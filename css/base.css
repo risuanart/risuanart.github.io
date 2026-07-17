@@ -1,0 +1,49 @@
+/* base.css —— reset 與基礎樣式。
+   套用 colors.css 與 tokens.css 的變數，不在這裡另外定義色碼或數值。 */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-size: var(--font-size-base);
+  line-height: 1.6;
+  color: var(--color-text-primary);
+  background: var(--color-surface-light);
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+input, button, textarea, select {
+  font: inherit;
+  color: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* 全域處理：使用者開啟「減少動態」偏好時，關閉／大幅縮短所有動畫與轉場。
+   不論後續哪個階段加了什麼動畫，都必須尊重這個設定，不可個別覆寫繞過。 */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0s !important; /* stagger 用的 delay 也要一起清掉，否則內容還是會等 delay 過完才出現 */
+    scroll-behavior: auto !important;
+  }
+}

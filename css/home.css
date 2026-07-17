@@ -1,0 +1,494 @@
+/* home.css —— 首頁專屬樣式。
+   目前只做手機版（<900px 尚未定義桌面版，之後再補）。
+   套用方向 02「藝廊質感極簡風」的規則：一律用 --radius-sharp、髮絲線分隔取代陰影卡片、
+   動態一律用 --ease-standard，不用 --ease-overshoot。
+
+   導覽模式參考 María Cerdán 手機版：左邊緣是常駐的直式文字分頁（不是收合選單），
+   點了分頁後，內容直接變成右側主要內容區塊本身，不是浮動彈出面板。 */
+
+html, body {
+  height: 100%;
+}
+
+body {
+  position: relative;
+  overflow: hidden; /* 分頁常駐、內容區自己捲動，頁面本身不捲動 */
+}
+
+/* ---------- 背景暈染動畫：整站最底層，斜對角柔霧漸層 ----------
+   參考圖的實際像素分析結果：不是好幾塊「大範圍純色」互相疊加，是一張連續漸變的斜對角
+   （135deg）暈染——飽和色只出現在兩個角落各約 1/5~1/4 的小範圍，中間 50-60% 是大面積
+   極淡的柔霧色（奶油/米白），飽和度全程都偏低，靠中間這塊柔霧色撐起「很奶油很柔」的
+   整體印象。這裡把參考圖的比例套用在網站自己的三個品牌色上（不是抄參考圖本身的金黃/
+   藍紫色號，那組顏色跟這個網站的色彩系統無關）：
+   - 左上角小範圍飽和點：南瓜橘（--color-warning）——本來在畫布筆刷裡就是三色中比重
+     最低、最點綴性質的顏色，跟參考圖裡「小範圍、最跳」的角落定位一致。
+   - 中間大範圍柔霧色：橄欖綠（--color-brand）被大量稀釋、幾乎融進米色背景——橄欖綠
+     是網站比重最高的主色，用它撐起大面積但幾乎看不出顏色的柔霧中段，等於品牌色無所
+     不在但很低調。
+   - 右下角小範圍飽和點：牛仔灰藍（--color-button-primary）。
+   background-size 故意比容器大（220%），animation 只讓這張斜角漸層本身緩慢位移，
+   維持之前討論過的「持續暈染呼吸感」，不是三個獨立色塊各自跑位。
+   z-index: -1 固定在最底層，.content-panel 的底色要改成半透明（見下方）才看得到暈染透出來。 */
+.ambient-bg {
+  position: fixed;
+  /* 比視窗四邊各多留 60px（覆蓋 blur(30px) 需要的取樣範圍），讓模糊造成的邊緣淡出
+     發生在視窗看不到的範圍外，視窗內看到的都是模糊「內部」乾淨的部分，
+     不會在四個邊緣看到一圈淡出透明、透出底色變白的邊框感。 */
+  inset: -60px;
+  z-index: -2;
+  pointer-events: none;
+  background-image: linear-gradient(
+    135deg,
+    var(--color-warning) 0%,
+    color-mix(in srgb, var(--color-warning) 55%, var(--color-surface-light)) 14%,
+    color-mix(in srgb, var(--color-brand) 22%, var(--color-surface-light)) 32%,
+    color-mix(in srgb, var(--color-brand) 22%, var(--color-surface-light)) 63%,
+    color-mix(in srgb, var(--color-button-primary) 55%, var(--color-surface-light)) 86%,
+    var(--color-button-primary) 100%
+  );
+  background-size: 220% 220%;
+  background-position: 0% 0%;
+  opacity: 1;
+  filter: blur(30px);
+  /* 速度／緩動參考規格：手機版（<1024px）17s、桌面版（≥1024px，見下方 media query）14s，
+     兩者都用 ease（慢—快—慢）不是 linear——慢速＋ease 讓開頭結尾更平滑，不容易看出「跳動」，
+     只會感覺到很輕微、持續的呼吸暈染感，這是刻意的效果，不是還沒調好。 */
+  animation: ambient-drift 17s ease infinite;
+}
+
+@media (min-width: 1024px) {
+  .ambient-bg {
+    animation-duration: 14s;
+  }
+}
+
+@keyframes ambient-drift {
+  0%, 100% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+}
+
+/* ---------- 顆粒質感 ----------
+   參考圖那種粗糙、帶雜訊顆粒感的漸層，光靠 CSS 漸層＋blur 只會做出很乾淨平滑的色塊，
+   缺少那種「印刷噪點/膠片顆粒」的粗糙質地。這裡用一個 inline SVG（feTurbulence 濾鏡
+   產生碎形雜訊，再用 feColorMatrix 去色只留亮度雜訊）當作可平鋪的底圖，疊在色塊暈光
+   上面。純 CSS/SVG 做法，不用額外圖檔、不用 canvas/JS 產生。
+   baseFrequency 從 0.85 降到 0.35：頻率越低，顆粒本身越大越粗，比較像參考圖那種
+   粗獷質感，不是原本很細很密、偏數位科技感的噪點。
+   混合模式改用 mix-blend-mode: multiply（不是 overlay）：multiply 只會讓底色變暗、
+   不會反過來把暗部推亮，疊出來偏暗、偏髒，比較像舊紙張斑駁污漬的觸感，比 overlay
+   更粗獷；因為 multiply 疊加效果本身比較重，opacity 從 0.6 降到 0.25 避免整體太暗。 */
+.ambient-grain {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.25;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.35' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+
+/* ---------- Logo：左上角（圖片，可點擊回到首頁畫布） ---------- */
+.logo {
+  position: fixed;
+  top: var(--space-4);
+  left: var(--space-4);
+  z-index: 30;
+  appearance: none;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.logo img {
+  display: block;
+  height: 2.25rem;
+  width: auto;
+}
+
+/* ---------- 左邊緣常駐直式分頁 ----------
+   整個 <nav> 當一個單位用 rotate(-90deg) 旋轉：旋轉前是一排橫向排列的按鈕（flex row），
+   旋轉後變成貼著左緣、由下往上讀的直排標籤。
+   transform-origin 用 left top（不是 left bottom）：旋轉基準點在左上角，
+   文字粗細的方向會往基準點右側（畫面內側）延伸；用 left bottom 的話，
+   延伸方向會是往基準點左側，貼著畫面左緣時就會直接超出邊界被裁掉。 */
+.side-tabs {
+  position: fixed;
+  left: 3vw;
+  bottom: var(--space-16);
+  z-index: 30;
+  display: flex;
+  flex-direction: row;
+  gap: var(--space-10);
+  transform-origin: left top;
+  transform: rotate(-90deg);
+}
+
+.side-tabs button {
+  appearance: none;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: "Helvetica Neue", Arial, "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", sans-serif;
+  font-weight: 700;
+  font-size: calc(clamp(32px, 8vw, 56px) / 2);
+  letter-spacing: normal; /* 試套用「全站不額外調整字距」的規則，原本是刻意加的 0.05em */
+  color: var(--color-text-primary);
+  opacity: 0.38;
+  /* 0.5s 是參考資料指定的數值，比通用的 --duration-fast 慢，只用在這個 hover 上 */
+  transition: opacity 0.5s var(--ease-standard);
+  /* 文字光暈：不管背後畫布被畫成什麼顏色，目錄字都維持固定對比度，保證看得清楚。
+     疊多層同色 text-shadow 做出一圈實色暈光，而不是單層模糊陰影那種弱效果。
+     用呼吸動畫讓暈光強度緩慢脈動，強調「這是可以點的目錄」，動畫刻意只動 text-shadow、
+     不動 opacity，才不會跟上面 hover 用的 opacity transition 互相打架。 */
+  animation: tab-halo-breathe 4s ease-in-out infinite;
+  /* 翻牌動畫需要景深才會有立體感，perspective 設在 button 這一層（子層 .tab-char
+     的 3D 旋轉都是相對這個景深去算的）。 */
+  perspective: 400px;
+  /* 中文／英文兩排文字用 flex-direction: column 上下堆疊——因為整個 <nav> 被旋轉了
+     -90 度，pre-rotation 垂直堆疊的兩排，旋轉之後會變成螢幕上左右並排的兩條直排文字，
+     不是同一條線接在一起。順序在下面 .tab-row--cn／.tab-row--en 的 DOM 順序決定
+     哪個在螢幕左邊、哪個在右邊（先寫的那排在螢幕左側）。 */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1px;
+}
+
+.side-tabs button:hover {
+  opacity: 0.6;
+}
+
+.tab-row {
+  display: flex;
+  flex-direction: row;
+  white-space: nowrap;
+  /* 中文字級(16px)比英文字級(6.4px)大很多，兩者都繼承全站預設的 line-height:1.6，
+     字級越大、行高多出來的留白（leading）也跟著等比例放大，導致中文行框頂部到實際
+     字形的距離比英文多出好幾 px，兩排並排時頂部看起來對不齊。line-height:1 讓行框
+     幾乎貼齊字形本身，把這個留白差距降到最低（不同字體本身的 ascent/descent 比例仍可能
+     有極小誤差，但不會再是肉眼看得出來的落差）。 */
+  line-height: 1;
+}
+
+/* 中文目錄字後面接一段小寫英文翻譯，純裝飾性質、豐富排版層次，不是給不懂中文的訪客看的
+   功能性翻譯。英文字母沿用中文一樣一個字一個字排列，只是字級縮小、字重降回 400
+   （中文是 700）、加寬字距，做出主副層次；顏色/透明度沿用父層 button 的設定。 */
+.tab-char--en {
+  font-size: 0.4em;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  vertical-align: top;
+}
+
+/* 懸停時每個字原地翻牌（不移動位置、沒有滑動軌跡），翻牌後直接變成另一個字，
+   不是「同一個字轉正」。做法是每個字位置放兩層內容：
+   .tab-face--front 是原本顯示的字，.tab-face--back 是翻過去要換成的那個字
+   （已經在 HTML 裡算好對應：課⇄程、材⇄包，中英文分開各自互換，不會混在一起；
+   只有奇數個字正中間那一個沒有對象可換，前後兩面就填一樣的字）。
+   .tab-face--back 預先用 rotateY(180deg) 轉到「背面」藏起來，配合
+   backface-visibility:hidden 讓它翻到正面之前完全看不到。
+   懸停時 .tab-char 本身同時做兩件事：rotate(90deg) 抵銷 nav 的 -90 度旋轉讓字轉正、
+   rotateY(180deg) 讓整張牌翻面——翻完之後正面(前面那個字)轉到背後藏起來，
+   原本藏在背面、角度抵銷後方向剛好正常的另一個字轉到正面，位置完全沒有移動，
+   純粹是「這個位置顯示的字變了」，沒有平移的軌跡。 */
+.tab-char {
+  position: relative;
+  display: inline-block;
+  transform-style: preserve-3d;
+  transition: transform 0.5s var(--ease-standard);
+  transition-delay: calc(var(--i, 0) * 45ms);
+}
+
+.tab-face {
+  backface-visibility: hidden;
+}
+
+.tab-face--front {
+  display: inline-block;
+}
+
+.tab-face--back {
+  position: absolute;
+  inset: 0;
+  transform: rotateY(180deg);
+}
+
+.side-tabs button:hover .tab-char {
+  transform: rotate(90deg) rotateY(180deg);
+}
+
+@keyframes tab-halo-breathe {
+  0%, 100% {
+    text-shadow: 0 0 3px var(--color-surface-light), 0 0 6px var(--color-surface-light);
+  }
+  50% {
+    text-shadow: 0 0 6px var(--color-surface-light), 0 0 12px var(--color-surface-light);
+  }
+}
+
+/* 文字自動變色：JS 讀取畫布底下的平均亮度，太深時加上這個 class。
+   淺色字要換一圈深色光暈，不然淺字配淺光暈等於隱形——跟預設的淺底/深字邏輯完全相反。 */
+.side-tabs button.on-dark {
+  color: var(--color-surface-light);
+  animation-name: tab-halo-breathe-dark;
+}
+
+@keyframes tab-halo-breathe-dark {
+  0%, 100% {
+    text-shadow: 0 0 3px var(--color-surface-dark), 0 0 6px var(--color-surface-dark);
+  }
+  50% {
+    text-shadow: 0 0 6px var(--color-surface-dark), 0 0 12px var(--color-surface-dark);
+  }
+}
+
+.side-tabs button[aria-pressed="true"] {
+  opacity: 1;
+}
+
+/* ---------- 右側內容區：分頁點了之後,子項目直接列在這裡 ----------
+   display:flex + justify-content:flex-end：讓 .content-list（清單裡唯一還在正常文件流裡的
+   子元素，畫布/毛玻璃/引導提示都是 position:fixed/absolute，不受這裡的 flex 影響）貼齊
+   容器底部，不管清單有幾項，最後一項的底部都會落在同一個高度，而不是隨項目數量往上下浮動。
+   實際貼齊哪個高度由 main.js 的 alignListToTabs() 動態量測側邊目錄文字的底部邊緣、
+   寫入 padding-bottom 決定，這裡先不寫死數字。 */
+.content-panel {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  overflow-y: auto;
+  /* rgba 直接寫死 --color-surface-light(#EDE6D8) 的 RGB 分量＋78% 不透明度，
+     不依賴 color-mix()，所有瀏覽器都能正確顯示半透明，讓底下的 .ambient-bg 透出來。 */
+  background: rgba(237, 230, 216, 0.68);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: calc(var(--space-24) + var(--space-6) + 200px) 0 0;
+}
+
+/* ---------- 首頁空白狀態的畫布互動 ----------
+   只在「還沒點任何分類」時出現，退居背景：不搶「點選左側目錄查看內容」這行字的視覺主角地位，
+   訪客可以隨手畫幾筆顏料痕跡，但畫布本身不是這頁的主要動作。一旦點了任一分類，
+   畫布就永久隱藏（見 main.js），因為那之後訪客的注意力該放在清單內容上。 */
+.paint-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  cursor: crosshair;
+  touch-action: none; /* 手機上用手指畫，不要觸發捲動或縮放 */
+}
+
+/* 首頁引導提示：置中在畫面正中間（不是跟著 content-panel 的留白跑，
+   用 position:fixed 直接對齊整個視窗），搭配線條圖案＋文字，進場時用類似燭光的柔和
+   明暗律動吸引注意力，引導訪客發現畫布可以互動。點分類、或訪客開始畫第一筆之後就會隱藏（見 main.js）。 */
+.content-empty {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-text-secondary);
+  text-align: center;
+  pointer-events: none; /* 不擋畫布的滑鼠/觸控事件 */
+  animation: empty-breathe 4s ease-in-out infinite;
+}
+
+/* .content-empty 自己宣告了 display:flex，特異度剛好跟瀏覽器內建的 [hidden]{display:none}
+   打平手，載入順序在後的這份檔案會贏，導致設定 hidden 屬性後畫面還是沒有真的消失。
+   這裡明確用 [hidden] 疊加特異度蓋回去，確保 JS 設定 hidden=true 時真的會隱藏。 */
+.content-empty[hidden] {
+  display: none;
+}
+
+.content-empty__text {
+  margin: 0;
+  font-family: "Helvetica Neue", Arial, "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", sans-serif;
+  font-size: var(--font-size-lg);
+  /* 跟目錄字同一套文字光暈邏輯，避免被畫布痕跡蓋掉可讀性。 */
+  text-shadow: 0 0 3px var(--color-surface-light), 0 0 6px var(--color-surface-light);
+}
+
+.content-empty.on-dark {
+  color: var(--color-surface-light);
+}
+.content-empty.on-dark .content-empty__text {
+  text-shadow: 0 0 3px var(--color-surface-dark), 0 0 6px var(--color-surface-dark);
+}
+
+/* 「New canvas?」模式：訪客逛過至少一個分類、再點 logo 回到畫布時才會出現這個模式，
+   代表這不再是單純的裝飾邀請文字，而是真的可以點擊觸發「要不要買新畫布」的詢問。
+   .content-empty 本身維持 pointer-events:none（不擋畫布事件），只有這個模式下
+   文字本身額外開回 pointer-events:auto，其餘留白區域仍然不擋畫布。 */
+.content-empty.mode-newcanvas .content-empty__text {
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.canvas-confirm {
+  margin-top: var(--space-2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  pointer-events: auto;
+}
+
+.canvas-confirm[hidden] {
+  display: none;
+}
+
+.canvas-confirm__question {
+  margin: 0;
+  font-family: "Helvetica Neue", Arial, "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", sans-serif;
+  font-size: var(--font-size-sm);
+  text-shadow: 0 0 3px var(--color-surface-light), 0 0 6px var(--color-surface-light);
+}
+
+.content-empty.on-dark .canvas-confirm__question {
+  text-shadow: 0 0 3px var(--color-surface-dark), 0 0 6px var(--color-surface-dark);
+}
+
+.canvas-confirm__actions {
+  display: flex;
+  gap: var(--space-4);
+}
+
+.canvas-confirm__btn {
+  appearance: none;
+  border: 1px solid currentColor;
+  background: none;
+  padding: var(--space-1) var(--space-4);
+  font-family: "Helvetica Neue", Arial, "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", sans-serif;
+  font-size: var(--font-size-xs);
+  color: inherit;
+  cursor: pointer;
+  border-radius: var(--radius-sharp, 0);
+  transition: opacity 0.2s var(--ease-standard);
+}
+
+.canvas-confirm__btn:hover {
+  opacity: 0.6;
+}
+
+/* 燭光式呼吸律動：平滑漸強漸弱（ease-in-out），不是忽亮忽暗的故障閃爍，
+   跟現在暈染背景/顆粒質感那種溫暖有機的調性比較搭。 */
+@keyframes empty-breathe {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 1; }
+}
+
+/* 混搭版：文字本身維持燭光呼吸（上面的 empty-breathe），額外疊兩圈由中心往外擴散、
+   漸淡的光暈漣漪（::before／::after，錯開一半週期讓漣漪連續不斷），兩種律動同時疊加。 */
+.content-empty::before,
+.content-empty::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, var(--color-brand) 0%, transparent 70%);
+  opacity: 0;
+  animation: empty-ripple 3.2s ease-out infinite;
+}
+
+.content-empty::after {
+  animation-delay: 1.6s;
+}
+
+@keyframes empty-ripple {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(12);
+    opacity: 0;
+  }
+}
+
+/* 點分類進清單後才出現的毛玻璃層：蓋在畫布上方、清單文字下方，只模糊/柔化背後的顏料痕跡，
+   不會模糊到清單文字本身。畫布還是完整保留，只是視覺上多一層霧面質感，兼顧「痕跡不消失」
+   跟「文字讀起來更清楚」。pointer-events:none 讓下面的畫布事件跟清單本身的捲動/點擊都不受影響。 */
+.content-glass {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+.content-list {
+  position: relative;
+  z-index: 1;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* 字級＝內容區寬度的 10%；字重 700 幾何無襯線（西文用 Poppins，中文無對應幾何字重時
+   自動 fallback 到 Noto Sans TC 700）。line-height 1.1 是給單一項目內換行用的緊排，
+   項目「之間」的 1.75 節奏改用 margin-bottom 做出來（line-height 沒辦法同一個屬性
+   同時做出兩種疏密）。左縮排 17%、右側不設寬度上限，只留 3% 安全距離讓長項目可以逼近右緣。 */
+.content-list li {
+  margin: 0 0 calc(clamp(24px, 6vw, 42px) * 0.65);
+  padding: 0 3% 0 17%;
+  overflow: hidden; /* 讓 .inner 從左側滑入時不會冒出水平捲軸 */
+  font-family: "Poppins", "Helvetica Neue", Arial, "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", sans-serif;
+  font-weight: 700;
+  font-size: clamp(24px, 6vw, 42px);
+  line-height: 1.6; /* 試套用「行高固定是字級 1.6 倍」的規則，原本是刻意調緊的 1.1 */
+  color: var(--color-text-primary);
+}
+
+.content-list li:last-child {
+  margin-bottom: 0;
+}
+
+/* ---------- 項目逐項橫向淡入／淡出動畫 ----------
+   只動 transform／opacity（走 GPU 合成層）。位移量用 em，跟著清單字級等比縮放，
+   字級以後再調也不用重調動畫。
+   預設（未加 is-visible）就是「進場前」的隱藏狀態，新建立的項目不用另外加 class 才會是隱藏的。
+   進場時長 0.3s 是獨立於 duration 階梯之外的特例（不是 --duration-normal），
+   --ease-standard 現在就是瀏覽器預設 ease，兩邊已經一致，不再是刻意違反規則的實驗版本。 */
+.content-list li .inner {
+  display: inline-block;
+  will-change: transform, opacity;
+  opacity: 0;
+  transform: translateX(-0.6em);
+  transition: transform 0.3s var(--ease-standard),
+              opacity 0.3s var(--ease-standard);
+}
+
+.content-list li.is-visible .inner {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* .leaving 特意寫在 .is-visible 之後：兩者特異度相同，靠原始碼順序讓切換分頁離場時，
+   .leaving 蓋過 .is-visible 的結束狀態，改用離場專用的時長與曲線。 */
+.content-list li.leaving .inner {
+  opacity: 0;
+  transform: translateX(-0.6em);
+  transition: transform var(--duration-exit) var(--ease-exit),
+              opacity var(--duration-exit) var(--ease-exit);
+}

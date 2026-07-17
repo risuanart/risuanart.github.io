@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>日宣繪畫室</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;600;700&family=Poppins:wght@700&family=Noto+Serif+TC:wght@500;700&family=Noto+Sans+TC:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/colors.css">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/home.css">
+</head>
+<body>
+
+  <div class="ambient-bg" aria-hidden="true"></div>
+  <div class="ambient-grain" aria-hidden="true"></div>
+
+  <header>
+    <button type="button" class="logo" id="logo-reset" aria-label="回到首頁畫布">
+      <img src="assets/images/logo-risuan拷貝.png" alt="日宣繪畫室">
+    </button>
+  </header>
+
+  <nav class="side-tabs" id="side-tabs" aria-label="首頁分類目錄">
+    <button type="button" data-cat="materials" aria-pressed="false">
+      <span class="tab-row tab-row--cn"><span class="tab-char" style="--i:0"><span class="tab-face tab-face--front">材</span><span class="tab-face tab-face--back">包</span></span><span class="tab-char" style="--i:1"><span class="tab-face tab-face--front">料</span><span class="tab-face tab-face--back">料</span></span><span class="tab-char" style="--i:2"><span class="tab-face tab-face--front">包</span><span class="tab-face tab-face--back">材</span></span></span><span class="tab-row tab-row--en"><span class="tab-char tab-char--en" style="--i:3"><span class="tab-face tab-face--front">M</span><span class="tab-face tab-face--back">S</span></span><span class="tab-char tab-char--en" style="--i:4"><span class="tab-face tab-face--front">A</span><span class="tab-face tab-face--back">L</span></span><span class="tab-char tab-char--en" style="--i:5"><span class="tab-face tab-face--front">T</span><span class="tab-face tab-face--back">A</span></span><span class="tab-char tab-char--en" style="--i:6"><span class="tab-face tab-face--front">E</span><span class="tab-face tab-face--back">I</span></span><span class="tab-char tab-char--en" style="--i:7"><span class="tab-face tab-face--front">R</span><span class="tab-face tab-face--back">R</span></span><span class="tab-char tab-char--en" style="--i:8"><span class="tab-face tab-face--front">I</span><span class="tab-face tab-face--back">E</span></span><span class="tab-char tab-char--en" style="--i:9"><span class="tab-face tab-face--front">A</span><span class="tab-face tab-face--back">T</span></span><span class="tab-char tab-char--en" style="--i:10"><span class="tab-face tab-face--front">L</span><span class="tab-face tab-face--back">A</span></span><span class="tab-char tab-char--en" style="--i:11"><span class="tab-face tab-face--front">S</span><span class="tab-face tab-face--back">M</span></span></span>
+    </button>
+    <button type="button" data-cat="group" aria-pressed="false">
+      <span class="tab-row tab-row--cn"><span class="tab-char" style="--i:0"><span class="tab-face tab-face--front">團</span><span class="tab-face tab-face--back">課</span></span><span class="tab-char" style="--i:1"><span class="tab-face tab-face--front">體</span><span class="tab-face tab-face--back">體</span></span><span class="tab-char" style="--i:2"><span class="tab-face tab-face--front">課</span><span class="tab-face tab-face--back">團</span></span></span><span class="tab-row tab-row--en"><span class="tab-char tab-char--en" style="--i:3"><span class="tab-face tab-face--front">G</span><span class="tab-face tab-face--back">P</span></span><span class="tab-char tab-char--en" style="--i:4"><span class="tab-face tab-face--front">R</span><span class="tab-face tab-face--back">U</span></span><span class="tab-char tab-char--en" style="--i:5"><span class="tab-face tab-face--front">O</span><span class="tab-face tab-face--back">O</span></span><span class="tab-char tab-char--en" style="--i:6"><span class="tab-face tab-face--front">U</span><span class="tab-face tab-face--back">R</span></span><span class="tab-char tab-char--en" style="--i:7"><span class="tab-face tab-face--front">P</span><span class="tab-face tab-face--back">G</span></span></span>
+    </button>
+    <button type="button" data-cat="courses" aria-pressed="false">
+      <span class="tab-row tab-row--cn"><span class="tab-char" style="--i:0"><span class="tab-face tab-face--front">課</span><span class="tab-face tab-face--back">程</span></span><span class="tab-char" style="--i:1"><span class="tab-face tab-face--front">程</span><span class="tab-face tab-face--back">課</span></span></span><span class="tab-row tab-row--en"><span class="tab-char tab-char--en" style="--i:2"><span class="tab-face tab-face--front">C</span><span class="tab-face tab-face--back">S</span></span><span class="tab-char tab-char--en" style="--i:3"><span class="tab-face tab-face--front">O</span><span class="tab-face tab-face--back">E</span></span><span class="tab-char tab-char--en" style="--i:4"><span class="tab-face tab-face--front">U</span><span class="tab-face tab-face--back">S</span></span><span class="tab-char tab-char--en" style="--i:5"><span class="tab-face tab-face--front">R</span><span class="tab-face tab-face--back">R</span></span><span class="tab-char tab-char--en" style="--i:6"><span class="tab-face tab-face--front">S</span><span class="tab-face tab-face--back">U</span></span><span class="tab-char tab-char--en" style="--i:7"><span class="tab-face tab-face--front">E</span><span class="tab-face tab-face--back">O</span></span><span class="tab-char tab-char--en" style="--i:8"><span class="tab-face tab-face--front">S</span><span class="tab-face tab-face--back">C</span></span></span>
+    </button>
+  </nav>
+
+  <main class="content-panel" id="content-panel">
+    <canvas class="paint-canvas" id="paint-canvas" aria-hidden="true"></canvas>
+    <div class="content-glass" id="content-glass" hidden aria-hidden="true"></div>
+    <div class="content-empty" id="content-empty">
+      <p class="content-empty__text" id="content-empty-text">Just paint.</p>
+      <div class="canvas-confirm" id="canvas-confirm" hidden>
+        <p class="canvas-confirm__question">Start a new canvas?</p>
+        <div class="canvas-confirm__actions">
+          <button type="button" class="canvas-confirm__btn" id="canvas-confirm-yes">Yes</button>
+          <button type="button" class="canvas-confirm__btn" id="canvas-confirm-no">No</button>
+        </div>
+      </div>
+    </div>
+    <ul class="content-list" id="content-list" hidden></ul>
+  </main>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
