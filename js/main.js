@@ -148,60 +148,81 @@ function setupPaintCanvas(panel) {
 
   // kind: "brush"（濕顏料）／"spray"（噴漆）／"charcoal"（炭筆），三種各自用不同濾波設定
   // 做出不同音色：筆刷是低通的悶聲刷過、噴漆是高通的嘶聲、炭筆是帶通的沙沙刮擦聲。
+  // resume() 是非同步的：呼叫下去之後 AudioContext 不會馬上變成 running，
+  // 如果緊接著就 createBufferSource().start()，第一次很容易在真正解鎖完成前就
+  // 把播放指令發出去，安靜地錯過（這極可能就是「一進頁面第一筆沒聲音」的成因）。
+  // 這裡改成：state 還不是 running 的話，先等 resume() 這個 promise 真的完成，
+  // 才建立音訊節點、真正開始播放；已經是 running 的話（絕大多數情況）就跟原本一樣同步執行。
+  // soundRequestId 是保險：如果 resume() 還沒 resolve、使用者就已經放開手指/換了下一筆，
+  // 避免等到 resume 完成才把「舊的那一筆」的聲音憑空生出來。
+  let soundRequestId = 0;
+
   function startStrokeSound(kind) {
     const ctxAudio = ensureAudioContext();
     if (!ctxAudio) return;
 
     stopStrokeSound(true);
+    soundRequestId += 1;
+    const requestId = soundRequestId;
 
-    const source = ctxAudio.createBufferSource();
-    source.buffer = getNoiseBuffer(ctxAudio);
-    source.loop = true;
+    function buildAndStart() {
+      if (requestId !== soundRequestId) return;
 
-    const filter = ctxAudio.createBiquadFilter();
-    const gain = ctxAudio.createGain();
-    gain.gain.value = 0;
+      const source = ctxAudio.createBufferSource();
+      source.buffer = getNoiseBuffer(ctxAudio);
+      source.loop = true;
 
-    if (kind === "spray") {
-      filter.type = "highpass";
-      filter.frequency.value = 3000;
-      // BiquadFilter 的 Q 預設值是 1，會在截止頻率附近堆出一個小共振峰，
-      // 聽起來就像吹口哨／風切那種尖銳感。壓到 Butterworth 的 0.7071（最平坦、無共振峰）。
-      filter.Q.value = 0.7071;
-    } else if (kind === "charcoal") {
-      // 降頻＋窄一點的 Q，往「筆在紙上書寫」的中低頻沙沙感靠，
-      // 原本 2000Hz 偏高聽起來比較像嘶聲而不是寫字的觸感。
-      filter.type = "bandpass";
-      filter.frequency.value = 750;
-      filter.Q.value = 1.1;
+      const filter = ctxAudio.createBiquadFilter();
+      const gain = ctxAudio.createGain();
+      gain.gain.value = 0;
+
+      if (kind === "spray") {
+        filter.type = "highpass";
+        filter.frequency.value = 3000;
+        // BiquadFilter 的 Q 預設值是 1，會在截止頻率附近堆出一個小共振峰，
+        // 聽起來就像吹口哨／風切那種尖銳感。壓到 Butterworth 的 0.7071（最平坦、無共振峰）。
+        filter.Q.value = 0.7071;
+      } else if (kind === "charcoal") {
+        // 降頻＋窄一點的 Q，往「筆在紙上書寫」的中低頻沙沙感靠，
+        // 原本 2000Hz 偏高聽起來比較像嘶聲而不是寫字的觸感。
+        filter.type = "bandpass";
+        filter.frequency.value = 750;
+        filter.Q.value = 1.1;
+      } else {
+        filter.type = "lowpass";
+        filter.frequency.value = 700; // 比原本 800 略低，聲音偏厚偏悶，更接近「濕」的觸感
+        filter.Q.value = 0.7071; // 避免低通截止點附近共振出風切感
+      }
+
+      source.connect(filter);
+      filter.connect(gain);
+      gain.connect(ctxAudio.destination);
+      source.start();
+
+      // 沾了顏料的筆刷拖曳時，顏料會有「黏住一下、扯開一下」的觸感，不是均勻平滑的摩擦聲。
+      // 疊一個低頻（人耳聽不出音高、只感覺到音量在抖動）的震盪器對主音量做輕微調變（tremolo），
+      // 模擬那種濕黏顏料斷斷續續分離的顆粒感。只套用在筆刷，噴漆/炭筆維持原本乾淨的音色。
+      let lfo = null;
+      let lfoGain = null;
+      if (kind === "brush") {
+        lfo = ctxAudio.createOscillator();
+        lfo.type = "sine";
+        lfo.frequency.value = 24;
+        lfoGain = ctxAudio.createGain();
+        lfoGain.gain.value = 0.02;
+        lfo.connect(lfoGain);
+        lfoGain.connect(gain.gain);
+        lfo.start();
+      }
+
+      activeSound = { source, filter, gain, kind, lfo, lfoGain };
+    }
+
+    if (ctxAudio.state !== "running") {
+      ctxAudio.resume().then(buildAndStart).catch(() => {});
     } else {
-      filter.type = "lowpass";
-      filter.frequency.value = 700; // 比原本 800 略低，聲音偏厚偏悶，更接近「濕」的觸感
-      filter.Q.value = 0.7071; // 避免低通截止點附近共振出風切感
+      buildAndStart();
     }
-
-    source.connect(filter);
-    filter.connect(gain);
-    gain.connect(ctxAudio.destination);
-    source.start();
-
-    // 沾了顏料的筆刷拖曳時，顏料會有「黏住一下、扯開一下」的觸感，不是均勻平滑的摩擦聲。
-    // 疊一個低頻（人耳聽不出音高、只感覺到音量在抖動）的震盪器對主音量做輕微調變（tremolo），
-    // 模擬那種濕黏顏料斷斷續續分離的顆粒感。只套用在筆刷，噴漆/炭筆維持原本乾淨的音色。
-    let lfo = null;
-    let lfoGain = null;
-    if (kind === "brush") {
-      lfo = ctxAudio.createOscillator();
-      lfo.type = "sine";
-      lfo.frequency.value = 24;
-      lfoGain = ctxAudio.createGain();
-      lfoGain.gain.value = 0.02;
-      lfo.connect(lfoGain);
-      lfoGain.connect(gain.gain);
-      lfo.start();
-    }
-
-    activeSound = { source, filter, gain, kind, lfo, lfoGain };
   }
 
   // 筆刷／炭筆的聲音只在「真的有在移動」時響，停下來（就算沒放開手）100ms 內沒有
@@ -239,6 +260,10 @@ function setupPaintCanvas(panel) {
       clearTimeout(strokeSilenceTimer);
       strokeSilenceTimer = null;
     }
+    // 保險：如果上一筆的 startStrokeSound 還卡在等 resume() 完成、還沒真的建立音訊節點
+    // （activeSound 還是 null），這裡也要讓那個還沒完成的 buildAndStart 失效，
+    // 不然使用者已經放開手指了，音效卻在幾十毫秒後才憑空冒出來、而且永遠停不掉。
+    soundRequestId += 1;
     if (!activeSound || !audioCtx) return;
     const { source, gain, lfo } = activeSound;
     if (immediate) {
