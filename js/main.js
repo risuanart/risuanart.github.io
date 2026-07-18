@@ -33,7 +33,7 @@ const STAGGER_MS = 100; // 項目間固定時間差
 // 訪客先前畫的痕跡在切換分類、瀏覽清單時都還在，只是清單文字會依底下顏色深淺自動換色（見 updateTextContrast）。
 function setupPaintCanvas(panel) {
   const canvas = document.getElementById("paint-canvas");
-  if (!canvas) return { enable() {}, disable() {} };
+  if (!canvas) return { enable() {}, disable() {}, unlockAudio() {} };
 
   const ctx = canvas.getContext("2d");
 
@@ -812,7 +812,7 @@ function setupPaintCanvas(panel) {
   }
 
   enable();
-  return { enable, disable, clear, playNewCanvasSound, hasContent };
+  return { enable, disable, clear, playNewCanvasSound, hasContent, unlockAudio };
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -825,6 +825,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const paintCanvas = setupPaintCanvas(panel);
   let switching = false;
+
+  // 音效解鎖保險（待修清單任務1）：畫布本身已經在 pointerdown／touchstart 掛了解鎖，
+  // 但 iOS Safari 對「哪個事件類型才算合法的使用者手勢」有時候比預期嚴格、因裝置/版本
+  // 而異，這裡再加一層不限定畫布、整個網頁最外層的保險——不管使用者第一次點/觸控的
+  // 是頁面上任何地方，只要是這三種事件類型（touchstart／mousedown／click）任何一種
+  // 最先發生，就立刻嘗試解鎖，三個各自最多只會真的觸發一次（{ once: true }），
+  // capture:true 讓它在事件往下傳遞給實際目標元素之前就先執行，盡量搶第一時間。
+  ["touchstart", "mousedown", "click"].forEach((eventName) => {
+    document.addEventListener(eventName, () => paintCanvas.unlockAudio(), {
+      once: true,
+      capture: true,
+    });
+  });
 
   // 側邊目錄跟左上角 logo 對齊中線：logo 是固定尺寸的圖片，目錄是旋轉後的文字，
   // 兩者的寬度、定位方式完全不同，沒辦法單靠猜一個 CSS 數字讓它們在各種螢幕寬度下
