@@ -1037,14 +1037,20 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // 「畫畫其實只有一次機會」的敘事機制（依待修清單任務3規格）：
-  // 觸發條件是「畫布現在有沒有內容」，不是有沒有逛過分類。
-  //   - 畫布無內容、從沒 reset 過：點 logo 直接回首頁，顯示「Just paint.」，不跳確認框
-  //   - 畫布有內容（不管是否 reset 過）：點 logo 直接跳出「New chance?」確認框，
+  // 觸發條件是「畫布現在有沒有內容」＋「有沒有逛過至少一個分類」，兩個都要成立：
+  // 設計上要讓訪客先發現「這次畫的東西清不掉」，逼他去逛目錄，逛過之後才解鎖
+  // 「原來還可以買新畫布重來」這個發現——在還沒逛過目錄之前，就算畫布有內容，
+  // 點 logo 也只會安靜地回首頁，不會跳出確認框。
+  //   - 畫布無內容：點 logo 直接回首頁，不跳確認框（Just paint. 或 Paint again，
+  //     依有沒有 reset 過決定）
+  //   - 畫布有內容 + 還沒逛過任何分類：點 logo 直接回首頁，不跳確認框，
+  //     畫布內容本身照常顯示（不覆蓋文字）
+  //   - 畫布有內容 + 已經逛過至少一個分類：點 logo 直接跳出「New chance?」確認框，
   //     這時候底下不顯示任何裝飾文字（畫布本身的內容就是重點）
-  //   - 畫布無內容、曾經 reset 過：點 logo 直接回首頁，顯示「Paint again」，不跳確認框
   // 選 No：確認框收起，留在原本畫好的畫布，不顯示任何文字。
   // 選 Yes：清空畫布、記錄「曾經 reset 過」，顯示「Paint again」。
   const HAS_EVER_RESET_KEY = "risuan_hasEverReset";
+  const HAS_VISITED_CATEGORY_KEY = "risuan_hasVisitedCategory";
   const emptyText = document.getElementById("content-empty-text");
   const canvasConfirm = document.getElementById("canvas-confirm");
   const confirmYes = document.getElementById("canvas-confirm-yes");
@@ -1082,9 +1088,11 @@ document.addEventListener("DOMContentLoaded", () => {
     if (canvasConfirm) canvasConfirm.hidden = true;
   }
 
-  // 初始載入：畫布內容已經在 setupPaintCanvas 裡從 localStorage 還原好了，
-  // 直接照 hasContent() 決定要不要顯示引導文字（有內容就不顯示，畫布本身就是重點）。
-  if (paintCanvas.hasContent()) {
+  // 初始載入：畫布內容已經在 setupPaintCanvas 裡從 localStorage 還原好了。
+  // 只有「有內容 + 已經逛過分類」才代表訪客已經進入「可以買新畫布」的階段，
+  // 這時候不顯示裝飾文字（畫布本身就是重點）；其餘情況（不管有沒有內容）
+  // 都照常顯示 Just paint. / Paint again，維持第一次體驗的感覺。
+  if (paintCanvas.hasContent() && localStorage.getItem(HAS_VISITED_CATEGORY_KEY) === "1") {
     empty.hidden = true;
   } else {
     empty.hidden = false;
@@ -1107,7 +1115,10 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   tabs.forEach((tab) => {
-    tab.addEventListener("click", () => showCategory(tab.dataset.cat));
+    tab.addEventListener("click", () => {
+      localStorage.setItem(HAS_VISITED_CATEGORY_KEY, "1");
+      showCategory(tab.dataset.cat);
+    });
   });
 
   // 點 Logo：回到首頁的畫布繪製區。清空清單、重新掛上畫布的畫筆事件，
@@ -1123,11 +1134,17 @@ document.addEventListener("DOMContentLoaded", () => {
       tabs.forEach((tab) => tab.setAttribute("aria-pressed", "false"));
       paintCanvas.enable();
 
-      if (paintCanvas.hasContent()) {
-        // 畫布有內容：直接跳出「要不要買新畫布」的確認框，不顯示裝飾文字。
+      const hasVisitedCategory = localStorage.getItem(HAS_VISITED_CATEGORY_KEY) === "1";
+      if (paintCanvas.hasContent() && hasVisitedCategory) {
+        // 畫布有內容、也逛過至少一個分類：直接跳出「要不要買新畫布」的確認框，不顯示裝飾文字。
         empty.hidden = false;
         if (emptyText) emptyText.textContent = "";
         if (canvasConfirm) canvasConfirm.hidden = false;
+      } else if (paintCanvas.hasContent()) {
+        // 畫布有內容，但還沒逛過分類：安靜回首頁，不跳確認框，但還是照常顯示
+        // Just paint. / Paint again（維持「看起來像還沒發現特殊機制」的第一次體驗）。
+        empty.hidden = false;
+        updateEmptyPromptMode();
       } else {
         empty.hidden = false;
         updateEmptyPromptMode();
