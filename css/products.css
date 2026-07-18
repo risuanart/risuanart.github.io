@@ -1,0 +1,379 @@
+/* products.css —— 材料包商品內頁樣式。
+   套用全站既有 colors.css／tokens.css，不重複定義色碼或數值系統。
+   僅手機版（<1024px），比照全站現況，桌面版尚未定義。
+
+   走向：美術館／作品集式的展示頁，不是電商購物車。具體差異：
+   - 大字級襯線標題（Fraunces，全站已引入）取代粗黑體商品名
+   - 內容分「章」（.chapter）鋪陳，段落間距寬，取代卡片網格
+   - 規格資訊用清單文字呈現，不用圖示卡片
+   - 收尾用內嵌的價格＋文字連結，不做懸浮購買列（那是電商站最典型的視覺語彙） */
+
+/* ---------- 色票例外聲明 ----------
+   colors.css 的「一色一責、禁止硬編色碼」規則管的是網站語意 UI 色（按鈕／文字／背景／
+   互動狀態）。但這個頁面的色系選擇器／色系故事區需要顯示「經典紅」「迎春粉」等真實
+   顏料色點——這些是產品實體色，跟網站語意色屬於不同範疇，比照 colors.css 裡 canvas
+   借用 warning 色的例外模式，這裡也用區域變數＋清楚註解的方式做例外，不代表開放
+   在其他地方硬編色碼。色號皆取樣自實際商品照片，非憑空選色。 */
+:root {
+  /* 色系選擇器主色點（一色系一顆） */
+  --swatch-classic-red: #a83a2e;
+  --swatch-welcome-pink: #e8a3a0;
+
+  /* 經典紅四色顏料（絳紅／過年紅／金／鉑金），取樣自 RS_05.1 產品照 */
+  --swatch-jiang-red: #7a2e2a;
+  --swatch-newyear-red: #c62828;
+  --swatch-gold: #c9a050;
+  --swatch-platinum: #d8c9a3;
+
+  /* 迎春粉四色顏料（櫻粉／朱紅／鉑金／銀），取樣自 RS_05.2 產品照 */
+  --swatch-cherry-pink: #e8b4b8;
+  --swatch-vermillion: #d94f30;
+  --swatch-pink-platinum: #d4c4a0;
+  --swatch-silver: #b8b8b0;
+}
+
+.product-page {
+  position: fixed;
+  inset: 0;
+  overflow-y: auto;
+  background: rgba(237, 230, 216, 0.68);
+  padding-top: calc(var(--space-16) + var(--space-6));
+  padding-bottom: var(--space-24);
+  /* 左側目錄（.side-tabs）維持首頁那套固定在左下角的定位，商品頁是長捲動頁面，
+     內容會一直流經目錄所在的高度，所以整個內容區永久保留一條左側安全邊界，
+     讓內容跟目錄「並存不打架」，不是疊在一起。實測目錄旋轉後的實際佔位右緣約在
+     35px，這裡抓 --space-16（64px）留一點呼吸空間，不用魔術數字。 */
+  padding-left: var(--space-16);
+}
+
+.work {
+  padding-right: var(--space-4);
+}
+
+/* ---------- 標題／簡介 ---------- */
+.work__intro {
+  padding: 0 0 0 var(--space-4);
+}
+
+.work-heading {
+  margin: 0;
+  font-family: 'Fraunces', 'Noto Serif TC', serif;
+  font-weight: 600;
+  /* clamp 而非固定斷點：跟首頁 .content-list 同一套「用 vw 連續縮放」慣例，
+     手機到平板寬度之間字級平滑放大，不需要另外寫斷點。 */
+  font-size: clamp(2.25rem, 1.4rem + 4vw, 3.5rem);
+  line-height: 1.08;
+  overflow-wrap: anywhere;
+}
+
+.work-heading__sub {
+  margin: var(--space-2) 0 0;
+  font-size: var(--font-size-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+}
+
+.intro {
+  margin: var(--space-6) 0 0;
+  max-width: 34ch;
+  font-size: var(--font-size-base);
+  line-height: 1.7;
+  color: var(--color-text-primary);
+}
+
+/* ---------- 章節共用節奏 ---------- */
+.chapter {
+  margin-top: var(--space-24);
+  padding: 0 0 0 var(--space-4);
+}
+
+.chapter__title {
+  margin: 0;
+  font-family: 'Fraunces', 'Noto Serif TC', serif;
+  font-weight: 600;
+  font-size: clamp(1.4rem, 1.15rem + 1vw, 1.75rem);
+}
+
+.chapter__intro {
+  margin-top: var(--space-4);
+  font-size: var(--font-size-base);
+  line-height: 1.7;
+  color: var(--color-text-primary);
+  max-width: 40ch;
+}
+
+.chapter__intro[data-placeholder] {
+  color: var(--color-text-secondary);
+  font-style: italic;
+}
+
+.chapter__tags {
+  margin-top: var(--space-6);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+/* ---------- ① 圖片輪播 ---------- */
+.gallery {
+  margin-top: var(--space-6);
+}
+
+.gallery__track {
+  display: flex;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.gallery__track::-webkit-scrollbar {
+  display: none;
+}
+
+.gallery__slide {
+  flex: 0 0 100%;
+  aspect-ratio: 1 / 1;
+  scroll-snap-align: center;
+}
+
+.gallery__slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* 展品感：不用圓角卡片，直角滿版更接近相框／展場輸出的觀感 */
+  border-radius: var(--radius-sharp);
+}
+
+.gallery__dots {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+}
+
+.gallery__dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--color-text-secondary);
+  opacity: 0.4;
+  transition: opacity var(--duration-fast) var(--ease-standard),
+    background var(--duration-fast) var(--ease-standard);
+}
+
+.gallery__dot--active {
+  background: var(--color-interactive);
+  opacity: 1;
+}
+
+/* ---------- 色系選擇：文字＋底線 tab，不用實色底的 pill 按鈕 ---------- */
+.color-picker {
+  display: flex;
+  gap: var(--space-6);
+  margin-top: var(--space-4);
+}
+
+.color-picker__chip {
+  appearance: none;
+  border: none;
+  background: none;
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: 0 0 var(--space-1);
+  border-bottom: 1px solid transparent;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: color var(--duration-fast) var(--ease-standard),
+    border-color var(--duration-fast) var(--ease-standard);
+}
+
+.color-picker__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex: none;
+}
+
+.color-picker__chip[aria-pressed="true"] {
+  color: var(--color-text-primary);
+  font-weight: 700;
+  border-bottom-color: var(--color-text-primary);
+}
+
+/* ---------- 怎麼玩／通用特色：純文字清單，不用圖示卡片 ---------- */
+.feature-list {
+  margin: var(--space-4) 0 0;
+  padding: 0;
+  list-style: none;
+  max-width: 40ch;
+}
+
+.feature-list li {
+  position: relative;
+  padding-left: var(--space-4);
+  font-size: var(--font-size-base);
+  line-height: 1.7;
+  color: var(--color-text-primary);
+}
+
+.feature-list li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--color-text-secondary);
+}
+
+.feature-list li + li {
+  margin-top: var(--space-2);
+}
+
+/* ---------- 套組內容 ---------- */
+.kit-section__photo {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: var(--radius-sharp);
+  margin-top: var(--space-4);
+}
+
+.kit-list {
+  margin-top: var(--space-4);
+  list-style: none;
+  font-size: var(--font-size-base);
+  line-height: 1.6;
+  color: var(--color-text-primary);
+  max-width: 40ch;
+}
+
+.kit-list li {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.kit-list li + li {
+  margin-top: var(--space-1);
+}
+
+.kit-list li[data-placeholder] {
+  color: var(--color-text-secondary);
+  font-style: italic;
+}
+
+/* ---------- 色系故事：借用 .chapter 節奏，色點當作 eyebrow，不做卡片底色 ---------- */
+.chapter__eyebrow {
+  margin: var(--space-2) 0 0;
+  display: flex;
+  gap: var(--space-1);
+}
+
+.chapter__eyebrow span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+/* ---------- 教學導流：維持深底反色塊，但拿掉圓角 pill 按鈕，改文字連結 ---------- */
+.chapter--cta {
+  margin-right: var(--space-4);
+  background: var(--color-surface-dark);
+  color: var(--color-surface-light);
+  padding: var(--space-6);
+}
+
+/* 九宮格動畫（.moodboard／.moodboard__cell）現在首頁跟商品頁共用（首頁：點材料包清單
+   的「流動畫」項目時右側整面顯示；商品頁：教學導流章節內），移到 home.css 集中維護，
+   這裡不重複定義。 */
+
+.chapter--cta p {
+  margin: 0;
+  font-size: var(--font-size-base);
+}
+
+.cta-section__ig {
+  display: inline-block;
+  margin-top: var(--space-4);
+  font-size: var(--font-size-sm);
+  border-bottom: 1px solid var(--color-surface-light);
+  transition: opacity var(--duration-fast) var(--ease-standard);
+}
+
+.cta-section__ig:active {
+  opacity: 0.6;
+}
+
+/* ---------- Credits／購買前請閱讀：手風琴，比照參考規格的 max-height 轉場 ---------- */
+.accordion {
+  margin-top: var(--space-24);
+  padding: 0 var(--space-4) 0 var(--space-4);
+}
+
+.accordion__toggle {
+  font-size: var(--font-size-base);
+  font-weight: 700;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.accordion__toggle::-webkit-details-marker {
+  display: none;
+}
+
+.accordion__toggle::after {
+  content: "展開閱讀 ＋";
+  font-size: var(--font-size-xs);
+  font-weight: 400;
+  color: var(--color-text-secondary);
+}
+
+.accordion[open] .accordion__toggle::after {
+  content: "收合 －";
+}
+
+.accordion__body {
+  margin-top: var(--space-4);
+  font-size: var(--font-size-sm);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  max-width: 46ch;
+}
+
+/* ---------- 收尾：內嵌價格＋取得方式，不做懸浮購買列 ---------- */
+.work__close {
+  margin-top: var(--space-16);
+  padding: var(--space-6) var(--space-4) 0;
+  border-top: 1px solid color-mix(in srgb, var(--color-text-secondary) 25%, transparent);
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.work__price {
+  margin: 0;
+  font-family: 'Fraunces', 'Noto Serif TC', serif;
+  font-weight: 600;
+  font-size: var(--font-size-xl);
+}
+
+.work__cta {
+  appearance: none;
+  border: none;
+  background: none;
+  padding: 0;
+  font-size: var(--font-size-base);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  border-bottom: 1px solid var(--color-text-primary);
+  cursor: not-allowed;
+  transition: opacity var(--duration-fast) var(--ease-standard);
+}
+
+.work__cta:disabled {
+  opacity: 0.5;
+}

@@ -50,6 +50,27 @@
       </div>
     </div>
     <ul class="content-list" id="content-list" hidden></ul>
+    <div class="content-moodboard" id="content-moodboard" hidden>
+      <!-- 注意：--moodboard-src 的相對路徑是相對於「套用 background-image: var(--moodboard-src)
+           那條規則所在的 CSS 檔案」（home.css，在 /css/ 底下），不是相對於這份 index.html，
+           所以要多一層 ../ 才會正確指到 /assets/，這是 CSS 自訂屬性裡 url() 解析路徑的已知行為，
+           不是筆誤。 -->
+      <a class="moodboard" id="moodboard-link" href="products/fluid-art.html" aria-label="查看春聯流動畫材料包"
+         style="--moodboard-src: url('../assets/images/products/fluid-art/RS_01_主圖片_w1080xh1920拷貝.jpg')">
+        <span class="moodboard__cell" style="--col:0; --row:0; --i:0"></span>
+        <span class="moodboard__cell" style="--col:1; --row:0; --i:1" data-flicker></span>
+        <span class="moodboard__cell" style="--col:2; --row:0; --i:2"></span>
+        <span class="moodboard__cell" style="--col:0; --row:1; --i:3"></span>
+        <span class="moodboard__cell" style="--col:1; --row:1; --i:4"></span>
+        <span class="moodboard__cell" style="--col:2; --row:1; --i:5" data-flicker></span>
+        <span class="moodboard__cell" style="--col:0; --row:2; --i:6"></span>
+        <span class="moodboard__cell" style="--col:1; --row:2; --i:7"></span>
+        <span class="moodboard__cell" style="--col:2; --row:2; --i:8"></span>
+        <span class="moodboard__cell" style="--col:0; --row:3; --i:9" data-flicker></span>
+        <span class="moodboard__cell" style="--col:1; --row:3; --i:10"></span>
+        <span class="moodboard__cell" style="--col:2; --row:3; --i:11"></span>
+      </a>
+    </div>
   </main>
 
   <script src="js/main.js"></script>

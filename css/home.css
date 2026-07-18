@@ -143,6 +143,10 @@ body {
   transform: rotate(-90deg);
 }
 
+/* .side-tabs a：商品頁的目錄改用真的 <a> 連結跳轉離開 SPA（見 products/fluid-art.html），
+   跟首頁原本的 <button data-cat> 共用同一套視覺樣式，這裡把選取器一併涵蓋兩種標籤，
+   首頁沒有 <a> 子元素所以不影響原本行為。 */
+.side-tabs a,
 .side-tabs button {
   appearance: none;
   border: none;
@@ -175,6 +179,7 @@ body {
   gap: 1px;
 }
 
+.side-tabs a:hover,
 .side-tabs button:hover {
   opacity: 0.6;
 }
@@ -234,6 +239,7 @@ body {
   transform: rotateY(180deg);
 }
 
+.side-tabs a:hover .tab-char,
 .side-tabs button:hover .tab-char {
   transform: rotate(90deg) rotateY(180deg);
 }
@@ -263,7 +269,8 @@ body {
   }
 }
 
-.side-tabs button[aria-pressed="true"] {
+.side-tabs button[aria-pressed="true"],
+.side-tabs a[aria-current="page"] {
   opacity: 1;
 }
 
@@ -513,4 +520,58 @@ body {
   transform: translateX(-0.6em);
   transition: transform var(--duration-exit) var(--ease-exit),
               opacity var(--duration-exit) var(--ease-exit);
+}
+
+/* ---------- 材料包清單「流動畫」項目的預覽面板：右側整面顯示九宮格動畫 ----------
+   點清單項目時觸發（見 main.js showMoodboard()），不是切換分類；容器沿用跟
+   .content-list li 同一套左右安全邊界（17%／3%），維持跟清單一致的版面節奏。 */
+.content-moodboard {
+  position: relative;
+  z-index: 1;
+  padding: 0 3% 0 17%;
+}
+
+/* ---------- 九宮格動畫（.moodboard／.moodboard__cell） ----------
+   首頁跟商品頁（products/fluid-art.html 教學導流章節）共用同一套規則，故集中放在這裡：
+   單張 RS_01 拼貼圖用 background-position 切成 3欄x4列，預設每格淡出＋輕微放大＋模糊，
+   加上 .is-revealed class 後逐格淡入定位，部分格子額外做一次短閃爍。 */
+.moodboard {
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  border-radius: var(--radius-sharp);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.moodboard__cell {
+  background-image: var(--moodboard-src);
+  background-size: 300% 400%;
+  background-position: calc(var(--col) * 50%) calc(var(--row) * 33.3333%);
+  opacity: 0;
+  transform: scale(1.08);
+  filter: blur(6px);
+  transition: opacity var(--duration-slow) var(--ease-standard),
+    transform var(--duration-slow) var(--ease-standard),
+    filter var(--duration-slow) var(--ease-standard);
+  transition-delay: calc(var(--i, 0) * 70ms);
+}
+
+.moodboard.is-revealed .moodboard__cell {
+  opacity: 1;
+  transform: scale(1);
+  filter: blur(0);
+}
+
+.moodboard.is-revealed .moodboard__cell[data-flicker] {
+  animation: moodboard-flicker 480ms var(--ease-standard);
+  animation-delay: calc(var(--i, 0) * 70ms + 320ms);
+}
+
+@keyframes moodboard-flicker {
+  0%, 100% { opacity: 1; }
+  40% { opacity: 0.25; }
+  70% { opacity: 1; }
 }
