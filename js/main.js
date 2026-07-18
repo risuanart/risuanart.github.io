@@ -60,14 +60,44 @@ function setupPaintCanvas(panel) {
     return getColor(PAINT_PALETTE[0].varName);
   }
 
+  // 畫布內容持久化：重新整理網頁、旋轉手機（會觸發 resize）都不應該把畫布洗掉，
+  // 「畫過的東西永久保留、只有買新畫布才會清空」是這個互動的核心敘事，重整不該是
+  // 規避這個限制的後門。用 canvas.toDataURL() 存進 localStorage，resize/載入時讀回來畫上去。
+  const CANVAS_DATA_KEY = "risuan_canvasData";
+  let hasDrawnContent = false;
+
+  function saveCanvasData() {
+    try {
+      localStorage.setItem(CANVAS_DATA_KEY, canvas.toDataURL());
+    } catch (e) {
+      // 畫面太複雜、資料超過 localStorage 容量，或瀏覽器隱私模式擋寫入時安靜失敗，
+      // 不影響畫布本身當下還能繼續畫，只是這次的內容可能沒辦法在下次重整時還原。
+    }
+  }
+
+  function restoreCanvasData() {
+    const dataUrl = localStorage.getItem(CANVAS_DATA_KEY);
+    if (!dataUrl) return;
+    const img = new Image();
+    img.onload = () => {
+      ctx.drawImage(img, 0, 0, panel.clientWidth, panel.clientHeight);
+    };
+    img.src = dataUrl;
+    hasDrawnContent = true;
+  }
+
   // canvas.width／height 只在初始化跟真正的視窗縮放時設定：
   // 每次指定這兩個屬性都會清空畫布內容，所以不能放進 enable()，
   // 否則「點 Logo 回首頁但不清空畫布」這個需求就會被 resize 意外破壞。
+  // resize 本身一定會清空像素（改變 canvas.width/height 的副作用，沒辦法避免），
+  // 所以緊接著呼叫 restoreCanvasData() 把上次存的內容畫回去，旋轉手機/縮放視窗
+  // 才不會把畫布重置成空白。
   function resize() {
     const dpr = window.devicePixelRatio || 1;
     canvas.width = panel.clientWidth * dpr;
     canvas.height = panel.clientHeight * dpr;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    restoreCanvasData();
   }
   resize();
   window.addEventListener("resize", resize);
@@ -630,16 +660,29 @@ function setupPaintCanvas(panel) {
 
   let isCharcoal = false;
 
+  // logo 呼吸提示：訪客畫下第一筆之後觸發一次，同一個瀏覽階段內不重複（買新畫布、
+  // clear() 之後才會重置成可以再觸發一次，見下方 clear()）。
+  let logoHintShown = false;
+  function triggerLogoHint() {
+    if (logoHintShown) return;
+    logoHintShown = true;
+    const logo = document.querySelector(".logo");
+    if (!logo) return;
+    logo.classList.add("logo--hint");
+  }
+
   function onPointerDown(event) {
     // 訪客一開始畫第一筆，代表已經「發現可以畫畫」這件事了，
     // 中間的引導提示（線條圖案＋文字）就可以收起來，不擋畫作。
     const emptyHint = document.getElementById("content-empty");
     if (emptyHint && !emptyHint.hidden) emptyHint.hidden = true;
 
-    // 記錄「這輩子畫過至少一次」，用來分辨第一次來訪（還沒畫過，顯示 Just paint.）
-    // 跟買了新畫布之後再畫（顯示 Paint again）這兩種不同情境的文案，這個記錄一旦設定
-    // 就不會清掉（跟 New chance? 那個「這一輪逛過分類」的狀態不同，是永久的）。
-    localStorage.setItem("risuan_hasEverPainted", "1");
+    triggerLogoHint();
+
+    // 「New chance?」的觸發條件是「畫布現在有沒有內容」，不是有沒有逛過分類，
+    // 這裡一畫下去就標記為有內容；實際存進 localStorage（供重整後還原、也是
+    // hasContent() 判斷的依據）在 onPointerUp 這一筆畫結束時做。
+    hasDrawnContent = true;
 
     drawing = true;
     currentColor = pickWeightedColor();
@@ -683,6 +726,7 @@ function setupPaintCanvas(panel) {
     lastMoveTime = now;
   }
   function onPointerUp() {
+    const wasDrawing = drawing;
     drawing = false;
     isSpraying = false;
     isCharcoal = false;
@@ -690,18 +734,31 @@ function setupPaintCanvas(panel) {
     sprayRAF = null;
     stopStrokeSound(false);
     updateTextContrast(); // 筆畫剛畫完就立刻檢查一次，不用等 tickDrips 的節拍
+    // disable() 也會呼叫這個函式做保險清理（防止切分類時剛好還在畫到一半），
+    // 只有「真的剛結束一筆畫」才需要存檔，避免每次切分類都重複存一次沒變化的畫布。
+    if (wasDrawing) saveCanvasData();
+  }
+
+  // iOS Safari 對「哪些事件類型算合法的使用者手勢」判定比較嚴格，AudioContext.resume()
+  // 一定要在這類事件的處理函式裡「同步」呼叫才會真的解鎖；pointerdown 不一定每個
+  // WebKit 版本都認可，額外明確掛在 touchstart 上作為保險，兩邊都呼叫同一個
+  // ensureAudioContext()（內部已經有 audioCtx 存在就不重建的判斷，重複呼叫不會有副作用）。
+  function unlockAudio() {
+    ensureAudioContext();
   }
 
   function enable() {
     canvas.hidden = false;
     canvas.addEventListener("pointerdown", onPointerDown);
     canvas.addEventListener("pointermove", onPointerMove);
+    canvas.addEventListener("touchstart", unlockAudio, { passive: true });
     window.addEventListener("pointerup", onPointerUp);
   }
 
   function disable() {
     canvas.removeEventListener("pointerdown", onPointerDown);
     canvas.removeEventListener("pointermove", onPointerMove);
+    canvas.removeEventListener("touchstart", unlockAudio);
     window.removeEventListener("pointerup", onPointerUp);
     onPointerUp();
   }
@@ -719,6 +776,17 @@ function setupPaintCanvas(panel) {
     charcoalInkGrid.clear();
     drips.length = 0;
     paintLoad = 1;
+    localStorage.removeItem(CANVAS_DATA_KEY);
+    hasDrawnContent = false;
+    // 買了新畫布＝新的一輪開始，讓 logo 呼吸提示下次畫第一筆時可以再觸發一次。
+    logoHintShown = false;
+    const logo = document.querySelector(".logo");
+    if (logo) logo.classList.remove("logo--hint");
+  }
+
+  // 「New chance?」該不該跳出來，就是問這個：畫布現在有沒有內容。
+  function hasContent() {
+    return hasDrawnContent;
   }
 
   // 收銀機音效：兩聲快速上揚的鈴聲疊一段短促的「叮」高頻噪音尾巴，模擬收銀機打開的
@@ -744,7 +812,7 @@ function setupPaintCanvas(panel) {
   }
 
   enable();
-  return { enable, disable, clear, playNewCanvasSound };
+  return { enable, disable, clear, playNewCanvasSound, hasContent };
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -955,55 +1023,78 @@ document.addEventListener("DOMContentLoaded", () => {
     }, totalExitTime);
   }
 
-  // 「畫畫其實只有一次機會」的敘事機制：訪客逛過至少一個分類、再點 logo 回來時，
-  // 引導文字從「Just paint.」變成「New chance?」，暗示畫布已經定案、想要新的要另外
-  // 點擊確認。這個「逛過分類」的狀態存在 localStorage，重新整理網頁也會記得。
-  // 按 Yes 真的買了新畫布之後，因為訪客不是「第一次來」了，文案改用「Paint again」，
-  // 跟真正第一次來訪、還沒畫過的「Just paint.」做區別（用 risuan_hasEverPainted
-  // 這個永久不清除的記錄判斷）。
-  const VISITED_CATEGORY_KEY = "risuan_visitedSinceCanvas";
-  const HAS_EVER_PAINTED_KEY = "risuan_hasEverPainted";
+  // 「畫畫其實只有一次機會」的敘事機制（依待修清單任務3規格）：
+  // 觸發條件是「畫布現在有沒有內容」，不是有沒有逛過分類。
+  //   - 畫布無內容、從沒 reset 過：點 logo 直接回首頁，顯示「Just paint.」，不跳確認框
+  //   - 畫布有內容（不管是否 reset 過）：點 logo 直接跳出「New chance?」確認框，
+  //     這時候底下不顯示任何裝飾文字（畫布本身的內容就是重點）
+  //   - 畫布無內容、曾經 reset 過：點 logo 直接回首頁，顯示「Paint again」，不跳確認框
+  // 選 No：確認框收起，留在原本畫好的畫布，不顯示任何文字。
+  // 選 Yes：清空畫布、記錄「曾經 reset 過」，顯示「Paint again」。
+  const HAS_EVER_RESET_KEY = "risuan_hasEverReset";
   const emptyText = document.getElementById("content-empty-text");
   const canvasConfirm = document.getElementById("canvas-confirm");
   const confirmYes = document.getElementById("canvas-confirm-yes");
   const confirmNo = document.getElementById("canvas-confirm-no");
 
-  function updateEmptyPromptMode() {
-    const visited = localStorage.getItem(VISITED_CATEGORY_KEY) === "1";
-    const hasEverPainted = localStorage.getItem(HAS_EVER_PAINTED_KEY) === "1";
-    empty.classList.toggle("mode-newcanvas", visited);
-    if (emptyText) {
-      emptyText.textContent = visited ? "New chance?" : (hasEverPainted ? "Paint again" : "Just paint.");
-    }
-    if (canvasConfirm) canvasConfirm.hidden = true; // 每次回到這個畫面都重置，不殘留上次展開的確認框
-  }
-  updateEmptyPromptMode();
+  // 回訪問候語（依待修清單任務5規格）：距上次造訪的時間長短，取代原本的
+  // Just paint. / Paint again，只在首頁、畫布為空需要顯示狀態文字時套用。
+  // 只在整個瀏覽階段「第一次」需要顯示文字時算一次（見下方 computeGreeting 呼叫處），
+  // 同一階段內文字不會因為使用者按了幾次 logo 就一直变来变去。
+  // 算完之後立刻把這次的造訪時間寫回去，下一次真正的造訪（重新整理或之後回來）
+  // 才會拿「這次」當作「上次造訪」來比較。
+  const LAST_VISIT_KEY = "risuan_lastVisit";
+  const DAY_MS = 24 * 60 * 60 * 1000;
 
-  if (emptyText) {
-    emptyText.addEventListener("click", () => {
-      if (!empty.classList.contains("mode-newcanvas")) return; // 「Just paint.」模式下純裝飾，不可點擊
-      canvasConfirm.hidden = false;
-    });
+  function computeGreeting() {
+    const lastVisitRaw = localStorage.getItem(LAST_VISIT_KEY);
+    let greeting = null;
+    if (lastVisitRaw) {
+      const diff = Date.now() - parseInt(lastVisitRaw, 10);
+      if (diff < DAY_MS) greeting = "Missed us?";
+      else if (diff >= 21 * DAY_MS) greeting = "Long time no see.";
+      else greeting = "Nice to see you again.";
+    }
+    localStorage.setItem(LAST_VISIT_KEY, String(Date.now()));
+    return greeting;
   }
+  const greeting = computeGreeting();
+
+  // 畫布無內容時該顯示的文字（回訪問候語，或 Just paint. / Paint again 這兩個預設值），
+  // 不處理有內容的情況（有內容時是否顯示確認框，由呼叫端——初始載入／logo 點擊——各自決定）。
+  function updateEmptyPromptMode() {
+    const hasEverReset = localStorage.getItem(HAS_EVER_RESET_KEY) === "1";
+    const fallback = hasEverReset ? "Paint again" : "Just paint.";
+    if (emptyText) emptyText.textContent = greeting || fallback;
+    if (canvasConfirm) canvasConfirm.hidden = true;
+  }
+
+  // 初始載入：畫布內容已經在 setupPaintCanvas 裡從 localStorage 還原好了，
+  // 直接照 hasContent() 決定要不要顯示引導文字（有內容就不顯示，畫布本身就是重點）。
+  if (paintCanvas.hasContent()) {
+    empty.hidden = true;
+  } else {
+    empty.hidden = false;
+    updateEmptyPromptMode();
+  }
+
   if (confirmYes) {
     confirmYes.addEventListener("click", () => {
       paintCanvas.playNewCanvasSound();
       paintCanvas.clear();
-      localStorage.removeItem(VISITED_CATEGORY_KEY);
+      localStorage.setItem(HAS_EVER_RESET_KEY, "1");
       updateEmptyPromptMode();
     });
   }
   if (confirmNo) {
     confirmNo.addEventListener("click", () => {
-      canvasConfirm.hidden = true;
+      // 選 No：留在原本畫好的畫布，不顯示任何文字，直接把整個提示區收起來。
+      empty.hidden = true;
     });
   }
 
   tabs.forEach((tab) => {
-    tab.addEventListener("click", () => {
-      localStorage.setItem(VISITED_CATEGORY_KEY, "1");
-      showCategory(tab.dataset.cat);
-    });
+    tab.addEventListener("click", () => showCategory(tab.dataset.cat));
   });
 
   // 點 Logo：回到首頁的畫布繪製區。清空清單、重新掛上畫布的畫筆事件，
@@ -1015,12 +1106,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
       list.hidden = true;
       list.innerHTML = "";
-      empty.hidden = false;
       if (glass) glass.hidden = true;
       tabs.forEach((tab) => tab.setAttribute("aria-pressed", "false"));
-      updateEmptyPromptMode();
-
       paintCanvas.enable();
+
+      if (paintCanvas.hasContent()) {
+        // 畫布有內容：直接跳出「要不要買新畫布」的確認框，不顯示裝飾文字。
+        empty.hidden = false;
+        if (emptyText) emptyText.textContent = "";
+        if (canvasConfirm) canvasConfirm.hidden = false;
+      } else {
+        empty.hidden = false;
+        updateEmptyPromptMode();
+      }
     });
   }
 });

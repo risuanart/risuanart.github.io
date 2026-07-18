@@ -106,6 +106,19 @@ body {
   cursor: pointer;
 }
 
+/* 訪客畫下第一筆之後，logo 觸發一次呼吸感的透明度脈動，暗示「這個也可以點」，
+   不用文字說破。只播一輪（不加 infinite）就自動停在 opacity:1 的正常狀態，
+   不會重複觸發，也不影響 logo 本身的可點擊範圍/功能（純粹只是 opacity 動畫）。 */
+.logo--hint {
+  animation: logo-hint-breathe 2.4s ease-in-out;
+}
+
+@keyframes logo-hint-breathe {
+  0%, 100% { opacity: 1; }
+  25%, 75% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
 .logo img {
   display: block;
   height: 2.25rem;
@@ -287,6 +300,12 @@ body {
   height: 100%;
   cursor: crosshair;
   touch-action: none; /* 手機上用手指畫，不要觸發捲動或縮放 */
+  /* iOS Safari 長按畫布會跳出系統的「拷貝／尋找所選範圍／翻譯」選字選單，
+     蓋掉長按噴漆的互動，這幾個屬性明確告訴瀏覽器這塊區域不需要文字選取／
+     長按選單這些原生行為。只套用在畫布本身，不影響頁面其他地方的選取功能。 */
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
 }
 
 /* 首頁引導提示：置中在畫面正中間（不是跟著 content-panel 的留白跑，
@@ -331,15 +350,9 @@ body {
   text-shadow: 0 0 3px var(--color-surface-dark), 0 0 6px var(--color-surface-dark);
 }
 
-/* 「New canvas?」模式：訪客逛過至少一個分類、再點 logo 回到畫布時才會出現這個模式，
-   代表這不再是單純的裝飾邀請文字，而是真的可以點擊觸發「要不要買新畫布」的詢問。
-   .content-empty 本身維持 pointer-events:none（不擋畫布事件），只有這個模式下
-   文字本身額外開回 pointer-events:auto，其餘留白區域仍然不擋畫布。 */
-.content-empty.mode-newcanvas .content-empty__text {
-  pointer-events: auto;
-  cursor: pointer;
-}
-
+/* 「New chance?」確認框：點 logo 時如果畫布有內容，會直接跳出來（不用先點文字），
+   .content-empty 本身維持 pointer-events:none（不擋畫布事件），只有確認框本身
+   （含 Yes/No 按鈕）額外開回 pointer-events:auto。 */
 .canvas-confirm {
   margin-top: var(--space-2);
   display: flex;
@@ -353,6 +366,14 @@ body {
   display: none;
 }
 
+.canvas-confirm__title {
+  margin: 0;
+  font-family: "Helvetica Neue", Arial, "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", sans-serif;
+  font-weight: 600;
+  font-size: var(--font-size-lg);
+  text-shadow: 0 0 3px var(--color-surface-light), 0 0 6px var(--color-surface-light);
+}
+
 .canvas-confirm__question {
   margin: 0;
   font-family: "Helvetica Neue", Arial, "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", sans-serif;
@@ -360,6 +381,7 @@ body {
   text-shadow: 0 0 3px var(--color-surface-light), 0 0 6px var(--color-surface-light);
 }
 
+.content-empty.on-dark .canvas-confirm__title,
 .content-empty.on-dark .canvas-confirm__question {
   text-shadow: 0 0 3px var(--color-surface-dark), 0 0 6px var(--color-surface-dark);
 }
