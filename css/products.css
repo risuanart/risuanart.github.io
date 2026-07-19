@@ -114,57 +114,115 @@
   color: var(--color-text-secondary);
 }
 
-/* ---------- ① 圖片輪播 ---------- */
+/* ---------- ① 圖片輪播：自動輪播疊圖淡入淡出＋文字步驟清單 ----------
+   參考 focalglow.co「我們如何與您合作」區塊的邏輯：所有圖片疊在同一個 position:relative
+   容器裡（position:absolute; inset:0），用 opacity 決定哪張看得到，計時器每 4 秒自動換下一張，
+   點文字清單可以直接跳＋重設計時器。原版是桌面雙欄（文字 sticky 在左、圖在右），這裡是手機版，
+   改成上下堆疊：圖在上、文字清單在下，不做 sticky（手機沒有對應的橫向捲動情境）。 */
 .gallery {
   margin-top: var(--space-6);
 }
 
-.gallery__track {
-  display: flex;
-  overflow-x: scroll;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-}
-
-.gallery__track::-webkit-scrollbar {
-  display: none;
-}
-
-.gallery__slide {
-  flex: 0 0 100%;
+.gallery__frame {
+  position: relative;
+  width: 100%;
   aspect-ratio: 1 / 1;
-  scroll-snap-align: center;
 }
 
-.gallery__slide img {
+/* 有些格是靜音自動播放的短循環影片（取代 GIF 的常見手法），跟照片疊在同一個容器裡，
+   用同一套 opacity 切換邏輯，見 product-gallery.js。 */
+.gallery__frame img,
+.gallery__frame video {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   /* 展品感：不用圓角卡片，直角滿版更接近相框／展場輸出的觀感 */
   border-radius: var(--radius-sharp);
+  opacity: 0;
+  transition: opacity var(--duration-slow) var(--ease-standard);
 }
 
-.gallery__dots {
-  display: flex;
-  justify-content: center;
-  gap: var(--space-2);
-  margin-top: var(--space-2);
-}
-
-.gallery__dot {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--color-text-secondary);
-  opacity: 0.4;
-  transition: opacity var(--duration-fast) var(--ease-standard),
-    background var(--duration-fast) var(--ease-standard);
-}
-
-.gallery__dot--active {
-  background: var(--color-interactive);
+.gallery__frame img.is-active,
+.gallery__frame video.is-active {
   opacity: 1;
+}
+
+.gallery__captions {
+  margin: var(--space-4) 0 0;
+  padding: 0;
+  list-style: none;
+  max-width: 40ch;
+}
+
+.gallery__caption {
+  padding: var(--space-2) 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  opacity: 0.5;
+  cursor: pointer;
+  border-bottom: 1px solid color-mix(in srgb, var(--color-text-secondary) 15%, transparent);
+  transition: opacity var(--duration-fast) var(--ease-standard),
+    color var(--duration-fast) var(--ease-standard);
+}
+
+.gallery__caption:last-child {
+  border-bottom: none;
+}
+
+.gallery__caption.is-active {
+  opacity: 1;
+  color: var(--color-text-primary);
+  font-weight: 700;
+}
+
+.gallery__caption-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* 小圓點：未作用中是空心（僅描邊），作用中填滿實色，跟參考規格同一套邏輯 */
+.gallery__caption-dot {
+  width: 6px;
+  height: 6px;
+  flex: none;
+  border-radius: 50%;
+  border: 1px solid currentColor;
+  transition: background var(--duration-fast) var(--ease-standard);
+}
+
+.gallery__caption.is-active .gallery__caption-dot {
+  background: currentColor;
+}
+
+/* 編號：等寬數字，避免 1~8 位數字寬度不一時文字跟著左右跳動 */
+.gallery__caption-num {
+  font-variant-numeric: tabular-nums;
+  font-size: var(--font-size-xs);
+}
+
+/* 說明句：只在作用中那一項展開，非作用中收合成 0（複用規格書 credits 手風琴同一套
+   max-height 轉場手法），字重維持 400，不跟標題一樣加粗，做出主副層次。 */
+.gallery__caption-desc {
+  margin: 0;
+  padding-left: calc(6px + var(--space-2) + 1.5em);
+  font-size: var(--font-size-xs);
+  font-weight: 400;
+  color: var(--color-text-secondary);
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height var(--duration-normal) var(--ease-standard),
+    opacity var(--duration-normal) var(--ease-standard),
+    margin-top var(--duration-normal) var(--ease-standard);
+}
+
+.gallery__caption.is-active .gallery__caption-desc {
+  max-height: 3em;
+  opacity: 1;
+  margin-top: var(--space-1);
 }
 
 /* ---------- 色系選擇：文字＋底線 tab，不用實色底的 pill 按鈕 ---------- */
