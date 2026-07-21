@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>2026 春聯流動畫材料包｜日宣繪畫室</title>
+  <title>春聯流動畫材料包｜日宣繪畫室</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;600;700&family=Poppins:wght@700&family=Noto+Serif+TC:wght@500;700&family=Noto+Sans+TC:wght@400;600;700&display=swap" rel="stylesheet">
@@ -38,72 +38,21 @@
 
   <main class="product-page work">
 
-    <!-- 標題／簡介：對應參考規格的 Title + Intro -->
-    <header class="work__intro">
-      <h1 class="work-heading"><span class="inner">春聯流動畫材料包</span></h1>
-      <p class="work-heading__sub">2026｜手作材料包</p>
-      <p class="intro">倒入顏料，讓色彩自己流動出紋路。沒有兩幅是一樣的——這是專屬這個新年、只此一次的手作體驗。</p>
-    </header>
-
-    <!-- 第一章：作品成色（輪播＋色系） -->
-    <section class="chapter">
-      <h2 class="chapter__title">作品成色</h2>
-      <section class="gallery">
-        <div class="gallery__frame"></div>
-        <ul class="gallery__captions"></ul>
-      </section>
-
-      <div class="color-picker" role="group" aria-label="選擇色系">
-        <button type="button" class="color-picker__chip" data-scheme="classic-red" aria-pressed="true">
-          <span class="color-picker__dot" style="background: var(--swatch-classic-red)"></span>
-          經典紅
-        </button>
-        <button type="button" class="color-picker__chip" data-scheme="welcome-pink" aria-pressed="false">
-          <span class="color-picker__dot" style="background: var(--swatch-welcome-pink)"></span>
-          迎春粉
-        </button>
-      </div>
-    </section>
-
-    <!-- 第二章：色系故事 -->
-    <section class="chapter chapter--story">
-      <h2 class="chapter__title story-section__name">經典紅</h2>
-      <p class="chapter__eyebrow story-section__swatches"></p>
-      <p class="chapter__intro story-section__body"></p>
-    </section>
-
-    <!-- 第三章：怎麼玩／通用特色 -->
-    <section class="chapter">
-      <h2 class="chapter__title">怎麼玩</h2>
-      <ul class="feature-list">
-        <li>免美術基礎，跟著步驟倒入顏料即可完成流動畫效果</li>
-        <li>約 30 分鐘即可完成一組作品，適合親子或初學者體驗</li>
-        <li>材料包內附中英雙語圖文說明，操作步驟一目了然</li>
-        <li>掃描包裝 QR Code 觀看完整示範影片，邊看邊做更安心</li>
-      </ul>
-      <p class="chapter__tags">適合：親子家庭・送禮・教學場合</p>
-    </section>
-
-    <!-- 第四章：套組內容 -->
-    <section class="chapter">
-      <h2 class="chapter__title">套組內容</h2>
-      <img class="kit-section__photo" alt="">
-      <ul class="kit-list"></ul>
-    </section>
-
-    <!-- 第五章：教學導流 -->
-    <section class="chapter chapter--cta">
-      <!-- 九宮格動畫：同一張 RS_01 拼貼圖用 background-position 切成 3x4 格，
-           點擊後逐格淡入定位，其中幾格額外做一次短閃爍，觸發方式待定（目前先用點擊）。
-           注意：--moodboard-src 這個相對路徑是相對於 home.css（/css/ 底下）解析，不是相對於
-           這份 HTML，所以跟 index.html 用同一層 ../ 前綴，兩邊要保持一致，見 index.html 裡的說明。 -->
-      <div class="moodboard" role="button" tabindex="0" aria-label="播放精選畫面動畫"
+    <!-- 頁首：只負責定調與指路，不揭露版本規格差異。九宮格動畫沿用首頁預覽面板同一套
+         CSS／拼貼圖，這裡額外把其中一格（col:1,row:1）換成真的影片，取代拼貼圖切片，
+         data-autoplay 讓動畫在頁面載入後自動播放一次，不用等使用者先點（見 product-gallery.js
+         的 initMoodboard()）。影片是 <video> 一般 HTML 屬性，相對路徑以這份 HTML 檔案本身為準
+         （跟 --moodboard-src 那個 CSS url() 的解析基準不同，不要混用同一套 ../ 假設）。 -->
+    <section class="intro-hero">
+      <div class="moodboard" data-autoplay role="button" tabindex="0" aria-label="播放開場動畫"
            style="--moodboard-src: url('../assets/images/products/fluid-art/RS_01_主圖片_w1080xh1920拷貝.jpg')">
         <span class="moodboard__cell" style="--col:0; --row:0; --i:0"></span>
         <span class="moodboard__cell" style="--col:1; --row:0; --i:1" data-flicker></span>
         <span class="moodboard__cell" style="--col:2; --row:0; --i:2"></span>
         <span class="moodboard__cell" style="--col:0; --row:1; --i:3"></span>
-        <span class="moodboard__cell" style="--col:1; --row:1; --i:4"></span>
+        <span class="moodboard__cell" style="--col:1; --row:1; --i:4" data-video>
+          <video src="../assets/images/products/fluid-art/RS_video-gold-sticker.mp4" autoplay muted loop playsinline aria-label="金色字貼近拍，實際手貼上畫布的過程"></video>
+        </span>
         <span class="moodboard__cell" style="--col:2; --row:1; --i:5" data-flicker></span>
         <span class="moodboard__cell" style="--col:0; --row:2; --i:6"></span>
         <span class="moodboard__cell" style="--col:1; --row:2; --i:7"></span>
@@ -112,21 +61,14 @@
         <span class="moodboard__cell" style="--col:1; --row:3; --i:10"></span>
         <span class="moodboard__cell" style="--col:2; --row:3; --i:11"></span>
       </div>
-      <p>完整示範影片，掃描包裝 QR Code 即可觀看</p>
-      <a class="cta-section__ig" href="https://instagram.com/ri.suan_art" target="_blank" rel="noopener">追蹤 @ri.suan_art 看示範 ↗</a>
+
+      <p class="intro-hero__tagline">倒入顏料，讓流動帶出色彩的變化。<br>無法復刻的作品，這是這個新年，只此一次的手作體驗。</p>
+
+      <nav class="intro-hero__forks" aria-label="選擇材料包版本">
+        <a href="fluid-art-light.html">輕巧嘗試 ↗</a>
+        <a href="fluid-art-gift.html">完整的新年儀式 ↗</a>
+      </nav>
     </section>
-
-    <!-- Credits 手風琴：對應規格的購買前須知 -->
-    <details class="accordion">
-      <summary class="accordion__toggle">購買前請閱讀</summary>
-      <div class="accordion__body">此材料包為手作 DIY 商品，顏料倒入後的流動紋路為隨機生成，每件成品皆獨一無二，圖片僅供參考，實際成品會依操作手法略有差異。顏料開封後請盡快使用完畢，避免長時間曝曬或高溫存放。材料包一經拆封使用，恕不接受退換貨，若有商品瑕疵請於收到商品 7 日內與我們聯繫。</div>
-    </details>
-
-    <!-- 收尾：價格＋取得方式，非懸浮，融在頁面結尾，不做電商購物車列 -->
-    <footer class="work__close">
-      <p class="work__price">$000</p>
-      <button type="button" class="work__cta" disabled aria-label="購買功能尚未開放">取得材料包 ↗</button>
-    </footer>
 
   </main>
 

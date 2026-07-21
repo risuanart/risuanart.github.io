@@ -61,8 +61,8 @@
   font-weight: 600;
   /* clamp 而非固定斷點：跟首頁 .content-list 同一套「用 vw 連續縮放」慣例，
      手機到平板寬度之間字級平滑放大，不需要另外寫斷點。 */
-  font-size: clamp(2.25rem, 1.4rem + 4vw, 3.5rem);
-  line-height: 1.08;
+  font-size: clamp(1.75rem, 1.3rem + 3vw, 2.75rem);
+  line-height: 1.1;
   overflow-wrap: anywhere;
 }
 
@@ -74,10 +74,21 @@
   color: var(--color-text-secondary);
 }
 
+/* 價格提前：讓進頁面第一眼就看到價格，不用滑到最底部的 .work__price 才知道。
+   字級介於副標（xs）跟主標題之間，用 Fraunces 呼應底部收尾的價格排版，
+   但份量明顯輕於 H1，避免搶走標題的視覺重量。 */
+.work-heading__price {
+  margin: var(--space-1) 0 0;
+  font-family: 'Fraunces', 'Noto Serif TC', serif;
+  font-weight: 600;
+  font-size: var(--font-size-lg);
+  color: var(--color-text-primary);
+}
+
 .intro {
   margin: var(--space-6) 0 0;
   max-width: 34ch;
-  font-size: var(--font-size-base);
+  font-size: var(--font-size-sm);
   line-height: 1.7;
   color: var(--color-text-primary);
 }
@@ -92,15 +103,21 @@
   margin: 0;
   font-family: 'Fraunces', 'Noto Serif TC', serif;
   font-weight: 600;
-  font-size: clamp(1.4rem, 1.15rem + 1vw, 1.75rem);
+  font-size: clamp(1.15rem, 1rem + 0.7vw, 1.375rem);
 }
 
 .chapter__intro {
   margin-top: var(--space-4);
-  font-size: var(--font-size-base);
+  font-size: var(--font-size-sm);
   line-height: 1.7;
   color: var(--color-text-primary);
   max-width: 40ch;
+}
+
+/* 色系故事現在是多段落（見 product-gallery.js renderStory()，一段一個 <p>，
+   句號後真的分段），段落間距比照 .chapter__prose 同一階。 */
+.chapter__intro > p + p {
+  margin-top: var(--space-4);
 }
 
 .chapter__intro[data-placeholder] {
@@ -112,6 +129,49 @@
   margin-top: var(--space-6);
   font-size: var(--font-size-sm);
   color: var(--color-text-secondary);
+}
+
+/* 章節內的橫幅圖（目前：怎麼玩章節尾聲，示意多人一起製作），刻意不用跟輪播／
+   套組內容照片一樣的正方形，改用較扁的橫式比例，構圖上區分「情境示意」跟
+   「產品實拍」兩種不同性質的圖。 */
+.chapter__banner-photo {
+  width: 100%;
+  aspect-ratio: 2 / 1;
+  border-radius: var(--radius-sharp);
+  margin-top: var(--space-6);
+  overflow: hidden;
+}
+
+.chapter__banner-photo .placeholder-box {
+  width: 100%;
+  height: 100%;
+}
+
+/* 敘事類多段落文案（怎麼玩／字貼工藝／黏土說明），跟 .chapter__intro 同一套字級節奏，
+   差別是允許多個 <p> 依序排列，段落間距用 owl selector 統一處理。 */
+.chapter__prose {
+  margin-top: var(--space-4);
+  max-width: 40ch;
+  font-size: var(--font-size-sm);
+  line-height: 1.7;
+  color: var(--color-text-primary);
+}
+
+.chapter__prose > * + * {
+  margin-top: var(--space-4);
+}
+
+/* 內文文字連結（例如尾聲導引至另一版本）：比照 .cta-section__ig／.work__cta 的
+   底線連結語彙，不用瀏覽器預設底線（全站 a 已在 base.css 關掉 text-decoration）。 */
+.text-link {
+  color: inherit;
+  font-weight: 700;
+  border-bottom: 1px solid var(--color-text-primary);
+  transition: opacity var(--duration-fast) var(--ease-standard);
+}
+
+.text-link:active {
+  opacity: 0.6;
 }
 
 /* ---------- ① 圖片輪播：自動輪播疊圖淡入淡出＋文字步驟清單 ----------
@@ -130,23 +190,46 @@
 }
 
 /* 有些格是靜音自動播放的短循環影片（取代 GIF 的常見手法），跟照片疊在同一個容器裡，
-   用同一套 opacity 切換邏輯，見 product-gallery.js。 */
+   用同一套 opacity 切換邏輯，見 product-gallery.js。輕巧版有幾格沒有對應的實拍照片
+   （現有照片是照禮盒版拍的），改疊一個 .placeholder-box 文字說明，共用同一套定位／
+   淡入淡出規則。 */
 .gallery__frame img,
-.gallery__frame video {
+.gallery__frame video,
+.gallery__frame .placeholder-box {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
   /* 展品感：不用圓角卡片，直角滿版更接近相框／展場輸出的觀感 */
   border-radius: var(--radius-sharp);
   opacity: 0;
   transition: opacity var(--duration-slow) var(--ease-standard);
 }
 
+.gallery__frame img,
+.gallery__frame video {
+  object-fit: cover;
+}
+
 .gallery__frame img.is-active,
-.gallery__frame video.is-active {
+.gallery__frame video.is-active,
+.gallery__frame .placeholder-box.is-active {
   opacity: 1;
+}
+
+/* 佔位說明框：輕巧版還沒有實拍照片的格子（輪播格、套組內容照片）共用這套視覺——
+   虛線框＋淡底色，一看就知道是「待補照片」，不會被誤認成正式素材。 */
+.placeholder-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+  text-align: center;
+  border: 1px dashed color-mix(in srgb, var(--color-text-secondary) 40%, transparent);
+  background: color-mix(in srgb, var(--color-text-secondary) 8%, transparent);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-xs);
+  line-height: 1.6;
 }
 
 .gallery__captions {
@@ -288,19 +371,33 @@
   margin-top: var(--space-2);
 }
 
-/* ---------- 套組內容 ---------- */
+/* ---------- 套組內容 ----------
+   .kit-section__photo 現在是容器（不是 <img> 本身），JS 依版本塞入真的照片或
+   .placeholder-box 文字說明，見 product-gallery.js applyScheme()。 */
 .kit-section__photo {
   width: 100%;
   aspect-ratio: 1 / 1;
-  object-fit: cover;
   border-radius: var(--radius-sharp);
   margin-top: var(--space-4);
+  overflow: hidden;
+}
+
+.kit-section__photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.kit-section__photo .placeholder-box {
+  width: 100%;
+  height: 100%;
 }
 
 .kit-list {
   margin-top: var(--space-4);
   list-style: none;
-  font-size: var(--font-size-base);
+  font-size: var(--font-size-sm);
   line-height: 1.6;
   color: var(--color-text-primary);
   max-width: 40ch;
@@ -333,21 +430,86 @@
   border-radius: 50%;
 }
 
+/* 色系故事結尾：三格小圖示意同一組顏料在不同比例下的成果差異。
+   跟主輪播／套組內容照片的正方形一致，但縮小排成一列，強調「同組微調」的並列感，
+   不是跟主圖搶視覺重量的獨立大圖。 */
+.story-section__variations {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+  max-width: 40ch;
+}
+
+.story-section__variation {
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius-sharp);
+  overflow: hidden;
+}
+
+.story-section__variation .placeholder-box {
+  width: 100%;
+  height: 100%;
+  padding: var(--space-1);
+  font-size: var(--font-size-xs);
+}
+
+/* 字貼材質對比（僅禮盒版套組內容使用）：跟上面色系故事的三格比例示意同一套視覺語言，
+   只是兩格並排，比較「輕巧版亮面水晶貼」跟「禮盒版磨砂手工字貼」的材質差異。 */
+.sticker-compare {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+  max-width: 40ch;
+}
+
+.sticker-compare__cell {
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius-sharp);
+  overflow: hidden;
+}
+
+.sticker-compare__cell.placeholder-box {
+  padding: var(--space-1);
+  font-size: var(--font-size-xs);
+}
+
+/* 怎麼玩章節（僅禮盒版）：兩格並排比較「5cm 練習」跟「15cm 正式創作」，
+   跟 .sticker-compare 同一套兩格網格語言，這裡是不同章節、不同比較內容，
+   所以另開一組類別名稱，不是共用同一個。 */
+.howto-compare {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+  max-width: 40ch;
+}
+
+.howto-compare__cell {
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius-sharp);
+  overflow: hidden;
+}
+
+.howto-compare__cell.placeholder-box {
+  padding: var(--space-1);
+  font-size: var(--font-size-xs);
+}
+
 /* ---------- 教學導流：維持深底反色塊，但拿掉圓角 pill 按鈕，改文字連結 ---------- */
 .chapter--cta {
-  margin-right: var(--space-4);
   background: var(--color-surface-dark);
   color: var(--color-surface-light);
   padding: var(--space-6);
 }
 
-/* 九宮格動畫（.moodboard／.moodboard__cell）現在首頁跟商品頁共用（首頁：點材料包清單
-   的「流動畫」項目時右側整面顯示；商品頁：教學導流章節內），移到 home.css 集中維護，
-   這裡不重複定義。 */
+/* 九宮格動畫（.moodboard／.moodboard__cell）目前只有 fluid-art-intro.html 頁首在用，
+   規則放在 home.css 集中維護，這裡不重複定義。 */
 
 .chapter--cta p {
   margin: 0;
-  font-size: var(--font-size-base);
+  font-size: var(--font-size-sm);
 }
 
 .cta-section__ig {
@@ -401,15 +563,39 @@
   max-width: 46ch;
 }
 
+.accordion__body > * + * {
+  margin-top: var(--space-2);
+}
+
+.accordion__body h3 {
+  margin-top: var(--space-4);
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--color-text-primary);
+}
+
 /* ---------- 收尾：內嵌價格＋取得方式，不做懸浮購買列 ---------- */
 .work__close {
   margin-top: var(--space-16);
   padding: var(--space-6) var(--space-4) 0;
   border-top: 1px solid color-mix(in srgb, var(--color-text-secondary) 25%, transparent);
   display: flex;
-  align-items: baseline;
+  align-items: flex-end;
   justify-content: space-between;
   gap: var(--space-4);
+}
+
+.work__close-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.work__shipping-note {
+  margin: 0;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
 }
 
 .work__price {
@@ -434,4 +620,47 @@
 
 .work__cta:disabled {
   opacity: 0.5;
+}
+
+/* ---------- 頁首（fluid-art-intro.html）：影片開場＋定調句＋岔路文字連結 ----------
+   只負責「定調」與「指路」，不揭露版本規格差異，岔路維持文字連結，不做按鈕／卡片。
+   九宮格動畫（.moodboard）沿用 home.css 的共用規則，這裡只調整頁首情境下的尺寸與排版。 */
+.intro-hero {
+  padding: 0 var(--space-4) 0 var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-10);
+}
+
+.intro-hero .moodboard {
+  max-width: 320px;
+}
+
+.intro-hero__tagline {
+  margin: 0;
+  max-width: 30ch;
+  font-family: 'Fraunces', 'Noto Serif TC', serif;
+  font-weight: 500;
+  font-size: clamp(1.3rem, 1.05rem + 1.2vw, 1.75rem);
+  line-height: 1.55;
+  color: var(--color-text-primary);
+}
+
+.intro-hero__forks {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  align-items: flex-start;
+}
+
+.intro-hero__forks a {
+  font-size: var(--font-size-base);
+  font-weight: 700;
+  border-bottom: 1px solid var(--color-text-primary);
+  padding-bottom: var(--space-1);
+  transition: opacity var(--duration-fast) var(--ease-standard);
+}
+
+.intro-hero__forks a:active {
+  opacity: 0.6;
 }

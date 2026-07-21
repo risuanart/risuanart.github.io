@@ -15,6 +15,10 @@ html {
 }
 
 body {
+  /* 全站預設內文字型：跟 home.css 各元件目前逐一手動指定的字型堆疊一致，
+     這裡補一份 body 基準值，避免漏寫 font-family 的元素（例如商品頁內文）
+     直接落回瀏覽器預設的 serif（Times）。 */
+  font-family: "Helvetica Neue", Arial, "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", sans-serif;
   font-size: var(--font-size-base);
   line-height: 1.6;
   color: var(--color-text-primary);

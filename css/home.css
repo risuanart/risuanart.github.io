@@ -522,17 +522,9 @@ body {
               opacity var(--duration-exit) var(--ease-exit);
 }
 
-/* ---------- 材料包清單「流動畫」項目的預覽面板：右側整面顯示九宮格動畫 ----------
-   點清單項目時觸發（見 main.js showMoodboard()），不是切換分類；容器沿用跟
-   .content-list li 同一套左右安全邊界（17%／3%），維持跟清單一致的版面節奏。 */
-.content-moodboard {
-  position: relative;
-  z-index: 1;
-  padding: 0 3% 0 17%;
-}
-
 /* ---------- 九宮格動畫（.moodboard／.moodboard__cell） ----------
-   首頁跟商品頁（products/fluid-art.html 教學導流章節）共用同一套規則，故集中放在這裡：
+   目前只有 products/fluid-art-intro.html（頁首）在用，放在 home.css 是因為最早跟首頁
+   預覽面板共用過這套規則（該面板已移除，見 index.html／main.js）。
    單張 RS_01 拼貼圖用 background-position 切成 3欄x4列，預設每格淡出＋輕微放大＋模糊，
    加上 .is-revealed class 後逐格淡入定位，部分格子額外做一次短閃爍。 */
 .moodboard {
@@ -574,4 +566,21 @@ body {
   0%, 100% { opacity: 1; }
   40% { opacity: 0.25; }
   70% { opacity: 1; }
+}
+
+/* 其中一格可以放真的影片（例如 fluid-art-intro.html 的金色字貼特寫短片），取代拼貼圖切片。
+   影片是這一格的子元素，需要 position:relative 讓子元素的 absolute 定位以這一格為基準，
+   不是往上飄到更外層的祖先。整格的淡入／模糊動畫套用在 .moodboard__cell 本身，
+   影片跟著父層一起淡入，不用另外處理。 */
+.moodboard__cell[data-video] {
+  position: relative;
+  background-image: none;
+}
+
+.moodboard__cell[data-video] video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }

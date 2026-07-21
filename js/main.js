@@ -21,12 +21,9 @@ const CATEGORIES = {
   },
   materials: {
     title: "材料包",
-    // 「流動畫」商品頁已經做好（獨立頁面，非本頁SPA清單內展開）。點這個項目時，
-    // 先在右側整面顯示九宮格預覽動畫（見 showMoodboard()），不是直接跳轉；
-    // 再點一次九宮格（它本身就是真的 <a href>）才會離開首頁跳到商品頁。
-    // href 保留當作 JS 失效時的備援（progressive enhancement），不是真的靠它導覽。
-    // 「砂畫」還沒有對應頁面，維持純文字。
-    items: [{ text: "流動畫", href: "products/fluid-art.html", reveal: "moodboard" }, "砂畫"],
+    // 「流動畫」點下去直接離開首頁跳到頁首（fluid-art-intro.html），九宮格開場動畫
+    // 只在頁首播放一次，首頁這裡不重複播放。「砂畫」還沒有對應頁面，維持純文字。
+    items: [{ text: "流動畫", href: "products/fluid-art-intro.html" }, "砂畫"],
   },
 };
 
@@ -1012,38 +1009,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 材料包清單裡「流動畫」項目點下去的預覽面板：右側整面顯示九宮格動畫，
-  // 動畫本身（.moodboard／.moodboard__cell）跟商品頁教學導流章節共用同一套 CSS，見 home.css。
-  const contentMoodboard = document.getElementById("content-moodboard");
-
-  function showMoodboard() {
-    if (!contentMoodboard) return;
-    list.hidden = true;
-    contentMoodboard.hidden = false;
-    const board = contentMoodboard.querySelector(".moodboard");
-    board.classList.remove("is-revealed");
-    // 雙 rAF：先讓「未播放」狀態真的畫出來一次，下一輪才加 class 觸發轉場，
-    // 跟 revealItems() 用的是同一招，避免兩個狀態疊在同一畫面直接跳過去。
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        board.classList.add("is-revealed");
-      });
-    });
-  }
-
-  function hideMoodboard() {
-    if (!contentMoodboard || contentMoodboard.hidden) return;
-    contentMoodboard.hidden = true;
-    const board = contentMoodboard.querySelector(".moodboard");
-    if (board) board.classList.remove("is-revealed");
-    list.hidden = false;
-  }
-
   function buildItems(cat) {
     const data = CATEGORIES[cat];
     if (!data) return;
 
-    hideMoodboard();
     list.innerHTML = "";
     const items = data.items.map((item) => {
       const li = document.createElement("li");
@@ -1051,15 +1020,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const inner = document.createElement(hasLink ? "a" : "span");
       inner.className = "inner";
       inner.textContent = hasLink ? item.text : item;
-      if (hasLink) {
-        inner.href = item.href;
-        if (item.reveal === "moodboard") {
-          inner.addEventListener("click", (e) => {
-            e.preventDefault();
-            showMoodboard();
-          });
-        }
-      }
+      if (hasLink) inner.href = item.href;
       li.appendChild(inner);
       list.appendChild(li);
       return li;
@@ -1196,7 +1157,6 @@ document.addEventListener("DOMContentLoaded", () => {
     logoReset.addEventListener("click", () => {
       switching = false;
 
-      hideMoodboard();
       list.hidden = true;
       list.innerHTML = "";
       if (glass) glass.hidden = true;
