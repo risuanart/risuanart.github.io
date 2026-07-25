@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="../css/base.css">
   <link rel="stylesheet" href="../css/home.css">
   <link rel="stylesheet" href="../css/products.css">
+  <link rel="stylesheet" href="../css/cart.css">
 </head>
 <body data-kit-version="gift">
 
@@ -22,6 +23,21 @@
     <a class="logo" href="../index.html" aria-label="回到首頁畫布">
       <img src="../assets/images/logo-risuan拷貝.png" alt="日宣繪畫室">
     </a>
+    <div class="cart-badge-wrap">
+      <button type="button" class="cart-badge" aria-haspopup="true" aria-expanded="false" aria-label="購物車，目前 0 件">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+        <span class="cart-badge__count">0</span>
+      </button>
+      <div class="cart-preview" hidden>
+        <ul class="cart-preview__list"></ul>
+        <p class="cart-preview__empty">購物車是空的</p>
+        <p class="cart-preview__total"></p>
+        <div class="cart-preview__actions">
+          <a class="cart-preview__view" href="../cart.html">查看購物車</a>
+          <button type="button" class="cart-preview__continue">繼續選購</button>
+        </div>
+      </div>
+    </div>
   </header>
 
   <nav class="side-tabs" aria-label="全站分類目錄">
@@ -41,9 +57,42 @@
     <!-- 標題／簡介：全站開場句，跟頁首、輕巧版共用同一句 -->
     <header class="work__intro">
       <h1 class="work-heading"><span class="inner">春聯流動畫材料包</span></h1>
-      <p class="work-heading__sub">2026｜禮盒版</p>
-      <p class="work-heading__price">$1,100</p>
+      <!-- 版本標籤前面的方塊數量＝成品件數（輕巧版1幅／禮盒版2幅），
+           用符號多傳遞一個規格資訊，不只是純裝飾。 -->
+      <p class="work-heading__version"><span class="work-heading__version-marks" aria-hidden="true"><span></span><span></span></span>禮盒版</p>
+      <p class="work-heading__sub">2026</p>
       <p class="intro">15cm 與 5cm 雙幅創作，磨砂手工字貼、無痕上牆，<br>一份更完整的新年儀式。</p>
+
+      <!-- 雙色成品縮圖：進頁面第一眼看到有哪些色系，點下去直接切換（跟色系選擇器
+           共用同一套 .color-picker__chip 機制，見 products.css 說明）。
+           「色系」這個欄位標籤是刻意加的，不然縮圖光看外觀不容易看出是用來選色的。 -->
+      <p class="work-heading__field-label">色系</p>
+      <div class="work-heading__preview" role="group" aria-label="選擇色系">
+        <button type="button" class="color-picker__chip work-heading__preview-cell" data-scheme="classic-red" aria-pressed="true">
+          <img src="../assets/images/products/fluid-art/RS_05.7_產品圖片_800x800拷貝.jpg" alt="經典紅成品參考圖" width="80" height="80" loading="lazy">
+          經典紅
+        </button>
+        <button type="button" class="color-picker__chip work-heading__preview-cell" data-scheme="welcome-pink" aria-pressed="false">
+          <img src="../assets/images/products/fluid-art/RS_05.8_產品圖片_800x800拷貝.jpg" alt="迎春粉成品參考圖" width="80" height="80" loading="lazy">
+          迎春粉
+        </button>
+      </div>
+
+      <!-- 標題區也放一組加入購物車：跟最底部那組共用同一個 data-add-to-cart 機制
+           （cart.js 用 querySelectorAll 抓全頁所有符合的按鈕，這裡不用多寫任何 JS），
+           讓已經決定要買的人不用滑完整頁故事才找得到入口；想看完故事再決定的人，
+           底部收尾那組還在。上面加一條分隔線＋留白，跟純敘事的文字內容明確切開，
+           讓人一眼看出「這裡開始是可以動手的區塊」，不是接著往下讀的介紹文字。 -->
+      <div class="work-heading__buy-row">
+        <div class="work-heading__buy-text">
+          <p class="work-heading__price">$1,100</p>
+          <p class="work__color-hint">目前選擇：<strong class="work__color-hint-name">經典紅</strong>・禮盒版<span class="work__addon-hint" hidden>＋畫布加購</span></p>
+        </div>
+        <button type="button" class="work__cta work__cta--primary" data-add-to-cart data-product="fluid-art-gift">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+          <span class="work__cta-label">加入購物車</span>
+        </button>
+      </div>
     </header>
 
     <!-- 第一章：作品成色（輪播＋色系，跟輕巧版共用同一套素材） -->
@@ -161,6 +210,21 @@
       <p class="chapter__intro">如果只想先輕巧嘗試流動畫，15cm 單幅成品、簡易中英圖解，<a class="text-link" href="fluid-art-light.html">輕巧版</a>在這裡。</p>
     </section>
 
+    <!-- 延伸創作：畫布＋字貼＋架高杯加購，禮盒版的顏料份量足夠支援第二幅創作，
+         這是給想再做一幅的人的加購選項。跟主商品共用底部同一顆「加入購物車」
+         按鈕一次性加入，不做獨立商品頁或第二顆按鈕（見購物車與多商品架構規格書
+         第四章）。核取方塊狀態由 cart.js initAddOns() 讀取。 -->
+    <section class="chapter addon-section">
+      <h2 class="chapter__title">延伸創作</h2>
+      <label class="addon-item">
+        <input type="checkbox" class="addon-item__checkbox" data-addon-product="fluid-art-gift" data-addon-key="canvas-kit">
+        <span class="addon-item__body">
+          <span class="addon-item__name">空白畫布＋字貼＋架高杯（$__）</span>
+          <span class="addon-item__note">顏料份量足夠支援第二幅創作，加購畫布即可再完成一幅。</span>
+        </span>
+      </label>
+    </section>
+
     <!-- 購買前請閱讀：兩子頁共用同一份條款 -->
     <details class="accordion">
       <summary class="accordion__toggle">購買前請閱讀</summary>
@@ -197,17 +261,23 @@
       </div>
     </details>
 
-    <!-- 收尾：出貨提示＋價格＋取得方式，非懸浮，融在頁面結尾，不做電商購物車列 -->
+    <!-- 收尾：出貨提示＋價格＋加入購物車，非懸浮，融在頁面結尾，不做懸浮購買列。
+         加入購物車會讀取當下選中的色系（見 js/cart.js initAddToCart()）。 -->
     <footer class="work__close">
       <div class="work__close-text">
         <p class="work__shipping-note">出貨依訂購順序安排，時程將於下單頁面公告。</p>
+        <p class="work__color-hint">目前選擇：<strong class="work__color-hint-name">經典紅</strong>・禮盒版<span class="work__addon-hint" hidden>＋畫布加購</span></p>
         <p class="work__price">$1,100</p>
       </div>
-      <button type="button" class="work__cta" disabled aria-label="購買功能尚未開放">取得材料包 ↗</button>
+      <button type="button" class="work__cta work__cta--primary" data-add-to-cart data-product="fluid-art-gift">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+        <span class="work__cta-label">加入購物車</span>
+      </button>
     </footer>
 
   </main>
 
   <script src="../js/product-gallery.js"></script>
+  <script src="../js/cart.js"></script>
 </body>
 </html>

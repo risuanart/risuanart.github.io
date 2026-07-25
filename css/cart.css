@@ -1,0 +1,440 @@
+/* cart.css —— 購物車徽章（商品頁共用）＋購物車頁樣式。
+   延續 products.css 的克制調性：清單文字為主，沒有卡片底色、沒有圓角 pill 標籤，
+   跟全站「作品集，不是電商」的視覺語彙一致，只是這裡是真的有功能的購物車。 */
+
+/* ---------- 購物車徽章：固定在右上角，跟左上角 logo 對稱，全站常駐 ----------
+   線條圖示（不用文字），數字徽章一直顯示（含 0 件），不會忽隱忽現——
+   讓使用者隨時知道「這裡有購物車」，不用先加東西進去才看得到入口。
+   .cart-badge-wrap 負責固定定位，.cart-badge 本身是觸發下拉迷你購物車的按鈕
+   （不是直接導頁的連結），.cart-preview 是它旁邊彈出的下拉面板。 */
+.cart-badge-wrap {
+  position: fixed;
+  top: var(--space-4);
+  right: var(--space-4);
+  z-index: 30;
+}
+
+.cart-badge {
+  appearance: none;
+  border: none;
+  background: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  color: var(--color-text-primary);
+  cursor: pointer;
+  transition: opacity var(--duration-fast) var(--ease-standard);
+}
+
+.cart-badge:active {
+  opacity: 0.6;
+}
+
+.cart-badge svg {
+  display: block;
+  width: 22px;
+  height: 22px;
+}
+
+/* 加入購物車那瞬間，圖示放大回彈一次，把按鈕的動作跟右上角的購物車連起來
+   （見 js/cart.js pulseCartBadge()）。--ease-overshoot 是全站既有、專門用在
+   這種「需要手感回彈」互動的 token，不用自己另外調曲線。 */
+.cart-badge.is-pulsing svg {
+  animation: cart-badge-pulse 420ms var(--ease-overshoot);
+}
+
+@keyframes cart-badge-pulse {
+  0% { transform: scale(1); }
+  45% { transform: scale(1.35); }
+  100% { transform: scale(1); }
+}
+
+.cart-badge__count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.4em;
+  height: 1.4em;
+  padding: 0 0.3em;
+  border-radius: 999px;
+  background: var(--color-surface-dark);
+  color: var(--color-surface-light);
+  font-size: var(--font-size-xs);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- 迷你購物車下拉：點購物車圖示先看一眼內容，再決定要去結帳
+   還是留在原頁面繼續選購，不是點了就直接被導離目前的商品頁。 ---------- */
+.cart-preview {
+  position: absolute;
+  top: calc(100% + var(--space-2));
+  right: 0;
+  width: min(300px, calc(100vw - 2 * var(--space-4)));
+  background: var(--color-surface-light);
+  border: 1px solid color-mix(in srgb, var(--color-text-secondary) 25%, transparent);
+  box-shadow: var(--shadow-raised);
+  border-radius: var(--radius-sharp);
+  padding: var(--space-4);
+}
+
+.cart-preview__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 45vh;
+  overflow-y: auto;
+}
+
+.cart-preview__item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) 0;
+  border-top: 1px solid color-mix(in srgb, var(--color-text-secondary) 15%, transparent);
+}
+
+.cart-preview__item:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+
+/* 用 class 而非 img 元素選取器，這樣沒有實拍素材時的 .placeholder-box 文字
+   佔位框（見 js/cart.js thumbHTML()）也能套用同一組尺寸，不用另外寫一份。 */
+.cart-preview__item-thumb {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: var(--radius-sharp);
+  padding: 0;
+  font-size: 0.55rem;
+}
+
+.cart-preview__item-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.cart-preview__item-name {
+  margin: 0;
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.cart-preview__item-meta {
+  margin: var(--space-1) 0 0;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
+.cart-preview__item-price {
+  flex: none;
+  margin: 0;
+  font-size: var(--font-size-xs);
+  font-variant-numeric: tabular-nums;
+  color: var(--color-text-primary);
+}
+
+.cart-preview__empty {
+  margin: 0;
+  padding: var(--space-4) 0;
+  text-align: center;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.cart-preview__total {
+  margin: var(--space-2) 0 0;
+  padding-top: var(--space-2);
+  border-top: 1px solid color-mix(in srgb, var(--color-text-secondary) 25%, transparent);
+  text-align: right;
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.cart-preview__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+}
+
+.cart-preview__view {
+  display: block;
+  text-align: center;
+  padding: var(--space-2);
+  background: var(--color-button-primary);
+  color: var(--color-surface-light);
+  border-radius: var(--radius-sharp);
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+}
+
+.cart-preview__view:active {
+  opacity: 0.7;
+}
+
+.cart-preview__continue {
+  appearance: none;
+  border: none;
+  background: none;
+  padding: var(--space-1);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  text-align: center;
+  cursor: pointer;
+}
+
+.cart-preview__continue:active {
+  opacity: 0.6;
+}
+
+/* ---------- 加入購物車提示泡泡（toast）----------
+   從購物車圖示下方滑入（跟迷你購物車下拉同一側，視覺上呼應「東西進了這裡」），
+   停留幾秒後自動滑出消失，見 js/cart.js showCartToast()。深底白字＋圓角，
+   是全站少數用到「浮動於內容之上」的元素——toast 本質上就是暫時性的系統提示，
+   跟頁面內容不是同一個層次，例外於「不做懸浮元素」的原則是合理的。 */
+.cart-toast-container {
+  position: fixed;
+  top: calc(var(--space-4) + 40px);
+  right: var(--space-4);
+  z-index: 40;
+  display: flex;
+  flex-direction: column-reverse;
+  gap: var(--space-2);
+  pointer-events: none;
+}
+
+.cart-toast {
+  background: #010101;
+  color: #fff;
+  border-radius: 0.5rem;
+  padding: 0.3rem 1rem;
+  font-size: var(--font-size-xs);
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(100%);
+  transition: opacity 1s cubic-bezier(0.07, 0.95, 0, 1),
+    transform 1s cubic-bezier(0.07, 0.95, 0, 1);
+}
+
+.cart-toast.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.cart-toast.is-leaving {
+  opacity: 0;
+  transform: translateX(-3rem);
+  transition: opacity 1s var(--ease-standard), transform 1s var(--ease-standard);
+}
+
+/* ---------- 購物車清單：依大分類分組 ---------- */
+.cart-group + .cart-group {
+  margin-top: var(--space-16);
+}
+
+.cart-group__title {
+  margin: 0;
+  font-family: 'Fraunces', 'Noto Serif TC', serif;
+  font-weight: 600;
+  font-size: var(--font-size-lg);
+}
+
+.cart-list {
+  margin-top: var(--space-4);
+  padding: 0;
+  list-style: none;
+  max-width: 50ch;
+}
+
+/* 縮圖＋內文並排，內文自己再分兩排（品名／數量價格），不把縮圖、品名、數量、
+   價格、移除全部塞進同一橫排——品名在窄螢幕上會被擠成只剩一兩個字寬的直條。 */
+.cart-item {
+  display: flex;
+  gap: var(--space-4);
+  padding: var(--space-4) 0;
+  border-top: 1px solid color-mix(in srgb, var(--color-text-secondary) 20%, transparent);
+}
+
+.cart-item__thumb-link {
+  flex: none;
+  display: block;
+  transition: opacity var(--duration-fast) var(--ease-standard);
+}
+
+.cart-item__thumb-link:active {
+  opacity: 0.6;
+}
+
+.cart-item__thumb {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: var(--radius-sharp);
+}
+
+/* 沒有實拍素材時的文字佔位框（見 js/cart.js thumbHTML()），縮圖尺寸太小，
+   .placeholder-box 預設的留白跟字級塞不進 64px 見方，這裡另外縮小。 */
+.cart-item__thumb.placeholder-box {
+  padding: 0;
+  font-size: 0.6rem;
+}
+
+.cart-item:last-child {
+  border-bottom: 1px solid color-mix(in srgb, var(--color-text-secondary) 20%, transparent);
+}
+
+.cart-item__body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.cart-item__name {
+  display: block;
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  transition: opacity var(--duration-fast) var(--ease-standard);
+}
+
+.cart-item__name:active {
+  opacity: 0.6;
+}
+
+/* 色系下拉：可以直接在購物車換色，不用跳回商品頁。用原生 <select>——
+   手機上點下去就是系統原生的選單/滾輪，不用自己刻一個彈出選單。
+   外觀上盡量抹掉瀏覽器預設樣式，看起來像其他地方的底線文字連結，
+   只是多一個小箭頭暗示「這個可以點開換」。 */
+.cart-item__scheme-select {
+  appearance: none;
+  -webkit-appearance: none;
+  border: none;
+  background-color: transparent;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%238A8570' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right center;
+  /* 沒宣告 background-size 的話，這個 SVG 沒有在根節點寫 width/height，
+     瀏覽器會退回預設的內建尺寸（常見是 300x150px）畫出來，圖示會大到蓋住文字——
+     這裡明確鎖定成跟 viewBox 一致的小尺寸，不依賴瀏覽器猜測。 */
+  background-size: 10px 6px;
+  margin: var(--space-1) 0 0;
+  padding: 0 var(--space-4) var(--space-1) 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--color-text-secondary) 40%, transparent);
+  font-family: inherit;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+}
+
+.cart-item__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+/* 數量調整改成一體成型的 stepper（減／數字／加共用同一個外框，中間用分隔線隔開），
+   不是三個各自獨立、東一顆西一顆的按鈕＋裸數字，看起來更像一個完整的元件。 */
+.cart-item__qty {
+  display: flex;
+  align-items: stretch;
+  flex: none;
+  border: 1px solid color-mix(in srgb, var(--color-text-secondary) 40%, transparent);
+  border-radius: var(--radius-sharp);
+  overflow: hidden;
+  font-size: var(--font-size-sm);
+  font-variant-numeric: tabular-nums;
+}
+
+.cart-item__qty button {
+  appearance: none;
+  border: none;
+  background: none;
+  width: 2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-primary);
+  cursor: pointer;
+}
+
+.cart-item__qty button:active {
+  background: color-mix(in srgb, var(--color-text-secondary) 15%, transparent);
+}
+
+.cart-item__qty span {
+  min-width: 2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-left: 1px solid color-mix(in srgb, var(--color-text-secondary) 40%, transparent);
+  border-right: 1px solid color-mix(in srgb, var(--color-text-secondary) 40%, transparent);
+}
+
+.cart-item__price {
+  flex: none;
+  margin: 0;
+  min-width: 6ch;
+  text-align: right;
+  font-size: var(--font-size-sm);
+  font-variant-numeric: tabular-nums;
+  color: var(--color-text-primary);
+}
+
+/* 垃圾桶線條圖示取代「移除」文字，跟購物車徽章、加入購物車按鈕同一套圖示語言。
+   按下去變成警示色（--color-warning，全站規則是僅限破壞性操作才用這個顏色，
+   移除購物車項目正是這種情境）。 */
+.cart-item__remove {
+  flex: none;
+  appearance: none;
+  border: none;
+  background: none;
+  padding: var(--space-1);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+
+.cart-item__remove svg {
+  display: block;
+}
+
+.cart-item__remove:active {
+  color: var(--color-warning);
+}
+
+/* 加購子項目：縮排顯示在主商品下方，字級跟顏色都退一階，標示這是補充項目
+   而非獨立商品（見規格書第五章）。 */
+.cart-item__addons {
+  margin: var(--space-2) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cart-item__addon {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding-left: var(--space-4);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+.cart-item__addon + .cart-item__addon {
+  margin-top: var(--space-1);
+}
+
+.cart-empty {
+  margin-top: var(--space-4);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}

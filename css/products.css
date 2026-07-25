@@ -69,16 +69,116 @@
 .work-heading__sub {
   margin: var(--space-2) 0 0;
   font-size: var(--font-size-xs);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  letter-spacing: 0.05em;
   color: var(--color-text-secondary);
+}
+
+/* 版本標籤：原本只是副標裡一段不起眼的小寫字，滑過去很容易沒注意到是
+   輕巧版還是禮盒版。改成有邊框的標籤，邊框色呼應「加入購物車」按鈕的底色
+   （--color-button-primary），視覺上讓人先注意到「這是哪個版本」。 */
+.work-heading__version {
+  display: inline-flex;
+  align-items: center;
+  margin-top: var(--space-2);
+  padding: 0.15em var(--space-2);
+  border: 1px solid var(--color-button-primary);
+  border-radius: var(--radius-sharp);
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  color: var(--color-button-primary);
+}
+
+/* 標籤前面的方塊數量＝成品件數：輕巧版一個方塊（單幅成品），禮盒版兩個
+   方塊（雙幅成品），用 currentColor 跟著標籤文字同一個顏色走。 */
+.work-heading__version-marks {
+  display: inline-flex;
+  gap: 2px;
+  margin-right: var(--space-1);
+}
+
+.work-heading__version-marks span {
+  width: 6px;
+  height: 6px;
+  background: currentColor;
+}
+
+/* 「色系」欄位標籤：縮圖本身看起來就是張照片，不加這行字很容易看不出來
+   是可以點的選色控制項，不是單純的裝飾圖。 */
+.work-heading__field-label {
+  margin: var(--space-6) 0 0;
+  font-size: var(--font-size-xs);
+  letter-spacing: 0.05em;
+  color: var(--color-text-secondary);
+}
+
+/* 雙色成品縮圖：進頁面第一眼就看到有哪些色系可選，不用滑到「作品成色」章節
+   才知道。這兩顆按鈕直接套用 .color-picker__chip（跟色系選擇器共用同一套
+   click／aria-pressed 邏輯，見 product-gallery.js），這裡只覆寫外觀，
+   從文字＋底線 tab 改成縮圖＋標籤的卡片，不用多寫任何 JS。 */
+.work-heading__preview {
+  display: flex;
+  gap: var(--space-4);
+  margin-top: var(--space-2);
+}
+
+.work-heading__preview-cell.color-picker__chip {
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  padding: 0;
+  border-bottom: none;
+}
+
+.work-heading__preview-cell img {
+  width: 72px;
+  height: 72px;
+  object-fit: cover;
+  border-radius: var(--radius-sharp);
+  border: 2px solid transparent;
+  transition: border-color var(--duration-fast) var(--ease-standard),
+    box-shadow var(--duration-fast) var(--ease-standard),
+    opacity var(--duration-fast) var(--ease-standard);
+}
+
+/* 選中的縮圖用雙層陰影（tokens.css 裡本來就定義好的 --shadow-raised 組合，
+   這是它第一次真的派上用場）做出「浮起來」的實體感，取代只有一圈外框的
+   扁平標示，跟色系選擇器裡純文字的粗體／底線標示做出區隔——這裡是照片，
+   用光影比用線條更貼切。 */
+.work-heading__preview-cell[aria-pressed="true"] img {
+  border-color: var(--color-text-primary);
+  box-shadow: var(--shadow-raised);
+}
+
+.work-heading__preview-cell:active img {
+  opacity: 0.7;
+}
+
+/* 標題區的「買」這件事收成一組：價格＋已選色系放左邊、按鈕放右邊，
+   跟頁面最底部收尾的 .work__close 用同一種左右分欄排法＋同一種上緣分隔線，
+   讓頭尾兩處的購買動作視覺上像一對呼應的書擋。分隔線＋留白是刻意的：
+   沒有這條線的話，這個區塊會直接接在敘事文字後面，容易被誤認成介紹文字的
+   延伸，看不出來這裡開始是「可以動手」的交易區塊。 */
+.work-heading__buy-row {
+  margin-top: var(--space-6);
+  padding-top: var(--space-4);
+  border-top: 1px solid color-mix(in srgb, var(--color-text-secondary) 25%, transparent);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.work-heading__buy-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
 }
 
 /* 價格提前：讓進頁面第一眼就看到價格，不用滑到最底部的 .work__price 才知道。
    字級介於副標（xs）跟主標題之間，用 Fraunces 呼應底部收尾的價格排版，
    但份量明顯輕於 H1，避免搶走標題的視覺重量。 */
 .work-heading__price {
-  margin: var(--space-1) 0 0;
+  margin: 0;
   font-family: 'Fraunces', 'Noto Serif TC', serif;
   font-weight: 600;
   font-size: var(--font-size-lg);
@@ -417,6 +517,124 @@
   font-style: italic;
 }
 
+/* ---------- 加購項目：核取方塊列表，不用電商常見的商品卡片網格 ----------
+   延續全站條列式風格，用原生 checkbox（accent-color 沿用主色，保留原生的
+   鍵盤／輔助科技操作行為，不用自己刻一個假的方塊圖示）。 */
+.addon-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+  max-width: 40ch;
+  cursor: pointer;
+}
+
+.addon-item__checkbox {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  margin-top: 0.15em;
+  accent-color: var(--color-text-primary);
+  cursor: pointer;
+}
+
+.addon-item__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.addon-item__name {
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.addon-item__note {
+  font-size: var(--font-size-xs);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+
+/* 加購摘要提示：即時反映在按鈕上方的「目前選擇」列，見 js/cart.js initAddOns()。 */
+.work__addon-hint {
+  color: var(--color-text-primary);
+}
+
+/* ---------- 圖案選擇卡片網格（砂畫輕巧版 8 款自選／自由創作組 5 款固定展示） ----------
+   8 款圖案彼此差異度高（構圖、字、配色都不同，不是像色系那樣的單純顏色替換），
+   用 2 欄卡片網格讓使用者一次看到全部選項比較，不用像色系 chip 那樣一次只看 1-2 個。
+   選中狀態用 inset box-shadow 標邊框，不改變 border 寬度，避免選取瞬間卡片尺寸跳動。 */
+.pattern-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+  padding: 0;
+  max-width: 46ch;
+}
+
+.pattern-card {
+  appearance: none;
+  border: 1px solid color-mix(in srgb, var(--color-text-secondary) 30%, transparent);
+  border-radius: var(--radius-sharp);
+  background: none;
+  padding: var(--space-2);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  text-align: left;
+  font-family: inherit;
+  color: inherit;
+  cursor: pointer;
+  transition: box-shadow var(--duration-fast) var(--ease-standard);
+}
+
+.pattern-card[aria-pressed="true"] {
+  box-shadow: inset 0 0 0 2px var(--color-text-primary);
+}
+
+.pattern-card--static {
+  cursor: default;
+}
+
+.pattern-card__photo {
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius-sharp);
+  padding: var(--space-1);
+  font-size: 0.65rem;
+}
+
+.pattern-card__name {
+  margin: var(--space-1) 0 0;
+  font-family: 'Fraunces', 'Noto Serif TC', serif;
+  font-weight: 600;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+}
+
+.pattern-card__tags {
+  margin: 0;
+  font-size: var(--font-size-xs);
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+}
+
+.pattern-card__meta {
+  margin: 0;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+/* 套組內容章節：「成品尺寸」隨選中圖案即時更新，見 js/sand-art-gallery.js applyPattern()。 */
+.kit-section__size-hint {
+  margin-top: var(--space-4);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+  max-width: 40ch;
+}
+
 /* ---------- 色系故事：借用 .chapter 節奏，色點當作 eyebrow，不做卡片底色 ---------- */
 .chapter__eyebrow {
   margin: var(--space-2) 0 0;
@@ -598,6 +816,19 @@
   color: var(--color-text-secondary);
 }
 
+/* 加入購物車當下選的是哪個色系，容易被使用者忽略（色系選擇器在頁面上方，
+   按鈕在最下面，中間隔了很長的內容）。這裡在按鈕正上方重複顯示一次目前選擇，
+   跟著色系切換即時更新（見 js/cart.js），不用往上滑回去確認。 */
+.work__color-hint {
+  margin: var(--space-1) 0 0;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
+.work__color-hint-name {
+  color: var(--color-text-primary);
+}
+
 .work__price {
   margin: 0;
   font-family: 'Fraunces', 'Noto Serif TC', serif;
@@ -614,12 +845,49 @@
   font-weight: 700;
   color: var(--color-text-primary);
   border-bottom: 1px solid var(--color-text-primary);
-  cursor: not-allowed;
+  cursor: pointer;
   transition: opacity var(--duration-fast) var(--ease-standard);
 }
 
+.work__cta:active {
+  opacity: 0.6;
+}
+
 .work__cta:disabled {
+  cursor: not-allowed;
   opacity: 0.5;
+}
+
+/* 「加入購物車」是頁面上唯一真的會發生交易動作的按鈕，值得比其他文字連結
+   多一點視覺重量——用 --color-button-primary（colors.css 原本就定義好、
+   註解寫明「一般功能性按鈕（CTA、送出、連結按鈕）」的填色，這裡是它第一次
+   真的派上用場），配上跟購物車徽章同一顆線條袋子圖示。維持全站「直角＋
+   克制」的調性，不做圓角 pill、不做漸層。 */
+.work__cta--primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  /* min-height 保留 44px（行動裝置觸控目標下限），但寬度／內距縮小，
+     不然按鈕看起來比旁邊的價格還搶眼，喧賓奪主。 */
+  min-height: 44px;
+  padding: var(--space-1) var(--space-4);
+  border: none;
+  border-bottom: none;
+  border-radius: var(--radius-sharp);
+  background: var(--color-button-primary);
+  color: var(--color-surface-light);
+  font-size: var(--font-size-sm);
+}
+
+.work__cta--primary svg {
+  flex: none;
+  width: 15px;
+  height: 15px;
+}
+
+.work__cta--primary:disabled {
+  background: color-mix(in srgb, var(--color-button-primary) 55%, var(--color-surface-light));
 }
 
 /* ---------- 頁首（fluid-art-intro.html）：影片開場＋定調句＋岔路文字連結 ----------
@@ -634,6 +902,14 @@
 
 .intro-hero .moodboard {
   max-width: 320px;
+}
+
+/* 砂畫頁首還沒有任何實拍／拼貼素材，用單一 placeholder-box 頂著（見
+   sand-art-intro.html），跟流動畫頁首的九宮格拼貼佔同一個版面位置與寬度，
+   之後素材到位要換掉時，版面節奏不用跟著調整。 */
+.intro-hero .sand-intro-hero__photo {
+  max-width: 320px;
+  width: 100%;
 }
 
 .intro-hero__tagline {

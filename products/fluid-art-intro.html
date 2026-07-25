@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="../css/base.css">
   <link rel="stylesheet" href="../css/home.css">
   <link rel="stylesheet" href="../css/products.css">
+  <link rel="stylesheet" href="../css/cart.css">
 </head>
 <body>
 
@@ -22,6 +23,21 @@
     <a class="logo" href="../index.html" aria-label="回到首頁畫布">
       <img src="../assets/images/logo-risuan拷貝.png" alt="日宣繪畫室">
     </a>
+    <div class="cart-badge-wrap">
+      <button type="button" class="cart-badge" aria-haspopup="true" aria-expanded="false" aria-label="購物車，目前 0 件">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+        <span class="cart-badge__count">0</span>
+      </button>
+      <div class="cart-preview" hidden>
+        <ul class="cart-preview__list"></ul>
+        <p class="cart-preview__empty">購物車是空的</p>
+        <p class="cart-preview__total"></p>
+        <div class="cart-preview__actions">
+          <a class="cart-preview__view" href="../cart.html">查看購物車</a>
+          <button type="button" class="cart-preview__continue">繼續選購</button>
+        </div>
+      </div>
+    </div>
   </header>
 
   <nav class="side-tabs" aria-label="全站分類目錄">
@@ -73,5 +89,6 @@
   </main>
 
   <script src="../js/product-gallery.js"></script>
+  <script src="../js/cart.js"></script>
 </body>
 </html>
