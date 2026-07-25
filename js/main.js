@@ -964,6 +964,22 @@ document.addEventListener("DOMContentLoaded", () => {
     const lastItem = items[items.length - 1];
     if (!lastItem) {
       panel.style.paddingBottom = `${Math.max(0, window.innerHeight - targetY)}px`;
+      panel.classList.remove("is-overflowing");
+      return;
+    }
+
+    // 清單本身（不加任何底部留白）的自然高度，如果已經比可視範圍還高（例如課程分類
+    // 有 7 項，字級又是跟容器寬度等比縮放的大字），代表無論 padding-bottom 怎麼調，
+    // 都不可能讓最後一項底部對齊 targetY——硬要用 flex-end 對齊，只會把開頭幾項推到
+    // 可視範圍外，配合 buildItems() 裡的 panel.scrollTop = 0，畫面看起來像整份清單
+    // 被推到最上面、貼著 logo（在小螢幕手機上很容易發生）。這種情況改用由上而下的
+    // 自然排列（見 .content-panel.is-overflowing），不勉強做底部對齊。
+    const paddingTop = parseFloat(getComputedStyle(panel).paddingTop) || 0;
+    const availableHeight = panel.clientHeight - paddingTop;
+    const overflowing = list.scrollHeight > availableHeight;
+    panel.classList.toggle("is-overflowing", overflowing);
+    if (overflowing) {
+      panel.style.paddingBottom = "0px";
       return;
     }
 
