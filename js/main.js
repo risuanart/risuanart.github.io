@@ -21,9 +21,12 @@ const CATEGORIES = {
   },
   materials: {
     title: "材料包",
-    // 「流動畫」點下去直接離開首頁跳到頁首（fluid-art-intro.html），九宮格開場動畫
-    // 只在頁首播放一次，首頁這裡不重複播放。「砂畫」還沒有對應頁面，維持純文字。
-    items: [{ text: "流動畫", href: "products/fluid-art-intro.html" }, "砂畫"],
+    // 「流動畫」「砂畫」點下去都直接離開首頁跳到各自的頁首，開場動畫只在
+    // 頁首播放一次，首頁這裡不重複播放。
+    items: [
+      { text: "流動畫", href: "products/fluid-art-intro.html" },
+      { text: "砂畫", href: "products/sand-art-intro.html" },
+    ],
   },
 };
 
