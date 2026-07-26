@@ -346,6 +346,28 @@ button.text-link {
   line-height: 1.6;
 }
 
+/* 附加圖示的相片佔位框（目前用在砂畫圖案：pattern-card__photo／
+   overview-card__thumb／購物車縮圖），圖示在上、文字在下，讓這格看起來是
+   「預留給照片的位置」，不是一格空白裡飄著幾個字。用額外的 modifier class
+   疊加在既有 .placeholder-box 上，不改動base樣式本身——其他既有的純文字
+   佔位框（例如流動畫色系故事的深淺示意、套組內容缺照片說明）維持原樣不變。
+   圖示尺寸用 em（相對這個元素自己的 font-size），縮圖縮小時（見
+   .cart-item__thumb.placeholder-box 等 font-size 覆寫）圖示會跟著等比縮小，
+   不用每個尺寸各自再調一次圖示大小。 */
+.placeholder-box--photo {
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.placeholder-box__icon {
+  flex: none;
+  opacity: 0.6;
+}
+
+.placeholder-box__text {
+  display: block;
+}
+
 .gallery__captions {
   margin: var(--space-4) 0 0;
   padding: 0;

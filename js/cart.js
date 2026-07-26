@@ -107,6 +107,11 @@
   // src 讓瀏覽器顯示破圖圖示。className 決定實際尺寸／圓角（見 cart.css
   // .cart-preview__item-thumb／.cart-item__thumb），img 與 placeholder-box
   // 共用同一個 class 就會是同樣的尺寸，呼叫端不用另外判斷。
+  // 相片圖示：讓還沒有實拍素材的縮圖看起來是「預留給照片的位置」，不是一格
+  // 空白裡飄著兩個字，跟 sand-art-gallery.js 的圖案卡片共用同一個圖示、同一套
+  // placeholder-box--photo 排版邏輯（圖示在上、文字在下）。
+  const PLACEHOLDER_PHOTO_ICON = `<svg class="placeholder-box__icon" viewBox="0 0 24 24" width="1.8em" height="1.8em" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1.5"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 16l-5.5-5.5a1 1 0 0 0-1.4 0L6 19"/></svg>`;
+
   function thumbHTML(item, className) {
     const src = SCHEME_IMAGES[item.scheme];
     if (src) {
@@ -114,7 +119,7 @@
       const schemeName = SCHEME_NAMES[item.scheme] || "";
       return `<img class="${className}" src="${src}" alt="${product ? product.name : ""}・${schemeName}成品參考圖" loading="lazy">`;
     }
-    return `<div class="${className} placeholder-box" aria-hidden="true">圖片待補</div>`;
+    return `<div class="${className} placeholder-box placeholder-box--photo" aria-hidden="true">${PLACEHOLDER_PHOTO_ICON}<span class="placeholder-box__text">圖片待補</span></div>`;
   }
 
   // 縮圖／品名點下去要連去哪個商品頁。

@@ -31,9 +31,13 @@
   // 自由創作組固定精選 5 款（不開放自選），順序照規格書第八章列出的順序。
   const COLLECTION_PATTERNS = ["nafu-grid", "yingchun-grid", "cai", "chun", "fu-sheep"];
 
+  // 相片圖示：跟純文字說明分開放（見 placeholder-box--photo），讓還沒有實拍
+  // 素材的圖案格子看起來是「預留給照片的位置」，不是一格空白裡飄著一行小字。
+  const PLACEHOLDER_PHOTO_ICON = `<svg class="placeholder-box__icon" viewBox="0 0 24 24" width="1.8em" height="1.8em" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1.5"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 16l-5.5-5.5a1 1 0 0 0-1.4 0L6 19"/></svg>`;
+
   function patternCardHTML(p) {
     return `
-      <div class="placeholder-box pattern-card__photo" aria-hidden="true">建議拍攝：${p.name}・${p.style}</div>
+      <div class="placeholder-box placeholder-box--photo pattern-card__photo" aria-hidden="true">${PLACEHOLDER_PHOTO_ICON}<span class="placeholder-box__text">建議拍攝：${p.name}・${p.style}</span></div>
       <p class="pattern-card__name">${p.shortLabel}</p>
       <p class="pattern-card__tags">${p.style}・${p.colorDesc}</p>
       <p class="pattern-card__meta">${p.size}cm・${p.material}</p>
