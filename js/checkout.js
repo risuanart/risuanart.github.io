@@ -7,9 +7,14 @@
 
    超商取貨會整頁導去綠界電子地圖（這一步一定要離開網站，綠界規定不能用
    iframe 嵌入），選完店綠界會把瀏覽器導回這裡（網址帶著 ?orderId=xxx）；
-   這支檔案在頁面載入時如果發現網址已經有 orderId，就直接跳過購物車編輯
-   畫面、進到確認區塊，這樣不管是剛按下「結帳」還是從綠界地圖選店回來，
-   走的都是同一段渲染邏輯。
+   這支檔案在頁面載入時如果發現網址已經有 orderId，就直接顯示確認區塊，
+   這樣不管是剛按下「結帳」還是從綠界地圖選店回來，走的都是同一段渲染邏輯。
+
+   按下「結帳」之後，購物車內容不會被藏起來——確認區塊是「加」在購物車
+   下面，並且平滑捲動過去，讓客人清楚知道往上滑還在原本的購物車、可以
+   繼續調整數量／刪除品項。如果客人真的在這個狀態下改了購物車，會重新
+   呼叫一次 start-checkout 把訂單資料同步成最新的購物車內容（見
+   scheduleResync()），不會讓客人改了數量、卻付到改之前的舊金額。
 
    送貨方式的運費金額（65／130）只用來「即時顯示」小計＋運費的總金額，
    真正算錢、擋不合法金額的地方是後端 lib/products.js 的 shippingFeeFor()，
@@ -50,12 +55,20 @@
 
   function showCartEditView() {
     confirmView.hidden = true;
-    cartEditView.hidden = false;
+    if (new URLSearchParams(window.location.search).has("orderId")) {
+      history.pushState(null, "", "cart.html");
+    }
   }
 
+  // 購物車內容維持顯示，確認區塊平滑捲動進來，讓客人知道自己還在同一頁、
+  // 往上滑就是原本的購物車，不是被帶去了別的地方。只有「從隱藏變成顯示」
+  // 的那一刻才捲動——之後客人在購物車那邊調整數量觸發 scheduleResync()
+  // 重新整理確認區塊時，如果每次都硬把畫面捲回去，反而會打斷客人正在
+  // 操作購物車的捲動位置。
   function showConfirmView() {
-    cartEditView.hidden = true;
+    const wasHidden = confirmView.hidden;
     confirmView.hidden = false;
+    if (wasHidden) confirmView.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
   function showConfirmError(message) {
@@ -104,6 +117,15 @@
     }
   }
 
+  // 目前顯示中的訂單／宅配是否已確認，給下面那組「只掛一次」的送貨方式
+  // 按鈕監聽器讀取——loadAndShowConfirm 可能因為 scheduleResync() 被同一頁
+  // 呼叫好幾次（客人結帳後又回頭調整購物車數量），如果每次都重新
+  // addEventListener，同一顆按鈕會累積掛上一堆重複的監聽器，越用越怪。
+  // 用這兩個模組層級的變數＋只掛一次的監聽器取代，各自呼叫時直接讀/寫
+  // 最新狀態即可。
+  let currentOrder = null;
+  let isHomeConfirmed = false;
+
   async function loadAndShowConfirm(orderId) {
     showConfirmView();
     loadingEl.hidden = false;
@@ -138,76 +160,104 @@
     shippingCvsLink.href = `${CHECKOUT_API_BASE}/api/logistics-map?orderId=${encodeURIComponent(order.orderId)}`;
     form.action = `${CHECKOUT_API_BASE}/api/create-order`;
 
-    let isHomeConfirmed = false;
-    renderShippingState(order, isHomeConfirmed);
-
-    shippingHomeBtn.addEventListener("click", () => {
-      isHomeConfirmed = true;
-      renderShippingState(order, isHomeConfirmed);
-      receiverZipcodeInput.focus();
-    });
-    switchToHomeBtn.addEventListener("click", () => {
-      isHomeConfirmed = true;
-      renderShippingState(order, isHomeConfirmed);
-      receiverZipcodeInput.focus();
-    });
-    switchToPickerBtn.addEventListener("click", () => {
-      isHomeConfirmed = false;
-      renderShippingState(order, isHomeConfirmed);
-    });
+    currentOrder = order;
+    // 訂單本身如果已經帶著選好的門市（例如剛從綠界地圖選店回來），沿用；
+    // 否則維持客人原本選的是不是宅配，同步之後不用重新選一次送貨方式。
+    if (order.cvsStore && order.cvsStore.CVSStoreID) isHomeConfirmed = false;
+    renderShippingState(currentOrder, isHomeConfirmed);
 
     loadingEl.hidden = true;
     contentEl.hidden = false;
   }
 
+  shippingHomeBtn.addEventListener("click", () => {
+    isHomeConfirmed = true;
+    renderShippingState(currentOrder, isHomeConfirmed);
+    receiverZipcodeInput.focus();
+  });
+  switchToHomeBtn.addEventListener("click", () => {
+    isHomeConfirmed = true;
+    renderShippingState(currentOrder, isHomeConfirmed);
+    receiverZipcodeInput.focus();
+  });
+  switchToPickerBtn.addEventListener("click", () => {
+    isHomeConfirmed = false;
+    renderShippingState(currentOrder, isHomeConfirmed);
+  });
+
+  function showCheckoutError(message) {
+    if (!checkoutErrorEl) return;
+    checkoutErrorEl.textContent = message;
+    checkoutErrorEl.hidden = false;
+  }
+
+  function hideCheckoutError() {
+    if (checkoutErrorEl) checkoutErrorEl.hidden = true;
+  }
+
+  // 建立／更新訂單草稿並顯示確認區塊。按「結帳」跟「購物車內容變動時自動
+  // 同步」共用這支函式——不管哪個情境觸發，客人最後看到／要付的金額都一定
+  // 是當下購物車真正的內容，不會有「畫面顯示的跟後端記錄的對不上」的情況。
+  async function runCheckout() {
+    if (!window.RisuanCart) return;
+    const cartItems = window.RisuanCart.getCheckoutPayload();
+    if (!cartItems.length) {
+      // 客人在確認畫面還開著的時候把購物車清空了，這筆訂單已經沒有意義，
+      // 收起確認區塊、回到（顯示「購物車是空的」的）購物車編輯畫面。
+      showCartEditView();
+      return;
+    }
+
+    hideCheckoutError();
+
+    try {
+      const res = await fetch(`${CHECKOUT_API_BASE}/api/start-checkout`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ cartItems }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "建立訂單失敗，請稍後再試一次");
+
+      history.pushState(null, "", `cart.html?orderId=${encodeURIComponent(data.orderId)}`);
+      await loadAndShowConfirm(data.orderId);
+    } catch (err) {
+      showCheckoutError(`結帳發生問題：${err.message}`);
+    }
+  }
+
+  // 購物車變動時（調整數量／刪除／換規格），如果確認區塊正開著，代表客人
+  // 是在已經按過一次「結帳」之後才回頭改購物車——這裡要重新同步，不能讓
+  // 客人改了數量卻付到舊金額。用小小的 debounce 避免連續按 +/- 按鈕時
+  // 每一下都打一次後端。
+  let resyncTimer = null;
+  function scheduleResync() {
+    if (confirmView.hidden) return;
+    if (resyncTimer) clearTimeout(resyncTimer);
+    resyncTimer = setTimeout(runCheckout, 400);
+  }
+
   function initCartEditView() {
     if (!checkoutBtn || !window.RisuanCart) return;
-
-    const originalLabel = checkoutBtn.textContent;
 
     function updateButtonState() {
       const hasItems = window.RisuanCart.readCart().length > 0;
       checkoutBtn.disabled = !hasItems;
     }
 
-    function showCheckoutError(message) {
-      if (!checkoutErrorEl) return;
-      checkoutErrorEl.textContent = message;
-      checkoutErrorEl.hidden = false;
-    }
-
-    function hideCheckoutError() {
-      if (checkoutErrorEl) checkoutErrorEl.hidden = true;
-    }
-
     checkoutBtn.addEventListener("click", async () => {
-      const cartItems = window.RisuanCart.getCheckoutPayload();
-      if (!cartItems.length) return;
-
-      hideCheckoutError();
       checkoutBtn.disabled = true;
       checkoutBtn.textContent = "處理中…";
-
-      try {
-        const res = await fetch(`${CHECKOUT_API_BASE}/api/start-checkout`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ cartItems }),
-        });
-        const data = await res.json();
-        if (!res.ok) throw new Error(data.error || "建立訂單失敗，請稍後再試一次");
-
-        history.pushState(null, "", `cart.html?orderId=${encodeURIComponent(data.orderId)}`);
-        loadAndShowConfirm(data.orderId);
-      } catch (err) {
-        showCheckoutError(`結帳發生問題：${err.message}`);
-        checkoutBtn.textContent = originalLabel;
-        updateButtonState();
-      }
+      await runCheckout();
+      checkoutBtn.textContent = "結帳";
+      updateButtonState();
     });
 
     updateButtonState();
-    document.addEventListener("cart:updated", updateButtonState);
+    document.addEventListener("cart:updated", () => {
+      updateButtonState();
+      scheduleResync();
+    });
     window.addEventListener("storage", updateButtonState);
   }
 
