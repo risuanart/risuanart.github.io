@@ -511,6 +511,15 @@
   max-width: 46ch;
 }
 
+/* .shipping-options／.shipping-confirmed 自己宣告了 display，跟瀏覽器內建
+   的 [hidden]{display:none} 規則同一個特異度，會被同層疊順序在後面的這兩條
+   規則蓋過去，導致 JS 設定 hidden=true 卻還是顯示出來——用 [hidden] 屬性
+   選擇器組合起來提高特異度，明確蓋回 display:none。 */
+.shipping-options[hidden],
+.shipping-confirmed[hidden] {
+  display: none;
+}
+
 .shipping-option {
   appearance: none;
   border: 1px solid color-mix(in srgb, var(--color-text-secondary) 30%, transparent);
