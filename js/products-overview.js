@@ -43,10 +43,62 @@
     return article;
   }
 
+  // 頁面最上面的「分類大圖」：兩個分類各一張大圖，scroll-snap 橫向滑動，
+  // 跟砂畫圖案選擇器（sand-art-gallery.js initPatternCarousel()）同一套手勢／
+  // IntersectionObserver 判斷「目前滑到哪一張」的做法，維持全站滑動元件手感
+  // 一致。點下去／滑到底會直接跳到下面對應分類的商品卡（見 init() 裡
+  // section.id = `group-${cat}`）。
+  function initCategoryHero() {
+    const hero = document.querySelector(".category-hero[data-category-hero]");
+    if (!hero) return;
+    const track = hero.querySelector(".category-hero__track");
+    const dotsWrap = hero.querySelector(".category-hero__dots");
+    const panels = Array.from(track.querySelectorAll(".category-hero__panel"));
+    if (!panels.length) return;
+
+    const dots = panels.map((panel, i) => {
+      const dot = document.createElement("button");
+      dot.type = "button";
+      dot.className = "category-hero__dot";
+      dot.setAttribute("aria-label", `跳到${panel.querySelector(".category-hero__name").textContent}`);
+      dot.setAttribute("aria-current", i === 0 ? "true" : "false");
+      dotsWrap.appendChild(dot);
+      return dot;
+    });
+
+    function markActive(i) {
+      dots.forEach((d, idx) => d.setAttribute("aria-current", String(idx === i)));
+    }
+
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const mostVisible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (mostVisible) markActive(panels.indexOf(mostVisible.target));
+      },
+      { root: track, threshold: [0.6] }
+    );
+    panels.forEach((panel) => observer.observe(panel));
+
+    dots.forEach((dot, i) => {
+      dot.addEventListener("click", () => {
+        panels[i].scrollIntoView({
+          behavior: prefersReducedMotion ? "auto" : "smooth",
+          inline: "center",
+          block: "nearest",
+        });
+      });
+    });
+  }
+
   function init() {
     const cart = window.RisuanCart;
     const grid = document.querySelector(".overview-grid");
     if (!cart || !grid) return;
+
+    initCategoryHero();
 
     const { PRODUCTS, CATEGORY_ORDER, CATEGORY_LABELS } = cart;
 
@@ -64,11 +116,12 @@
 
       const section = document.createElement("section");
       section.className = "overview-group";
-
-      const title = document.createElement("h2");
-      title.className = "overview-group__title";
-      title.textContent = CATEGORY_LABELS[cat] || cat;
-      section.appendChild(title);
+      // id 給頁面最上面的分類大圖（.category-hero__panel）當跳轉錨點用。
+      section.id = `group-${cat}`;
+      // 分類名稱已經由上面的分類大圖（.category-hero__name）呈現過一次，
+      // 這裡不再重複一個文字標題，但保留 aria-label 讓螢幕報讀器仍然知道
+      // 這個區塊是哪個分類（不是完全拿掉語意，只是不重複顯示文字）。
+      section.setAttribute("aria-label", CATEGORY_LABELS[cat] || cat);
 
       const cardsWrap = document.createElement("div");
       cardsWrap.className = "overview-group__cards";
