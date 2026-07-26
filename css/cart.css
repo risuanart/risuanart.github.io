@@ -433,8 +433,92 @@
   margin-top: var(--space-1);
 }
 
+/* 結帳按鈕按下去、後端連線失敗時的錯誤訊息，用 --color-warning（全站規則：
+   僅限這種「東西真的出問題」的情境才用這個顏色）。 */
+.checkout-error {
+  margin: 0;
+  font-size: var(--font-size-xs);
+  color: var(--color-warning);
+  max-width: 32ch;
+}
+
 .cart-empty {
   margin-top: var(--space-4);
   font-size: var(--font-size-sm);
   color: var(--color-text-secondary);
+}
+
+/* ---------- 結帳確認頁（checkout-confirm.html） ---------- */
+.confirm-items {
+  margin: var(--space-4) 0 0;
+  padding: 0;
+  list-style: none;
+  max-width: 50ch;
+}
+
+.confirm-item {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-2) 0;
+  border-top: 1px solid color-mix(in srgb, var(--color-text-secondary) 20%, transparent);
+  font-size: var(--font-size-sm);
+}
+
+.confirm-item:first-child {
+  border-top: none;
+}
+
+.confirm-item__price {
+  flex: none;
+  font-variant-numeric: tabular-nums;
+}
+
+.confirm-total {
+  margin: 0;
+  padding-top: var(--space-2);
+  border-top: 1px solid color-mix(in srgb, var(--color-text-secondary) 25%, transparent);
+  text-align: right;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  max-width: 50ch;
+}
+
+.confirm-store {
+  margin-top: var(--space-4);
+  font-size: var(--font-size-sm);
+  max-width: 40ch;
+}
+
+#confirm-form {
+  margin-top: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-4);
+  max-width: 40ch;
+}
+
+.confirm-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  width: 100%;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
+.confirm-field input {
+  font-family: inherit;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+  border: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--color-text-secondary) 40%, transparent);
+  padding: var(--space-2) 0;
+  background: none;
+}
+
+.confirm-field input:focus {
+  outline: none;
+  border-bottom-color: var(--color-text-primary);
 }

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>購物車｜日宣繪畫室</title>
+  <title>確認訂單｜日宣繪畫室</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;600;700&family=Poppins:wght@700&family=Noto+Serif+TC:wght@500;700&family=Noto+Sans+TC:wght@400;600;700&display=swap" rel="stylesheet">
@@ -52,33 +52,62 @@
     </a>
   </nav>
 
-  <main class="product-page cart-page work">
+  <main class="product-page work">
 
     <header class="work__intro">
-      <h1 class="work-heading"><span class="inner">購物車</span></h1>
+      <h1 class="work-heading"><span class="inner">確認訂單</span></h1>
+      <p class="intro">選好取貨門市了，最後填一下收件資訊，就可以前往付款。</p>
     </header>
 
-    <section class="chapter">
-      <div class="cart-groups"></div>
-      <p class="cart-empty" hidden>購物車目前是空的，<a class="text-link" href="products/fluid-art-intro.html">看看材料包</a>。</p>
+    <section class="chapter" id="confirm-loading">
+      <p class="chapter__intro">正在載入訂單內容…</p>
     </section>
 
-    <!-- 收尾：小計＋結帳。結帳流程：按下去先把購物車內容送到後端重新計價
-         （不信任瀏覽器端的金額），成功後導向 7-11 電子地圖選門市，選完店
-         再回到 checkout-confirm.html 填姓名電話、送出付款（見 js/checkout.js
-         與 risuan-checkout 專案）。 -->
-    <footer class="work__close">
-      <div class="work__close-text">
-        <p class="work__shipping-note">結帳後會請你選擇 7-11 取貨門市，並線上完成付款。</p>
-        <p class="checkout-error" role="alert" hidden></p>
-        <p class="work__price">小計 $0</p>
-      </div>
-      <button type="button" class="work__cta work__cta--primary" data-checkout-cta disabled>結帳</button>
-    </footer>
+    <section class="chapter" id="confirm-error" hidden>
+      <p class="chapter__intro" data-placeholder="true"></p>
+      <p class="chapter__intro"><a class="text-link" href="cart.html">回到購物車重新結帳</a></p>
+    </section>
+
+    <div id="confirm-content" hidden>
+      <section class="chapter">
+        <h2 class="chapter__title">你選購的商品</h2>
+        <ul class="confirm-items"></ul>
+        <p class="confirm-total"></p>
+      </section>
+
+      <section class="chapter">
+        <h2 class="chapter__title">取貨門市</h2>
+        <p class="confirm-store"></p>
+        <p class="chapter__tags">門市選錯了嗎？<a class="text-link" href="cart.html">回到購物車重新結帳</a>可以重新選店。</p>
+      </section>
+
+      <section class="chapter">
+        <h2 class="chapter__title">收件資訊</h2>
+        <form id="confirm-form" method="POST" action="">
+          <input type="hidden" name="orderId" id="confirm-order-id">
+          <label class="confirm-field">
+            <span>姓名</span>
+            <input type="text" name="customerName" required maxlength="20" autocomplete="name">
+          </label>
+          <label class="confirm-field">
+            <span>手機（7-11 取貨簡訊會發到這個號碼）</span>
+            <input type="tel" name="customerPhone" required pattern="09[0-9]{8}" placeholder="09XXXXXXXX" autocomplete="tel">
+          </label>
+          <label class="confirm-field">
+            <span>Email（選填）</span>
+            <input type="email" name="customerEmail" autocomplete="email">
+          </label>
+          <button type="submit" class="work__cta work__cta--primary">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+            <span>前往付款</span>
+          </button>
+        </form>
+      </section>
+    </div>
 
   </main>
 
   <script src="js/cart.js"></script>
-  <script src="js/checkout.js"></script>
+  <script src="js/checkout-confirm.js"></script>
 </body>
 </html>

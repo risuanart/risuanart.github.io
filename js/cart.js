@@ -647,4 +647,27 @@
   } else {
     init();
   }
+
+  // 給 js/checkout.js 用的最小公開介面：結帳流程需要把購物車內容送去後端
+  // 重新計價，但商品名稱／色系名稱這些資料只存在這支檔案的 PRODUCTS／
+  // SCHEME_NAMES 裡（cart.js 開頭說過這是唯一該知道商品資料的地方），
+  // 與其讓 checkout.js 自己再存一份，不如在這裡開一個小窗口讓它讀。
+  // 後端（risuan-checkout/lib/products.js）不信任這裡送過去的任何金額，
+  // 一律用自己的價格表重算，這裡只是拿來組出「品項＋數量」的清單。
+  window.RisuanCart = {
+    readCart,
+    cartTotal,
+    getCheckoutPayload() {
+      return readCart().map((item) => {
+        const product = PRODUCTS[item.productKey];
+        return {
+          productKey: item.productKey,
+          name: product ? product.name : item.productKey,
+          schemeName: SCHEME_NAMES[item.scheme] || "",
+          addOns: item.addOns || [],
+          qty: item.qty,
+        };
+      });
+    },
+  };
 })();
