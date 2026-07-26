@@ -767,61 +767,169 @@ button.text-link {
   margin-top: var(--space-10);
 }
 
-/* auto-fill／minmax 讓欄數跟著容器寬度自動決定：390px 手機寬度扣掉版面留白後
-   放不下兩張 240px 的卡片，會自動退成單欄，不用另外寫斷點去防止擁擠。 */
-.overview-group__cards {
+.shop-tiles {
   margin-top: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  display: flex;
+  flex-direction: column;
   gap: var(--space-4);
 }
 
-.overview-card {
+/* ---------- 手風琴大圖磚 ----------
+   收合狀態只有代表照＋名稱＋一句話標語（參考 by-manifesto 那類大圖作品集頁面
+   的視覺語彙：大圖、極少文字），點下去往下展開完整摘要。同一時間只展開一張
+   （見 js/products-overview.js initAccordion()），維持「收合時可以一次瀏覽
+   很多產品」的初衷。 */
+.shop-tile {
+  border-bottom: 1px solid color-mix(in srgb, var(--color-text-secondary) 25%, transparent);
+}
+
+.shop-tile:first-child {
+  border-top: 1px solid color-mix(in srgb, var(--color-text-secondary) 25%, transparent);
+}
+
+.shop-tile__toggle {
+  appearance: none;
+  width: 100%;
+  border: none;
+  background: none;
+  padding: var(--space-4) 0;
   display: flex;
-  flex-direction: column;
-  border: 1px solid color-mix(in srgb, var(--color-text-secondary) 30%, transparent);
+  align-items: center;
+  gap: var(--space-4);
+  text-align: left;
+  font-family: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.shop-tile__toggle:active {
+  opacity: 0.8;
+}
+
+.shop-tile__photo {
+  flex: none;
+  display: block;
+  width: 112px;
+  aspect-ratio: 4 / 5;
   border-radius: var(--radius-sharp);
   overflow: hidden;
 }
 
-.overview-card__thumb-link {
-  display: block;
-  transition: opacity var(--duration-fast) var(--ease-standard);
-}
-
-.overview-card__thumb-link:active {
-  opacity: 0.7;
-}
-
-.overview-card__thumb {
-  display: block;
+.shop-tile__photo img,
+.shop-tile__photo .placeholder-box {
   width: 100%;
-  aspect-ratio: 1 / 1;
+  height: 100%;
   object-fit: cover;
 }
 
-.overview-card__thumb.placeholder-box {
-  font-size: 0.7rem;
+.shop-tile__photo .placeholder-box__text {
+  display: none; /* 收合磚縮圖太小放不下說明文字，只留圖示 */
 }
 
-.overview-card__body {
+.shop-tile__meta {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.shop-tile__name {
+  font-family: 'Fraunces', 'Noto Serif TC', serif;
+  font-weight: 600;
+  font-size: var(--font-size-lg);
+  color: var(--color-text-primary);
+}
+
+.shop-tile__tagline {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
+/* 展開／收合：max-height 搭配 transition 做開合動畫，而非直接切換
+   hidden（見 [hidden] 那條規則），這樣才有滑順展開的動態，不是瞬間跳出來。
+   max-height 給一個遠大於實際內容高度的值即可，不用精算真正的內容高度。 */
+.shop-tile__panel {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height var(--duration-normal) var(--ease-standard);
+}
+
+.shop-tile__panel:not([hidden]) {
+  max-height: 2000px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shop-tile__panel {
+    transition: none;
+  }
+}
+
+.shop-tile__panel-inner {
+  padding: 0 0 var(--space-6);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-4);
+  max-width: 46ch;
+}
+
+.shop-tile__panel-photo {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  max-width: 220px;
+  border-radius: var(--radius-sharp);
+  overflow: hidden;
+}
+
+.shop-tile__panel-photo img,
+.shop-tile__panel-photo .placeholder-box {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.shop-tile__panel-desc {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+
+.shop-tile__panel-kit {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
+.shop-tile__panel-kit li {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.shop-tile__panel-buy {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: var(--space-2);
-  padding: var(--space-4);
 }
 
-.overview-card__name {
+.shop-tile__panel-price {
+  margin: 0;
   font-family: 'Fraunces', 'Noto Serif TC', serif;
   font-weight: 600;
-  font-size: var(--font-size-sm);
-  color: var(--color-text-primary);
-  transition: opacity var(--duration-fast) var(--ease-standard);
+  font-size: var(--font-size-lg);
+  font-variant-numeric: tabular-nums;
 }
 
-.overview-card__name:active {
-  opacity: 0.6;
+.shop-tile__panel-add {
+  width: 100%;
 }
 
 /* 規格下拉：跟結帳表單輸入框（.confirm-field input）同一套「有邊框的方塊」

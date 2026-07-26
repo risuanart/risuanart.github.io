@@ -364,4 +364,10 @@
   } else {
     init();
   }
+
+  // 給總覽購物頁的手風琴磚（js/products-overview.js）用的唯讀資料存取，展開
+  // 內容（代表照／色系故事摘要／套組內容）直接讀這裡，不重複維護第二份色系
+  // 資料。IMG_BASE 是這支檔案內部用的相對路徑字首，總覽頁在 /products/ 底下，
+  // 跟這裡假設的深度一致，可以直接共用。
+  window.RisuanFluidArt = { COLOR_SCHEMES, KIT_VERSIONS, IMG_BASE };
 })();

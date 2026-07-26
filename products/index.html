@@ -84,10 +84,11 @@
       <div class="category-hero__dots"></div>
     </div>
 
-    <!-- 商品卡片網格：由 js/products-overview.js 動態產生，資料直接讀
-         window.RisuanCart（js/cart.js，PRODUCTS／VARIANT_OPTIONS／
-         SCHEME_NAMES／CATEGORY_ORDER／CATEGORY_LABELS），不建立第二套
-         商品資料。 -->
+    <!-- 手風琴大圖磚：由 js/products-overview.js 動態產生，收合狀態只顯示
+         代表照＋名稱＋一句話標語，點下去在同一頁展開完整摘要（不用跳頁就能
+         看完 4 款材料包的重點）。資料直接讀 window.RisuanCart（js/cart.js）、
+         window.RisuanFluidArt（js/product-gallery.js）、window.RisuanPatterns
+         （js/sand-art-gallery.js），不建立第二套商品資料。 -->
     <div class="overview-grid"></div>
 
     <!-- 頁尾：接回敘事型頁首，這頁不是購物路徑的死路，訪客若想深入了解
@@ -99,6 +100,8 @@
   </main>
 
   <script src="../js/cart.js"></script>
+  <script src="../js/product-gallery.js"></script>
+  <script src="../js/sand-art-gallery.js"></script>
   <script src="../js/products-overview.js"></script>
 </body>
 </html>

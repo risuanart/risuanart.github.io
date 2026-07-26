@@ -24,11 +24,15 @@
   // 也不用畫換規格的下拉選單。
   // TODO：sand-art-light／sand-art-collection 的 price 是還沒定案的佔位數字
   // （規格書「$__」），價格確定後這裡跟商品頁上的「$__」都要改。
+  // tagline：總覽購物頁手風琴磚（js/products-overview.js）收合狀態顯示的
+  // 一句話標語，跟各商品敘事子頁 <p class="intro"> 的完整文案是各自獨立的
+  // 兩段文字——這裡故意簡短（收合磚只有一行空間），不是那段文案的複製，
+  // 兩處各自維護沒關係，改其中一處不影響另一處。
   const PRODUCTS = {
-    "fluid-art-light": { name: "春聯流動畫材料包・輕巧版", price: 800, category: "fluid-art" },
-    "fluid-art-gift": { name: "春聯流動畫材料包・禮盒版", price: 1100, category: "fluid-art" },
-    "sand-art-light": { name: "春聯砂畫材料包・輕巧版", price: 0, category: "sand-art" },
-    "sand-art-collection": { name: "春聯砂畫材料包・自由創作組", price: 0, category: "sand-art", hasVariant: false },
+    "fluid-art-light": { name: "春聯流動畫材料包・輕巧版", price: 800, category: "fluid-art", tagline: "單幅 15cm，最快抵達的新年儀式" },
+    "fluid-art-gift": { name: "春聯流動畫材料包・禮盒版", price: 1100, category: "fluid-art", tagline: "雙幅成品，完整的流動畫體驗" },
+    "sand-art-light": { name: "春聯砂畫材料包・輕巧版", price: 0, category: "sand-art", tagline: "8 款圖案任選，撕貼倒沙鋪出你的春聯" },
+    "sand-art-collection": { name: "春聯砂畫材料包・自由創作組", price: 0, category: "sand-art", hasVariant: false, tagline: "5 款精選圖案＋26色顏料，自由創作一整套" },
   };
   const CATEGORY_LABELS = { "fluid-art": "春聯流動畫", "sand-art": "春聯砂畫" };
   // 購物車頁分組顯示的固定順序，不跟著「使用者先加哪一類商品」變動——不然同一個
