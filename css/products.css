@@ -270,6 +270,20 @@
   transition: opacity var(--duration-fast) var(--ease-standard);
 }
 
+/* .text-link 原本是給 <a> 用的，少數地方（結帳頁的「改成宅配到府」等）
+   套在 <button> 上，要另外清掉瀏覽器預設的按鈕外框／底色／內距，
+   不然會冒出一個灰底方框，看起來完全不像文字連結。 */
+button.text-link {
+  appearance: none;
+  border: none;
+  border-bottom: 1px solid var(--color-text-primary);
+  background: none;
+  padding: 0;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
+}
+
 .text-link:active {
   opacity: 0.6;
 }

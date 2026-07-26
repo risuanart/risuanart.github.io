@@ -448,7 +448,22 @@
   color: var(--color-text-secondary);
 }
 
-/* ---------- 結帳確認頁（checkout-confirm.html） ---------- */
+/* ---------- 結帳確認區塊：購物車頁按下「結帳」後，同一頁往下展開的部分
+   （不再跳轉到另一個 checkout-confirm.html），用一個外框把「這是接下來要
+   填的東西」跟上面的購物車內容區隔開，避免看起來只是隨頁面散落的文字欄位。 ---------- */
+.order-confirm-box {
+  margin-top: var(--space-8);
+  padding: var(--space-6) var(--space-5);
+  border: 1px solid color-mix(in srgb, var(--color-text-secondary) 30%, transparent);
+  border-radius: var(--radius-sharp);
+}
+
+.order-confirm-box > .chapter + .chapter {
+  margin-top: var(--space-8);
+  padding-top: var(--space-8);
+  border-top: 1px solid color-mix(in srgb, var(--color-text-secondary) 20%, transparent);
+}
+
 .confirm-items {
   margin: var(--space-4) 0 0;
   padding: 0;
@@ -572,23 +587,37 @@
 .confirm-field {
   display: flex;
   flex-direction: column;
-  gap: var(--space-1);
+  gap: var(--space-2);
   width: 100%;
   font-size: var(--font-size-xs);
   color: var(--color-text-secondary);
 }
 
+/* 標籤字距拉寬＋略縮小，是從參考站觀察到的排版手感（見對話紀錄）：
+   中文字距拉開會讀出「有特別排過版」的質感，不是單純字體本身的功勞。 */
+.confirm-field > span {
+  letter-spacing: 0.08em;
+}
+
+/* 輸入框改成有邊框的方塊，跟同一頁 .shipping-option 卡片同一套語言
+   （方角、細邊框），讓「這裡要填資料」更明確，取代原本純底線的寫法——
+   底線在編輯類頁面很優雅，但客人第一次結帳容易看不出這是可以點的欄位。 */
 .confirm-field input {
   font-family: inherit;
   font-size: var(--font-size-sm);
   color: var(--color-text-primary);
-  border: none;
-  border-bottom: 1px solid color-mix(in srgb, var(--color-text-secondary) 40%, transparent);
-  padding: var(--space-2) 0;
-  background: none;
+  border: 1px solid color-mix(in srgb, var(--color-text-secondary) 35%, transparent);
+  border-radius: var(--radius-sharp);
+  padding: var(--space-3);
+  background: var(--color-surface-light);
+  transition: border-color var(--duration-fast) var(--ease-standard);
 }
 
 .confirm-field input:focus {
   outline: none;
-  border-bottom-color: var(--color-text-primary);
+  border-color: var(--color-text-primary);
+}
+
+.confirm-field input::placeholder {
+  color: color-mix(in srgb, var(--color-text-secondary) 70%, transparent);
 }
