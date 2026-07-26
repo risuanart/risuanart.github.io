@@ -489,6 +489,12 @@
   font-variant-numeric: tabular-nums;
 }
 
+/* 「× 1」這種數量標記不要在「×」跟數字中間被硬拆到下一行去，寧可整組
+   一起換行，也不要留一個孤零零的數字吊在那裡。 */
+.confirm-item__qty {
+  white-space: nowrap;
+}
+
 .confirm-subtotal {
   margin: 0;
   padding-top: var(--space-2);
@@ -582,6 +588,16 @@
   align-items: flex-start;
   gap: var(--space-4);
   max-width: 40ch;
+}
+
+/* #home-address-fields 本身只是個純 <div>（不是 #confirm-form 的直接
+   flex 子項），裡面的郵遞區號／完整收件地址兩個欄位原本完全沒有間距，
+   會黏在一起——這裡另外補上跟外層 #confirm-form 一致的 flex＋gap。 */
+#home-address-fields {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  width: 100%;
 }
 
 .confirm-field {

@@ -892,6 +892,10 @@ button.text-link {
   background: var(--color-button-primary);
   color: var(--color-surface-light);
   font-size: var(--font-size-sm);
+  /* 跟旁邊的 .work__close-text 共用同一個 flex row，窄螢幕下沒有這兩條
+     的話按鈕會被擠壓，「結帳」兩個字被逼到分行變成直式「結／帳」。 */
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 .work__cta--primary svg {

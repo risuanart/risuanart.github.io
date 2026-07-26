@@ -149,7 +149,7 @@
       li.className = "confirm-item";
       const addonText = item.addOns && item.addOns.length ? `　＋加購 ${item.addOns.length} 項` : "";
       li.innerHTML = `
-        <span class="confirm-item__name">${item.name}${item.schemeName ? `・${item.schemeName}` : ""} × ${item.qty}${addonText}</span>
+        <span class="confirm-item__name">${item.name}${item.schemeName ? `・${item.schemeName}` : ""} <span class="confirm-item__qty">× ${item.qty}</span>${addonText}</span>
         <span class="confirm-item__price">${formatMoney(item.lineTotal)}</span>
       `;
       list.appendChild(li);
