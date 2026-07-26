@@ -2,13 +2,9 @@
    邏輯全部在另一個獨立部署的後端（risuan-checkout，Vercel Serverless
    Functions），這支檔案只負責：把購物車內容送過去給後端重新計價、建立
    訂單草稿，成功後把整頁導向 7-11 電子地圖選店，之後的流程（選店→結帳
-   確認頁→付款）都在後端跟 checkout-confirm.html 那邊接手，不歸這支檔案管。
-
-   CHECKOUT_API_BASE 部署到 Vercel 後會拿到一個 https://xxx.vercel.app
-   網址，要換成那個實際網址（見 risuan-checkout/README.md 部署步驟）。 */
+   確認頁→付款）都在後端跟 checkout-confirm.html 那邊接手，不歸這支檔案管。 */
 
 (function () {
-  // TODO：換成 risuan-checkout 實際部署到 Vercel 後拿到的網址。
   const CHECKOUT_API_BASE = "https://risuan-checkout.vercel.app";
 
   function initCheckout() {

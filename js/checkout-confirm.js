@@ -6,7 +6,6 @@
    到 HTML 字串反而沒辦法讓裡面的 <script> 自動執行）。 */
 
 (function () {
-  // TODO：跟 js/checkout.js 用同一個網址，換成 risuan-checkout 實際部署網址。
   const CHECKOUT_API_BASE = "https://risuan-checkout.vercel.app";
 
   const params = new URLSearchParams(window.location.search);
