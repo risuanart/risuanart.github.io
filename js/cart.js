@@ -216,12 +216,20 @@
   }
 
   // 讀取「目前選中的規格變體」：流動畫是色系 chip（.color-picker__chip），
-  // 砂畫輕巧版是圖案卡片（.pattern-card，見 js/sand-art-gallery.js），兩種
-  // 元素共用同一個 data-scheme 屬性名稱，這裡不用分開處理。頁面上兩種元素
-  // 都沒有的話（例如自由創作組，固定組合沒有規格可選），回傳 null。
-  function activeScheme() {
-    const chip = document.querySelector('.color-picker__chip[aria-pressed="true"], .pattern-card[aria-pressed="true"]');
-    return chip ? chip.dataset.scheme : null;
+  // 砂畫輕巧版敘事子頁是圖案卡片（.pattern-card），兩種元素共用同一個
+  // data-scheme 屬性名稱，這裡不用分開處理。材料包總覽購物頁改用 <select>
+  // 緊湊呈現（同時有 4 張商品卡，不能像單一商品頁那樣整頁只有一組選擇器），
+  // 找不到 chip 的話退而找 .variant-select 的 value。
+  //
+  // scope 預設是整個頁面（document）——單一商品頁本來就只有一組選擇器，
+  // 全域找剛好符合需求，不用改。總覽頁每張卡片會傳自己的卡片容器當 scope，
+  // 這樣才能分辨「現在讀的是哪一張卡片選的規格」，不會读到別張卡片的值。
+  function activeScheme(scope) {
+    const root = scope || document;
+    const chip = root.querySelector('.color-picker__chip[aria-pressed="true"], .pattern-card[aria-pressed="true"]');
+    if (chip) return chip.dataset.scheme;
+    const select = root.querySelector(".variant-select");
+    return select ? select.value : null;
   }
 
   // 加入購物車的音效：優先播放真的音檔（硬幣/收銀機那種音效素材），檔案還沒放
@@ -377,11 +385,15 @@
       const productKey = btn.dataset.product;
       const label = btn.querySelector(".work__cta-label") || btn;
       const originalLabel = label.textContent;
+      // 總覽購物頁的每張卡片是 [data-product-card]，只在那張卡片範圍內找選中的
+      // 規格；其他頁面沒有這層包裝，closest() 找不到就退回 null，activeScheme()
+      // 收到 undefined 會自己 fallback 成 document，行為跟改之前完全一樣。
+      const scope = btn.closest("[data-product-card]") || undefined;
       btn.addEventListener("click", () => {
         // 沒有規格可選的商品（例如自由創作組，固定組合）用固定的 "default" 當
         // 內部 id 用的 scheme key，畫面上不顯示這個字，SCHEME_NAMES 也不會有
         // 對應項目，下面組文字時全部用「有沒有拿到色系名稱」判斷要不要顯示。
-        const scheme = activeScheme() || "default";
+        const scheme = activeScheme(scope) || "default";
         const addOnKeys = selectedAddOns(productKey);
         addItem(productKey, scheme, addOnKeys);
         playCartChime();
@@ -669,5 +681,18 @@
         };
       });
     },
+    // 以下是唯讀商品資料，給材料包總覽購物頁（js/products-overview.js）用——
+    // 那頁沒有另建一份商品資料，直接讀這裡，改價格／規格只要改這一份就好。
+    PRODUCTS,
+    VARIANT_OPTIONS,
+    SCHEME_NAMES,
+    CATEGORY_ORDER,
+    CATEGORY_LABELS,
+    thumbHTML,
+    // initAddToCart 在這支檔案自己的 init() 時已經跑過一次，但那時候總覽頁的
+    // 商品卡片還沒被 products-overview.js 動態建立出來，掃描不到任何按鈕。
+    // 開放這個函式讓總覽頁卡片建好之後可以重新呼叫一次，掛上「加入購物車」
+    // 的行為——呼叫的還是同一支函式，不是另外寫一套。
+    initAddToCart,
   };
 })();

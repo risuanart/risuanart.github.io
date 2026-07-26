@@ -62,10 +62,14 @@
       <p class="intro">撕開、倒沙、鋪色，<br>簡單技法，拼貼出陪伴一年的春聯。</p>
 
       <!-- 圖案選擇機制：8 款圖案差異度高（構圖／字／配色都不同，不是像色系那樣的
-           單純顏色替換），用 2 欄卡片網格取代色系選擇器的小縮圖列，讓客人一次看到
-           全部選項比較。網格內容由 js/sand-art-gallery.js 動態產生（見 PATTERNS）。 -->
+           單純顏色替換），scroll-snap 橫向滑動一次呈現一張，手機窄螢幕下圖案本身
+           可視區域佔螢幕寬度七成以上，方便仔細比較構圖細節。下方索引點可直接點擊
+           跳轉，不用依序滑過去。內容由 js/sand-art-gallery.js 動態產生（見 PATTERNS）。 -->
       <p class="work-heading__field-label">圖案</p>
-      <div class="pattern-grid" data-selectable role="group" aria-label="選擇圖案"></div>
+      <div class="pattern-carousel" data-pattern-carousel role="group" aria-label="選擇圖案">
+        <div class="pattern-carousel__track"></div>
+        <div class="pattern-carousel__dots"></div>
+      </div>
 
       <div class="work-heading__buy-row">
         <div class="work-heading__buy-text">

@@ -641,6 +641,200 @@ button.text-link {
   font-variant-numeric: tabular-nums;
 }
 
+/* ---------- 材料包總覽購物頁（/products/index.html） ----------
+   快速決策路徑：小卡片、緊湊呈現，不維持敘事子頁大量留白的節奏（見任務指令
+   視覺原則），但邊框／字級／圓角一樣引用全站既有變數，不做電商促銷式視覺
+   （不劃線比價、不倒數、不庫存告急）。 */
+.overview-page__intro {
+  margin-top: var(--space-4);
+  max-width: 56ch;
+}
+
+.overview-group + .overview-group {
+  margin-top: var(--space-16);
+}
+
+.overview-group {
+  margin-top: var(--space-10);
+}
+
+.overview-group__title {
+  margin: 0;
+  font-family: 'Fraunces', 'Noto Serif TC', serif;
+  font-weight: 600;
+  font-size: var(--font-size-lg);
+}
+
+/* auto-fill／minmax 讓欄數跟著容器寬度自動決定：390px 手機寬度扣掉版面留白後
+   放不下兩張 240px 的卡片，會自動退成單欄，不用另外寫斷點去防止擁擠。 */
+.overview-group__cards {
+  margin-top: var(--space-4);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: var(--space-4);
+}
+
+.overview-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid color-mix(in srgb, var(--color-text-secondary) 30%, transparent);
+  border-radius: var(--radius-sharp);
+  overflow: hidden;
+}
+
+.overview-card__thumb-link {
+  display: block;
+  transition: opacity var(--duration-fast) var(--ease-standard);
+}
+
+.overview-card__thumb-link:active {
+  opacity: 0.7;
+}
+
+.overview-card__thumb {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+.overview-card__thumb.placeholder-box {
+  font-size: 0.7rem;
+}
+
+.overview-card__body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-2);
+  padding: var(--space-4);
+}
+
+.overview-card__name {
+  font-family: 'Fraunces', 'Noto Serif TC', serif;
+  font-weight: 600;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+  transition: opacity var(--duration-fast) var(--ease-standard);
+}
+
+.overview-card__name:active {
+  opacity: 0.6;
+}
+
+/* 規格下拉：跟結帳表單輸入框（.confirm-field input）同一套「有邊框的方塊」
+   語言，維持全站現在「這裡可以填/選」的視覺一致性，不是每個表單元件各自
+   一套樣式。原生 <select>，手機上點下去是系統原生選單，不用自己刻彈出選單。 */
+.variant-select {
+  width: 100%;
+  appearance: none;
+  -webkit-appearance: none;
+  font-family: inherit;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-primary);
+  border: 1px solid color-mix(in srgb, var(--color-text-secondary) 35%, transparent);
+  border-radius: var(--radius-sharp);
+  background-color: var(--color-surface-light);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%238A8570' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right var(--space-3) center;
+  background-size: 10px 6px;
+  padding: var(--space-2) var(--space-6) var(--space-2) var(--space-3);
+  cursor: pointer;
+}
+
+.variant-select:focus {
+  outline: none;
+  border-color: var(--color-text-primary);
+}
+
+.overview-card__price {
+  margin: 0;
+  font-family: 'Fraunces', 'Noto Serif TC', serif;
+  font-weight: 600;
+  font-size: var(--font-size-lg);
+  font-variant-numeric: tabular-nums;
+}
+
+.overview-card__add {
+  width: 100%;
+  margin-top: var(--space-1);
+}
+
+.overview-page__back-link {
+  margin-top: var(--space-16);
+  padding-top: var(--space-6);
+  border-top: 1px solid color-mix(in srgb, var(--color-text-secondary) 25%, transparent);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+/* ---------- 圖案滑動選擇器（砂畫輕巧版敘事子頁專用） ----------
+   scroll-snap 橫向輪播，一次只呈現一張，卡片本身沿用 .pattern-card 樣式
+   （跟卡片網格模式共用同一套視覺語言，只是排列方式從網格改成單排橫向）。
+   .pattern-carousel__track 左右各留一段 padding，讓第一張／最後一張捲到底
+   時也能置中，不會卡在螢幕邊緣。 */
+.pattern-carousel {
+  margin-top: var(--space-4);
+}
+
+.pattern-carousel__track {
+  display: flex;
+  gap: var(--space-3);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  /* 逃出 .product-page（左側固定 64px，留給左側目錄 .side-tabs）跟 .work
+     （右側 16px）的版面留白，讓滑動軌道真的貼齊螢幕左右邊緣。這兩個留白
+     左右不對稱，如果只用對稱的 vw 負邊界去估（例如 margin: 0 -9vw），
+     實測卡片寬度只會有螢幕的六成，達不到驗收標準的七成——因為那時候
+     百分比／vw 是相對於「已經被 64px 吃掉一大塊」的容器寬度去算，不是
+     相對於真正的螢幕寬度。 */
+  margin-left: calc(-1 * var(--space-16));
+  margin-right: calc(-1 * var(--space-4));
+  padding: var(--space-1) 9vw var(--space-2);
+  scrollbar-width: none;
+}
+
+.pattern-carousel__track::-webkit-scrollbar {
+  display: none;
+}
+
+/* 用 vw（相對於真正的螢幕寬度）而非 %（相對於容器寬度），卡片寬度才不會
+   被 .pattern-carousel__track 逃出去之前的父層留白影響。82vw 扣掉卡片自己
+   的 padding 後，pattern-card__photo 圖案本身還是輕鬆超過驗收標準的
+   70% 螢幕寬度，兩側留一點點鄰卡片邊緣暗示「還可以往旁邊滑」。 */
+.pattern-carousel__track > .pattern-card {
+  flex: 0 0 82vw;
+  max-width: 320px;
+  scroll-snap-align: center;
+}
+
+.pattern-carousel__dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-1);
+}
+
+.pattern-carousel__dot {
+  appearance: none;
+  border: none;
+  padding: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--color-text-secondary) 40%, transparent);
+  cursor: pointer;
+  transition: background var(--duration-fast) var(--ease-standard), transform var(--duration-fast) var(--ease-standard);
+}
+
+.pattern-carousel__dot[aria-current="true"] {
+  background: var(--color-text-primary);
+  transform: scale(1.3);
+}
+
 /* 套組內容章節：「成品尺寸」隨選中圖案即時更新，見 js/sand-art-gallery.js applyPattern()。 */
 .kit-section__size-hint {
   margin-top: var(--space-4);
