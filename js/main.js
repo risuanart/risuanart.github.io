@@ -1162,8 +1162,15 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // 「材料包」不用面板清單（流動畫／砂畫）這條路，直接離開首頁跳到手風琴式
+  // 大圖總覽購物頁（products/index.html）——那頁本身就同時涵蓋兩個分類、
+  // 還能直接加入購物車，比首頁面板清單再點一次進頁首更快一步到位。
   tabs.forEach((tab) => {
     tab.addEventListener("click", () => {
+      if (tab.dataset.cat === "materials") {
+        window.location.href = "products/index.html";
+        return;
+      }
       localStorage.setItem(HAS_VISITED_CATEGORY_KEY, "1");
       showCategory(tab.dataset.cat);
     });
