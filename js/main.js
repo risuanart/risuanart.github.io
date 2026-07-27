@@ -13,6 +13,9 @@ const CATEGORIES = {
       "自己帶圖創作",
       "鏡子拼貼",
       "串珠",
+      // 課程總覽頁還沒做出來之前，先把「預約須知」放在課程清單最下面方便
+      // 分類；等課程總覽頁做出來，這個連結預期會搬過去那頁裡面。
+      { text: "預約須知", href: "faq.html" },
     ],
   },
   group: {
@@ -1162,10 +1165,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 「材料包」「常見問題」不用面板清單這條路，直接離開首頁跳到各自的頁面
-  // （材料包→手風琴式大圖總覽購物頁，常見問題→單一頁的 Q&A，兩者都沒有
-  // 「子項目清單」這個中間步驟，不需要先展開面板再點一次）。
-  const DIRECT_LINK_CATEGORIES = { materials: "products/index.html", faq: "faq.html" };
+  // 「材料包」不用面板清單這條路，直接離開首頁跳到手風琴式大圖總覽購物頁，
+  // 不需要先展開面板再點一次。「常見問題」（faq.html）目前放在「課程」
+  // 清單最下面（見 CATEGORIES.courses.items），不是獨立分頁，等課程總覽頁
+  // 做出來再考慮搬過去那頁裡面。
+  const DIRECT_LINK_CATEGORIES = { materials: "products/index.html" };
   tabs.forEach((tab) => {
     tab.addEventListener("click", () => {
       const directHref = DIRECT_LINK_CATEGORIES[tab.dataset.cat];
