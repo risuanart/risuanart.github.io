@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>常見問題｜日宣繪畫室</title>
+  <title>預約須知｜日宣繪畫室</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;600;700&family=Poppins:wght@700&family=Noto+Serif+TC:wght@500;700&family=Noto+Sans+TC:wght@400;600;700&display=swap" rel="stylesheet">
@@ -58,54 +58,238 @@
   <main class="product-page work">
 
     <header class="work__intro">
-      <h1 class="work-heading"><span class="inner">常見問題</span></h1>
+      <h1 class="work-heading"><span class="inner">預約須知</span></h1>
       <p class="intro">來畫室上課前，你可能想先知道的事。<br>找不到答案歡迎直接私訊我們。</p>
     </header>
 
-    <!-- 內容全部待補：目前只先框出常見的分類跟問題方向，答案還沒有真的
-         內容，先用〔待補〕標示，之後有實際的上課規則／地址／收費方式
-         再替換，不要憑印象編造實際政策內容。材料包相關的常見問題已經
-         搬到 products/faq.html，這頁只放來畫室上課相關的問題。 -->
-    <section class="faq-group">
-      <h2 class="faq-group__title">地點與交通</h2>
+    <!-- 第一層：入口篩選層。5 則、無分類、依序呈現，不用手風琴收合——
+         這一層要讓還沒決定的訪客一眼掃過去就看到全部內容，不需要先點開。
+         用左側色塊＋較大留白跟第二層的收合清單做出明顯的視覺層次區隔。 -->
+    <section class="faq-tier1">
+      <h2 class="faq-tier1__title">入店前，先確認這幾件事</h2>
 
-      <details class="faq-item">
-        <summary class="faq-item__toggle">畫室在哪裡？怎麼過去？</summary>
-        <p class="faq-item__body" data-placeholder="true">〔待補：畫室地址、鄰近捷運／公車站、停車資訊〕</p>
-      </details>
+      <div class="faq-tier1__item">
+        <h3 class="faq-tier1__q">可以帶朋友或小孩來陪同嗎？</h3>
+        <p class="faq-tier1__a">畫室僅收高中以上學員，為維持課程體驗，無法分神接待孩童（包含委由同行大人照顧的情況），也不接受非上課學員陪同。這項規則沒有例外，感謝理解。</p>
+      </div>
+
+      <div class="faq-tier1__item">
+        <h3 class="faq-tier1__q">兩個人可以一起畫同一張畫嗎？</h3>
+        <p class="faq-tier1__a">需依選圖判斷，兩人共畫並非適用於所有題材。寫實類題材（如人像、寵物寫實照片）因繪製方式與作業空間限制，通常較難兩人同時進行；肌理、抽象、色塊類題材因作畫步驟（先調色、後上色）較容易分工，兩人共畫的可行性較高。若不確定自己想畫的圖屬於哪一種，歡迎直接傳圖片給我們，我們會依實際圖面告訴你是否適合兩人共畫、以及建議使用的媒材。</p>
+      </div>
+
+      <div class="faq-tier1__item">
+        <h3 class="faq-tier1__q">畫室有提供參考圖嗎？要自己準備嗎？</h3>
+        <p class="faq-tier1__a">畫室不提供固定的參考圖庫，需要同學先自己搜尋、找到真正喜歡的圖片，再帶著圖片來討論。這個安排，是我們發現許多同學在不熟悉畫作步驟與材料的情況下，容易憑直覺誤判選圖難易度，或因為覺得自己做不到而設限，錯過原本能畫得更好看的選擇。透過行前討論的過程，我們會捕捉同學們的選圖狀況，給予較貼近實際情況的建議，幫助你選到既喜歡、又適合自己目前程度的圖。若沒有方向，可以先上 Pinterest、小紅書等平台找找喜歡的風格，再傳給我們評估。</p>
+      </div>
+
+      <div class="faq-tier1__item">
+        <h3 class="faq-tier1__q">可以帶寵物來畫嗎？寵物課的圖片需要提前準備嗎？</h3>
+        <p class="faq-tier1__a">可以，我們也開設寵物專屬的繪畫課程。寵物照片建議課前一週先傳送給我們討論，確保能掌握毛色、光線等細節；詳細的照片準備建議可參考〈寵物油畫課程介紹〉頁面。</p>
+      </div>
+
+      <div class="faq-tier1__item">
+        <h3 class="faq-tier1__q">我沒有想畫的圖，只是想單純體驗自由創作，可以嗎？</h3>
+        <p class="faq-tier1__a">可以，但建議先了解畫室的運作方式：我們以私訊討論選圖為主，目的是為了可以最大化作品的完成精緻度，即使是自由創作，也會建議準備幾張輔助圖片（顏色、筆觸、局部參考皆可）作為與老師的溝通橋樑。若希望完全不透過討論、全程自主發揮，我們可以配合，但需要在預約前先達成共識，因為這種狀況下我們無法掌握繪畫過程，也就無法保證作品能順利完成。若同學重視的是完全不受拘束的創作自由度，坊間也有蠻多畫室提供這樣的空間服務，會建議多方評估看看合適自己的繪畫形式，以利體驗與成品的平衡！</p>
+      </div>
     </section>
 
-    <section class="faq-group">
-      <h2 class="faq-group__title">報名與費用</h2>
+    <!-- 第二層：預約細節層。分類收合＋錨點導覽，服務已經決定要來、需要
+         實際操作資訊的訪客——這層資訊量大，用 <details> 手風琴收合，
+         不用像第一層那樣整段攤開。 -->
+    <section class="faq-tier2">
+      <h2 class="faq-tier2__title">預約前，你會需要的細節</h2>
 
-      <details class="faq-item">
-        <summary class="faq-item__toggle">要怎麼報名上課？</summary>
-        <p class="faq-item__body" data-placeholder="true">〔待補：報名管道、需不需要先預約、確認報名的方式〕</p>
-      </details>
+      <nav class="faq-tier2__jump" aria-label="預約細節分類導覽">
+        <a href="#transport">交通與到達方式</a>
+        <a href="#visit">事先參觀</a>
+        <a href="#booking">預約與付款流程</a>
+        <a href="#cancellation">時段調整／取消規則</a>
+        <a href="#onsite">現場規範</a>
+        <a href="#pet">寵物課特殊須知</a>
+        <a href="#pickup">作品完成與領取方式</a>
+      </nav>
 
-      <details class="faq-item">
-        <summary class="faq-item__toggle">費用怎麼算？現場付款還是先線上付？</summary>
-        <p class="faq-item__body" data-placeholder="true">〔待補：單堂／方案價格、付款時機與方式〕</p>
-      </details>
+      <section class="faq-group" id="transport">
+        <h3 class="faq-group__title">交通與到達方式</h3>
 
-      <details class="faq-item">
-        <summary class="faq-item__toggle">可以取消或改期嗎？</summary>
-        <p class="faq-item__body" data-placeholder="true">〔待補：取消／改期期限與規則，是否會退費〕</p>
-      </details>
-    </section>
+        <details class="faq-item">
+          <summary class="faq-item__toggle">畫室地址在哪裡？怎麼過去？</summary>
+          <p class="faq-item__body">地址為台北市中山區吉林路200巷13號 2樓（請注意是2樓，不要誤入1樓）。搭乘捷運可從行天宮站1號出口步行約6分鐘（約400公尺）抵達。</p>
+        </details>
 
-    <section class="faq-group">
-      <h2 class="faq-group__title">上課須知</h2>
+        <details class="faq-item">
+          <summary class="faq-item__toggle">附近好停車嗎？</summary>
+          <p class="faq-item__body">機車：吉林路上有不少機車格，$20/天，停好車步行到畫室約2分鐘。汽車：附近車位非常少，台北市區停車本來就不易，建議騎車或搭乘大眾運輸較方便。若一定要開車前來，強烈建議提前20-30分鐘出發！預留找車位的時間，遲到會影響課程時間，請務必抓好時間（詳見「當天遲到會怎麼處理」）。</p>
+        </details>
 
-      <details class="faq-item">
-        <summary class="faq-item__toggle">需要自己準備工具或材料嗎？</summary>
-        <p class="faq-item__body" data-placeholder="true">〔待補：現場提供哪些材料工具、是否需要自備任何東西〕</p>
-      </details>
+        <details class="faq-item">
+          <summary class="faq-item__toggle">附近有地方可以先買飲料/簡單用餐嗎？</summary>
+          <p class="faq-item__body">行天宮站1號出口周邊有星巴克、cama、路易莎、7-Eleven，吉林路上也有50嵐，方便在上課前先買好飲料（畫室不提供茶水）。</p>
+        </details>
+      </section>
 
-      <details class="faq-item">
-        <summary class="faq-item__toggle">適合什麼年齡／程度參加？</summary>
-        <p class="faq-item__body" data-placeholder="true">〔待補：年齡限制、是否需要基礎、可否親子同行〕</p>
-      </details>
+      <section class="faq-group" id="visit">
+        <h3 class="faq-group__title">事先參觀</h3>
+
+        <details class="faq-item">
+          <summary class="faq-item__toggle">可以事先參觀嗎？</summary>
+          <p class="faq-item__body">可以，務必訊息事先預約，以利安排。</p>
+        </details>
+      </section>
+
+      <section class="faq-group" id="booking">
+        <h3 class="faq-group__title">預約與付款流程</h3>
+
+        <details class="faq-item">
+          <summary class="faq-item__toggle">確認預約後的付款流程是什麼？</summary>
+          <p class="faq-item__body">確認課程與金額後，會提供匯款帳號資訊，請於收到後完成匯款以確定預約成立。目前僅提供匯款付款，暫不提供現場刷卡或付現。</p>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-item__toggle">多人一起預約，可以各自選不同課程/題材嗎？</summary>
+          <p class="faq-item__body">可以，同行的同學可以各自選擇想上的課程與題材，不需要統一。若一群人由一人統一協助預約、但大家對課程內容還不熟悉，建議建立一個 IG 群組並邀請畫室加入，我們會在群組內統一說明課程資訊、協助大家決定課程內容、材料與圖片，並直接回答同學的問題，負責預約的同學就不需要來回轉述。</p>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-item__toggle">上課時段怎麼安排？要怎麼預約時段？</summary>
+          <p class="faq-item__body">平日開放時段為 10:00、14:00；假日開放時段為 10:00、14:00、16:00。可直接私訊告知想預約的日期時間、課程人數，若方便的話，建議提供 2 組候選時段供安排。公休日浮動。</p>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-item__toggle">可以使用文化幣付款嗎？</summary>
+          <p class="faq-item__body">可以使用文化幣。但因需先保留上課位置，須先以匯款方式保留名額，當天再以文化幣結帳、退還現金差額的方式處理。</p>
+        </details>
+      </section>
+
+      <section class="faq-group" id="cancellation">
+        <h3 class="faq-group__title">時段調整／取消規則</h3>
+
+        <details class="faq-item">
+          <summary class="faq-item__toggle">退費或改期的標準是什麼？</summary>
+          <div class="faq-item__body">
+            <ul>
+              <li>開課3天前取消：退費70%或延期</li>
+              <li>開課3天內（含3天）取消：退費50%或延期</li>
+              <li>課前24小時內取消：無法退款，可順延一次</li>
+              <li>遇天災達政府公告停班停課標準：可依規定選擇延期或退費</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-item__toggle">當天遲到會怎麼處理？</summary>
+          <p class="faq-item__body">遲到20分鐘內，課程照常進行，若因遲到導致課程時間延長，需追加延長費用 $300/半小時。遲到超過20分鐘，視同放棄課程，無法改期也無法退費。</p>
+        </details>
+      </section>
+
+      <section class="faq-group" id="onsite">
+        <h3 class="faq-group__title">現場規範</h3>
+
+        <details class="faq-item">
+          <summary class="faq-item__toggle">畫室有提供飲食嗎？可以自己帶嗎？</summary>
+          <p class="faq-item__body">畫室不提供茶水，需自行攜帶或現場叫外送。因不方便清潔，僅能攜帶乾性、不需使用筷子或湯匙的輕食，例如三明治、飯糰；湯湯水水的飯麵、氣味較重的餐點皆不開放帶入，蛋餅也建議避免。用餐產生的垃圾請自行帶走，畫室不協助處理。</p>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-item__toggle">上課該穿什麼？畫室有拖鞋和圍裙嗎？</summary>
+          <p class="faq-item__body">建議穿著不昂貴的衣物，避免顏料清洗不易；也建議避免過長的洋裝、公主袖、垂墜蝴蝶結等寬鬆或有垂墜設計的服裝，容易沾到顏料或勾到工具。畫室提供室內拖鞋與圍裙供使用。</p>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-item__toggle">上課時可以直播或錄影嗎？</summary>
+          <p class="faq-item__body">如有直播需求，請將麥克風靜音，避免錄到其他同學的聲音；錄影則不限制，但仍請避免拍到其他同學。畫室目前沒有提供腳架，若有需要請自行攜帶。</p>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-item__toggle">顏料不小心沾到衣服，要怎麼清洗？</summary>
+          <p class="faq-item__body">壓克力顏料屬水性，但乾燥後會形成無法溶於水的膠膜，即使是剛沾上、還沒乾的狀態也很容易殘留在纖維中，基本上一旦沾到衣服就難以完全清除，請務必留意，避免穿著在意的衣物來上課。油畫顏料建議當天回家後盡快用洗衣精手洗，使用去漬型洗衣精效果會更好；但仍無法保證一定能完全洗淨，尤其淺色或白色衣物較容易吃色殘留，請有心理準備。所有課程均共用教室與廁所，即使是非繪畫課程，仍建議留意穿著，降低不慎沾染的風險。</p>
+        </details>
+      </section>
+
+      <section class="faq-group" id="pet">
+        <h3 class="faq-group__title">寵物課特殊須知</h3>
+
+        <details class="faq-item">
+          <summary class="faq-item__toggle">寵物課的圖片需要提前討論嗎？</summary>
+          <p class="faq-item__body">需要，建議課前一週傳送照片討論。若有特殊狀況無法提前傳送，請告知原因。</p>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-item__toggle">畫寵物的話，要選全身還是局部？尺寸怎麼選比較好？</summary>
+          <p class="faq-item__body">小尺寸建議以臉部為主、帶一點身體，不建議畫全身；大尺寸可畫全身，但身體的精緻度會低於臉部（身體本來就比臉部難畫）。背景以單色、雙色為主，至多漸層暈染，無法呈現太複雜的背景，可提前想好想要的背景顏色。以上為一般建議，仍會依實際傳送的照片討論調整。</p>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-item__toggle">寵物照片要怎麼準備比較好畫？</summary>
+          <p class="faq-item__body">建議條件如下：解析度高、毛流清晰；顏色盡量接近寵物本身真實毛色，避免昏暗光線下拍攝的照片，畫出來也會偏暗；避免逆光。請挑選近距離拍攝的照片為佳，避免遠拍後放大。如果只有已過世寵物的照片、或照片非常模糊，仍可以先傳給我們評估。</p>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-item__toggle">可以畫多隻寵物的合照嗎？加購怎麼算？</summary>
+          <p class="faq-item__body">可以，但多寵物合照需注意各張照片的拍攝角度與光線盡量一致，避免合成後比例或色調不協調。加購價格為：大張加一隻，加價 $700，時間延長 1.5 小時；小張加一隻，加價 $500，時間延長 1 小時。整堂課時間會因此拉長至 3-4 小時，需當天完成。</p>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-item__toggle">有好幾張寵物照片，不知道選哪張比較好，怎麼辦？</summary>
+          <p class="faq-item__body">建議挑選至多 3 張候選照片傳給我們，我們會依構圖、毛色呈現、清晰度等條件協助評估，選出最適合入畫的一張。傳送過多照片反而會拉長評估與討論的時間，建議先自行初篩後再傳送。</p>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-item__toggle">完全不會畫畫也可以上寵物課嗎？</summary>
+          <p class="faq-item__body">可以，寵物課多數同學都是零基礎，課程會由老師引導完成，不需要具備繪畫經驗。比起「會不會畫」，更重要的是對這幅畫有沒有耐心與愛。尤其是畫自己的寵物，同學通常會特別願意花時間琢磨細節，這份用心往往比技巧更能決定作品好不好看。老師會在過程中隨時告訴你該做什麼調整、下一步怎麼進行，只要願意投入，通常都能完成一幅令自己滿意的作品。</p>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-item__toggle">寵物課使用什麼媒材？需要上多久？</summary>
+          <p class="faq-item__body">寵物課一律使用油畫媒材，單隻寵物約需 2-3 小時，可一堂課完成。</p>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-item__toggle">可以帶寵物來畫室嗎？需要準備什麼？</summary>
+          <div class="faq-item__body">
+            <p>可以，但依寵物種類有不同的注意事項：</p>
+            <ul>
+              <li>狗：大型犬每時段限制 1-2 隻，小型犬建議包尿布，以維持環境整潔，並自備牽繩。</li>
+              <li>貓：不建議帶來，貓咪容易緊張、亂跳亂躲，也可能因為要兼顧貓咪而影響同學作畫；若堅持要帶，僅能全程放在提籠內，不能放出來活動。</li>
+              <li>其他寵物（如爬蟲類、烏龜、天竺鼠等）：需自備籠子全程安置。</li>
+            </ul>
+            <p>另外請自備寵物飲用水，畫室不提供。</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-item__toggle">帶寵物來畫室安全嗎？環境會不會有問題？</summary>
+          <p class="faq-item__body">畫室以人為主要使用空間，非寵物專用場地，地面或地毯可能殘留少量顏料、珠珠等手作材料，無法做到寵物專用場所等級的清潔。若同學的寵物較敏感或容易誤食小物，請自行評估是否適合帶來，或建議使用寵物提籠、外出袋等方式隔離接觸地面。</p>
+        </details>
+      </section>
+
+      <section class="faq-group" id="pickup">
+        <h3 class="faq-group__title">作品完成與領取方式</h3>
+
+        <details class="faq-item">
+          <summary class="faq-item__toggle">畫完之後可以馬上帶走嗎？</summary>
+          <p class="faq-item__body">可以，畫室會提供大紙袋供當天帶回家自行乾燥。攜帶過程請小心保護畫作，且不能騎乘機車運送。</p>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-item__toggle">如果不方便馬上帶走，可以放畫室乾燥再來拿嗎？需要多久？</summary>
+          <div class="faq-item__body">
+            <p>可以預約時間再回來領取，不同媒材所需乾燥時間如下：</p>
+            <ul>
+              <li>一般油畫：7天</li>
+              <li>刮刀油畫：14天</li>
+              <li>流動畫：3天</li>
+              <li>石英砂肌理畫：2天</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-item__toggle">不方便到店領取，可以用寄送的嗎？</summary>
+          <p class="faq-item__body">需主動私訊畫室告知後會在一週內寄出，從乾燥到收到約需2～3週，適合沒有時間壓力的同學。寄送方式可選 7-11 店到店（$100）或宅配（貨到付款）。</p>
+        </details>
+      </section>
     </section>
 
     <p class="overview-page__back-link">

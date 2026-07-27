@@ -1160,11 +1160,79 @@ button.text-link {
   opacity: 0.6;
 }
 
-/* ---------- 常見問題頁（faq.html） ----------
-   跟 .accordion（購買前請閱讀）視覺語彙一致（<details>／"展開閱讀＋"↔
-   "收合－" 的開合提示文字），但那個是給頁面結尾單一一大塊條款用的，
-   margin-top 96px 的大留白套在「一長串逐題展開」的 FAQ 清單上會變成
-   每題之間隔超遠——另外做這組間距收緊、可以連續一長串排列的版本。 */
+/* ---------- 預約須知頁（faq.html） ----------
+   三層資訊架構的第一、二層（第三層「選課指南」不在本次範圍）：
+   第一層（入口篩選層）用左側色塊＋不收合的方式，讓還沒決定的訪客一次
+   掃過全部內容；第二層（預約細節層）資訊量大，用分類＋<details> 手風琴
+   收合＋錨點導覽，服務已經決定要來、需要查詢細節的訪客。兩層要有明顯
+   的視覺層次區隔（見任務規格書驗收標準 2）。 */
+.faq-tier1 {
+  margin-top: var(--space-10);
+  padding-left: var(--space-4);
+  border-left: 3px solid var(--color-brand);
+}
+
+.faq-tier1__title {
+  margin: 0;
+  font-family: 'Fraunces', 'Noto Serif TC', serif;
+  font-weight: 600;
+  font-size: var(--font-size-lg);
+  color: var(--color-text-primary);
+}
+
+.faq-tier1__item {
+  margin-top: var(--space-6);
+}
+
+.faq-tier1__q {
+  margin: 0;
+  font-size: var(--font-size-base);
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.faq-tier1__a {
+  margin: var(--space-2) 0 0;
+  font-size: var(--font-size-sm);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  max-width: 52ch;
+}
+
+.faq-tier2 {
+  margin-top: var(--space-16);
+  padding-top: var(--space-6);
+  border-top: 1px solid color-mix(in srgb, var(--color-text-secondary) 25%, transparent);
+}
+
+.faq-tier2__title {
+  margin: 0;
+  font-family: 'Fraunces', 'Noto Serif TC', serif;
+  font-weight: 600;
+  font-size: var(--font-size-lg);
+  color: var(--color-text-primary);
+}
+
+/* 錨點導覽：分類一多，先讓訪客看到「有哪些分類」再決定要點開哪個，
+   不用整頁往下滑著找。 */
+.faq-tier2__jump {
+  margin-top: var(--space-4);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-4);
+}
+
+.faq-tier2__jump a {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  border-bottom: 1px solid color-mix(in srgb, var(--color-text-secondary) 40%, transparent);
+  transition: opacity var(--duration-fast) var(--ease-standard);
+}
+
+.faq-tier2__jump a:active {
+  opacity: 0.6;
+}
+
 .faq-group {
   margin-top: var(--space-10);
 }
@@ -1222,6 +1290,21 @@ button.text-link {
 
 .faq-item__body[data-placeholder] {
   font-style: italic;
+}
+
+/* 部分題目的答案不只一個段落（例如退費規則、寵物注意事項是條列式），
+   .faq-item__body 這時候是 <div> 包多個 <p>／<ul>，不是單一 <p>。 */
+.faq-item__body > * + * {
+  margin-top: var(--space-2);
+}
+
+.faq-item__body ul {
+  margin: 0;
+  padding-left: var(--space-4);
+}
+
+.faq-item__body li + li {
+  margin-top: var(--space-1);
 }
 
 /* ---------- Credits／購買前請閱讀：手風琴，比照參考規格的 max-height 轉場 ---------- */
