@@ -1162,13 +1162,15 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 「材料包」不用面板清單（流動畫／砂畫）這條路，直接離開首頁跳到手風琴式
-  // 大圖總覽購物頁（products/index.html）——那頁本身就同時涵蓋兩個分類、
-  // 還能直接加入購物車，比首頁面板清單再點一次進頁首更快一步到位。
+  // 「材料包」「常見問題」不用面板清單這條路，直接離開首頁跳到各自的頁面
+  // （材料包→手風琴式大圖總覽購物頁，常見問題→單一頁的 Q&A，兩者都沒有
+  // 「子項目清單」這個中間步驟，不需要先展開面板再點一次）。
+  const DIRECT_LINK_CATEGORIES = { materials: "products/index.html", faq: "faq.html" };
   tabs.forEach((tab) => {
     tab.addEventListener("click", () => {
-      if (tab.dataset.cat === "materials") {
-        window.location.href = "products/index.html";
+      const directHref = DIRECT_LINK_CATEGORIES[tab.dataset.cat];
+      if (directHref) {
+        window.location.href = directHref;
         return;
       }
       localStorage.setItem(HAS_VISITED_CATEGORY_KEY, "1");
