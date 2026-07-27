@@ -1220,6 +1220,10 @@ button.text-link {
   max-width: 46ch;
 }
 
+.faq-item__body[data-placeholder] {
+  font-style: italic;
+}
+
 /* ---------- Credits／購買前請閱讀：手風琴，比照參考規格的 max-height 轉場 ---------- */
 .accordion {
   margin-top: var(--space-24);
