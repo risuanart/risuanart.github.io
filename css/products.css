@@ -1358,3 +1358,17 @@ button.text-link {
 .intro-hero__forks a:active {
   opacity: 0.6;
 }
+
+/* ---------- 極短螢幕（例如一代 iPhone SE，320×568）專屬修正 ----------
+   在這種螢幕高度下，捲動前第一屏的標題區塊（.work__intro）內容剛好會
+   跟底部固定懸浮的 .pill-nav 疊在一起，「加入購物車」按鈕跟色系/價格
+   文字有一部分會被蓋住。買列（.work-heading__buy-row）本身沒辦法完整
+   塞進這麼矮的第一屏，與其讓它卡在懸浮列後面一半，不如直接讓它整段
+   排到懸浮列下緣以下——使用者反正得捲動才看得到，乾脆讓它完整落在
+   下一屏，不要卡在「看得到一半、還被蓋住」的尷尬位置。一般手機（高度
+   > 600px，包含 2022 年之後的 iPhone SE）完全不吃這個斷點，排版不變。 */
+@media (max-height: 600px) {
+  .work-heading__buy-row {
+    margin-top: calc(var(--space-6) + 70px);
+  }
+}
