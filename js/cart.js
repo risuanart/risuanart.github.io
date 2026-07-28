@@ -378,10 +378,10 @@
   }
 
   // 目前頁面上勾選的加購項目 key 陣列（見 products/fluid-art-gift.html 的
-  // .addon-item__checkbox，data-addon-product 標明這個 checkbox 屬於哪個商品）。
+  // .addon-card__checkbox，data-addon-product 標明這個 checkbox 屬於哪個商品）。
   function selectedAddOns(productKey) {
     return Array.from(
-      document.querySelectorAll(`.addon-item__checkbox[data-addon-product="${productKey}"]:checked`)
+      document.querySelectorAll(`.addon-card__checkbox[data-addon-product="${productKey}"]:checked`)
     ).map((el) => el.dataset.addonKey);
   }
 
@@ -435,7 +435,7 @@
     const hints = document.querySelectorAll(".work__addon-hint");
     if (!hints.length) return;
 
-    document.querySelectorAll(".addon-item__checkbox").forEach((checkbox) => {
+    document.querySelectorAll(".addon-card__checkbox").forEach((checkbox) => {
       checkbox.addEventListener("change", () => {
         const productKey = checkbox.dataset.addonProduct;
         const hasAny = selectedAddOns(productKey).length > 0;

@@ -609,43 +609,113 @@ button.text-link {
   font-style: italic;
 }
 
-/* ---------- 加購項目：核取方塊列表，不用電商常見的商品卡片網格 ----------
-   延續全站條列式風格，用原生 checkbox（accent-color 沿用主色，保留原生的
-   鍵盤／輔助科技操作行為，不用自己刻一個假的方塊圖示）。 */
-.addon-item {
+/* ---------- 加購項目：商品卡片樣式（照片＋名稱＋說明＋價格） ----------
+   加購的是「另一件商品」，不是條款清單裡的一個選項，改用商品卡片呈現
+   （照片＋價格），跟主商品的視覺語彙一致，讓使用者一眼看出這是可以加進
+   購物車的額外商品。整張卡片包在同一個 <label> 裡，點哪裡都能勾選／取消；
+   checkbox 本身視覺隱藏（但保留在 DOM 中間，維持原生鍵盤／輔助科技操作），
+   用 .addon-card__toggle 畫一個方形勾選框取代圓形 accent-color 打勾，
+   維持全站「不用圓角/圓形填色」的直角語彙。checked 狀態靠同層級的
+   ~ 兄弟選擇器驅動，不依賴 :has()。 */
+.addon-grid {
   display: flex;
-  align-items: flex-start;
+  flex-direction: column;
   gap: var(--space-3);
   margin-top: var(--space-4);
-  max-width: 40ch;
+  max-width: 46ch;
+}
+
+.addon-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  border: 1px solid color-mix(in srgb, var(--color-text-secondary) 30%, transparent);
+  border-radius: var(--radius-sharp);
   cursor: pointer;
 }
 
-.addon-item__checkbox {
+.addon-card__checkbox {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.addon-card__thumb {
   flex: none;
-  width: 18px;
-  height: 18px;
-  margin-top: 0.15em;
-  accent-color: var(--color-text-primary);
-  cursor: pointer;
+  width: 25vw;
+  max-width: 84px;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius-sharp);
+  overflow: hidden;
 }
 
-.addon-item__body {
+.addon-card__thumb .placeholder-box {
+  width: 100%;
+  height: 100%;
+  padding: var(--space-1);
+  font-size: 0.55rem;
+}
+
+.addon-card__body {
+  flex: 1;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   gap: var(--space-1);
 }
 
-.addon-item__name {
+.addon-card__name {
   font-size: var(--font-size-sm);
   font-weight: 700;
   color: var(--color-text-primary);
 }
 
-.addon-item__note {
+.addon-card__note {
   font-size: var(--font-size-xs);
   line-height: 1.6;
   color: var(--color-text-secondary);
+}
+
+.addon-card__price {
+  margin-top: var(--space-1);
+  font-size: var(--font-size-sm);
+  font-variant-numeric: tabular-nums;
+  color: var(--color-text-primary);
+}
+
+.addon-card__toggle {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  border: 1px solid color-mix(in srgb, var(--color-text-secondary) 50%, transparent);
+  border-radius: var(--radius-sharp);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  line-height: 1;
+  color: transparent;
+  transition: background var(--duration-fast) var(--ease-standard),
+    border-color var(--duration-fast) var(--ease-standard),
+    color var(--duration-fast) var(--ease-standard);
+}
+
+.addon-card__toggle::after {
+  content: "✓";
+}
+
+.addon-card__checkbox:checked ~ .addon-card__toggle {
+  background: var(--color-text-primary);
+  border-color: var(--color-text-primary);
+  color: var(--color-surface-light);
+}
+
+.addon-card__checkbox:focus-visible ~ .addon-card__toggle {
+  outline: 2px solid var(--color-text-primary);
+  outline-offset: 2px;
 }
 
 /* 加購摘要提示：即時反映在按鈕上方的「目前選擇」列，見 js/cart.js initAddOns()。 */
