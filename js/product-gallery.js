@@ -9,6 +9,10 @@
     "classic-red": {
       name: "經典紅",
       dot: "var(--swatch-classic-red)",
+      // BUY 按鈕跟著色系換底色時，文字/圖示也要跟著換成看得清楚的顏色——
+      // 經典紅底色深，用原本的淺色文字；迎春粉底色淺，淺色文字對比不夠
+      // （實測只有 1.66:1，遠低於 WCAG 最低 3:1），要換成深色文字。
+      ctaText: "var(--color-surface-light)",
       // 這 8 張現有實拍照片其實是照著「禮盒版」（雙尺寸畫布＋完整配件）拍的，有幾張連照片本身
       // 都燒進了「材料包內含15cm、5cm春聯各一幅」或無痕黏土上牆配件的文字／畫面，輕巧版
       // （單一15cm、無上牆黏土）套用會變成錯誤宣稱。lightPlaceholder：輕巧版此格改顯示文字
@@ -50,6 +54,7 @@
     "welcome-pink": {
       name: "迎春粉",
       dot: "var(--swatch-welcome-pink)",
+      ctaText: "var(--color-text-primary)",
       gallery: [
         { file: "RS+_04.2_產品主圖_800x800拷貝.jpg", alt: "春聯流動畫材料包，包裝盒與春字菱形成品合照", caption: "包裝與成品", lightPlaceholder: "建議拍攝：輕巧版包裝與春字菱形成品合照" },
         { file: "RS_05.8_產品圖片_800x800拷貝.jpg", alt: "成品模擬圖，四款春字菱形排列", caption: "成品模擬圖" },
@@ -316,6 +321,18 @@
       chips.forEach((chip) => {
         chip.setAttribute("aria-pressed", String(chip.dataset.scheme === key));
       });
+
+      // BUY 按鈕（標題買列／收尾購買列，主商品的兩個進入點）跟著目前選中的
+      // 色系換底色，加購卡（.addon-card__cta，賣的是別的商品——畫布加購組）
+      // 不在這個選取器範圍內，不會被連動換色。
+      document
+        .querySelectorAll(
+          ".work-heading__buy-row [data-add-to-cart], .work__close [data-add-to-cart]"
+        )
+        .forEach((btn) => {
+          btn.style.background = scheme.dot;
+          btn.style.color = scheme.ctaText;
+        });
     }
 
     chips.forEach((chip) => {
