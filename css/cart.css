@@ -539,6 +539,12 @@
   box-shadow: inset 0 0 0 2px var(--color-text-primary);
 }
 
+/* 圖示放在名稱上方，讓兩個選項光看圖案就能先分辨超商／宅配，
+   不用先讀完文字才知道差異——跟收件資訊欄位裡的圖示同一個用意。 */
+.shipping-option__icon {
+  color: var(--color-text-secondary);
+}
+
 .shipping-option__name {
   font-size: var(--font-size-sm);
   font-weight: 700;
@@ -593,25 +599,65 @@
   letter-spacing: 0.08em;
 }
 
-/* 輸入框改成有邊框的方塊，跟同一頁 .shipping-option 卡片同一套語言
-   （方角、細邊框），讓「這裡要填資料」更明確，取代原本純底線的寫法——
-   底線在編輯類頁面很優雅，但客人第一次結帳容易看不出這是可以點的欄位。 */
-.confirm-field input {
-  font-family: inherit;
-  font-size: var(--font-size-sm);
-  color: var(--color-text-primary);
+/* 輸入框改成有邊框的方塊＋前綴圖示（姓名／手機／Email／收件地址），
+   跟同一頁 .shipping-option 卡片同一套語言（方角、細邊框），讓「這裡要
+   填資料」更明確，圖示則是一眼就能認出欄位類型，不用先讀完文字標籤。
+   邊框／底色從 input 本身移到外層 .confirm-field__control，圖示才能
+   跟輸入框共用同一個框，不是各自獨立的兩個元素。郵遞區號欄位短，
+   不需要圖示輔助辨認，維持沒有圖示。 */
+.confirm-field__control {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
   border: 1px solid color-mix(in srgb, var(--color-text-secondary) 35%, transparent);
   border-radius: var(--radius-sharp);
-  padding: var(--space-3);
+  padding: 0 var(--space-3);
   background: var(--color-surface-light);
   transition: border-color var(--duration-fast) var(--ease-standard);
 }
 
+.confirm-field__control:focus-within {
+  border-color: var(--color-text-primary);
+}
+
+.confirm-field__icon {
+  flex: none;
+  color: var(--color-text-secondary);
+}
+
+.confirm-field input {
+  flex: 1;
+  min-width: 0;
+  font-family: inherit;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+  border: none;
+  background: none;
+  padding: var(--space-3) 0;
+}
+
 .confirm-field input:focus {
   outline: none;
-  border-color: var(--color-text-primary);
 }
 
 .confirm-field input::placeholder {
   color: color-mix(in srgb, var(--color-text-secondary) 70%, transparent);
+}
+
+/* 步驟編號小圓圈：送貨方式／收件資訊是真的要依序填的兩個步驟，編號
+   讓使用者一眼看出還剩幾步；「你選購的商品」只是回顧清單，不是要填的
+   步驟，不掛編號。空心圓圈＋細邊框，不是實心色塊，維持全站克制的
+   視覺語彙，不做太搶眼的裝飾。 */
+.step-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  margin-right: var(--space-2);
+  border: 1.5px solid var(--color-text-primary);
+  border-radius: 50%;
+  font-size: 0.7rem;
+  font-family: Georgia, 'Playfair Display', serif;
+  vertical-align: middle;
 }
