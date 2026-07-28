@@ -337,7 +337,10 @@
     clone.style.width = startRect.width + "px";
     clone.style.height = startRect.height + "px";
     clone.style.margin = "0";
-    clone.style.color = getComputedStyle(sourceIcon).color;
+    // 用購物車圖示本身的顏色（深色），不是按鈕上的圖示顏色——按鈕是實色底
+    // （.work__cta--primary 用淺色圖示，襯著深色按鈕底），圖示飛出按鈕、
+    // 落在淺色頁面背景上之後，淺色圖示幾乎看不見，等於整段動畫都是空的。
+    clone.style.color = getComputedStyle(cartIcon).color;
     clone.style.zIndex = "60";
     clone.style.pointerEvents = "none";
     document.body.appendChild(clone);
