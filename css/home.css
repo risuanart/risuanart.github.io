@@ -94,20 +94,20 @@ body {
 }
 
 /* ---------- 頂部列（商品頁／購物車／常見問題共用，首頁不套用） ----------
-   套用材料包母頁（products/index.html）的頂部列視覺語言：跟底部懸浮列
-   同一套毛玻璃處理（半透明底色＋強力模糊），內容捲動經過標題下方時
-   還能維持可讀性，不是純透明直接蓋在圖片/文字上。只加在 .site-header
-   這個額外的 class 上（首頁的 <header> 沒有這個 class），首頁維持原本
-   沒有背景列的極簡corner-icon 風格，不受影響。 */
+   套用材料包母頁（products/index.html）的頂部列視覺語言：預設透明、不擋
+   底下內容，捲動經過圖片/文字時（由 js/site-header-scroll.js 偵測捲動
+   容器加上 .is-scrolled）才切成跟底部懸浮列同一套毛玻璃處理（半透明底色
+   ＋強力模糊），維持標題可讀性。只加在 .site-header 這個額外的 class 上
+   （首頁的 <header> 沒有這個 class），首頁維持原本沒有背景列的極簡
+   corner-icon 風格，不受影響。 */
 .site-header {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 25;
-  background: color-mix(in srgb, var(--color-text-secondary) 20%, transparent);
-  backdrop-filter: blur(30px);
-  -webkit-backdrop-filter: blur(30px);
+  background: transparent;
+  transition: background var(--duration-normal) var(--ease-standard);
   /* 材料包母頁（products/index.html）的頂部列是「← 返回／頁面標題／購物車」
      三欄橫排，這裡把原本只是背景裝飾的 .site-header 改成真的排版容器，
      取代原本各自 position:fixed 懸浮在角落的 logo／購物車圖示。
@@ -118,6 +118,12 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 20px var(--pad-h);
+}
+
+.site-header.is-scrolled {
+  background: color-mix(in srgb, var(--color-text-secondary) 20%, transparent);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
 }
 
 .site-header__back,

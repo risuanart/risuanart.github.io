@@ -110,15 +110,20 @@
     position: sticky;
     top:0;
     z-index:10;
-    /* 跟底部懸浮列同一套毛玻璃處理（半透明底色＋強力模糊），內容捲動
-       經過標題下方時還能維持可讀性，不是純透明直接蓋在圖片/文字上。 */
-    background: var(--pill-bg);
-    backdrop-filter: blur(30px);
-    -webkit-backdrop-filter: blur(30px);
+    /* 預設透明，還沒捲動經過任何內容時不擋畫面。捲動後（見下方 <script>
+       監聽 window scroll 切換 .is-scrolled）才切成跟底部懸浮列同一套
+       毛玻璃處理（半透明底色＋強力模糊），維持標題可讀性。 */
+    background: transparent;
+    transition: background .45s ease;
     display:flex;
     align-items:center;
     justify-content:space-between;
     padding:20px var(--pad-h);
+  }
+  header.is-scrolled{
+    background: var(--pill-bg);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
   }
   header .back{ }
   header .title{font-size:12px; letter-spacing:1px; text-transform:uppercase;}
@@ -588,6 +593,14 @@
       }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
       themeSections.forEach(el => themeObserver.observe(el));
     }
+
+    // 頂部列預設透明，捲動經過內容後才切換成毛玻璃效果
+    const siteHeader = document.querySelector('header');
+    const updateHeaderGlass = () => {
+      siteHeader.classList.toggle('is-scrolled', window.scrollY > 4);
+    };
+    window.addEventListener('scroll', updateHeaderGlass, { passive: true });
+    updateHeaderGlass();
   </script>
 
 </body>
