@@ -1,86 +1,595 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>材料包總覽｜日宣繪畫室</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;600;700&family=Poppins:wght@700&family=Noto+Serif+TC:wght@500;700&family=Noto+Sans+TC:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/colors.css">
-  <link rel="stylesheet" href="../css/tokens.css">
-  <link rel="stylesheet" href="../css/base.css">
-  <link rel="stylesheet" href="../css/home.css">
-  <link rel="stylesheet" href="../css/products.css">
-  <link rel="stylesheet" href="../css/cart.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>材料包｜日宣繪畫室</title>
+<style>
+  :root{
+    --bg: #f5f5ed;
+    --ink: #111110;
+    --line: rgba(0,0,0,0.12);
+    --pill-bg: rgba(193,193,189,0.35);
+    --gap-sm: 20px;
+    --gap-md: 30px;
+    /* 區塊間垂直留白（.spacer／.spacer.double）跟區塊左右內距（.p30）都是
+       響應式 token：桌面用這裡的值，手機（≤768px）在下面的媒體查詢裡蓋掉，
+       全站沿用同一組數值，不用每個區塊各自寫一次手機版覆蓋。 */
+    --gap-lg: 90px;
+    --gap-double: 180px;
+    --pad-h: 30px;
+    --max-text: 800px;
+  }
+  @media (max-width: 768px){
+    :root{
+      --gap-lg: 60px;
+      --gap-double: 100px;
+      --pad-h: 20px;
+    }
+  }
+  .p30{ padding-left: var(--pad-h); padding-right: var(--pad-h); }
+  .p20{ padding: 20px; }
+  .spacer{ height: var(--gap-lg); }
+  .spacer.double{ height: var(--gap-double); }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    color:var(--ink);
+    font-family: "Helvetica Neue", Arial, "Noto Sans TC", sans-serif;
+    font-size:14px;
+    line-height:1.5;
+  }
+
+  /* ---------- 首頁同款動畫底色 ----------
+     斜角漸層＋緩慢位移動畫＋blur，色票直接沿用 colors.css 的
+     --color-warning／--color-brand／--color-button-primary／
+     --color-surface-light（這頁是獨立檔案沒有載入那份 CSS，改寫成字面色碼）。 */
+  .ambient-bg{
+    position: fixed;
+    inset: -60px;
+    z-index: -2;
+    pointer-events: none;
+    background-image: linear-gradient(
+      135deg,
+      #B8541C 0%,
+      color-mix(in srgb, #B8541C 55%, #EDE6D8) 14%,
+      color-mix(in srgb, #686F12 22%, #EDE6D8) 32%,
+      color-mix(in srgb, #686F12 22%, #EDE6D8) 63%,
+      color-mix(in srgb, #6E85A0 55%, #EDE6D8) 86%,
+      #6E85A0 100%
+    );
+    background-size: 220% 220%;
+    background-position: 0% 0%;
+    filter: blur(30px);
+    animation: ambient-drift 17s ease infinite;
+  }
+  @media (min-width: 1024px){
+    .ambient-bg{ animation-duration: 14s; }
+  }
+  @keyframes ambient-drift{
+    0%, 100% { background-position: 0% 0%; }
+    50% { background-position: 100% 100%; }
+  }
+  .ambient-grain{
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.25;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.35' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
+  }
+  @media (prefers-reduced-motion: reduce){
+    .ambient-bg{ animation: none; }
+  }
+  /* 半透明米色蓋在 ambient-bg／ambient-grain 上面，讓底下的暈染色隱約透出來。
+     故意不是直接寫在 body 上：body 的背景會被瀏覽器「提升」去畫最底層的
+     畫布，反而蓋在 .ambient-bg（z-index:-2）下面、完全被蓋住看不到，
+     實測結果整頁會變成沒有稀釋過的原始飽和漸層色，比首頁實際看到的濃豔
+     很多。改成一個包住全部內容的一般 wrapper div（不是額外疊一層蓋在
+     內容上面的 fixed 浮層，那樣反而會蓋住底下的文字），背景色直接當
+     wrapper 自己的底色，子元素本來就會正常疊在自己 parent 的背景之上，
+     不會有 body 那個「被提升去畫布」的特例問題。 */
+  .page-tint{
+    background: rgba(237, 230, 216, 0.68);
+  }
+  h1,h2,h3{
+    font-family: Georgia, "Playfair Display", "Noto Serif TC", serif;
+    font-weight:400;
+    margin:0;
+  }
+  a{color:inherit; text-decoration:none;}
+  .uppercase{text-transform:uppercase; letter-spacing:1px;}
+  .small{font-size:11px;}
+  .center{text-align:center;}
+  .wrap{max-width:1400px; margin:0 auto; padding:0 30px;}
+
+  /* ---------- Header (sticky) ---------- */
+  header{
+    position: sticky;
+    top:0;
+    z-index:10;
+    /* 跟底部懸浮列同一套「透出底色」處理：更淡的底色＋更強的模糊，
+       拿掉原本那條硬邊的底線分隔，改用模糊本身自然帶出跟內容的區隔，
+       不會像一塊蓋在最上面的實色橫條那麼突兀。 */
+    background: rgba(237, 230, 216, 0.4);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:20px var(--pad-h);
+  }
+  header .back{ }
+  header .title{font-size:12px; letter-spacing:1px; text-transform:uppercase;}
+  header .enquire{ }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding: var(--gap-lg) var(--pad-h) var(--gap-md);
+    text-align:center;
+  }
+  .hero h1{
+    font-size: clamp(32px, 6vw, 64px);
+    letter-spacing:4px;
+    text-transform:uppercase;
+    opacity:0;
+    transform:translateY(20px);
+    transition: opacity 1s ease, transform 1s ease;
+  }
+  .hero .tagline{
+    margin-top:16px;
+    font-size:12px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:#666;
+  }
+  .hero .intro{
+    max-width:var(--max-text);
+    margin:30px auto 0;
+    font-size:15px;
+    line-height:1.6;
+  }
+
+  .hero-image{
+    margin-top:var(--gap-lg);
+    margin-left:calc(-1 * var(--pad-h));
+    margin-right:calc(-1 * var(--pad-h));
+    width:auto;
+    aspect-ratio: 16/9;
+    background:linear-gradient(135deg,#cfcac0,#8a8478);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  /* 拍照代辦事項：直接寫在圖片佔位框裡，記錄之後要補拍哪張照片，
+     不是設計稿的正式文案——之後照片補上去就整段刪掉。 */
+  .photo-note{
+    max-width:80%;
+    padding:12px;
+    text-align:center;
+    font-size:12px;
+    line-height:1.6;
+    color:rgba(17,17,16,0.55);
+  }
+
+  /* ---------- Fade-in on scroll ---------- */
+  .fade-in{
+    opacity:0;
+    transform:translateY(30px);
+    transition: opacity .9s ease, transform .9s ease;
+  }
+  .fade-in.is-visible{
+    opacity:1;
+    transform:translateY(0);
+  }
+  .hero h1.is-visible{ opacity:1; transform:translateY(0); }
+  .delay-1{ transition-delay:.15s; }
+  .delay-2{ transition-delay:.3s; }
+
+  /* ---------- Section: overview (label + text grid) ---------- */
+  .overview{
+    display:grid;
+    grid-template-columns: 220px 1fr 1fr;
+    gap:var(--gap-md);
+    padding: var(--gap-lg) var(--pad-h);
+    border-top:1px solid var(--line);
+  }
+  .overview .label{
+    font-size:11px;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color:#666;
+  }
+  .overview .body p,
+  .overview .extra p{
+    max-width:var(--max-text);
+    margin:0 0 20px;
+    line-height:1.7;
+  }
+
+  /* ---------- Image + text split rows ---------- */
+  .split-row{
+    display:flex;
+    gap:var(--gap-md);
+    padding: var(--gap-md) var(--pad-h);
+    align-items:center;
+  }
+  .split-row.reverse{ flex-direction:row-reverse; }
+  .split-row .col{ flex:1; }
+  .split-row .img-box{
+    aspect-ratio: 4/3;
+    background:linear-gradient(135deg,#d8d3c8,#a49c8c);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .split-row .text-box{
+    max-width:500px;
+    font-size:16px;
+    line-height:1.7;
+  }
+
+  /* ---------- Gallery (stacked full-width images) ---------- */
+  .gallery{
+    display:flex;
+    flex-direction:column;
+    gap:var(--gap-lg);
+    padding: var(--gap-lg) var(--pad-h);
+  }
+  .gallery .img-box{
+    width:auto;
+    margin-left:calc(-1 * var(--pad-h));
+    margin-right:calc(-1 * var(--pad-h));
+    aspect-ratio: 16/9;
+    background:linear-gradient(135deg,#c9c2b3,#78715f);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .gallery-item{
+    display:block;
+  }
+  .gallery-item__label{
+    margin: 12px 0 0;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    color: var(--ink);
+  }
+
+  /* ---------- Meta info (Scope / Team / Share) ---------- */
+  .meta{
+    padding: var(--gap-lg) var(--pad-h);
+    border-top:1px solid var(--line);
+  }
+  /* 比較表格：直接用真的 <table>，寬度不夠時整個表格自己橫向捲動
+     （overflow-x:auto），不會把整個頁面撐出橫向捲軸。 */
+  .meta-table-wrap{
+    overflow-x:auto;
+  }
+  .meta table{
+    width:100%;
+    min-width:520px;
+    border-collapse:collapse;
+    font-size:13px;
+  }
+  .meta thead th{
+    text-align:left;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    color:#666;
+    font-weight:400;
+    padding:0 16px 12px 0;
+    border-bottom:1px solid var(--line);
+    white-space:nowrap;
+  }
+  .meta tbody td{
+    padding:14px 16px 14px 0;
+    border-bottom:1px solid var(--line);
+    vertical-align:top;
+    line-height:1.6;
+  }
+  .meta tbody tr:last-child td{ border-bottom:none; }
+  .meta td.tier{ color:#666; font-size:12px; white-space:nowrap; }
+  .meta td.price{ font-variant-numeric: tabular-nums; white-space:nowrap; }
+
+  /* ---------- More projects ---------- */
+  .more-projects{
+    padding: var(--gap-lg) var(--pad-h);
+    border-top:1px solid var(--line);
+  }
+  .more-projects h2{
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    margin-bottom:var(--gap-md);
+  }
+  .project-card{
+    position:relative;
+    width:auto;
+    margin-left:calc(-1 * var(--pad-h));
+    margin-right:calc(-1 * var(--pad-h));
+    aspect-ratio: 21/9;
+    background:linear-gradient(135deg,#3a332b,#1c1712);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    margin-bottom:var(--gap-md);
+    overflow:hidden;
+  }
+  /* 深色底的卡片，拍照代辦文字改用淺色、不用跟 hero-image 那類淺色底一樣的
+     深色字，不然會完全看不見。 */
+  .project-card .photo-note{
+    color:rgba(245,245,237,0.7);
+  }
+  .project-card span{
+    color:#f5f5ed;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    font-size:20px;
+    transition: transform .5s ease;
+  }
+  .project-card:hover span{ transform:scale(1.05); }
+
+  /* ---------- Floating bottom pill nav ---------- */
+  .pill-nav{
+    position:fixed;
+    left:50%;
+    bottom:30px;
+    transform:translateX(-50%);
+    width: calc(100% - 60px);
+    max-width: 500px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:30px;
+    padding:12px 24px;
+    border-radius:10px;
+    background-color: rgba(193,193,189,0.25);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    font-size:11px;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    z-index:20;
+  }
+  /* 中間是「目前捲動到哪個主題」的指示文字，左右是次要的目錄連結——
+     字級加大、顏色加深＋加粗，跟兩側的小字、淺灰、細體拉開層次。 */
+  .pill-nav a{
+    font-size:11px;
+    font-weight:400;
+    color:#666;
+  }
+  .pill-nav .logo{
+    font-size:13px;
+    font-weight:600;
+    letter-spacing:2px;
+    color:var(--ink);
+  }
+
+  /* ---------- Footer ---------- */
+  footer{
+    padding: var(--gap-lg) var(--pad-h) calc(var(--gap-lg) + 80px);
+    border-top:1px solid var(--line);
+  }
+  footer h2{
+    font-size: clamp(36px, 8vw, 90px);
+    letter-spacing:2px;
+  }
+  footer .contact{
+    max-width:450px;
+    margin-top:var(--gap-md);
+    font-size:14px;
+    line-height:1.7;
+  }
+  footer .bottom-row{
+    display:flex;
+    justify-content:space-between;
+    margin-top:var(--gap-lg);
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    color:#666;
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 768px){
+    .overview{ grid-template-columns: 1fr; }
+    /* 原本的 align-items:center 是給桌面版左右並排時，圖片跟文字垂直置中用的；
+       手機版變成上下堆疊（column）後，center 會讓子元素縮成內容寬度，圖片
+       (.img-box 只有 aspect-ratio、沒有內容撐開寬度) 因此整個垮成 0 寬 0 高、
+       完全不可見。手機版改回 stretch，讓圖片跟文字都撐滿整欄寬度。 */
+    .split-row, .split-row.reverse{ flex-direction:column; align-items:stretch; }
+    .pill-nav{ gap:16px; padding:10px 18px; }
+  }
+</style>
 </head>
 <body>
 
   <div class="ambient-bg" aria-hidden="true"></div>
   <div class="ambient-grain" aria-hidden="true"></div>
 
+  <div class="page-tint">
+
   <header>
-    <a class="logo" href="../index.html" aria-label="回到首頁畫布">
-      <img src="../assets/images/logo-risuan拷貝.png" alt="日宣繪畫室">
-    </a>
-    <div class="cart-badge-wrap">
-      <button type="button" class="cart-badge" aria-haspopup="true" aria-expanded="false" aria-label="購物車，目前 0 件">
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
-        <span class="cart-badge__count">0</span>
-      </button>
-      <div class="cart-preview" hidden>
-        <ul class="cart-preview__list"></ul>
-        <p class="cart-preview__empty">購物車是空的</p>
-        <p class="cart-preview__total"></p>
-        <div class="cart-preview__actions">
-          <a class="cart-preview__view" href="../cart.html">查看購物車</a>
-          <button type="button" class="cart-preview__continue">繼續選購</button>
-        </div>
-      </div>
-    </div>
+    <a class="back uppercase small" href="../index.html">← 返回</a>
+    <div class="title">材料包</div>
+    <a class="enquire uppercase small" href="../cart.html">購物車</a>
   </header>
 
-  <nav class="pill-nav" aria-label="全站分類導覽">
-    <a href="../index.html" data-cat="group">團體課</a>
-    <a href="index.html" data-cat="materials" aria-current="page">材料包</a>
-    <a href="../index.html" data-cat="courses">課程</a>
+  <section class="hero" data-theme="手作材料包">
+    <h1 class="fade-in">手作材料包</h1>
+    <div class="tagline fade-in delay-1">A Short Tagline Goes Here</div>
+    <p class="intro fade-in delay-2">
+      一份禮，不只迎新，也留住一段節氣的美好。<br><br>
+      如果你已經對制式的新春禮盒提不起興趣，<br>
+      今年，換一種方式迎接新年。
+    </p>
+    <div class="hero-image fade-in delay-2"><span class="photo-note">建議拍攝：材料包全家福或開箱情境照，呼應「一份禮，不只迎新」的節慶氛圍</span></div>
+  </section>
+
+  <section class="overview" data-theme="在家也能簡易完成">
+    <div class="label">
+      專案概述
+    </div>
+    <div class="body">
+      <p class="fade-in">我們把傳統工藝與手作結合，推出在家就能完成的材料包，<br>不論是自己嘗試，或是與家人朋友一起，<br>都能做出一幅屬於這個新年的作品。</p>
+    </div>
+    <div class="extra">
+      <p class="fade-in delay-1">這裡放第二段補充文字，桌面版會排在「專案概述」這排的最右邊，手機版會接在上一段文字下方。</p>
+    </div>
+  </section>
+
+  <a class="split-row" href="fluid-art-light.html" data-theme="輕巧版材料包">
+    <div class="col img-box fade-in"><span class="photo-note">建議拍攝：流動畫材料包輕巧版成品／包裝照</span></div>
+    <div class="col text-box fade-in delay-1">
+      <strong>輕巧版材料包</strong><br>
+      單幅 15cm，最快抵達的新年儀式
+    </div>
+  </a>
+
+  <a class="split-row reverse" href="fluid-art-gift.html" data-theme="禮盒版材料包">
+    <div class="col img-box fade-in"><span class="photo-note">建議拍攝：流動畫材料包禮盒版成品／包裝照</span></div>
+    <div class="col text-box fade-in delay-1">
+      <strong>禮盒版材料包</strong><br>
+      雙幅成品，完整的流動畫體驗
+    </div>
+  </a>
+
+  <!-- 三種版本的比較表格：內容直接取自各商品頁已經確定的名稱／價格／
+       一句話標語（js/cart.js PRODUCTS），不是另外編的行銷文案。輕巧版有
+       兩列是因為流動畫、砂畫兩條產品線都各自有輕巧版，禮盒版只有流動畫，
+       創作組只有砂畫——是目前商品線真實的結構，不是排版失誤。 -->
+  <section class="meta" data-theme="規格">
+    <div class="meta-table-wrap">
+      <table class="fade-in">
+        <thead>
+          <tr>
+            <th>版本</th>
+            <th>材料包</th>
+            <th>價格</th>
+            <th>特色</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="tier">輕巧版</td>
+            <td>春聯流動畫材料包</td>
+            <td class="price">$800</td>
+            <td>單幅 15cm，最快抵達的新年儀式</td>
+          </tr>
+          <tr>
+            <td class="tier">輕巧版</td>
+            <td>春聯砂畫材料包</td>
+            <td class="price">$__</td>
+            <td>8 款圖案任選，撕貼倒沙鋪出你的春聯</td>
+          </tr>
+          <tr>
+            <td class="tier">禮盒版</td>
+            <td>春聯流動畫材料包</td>
+            <td class="price">$1,100</td>
+            <td>雙幅成品，完整的流動畫體驗</td>
+          </tr>
+          <tr>
+            <td class="tier">創作組</td>
+            <td>春聯砂畫材料包</td>
+            <td class="price">$__</td>
+            <td>5 款精選圖案＋26色顏料，自由創作一整套</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="gallery">
+    <a class="gallery-item fade-in" href="sand-art-light.html" data-theme="沙畫輕巧版">
+      <div class="img-box"><span class="photo-note">建議拍攝：砂畫材料包輕巧版成品或操作過程</span></div>
+      <p class="gallery-item__label">沙畫輕巧版</p>
+    </a>
+    <a class="gallery-item fade-in" href="sand-art-collection.html" data-theme="沙畫創作版">
+      <div class="img-box"><span class="photo-note">建議拍攝：砂畫材料包創作組成品或操作過程</span></div>
+      <p class="gallery-item__label">沙畫創作版</p>
+    </a>
+    <a class="gallery-item fade-in" href="fluid-art-light.html" data-theme="流動畫輕巧版">
+      <div class="img-box"><span class="photo-note">建議拍攝：流動畫材料包輕巧版成品</span></div>
+      <p class="gallery-item__label">流動畫輕巧版</p>
+    </a>
+    <a class="gallery-item fade-in" href="fluid-art-gift.html" data-theme="流動畫禮盒版">
+      <div class="img-box"><span class="photo-note">建議拍攝：流動畫材料包禮盒版成品</span></div>
+      <p class="gallery-item__label">流動畫禮盒版</p>
+    </a>
+  </section>
+
+  <section class="more-projects" data-theme="其他服務">
+    <h2>其他服務</h2>
+    <a class="project-card fade-in" href="../index.html"><span>實體繪畫課程</span><span class="photo-note">建議拍攝：畫室實體上課情境照</span></a>
+    <a class="project-card fade-in delay-1" href="../index.html"><span>企業/團體課程</span><span class="photo-note">建議拍攝：企業/團體包班活動情境照</span></a>
+  </section>
+
+  <footer data-theme="聯絡我們">
+    <h2 class="fade-in">日宣繪畫室</h2>
+    <div class="contact fade-in delay-1">
+      對材料包有任何疑問，歡迎私訊
+      <a href="https://instagram.com/ri.suan_art" target="_blank" rel="noopener">@ri.suan_art</a>
+    </div>
+    <div class="bottom-row">
+      <span>© 日宣繪畫室 2026</span>
+      <a href="https://instagram.com/ri.suan_art" target="_blank" rel="noopener">Instagram</a>
+    </div>
+  </footer>
+
+  <!-- 課程／團體課目前還沒有各自獨立的頁面（只在首頁側邊分類清單裡），
+       連回首頁，讓訪客自己從那裡點進對應分類（跟其他頁面底部懸浮列的
+       處理方式一致，見 css/home.css .pill-nav 的站台共用版本）。 -->
+  <nav class="pill-nav">
+    <a href="../index.html">課程</a>
+    <span class="logo">材料包</span>
+    <a href="../index.html">團體課</a>
   </nav>
 
-  <main class="product-page overview-page work">
+  </div><!-- /.page-tint -->
 
-    <header class="work__intro">
-      <h1 class="work-heading reveal"><span class="inner">材料包</span></h1>
-      <div class="chapter__prose overview-page__intro reveal">
-        <p>一份禮，不只迎新，也留住一段節氣的美好。</p>
-        <p>如果你已經對制式的新春禮盒提不起興趣，<br>今年，換一種方式迎接新年。</p>
-        <p>我們把傳統工藝與手作結合，推出在家就能完成的材料包，<br>不論是自己嘗試，或是與家人朋友一起，<br>都能做出一幅屬於這個新年的作品。</p>
-      </div>
-    </header>
+  <script>
+    // 捲動淡入動畫
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+        }
+      });
+    }, { threshold: 0.15 });
 
-    <!-- 商品區塊：由 js/products-overview.js 動態產生，每款商品一個「小案例」
-         區塊，內容全部展開顯示（滿版照片→內含清單＋敘事文字→規格選擇→價格→
-         加入購物車→查看完整介紹連結），不用點開才看得到。資料直接讀
-         window.RisuanCart（js/cart.js）、window.RisuanFluidArt
-         （js/product-gallery.js）、window.RisuanPatterns
-         （js/sand-art-gallery.js），不建立第二套商品資料。 -->
-    <div class="overview-grid"></div>
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-    <!-- 頁尾：接回敘事型頁首，這頁不是購物路徑的死路，訪客若想深入了解
-         仍可無縫接回敘事路徑（見任務指令二、①）；下單／付款／出貨相關的
-         常見問題單獨移到 faq.html，從這裡連過去，不佔用側邊選單的
-         「常見問題」分頁（那個現在留給來畫室上課的常見問題用）。 -->
-    <p class="overview-page__back-link reveal">
-      想了解更多？看看<a class="text-link" href="fluid-art-intro.html">春聯流動畫</a>與<a class="text-link" href="sand-art-intro.html">春聯砂畫</a>的故事 →
-    </p>
-    <p class="overview-page__back-link reveal">
-      對下單、付款、出貨有疑問？看看<a class="text-link" href="faq.html">材料包常見問題</a> →
-    </p>
+    // Hero 標題進場（頁面載入立即觸發一次）
+    window.addEventListener('load', () => {
+      document.querySelectorAll('.hero .fade-in').forEach(el => {
+        setTimeout(()=> el.classList.add('is-visible'), 100);
+      });
+    });
 
-  </main>
+    // 底部懸浮列中間文字：捲動到哪個主題區塊，就換成該主題的名稱
+    // （每個區塊自己標 data-theme，不用另外維護一份「捲動位置對應文字」的清單）。
+    // 用 rootMargin 把偵測範圍收窄到螢幕正中間一小段，區塊「捲過畫面中線」時
+    // 才算切換到那個主題，不是一進畫面下緣就切換（那樣切換太早，跟使用者
+    // 實際正在看的內容對不起來）。
+    const pillLogo = document.querySelector('.pill-nav .logo');
+    const themeSections = document.querySelectorAll('[data-theme]');
+    if (pillLogo && themeSections.length) {
+      const themeObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            pillLogo.textContent = entry.target.dataset.theme;
+          }
+        });
+      }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
+      themeSections.forEach(el => themeObserver.observe(el));
+    }
+  </script>
 
-  <script src="../js/cart.js"></script>
-  <script src="../js/product-gallery.js"></script>
-  <script src="../js/sand-art-gallery.js"></script>
-  <script src="../js/products-overview.js"></script>
 </body>
 </html>
