@@ -436,8 +436,6 @@
 
 .order-confirm-box > .chapter + .chapter {
   margin-top: var(--space-8);
-  padding-top: var(--space-8);
-  border-top: 1px solid color-mix(in srgb, var(--color-text-secondary) 20%, transparent);
 }
 
 .confirm-items {
