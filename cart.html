@@ -48,20 +48,23 @@
   <main class="product-page cart-page work">
 
     <header class="work__intro">
-      <h1 class="work-heading"><span class="inner">購物車</span></h1>
+      <h1 class="work-heading fade-in"><span class="inner">購物車</span></h1>
     </header>
 
     <!-- 購物車編輯畫面。按「結帳」之後，這一整塊會被藏起來，改顯示下面
          #order-confirm-view 那塊（同一頁往下展開，不再跳轉到另一個頁面）。
          如果網址上已經帶著 orderId（例如從綠界電子地圖選店回來），一開始
-         就直接隱藏這塊、跳去顯示確認區塊，見 js/checkout.js。 -->
+         就直接隱藏這塊、跳去顯示確認區塊，見 js/checkout.js。
+         結帳確認區塊（#order-confirm-view）不套用捲動淡入——那是逐步展開
+         的表單流程，切換步驟當下就該立即顯示，不需要跟敘事類頁面一樣
+         等捲動淡入。 -->
     <div id="cart-edit-view">
-      <section class="chapter">
+      <section class="chapter fade-in delay-1">
         <div class="cart-groups"></div>
         <p class="cart-empty" hidden>購物車目前是空的，<a class="text-link" href="products/fluid-art-intro.html">看看材料包</a>。</p>
       </section>
 
-      <footer class="work__close">
+      <footer class="work__close fade-in delay-2">
         <div class="work__close-text">
           <p class="work__shipping-note">結帳後會請你選擇送貨方式，並線上完成付款。</p>
           <p class="checkout-error" role="alert" hidden></p>
@@ -163,5 +166,6 @@
   <script src="js/cart.js"></script>
   <script src="js/checkout.js"></script>
   <script src="js/site-header-scroll.js"></script>
+  <script src="js/scroll-reveal.js"></script>
 </body>
 </html>
