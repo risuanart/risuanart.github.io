@@ -502,7 +502,7 @@
 .shipping-options {
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
+  gap: var(--space-4);
   margin-top: var(--space-4);
   max-width: 46ch;
 }
@@ -521,10 +521,10 @@
   border: none;
   border-radius: 10px;
   background: var(--color-surface-light);
-  padding: var(--space-3) var(--space-4);
+  padding: var(--space-2) var(--space-4);
   display: flex;
   align-items: center;
-  gap: var(--space-3);
+  gap: var(--space-2);
   text-align: left;
   font-family: inherit;
   color: inherit;
@@ -610,7 +610,7 @@
   /* 沿用底部懸浮列（.pill-nav，見 home.css）同一種做法：不描邊框，
      單純用底色跟圓角區隔出範圍，跟頁面背景本身有沒有邊框無關。 */
   border-radius: 10px;
-  padding: 0 var(--space-3);
+  padding: 0 var(--space-4);
   background: var(--color-surface-light);
   transition: box-shadow var(--duration-fast) var(--ease-standard);
 }
@@ -634,7 +634,7 @@
   color: var(--color-text-primary);
   border: none;
   background: none;
-  padding: var(--space-3) 0;
+  padding: var(--space-2) 0;
 }
 
 .confirm-field input:focus {
