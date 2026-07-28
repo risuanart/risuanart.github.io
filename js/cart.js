@@ -134,15 +134,16 @@
     document.dispatchEvent(new CustomEvent("cart:updated"));
   }
 
-  function addItem(productKey, scheme) {
+  function addItem(productKey, scheme, qty) {
+    qty = qty || 1;
     if (!PRODUCTS[productKey]) return;
     const items = readCart();
     const id = [productKey, scheme].join("__");
     const existing = items.find((i) => i.id === id);
     if (existing) {
-      existing.qty += 1;
+      existing.qty += qty;
     } else {
-      items.push({ id, productKey, scheme, qty: 1 });
+      items.push({ id, productKey, scheme, qty });
     }
     writeCart(items);
   }
@@ -421,11 +422,47 @@
     update();
   }
 
+  // 標題買列／收尾購買列的數量選擇器：同一頁的兩處代表同一件主商品，
+  // 數字互相同步（改其中一個，另一個跟著變），跟 initColorHint() 的雙處
+  // 同步做法一致。只套用在主商品這兩個進入點，延伸創作加購卡
+  // （[data-product-card] 範圍內）沒有這組選擇器，一律維持一次加購 1 件。
+  function initBuyQty() {
+    const steppers = document.querySelectorAll("[data-buy-qty]");
+    if (!steppers.length) return null;
+
+    const MAX_QTY = 20;
+
+    function getQty() {
+      return parseInt(steppers[0].querySelector("[data-qty-value]").textContent, 10) || 1;
+    }
+
+    function setQty(qty) {
+      qty = Math.max(1, Math.min(MAX_QTY, qty));
+      steppers.forEach((stepper) => {
+        stepper.querySelector("[data-qty-value]").textContent = qty;
+        stepper.querySelector("[data-qty-minus]").disabled = qty <= 1;
+        stepper.querySelector("[data-qty-plus]").disabled = qty >= MAX_QTY;
+      });
+    }
+
+    steppers.forEach((stepper) => {
+      stepper
+        .querySelector("[data-qty-minus]")
+        .addEventListener("click", () => setQty(getQty() - 1));
+      stepper
+        .querySelector("[data-qty-plus]")
+        .addEventListener("click", () => setQty(getQty() + 1));
+    });
+
+    setQty(1);
+    return { getQty, setQty };
+  }
+
   // 商品頁「加入購物車」按鈕：讀取當下選中的色系 chip（跟 product-gallery.js
   // 共用同一批 .color-picker__chip，不用另外維護一份選色狀態）。按鈕內有圖示＋
   // 文字兩個子元素，「已加入」的暫時提示只換文字那個 span，圖示不會被蓋掉；
   // 找不到 .work__cta-label 的話（萬一有按鈕沒套用新結構）退回整顆按鈕的文字。
-  function initAddToCart() {
+  function initAddToCart(buyQty) {
     document.querySelectorAll("[data-add-to-cart]").forEach((btn) => {
       const productKey = btn.dataset.product;
       const label = btn.querySelector(".work__cta-label") || btn;
@@ -439,13 +476,18 @@
         // 內部 id 用的 scheme key，畫面上不顯示這個字，SCHEME_NAMES 也不會有
         // 對應項目，下面組文字時全部用「有沒有拿到色系名稱」判斷要不要顯示。
         const scheme = activeScheme(scope) || "default";
-        addItem(productKey, scheme);
+        // 延伸創作加購卡（scope 有值）沒有數量選擇器，固定一次加購 1 件；
+        // 主商品的兩個進入點（scope 是 undefined）才讀取數量選擇器目前的數字。
+        const qty = !scope && buyQty ? buyQty.getQty() : 1;
+        addItem(productKey, scheme, qty);
         playCartChime();
         flyToCart(btn.querySelector("svg"));
         const product = PRODUCTS[productKey];
         const schemeName = SCHEME_NAMES[scheme] || "";
         const detail = schemeName ? `（${schemeName}）` : "";
-        showCartToast(`已加入：${product ? product.name : ""}${detail}`);
+        const qtyDetail = qty > 1 ? `　×${qty}` : "";
+        showCartToast(`已加入：${product ? product.name : ""}${detail}${qtyDetail}`);
+        if (!scope && buyQty) buyQty.setQty(1);
 
         label.textContent = "已加入 ✓";
         btn.disabled = true;
@@ -654,7 +696,8 @@
   function init() {
     updateBadges();
     initColorHint();
-    initAddToCart();
+    const buyQty = initBuyQty();
+    initAddToCart(buyQty);
     initCartPreview();
     renderCartPage();
   }

@@ -196,7 +196,65 @@
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
+  /* 窄螢幕上「價格＋色系」文字＋數量選擇器＋BUY 按鈕三塊擠不進同一行，
+     允許換行——buy-action（數量選擇器＋按鈕）用 margin-left:auto 自己
+     換到第二行時還是靠右對齊，不會因為換行變成貼著左邊。 */
+  flex-wrap: wrap;
   gap: var(--space-4);
+}
+
+/* 數量選擇器＋BUY 按鈕視覺上收成一組，跟左邊的價格/色系文字分開，
+   換行時這兩個一起換、不會分家。 */
+.buy-action {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-left: auto;
+}
+
+/* 買列的數量選擇器：跟購物車清單裡的 .cart-item__qty 同一套視覺語言
+   （方角、細邊框、中間數字），但這裡是加入購物車「之前」先選好要買
+   幾件，不是購物車頁那種已經加入、事後修改的情境，用獨立的 class
+   名稱，不直接沿用 .cart-item__qty。 */
+.qty-stepper {
+  display: flex;
+  align-items: stretch;
+  flex: none;
+  border: 1px solid color-mix(in srgb, var(--color-text-secondary) 40%, transparent);
+  border-radius: var(--radius-sharp);
+  overflow: hidden;
+  font-size: var(--font-size-sm);
+  font-variant-numeric: tabular-nums;
+}
+
+.qty-stepper button {
+  appearance: none;
+  border: none;
+  background: none;
+  width: 2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-primary);
+  cursor: pointer;
+}
+
+.qty-stepper button:active {
+  background: color-mix(in srgb, var(--color-text-secondary) 15%, transparent);
+}
+
+.qty-stepper button:disabled {
+  color: color-mix(in srgb, var(--color-text-secondary) 50%, transparent);
+  cursor: default;
+}
+
+.qty-stepper span {
+  min-width: 2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-left: 1px solid color-mix(in srgb, var(--color-text-secondary) 40%, transparent);
+  border-right: 1px solid color-mix(in srgb, var(--color-text-secondary) 40%, transparent);
 }
 
 .work-heading__buy-text {
@@ -1215,6 +1273,9 @@ button.text-link {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
+  /* 跟 .work-heading__buy-row 同一個理由：窄螢幕上文字＋數量選擇器＋按鈕
+     擠不進同一行，允許換行，.buy-action 自己 margin-left:auto 維持靠右。 */
+  flex-wrap: wrap;
   gap: var(--space-4);
 }
 
