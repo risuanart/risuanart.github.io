@@ -4,93 +4,40 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>材料包｜日宣繪畫室</title>
+<link rel="stylesheet" href="../css/colors.css">
+<link rel="stylesheet" href="../css/tokens.css">
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/home.css">
 <style>
   :root{
-    --bg: #f5f5ed;
-    --ink: #111110;
-    --line: rgba(0,0,0,0.12);
-    --pill-bg: rgba(193,193,189,0.35);
-    --gap-sm: 20px;
+    /* 顏色／間距／字距的實際數值已經搬進 colors.css／tokens.css 變成全站共用
+       規格（跟 .site-header／.pill-nav／敘事子頁 products.css 同一套），
+       這裡只留這頁自己專屬、還沒有共用需求的別名/token（--ink／--line 只是
+       比較短好記的別名，--gap-md／--max-text 目前只有這頁在用）。
+       --gap-lg／--gap-double／--pad-h 直接沿用 tokens.css 載入進來的
+       --editorial-gap／--editorial-gap-double／--pad-h，不用自己再定義
+       一次數值，也不用另外寫手機版媒體查詢——共用 token 本身已經是響應式的。 */
+    --ink: var(--color-text-primary);
+    --line: color-mix(in srgb, var(--color-text-secondary) 25%, transparent);
     --gap-md: 30px;
-    /* 區塊間垂直留白（.spacer／.spacer.double）跟區塊左右內距（.p30）都是
-       響應式 token：桌面用這裡的值，手機（≤768px）在下面的媒體查詢裡蓋掉，
-       全站沿用同一組數值，不用每個區塊各自寫一次手機版覆蓋。 */
-    --gap-lg: 90px;
-    --gap-double: 180px;
-    --pad-h: 30px;
+    --gap-lg: var(--editorial-gap);
+    --gap-double: var(--editorial-gap-double);
     --max-text: 800px;
   }
-  @media (max-width: 768px){
-    :root{
-      --gap-lg: 60px;
-      --gap-double: 100px;
-      --pad-h: 20px;
-    }
-  }
-  .p30{ padding-left: var(--pad-h); padding-right: var(--pad-h); }
-  .p20{ padding: 20px; }
-  .spacer{ height: var(--gap-lg); }
-  .spacer.double{ height: var(--gap-double); }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
   body{
     color:var(--ink);
-    font-family: "Helvetica Neue", Arial, "Noto Sans TC", sans-serif;
     font-size:14px;
     line-height:1.5;
   }
 
-  /* ---------- 首頁同款動畫底色 ----------
-     斜角漸層＋緩慢位移動畫＋blur，色票直接沿用 colors.css 的
-     --color-warning／--color-brand／--color-button-primary／
-     --color-surface-light（這頁是獨立檔案沒有載入那份 CSS，改寫成字面色碼）。 */
-  .ambient-bg{
-    position: fixed;
-    inset: -60px;
-    z-index: -2;
-    pointer-events: none;
-    background-image: linear-gradient(
-      135deg,
-      #B8541C 0%,
-      color-mix(in srgb, #B8541C 55%, #EDE6D8) 14%,
-      color-mix(in srgb, #686F12 22%, #EDE6D8) 32%,
-      color-mix(in srgb, #686F12 22%, #EDE6D8) 63%,
-      color-mix(in srgb, #6E85A0 55%, #EDE6D8) 86%,
-      #6E85A0 100%
-    );
-    background-size: 220% 220%;
-    background-position: 0% 0%;
-    filter: blur(30px);
-    animation: ambient-drift 17s ease infinite;
-  }
-  @media (min-width: 1024px){
-    .ambient-bg{ animation-duration: 14s; }
-  }
-  @keyframes ambient-drift{
-    0%, 100% { background-position: 0% 0%; }
-    50% { background-position: 100% 100%; }
-  }
-  .ambient-grain{
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    pointer-events: none;
-    opacity: 0.25;
-    mix-blend-mode: multiply;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.35' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    background-size: 200px 200px;
-  }
-  @media (prefers-reduced-motion: reduce){
-    .ambient-bg{ animation: none; }
-  }
-  /* 半透明米色蓋在 ambient-bg／ambient-grain 上面，讓底下的暈染色隱約透出來。
-     故意不是直接寫在 body 上：body 的背景會被瀏覽器「提升」去畫最底層的
-     畫布，反而蓋在 .ambient-bg（z-index:-2）下面、完全被蓋住看不到，
-     實測結果整頁會變成沒有稀釋過的原始飽和漸層色，比首頁實際看到的濃豔
-     很多。改成一個包住全部內容的一般 wrapper div（不是額外疊一層蓋在
-     內容上面的 fixed 浮層，那樣反而會蓋住底下的文字），背景色直接當
-     wrapper 自己的底色，子元素本來就會正常疊在自己 parent 的背景之上，
-     不會有 body 那個「被提升去畫布」的特例問題。 */
+  /* 半透明米色蓋在 .ambient-bg／.ambient-grain（現在跟全站共用同一份，見
+     home.css，已經改用真的顏色變數不是寫死色碼）上面，讓底下的暈染色隱約
+     透出來。故意不是直接寫在 body 上：body 的背景會被瀏覽器「提升」去畫
+     最底層的畫布，反而蓋在 .ambient-bg（z-index:-2）下面、完全被蓋住看不到。
+     改成一個包住全部內容的一般 wrapper div，背景色直接當 wrapper 自己的
+     底色，子元素本來就會正常疊在自己 parent 的背景之上。 */
   .page-tint{
     background: rgba(237, 230, 216, 0.68);
   }
@@ -104,26 +51,6 @@
   .small{font-size:11px;}
   .center{text-align:center;}
   .wrap{max-width:1400px; margin:0 auto; padding:0 30px;}
-
-  /* ---------- Header (sticky) ---------- */
-  header{
-    position: sticky;
-    top:0;
-    z-index:10;
-    /* 跟底部懸浮列同一套「透出底色」處理：更淡的底色＋更強的模糊，
-       拿掉原本那條硬邊的底線分隔，改用模糊本身自然帶出跟內容的區隔，
-       不會像一塊蓋在最上面的實色橫條那麼突兀。 */
-    background: rgba(237, 230, 216, 0.4);
-    backdrop-filter: blur(30px);
-    -webkit-backdrop-filter: blur(30px);
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:20px var(--pad-h);
-  }
-  header .back{ }
-  header .title{font-size:12px; letter-spacing:1px; text-transform:uppercase;}
-  header .enquire{ }
 
   /* ---------- Hero ---------- */
   .hero{
@@ -335,41 +262,9 @@
   }
   .project-card:hover span{ transform:scale(1.05); }
 
-  /* ---------- Floating bottom pill nav ---------- */
-  .pill-nav{
-    position:fixed;
-    left:50%;
-    bottom:30px;
-    transform:translateX(-50%);
-    width: calc(100% - 60px);
-    max-width: 500px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:30px;
-    padding:12px 24px;
-    border-radius:10px;
-    background-color: rgba(193,193,189,0.25);
-    backdrop-filter: blur(30px);
-    -webkit-backdrop-filter: blur(30px);
-    font-size:11px;
-    letter-spacing:1px;
-    text-transform:uppercase;
-    z-index:20;
-  }
-  /* 中間是「目前捲動到哪個主題」的指示文字，左右是次要的目錄連結——
-     字級加大、顏色加深＋加粗，跟兩側的小字、淺灰、細體拉開層次。 */
-  .pill-nav a{
-    font-size:11px;
-    font-weight:400;
-    color:#666;
-  }
-  .pill-nav .logo{
-    font-size:13px;
-    font-weight:600;
-    letter-spacing:2px;
-    color:var(--ink);
-  }
+  /* .pill-nav 本身跟中間「目前捲動到哪個主題」的指示文字樣式，現在跟全站
+     共用同一份（見 css/home.css .pill-nav／.pill-nav .logo），不用再自己
+     定義一次背景/字級/字距。 */
 
   /* ---------- Footer ---------- */
   footer{
@@ -415,10 +310,10 @@
 
   <div class="page-tint">
 
-  <header>
-    <a class="back uppercase small" href="../index.html">← 返回</a>
-    <div class="title">材料包</div>
-    <a class="enquire uppercase small" href="../cart.html">購物車</a>
+  <header class="site-header">
+    <a class="site-header__back" href="../index.html">← 返回</a>
+    <div class="site-header__title">材料包</div>
+    <a class="site-header__action" href="../cart.html">購物車</a>
   </header>
 
   <section class="hero" data-theme="手作材料包">

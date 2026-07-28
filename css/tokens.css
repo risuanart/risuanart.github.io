@@ -55,4 +55,32 @@
     cubic-bezier(0.07,0.95,0,1)「起步快、收尾綿長」的滑順曲線，比較後不喜歡那種前快後慢的反差） */
   --ease-overshoot: cubic-bezier(0.34, 1.56, 0.64, 1); /* 帶輕微過衝，用於需要手感回彈的互動（如按鈕按下回彈） */
   --ease-exit:      cubic-bezier(1, 0.5, 0.8, 1);    /* 清單離場專用曲線，跟 --ease-standard 不同調性 */
+
+  /* ---------- 編輯式版面節奏（材料包母頁 products/index.html 定案的規格）----------
+     這組是跟上面 --space-* 平行、但服務不同尺度的第二套刻度：--space-* 管小尺度
+     的元件內距（圖示跟文字的距離、清單項目間距），這組專管「頁面級」的節奏——
+     頁面左右安全邊界、大區塊跟大區塊之間的留白、頂部列跟捲動淡入相關的字級／
+     字距。母頁本身、.site-header／.pill-nav（見 home.css）、商品敘事子頁
+     （見 products.css）都從這裡讀值，之後新頁面要套用同一種編輯感，直接用
+     這幾個變數就會自動一致，要調整整體節奏也只要改這裡一次。
+     --pad-h／--editorial-gap／--editorial-gap-double 在 768px 以下（全站目前
+     唯一有定義的斷點）換成較窄的手機版數值。 */
+  --pad-h: 30px;
+  --editorial-gap: 90px;
+  --editorial-gap-double: 180px;
+  --editorial-header-height: 58px; /* 母頁頂部列實測高度（20px 內距＋文字行高），
+    .site-header 靠自己的 padding 自然撐出這個高度，這裡是給需要「保留頂部列
+    佔用空間」的頁面（例如 .product-page 固定版面）拿來算 padding-top 用的。 */
+  --editorial-label-font-size: 11px;   /* 頂部列返回連結、小型大寫標籤 */
+  --editorial-title-font-size: 12px;   /* 頂部列頁面標題 */
+  --editorial-tracking: 1px;           /* 頂部列文字字距 */
+  --editorial-heading-tracking: 0.04em; /* 大標題（.work-heading／.hero h1）字距 */
+}
+
+@media (max-width: 768px) {
+  :root {
+    --pad-h: 20px;
+    --editorial-gap: 60px;
+    --editorial-gap-double: 100px;
+  }
 }

@@ -37,17 +37,18 @@
   inset: 0;
   overflow-y: auto;
   background: rgba(237, 230, 216, 0.68);
-  padding-top: calc(var(--space-16) + var(--space-6));
+  /* 保留頂部列（.site-header，position:fixed）實際佔用的高度，避免內容一開始
+     就被蓋住，多留 --space-6 呼吸空間，不是緊貼在列的正下方。 */
+  padding-top: calc(var(--editorial-header-height) + var(--space-6));
   padding-bottom: var(--space-24);
-  /* 原本這裡保留 --space-16（64px）給左側直式目錄（.side-tabs），但這幾頁的
-     .side-tabs 已經全部改成底部懸浮列（見 css/home.css .pill-nav），不再需要
-     這條安全邊界，改成跟右側 .work 對稱的 --space-4，內容才會真的置中在
-     螢幕正中間，不是偏向右側。 */
-  padding-left: var(--space-4);
+  /* 左右安全邊界改用 --pad-h（跟母頁、.site-header、.pill-nav 同一組編輯式
+     版面節奏 token，見 tokens.css），內容才會真的置中在螢幕正中間，
+     手機/桌面斷點也會自動跟著母頁的規格切換，不用另外寫一次媒體查詢。 */
+  padding-left: var(--pad-h);
 }
 
 .work {
-  padding-right: var(--space-4);
+  padding-right: var(--pad-h);
 }
 
 /* ---------- 標題／簡介 ---------- */
@@ -68,9 +69,9 @@
   font-size: clamp(1.75rem, 1.3rem + 3vw, 2.75rem);
   line-height: 1.1;
   overflow-wrap: anywhere;
-  /* 字距跟材料包母頁（products/index.html）的大標題對齊，統一敘事子頁跟
-     母頁的編輯感。 */
-  letter-spacing: 0.04em;
+  /* 字距用共用 token（--editorial-heading-tracking，見 tokens.css），
+     跟母頁的大標題對齊，統一敘事子頁跟母頁的編輯感。 */
+  letter-spacing: var(--editorial-heading-tracking);
 }
 
 .work-heading__sub {
@@ -207,7 +208,9 @@
 
 /* ---------- 章節共用節奏 ---------- */
 .chapter {
-  margin-top: var(--space-24);
+  /* 章節與章節之間的大留白，改用 --editorial-gap（母頁的大區塊間距節奏，
+     見 tokens.css），手機/桌面斷點會跟著母頁一起變，不用另外維護一份。 */
+  margin-top: var(--editorial-gap);
 }
 
 .chapter__title {
@@ -638,8 +641,8 @@ button.text-link {
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
-  margin-left: calc(-1 * var(--space-4));
-  margin-right: calc(-1 * var(--space-4));
+  margin-left: calc(-1 * var(--pad-h));
+  margin-right: calc(-1 * var(--pad-h));
   padding: var(--space-1) 9vw var(--space-2);
   scrollbar-width: none;
 }
@@ -821,11 +824,11 @@ button.text-link {
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
-  /* 逃出 .product-page／.work 左右各 --space-4 的版面留白，讓滑動軌道真的
+  /* 逃出 .product-page／.work 左右各 --pad-h 的版面留白，讓滑動軌道真的
      貼齊螢幕左右邊緣。用 vw 而非 % 算卡片寬度：% 是相對「已經被留白吃掉
      一塊」的容器寬度去算，vw 才是相對真正的螢幕寬度。 */
-  margin-left: calc(-1 * var(--space-4));
-  margin-right: calc(-1 * var(--space-4));
+  margin-left: calc(-1 * var(--pad-h));
+  margin-right: calc(-1 * var(--pad-h));
   padding: var(--space-1) 9vw var(--space-2);
   scrollbar-width: none;
 }
@@ -1133,7 +1136,7 @@ button.text-link {
 
 /* ---------- Credits／購買前請閱讀：手風琴，比照參考規格的 max-height 轉場 ---------- */
 .accordion {
-  margin-top: var(--space-24);
+  margin-top: var(--editorial-gap);
   padding: 0 var(--space-4) 0 var(--space-4);
 }
 
