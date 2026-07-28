@@ -52,6 +52,19 @@
   padding-right: var(--pad-h);
 }
 
+/* ---------- 捲動淡入（跟母頁 products/index.html 同一套 .fade-in／
+   .is-visible 動效語言，見 js/scroll-reveal.js）---------- */
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity .9s ease, transform .9s ease;
+}
+
+.fade-in.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* ---------- 標題／簡介 ---------- */
 .work__intro {
   /* 對齊材料包母頁（products/index.html）的置中大標題排版，跟母頁像同一個

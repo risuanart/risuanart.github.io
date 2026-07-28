@@ -48,7 +48,7 @@
   <main class="product-page work">
 
     <!-- 標題／簡介：全站開場句，跟頁首、輕巧版共用同一句 -->
-    <header class="work__intro">
+    <header class="work__intro fade-in">
       <h1 class="work-heading"><span class="inner">春聯流動畫材料包</span></h1>
       <!-- 版本標籤前面的方塊數量＝成品件數（輕巧版1幅／禮盒版2幅），
            用符號多傳遞一個規格資訊，不只是純裝飾。 -->
@@ -89,7 +89,7 @@
     </header>
 
     <!-- 第一章：作品成色（輪播＋色系，跟輕巧版共用同一套素材） -->
-    <section class="chapter">
+    <section class="chapter fade-in">
       <h2 class="chapter__title">作品成色</h2>
       <section class="gallery">
         <div class="gallery__frame"></div>
@@ -109,7 +109,7 @@
     </section>
 
     <!-- 第二章：色系故事 -->
-    <section class="chapter chapter--story">
+    <section class="chapter chapter--story fade-in">
       <h2 class="chapter__title story-section__name">經典紅</h2>
       <!-- 重複一組色系切換：這個章節內容整段跟著色系變（標題／顏料／故事文案），
            使用者滑到這裡才想換色系的話，不用滑回最上面的作品成色章節再切換一次。
@@ -135,7 +135,7 @@
     <!-- 第三章：怎麼玩：兩階段敘事（先小幅試做、再正式創作），不是輕巧版文字
          加長版——倒顏料比例、靜置24小時這些事實包進兩個階段裡自然帶出，
          跟輕巧版「一次到位」的單段敘述做出節奏上的差異，不只是字數不同。 -->
-    <section class="chapter">
+    <section class="chapter fade-in">
       <h2 class="chapter__title">怎麼玩</h2>
       <div class="chapter__prose">
         <p>禮盒版的創作分成兩個階段，<br>先在 5cm 小畫布練手感，再把技法帶到 15cm 大畫布正式創作。</p>
@@ -157,7 +157,7 @@
     </section>
 
     <!-- 第四章：套組內容 -->
-    <section class="chapter">
+    <section class="chapter fade-in">
       <h2 class="chapter__title">套組內容</h2>
       <!-- 重複一組色系切換，理由同色系故事章節：套組內容整段（照片／字貼）跟著
            色系變，不用滑回最上面才能換色系看另一色的內容物。 -->
@@ -193,13 +193,13 @@
     </section>
 
     <!-- 第五章：教學導流 -->
-    <section class="chapter chapter--cta">
+    <section class="chapter chapter--cta fade-in">
       <p>隨附完整說明書，從架高、倒色到貼字上膠，每個環節都寫得清楚，做起來更安心。<br>教學影片收錄兩種倒色技法示範，掃描包裝 QR Code，跟著步驟一次做對。<br>想看看更多流動畫的靈感與分享，歡迎追蹤 @ri.suan_art。</p>
       <a class="cta-section__ig" href="https://instagram.com/ri.suan_art" target="_blank" rel="noopener">追蹤 @ri.suan_art ↗</a>
     </section>
 
     <!-- 尾聲：導引至輕巧版 -->
-    <section class="chapter">
+    <section class="chapter fade-in">
       <p class="chapter__intro">如果只想先輕巧嘗試流動畫，15cm 單幅成品、簡易中英圖解，<a class="text-link" href="fluid-art-light.html">輕巧版</a>在這裡。</p>
     </section>
 
@@ -207,7 +207,7 @@
          這是給想再做一幅的人的加購選項。獨立商品卡，按「加入購物車」直接加入，
          跟主商品共用同一套 data-add-to-cart／initAddToCart() 機制（見
          js/cart.js），不做勾選再合併的機制。 -->
-    <section class="chapter addon-section">
+    <section class="chapter addon-section fade-in">
       <h2 class="chapter__title">延伸創作</h2>
       <div class="addon-carousel">
         <div class="addon-carousel__track">
@@ -230,7 +230,7 @@
     </section>
 
     <!-- 購買前請閱讀：兩子頁共用同一份條款 -->
-    <details class="accordion">
+    <details class="accordion fade-in">
       <summary class="accordion__toggle">購買前請閱讀</summary>
       <div class="accordion__body">
         <p>感謝你選擇 Ri Suan Studio 的材料包與手作商品。為了確保每位創作者都有順暢的購買體驗，請花些時間閱讀以下內容。當你在本網站完成訂購，即代表你已閱讀並同意此內容。</p>
@@ -267,7 +267,7 @@
 
     <!-- 收尾：出貨提示＋價格＋加入購物車，非懸浮，融在頁面結尾，不做懸浮購買列。
          加入購物車會讀取當下選中的色系（見 js/cart.js initAddToCart()）。 -->
-    <footer class="work__close">
+    <footer class="work__close fade-in">
       <div class="work__close-text">
         <p class="work__shipping-note">出貨依訂購順序安排，時程將於下單頁面公告。</p>
         <p class="work__color-hint">目前選擇：<strong class="work__color-hint-name">經典紅</strong>・禮盒版<span class="work__addon-hint" hidden>＋畫布加購</span></p>
@@ -284,5 +284,6 @@
   <script src="../js/product-gallery.js"></script>
   <script src="../js/cart.js"></script>
   <script src="../js/site-header-scroll.js"></script>
+  <script src="../js/scroll-reveal.js"></script>
 </body>
 </html>

@@ -48,7 +48,7 @@
   <main class="product-page work">
 
     <!-- 標題／簡介：跟頁首、自由創作組共用同一句開場句 -->
-    <header class="work__intro">
+    <header class="work__intro fade-in">
       <h1 class="work-heading"><span class="inner">春聯砂畫材料包</span></h1>
       <p class="work-heading__version"><span class="work-heading__version-marks" aria-hidden="true"><span></span></span>輕巧版</p>
       <p class="work-heading__sub">2026</p>
@@ -80,7 +80,7 @@
          （呼應文字內容的過程照／動圖），是不分圖案共用的一張，不用每款圖案
          各拍一張——8 款圖案的操作過程（撕貼紙／倒沙／刷勻）動作相同，
          差異只在最後呈現的圖案本身，那部分已經由上面的滑動選擇器涵蓋。 -->
-    <section class="chapter">
+    <section class="chapter fade-in">
       <h2 class="chapter__title">怎麼玩</h2>
       <div class="chapter__prose">
         <p>由深至淺，依序完成，<br>一格一格拼出完整的畫面。</p>
@@ -119,7 +119,7 @@
 
     <!-- 第四章：套組內容。成品尺寸隨選中圖案即時更新（見 sand-art-gallery.js），
          材料清單不隨圖案變動，兩者都是純沙款式共用同一份配件。 -->
-    <section class="chapter">
+    <section class="chapter fade-in">
       <h2 class="chapter__title">套組內容</h2>
       <p class="kit-section__size-hint">成品尺寸：依所選圖案而定（15cm 或 20cm）</p>
       <div class="kit-section__photo">
@@ -135,7 +135,7 @@
     </section>
 
     <!-- 尾聲：導引至自由創作組 -->
-    <section class="chapter">
+    <section class="chapter fade-in">
       <p class="chapter__intro">如果想要更多元的創作體驗，5款精選圖案、26色自由配色、還有金箔與特殊材質點綴，<a class="text-link" href="sand-art-collection.html">自由創作組</a>在這裡。</p>
     </section>
 
@@ -145,7 +145,7 @@
          data-product 指向 PRODUCTS 裡標記 hidden:true 的加購商品鍵，不會
          出現在材料包總覽購物頁。額外顏色沙是固定套組，不開放單色自選，
          文案不寫「自選」。 -->
-    <section class="chapter addon-section">
+    <section class="chapter addon-section fade-in">
       <h2 class="chapter__title">延伸創作</h2>
       <div class="addon-carousel">
         <div class="addon-carousel__track">
@@ -184,7 +184,7 @@
     <!-- 購買前請閱讀：跟流動畫共用整體條款架構，但「使用前準備」「操作提醒」
          「材料保存」三段內容跟操作技法／材質直接相關，不能直接沿用流動畫的
          顏料相關描述，這裡改寫成砂畫材質對應的內容（撕貼、沙料、乾燥保存）。 -->
-    <details class="accordion">
+    <details class="accordion fade-in">
       <summary class="accordion__toggle">購買前請閱讀</summary>
       <div class="accordion__body">
         <p>感謝你選擇 Ri Suan Studio 的材料包與手作商品。為了確保每位創作者都有順暢的購買體驗，請花些時間閱讀以下內容。當你在本網站完成訂購，即代表你已閱讀並同意此內容。</p>
@@ -217,7 +217,7 @@
     </details>
 
     <!-- 收尾：出貨提示＋價格＋加入購物車 -->
-    <footer class="work__close">
+    <footer class="work__close fade-in">
       <div class="work__close-text">
         <p class="work__shipping-note">出貨依訂購順序安排，時程將於下單頁面公告。</p>
         <p class="work__color-hint">目前選擇：<strong class="work__color-hint-name"></strong>・輕巧版</p>
@@ -234,5 +234,6 @@
   <script src="../js/sand-art-gallery.js"></script>
   <script src="../js/cart.js"></script>
   <script src="../js/site-header-scroll.js"></script>
+  <script src="../js/scroll-reveal.js"></script>
 </body>
 </html>
