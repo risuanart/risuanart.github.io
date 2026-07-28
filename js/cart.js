@@ -302,6 +302,69 @@
     });
   }
 
+  // 加入購物車瞬間，複製按鈕上的購物袋圖示，用一段拋物線軌跡飛到右上角的
+  // 購物車圖示，抵達的同時才觸發 pulseCartBadge()（圖示回彈），把「東西被丟進
+  // 購物車」的動作具象化，不只是文字提示跳出來。用 Element.animate()（Web
+  // Animations API）而不是 CSS transition/@keyframes，因為起訖點座標是每次
+  // 點擊當下才量出來的（按鈕位置、購物車圖示位置都可能不同），沒辦法預先寫死
+  // 在 CSS 裡。base.css 全域的 prefers-reduced-motion 規則只涵蓋 CSS
+  // animation/transition，管不到這裡用 JS 產生的動畫，所以這裡自己另外判斷
+  // 一次，開啟「減少動態」時直接跳過飛行動畫，只保留圖示回彈當作有加入的回饋。
+  function flyToCart(sourceIcon) {
+    const cartIcon = document.querySelector(".cart-badge-wrap .cart-badge svg");
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    if (!sourceIcon || !cartIcon || prefersReducedMotion) {
+      pulseCartBadge();
+      return;
+    }
+
+    const startRect = sourceIcon.getBoundingClientRect();
+    const endRect = cartIcon.getBoundingClientRect();
+    const deltaX =
+      endRect.left + endRect.width / 2 - (startRect.left + startRect.width / 2);
+    const deltaY =
+      endRect.top + endRect.height / 2 - (startRect.top + startRect.height / 2);
+    // 中途往上拉一段高度，飛行軌跡才有拋物線弧度，不是筆直橫移過去。
+    const arcLift = -Math.max(60, Math.abs(deltaY) * 0.5);
+
+    const clone = sourceIcon.cloneNode(true);
+    clone.style.position = "fixed";
+    clone.style.left = startRect.left + "px";
+    clone.style.top = startRect.top + "px";
+    clone.style.width = startRect.width + "px";
+    clone.style.height = startRect.height + "px";
+    clone.style.margin = "0";
+    clone.style.color = getComputedStyle(sourceIcon).color;
+    clone.style.zIndex = "60";
+    clone.style.pointerEvents = "none";
+    document.body.appendChild(clone);
+
+    const animation = clone.animate(
+      [
+        { transform: "translate(0, 0) scale(1) rotate(0deg)", opacity: 1, offset: 0 },
+        {
+          transform: `translate(${deltaX * 0.5}px, ${deltaY * 0.5 + arcLift}px) scale(1.15) rotate(-8deg)`,
+          opacity: 1,
+          offset: 0.55,
+        },
+        {
+          transform: `translate(${deltaX}px, ${deltaY}px) scale(0.35) rotate(6deg)`,
+          opacity: 0,
+          offset: 1,
+        },
+      ],
+      { duration: 650, easing: "cubic-bezier(0.3, 0, 0.55, 1)" }
+    );
+
+    animation.onfinish = () => {
+      clone.remove();
+      pulseCartBadge();
+    };
+  }
+
   // 加入購物車的提示泡泡：從購物車圖示旁邊滑入，顯示「已加入：商品名 (色系)」，
   // 停留幾秒後自動滑出消失。用 CSS class 觸發 transition（不是 @keyframes），
   // 進場／離場是兩種不同的曲線與位移量，寫在 cart.css 的 .cart-toast／
@@ -375,7 +438,7 @@
         const scheme = activeScheme(scope) || "default";
         addItem(productKey, scheme);
         playCartChime();
-        pulseCartBadge();
+        flyToCart(btn.querySelector("svg"));
         const product = PRODUCTS[productKey];
         const schemeName = SCHEME_NAMES[scheme] || "";
         const detail = schemeName ? `（${schemeName}）` : "";
