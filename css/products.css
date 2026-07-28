@@ -39,11 +39,11 @@
   background: rgba(237, 230, 216, 0.68);
   padding-top: calc(var(--space-16) + var(--space-6));
   padding-bottom: var(--space-24);
-  /* 左側目錄（.side-tabs）維持首頁那套固定在左下角的定位，商品頁是長捲動頁面，
-     內容會一直流經目錄所在的高度，所以整個內容區永久保留一條左側安全邊界，
-     讓內容跟目錄「並存不打架」，不是疊在一起。實測目錄旋轉後的實際佔位右緣約在
-     35px，這裡抓 --space-16（64px）留一點呼吸空間，不用魔術數字。 */
-  padding-left: var(--space-16);
+  /* 原本這裡保留 --space-16（64px）給左側直式目錄（.side-tabs），但這幾頁的
+     .side-tabs 已經全部改成底部懸浮列（見 css/home.css .pill-nav），不再需要
+     這條安全邊界，改成跟右側 .work 對稱的 --space-4，內容才會真的置中在
+     螢幕正中間，不是偏向右側。 */
+  padding-left: var(--space-4);
 }
 
 .work {
@@ -52,7 +52,11 @@
 
 /* ---------- 標題／簡介 ---------- */
 .work__intro {
-  padding: 0 0 0 var(--space-4);
+  /* 對齊材料包母頁（products/index.html）的置中大標題排版，跟母頁像同一個
+     網站。買列（.work-heading__buy-row）跟色系縮圖列各自需要左右分欄或
+     置中，用自己的 justify-content 覆寫，不會被這裡的 text-align 影響
+     （text-align 只管行內內容，flex 容器的排列方式看自己的宣告）。 */
+  text-align: center;
 }
 
 .work-heading {
@@ -120,6 +124,7 @@
    從文字＋底線 tab 改成縮圖＋標籤的卡片，不用多寫任何 JS。 */
 .work-heading__preview {
   display: flex;
+  justify-content: center;
   gap: var(--space-4);
   margin-top: var(--space-2);
 }
@@ -189,7 +194,11 @@
 }
 
 .intro {
-  margin: var(--space-6) 0 0;
+  /* max-width 限制寬度＋auto 左右margin，讓這段文字本身（不只是裡面的字）
+     置中在整個標題區塊裡，呼應母頁 .hero .intro 同一種「置中窄欄」排法。
+     文字本身的置中對齊直接繼承 .work__intro 的 text-align:center，這裡
+     不用再宣告一次。 */
+  margin: var(--space-6) auto 0;
   max-width: 34ch;
   font-size: var(--font-size-sm);
   line-height: 1.7;
@@ -199,7 +208,6 @@
 /* ---------- 章節共用節奏 ---------- */
 .chapter {
   margin-top: var(--space-24);
-  padding: 0 0 0 var(--space-4);
 }
 
 .chapter__title {
@@ -617,8 +625,7 @@ button.text-link {
    「加入購物車」按鈕，按下去直接獨立加入購物車（不用先勾選、等主商品的
    按鈕才一併加購）。這顆按鈕跟主商品共用同一套 data-add-to-cart／
    initAddToCart() 邏輯（見 js/cart.js），data-product 指向這個加購項目
-   自己在 PRODUCTS 裡的商品鍵（hidden:true，不會出現在材料包總覽購物頁的
-   商品區塊，那頁只列「真的獨立成一件商品」的品項）。
+   自己在 PRODUCTS 裡的商品鍵（見 js/cart.js）。
    逃出 .product-page／.work 版面留白讓卡片列貼齊螢幕邊緣、可以往右滑，
    手法跟 .pattern-carousel__track 同一套。 */
 .addon-carousel {
@@ -631,7 +638,7 @@ button.text-link {
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
-  margin-left: calc(-1 * var(--space-16));
+  margin-left: calc(-1 * var(--space-4));
   margin-right: calc(-1 * var(--space-4));
   padding: var(--space-1) 9vw var(--space-2);
   scrollbar-width: none;
@@ -765,147 +772,6 @@ button.text-link {
   font-variant-numeric: tabular-nums;
 }
 
-/* ---------- 材料包總覽購物頁（/products/index.html） ----------
-   2026-07-28 改版：參考 by-manifesto 案例頁的編輯式節奏，拿掉可滑動分類
-   大圖與手風琴商品磚，改成由上往下的單一閱讀動線——標題留白拉大，每款
-   商品各自一個「小案例」區塊（滿版照片→內含清單＋敘事文字→規格/價格/
-   加入購物車→查看完整介紹連結），捲動進場淡入，不用點開才看得到內容。 */
-.overview-page__intro {
-  margin-top: var(--space-6);
-  max-width: 56ch;
-}
-
-/* ---------- 捲動淡入：全站共用的極簡技巧，跟首頁 .content-list 同一套
-   「預設隱藏＋加 is-visible 切換」邏輯（見 css/home.css），只是這裡是
-   區塊級的位移（固定 --space-6），不是文字逐字的 em 位移。
-   IntersectionObserver 邏輯見 js/products-overview.js initRevealAnimations()。 */
-.reveal {
-  opacity: 0;
-  transform: translateY(var(--space-6));
-  transition: opacity var(--duration-slow) var(--ease-standard),
-    transform var(--duration-slow) var(--ease-standard);
-}
-
-.reveal.is-visible {
-  opacity: 1;
-  transform: none;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .reveal {
-    transition: none;
-  }
-}
-
-.overview-group + .overview-group {
-  margin-top: var(--space-24);
-}
-
-.overview-group {
-  margin-top: var(--space-16);
-}
-
-/* 分類標籤：取代原本可滑動的分類大圖，變成小型大寫字距標籤，呼應參考站
-   SCOPE／TEAM 那類小標籤語彙。 */
-.overview-group__label {
-  margin: 0 0 var(--space-6);
-  font-size: var(--font-size-xs);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--color-text-secondary);
-}
-
-/* ---------- 商品小案例（取代原本的手風琴磚） ----------
-   每款商品內容全部展開顯示，不用點擊才看得到——參考站的閱讀節奏是「一路
-   往下滑」，不是「點開機關」。彼此之間用大留白＋細分隔線區隔，不做卡片
-   邊框容器。 */
-.product-spread + .product-spread {
-  margin-top: var(--space-24);
-  padding-top: var(--space-16);
-  border-top: 1px solid color-mix(in srgb, var(--color-text-secondary) 20%, transparent);
-}
-
-.product-spread__photo {
-  aspect-ratio: 4 / 5;
-  border-radius: var(--radius-sharp);
-  overflow: hidden;
-  /* 逃出 .product-page／.work 的版面留白讓照片貼齊螢幕邊緣（滿版大圖是
-     這次改版的核心視覺），手法跟 .pattern-carousel__track 同一套。 */
-  margin-left: calc(-1 * var(--space-16));
-  margin-right: calc(-1 * var(--space-4));
-}
-
-.product-spread__photo img,
-.product-spread__photo .placeholder-box {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.product-spread__info {
-  margin-top: var(--space-6);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-6);
-}
-
-.product-spread__label {
-  margin: 0 0 var(--space-2);
-  font-size: var(--font-size-xs);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--color-text-secondary);
-}
-
-.product-spread__name {
-  margin: 0;
-  font-family: Georgia, 'Playfair Display', 'Noto Serif TC', serif;
-  font-weight: 600;
-  font-size: var(--font-size-xl);
-}
-
-.product-spread__desc {
-  margin: var(--space-2) 0 0;
-  max-width: 46ch;
-  font-size: var(--font-size-base);
-  line-height: 1.7;
-  color: var(--color-text-primary);
-}
-
-.product-spread__tagline {
-  margin: var(--space-2) 0 0;
-  max-width: 46ch;
-  font-size: var(--font-size-sm);
-  color: var(--color-text-secondary);
-}
-
-.product-spread__buy {
-  margin-top: var(--space-6);
-  max-width: 32ch;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: var(--space-2);
-}
-
-.product-spread__price {
-  margin: 0;
-  font-family: Georgia, 'Playfair Display', 'Noto Serif TC', serif;
-  font-weight: 600;
-  font-size: var(--font-size-lg);
-  font-variant-numeric: tabular-nums;
-}
-
-.product-spread__add {
-  width: 100%;
-}
-
-.product-spread__more {
-  display: inline-block;
-  margin-top: var(--space-4);
-  font-size: var(--font-size-sm);
-}
-
 /* 規格下拉：跟結帳表單輸入框（.confirm-field input）同一套「有邊框的方塊」
    語言，維持全站現在「這裡可以填/選」的視覺一致性，不是每個表單元件各自
    一套樣式。原生 <select>，手機上點下去是系統原生選單，不用自己刻彈出選單。 */
@@ -955,13 +821,10 @@ button.text-link {
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
-  /* 逃出 .product-page（左側固定 64px，留給左側目錄 .side-tabs）跟 .work
-     （右側 16px）的版面留白，讓滑動軌道真的貼齊螢幕左右邊緣。這兩個留白
-     左右不對稱，如果只用對稱的 vw 負邊界去估（例如 margin: 0 -9vw），
-     實測卡片寬度只會有螢幕的六成，達不到驗收標準的七成——因為那時候
-     百分比／vw 是相對於「已經被 64px 吃掉一大塊」的容器寬度去算，不是
-     相對於真正的螢幕寬度。 */
-  margin-left: calc(-1 * var(--space-16));
+  /* 逃出 .product-page／.work 左右各 --space-4 的版面留白，讓滑動軌道真的
+     貼齊螢幕左右邊緣。用 vw 而非 % 算卡片寬度：% 是相對「已經被留白吃掉
+     一塊」的容器寬度去算，vw 才是相對真正的螢幕寬度。 */
+  margin-left: calc(-1 * var(--space-4));
   margin-right: calc(-1 * var(--space-4));
   padding: var(--space-1) 9vw var(--space-2);
   scrollbar-width: none;
