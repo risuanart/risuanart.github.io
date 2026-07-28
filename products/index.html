@@ -110,12 +110,10 @@
     position: sticky;
     top:0;
     z-index:10;
-    /* 跟底部懸浮列同一套「透出底色」處理：更淡的底色＋更強的模糊，
-       拿掉原本那條硬邊的底線分隔，改用模糊本身自然帶出跟內容的區隔，
-       不會像一塊蓋在最上面的實色橫條那麼突兀。 */
-    background: rgba(237, 230, 216, 0.4);
-    backdrop-filter: blur(30px);
-    -webkit-backdrop-filter: blur(30px);
+    /* 不做半透明色塊蓋在內容上方，直接跟頁面背景融為一體，
+       只留一條細線做區隔（參考網站的作法）。 */
+    background: transparent;
+    border-bottom: 1px solid var(--line);
     display:flex;
     align-items:center;
     justify-content:space-between;
