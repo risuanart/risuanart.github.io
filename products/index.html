@@ -374,6 +374,20 @@
     letter-spacing:2px;
     color:var(--ink);
   }
+  /* 第二狀態：捲動離開 Hero 後，中間從副標題文字換成可點擊回首頁的 logo，
+     預設隱藏，切到 .is-home-mode 才顯示（見下方 <script>）。 */
+  .pill-nav__home{
+    display:none;
+    align-items:center;
+    justify-content:center;
+  }
+  .pill-nav__home img{
+    display:block;
+    height:20px;
+    width:auto;
+  }
+  .pill-nav.is-home-mode .logo{ display:none; }
+  .pill-nav.is-home-mode .pill-nav__home{ display:flex; }
 
   /* ---------- Footer ---------- */
   footer{
@@ -425,7 +439,7 @@
     <a class="enquire uppercase small" href="../cart.html">購物車</a>
   </header>
 
-  <section class="hero" data-theme="手作材料包">
+  <section class="hero">
     <h1 class="fade-in">手作材料包</h1>
     <div class="tagline fade-in delay-1">A Short Tagline Goes Here</div>
     <p class="intro fade-in delay-2">
@@ -436,7 +450,7 @@
     <div class="hero-image fade-in delay-2"><span class="photo-note">建議拍攝：材料包全家福或開箱情境照，呼應「一份禮，不只迎新」的節慶氛圍</span></div>
   </section>
 
-  <section class="overview" data-theme="在家也能簡易完成">
+  <section class="overview">
     <div class="label">
       專案概述
     </div>
@@ -448,7 +462,7 @@
     </div>
   </section>
 
-  <a class="split-row" href="fluid-art-light.html" data-theme="輕巧版材料包">
+  <a class="split-row" href="fluid-art-light.html">
     <div class="col img-box fade-in"><span class="photo-note">建議拍攝：流動畫材料包輕巧版成品／包裝照</span></div>
     <div class="col text-box fade-in delay-1">
       <strong>輕巧版材料包</strong><br>
@@ -456,7 +470,7 @@
     </div>
   </a>
 
-  <a class="split-row reverse" href="fluid-art-gift.html" data-theme="禮盒版材料包">
+  <a class="split-row reverse" href="fluid-art-gift.html">
     <div class="col img-box fade-in"><span class="photo-note">建議拍攝：流動畫材料包禮盒版成品／包裝照</span></div>
     <div class="col text-box fade-in delay-1">
       <strong>禮盒版材料包</strong><br>
@@ -468,7 +482,7 @@
        一句話標語（js/cart.js PRODUCTS），不是另外編的行銷文案。輕巧版有
        兩列是因為流動畫、砂畫兩條產品線都各自有輕巧版，禮盒版只有流動畫，
        創作組只有砂畫——是目前商品線真實的結構，不是排版失誤。 -->
-  <section class="meta" data-theme="規格">
+  <section class="meta">
     <div class="meta-table-wrap">
       <table class="fade-in">
         <thead>
@@ -510,31 +524,31 @@
   </section>
 
   <section class="gallery">
-    <a class="gallery-item fade-in" href="sand-art-light.html" data-theme="沙畫輕巧版">
+    <a class="gallery-item fade-in" href="sand-art-light.html">
       <div class="img-box"><span class="photo-note">建議拍攝：砂畫材料包輕巧版成品或操作過程</span></div>
       <p class="gallery-item__label">沙畫輕巧版</p>
     </a>
-    <a class="gallery-item fade-in" href="sand-art-collection.html" data-theme="沙畫創作版">
+    <a class="gallery-item fade-in" href="sand-art-collection.html">
       <div class="img-box"><span class="photo-note">建議拍攝：砂畫材料包創作組成品或操作過程</span></div>
       <p class="gallery-item__label">沙畫創作版</p>
     </a>
-    <a class="gallery-item fade-in" href="fluid-art-light.html" data-theme="流動畫輕巧版">
+    <a class="gallery-item fade-in" href="fluid-art-light.html">
       <div class="img-box"><span class="photo-note">建議拍攝：流動畫材料包輕巧版成品</span></div>
       <p class="gallery-item__label">流動畫輕巧版</p>
     </a>
-    <a class="gallery-item fade-in" href="fluid-art-gift.html" data-theme="流動畫禮盒版">
+    <a class="gallery-item fade-in" href="fluid-art-gift.html">
       <div class="img-box"><span class="photo-note">建議拍攝：流動畫材料包禮盒版成品</span></div>
       <p class="gallery-item__label">流動畫禮盒版</p>
     </a>
   </section>
 
-  <section class="more-projects" data-theme="其他服務">
+  <section class="more-projects">
     <h2>其他服務</h2>
     <a class="project-card fade-in" href="../index.html"><span>實體繪畫課程</span><span class="photo-note">建議拍攝：畫室實體上課情境照</span></a>
     <a class="project-card fade-in delay-1" href="../index.html"><span>企業/團體課程</span><span class="photo-note">建議拍攝：企業/團體包班活動情境照</span></a>
   </section>
 
-  <footer data-theme="聯絡我們">
+  <footer>
     <h2 class="fade-in">日宣繪畫室</h2>
     <div class="contact fade-in delay-1">
       對材料包有任何疑問，歡迎私訊
@@ -551,7 +565,10 @@
        處理方式一致，見 css/home.css .pill-nav 的站台共用版本）。 -->
   <nav class="pill-nav">
     <a href="../index.html">課程</a>
-    <span class="logo">材料包</span>
+    <span class="logo">在家也可以輕鬆完成</span>
+    <a class="pill-nav__home" href="../index.html" aria-label="回到首頁">
+      <img src="../assets/images/logo-risuan拷貝.png" alt="日宣繪畫室">
+    </a>
     <a href="../index.html">團體課</a>
   </nav>
 
@@ -576,22 +593,17 @@
       });
     });
 
-    // 底部懸浮列中間文字：捲動到哪個主題區塊，就換成該主題的名稱
-    // （每個區塊自己標 data-theme，不用另外維護一份「捲動位置對應文字」的清單）。
-    // 用 rootMargin 把偵測範圍收窄到螢幕正中間一小段，區塊「捲過畫面中線」時
-    // 才算切換到那個主題，不是一進畫面下緣就切換（那樣切換太早，跟使用者
-    // 實際正在看的內容對不起來）。
-    const pillLogo = document.querySelector('.pill-nav .logo');
-    const themeSections = document.querySelectorAll('[data-theme]');
-    if (pillLogo && themeSections.length) {
-      const themeObserver = new IntersectionObserver((entries) => {
+    // 底部懸浮列中間：一開始（還在 Hero）顯示副標題文字，捲動離開 Hero
+    // 進到第二區塊之後，換成可以點擊回首頁的 logo 圖案。
+    const pillNav = document.querySelector('.pill-nav');
+    const heroSection = document.querySelector('.hero');
+    if (pillNav && heroSection) {
+      const heroObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            pillLogo.textContent = entry.target.dataset.theme;
-          }
+          pillNav.classList.toggle('is-home-mode', !entry.isIntersecting);
         });
-      }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
-      themeSections.forEach(el => themeObserver.observe(el));
+      }, { threshold: 0 });
+      heroObserver.observe(heroSection);
     }
 
     // 頂部列預設透明，捲動經過內容後才切換成毛玻璃效果
@@ -601,6 +613,18 @@
     };
     window.addEventListener('scroll', updateHeaderGlass, { passive: true });
     updateHeaderGlass();
+
+    // 左上角「← 返回」預設回到瀏覽器上一頁，不要一律直接跳回首頁——
+    // href 保留首頁連結當作沒有上一頁時（例如從外部連結直接開啟）的備援。
+    const backLink = document.querySelector('.back');
+    if (backLink) {
+      backLink.addEventListener('click', (e) => {
+        if (window.history.length > 1) {
+          e.preventDefault();
+          window.history.back();
+        }
+      });
+    }
   </script>
 
 </body>

@@ -18,4 +18,16 @@
 
   scrollEl.addEventListener("scroll", update, { passive: true });
   update();
+
+  // 左上角「← 返回」預設回到瀏覽器上一頁，不要一律直接跳回首頁——
+  // href 保留首頁連結當作沒有上一頁時（例如從外部連結直接開啟）的備援。
+  const backLink = header.querySelector(".site-header__back");
+  if (backLink) {
+    backLink.addEventListener("click", (e) => {
+      if (window.history.length > 1) {
+        e.preventDefault();
+        window.history.back();
+      }
+    });
+  }
 })();
