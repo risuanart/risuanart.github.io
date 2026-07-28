@@ -94,18 +94,20 @@ body {
 }
 
 /* ---------- 頂部列（商品頁／購物車／常見問題共用，首頁不套用） ----------
-   套用材料包母頁（products/index.html）的頂部列視覺語言：不做色塊蓋在
-   內容上方，直接跟頁面背景融為一體，只留一條細線區隔，取代原本
-   logo／購物車圖示各自懸浮在裸背景上的樣子。只加在 .site-header 這個
-   額外的 class 上（首頁的 <header> 沒有這個 class），首頁維持原本沒有
-   背景列的極簡corner-icon 風格，不受影響。 */
+   套用材料包母頁（products/index.html）的頂部列視覺語言：跟底部懸浮列
+   同一套毛玻璃處理（半透明底色＋強力模糊），內容捲動經過標題下方時
+   還能維持可讀性，不是純透明直接蓋在圖片/文字上。只加在 .site-header
+   這個額外的 class 上（首頁的 <header> 沒有這個 class），首頁維持原本
+   沒有背景列的極簡corner-icon 風格，不受影響。 */
 .site-header {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 25;
-  background: transparent;
+  background: color-mix(in srgb, var(--color-text-secondary) 20%, transparent);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
   border-bottom: 1px solid color-mix(in srgb, var(--color-text-secondary) 20%, transparent);
   /* 材料包母頁（products/index.html）的頂部列是「← 返回／頁面標題／購物車」
      三欄橫排，這裡把原本只是背景裝飾的 .site-header 改成真的排版容器，

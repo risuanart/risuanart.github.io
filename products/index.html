@@ -110,9 +110,11 @@
     position: sticky;
     top:0;
     z-index:10;
-    /* 不做半透明色塊蓋在內容上方，直接跟頁面背景融為一體，
-       只留一條細線做區隔（參考網站的作法）。 */
-    background: transparent;
+    /* 跟底部懸浮列同一套毛玻璃處理（半透明底色＋強力模糊），內容捲動
+       經過標題下方時還能維持可讀性，不是純透明直接蓋在圖片/文字上。 */
+    background: var(--pill-bg);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
     border-bottom: 1px solid var(--line);
     display:flex;
     align-items:center;
