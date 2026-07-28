@@ -111,6 +111,47 @@ body {
   background: color-mix(in srgb, var(--color-surface-light) 40%, transparent);
   backdrop-filter: blur(30px);
   -webkit-backdrop-filter: blur(30px);
+  /* 材料包母頁（products/index.html）的頂部列是「← 返回／頁面標題／購物車」
+     三欄橫排，這裡把原本只是背景裝飾的 .site-header 改成真的排版容器，
+     取代原本各自 position:fixed 懸浮在角落的 logo／購物車圖示。 */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--space-4);
+}
+
+.site-header__back,
+.site-header__title {
+  font-size: var(--font-size-xs);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-text-primary);
+}
+
+.site-header__back {
+  flex: none;
+}
+
+.site-header__title {
+  flex: 1;
+  min-width: 0;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 0 var(--space-2);
+}
+
+/* 購物車圖示原本是 position:fixed 懸浮在右上角，這裡改成 .site-header 這個
+   flex 排版容器裡的一般子元素（跟返回連結／標題同一排），數量徽章跟點擊
+   彈出迷你購物車預覽這些真的功能都沒有動，只是排列位置從「懸浮在角落」
+   變成「排進頂部列的右側」。.cart-preview 的 position:absolute 是相對這裡
+   來定位，position:relative 一樣能撐住，不需要再是 fixed。 */
+.site-header .cart-badge-wrap {
+  position: relative;
+  top: auto;
+  right: auto;
+  flex: none;
 }
 
 /* ---------- Logo：左上角（圖片，可點擊回到首頁畫布） ---------- */
