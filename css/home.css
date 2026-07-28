@@ -125,6 +125,49 @@ body {
   width: auto;
 }
 
+/* ---------- 底部懸浮列（全站導覽，首頁以外的頁面用） ----------
+   首頁的 .side-tabs 跟畫布明暗偵測／清單捲動對齊系統綁在一起（見 main.js
+   updateTextContrast()／alignListToTabs() 等函式，都是拿 .side-tabs 的
+   精確幾何位置去反推計算），拆掉風險太高，所以首頁維持原本的直式分頁，
+   不套用這個底部列。其他頁面（商品頁、購物車、常見問題）的 .side-tabs
+   只是單純的靜態連結，這裡整個換成這顆半透明模糊的懸浮列，三個分類固定
+   顯示，目前所在的分類置中放大加粗，另外兩個分類縮小、變淺色放在兩側。
+   視覺語彙（透出底色模糊、寬版圓角、置中放大）沿用材料包草頁
+   （products/draft.html）已經試過的版本。 */
+.pill-nav {
+  position: fixed;
+  left: 50%;
+  bottom: var(--space-6);
+  transform: translateX(-50%);
+  z-index: 30;
+  width: calc(100% - var(--space-6) * 2);
+  max-width: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-6);
+  padding: var(--space-2) var(--space-6);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--color-text-secondary) 20%, transparent);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+}
+
+.pill-nav a {
+  font-size: var(--font-size-xs);
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+}
+
+.pill-nav a[aria-current="page"] {
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--color-text-primary);
+}
+
 /* ---------- 左邊緣常駐直式分頁 ----------
    整個 <nav> 當一個單位用 rotate(-90deg) 旋轉：旋轉前是一排橫向排列的按鈕（flex row），
    旋轉後變成貼著左緣、由下往上讀的直排標籤。
