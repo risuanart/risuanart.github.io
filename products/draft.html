@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>材料包草頁｜日宣繪畫室</title>
+<style>
+  :root{
+    --bg: #f5f5ed;
+    --ink: #111110;
+    --line: rgba(0,0,0,0.12);
+    --pill-bg: rgba(193,193,189,0.35);
+    --gap-sm: 20px;
+    --gap-md: 30px;
+    --gap-lg: 60px;
+    --max-text: 800px;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family: "Helvetica Neue", Arial, "Noto Sans TC", sans-serif;
+    font-size:14px;
+    line-height:1.5;
+  }
+  h1,h2,h3{
+    font-family: Georgia, "Playfair Display", "Noto Serif TC", serif;
+    font-weight:400;
+    margin:0;
+  }
+  a{color:inherit; text-decoration:none;}
+  .uppercase{text-transform:uppercase; letter-spacing:1px;}
+  .small{font-size:11px;}
+  .center{text-align:center;}
+  .wrap{max-width:1400px; margin:0 auto; padding:0 30px;}
+
+  /* ---------- Header (sticky) ---------- */
+  header{
+    position: sticky;
+    top:0;
+    z-index:10;
+    background:var(--bg);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:20px 30px;
+    border-bottom:1px solid var(--line);
+  }
+  header .back{ }
+  header .title{font-size:12px; letter-spacing:1px; text-transform:uppercase;}
+  header .enquire{ }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding: var(--gap-lg) 30px var(--gap-md);
+    text-align:center;
+  }
+  .hero h1{
+    font-size: clamp(32px, 6vw, 64px);
+    letter-spacing:4px;
+    text-transform:uppercase;
+    opacity:0;
+    transform:translateY(20px);
+    transition: opacity 1s ease, transform 1s ease;
+  }
+  .hero .tagline{
+    margin-top:16px;
+    font-size:12px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:#666;
+  }
+  .hero .intro{
+    max-width:var(--max-text);
+    margin:30px auto 0;
+    font-size:18px;
+    line-height:1.6;
+  }
+
+  .hero-image{
+    margin-top:var(--gap-lg);
+    width:100%;
+    aspect-ratio: 16/9;
+    background:linear-gradient(135deg,#cfcac0,#8a8478);
+  }
+
+  /* ---------- Fade-in on scroll ---------- */
+  .fade-in{
+    opacity:0;
+    transform:translateY(30px);
+    transition: opacity .9s ease, transform .9s ease;
+  }
+  .fade-in.is-visible{
+    opacity:1;
+    transform:translateY(0);
+  }
+  .hero h1.is-visible{ opacity:1; transform:translateY(0); }
+  .delay-1{ transition-delay:.15s; }
+  .delay-2{ transition-delay:.3s; }
+
+  /* ---------- Section: overview (label + text grid) ---------- */
+  .overview{
+    display:grid;
+    grid-template-columns: 220px 1fr;
+    gap:var(--gap-md);
+    padding: var(--gap-lg) 30px;
+    border-top:1px solid var(--line);
+  }
+  .overview .label{
+    font-size:11px;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color:#666;
+  }
+  .overview .body p{
+    max-width:var(--max-text);
+    margin:0 0 20px;
+    line-height:1.7;
+  }
+
+  /* ---------- Image + text split rows ---------- */
+  .split-row{
+    display:flex;
+    gap:var(--gap-md);
+    padding: var(--gap-md) 30px;
+    align-items:center;
+  }
+  .split-row.reverse{ flex-direction:row-reverse; }
+  .split-row .col{ flex:1; }
+  .split-row .img-box{
+    aspect-ratio: 4/3;
+    background:linear-gradient(135deg,#d8d3c8,#a49c8c);
+  }
+  .split-row .text-box{
+    max-width:500px;
+    font-size:16px;
+    line-height:1.7;
+  }
+
+  /* ---------- Gallery (stacked full-width images) ---------- */
+  .gallery{
+    display:flex;
+    flex-direction:column;
+    gap:var(--gap-lg);
+    padding: var(--gap-lg) 30px;
+  }
+  .gallery .img-box{
+    width:100%;
+    aspect-ratio: 16/9;
+    background:linear-gradient(135deg,#c9c2b3,#78715f);
+  }
+
+  /* ---------- Meta info (Scope / Team / Share) ---------- */
+  .meta{
+    display:grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: var(--gap-md);
+    padding: var(--gap-lg) 30px;
+    border-top:1px solid var(--line);
+  }
+  .meta .block h3{
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    color:#666;
+    margin-bottom:16px;
+    font-family:inherit;
+  }
+  .meta .block .item{ margin-bottom:10px; }
+  .meta .block .item a{ border-bottom:1px solid var(--ink); }
+
+  /* ---------- More projects ---------- */
+  .more-projects{
+    padding: var(--gap-lg) 30px;
+    border-top:1px solid var(--line);
+  }
+  .more-projects h2{
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    margin-bottom:var(--gap-md);
+  }
+  .project-card{
+    position:relative;
+    width:100%;
+    aspect-ratio: 21/9;
+    background:linear-gradient(135deg,#3a332b,#1c1712);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-bottom:var(--gap-md);
+    overflow:hidden;
+  }
+  .project-card span{
+    color:#f5f5ed;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    font-size:20px;
+    transition: transform .5s ease;
+  }
+  .project-card:hover span{ transform:scale(1.05); }
+
+  /* ---------- Floating bottom pill nav ---------- */
+  .pill-nav{
+    position:fixed;
+    left:50%;
+    bottom:30px;
+    transform:translateX(-50%);
+    display:flex;
+    align-items:center;
+    gap:30px;
+    padding:12px 24px;
+    border-radius:30px;
+    background:var(--pill-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    font-size:11px;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    z-index:20;
+  }
+  .pill-nav .logo{ font-weight:600; letter-spacing:2px; }
+
+  /* ---------- Footer ---------- */
+  footer{
+    padding: var(--gap-lg) 30px calc(var(--gap-lg) + 80px);
+    border-top:1px solid var(--line);
+  }
+  footer h2{
+    font-size: clamp(36px, 8vw, 90px);
+    letter-spacing:2px;
+  }
+  footer .contact{
+    max-width:450px;
+    margin-top:var(--gap-md);
+    font-size:14px;
+    line-height:1.7;
+  }
+  footer .bottom-row{
+    display:flex;
+    justify-content:space-between;
+    margin-top:var(--gap-lg);
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    color:#666;
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 768px){
+    .overview{ grid-template-columns: 1fr; }
+    .split-row, .split-row.reverse{ flex-direction:column; }
+    .meta{ grid-template-columns: 1fr; gap:40px; }
+    .pill-nav{ gap:16px; padding:10px 18px; }
+  }
+</style>
+</head>
+<body>
+
+  <header>
+    <a class="back uppercase small" href="index.html">← 返回</a>
+    <div class="title">材料包草頁</div>
+    <a class="enquire uppercase small" href="index.html">離開草頁</a>
+  </header>
+
+  <section class="hero">
+    <h1 class="fade-in">Project Name</h1>
+    <div class="tagline fade-in delay-1">A Short Tagline Goes Here</div>
+    <p class="intro fade-in delay-2">
+      這裡放專案的簡短介紹文字,大約 2-3 行,置中對齊,
+      用來說明這個案子的核心概念與定位。
+    </p>
+    <div class="hero-image fade-in delay-2"></div>
+  </section>
+
+  <section class="overview">
+    <div class="label">
+      專案概述<br><span class="small">（閱讀時間 2 分鐘）</span>
+    </div>
+    <div class="body">
+      <p class="fade-in">第一段內文放在這裡,說明專案的核心理念與設計方向,可以分成好幾個段落依序呈現。</p>
+      <p class="fade-in">第二段內文,延續說明品牌策略或設計脈絡,段落之間保持適當留白與行高,閱讀起來會比較舒適。</p>
+      <p class="fade-in">第三段內文,可以放材質、字體、印刷工藝等細節說明。</p>
+    </div>
+  </section>
+
+  <div class="split-row">
+    <div class="col img-box fade-in"></div>
+    <div class="col text-box fade-in delay-1">
+      這裡放圖片旁邊搭配的說明文字,桌面版左右各半,手機版會自動堆疊成上下排列。
+    </div>
+  </div>
+
+  <div class="split-row reverse">
+    <div class="col img-box fade-in"></div>
+    <div class="col text-box fade-in delay-1">
+      這是第二組圖文區塊,左右順序相反,製造交錯的節奏感。
+    </div>
+  </div>
+
+  <section class="meta">
+    <div class="block fade-in">
+      <h3>Scope</h3>
+      <div class="item">品牌策略</div>
+      <div class="item">識別設計</div>
+      <div class="item">攝影</div>
+      <div class="item">網站</div>
+    </div>
+    <div class="block fade-in delay-1">
+      <h3>Team</h3>
+      <div class="item">客戶：<a href="#">客戶名稱</a></div>
+      <div class="item">攝影：<a href="#">工作室名稱</a></div>
+      <div class="item">印刷：<a href="#">印刷廠名稱</a></div>
+    </div>
+    <div class="block fade-in delay-2">
+      <h3>Share</h3>
+      <div class="item"><a href="#">Email</a></div>
+      <div class="item"><a href="#">簡訊</a></div>
+    </div>
+  </section>
+
+  <section class="gallery">
+    <div class="img-box fade-in"></div>
+    <div class="img-box fade-in"></div>
+    <div class="img-box fade-in"></div>
+  </section>
+
+  <section class="more-projects">
+    <h2>More Projects</h2>
+    <a class="project-card fade-in" href="#"><span>Project Two</span></a>
+    <a class="project-card fade-in delay-1" href="#"><span>Project Three</span></a>
+  </section>
+
+  <footer>
+    <h2 class="fade-in">STUDIO</h2>
+    <div class="contact fade-in delay-1">
+      我們與致力於打造卓越場所的開發商合作。請寄信至
+      <a href="mailto:hello@example.com">hello@example.com</a>
+    </div>
+    <div class="bottom-row">
+      <span>© Studio 2026</span>
+      <a href="#">Instagram</a>
+    </div>
+  </footer>
+
+  <nav class="pill-nav">
+    <a href="index.html">Work</a>
+    <span class="logo">STUDIO</span>
+    <a href="../index.html">首頁</a>
+  </nav>
+
+  <script>
+    // 捲動淡入動畫
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Hero 標題進場（頁面載入立即觸發一次）
+    window.addEventListener('load', () => {
+      document.querySelectorAll('.hero .fade-in').forEach(el => {
+        setTimeout(()=> el.classList.add('is-visible'), 100);
+      });
+    });
+  </script>
+
+</body>
+</html>
