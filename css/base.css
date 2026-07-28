@@ -15,10 +15,14 @@ html {
 }
 
 body {
-  /* 全站預設內文字型：跟 home.css 各元件目前逐一手動指定的字型堆疊一致，
-     這裡補一份 body 基準值，避免漏寫 font-family 的元素（例如商品頁內文）
-     直接落回瀏覽器預設的 serif（Times）。 */
-  font-family: "Helvetica Neue", Arial, "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", sans-serif;
+  /* 全站預設內文字型，對齊材料包母頁（products/index.html）的字型堆疊——
+     拿掉 PingFang TC／Microsoft JhengHei 這兩個系統字體，讓中文內文優先吃到
+     實際載入的 Noto Sans TC 網頁字型，不同作業系統上才會顯示同一款字，
+     不會 Mac 上是 PingFang TC、Windows 上是 Microsoft JhengHei，兩邊長得不一樣。
+     home.css 裡有些首頁專屬元件（側邊分頁、清單文字等）自己另外明確指定了
+     含 PingFang TC／Microsoft JhengHei 的舊堆疊，那些用自己的宣告，不會被
+     這裡的改動影響——首頁維持原本的字型選擇，不在這次對齊範圍內。 */
+  font-family: "Helvetica Neue", Arial, "Noto Sans TC", sans-serif;
   font-size: var(--font-size-base);
   line-height: 1.6;
   color: var(--color-text-primary);
