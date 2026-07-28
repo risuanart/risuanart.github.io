@@ -609,17 +609,18 @@
   display: flex;
   align-items: center;
   gap: var(--space-2);
-  border: 1px solid color-mix(in srgb, var(--color-text-secondary) 35%, transparent);
-  /* 沿用底部懸浮列（.pill-nav，見 home.css）同一個圓角數值，不是全站
-     方角卡片慣用的 --radius-sharp。 */
+  /* 沿用底部懸浮列（.pill-nav，見 home.css）同一種做法：不描邊框，
+     單純用底色跟圓角區隔出範圍，跟頁面背景本身有沒有邊框無關。 */
   border-radius: 10px;
   padding: 0 var(--space-3);
   background: var(--color-surface-light);
-  transition: border-color var(--duration-fast) var(--ease-standard);
+  transition: box-shadow var(--duration-fast) var(--ease-standard);
 }
 
+/* 沒有邊框可以變色，聚焦時改用一圈細陰影當作可視的聚焦提示，
+   維持鍵盤操作／無障礙可以看到目前聚焦在哪一格。 */
 .confirm-field__control:focus-within {
-  border-color: var(--color-text-primary);
+  box-shadow: 0 0 0 2px var(--color-text-primary);
 }
 
 .confirm-field__icon {
