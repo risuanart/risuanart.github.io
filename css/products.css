@@ -38,8 +38,9 @@
   overflow-y: auto;
   background: rgba(237, 230, 216, 0.68);
   /* 保留頂部列（.site-header，position:fixed）實際佔用的高度，避免內容一開始
-     就被蓋住，多留 --space-6 呼吸空間，不是緊貼在列的正下方。 */
-  padding-top: calc(var(--editorial-header-height) + var(--space-6));
+     就被蓋住，額外留白對齊母頁標題跟頂部列之間的實測間距（65px），
+     不是緊貼在列的正下方。 */
+  padding-top: calc(var(--editorial-header-height) + 69px);
   padding-bottom: var(--space-24);
   /* 左右安全邊界改用 --pad-h（跟母頁、.site-header、.pill-nav 同一組編輯式
      版面節奏 token，見 tokens.css），內容才會真的置中在螢幕正中間，
