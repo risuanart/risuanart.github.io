@@ -609,47 +609,48 @@ button.text-link {
   font-style: italic;
 }
 
-/* ---------- 加購項目：商品卡片樣式（照片＋名稱＋說明＋價格） ----------
-   加購的是「另一件商品」，不是條款清單裡的一個選項，改用商品卡片呈現
-   （照片＋價格），跟主商品的視覺語彙一致，讓使用者一眼看出這是可以加進
-   購物車的額外商品。整張卡片包在同一個 <label> 裡，點哪裡都能勾選／取消；
-   checkbox 本身視覺隱藏（但保留在 DOM 中間，維持原生鍵盤／輔助科技操作），
-   用 .addon-card__toggle 畫一個方形勾選框取代圓形 accent-color 打勾，
-   維持全站「不用圓角/圓形填色」的直角語彙。checked 狀態靠同層級的
-   ~ 兄弟選擇器驅動，不依賴 :has()。 */
-.addon-grid {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
+/* ---------- 加購項目：可往右滑的商品卡片列（圖上、字下） ----------
+   加購的是「另一件商品」，不是主商品身上勾選的附加選項——每張卡自己有一顆
+   「加入購物車」按鈕，按下去直接獨立加入購物車（不用先勾選、等主商品的
+   按鈕才一併加購）。這顆按鈕跟主商品共用同一套 data-add-to-cart／
+   initAddToCart() 邏輯（見 js/cart.js），data-product 指向這個加購項目
+   自己在 PRODUCTS 裡的商品鍵（hidden:true，不會出現在材料包總覽購物頁的
+   商品磚，那頁只列「真的獨立成一件商品」的品項）。
+   逃出 .product-page／.work 版面留白讓卡片列貼齊螢幕邊緣、可以往右滑，
+   手法跟 .pattern-carousel__track、.category-hero__track 同一套。 */
+.addon-carousel {
   margin-top: var(--space-4);
-  max-width: 46ch;
+}
+
+.addon-carousel__track {
+  display: flex;
+  gap: var(--space-3);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  margin-left: calc(-1 * var(--space-16));
+  margin-right: calc(-1 * var(--space-4));
+  padding: var(--space-1) 9vw var(--space-2);
+  scrollbar-width: none;
+}
+
+.addon-carousel__track::-webkit-scrollbar {
+  display: none;
 }
 
 .addon-card {
+  flex: 0 0 46vw;
+  max-width: 190px;
+  scroll-snap-align: start;
   display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  padding: var(--space-3);
+  flex-direction: column;
   border: 1px solid color-mix(in srgb, var(--color-text-secondary) 30%, transparent);
   border-radius: var(--radius-sharp);
-  cursor: pointer;
-}
-
-.addon-card__checkbox {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  opacity: 0;
-  pointer-events: none;
+  overflow: hidden;
 }
 
 .addon-card__thumb {
-  flex: none;
-  width: 25vw;
-  max-width: 84px;
   aspect-ratio: 1 / 1;
-  border-radius: var(--radius-sharp);
-  overflow: hidden;
 }
 
 .addon-card__thumb .placeholder-box {
@@ -660,67 +661,39 @@ button.text-link {
 }
 
 .addon-card__body {
-  flex: 1;
-  min-width: 0;
+  padding: var(--space-3) var(--space-3) 0;
   display: flex;
   flex-direction: column;
   gap: var(--space-1);
 }
 
 .addon-card__name {
+  margin: 0;
   font-size: var(--font-size-sm);
   font-weight: 700;
   color: var(--color-text-primary);
 }
 
 .addon-card__note {
+  margin: 0;
   font-size: var(--font-size-xs);
   line-height: 1.6;
   color: var(--color-text-secondary);
 }
 
 .addon-card__price {
-  margin-top: var(--space-1);
+  margin: var(--space-1) 0 0;
   font-size: var(--font-size-sm);
   font-variant-numeric: tabular-nums;
   color: var(--color-text-primary);
 }
 
-.addon-card__toggle {
-  flex: none;
-  width: 22px;
-  height: 22px;
-  border: 1px solid color-mix(in srgb, var(--color-text-secondary) 50%, transparent);
-  border-radius: var(--radius-sharp);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.7rem;
-  line-height: 1;
-  color: transparent;
-  transition: background var(--duration-fast) var(--ease-standard),
-    border-color var(--duration-fast) var(--ease-standard),
-    color var(--duration-fast) var(--ease-standard);
-}
-
-.addon-card__toggle::after {
-  content: "✓";
-}
-
-.addon-card__checkbox:checked ~ .addon-card__toggle {
-  background: var(--color-text-primary);
-  border-color: var(--color-text-primary);
-  color: var(--color-surface-light);
-}
-
-.addon-card__checkbox:focus-visible ~ .addon-card__toggle {
-  outline: 2px solid var(--color-text-primary);
-  outline-offset: 2px;
-}
-
-/* 加購摘要提示：即時反映在按鈕上方的「目前選擇」列，見 js/cart.js initAddOns()。 */
-.work__addon-hint {
-  color: var(--color-text-primary);
+/* 沿用全站唯一一顆「加入購物車」按鈕語彙（.work__cta--primary），只加寬度／
+   間距的覆寫，不重新定義顏色或字重——避免同一個動作在不同地方長得不一樣。 */
+.addon-card__cta {
+  width: auto;
+  margin: var(--space-3);
+  margin-top: auto;
 }
 
 /* ---------- 圖案選擇卡片網格（砂畫輕巧版 8 款自選／自由創作組 5 款固定展示） ----------

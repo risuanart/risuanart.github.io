@@ -222,8 +222,12 @@
 
     const { PRODUCTS, CATEGORY_ORDER, CATEGORY_LABELS } = cart;
 
+    // hidden: true 的品項（主商品頁「延伸創作」的加購項目，例如額外顏色沙）
+    // 不是訪客會在這頁單獨瀏覽選購的商品，跳過不建磚（見 js/cart.js PRODUCTS
+    // 註解）。
     const byCategory = new Map();
     Object.keys(PRODUCTS).forEach((key) => {
+      if (PRODUCTS[key].hidden) return;
       const cat = PRODUCTS[key].category || "other";
       if (!byCategory.has(cat)) byCategory.set(cat, []);
       byCategory.get(cat).push(key);

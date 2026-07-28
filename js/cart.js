@@ -28,11 +28,19 @@
   // 一句話標語，跟各商品敘事子頁 <p class="intro"> 的完整文案是各自獨立的
   // 兩段文字——這裡故意簡短（收合磚只有一行空間），不是那段文案的複製，
   // 兩處各自維護沒關係，改其中一處不影響另一處。
+  // hidden: true——加購項目本質上是「另一件商品」，用跟主商品完全相同的
+  // data-add-to-cart／initAddToCart() 機制獨立加入購物車（見各商品頁的
+  // .addon-card__cta），但不是訪客會在材料包總覽購物頁單獨瀏覽、選購的品項，
+  // 所以在 products-overview.js 組總覽卡片時要排除掉（見那支檔案 init()
+  // 開頭的 hidden 過濾），只在各自主商品頁的「延伸創作」區塊才看得到。
   const PRODUCTS = {
     "fluid-art-light": { name: "春聯流動畫材料包・輕巧版", price: 800, category: "fluid-art", tagline: "單幅 15cm，最快抵達的新年儀式" },
     "fluid-art-gift": { name: "春聯流動畫材料包・禮盒版", price: 1100, category: "fluid-art", tagline: "雙幅成品，完整的流動畫體驗" },
     "sand-art-light": { name: "春聯砂畫材料包・輕巧版", price: 0, category: "sand-art", tagline: "8 款圖案任選，撕貼倒沙鋪出你的春聯" },
     "sand-art-collection": { name: "春聯砂畫材料包・自由創作組", price: 0, category: "sand-art", hasVariant: false, tagline: "5 款精選圖案＋26色顏料，自由創作一整套" },
+    "fluid-art-canvas-kit": { name: "空白畫布＋字貼＋架高杯", price: 0, category: "fluid-art", hasVariant: false, hidden: true },
+    "sand-art-extra-color": { name: "額外顏色沙・固定套組", price: 0, category: "sand-art", hasVariant: false, hidden: true },
+    "sand-art-sticker-only": { name: "純貼紙加購・單款", price: 0, category: "sand-art", hasVariant: false, hidden: true },
   };
   const CATEGORY_LABELS = { "fluid-art": "春聯流動畫", "sand-art": "春聯砂畫" };
   // 購物車頁分組顯示的固定順序，不跟著「使用者先加哪一類商品」變動——不然同一個
@@ -61,37 +69,11 @@
     "fu-sheep": "福（羊群報福）",
   };
 
-  // 加購項目（補充性質，非獨立商品）。key 命名跟 HTML 裡 checkbox 的
-  // data-addon-key 對應（見 initAddOns）。
-  // TODO：price 都是還沒定案的佔位數字，價格確定後這裡跟商品頁上的「$__」都要改。
-  const ADD_ONS = {
-    "fluid-art-gift": [
-      { key: "canvas-kit", name: "空白畫布＋字貼＋架高杯", price: 0 },
-    ],
-    "sand-art-light": [
-      { key: "extra-sand", name: "額外顏色沙・單色", price: 0 },
-      { key: "sticker-only", name: "純貼紙加購・單款", price: 0 },
-    ],
-    "sand-art-collection": [
-      { key: "sticker-only", name: "純貼紙加購・單款", price: 0 },
-    ],
-  };
-
-  function findAddOn(productKey, addOnKey) {
-    const list = ADD_ONS[productKey] || [];
-    return list.find((a) => a.key === addOnKey);
-  }
-
-  // 單件商品含加購的單價／整行小計，購物車頁與迷你購物車預覽共用同一套計算，
+  // 單件商品的單價／整行小計，購物車頁與迷你購物車預覽共用同一套計算，
   // 避免兩處各自算一次、之後改價格漏改其中一處。
   function itemUnitPrice(item) {
     const product = PRODUCTS[item.productKey];
-    if (!product) return 0;
-    const addOnsTotal = (item.addOns || []).reduce((sum, key) => {
-      const addOn = findAddOn(item.productKey, key);
-      return sum + (addOn ? addOn.price : 0);
-    }, 0);
-    return product.price + addOnsTotal;
+    return product ? product.price : 0;
   }
 
   function itemLineTotal(item) {
@@ -152,19 +134,15 @@
     document.dispatchEvent(new CustomEvent("cart:updated"));
   }
 
-  // addOnKeys：目前勾選的加購項目 key 陣列（見 initAddToCart 怎麼讀取 checkbox
-  // 狀態）。id 把 addOns 也編進去，這樣「同商品同色系但加購不同」會是購物車裡
-  // 不同的兩筆，不會被誤合併成一筆卻遺失其中一邊的加購資訊。
-  function addItem(productKey, scheme, addOnKeys) {
+  function addItem(productKey, scheme) {
     if (!PRODUCTS[productKey]) return;
-    const addOns = Array.isArray(addOnKeys) ? [...addOnKeys].sort() : [];
     const items = readCart();
-    const id = [productKey, scheme, ...addOns].join("__");
+    const id = [productKey, scheme].join("__");
     const existing = items.find((i) => i.id === id);
     if (existing) {
       existing.qty += 1;
     } else {
-      items.push({ id, productKey, scheme, qty: 1, addOns });
+      items.push({ id, productKey, scheme, qty: 1 });
     }
     writeCart(items);
   }
@@ -192,7 +170,7 @@
     const item = items.find((i) => i.id === id);
     if (!item || item.scheme === newScheme) return;
 
-    const newId = [item.productKey, newScheme, ...(item.addOns || [])].join("__");
+    const newId = [item.productKey, newScheme].join("__");
     const existing = items.find((i) => i.id === newId);
     if (existing) {
       existing.qty += item.qty;
@@ -377,14 +355,6 @@
     update();
   }
 
-  // 目前頁面上勾選的加購項目 key 陣列（見 products/fluid-art-gift.html 的
-  // .addon-card__checkbox，data-addon-product 標明這個 checkbox 屬於哪個商品）。
-  function selectedAddOns(productKey) {
-    return Array.from(
-      document.querySelectorAll(`.addon-card__checkbox[data-addon-product="${productKey}"]:checked`)
-    ).map((el) => el.dataset.addonKey);
-  }
-
   // 商品頁「加入購物車」按鈕：讀取當下選中的色系 chip（跟 product-gallery.js
   // 共用同一批 .color-picker__chip，不用另外維護一份選色狀態）。按鈕內有圖示＋
   // 文字兩個子元素，「已加入」的暫時提示只換文字那個 span，圖示不會被蓋掉；
@@ -403,20 +373,12 @@
         // 內部 id 用的 scheme key，畫面上不顯示這個字，SCHEME_NAMES 也不會有
         // 對應項目，下面組文字時全部用「有沒有拿到色系名稱」判斷要不要顯示。
         const scheme = activeScheme(scope) || "default";
-        const addOnKeys = selectedAddOns(productKey);
-        addItem(productKey, scheme, addOnKeys);
+        addItem(productKey, scheme);
         playCartChime();
         pulseCartBadge();
         const product = PRODUCTS[productKey];
         const schemeName = SCHEME_NAMES[scheme] || "";
-        const addOnNames = addOnKeys
-          .map((key) => findAddOn(productKey, key))
-          .filter(Boolean)
-          .map((a) => a.name);
-        const detailParts = [];
-        if (schemeName) detailParts.push(schemeName);
-        if (addOnNames.length) detailParts.push(`＋${addOnNames.join("、")}`);
-        const detail = detailParts.length ? `（${detailParts.join("")}）` : "";
+        const detail = schemeName ? `（${schemeName}）` : "";
         showCartToast(`已加入：${product ? product.name : ""}${detail}`);
 
         label.textContent = "已加入 ✓";
@@ -425,21 +387,6 @@
           label.textContent = originalLabel;
           btn.disabled = false;
         }, 1200);
-      });
-    });
-  }
-
-  // 加購 checkbox 一勾選，按鈕上方的「目前選擇」摘要列立刻反映（見規格書第三章：
-  // 加購項目金額需在即時摘要列一併反映），不用等按下加入購物車才知道勾了什麼。
-  function initAddOns() {
-    const hints = document.querySelectorAll(".work__addon-hint");
-    if (!hints.length) return;
-
-    document.querySelectorAll(".addon-card__checkbox").forEach((checkbox) => {
-      checkbox.addEventListener("change", () => {
-        const productKey = checkbox.dataset.addonProduct;
-        const hasAny = selectedAddOns(productKey).length > 0;
-        hints.forEach((el) => (el.hidden = !hasAny));
       });
     });
   }
@@ -486,14 +433,9 @@
         const product = PRODUCTS[item.productKey];
         if (!product) return;
         const schemeName = SCHEME_NAMES[item.scheme] || "";
-        const addOnNames = (item.addOns || [])
-          .map((key) => findAddOn(item.productKey, key))
-          .filter(Boolean)
-          .map((a) => a.name);
         const metaParts = [];
         if (schemeName) metaParts.push(`${schemeName} × ${item.qty}`);
         else metaParts.push(`× ${item.qty}`);
-        if (addOnNames.length) metaParts.push(`＋${addOnNames.join("、")}`);
         const li = document.createElement("li");
         li.className = "cart-preview__item";
         li.innerHTML = `
@@ -559,16 +501,6 @@
           .map((key) => `<option value="${key}"${key === item.scheme ? " selected" : ""}>${SCHEME_NAMES[key] || key}</option>`)
           .join("")}</select>`
       : "";
-    // 加購子項目縮排顯示在主商品下方，數量跟著主商品一起走（不單獨調整），
-    // 標示為子項目而非獨立商品（見規格書第五章）。
-    const addOnLines = (item.addOns || [])
-      .map((key) => findAddOn(item.productKey, key))
-      .filter(Boolean)
-      .map(
-        (addOn) =>
-          `<li class="cart-item__addon">＋ ${addOn.name} × ${item.qty}<span>$${(addOn.price * item.qty).toLocaleString()}</span></li>`
-      )
-      .join("");
     li.innerHTML = `
       <a class="cart-item__thumb-link" href="${productUrl}">
         ${thumbHTML(item, "cart-item__thumb")}
@@ -589,7 +521,6 @@
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16"/><path d="M9 7V4h6v3"/><path d="M6 7l1 13h10l1-13"/></svg>
           </button>
         </div>
-        ${addOnLines ? `<ul class="cart-item__addons">${addOnLines}</ul>` : ""}
       </div>
     `;
     li.querySelector("[data-qty-decrease]").addEventListener("click", () => setQty(item.id, item.qty - 1));
@@ -657,7 +588,6 @@
   function init() {
     updateBadges();
     initColorHint();
-    initAddOns();
     initAddToCart();
     initCartPreview();
     renderCartPage();
@@ -685,7 +615,6 @@
           productKey: item.productKey,
           name: product ? product.name : item.productKey,
           schemeName: SCHEME_NAMES[item.scheme] || "",
-          addOns: item.addOns || [],
           qty: item.qty,
         };
       });
