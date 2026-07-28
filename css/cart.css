@@ -240,7 +240,7 @@
 
 .cart-group__title {
   margin: 0;
-  font-family: 'Fraunces', 'Noto Serif TC', serif;
+  font-family: Georgia, 'Playfair Display', 'Noto Serif TC', serif;
   font-weight: 600;
   font-size: var(--font-size-lg);
 }

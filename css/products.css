@@ -57,13 +57,16 @@
 
 .work-heading {
   margin: 0;
-  font-family: 'Fraunces', 'Noto Serif TC', serif;
+  font-family: Georgia, 'Playfair Display', 'Noto Serif TC', serif;
   font-weight: 600;
   /* clamp 而非固定斷點：跟首頁 .content-list 同一套「用 vw 連續縮放」慣例，
      手機到平板寬度之間字級平滑放大，不需要另外寫斷點。 */
   font-size: clamp(1.75rem, 1.3rem + 3vw, 2.75rem);
   line-height: 1.1;
   overflow-wrap: anywhere;
+  /* 字距跟材料包母頁（products/index.html）的大標題對齊，統一敘事子頁跟
+     母頁的編輯感。 */
+  letter-spacing: 0.04em;
 }
 
 .work-heading__sub {
@@ -179,7 +182,7 @@
    但份量明顯輕於 H1，避免搶走標題的視覺重量。 */
 .work-heading__price {
   margin: 0;
-  font-family: 'Fraunces', 'Noto Serif TC', serif;
+  font-family: Georgia, 'Playfair Display', 'Noto Serif TC', serif;
   font-weight: 600;
   font-size: var(--font-size-lg);
   color: var(--color-text-primary);
@@ -201,7 +204,7 @@
 
 .chapter__title {
   margin: 0;
-  font-family: 'Fraunces', 'Noto Serif TC', serif;
+  font-family: Georgia, 'Playfair Display', 'Noto Serif TC', serif;
   font-weight: 600;
   font-size: clamp(1.15rem, 1rem + 0.7vw, 1.375rem);
 }
@@ -277,7 +280,7 @@
 }
 
 .chapter__step-title {
-  font-family: 'Fraunces', 'Noto Serif TC', serif;
+  font-family: Georgia, 'Playfair Display', 'Noto Serif TC', serif;
   font-weight: 600;
   font-size: var(--font-size-lg);
 }
@@ -742,7 +745,7 @@ button.text-link {
 
 .pattern-card__name {
   margin: var(--space-1) 0 0;
-  font-family: 'Fraunces', 'Noto Serif TC', serif;
+  font-family: Georgia, 'Playfair Display', 'Noto Serif TC', serif;
   font-weight: 600;
   font-size: var(--font-size-sm);
   color: var(--color-text-primary);
@@ -770,12 +773,6 @@ button.text-link {
 .overview-page__intro {
   margin-top: var(--space-6);
   max-width: 56ch;
-}
-
-/* 標題留白／字距拉大一點，呼應參考站置中大標題的編輯感，只在這頁生效，
-   不影響敘事子頁既有的 .work-heading。 */
-.overview-page .work-heading .inner {
-  letter-spacing: 0.04em;
 }
 
 /* ---------- 捲動淡入：全站共用的極簡技巧，跟首頁 .content-list 同一套
@@ -862,7 +859,7 @@ button.text-link {
 
 .product-spread__name {
   margin: 0;
-  font-family: 'Fraunces', 'Noto Serif TC', serif;
+  font-family: Georgia, 'Playfair Display', 'Noto Serif TC', serif;
   font-weight: 600;
   font-size: var(--font-size-xl);
 }
@@ -893,7 +890,7 @@ button.text-link {
 
 .product-spread__price {
   margin: 0;
-  font-family: 'Fraunces', 'Noto Serif TC', serif;
+  font-family: Georgia, 'Playfair Display', 'Noto Serif TC', serif;
   font-weight: 600;
   font-size: var(--font-size-lg);
   font-variant-numeric: tabular-nums;
@@ -1138,7 +1135,7 @@ button.text-link {
 
 .faq-tier1__title {
   margin: 0;
-  font-family: 'Fraunces', 'Noto Serif TC', serif;
+  font-family: Georgia, 'Playfair Display', 'Noto Serif TC', serif;
   font-weight: 600;
   font-size: var(--font-size-lg);
   color: var(--color-text-primary);
@@ -1171,7 +1168,7 @@ button.text-link {
 
 .faq-tier2__title {
   margin: 0;
-  font-family: 'Fraunces', 'Noto Serif TC', serif;
+  font-family: Georgia, 'Playfair Display', 'Noto Serif TC', serif;
   font-weight: 600;
   font-size: var(--font-size-lg);
   color: var(--color-text-primary);
@@ -1203,7 +1200,7 @@ button.text-link {
 
 .faq-group__title {
   margin: 0;
-  font-family: 'Fraunces', 'Noto Serif TC', serif;
+  font-family: Georgia, 'Playfair Display', 'Noto Serif TC', serif;
   font-weight: 600;
   font-size: var(--font-size-lg);
 }
@@ -1360,7 +1357,7 @@ button.text-link {
 
 .work__price {
   margin: 0;
-  font-family: 'Fraunces', 'Noto Serif TC', serif;
+  font-family: Georgia, 'Playfair Display', 'Noto Serif TC', serif;
   font-weight: 600;
   font-size: var(--font-size-xl);
 }
@@ -1448,7 +1445,7 @@ button.text-link {
 .intro-hero__tagline {
   margin: 0;
   max-width: 30ch;
-  font-family: 'Fraunces', 'Noto Serif TC', serif;
+  font-family: Georgia, 'Playfair Display', 'Noto Serif TC', serif;
   font-weight: 500;
   font-size: clamp(1.3rem, 1.05rem + 1.2vw, 1.75rem);
   line-height: 1.55;
