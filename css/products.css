@@ -65,6 +65,14 @@
   transform: translateY(0);
 }
 
+/* 分批進場用的延遲階梯：標題區塊行數較多（標題／版本／日期／內文／色系／
+   縮圖／購買列），4 級比母頁 Hero 的 2 級（.delay-1／.delay-2）更細，
+   讓每一行有自己明顯的進場時間點，不是分成兩三團一起跳出來。 */
+.delay-1 { transition-delay: .12s; }
+.delay-2 { transition-delay: .24s; }
+.delay-3 { transition-delay: .36s; }
+.delay-4 { transition-delay: .48s; }
+
 /* ---------- 標題／簡介 ---------- */
 .work__intro {
   /* 對齊材料包母頁（products/index.html）的置中大標題排版，跟母頁像同一個
