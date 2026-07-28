@@ -1,9 +1,11 @@
-/* products-overview.js —— 材料包總覽購物頁（/products/index.html）專用：手風琴式
-   大圖磚，收合狀態只顯示代表照＋名稱＋一句話標語（參考 by-manifesto 那類大圖
-   作品集頁面的視覺語彙），點下去在同一頁往下展開完整內容（代表照＋規格選擇＋
-   套組亮點＋價格＋加入購物車＋連到完整介紹頁的連結），不用跳頁就能看到不同
-   材料包的重點資訊——跟四個敘事子頁並存，不取代，深入閱讀的訪客還是點得進
-   完整介紹頁。
+/* products-overview.js —— 材料包總覽購物頁（/products/index.html）專用。
+
+   2026-07-28 改版：參考 by-manifesto 案例頁的編輯式節奏（大留白、置中大標題、
+   滿版照片與敘事文字交替、捲動進場淡入），拿掉原本可滑動的分類大圖與手風琴
+   商品磚，改成由上往下的單一閱讀動線——每款商品是一個「小案例」區塊，內容
+   全部展開顯示（滿版照片→內含清單＋敘事文字→規格選擇→價格→加入購物車→
+   查看完整介紹連結），不用點開才看得到——跟四個敘事子頁並存，不取代，深入
+   閱讀的訪客還是點得進完整介紹頁。
 
    商品資料完全不在這裡另外定義，全部讀 window.RisuanCart（js/cart.js，
    PRODUCTS／VARIANT_OPTIONS／SCHEME_NAMES）、window.RisuanFluidArt
@@ -39,9 +41,9 @@
     return `<div class="placeholder-box placeholder-box--photo" aria-hidden="true">${PLACEHOLDER_PHOTO_ICON}<span class="placeholder-box__text">${text}</span></div>`;
   }
 
-  // 依商品類型取得「收合磚的代表照」與「展開後隨規格切換的代表照＋一句話
-  // 描述」，三種商品各自的資料來源不同（色系 vs 圖案 vs 固定組合），統一
-  // 包成同一個介面讓 buildTile() 不用分岔判斷太多次。
+  // 依商品類型取得「目前規格的代表照＋一句話描述」，三種商品各自的資料來源
+  // 不同（色系 vs 圖案 vs 固定組合），統一包成同一個介面讓 buildSpread() 不用
+  // 分岔判斷太多次。
   function getVariantPreview(key, schemeKey) {
     const fluidArt = window.RisuanFluidArt;
     const patterns = window.RisuanPatterns;
@@ -71,7 +73,9 @@
     };
   }
 
-  function buildTile(cart, key) {
+  // 每款商品一個「小案例」區塊：滿版照片→內含清單＋敘事文字→規格選擇／
+  // 價格／加入購物車→查看完整介紹連結。內容一律展開顯示，不做手風琴收合。
+  function buildSpread(cart, key) {
     const { PRODUCTS, VARIANT_OPTIONS, SCHEME_NAMES } = cart;
     const product = PRODUCTS[key];
     const variantKeys = product.hasVariant === false ? [] : VARIANT_OPTIONS[key] || [];
@@ -81,13 +85,11 @@
     const preview = getVariantPreview(key, defaultScheme);
 
     const article = document.createElement("article");
-    article.className = "shop-tile";
-    article.dataset.productCard = ""; // activeScheme() 掃描範圍用（跟總覽卡片一樣的機制）
-
-    const panelId = `shop-tile-panel-${key}`;
+    article.className = "product-spread reveal";
+    article.dataset.productCard = ""; // activeScheme() 掃描範圍用（跟原本手風琴磚一樣的機制）
 
     const selectHTML = variantKeys.length
-      ? `<select class="variant-select shop-tile__select" aria-label="選擇${product.name}的規格">${variantKeys
+      ? `<select class="variant-select product-spread__select" aria-label="選擇${product.name}的規格">${variantKeys
           .map((k) => `<option value="${k}">${SCHEME_NAMES[k] || k}</option>`)
           .join("")}</select>`
       : "";
@@ -97,120 +99,65 @@
       .join("");
 
     article.innerHTML = `
-      <button type="button" class="shop-tile__toggle" aria-expanded="false" aria-controls="${panelId}">
-        <span class="shop-tile__photo">${preview.photoHTML}</span>
-        <span class="shop-tile__meta">
-          <span class="shop-tile__name">${product.name}</span>
-          <span class="shop-tile__tagline">${product.tagline || ""}</span>
-        </span>
-      </button>
-      <div class="shop-tile__panel" id="${panelId}" hidden>
-        <div class="shop-tile__panel-inner">
-          <div class="shop-tile__panel-photo">${preview.photoHTML}</div>
-          <p class="shop-tile__panel-desc"></p>
-          <ul class="shop-tile__panel-kit">${kitHTML}</ul>
-          <div class="shop-tile__panel-buy">
-            ${selectHTML}
-            <p class="shop-tile__panel-price">${priceText}</p>
-            <button type="button" class="work__cta work__cta--primary shop-tile__panel-add" data-add-to-cart data-product="${key}">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
-              <span class="work__cta-label">加入購物車</span>
-            </button>
-          </div>
-          <a class="text-link shop-tile__panel-more" href="${productUrl}">查看完整介紹 →</a>
+      <div class="product-spread__photo">${preview.photoHTML}</div>
+      <div class="product-spread__info">
+        <div>
+          <p class="product-spread__label">內含</p>
+          <ul class="kit-list product-spread__kit">${kitHTML}</ul>
+        </div>
+        <div>
+          <h2 class="product-spread__name">${product.name}</h2>
+          <p class="product-spread__desc"></p>
+          <p class="product-spread__tagline">${product.tagline || ""}</p>
         </div>
       </div>
+      <div class="product-spread__buy">
+        ${selectHTML}
+        <p class="product-spread__price">${priceText}</p>
+        <button type="button" class="work__cta work__cta--primary product-spread__add" data-add-to-cart data-product="${key}">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+          <span class="work__cta-label">加入購物車</span>
+        </button>
+      </div>
+      <a class="text-link product-spread__more" href="${productUrl}">查看完整介紹 →</a>
     `;
 
-    const descEl = article.querySelector(".shop-tile__panel-desc");
+    const descEl = article.querySelector(".product-spread__desc");
     descEl.textContent = preview.desc;
 
-    // 規格切換時，展開內容的代表照／描述跟著換（跟收合磚的縮圖不同步——縮圖
-    // 固定顯示第一個規格，只有展開後才需要即時反應客人正在看哪一款）。
-    const select = article.querySelector(".shop-tile__select");
+    // 規格切換時，照片／描述跟著換（跟主商品敘事子頁的色系切換是同一套概念）。
+    const select = article.querySelector(".product-spread__select");
     if (select) {
-      const panelPhoto = article.querySelector(".shop-tile__panel-photo");
+      const photoEl = article.querySelector(".product-spread__photo");
       select.addEventListener("change", () => {
         const p = getVariantPreview(key, select.value);
         descEl.textContent = p.desc;
-        panelPhoto.innerHTML = p.photoHTML;
+        photoEl.innerHTML = p.photoHTML;
       });
     }
 
     return article;
   }
 
-  // 手風琴：整頁（跨兩個分類）同一時間只展開一張磚，展開另一張時先收合前一張
-  // ——維持「收合狀態可以一次瀏覽很多產品」的初衷，不會因為好幾張都展開而
-  // 變成一樣長的滑動頁。openTile 是模組層級變數（不是每個分類各自一份），
-  // 這樣春聯流動畫展開一張時，切去春聯砂畫展開另一張，前一張才會正確收合。
-  let openTile = null;
-
-  function wireAccordionTile(tile) {
-    const toggle = tile.querySelector(".shop-tile__toggle");
-    const panel = tile.querySelector(".shop-tile__panel");
-
-    toggle.addEventListener("click", () => {
-      const isOpen = toggle.getAttribute("aria-expanded") === "true";
-
-      if (openTile && openTile !== tile) {
-        openTile.querySelector(".shop-tile__toggle").setAttribute("aria-expanded", "false");
-        openTile.querySelector(".shop-tile__panel").hidden = true;
-      }
-
-      toggle.setAttribute("aria-expanded", String(!isOpen));
-      panel.hidden = isOpen;
-      openTile = isOpen ? null : tile;
-
-      if (!isOpen) {
-        tile.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-    });
-  }
-
-  function initCategoryHero() {
-    const hero = document.querySelector(".category-hero[data-category-hero]");
-    if (!hero) return;
-    const track = hero.querySelector(".category-hero__track");
-    const dotsWrap = hero.querySelector(".category-hero__dots");
-    const panels = Array.from(track.querySelectorAll(".category-hero__panel"));
-    if (!panels.length) return;
-
-    const dots = panels.map((panel, i) => {
-      const dot = document.createElement("button");
-      dot.type = "button";
-      dot.className = "category-hero__dot";
-      dot.setAttribute("aria-label", `跳到${panel.querySelector(".category-hero__name").textContent}`);
-      dot.setAttribute("aria-current", i === 0 ? "true" : "false");
-      dotsWrap.appendChild(dot);
-      return dot;
-    });
-
-    function markActive(i) {
-      dots.forEach((d, idx) => d.setAttribute("aria-current", String(idx === i)));
-    }
-
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  // 捲動進場淡入：跟首頁 .content-list 同一套「IntersectionObserver 加
+  // is-visible class」邏輯（見 css/home.css），套用在這頁所有 .reveal 元素
+  // 上（含靜態的標題／引言，以及這裡動態建出來的商品區塊）。一旦淡入就不用
+  // 再觀察，不會因為使用者上下滑動而反覆淡入淡出。
+  function initRevealAnimations() {
+    const targets = document.querySelectorAll(".reveal");
+    if (!targets.length) return;
     const observer = new IntersectionObserver(
       (entries) => {
-        const mostVisible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (mostVisible) markActive(panels.indexOf(mostVisible.target));
-      },
-      { root: track, threshold: [0.6] }
-    );
-    panels.forEach((panel) => observer.observe(panel));
-
-    dots.forEach((dot, i) => {
-      dot.addEventListener("click", () => {
-        panels[i].scrollIntoView({
-          behavior: prefersReducedMotion ? "auto" : "smooth",
-          inline: "center",
-          block: "nearest",
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
         });
-      });
-    });
+      },
+      { threshold: 0.15 }
+    );
+    targets.forEach((el) => observer.observe(el));
   }
 
   function init() {
@@ -218,13 +165,11 @@
     const grid = document.querySelector(".overview-grid");
     if (!cart || !grid || !window.RisuanFluidArt || !window.RisuanPatterns) return;
 
-    initCategoryHero();
-
     const { PRODUCTS, CATEGORY_ORDER, CATEGORY_LABELS } = cart;
 
     // hidden: true 的品項（主商品頁「延伸創作」的加購項目，例如額外顏色沙）
-    // 不是訪客會在這頁單獨瀏覽選購的商品，跳過不建磚（見 js/cart.js PRODUCTS
-    // 註解）。
+    // 不是訪客會在這頁單獨瀏覽選購的商品，跳過不建區塊（見 js/cart.js
+    // PRODUCTS 註解）。
     const byCategory = new Map();
     Object.keys(PRODUCTS).forEach((key) => {
       if (PRODUCTS[key].hidden) return;
@@ -241,24 +186,24 @@
       const section = document.createElement("section");
       section.className = "overview-group";
       section.id = `group-${cat}`;
-      section.setAttribute("aria-label", CATEGORY_LABELS[cat] || cat);
 
-      const tilesWrap = document.createElement("div");
-      tilesWrap.className = "shop-tiles";
+      const label = document.createElement("p");
+      label.className = "overview-group__label reveal";
+      label.textContent = CATEGORY_LABELS[cat] || cat;
+      section.appendChild(label);
+
       keys.forEach((key) => {
-        const tile = buildTile(cart, key);
-        tilesWrap.appendChild(tile);
-        wireAccordionTile(tile);
+        section.appendChild(buildSpread(cart, key));
       });
-      section.appendChild(tilesWrap);
 
       grid.appendChild(section);
     });
 
-    // 磚是剛剛才動態建出來的，cart.js 自己 init() 時掃過一次「加入購物車」
-    // 按鈕，那時候這些磚還不存在、掃不到——這裡重新呼叫一次同一支函式，
+    // 區塊是剛剛才動態建出來的，cart.js 自己 init() 時掃過一次「加入購物車」
+    // 按鈕，那時候這些區塊還不存在、掃不到——這裡重新呼叫一次同一支函式，
     // 讓新按鈕也掛上「加入購物車」的行為，不是另外寫一套判斷邏輯。
     cart.initAddToCart();
+    initRevealAnimations();
   }
 
   if (document.readyState === "loading") {

@@ -615,9 +615,9 @@ button.text-link {
    按鈕才一併加購）。這顆按鈕跟主商品共用同一套 data-add-to-cart／
    initAddToCart() 邏輯（見 js/cart.js），data-product 指向這個加購項目
    自己在 PRODUCTS 裡的商品鍵（hidden:true，不會出現在材料包總覽購物頁的
-   商品磚，那頁只列「真的獨立成一件商品」的品項）。
+   商品區塊，那頁只列「真的獨立成一件商品」的品項）。
    逃出 .product-page／.work 版面留白讓卡片列貼齊螢幕邊緣、可以往右滑，
-   手法跟 .pattern-carousel__track、.category-hero__track 同一套。 */
+   手法跟 .pattern-carousel__track 同一套。 */
 .addon-carousel {
   margin-top: var(--space-4);
 }
@@ -763,263 +763,135 @@ button.text-link {
 }
 
 /* ---------- 材料包總覽購物頁（/products/index.html） ----------
-   快速決策路徑：小卡片、緊湊呈現，不維持敘事子頁大量留白的節奏（見任務指令
-   視覺原則），但邊框／字級／圓角一樣引用全站既有變數，不做電商促銷式視覺
-   （不劃線比價、不倒數、不庫存告急）。 */
+   2026-07-28 改版：參考 by-manifesto 案例頁的編輯式節奏，拿掉可滑動分類
+   大圖與手風琴商品磚，改成由上往下的單一閱讀動線——標題留白拉大，每款
+   商品各自一個「小案例」區塊（滿版照片→內含清單＋敘事文字→規格/價格/
+   加入購物車→查看完整介紹連結），捲動進場淡入，不用點開才看得到內容。 */
 .overview-page__intro {
-  margin-top: var(--space-4);
+  margin-top: var(--space-6);
   max-width: 56ch;
 }
 
-/* ---------- 分類大圖（進總覽頁先滑過兩個分類各一張大圖） ----------
-   跟砂畫圖案選擇器（.pattern-carousel）同一套 scroll-snap 手勢＋索引點，
-   維持全站滑動元件手感一致，只是尺寸更大、內容是「分類」不是「圖案」。 */
-.category-hero {
-  margin-top: var(--space-8);
+/* 標題留白／字距拉大一點，呼應參考站置中大標題的編輯感，只在這頁生效，
+   不影響敘事子頁既有的 .work-heading。 */
+.overview-page .work-heading .inner {
+  letter-spacing: 0.04em;
 }
 
-.category-hero__track {
-  display: flex;
-  gap: var(--space-3);
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  /* 逃出 .product-page（左側固定 64px 側邊目錄留白）／.work（右側 16px）
-     的版面留白，讓大圖真的貼齊螢幕邊緣——原因見 .pattern-carousel__track
-     同樣的處理。 */
-  margin-left: calc(-1 * var(--space-16));
-  margin-right: calc(-1 * var(--space-4));
-  padding: var(--space-1) 9vw var(--space-2);
-  scrollbar-width: none;
+/* ---------- 捲動淡入：全站共用的極簡技巧，跟首頁 .content-list 同一套
+   「預設隱藏＋加 is-visible 切換」邏輯（見 css/home.css），只是這裡是
+   區塊級的位移（固定 --space-6），不是文字逐字的 em 位移。
+   IntersectionObserver 邏輯見 js/products-overview.js initRevealAnimations()。 */
+.reveal {
+  opacity: 0;
+  transform: translateY(var(--space-6));
+  transition: opacity var(--duration-slow) var(--ease-standard),
+    transform var(--duration-slow) var(--ease-standard);
 }
 
-.category-hero__track::-webkit-scrollbar {
-  display: none;
-}
-
-.category-hero__panel {
-  flex: 0 0 86vw;
-  max-width: 420px;
-  scroll-snap-align: center;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-  color: inherit;
-  transition: opacity var(--duration-fast) var(--ease-standard);
-}
-
-.category-hero__panel:active {
-  opacity: 0.85;
-}
-
-.category-hero__photo {
-  display: block;
-  aspect-ratio: 4 / 5;
-  border-radius: var(--radius-sharp);
-  overflow: hidden;
-}
-
-.category-hero__photo img,
-.category-hero__photo .placeholder-box {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.category-hero__name {
-  font-family: 'Fraunces', 'Noto Serif TC', serif;
-  font-weight: 600;
-  font-size: var(--font-size-lg);
-  color: var(--color-text-primary);
-}
-
-.category-hero__dots {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: var(--space-2);
-  margin-top: var(--space-3);
-}
-
-.category-hero__dot {
-  appearance: none;
-  border: none;
-  padding: 0;
-  width: 7px;
-  height: 7px;
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--color-text-secondary) 40%, transparent);
-  cursor: pointer;
-  transition: background var(--duration-fast) var(--ease-standard), transform var(--duration-fast) var(--ease-standard);
-}
-
-.category-hero__dot[aria-current="true"] {
-  background: var(--color-text-primary);
-  transform: scale(1.3);
-}
-
-.overview-group + .overview-group {
-  margin-top: var(--space-16);
-}
-
-.overview-group {
-  margin-top: var(--space-10);
-}
-
-.shop-tiles {
-  margin-top: 0;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-4);
-}
-
-/* ---------- 手風琴大圖磚 ----------
-   收合狀態只有代表照＋名稱＋一句話標語（參考 by-manifesto 那類大圖作品集頁面
-   的視覺語彙：大圖、極少文字），點下去往下展開完整摘要。同一時間只展開一張
-   （見 js/products-overview.js initAccordion()），維持「收合時可以一次瀏覽
-   很多產品」的初衷。 */
-.shop-tile {
-  border-bottom: 1px solid color-mix(in srgb, var(--color-text-secondary) 25%, transparent);
-}
-
-.shop-tile:first-child {
-  border-top: 1px solid color-mix(in srgb, var(--color-text-secondary) 25%, transparent);
-}
-
-.shop-tile__toggle {
-  appearance: none;
-  width: 100%;
-  border: none;
-  background: none;
-  padding: var(--space-4) 0;
-  display: flex;
-  align-items: center;
-  gap: var(--space-4);
-  text-align: left;
-  font-family: inherit;
-  color: inherit;
-  cursor: pointer;
-}
-
-.shop-tile__toggle:active {
-  opacity: 0.8;
-}
-
-.shop-tile__photo {
-  flex: none;
-  display: block;
-  width: 112px;
-  aspect-ratio: 4 / 5;
-  border-radius: var(--radius-sharp);
-  overflow: hidden;
-}
-
-.shop-tile__photo img,
-.shop-tile__photo .placeholder-box {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.shop-tile__photo .placeholder-box__text {
-  display: none; /* 收合磚縮圖太小放不下說明文字，只留圖示 */
-}
-
-.shop-tile__meta {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-1);
-}
-
-.shop-tile__name {
-  font-family: 'Fraunces', 'Noto Serif TC', serif;
-  font-weight: 600;
-  font-size: var(--font-size-lg);
-  color: var(--color-text-primary);
-}
-
-.shop-tile__tagline {
-  font-size: var(--font-size-xs);
-  color: var(--color-text-secondary);
-}
-
-/* 展開／收合：max-height 搭配 transition 做開合動畫，而非直接切換
-   hidden（見 [hidden] 那條規則），這樣才有滑順展開的動態，不是瞬間跳出來。
-   max-height 給一個遠大於實際內容高度的值即可，不用精算真正的內容高度。 */
-.shop-tile__panel {
-  overflow: hidden;
-  max-height: 0;
-  transition: max-height var(--duration-normal) var(--ease-standard);
-}
-
-.shop-tile__panel:not([hidden]) {
-  max-height: 2000px;
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .shop-tile__panel {
+  .reveal {
     transition: none;
   }
 }
 
-.shop-tile__panel-inner {
-  padding: 0 0 var(--space-6);
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: var(--space-4);
-  max-width: 46ch;
+.overview-group + .overview-group {
+  margin-top: var(--space-24);
 }
 
-.shop-tile__panel-photo {
-  width: 100%;
+.overview-group {
+  margin-top: var(--space-16);
+}
+
+/* 分類標籤：取代原本可滑動的分類大圖，變成小型大寫字距標籤，呼應參考站
+   SCOPE／TEAM 那類小標籤語彙。 */
+.overview-group__label {
+  margin: 0 0 var(--space-6);
+  font-size: var(--font-size-xs);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+}
+
+/* ---------- 商品小案例（取代原本的手風琴磚） ----------
+   每款商品內容全部展開顯示，不用點擊才看得到——參考站的閱讀節奏是「一路
+   往下滑」，不是「點開機關」。彼此之間用大留白＋細分隔線區隔，不做卡片
+   邊框容器。 */
+.product-spread + .product-spread {
+  margin-top: var(--space-24);
+  padding-top: var(--space-16);
+  border-top: 1px solid color-mix(in srgb, var(--color-text-secondary) 20%, transparent);
+}
+
+.product-spread__photo {
   aspect-ratio: 4 / 5;
-  max-width: 220px;
   border-radius: var(--radius-sharp);
   overflow: hidden;
+  /* 逃出 .product-page／.work 的版面留白讓照片貼齊螢幕邊緣（滿版大圖是
+     這次改版的核心視覺），手法跟 .pattern-carousel__track 同一套。 */
+  margin-left: calc(-1 * var(--space-16));
+  margin-right: calc(-1 * var(--space-4));
 }
 
-.shop-tile__panel-photo img,
-.shop-tile__panel-photo .placeholder-box {
+.product-spread__photo img,
+.product-spread__photo .placeholder-box {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.shop-tile__panel-desc {
-  margin: 0;
-  font-size: var(--font-size-sm);
-  line-height: 1.6;
-  color: var(--color-text-secondary);
-}
-
-.shop-tile__panel-kit {
-  margin: 0;
-  padding: 0;
-  list-style: none;
+.product-spread__info {
+  margin-top: var(--space-6);
   display: flex;
   flex-direction: column;
-  gap: var(--space-1);
+  gap: var(--space-6);
+}
+
+.product-spread__label {
+  margin: 0 0 var(--space-2);
   font-size: var(--font-size-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: var(--color-text-secondary);
 }
 
-.shop-tile__panel-kit li {
-  display: flex;
-  gap: var(--space-2);
+.product-spread__name {
+  margin: 0;
+  font-family: 'Fraunces', 'Noto Serif TC', serif;
+  font-weight: 600;
+  font-size: var(--font-size-xl);
 }
 
-.shop-tile__panel-buy {
-  width: 100%;
+.product-spread__desc {
+  margin: var(--space-2) 0 0;
+  max-width: 46ch;
+  font-size: var(--font-size-base);
+  line-height: 1.7;
+  color: var(--color-text-primary);
+}
+
+.product-spread__tagline {
+  margin: var(--space-2) 0 0;
+  max-width: 46ch;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.product-spread__buy {
+  margin-top: var(--space-6);
+  max-width: 32ch;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: var(--space-2);
 }
 
-.shop-tile__panel-price {
+.product-spread__price {
   margin: 0;
   font-family: 'Fraunces', 'Noto Serif TC', serif;
   font-weight: 600;
@@ -1027,8 +899,14 @@ button.text-link {
   font-variant-numeric: tabular-nums;
 }
 
-.shop-tile__panel-add {
+.product-spread__add {
   width: 100%;
+}
+
+.product-spread__more {
+  display: inline-block;
+  margin-top: var(--space-4);
+  font-size: var(--font-size-sm);
 }
 
 /* 規格下拉：跟結帳表單輸入框（.confirm-field input）同一套「有邊框的方塊」
@@ -1055,19 +933,6 @@ button.text-link {
 .variant-select:focus {
   outline: none;
   border-color: var(--color-text-primary);
-}
-
-.overview-card__price {
-  margin: 0;
-  font-family: 'Fraunces', 'Noto Serif TC', serif;
-  font-weight: 600;
-  font-size: var(--font-size-lg);
-  font-variant-numeric: tabular-nums;
-}
-
-.overview-card__add {
-  width: 100%;
-  margin-top: var(--space-1);
 }
 
 .overview-page__back-link {

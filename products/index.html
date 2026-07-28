@@ -55,39 +55,19 @@
   <main class="product-page overview-page work">
 
     <header class="work__intro">
-      <h1 class="work-heading"><span class="inner">材料包</span></h1>
-      <div class="chapter__prose overview-page__intro">
+      <h1 class="work-heading reveal"><span class="inner">材料包</span></h1>
+      <div class="chapter__prose overview-page__intro reveal">
         <p>一份禮，不只迎新，也留住一段節氣的美好。</p>
         <p>如果你已經對制式的新春禮盒提不起興趣，<br>今年，換一種方式迎接新年。</p>
         <p>我們把傳統工藝與手作結合，推出在家就能完成的材料包，<br>不論是自己嘗試，或是與家人朋友一起，<br>都能做出一幅屬於這個新年的作品。</p>
       </div>
     </header>
 
-    <!-- 分類大圖：進頁面先滑過兩個分類各一張大圖（跟圖案選擇器同一套
-         scroll-snap 手勢），點下去／滑到底會直接跳到下面對應分類的商品卡
-         （id 由 js/products-overview.js 建立卡片區塊時一併加上）。 -->
-    <div class="category-hero" data-category-hero>
-      <div class="category-hero__track">
-        <a class="category-hero__panel" href="#group-fluid-art" data-category="fluid-art">
-          <span class="category-hero__photo">
-            <img src="../assets/images/products/fluid-art/RS+_04.1_產品主圖_800x800拷貝.jpg" alt="春聯流動畫材料包成品" loading="lazy">
-          </span>
-          <span class="category-hero__name">春聯流動畫</span>
-        </a>
-        <a class="category-hero__panel" href="#group-sand-art" data-category="sand-art">
-          <span class="category-hero__photo">
-            <span class="placeholder-box placeholder-box--photo" aria-hidden="true"><svg class="placeholder-box__icon" viewBox="0 0 24 24" width="1.8em" height="1.8em" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1.5"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 16l-5.5-5.5a1 1 0 0 0-1.4 0L6 19"/></svg><span class="placeholder-box__text">建議拍攝：砂畫成品意象照，呼應「春聯砂畫」分類</span></span>
-          </span>
-          <span class="category-hero__name">春聯砂畫</span>
-        </a>
-      </div>
-      <div class="category-hero__dots"></div>
-    </div>
-
-    <!-- 手風琴大圖磚：由 js/products-overview.js 動態產生，收合狀態只顯示
-         代表照＋名稱＋一句話標語，點下去在同一頁展開完整摘要（不用跳頁就能
-         看完 4 款材料包的重點）。資料直接讀 window.RisuanCart（js/cart.js）、
-         window.RisuanFluidArt（js/product-gallery.js）、window.RisuanPatterns
+    <!-- 商品區塊：由 js/products-overview.js 動態產生，每款商品一個「小案例」
+         區塊，內容全部展開顯示（滿版照片→內含清單＋敘事文字→規格選擇→價格→
+         加入購物車→查看完整介紹連結），不用點開才看得到。資料直接讀
+         window.RisuanCart（js/cart.js）、window.RisuanFluidArt
+         （js/product-gallery.js）、window.RisuanPatterns
          （js/sand-art-gallery.js），不建立第二套商品資料。 -->
     <div class="overview-grid"></div>
 
@@ -95,10 +75,10 @@
          仍可無縫接回敘事路徑（見任務指令二、①）；下單／付款／出貨相關的
          常見問題單獨移到 faq.html，從這裡連過去，不佔用側邊選單的
          「常見問題」分頁（那個現在留給來畫室上課的常見問題用）。 -->
-    <p class="overview-page__back-link">
+    <p class="overview-page__back-link reveal">
       想了解更多？看看<a class="text-link" href="fluid-art-intro.html">春聯流動畫</a>與<a class="text-link" href="sand-art-intro.html">春聯砂畫</a>的故事 →
     </p>
-    <p class="overview-page__back-link">
+    <p class="overview-page__back-link reveal">
       對下單、付款、出貨有疑問？看看<a class="text-link" href="faq.html">材料包常見問題</a> →
     </p>
 
