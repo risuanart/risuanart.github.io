@@ -51,14 +51,27 @@
       <h1 class="work-heading fade-in"><span class="inner">您的購物車</span></h1>
     </header>
 
-    <!-- 購物車編輯畫面。按「結帳」之後，這一整塊會被藏起來，改顯示下面
+    <!-- 購物車編輯畫面。按「結帳」之後，這一整塊會收合成一條「確認訂單詳情
+         ＋金額」的橫條（點一下可以再展開回去確認／修改內容），下面接著展開
          #order-confirm-view 那塊（同一頁往下展開，不再跳轉到另一個頁面）。
          如果網址上已經帶著 orderId（例如從綠界電子地圖選店回來），一開始
-         就直接隱藏這塊、跳去顯示確認區塊，見 js/checkout.js。
+         就直接收合這塊、跳去顯示確認區塊，見 js/checkout.js。
+
+         用原生 <details>／<summary>：展開收合、鍵盤操作、無障礙狀態都交給
+         瀏覽器內建行為。還沒結帳前 details 維持 open 且 summary 橫條隱藏
+         （這時候購物車就是主畫面，不需要收合），結帳後才把 summary 顯示
+         出來並收起內容。
+
          結帳確認區塊（#order-confirm-view）不套用捲動淡入——那是逐步展開
          的表單流程，切換步驟當下就該立即顯示，不需要跟敘事類頁面一樣
          等捲動淡入。 -->
-    <div id="cart-edit-view">
+    <details id="cart-edit-view" open>
+      <summary class="cart-collapse" hidden>
+        <span class="cart-collapse__label">確認訂單詳情</span>
+        <span class="cart-collapse__total"></span>
+        <svg class="cart-collapse__chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+      </summary>
+
       <section class="chapter fade-in delay-1">
         <div class="cart-columns" hidden>
           <span>商品</span>
@@ -83,7 +96,7 @@
         </div>
         <button type="button" class="work__cta work__cta--primary" data-checkout-cta disabled>結帳</button>
       </footer>
-    </div>
+    </details>
 
     <!-- 結帳確認區塊：選送貨方式、填收件資訊，最後送出到綠界付款頁。
          內容跟欄位配置沿用原本 checkout-confirm.html 的設計，只是現在跟
@@ -100,20 +113,10 @@
       </section>
 
       <div id="confirm-content" class="order-confirm-box" hidden>
-        <!-- 收合式清單：預設收起，只留一行標題＋件數／小計，按了才展開完整
-             品項清單——這區塊只是回顧，不是要填的步驟，收合節省一開始的
-             垂直空間。用原生 <details>／<summary>，展開收合、鍵盤操作、
-             無障礙狀態都交給瀏覽器內建行為，不用自己刻。 -->
-        <details class="chapter">
-          <summary class="chapter__title confirm-summary">
-            <span class="confirm-summary__label">你選購的商品</span>
-            <span class="confirm-summary__meta" id="confirm-summary-meta"></span>
-            <svg class="confirm-summary__chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-          </summary>
-          <ul class="confirm-items"></ul>
-          <p class="confirm-subtotal"></p>
-        </details>
-
+        <!-- 這裡原本還有一段收合式的「你選購的商品」清單，但購物車編輯區
+             本身結帳後就收合成「確認訂單詳情」橫條、點開就是同一批商品
+             （而且還多了縮圖跟可直接調整的數量），兩個收合清單並排等於
+             同一件事講兩次，所以移除，只留上面那一條。 -->
         <!-- 送貨方式：還沒選的話顯示兩個選項；超商取貨會整頁導去綠界電子地圖，
              選完店綠界會把瀏覽器導回這一頁（帶著 orderId）；宅配到府不用離開
              這頁，直接在下面顯示地址欄位。兩條路最後都在同一個 <form> 送出

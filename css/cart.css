@@ -233,6 +233,56 @@
   transition: opacity 1s var(--ease-standard), transform 1s var(--ease-standard);
 }
 
+/* 結帳後把整個購物車編輯區收合成的橫條：左邊「確認訂單詳情」、右邊金額，
+   最右一個箭頭指出可以再展開回去確認／修改。結帳前這條是隱藏的（購物車
+   本身就是主畫面，不需要收合）。 */
+.cart-collapse {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-6);
+  padding: var(--space-4);
+  border-radius: 10px;
+  background: var(--color-surface-light);
+  cursor: pointer;
+  list-style: none;
+}
+
+.cart-collapse::-webkit-details-marker {
+  display: none;
+}
+
+/* summary 預設 display:list-item，上面改成 flex 之後同樣會蓋掉瀏覽器內建的
+   [hidden]{display:none}，這裡明確補回來。 */
+.cart-collapse[hidden] {
+  display: none;
+}
+
+.cart-collapse__label {
+  flex: 1;
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.cart-collapse__total {
+  flex: none;
+  font-family: Georgia, 'Playfair Display', serif;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.cart-collapse__chevron {
+  flex: none;
+  color: var(--color-text-secondary);
+  transition: transform var(--duration-fast) var(--ease-standard);
+}
+
+details[open] > .cart-collapse .cart-collapse__chevron {
+  transform: rotate(180deg);
+}
+
 /* ---------- 購物車清單：依大分類分組 ---------- */
 .cart-group + .cart-group {
   margin-top: var(--space-16);
@@ -519,48 +569,6 @@
   margin-top: var(--space-8);
 }
 
-.confirm-items {
-  margin: var(--space-4) 0 0;
-  padding: 0;
-  list-style: none;
-  max-width: 50ch;
-}
-
-.confirm-item {
-  display: flex;
-  justify-content: space-between;
-  gap: var(--space-4);
-  padding: var(--space-2) 0;
-  border-top: 1px solid color-mix(in srgb, var(--color-text-secondary) 20%, transparent);
-  font-size: var(--font-size-sm);
-}
-
-.confirm-item:first-child {
-  border-top: none;
-}
-
-.confirm-item__price {
-  flex: none;
-  font-variant-numeric: tabular-nums;
-}
-
-/* 「× 1」這種數量標記不要在「×」跟數字中間被硬拆到下一行去，寧可整組
-   一起換行，也不要留一個孤零零的數字吊在那裡。 */
-.confirm-item__qty {
-  white-space: nowrap;
-}
-
-.confirm-subtotal {
-  margin: 0;
-  padding-top: var(--space-2);
-  border-top: 1px solid color-mix(in srgb, var(--color-text-secondary) 25%, transparent);
-  text-align: right;
-  font-size: var(--font-size-sm);
-  color: var(--color-text-secondary);
-  font-variant-numeric: tabular-nums;
-  max-width: 50ch;
-}
-
 .confirm-total {
   margin: 0 0 var(--space-4);
   text-align: right;
@@ -613,43 +621,6 @@
   margin: 0;
   font-size: var(--font-size-xs);
   color: var(--color-text-secondary);
-}
-
-/* 「你選購的商品」收合區：summary 取代原本純文字的 <h2>，左邊標題、
-   中間件數／小計提示、右邊箭頭，箭頭方向隨展開狀態轉向。 */
-.confirm-summary {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-  cursor: pointer;
-  list-style: none;
-}
-
-.confirm-summary::-webkit-details-marker {
-  display: none;
-}
-
-.confirm-summary__label {
-  flex: 1;
-}
-
-.confirm-summary__meta {
-  flex: none;
-  font-family: Georgia, 'Playfair Display', serif;
-  font-weight: 400;
-  font-size: var(--font-size-xs);
-  color: var(--color-text-secondary);
-  font-variant-numeric: tabular-nums;
-}
-
-.confirm-summary__chevron {
-  flex: none;
-  color: var(--color-text-secondary);
-  transition: transform var(--duration-fast) var(--ease-standard);
-}
-
-details[open] > .confirm-summary .confirm-summary__chevron {
-  transform: rotate(180deg);
 }
 
 /* ---------- 送貨方式選擇（超商取貨／宅配到府）----------

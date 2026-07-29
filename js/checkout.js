@@ -31,6 +31,20 @@
   const checkoutBtn = document.querySelector("[data-checkout-cta]");
   const checkoutErrorEl = document.querySelector(".checkout-error");
 
+  // 結帳後把整個購物車編輯區收合成一條「確認訂單詳情＋金額」的橫條；
+  // 還沒結帳前橫條是隱藏的、內容維持展開（購物車本身就是主畫面）。
+  const cartCollapseBar = cartEditView.querySelector(".cart-collapse");
+  const cartCollapseTotal = cartEditView.querySelector(".cart-collapse__total");
+  function collapseCartEditView(total) {
+    cartCollapseBar.hidden = false;
+    cartCollapseTotal.textContent = formatMoney(total);
+    cartEditView.open = false;
+  }
+  function expandCartEditView() {
+    cartCollapseBar.hidden = true;
+    cartEditView.open = true;
+  }
+
   const loadingEl = document.getElementById("confirm-loading");
   const errorEl = document.getElementById("confirm-error");
   const contentEl = document.getElementById("confirm-content");
@@ -123,6 +137,7 @@
 
   function showCartEditView() {
     confirmView.hidden = true;
+    expandCartEditView();
     if (new URLSearchParams(window.location.search).has("orderId")) {
       history.pushState(null, "", "cart.html");
     }
@@ -214,24 +229,6 @@
       return;
     }
 
-    const list = document.querySelector(".confirm-items");
-    list.innerHTML = "";
-    order.items.forEach((item) => {
-      const li = document.createElement("li");
-      li.className = "confirm-item";
-      const addonText = item.addOns && item.addOns.length ? `　＋加購 ${item.addOns.length} 項` : "";
-      li.innerHTML = `
-        <span class="confirm-item__name">${item.name}${item.schemeName ? `・${item.schemeName}` : ""} <span class="confirm-item__qty">× ${item.qty}</span>${addonText}</span>
-        <span class="confirm-item__price">${formatMoney(item.lineTotal)}</span>
-      `;
-      list.appendChild(li);
-    });
-    document.querySelector(".confirm-subtotal").textContent = `商品小計 ${formatMoney(order.itemsTotal)}`;
-    // 收合區塊摺起來時，標題旁邊還是要看得到件數／小計，不用展開才知道
-    // 訂單大概多少錢。
-    const totalQty = order.items.reduce((sum, item) => sum + item.qty, 0);
-    document.getElementById("confirm-summary-meta").textContent = `${totalQty} 件・${formatMoney(order.itemsTotal)}`;
-
     document.getElementById("confirm-order-id").value = order.orderId;
     shippingCvsLink.href = `${CHECKOUT_API_BASE}/api/logistics-map?orderId=${encodeURIComponent(order.orderId)}`;
     form.action = `${CHECKOUT_API_BASE}/api/create-order`;
@@ -244,6 +241,9 @@
 
     loadingEl.hidden = true;
     contentEl.hidden = false;
+    // 訂單已經建立起來了，購物車編輯區收合成一條橫條，把畫面讓給下面的
+    // 送貨方式／收件資料；要回頭確認或修改內容，點那條橫條就會再展開。
+    collapseCartEditView(order.itemsTotal);
     // 內容整個渲染完成、高度定型之後才捲動，直接把「送貨方式」帶到畫面
     // 最上面（而不是整個 order-confirm-view 的頂端，那前面還有一段收合
     // 起來的「你選購的商品」）。
