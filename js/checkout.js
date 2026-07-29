@@ -38,6 +38,7 @@
   const customerSection = document.getElementById("customer-section");
   const backToCartBtn = document.getElementById("confirm-back-to-cart");
 
+  const shippingSection = document.getElementById("shipping-section");
   const shippingCvsLink = document.getElementById("shipping-cvs-link");
   const shippingHomeBtn = document.getElementById("shipping-home-btn");
   const confirmStoreEl = document.querySelector(".confirm-store");
@@ -76,11 +77,14 @@
   // 往上滑就是原本的購物車，不是被帶去了別的地方。只有「從隱藏變成顯示」
   // 的那一刻才捲動——之後客人在購物車那邊調整數量觸發 scheduleResync()
   // 重新整理確認區塊時，如果每次都硬把畫面捲回去，反而會打斷客人正在
-  // 操作購物車的捲動位置。
+  // 操作購物車的捲動位置。回傳 wasHidden 給呼叫端決定捲動時機，不在這裡
+  // 立刻捲——這時候確認區塊裡還只有「正在載入訂單內容…」那一行 placeholder，
+  // 真正的內容（送貨方式、收件資訊）都還沒渲染出來，現在捲只會捲到
+  // placeholder 的位置，等內容載入完、整塊長高之後，畫面反而停在半山腰。
   function showConfirmView() {
     const wasHidden = confirmView.hidden;
     confirmView.hidden = false;
-    if (wasHidden) confirmView.scrollIntoView({ behavior: "smooth", block: "start" });
+    return wasHidden;
   }
 
   function showConfirmError(message) {
@@ -136,7 +140,7 @@
   let isHomeConfirmed = false;
 
   async function loadAndShowConfirm(orderId) {
-    showConfirmView();
+    const wasHidden = showConfirmView();
     loadingEl.hidden = false;
     errorEl.hidden = true;
     contentEl.hidden = true;
@@ -148,6 +152,7 @@
       if (!res.ok) throw new Error(order.error || "找不到這筆訂單");
     } catch (err) {
       showConfirmError(`讀取訂單失敗：${err.message}`);
+      if (wasHidden) confirmView.scrollIntoView({ behavior: "smooth", block: "start" });
       return;
     }
 
@@ -181,6 +186,10 @@
 
     loadingEl.hidden = true;
     contentEl.hidden = false;
+    // 內容整個渲染完成、高度定型之後才捲動，直接把「送貨方式」帶到畫面
+    // 最上面（而不是整個 order-confirm-view 的頂端，那前面還有一段收合
+    // 起來的「你選購的商品」）。
+    if (wasHidden) shippingSection.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
   // 點「宅配到府」按鈕：不管目前是哪種狀態（還沒選／已選超商門市），
