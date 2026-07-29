@@ -1023,6 +1023,14 @@
   gap: var(--space-4);
 }
 
+/* 自己宣告了 display:flex，會蓋掉瀏覽器內建的 [hidden]{display:none}——
+   這份檔案裡好幾處同成因的修正，這裡補上明確覆蓋。少了這條，#receiver-section
+   即使掛著 hidden 屬性（還沒選送貨方式前就是這樣）還是會整個顯示出來。 */
+#customer-section[hidden],
+#receiver-section[hidden] {
+  display: none;
+}
+
 /* #receiver-fields／#home-address-fields 本身只是純 <div>（不是外層
    flex 容器的直接子項自己不會自動排列），裡面的欄位原本完全沒有間距，
    會黏在一起——這裡補上跟外層一致的 flex＋gap。 */

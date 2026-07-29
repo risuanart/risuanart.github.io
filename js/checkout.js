@@ -168,7 +168,7 @@
   const errorEl = document.getElementById("confirm-error");
   const contentEl = document.getElementById("confirm-content");
   const form = document.getElementById("confirm-form");
-  const customerSection = document.getElementById("customer-section");
+  const confirmPayEl = document.querySelector(".confirm-pay");
   const backToCartBtn = document.getElementById("confirm-back-to-cart");
 
   const shippingSection = document.getElementById("shipping-section");
@@ -311,8 +311,12 @@
     receiverAddressInput.required = method === "home";
 
     syncPickupModeControls(method);
-    customerSection.hidden = !method;
+    // 聯絡資訊不依賴送貨方式，一開始就能填，不用等選完送貨方式才出現
+    // （customerSection 一直是可見的，不隨 method 切換）。收件資料要看
+    // 送貨方式才知道該問「取貨」還是「地址」，維持原本要選了才出現；
+    // 小計／送出按鈕同理，沒有 method 就沒有運費可以算，不該讓人送出。
     receiverSection.hidden = !method;
+    confirmPayEl.hidden = !method;
     currentShippingMethod = method;
     // 面板正開著的時候換送貨方式（例如點「宅配到府」），運費／總金額
     // 要立刻跟著更新，不能等下次重新打開才對。
