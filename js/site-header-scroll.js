@@ -21,8 +21,12 @@
 
   // 左上角「← 返回」預設回到瀏覽器上一頁，不要一律直接跳回首頁——
   // href 保留首頁連結當作沒有上一頁時（例如從外部連結直接開啟）的備援。
+  // 有 data-back-fixed 的頁面（目前只有購物車頁）不套用這個行為，維持
+  // 單純的 <a href>——購物車結帳流程會整頁導去綠界電子地圖選門市再導回來，
+  // history.back() 這時候會回到綠界那個頁面，該頁常常已經過期／不給快取，
+  // 點回去會出現 ERR_CACHE_MISS，不如固定回材料包母頁。
   const backLink = header.querySelector(".site-header__back");
-  if (backLink) {
+  if (backLink && !backLink.hasAttribute("data-back-fixed")) {
     backLink.addEventListener("click", (e) => {
       if (window.history.length > 1) {
         e.preventDefault();

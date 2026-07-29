@@ -241,13 +241,24 @@
     pickupModePicker.hidden = !isCvs;
     receiverSameRow.hidden = isCvs;
   }
+  // 超商取貨選「我會自行取貨」時，收件資料整區跳過（customerName／Phone／
+  // Email 已經鏡射進 receiverName 等欄位一起送出，見
+  // syncReceiverSameAsCustomer()，不用再讓客人填一次）；選「委託他人代為
+  // 取貨」才出現「③收件資料」讓客人填別人的資料。宅配到府不受這個影響，
+  // 一律都要收件資料（地址一定要問）。
+  function updateReceiverSectionVisibility() {
+    const skipForSelfPickup = currentShippingMethod === "cvs" && pickupModeSelf.checked;
+    receiverSection.hidden = !currentShippingMethod || skipForSelfPickup;
+  }
   pickupModeSelf.addEventListener("change", () => {
     receiverSameCheckbox.checked = true;
     syncReceiverSameAsCustomer();
+    updateReceiverSectionVisibility();
   });
   pickupModeOther.addEventListener("change", () => {
     receiverSameCheckbox.checked = false;
     syncReceiverSameAsCustomer();
+    updateReceiverSectionVisibility();
   });
 
   function formatMoney(n) {
@@ -311,13 +322,14 @@
     receiverAddressInput.required = method === "home";
 
     syncPickupModeControls(method);
+    currentShippingMethod = method;
     // 聯絡資訊不依賴送貨方式，一開始就能填，不用等選完送貨方式才出現
     // （customerSection 一直是可見的，不隨 method 切換）。收件資料要看
-    // 送貨方式才知道該問「取貨」還是「地址」，維持原本要選了才出現；
-    // 小計／送出按鈕同理，沒有 method 就沒有運費可以算，不該讓人送出。
-    receiverSection.hidden = !method;
+    // 送貨方式跟取貨方式才知道該不該出現（見
+    // updateReceiverSectionVisibility()）；小計／送出按鈕沒有 method 就
+    // 沒有運費可以算，不該讓人送出。
+    updateReceiverSectionVisibility();
     confirmPayEl.hidden = !method;
-    currentShippingMethod = method;
     // 面板正開著的時候換送貨方式（例如點「宅配到府」），運費／總金額
     // 要立刻跟著更新，不能等下次重新打開才對。
     if (!orderSheet.hidden) renderOrderSheet(order, method);

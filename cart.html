@@ -20,7 +20,10 @@
   <div class="ambient-grain" aria-hidden="true"></div>
 
   <header class="site-header">
-    <a class="site-header__back" href="index.html">← 返回</a>
+    <!-- 結帳流程會整頁導去綠界電子地圖選門市再導回這頁，history 裡會夾著
+         那個外部頁面；固定回材料包母頁，不用瀏覽器上一頁（見
+         js/site-header-scroll.js data-back-fixed 的說明）。 -->
+    <a class="site-header__back" href="products/index.html" data-back-fixed>← 返回</a>
     <div class="site-header__title">購物車</div>
     <!-- 填收件資料往下滑、上面那條「確認訂單詳情」橫條捲出畫面之後，橫條
          會併進這一列頂部導覽（.site-header.is-order-docked）：標題位置換成
@@ -143,16 +146,16 @@
                  （見 js/checkout.js syncCustomerName()），不改後端契約。 -->
             <div class="confirm-field-row">
               <label class="confirm-field">
-                <span>名字</span>
+                <span>姓氏</span>
                 <div class="confirm-field__control">
                   <svg class="confirm-field__icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-3.5 3-6 7-6s7 2.5 7 6"/></svg>
-                  <input type="text" id="customer-first-name" required maxlength="10" autocomplete="given-name" placeholder="名字">
+                  <input type="text" id="customer-last-name" required maxlength="10" autocomplete="family-name" placeholder="姓氏">
                 </div>
               </label>
               <label class="confirm-field">
-                <span>姓氏</span>
+                <span>名字</span>
                 <div class="confirm-field__control">
-                  <input type="text" id="customer-last-name" required maxlength="10" autocomplete="family-name" placeholder="姓氏">
+                  <input type="text" id="customer-first-name" required maxlength="10" autocomplete="given-name" placeholder="名字">
                 </div>
               </label>
             </div>
@@ -211,15 +214,33 @@
                 <p class="confirm-store__address"></p>
               </div>
             </div>
+
+            <!-- 超商取貨限定：選好門市之後，緊接著問「自行取貨」還是
+                 「委託他人代為取貨」——選自行取貨就不用再填收件資料，直接
+                 跳到前往付款；選委託他人才會出現下面的「③收件資料」。
+                 兩顆選項底層都是同一個 #receiver-same-as-customer 的勾選
+                 狀態，只是換一種說法／UI，見 checkout.js
+                 syncPickupModeControls()／updateReceiverSectionVisibility()。 -->
+            <div class="confirm-radio-group" id="pickup-mode-picker" hidden>
+              <label class="confirm-radio">
+                <input type="radio" name="pickupMode" id="pickup-mode-self" checked>
+                <span>我會自行取貨</span>
+              </label>
+              <label class="confirm-radio">
+                <input type="radio" name="pickupMode" id="pickup-mode-other">
+                <span>我會委託他人代為取貨</span>
+              </label>
+            </div>
           </section>
 
-          <!-- 收件資料：勾選「與聯絡資訊一樣」時（預設勾選——多數訂單都是
-               本人自己收），姓名／電話／Email 三格改唯讀並即時同步聯絡資訊
-               資料，讓後端仍然收得到值（唯讀欄位會送出，disabled 欄位
-               不會，所以這裡用 readOnly 不是 disabled，見 checkout.js
-               syncReceiverSameAsCustomer()）；取消勾選才能自己填一組不同的
-               收件人資料。地址只在宅配到府才需要，維持只有這種送貨方式
-               才顯示。 -->
+          <!-- 收件資料：超商取貨且選「我會自行取貨」時，這整區完全跳過
+               （customerName／Phone／Email 本來就會鏡射進 receiverName 等
+               欄位一起送出，見 syncReceiverSameAsCustomer()，不用再問一次）。
+               宅配到府維持原本的「與聯絡資訊一樣」勾選——姓名／電話／Email
+               三格改唯讀並即時同步聯絡資訊資料，讓後端仍然收得到值（唯讀
+               欄位會送出，disabled 欄位不會，所以這裡用 readOnly 不是
+               disabled）；取消勾選才能自己填一組不同的收件人資料。地址只在
+               宅配到府才需要。 -->
           <section class="chapter" id="receiver-section" hidden>
             <h2 class="chapter__title"><span class="step-badge">3</span>收件資料</h2>
 
@@ -244,22 +265,6 @@
                   <svg class="confirm-field__icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="1.5"/><path d="m3.5 6.5 8.5 6 8.5-6"/></svg>
                   <input type="email" name="receiverEmail" autocomplete="email" placeholder="you@example.com">
                 </div>
-              </label>
-            </div>
-
-            <!-- 超商取貨限定：「自行取貨／委託他人代為取貨」比「與聯絡資訊
-                 一樣」更貼近取貨情境的說法，取代同一顆 checkbox 的呈現；
-                 宅配到府維持原本的 checkbox 說法（收件人在家，不是「取貨」）。
-                 兩邊底層都是同一個 #receiver-same-as-customer 的勾選狀態，
-                 只是換一種說法／UI，見 checkout.js syncPickupModeControls()。 -->
-            <div class="confirm-radio-group" id="pickup-mode-picker" hidden>
-              <label class="confirm-radio">
-                <input type="radio" name="pickupMode" id="pickup-mode-self" checked>
-                <span>我會自行取貨</span>
-              </label>
-              <label class="confirm-radio">
-                <input type="radio" name="pickupMode" id="pickup-mode-other">
-                <span>我會委託他人代為取貨</span>
               </label>
             </div>
 
