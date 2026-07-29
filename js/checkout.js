@@ -35,12 +35,20 @@
   // 還沒結帳前橫條是隱藏的（購物車本身就是主畫面）。
   const cartCollapseBar = document.querySelector(".cart-collapse");
   const cartCollapseTotal = cartCollapseBar.querySelector(".cart-collapse__total");
-  function collapseCartEditView(total) {
+  function collapseCartEditView() {
     cartEditView.hidden = true;
     cartCollapseBar.hidden = false;
-    cartCollapseTotal.textContent = formatMoney(total);
-    headerOrderTotal.textContent = formatMoney(total);
     updateOrderDock();
+  }
+  // 橫條／頂部導覽上顯示的金額要包含運費，不能只有商品小計——這裡集中算
+  // 一次，renderShippingState() 每次送貨方式改變（含第一次選定）都會重
+  // 呼叫，不是只有結帳當下算一次就不再更新。還沒選送貨方式時運費當 0，
+  // 顯示的就是純商品小計，等選了才會補上運費。
+  function updateCollapseBarTotal(order, method) {
+    const fee = method ? SHIPPING_FEES[method] : 0;
+    const total = formatMoney(order.itemsTotal + fee);
+    cartCollapseTotal.textContent = total;
+    headerOrderTotal.textContent = total;
   }
   function expandCartEditView() {
     cartEditView.hidden = false;
@@ -481,6 +489,9 @@
     // 面板正開著的時候換送貨方式（例如點「宅配到府」），運費／總金額
     // 要立刻跟著更新，不能等下次重新打開才對。
     if (!orderSheet.hidden) renderOrderSheet(order, method);
+    // 橫條／頂部導覽上的金額同理，換送貨方式要立刻反映運費，不是只有
+    // 結帳當下算一次。
+    updateCollapseBarTotal(order, method);
     if (method) {
       document.getElementById("confirm-shipping-method").value = method;
       const fee = SHIPPING_FEES[method];
@@ -533,7 +544,7 @@
     contentEl.hidden = false;
     // 訂單已經建立起來了，購物車編輯區收合成一條橫條，把畫面讓給下面的
     // 送貨方式／收件資料；要回頭確認或修改內容，點那條橫條就會再展開。
-    collapseCartEditView(order.itemsTotal);
+    collapseCartEditView();
     // 內容整個渲染完成、高度定型之後才捲動，直接把「送貨方式」帶到畫面
     // 最上面（而不是整個 order-confirm-view 的頂端，那前面還有一段收合
     // 起來的「你選購的商品」）。
