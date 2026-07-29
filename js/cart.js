@@ -619,15 +619,17 @@
           ${schemeSelectHTML}
         </div>
         <div class="cart-item__meta">
-          <div class="cart-item__qty">
-            <button type="button" data-qty-decrease aria-label="減少數量"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg></button>
-            <span>${item.qty}</span>
-            <button type="button" data-qty-increase aria-label="增加數量"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+          <div class="cart-item__qty-actions">
+            <div class="cart-item__qty">
+              <button type="button" data-qty-decrease aria-label="減少數量"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg></button>
+              <span>${item.qty}</span>
+              <button type="button" data-qty-increase aria-label="增加數量"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+            </div>
+            <button type="button" class="cart-item__remove" aria-label="移除">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16"/><path d="M9 7V4h6v3"/><path d="M6 7l1 13h10l1-13"/></svg>
+            </button>
           </div>
           <p class="cart-item__price">$${(product.price * item.qty).toLocaleString()}</p>
-          <button type="button" class="cart-item__remove" aria-label="移除">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16"/><path d="M9 7V4h6v3"/><path d="M6 7l1 13h10l1-13"/></svg>
-          </button>
         </div>
       </div>
     `;
@@ -645,6 +647,7 @@
   function renderCartPage() {
     const groupsEl = document.querySelector(".cart-groups");
     if (!groupsEl) return;
+    const columnsEl = document.querySelector(".cart-columns");
     const emptyMsg = document.querySelector(".cart-empty");
     const totalEl = document.querySelector(".cart-page .work__price");
 
@@ -653,6 +656,7 @@
       groupsEl.innerHTML = "";
       const hasItems = items.length > 0;
       groupsEl.hidden = !hasItems;
+      if (columnsEl) columnsEl.hidden = !hasItems;
       if (emptyMsg) emptyMsg.hidden = hasItems;
 
       const byCategory = new Map();
