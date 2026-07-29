@@ -1188,6 +1188,41 @@
   color: color-mix(in srgb, var(--color-text-secondary) 70%, transparent);
 }
 
+/* 縣市／鄉鎮市區下拉選單，跟同一欄的文字輸入框共用 .confirm-field__control
+   這個外框（無邊框、圓角、surface-light 底色），只是把文字輸入換成原生
+   <select>——手機上點下去就是系統原生的選單/滾輪，不用自己刻。抹掉瀏覽器
+   預設外觀，尾端补一個小箭頭暗示「這裡可以點開選」。 */
+.confirm-field__control select {
+  flex: 1;
+  min-width: 0;
+  appearance: none;
+  -webkit-appearance: none;
+  border: none;
+  background: none;
+  font-family: inherit;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+  padding: var(--space-2) 0;
+  cursor: pointer;
+}
+
+.confirm-field__control select:focus {
+  outline: none;
+}
+
+/* 還沒選縣市時，鄉鎮市區選單是 disabled 狀態，文字跟著轉成次要色，
+   跟其他頁面「還不能填」的欄位維持同一套視覺語言。 */
+.confirm-field__control select:disabled {
+  color: color-mix(in srgb, var(--color-text-secondary) 70%, transparent);
+  cursor: not-allowed;
+}
+
+.confirm-field__chevron {
+  flex: none;
+  color: var(--color-text-secondary);
+  pointer-events: none;
+}
+
 /* 步驟編號小圓圈：送貨方式／收件資訊是真的要依序填的兩個步驟，編號
    讓使用者一眼看出還剩幾步；「你選購的商品」只是回顧清單，不是要填的
    步驟，不掛編號。空心圓圈＋細邊框，不是實心色塊，維持全站克制的

@@ -178,7 +178,70 @@
   const receiverSection = document.getElementById("receiver-section");
   const homeAddressFields = document.getElementById("home-address-fields");
   const receiverZipcodeInput = document.getElementById("receiver-zipcode");
-  const receiverAddressInput = document.getElementById("receiver-address");
+
+  // 縣市／鄉鎮市區改下拉選單，選了鄉鎮市區直接查表帶出郵遞區號（資料見
+  // js/tw-postal-codes.js）；詳細地址維持自由輸入。送出時用
+  // #confirm-receiver-address 這個隱藏欄位把「縣市＋鄉鎮市區＋詳細地址」
+  // 合併成後端原本認得的單一 receiverAddress，不改後端契約——跟
+  // syncCustomerName() 同一套模式。
+  const receiverCountySelect = document.getElementById("receiver-county");
+  const receiverDistrictSelect = document.getElementById("receiver-district");
+  const receiverAddressDetailInput = document.getElementById("receiver-address-detail");
+  const receiverAddressHidden = document.getElementById("confirm-receiver-address");
+
+  if (window.TW_POSTAL_CODES) {
+    Object.keys(window.TW_POSTAL_CODES).forEach((county) => {
+      const opt = document.createElement("option");
+      opt.value = county;
+      opt.textContent = county;
+      receiverCountySelect.appendChild(opt);
+    });
+  }
+
+  function resetDistrictSelect(placeholder) {
+    receiverDistrictSelect.innerHTML = "";
+    const opt = document.createElement("option");
+    opt.value = "";
+    opt.textContent = placeholder;
+    receiverDistrictSelect.appendChild(opt);
+  }
+  resetDistrictSelect("請先選縣市");
+
+  function syncReceiverAddress() {
+    receiverAddressHidden.value = `${receiverCountySelect.value}${receiverDistrictSelect.value}${receiverAddressDetailInput.value.trim()}`;
+  }
+
+  receiverCountySelect.addEventListener("change", () => {
+    const county = receiverCountySelect.value;
+    receiverZipcodeInput.value = "";
+    if (!county || !window.TW_POSTAL_CODES) {
+      receiverDistrictSelect.disabled = true;
+      resetDistrictSelect("請先選縣市");
+      syncReceiverAddress();
+      return;
+    }
+    receiverDistrictSelect.disabled = false;
+    resetDistrictSelect("請選擇");
+    Object.keys(window.TW_POSTAL_CODES[county]).forEach((district) => {
+      const opt = document.createElement("option");
+      opt.value = district;
+      opt.textContent = district;
+      receiverDistrictSelect.appendChild(opt);
+    });
+    syncReceiverAddress();
+  });
+
+  receiverDistrictSelect.addEventListener("change", () => {
+    const county = receiverCountySelect.value;
+    const district = receiverDistrictSelect.value;
+    receiverZipcodeInput.value =
+      county && district && window.TW_POSTAL_CODES ? window.TW_POSTAL_CODES[county][district] || "" : "";
+    syncReceiverAddress();
+  });
+
+  receiverAddressDetailInput.addEventListener("input", syncReceiverAddress);
+  // 送出當下再保險同步一次——理由同 syncCustomerName()。
+  form.addEventListener("submit", syncReceiverAddress);
 
   // 姓名分成名字／姓氏兩格是純前端呈現，後端 create-order 只認得單一
   // customerName 欄位——這裡即時把兩格合併寫進送出用的隱藏欄位，
@@ -318,8 +381,13 @@
     }
 
     homeAddressFields.hidden = method !== "home";
-    receiverZipcodeInput.required = method === "home";
-    receiverAddressInput.required = method === "home";
+    // 郵遞區號是唯讀、自動帶出來的，不需要另外掛 required——選了縣市／
+    // 鄉鎮市區自然就有值；反過來對一個唯讀欄位掛 required，瀏覽器跳出的
+    // 「請填寫這個欄位」會指向一個使用者點不動的欄位，體驗很怪。真正要
+    // 擋的是縣市／鄉鎮市區／詳細地址這三格。
+    receiverCountySelect.required = method === "home";
+    receiverDistrictSelect.required = method === "home";
+    receiverAddressDetailInput.required = method === "home";
 
     syncPickupModeControls(method);
     currentShippingMethod = method;
@@ -398,7 +466,9 @@
   shippingHomeBtn.addEventListener("click", () => {
     isHomeConfirmed = true;
     renderShippingState(currentOrder, isHomeConfirmed);
-    receiverZipcodeInput.focus();
+    // 地址欄位現在從「選縣市」開始，不是打字，聚焦第一個要操作的欄位
+    // 改成這顆下拉選單。
+    receiverCountySelect.focus();
   });
   // 點「超商取貨」按鈕：本身是 <a href> 會直接導去綠界電子地圖重新選店，
   // 回來後 loadAndShowConfirm 會依訂單最新的 cvsStore 重新渲染，這裡只要
