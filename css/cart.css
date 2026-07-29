@@ -233,6 +233,61 @@
   transition: opacity 1s var(--ease-standard), transform 1s var(--ease-standard);
 }
 
+/* ---------- 「確認訂單詳情」併進頂部導覽（結帳後往下滑時）----------
+   上面那條橫條捲出畫面之後，改由頂部導覽接手顯示：標題位置換成可點開
+   訂單明細的按鈕，購物車圖示位置換成金額，客人滑到哪都看得到訂單金額。
+   兩組元素在 DOM 裡是並存的，只是靠 .is-order-docked 互相切換顯示，
+   不用把節點搬來搬去。 ---------- */
+.site-header.is-order-docked .site-header__title,
+.site-header.is-order-docked .cart-badge-wrap {
+  display: none;
+}
+
+.site-header__order {
+  appearance: none;
+  border: none;
+  background: none;
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  padding: 0 var(--space-2);
+  font-family: inherit;
+  font-size: var(--editorial-label-font-size);
+  letter-spacing: var(--editorial-tracking);
+  color: var(--color-text-primary);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+/* .site-header__order／__order-total 自己宣告了 display，同樣會蓋掉瀏覽器
+   內建的 [hidden]{display:none}（見這份檔案裡其他幾處同成因的修正）。 */
+.site-header__order[hidden],
+.site-header__order-total[hidden] {
+  display: none;
+}
+
+.site-header__order-chevron {
+  flex: none;
+  color: var(--color-text-secondary);
+  transition: transform var(--duration-fast) var(--ease-standard);
+}
+
+.site-header__order[aria-expanded="true"] .site-header__order-chevron {
+  transform: rotate(180deg);
+}
+
+.site-header__order-total {
+  flex: none;
+  display: block;
+  font-family: Georgia, 'Playfair Display', serif;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
 /* 結帳後把整個購物車編輯區收合成的橫條：左邊「確認訂單詳情」、右邊金額，
    最右一個箭頭指出可以再展開回去確認／修改。結帳前這條是隱藏的（購物車
    本身就是主畫面，不需要收合）。 */

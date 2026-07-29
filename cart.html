@@ -22,6 +22,15 @@
   <header class="site-header">
     <a class="site-header__back" href="index.html">← 返回</a>
     <div class="site-header__title">購物車</div>
+    <!-- 填收件資料往下滑、上面那條「確認訂單詳情」橫條捲出畫面之後，橫條
+         會併進這一列頂部導覽（.site-header.is-order-docked）：標題位置換成
+         這顆可點開訂單明細的按鈕，購物車圖示位置換成金額，讓客人不管滑到
+         哪裡都看得到目前訂單多少錢、也隨時點得開明細。見 js/checkout.js
+         initOrderDock()。 -->
+    <button type="button" class="site-header__order" hidden aria-expanded="false">
+      <span>確認訂單詳情</span>
+      <svg class="site-header__order-chevron" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+    </button>
     <div class="cart-badge-wrap">
       <button type="button" class="cart-badge" aria-haspopup="true" aria-expanded="false" aria-label="購物車，目前 0 件">
         <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
@@ -37,6 +46,7 @@
         </div>
       </div>
     </div>
+    <span class="site-header__order-total" hidden></span>
   </header>
 
   <nav class="pill-nav" aria-label="全站分類導覽">

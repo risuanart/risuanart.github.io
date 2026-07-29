@@ -38,12 +38,57 @@
   function collapseCartEditView(total) {
     cartCollapseBar.hidden = false;
     cartCollapseTotal.textContent = formatMoney(total);
+    headerOrderTotal.textContent = formatMoney(total);
     cartEditView.open = false;
+    updateOrderDock();
   }
   function expandCartEditView() {
     cartCollapseBar.hidden = true;
     cartEditView.open = true;
+    updateOrderDock();
   }
+
+  // 往下滑、上面那條「確認訂單詳情」橫條捲出畫面之後，把它併進頂部導覽：
+  // 標題位置換成可點開訂單明細的按鈕，購物車圖示位置換成金額。判斷方式是
+  // 直接比較橫條與頂部導覽的實際位置（兩者都用 getBoundingClientRect()
+  // 量，不寫死高度）——橫條的下緣一旦被固定的頂部導覽蓋過去，就換頂部
+  // 導覽接手顯示。
+  const siteHeader = document.querySelector(".site-header");
+  const headerOrderBtn = document.querySelector(".site-header__order");
+  const headerOrderTotal = document.querySelector(".site-header__order-total");
+  // .product-page 自己是捲動容器（overflow:auto），捲動事件不會冒泡到
+  // window，要掛在它身上；沒有的話才退回監聽整個視窗。
+  const scroller = document.querySelector(".product-page");
+
+  function updateOrderDock() {
+    if (!siteHeader || !headerOrderBtn) return;
+    // 還沒結帳（橫條本身是隱藏的）就不該有這個狀態。
+    if (cartCollapseBar.hidden) {
+      siteHeader.classList.remove("is-order-docked");
+      headerOrderBtn.hidden = true;
+      headerOrderTotal.hidden = true;
+      return;
+    }
+    const docked = cartCollapseBar.getBoundingClientRect().bottom < siteHeader.getBoundingClientRect().bottom;
+    siteHeader.classList.toggle("is-order-docked", docked);
+    headerOrderBtn.hidden = !docked;
+    headerOrderTotal.hidden = !docked;
+    headerOrderBtn.setAttribute("aria-expanded", cartEditView.open ? "true" : "false");
+  }
+
+  if (headerOrderBtn) {
+    // 點頂部導覽上的「確認訂單詳情」＝展開明細並捲回去看，等同於直接點
+    // 上面那條橫條。
+    headerOrderBtn.addEventListener("click", () => {
+      cartEditView.open = true;
+      cartCollapseBar.scrollIntoView({ behavior: "smooth", block: "start" });
+      updateOrderDock();
+    });
+  }
+  (scroller || window).addEventListener("scroll", updateOrderDock, { passive: true });
+  window.addEventListener("resize", updateOrderDock);
+  // 客人自己點橫條展開／收合時，箭頭方向與 docked 狀態也要跟著更新。
+  cartEditView.addEventListener("toggle", updateOrderDock);
 
   const loadingEl = document.getElementById("confirm-loading");
   const errorEl = document.getElementById("confirm-error");
