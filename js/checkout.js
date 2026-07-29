@@ -38,16 +38,28 @@
   const customerSection = document.getElementById("customer-section");
   const backToCartBtn = document.getElementById("confirm-back-to-cart");
 
-  const shippingPicker = document.getElementById("shipping-picker");
   const shippingCvsLink = document.getElementById("shipping-cvs-link");
   const shippingHomeBtn = document.getElementById("shipping-home-btn");
-  const shippingCvsConfirmed = document.getElementById("shipping-cvs-confirmed");
-  const shippingHomeConfirmed = document.getElementById("shipping-home-confirmed");
-  const switchToHomeBtn = document.getElementById("switch-to-home");
-  const switchToPickerBtn = document.getElementById("switch-to-picker");
+  const confirmStoreEl = document.querySelector(".confirm-store");
   const homeAddressFields = document.getElementById("home-address-fields");
   const receiverZipcodeInput = document.getElementById("receiver-zipcode");
   const receiverAddressInput = document.getElementById("receiver-address");
+
+  // 姓名分成名字／姓氏兩格是純前端呈現，後端 create-order 只認得單一
+  // customerName 欄位——這裡即時把兩格合併寫進送出用的隱藏欄位，
+  // 不用改後端契約。中文姓名習慣姓在前、名在後（例如「王小明」），
+  // 所以合併順序是姓氏＋名字。
+  const customerFirstNameInput = document.getElementById("customer-first-name");
+  const customerLastNameInput = document.getElementById("customer-last-name");
+  const customerNameHidden = document.getElementById("confirm-customer-name");
+  function syncCustomerName() {
+    customerNameHidden.value = `${customerLastNameInput.value.trim()}${customerFirstNameInput.value.trim()}`;
+  }
+  customerFirstNameInput.addEventListener("input", syncCustomerName);
+  customerLastNameInput.addEventListener("input", syncCustomerName);
+  // 送出當下再保險同步一次——瀏覽器自動填表在少數情況不會觸發 input
+  // 事件，不能只靠打字時的即時同步。
+  form.addEventListener("submit", syncCustomerName);
 
   function formatMoney(n) {
     return `$${n.toLocaleString()}`;
@@ -78,34 +90,31 @@
     errorEl.querySelector("[data-placeholder]").textContent = message;
   }
 
-  // 三種送貨方式 UI 狀態：picker（還沒選）／cvs（已選超商門市，來自綠界回傳）
-  // ／home（客人在這頁自己選了宅配，填地址）。isHomeConfirmed 是本地狀態，
-  // 不是從後端讀來的，因為宅配到府不用經過任何跳轉，選了就是選了。
+  // 兩種送貨方式的按鈕常駐畫面（不像以前選完就整組隱藏、換成一行文字
+  // 連結），這裡只切換 aria-pressed 標記哪一顆是目前選中的狀態。
+  // cvs（已選超商門市，來自綠界回傳）／home（客人在這頁自己選了宅配，
+  // 填地址）。isHomeConfirmed 是本地狀態，不是從後端讀來的，因為宅配到府
+  // 不用經過任何跳轉，選了就是選了。
   function renderShippingState(order, isHomeConfirmed) {
     const hasCvsStore = Boolean(order.cvsStore && order.cvsStore.CVSStoreID);
     let method = null;
-
-    shippingPicker.hidden = true;
-    shippingCvsConfirmed.hidden = true;
-    shippingHomeConfirmed.hidden = true;
-    homeAddressFields.hidden = true;
-    receiverZipcodeInput.required = false;
-    receiverAddressInput.required = false;
-
     if (hasCvsStore && !isHomeConfirmed) {
       method = "cvs";
-      shippingCvsConfirmed.hidden = false;
-      document.querySelector(".confirm-store").textContent =
-        `${order.cvsStore.CVSStoreName}（${order.cvsStore.CVSAddress}）`;
     } else if (isHomeConfirmed) {
       method = "home";
-      shippingHomeConfirmed.hidden = false;
-      homeAddressFields.hidden = false;
-      receiverZipcodeInput.required = true;
-      receiverAddressInput.required = true;
-    } else {
-      shippingPicker.hidden = false;
     }
+
+    shippingCvsLink.setAttribute("aria-pressed", method === "cvs" ? "true" : "false");
+    shippingHomeBtn.setAttribute("aria-pressed", method === "home" ? "true" : "false");
+
+    confirmStoreEl.hidden = method !== "cvs";
+    if (method === "cvs") {
+      confirmStoreEl.textContent = `${order.cvsStore.CVSStoreName}（${order.cvsStore.CVSAddress}）`;
+    }
+
+    homeAddressFields.hidden = method !== "home";
+    receiverZipcodeInput.required = method === "home";
+    receiverAddressInput.required = method === "home";
 
     customerSection.hidden = !method;
     if (method) {
@@ -155,6 +164,10 @@
       list.appendChild(li);
     });
     document.querySelector(".confirm-subtotal").textContent = `商品小計 ${formatMoney(order.itemsTotal)}`;
+    // 收合區塊摺起來時，標題旁邊還是要看得到件數／小計，不用展開才知道
+    // 訂單大概多少錢。
+    const totalQty = order.items.reduce((sum, item) => sum + item.qty, 0);
+    document.getElementById("confirm-summary-meta").textContent = `${totalQty} 件・${formatMoney(order.itemsTotal)}`;
 
     document.getElementById("confirm-order-id").value = order.orderId;
     shippingCvsLink.href = `${CHECKOUT_API_BASE}/api/logistics-map?orderId=${encodeURIComponent(order.orderId)}`;
@@ -170,19 +183,19 @@
     contentEl.hidden = false;
   }
 
+  // 點「宅配到府」按鈕：不管目前是哪種狀態（還沒選／已選超商門市），
+  // 都直接切換成宅配並展開地址欄位——按鈕本身就是唯一的切換入口，
+  // 不需要另外一顆「改成宅配到府」的文字連結。
   shippingHomeBtn.addEventListener("click", () => {
     isHomeConfirmed = true;
     renderShippingState(currentOrder, isHomeConfirmed);
     receiverZipcodeInput.focus();
   });
-  switchToHomeBtn.addEventListener("click", () => {
-    isHomeConfirmed = true;
-    renderShippingState(currentOrder, isHomeConfirmed);
-    receiverZipcodeInput.focus();
-  });
-  switchToPickerBtn.addEventListener("click", () => {
+  // 點「超商取貨」按鈕：本身是 <a href> 會直接導去綠界電子地圖重新選店，
+  // 回來後 loadAndShowConfirm 會依訂單最新的 cvsStore 重新渲染，這裡只要
+  // 把本機的「宅配已選」狀態清掉，讓渲染結果改回超商那一側。
+  shippingCvsLink.addEventListener("click", () => {
     isHomeConfirmed = false;
-    renderShippingState(currentOrder, isHomeConfirmed);
   });
 
   function showCheckoutError(message) {

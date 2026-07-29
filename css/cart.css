@@ -570,9 +570,47 @@
 }
 
 .confirm-store {
-  margin: 0;
+  margin: var(--space-2) 0 0;
   font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
   max-width: 40ch;
+}
+
+/* 「你選購的商品」收合區：summary 取代原本純文字的 <h2>，左邊標題、
+   中間件數／小計提示、右邊箭頭，箭頭方向隨展開狀態轉向。 */
+.confirm-summary {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  cursor: pointer;
+  list-style: none;
+}
+
+.confirm-summary::-webkit-details-marker {
+  display: none;
+}
+
+.confirm-summary__label {
+  flex: 1;
+}
+
+.confirm-summary__meta {
+  flex: none;
+  font-family: Georgia, 'Playfair Display', serif;
+  font-weight: 400;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+.confirm-summary__chevron {
+  flex: none;
+  color: var(--color-text-secondary);
+  transition: transform var(--duration-fast) var(--ease-standard);
+}
+
+details[open] > .confirm-summary .confirm-summary__chevron {
+  transform: rotate(180deg);
 }
 
 /* ---------- 送貨方式選擇（超商取貨／宅配到府）----------
@@ -588,15 +626,6 @@
   max-width: 46ch;
 }
 
-/* .shipping-options／.shipping-confirmed 自己宣告了 display，跟瀏覽器內建
-   的 [hidden]{display:none} 規則同一個特異度，會被同層疊順序在後面的這兩條
-   規則蓋過去，導致 JS 設定 hidden=true 卻還是顯示出來——用 [hidden] 屬性
-   選擇器組合起來提高特異度，明確蓋回 display:none。 */
-.shipping-options[hidden],
-.shipping-confirmed[hidden] {
-  display: none;
-}
-
 .shipping-option {
   appearance: none;
   border: none;
@@ -610,16 +639,30 @@
   font-family: inherit;
   color: inherit;
   cursor: pointer;
-  transition: box-shadow var(--duration-fast) var(--ease-standard);
+  transition: box-shadow var(--duration-fast) var(--ease-standard), background var(--duration-fast) var(--ease-standard);
 }
 
 .shipping-option:active {
   box-shadow: 0 0 0 2px var(--color-text-primary);
 }
 
+/* 選好之後這顆按鈕維持在畫面上、只是切換成「已選」樣式（實色底＋常駐
+   外框），不是消失換成另一段文字連結——換送貨方式就是直接點另一顆。 */
+.shipping-option[aria-pressed="true"] {
+  background: var(--color-text-primary);
+  box-shadow: 0 0 0 2px var(--color-text-primary);
+}
+
+.shipping-option[aria-pressed="true"] .shipping-option__icon,
+.shipping-option[aria-pressed="true"] .shipping-option__name,
+.shipping-option[aria-pressed="true"] .shipping-option__fee {
+  color: var(--color-surface-light);
+}
+
 .shipping-option__icon {
   flex: none;
   color: var(--color-text-secondary);
+  transition: color var(--duration-fast) var(--ease-standard);
 }
 
 .shipping-option__name {
@@ -627,6 +670,7 @@
   font-size: var(--font-size-sm);
   font-weight: 700;
   color: var(--color-text-primary);
+  transition: color var(--duration-fast) var(--ease-standard);
 }
 
 .shipping-option__fee {
@@ -634,14 +678,7 @@
   font-size: var(--font-size-xs);
   color: var(--color-text-secondary);
   font-variant-numeric: tabular-nums;
-}
-
-.shipping-confirmed {
-  margin-top: var(--space-4);
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: var(--space-2);
+  transition: color var(--duration-fast) var(--ease-standard);
 }
 
 #confirm-form {
@@ -663,6 +700,15 @@
   width: 100%;
 }
 
+/* #home-address-fields 用 ID 選到、宣告了 display，特異度比瀏覽器內建的
+   [hidden]{display:none}（單純屬性選擇器）高，JS 設定 hidden=true 蓋不掉
+   這條規則——超商取貨模式下地址欄位其實一直沒有真的藏起來。用 ID＋屬性
+   選擇器提高特異度明確蓋回 display:none（跟 .cart-columns[hidden] 同一個
+   成因，見 js/checkout.js renderShippingState()）。 */
+#home-address-fields[hidden] {
+  display: none;
+}
+
 .confirm-field {
   display: flex;
   flex-direction: column;
@@ -670,6 +716,38 @@
   width: 100%;
   font-size: var(--font-size-xs);
   color: var(--color-text-secondary);
+}
+
+/* 名字／姓氏左右並排——兩個 .confirm-field 各占一半寬，中間留一般欄位
+   間距，跟其餘單欄欄位在同一個 #confirm-form 的 flex 直排裡對齊。 */
+.confirm-field-row {
+  display: flex;
+  gap: var(--space-4);
+  width: 100%;
+}
+
+.confirm-field-row .confirm-field {
+  width: auto;
+  flex: 1;
+  min-width: 0;
+}
+
+/* 行銷通知勾選框：原生 checkbox 尺寸太小、觸控不好按，這裡放大到符合
+   最小觸控面積建議，勾選色沿用全站主色，不用瀏覽器預設的藍色打斷配色。 */
+.confirm-checkbox {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+  cursor: pointer;
+}
+
+.confirm-checkbox input {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--color-text-primary);
+  cursor: pointer;
 }
 
 /* 標籤字距拉寬＋略縮小，是從參考站觀察到的排版手感（見對話紀錄）：

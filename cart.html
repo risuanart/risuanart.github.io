@@ -100,56 +100,72 @@
       </section>
 
       <div id="confirm-content" class="order-confirm-box" hidden>
-        <section class="chapter">
-          <h2 class="chapter__title">你選購的商品</h2>
+        <!-- 收合式清單：預設收起，只留一行標題＋件數／小計，按了才展開完整
+             品項清單——這區塊只是回顧，不是要填的步驟，收合節省一開始的
+             垂直空間。用原生 <details>／<summary>，展開收合、鍵盤操作、
+             無障礙狀態都交給瀏覽器內建行為，不用自己刻。 -->
+        <details class="chapter">
+          <summary class="chapter__title confirm-summary">
+            <span class="confirm-summary__label">你選購的商品</span>
+            <span class="confirm-summary__meta" id="confirm-summary-meta"></span>
+            <svg class="confirm-summary__chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+          </summary>
           <ul class="confirm-items"></ul>
           <p class="confirm-subtotal"></p>
-        </section>
+        </details>
 
         <!-- 送貨方式：還沒選的話顯示兩個選項；超商取貨會整頁導去綠界電子地圖，
              選完店綠界會把瀏覽器導回這一頁（帶著 orderId）；宅配到府不用離開
              這頁，直接在下面顯示地址欄位。兩條路最後都在同一個 <form> 送出
              到 create-order。 -->
+        <!-- 送貨方式選擇維持同一組按鈕常駐畫面，不會因為選完就被隱藏、換成
+             一行文字連結——選中的那顆用 aria-pressed 標記「已選」樣式即可，
+             要改選另一種方式，直接點另一顆按鈕（超商取貨會整頁導去綠界
+             電子地圖重新選店；宅配到府純本機切換）。 -->
         <section class="chapter" id="shipping-section">
           <h2 class="chapter__title"><span class="step-badge">1</span>送貨方式</h2>
 
           <div id="shipping-picker" class="shipping-options">
-            <a class="shipping-option" id="shipping-cvs-link" href="#">
+            <a class="shipping-option" id="shipping-cvs-link" href="#" aria-pressed="false">
               <svg class="shipping-option__icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9.5 4.5 4h15L21 9.5"/><path d="M4 9.5V20h16V9.5"/><path d="M9.5 20v-5.5h5V20"/></svg>
               <span class="shipping-option__name">超商取貨（7-11）</span>
               <span class="shipping-option__fee">$65</span>
             </a>
-            <button type="button" class="shipping-option" id="shipping-home-btn">
+            <button type="button" class="shipping-option" id="shipping-home-btn" aria-pressed="false">
               <svg class="shipping-option__icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="11" height="9"/><path d="M13 10.5h4l3 3V16h-7z"/><circle cx="6.5" cy="18" r="1.6"/><circle cx="16.5" cy="18" r="1.6"/></svg>
               <span class="shipping-option__name">宅配到府（黑貓宅急便）</span>
               <span class="shipping-option__fee">$130</span>
             </button>
           </div>
 
-          <div id="shipping-cvs-confirmed" class="shipping-confirmed" hidden>
-            <p class="confirm-store"></p>
-            <button type="button" class="text-link" id="switch-to-home">改成宅配到府</button>
-          </div>
-
-          <div id="shipping-home-confirmed" class="shipping-confirmed" hidden>
-            <p class="chapter__tags">宅配到府・運費 $130</p>
-            <button type="button" class="text-link" id="switch-to-picker">改成超商取貨／重新選擇</button>
-          </div>
+          <p class="confirm-store" hidden></p>
         </section>
 
         <section class="chapter" id="customer-section" hidden>
-          <h2 class="chapter__title"><span class="step-badge">2</span>收件資訊</h2>
+          <h2 class="chapter__title"><span class="step-badge">2</span>聯絡資料</h2>
           <p class="confirm-total"></p>
           <form id="confirm-form" method="POST" action="">
             <input type="hidden" name="orderId" id="confirm-order-id">
             <input type="hidden" name="shippingMethod" id="confirm-shipping-method">
-            <label class="confirm-field">
-              <span>姓名</span>
-              <div class="confirm-field__control">
-                <svg class="confirm-field__icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-3.5 3-6 7-6s7 2.5 7 6"/></svg>
-                <input type="text" name="customerName" required maxlength="20" autocomplete="name" placeholder="您的姓名">
-              </div>
-            </label>
+            <!-- 姓名分成名字／姓氏左右並排，送出時用 #confirm-customer-name
+                 這個隱藏欄位把兩個值合併成後端原本認得的單一 customerName
+                 （見 js/checkout.js syncCustomerName()），不改後端契約。 -->
+            <div class="confirm-field-row">
+              <label class="confirm-field">
+                <span>名字</span>
+                <div class="confirm-field__control">
+                  <svg class="confirm-field__icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-3.5 3-6 7-6s7 2.5 7 6"/></svg>
+                  <input type="text" id="customer-first-name" required maxlength="10" autocomplete="given-name" placeholder="名字">
+                </div>
+              </label>
+              <label class="confirm-field">
+                <span>姓氏</span>
+                <div class="confirm-field__control">
+                  <input type="text" id="customer-last-name" required maxlength="10" autocomplete="family-name" placeholder="姓氏">
+                </div>
+              </label>
+            </div>
+            <input type="hidden" name="customerName" id="confirm-customer-name">
             <label class="confirm-field">
               <span>手機（取貨／到貨簡訊會發到這個號碼）</span>
               <div class="confirm-field__control">
@@ -163,6 +179,10 @@
                 <svg class="confirm-field__icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="1.5"/><path d="m3.5 6.5 8.5 6 8.5-6"/></svg>
                 <input type="email" name="customerEmail" required autocomplete="email" placeholder="you@example.com">
               </div>
+            </label>
+            <label class="confirm-checkbox">
+              <input type="checkbox" name="marketingOptIn" value="true">
+              <span>我想收到最新消息和限定優惠通知</span>
             </label>
             <div id="home-address-fields" hidden>
               <label class="confirm-field">
