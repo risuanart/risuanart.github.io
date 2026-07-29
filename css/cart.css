@@ -681,7 +681,7 @@ details[open] > .confirm-summary .confirm-summary__chevron {
   transition: color var(--duration-fast) var(--ease-standard);
 }
 
-/* <form> 現在整個往外拉，同時包住「訂購人資料」「收件資料」兩個
+/* <form> 現在整個往外拉，同時包住「聯絡資訊」「收件資料」兩個
    <section>＋最後的小計／送出按鈕，本身只負責統一最大寬度，不再是
    欄位直接排列用的 flex 容器——欄位排列（flex column＋gap）改放到
    #customer-section／#receiver-section 這一層，見下面。 */
@@ -689,7 +689,7 @@ details[open] > .confirm-summary .confirm-summary__chevron {
   max-width: 40ch;
 }
 
-/* 「訂購人資料」「收件資料」內部的欄位（標題、姓名列、手機、Email……）
+/* 「聯絡資訊」「收件資料」內部的欄位（標題、姓名列、手機、Email……）
    用同一套 flex column＋gap 排列，取代原本掛在 #confirm-form 上的那套
    （現在 form 底下多了兩個 section，不能再整個攤平排。） */
 #customer-section,
@@ -791,8 +791,8 @@ details[open] > .confirm-summary .confirm-summary__chevron {
   box-shadow: 0 0 0 2px var(--color-text-primary);
 }
 
-/* 「與訂購人資料一樣」勾選時，收件人姓名／電話／Email 改唯讀並同步顯示
-   訂購人資料——降低透明度暗示「這裡不能編輯」，取消勾選才恢復正常。 */
+/* 「與聯絡資訊一樣」勾選時，收件人姓名／電話／Email 改唯讀並同步顯示
+   聯絡資訊——降低透明度暗示「這裡不能編輯」，取消勾選才恢復正常。 */
 .confirm-field__control:has(input:read-only) {
   opacity: 0.55;
 }

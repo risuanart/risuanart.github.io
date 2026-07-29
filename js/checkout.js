@@ -65,8 +65,8 @@
   // 事件，不能只靠打字時的即時同步。
   form.addEventListener("submit", syncCustomerName);
 
-  // 收件資料勾選「與訂購人資料一樣」（預設勾選——多數訂單本人自己收）：
-  // 姓名／電話／Email 改唯讀，即時鏡射訂購人剛剛填的資料。這裡故意用
+  // 收件資料勾選「與聯絡資訊一樣」（預設勾選——多數訂單本人自己收）：
+  // 姓名／電話／Email 改唯讀，即時鏡射聯絡資訊剛剛填的資料。這裡故意用
   // readOnly 不是 disabled——disabled 的欄位送出表單時整個不會出現在
   // POST 內容裡，readOnly 的欄位還是會照常送出，後端才收得到值。
   const receiverSameCheckbox = document.getElementById("receiver-same-as-customer");

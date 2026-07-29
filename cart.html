@@ -141,7 +141,7 @@
           <p class="confirm-store" hidden></p>
         </section>
 
-        <!-- 訂購人資料（下單、收款項通知的聯絡窗口）跟收件資料（實際收貨的
+        <!-- 聯絡資訊（下單、收款項通知的聯絡窗口）跟收件資料（實際收貨的
              人，禮物代購或公司代收等情境可能是別人）拆成兩個獨立步驟；
              <form> 整個往外拉，同時包住這兩個 <section>，送出按鈕放在
              最後——兩塊資料都填完才送出同一筆訂單。 -->
@@ -150,7 +150,7 @@
           <input type="hidden" name="shippingMethod" id="confirm-shipping-method">
 
           <section class="chapter" id="customer-section" hidden>
-            <h2 class="chapter__title"><span class="step-badge">2</span>訂購人資料</h2>
+            <h2 class="chapter__title"><span class="step-badge">2</span>聯絡資訊</h2>
             <!-- 姓名分成名字／姓氏左右並排，送出時用 #confirm-customer-name
                  這個隱藏欄位把兩個值合併成後端原本認得的單一 customerName
                  （見 js/checkout.js syncCustomerName()），不改後端契約。 -->
@@ -190,8 +190,8 @@
             </label>
           </section>
 
-          <!-- 收件資料：勾選「與訂購人資料一樣」時（預設勾選——多數訂單都是
-               本人自己收），姓名／電話／Email 三格改唯讀並即時同步訂購人
+          <!-- 收件資料：勾選「與聯絡資訊一樣」時（預設勾選——多數訂單都是
+               本人自己收），姓名／電話／Email 三格改唯讀並即時同步聯絡資訊
                資料，讓後端仍然收得到值（唯讀欄位會送出，disabled 欄位
                不會，所以這裡用 readOnly 不是 disabled，見 checkout.js
                syncReceiverSameAsCustomer()）；取消勾選才能自己填一組不同的
@@ -226,7 +226,7 @@
 
             <label class="confirm-checkbox">
               <input type="checkbox" id="receiver-same-as-customer" checked>
-              <span>與訂購人資料一樣</span>
+              <span>與聯絡資訊一樣</span>
             </label>
 
             <div id="home-address-fields" hidden>
