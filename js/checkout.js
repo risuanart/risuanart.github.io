@@ -94,6 +94,29 @@
   form.addEventListener("submit", syncReceiverSameAsCustomer);
   syncReceiverSameAsCustomer();
 
+  // 超商取貨限定：「自行取貨／委託他人代為取貨」比「與聯絡資訊一樣」更
+  // 貼近取貨情境的說法，取代同一顆 checkbox 的呈現；宅配到府維持原本的
+  // checkbox 說法。兩組控制項底層都只是在讀寫同一個 receiverSameCheckbox
+  // 的勾選狀態，換算法完全共用 syncReceiverSameAsCustomer()，不用重寫
+  // 一份唯讀／必填切換邏輯。
+  const pickupModePicker = document.getElementById("pickup-mode-picker");
+  const receiverSameRow = document.getElementById("receiver-same-row");
+  const pickupModeSelf = document.getElementById("pickup-mode-self");
+  const pickupModeOther = document.getElementById("pickup-mode-other");
+  function syncPickupModeControls(method) {
+    const isCvs = method === "cvs";
+    pickupModePicker.hidden = !isCvs;
+    receiverSameRow.hidden = isCvs;
+  }
+  pickupModeSelf.addEventListener("change", () => {
+    receiverSameCheckbox.checked = true;
+    syncReceiverSameAsCustomer();
+  });
+  pickupModeOther.addEventListener("change", () => {
+    receiverSameCheckbox.checked = false;
+    syncReceiverSameAsCustomer();
+  });
+
   function formatMoney(n) {
     return `$${n.toLocaleString()}`;
   }
@@ -145,13 +168,15 @@
 
     confirmStoreEl.hidden = method !== "cvs";
     if (method === "cvs") {
-      confirmStoreEl.textContent = `${order.cvsStore.CVSStoreName}（${order.cvsStore.CVSAddress}）`;
+      confirmStoreEl.querySelector(".confirm-store__name").textContent = order.cvsStore.CVSStoreName;
+      confirmStoreEl.querySelector(".confirm-store__address").textContent = order.cvsStore.CVSAddress;
     }
 
     homeAddressFields.hidden = method !== "home";
     receiverZipcodeInput.required = method === "home";
     receiverAddressInput.required = method === "home";
 
+    syncPickupModeControls(method);
     customerSection.hidden = !method;
     receiverSection.hidden = !method;
     if (method) {

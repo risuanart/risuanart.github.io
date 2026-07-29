@@ -569,11 +569,50 @@
   max-width: 50ch;
 }
 
+/* 選定門市卡片：定位圖示＋門市名稱（粗體）＋地址（次要色），跟
+   .shipping-option／.confirm-field__control 同一套圓角、surface-light
+   底色語言，取代原本一整行擠在一起的純文字，一眼就能認出「這裡已經
+   選好了」。 */
 .confirm-store {
-  margin: var(--space-2) 0 0;
-  font-size: var(--font-size-sm);
-  color: var(--color-text-secondary);
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+  padding: var(--space-4);
+  border-radius: 10px;
+  background: var(--color-surface-light);
   max-width: 40ch;
+}
+
+/* .confirm-store 自己宣告了 display，同一個「作者樣式表蓋過瀏覽器內建
+   [hidden]{display:none}」的成因，這裡照慣例補上明確的覆蓋規則。 */
+.confirm-store[hidden] {
+  display: none;
+}
+
+.confirm-store__icon {
+  flex: none;
+  margin-top: 2px;
+  color: var(--color-text-secondary);
+}
+
+.confirm-store__body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.confirm-store__name {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.confirm-store__address {
+  margin: 0;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
 }
 
 /* 「你選購的商品」收合區：summary 取代原本純文字的 <h2>，左邊標題、
@@ -755,6 +794,42 @@ details[open] > .confirm-summary .confirm-summary__chevron {
 }
 
 .confirm-checkbox input {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--color-text-primary);
+  cursor: pointer;
+}
+
+/* 同一個「作者樣式表 display:flex 蓋過瀏覽器內建 [hidden]」成因，先補
+   在共用的 .confirm-checkbox 上——目前只有收件資料那顆會被動態隱藏，
+   但這樣以後其他地方要用同一個 class＋hidden 也不會重踩一次。 */
+.confirm-checkbox[hidden] {
+  display: none;
+}
+
+/* 超商取貨限定的「自行取貨／委託他人代為取貨」單選，跟 .confirm-checkbox
+   同一套視覺語言（大小、字級、勾選色），只是換成一組 radio。 */
+.confirm-radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  width: 100%;
+}
+
+.confirm-radio-group[hidden] {
+  display: none;
+}
+
+.confirm-radio {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+  cursor: pointer;
+}
+
+.confirm-radio input {
   width: 20px;
   height: 20px;
   accent-color: var(--color-text-primary);

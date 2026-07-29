@@ -138,7 +138,16 @@
             </button>
           </div>
 
-          <p class="confirm-store" hidden></p>
+          <!-- 選定門市卡片：原本只有一行純文字，門市名稱跟地址混在一起不容易
+               一眼看出「已經選好了」；改成定位圖示＋門市名稱（粗體）＋地址
+               （次要色）分兩行的卡片，跟頁面其他資訊區塊同一套視覺語言。 -->
+          <div class="confirm-store" hidden>
+            <svg class="confirm-store__icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.2"/></svg>
+            <div class="confirm-store__body">
+              <p class="confirm-store__name"></p>
+              <p class="confirm-store__address"></p>
+            </div>
+          </div>
         </section>
 
         <!-- 聯絡資訊（下單、收款項通知的聯絡窗口）跟收件資料（實際收貨的
@@ -224,7 +233,23 @@
               </label>
             </div>
 
-            <label class="confirm-checkbox">
+            <!-- 超商取貨限定：「自行取貨／委託他人代為取貨」比「與聯絡資訊
+                 一樣」更貼近取貨情境的說法，取代同一顆 checkbox 的呈現；
+                 宅配到府維持原本的 checkbox 說法（收件人在家，不是「取貨」）。
+                 兩邊底層都是同一個 #receiver-same-as-customer 的勾選狀態，
+                 只是換一種說法／UI，見 checkout.js syncPickupModeControls()。 -->
+            <div class="confirm-radio-group" id="pickup-mode-picker" hidden>
+              <label class="confirm-radio">
+                <input type="radio" name="pickupMode" id="pickup-mode-self" checked>
+                <span>我會自行取貨</span>
+              </label>
+              <label class="confirm-radio">
+                <input type="radio" name="pickupMode" id="pickup-mode-other">
+                <span>我會委託他人代為取貨</span>
+              </label>
+            </div>
+
+            <label class="confirm-checkbox" id="receiver-same-row">
               <input type="checkbox" id="receiver-same-as-customer" checked>
               <span>與聯絡資訊一樣</span>
             </label>
