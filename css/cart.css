@@ -292,6 +292,9 @@
    最右一個箭頭指出可以再展開回去確認／修改。結帳前這條是隱藏的（購物車
    本身就是主畫面，不需要收合）。 */
 .cart-collapse {
+  appearance: none;
+  border: none;
+  width: 100%;
   display: flex;
   align-items: center;
   gap: var(--space-2);
@@ -299,16 +302,13 @@
   padding: var(--space-4);
   border-radius: 10px;
   background: var(--color-surface-light);
+  font-family: inherit;
+  text-align: left;
   cursor: pointer;
-  list-style: none;
 }
 
-.cart-collapse::-webkit-details-marker {
-  display: none;
-}
-
-/* summary 預設 display:list-item，上面改成 flex 之後同樣會蓋掉瀏覽器內建的
-   [hidden]{display:none}，這裡明確補回來。 */
+/* 自己宣告了 display:flex，會蓋掉瀏覽器內建的 [hidden]{display:none}，
+   這裡明確補回來（這份檔案裡好幾處同成因的修正）。 */
 .cart-collapse[hidden] {
   display: none;
 }
@@ -334,8 +334,266 @@
   transition: transform var(--duration-fast) var(--ease-standard);
 }
 
-details[open] > .cart-collapse .cart-collapse__chevron {
+.cart-collapse[aria-expanded="true"] .cart-collapse__chevron {
   transform: rotate(180deg);
+}
+
+/* ---------- 訂單明細面板：從畫面下方滑出 ----------
+   結帳後點「確認訂單詳情」（頁面上那條橫條，或併進頂部導覽之後的那顆
+   按鈕）就滑出這塊。刻意不做成就地展開——就地展開會把下面正在填的表單
+   整個推走，關掉之後還要再滑回原本的位置；面板是 position:fixed 蓋在
+   上面，開關全程不動底下的捲動位置。 ---------- */
+.order-sheet {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  align-items: flex-end;
+}
+
+.order-sheet[hidden] {
+  display: none;
+}
+
+.order-sheet__backdrop {
+  position: absolute;
+  inset: 0;
+  background: color-mix(in srgb, var(--color-text-primary) 45%, transparent);
+  animation: order-sheet-fade var(--duration-normal) var(--ease-standard);
+}
+
+.order-sheet__panel {
+  position: relative;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  /* 面板內部捲到底之後，不要把捲動接力給底下的表單。 */
+  overscroll-behavior: contain;
+  padding: var(--space-6) var(--pad-h) calc(var(--space-6) + env(safe-area-inset-bottom, 0px));
+  border-radius: 16px 16px 0 0;
+  background: var(--color-surface-light);
+  box-shadow: var(--shadow-raised);
+  animation: order-sheet-rise var(--duration-normal) var(--ease-standard);
+}
+
+@keyframes order-sheet-fade {
+  from { opacity: 0; }
+}
+
+@keyframes order-sheet-rise {
+  from { transform: translateY(100%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .order-sheet__backdrop,
+  .order-sheet__panel {
+    animation: none;
+  }
+}
+
+.order-sheet__head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.order-sheet__title {
+  flex: 1;
+  margin: 0;
+  font-family: Georgia, 'Playfair Display', serif;
+  font-weight: 600;
+  font-size: var(--font-size-lg);
+  color: var(--color-text-primary);
+}
+
+.order-sheet__close {
+  appearance: none;
+  border: none;
+  background: none;
+  flex: none;
+  padding: var(--space-1);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+}
+
+.order-sheet__close svg {
+  display: block;
+}
+
+.order-sheet__items {
+  margin: var(--space-6) 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.order-sheet__item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+}
+
+/* 縮圖左上角疊一個數量圓標（參考圖的做法），比另外排一行「× 2」省空間，
+   也更快讀懂「這個買了幾件」。 */
+.order-sheet__thumb-wrap {
+  position: relative;
+  flex: none;
+}
+
+.order-sheet__thumb {
+  display: block;
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: var(--radius-sharp);
+}
+
+.order-sheet__thumb.placeholder-box {
+  padding: 0;
+  font-size: 0.55rem;
+}
+
+.order-sheet__thumb--empty {
+  background: color-mix(in srgb, var(--color-text-secondary) 15%, transparent);
+}
+
+.order-sheet__qty {
+  position: absolute;
+  top: -6px;
+  left: -6px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 9px;
+  background: var(--color-text-primary);
+  color: var(--color-surface-light);
+  font-size: 0.65rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.order-sheet__item-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.order-sheet__item-name {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.order-sheet__item-variant {
+  margin: 2px 0 0;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
+.order-sheet__item-price {
+  flex: none;
+  margin: 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.order-sheet__discount {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-6);
+  padding-top: var(--space-6);
+  border-top: 1px solid color-mix(in srgb, var(--color-text-secondary) 20%, transparent);
+}
+
+.order-sheet__discount-input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--color-text-secondary) 12%, transparent);
+  padding: var(--space-2) var(--space-4);
+  font-family: inherit;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+  transition: box-shadow var(--duration-fast) var(--ease-standard);
+}
+
+.order-sheet__discount-input:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--color-text-primary);
+}
+
+.order-sheet__discount-input::placeholder {
+  color: color-mix(in srgb, var(--color-text-secondary) 70%, transparent);
+}
+
+.order-sheet__discount-apply {
+  appearance: none;
+  flex: none;
+  border: none;
+  border-radius: 10px;
+  padding: var(--space-2) var(--space-4);
+  background: var(--color-text-primary);
+  color: var(--color-surface-light);
+  font-family: inherit;
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity var(--duration-fast) var(--ease-standard);
+}
+
+.order-sheet__discount-apply:active {
+  opacity: 0.7;
+}
+
+.order-sheet__lines {
+  margin: var(--space-4) 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.order-sheet__line {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.order-sheet__line dt {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.order-sheet__line dd {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.order-sheet__grand {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+  padding-top: var(--space-4);
+  border-top: 1px solid color-mix(in srgb, var(--color-text-secondary) 20%, transparent);
+  font-family: Georgia, 'Playfair Display', serif;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.order-sheet__grand span:last-child {
+  font-size: var(--font-size-lg);
+  font-variant-numeric: tabular-nums;
 }
 
 /* ---------- 購物車清單：依大分類分組 ---------- */

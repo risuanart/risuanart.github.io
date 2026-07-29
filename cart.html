@@ -61,27 +61,16 @@
       <h1 class="work-heading fade-in"><span class="inner">您的購物車</span></h1>
     </header>
 
-    <!-- 購物車編輯畫面。按「結帳」之後，這一整塊會收合成一條「確認訂單詳情
-         ＋金額」的橫條（點一下可以再展開回去確認／修改內容），下面接著展開
-         #order-confirm-view 那塊（同一頁往下展開，不再跳轉到另一個頁面）。
-         如果網址上已經帶著 orderId（例如從綠界電子地圖選店回來），一開始
-         就直接收合這塊、跳去顯示確認區塊，見 js/checkout.js。
-
-         用原生 <details>／<summary>：展開收合、鍵盤操作、無障礙狀態都交給
-         瀏覽器內建行為。還沒結帳前 details 維持 open 且 summary 橫條隱藏
-         （這時候購物車就是主畫面，不需要收合），結帳後才把 summary 顯示
-         出來並收起內容。
+    <!-- 購物車編輯畫面。按「結帳」之後，這一整塊會被藏起來，改顯示下面那條
+         「確認訂單詳情＋金額」的橫條，以及 #order-confirm-view 那塊（同一頁
+         往下展開，不再跳轉到另一個頁面）。如果網址上已經帶著 orderId
+         （例如從綠界電子地圖選店回來），一開始就直接藏起這塊，見
+         js/checkout.js。
 
          結帳確認區塊（#order-confirm-view）不套用捲動淡入——那是逐步展開
          的表單流程，切換步驟當下就該立即顯示，不需要跟敘事類頁面一樣
          等捲動淡入。 -->
-    <details id="cart-edit-view" open>
-      <summary class="cart-collapse" hidden>
-        <span class="cart-collapse__label">確認訂單詳情</span>
-        <span class="cart-collapse__total"></span>
-        <svg class="cart-collapse__chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-      </summary>
-
+    <div id="cart-edit-view">
       <section class="chapter fade-in delay-1">
         <div class="cart-columns" hidden>
           <span>商品</span>
@@ -106,7 +95,18 @@
         </div>
         <button type="button" class="work__cta work__cta--primary" data-checkout-cta disabled>結帳</button>
       </footer>
-    </details>
+    </div>
+
+    <!-- 結帳後取代購物車編輯區的橫條：左邊「確認訂單詳情」、右邊金額。
+         點一下從畫面下方滑出訂單明細（.order-sheet），不是就地展開——
+         就地展開會把下面正在填的表單整個推走，關掉之後還要再滑回來，
+         用彈出面板才能關掉就回到原本填到一半的位置。往下滑時這條會併進
+         頂部導覽，見 js/checkout.js initOrderDock()。 -->
+    <button type="button" class="cart-collapse" hidden aria-haspopup="dialog" aria-expanded="false">
+      <span class="cart-collapse__label">確認訂單詳情</span>
+      <span class="cart-collapse__total"></span>
+      <svg class="cart-collapse__chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+    </button>
 
     <!-- 結帳確認區塊：選送貨方式、填收件資訊，最後送出到綠界付款頁。
          內容跟欄位配置沿用原本 checkout-confirm.html 的設計，只是現在跟
@@ -296,6 +296,40 @@
     </div>
 
   </main>
+
+  <!-- 訂單明細面板：從畫面下方滑出，蓋在正在填的表單上面，關掉就回到原本
+       填到一半的位置（面板是 position:fixed，開關過程完全不動底下的捲動
+       位置）。放在 <main> 外面，才不會被 .product-page 的 overflow 裁掉。 -->
+  <div class="order-sheet" hidden>
+    <div class="order-sheet__backdrop" data-order-sheet-close></div>
+    <div class="order-sheet__panel" role="dialog" aria-modal="true" aria-labelledby="order-sheet-title">
+      <div class="order-sheet__head">
+        <h2 class="order-sheet__title" id="order-sheet-title">訂單資訊</h2>
+        <button type="button" class="order-sheet__close" data-order-sheet-close aria-label="關閉訂單明細">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </div>
+      <ul class="order-sheet__items"></ul>
+      <div class="order-sheet__discount">
+        <input type="text" class="order-sheet__discount-input" placeholder="折扣碼" aria-label="折扣碼">
+        <button type="button" class="order-sheet__discount-apply">套用</button>
+      </div>
+      <dl class="order-sheet__lines">
+        <div class="order-sheet__line">
+          <dt>合計</dt>
+          <dd data-sheet-subtotal></dd>
+        </div>
+        <div class="order-sheet__line">
+          <dt>運費</dt>
+          <dd data-sheet-shipping></dd>
+        </div>
+      </dl>
+      <div class="order-sheet__grand">
+        <span>總金額</span>
+        <span data-sheet-grand></span>
+      </div>
+    </div>
+  </div>
 
   <script src="js/cart.js"></script>
   <script src="js/checkout.js"></script>

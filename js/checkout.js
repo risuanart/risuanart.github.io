@@ -31,20 +31,21 @@
   const checkoutBtn = document.querySelector("[data-checkout-cta]");
   const checkoutErrorEl = document.querySelector(".checkout-error");
 
-  // 結帳後把整個購物車編輯區收合成一條「確認訂單詳情＋金額」的橫條；
-  // 還沒結帳前橫條是隱藏的、內容維持展開（購物車本身就是主畫面）。
-  const cartCollapseBar = cartEditView.querySelector(".cart-collapse");
-  const cartCollapseTotal = cartEditView.querySelector(".cart-collapse__total");
+  // 結帳後把整個購物車編輯區換成一條「確認訂單詳情＋金額」的橫條；
+  // 還沒結帳前橫條是隱藏的（購物車本身就是主畫面）。
+  const cartCollapseBar = document.querySelector(".cart-collapse");
+  const cartCollapseTotal = cartCollapseBar.querySelector(".cart-collapse__total");
   function collapseCartEditView(total) {
+    cartEditView.hidden = true;
     cartCollapseBar.hidden = false;
     cartCollapseTotal.textContent = formatMoney(total);
     headerOrderTotal.textContent = formatMoney(total);
-    cartEditView.open = false;
     updateOrderDock();
   }
   function expandCartEditView() {
+    cartEditView.hidden = false;
     cartCollapseBar.hidden = true;
-    cartEditView.open = true;
+    closeOrderSheet();
     updateOrderDock();
   }
 
@@ -73,22 +74,95 @@
     siteHeader.classList.toggle("is-order-docked", docked);
     headerOrderBtn.hidden = !docked;
     headerOrderTotal.hidden = !docked;
-    headerOrderBtn.setAttribute("aria-expanded", cartEditView.open ? "true" : "false");
   }
 
-  if (headerOrderBtn) {
-    // 點頂部導覽上的「確認訂單詳情」＝展開明細並捲回去看，等同於直接點
-    // 上面那條橫條。
-    headerOrderBtn.addEventListener("click", () => {
-      cartEditView.open = true;
-      cartCollapseBar.scrollIntoView({ behavior: "smooth", block: "start" });
-      updateOrderDock();
-    });
-  }
   (scroller || window).addEventListener("scroll", updateOrderDock, { passive: true });
   window.addEventListener("resize", updateOrderDock);
-  // 客人自己點橫條展開／收合時，箭頭方向與 docked 狀態也要跟著更新。
-  cartEditView.addEventListener("toggle", updateOrderDock);
+
+  // ---------- 訂單明細面板（從畫面下方滑出）----------
+  // 刻意不做成就地展開：就地展開會把下面正在填的表單整個推走，關掉之後
+  // 還要再滑回原本的位置。面板是 position:fixed 蓋在上面，開關全程都不
+  // 動底下的捲動位置，關掉就回到原本填到一半的地方。
+  const orderSheet = document.querySelector(".order-sheet");
+  const orderSheetItems = orderSheet.querySelector(".order-sheet__items");
+  const orderSheetSubtotal = orderSheet.querySelector("[data-sheet-subtotal]");
+  const orderSheetShipping = orderSheet.querySelector("[data-sheet-shipping]");
+  const orderSheetGrand = orderSheet.querySelector("[data-sheet-grand]");
+
+  // 縮圖只有前端的商品資料（cart.js 的 SCHEME_IMAGES）才有，後端回傳的
+  // 品項沒有；用「品名＋規格名」把後端品項對回本機購物車那一筆，拿得到
+  // 就畫縮圖，拿不到就退回沒有縮圖的排版，不會整個壞掉。
+  function localCartLookup() {
+    const map = new Map();
+    if (!window.RisuanCart) return map;
+    const { readCart, PRODUCTS, SCHEME_NAMES } = window.RisuanCart;
+    readCart().forEach((item) => {
+      const product = PRODUCTS[item.productKey];
+      const key = `${product ? product.name : item.productKey}|${SCHEME_NAMES[item.scheme] || ""}`;
+      map.set(key, item);
+    });
+    return map;
+  }
+
+  function renderOrderSheet(order, method) {
+    const lookup = localCartLookup();
+    orderSheetItems.innerHTML = "";
+    order.items.forEach((item) => {
+      const li = document.createElement("li");
+      li.className = "order-sheet__item";
+      const local = lookup.get(`${item.name}|${item.schemeName || ""}`);
+      // 對不回本機那一筆時（理論上不會發生，品名／規格名都是從同一份資料
+      // 送出去的），至少畫一個同尺寸的空方塊，數量圓標才有東西可以貼，
+      // 不會變成孤零零一顆數字浮在旁邊。
+      const thumb =
+        local && window.RisuanCart
+          ? window.RisuanCart.thumbHTML(local, "order-sheet__thumb")
+          : `<div class="order-sheet__thumb order-sheet__thumb--empty" aria-hidden="true"></div>`;
+      li.innerHTML = `
+        <div class="order-sheet__thumb-wrap">
+          ${thumb}
+          <span class="order-sheet__qty">${item.qty}</span>
+        </div>
+        <div class="order-sheet__item-body">
+          <p class="order-sheet__item-name">${item.name}</p>
+          ${item.schemeName ? `<p class="order-sheet__item-variant">${item.schemeName}</p>` : ""}
+        </div>
+        <p class="order-sheet__item-price">${formatMoney(item.lineTotal)}</p>
+      `;
+      orderSheetItems.appendChild(li);
+    });
+
+    // 還沒選送貨方式就還不知道運費，那一行顯示「選擇後計算」而不是硬掛
+    // 一個 $0，避免看起來像「這筆免運」。
+    const fee = method ? SHIPPING_FEES[method] : null;
+    orderSheetSubtotal.textContent = formatMoney(order.itemsTotal);
+    orderSheetShipping.textContent = fee === null ? "選擇送貨方式後計算" : formatMoney(fee);
+    orderSheetGrand.textContent = formatMoney(order.itemsTotal + (fee || 0));
+  }
+
+  function openOrderSheet() {
+    if (!currentOrder) return;
+    renderOrderSheet(currentOrder, currentShippingMethod);
+    orderSheet.hidden = false;
+    cartCollapseBar.setAttribute("aria-expanded", "true");
+    if (headerOrderBtn) headerOrderBtn.setAttribute("aria-expanded", "true");
+    orderSheet.querySelector(".order-sheet__close").focus();
+  }
+
+  function closeOrderSheet() {
+    orderSheet.hidden = true;
+    cartCollapseBar.setAttribute("aria-expanded", "false");
+    if (headerOrderBtn) headerOrderBtn.setAttribute("aria-expanded", "false");
+  }
+
+  cartCollapseBar.addEventListener("click", openOrderSheet);
+  if (headerOrderBtn) headerOrderBtn.addEventListener("click", openOrderSheet);
+  orderSheet.querySelectorAll("[data-order-sheet-close]").forEach((el) => {
+    el.addEventListener("click", closeOrderSheet);
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !orderSheet.hidden) closeOrderSheet();
+  });
 
   const loadingEl = document.getElementById("confirm-loading");
   const errorEl = document.getElementById("confirm-error");
@@ -239,6 +313,10 @@
     syncPickupModeControls(method);
     customerSection.hidden = !method;
     receiverSection.hidden = !method;
+    currentShippingMethod = method;
+    // 面板正開著的時候換送貨方式（例如點「宅配到府」），運費／總金額
+    // 要立刻跟著更新，不能等下次重新打開才對。
+    if (!orderSheet.hidden) renderOrderSheet(order, method);
     if (method) {
       document.getElementById("confirm-shipping-method").value = method;
       const fee = SHIPPING_FEES[method];
@@ -256,6 +334,9 @@
   // 最新狀態即可。
   let currentOrder = null;
   let isHomeConfirmed = false;
+  // 目前選中的送貨方式，給訂單明細面板算運費／總金額用（面板可能在客人
+  // 還沒選送貨方式時就被點開，那時候是 null）。
+  let currentShippingMethod = null;
 
   async function loadAndShowConfirm(orderId) {
     const wasHidden = showConfirmView();
