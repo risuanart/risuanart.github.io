@@ -272,10 +272,14 @@
   // sessionStorage 自己的生命週期處理就好。
   const marketingOptInInput = document.querySelector('[name="marketingOptIn"]');
   const DRAFT_STORAGE_KEY = "risuan-checkout-draft";
+  // 草稿只是為了撐過綠界那段導頁，正常情況幾秒到幾分鐘內就會用到；放寬到
+  // 30 分鐘是保險，同時也讓分頁忘了關、隔了一段時間才被別人碰到同一台
+  // 裝置時，草稿裡的聯絡資訊不會一直有效，縮短暴露的時間窗。
+  const DRAFT_MAX_AGE_MS = 30 * 60 * 1000;
   const draftInputs = [customerFirstNameInput, customerLastNameInput, customerPhoneInput, customerEmailInput, marketingOptInInput];
 
   function saveDraft() {
-    const draft = {};
+    const draft = { savedAt: Date.now() };
     draftInputs.forEach((el) => {
       draft[el.id || el.name] = el.type === "checkbox" ? el.checked : el.value;
     });
@@ -295,6 +299,14 @@
       draft = null;
     }
     if (!draft) return;
+    if (!draft.savedAt || Date.now() - draft.savedAt > DRAFT_MAX_AGE_MS) {
+      try {
+        sessionStorage.removeItem(DRAFT_STORAGE_KEY);
+      } catch (err) {
+        // 同上，清不掉就算了，反正也已經判定過期不會拿來用。
+      }
+      return;
+    }
     draftInputs.forEach((el) => {
       const key = el.id || el.name;
       if (!(key in draft)) return;
@@ -333,7 +345,23 @@
       receiverEmailInput.value = customerEmailInput.value;
     }
   }
-  receiverSameCheckbox.addEventListener("change", syncReceiverSameAsCustomer);
+  // 切去「不是同一人」的那一刻（不是每次 syncReceiverSameAsCustomer()
+  // 重新整理都清）才把姓名／電話／Email 清空——切換當下它們還留著剛剛
+  // 鏡射進來的聯絡資訊，客人容易誤送出「收件人＝訂購人」，但實際上是要
+  // 幫別人代收，得自己重新填一組。只在切換的瞬間清一次，不是掛進
+  // syncReceiverSameAsCustomer() 本體：那支函式也會被聯絡資訊欄位的
+  // input 事件呼叫（讓「同一人」狀態下的鏡射能即時更新），如果清空邏輯
+  // 也放在裡面，客人在收件資料已經是「不同人」時，光是打自己的手機號碼
+  // 就會把剛打好的收件人資料清掉。
+  function clearReceiverFields() {
+    receiverNameInput.value = "";
+    receiverPhoneInput.value = "";
+    receiverEmailInput.value = "";
+  }
+  receiverSameCheckbox.addEventListener("change", () => {
+    if (!receiverSameCheckbox.checked) clearReceiverFields();
+    syncReceiverSameAsCustomer();
+  });
   customerFirstNameInput.addEventListener("input", syncReceiverSameAsCustomer);
   customerLastNameInput.addEventListener("input", syncReceiverSameAsCustomer);
   customerPhoneInput.addEventListener("input", syncReceiverSameAsCustomer);
@@ -371,6 +399,7 @@
   });
   pickupModeOther.addEventListener("change", () => {
     receiverSameCheckbox.checked = false;
+    clearReceiverFields();
     syncReceiverSameAsCustomer();
     updateReceiverSectionVisibility();
   });
