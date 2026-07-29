@@ -261,6 +261,57 @@
   // 事件，不能只靠打字時的即時同步。
   form.addEventListener("submit", syncCustomerName);
 
+  // ---------- 聯絡資訊草稿：存在 sessionStorage，撐過綠界導頁 ----------
+  // 超商取貨選門市會整頁離開網站去綠界電子地圖，選完再導回來——這是一次
+  // 全新的頁面載入，DOM 裡任何還沒送出的欄位內容都會消失（純靜態站，沒有
+  // SPA 路由層可以保留 state），客人剛填好的聯絡資訊會整個不見。這裡在
+  // 相關欄位輸入時順手存一份草稿，頁面重新載入、欄位還是空的時候就讀
+  // 回來。用 sessionStorage 不是 localStorage——分頁關掉草稿就會跟著消失，
+  // 不會跨瀏覽階段留著別人填過的聯絡資料；實際送出付款是整頁導去綠界，
+  // 這支檔案收不到「訂單真的成功了」這個訊號可以主動清草稿，交給
+  // sessionStorage 自己的生命週期處理就好。
+  const marketingOptInInput = document.querySelector('[name="marketingOptIn"]');
+  const DRAFT_STORAGE_KEY = "risuan-checkout-draft";
+  const draftInputs = [customerFirstNameInput, customerLastNameInput, customerPhoneInput, customerEmailInput, marketingOptInInput];
+
+  function saveDraft() {
+    const draft = {};
+    draftInputs.forEach((el) => {
+      draft[el.id || el.name] = el.type === "checkbox" ? el.checked : el.value;
+    });
+    try {
+      sessionStorage.setItem(DRAFT_STORAGE_KEY, JSON.stringify(draft));
+    } catch (err) {
+      // 部分瀏覽器的隱私模式會擋 sessionStorage 寫入，草稿救援本來就是
+      // 錦上添花的功能，寫不進去就算了，不影響正常結帳流程。
+    }
+  }
+
+  function restoreDraft() {
+    let draft;
+    try {
+      draft = JSON.parse(sessionStorage.getItem(DRAFT_STORAGE_KEY) || "null");
+    } catch (err) {
+      draft = null;
+    }
+    if (!draft) return;
+    draftInputs.forEach((el) => {
+      const key = el.id || el.name;
+      if (!(key in draft)) return;
+      if (el.type === "checkbox") {
+        el.checked = draft[key];
+      } else if (!el.value) {
+        el.value = draft[key];
+      }
+    });
+    syncCustomerName();
+  }
+
+  draftInputs.forEach((el) => {
+    el.addEventListener(el.type === "checkbox" ? "change" : "input", saveDraft);
+  });
+  restoreDraft();
+
   // 收件資料勾選「與聯絡資訊一樣」（預設勾選——多數訂單本人自己收）：
   // 姓名／電話／Email 改唯讀，即時鏡射聯絡資訊剛剛填的資料。這裡故意用
   // readOnly 不是 disabled——disabled 的欄位送出表單時整個不會出現在
