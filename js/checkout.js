@@ -42,6 +42,7 @@
   const shippingCvsLink = document.getElementById("shipping-cvs-link");
   const shippingHomeBtn = document.getElementById("shipping-home-btn");
   const confirmStoreEl = document.querySelector(".confirm-store");
+  const receiverSection = document.getElementById("receiver-section");
   const homeAddressFields = document.getElementById("home-address-fields");
   const receiverZipcodeInput = document.getElementById("receiver-zipcode");
   const receiverAddressInput = document.getElementById("receiver-address");
@@ -53,6 +54,8 @@
   const customerFirstNameInput = document.getElementById("customer-first-name");
   const customerLastNameInput = document.getElementById("customer-last-name");
   const customerNameHidden = document.getElementById("confirm-customer-name");
+  const customerPhoneInput = document.querySelector('[name="customerPhone"]');
+  const customerEmailInput = document.querySelector('[name="customerEmail"]');
   function syncCustomerName() {
     customerNameHidden.value = `${customerLastNameInput.value.trim()}${customerFirstNameInput.value.trim()}`;
   }
@@ -61,6 +64,35 @@
   // 送出當下再保險同步一次——瀏覽器自動填表在少數情況不會觸發 input
   // 事件，不能只靠打字時的即時同步。
   form.addEventListener("submit", syncCustomerName);
+
+  // 收件資料勾選「與訂購人資料一樣」（預設勾選——多數訂單本人自己收）：
+  // 姓名／電話／Email 改唯讀，即時鏡射訂購人剛剛填的資料。這裡故意用
+  // readOnly 不是 disabled——disabled 的欄位送出表單時整個不會出現在
+  // POST 內容裡，readOnly 的欄位還是會照常送出，後端才收得到值。
+  const receiverSameCheckbox = document.getElementById("receiver-same-as-customer");
+  const receiverNameInput = document.querySelector('[name="receiverName"]');
+  const receiverPhoneInput = document.querySelector('[name="receiverPhone"]');
+  const receiverEmailInput = document.querySelector('[name="receiverEmail"]');
+  function syncReceiverSameAsCustomer() {
+    const same = receiverSameCheckbox.checked;
+    receiverNameInput.readOnly = same;
+    receiverPhoneInput.readOnly = same;
+    receiverEmailInput.readOnly = same;
+    receiverNameInput.required = !same;
+    receiverPhoneInput.required = !same;
+    if (same) {
+      receiverNameInput.value = customerNameHidden.value;
+      receiverPhoneInput.value = customerPhoneInput.value;
+      receiverEmailInput.value = customerEmailInput.value;
+    }
+  }
+  receiverSameCheckbox.addEventListener("change", syncReceiverSameAsCustomer);
+  customerFirstNameInput.addEventListener("input", syncReceiverSameAsCustomer);
+  customerLastNameInput.addEventListener("input", syncReceiverSameAsCustomer);
+  customerPhoneInput.addEventListener("input", syncReceiverSameAsCustomer);
+  customerEmailInput.addEventListener("input", syncReceiverSameAsCustomer);
+  form.addEventListener("submit", syncReceiverSameAsCustomer);
+  syncReceiverSameAsCustomer();
 
   function formatMoney(n) {
     return `$${n.toLocaleString()}`;
@@ -121,6 +153,7 @@
     receiverAddressInput.required = method === "home";
 
     customerSection.hidden = !method;
+    receiverSection.hidden = !method;
     if (method) {
       document.getElementById("confirm-shipping-method").value = method;
       const fee = SHIPPING_FEES[method];

@@ -141,12 +141,16 @@
           <p class="confirm-store" hidden></p>
         </section>
 
-        <section class="chapter" id="customer-section" hidden>
-          <h2 class="chapter__title"><span class="step-badge">2</span>聯絡資料</h2>
-          <p class="confirm-total"></p>
-          <form id="confirm-form" method="POST" action="">
-            <input type="hidden" name="orderId" id="confirm-order-id">
-            <input type="hidden" name="shippingMethod" id="confirm-shipping-method">
+        <!-- 訂購人資料（下單、收款項通知的聯絡窗口）跟收件資料（實際收貨的
+             人，禮物代購或公司代收等情境可能是別人）拆成兩個獨立步驟；
+             <form> 整個往外拉，同時包住這兩個 <section>，送出按鈕放在
+             最後——兩塊資料都填完才送出同一筆訂單。 -->
+        <form id="confirm-form" method="POST" action="">
+          <input type="hidden" name="orderId" id="confirm-order-id">
+          <input type="hidden" name="shippingMethod" id="confirm-shipping-method">
+
+          <section class="chapter" id="customer-section" hidden>
+            <h2 class="chapter__title"><span class="step-badge">2</span>訂購人資料</h2>
             <!-- 姓名分成名字／姓氏左右並排，送出時用 #confirm-customer-name
                  這個隱藏欄位把兩個值合併成後端原本認得的單一 customerName
                  （見 js/checkout.js syncCustomerName()），不改後端契約。 -->
@@ -184,6 +188,47 @@
               <input type="checkbox" name="marketingOptIn" value="true">
               <span>我想收到最新消息和限定優惠通知</span>
             </label>
+          </section>
+
+          <!-- 收件資料：勾選「與訂購人資料一樣」時（預設勾選——多數訂單都是
+               本人自己收），姓名／電話／Email 三格改唯讀並即時同步訂購人
+               資料，讓後端仍然收得到值（唯讀欄位會送出，disabled 欄位
+               不會，所以這裡用 readOnly 不是 disabled，見 checkout.js
+               syncReceiverSameAsCustomer()）；取消勾選才能自己填一組不同的
+               收件人資料。地址只在宅配到府才需要，維持只有這種送貨方式
+               才顯示。 -->
+          <section class="chapter" id="receiver-section" hidden>
+            <h2 class="chapter__title"><span class="step-badge">3</span>收件資料</h2>
+
+            <div id="receiver-fields">
+              <label class="confirm-field">
+                <span>收件人姓名</span>
+                <div class="confirm-field__control">
+                  <svg class="confirm-field__icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-3.5 3-6 7-6s7 2.5 7 6"/></svg>
+                  <input type="text" name="receiverName" maxlength="20" autocomplete="name" placeholder="收件人姓名">
+                </div>
+              </label>
+              <label class="confirm-field">
+                <span>收件人電話</span>
+                <div class="confirm-field__control">
+                  <svg class="confirm-field__icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 3.5c-1 0-2 .9-2 2 0 7.2 6.3 13.5 13.5 13.5 1.1 0 2-.9 2-2v-2.3l-3.7-1-1.6 1.6a9.5 9.5 0 0 1-5.6-5.6l1.6-1.6-1-3.7H6.5z"/></svg>
+                  <input type="tel" name="receiverPhone" pattern="09[0-9]{8}" placeholder="09XXXXXXXX" autocomplete="tel">
+                </div>
+              </label>
+              <label class="confirm-field">
+                <span>收件人 Email</span>
+                <div class="confirm-field__control">
+                  <svg class="confirm-field__icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="1.5"/><path d="m3.5 6.5 8.5 6 8.5-6"/></svg>
+                  <input type="email" name="receiverEmail" autocomplete="email" placeholder="you@example.com">
+                </div>
+              </label>
+            </div>
+
+            <label class="confirm-checkbox">
+              <input type="checkbox" id="receiver-same-as-customer" checked>
+              <span>與訂購人資料一樣</span>
+            </label>
+
             <div id="home-address-fields" hidden>
               <label class="confirm-field">
                 <span>郵遞區號</span>
@@ -199,12 +244,16 @@
                 </div>
               </label>
             </div>
+          </section>
+
+          <div class="chapter confirm-pay">
+            <p class="confirm-total"></p>
             <button type="submit" class="work__cta work__cta--primary">
               <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
               <span>前往付款</span>
             </button>
-          </form>
-        </section>
+          </div>
+        </form>
       </div>
     </div>
 

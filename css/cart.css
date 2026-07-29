@@ -681,18 +681,29 @@ details[open] > .confirm-summary .confirm-summary__chevron {
   transition: color var(--duration-fast) var(--ease-standard);
 }
 
+/* <form> 現在整個往外拉，同時包住「訂購人資料」「收件資料」兩個
+   <section>＋最後的小計／送出按鈕，本身只負責統一最大寬度，不再是
+   欄位直接排列用的 flex 容器——欄位排列（flex column＋gap）改放到
+   #customer-section／#receiver-section 這一層，見下面。 */
 #confirm-form {
-  margin-top: var(--space-4);
+  max-width: 40ch;
+}
+
+/* 「訂購人資料」「收件資料」內部的欄位（標題、姓名列、手機、Email……）
+   用同一套 flex column＋gap 排列，取代原本掛在 #confirm-form 上的那套
+   （現在 form 底下多了兩個 section，不能再整個攤平排。） */
+#customer-section,
+#receiver-section {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: var(--space-4);
-  max-width: 40ch;
 }
 
-/* #home-address-fields 本身只是個純 <div>（不是 #confirm-form 的直接
-   flex 子項），裡面的郵遞區號／完整收件地址兩個欄位原本完全沒有間距，
-   會黏在一起——這裡另外補上跟外層 #confirm-form 一致的 flex＋gap。 */
+/* #receiver-fields／#home-address-fields 本身只是純 <div>（不是外層
+   flex 容器的直接子項自己不會自動排列），裡面的欄位原本完全沒有間距，
+   會黏在一起——這裡補上跟外層一致的 flex＋gap。 */
+#receiver-fields,
 #home-address-fields {
   display: flex;
   flex-direction: column;
@@ -778,6 +789,12 @@ details[open] > .confirm-summary .confirm-summary__chevron {
    維持鍵盤操作／無障礙可以看到目前聚焦在哪一格。 */
 .confirm-field__control:focus-within {
   box-shadow: 0 0 0 2px var(--color-text-primary);
+}
+
+/* 「與訂購人資料一樣」勾選時，收件人姓名／電話／Email 改唯讀並同步顯示
+   訂購人資料——降低透明度暗示「這裡不能編輯」，取消勾選才恢復正常。 */
+.confirm-field__control:has(input:read-only) {
+  opacity: 0.55;
 }
 
 .confirm-field__icon {
