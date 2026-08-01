@@ -88,6 +88,19 @@
     "welcome-pink": BASE_PREFIX + "assets/images/products/fluid-art/RS_05.8_產品圖片_800x800拷貝.jpg",
   };
 
+  // 總覽格狀購物頁（products/shop.html）電腦版 hover 換圖用的「第二張圖」：
+  // 內容物全展開，跟主圖（成品模擬圖）是不同角度／不同用途的真實照片，
+  // 不是隨便複製一張湊數。查不到對應圖的商品（目前砂畫兩款都還沒有實拍
+  // 素材）就不會有 hover 換圖，見 js/products-overview.js 的條件判斷。
+  const SCHEME_DETAIL_IMAGES = {
+    "classic-red": BASE_PREFIX + "assets/images/products/fluid-art/RS_05.1_產品圖片_800x800拷貝.jpg",
+    "welcome-pink": BASE_PREFIX + "assets/images/products/fluid-art/RS_05.2_產品圖片_800x800拷貝.jpg",
+  };
+
+  function detailImageSrc(scheme) {
+    return SCHEME_DETAIL_IMAGES[scheme] || null;
+  }
+
   // 砂畫目前還沒有任何實拍素材，SCHEME_IMAGES 查不到對應圖時，縮圖改畫一個
   // 文字佔位框（跟商品頁 .placeholder-box 同一套視覺語言），不要留一個空的
   // src 讓瀏覽器顯示破圖圖示。className 決定實際尺寸／圓角（見 cart.css
@@ -458,15 +471,25 @@
     return { getQty, setQty };
   }
 
+  // 「已加入」暫時提示用的勾勾圖示（跟全站圖示同一套線條風格：
+  // stroke-width 2、圓端），純圖示鈕（沒有 .work__cta-label 文字，例如
+  // 加購卡、總覽格狀商品卡的圓形「+」）點下去換成這個，不是換文字。
+  const CHECK_ICON_HTML = '<path d="M5 13l4 4L19 7"/>';
+
   // 商品頁「加入購物車」按鈕：讀取當下選中的色系 chip（跟 product-gallery.js
   // 共用同一批 .color-picker__chip，不用另外維護一份選色狀態）。按鈕內有圖示＋
-  // 文字兩個子元素，「已加入」的暫時提示只換文字那個 span，圖示不會被蓋掉；
-  // 找不到 .work__cta-label 的話（萬一有按鈕沒套用新結構）退回整顆按鈕的文字。
+  // 文字兩個子元素的（.work__cta-label 存在），「已加入」的暫時提示只換文字
+  // 那個 span，圖示不會被蓋掉；純圖示鈕（沒有文字 label）換成上面的勾勾圖示，
+  // 不能沿用「退回整顆按鈕的文字」這條路——那樣會把按鈕原本的 <svg> 整個
+  // 清空換成純文字，「已加入」的提示結束後 textContent 復原成空字串
+  // （因為一開始就沒有文字節點），圖示就永久消失了，是個真的會炸掉的 bug。
   function initAddToCart(buyQty) {
     document.querySelectorAll("[data-add-to-cart]").forEach((btn) => {
       const productKey = btn.dataset.product;
-      const label = btn.querySelector(".work__cta-label") || btn;
-      const originalLabel = label.textContent;
+      const label = btn.querySelector(".work__cta-label");
+      const svg = btn.querySelector("svg");
+      const originalLabel = label ? label.textContent : null;
+      const originalIconHTML = !label && svg ? svg.innerHTML : null;
       // 總覽購物頁的每張卡片是 [data-product-card]，只在那張卡片範圍內找選中的
       // 規格；其他頁面沒有這層包裝，closest() 找不到就退回 null，activeScheme()
       // 收到 undefined 會自己 fallback 成 document，行為跟改之前完全一樣。
@@ -481,7 +504,9 @@
         const qty = !scope && buyQty ? buyQty.getQty() : 1;
         addItem(productKey, scheme, qty);
         playCartChime();
-        flyToCart(btn.querySelector("svg"));
+        // 飛入購物車的動畫要用原本的圖示（複製一份去飛），一定要在下面換成
+        // 勾勾之前呼叫，不然飛出去的會是勾勾而不是原本按下去那顆圖示。
+        flyToCart(svg);
         const product = PRODUCTS[productKey];
         const schemeName = SCHEME_NAMES[scheme] || "";
         const detail = schemeName ? `（${schemeName}）` : "";
@@ -489,10 +514,18 @@
         showCartToast(`已加入：${product ? product.name : ""}${detail}${qtyDetail}`);
         if (!scope && buyQty) buyQty.setQty(1);
 
-        label.textContent = "已加入 ✓";
         btn.disabled = true;
+        if (label) {
+          label.textContent = "已加入 ✓";
+        } else if (svg) {
+          svg.innerHTML = CHECK_ICON_HTML;
+        }
         setTimeout(() => {
-          label.textContent = originalLabel;
+          if (label) {
+            label.textContent = originalLabel;
+          } else if (svg && originalIconHTML !== null) {
+            svg.innerHTML = originalIconHTML;
+          }
           btn.disabled = false;
         }, 1200);
       });
@@ -552,7 +585,7 @@
             <p class="cart-preview__item-name">${product.name}</p>
             <p class="cart-preview__item-meta">${metaParts.join("　")}</p>
           </div>
-          <p class="cart-preview__item-price">$${itemLineTotal(item).toLocaleString()}</p>
+          <p class="cart-preview__item-price price-text">$${itemLineTotal(item).toLocaleString()}</p>
         `;
         list.appendChild(li);
       });
@@ -629,7 +662,7 @@
               <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16"/><path d="M9 7V4h6v3"/><path d="M6 7l1 13h10l1-13"/></svg>
             </button>
           </div>
-          <p class="cart-item__price">$${(product.price * item.qty).toLocaleString()}</p>
+          <p class="cart-item__price price-text">$${(product.price * item.qty).toLocaleString()}</p>
         </div>
       </div>
     `;
@@ -739,7 +772,9 @@
     SCHEME_NAMES,
     CATEGORY_ORDER,
     CATEGORY_LABELS,
+    PRODUCT_URLS,
     thumbHTML,
+    detailImageSrc,
     // initAddToCart 在這支檔案自己的 init() 時已經跑過一次，但那時候總覽頁的
     // 商品卡片還沒被 products-overview.js 動態建立出來，掃描不到任何按鈕。
     // 開放這個函式讓總覽頁卡片建好之後可以重新呼叫一次，掛上「加入購物車」

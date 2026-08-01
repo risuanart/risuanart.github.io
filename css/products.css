@@ -717,7 +717,6 @@ button.text-link {
 
 .addon-carousel__track {
   display: flex;
-  gap: var(--space-3);
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
@@ -731,9 +730,13 @@ button.text-link {
   display: none;
 }
 
+/* 卡片尺寸／間距是照參考頁面（Yuzawaya 商品滑動列）實測換算的比例：
+   卡片固定寬 122.8px、左右各留 4.8px margin，相鄰兩張卡片之間因此
+   自然形成 9.6px 的間隙——不是另外在 track 上加 gap，兩者疊加會變太寬。 */
 .addon-card {
-  flex: 0 0 46vw;
-  max-width: 190px;
+  flex: 0 0 auto;
+  width: 122.8px;
+  margin: 0 4.8px;
   scroll-snap-align: start;
   display: flex;
   flex-direction: column;
@@ -750,43 +753,365 @@ button.text-link {
   width: 100%;
   height: 100%;
   padding: var(--space-1);
-  font-size: 0.55rem;
+  font-size: 0.5rem;
 }
 
 .addon-card__body {
-  padding: var(--space-3) var(--space-3) 0;
+  flex: 1;
+  padding: 8px 8px 0;
   display: flex;
   flex-direction: column;
-  gap: var(--space-1);
+  gap: 4px;
 }
 
 .addon-card__name {
   margin: 0;
-  font-size: var(--font-size-sm);
+  font-size: 0.75rem;
+  line-height: 1.3;
   font-weight: 700;
   color: var(--color-text-primary);
 }
 
 .addon-card__note {
   margin: 0;
-  font-size: var(--font-size-xs);
-  line-height: 1.6;
+  font-size: 0.65rem;
+  line-height: 1.5;
   color: var(--color-text-secondary);
 }
 
+/* 價格跟「加入購物車」圖示鈕同一排、底部對齊。margin-top:auto 讓這排
+   固定貼在卡片最底部，不受上面說明文字行數影響（不同加購項目的說明
+   長度不一樣，2 行或 3 行都好，這排位置仍然一致）。 */
+.addon-card__footer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: auto;
+  padding-bottom: 8px;
+}
+
+/* 字型／字級／顏色改用全站共用的 .price-text（見 base.css），這裡只管
+   排版位置。 */
 .addon-card__price {
-  margin: var(--space-1) 0 0;
-  font-size: var(--font-size-sm);
-  font-variant-numeric: tabular-nums;
-  color: var(--color-text-primary);
+  margin: 0;
 }
 
 /* 沿用全站唯一一顆「加入購物車」按鈕語彙（.work__cta--primary），只加寬度／
-   間距的覆寫，不重新定義顏色或字重——避免同一個動作在不同地方長得不一樣。 */
+   間距的覆寫，不重新定義顏色或字重——避免同一個動作在不同地方長得不一樣。
+   只留圖示、拿掉文字後，可及性名稱改由 markup 上的 aria-label 提供。
+   min-height:44px 的觸控下限在 .work__cta--primary 本體上，這裡不動它。 */
 .addon-card__cta {
+  flex-shrink: 0;
   width: auto;
-  margin: var(--space-3);
-  margin-top: auto;
+  margin: 0;
+}
+
+/* ---------- 材料包總覽購物頁（products/shop.html）：搜尋列＋橫向分類圖示列 ----------
+   從 products/index.html 搬過來這裡——這個總覽格狀購物頁比原本的敘事式
+   母頁更適合放搜尋／分類快速入口，兩邊不用重複維護同一組 UI。搜尋清單
+   資料直接讀 js/products-overview.js 建卡片時用的同一份 PRODUCTS，不用
+   另外寫死一份重複的商品名稱／價格。 */
+.quick-nav {
+  margin-top: var(--space-6);
+}
+
+.quick-nav__search {
+  position: relative;
+}
+
+.quick-nav__search-input {
+  width: 100%;
+  height: 36px;
+  box-sizing: border-box;
+  padding: 0 38px 0 16px;
+  border: 1px solid color-mix(in srgb, var(--color-text-secondary) 30%, transparent);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.5);
+  font-family: inherit;
+  font-size: 13px;
+  color: var(--color-text-primary);
+}
+
+.quick-nav__search-input::placeholder {
+  color: var(--color-text-secondary);
+}
+
+.quick-nav__search-input:focus {
+  outline: none;
+  border-color: var(--color-text-primary);
+}
+
+/* 放大鏡固定顯示在右側，原生的清除叉叉會跟它疊在一起，乾脆藏起來——
+   清空搜尋字直接全選刪除就好，不差這顆按鈕。 */
+.quick-nav__search-input::-webkit-search-cancel-button {
+  display: none;
+}
+
+.quick-nav__search-icon {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-text-secondary);
+  pointer-events: none;
+}
+
+.quick-nav__search-results {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 8px);
+  margin: 0;
+  padding: 8px;
+  list-style: none;
+  background: var(--color-surface-light);
+  border: 1px solid color-mix(in srgb, var(--color-text-secondary) 30%, transparent);
+  border-radius: 16px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+  max-height: 280px;
+  overflow-y: auto;
+  z-index: 5;
+}
+
+.quick-nav__search-results a,
+.quick-nav__search-results .no-result {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  font-size: 14px;
+  color: inherit;
+}
+
+.quick-nav__search-results a:hover {
+  background: color-mix(in srgb, var(--color-text-secondary) 12%, transparent);
+}
+
+/* 字型／字級／顏色改用全站共用的 .price-text（見 base.css），這裡只管
+   排版位置。 */
+.quick-nav__search-results .result-price {
+  white-space: nowrap;
+}
+
+.quick-nav__search-results .no-result {
+  color: var(--color-text-secondary);
+  font-size: 13px;
+}
+
+/* 分類圖示列滿版貼齊視窗邊緣，手法跟 .addon-carousel__track 同一套
+   （負 margin 抵銷 .product-page／.work 的左右內距，再用同樣的內距補
+   回來）。項目之間刻意不另外加 flex gap：每個項目寬 81px、圓形縮圖 57px
+   置中，兩個相鄰圓形之間自然就是 24px 的間隙、中心距等於 81px 的項目
+   寬——這兩個數字是直接量測參考圖算出來的，不是巧合。 */
+.quick-nav__categories {
+  display: flex;
+  margin-top: var(--space-4);
+  margin-left: calc(-1 * var(--pad-h));
+  margin-right: calc(-1 * var(--pad-h));
+  padding: 0 var(--pad-h) 6px;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+}
+
+.quick-nav__cat {
+  flex: 0 0 auto;
+  width: 81px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  scroll-snap-align: start;
+}
+
+.quick-nav__cat-thumb {
+  width: 57px;
+  height: 57px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed color-mix(in srgb, var(--color-text-secondary) 40%, transparent);
+  background: color-mix(in srgb, var(--color-text-secondary) 8%, transparent);
+  color: var(--color-text-secondary);
+}
+
+.quick-nav__cat-label {
+  width: 72px;
+  font-size: 11px;
+  line-height: 1.4;
+  letter-spacing: 0.3px;
+  text-align: center;
+  color: var(--color-text-primary);
+}
+
+/* ---------- 材料包總覽購物頁（products/shop.html）：格狀商品卡 ----------
+   卡片內容是 js/products-overview.js 讀 window.RisuanCart 動態產生，這裡
+   只負責排版，不寫死商品。2 欄固定格狀，跟 .addon-carousel 的橫向捲動
+   卡片列是不同排版邏輯（那個是同一件主商品底下的加購選項，這裡是總覽
+   所有材料包）。
+
+   間距是照參考頁面實測換算的比例（getBoundingClientRect 量出來的
+   CSS px，原頁面 355px 寬）：同一列左右兩張圖片間距 10px、圖片底部到
+   名稱頂部 15px、名稱到價格 9px、上一張卡片內容底部到下一列圖片頂部
+   63px。圖片本身維持流動寬度（1fr 欄位撐滿），不是照抄參考頁那組固定
+   158px──不同裝置寬度下，欄寬本來就該跟著版面縮放，重點是「間距」抓住
+   同樣的比例節奏，不是抄同一個絕對數字。 */
+.shop-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 20px;
+  row-gap: 63px;
+  margin-top: var(--space-6);
+  /* 額外內縮，讓圖片比滿版鋪滿兩欄再小一點——不影響 column-gap，
+     只是讓每欄本身變窄一些。 */
+  padding: 0 10px;
+}
+
+/* .shop-card 本身是 relative 定位錨點（不是 .shop-card__media），這樣
+   右上角的快速加入鈕跟底下的圖片連結是兄弟關係，不是巢狀的 <button>
+   塞進 <a> 裡（那樣是無效的 HTML）。 */
+.shop-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.shop-card__media {
+  position: relative;
+  display: block;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: var(--radius-sharp);
+  background: color-mix(in srgb, var(--color-text-secondary) 8%, transparent);
+}
+
+.shop-card__thumb {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.shop-card__thumb.placeholder-box {
+  font-size: 0.55rem;
+}
+
+/* 電腦版 hover 換圖用的第二張圖，疊在主圖正上方、預設透明——只有
+   js/products-overview.js 真的查得到「第二張圖」的商品才會輸出這個
+   元素，觸發 hover 的規則在下面 @media (min-width: 1024px) 那段，
+   手機／平板（沒有真正 hover 狀態的裝置）不套用，避免點一下卡在
+   「已經 hover」的殘影狀態退不出來。 */
+.shop-card__thumb--hover {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity var(--duration-fast) var(--ease-standard);
+}
+
+/* 跟參考圖一樣，圓形鈕故意疊在圖片右上角「角上」，不是整顆縮在圖片
+   範圍內——上緣／右緣各超出圖片邊界 8px。欄與欄之間的 column-gap 是
+   10px（見 .shop-grid），超出量控制在 8px 以內，才不會蓋到右邊那欄
+   下一張商品圖。 */
+.shop-card__add {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 50%;
+  background: var(--color-surface-light);
+  color: var(--color-text-primary);
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+  transition: transform var(--duration-fast) var(--ease-standard);
+}
+
+.shop-card__add:active {
+  transform: scale(0.9);
+}
+
+.shop-card__add:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* 名稱／價格文字左緣比圖片左緣多內縮 5px，名稱到價格間距 9px——
+   同樣是照參考圖實測的節奏，不是隨手選的數字。 */
+.shop-card__info {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  padding-left: 5px;
+}
+
+/* text-decoration-color（不是 text-decoration-line）可以平滑轉場，底線
+   本身一直都在，只是顏色預設透明——hover 時顏色轉成 currentColor 就會有
+   平滑淡入的底線效果，不是生硬地瞬間出現/消失一條線。 */
+.shop-card__name {
+  margin: 0;
+  font-size: 14px;
+  line-height: 21px;
+  color: var(--color-text-primary);
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  transition: text-decoration-color var(--duration-fast) var(--ease-standard);
+}
+
+/* 字型／字級／行高／顏色都改用全站共用的 .price-text（見 base.css＋
+   tokens.css／colors.css 的 --price-*／--color-price），這裡只管排版
+   位置（margin），不重複宣告顏色字體──改價格樣式只要改那邊，不用
+   回來這裡找。ABeeZee 字型檔在這頁的 <head> 另外引入（見 shop.html）。 */
+.shop-card__price {
+  margin: 0;
+}
+
+/* ---------- 商品格狀卡：電腦版限定的 hover 互動 ----------
+   手機版一直顯示「+」快速加入鈕（見上面沒有媒體查詢限制的 .shop-card__add
+   底色/陰影規則），電腦版改成預設淡出、滑鼠移到卡片上才淡入；換圖與底線
+   同樣只在滑鼠移入時觸發。用 min-width:1024px（跟 home.css 的 .ambient-bg
+   同一個桌面斷點），不用 hover 媒體查詢（如 (hover:hover)），因為單純比
+   螢幕寬度更直接對應「電腦版」這個需求，觸控裝置本來就很少會落在
+   1024px 以上的寬度。:focus-within 讓鍵盤 tab 進卡片裡的連結／按鈕時也能
+   看到同樣的效果，不是滑鼠專屬。 */
+@media (min-width: 1024px) {
+  /* 手機版是固定 2 欄（1fr 1fr），欄寬跟著螢幕寬度硬撐，螢幕越寬圖片
+     就越大；電腦版改成「欄寬固定在 180–220px 之間，欄數自己隨容器寬度
+     增減」，圖片大小維持跟手機版差不多的閱讀密度，不會因為螢幕變寬就
+     跟著放大到不合理的尺寸。max-width 加上左右 auto margin 是額外的
+     保險，超寬螢幕（例如 27 吋）不會整排硬撐開、密度變得太鬆散。 */
+  .shop-grid {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 220px));
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .shop-card__add {
+    opacity: 0;
+  }
+
+  .shop-card:hover .shop-card__add,
+  .shop-card:focus-within .shop-card__add {
+    opacity: 1;
+  }
+
+  .shop-card:hover .shop-card__thumb--hover,
+  .shop-card:focus-within .shop-card__thumb--hover {
+    opacity: 1;
+  }
+
+  .shop-card:hover .shop-card__name,
+  .shop-card:focus-within .shop-card__name {
+    text-decoration-color: currentColor;
+  }
 }
 
 /* ---------- 圖案選擇卡片網格（砂畫輕巧版 8 款自選／自由創作組 5 款固定展示） ----------

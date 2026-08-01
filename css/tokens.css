@@ -14,6 +14,16 @@
   --font-size-xl:   2rem;     /* 區塊標題 */
   --font-size-2xl:  3rem;     /* 頁面主標題 */
 
+  /* ---------- 商品價格文字規格 ----------
+     全站商品價格顯示統一套用這組規格（實際套用見 base.css 的 .price-text），
+     改這裡全站價格文字會一起變，不用一個個元件分別找。數值來自實測參考
+     頁面的價格文字排版。字級剛好等於 --font-size-sm（14px），直接沿用
+     同一個字級 token，不另外開一個重複的數值。 */
+  --price-font-family: "ABeeZee", sans-serif;
+  --price-font-size: var(--font-size-sm);
+  --price-font-weight: 400;
+  --price-line-height: 21px;
+
   /* ---------- 間距系統 ----------
      階梯：4 / 8 / 16 / 24 / 40 / 64 / 96。
      原則：留白刻意不平均——重點區塊周圍留大量空白（用大階，如 64/96），

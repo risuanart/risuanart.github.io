@@ -135,7 +135,7 @@
           <p class="order-sheet__item-name">${item.name}</p>
           ${item.schemeName ? `<p class="order-sheet__item-variant">${item.schemeName}</p>` : ""}
         </div>
-        <p class="order-sheet__item-price">${formatMoney(item.lineTotal)}</p>
+        <p class="order-sheet__item-price price-text">${formatMoney(item.lineTotal)}</p>
       `;
       orderSheetItems.appendChild(li);
     });

@@ -129,12 +129,11 @@
   color: var(--color-text-secondary);
 }
 
+/* 字型／字級／顏色改用全站共用的 .price-text（見 base.css），這裡只管
+   排版位置。 */
 .cart-preview__item-price {
   flex: none;
   margin: 0;
-  font-size: var(--font-size-xs);
-  font-variant-numeric: tabular-nums;
-  color: var(--color-text-primary);
 }
 
 .cart-preview__empty {
@@ -494,12 +493,11 @@
   color: var(--color-text-secondary);
 }
 
+/* 字型／字級／顏色改用全站共用的 .price-text（見 base.css），這裡只管
+   排版位置。 */
 .order-sheet__item-price {
   flex: none;
   margin: 0;
-  font-size: var(--font-size-sm);
-  color: var(--color-text-primary);
-  font-variant-numeric: tabular-nums;
 }
 
 .order-sheet__discount {
@@ -772,14 +770,13 @@
   border-right: 1px solid color-mix(in srgb, var(--color-text-secondary) 40%, transparent);
 }
 
+/* 字型／字級／顏色改用全站共用的 .price-text（見 base.css），這裡只管
+   排版位置。 */
 .cart-item__price {
   flex: none;
   margin: 0;
   min-width: 6ch;
   text-align: right;
-  font-size: var(--font-size-sm);
-  font-variant-numeric: tabular-nums;
-  color: var(--color-text-primary);
 }
 
 /* 垃圾桶線條圖示取代「移除」文字，跟購物車徽章、加入購物車按鈕同一套圖示語言。

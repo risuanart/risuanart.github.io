@@ -44,6 +44,20 @@ a {
   text-decoration: none;
 }
 
+/* 全站商品價格文字共用樣式：套用 tokens.css 的價格專屬字型／字級／字重／
+   行高規格＋colors.css 的 --color-price。之後要調整價格顯示樣式（例如
+   換字型、改顏色），只要改那幾個變數，套用這個 class 的地方會一起跟著
+   變，不用一個個元件分別找、分別改。 */
+.price-text {
+  font-family: var(--price-font-family);
+  font-size: var(--price-font-size);
+  font-weight: var(--price-font-weight);
+  line-height: var(--price-line-height);
+  letter-spacing: normal;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-price);
+}
+
 /* 全域處理：使用者開啟「減少動態」偏好時，關閉／大幅縮短所有動畫與轉場。
    不論後續哪個階段加了什麼動畫，都必須尊重這個設定，不可個別覆寫繞過。 */
 @media (prefers-reduced-motion: reduce) {

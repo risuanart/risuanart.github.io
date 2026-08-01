@@ -1169,7 +1169,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // 不需要先展開面板再點一次。「常見問題」（faq.html）目前放在「課程」
   // 清單最下面（見 CATEGORIES.courses.items），不是獨立分頁，等課程總覽頁
   // 做出來再考慮搬過去那頁裡面。
-  const DIRECT_LINK_CATEGORIES = { materials: "products/index.html" };
+  // 「購物車」（products/shop.html）是暫時掛在這裡的格狀商品頁面試做版，
+  // 版型定案後這個分類跟連結會再考慮搬到哪裡（見那頁自己的檔案註解）。
+  const DIRECT_LINK_CATEGORIES = { materials: "products/index.html", shop: "products/shop.html" };
   tabs.forEach((tab) => {
     tab.addEventListener("click", () => {
       const directHref = DIRECT_LINK_CATEGORIES[tab.dataset.cat];
