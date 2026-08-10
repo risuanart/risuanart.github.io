@@ -15,18 +15,41 @@ html {
 }
 
 body {
-  /* 全站預設內文字型，對齊材料包母頁（products/index.html）的字型堆疊——
-     拿掉 PingFang TC／Microsoft JhengHei 這兩個系統字體，讓中文內文優先吃到
-     實際載入的 Noto Sans TC 網頁字型，不同作業系統上才會顯示同一款字，
-     不會 Mac 上是 PingFang TC、Windows 上是 Microsoft JhengHei，兩邊長得不一樣。
-     home.css 裡有些首頁專屬元件（側邊分頁、清單文字等）自己另外明確指定了
-     含 PingFang TC／Microsoft JhengHei 的舊堆疊，那些用自己的宣告，不會被
-     這裡的改動影響——首頁維持原本的字型選擇，不在這次對齊範圍內。 */
-  font-family: "Helvetica Neue", Arial, "Noto Sans TC", sans-serif;
+  /* 全站預設字型，見 tokens.css 的 --font-family-base 註解：Open Sans 接
+     Noto Sans TC，找不到才退回系統預設。letter-spacing 全站統一加 1px，
+     沒有另外指定字距的元素會繼承到這裡。 */
+  font-family: var(--font-family-base);
   font-size: var(--font-size-base);
   line-height: 1.6;
+  letter-spacing: var(--letter-spacing-base);
   color: var(--color-text-primary);
   background: var(--color-surface-light);
+}
+
+/* 一般標題的預設字級規格（見 tokens.css 的 --heading-* 註解）。只補沒有
+   另外指定大小的 h1-h6；已經用 class 明確指定過字級的標題（selector
+   特異度更高），維持原尺寸不受影響。實測全站目前沒有任何一個標題是
+   「裸 h 標籤、字級由外層容器繼承下來」這種寫法，所以這條規則不會撞到
+   任何既有設計。 */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: var(--heading-font-weight);
+  font-size: var(--heading-font-size);
+  line-height: var(--heading-line-height);
+}
+
+/* 內文段落統一規格（見 tokens.css 的 --body-* 註解）：14px／字重400／
+   行高25.2px，字距沿用上面 body 繼承下來的 1px。
+   這是刻意套用在「所有」<p>（不是只補沒指定的）：已經用 class 直接
+   指定過字級的段落（.chapter__intro、.intro、.faq-item__body 的 <p>
+   版本等），class selector 特異度比這裡的裸 p{} 高，不受影響，維持原樣；
+   但沒有自己 class、原本靠外層容器（.chapter__prose、.accordion__body、
+   faq-item__body 的 <div> 版本）繼承行高的段落，會被這條規則統一蓋成
+   25.2px（原本各自是 1.6～1.7 倍行高，22.4～23.8px），這是確認過的
+   刻意選擇，不是副作用——目的是讓內文段落的行高全站真正一致。 */
+p {
+  font-size: var(--body-font-size);
+  font-weight: var(--body-font-weight);
+  line-height: var(--body-line-height);
 }
 
 img, picture, video, canvas, svg {

@@ -1171,7 +1171,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // 做出來再考慮搬過去那頁裡面。
   // 「購物車」（products/shop.html）是暫時掛在這裡的格狀商品頁面試做版，
   // 版型定案後這個分類跟連結會再考慮搬到哪裡（見那頁自己的檔案註解）。
-  const DIRECT_LINK_CATEGORIES = { materials: "products/index.html", shop: "products/shop.html" };
+  const DIRECT_LINK_CATEGORIES = { materials: "products/index.html", shop: "products/shop.html", "test-product": "products/test-product.html" };
   tabs.forEach((tab) => {
     tab.addEventListener("click", () => {
       const directHref = DIRECT_LINK_CATEGORIES[tab.dataset.cat];

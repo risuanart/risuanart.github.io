@@ -71,7 +71,13 @@
   top: calc(100% + var(--space-2));
   right: 0;
   width: min(300px, calc(100vw - 2 * var(--space-4)));
-  background: var(--color-surface-light);
+  /* 底色改用 --panel-bg（colors.css，背景1/背景2 共用的「浮動內容面板」
+     色票），不是直接寫死 --color-surface-light——背景2（米白測試中）啟用
+     時，--color-surface-light 還是原本比較深、比較黃的暖米色，跟頁面
+     本身已經換成的米白色不同色階，購物車面板打開會看起來像另一塊顏色
+     不同的補丁。改用 --panel-bg 之後，面板底色永遠跟頁面背景同一色階，
+     只靠邊框＋陰影標示這是浮動面板，不靠色差。 */
+  background: var(--panel-bg);
   border: 1px solid color-mix(in srgb, var(--color-text-secondary) 25%, transparent);
   box-shadow: var(--shadow-raised);
   border-radius: var(--radius-sharp);
@@ -281,7 +287,7 @@
 .site-header__order-total {
   flex: none;
   display: block;
-  font-family: Georgia, 'Playfair Display', serif;
+  font-family: var(--font-family-base);
   font-size: var(--font-size-sm);
   color: var(--color-text-primary);
   font-variant-numeric: tabular-nums;
@@ -321,7 +327,7 @@
 
 .cart-collapse__total {
   flex: none;
-  font-family: Georgia, 'Playfair Display', serif;
+  font-family: var(--font-family-base);
   font-size: var(--font-size-sm);
   color: var(--color-text-primary);
   font-variant-numeric: tabular-nums;
@@ -399,7 +405,7 @@
 .order-sheet__title {
   flex: 1;
   margin: 0;
-  font-family: Georgia, 'Playfair Display', serif;
+  font-family: var(--font-family-base);
   font-weight: 600;
   font-size: var(--font-size-lg);
   color: var(--color-text-primary);
@@ -584,7 +590,7 @@
   margin-top: var(--space-4);
   padding-top: var(--space-4);
   border-top: 1px solid color-mix(in srgb, var(--color-text-secondary) 20%, transparent);
-  font-family: Georgia, 'Playfair Display', serif;
+  font-family: var(--font-family-base);
   font-weight: 600;
   color: var(--color-text-primary);
 }
@@ -601,7 +607,7 @@
 
 .cart-group__title {
   margin: 0;
-  font-family: Georgia, 'Playfair Display', serif;
+  font-family: var(--font-family-base);
   font-weight: 600;
   font-size: var(--font-size-lg);
 }
@@ -1234,6 +1240,6 @@
   border: 1.5px solid var(--color-text-primary);
   border-radius: 50%;
   font-size: 0.7rem;
-  font-family: Georgia, 'Playfair Display', serif;
+  font-family: var(--font-family-base);
   vertical-align: middle;
 }

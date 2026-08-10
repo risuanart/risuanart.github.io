@@ -4,6 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>材料包｜日宣繪畫室</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/colors.css">
+<link rel="stylesheet" href="../css/tokens.css">
 <style>
   :root{
     --bg: #f5f5ed;
@@ -12,20 +17,23 @@
     --pill-bg: rgba(193,193,189,0.35);
     --gap-sm: 20px;
     --gap-md: 30px;
-    /* 區塊間垂直留白（.spacer／.spacer.double）跟區塊左右內距（.p30）都是
-       響應式 token：桌面用這裡的值，手機（≤768px）在下面的媒體查詢裡蓋掉，
-       全站沿用同一組數值，不用每個區塊各自寫一次手機版覆蓋。 */
-    --gap-lg: 90px;
-    --gap-double: 180px;
-    --pad-h: 30px;
+    /* --gap-lg／--gap-double／--pad-h：這頁是最早定案這組編輯式版面節奏的
+       頁面，數值後來被搬到 tokens.css 變成全站共用的 --editorial-gap／
+       --editorial-gap-double／--pad-h（含 768px 響應式切換）。這裡改成
+       直接指到那組共用 token，不再自己重複定義一份數值：改 tokens.css，
+       這頁的版面節奏會跟著一起變，不用兩邊分別維護。--pad-h 名稱兩邊
+       本來就相同，直接吃 tokens.css 那份、這裡不用再宣告一次。 */
+    --gap-lg: var(--editorial-gap);
+    --gap-double: var(--editorial-gap-double);
     --max-text: 800px;
-  }
-  @media (max-width: 768px){
-    :root{
-      --gap-lg: 60px;
-      --gap-double: 100px;
-      --pad-h: 20px;
-    }
+
+    /* 背景版本開關（背景1／背景2）：block＝背景1（下面 .ambient-bg／
+       .ambient-grain 的暈染動畫，原本設計）／none＝背景2（純白底，目前
+       啟用，測試用）。這個開關 home.css 也有一份幾乎一樣的，但 home.css
+       整份沒有載入這頁（component 太多、怕互相污染），這裡只能維持獨立
+       一份。--panel-bg（.page-tint 用）已經改吃上面新載入的 colors.css，
+       不用在這裡重複宣告。 */
+    --ambient-display: none; /* 背景1用：block */
   }
   .p30{ padding-left: var(--pad-h); padding-right: var(--pad-h); }
   .p20{ padding: 20px; }
@@ -35,28 +43,30 @@
   html,body{margin:0;padding:0;}
   body{
     color:var(--ink);
-    font-family: "Helvetica Neue", Arial, "Noto Sans TC", sans-serif;
+    font-family: var(--font-family-base);
     font-size:14px;
     line-height:1.5;
+    letter-spacing: var(--letter-spacing-base);
   }
 
   /* ---------- 首頁同款動畫底色 ----------
-     斜角漸層＋緩慢位移動畫＋blur，色票直接沿用 colors.css 的
-     --color-warning／--color-brand／--color-button-primary／
-     --color-surface-light（這頁是獨立檔案沒有載入那份 CSS，改寫成字面色碼）。 */
+     斜角漸層＋緩慢位移動畫＋blur，色票現在直接吃上面新載入的 colors.css
+     （之前這頁沒載入那份檔案，色票是改寫成字面色碼的權宜做法，現在補回
+     真正的變數引用）。 */
   .ambient-bg{
     position: fixed;
     inset: -60px;
     z-index: -2;
     pointer-events: none;
+    display: var(--ambient-display, block);
     background-image: linear-gradient(
       135deg,
-      #B8541C 0%,
-      color-mix(in srgb, #B8541C 55%, #EDE6D8) 14%,
-      color-mix(in srgb, #686F12 22%, #EDE6D8) 32%,
-      color-mix(in srgb, #686F12 22%, #EDE6D8) 63%,
-      color-mix(in srgb, #6E85A0 55%, #EDE6D8) 86%,
-      #6E85A0 100%
+      var(--color-warning) 0%,
+      color-mix(in srgb, var(--color-warning) 55%, var(--color-surface-light)) 14%,
+      color-mix(in srgb, var(--color-brand) 22%, var(--color-surface-light)) 32%,
+      color-mix(in srgb, var(--color-brand) 22%, var(--color-surface-light)) 63%,
+      color-mix(in srgb, var(--color-button-primary) 55%, var(--color-surface-light)) 86%,
+      var(--color-button-primary) 100%
     );
     background-size: 220% 220%;
     background-position: 0% 0%;
@@ -75,6 +85,7 @@
     inset: 0;
     z-index: -1;
     pointer-events: none;
+    display: var(--ambient-display, block);
     opacity: 0.25;
     mix-blend-mode: multiply;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.35' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
@@ -92,12 +103,22 @@
      wrapper 自己的底色，子元素本來就會正常疊在自己 parent 的背景之上，
      不會有 body 那個「被提升去畫布」的特例問題。 */
   .page-tint{
-    background: rgba(237, 230, 216, 0.68);
+    background: var(--panel-bg);
   }
   h1,h2,h3{
-    font-family: Georgia, "Playfair Display", "Noto Serif TC", serif;
+    font-family: var(--font-family-base);
     font-weight:400;
     margin:0;
+  }
+  /* 跟 base.css 同一組內文段落統一規格（見該處註解）：14px／字重400／
+     行高25.2px。這頁目前每個 <p> 都自己有 class（.intro、.overview
+     .body p、.overview .extra p 等），class 特異度比這裡的裸 p{} 高，
+     不受影響；這裡補上是為了跟其他頁面維持同一套標準，以後這頁如果
+     加裸 <p>，也會自動套用這個規格。 */
+  p{
+    font-size: var(--body-font-size);
+    font-weight: var(--body-font-weight);
+    line-height: var(--body-line-height);
   }
   a{color:inherit; text-decoration:none;}
   .uppercase{text-transform:uppercase; letter-spacing:1px;}
@@ -125,7 +146,8 @@
     backdrop-filter: blur(30px);
     -webkit-backdrop-filter: blur(30px);
   }
-  header .back{ }
+  header .back{ display:flex; align-items:center; }
+  header .back img{ display:block; height:22px; width:auto; }
   header .title{font-size:12px; letter-spacing:1px; text-transform:uppercase;}
   header .enquire{ }
 
@@ -434,7 +456,7 @@
   <div class="page-tint">
 
   <header>
-    <a class="back uppercase small" href="../index.html">← 返回</a>
+    <a class="back" href="../index.html" aria-label="回到首頁"><img src="../assets/images/logo-risuan拷貝.png" alt="日宣繪畫室"></a>
     <div class="title">材料包</div>
     <a class="enquire uppercase small" href="../cart.html">購物車</a>
   </header>
@@ -614,17 +636,6 @@
     window.addEventListener('scroll', updateHeaderGlass, { passive: true });
     updateHeaderGlass();
 
-    // 左上角「← 返回」預設回到瀏覽器上一頁，不要一律直接跳回首頁——
-    // href 保留首頁連結當作沒有上一頁時（例如從外部連結直接開啟）的備援。
-    const backLink = document.querySelector('.back');
-    if (backLink) {
-      backLink.addEventListener('click', (e) => {
-        if (window.history.length > 1) {
-          e.preventDefault();
-          window.history.back();
-        }
-      });
-    }
   </script>
 
 </body>

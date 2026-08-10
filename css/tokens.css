@@ -14,6 +14,33 @@
   --font-size-xl:   2rem;     /* 區塊標題 */
   --font-size-2xl:  3rem;     /* 頁面主標題 */
 
+  /* ---------- 字體 ----------
+     全站字體試套用 Open Sans：英文/數字吃 Open Sans，中文接住既有已經在
+     載入的 Noto Sans TC（跨平台顯示一致，不會 Mac/Windows 長得不一樣），
+     兩個都載入失敗才退回瀏覽器/系統預設 sans-serif。取代原本 base.css 的
+     Helvetica Neue 堆疊，以及 cart.css／products.css 裡各標題共用的
+     Georgia＋Playfair Display 襯線字堆疊。
+     首頁側邊分頁、畫布提示文字等 home.css 專屬裝飾元件維持原本字型，
+     不在這次套用範圍內（沿用之前對齊中文字型時就定下的例外）。
+     ABeeZee 價格字型（上面 --price-font-family）也不受這裡影響，那是
+     另一組已經定案的獨立規格。
+     --letter-spacing-base 全站統一加 1px 字距（原本瀏覽器預設 normal／
+     0px），套用在 body，讓沒有自己另外指定字距的地方都會繼承到。
+     --heading-*／--body-* 這組是新增的「一般標題」與「內文段落」預設值
+     （套用見 base.css 的 h1-h6／p），只補沒有另外指定大小的標題／內文；
+     已經用 6 級字級系統或元件自己的 class 明確指定過大小的標題（例如
+     頁面主視覺大標題），selector 特異度更高，不受這裡影響，維持原尺寸。 */
+  --font-family-base: "Open Sans", "Noto Sans TC", sans-serif;
+  --letter-spacing-base: 1px;
+
+  --heading-font-size: 17px;
+  --heading-font-weight: 600;
+  --heading-line-height: 30px;
+
+  --body-font-size: 14px;
+  --body-font-weight: 400;
+  --body-line-height: 25.2px;
+
   /* ---------- 商品價格文字規格 ----------
      全站商品價格顯示統一套用這組規格（實際套用見 base.css 的 .price-text），
      改這裡全站價格文字會一起變，不用一個個元件分別找。數值來自實測參考

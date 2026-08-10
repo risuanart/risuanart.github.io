@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>測試產品頁｜日宣繪畫室</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=ABeeZee&family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;600;700&family=Poppins:wght@700&family=Noto+Serif+TC:wght@500;700&family=Noto+Sans+TC:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/colors.css">
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/home.css">
+  <link rel="stylesheet" href="../css/products.css">
+  <link rel="stylesheet" href="../css/cart.css">
+  <link rel="stylesheet" href="../css/product-template.css">
+</head>
+<body>
+
+  <div class="ambient-bg" aria-hidden="true"></div>
+  <div class="ambient-grain" aria-hidden="true"></div>
+
+  <!-- 這份是「快速產品頁」共用樣板，不接任何真實商品資料，純示範版型。
+       之後要生成新產品頁，複製這份檔案，換掉圖片佔位框／文字／價格，
+       樣式（顏色、字型、動畫）會自動套用全站既有規則，不用另外調整。
+       目前只掛在首頁側邊目錄的「測試產品頁」分頁，還沒接進真正的商品
+       流程（也沒有出現在 products/shop.html 或任何商品清單裡）。 -->
+
+  <header class="site-header">
+    <a class="site-header__back" href="../index.html" data-back-fixed aria-label="回到首頁"><img src="../assets/images/logo-risuan拷貝.png" alt="日宣繪畫室"></a>
+    <div class="site-header__title">測試產品頁</div>
+    <div class="cart-badge-wrap">
+      <button type="button" class="cart-badge" aria-haspopup="true" aria-expanded="false" aria-label="購物車，目前 0 件">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+        <span class="cart-badge__count">0</span>
+      </button>
+      <div class="cart-preview" hidden>
+        <ul class="cart-preview__list"></ul>
+        <p class="cart-preview__empty">購物車是空的</p>
+        <p class="cart-preview__total"></p>
+        <div class="cart-preview__actions">
+          <a class="cart-preview__view" href="../cart.html">查看購物車</a>
+          <button type="button" class="cart-preview__continue">繼續選購</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="product-page work">
+
+    <div class="ptpl-banner fade-in" id="ptpl-banner">
+      限時優惠活動說明文字（範例，可刪）
+      <button type="button" class="ptpl-banner__close" id="ptpl-banner-close" aria-label="關閉公告">✕</button>
+    </div>
+
+    <section class="ptpl-hero">
+      <div class="gallery fade-in">
+        <div class="placeholder-box ptpl-gallery__main" id="ptpl-gallery-main">圖片待補・商品主圖</div>
+        <div class="ptpl-gallery__thumbs" id="ptpl-gallery-thumbs">
+          <button type="button" class="ptpl-gallery__thumb is-active" data-label="縮圖一"><span class="placeholder-box">縮圖1</span></button>
+          <button type="button" class="ptpl-gallery__thumb" data-label="縮圖二"><span class="placeholder-box">縮圖2</span></button>
+          <button type="button" class="ptpl-gallery__thumb" data-label="縮圖三"><span class="placeholder-box">縮圖3</span></button>
+          <button type="button" class="ptpl-gallery__thumb" data-label="縮圖四"><span class="placeholder-box">縮圖4</span></button>
+        </div>
+      </div>
+
+      <div class="summary fade-in delay-1">
+        <h1 class="work-heading ptpl-summary__title">示範商品名稱</h1>
+        <p class="ptpl-summary__price">$__</p>
+        <p class="ptpl-summary__stock">尚有現貨</p>
+
+        <div class="ptpl-option">
+          <label for="ptpl-variant">款式</label>
+          <select id="ptpl-variant" class="variant-select">
+            <option value="">請選取一個選項</option>
+            <option value="a">選項 A</option>
+            <option value="b">選項 B</option>
+          </select>
+        </div>
+
+        <div class="ptpl-qty-row">
+          <div class="qty-stepper ptpl-qty-stepper">
+            <button type="button" id="ptpl-qty-minus" aria-label="數量減少">−</button>
+            <input type="text" id="ptpl-qty-input" value="1" inputmode="numeric" aria-label="數量">
+            <button type="button" id="ptpl-qty-plus" aria-label="數量增加">＋</button>
+          </div>
+        </div>
+        <button type="button" class="ptpl-add-btn" id="ptpl-add-btn" disabled>加入購物車</button>
+
+        <div class="ptpl-meta">
+          分類：<a href="#">分類一</a>、<a href="#">分類二</a>、<a href="#">分類三</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="ptpl-color-tabs fade-in delay-2">
+      <ul class="ptpl-color-tabs__nav" id="ptpl-color-tabs">
+        <li class="is-active" data-color="rainbow">彩虹條紋</li>
+        <li data-color="red">番茄紅</li>
+        <li data-color="yellow">黃色</li>
+        <li data-color="blue">寶藍色</li>
+      </ul>
+      <div class="ptpl-color-tabs__media">
+        <div class="placeholder-box" id="ptpl-media-lifestyle">圖片待補・彩虹條紋情境照</div>
+        <div class="placeholder-box" id="ptpl-media-product">圖片待補・彩虹條紋商品照</div>
+      </div>
+    </section>
+
+    <section class="ptpl-description fade-in delay-2">
+      <h4>商品介紹小標題</h4>
+      <p>這裡放商品說明文字，介紹商品特色、材質、使用情境等內容。換成真實文案就好，字級／行高／字距都已經套用全站內文標準（14px／字重400／行高25.2px／字距1px），不用另外設定。</p>
+
+      <div class="placeholder-box">圖片待補・商品情境圖</div>
+
+      <h4>商品詳細</h4>
+      <p>商品：示範商品名稱<br>材質：示範材質內容<br>尺寸：示範尺寸內容</p>
+    </section>
+
+    <section class="ptpl-related fade-in delay-2">
+      <h2 class="ptpl-related__title">相關商品</h2>
+      <div class="shop-grid" role="list" aria-label="相關商品">
+        <div class="shop-card" data-product-card>
+          <div class="shop-card__media"><div class="placeholder-box shop-card__thumb">圖片待補</div></div>
+          <div class="shop-card__info">
+            <p class="shop-card__name">相關商品名稱一</p>
+            <p class="shop-card__price price-text">$__</p>
+          </div>
+        </div>
+        <div class="shop-card" data-product-card>
+          <div class="shop-card__media"><div class="placeholder-box shop-card__thumb">圖片待補</div></div>
+          <div class="shop-card__info">
+            <p class="shop-card__name">相關商品名稱二</p>
+            <p class="shop-card__price price-text">$__</p>
+          </div>
+        </div>
+        <div class="shop-card" data-product-card>
+          <div class="shop-card__media"><div class="placeholder-box shop-card__thumb">圖片待補</div></div>
+          <div class="shop-card__info">
+            <p class="shop-card__name">相關商品名稱三</p>
+            <p class="shop-card__price price-text">$__</p>
+          </div>
+        </div>
+        <div class="shop-card" data-product-card>
+          <div class="shop-card__media"><div class="placeholder-box shop-card__thumb">圖片待補</div></div>
+          <div class="shop-card__info">
+            <p class="shop-card__name">相關商品名稱四</p>
+            <p class="shop-card__price price-text">$__</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="../js/cart.js"></script>
+  <script src="../js/site-header-scroll.js"></script>
+  <script src="../js/scroll-reveal.js"></script>
+  <script>
+    // 這份樣板故意不接 js/cart.js 的 initAddToCart()／data-add-to-cart
+    // 機制——這裡沒有真實的 PRODUCTS key，接了反而會找不到商品資料出錯。
+    // 底下是純示範用的獨立互動邏輯：數量加減、選規格才能按「加入購物車」、
+    // 縮圖切換主圖、關閉公告列。加入購物車按鈕點下去只做視覺回饋，
+    // 不會真的寫入購物車資料。
+    (function () {
+      const qtyInput = document.getElementById("ptpl-qty-input");
+      document.getElementById("ptpl-qty-minus").addEventListener("click", () => {
+        qtyInput.value = Math.max(1, (parseInt(qtyInput.value, 10) || 1) - 1);
+      });
+      document.getElementById("ptpl-qty-plus").addEventListener("click", () => {
+        qtyInput.value = (parseInt(qtyInput.value, 10) || 1) + 1;
+      });
+
+      const variantSelect = document.getElementById("ptpl-variant");
+      const addBtn = document.getElementById("ptpl-add-btn");
+      variantSelect.addEventListener("change", () => {
+        const selected = variantSelect.value !== "";
+        addBtn.disabled = !selected;
+        addBtn.classList.toggle("is-active", selected);
+      });
+      addBtn.addEventListener("click", () => {
+        if (addBtn.disabled) return;
+        const original = addBtn.textContent;
+        addBtn.textContent = "已加入 ✓";
+        setTimeout(() => { addBtn.textContent = original; }, 1200);
+      });
+
+      const galleryMain = document.getElementById("ptpl-gallery-main");
+      document.querySelectorAll(".ptpl-gallery__thumb").forEach((thumb) => {
+        thumb.addEventListener("click", () => {
+          galleryMain.textContent = "圖片待補・" + thumb.dataset.label;
+          document.querySelectorAll(".ptpl-gallery__thumb").forEach((t) => t.classList.remove("is-active"));
+          thumb.classList.add("is-active");
+        });
+      });
+
+      const banner = document.getElementById("ptpl-banner");
+      document.getElementById("ptpl-banner-close").addEventListener("click", () => {
+        banner.hidden = true;
+      });
+
+      // 色系分頁切換：點分頁換成對應色系的「情境照／商品照」佔位框文字
+      // （真的接商品資料時，這裡改成換 <img src> 就好，結構不用重寫）。
+      const colorTabs = document.querySelectorAll("#ptpl-color-tabs li");
+      const mediaLifestyle = document.getElementById("ptpl-media-lifestyle");
+      const mediaProduct = document.getElementById("ptpl-media-product");
+      colorTabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+          colorTabs.forEach((t) => t.classList.remove("is-active"));
+          tab.classList.add("is-active");
+          const label = tab.textContent.trim();
+          mediaLifestyle.textContent = "圖片待補・" + label + "情境照";
+          mediaProduct.textContent = "圖片待補・" + label + "商品照";
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

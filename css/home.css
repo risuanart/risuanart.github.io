@@ -29,7 +29,17 @@ body {
    - 右下角小範圍飽和點：牛仔灰藍（--color-button-primary）。
    background-size 故意比容器大（220%），animation 只讓這張斜角漸層本身緩慢位移，
    維持之前討論過的「持續暈染呼吸感」，不是三個獨立色塊各自跑位。
-   z-index: -1 固定在最底層，.content-panel 的底色要改成半透明（見下方）才看得到暈染透出來。 */
+   z-index: -1 固定在最底層，.content-panel 的底色要改成半透明（見下方）才看得到暈染透出來。
+
+   ---------- 背景版本開關（背景1／背景2） ----------
+   --ambient-display 控制這段動畫跟下面的顆粒質感要不要顯示：
+     block（背景1，原本設計）／none（背景2，目前啟用，純白底測試中）。
+   對應的頁面底色開關 --page-bg 放在 colors.css（全站色彩單一來源，這裡
+   不能寫死色碼），兩個要一起切換才會同步，切換方式見 colors.css 該處註解。 */
+:root {
+  --ambient-display: none; /* 背景1（暈染動畫）用：block */
+}
+
 .ambient-bg {
   position: fixed;
   /* 比視窗四邊各多留 60px（覆蓋 blur(30px) 需要的取樣範圍），讓模糊造成的邊緣淡出
@@ -38,6 +48,7 @@ body {
   inset: -60px;
   z-index: -2;
   pointer-events: none;
+  display: var(--ambient-display, block);
   background-image: linear-gradient(
     135deg,
     var(--color-warning) 0%,
@@ -87,10 +98,19 @@ body {
   inset: 0;
   z-index: -1;
   pointer-events: none;
+  display: var(--ambient-display, block);
   opacity: 0.25;
   mix-blend-mode: multiply;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.35' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size: 200px 200px;
+}
+
+/* 背景2（純白）生效時，蓋掉 base.css 那行暖米色底；背景1生效時 --page-bg
+   等於 --color-surface-light，跟 base.css 原本那行結果一樣，等於沒改。
+   這條規則能蓋過 base.css 是因為 <link> 順序上 home.css 排在 base.css
+   後面（見各頁 <head>），同樣是 body 選擇器、同樣特異度，後面的贏。 */
+body {
+  background: var(--page-bg);
 }
 
 /* ---------- 頂部列（商品頁／購物車／常見問題共用，首頁不套用） ----------
@@ -138,6 +158,22 @@ body {
 .site-header__back,
 .site-header__action {
   flex: none;
+}
+
+/* 左上角改成品牌 logo（可點回首頁），取代原本的「← 返回」文字連結——
+   跟首頁自己的 .logo 圖案共用同一張圖檔，但這裡是排在 .site-header
+   這排 flex 列裡的一般子元素（不是像首頁那樣 position:fixed 懸浮），
+   高度對齊 products/index.html 底部懸浮列 .pill-nav__home img 用的
+   20px 尺寸級距，全站「logo＝回首頁」的視覺語彙保持一致。 */
+.site-header__back {
+  display: flex;
+  align-items: center;
+}
+
+.site-header__back img {
+  display: block;
+  height: 22px;
+  width: auto;
 }
 
 .site-header__title {
@@ -432,9 +468,10 @@ body {
   top: 0;
   bottom: 0;
   overflow-y: auto;
-  /* rgba 直接寫死 --color-surface-light(#EDE6D8) 的 RGB 分量＋78% 不透明度，
-     不依賴 color-mix()，所有瀏覽器都能正確顯示半透明，讓底下的 .ambient-bg 透出來。 */
-  background: rgba(237, 230, 216, 0.68);
+  /* 背景1（原本設計）時這裡是半透明暖米色，讓底下的 .ambient-bg 透出來；
+     背景2（純白，目前啟用）時改成不透明白色。實際值由 colors.css 的
+     --panel-bg 控制，兩個版本一起切換見該處註解。 */
+  background: var(--panel-bg);
   display: flex;
   flex-direction: column;
   justify-content: flex-end;

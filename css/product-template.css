@@ -1,0 +1,291 @@
+/* product-template.css —— 「快速產品頁」共用樣板的專屬樣式。
+   給之後要快速生成的簡單產品頁用（範本見 products/test-product.html）：
+   只要換圖片、文字、價格，結構跟樣式都不用重寫。跟 products.css 裡那組
+   客製敘事型商品頁（怎麼玩／色系故事／延伸創作，像流動畫、砂畫那幾頁）
+   是兩種不同的頁面骨架，特地分開放一個檔案，不互相污染。
+   顏色／字級／圓角／間距／動態一律吃 colors.css／tokens.css 既有變數，
+   不在這裡另外定義任何色碼或動態曲線；能重用 products.css 既有 class
+   （.placeholder-box／.qty-stepper／.variant-select／.price-text／
+   .chapter__title／.shop-grid／.shop-card 系列）的地方就直接重用，不重刻。 */
+
+/* ---------- 頂部公告橫幅（可留可不留，示範用） ---------- */
+.ptpl-banner {
+  position: relative;
+  padding: var(--space-2) var(--space-10);
+  background: var(--color-surface-dark);
+  color: var(--color-surface-light);
+  text-align: center;
+  font-size: var(--font-size-xs);
+  letter-spacing: 0.05em;
+}
+
+.ptpl-banner__close {
+  position: absolute;
+  right: var(--space-4);
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: none;
+  padding: var(--space-1);
+  color: inherit;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity var(--duration-fast) var(--ease-standard);
+}
+.ptpl-banner__close:hover {
+  opacity: 1;
+}
+
+/* ---------- 商品主區：圖庫＋購買面板，兩欄 ---------- */
+.ptpl-hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-16);
+  margin-top: var(--space-6);
+}
+@media (max-width: 768px) {
+  .ptpl-hero {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+}
+
+.ptpl-gallery__main {
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius-sharp);
+}
+
+.ptpl-gallery__thumbs {
+  display: flex;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+}
+
+.ptpl-gallery__thumb {
+  flex: none;
+  width: 64px;
+  height: 64px;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  opacity: 0.55;
+  transition: opacity var(--duration-fast) var(--ease-standard);
+}
+.ptpl-gallery__thumb:hover {
+  opacity: 0.85;
+}
+.ptpl-gallery__thumb.is-active {
+  opacity: 1;
+  outline: 2px solid var(--color-button-primary);
+  outline-offset: 2px;
+}
+.ptpl-gallery__thumb .placeholder-box {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+  border-radius: var(--radius-sharp);
+}
+
+/* ---------- 購買面板 ---------- */
+.ptpl-summary__title {
+  margin: 0 0 var(--space-4);
+}
+
+/* 這是「商品頁大標題旁邊的價格」，跟格狀列表用的 .price-text（小字、
+   ABeeZee、灰階）是不同角色——比照 .work-heading__price 那組既有的
+   「大顯示價格」規格（見 products.css），不是重新發明一套數值。 */
+.ptpl-summary__price {
+  margin: 0 0 var(--space-2);
+  font-family: var(--font-family-base);
+  font-weight: 600;
+  font-size: var(--font-size-lg);
+  color: var(--color-text-primary);
+}
+
+.ptpl-summary__stock {
+  margin: 0 0 var(--space-6);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
+.ptpl-option {
+  margin-bottom: var(--space-6);
+}
+.ptpl-option label {
+  display: block;
+  margin-bottom: var(--space-2);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
+/* 這頁的規格下拉刻意不用 .variant-select 原本的暖米色填底：這個範本的
+   頁面底色本身已經很淺（背景2測試中是純白），填色框在這裡反而顯得像
+   另一塊卡片、多一層不必要的視覺噪音。改成透明背景＋維持原本的細邊框，
+   讓它跟頁面融為一體，只靠邊框＋箭頭圖示表示「這裡可以選」。只在這個
+   範本頁覆寫（product-template.css 在 <link> 順序上排在 products.css
+   後面），不影響其他頁面（如 shop.html）原本用到 .variant-select 的
+   地方——那些目前都是 hidden 的隱藏欄位，看不出來，沒有一併改的必要。 */
+.variant-select {
+  background-color: transparent;
+}
+
+.ptpl-qty-row {
+  margin-bottom: var(--space-4);
+}
+
+/* qty 輸入框跟 .qty-stepper 既有的 button/span 同一套邊框語言，只是
+   中間換成可編輯的 input（範本原本就是 input，維持這個互動方式）。 */
+.qty-stepper input {
+  width: 2.5em;
+  min-width: 2em;
+  border: none;
+  border-left: 1px solid color-mix(in srgb, var(--color-text-secondary) 40%, transparent);
+  border-right: 1px solid color-mix(in srgb, var(--color-text-secondary) 40%, transparent);
+  text-align: center;
+  font: inherit;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-text-primary);
+  background: none;
+}
+
+/* 數量按鈕改成正方形（跟原本 .qty-stepper 共用版本的窄長按鈕不同）：
+   寬高都設 44px，符合全站觸控目標最小尺寸，同時視覺上更方正、不擁擠。 */
+.ptpl-qty-stepper {
+  display: inline-flex;
+  height: 44px;
+}
+.ptpl-qty-stepper button {
+  width: 44px;
+}
+.ptpl-qty-stepper input {
+  width: 44px;
+}
+
+/* 加入購物車：填色按鈕，獨立一整排、滿版寬度（跟全站其他頁面用底線
+   文字的 .work__cta 不同語彙，這裡刻意保留範本「選規格前是灰色、選了
+   才變亮」的填色按鈕，因為這個範本的購買流程需要「還不能按」的明確
+   視覺提示，底線文字按鈕做不出這種對比）。圓角用 --radius-soft，跟
+   tokens.css 註解「一般卡片、按鈕」的既定用途一致。 */
+.ptpl-add-btn {
+  display: block;
+  width: 100%;
+  height: 44px; /* 全站觸控目標最小高度規則，不可再縮小 */
+  margin-bottom: var(--space-6);
+  border: none;
+  border-radius: var(--radius-soft);
+  background: var(--color-text-secondary);
+  color: var(--color-surface-light);
+  font-family: inherit;
+  font-size: var(--font-size-sm);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: not-allowed;
+  transition: background var(--duration-fast) var(--ease-standard),
+    transform var(--duration-fast) var(--ease-standard);
+}
+.ptpl-add-btn.is-active {
+  background: var(--color-button-primary);
+  cursor: pointer;
+}
+.ptpl-add-btn.is-active:active {
+  transform: scale(0.98);
+}
+
+.ptpl-meta {
+  padding-top: var(--space-4);
+  border-top: 1px solid color-mix(in srgb, var(--color-text-secondary) 25%, transparent);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+.ptpl-meta a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+/* ---------- 色系分頁切換 ----------
+   跟真實商品頁的 .color-picker（圓點色票 chip，見 products.css）是不同的
+   呈現方式，這裡刻意做成底線分頁＋兩張連動切換的圖（情境照／商品照），
+   給以後想用「分頁」而不是「色票」呈現多色款商品的頁面參考。顏色／字型
+   一律吃既有變數，不新增色碼。 */
+.ptpl-color-tabs {
+  margin-top: var(--editorial-gap);
+}
+
+.ptpl-color-tabs__nav {
+  display: flex;
+  list-style: none;
+  margin: 0 0 var(--space-4);
+  padding: 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--color-text-secondary) 25%, transparent);
+  overflow-x: auto;
+}
+.ptpl-color-tabs__nav li {
+  flex: none;
+  padding: var(--space-2) 0;
+  margin-right: var(--space-6);
+  margin-bottom: -1px; /* 蓋掉下方分隔線，讓 active 底線對齊容器邊框 */
+  font-size: var(--font-size-xs);
+  letter-spacing: 0.05em;
+  color: var(--color-text-secondary);
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+  transition: color var(--duration-fast) var(--ease-standard),
+    border-color var(--duration-fast) var(--ease-standard);
+}
+.ptpl-color-tabs__nav li:last-child {
+  margin-right: 0;
+}
+.ptpl-color-tabs__nav li:hover {
+  color: var(--color-text-primary);
+}
+.ptpl-color-tabs__nav li.is-active {
+  font-weight: 600;
+  color: var(--color-text-primary);
+  border-bottom-color: var(--color-text-primary);
+}
+
+.ptpl-color-tabs__media {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2);
+}
+.ptpl-color-tabs__media .placeholder-box {
+  aspect-ratio: 3 / 4;
+  border-radius: var(--radius-sharp);
+}
+
+/* ---------- 商品說明區：標題／段落／情境圖交錯 ----------
+   刻意不另外寫標題／段落的字級規則：裸 h4／裸 p 已經吃 base.css 的全站
+   標題（17/600/30）跟內文（14/400/25.2）預設值，這裡只補間距，換規格
+   要改的話直接去改 base.css／tokens.css，這頁會自動一起變。 */
+.ptpl-description {
+  max-width: 60ch;
+  margin: var(--editorial-gap) auto 0;
+}
+.ptpl-description h4 {
+  margin: var(--space-10) 0 var(--space-2);
+}
+.ptpl-description h4:first-child {
+  margin-top: 0;
+}
+.ptpl-description p {
+  margin: 0 0 var(--space-4);
+}
+.ptpl-description .placeholder-box {
+  aspect-ratio: 16 / 9;
+  margin: var(--space-6) 0;
+  border-radius: var(--radius-sharp);
+}
+
+/* ---------- 相關商品：直接沿用 products.css 的 .shop-grid／.shop-card
+   系列（見 products/shop.html），不重刻一套新的格狀樣式。這裡只補
+   section 本身的間距跟置中標題。 ---------- */
+.ptpl-related {
+  margin-top: var(--editorial-gap);
+}
+.ptpl-related__title {
+  text-align: center;
+  margin: 0 0 var(--space-6);
+}
