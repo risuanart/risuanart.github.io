@@ -93,16 +93,109 @@
       </div>
     </section>
 
+    <!-- 作品介紹：藝術家系列商品的靈感來源介紹（畫作＋簡介＋現藏地）。 -->
+    <section class="ptpl-artwork fade-in delay-2">
+      <p class="ptpl-artwork__eyebrow">作品介紹</p>
+      <img class="ptpl-artwork__image" src="../assets/images/products/sand-art-artist/sand-art-artist-dance-matisse.jpg" alt="Henri Matisse《Dance II》，五位人物手拉手圍成圓圈舞蹈，藍綠色背景">
+      <h2>Dance II</h2>
+      <blockquote class="ptpl-artwork__quote">
+        「色彩就是生命，沒有色彩就沒有生命。」
+        <cite>—— 野獸派大師馬諦斯 Henri Matisse</cite>
+      </blockquote>
+      <p>舞者們的圓形隊形並非偶然。這種隊形常被用來象徵團結和延續，而這些主題在馬蒂斯的作品中也得到了深刻的體現。</p>
+      <p>藝術家對色彩的運用也蘊含著象徵意義。例如，背景的藍色可以解讀為無限的象徵，而舞者的紅色則暗示著激情和活力。</p>
+      <p class="ptpl-artwork__credit">現藏地：俄羅斯聖彼得堡艾米塔吉博物館 State Hermitage Museum, St. Petersburg</p>
+    </section>
+
+    <!-- 名畫再製特色區塊：畫室原生特色（把名畫人物「羊化」、結合年節衍生
+         成春聯材料包設計），用滑動比對拉桿呈現「原畫 vs 羊化再創作」的
+         轉化過程。右側「羊化再創作」目前還沒有實際設計圖，先用佔位框；
+         等設計稿出來，把 .ptpl-compare__after 裡的佔位框換成 <img> 就好，
+         結構、拉桿邏輯都不用改。 -->
+    <section class="ptpl-transform fade-in delay-2">
+      <p class="ptpl-artwork__eyebrow">畫室原創特色</p>
+      <h2>名畫再製・羊化春聯</h2>
+      <div class="ptpl-compare" id="ptpl-compare" style="--pos: 50%;">
+        <div class="ptpl-compare__layer ptpl-compare__layer--before">
+          <img src="../assets/images/products/sand-art-artist/sand-art-artist-dance-matisse.jpg" alt="原畫：Henri Matisse《Dance II》">
+          <span class="ptpl-compare__label">原畫</span>
+        </div>
+        <div class="ptpl-compare__layer ptpl-compare__layer--after">
+          <img src="../assets/images/products/sand-art-artist/sand-art-artist-dance-sheep.jpg" alt="羊化再創作：畫室原創設計，羊群圍成舞蹈隊形，中間是粉色「福」字，結合年節小物">
+          <span class="ptpl-compare__label">羊化再創作</span>
+        </div>
+        <button type="button" class="ptpl-compare__handle" id="ptpl-compare-handle" role="slider" aria-label="拖曳比較原畫與羊化再創作設計" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+          <span class="ptpl-compare__handle-grip">⇔</span>
+        </button>
+      </div>
+      <p class="ptpl-transform__note" data-placeholder="true">〔文字待補：介紹畫室如何再製名畫、把人物羊化，結合年節設計成春聯材料包〕</p>
+    </section>
+
+    <!-- 商品詳細：材料平拍俯視圖＋內附材料清單。版型直接沿用真實商品頁
+         「套組內容」章節既有的 .kit-section__photo／.kit-list（見
+         fluid-art-light.html），不重刻新樣式。清單內容是依你手稿上的
+         圖示推測的材料項目，不確定的地方先標示待確認，正式品項確認後
+         告訴我再替換文字就好，結構不用動。 -->
+    <section class="ptpl-materials fade-in delay-2">
+      <p class="ptpl-artwork__eyebrow">商品詳細</p>
+      <div class="placeholder-box kit-section__photo">圖片待補・材料平拍俯視圖（比照參考圖：材料排列整齊、正上方俯拍）</div>
+      <ul class="kit-list">
+        <li><span aria-hidden="true">✦</span><span>分裝細砂 6 色</span></li>
+        <li><span aria-hidden="true">✦</span><span>羊化春聯圖案底卡（菱形）</span></li>
+        <li><span aria-hidden="true">✦</span><span>束口收納袋</span></li>
+        <li><span aria-hidden="true">✦</span><span>操作說明手冊</span></li>
+        <li data-placeholder="true"><span aria-hidden="true">✦</span><span>〔工具品項待確認，請提供正確名稱替換〕</span></li>
+      </ul>
+
+      <a class="ptpl-crosslink" href="sand-art-artist-blue.html">
+        <span class="ptpl-crosslink__text">另有原作配色款<br>看看「藝術家系列・羊化・原作配色」藍色款</span>
+        <span class="ptpl-crosslink__arrow" aria-hidden="true">→</span>
+        <div class="placeholder-box ptpl-crosslink__thumb">圖片待補</div>
+      </a>
+    </section>
+
+    <!-- 所有顏色細節展示圖：獨立一個區塊，跟上面「商品詳細」分開，不是
+         材料清單的附屬圖。 -->
+    <section class="ptpl-color-detail fade-in delay-2">
+      <p class="ptpl-artwork__eyebrow">顏色細節</p>
+      <div class="placeholder-box ptpl-materials__banner">圖片待補・所有顏色細節展示圖（窄橫幅）</div>
+    </section>
+
+    <!-- 顏色比較：這個紅色版本實際用到的色名對照表（六色分裝細砂＋其餘
+         配色，跟上面「商品詳細」清單第一項「分裝細砂 6 色」是同一批
+         顏色）。色票目前是我依照片肉眼估的色碼，不是正式色卡編號，正式
+         色號/色卡確定後告訴我，我再把 --swatch-* 數值換成準確的。 -->
+    <section class="ptpl-color-compare fade-in delay-2">
+      <p class="ptpl-artwork__eyebrow">顏色比較</p>
+      <ul class="ptpl-color-legend">
+        <li><span class="ptpl-color-legend__swatch" style="background:#7C1F30"></span><span class="ptpl-color-legend__name">酒紅</span><span class="ptpl-color-legend__role">背景</span></li>
+        <li><span class="ptpl-color-legend__swatch" style="background:#9C7A3C"></span><span class="ptpl-color-legend__name">閃棕</span><span class="ptpl-color-legend__role">地板</span></li>
+        <li><span class="ptpl-color-legend__swatch" style="background:#3B6EA5"></span><span class="ptpl-color-legend__name">潮藍</span><span class="ptpl-color-legend__role">手持小物</span></li>
+        <li><span class="ptpl-color-legend__swatch" style="background:#D93B3B"></span><span class="ptpl-color-legend__name">紅</span><span class="ptpl-color-legend__role">手持小物</span></li>
+        <li><span class="ptpl-color-legend__swatch" style="background:#E08FB3"></span><span class="ptpl-color-legend__name">粉紅</span><span class="ptpl-color-legend__role">福字</span></li>
+        <li><span class="ptpl-color-legend__swatch" style="background:#D9A441"></span><span class="ptpl-color-legend__name">麥芽</span><span class="ptpl-color-legend__role">羊臉</span></li>
+        <li><span class="ptpl-color-legend__swatch" style="background:#F0E6D2"></span><span class="ptpl-color-legend__name">白</span><span class="ptpl-color-legend__role">羊</span></li>
+      </ul>
+    </section>
+
+    <!-- 材料色系分頁：跟上面「顏色比較」共用同一批 7 色，呈現方式不同——
+         這裡是原本試做範本時就做好的底線分頁＋左右聯動照片切換，拿來讓人
+         一次專注看單一顏色的細節（沙色特寫＋應用示意），跟上面一次列出
+         全部顏色的對照表是互補關係，不是重複。 -->
     <section class="ptpl-color-tabs fade-in delay-2">
+      <p class="ptpl-artwork__eyebrow">材料色系</p>
       <ul class="ptpl-color-tabs__nav" id="ptpl-color-tabs">
-        <li class="is-active" data-color="rainbow">彩虹條紋</li>
-        <li data-color="red">番茄紅</li>
-        <li data-color="yellow">黃色</li>
-        <li data-color="blue">寶藍色</li>
+        <li class="is-active" data-color="wine-red">酒紅</li>
+        <li data-color="shimmer-brown">閃棕</li>
+        <li data-color="tide-blue">潮藍</li>
+        <li data-color="red">紅</li>
+        <li data-color="pink">粉紅</li>
+        <li data-color="malt">麥芽</li>
+        <li data-color="white">白</li>
       </ul>
       <div class="ptpl-color-tabs__media">
-        <div class="placeholder-box" id="ptpl-media-lifestyle">圖片待補・彩虹條紋情境照</div>
-        <div class="placeholder-box" id="ptpl-media-product">圖片待補・彩虹條紋商品照</div>
+        <div class="placeholder-box" id="ptpl-media-lifestyle">圖片待補・酒紅沙色特寫</div>
+        <div class="placeholder-box" id="ptpl-media-product">圖片待補・酒紅應用示意</div>
       </div>
     </section>
 
@@ -198,8 +291,8 @@
         banner.hidden = true;
       });
 
-      // 色系分頁切換：點分頁換成對應色系的「情境照／商品照」佔位框文字
-      // （真的接商品資料時，這裡改成換 <img src> 就好，結構不用重寫）。
+      // 材料色系分頁：點分頁換成對應顏色的「沙色特寫／應用示意」佔位框
+      // 文字（真的接商品資料時，這裡改成換 <img src> 就好，結構不用重寫）。
       const colorTabs = document.querySelectorAll("#ptpl-color-tabs li");
       const mediaLifestyle = document.getElementById("ptpl-media-lifestyle");
       const mediaProduct = document.getElementById("ptpl-media-product");
@@ -208,10 +301,52 @@
           colorTabs.forEach((t) => t.classList.remove("is-active"));
           tab.classList.add("is-active");
           const label = tab.textContent.trim();
-          mediaLifestyle.textContent = "圖片待補・" + label + "情境照";
-          mediaProduct.textContent = "圖片待補・" + label + "商品照";
+          mediaLifestyle.textContent = "圖片待補・" + label + "沙色特寫";
+          mediaProduct.textContent = "圖片待補・" + label + "應用示意";
         });
       });
+
+      // 名畫再製特色：滑動比對拉桿。用 pointer events（同時支援滑鼠／觸控）
+      // 算出拖曳位置佔容器寬度的百分比，寫進 --pos 這個 CSS 變數，左側
+      // 「原畫」圖層的 clip-path 靠這個變數決定露出多少（見
+      // css/product-template.css 的 .ptpl-compare__layer--before）。
+      // 方向鍵也做了鍵盤操作支援，不是只能用滑鼠／觸控拖曳。
+      const compare = document.getElementById("ptpl-compare");
+      const compareHandle = document.getElementById("ptpl-compare-handle");
+      if (compare && compareHandle) {
+        let dragging = false;
+
+        function setComparePos(clientX) {
+          const rect = compare.getBoundingClientRect();
+          let pct = ((clientX - rect.left) / rect.width) * 100;
+          pct = Math.max(0, Math.min(100, pct));
+          compare.style.setProperty("--pos", pct + "%");
+          compareHandle.setAttribute("aria-valuenow", Math.round(pct));
+        }
+
+        compare.addEventListener("pointerdown", (e) => {
+          dragging = true;
+          compare.setPointerCapture(e.pointerId);
+          setComparePos(e.clientX);
+        });
+        compare.addEventListener("pointermove", (e) => {
+          if (!dragging) return;
+          setComparePos(e.clientX);
+        });
+        compare.addEventListener("pointerup", () => { dragging = false; });
+        compare.addEventListener("pointercancel", () => { dragging = false; });
+
+        compareHandle.addEventListener("keydown", (e) => {
+          const current = parseFloat(compareHandle.getAttribute("aria-valuenow")) || 50;
+          let next = null;
+          if (e.key === "ArrowLeft") next = Math.max(0, current - 5);
+          if (e.key === "ArrowRight") next = Math.min(100, current + 5);
+          if (next === null) return;
+          e.preventDefault();
+          compare.style.setProperty("--pos", next + "%");
+          compareHandle.setAttribute("aria-valuenow", next);
+        });
+      }
     })();
   </script>
 </body>

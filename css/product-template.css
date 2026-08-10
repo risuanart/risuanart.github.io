@@ -202,11 +202,287 @@
   text-decoration: underline;
 }
 
-/* ---------- 色系分頁切換 ----------
+/* ---------- 作品介紹（藝術家系列的靈感畫作介紹） ----------
+   標題／段落刻意不另外寫字級：裸 h2／裸 p 已經吃 base.css 的全站標題
+   （17/600/30）跟內文（14/400/25.2）預設值。這裡只補間距跟兩個需要
+   特別處理的元素（引言、現藏地credit行）。 */
+.ptpl-artwork {
+  margin-top: var(--editorial-gap);
+  max-width: 60ch;
+}
+.ptpl-artwork__eyebrow {
+  margin: 0 0 var(--space-2);
+  font-size: var(--font-size-xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+}
+.ptpl-artwork__image {
+  width: 100%;
+  aspect-ratio: 8 / 5;
+  object-fit: cover;
+  margin-bottom: var(--space-6);
+  border-radius: var(--radius-sharp);
+}
+.ptpl-artwork h2 {
+  margin: 0 0 var(--space-4);
+}
+
+/* 引言用左側色條＋斜體，跟內文段落拉開層次，是這個畫作介紹區塊唯一
+   刻意跳脫「裸標籤吃預設值」規則的地方——引言在視覺上本來就該是被
+   強調、跳出來的一段，不是一般內文。 */
+.ptpl-artwork__quote {
+  margin: 0 0 var(--space-6);
+  padding-left: var(--space-4);
+  border-left: 2px solid color-mix(in srgb, var(--color-text-secondary) 50%, transparent);
+  font-style: italic;
+  color: var(--color-text-primary);
+}
+.ptpl-artwork__quote cite {
+  display: block;
+  margin-top: var(--space-2);
+  font-style: normal;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
+.ptpl-artwork__credit {
+  margin-top: var(--space-6);
+  padding-top: var(--space-4);
+  border-top: 1px dashed color-mix(in srgb, var(--color-text-secondary) 25%, transparent);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
+/* ---------- 名畫再製特色：滑動比對拉桿 ----------
+   --pos 是目前拉桿位置（0%～100%，從左邊算），由 test-product.html 內嵌
+   script 拖曳時更新。.ptpl-compare__layer--before 用 clip-path 只露出
+   左側 0～--pos 這段，右側自然透出 --after 那層，做出「拖多少、看到多少
+   原畫」的效果，不用真的疊兩張圖片跑 JS 切換 src。 */
+.ptpl-transform {
+  margin-top: var(--editorial-gap);
+}
+.ptpl-transform h2 {
+  margin: 0 0 var(--space-6);
+}
+
+.ptpl-compare {
+  position: relative;
+  aspect-ratio: 8 / 5;
+  border-radius: var(--radius-sharp);
+  overflow: hidden;
+  touch-action: pan-y;
+  cursor: ew-resize;
+  user-select: none;
+}
+
+.ptpl-compare__layer {
+  position: absolute;
+  inset: 0;
+}
+.ptpl-compare__layer img,
+.ptpl-compare__placeholder {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+  object-fit: cover;
+  border-radius: 0;
+}
+.ptpl-compare__layer--after {
+  /* 兩層都是絕對定位、疊在同一個位置，沒有明確指定 z-index 的話瀏覽器
+     會讓「後面寫的」蓋住「前面寫的」——after 在 HTML 裡寫在 before 後面，
+     會整層蓋住 before，不管 before 的 clip-path 裁出多小範圍都看不到。
+     明確把 before 疊在 after 上面，靠 before 的 clip-path 露出左側一小段、
+     其餘範圍才會透出下面的 after，這樣拉桿才真的有比較效果。 */
+  z-index: 1;
+}
+.ptpl-compare__layer--before {
+  z-index: 2;
+  /* 只露出左側 0～--pos 這段，模擬拉桿左邊是「原畫」 */
+  clip-path: inset(0 calc(100% - var(--pos)) 0 0);
+}
+
+/* 羊化再創作圖裡的羊群構圖偏小、上方留了大片紅底，跟原畫「舞者幾乎
+   頂滿整個畫布」的滿版構圖比例不同，直接 object-fit:cover 會讓兩張圖
+   看起來不是同一個「量級」。局部放大＋往下移動裁切中心，讓羊群主體
+   填滿的比例更接近原畫的舞者。 */
+.ptpl-compare__layer--after img {
+  transform: scale(1.55);
+  transform-origin: 50% 62%;
+}
+
+.ptpl-compare__label {
+  position: absolute;
+  top: var(--space-2);
+  left: var(--space-2);
+  padding: 3px var(--space-2);
+  border-radius: var(--radius-sharp);
+  background: color-mix(in srgb, var(--color-surface-dark) 75%, transparent);
+  color: var(--color-surface-light);
+  font-size: var(--font-size-xs);
+  letter-spacing: 0.05em;
+}
+.ptpl-compare__layer--after .ptpl-compare__label {
+  left: auto;
+  right: var(--space-2);
+}
+
+.ptpl-compare__handle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--pos);
+  z-index: 3; /* 剛加了 before(2)／after(1) 的堆疊順序後，拉桿沒設 z-index
+    會變成 auto，反而被兩層蓋住看不見，這裡要疊在兩層之上 */
+  width: 44px; /* 觸控目標最小尺寸，撐開整條可拖曳的判定範圍，不是視覺寬度 */
+  transform: translateX(-50%);
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: ew-resize;
+}
+.ptpl-compare__handle::before {
+  /* 實際看得到的那條分隔線，跟上面 button 的可點擊判定範圍分開處理 */
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 2px;
+  transform: translateX(-50%);
+  background: var(--color-surface-light);
+}
+.ptpl-compare__handle-grip {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-surface-light);
+  color: var(--color-text-primary);
+  font-size: 14px;
+  box-shadow: var(--shadow-raised);
+}
+
+/* 待補文字樣式跟全站既有的 [data-placeholder] 慣例一致（見 products.css
+   的 .chapter__intro[data-placeholder] 等），斜體＋次要文字色，一眼就
+   看得出這段不是正式文案。 */
+.ptpl-transform__note {
+  margin-top: var(--space-4);
+}
+.ptpl-transform__note[data-placeholder] {
+  color: var(--color-text-secondary);
+  font-style: italic;
+}
+
+/* ---------- 商品詳細：材料平拍圖＋清單 ----------
+   .kit-section__photo／.kit-list／[data-placeholder] 都是 products.css
+   既有的「套組內容」章節樣式（見 fluid-art-light.html），直接沿用，這裡
+   只補 section 本身的間距跟下面新增的「跳到其他色款」連結卡片樣式。 */
+.ptpl-materials {
+  margin-top: var(--editorial-gap);
+}
+
+.ptpl-crosslink {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid color-mix(in srgb, var(--color-text-secondary) 25%, transparent);
+  border-radius: var(--radius-sharp);
+  color: inherit;
+  transition: background var(--duration-fast) var(--ease-standard);
+}
+.ptpl-crosslink:hover,
+.ptpl-crosslink:focus-visible {
+  background: color-mix(in srgb, var(--color-text-secondary) 8%, transparent);
+}
+/* 正方形照片轉45度變菱形，呼應一般春聯／福字的菱形貼法。改用 clip-path
+   切角做成菱形，不是真的用 transform:rotate(45deg) 轉整個方塊——如果
+   直接轉方塊，對角線會變成原邊長的 √2 倍，容易溢出旁邊的文字，而且裡面
+   的照片內容也會跟著歪斜。clip-path 純粹切掉四角，方塊本身的排版佔位
+   不變、裡面的照片依然是正的，效果一樣是菱形但不會有溢出或內容歪斜
+   的問題。 */
+.ptpl-crosslink__thumb {
+  flex: none;
+  width: 56px;
+  height: 56px;
+  aspect-ratio: auto;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  font-size: 8px;
+}
+.ptpl-crosslink__text {
+  flex: 1;
+  font-size: var(--font-size-xs);
+  line-height: 1.6;
+  color: var(--color-text-primary);
+}
+.ptpl-crosslink__arrow {
+  flex: none;
+  color: var(--color-text-secondary);
+  transition: transform var(--duration-fast) var(--ease-standard);
+}
+.ptpl-crosslink:hover .ptpl-crosslink__arrow {
+  transform: translateX(3px);
+}
+
+/* 窄橫幅：之後放「所有顏色細節展示圖」，比例故意拉寬拉扁，跟上面正方形
+   的材料平拍圖、下面 3:4 的比對媒體區都不同比例，讓這條橫幅在版面上
+   讀起來像「一條攤開來看的細節帶」，不是又一張正方形照片。 */
+.ptpl-materials__banner {
+  margin-top: var(--space-6);
+  aspect-ratio: 3 / 1;
+  border-radius: var(--radius-sharp);
+}
+
+/* ---------- 顏色比較：色名對照表 ---------- */
+.ptpl-color-compare {
+  margin-top: var(--editorial-gap);
+}
+
+.ptpl-color-legend {
+  margin-top: var(--space-6);
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-2) var(--space-4);
+  max-width: 46ch;
+}
+.ptpl-color-legend li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--font-size-xs);
+}
+.ptpl-color-legend__swatch {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1px solid color-mix(in srgb, var(--color-text-primary) 15%, transparent);
+}
+.ptpl-color-legend__name {
+  color: var(--color-text-primary);
+}
+.ptpl-color-legend__role {
+  color: var(--color-text-secondary);
+}
+
+/* ---------- 材料色系分頁 ----------
    跟真實商品頁的 .color-picker（圓點色票 chip，見 products.css）是不同的
-   呈現方式，這裡刻意做成底線分頁＋兩張連動切換的圖（情境照／商品照），
-   給以後想用「分頁」而不是「色票」呈現多色款商品的頁面參考。顏色／字型
-   一律吃既有變數，不新增色碼。 */
+   呈現方式，這裡是底線分頁＋兩張連動切換的圖（沙色特寫／應用示意），
+   讓人一次專注看單一顏色的細節，跟上面「顏色比較」一次列出全部顏色的
+   對照表是互補關係。顏色／字型一律吃既有變數，不新增色碼。 */
 .ptpl-color-tabs {
   margin-top: var(--editorial-gap);
 }
@@ -214,7 +490,7 @@
 .ptpl-color-tabs__nav {
   display: flex;
   list-style: none;
-  margin: 0 0 var(--space-4);
+  margin: var(--space-4) 0;
   padding: 0;
   border-bottom: 1px solid color-mix(in srgb, var(--color-text-secondary) 25%, transparent);
   overflow-x: auto;
