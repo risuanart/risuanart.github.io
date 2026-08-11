@@ -444,88 +444,40 @@
   border-radius: var(--radius-sharp);
 }
 
-/* ---------- 顏色比較：色名對照表 ---------- */
+/* ---------- 顏色比較：橫向色票選單（圖例兼分頁）＋連動照片 ----------
+   色票本身直接沿用真實商品頁的 .color-picker／.color-picker__chip／
+   .color-picker__dot（見 products.css），這裡只加 .ptpl-color-picker
+   這個修飾用 class 調整版面——原本那組是給 2 色橫排（圓點+橫式文字）
+   設計的，塞 7 色會超出版面寬度。改法不是把整排改直向、也不是縮小
+   字級，而是讓每個色票自己「變窄」：圓點在上，色名文字改直式書寫
+   （一個字一行），單一色票的寬度只需要一個字寬，7 個色票排一整排就
+   塞得下，不用左右滑動。不動共用的 .color-picker 本身，避免影響其他
+   頁面既有的 2 色橫排版面。 */
 .ptpl-color-compare {
   margin-top: var(--editorial-gap);
 }
 
-.ptpl-color-legend {
-  margin-top: var(--space-6);
-  padding: 0;
-  list-style: none;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-2) var(--space-4);
-  max-width: 46ch;
+.ptpl-color-picker {
+  flex-wrap: nowrap;
+  overflow-x: auto; /* 保留當保險，正常情況下應該不會真的觸發捲動 */
 }
-.ptpl-color-legend li {
-  display: flex;
+.ptpl-color-picker .color-picker__chip {
+  flex: none;
+  flex-direction: column;
   align-items: center;
-  gap: var(--space-2);
-  font-size: var(--font-size-xs);
+  gap: var(--space-1);
 }
-.ptpl-color-legend__swatch {
-  flex: none;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  border: 1px solid color-mix(in srgb, var(--color-text-primary) 15%, transparent);
-}
-.ptpl-color-legend__name {
-  color: var(--color-text-primary);
-}
-.ptpl-color-legend__role {
-  color: var(--color-text-secondary);
-}
-
-/* ---------- 材料色系分頁 ----------
-   跟真實商品頁的 .color-picker（圓點色票 chip，見 products.css）是不同的
-   呈現方式，這裡是底線分頁＋兩張連動切換的圖（沙色特寫／應用示意），
-   讓人一次專注看單一顏色的細節，跟上面「顏色比較」一次列出全部顏色的
-   對照表是互補關係。顏色／字型一律吃既有變數，不新增色碼。 */
-.ptpl-color-tabs {
-  margin-top: var(--editorial-gap);
-}
-
-.ptpl-color-tabs__nav {
-  display: flex;
-  list-style: none;
-  margin: var(--space-4) 0;
-  padding: 0;
-  border-bottom: 1px solid color-mix(in srgb, var(--color-text-secondary) 25%, transparent);
-  overflow-x: auto;
-}
-.ptpl-color-tabs__nav li {
-  flex: none;
-  padding: var(--space-2) 0;
-  margin-right: var(--space-6);
-  margin-bottom: -1px; /* 蓋掉下方分隔線，讓 active 底線對齊容器邊框 */
-  font-size: var(--font-size-xs);
-  letter-spacing: 0.05em;
-  color: var(--color-text-secondary);
-  border-bottom: 2px solid transparent;
-  cursor: pointer;
-  user-select: none;
-  white-space: nowrap;
-  transition: color var(--duration-fast) var(--ease-standard),
-    border-color var(--duration-fast) var(--ease-standard);
-}
-.ptpl-color-tabs__nav li:last-child {
-  margin-right: 0;
-}
-.ptpl-color-tabs__nav li:hover {
-  color: var(--color-text-primary);
-}
-.ptpl-color-tabs__nav li.is-active {
-  font-weight: 600;
-  color: var(--color-text-primary);
-  border-bottom-color: var(--color-text-primary);
+.ptpl-color-picker__label {
+  writing-mode: vertical-rl;
+  text-orientation: upright; /* 保持每個中文字本身正立，只是排列方向改直的，不是把字轉90度 */
+  line-height: 1.3;
 }
 
 .ptpl-color-tabs__media {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--space-2);
+  margin-top: var(--space-4);
 }
 .ptpl-color-tabs__media .placeholder-box {
   aspect-ratio: 3 / 4;
@@ -564,4 +516,29 @@
 .ptpl-related__title {
   text-align: center;
   margin: 0 0 var(--space-6);
+}
+
+/* ---------- 桌面／平板版面（≥1024px） ----------
+   手機版每個區塊寬度都是「滿版減掉左右 --pad-h」，螢幕越寬圖片就跟著
+   越大——這在手機上沒問題，但螢幕一拉寬（平板、電腦，尤其超寬螢幕）
+   圖片會大到不合理的尺寸、閱讀起來反而吃力。跟 products.css 的
+   .shop-grid 桌面版是同一個處理原則：圖片/圖庫類的區塊限制一個舒適的
+   最大寬度＋自動置中，不隨螢幕寬度無限放大；純文字敘述的區塊
+   （.ptpl-artwork／.ptpl-description）本來就已經用 60ch 限制閱讀行寬，
+   不需要在這裡重複處理。
+   900px 這個寬度是刻意選的：.ptpl-hero 兩欄（圖庫＋購買面板）在這個
+   寬度下每欄約 418px，跟手機版單欄圖片的視覺密度相近，不會突然變得
+   異常巨大；比 --editorial-gap 系統既有的 1100px（.shop-grid 用，那是
+   給「多張小圖並排」的格狀商品列表用的寬度）窄，因為這裡都是「單張大圖
+   +文字」的敘事型版面，不需要那麼寬。 */
+@media (min-width: 1024px) {
+  .ptpl-hero,
+  .ptpl-transform,
+  .ptpl-materials,
+  .ptpl-color-detail,
+  .ptpl-color-compare {
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
