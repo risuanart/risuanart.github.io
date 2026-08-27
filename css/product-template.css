@@ -50,9 +50,68 @@
   }
 }
 
+.ptpl-gallery__viewport {
+  position: relative;
+}
+
 .ptpl-gallery__main {
   aspect-ratio: 1 / 1;
   border-radius: var(--radius-sharp);
+  overflow: hidden;
+}
+.ptpl-gallery__main img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 左右切換箭頭：手機／平板完全不出現（display:none），靠縮圖列/手指滑動
+   切換就好；桌面（≥1024px）平時 opacity:0＋負 margin 把自己推到主圖外側
+   看不到，滑鼠移到 .ptpl-gallery__viewport 上（或鍵盤 tab 進按鈕本身，
+   :focus-within 是為了鍵盤操作者，:hover 只吃得到滑鼠）才淡入到
+   opacity:0.3、margin 歸零，0.3s 過渡。跟全站其他滑鼠限定的 hover 互動
+   （見 products.css 的 .shop-card:hover）同一個 1024px 斷點。 */
+.btn-prev,
+.btn-next {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .btn-prev,
+  .btn-next {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 50%;
+    background: var(--color-surface-neutral);
+    color: var(--color-text-primary);
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out, margin 0.3s ease-in-out;
+  }
+  .btn-prev {
+    left: 0;
+    margin-left: -20px;
+  }
+  .btn-next {
+    right: 0;
+    margin-right: -20px;
+  }
+  .ptpl-gallery__viewport:hover .btn-prev,
+  .ptpl-gallery__viewport:hover .btn-next,
+  .ptpl-gallery__viewport:focus-within .btn-prev,
+  .ptpl-gallery__viewport:focus-within .btn-next {
+    opacity: 0.3;
+    margin-left: 0;
+    margin-right: 0;
+  }
 }
 
 .ptpl-gallery__thumbs {
@@ -85,21 +144,21 @@
   aspect-ratio: auto;
   border-radius: var(--radius-sharp);
 }
+.ptpl-gallery__thumb img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--radius-sharp);
+}
 
 /* ---------- 購買面板 ---------- */
 .ptpl-summary__title {
   margin: 0 0 var(--space-4);
 }
 
-/* 這是「商品頁大標題旁邊的價格」，跟格狀列表用的 .price-text（小字、
-   ABeeZee、灰階）是不同角色——比照 .work-heading__price 那組既有的
-   「大顯示價格」規格（見 products.css），不是重新發明一套數值。 */
 .ptpl-summary__price {
   margin: 0 0 var(--space-2);
-  font-family: var(--font-family-base);
-  font-weight: 600;
-  font-size: var(--font-size-lg);
-  color: var(--color-text-primary);
 }
 
 .ptpl-summary__stock {

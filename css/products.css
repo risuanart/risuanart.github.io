@@ -88,7 +88,7 @@
 .work-heading {
   margin: 0;
   font-family: var(--font-family-base);
-  font-weight: 600;
+  font-weight: 400;
   /* clamp 而非固定斷點：跟首頁 .content-list 同一套「用 vw 連續縮放」慣例，
      手機到平板寬度之間字級平滑放大，不需要另外寫斷點。 */
   font-size: clamp(1.75rem, 1.3rem + 3vw, 2.75rem);
@@ -1030,7 +1030,10 @@ button.text-link {
   justify-content: center;
   border: none;
   border-radius: 50%;
-  background: var(--color-surface-light);
+  /* 改用 --color-surface-neutral（中性淺灰），不是 --color-surface-light
+     （暖米色）——這顆按鈕疊在圖片右上角、有一部分蓋到頁面底色，暖米色
+     跟現在的中性灰底色不搭，跟折扣碼輸入框是同一個處理。 */
+  background: var(--color-surface-neutral);
   color: var(--color-text-primary);
   cursor: pointer;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
@@ -1076,26 +1079,33 @@ button.text-link {
   margin: 0;
 }
 
+/* ---------- 商品格狀：平板／電腦斷點在 768px，不是 1024px ----------
+   實測參考站的行為：手機 2 欄，一過 768px（常見的平板寬度斷點，也是
+   tokens.css --pad-h 本來就在用的斷點）直接跳到固定 4 欄，欄數從平板到
+   電腦都不再增加，格子跟圖片只是隨容器寬度等比放大一點（平板約
+   201px、電腦約 220px），不是欄數跟著螢幕變寬一直長。原本這裡用
+   auto-fit + minmax(180,220) 會讓超寬螢幕自動長出第 5 欄，改成固定
+   repeat(4, 1fr) 就不會有這個問題。 */
+@media (min-width: 768px) {
+  .shop-grid {
+    grid-template-columns: repeat(4, 1fr);
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
 /* ---------- 商品格狀卡：電腦版限定的 hover 互動 ----------
    手機版一直顯示「+」快速加入鈕（見上面沒有媒體查詢限制的 .shop-card__add
    底色/陰影規則），電腦版改成預設淡出、滑鼠移到卡片上才淡入；換圖與底線
    同樣只在滑鼠移入時觸發。用 min-width:1024px（跟 home.css 的 .ambient-bg
    同一個桌面斷點），不用 hover 媒體查詢（如 (hover:hover)），因為單純比
    螢幕寬度更直接對應「電腦版」這個需求，觸控裝置本來就很少會落在
-   1024px 以上的寬度。:focus-within 讓鍵盤 tab 進卡片裡的連結／按鈕時也能
+   1024px 以上的寬度。這個斷點刻意跟上面「格狀欄數」的 768px 斷點分開──
+   768~1023px 之間的平板已經是 4 欄格狀了，但仍是觸控裝置、還不該有
+   hover 互動。:focus-within 讓鍵盤 tab 進卡片裡的連結／按鈕時也能
    看到同樣的效果，不是滑鼠專屬。 */
 @media (min-width: 1024px) {
-  /* 手機版是固定 2 欄（1fr 1fr），欄寬跟著螢幕寬度硬撐，螢幕越寬圖片
-     就越大；電腦版改成「欄寬固定在 180–220px 之間，欄數自己隨容器寬度
-     增減」，圖片大小維持跟手機版差不多的閱讀密度，不會因為螢幕變寬就
-     跟著放大到不合理的尺寸。max-width 加上左右 auto margin 是額外的
-     保險，超寬螢幕（例如 27 吋）不會整排硬撐開、密度變得太鬆散。 */
-  .shop-grid {
-    grid-template-columns: repeat(auto-fit, minmax(180px, 220px));
-    max-width: 1100px;
-    margin-left: auto;
-    margin-right: auto;
-  }
 
   .shop-card__add {
     opacity: 0;
@@ -1632,11 +1642,12 @@ button.text-link {
   color: var(--color-text-primary);
 }
 
+/* 字型／字級／顏色改用全站共用的 .price-text（見 base.css＋
+   tokens.css／colors.css 的 --price-*／--color-price），這裡只管排版
+   位置。原本是獨立的大字級「大顯示金額」規格（32px/600），跟其他小行項
+   價格不同調；使用者確認過要統一成同一套之後才改成這樣，不是忘記同步。 */
 .work__price {
   margin: 0;
-  font-family: var(--font-family-base);
-  font-weight: 600;
-  font-size: var(--font-size-xl);
 }
 
 .work__cta {

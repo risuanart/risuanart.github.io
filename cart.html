@@ -94,10 +94,19 @@
         <div class="work__close-text">
           <p class="work__shipping-note">運費和折扣將在結帳時計算。</p>
           <p class="checkout-error" role="alert" hidden></p>
-          <p class="work__price">小計 $0</p>
+          <p class="work__price price-text">小計 $0</p>
         </div>
         <button type="button" class="work__cta work__cta--primary" data-checkout-cta disabled>結帳</button>
       </footer>
+
+      <!-- 您可能對此有興趣：滿版格狀，位置在小計／結帳下面（不是並排），
+           排版比照參考站的購物車頁——直接沿用「相關商品」同一套
+           .shop-grid／.shop-card（見 products.css），2 欄手機／4 欄
+           ≥768px，跟其他商品格狀列表視覺一致，不用另外一套窄欄樣式。 -->
+      <section class="cart-cross-sell fade-in delay-3" id="cart-cross-sell">
+        <h2 class="cart-cross-sell__title">您可能對此有興趣</h2>
+        <div class="shop-grid" id="cart-cross-sell-grid" role="list" aria-label="您可能對此有興趣的商品"></div>
+      </section>
     </div>
 
     <!-- 結帳後取代購物車編輯區的橫條：左邊「確認訂單詳情」、右邊金額。
@@ -370,6 +379,7 @@
   <script src="js/cart.js"></script>
   <script src="js/tw-postal-codes.js"></script>
   <script src="js/checkout.js"></script>
+  <script src="js/cart-cross-sell.js"></script>
   <script src="js/site-header-scroll.js"></script>
   <script src="js/scroll-reveal.js"></script>
 </body>

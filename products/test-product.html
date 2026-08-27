@@ -55,9 +55,21 @@
 
     <section class="ptpl-hero">
       <div class="gallery fade-in">
-        <div class="placeholder-box ptpl-gallery__main" id="ptpl-gallery-main">圖片待補・商品主圖</div>
+        <div class="ptpl-gallery__viewport">
+          <div class="ptpl-gallery__main" id="ptpl-gallery-main"><img src="../assets/images/products/sand-art-artist/sand-art-artist-red-main.jpg" alt="羊化春聯砂畫（紅）完成品主圖"></div>
+          <!-- 左右切換箭頭：只在桌面（≥1024px，跟全站其他滑鼠限定的 hover
+               互動同一個斷點，見 products.css 的 .shop-card hover）平時
+               透明＋往外推，滑鼠移到整張主圖上才淡入浮現；手機／平板
+               完全不渲染，靠手指滑動縮圖列切換即可，見下面 CSS。 -->
+          <button type="button" class="btn-prev" id="ptpl-gallery-prev" aria-label="上一張圖片">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <button type="button" class="btn-next" id="ptpl-gallery-next" aria-label="下一張圖片">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
         <div class="ptpl-gallery__thumbs" id="ptpl-gallery-thumbs">
-          <button type="button" class="ptpl-gallery__thumb is-active" data-label="縮圖一"><span class="placeholder-box">縮圖1</span></button>
+          <button type="button" class="ptpl-gallery__thumb is-active" data-label="縮圖一" data-src="../assets/images/products/sand-art-artist/sand-art-artist-red-main.jpg" data-alt="羊化春聯砂畫（紅）完成品主圖"><img src="../assets/images/products/sand-art-artist/sand-art-artist-red-main.jpg" alt="縮圖一"></button>
           <button type="button" class="ptpl-gallery__thumb" data-label="縮圖二"><span class="placeholder-box">縮圖2</span></button>
           <button type="button" class="ptpl-gallery__thumb" data-label="縮圖三"><span class="placeholder-box">縮圖3</span></button>
           <button type="button" class="ptpl-gallery__thumb" data-label="縮圖四"><span class="placeholder-box">縮圖4</span></button>
@@ -66,7 +78,7 @@
 
       <div class="summary fade-in delay-1">
         <h1 class="work-heading ptpl-summary__title">示範商品名稱</h1>
-        <p class="ptpl-summary__price">$__</p>
+        <p class="ptpl-summary__price price-text">$__</p>
         <p class="ptpl-summary__stock">尚有現貨</p>
 
         <div class="ptpl-option">
@@ -280,13 +292,33 @@
         setTimeout(() => { addBtn.textContent = original; }, 1200);
       });
 
+      // 主圖切換：縮圖點擊、左右箭頭都呼叫同一個 selectThumb()，不是各自
+      // 分開寫一份「換圖＋更新 active 縮圖」的邏輯。箭頭是循環的（最後一張
+      // 按「下一張」回到第一張，反之亦然）。
       const galleryMain = document.getElementById("ptpl-gallery-main");
-      document.querySelectorAll(".ptpl-gallery__thumb").forEach((thumb) => {
-        thumb.addEventListener("click", () => {
+      const galleryThumbs = Array.from(document.querySelectorAll(".ptpl-gallery__thumb"));
+      function selectThumb(index) {
+        const thumb = galleryThumbs[index];
+        if (thumb.dataset.src) {
+          galleryMain.classList.remove("placeholder-box");
+          galleryMain.innerHTML = `<img src="${thumb.dataset.src}" alt="${thumb.dataset.alt || ""}">`;
+        } else {
+          galleryMain.classList.add("placeholder-box");
           galleryMain.textContent = "圖片待補・" + thumb.dataset.label;
-          document.querySelectorAll(".ptpl-gallery__thumb").forEach((t) => t.classList.remove("is-active"));
-          thumb.classList.add("is-active");
-        });
+        }
+        galleryThumbs.forEach((t) => t.classList.remove("is-active"));
+        thumb.classList.add("is-active");
+      }
+      galleryThumbs.forEach((thumb, index) => {
+        thumb.addEventListener("click", () => selectThumb(index));
+      });
+      document.getElementById("ptpl-gallery-prev").addEventListener("click", () => {
+        const current = galleryThumbs.findIndex((t) => t.classList.contains("is-active"));
+        selectThumb(current <= 0 ? galleryThumbs.length - 1 : current - 1);
+      });
+      document.getElementById("ptpl-gallery-next").addEventListener("click", () => {
+        const current = galleryThumbs.findIndex((t) => t.classList.contains("is-active"));
+        selectThumb(current >= galleryThumbs.length - 1 ? 0 : current + 1);
       });
 
       const banner = document.getElementById("ptpl-banner");

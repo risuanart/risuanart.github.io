@@ -609,7 +609,11 @@
   margin: 0;
   font-family: var(--font-family-base);
   font-weight: 600;
-  font-size: var(--font-size-lg);
+  /* 從 --font-size-lg（20px）降到 --font-size-base（16px），原本比周圍
+     內文（12-14px）大了快一個量級，跟現在調過的商品名稱／小計字級比起來
+     太突兀；縮小後還是比內文明顯大一號、看得出是分類標題，但差距沒那麼
+     誇張。 */
+  font-size: var(--font-size-base);
 }
 
 /* 商品清單上方的欄位標題（商品／小計），對齊下方每一列縮圖起點與價格右緣。 */
@@ -647,9 +651,11 @@
 /* 縮圖＋內文並排，內文自己再分兩排（品名／數量價格），不把縮圖、品名、數量、
    價格、移除全部塞進同一橫排——品名在窄螢幕上會被擠成只剩一兩個字寬的直條。
    項目之間不畫分隔線，靠上下 padding 留白區隔即可。 */
+/* 圖片跟文字間距改用 --space-6（24px），照參考規格的圖左字右節奏調寬——
+   顏色／字距／字型維持我們自己的 token，不跟著參考站的數值改。 */
 .cart-item {
   display: flex;
-  gap: var(--space-4);
+  gap: var(--space-6);
   padding: var(--space-4) 0;
 }
 
@@ -663,18 +669,22 @@
   opacity: 0.6;
 }
 
+/* 縮圖從 64px 放大到 80px（照參考規格），object-fit 維持 cover 不是
+   fill——fill 會把長寬比不是正方形的原圖硬拉伸變形，cover 保留原圖比例
+   裁切，是縮圖類元件的標準做法，不採用參考規格那個會讓圖片變形的選項。
+   圓角維持 --radius-sharp，跟全站縮圖同一套語言，不跟著改成直角。 */
 .cart-item__thumb {
-  width: 64px;
-  height: 64px;
+  width: 80px;
+  height: 80px;
   object-fit: cover;
   border-radius: var(--radius-sharp);
 }
 
-/* 沒有實拍素材時的文字佔位框（見 js/cart.js thumbHTML()），縮圖尺寸太小，
-   .placeholder-box 預設的留白跟字級塞不進 64px 見方，這裡另外縮小。 */
+/* 沒有實拍素材時的文字佔位框（見 js/cart.js thumbHTML()），80px 見方
+   比原本 64px 寬裕一些，字級可以比之前的 64px 版本略大一點。 */
 .cart-item__thumb.placeholder-box {
-  padding: 0;
-  font-size: 0.6rem;
+  padding: var(--space-1);
+  font-size: 0.65rem;
 }
 
 .cart-item__body {
@@ -685,12 +695,23 @@
   gap: var(--space-2);
 }
 
+/* 字級：手機 12px，≥768px（跟全站其他斷點同一個門檻，見 tokens.css
+   --pad-h／products.css .shop-grid）放大到 13px。字距 1.95px 是這個
+   元件明確指定的數值，不是全站統一的 --letter-spacing-base（1px）——
+   刻意只在這裡覆蓋，不動全站字距系統。 */
 .cart-item__name {
   display: block;
-  font-size: var(--font-size-sm);
+  font-size: 12px;
   font-weight: 700;
+  letter-spacing: 1.95px;
   color: var(--color-text-primary);
   transition: opacity var(--duration-fast) var(--ease-standard);
+}
+
+@media (min-width: 768px) {
+  .cart-item__name {
+    font-size: 13px;
+  }
 }
 
 .cart-item__name:active {
@@ -700,7 +721,9 @@
 /* 色系下拉：可以直接在購物車換色，不用跳回商品頁。用原生 <select>——
    手機上點下去就是系統原生的選單/滾輪，不用自己刻一個彈出選單。
    外觀上盡量抹掉瀏覽器預設樣式，看起來像其他地方的底線文字連結，
-   只是多一個小箭頭暗示「這個可以點開換」。 */
+   只是多一個小箭頭暗示「這個可以點開換」。顏色改用 --color-scheme-text
+   （黑色70%透明度，見 colors.css 的例外說明），不是全站次要文字色，
+   跟商品名稱的粗體黑做出層次區分；字距同樣是這個元件專屬的 1.95px。 */
 .cart-item__scheme-select {
   appearance: none;
   -webkit-appearance: none;
@@ -717,8 +740,10 @@
   padding: 0 var(--space-4) var(--space-1) 0;
   border-bottom: 1px solid color-mix(in srgb, var(--color-text-secondary) 40%, transparent);
   font-family: inherit;
-  font-size: var(--font-size-xs);
-  color: var(--color-text-secondary);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 1.95px;
+  color: var(--color-scheme-text);
   cursor: pointer;
 }
 
@@ -744,10 +769,12 @@
   display: flex;
   align-items: stretch;
   flex: none;
+  width: 81px;
+  height: 30px;
+  box-sizing: border-box;
   border: 1px solid color-mix(in srgb, var(--color-text-secondary) 40%, transparent);
   border-radius: var(--radius-sharp);
   overflow: hidden;
-  font-size: var(--font-size-sm);
   font-variant-numeric: tabular-nums;
 }
 
@@ -755,7 +782,8 @@
   appearance: none;
   border: none;
   background: none;
-  width: 2em;
+  width: 28px;
+  flex: none;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -767,13 +795,25 @@
   background: color-mix(in srgb, var(--color-text-secondary) 15%, transparent);
 }
 
-.cart-item__qty span {
-  min-width: 2em;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-left: 1px solid color-mix(in srgb, var(--color-text-secondary) 40%, transparent);
-  border-right: 1px solid color-mix(in srgb, var(--color-text-secondary) 40%, transparent);
+.cart-item__qty-input {
+  appearance: none;
+  width: 23px;
+  flex: none;
+  min-width: 0;
+  border: none;
+  padding: 0;
+  background: transparent;
+  /* 字型跟旁邊的價格數字統一用 --price-font-family（ABeeZee），不寫死
+     字面值——這樣以後價格字型換了，這裡會自動一起變。 */
+  font-family: var(--price-font-family);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+  text-align: center;
+}
+
+.cart-item__qty-input:focus {
+  outline: none;
+  background: color-mix(in srgb, var(--color-text-secondary) 10%, transparent);
 }
 
 /* 字型／字級／顏色改用全站共用的 .price-text（見 base.css），這裡只管
@@ -801,6 +841,10 @@
 
 .cart-item__remove svg {
   display: block;
+}
+
+.cart-item__remove:active {
+  color: var(--color-warning);
 }
 
 .cart-item__remove:active {
@@ -837,7 +881,10 @@
   min-width: 0;
   border: none;
   border-radius: 10px;
-  background: var(--color-surface-light);
+  /* 改用 --color-surface-neutral（中性淺灰），不是 --color-surface-light
+     （暖米色）——這個欄位直接坐在頁面底色上，暖米色跟現在的中性灰底色
+     不搭。 */
+  background: var(--color-surface-neutral);
   padding: var(--space-2) var(--space-4);
   font-family: inherit;
   font-size: var(--font-size-sm);
@@ -1242,4 +1289,19 @@
   font-size: 0.7rem;
   font-family: var(--font-family-base);
   vertical-align: middle;
+}
+
+/* ---------- 購物車頁底部：您可能對此有興趣 ----------
+   照參考站的購物車頁排法：這個區塊在小計／結帳按鈕「下面」、滿版寬度，
+   不是跟小計並排擠成窄欄（先前做過並排版本，使用者比對參考站截圖後
+   確認要改成這樣）。格狀列表直接沿用「相關商品」同一套 .shop-grid（見
+   products.css），2 欄手機／4 欄 ≥768px，跟其他商品格狀列表視覺一致，
+   不用另外一套窄欄樣式或縮小字級。 */
+.cart-cross-sell {
+  margin-top: var(--space-16);
+}
+
+.cart-cross-sell__title {
+  margin: 0 0 var(--space-6);
+  text-align: center;
 }

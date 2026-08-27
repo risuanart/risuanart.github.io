@@ -654,9 +654,9 @@
         <div class="cart-item__meta">
           <div class="cart-item__qty-actions">
             <div class="cart-item__qty">
-              <button type="button" data-qty-decrease aria-label="減少數量"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg></button>
-              <span>${item.qty}</span>
-              <button type="button" data-qty-increase aria-label="增加數量"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+              <button type="button" data-qty-decrease aria-label="減少數量"><svg width="8" height="2" viewBox="0 0 8 2" aria-hidden="true"><path fill="currentColor" d="M0 0h8v2H0z"/></svg></button>
+              <input type="text" class="cart-item__qty-input" data-qty-input inputmode="numeric" value="${item.qty}" aria-label="數量">
+              <button type="button" data-qty-increase aria-label="增加數量"><svg width="8" height="8" viewBox="0 0 8 8" aria-hidden="true"><path fill="currentColor" d="M3 5v3h2V5h3V3H5V0H3v3H0v2h3z"/></svg></button>
             </div>
             <button type="button" class="cart-item__remove" aria-label="移除">
               <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16"/><path d="M9 7V4h6v3"/><path d="M6 7l1 13h10l1-13"/></svg>
@@ -666,8 +666,17 @@
         </div>
       </div>
     `;
+    const qtyInput = li.querySelector("[data-qty-input]");
     li.querySelector("[data-qty-decrease]").addEventListener("click", () => setQty(item.id, item.qty - 1));
     li.querySelector("[data-qty-increase]").addEventListener("click", () => setQty(item.id, item.qty + 1));
+    // 直接輸入數字也能改數量，不是只能點 +/-。輸入不是數字或小於等於0時交給
+    // setQty 自己的規則處理（見上面 setQty 定義：qty<=0 直接移除這件商品，
+    // 跟按到「−」減到0是同一套邏輯，不用另外寫一次）；blur 才觸發，不是每打
+    //一個字就送出一次。
+    qtyInput.addEventListener("change", () => {
+      const parsed = parseInt(qtyInput.value, 10);
+      setQty(item.id, Number.isNaN(parsed) ? item.qty : parsed);
+    });
     li.querySelector(".cart-item__remove").addEventListener("click", () => removeItem(item.id));
     const schemeSelect = li.querySelector(".cart-item__scheme-select");
     if (schemeSelect) schemeSelect.addEventListener("change", (e) => changeScheme(item.id, e.target.value));
