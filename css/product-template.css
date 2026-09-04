@@ -301,7 +301,10 @@
 }
 
 /* ---------- 作品介紹（藝術家系列的靈感畫作介紹） ----------
-   裸 p 刻意不另外寫字級，吃 base.css 的全站內文（14/400/25.2）預設值；
+   裸 p 字級／行高吃 base.css 的全站內文（14/400/25.2）預設值，但 base.css
+   那條規則不管段落間距（刻意不設 margin，避免跟其他頁面既有的段落間距
+   邏輯打架），這裡的內容現在是馬諦斯生平＋《舞蹈》介紹三段連續段落，
+   沒有段落間距會全部黏在一起變成一大塊，所以額外補上 margin-bottom。
    h2「Dance II」改用展示襯線字體（見下方），不是全站標題共用的
    17/600/30，這裡只補間距跟兩個需要特別處理的元素（引言、現藏地credit
    行）。 */
@@ -327,6 +330,9 @@
   font-family: var(--font-family-display);
   font-weight: 500;
   font-size: var(--font-size-lg);
+}
+.ptpl-artwork p {
+  margin-bottom: var(--space-4);
 }
 
 /* 引言用左側色條＋斜體，跟內文段落拉開層次，是這個畫作介紹區塊唯一
@@ -486,26 +492,8 @@
 .ptpl-transform__note {
   margin-top: var(--space-4);
 }
-
-/* ---------- 關於這幅畫：馬諦斯生平／《舞蹈》介紹／畫室創作脈絡 ----------
-   跟「畫室原創特色」間距刻意貼近（--space-10，不是 --editorial-gap-double）
-   ——這裡是延續上一個區塊的敘事，不是主題轉換，大間距留給下一個「商品
-   詳細」（故事切到規格資訊，才是真的轉換）。裸 p 吃 base.css 的全站內文
-   預設值，不用另外寫字級。 */
-.ptpl-artist {
-  margin-top: var(--space-10);
-}
-.ptpl-artist h2 {
-  margin: 0 0 var(--space-4);
-  font-family: var(--font-family-display);
-  font-weight: 500;
-  font-size: var(--font-size-lg);
-}
-.ptpl-artist p {
-  margin: 0 0 var(--space-4);
-}
-.ptpl-artist p:last-child {
-  margin-bottom: 0;
+.ptpl-transform__note strong {
+  font-weight: 600;
 }
 
 /* ---------- 商品詳細：材料平拍圖＋清單 ----------
@@ -758,7 +746,6 @@
   .ptpl-hero,
   .ptpl-artwork,
   .ptpl-transform,
-  .ptpl-artist,
   .ptpl-materials,
   .ptpl-color-detail,
   .ptpl-color-compare,
