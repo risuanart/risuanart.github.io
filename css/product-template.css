@@ -483,15 +483,29 @@
   box-shadow: var(--shadow-raised);
 }
 
-/* 待補文字樣式跟全站既有的 [data-placeholder] 慣例一致（見 products.css
-   的 .chapter__intro[data-placeholder] 等），斜體＋次要文字色，一眼就
-   看得出這段不是正式文案。 */
 .ptpl-transform__note {
   margin-top: var(--space-4);
 }
-.ptpl-transform__note[data-placeholder] {
-  color: var(--color-text-secondary);
-  font-style: italic;
+
+/* ---------- 關於這幅畫：馬諦斯生平／《舞蹈》介紹／畫室創作脈絡 ----------
+   跟「畫室原創特色」間距刻意貼近（--space-10，不是 --editorial-gap-double）
+   ——這裡是延續上一個區塊的敘事，不是主題轉換，大間距留給下一個「商品
+   詳細」（故事切到規格資訊，才是真的轉換）。裸 p 吃 base.css 的全站內文
+   預設值，不用另外寫字級。 */
+.ptpl-artist {
+  margin-top: var(--space-10);
+}
+.ptpl-artist h2 {
+  margin: 0 0 var(--space-4);
+  font-family: var(--font-family-display);
+  font-weight: 500;
+  font-size: var(--font-size-lg);
+}
+.ptpl-artist p {
+  margin: 0 0 var(--space-4);
+}
+.ptpl-artist p:last-child {
+  margin-bottom: 0;
 }
 
 /* ---------- 商品詳細：材料平拍圖＋清單 ----------
@@ -614,6 +628,19 @@
   letter-spacing: 0.1em;
   color: var(--color-text-secondary);
 }
+/* 色款故事文案（因應過年配色／致敬原畫配色），放在色款標籤跟色票之間——
+   標籤負責「這是紅款/藍款」的結構辨識，這段文字負責「為什麼選這個配色」
+   的敘事，兩者角色不同、都留著。 */
+.ptpl-color-group__intro {
+  margin: 0 0 var(--space-4);
+  max-width: 60ch;
+  font-size: var(--font-size-sm);
+  line-height: 1.7;
+  color: var(--color-text-primary);
+}
+.ptpl-color-group__intro strong {
+  font-weight: 600;
+}
 
 .ptpl-color-picker {
   flex-wrap: nowrap;
@@ -731,6 +758,7 @@
   .ptpl-hero,
   .ptpl-artwork,
   .ptpl-transform,
+  .ptpl-artist,
   .ptpl-materials,
   .ptpl-color-detail,
   .ptpl-color-compare,
