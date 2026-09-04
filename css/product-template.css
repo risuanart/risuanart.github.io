@@ -8,7 +8,23 @@
    （.placeholder-box／.qty-stepper／.variant-select／.price-text／
    .chapter__title／.shop-grid／.shop-card 系列）的地方就直接重用，不重刻。 */
 
-/* ---------- 頂部公告橫幅（可留可不留，示範用） ---------- */
+/* ---------- 頂部公告橫幅（可留可不留，示範用） ----------
+   跟 .site-header 一起包在 .site-topbar 裡（見下方），疊在整個頁面最上面
+   一列，比 .site-header 更上面一層，不是塞在 .product-page 內容區裡面。 */
+.site-topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 25;
+}
+/* .site-header 本身在 home.css 定義成 position:fixed；包進 .site-topbar
+   之後改回普通排版流，讓公告橫幅／頂部列兩塊上下堆疊，一起被外層
+   .site-topbar 固定在畫面最上方。 */
+.site-topbar .site-header {
+  position: static;
+}
+
 .ptpl-banner {
   position: relative;
   padding: var(--space-2) var(--space-10);
@@ -17,6 +33,21 @@
   text-align: center;
   font-size: var(--font-size-xs);
   letter-spacing: 0.05em;
+}
+
+/* 定時輪播的文字用淡出／淡入（不是直接跳字），見 test-product.html 的
+   輪播 JS：先加 .is-fading 讓文字淡出，換字後拿掉 class 淡回來。 */
+.ptpl-banner__text {
+  display: inline-block;
+  transition: opacity var(--duration-fast) var(--ease-standard);
+}
+.ptpl-banner__text.is-fading {
+  opacity: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ptpl-banner__text {
+    transition: none;
+  }
 }
 
 .ptpl-banner__close {
@@ -153,8 +184,16 @@
 }
 
 /* ---------- 購買面板 ---------- */
+/* 這個範本頁的區塊標題（商品名稱＋下面每個 section 的 h2）統一改用展示
+   襯線字體（--font-family-display，見 tokens.css），跟內文的 Open Sans／
+   Noto Sans TC 拉開層次——全站目前所有標題其實都還是跟內文共用同一套
+   字體，這裡先在這個範本頁試，不動 .work-heading／.chapter__title 等
+   全站共用規則，避免大範圍改動。字重用 500，Fraunces／Noto Serif TC
+   兩個字體都剛好有載入這個字重，不會有其中一個字體被瀏覽器合成假粗體。 */
 .ptpl-summary__title {
   margin: 0 0 var(--space-4);
+  font-family: var(--font-family-display);
+  font-weight: 500;
 }
 
 .ptpl-summary__price {
@@ -262,12 +301,12 @@
 }
 
 /* ---------- 作品介紹（藝術家系列的靈感畫作介紹） ----------
-   標題／段落刻意不另外寫字級：裸 h2／裸 p 已經吃 base.css 的全站標題
-   （17/600/30）跟內文（14/400/25.2）預設值。這裡只補間距跟兩個需要
-   特別處理的元素（引言、現藏地credit行）。 */
+   裸 p 刻意不另外寫字級，吃 base.css 的全站內文（14/400/25.2）預設值；
+   h2「Dance II」改用展示襯線字體（見下方），不是全站標題共用的
+   17/600/30，這裡只補間距跟兩個需要特別處理的元素（引言、現藏地credit
+   行）。 */
 .ptpl-artwork {
   margin-top: var(--editorial-gap);
-  max-width: 60ch;
 }
 .ptpl-artwork__eyebrow {
   margin: 0 0 var(--space-2);
@@ -285,6 +324,9 @@
 }
 .ptpl-artwork h2 {
   margin: 0 0 var(--space-4);
+  font-family: var(--font-family-display);
+  font-weight: 500;
+  font-size: var(--font-size-lg);
 }
 
 /* 引言用左側色條＋斜體，跟內文段落拉開層次，是這個畫作介紹區塊唯一
@@ -317,12 +359,25 @@
    --pos 是目前拉桿位置（0%～100%，從左邊算），由 test-product.html 內嵌
    script 拖曳時更新。.ptpl-compare__layer--before 用 clip-path 只露出
    左側 0～--pos 這段，右側自然透出 --after 那層，做出「拖多少、看到多少
-   原畫」的效果，不用真的疊兩張圖片跑 JS 切換 src。 */
+   原畫」的效果，不用真的疊兩張圖片跑 JS 切換 src。
+
+   這是全頁唯一保留「畫室原創特色」小標籤的區塊——這裡是畫室真正的核心
+   賣點（名畫再製、羊化春聯），值得被特別標出來；其他區塊原本也各自掛
+   一個類似的小標籤，會讓整頁看起來像貼格式化標籤而不是真的分章節，
+   已經拿掉，改成直接用標題大小分段（見 .ptpl-artwork h2 等）。
+   跟上一個「作品介紹」區塊的間距故意縮小（--space-10，不是
+   --editorial-gap），因為這兩個區塊是同一條敘事線的上下文（先介紹原畫、
+   接著介紹怎麼再創作），不是各自獨立的主題，間距貼近一點讀起來才連貫；
+   往下一個「商品詳細」才是真正的主題轉換（從畫作故事切到規格資訊），
+   間距改大（--editorial-gap-double）做出明顯區隔。 */
 .ptpl-transform {
-  margin-top: var(--editorial-gap);
+  margin-top: var(--space-10);
 }
 .ptpl-transform h2 {
   margin: 0 0 var(--space-6);
+  font-family: var(--font-family-display);
+  font-weight: 500;
+  font-size: var(--font-size-lg);
 }
 
 .ptpl-compare {
@@ -442,63 +497,85 @@
 /* ---------- 商品詳細：材料平拍圖＋清單 ----------
    .kit-section__photo／.kit-list／[data-placeholder] 都是 products.css
    既有的「套組內容」章節樣式（見 fluid-art-light.html），直接沿用，這裡
-   只補 section 本身的間距跟下面新增的「跳到其他色款」連結卡片樣式。 */
+   只補 section 本身的間距。
+   間距用 --editorial-gap-double（比其他區塊常用的 --editorial-gap 大一階）：
+   從「名畫再製」的故事／情感敘事，切到這裡開始是規格／材料資訊，是頁面
+   裡最大的一次主題轉換，值得留比較大的空白做區隔——tokens.css 本來就
+   明文規定「留白刻意不平均」，不要整頁每個區塊間距長一樣，這裡是實際
+   套用那條規則的地方。 */
 .ptpl-materials {
-  margin-top: var(--editorial-gap);
+  margin-top: var(--editorial-gap-double);
+}
+.ptpl-materials h2 {
+  margin: 0 0 var(--space-4);
+  font-family: var(--font-family-display);
+  font-weight: 500;
+  font-size: var(--font-size-lg);
+}
+/* 色沙材料（紅款／藍款）跟上面的工具清單分開一段距離，讓讀者看得出這裡
+   換了一個「性質不同」的清單（工具通用 vs 色沙隨款式不同），複用跟
+   顏色細節同一套 .ptpl-color-detail__groups 排版（見上方），只加大一點
+   跟工具清單的間距。 */
+.ptpl-materials__colors {
+  margin-top: var(--space-6);
 }
 
-.ptpl-crosslink {
-  display: flex;
-  align-items: center;
-  gap: var(--space-4);
+/* 安全須知：跟 .ptpl-crosslink（連結卡片）同一套「細邊框＋直角」語言，
+   維持這頁一貫的邊框樣式，不另外發明。內文用次要文字色＋小字級，維持
+   「補充資訊」的視覺層級，不會搶過上面材料清單的份量。 */
+.ptpl-notice {
   margin-top: var(--space-6);
-  padding: var(--space-2) var(--space-4);
+  padding: var(--space-4);
   border: 1px solid color-mix(in srgb, var(--color-text-secondary) 25%, transparent);
   border-radius: var(--radius-sharp);
-  color: inherit;
-  transition: background var(--duration-fast) var(--ease-standard);
 }
-.ptpl-crosslink:hover,
-.ptpl-crosslink:focus-visible {
-  background: color-mix(in srgb, var(--color-text-secondary) 8%, transparent);
-}
-/* 正方形照片轉45度變菱形，呼應一般春聯／福字的菱形貼法。改用 clip-path
-   切角做成菱形，不是真的用 transform:rotate(45deg) 轉整個方塊——如果
-   直接轉方塊，對角線會變成原邊長的 √2 倍，容易溢出旁邊的文字，而且裡面
-   的照片內容也會跟著歪斜。clip-path 純粹切掉四角，方塊本身的排版佔位
-   不變、裡面的照片依然是正的，效果一樣是菱形但不會有溢出或內容歪斜
-   的問題。 */
-.ptpl-crosslink__thumb {
-  flex: none;
-  width: 56px;
-  height: 56px;
-  aspect-ratio: auto;
-  padding: 0;
-  border: none;
-  border-radius: 0;
-  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-  font-size: 8px;
-}
-.ptpl-crosslink__text {
-  flex: 1;
-  font-size: var(--font-size-xs);
-  line-height: 1.6;
+.ptpl-notice__title {
+  margin: 0 0 var(--space-2);
+  font-weight: 600;
   color: var(--color-text-primary);
 }
-.ptpl-crosslink__arrow {
-  flex: none;
+.ptpl-notice__list {
+  margin: 0;
+  padding-left: 1.2em;
+  font-size: var(--font-size-xs);
+  line-height: 1.7;
   color: var(--color-text-secondary);
-  transition: transform var(--duration-fast) var(--ease-standard);
 }
-.ptpl-crosslink:hover .ptpl-crosslink__arrow {
-  transform: translateX(3px);
+.ptpl-notice__list li {
+  margin-bottom: var(--space-1);
+}
+.ptpl-notice__list li:last-child {
+  margin-bottom: 0;
 }
 
-/* 窄橫幅：之後放「所有顏色細節展示圖」，比例故意拉寬拉扁，跟上面正方形
-   的材料平拍圖、下面 3:4 的比對媒體區都不同比例，讓這條橫幅在版面上
-   讀起來像「一條攤開來看的細節帶」，不是又一張正方形照片。 */
-.ptpl-materials__banner {
+/* 顏色細節：跟上面「商品詳細」是同一組材料資訊的延伸（這條橫幅本身就是
+   材料色系的展示圖），間距刻意貼近（--space-10），不是又一個
+   --editorial-gap-double 的大區隔——大間距只用在真正的主題轉換，這裡
+   不是。 */
+.ptpl-color-detail {
+  margin-top: var(--space-10);
+}
+.ptpl-color-detail h2 {
+  margin: 0 0 var(--space-4);
+  font-family: var(--font-family-display);
+  font-weight: 500;
+  font-size: var(--font-size-lg);
+}
+
+/* 紅款／藍款兩張展示圖上下排列，跟下面「顏色比較」的兩排色票同一套
+   .ptpl-color-group／.ptpl-color-group__label 語言（見下方），讀者掃過去
+   會直覺把這兩個區塊的紅款/藍款配對起來看，不是各自發明一套標籤。 */
+.ptpl-color-detail__groups {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
   margin-top: var(--space-6);
+}
+
+/* 窄橫幅：比例故意拉寬拉扁，跟上面正方形的材料平拍圖、下面 3:4 的比對
+   媒體區都不同比例，讓這條橫幅在版面上讀起來像「一條攤開來看的細節帶」，
+   不是又一張正方形照片。 */
+.ptpl-materials__banner {
   aspect-ratio: 3 / 1;
   border-radius: var(--radius-sharp);
 }
@@ -511,9 +588,31 @@
    字級，而是讓每個色票自己「變窄」：圓點在上，色名文字改直式書寫
    （一個字一行），單一色票的寬度只需要一個字寬，7 個色票排一整排就
    塞得下，不用左右滑動。不動共用的 .color-picker 本身，避免影響其他
-   頁面既有的 2 色橫排版面。 */
+   頁面既有的 2 色橫排版面。跟上面「顏色細節」間距一樣貼近（--space-10）
+   ——這兩個區塊都是同一件事（看顏色）的不同呈現方式，不是主題轉換。 */
 .ptpl-color-compare {
-  margin-top: var(--editorial-gap);
+  margin-top: var(--space-10);
+}
+.ptpl-color-compare h2 {
+  margin: 0 0 var(--space-4);
+  font-family: var(--font-family-display);
+  font-weight: 500;
+  font-size: var(--font-size-lg);
+}
+
+/* 紅款／藍款兩排色票，各自一個 .ptpl-color-group（標籤＋色票列），
+   兩排之間用 --space-4 隔開，比一組色票內部色票的間距（color-picker 自己
+   的 gap）稍寬，讀者掃過去才分得出「這是換一排」不是同一排的延續。 */
+#ptpl-color-tabs-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+.ptpl-color-group__label {
+  margin: 0 0 var(--space-2);
+  font-size: var(--font-size-xs);
+  letter-spacing: 0.1em;
+  color: var(--color-text-secondary);
 }
 
 .ptpl-color-picker {
@@ -543,26 +642,59 @@
   border-radius: var(--radius-sharp);
 }
 
-/* ---------- 商品說明區：標題／段落／情境圖交錯 ----------
-   刻意不另外寫標題／段落的字級規則：裸 h4／裸 p 已經吃 base.css 的全站
-   標題（17/600/30）跟內文（14/400/25.2）預設值，這裡只補間距，換規格
-   要改的話直接去改 base.css／tokens.css，這頁會自動一起變。 */
+/* ---------- 商品說明區：分頁籤（商品介紹／規格資訊） ----------
+   裸 p 已經吃 base.css 的全站內文預設值（14/400/25.2），這裡只補分頁籤
+   本身的樣式跟間距。分頁籤列用底線標示目前選取項，不用色塊/圓角背景——
+   跟全站「直角俐落」的視覺語言一致（見 --radius-sharp 系統），也避免
+   看起來像另外發明的元件。上緣間距用 --editorial-gap-double：從「顏色
+   比較」的互動式色票，切到這裡開始是純文字的規格說明，是另一次明顯的
+   主題轉換，比照前面「商品詳細」那次轉換同樣留大間距。 */
 .ptpl-description {
-  max-width: 60ch;
-  margin: var(--editorial-gap) auto 0;
+  margin: var(--editorial-gap-double) auto 0;
 }
-.ptpl-description h4 {
-  margin: var(--space-10) 0 var(--space-2);
+
+.ptpl-tabs {
+  display: flex;
+  gap: var(--space-6);
+  border-bottom: 1px solid color-mix(in srgb, var(--color-text-secondary) 25%, transparent);
 }
-.ptpl-description h4:first-child {
-  margin-top: 0;
+.ptpl-tabs__btn {
+  position: relative;
+  padding: var(--space-2) 0 var(--space-4);
+  border: none;
+  background: none;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  cursor: pointer;
 }
-.ptpl-description p {
+.ptpl-tabs__btn::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background: var(--color-text-primary);
+  opacity: 0;
+  transition: opacity var(--duration-fast) var(--ease-standard);
+}
+.ptpl-tabs__btn.is-active {
+  color: var(--color-text-primary);
+}
+.ptpl-tabs__btn.is-active::after {
+  opacity: 1;
+}
+
+.ptpl-tabs__panel {
+  padding-top: var(--space-6);
+}
+.ptpl-tabs__panel p {
   margin: 0 0 var(--space-4);
 }
-.ptpl-description .placeholder-box {
+.ptpl-tabs__panel .placeholder-box {
   aspect-ratio: 16 / 9;
-  margin: var(--space-6) 0;
+  margin: var(--space-6) 0 0;
   border-radius: var(--radius-sharp);
 }
 
@@ -575,6 +707,9 @@
 .ptpl-related__title {
   text-align: center;
   margin: 0 0 var(--space-6);
+  font-family: var(--font-family-display);
+  font-weight: 500;
+  font-size: var(--font-size-lg);
 }
 
 /* ---------- 桌面／平板版面（≥1024px） ----------
@@ -582,9 +717,11 @@
    越大——這在手機上沒問題，但螢幕一拉寬（平板、電腦，尤其超寬螢幕）
    圖片會大到不合理的尺寸、閱讀起來反而吃力。跟 products.css 的
    .shop-grid 桌面版是同一個處理原則：圖片/圖庫類的區塊限制一個舒適的
-   最大寬度＋自動置中，不隨螢幕寬度無限放大；純文字敘述的區塊
-   （.ptpl-artwork／.ptpl-description）本來就已經用 60ch 限制閱讀行寬，
-   不需要在這裡重複處理。
+   最大寬度＋自動置中，不隨螢幕寬度無限放大。
+   .ptpl-artwork／.ptpl-description 原本另外用 60ch 限制成偏窄的閱讀欄，
+   跟參考圖（koyama.com.tw 品牌介紹區）的行寬不符——對方標題／內文是跟
+   圖片區同寬、不是縮成一欄窄版，所以拿掉 60ch，改成跟其他區塊套用同一個
+   900px 上限，全頁行寬統一。
    900px 這個寬度是刻意選的：.ptpl-hero 兩欄（圖庫＋購買面板）在這個
    寬度下每欄約 418px，跟手機版單欄圖片的視覺密度相近，不會突然變得
    異常巨大；比 --editorial-gap 系統既有的 1100px（.shop-grid 用，那是
@@ -592,10 +729,12 @@
    +文字」的敘事型版面，不需要那麼寬。 */
 @media (min-width: 1024px) {
   .ptpl-hero,
+  .ptpl-artwork,
   .ptpl-transform,
   .ptpl-materials,
   .ptpl-color-detail,
-  .ptpl-color-compare {
+  .ptpl-color-compare,
+  .ptpl-description {
     max-width: 900px;
     margin-left: auto;
     margin-right: auto;

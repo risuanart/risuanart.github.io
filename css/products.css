@@ -40,10 +40,14 @@
      背景2（純白，目前啟用）時改成不透明白色。實際值由 colors.css 的
      --panel-bg 控制，兩個版本一起切換見該處註解。 */
   background: var(--panel-bg);
-  /* 保留頂部列（.site-header，position:fixed）實際佔用的高度，避免內容一開始
-     就被蓋住，額外留白對齊母頁標題跟頂部列之間的實測間距（65px），
-     不是緊貼在列的正下方。 */
-  padding-top: calc(var(--editorial-header-height) + 69px);
+  /* 保留頂部列（.site-header，position:fixed，部分頁面上面還疊了一個
+     .site-topbar 公告橫幅，見 product-template.css）實際佔用的高度，避免
+     內容一開始就被蓋住，額外留白對齊母頁標題跟頂部列之間的實測間距
+     （65px），不是緊貼在列的正下方。--ptpl-topbar-height 由 JS 即時量測
+     .site-topbar 實際高度回填（見 test-product.html：公告橫幅關閉時會
+     重新量測），fallback 用回單純 .site-header 高度，沒有公告橫幅的頁面
+     或 JS 還沒跑完前都不會蓋住內容。 */
+  padding-top: calc(var(--ptpl-topbar-height, var(--editorial-header-height)) + 69px);
   padding-bottom: var(--space-24);
   /* 左右安全邊界改用 --pad-h（跟母頁、.site-header、.pill-nav 同一組編輯式
      版面節奏 token，見 tokens.css），內容才會真的置中在螢幕正中間，

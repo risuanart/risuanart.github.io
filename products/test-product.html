@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>測試產品頁｜日宣繪畫室</title>
+  <title>春聯砂畫材料包・羊群報福（進階款）｜日宣繪畫室</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=ABeeZee&family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;600;700&family=Poppins:wght@700&family=Noto+Serif+TC:wght@500;700&family=Noto+Sans+TC:wght@400;600;700&display=swap" rel="stylesheet">
@@ -26,32 +26,34 @@
        目前只掛在首頁側邊目錄的「測試產品頁」分頁，還沒接進真正的商品
        流程（也沒有出現在 products/shop.html 或任何商品清單裡）。 -->
 
-  <header class="site-header">
-    <a class="site-header__back" href="../index.html" data-back-fixed aria-label="回到首頁"><img src="../assets/images/logo-risuan拷貝.png" alt="日宣繪畫室"></a>
-    <div class="site-header__title">測試產品頁</div>
-    <div class="cart-badge-wrap">
-      <button type="button" class="cart-badge" aria-haspopup="true" aria-expanded="false" aria-label="購物車，目前 0 件">
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
-        <span class="cart-badge__count">0</span>
-      </button>
-      <div class="cart-preview" hidden>
-        <ul class="cart-preview__list"></ul>
-        <p class="cart-preview__empty">購物車是空的</p>
-        <p class="cart-preview__total"></p>
-        <div class="cart-preview__actions">
-          <a class="cart-preview__view" href="../cart.html">查看購物車</a>
-          <button type="button" class="cart-preview__continue">繼續選購</button>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <main class="product-page work">
-
-    <div class="ptpl-banner fade-in" id="ptpl-banner">
-      限時優惠活動說明文字（範例，可刪）
+  <div class="site-topbar">
+    <div class="ptpl-banner" id="ptpl-banner">
+      <span class="ptpl-banner__text" id="ptpl-banner-text">限時優惠活動說明文字（範例，可刪）</span>
       <button type="button" class="ptpl-banner__close" id="ptpl-banner-close" aria-label="關閉公告">✕</button>
     </div>
+
+    <header class="site-header">
+      <a class="site-header__back" href="../index.html" data-back-fixed aria-label="回到首頁"><img src="../assets/images/logo-risuan拷貝.png" alt="日宣繪畫室"></a>
+      <div class="site-header__title">春聯砂畫材料包・羊群報福（進階款）</div>
+      <div class="cart-badge-wrap">
+        <button type="button" class="cart-badge" aria-haspopup="true" aria-expanded="false" aria-label="購物車，目前 0 件">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+          <span class="cart-badge__count">0</span>
+        </button>
+        <div class="cart-preview" hidden>
+          <ul class="cart-preview__list"></ul>
+          <p class="cart-preview__empty">購物車是空的</p>
+          <p class="cart-preview__total"></p>
+          <div class="cart-preview__actions">
+            <a class="cart-preview__view" href="../cart.html">查看購物車</a>
+            <button type="button" class="cart-preview__continue">繼續選購</button>
+          </div>
+        </div>
+      </div>
+    </header>
+  </div>
+
+  <main class="product-page work">
 
     <section class="ptpl-hero">
       <div class="gallery fade-in">
@@ -77,16 +79,20 @@
       </div>
 
       <div class="summary fade-in delay-1">
-        <h1 class="work-heading ptpl-summary__title">示範商品名稱</h1>
+        <h1 class="work-heading ptpl-summary__title">春聯砂畫材料包・羊群報福（進階款）</h1>
         <p class="ptpl-summary__price price-text">$__</p>
         <p class="ptpl-summary__stock">尚有現貨</p>
 
+        <!-- 款式＝色款選擇：紅、藍兩色現在共用同一個商品頁，不再各自
+             分開頁面。選單改變時只換上方圖庫的主圖（見下方 script 的
+             applyVariantGallery()），下面作品介紹／名畫再製／商品詳細等
+             敘述內容維持共用，不隨色款切換而改變。 -->
         <div class="ptpl-option">
           <label for="ptpl-variant">款式</label>
           <select id="ptpl-variant" class="variant-select">
-            <option value="">請選取一個選項</option>
-            <option value="a">選項 A</option>
-            <option value="b">選項 B</option>
+            <option value="">請選擇顏色</option>
+            <option value="red">紅</option>
+            <option value="blue">藍</option>
           </select>
         </div>
 
@@ -105,9 +111,12 @@
       </div>
     </section>
 
-    <!-- 作品介紹：藝術家系列商品的靈感來源介紹（畫作＋簡介＋現藏地）。 -->
+    <!-- 作品介紹：藝術家系列商品的靈感來源介紹（畫作＋簡介＋現藏地）。
+         不加小標籤——「Dance II」本身用展示襯線字體排出來已經夠有份量
+         當標題，不需要再疊一層「作品介紹」小標籤，全頁的小標籤只留給
+         下面「名畫再製」這個真正的核心賣點區塊用，避免每個區塊都掛
+         同樣的小標籤格式，讀起來像貼標籤而不是真的分章節。 -->
     <section class="ptpl-artwork fade-in delay-2">
-      <p class="ptpl-artwork__eyebrow">作品介紹</p>
       <img class="ptpl-artwork__image" src="../assets/images/products/sand-art-artist/sand-art-artist-dance-matisse.jpg" alt="Henri Matisse《Dance II》，五位人物手拉手圍成圓圈舞蹈，藍綠色背景">
       <h2>Dance II</h2>
       <blockquote class="ptpl-artwork__quote">
@@ -126,7 +135,7 @@
          結構、拉桿邏輯都不用改。 -->
     <section class="ptpl-transform fade-in delay-2">
       <p class="ptpl-artwork__eyebrow">畫室原創特色</p>
-      <h2>名畫再製・羊化春聯</h2>
+      <h2>羊諦斯之舞</h2>
       <div class="ptpl-compare" id="ptpl-compare" style="--pos: 50%;">
         <div class="ptpl-compare__layer ptpl-compare__layer--before">
           <img src="../assets/images/products/sand-art-artist/sand-art-artist-dance-matisse.jpg" alt="原畫：Henri Matisse《Dance II》">
@@ -145,68 +154,162 @@
 
     <!-- 商品詳細：材料平拍俯視圖＋內附材料清單。版型直接沿用真實商品頁
          「套組內容」章節既有的 .kit-section__photo／.kit-list（見
-         fluid-art-light.html），不重刻新樣式。清單內容是依你手稿上的
-         圖示推測的材料項目，不確定的地方先標示待確認，正式品項確認後
-         告訴我再替換文字就好，結構不用動。 -->
+         fluid-art-light.html），不重刻新樣式。
+         這裡整組都不隨上面「款式」選單切換了（跟主圖不一樣）：
+         ①平拍照只拍工具與配件（底板／集沙盤／排刷／夾子／桌布），刻意不拍
+         色沙——這些工具兩色通用，之後真的換色只有色沙材料不同，照片不用
+         重拍；②工具清單也是兩色通用，固定列出；③色沙材料（絨毛砂／細砂／
+         碎金箔／亮粉，紅藍真的不一樣、不是換個顏色而已）才是紅藍分開列，
+         但兩款都直接列出來（不是切換），跟「顏色比較」同一套邏輯——這是
+         文字，不是照片，兩份並排不會有版面負擔，讀者也不用切換記憶比較。
+         清單順序刻意對齊平拍照的內容：先列照片裡看得到的工具，再列照片
+         裡沒有的色沙材料，讀者掃下來的順序才順（先對照片、再看色卡）。
+         安全須知（幼童陪伴、誤食風險等）紅藍文字完全一樣，固定寫在最下面。 -->
     <section class="ptpl-materials fade-in delay-2">
-      <p class="ptpl-artwork__eyebrow">商品詳細</p>
-      <div class="placeholder-box kit-section__photo">圖片待補・材料平拍俯視圖（比照參考圖：材料排列整齊、正上方俯拍）</div>
+      <h2>商品詳細</h2>
+      <div class="placeholder-box kit-section__photo">圖片待補・材料平拍俯視圖（僅工具與配件，不含色沙——紅藍兩色通用，之後換色不用重拍）</div>
       <ul class="kit-list">
-        <li><span aria-hidden="true">✦</span><span>分裝細砂 6 色</span></li>
-        <li><span aria-hidden="true">✦</span><span>羊化春聯圖案底卡（菱形）</span></li>
-        <li><span aria-hidden="true">✦</span><span>束口收納袋</span></li>
-        <li><span aria-hidden="true">✦</span><span>操作說明手冊</span></li>
-        <li data-placeholder="true"><span aria-hidden="true">✦</span><span>〔工具品項待確認，請提供正確名稱替換〕</span></li>
+        <li><span aria-hidden="true">✦</span><span>砂畫底板〔20×20cm〕... 1張</span></li>
+        <li><span aria-hidden="true">✦</span><span>集沙盤 ... 1個</span></li>
+        <li><span aria-hidden="true">✦</span><span>排刷 ... 1支</span></li>
+        <li><span aria-hidden="true">✦</span><span>夾子 ... 1支</span></li>
+        <li><span aria-hidden="true">✦</span><span>一次性防污桌布 ... 1張</span></li>
+        <li><span aria-hidden="true">✦</span><span>簡易步驟圖</span></li>
+        <li><span aria-hidden="true">✦</span><span>教學影片（掃描 QR Code 觀看）</span></li>
       </ul>
 
-      <a class="ptpl-crosslink" href="sand-art-artist-blue.html">
-        <span class="ptpl-crosslink__text">另有原作配色款<br>看看「藝術家系列・羊化・原作配色」藍色款</span>
-        <span class="ptpl-crosslink__arrow" aria-hidden="true">→</span>
-        <div class="placeholder-box ptpl-crosslink__thumb">圖片待補</div>
-      </a>
+      <div class="ptpl-color-detail__groups ptpl-materials__colors">
+        <div class="ptpl-color-group">
+          <p class="ptpl-color-group__label">紅款・色沙材料</p>
+          <ul class="kit-list">
+            <li><span aria-hidden="true">✦</span><span>絨毛砂〔3色：酒紅、白、金棕〕... 每色1罐</span></li>
+            <li><span aria-hidden="true">✦</span><span>細砂〔4色：麥芽、粉紅、紅、潮藍〕... 每色1管</span></li>
+            <li><span aria-hidden="true">✦</span><span>碎金箔〔1色：金〕... 1罐</span></li>
+          </ul>
+        </div>
+        <div class="ptpl-color-group">
+          <p class="ptpl-color-group__label">藍款・色沙材料</p>
+          <ul class="kit-list">
+            <li><span aria-hidden="true">✦</span><span>絨毛砂〔4色：湖藍、深橙、淺橙、綠〕... 每色1罐</span></li>
+            <li><span aria-hidden="true">✦</span><span>細砂〔2色：紅、珊瑚紅〕... 每色1管</span></li>
+            <li><span aria-hidden="true">✦</span><span>亮粉〔1色：香檳銀〕... 1管</span></li>
+            <li><span aria-hidden="true">✦</span><span>碎金箔〔1色：銀〕... 1罐</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="ptpl-notice">
+        <p class="ptpl-notice__title">請注意</p>
+        <ul class="ptpl-notice__list">
+          <li>幼童使用時請大人隨旁陪伴使用。</li>
+          <li>材料包含細小顆粒，吞嚥會有嗆入或誤食風險。</li>
+          <li>碎金箔與亮粉顆粒細緻，操作時請避免風扇、空調直吹，以免材料飛散。</li>
+          <li>沙料若沾染衣物或家具，建議盡快輕拍清除，避免顆粒卡入纖維縫隙。</li>
+          <li>操作時建議鋪好桌布，避免沙料灑落。</li>
+          <li>請將材料存放在幼兒與寵物無法取得之處。</li>
+        </ul>
+      </div>
     </section>
 
-    <!-- 所有顏色細節展示圖：獨立一個區塊，跟上面「商品詳細」分開，不是
-         材料清單的附屬圖。 -->
+    <!-- 顏色細節：獨立一個區塊，跟上面「商品詳細」分開，不是材料清單的
+         附屬圖。這裡計劃跟下面「顏色比較」搭配——材料要依顏色比較色票
+         的排序（紅款：酒紅→白→金棕→麥芽→粉紅→紅→潮藍→金；藍款：湖藍→
+         深橙→淺橙→綠→紅→珊瑚紅→香檳銀→銀）擺放拍攝，讀者對照著看色票
+         順序跟展示圖順序才會一致。因為顏色比較現在紅藍兩款同時列出（見
+         下方），這裡也拆成紅款／藍款兩張窄橫幅，不是一張「所有顏色」
+         混在一起的圖——一張圖同時塞紅藍兩款 16 種顏色的材料，排序邏輯
+         反而會混亂，分開拍、分開排序，才對得上下面色票的分組方式。 -->
     <section class="ptpl-color-detail fade-in delay-2">
-      <p class="ptpl-artwork__eyebrow">顏色細節</p>
-      <div class="placeholder-box ptpl-materials__banner">圖片待補・所有顏色細節展示圖（窄橫幅）</div>
+      <h2>顏色細節</h2>
+      <div class="ptpl-color-detail__groups">
+        <div class="ptpl-color-group">
+          <p class="ptpl-color-group__label">紅款</p>
+          <div class="placeholder-box ptpl-materials__banner">圖片待補・紅款顏色細節展示圖（窄橫幅，材料依酒紅→白→金棕→麥芽→粉紅→紅→潮藍→金排序拍攝）</div>
+        </div>
+        <div class="ptpl-color-group">
+          <p class="ptpl-color-group__label">藍款</p>
+          <div class="placeholder-box ptpl-materials__banner">圖片待補・藍款顏色細節展示圖（窄橫幅，材料依湖藍→深橙→淺橙→綠→紅→珊瑚紅→香檳銀→銀排序拍攝）</div>
+        </div>
+      </div>
     </section>
 
-    <!-- 顏色比較：合併原本分開的「色名對照表」跟「材料色系分頁」成一個
-         橫向排列的色票選單——每個色票本身就是圖例（圓點+色名），同時也是
-         可點擊的分頁，點下去切換下面的「沙色特寫／應用示意」兩張圖，不用
-         再分兩個區塊各看一次。顏色順序跟上面「顏色細節」橫幅一致：酒紅→
-         閃棕→潮藍→紅→粉紅→麥芽→白。色票直接沿用真實商品頁的
-         .color-picker／.color-picker__chip／.color-picker__dot（見
-         products.css），只加了橫向捲動處理（原本那組只給 2 色用，沒考慮
-         7 色會超寬）。色碼目前是我依照片肉眼估的，不是正式色卡編號，
-         正式色號確定後告訴我再替換。用途（背景／地板等）改放進
-         aria-label，不佔版面，但螢幕閱讀器/長按提示還是讀得到。 -->
+    <!-- 顏色比較：紅、藍兩款的色票「同時全部列出」，不是跟著上面的款式
+         選單切換——這區塊的功能是「比較」，讀者要能同時看到兩款差異，
+         而不是切換款式選單、憑記憶去比對，所以刻意跟款式選單脫鉤，是
+         全頁唯一不受款式選單控制的區塊（圖庫／材料清單代表「選這款會
+         收到什麼」，本來就該跟著選單走；這裡是幫讀者「決定要選哪一款」，
+         角色不同）。
+         色票分兩排、各自標「紅款」「藍款」，點任一顆（不分紅藍）都會
+         切換下面「沙色特寫／應用示意」的預覽——兩排包在同一個
+         #ptpl-color-tabs-wrap 底下，用事件代理統一處理點擊，紅藍互相
+         點擊會互相取消選取狀態，不是各自獨立兩組。
+         色票本身沿用真實商品頁的 .color-picker／.color-picker__chip／
+         .color-picker__dot（見 products.css）。色碼是依材料名稱肉眼估的，
+         不是正式色卡編號，正式色號確定後告訴我再替換；用途標「材料類別」
+         （絨毛砂／細砂／碎金箔／亮粉，對應商品詳細清單），不是猜測圖案裡
+         的視覺位置（藍色版目前還沒有實際成品照，猜視覺位置會不準）。 -->
     <section class="ptpl-color-compare fade-in delay-2">
-      <p class="ptpl-artwork__eyebrow">顏色比較</p>
-      <div class="color-picker ptpl-color-picker" role="group" aria-label="選擇材料顏色" id="ptpl-color-tabs">
-        <button type="button" class="color-picker__chip" data-color="wine-red" aria-pressed="true" aria-label="酒紅（背景）">
-          <span class="color-picker__dot" style="background:#7C1F30"></span><span class="ptpl-color-picker__label">酒紅</span>
-        </button>
-        <button type="button" class="color-picker__chip" data-color="shimmer-brown" aria-pressed="false" aria-label="閃棕（地板）">
-          <span class="color-picker__dot" style="background:#9C7A3C"></span><span class="ptpl-color-picker__label">閃棕</span>
-        </button>
-        <button type="button" class="color-picker__chip" data-color="tide-blue" aria-pressed="false" aria-label="潮藍（手持小物）">
-          <span class="color-picker__dot" style="background:#3B6EA5"></span><span class="ptpl-color-picker__label">潮藍</span>
-        </button>
-        <button type="button" class="color-picker__chip" data-color="red" aria-pressed="false" aria-label="紅（手持小物）">
-          <span class="color-picker__dot" style="background:#D93B3B"></span><span class="ptpl-color-picker__label">紅</span>
-        </button>
-        <button type="button" class="color-picker__chip" data-color="pink" aria-pressed="false" aria-label="粉紅（福字）">
-          <span class="color-picker__dot" style="background:#E08FB3"></span><span class="ptpl-color-picker__label">粉紅</span>
-        </button>
-        <button type="button" class="color-picker__chip" data-color="malt" aria-pressed="false" aria-label="麥芽（羊臉）">
-          <span class="color-picker__dot" style="background:#D9A441"></span><span class="ptpl-color-picker__label">麥芽</span>
-        </button>
-        <button type="button" class="color-picker__chip" data-color="white" aria-pressed="false" aria-label="白（羊）">
-          <span class="color-picker__dot" style="background:#F0E6D2"></span><span class="ptpl-color-picker__label">白</span>
-        </button>
+      <h2>顏色比較</h2>
+      <div id="ptpl-color-tabs-wrap">
+        <div class="ptpl-color-group">
+          <p class="ptpl-color-group__label">紅款</p>
+          <div class="color-picker ptpl-color-picker" role="group" aria-label="紅款材料顏色" id="ptpl-color-tabs-red">
+            <button type="button" class="color-picker__chip" data-color="wine-red" aria-pressed="true" aria-label="酒紅（絨毛砂）">
+              <span class="color-picker__dot" style="background:#7C1F30"></span><span class="ptpl-color-picker__label">酒紅</span>
+            </button>
+            <button type="button" class="color-picker__chip" data-color="white" aria-pressed="false" aria-label="白（絨毛砂）">
+              <span class="color-picker__dot" style="background:#F5F0E8"></span><span class="ptpl-color-picker__label">白</span>
+            </button>
+            <button type="button" class="color-picker__chip" data-color="gold-brown" aria-pressed="false" aria-label="金棕（絨毛砂）">
+              <span class="color-picker__dot" style="background:#B8863B"></span><span class="ptpl-color-picker__label">金棕</span>
+            </button>
+            <button type="button" class="color-picker__chip" data-color="malt" aria-pressed="false" aria-label="麥芽（細砂）">
+              <span class="color-picker__dot" style="background:#D9A441"></span><span class="ptpl-color-picker__label">麥芽</span>
+            </button>
+            <button type="button" class="color-picker__chip" data-color="pink" aria-pressed="false" aria-label="粉紅（細砂）">
+              <span class="color-picker__dot" style="background:#E08FB3"></span><span class="ptpl-color-picker__label">粉紅</span>
+            </button>
+            <button type="button" class="color-picker__chip" data-color="red" aria-pressed="false" aria-label="紅（細砂）">
+              <span class="color-picker__dot" style="background:#D93B3B"></span><span class="ptpl-color-picker__label">紅</span>
+            </button>
+            <button type="button" class="color-picker__chip" data-color="tide-blue" aria-pressed="false" aria-label="潮藍（細砂）">
+              <span class="color-picker__dot" style="background:#3B6EA5"></span><span class="ptpl-color-picker__label">潮藍</span>
+            </button>
+            <button type="button" class="color-picker__chip" data-color="gold" aria-pressed="false" aria-label="金（碎金箔）">
+              <span class="color-picker__dot" style="background:#D4AF37"></span><span class="ptpl-color-picker__label">金</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="ptpl-color-group">
+          <p class="ptpl-color-group__label">藍款</p>
+          <div class="color-picker ptpl-color-picker" role="group" aria-label="藍款材料顏色" id="ptpl-color-tabs-blue">
+            <button type="button" class="color-picker__chip" data-color="lake-blue" aria-pressed="false" aria-label="湖藍（絨毛砂）">
+              <span class="color-picker__dot" style="background:#4A8FA3"></span><span class="ptpl-color-picker__label">湖藍</span>
+            </button>
+            <button type="button" class="color-picker__chip" data-color="deep-orange" aria-pressed="false" aria-label="深橙（絨毛砂）">
+              <span class="color-picker__dot" style="background:#D2691E"></span><span class="ptpl-color-picker__label">深橙</span>
+            </button>
+            <button type="button" class="color-picker__chip" data-color="light-orange" aria-pressed="false" aria-label="淺橙（絨毛砂）">
+              <span class="color-picker__dot" style="background:#F0A868"></span><span class="ptpl-color-picker__label">淺橙</span>
+            </button>
+            <button type="button" class="color-picker__chip" data-color="green" aria-pressed="false" aria-label="綠（絨毛砂）">
+              <span class="color-picker__dot" style="background:#6B8E4E"></span><span class="ptpl-color-picker__label">綠</span>
+            </button>
+            <button type="button" class="color-picker__chip" data-color="red" aria-pressed="false" aria-label="紅（細砂）">
+              <span class="color-picker__dot" style="background:#D93B3B"></span><span class="ptpl-color-picker__label">紅</span>
+            </button>
+            <button type="button" class="color-picker__chip" data-color="coral-red" aria-pressed="false" aria-label="珊瑚紅（細砂）">
+              <span class="color-picker__dot" style="background:#E8735A"></span><span class="ptpl-color-picker__label">珊瑚紅</span>
+            </button>
+            <button type="button" class="color-picker__chip" data-color="champagne-silver" aria-pressed="false" aria-label="香檳銀（亮粉）">
+              <span class="color-picker__dot" style="background:#D8D0C0"></span><span class="ptpl-color-picker__label">香檳銀</span>
+            </button>
+            <button type="button" class="color-picker__chip" data-color="silver" aria-pressed="false" aria-label="銀（碎金箔）">
+              <span class="color-picker__dot" style="background:#B8B8B0"></span><span class="ptpl-color-picker__label">銀</span>
+            </button>
+          </div>
+        </div>
       </div>
       <div class="ptpl-color-tabs__media">
         <div class="placeholder-box" id="ptpl-media-lifestyle">圖片待補・酒紅沙色特寫</div>
@@ -214,14 +317,24 @@
       </div>
     </section>
 
+    <!-- 商品資訊改分頁籤呈現（參考 koyama.com.tw 商品頁「說明／其他資訊」
+         的分頁模式）：內容不用一次攤開，切成「商品介紹」「規格資訊」兩籤，
+         點擊才切換顯示，跟色票選單一樣用 aria-selected/hidden 切換狀態，
+         不是另外發明一套邏輯。 -->
     <section class="ptpl-description fade-in delay-2">
-      <h4>商品介紹小標題</h4>
-      <p>這裡放商品說明文字，介紹商品特色、材質、使用情境等內容。換成真實文案就好，字級／行高／字距都已經套用全站內文標準（14px／字重400／行高25.2px／字距1px），不用另外設定。</p>
+      <div class="ptpl-tabs" role="tablist" aria-label="商品資訊">
+        <button type="button" class="ptpl-tabs__btn is-active" role="tab" id="ptpl-tab-btn-intro" aria-controls="ptpl-tab-panel-intro" aria-selected="true">商品介紹</button>
+        <button type="button" class="ptpl-tabs__btn" role="tab" id="ptpl-tab-btn-spec" aria-controls="ptpl-tab-panel-spec" aria-selected="false" tabindex="-1">規格資訊</button>
+      </div>
 
-      <div class="placeholder-box">圖片待補・商品情境圖</div>
+      <div class="ptpl-tabs__panel" id="ptpl-tab-panel-intro" role="tabpanel" aria-labelledby="ptpl-tab-btn-intro">
+        <p>這裡放商品說明文字，介紹商品特色、材質、使用情境等內容。換成真實文案就好，字級／行高／字距都已經套用全站內文標準（14px／字重400／行高25.2px／字距1px），不用另外設定。</p>
+        <div class="placeholder-box">圖片待補・商品情境圖</div>
+      </div>
 
-      <h4>商品詳細</h4>
-      <p>商品：示範商品名稱<br>材質：示範材質內容<br>尺寸：示範尺寸內容</p>
+      <div class="ptpl-tabs__panel" id="ptpl-tab-panel-spec" role="tabpanel" aria-labelledby="ptpl-tab-btn-spec" hidden>
+        <p>商品：春聯砂畫材料包・羊群報福（進階款）<br>成品尺寸：20×20cm<br>顏色數：8色（紅、藍兩款式顏色組合不同，詳見「商品詳細」材料清單）</p>
+      </div>
     </section>
 
     <section class="ptpl-related fade-in delay-2">
@@ -284,6 +397,7 @@
         const selected = variantSelect.value !== "";
         addBtn.disabled = !selected;
         addBtn.classList.toggle("is-active", selected);
+        if (selected) applyVariant(variantSelect.value);
       });
       addBtn.addEventListener("click", () => {
         if (addBtn.disabled) return;
@@ -321,26 +435,126 @@
         selectThumb(current >= galleryThumbs.length - 1 ? 0 : current + 1);
       });
 
+      // 款式（紅／藍）換色：紅、藍現在共用同一頁，不是各自獨立頁面。切換
+      // 款式只換一個地方：縮圖一（視為「這個色款的主圖」）跟主圖顯示——
+      // 代表「選這款會收到的成品長怎樣」，理當跟著款式選單走。
+      // 商品詳細（工具清單＋色沙材料）、顏色比較都不在這裡處理：工具清單
+      // 兩色通用固定不變；色沙材料跟顏色比較一樣是紅藍同時列出（見上面
+      // HTML），刻意不跟款式選單連動，讓讀者能直接比較兩款差異，不用
+      // 切換記憶——所以 VARIANT_DATA 只放主圖資料。作品介紹／名畫再製那些
+      // 敘述內容也維持共用，不受款式切換影響。
+      // 藍色目前還沒有實際主圖照片，沿用縮圖二～四那套「沒有 data-src 就
+      // 顯示待補文字」的邏輯，等真的照片給了，把 src 補進 VARIANT_DATA.blue
+      // 就好，不用改邏輯。
+      const VARIANT_DATA = {
+        red: {
+          gallery: {
+            src: "../assets/images/products/sand-art-artist/sand-art-artist-red-main.jpg",
+            alt: "羊諦斯之舞・春聯砂畫（紅）完成品主圖",
+            label: "紅色主圖",
+          },
+        },
+        blue: {
+          gallery: {
+            src: null,
+            alt: "羊諦斯之舞・春聯砂畫（藍）完成品主圖",
+            label: "藍色主圖",
+          },
+        },
+      };
+      function applyVariant(variant) {
+        const data = VARIANT_DATA[variant];
+        if (!data) return;
+
+        const mainThumb = galleryThumbs[0];
+        mainThumb.dataset.label = data.gallery.label;
+        mainThumb.dataset.alt = data.gallery.alt;
+        if (data.gallery.src) {
+          mainThumb.dataset.src = data.gallery.src;
+          mainThumb.innerHTML = `<img src="${data.gallery.src}" alt="縮圖一">`;
+        } else {
+          delete mainThumb.dataset.src;
+          mainThumb.innerHTML = `<span class="placeholder-box">縮圖1</span>`;
+        }
+        selectThumb(0);
+      }
+
+      // 公告橫幅定時輪播文字：陣列裡放幾則就輪播幾則，每 4 秒切下一則，
+      // 用淡出→換字→淡回來（.is-fading，見 product-template.css），
+      // 不是直接跳字。目前是範例文字，正式上架時把陣列內容換成真的
+      // 活動文案就好，結構不用改。
       const banner = document.getElementById("ptpl-banner");
+      const bannerText = document.getElementById("ptpl-banner-text");
+      const bannerMessages = [
+        "限時優惠活動說明文字（範例，可刪）",
+        "第二則公告文字（範例，可刪）",
+        "第三則公告文字（範例，可刪）",
+      ];
+      let bannerIndex = 0;
+      let bannerTimer = null;
+      if (bannerText && bannerMessages.length > 1) {
+        bannerTimer = setInterval(() => {
+          bannerIndex = (bannerIndex + 1) % bannerMessages.length;
+          bannerText.classList.add("is-fading");
+          setTimeout(() => {
+            bannerText.textContent = bannerMessages[bannerIndex];
+            bannerText.classList.remove("is-fading");
+          }, 220);
+        }, 4000);
+      }
       document.getElementById("ptpl-banner-close").addEventListener("click", () => {
         banner.hidden = true;
+        if (bannerTimer) clearInterval(bannerTimer);
       });
 
-      // 顏色比較色票：點色票換成對應顏色的「沙色特寫／應用示意」佔位框
-      // 文字（真的接商品資料時，這裡改成換 <img src> 就好，結構不用重寫）。
-      // active 狀態用 aria-pressed 切換，跟真實商品頁的 .color-picker__chip
-      // 是同一套邏輯（見 js/product-gallery.js 的色系切換），不是另外發明
-      // 一套 class 判斷。
-      const colorTabs = document.querySelectorAll("#ptpl-color-tabs .color-picker__chip");
-      const mediaLifestyle = document.getElementById("ptpl-media-lifestyle");
-      const mediaProduct = document.getElementById("ptpl-media-product");
-      colorTabs.forEach((tab) => {
-        tab.addEventListener("click", () => {
-          colorTabs.forEach((t) => t.setAttribute("aria-pressed", "false"));
-          tab.setAttribute("aria-pressed", "true");
-          const label = tab.textContent.trim();
-          mediaLifestyle.textContent = "圖片待補・" + label + "沙色特寫";
-          mediaProduct.textContent = "圖片待補・" + label + "應用示意";
+      // .site-topbar（公告橫幅＋頂部列）實際高度會隨公告橫幅關閉／文字換行
+      // 而變動，用 ResizeObserver 即時量測回填給 .product-page 的
+      // padding-top（見 products.css 的 --ptpl-topbar-height），不用寫死
+      // 高度猜測值，橫幅關閉後內容會自動往上補滿，不會留一塊空白。
+      const topbar = document.querySelector(".site-topbar");
+      if (topbar) {
+        const syncTopbarHeight = () => {
+          document.documentElement.style.setProperty("--ptpl-topbar-height", topbar.offsetHeight + "px");
+        };
+        new ResizeObserver(syncTopbarHeight).observe(topbar);
+      }
+
+      // 顏色比較色票：紅款／藍款兩排同時列出（不跟款式選單連動，見上面
+      // HTML 註解），點任一顆色票（不分紅藍）換成對應顏色的「沙色特寫／
+      // 應用示意」佔位框文字（真的接商品資料時，這裡改成換 <img src>
+      // 就好，結構不用重寫）。active 狀態用 aria-pressed 切換，跟真實
+      // 商品頁的 .color-picker__chip 是同一套邏輯（見 js/product-gallery.js
+      // 的色系切換），不是另外發明一套 class 判斷。
+      // 監聽在兩排共同的父層容器 #ptpl-color-tabs-wrap 上（事件代理），
+      // 這樣點紅款色票會把藍款那排的選取狀態一起取消，反之亦然——是
+      // 「全頁只有一個目前預覽中的顏色」，不是紅藍各自獨立兩組狀態。
+      const colorTabsWrap = document.getElementById("ptpl-color-tabs-wrap");
+      colorTabsWrap.addEventListener("click", (e) => {
+        const tab = e.target.closest(".color-picker__chip");
+        if (!tab) return;
+        colorTabsWrap.querySelectorAll(".color-picker__chip").forEach((t) => t.setAttribute("aria-pressed", "false"));
+        tab.setAttribute("aria-pressed", "true");
+        const label = tab.querySelector(".ptpl-color-picker__label").textContent.trim();
+        document.getElementById("ptpl-media-lifestyle").textContent = "圖片待補・" + label + "沙色特寫";
+        document.getElementById("ptpl-media-product").textContent = "圖片待補・" + label + "應用示意";
+      });
+
+      // 商品資訊分頁籤：點哪個籤，顯示對應面板、其他隱藏（hidden 屬性），
+      // 同步 aria-selected／tabindex，鍵盤 tab 進來也只會停在目前選取的
+      // 那個籤上（跟原生分頁籤鍵盤行為一致）。
+      const tabBtns = document.querySelectorAll(".ptpl-tabs__btn");
+      tabBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          tabBtns.forEach((b) => {
+            b.classList.remove("is-active");
+            b.setAttribute("aria-selected", "false");
+            b.tabIndex = -1;
+            document.getElementById(b.getAttribute("aria-controls")).hidden = true;
+          });
+          btn.classList.add("is-active");
+          btn.setAttribute("aria-selected", "true");
+          btn.tabIndex = 0;
+          document.getElementById(btn.getAttribute("aria-controls")).hidden = false;
         });
       });
 

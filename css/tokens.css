@@ -33,6 +33,12 @@
   --font-family-base: "Open Sans", "Noto Sans TC", sans-serif;
   --letter-spacing-base: 1px;
 
+  /* 展示用襯線字體：目前只給「快速產品頁」樣板（product-template.css）
+     的區塊標題使用，跟內文標題共用同一套 Open Sans／Noto Sans TC 是刻意
+     先保守處理，避免大範圍套用影響全站既有頁面觀感。Fraunces／Noto Serif TC
+     兩個字型都已經在全站 <link> 引入，這裡只是第一次真的接上選擇器用。 */
+  --font-family-display: "Fraunces", "Noto Serif TC", serif;
+
   --heading-font-size: 17px;
   --heading-font-weight: 600;
   --heading-line-height: 30px;
