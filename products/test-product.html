@@ -337,9 +337,23 @@
         <button type="button" class="ptpl-tabs__btn" role="tab" id="ptpl-tab-btn-spec" aria-controls="ptpl-tab-panel-spec" aria-selected="false" tabindex="-1">規格資訊</button>
       </div>
 
+      <!-- 商品介紹分頁改用「一句話陳述＋補充說明＋圖片」的節奏鋪陳（參考
+           你給的截圖風格：短句先破題、營造情境感，再用一段話補充重要
+           資訊，圖片接在後面收尾），不是一次把所有資訊攤開成長段落。
+           每個 .ptpl-story-block 是一個獨立的重點單元。 -->
       <div class="ptpl-tabs__panel" id="ptpl-tab-panel-intro" role="tabpanel" aria-labelledby="ptpl-tab-btn-intro">
-        <p>這裡放商品說明文字，介紹商品特色、材質、使用情境等內容。換成真實文案就好，字級／行高／字距都已經套用全站內文標準（14px／字重400／行高25.2px／字距1px），不用另外設定。</p>
-        <div class="placeholder-box">圖片待補・商品情境圖</div>
+        <div class="ptpl-story-block">
+          <p class="ptpl-story-block__statement">不只是細砂。</p>
+          <p class="ptpl-story-block__body">比起基礎款的細砂，這一款加入了絨毛砂與碎金箔（藍款另有亮粉），操作上多一些層次與變化，適合已經試過砂畫、想挑戰更豐富材質效果的你。</p>
+          <p class="ptpl-story-block__body"><strong>適合對象</strong>：想挑戰更多材質層次的你・親子共作・送禮</p>
+          <div class="placeholder-box">圖片待補・商品情境圖（操作過程或成品情境照）</div>
+        </div>
+
+        <div class="ptpl-story-block">
+          <p class="ptpl-story-block__statement">掛上牆，或貼上門。</p>
+          <p class="ptpl-story-block__body">完成後，若想固定於牆面或門上，建議自行搭配無痕黏土或膠條使用。</p>
+          <div class="placeholder-box">圖片待補・成品上牆／上門展示示意圖</div>
+        </div>
       </div>
 
       <div class="ptpl-tabs__panel" id="ptpl-tab-panel-spec" role="tabpanel" aria-labelledby="ptpl-tab-btn-spec" hidden>

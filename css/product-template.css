@@ -709,8 +709,27 @@
 }
 .ptpl-tabs__panel .placeholder-box {
   aspect-ratio: 16 / 9;
-  margin: var(--space-6) 0 0;
+  margin: var(--space-10) 0;
   border-radius: var(--radius-sharp);
+}
+
+/* 「一句話陳述＋補充說明＋圖片」節奏：陳述句字級拉大、字重加重，
+   造成先破題的停頓感，跟下面補充說明的一般內文字級拉開層次——但刻意
+   不用展示襯線字體（--font-family-display），那個字體全站只保留給
+   section 標題（h2）用，這裡只是分頁內部的小節重點，用回內文字體
+   放大放粗就好，避免跟真正的區塊標題搶視覺份量。
+   陳述句跟補充說明之間、區塊跟區塊之間都留比一般段落更寬的間距——原本
+   都套用一般段落的 16px，整段擠成一塊看不出「先破題、再說明」的停頓感，
+   改成陳述句下方留 24px、區塊之間留 40px，讀起來才有各自呼吸的空間。 */
+.ptpl-story-block + .ptpl-story-block {
+  margin-top: var(--space-10);
+}
+.ptpl-story-block__statement {
+  margin-bottom: var(--space-6);
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-lg);
+  font-weight: 500;
+  color: var(--color-text-primary);
 }
 
 /* ---------- 相關商品：直接沿用 products.css 的 .shop-grid／.shop-card
