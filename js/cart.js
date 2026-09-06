@@ -39,6 +39,7 @@
     "sand-art-light": { name: "春聯砂畫材料包・輕巧版", price: 0, category: "sand-art", tagline: "8 款圖案任選，撕貼倒沙鋪出你的春聯" },
     "sand-art-collection": { name: "春聯砂畫材料包・自由創作組", price: 0, category: "sand-art", hasVariant: false, tagline: "5 款精選圖案＋26色顏料，自由創作一整套" },
     "sand-art-artist-sheep": { name: "春聯砂畫材料包・羊群報福（進階款）", price: 0, category: "sand-art", tagline: "致敬馬諦斯《舞蹈》，羊群報福紅藍兩色任選" },
+    "sand-art-chun": { name: "春聯砂畫材料包・春（基礎款）", price: 0, category: "sand-art", hasVariant: false, tagline: "（待補）" },
     "fluid-art-canvas-kit": { name: "空白畫布＋字貼＋架高杯", price: 0, category: "fluid-art", hasVariant: false, hidden: true },
     "sand-art-extra-color": { name: "額外顏色沙・固定套組", price: 0, category: "sand-art", hasVariant: false, hidden: true },
     "sand-art-sticker-only": { name: "純貼紙加購・單款", price: 0, category: "sand-art", hasVariant: false, hidden: true },
@@ -136,6 +137,7 @@
     "sand-art-light": BASE_PREFIX + "products/sand-art-light.html",
     "sand-art-collection": BASE_PREFIX + "products/sand-art-collection.html",
     "sand-art-artist-sheep": BASE_PREFIX + "products/sand-art-artist-sheep.html",
+    "sand-art-chun": BASE_PREFIX + "products/sand-art-chun.html",
   };
 
   const CART_PAGE_URL = BASE_PREFIX + "cart.html";

@@ -37,6 +37,17 @@
      這裡也要一起換。 */
   --swatch-artist-sheep-red: #7C1F30;
   --swatch-artist-sheep-blue: #4A8FA3;
+
+  /* 「春」款分裝沙 7 色，跟上面同一批肉眼估色（依材料名稱估，不是正式
+     色卡編號），色名相同的直接沿用同一個值（湖藍＝--swatch-artist-sheep-blue
+     那組估色）。 */
+  --swatch-chun-black: #2B2B2B;
+  --swatch-chun-ink-blue: #1F3A5F;
+  --swatch-chun-pink: #E8A0B4;
+  --swatch-chun-ice-blue: #A8D4E0;
+  --swatch-chun-lake-blue: #4A8FA3;
+  --swatch-chun-light-pink: #F0C4D0;
+  --swatch-chun-ice-purple: #C8B8E0;
 }
 
 .product-page {
@@ -174,7 +185,8 @@
   border-bottom: none;
 }
 
-.work-heading__preview-cell img {
+.work-heading__preview-cell img,
+.work-heading__preview-cell .placeholder-box {
   width: 72px;
   height: 72px;
   object-fit: cover;
@@ -185,11 +197,22 @@
     opacity var(--duration-fast) var(--ease-standard);
 }
 
+/* 還沒有實拍照片的款式（見 sand-art-chun.html）縮圖先用 .placeholder-box
+   佔位，尺寸跟真的照片一樣是 72×72，跟上面的 img 共用同一條規則，之後
+   照片到位直接把 <div class="placeholder-box"> 換成 <img> 就好，不用再
+   調整卡片外觀。 */
+.work-heading__preview-cell .placeholder-box {
+  padding: 0;
+  font-size: 9px;
+  line-height: 1.3;
+}
+
 /* 選中的縮圖用雙層陰影（tokens.css 裡本來就定義好的 --shadow-raised 組合，
    這是它第一次真的派上用場）做出「浮起來」的實體感，取代只有一圈外框的
    扁平標示，跟色系選擇器裡純文字的粗體／底線標示做出區隔——這裡是照片，
    用光影比用線條更貼切。 */
-.work-heading__preview-cell[aria-pressed="true"] img {
+.work-heading__preview-cell[aria-pressed="true"] img,
+.work-heading__preview-cell[aria-pressed="true"] .placeholder-box {
   border-color: var(--color-text-primary);
   box-shadow: var(--shadow-raised);
 }
@@ -355,6 +378,41 @@
   height: 100%;
 }
 
+/* ---------- 色點小色票列（純展示，不可點擊） ----------
+   跟「藝術家系列」範本頁的 .ptpl-swatch__chip／.ptpl-swatch__dot 是
+   同樣的視覺語言（色點在上、直式文字標籤在下），但那是可點擊切換
+   下方媒體預覽的按鈕；這裡只是靜態展示這一款用了哪些顏色，不需要
+   點擊互動，所以用 <ul>/<li> 不是 <button>，也不需要 aria-pressed
+   狀態。命名跟著全站慣例走，不是 ptpl-* 前綴。 */
+.color-swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+  list-style: none;
+}
+
+.color-swatch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.color-swatch__dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  flex: none;
+}
+
+.color-swatch__label {
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
 /* 三步驟拆解（目前：砂畫輕巧版「怎麼玩」撕／倒／鋪）。編號用等寬數字＋
    細體字級，跟 .gallery__caption-num 同一套「文字編號」語彙，不用實色圓形
    徽章——全站按鈕本來就不用圓角/圓形填色，這裡的編號延續同一個克制原則。
@@ -423,6 +481,58 @@
 
 .chapter__prose > * + * {
   margin-top: var(--space-4);
+}
+
+/* ---------- 商品介紹：「一句話陳述＋補充說明＋圖片」節奏 ----------
+   跟「藝術家系列」範本頁（product-template.css）的 .ptpl-story-block
+   是同樣的排版邏輯——陳述句字級拉大、字重加重，跟下面補充說明的一般
+   內文拉開層次——這裡是真實商品頁的版本，命名跟著全站 .chapter__* 系列
+   走，不是 ptpl-* 前綴（見 sand-art-chun.html「商品介紹」）。內容量不像
+   羊群報福那麼多，不需要分頁籤機制，直接照順序往下排列即可。 */
+.chapter__block + .chapter__block {
+  margin-top: var(--space-10);
+}
+
+.chapter__statement {
+  margin: var(--space-4) 0 var(--space-4);
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+/* ---------- 請注意：安全須知 ----------
+   跟「藝術家系列」範本頁的 .ptpl-notice 是同樣的視覺語言（細邊框＋
+   直角，維持全站一貫的邊框樣式），這裡是真實商品頁的版本，命名跟著
+   全站慣例走，不是 ptpl-* 前綴。刻意做成一直顯示的區塊，不是收進
+   「購買前請閱讀」手風琴裡——安全須知不管訪客有沒有點開那份條款都該
+   看到。 */
+.safety-notice {
+  margin-top: var(--editorial-gap);
+  padding: var(--space-4);
+  border: 1px solid color-mix(in srgb, var(--color-text-secondary) 25%, transparent);
+  border-radius: var(--radius-sharp);
+}
+
+.safety-notice__title {
+  margin: 0 0 var(--space-2);
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.safety-notice__list {
+  margin: 0;
+  padding-left: 1.2em;
+  font-size: var(--font-size-xs);
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+}
+
+.safety-notice__list li {
+  margin-bottom: var(--space-1);
+}
+
+.safety-notice__list li:last-child {
+  margin-bottom: 0;
 }
 
 /* 內文文字連結（例如尾聲導引至另一版本）：比照 .cta-section__ig／.work__cta 的
