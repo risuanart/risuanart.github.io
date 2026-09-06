@@ -30,6 +30,13 @@
   --swatch-vermillion: #d94f30;
   --swatch-pink-platinum: #d4c4a0;
   --swatch-silver: #b8b8b0;
+
+  /* 藝術家系列・羊群報福，購買面板款式色點：各取該色款最具代表性的
+     主色（紅款＝酒紅、藍款＝湖藍），跟 product-template.css「顏色比較」
+     區塊的估色是同一批肉眼估色，還不是正式色卡編號，正式色號確定後
+     這裡也要一起換。 */
+  --swatch-artist-sheep-red: #7C1F30;
+  --swatch-artist-sheep-blue: #4A8FA3;
 }
 
 .product-page {

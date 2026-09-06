@@ -38,6 +38,7 @@
     "fluid-art-gift": { name: "春聯流動畫材料包・禮盒版", price: 1100, category: "fluid-art", tagline: "雙幅成品，完整的流動畫體驗" },
     "sand-art-light": { name: "春聯砂畫材料包・輕巧版", price: 0, category: "sand-art", tagline: "8 款圖案任選，撕貼倒沙鋪出你的春聯" },
     "sand-art-collection": { name: "春聯砂畫材料包・自由創作組", price: 0, category: "sand-art", hasVariant: false, tagline: "5 款精選圖案＋26色顏料，自由創作一整套" },
+    "sand-art-artist-sheep": { name: "春聯砂畫材料包・羊群報福（進階款）", price: 0, category: "sand-art", tagline: "致敬馬諦斯《舞蹈》，羊群報福紅藍兩色任選" },
     "fluid-art-canvas-kit": { name: "空白畫布＋字貼＋架高杯", price: 0, category: "fluid-art", hasVariant: false, hidden: true },
     "sand-art-extra-color": { name: "額外顏色沙・固定套組", price: 0, category: "sand-art", hasVariant: false, hidden: true },
     "sand-art-sticker-only": { name: "純貼紙加購・單款", price: 0, category: "sand-art", hasVariant: false, hidden: true },
@@ -54,8 +55,12 @@
     "fluid-art-light": ["classic-red", "welcome-pink"],
     "fluid-art-gift": ["classic-red", "welcome-pink"],
     "sand-art-light": ["nafu-wave", "yingchun-wave", "yingchun-grid", "nafu-grid", "chun", "fu", "cai", "fu-sheep"],
+    "sand-art-artist-sheep": ["artist-sheep-red", "artist-sheep-blue"],
   };
 
+  // artist-sheep-red／artist-sheep-blue 特地加了 artist-sheep 前綴，不是
+  // 直接叫 red／blue——SCHEME_NAMES 是全站共用的一個扁平命名空間，「藝術家
+  // 系列」以後如果推出其他畫作／生肖再製，各自的色款鍵值才不會互撞。
   const SCHEME_NAMES = {
     "classic-red": "經典紅",
     "welcome-pink": "迎春粉",
@@ -67,6 +72,8 @@
     "fu": "福",
     "cai": "財",
     "fu-sheep": "福（羊群報福）",
+    "artist-sheep-red": "紅",
+    "artist-sheep-blue": "藍",
   };
 
   // 單件商品的單價／整行小計，購物車頁與迷你購物車預覽共用同一套計算，
@@ -86,6 +93,7 @@
   const SCHEME_IMAGES = {
     "classic-red": BASE_PREFIX + "assets/images/products/fluid-art/RS_05.7_產品圖片_800x800拷貝.jpg",
     "welcome-pink": BASE_PREFIX + "assets/images/products/fluid-art/RS_05.8_產品圖片_800x800拷貝.jpg",
+    "artist-sheep-red": BASE_PREFIX + "assets/images/products/sand-art-artist/sand-art-artist-red-main.jpg",
   };
 
   // 總覽格狀購物頁（products/shop.html）電腦版 hover 換圖用的「第二張圖」：
@@ -127,6 +135,7 @@
     "fluid-art-gift": BASE_PREFIX + "products/fluid-art-gift.html",
     "sand-art-light": BASE_PREFIX + "products/sand-art-light.html",
     "sand-art-collection": BASE_PREFIX + "products/sand-art-collection.html",
+    "sand-art-artist-sheep": BASE_PREFIX + "products/sand-art-artist-sheep.html",
   };
 
   const CART_PAGE_URL = BASE_PREFIX + "cart.html";

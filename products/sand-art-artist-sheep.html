@@ -20,11 +20,17 @@
   <div class="ambient-bg" aria-hidden="true"></div>
   <div class="ambient-grain" aria-hidden="true"></div>
 
-  <!-- 這份是「快速產品頁」共用樣板，不接任何真實商品資料，純示範版型。
-       之後要生成新產品頁，複製這份檔案，換掉圖片佔位框／文字／價格，
-       樣式（顏色、字型、動畫）會自動套用全站既有規則，不用另外調整。
-       目前只掛在首頁側邊目錄的「測試產品頁」分頁，還沒接進真正的商品
-       流程（也沒有出現在 products/shop.html 或任何商品清單裡）。 -->
+  <!-- 這份原本是「快速產品頁」共用樣板（原檔名 test-product.html），現在
+       是「藝術家系列」第一款真實商品：春聯砂畫材料包・羊群報福（進階款）。
+       已接上真實購物車流程（js/cart.js 的 PRODUCTS 鍵值
+       "sand-art-artist-sheep"），會自動出現在 products/shop.html 的商品
+       總覽格（由 js/products-overview.js 動態產生，不用手動加卡片）。
+       之後要用同一套版型生成「藝術家系列」其他畫作／生肖再製，複製這份
+       檔案即可，樣式（顏色、字型、動畫）會自動套用全站既有規則。
+       目前還缺：藍色款主圖／縮圖二～四／材料平拍圖／顏色細節與顏色比較
+       的實拍照片／商品介紹分頁的情境圖／正式價格／相關商品／商品分類
+       連結——都還是佔位狀態，樣品到貨、資料確定後再逐一替換，結構不用
+       重寫。 -->
 
   <div class="site-topbar">
     <div class="ptpl-banner" id="ptpl-banner">
@@ -55,6 +61,19 @@
 
   <main class="product-page work">
 
+    <!-- 開場句：跟其他「春聯砂畫材料包」子頁（sand-art-light.html／
+         sand-art-collection.html）共用同一句開場句＋同一套 .work__intro／
+         .work-heading／.work-heading__version／.intro 元件——這頁賣的
+         還是同一個材料包（只是換了「羊群報福」這款圖案／進階款規格），
+         套用跟其他子頁一致的開場，讓人一眼看出是同系列產品，不是另外
+         做的頁面。年份／文案直接照抄，不用另外重寫一份幾乎一樣的話。 -->
+    <header class="work__intro">
+      <h1 class="work-heading fade-in"><span class="inner">春聯砂畫材料包</span></h1>
+      <p class="work-heading__version fade-in delay-1"><span class="work-heading__version-marks" aria-hidden="true"><span></span></span>進階款</p>
+      <p class="work-heading__sub fade-in delay-1">2026</p>
+      <p class="intro fade-in delay-2">撕開、倒沙、鋪色，<br>簡單技法，拼貼出陪伴一年的春聯。</p>
+    </header>
+
     <section class="ptpl-hero">
       <div class="gallery fade-in">
         <div class="ptpl-gallery__viewport">
@@ -79,31 +98,54 @@
       </div>
 
       <div class="summary fade-in delay-1">
-        <h1 class="work-heading ptpl-summary__title">春聯砂畫材料包・羊群報福（進階款）</h1>
-        <p class="ptpl-summary__price price-text">$__</p>
+        <h2 class="work-heading ptpl-summary__title">春聯砂畫材料包・羊群報福（進階款）</h2>
         <p class="ptpl-summary__stock">尚有現貨</p>
 
-        <!-- 款式＝色款選擇：紅、藍兩色現在共用同一個商品頁，不再各自
-             分開頁面。選單改變時只換上方圖庫的主圖（見下方 script 的
-             applyVariantGallery()），下面作品介紹／名畫再製／商品詳細等
-             敘述內容維持共用，不隨色款切換而改變。 -->
-        <div class="ptpl-option">
-          <label for="ptpl-variant">款式</label>
-          <select id="ptpl-variant" class="variant-select">
-            <option value="">請選擇顏色</option>
-            <option value="red">紅</option>
-            <option value="blue">藍</option>
-          </select>
+        <!-- 款式＝色款選擇：改用跟真實商品頁（見 fluid-art-light.html）
+             完全同一套購買面板語彙——.work-heading__field-label／
+             .work-heading__preview／.color-picker__chip.work-heading__preview-cell
+             縮圖卡＋.work-heading__buy-row 買列，不是這個範本原本自己的
+             一套外觀（小色點＋灰底通版按鈕）。目的：讓這頁的「加入購物車」
+             區塊看起來跟其他商品頁是同一個網站，不是另外做的樣板。
+             data-scheme 直接對應 js/cart.js 的 SCHEME_NAMES／
+             activeScheme()，這裡是真正的購買規格選擇（不是「顏色比較」
+             那個純展示用的 .ptpl-swatch__chip，兩者不要搞混）。
+             點擊時只換上方圖庫的主圖（見下方 script 的 applyVariant()）＋
+             更新買列裡的「目前選擇」文字，下面作品介紹／名畫再製／商品
+             詳細等敘述內容維持共用，不隨色款切換而改變。預設兩顆都不是
+             「已選取」狀態，逼使用者主動選一次。藍款還沒有實拍照片，
+             縮圖先用跟其他頁面「輕巧版尚未實拍」同一套 .placeholder-box
+             說明文字佔位，樣品到貨後直接把 <span class="placeholder-box">
+             換成 <img> 即可，卡片外觀（72×72、選中時浮起）不用再調整。 -->
+        <p class="work-heading__field-label">款式</p>
+        <div class="work-heading__preview" role="group" aria-label="選擇款式顏色" id="ptpl-variant-picker">
+          <button type="button" class="color-picker__chip work-heading__preview-cell" data-scheme="artist-sheep-red" aria-pressed="false">
+            <img src="../assets/images/products/sand-art-artist/sand-art-artist-red-main.jpg" alt="羊化春聯砂畫紅款參考圖" width="80" height="80" loading="lazy">
+            紅
+          </button>
+          <button type="button" class="color-picker__chip work-heading__preview-cell" data-scheme="artist-sheep-blue" aria-pressed="false">
+            <span class="placeholder-box">拍攝中</span>
+            藍
+          </button>
         </div>
 
-        <div class="ptpl-qty-row">
-          <div class="qty-stepper ptpl-qty-stepper">
-            <button type="button" id="ptpl-qty-minus" aria-label="數量減少">−</button>
-            <input type="text" id="ptpl-qty-input" value="1" inputmode="numeric" aria-label="數量">
-            <button type="button" id="ptpl-qty-plus" aria-label="數量增加">＋</button>
+        <div class="work-heading__buy-row">
+          <div class="work-heading__buy-text">
+            <p class="work-heading__price">$__</p>
+            <p class="work__color-hint">目前選擇：<strong class="work__color-hint-name" id="ptpl-color-hint-name">尚未選擇</strong></p>
+          </div>
+          <div class="buy-action">
+            <div class="qty-stepper ptpl-qty-stepper">
+              <button type="button" id="ptpl-qty-minus" aria-label="數量減少">−</button>
+              <input type="text" id="ptpl-qty-input" value="1" inputmode="numeric" aria-label="數量">
+              <button type="button" id="ptpl-qty-plus" aria-label="數量增加">＋</button>
+            </div>
+            <button type="button" class="work__cta work__cta--primary" id="ptpl-add-btn" disabled>
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+              <span class="work__cta-label">加入購物車</span>
+            </button>
           </div>
         </div>
-        <button type="button" class="ptpl-add-btn" id="ptpl-add-btn" disabled>加入購物車</button>
 
         <div class="ptpl-meta">
           分類：<a href="#">分類一</a>、<a href="#">分類二</a>、<a href="#">分類三</a>
@@ -251,11 +293,17 @@
          切換下面「沙色特寫／應用示意」的預覽——兩排包在同一個
          #ptpl-color-tabs-wrap 底下，用事件代理統一處理點擊，紅藍互相
          點擊會互相取消選取狀態，不是各自獨立兩組。
-         色票本身沿用真實商品頁的 .color-picker／.color-picker__chip／
-         .color-picker__dot（見 products.css）。色碼是依材料名稱肉眼估的，
-         不是正式色卡編號，正式色號確定後告訴我再替換；用途標「材料類別」
-         （絨毛砂／細砂／碎金箔／亮粉，對應商品詳細清單），不是猜測圖案裡
-         的視覺位置（藍色版目前還沒有實際成品照，猜視覺位置會不準）。 -->
+         色票外觀沿用真實商品頁 .color-picker 的視覺語言（圓點+底線
+         指示），但按鈕本身改用專屬的 .ptpl-swatch__chip／.ptpl-swatch__dot
+         （見 product-template.css），不是直接共用 .color-picker__chip——
+         真正的購物車系統（js/cart.js 的 activeScheme()）會抓頁面上任何
+         .color-picker__chip[aria-pressed="true"] 當作使用者選的購買規格，
+         但這裡的色票純粹是展示用、不是購買選項（購買規格是上面「款式」
+         選單），如果共用同一個 class，「加入購物車」會誤讀成這裡點的
+         顏色，抓錯規格。色碼是依材料名稱肉眼估的，不是正式色卡編號，
+         正式色號確定後告訴我再替換；用途標「材料類別」（絨毛砂／細砂／
+         碎金箔／亮粉，對應商品詳細清單），不是猜測圖案裡的視覺位置
+         （藍色版目前還沒有實際成品照，猜視覺位置會不準）。 -->
     <section class="ptpl-color-compare fade-in delay-2">
       <h2>顏色比較</h2>
       <div id="ptpl-color-tabs-wrap">
@@ -263,29 +311,29 @@
           <p class="ptpl-color-group__label">紅款</p>
           <p class="ptpl-color-group__intro"><strong>因應過年配色</strong><br>如果馬諦斯畫的是舞蹈，那我們過的是年節。把寶藍換成喜氣的酒紅，金棕的山丘、粉紅的「福」字，讓這份野獸派的構圖，多了一份年節的福氣。</p>
           <div class="color-picker ptpl-color-picker" role="group" aria-label="紅款材料顏色" id="ptpl-color-tabs-red">
-            <button type="button" class="color-picker__chip" data-color="wine-red" aria-pressed="true" aria-label="酒紅（絨毛砂）">
-              <span class="color-picker__dot" style="background:#7C1F30"></span><span class="ptpl-color-picker__label">酒紅</span>
+            <button type="button" class="ptpl-swatch__chip" data-color="wine-red" aria-pressed="true" aria-label="酒紅（絨毛砂）">
+              <span class="ptpl-swatch__dot" style="background:#7C1F30"></span><span class="ptpl-color-picker__label">酒紅</span>
             </button>
-            <button type="button" class="color-picker__chip" data-color="white" aria-pressed="false" aria-label="白（絨毛砂）">
-              <span class="color-picker__dot" style="background:#F5F0E8"></span><span class="ptpl-color-picker__label">白</span>
+            <button type="button" class="ptpl-swatch__chip" data-color="white" aria-pressed="false" aria-label="白（絨毛砂）">
+              <span class="ptpl-swatch__dot" style="background:#F5F0E8"></span><span class="ptpl-color-picker__label">白</span>
             </button>
-            <button type="button" class="color-picker__chip" data-color="gold-brown" aria-pressed="false" aria-label="金棕（絨毛砂）">
-              <span class="color-picker__dot" style="background:#B8863B"></span><span class="ptpl-color-picker__label">金棕</span>
+            <button type="button" class="ptpl-swatch__chip" data-color="gold-brown" aria-pressed="false" aria-label="金棕（絨毛砂）">
+              <span class="ptpl-swatch__dot" style="background:#B8863B"></span><span class="ptpl-color-picker__label">金棕</span>
             </button>
-            <button type="button" class="color-picker__chip" data-color="malt" aria-pressed="false" aria-label="麥芽（細砂）">
-              <span class="color-picker__dot" style="background:#D9A441"></span><span class="ptpl-color-picker__label">麥芽</span>
+            <button type="button" class="ptpl-swatch__chip" data-color="malt" aria-pressed="false" aria-label="麥芽（細砂）">
+              <span class="ptpl-swatch__dot" style="background:#D9A441"></span><span class="ptpl-color-picker__label">麥芽</span>
             </button>
-            <button type="button" class="color-picker__chip" data-color="pink" aria-pressed="false" aria-label="粉紅（細砂）">
-              <span class="color-picker__dot" style="background:#E08FB3"></span><span class="ptpl-color-picker__label">粉紅</span>
+            <button type="button" class="ptpl-swatch__chip" data-color="pink" aria-pressed="false" aria-label="粉紅（細砂）">
+              <span class="ptpl-swatch__dot" style="background:#E08FB3"></span><span class="ptpl-color-picker__label">粉紅</span>
             </button>
-            <button type="button" class="color-picker__chip" data-color="red" aria-pressed="false" aria-label="紅（細砂）">
-              <span class="color-picker__dot" style="background:#D93B3B"></span><span class="ptpl-color-picker__label">紅</span>
+            <button type="button" class="ptpl-swatch__chip" data-color="red" aria-pressed="false" aria-label="紅（細砂）">
+              <span class="ptpl-swatch__dot" style="background:#D93B3B"></span><span class="ptpl-color-picker__label">紅</span>
             </button>
-            <button type="button" class="color-picker__chip" data-color="tide-blue" aria-pressed="false" aria-label="潮藍（細砂）">
-              <span class="color-picker__dot" style="background:#3B6EA5"></span><span class="ptpl-color-picker__label">潮藍</span>
+            <button type="button" class="ptpl-swatch__chip" data-color="tide-blue" aria-pressed="false" aria-label="潮藍（細砂）">
+              <span class="ptpl-swatch__dot" style="background:#3B6EA5"></span><span class="ptpl-color-picker__label">潮藍</span>
             </button>
-            <button type="button" class="color-picker__chip" data-color="gold" aria-pressed="false" aria-label="金（碎金箔）">
-              <span class="color-picker__dot" style="background:#D4AF37"></span><span class="ptpl-color-picker__label">金</span>
+            <button type="button" class="ptpl-swatch__chip" data-color="gold" aria-pressed="false" aria-label="金（碎金箔）">
+              <span class="ptpl-swatch__dot" style="background:#D4AF37"></span><span class="ptpl-color-picker__label">金</span>
             </button>
           </div>
         </div>
@@ -294,29 +342,29 @@
           <p class="ptpl-color-group__label">藍款</p>
           <p class="ptpl-color-group__intro"><strong>致敬原畫配色</strong><br>藍、橘、綠，馬諦斯用這三種顏色畫下了最經典的一幕。我們保留了這份野獸派的大膽用色，用絨毛、亮粉、金箔堆疊出更豐富的層次，讓百年前的色彩語言，落在這張春聯上。</p>
           <div class="color-picker ptpl-color-picker" role="group" aria-label="藍款材料顏色" id="ptpl-color-tabs-blue">
-            <button type="button" class="color-picker__chip" data-color="lake-blue" aria-pressed="false" aria-label="湖藍（絨毛砂）">
-              <span class="color-picker__dot" style="background:#4A8FA3"></span><span class="ptpl-color-picker__label">湖藍</span>
+            <button type="button" class="ptpl-swatch__chip" data-color="lake-blue" aria-pressed="false" aria-label="湖藍（絨毛砂）">
+              <span class="ptpl-swatch__dot" style="background:#4A8FA3"></span><span class="ptpl-color-picker__label">湖藍</span>
             </button>
-            <button type="button" class="color-picker__chip" data-color="deep-orange" aria-pressed="false" aria-label="深橙（絨毛砂）">
-              <span class="color-picker__dot" style="background:#D2691E"></span><span class="ptpl-color-picker__label">深橙</span>
+            <button type="button" class="ptpl-swatch__chip" data-color="deep-orange" aria-pressed="false" aria-label="深橙（絨毛砂）">
+              <span class="ptpl-swatch__dot" style="background:#D2691E"></span><span class="ptpl-color-picker__label">深橙</span>
             </button>
-            <button type="button" class="color-picker__chip" data-color="light-orange" aria-pressed="false" aria-label="淺橙（絨毛砂）">
-              <span class="color-picker__dot" style="background:#F0A868"></span><span class="ptpl-color-picker__label">淺橙</span>
+            <button type="button" class="ptpl-swatch__chip" data-color="light-orange" aria-pressed="false" aria-label="淺橙（絨毛砂）">
+              <span class="ptpl-swatch__dot" style="background:#F0A868"></span><span class="ptpl-color-picker__label">淺橙</span>
             </button>
-            <button type="button" class="color-picker__chip" data-color="green" aria-pressed="false" aria-label="綠（絨毛砂）">
-              <span class="color-picker__dot" style="background:#6B8E4E"></span><span class="ptpl-color-picker__label">綠</span>
+            <button type="button" class="ptpl-swatch__chip" data-color="green" aria-pressed="false" aria-label="綠（絨毛砂）">
+              <span class="ptpl-swatch__dot" style="background:#6B8E4E"></span><span class="ptpl-color-picker__label">綠</span>
             </button>
-            <button type="button" class="color-picker__chip" data-color="red" aria-pressed="false" aria-label="紅（細砂）">
-              <span class="color-picker__dot" style="background:#D93B3B"></span><span class="ptpl-color-picker__label">紅</span>
+            <button type="button" class="ptpl-swatch__chip" data-color="red" aria-pressed="false" aria-label="紅（細砂）">
+              <span class="ptpl-swatch__dot" style="background:#D93B3B"></span><span class="ptpl-color-picker__label">紅</span>
             </button>
-            <button type="button" class="color-picker__chip" data-color="coral-red" aria-pressed="false" aria-label="珊瑚紅（細砂）">
-              <span class="color-picker__dot" style="background:#E8735A"></span><span class="ptpl-color-picker__label">珊瑚紅</span>
+            <button type="button" class="ptpl-swatch__chip" data-color="coral-red" aria-pressed="false" aria-label="珊瑚紅（細砂）">
+              <span class="ptpl-swatch__dot" style="background:#E8735A"></span><span class="ptpl-color-picker__label">珊瑚紅</span>
             </button>
-            <button type="button" class="color-picker__chip" data-color="champagne-silver" aria-pressed="false" aria-label="香檳銀（亮粉）">
-              <span class="color-picker__dot" style="background:#D8D0C0"></span><span class="ptpl-color-picker__label">香檳銀</span>
+            <button type="button" class="ptpl-swatch__chip" data-color="champagne-silver" aria-pressed="false" aria-label="香檳銀（亮粉）">
+              <span class="ptpl-swatch__dot" style="background:#D8D0C0"></span><span class="ptpl-color-picker__label">香檳銀</span>
             </button>
-            <button type="button" class="color-picker__chip" data-color="silver" aria-pressed="false" aria-label="銀（碎金箔）">
-              <span class="color-picker__dot" style="background:#B8B8B0"></span><span class="ptpl-color-picker__label">銀</span>
+            <button type="button" class="ptpl-swatch__chip" data-color="silver" aria-pressed="false" aria-label="銀（碎金箔）">
+              <span class="ptpl-swatch__dot" style="background:#B8B8B0"></span><span class="ptpl-color-picker__label">銀</span>
             </button>
           </div>
         </div>
@@ -401,11 +449,27 @@
   <script src="../js/site-header-scroll.js"></script>
   <script src="../js/scroll-reveal.js"></script>
   <script>
-    // 這份樣板故意不接 js/cart.js 的 initAddToCart()／data-add-to-cart
-    // 機制——這裡沒有真實的 PRODUCTS key，接了反而會找不到商品資料出錯。
-    // 底下是純示範用的獨立互動邏輯：數量加減、選規格才能按「加入購物車」、
-    // 縮圖切換主圖、關閉公告列。加入購物車按鈕點下去只做視覺回饋，
-    // 不會真的寫入購物車資料。
+    // 這頁現在是真實商品，接上 js/cart.js 的 initAddToCart()／
+    // data-add-to-cart 機制（PRODUCTS 鍵值 "sand-art-artist-sheep"，見
+    // js/cart.js）。
+    // 數量輸入框故意不是 js/cart.js 內建的 [data-buy-qty] 標準寫法（那套
+    // 只認 <span data-qty-value>，不支援直接打字輸入），這裡維持原本可
+    // 打字輸入的 <input>，改寫一個小 adapter（getQty／setQty）包住它，
+    // 符合 initAddToCart() 需要的介面就好，不用整個換掉互動方式。
+    // data-add-to-cart 屬性刻意不寫在 HTML 裡、改在下面用 JS 加上去，
+    // 而且特地等 DOMContentLoaded 才加：cart.js 的 <script> 標籤執行當下
+    // document.readyState 還是 "loading"（後面還有其他 script 標籤跟
+    // </body> 沒解析完），它自己 init() 其實是掛在 DOMContentLoaded
+    // 事件上延後執行，不是馬上跑——如果這裡在事件觸發「之前」就把
+    // data-add-to-cart 屬性加上去，等 DOMContentLoaded 真的觸發時，
+    // cart.js 的 init() 會「又」掃到這顆按鈕、重複掛一次點擊事件（用它
+    // 自己抓到的 buyQty，這頁沒有 [data-buy-qty] 標準格式會抓到 null），
+    // 變成點一次同時觸發兩個監聽器、重複加入兩次購物車——這是實際測出
+    // 來的 bug，不是假設性的。解法是我們也一樣等 DOMContentLoaded 觸發
+    // 之後才加屬性、才手動呼叫 initAddToCart(buyQty)，順序排在 cart.js
+    // 自己的監聽器「之後」執行（同一個事件、後註冊的監聽器後執行），
+    // 這樣 cart.js 那次自動掃描永遠掃不到這顆按鈕（那時屬性還沒加上去），
+    // 只有我們手動呼叫的這次會真的掛上正確的 buyQty，不會重複。
     (function () {
       const qtyInput = document.getElementById("ptpl-qty-input");
       document.getElementById("ptpl-qty-minus").addEventListener("click", () => {
@@ -415,20 +479,40 @@
         qtyInput.value = (parseInt(qtyInput.value, 10) || 1) + 1;
       });
 
-      const variantSelect = document.getElementById("ptpl-variant");
+      // 款式色票：跟「顏色比較」的展示色票（.ptpl-swatch__chip）不是同一套，
+      // 這裡是真正的購買規格選擇，用 .color-picker__chip／data-scheme／
+      // aria-pressed，js/cart.js 的 activeScheme() 會直接讀這裡目前按下去
+      // 的那顆，不需要另外寫一個 buyQty 以外的 adapter。
+      // 「目前選擇」文字（.work__color-hint-name）：跟真實商品頁同一顆買列
+      // 元件，重複顯示一次目前選的款式，不用滑回上面色票再確認一次。
+      const SCHEME_LABELS = { "artist-sheep-red": "紅", "artist-sheep-blue": "藍" };
+      const colorHintName = document.getElementById("ptpl-color-hint-name");
+      const variantPicker = document.getElementById("ptpl-variant-picker");
       const addBtn = document.getElementById("ptpl-add-btn");
-      variantSelect.addEventListener("change", () => {
-        const selected = variantSelect.value !== "";
-        addBtn.disabled = !selected;
-        addBtn.classList.toggle("is-active", selected);
-        if (selected) applyVariant(variantSelect.value);
+      variantPicker.addEventListener("click", (e) => {
+        const chip = e.target.closest(".color-picker__chip");
+        if (!chip) return;
+        variantPicker.querySelectorAll(".color-picker__chip").forEach((c) => c.setAttribute("aria-pressed", "false"));
+        chip.setAttribute("aria-pressed", "true");
+        addBtn.disabled = false;
+        colorHintName.textContent = SCHEME_LABELS[chip.dataset.scheme] || chip.dataset.scheme;
+        applyVariant(chip.dataset.scheme);
       });
-      addBtn.addEventListener("click", () => {
-        if (addBtn.disabled) return;
-        const original = addBtn.textContent;
-        addBtn.textContent = "已加入 ✓";
-        setTimeout(() => { addBtn.textContent = original; }, 1200);
-      });
+
+      function wireAddToCart() {
+        const buyQty = {
+          getQty: () => Math.max(1, parseInt(qtyInput.value, 10) || 1),
+          setQty: (qty) => { qtyInput.value = Math.max(1, qty); },
+        };
+        addBtn.setAttribute("data-add-to-cart", "");
+        addBtn.dataset.product = "sand-art-artist-sheep";
+        window.RisuanCart.initAddToCart(buyQty);
+      }
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", wireAddToCart);
+      } else {
+        wireAddToCart();
+      }
 
       // 主圖切換：縮圖點擊、左右箭頭都呼叫同一個 selectThumb()，不是各自
       // 分開寫一份「換圖＋更新 active 縮圖」的邏輯。箭頭是循環的（最後一張
@@ -467,18 +551,23 @@
       // HTML），刻意不跟款式選單連動，讓讀者能直接比較兩款差異，不用
       // 切換記憶——所以 VARIANT_DATA 只放主圖資料。作品介紹／名畫再製那些
       // 敘述內容也維持共用，不受款式切換影響。
+      // 這裡的鍵值（artist-sheep-red／artist-sheep-blue）跟 <select> 選項的
+      // value、js/cart.js 的 VARIANT_OPTIONS／SCHEME_NAMES 用同一組值，
+      // 不是隨便取名——加了 artist-sheep 前綴是因為 SCHEME_NAMES 是全站
+      // 共用的一個扁平命名空間，以後「藝術家系列」如果推出其他畫作／
+      // 生肖，各自的色款鍵值不會互撞。
       // 藍色目前還沒有實際主圖照片，沿用縮圖二～四那套「沒有 data-src 就
-      // 顯示待補文字」的邏輯，等真的照片給了，把 src 補進 VARIANT_DATA.blue
-      // 就好，不用改邏輯。
+      // 顯示待補文字」的邏輯，等真的照片給了，把 src 補進
+      // VARIANT_DATA["artist-sheep-blue"] 就好，不用改邏輯。
       const VARIANT_DATA = {
-        red: {
+        "artist-sheep-red": {
           gallery: {
             src: "../assets/images/products/sand-art-artist/sand-art-artist-red-main.jpg",
             alt: "羊諦斯之舞・春聯砂畫（紅）完成品主圖",
             label: "紅色主圖",
           },
         },
-        blue: {
+        "artist-sheep-blue": {
           gallery: {
             src: null,
             alt: "羊諦斯之舞・春聯砂畫（藍）完成品主圖",
@@ -547,16 +636,19 @@
       // HTML 註解），點任一顆色票（不分紅藍）換成對應顏色的「沙色特寫／
       // 應用示意」佔位框文字（真的接商品資料時，這裡改成換 <img src>
       // 就好，結構不用重寫）。active 狀態用 aria-pressed 切換，跟真實
-      // 商品頁的 .color-picker__chip 是同一套邏輯（見 js/product-gallery.js
-      // 的色系切換），不是另外發明一套 class 判斷。
+      // 商品頁的色系切換是同一套邏輯，但這裡改用專屬的 .ptpl-swatch__chip
+      // class（不是共用 .color-picker__chip），避免跟 js/cart.js 的
+      // activeScheme() 打架——那支函式會把頁面上任何 .color-picker__chip
+      // 當作使用者選的購買規格，這裡的色票只是展示用，不能被誤讀成
+      // 購買選項。
       // 監聽在兩排共同的父層容器 #ptpl-color-tabs-wrap 上（事件代理），
       // 這樣點紅款色票會把藍款那排的選取狀態一起取消，反之亦然——是
       // 「全頁只有一個目前預覽中的顏色」，不是紅藍各自獨立兩組狀態。
       const colorTabsWrap = document.getElementById("ptpl-color-tabs-wrap");
       colorTabsWrap.addEventListener("click", (e) => {
-        const tab = e.target.closest(".color-picker__chip");
+        const tab = e.target.closest(".ptpl-swatch__chip");
         if (!tab) return;
-        colorTabsWrap.querySelectorAll(".color-picker__chip").forEach((t) => t.setAttribute("aria-pressed", "false"));
+        colorTabsWrap.querySelectorAll(".ptpl-swatch__chip").forEach((t) => t.setAttribute("aria-pressed", "false"));
         tab.setAttribute("aria-pressed", "true");
         const label = tab.querySelector(".ptpl-color-picker__label").textContent.trim();
         document.getElementById("ptpl-media-lifestyle").textContent = "圖片待補・" + label + "沙色特寫";

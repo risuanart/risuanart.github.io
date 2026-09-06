@@ -184,20 +184,12 @@
 }
 
 /* ---------- 購買面板 ---------- */
-/* 這個範本頁的區塊標題（商品名稱＋下面每個 section 的 h2）統一改用展示
-   襯線字體（--font-family-display，見 tokens.css），跟內文的 Open Sans／
-   Noto Sans TC 拉開層次——全站目前所有標題其實都還是跟內文共用同一套
-   字體，這裡先在這個範本頁試，不動 .work-heading／.chapter__title 等
-   全站共用規則，避免大範圍改動。字重用 500，Fraunces／Noto Serif TC
-   兩個字體都剛好有載入這個字重，不會有其中一個字體被瀏覽器合成假粗體。 */
+/* 這個範本頁的區塊標題（商品名稱＋下面每個 section 的 h2）原本試過改用
+   展示襯線字體（--font-family-display），跟其他商品頁的標題字體不一樣，
+   使用者確認過還是要以全站標準字體（--font-family-base，見 h1-h6 預設
+   規則）為主，這裡已經改回不覆寫字體/字重，跟其他頁面一致。 */
 .ptpl-summary__title {
   margin: 0 0 var(--space-4);
-  font-family: var(--font-family-display);
-  font-weight: 500;
-}
-
-.ptpl-summary__price {
-  margin: 0 0 var(--space-2);
 }
 
 .ptpl-summary__stock {
@@ -206,29 +198,17 @@
   color: var(--color-text-secondary);
 }
 
-.ptpl-option {
-  margin-bottom: var(--space-6);
-}
-.ptpl-option label {
-  display: block;
-  margin-bottom: var(--space-2);
-  font-size: var(--font-size-xs);
-  color: var(--color-text-secondary);
-}
-
-/* 這頁的規格下拉刻意不用 .variant-select 原本的暖米色填底：這個範本的
-   頁面底色本身已經很淺（背景2測試中是純白），填色框在這裡反而顯得像
-   另一塊卡片、多一層不必要的視覺噪音。改成透明背景＋維持原本的細邊框，
-   讓它跟頁面融為一體，只靠邊框＋箭頭圖示表示「這裡可以選」。只在這個
-   範本頁覆寫（product-template.css 在 <link> 順序上排在 products.css
-   後面），不影響其他頁面（如 shop.html）原本用到 .variant-select 的
-   地方——那些目前都是 hidden 的隱藏欄位，看不出來，沒有一併改的必要。 */
-.variant-select {
-  background-color: transparent;
-}
-
-.ptpl-qty-row {
-  margin-bottom: var(--space-4);
+/* 藍款尚未實拍：縮圖卡沿用跟其他頁面「輕巧版尚未實拍」同一套
+   .placeholder-box 說明文字佔位，這裡只補尺寸讓它跟旁邊的真實照片
+   （.work-heading__preview-cell img，72×72，見 products.css）等寬高，
+   不會因為換成文字佔位框就縮水變小張。 */
+.work-heading__preview-cell .placeholder-box {
+  width: 72px;
+  height: 72px;
+  padding: 0;
+  border-radius: var(--radius-sharp);
+  font-size: 10px;
+  line-height: 1.3;
 }
 
 /* qty 輸入框跟 .qty-stepper 既有的 button/span 同一套邊框語言，只是
@@ -259,37 +239,14 @@
   width: 44px;
 }
 
-/* 加入購物車：填色按鈕，獨立一整排、滿版寬度（跟全站其他頁面用底線
-   文字的 .work__cta 不同語彙，這裡刻意保留範本「選規格前是灰色、選了
-   才變亮」的填色按鈕，因為這個範本的購買流程需要「還不能按」的明確
-   視覺提示，底線文字按鈕做不出這種對比）。圓角用 --radius-soft，跟
-   tokens.css 註解「一般卡片、按鈕」的既定用途一致。 */
-.ptpl-add-btn {
-  display: block;
-  width: 100%;
-  height: 44px; /* 全站觸控目標最小高度規則，不可再縮小 */
-  margin-bottom: var(--space-6);
-  border: none;
-  border-radius: var(--radius-soft);
-  background: var(--color-text-secondary);
-  color: var(--color-surface-light);
-  font-family: inherit;
-  font-size: var(--font-size-sm);
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  cursor: not-allowed;
-  transition: background var(--duration-fast) var(--ease-standard),
-    transform var(--duration-fast) var(--ease-standard);
-}
-.ptpl-add-btn.is-active {
-  background: var(--color-button-primary);
-  cursor: pointer;
-}
-.ptpl-add-btn.is-active:active {
-  transform: scale(0.98);
-}
-
+/* margin-top 補這裡：改用 .work-heading__buy-row 之後，買列本身（跟其他
+   真實商品頁一樣）沒有 margin-bottom，因為那些頁面買列後面接的是
+   .chapter（自己會有 --editorial-gap 大留白）。這頁買列後面接的是分類
+   這行文字，沒有大留白可借，導致「分類」自己的 border-top 直接貼在買列
+   的按鈕／數量選擇器下緣，看起來像連在一起——原本舊版 .ptpl-add-btn
+   自己有 margin-bottom 撐開這段距離，換掉之後才漏掉。 */
 .ptpl-meta {
+  margin-top: var(--space-6);
   padding-top: var(--space-4);
   border-top: 1px solid color-mix(in srgb, var(--color-text-secondary) 25%, transparent);
   font-size: var(--font-size-xs);
@@ -327,8 +284,6 @@
 }
 .ptpl-artwork h2 {
   margin: 0 0 var(--space-4);
-  font-family: var(--font-family-display);
-  font-weight: 500;
   font-size: var(--font-size-lg);
 }
 .ptpl-artwork p {
@@ -381,8 +336,6 @@
 }
 .ptpl-transform h2 {
   margin: 0 0 var(--space-6);
-  font-family: var(--font-family-display);
-  font-weight: 500;
   font-size: var(--font-size-lg);
 }
 
@@ -510,8 +463,6 @@
 }
 .ptpl-materials h2 {
   margin: 0 0 var(--space-4);
-  font-family: var(--font-family-display);
-  font-weight: 500;
   font-size: var(--font-size-lg);
 }
 /* 色沙材料（紅款／藍款）跟上面的工具清單分開一段距離，讓讀者看得出這裡
@@ -559,8 +510,6 @@
 }
 .ptpl-color-detail h2 {
   margin: 0 0 var(--space-4);
-  font-family: var(--font-family-display);
-  font-weight: 500;
   font-size: var(--font-size-lg);
 }
 
@@ -583,22 +532,24 @@
 }
 
 /* ---------- 顏色比較：橫向色票選單（圖例兼分頁）＋連動照片 ----------
-   色票本身直接沿用真實商品頁的 .color-picker／.color-picker__chip／
-   .color-picker__dot（見 products.css），這裡只加 .ptpl-color-picker
-   這個修飾用 class 調整版面——原本那組是給 2 色橫排（圓點+橫式文字）
-   設計的，塞 7 色會超出版面寬度。改法不是把整排改直向、也不是縮小
-   字級，而是讓每個色票自己「變窄」：圓點在上，色名文字改直式書寫
-   （一個字一行），單一色票的寬度只需要一個字寬，7 個色票排一整排就
-   塞得下，不用左右滑動。不動共用的 .color-picker 本身，避免影響其他
-   頁面既有的 2 色橫排版面。跟上面「顏色細節」間距一樣貼近（--space-10）
-   ——這兩個區塊都是同一件事（看顏色）的不同呈現方式，不是主題轉換。 */
+   色票視覺語言參考真實商品頁的 .color-picker／.color-picker__chip／
+   .color-picker__dot（見 products.css：圓點+底線指示），但按鈕本身改用
+   專屬的 .ptpl-swatch__chip／.ptpl-swatch__dot，不是直接共用——這裡的
+   色票是展示用，不是購買規格選擇（購買規格是購買面板的「款式」選單），
+   如果共用同一個 class，js/cart.js 的 activeScheme() 會把這裡點的顏色
+   誤讀成使用者選的購買規格，「加入購物車」會抓錯款式。
+   .ptpl-color-picker 這個修飾用 class 調整版面——原本 .color-picker 是給
+   2 色橫排（圓點+橫式文字）設計的，塞 7~8 色會超出版面寬度。改法不是
+   把整排改直向、也不是縮小字級，而是讓每個色票自己「變窄」：圓點在上，
+   色名文字改直式書寫（一個字一行），單一色票的寬度只需要一個字寬，
+   7~8 個色票排一整排就塞得下，不用左右滑動。跟上面「顏色細節」間距
+   一樣貼近（--space-10）——這兩個區塊都是同一件事（看顏色）的不同
+   呈現方式，不是主題轉換。 */
 .ptpl-color-compare {
   margin-top: var(--space-10);
 }
 .ptpl-color-compare h2 {
   margin: 0 0 var(--space-4);
-  font-family: var(--font-family-display);
-  font-weight: 500;
   font-size: var(--font-size-lg);
 }
 
@@ -630,11 +581,41 @@
   font-weight: 600;
 }
 
+/* .color-picker__chip／.color-picker__dot（products.css）的複製版，
+   專屬展示用色票，跟真正的購買規格選擇器脫鉤（見上方大註解）。樣式
+   刻意跟原版一致（外觀不變），只是換了 class 名稱。 */
+.ptpl-swatch__chip {
+  appearance: none;
+  border: none;
+  background: none;
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: 0 0 var(--space-1);
+  border-bottom: 1px solid transparent;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: color var(--duration-fast) var(--ease-standard),
+    border-color var(--duration-fast) var(--ease-standard);
+}
+.ptpl-swatch__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex: none;
+}
+.ptpl-swatch__chip[aria-pressed="true"] {
+  color: var(--color-text-primary);
+  font-weight: 700;
+  border-bottom-color: var(--color-text-primary);
+}
+
 .ptpl-color-picker {
   flex-wrap: nowrap;
   overflow-x: auto; /* 保留當保險，正常情況下應該不會真的觸發捲動 */
 }
-.ptpl-color-picker .color-picker__chip {
+.ptpl-color-picker .ptpl-swatch__chip {
   flex: none;
   flex-direction: column;
   align-items: center;
@@ -714,10 +695,9 @@
 }
 
 /* 「一句話陳述＋補充說明＋圖片」節奏：陳述句字級拉大、字重加重，
-   造成先破題的停頓感，跟下面補充說明的一般內文字級拉開層次——但刻意
-   不用展示襯線字體（--font-family-display），那個字體全站只保留給
-   section 標題（h2）用，這裡只是分頁內部的小節重點，用回內文字體
-   放大放粗就好，避免跟真正的區塊標題搶視覺份量。
+   造成先破題的停頓感，跟下面補充說明的一般內文字級拉開層次，用全站
+   標準字體（--font-family-base），不用展示襯線字體——這裡只是分頁
+   內部的小節重點，不是真正的區塊標題。
    陳述句跟補充說明之間、區塊跟區塊之間都留比一般段落更寬的間距——原本
    都套用一般段落的 16px，整段擠成一塊看不出「先破題、再說明」的停頓感，
    改成陳述句下方留 24px、區塊之間留 40px，讀起來才有各自呼吸的空間。 */
@@ -726,9 +706,8 @@
 }
 .ptpl-story-block__statement {
   margin-bottom: var(--space-6);
-  font-family: var(--font-family-display);
   font-size: var(--font-size-lg);
-  font-weight: 500;
+  font-weight: 600;
   color: var(--color-text-primary);
 }
 
@@ -741,8 +720,6 @@
 .ptpl-related__title {
   text-align: center;
   margin: 0 0 var(--space-6);
-  font-family: var(--font-family-display);
-  font-weight: 500;
   font-size: var(--font-size-lg);
 }
 
