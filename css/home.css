@@ -105,7 +105,7 @@ body {
   background-size: 200px 200px;
 }
 
-/* 背景2（中性淺灰 #F7F7F7）生效時，蓋掉 base.css 那行暖米色底；背景1
+/* 背景2（目前試 #FFFFFF 純白）生效時，蓋掉 base.css 那行暖米色底；背景1
    生效時 --page-bg 等於 --color-surface-light，跟 base.css 原本那行
    結果一樣，等於沒改。這條規則能蓋過 base.css 是因為 <link> 順序上
    home.css 排在 base.css 後面（見各頁 <head>），同樣是 html 選擇器、
