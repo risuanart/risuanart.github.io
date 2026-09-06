@@ -72,13 +72,14 @@
   <main class="product-page work">
 
     <!-- 開場句：跟其他「春聯砂畫材料包」子頁（sand-art-light.html／
-         sand-art-collection.html）共用同一句開場句＋同一套 .work__intro／
-         .work-heading／.work-heading__version／.intro 元件——這頁賣的
-         還是同一個材料包（只是換了「羊群報福」這款圖案／進階款規格），
-         套用跟其他子頁一致的開場，讓人一眼看出是同系列產品，不是另外
-         做的頁面。年份／文案直接照抄，不用另外重寫一份幾乎一樣的話。 -->
+         sand-art-collection.html）共用同一套 .work__intro／
+         .work-heading／.work-heading__version／.intro 元件、同一句年份／
+         文案，讓人一眼看出是同系列產品。H1 這裡放完整商品名稱（不是像
+         其他子頁只放通用的「春聯砂畫材料包」），原本購買面板裡還有一個
+         重複的 .ptpl-summary__title 講一樣的名字，已經拿掉，名字只在
+         最上面出現一次。 -->
     <header class="work__intro">
-      <h1 class="work-heading fade-in"><span class="inner">春聯砂畫材料包</span></h1>
+      <h1 class="work-heading fade-in"><span class="inner">春聯砂畫材料包・羊群報福（進階款）</span></h1>
       <p class="work-heading__version fade-in delay-1"><span class="work-heading__version-marks" aria-hidden="true"><span></span></span>進階款</p>
       <p class="work-heading__sub fade-in delay-1">2026</p>
       <p class="intro fade-in delay-2">撕開、倒沙、鋪色，<br>簡單技法，拼貼出陪伴一年的春聯。</p>
@@ -108,7 +109,6 @@
       </div>
 
       <div class="summary fade-in delay-1">
-        <h2 class="work-heading ptpl-summary__title">春聯砂畫材料包・羊群報福（進階款）</h2>
         <p class="ptpl-summary__stock">尚有現貨</p>
 
         <!-- 款式＝色款選擇：改用跟真實商品頁（見 fluid-art-light.html）
@@ -224,7 +224,10 @@
          文字，不是照片，兩份並排不會有版面負擔，讀者也不用切換記憶比較。
          清單順序刻意對齊平拍照的內容：先列照片裡看得到的工具，再列照片
          裡沒有的色沙材料，讀者掃下來的順序才順（先對照片、再看色卡）。
-         安全須知（幼童陪伴、誤食風險等）紅藍文字完全一樣，固定寫在最下面。 -->
+         安全須知原本固定寫在這個 section 最下面，後來移到「商品介紹／
+         規格資訊」分頁下方（見 .ptpl-description 後面），不是分頁裡面：
+         這是不管讀者點開哪個分頁都該看到的資訊，放進單一分頁裡容易被
+         只看另一個分頁的讀者整個錯過。 -->
     <section class="ptpl-materials fade-in delay-2">
       <h2>商品詳細</h2>
       <div class="placeholder-box kit-section__photo">圖片待補・材料平拍俯視圖（僅工具與配件，不含色沙——紅藍兩色通用，之後換色不用重拍）</div>
@@ -256,18 +259,6 @@
             <li><span aria-hidden="true">✦</span><span>碎金箔〔1色：銀〕... 1罐</span></li>
           </ul>
         </div>
-      </div>
-
-      <div class="ptpl-notice">
-        <p class="ptpl-notice__title">請注意</p>
-        <ul class="ptpl-notice__list">
-          <li>幼童使用時請大人隨旁陪伴使用。</li>
-          <li>材料包含細小顆粒，吞嚥會有嗆入或誤食風險。</li>
-          <li>碎金箔與亮粉顆粒細緻，操作時請避免風扇、空調直吹，以免材料飛散。</li>
-          <li>沙料若沾染衣物或家具，建議盡快輕拍清除，避免顆粒卡入纖維縫隙。</li>
-          <li>操作時建議鋪好桌布，避免沙料灑落。</li>
-          <li>請將材料存放在幼兒與寵物無法取得之處。</li>
-        </ul>
       </div>
     </section>
 
@@ -418,6 +409,21 @@
         <p>商品：春聯砂畫材料包・羊群報福（進階款）<br>成品尺寸：20×20cm<br>顏色數：8色（紅、藍兩款式顏色組合不同，詳見「商品詳細」材料清單）</p>
       </div>
     </section>
+
+    <!-- 安全須知：原本固定寫在「商品詳細」section 最下面，改放在分頁
+         （商品介紹／規格資訊）下方、不是分頁裡面——不管讀者點開哪個
+         分頁都看得到，不會因為只看其中一個分頁而整個錯過這段資訊。 -->
+    <div class="ptpl-notice fade-in delay-2">
+      <p class="ptpl-notice__title">請注意</p>
+      <ul class="ptpl-notice__list">
+        <li>幼童使用時請大人隨旁陪伴使用。</li>
+        <li>材料包含細小顆粒，吞嚥會有嗆入或誤食風險。</li>
+        <li>碎金箔與亮粉顆粒細緻，操作時請避免風扇、空調直吹，以免材料飛散。</li>
+        <li>沙料若沾染衣物或家具，建議盡快輕拍清除，避免顆粒卡入纖維縫隙。</li>
+        <li>操作時建議鋪好桌布，避免沙料灑落。</li>
+        <li>請將材料存放在幼兒與寵物無法取得之處。</li>
+      </ul>
+    </div>
 
     <section class="ptpl-related fade-in delay-2">
       <h2 class="ptpl-related__title">相關商品</h2>

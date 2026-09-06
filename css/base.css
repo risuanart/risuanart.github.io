@@ -10,8 +10,14 @@
   padding: 0;
 }
 
+/* 底色設在 <html> 這層（不是 <body>）：<html> 背景會直接變成整個畫布
+   （viewport／手機橡皮筋回彈區域）的底色，比放在 <body> 更保險——body
+   本身維持透明，實際看到的底色都是這裡。這裡是「背景1」（原本設計）的
+   預設值，「背景2」（目前啟用，見 colors.css --page-bg 說明）由
+   home.css 的 html{} 覆寫。 */
 html {
   -webkit-text-size-adjust: 100%;
+  background: var(--color-surface-light);
 }
 
 body {
@@ -23,7 +29,7 @@ body {
   line-height: 1.6;
   letter-spacing: var(--letter-spacing-base);
   color: var(--color-text-primary);
-  background: var(--color-surface-light);
+  background: transparent;
 }
 
 /* 一般標題的預設字級規格（見 tokens.css 的 --heading-* 註解）。只補沒有

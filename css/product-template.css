@@ -184,14 +184,9 @@
 }
 
 /* ---------- 購買面板 ---------- */
-/* 這個範本頁的區塊標題（商品名稱＋下面每個 section 的 h2）原本試過改用
-   展示襯線字體（--font-family-display），跟其他商品頁的標題字體不一樣，
-   使用者確認過還是要以全站標準字體（--font-family-base，見 h1-h6 預設
-   規則）為主，這裡已經改回不覆寫字體/字重，跟其他頁面一致。 */
-.ptpl-summary__title {
-  margin: 0 0 var(--space-4);
-}
-
+/* 商品名稱只在最上面的 .work__intro H1 出現一次，購買面板這裡不重複放
+   一次標題（原本 .ptpl-summary__title 已經拿掉），.ptpl-summary__stock
+   直接是這個欄位的第一行。 */
 .ptpl-summary__stock {
   margin: 0 0 var(--space-6);
   font-size: var(--font-size-xs);
@@ -475,9 +470,13 @@
 
 /* 安全須知：跟 .ptpl-crosslink（連結卡片）同一套「細邊框＋直角」語言，
    維持這頁一貫的邊框樣式，不另外發明。內文用次要文字色＋小字級，維持
-   「補充資訊」的視覺層級，不會搶過上面材料清單的份量。 */
+   「補充資訊」的視覺層級，不會搶過主要內容的份量。
+   現在是分頁（.ptpl-description）後面的獨立區塊，不是巢狀在「商品詳細」
+   section 裡面，跟前面分頁是「同一件事的附加資訊」而不是新主題，間距
+   用 --space-10（跟 .ptpl-color-detail／.ptpl-color-compare 那種「同主題
+   不同呈現方式」同一階），不用整頁最大的 --editorial-gap。 */
 .ptpl-notice {
-  margin-top: var(--space-6);
+  margin-top: var(--space-10);
   padding: var(--space-4);
   border: 1px solid color-mix(in srgb, var(--color-text-secondary) 25%, transparent);
   border-radius: var(--radius-sharp);
