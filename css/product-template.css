@@ -637,57 +637,30 @@
   border-radius: var(--radius-sharp);
 }
 
-/* ---------- 商品說明區：分頁籤（商品介紹／規格資訊） ----------
-   裸 p 已經吃 base.css 的全站內文預設值（14/400/25.2），這裡只補分頁籤
-   本身的樣式跟間距。分頁籤列用底線標示目前選取項，不用色塊/圓角背景——
-   跟全站「直角俐落」的視覺語言一致（見 --radius-sharp 系統），也避免
-   看起來像另外發明的元件。上緣間距用 --editorial-gap-double：從「顏色
-   比較」的互動式色票，切到這裡開始是純文字的規格說明，是另一次明顯的
-   主題轉換，比照前面「商品詳細」那次轉換同樣留大間距。 */
+/* ---------- 商品說明區：商品介紹／規格資訊 ----------
+   原本是分頁籤（點擊切換），使用者確認過改成兩個各自獨立、一路往下
+   滑的一般區塊，跟其他 3 頁（春／輕巧版／自由創作組）一致，不再需要
+   .ptpl-tabs／.ptpl-tabs__panel 那套切換機制，相關 CSS 已移除。
+   裸 p 已經吃 base.css 的全站內文預設值（14/400/25.2），這裡只補
+   h2 標題跟區塊間距。第一個 .ptpl-description（商品介紹）上緣間距用
+   --editorial-gap-double：從「顏色比較」的互動式色票切到這裡開始是
+   純文字說明，是明顯的主題轉換；緊接在後的第二個 .ptpl-description
+   （規格資訊）用一般 --editorial-gap 就好，兩者是同一組「商品說明」
+   的延伸，不是又一次大主題轉換。 */
 .ptpl-description {
   margin: var(--editorial-gap-double) auto 0;
 }
 
-.ptpl-tabs {
-  display: flex;
-  gap: var(--space-6);
-  border-bottom: 1px solid color-mix(in srgb, var(--color-text-secondary) 25%, transparent);
-}
-.ptpl-tabs__btn {
-  position: relative;
-  padding: var(--space-2) 0 var(--space-4);
-  border: none;
-  background: none;
-  font-size: var(--font-size-sm);
-  font-weight: 600;
-  color: var(--color-text-secondary);
-  cursor: pointer;
-}
-.ptpl-tabs__btn::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -1px;
-  height: 2px;
-  background: var(--color-text-primary);
-  opacity: 0;
-  transition: opacity var(--duration-fast) var(--ease-standard);
-}
-.ptpl-tabs__btn.is-active {
-  color: var(--color-text-primary);
-}
-.ptpl-tabs__btn.is-active::after {
-  opacity: 1;
+.ptpl-description + .ptpl-description {
+  margin-top: var(--editorial-gap);
 }
 
-.ptpl-tabs__panel {
-  padding-top: var(--space-6);
-}
-.ptpl-tabs__panel p {
+.ptpl-description h2 {
   margin: 0 0 var(--space-4);
+  font-size: var(--font-size-lg);
 }
-.ptpl-tabs__panel .placeholder-box {
+
+.ptpl-description .placeholder-box {
   aspect-ratio: 16 / 9;
   margin: var(--space-10) 0;
   border-radius: var(--radius-sharp);

@@ -376,38 +376,32 @@
       </div>
     </section>
 
-    <!-- 商品資訊改分頁籤呈現（參考 koyama.com.tw 商品頁「說明／其他資訊」
-         的分頁模式）：內容不用一次攤開，切成「商品介紹」「規格資訊」兩籤，
-         點擊才切換顯示，跟色票選單一樣用 aria-selected/hidden 切換狀態，
-         不是另外發明一套邏輯。 -->
+    <!-- 商品介紹：原本做成分頁籤（商品介紹／規格資訊切換），跟其他
+         3 頁（春／輕巧版／自由創作組）都是一路往下滑的一般區塊不一樣，
+         使用者確認過改成一般區塊——內容量沒有大到需要分頁籤幫忙收合，
+         規格資訊只有一行字，藏進分頁籤反而容易被只看另一籤的讀者整個
+         錯過。故事段落「一句話陳述＋補充說明＋圖片」的節奏鋪陳維持
+         不變，每個 .ptpl-story-block 還是一個獨立的重點單元，只是拿掉
+         外層的分頁籤切換機制。 -->
     <section class="ptpl-description fade-in delay-2">
-      <div class="ptpl-tabs" role="tablist" aria-label="商品資訊">
-        <button type="button" class="ptpl-tabs__btn is-active" role="tab" id="ptpl-tab-btn-intro" aria-controls="ptpl-tab-panel-intro" aria-selected="true">商品介紹</button>
-        <button type="button" class="ptpl-tabs__btn" role="tab" id="ptpl-tab-btn-spec" aria-controls="ptpl-tab-panel-spec" aria-selected="false" tabindex="-1">規格資訊</button>
+      <h2>商品介紹</h2>
+      <div class="ptpl-story-block">
+        <p class="ptpl-story-block__statement">不只是細砂。</p>
+        <p class="ptpl-story-block__body">比起基礎款的細砂，這一款加入了絨毛砂與碎金箔（藍款另有亮粉），操作上多一些層次與變化，適合已經試過砂畫、想挑戰更豐富材質效果的你。</p>
+        <p class="ptpl-story-block__body"><strong>適合對象</strong>：想挑戰更多材質層次的你・親子共作・送禮</p>
+        <div class="placeholder-box">圖片待補・商品情境圖（操作過程或成品情境照）</div>
       </div>
 
-      <!-- 商品介紹分頁改用「一句話陳述＋補充說明＋圖片」的節奏鋪陳（參考
-           你給的截圖風格：短句先破題、營造情境感，再用一段話補充重要
-           資訊，圖片接在後面收尾），不是一次把所有資訊攤開成長段落。
-           每個 .ptpl-story-block 是一個獨立的重點單元。 -->
-      <div class="ptpl-tabs__panel" id="ptpl-tab-panel-intro" role="tabpanel" aria-labelledby="ptpl-tab-btn-intro">
-        <div class="ptpl-story-block">
-          <p class="ptpl-story-block__statement">不只是細砂。</p>
-          <p class="ptpl-story-block__body">比起基礎款的細砂，這一款加入了絨毛砂與碎金箔（藍款另有亮粉），操作上多一些層次與變化，適合已經試過砂畫、想挑戰更豐富材質效果的你。</p>
-          <p class="ptpl-story-block__body"><strong>適合對象</strong>：想挑戰更多材質層次的你・親子共作・送禮</p>
-          <div class="placeholder-box">圖片待補・商品情境圖（操作過程或成品情境照）</div>
-        </div>
-
-        <div class="ptpl-story-block">
-          <p class="ptpl-story-block__statement">掛上牆，或貼上門。</p>
-          <p class="ptpl-story-block__body">完成後，若想固定於牆面或門上，建議自行搭配無痕黏土或膠條使用。</p>
-          <div class="placeholder-box">圖片待補・成品上牆／上門展示示意圖</div>
-        </div>
+      <div class="ptpl-story-block">
+        <p class="ptpl-story-block__statement">掛上牆，或貼上門。</p>
+        <p class="ptpl-story-block__body">完成後，若想固定於牆面或門上，建議自行搭配無痕黏土或膠條使用。</p>
+        <div class="placeholder-box">圖片待補・成品上牆／上門展示示意圖</div>
       </div>
+    </section>
 
-      <div class="ptpl-tabs__panel" id="ptpl-tab-panel-spec" role="tabpanel" aria-labelledby="ptpl-tab-btn-spec" hidden>
-        <p>商品：春聯砂畫材料包・羊群報福（進階款）<br>成品尺寸：20×20cm<br>顏色數：8色（紅、藍兩款式顏色組合不同，詳見「商品詳細」材料清單）</p>
-      </div>
+    <section class="ptpl-description fade-in delay-2">
+      <h2>規格資訊</h2>
+      <p>商品：春聯砂畫材料包・羊群報福（進階款）<br>成品尺寸：20×20cm<br>顏色數：8色（紅、藍兩款式顏色組合不同，詳見「商品詳細」材料清單）</p>
     </section>
 
     <!-- 安全須知：原本固定寫在「商品詳細」section 最下面，改放在分頁
@@ -424,6 +418,15 @@
         <li>請將材料存放在幼兒與寵物無法取得之處。</li>
       </ul>
     </div>
+
+    <!-- 購買前請閱讀：這頁原本沒有這個區塊，使用者確認過補上——內容
+         改抽到 js/sand-art-terms.js 共用資料，跟 sand-art-chun.html
+         一起吃同一份，之後條款要改只改那支 JS 檔案一次，不用兩個
+         HTML 檔案分別改。容器留空、由 script 渲染進去。 -->
+    <details class="accordion fade-in">
+      <summary class="accordion__toggle">購買前請閱讀</summary>
+      <div class="accordion__body" data-sand-art-terms></div>
+    </details>
 
     <section class="ptpl-related fade-in delay-2">
       <h2 class="ptpl-related__title">相關商品</h2>
@@ -462,6 +465,7 @@
   </main>
 
   <script src="../js/cart.js"></script>
+  <script src="../js/sand-art-terms.js"></script>
   <script src="../js/site-header-scroll.js"></script>
   <script src="../js/scroll-reveal.js"></script>
   <script>
@@ -669,25 +673,6 @@
         const label = tab.querySelector(".ptpl-color-picker__label").textContent.trim();
         document.getElementById("ptpl-media-lifestyle").textContent = "圖片待補・" + label + "沙色特寫";
         document.getElementById("ptpl-media-product").textContent = "圖片待補・" + label + "應用示意";
-      });
-
-      // 商品資訊分頁籤：點哪個籤，顯示對應面板、其他隱藏（hidden 屬性），
-      // 同步 aria-selected／tabindex，鍵盤 tab 進來也只會停在目前選取的
-      // 那個籤上（跟原生分頁籤鍵盤行為一致）。
-      const tabBtns = document.querySelectorAll(".ptpl-tabs__btn");
-      tabBtns.forEach((btn) => {
-        btn.addEventListener("click", () => {
-          tabBtns.forEach((b) => {
-            b.classList.remove("is-active");
-            b.setAttribute("aria-selected", "false");
-            b.tabIndex = -1;
-            document.getElementById(b.getAttribute("aria-controls")).hidden = true;
-          });
-          btn.classList.add("is-active");
-          btn.setAttribute("aria-selected", "true");
-          btn.tabIndex = 0;
-          document.getElementById(btn.getAttribute("aria-controls")).hidden = false;
-        });
       });
 
       // 名畫再製特色：滑動比對拉桿。用 pointer events（同時支援滑鼠／觸控）
