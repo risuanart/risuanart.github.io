@@ -420,12 +420,13 @@
     </div>
 
     <!-- 購買前請閱讀：這頁原本沒有這個區塊，使用者確認過補上——內容
-         改抽到 js/sand-art-terms.js 共用資料，跟 sand-art-chun.html
-         一起吃同一份，之後條款要改只改那支 JS 檔案一次，不用兩個
-         HTML 檔案分別改。容器留空、由 script 渲染進去。 -->
+         改抽到 js/product-terms.js 共用資料（全站流動畫＋砂畫都吃同一份，
+         通用政策文字只維護一次，材質專屬文字依
+         data-product-terms="sand-art" 帶入）。容器留空、由 script
+         渲染進去。 -->
     <details class="accordion fade-in">
       <summary class="accordion__toggle">購買前請閱讀</summary>
-      <div class="accordion__body" data-sand-art-terms></div>
+      <div class="accordion__body" data-product-terms="sand-art"></div>
     </details>
 
     <section class="ptpl-related fade-in delay-2">
@@ -465,7 +466,7 @@
   </main>
 
   <script src="../js/cart.js"></script>
-  <script src="../js/sand-art-terms.js"></script>
+  <script src="../js/product-terms.js"></script>
   <script src="../js/site-header-scroll.js"></script>
   <script src="../js/scroll-reveal.js"></script>
   <script>

@@ -263,13 +263,13 @@
       </div>
     </section>
 
-    <!-- 購買前請閱讀：內容改抽到 js/sand-art-terms.js 共用資料，跟
-         sand-art-artist-sheep.html 一起吃同一份——砂畫材質／操作方式
-         通用，不是「春」專屬內容，之後條款要改只改那支 JS 檔案一次，
-         不用兩個 HTML 檔案分別改。容器留空、由 script 渲染進去。 -->
+    <!-- 購買前請閱讀：內容改抽到 js/product-terms.js 共用資料（全站
+         流動畫＋砂畫都吃同一份，通用政策文字只維護一次，材質專屬文字
+         依 data-product-terms="sand-art" 帶入）。容器留空、由 script
+         渲染進去。 -->
     <details class="accordion fade-in">
       <summary class="accordion__toggle">購買前請閱讀</summary>
-      <div class="accordion__body" data-sand-art-terms></div>
+      <div class="accordion__body" data-product-terms="sand-art"></div>
     </details>
 
     <footer class="work__close">
@@ -281,7 +281,7 @@
   </main>
 
   <script src="../js/cart.js"></script>
-  <script src="../js/sand-art-terms.js"></script>
+  <script src="../js/product-terms.js"></script>
   <script src="../js/site-header-scroll.js"></script>
   <script src="../js/scroll-reveal.js"></script>
 </body>
