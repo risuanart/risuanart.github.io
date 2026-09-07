@@ -40,6 +40,7 @@
     "sand-art-collection": { name: "春聯砂畫材料包・自由創作組", price: 0, category: "sand-art", hasVariant: false, tagline: "5 款精選圖案＋26色顏料，自由創作一整套" },
     "sand-art-artist-sheep": { name: "春聯砂畫材料包・羊群報福（進階款）", price: 0, category: "sand-art", tagline: "致敬馬諦斯《舞蹈》，羊群報福紅藍兩色任選" },
     "sand-art-chun": { name: "春聯砂畫材料包・春（基礎款）", price: 0, category: "sand-art", hasVariant: false, tagline: "（待補）" },
+    "sand-art-fu": { name: "春聯砂畫材料包・福（基礎款）", price: 0, category: "sand-art", hasVariant: false, tagline: "（待補）" },
     "fluid-art-canvas-kit": { name: "空白畫布＋字貼＋架高杯", price: 0, category: "fluid-art", hasVariant: false, hidden: true },
     "sand-art-extra-color": { name: "額外顏色沙・固定套組", price: 0, category: "sand-art", hasVariant: false, hidden: true },
     "sand-art-sticker-only": { name: "純貼紙加購・單款", price: 0, category: "sand-art", hasVariant: false, hidden: true },
@@ -110,6 +111,14 @@
     return SCHEME_DETAIL_IMAGES[scheme] || null;
   }
 
+  // 沒有款式可選的商品（hasVariant:false，例如「春」單一配色、自由創作組
+  // 固定組合）沒有「scheme」概念可以查 SCHEME_IMAGES，縮圖改直接用商品鍵
+  // 查這張表，thumbHTML() 在 SCHEME_IMAGES 查無結果時會退回來查這裡。
+  const PRODUCT_IMAGES = {
+    "sand-art-chun": BASE_PREFIX + "assets/images/products/sand-art-chun/sand-art-chun-main.jpg",
+    "sand-art-fu": BASE_PREFIX + "assets/images/products/sand-art-fu/sand-art-fu-main.jpg",
+  };
+
   // 砂畫目前還沒有任何實拍素材，SCHEME_IMAGES 查不到對應圖時，縮圖改畫一個
   // 文字佔位框（跟商品頁 .placeholder-box 同一套視覺語言），不要留一個空的
   // src 讓瀏覽器顯示破圖圖示。className 決定實際尺寸／圓角（見 cart.css
@@ -121,7 +130,7 @@
   const PLACEHOLDER_PHOTO_ICON = `<svg class="placeholder-box__icon" viewBox="0 0 24 24" width="1.8em" height="1.8em" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1.5"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 16l-5.5-5.5a1 1 0 0 0-1.4 0L6 19"/></svg>`;
 
   function thumbHTML(item, className) {
-    const src = SCHEME_IMAGES[item.scheme];
+    const src = SCHEME_IMAGES[item.scheme] || PRODUCT_IMAGES[item.productKey];
     if (src) {
       const product = PRODUCTS[item.productKey];
       const schemeName = SCHEME_NAMES[item.scheme] || "";
@@ -138,6 +147,7 @@
     "sand-art-collection": BASE_PREFIX + "products/sand-art-collection.html",
     "sand-art-artist-sheep": BASE_PREFIX + "products/sand-art-artist-sheep.html",
     "sand-art-chun": BASE_PREFIX + "products/sand-art-chun.html",
+    "sand-art-fu": BASE_PREFIX + "products/sand-art-fu.html",
   };
 
   const CART_PAGE_URL = BASE_PREFIX + "cart.html";

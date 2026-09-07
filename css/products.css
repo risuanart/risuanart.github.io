@@ -48,6 +48,16 @@
   --swatch-chun-lake-blue: #4A8FA3;
   --swatch-chun-light-pink: #F0C4D0;
   --swatch-chun-ice-purple: #C8B8E0;
+
+  /* 「福」款分裝沙 7 色，同一批肉眼估色。跟「春」「羊群報福」重複的
+     色名（粉紅、冰紫、白）直接沿用同一個值，不重新估一次。 */
+  --swatch-fu-jujube-red: #8B3626;
+  --swatch-fu-white: #F5F0E8;
+  --swatch-fu-golden-yellow: #E0A83C;
+  --swatch-fu-cyan: #4A9B8E;
+  --swatch-fu-pink: #E8A0B4;
+  --swatch-fu-ice-purple: #C8B8E0;
+  --swatch-fu-deep-tan: #C99B6E;
 }
 
 .product-page {
@@ -323,6 +333,27 @@
   color: var(--color-text-primary);
 }
 
+/* 標題區成品主圖：目前只有 sand-art-chun.html 在用——那頁只有單一配色，
+   沒有色系選擇器／圖案卡可以順便帶出「做完長什麼樣子」的縮圖，需要
+   獨立補一張。跟 .kit-section__photo（給 chapter 內滿版材料照用）分開
+   一個頁面標題專屬 class：這裡在 .work__intro 窄版標題區內，要限制
+   寬度＋置中，不是滿版鋪滿螢幕寬度。 */
+.work__intro-photo {
+  width: 100%;
+  max-width: 280px;
+  aspect-ratio: 1 / 1;
+  margin: var(--space-6) auto 0;
+  border-radius: var(--radius-sharp);
+  overflow: hidden;
+}
+
+.work__intro-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 /* ---------- 章節共用節奏 ---------- */
 .chapter {
   /* 章節與章節之間的大留白，改用 --editorial-gap（母頁的大區塊間距節奏，
@@ -352,6 +383,11 @@
 }
 
 .chapter__intro[data-placeholder] {
+  color: var(--color-text-secondary);
+  font-style: italic;
+}
+
+.chapter__prose[data-placeholder] {
   color: var(--color-text-secondary);
   font-style: italic;
 }
