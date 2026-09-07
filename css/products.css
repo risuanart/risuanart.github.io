@@ -58,6 +58,16 @@
   --swatch-fu-pink: #E8A0B4;
   --swatch-fu-ice-purple: #C8B8E0;
   --swatch-fu-deep-tan: #C99B6E;
+
+  /* 「財」款分裝沙 7 色，同一批肉眼估色。跟其他款重複的色名（湖藍、
+     深膚、黑色）直接沿用同一個值，不重新估一次。 */
+  --swatch-cai-coral-red: #E8735A;
+  --swatch-cai-lake-blue: #4A8FA3;
+  --swatch-cai-bright-yellow: #F0C020;
+  --swatch-cai-deep-tan: #C99B6E;
+  --swatch-cai-linen: #D9C9A8;
+  --swatch-cai-mustard: #C4A63C;
+  --swatch-cai-black: #2B2B2B;
 }
 
 .product-page {

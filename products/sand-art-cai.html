@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>春聯砂畫材料包・福（基礎款）｜日宣繪畫室</title>
+  <title>春聯砂畫材料包・財（基礎款）｜日宣繪畫室</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=ABeeZee&family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;600;700&family=Poppins:wght@700&family=Noto+Serif+TC:wght@500;700&family=Noto+Sans+TC:wght@400;600;700&display=swap" rel="stylesheet">
@@ -21,7 +21,7 @@
 
   <header class="site-header">
     <a class="site-header__back" href="../index.html" data-back-fixed aria-label="回到首頁"><img src="../assets/images/logo-risuan拷貝.png" alt="日宣繪畫室"></a>
-    <div class="site-header__title">春聯砂畫材料包・福（基礎款）</div>
+    <div class="site-header__title">春聯砂畫材料包・財（基礎款）</div>
     <div class="cart-badge-wrap">
       <button type="button" class="cart-badge" aria-haspopup="true" aria-expanded="false" aria-label="購物車，目前 0 件">
         <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
@@ -40,41 +40,40 @@
   </header>
 
   <!-- 8 個材料包子頁彼此輪替，見 fluid-art-light.html 同一處註解，這頁是
-       第 7 個加進循環的（砂畫「福」款獨立商品頁）。
+       第 8 個加進循環的（砂畫「財」款獨立商品頁，接在「福」後面）。
        順序：流動畫輕巧版→流動畫禮盒版→砂畫輕巧版→砂畫自由創作組→
        羊群報福（進階款）→春→福→財→（循環回流動畫輕巧版）。 -->
   <nav class="pill-nav" aria-label="材料包子頁導覽">
-    <a href="sand-art-chun.html">春</a>
+    <a href="sand-art-fu.html">福</a>
     <a href="index.html" aria-current="page">材料包</a>
-    <a href="sand-art-cai.html">財</a>
+    <a href="fluid-art-light.html">流動畫輕巧版</a>
   </nav>
 
   <main class="product-page work">
 
     <!-- 標題／簡介：跟其他「春聯砂畫材料包」子頁共用同一句開場句。
-         「福」原本是輕巧版 8 款圖案之一（見 js/sand-art-gallery.js 的
-         PATTERNS.fu：素色底＋星星點綴，酒紅底＋金字，15cm，純沙），
-         這頁是給它一個獨立商品頁／連結，做法跟「春」完全一致——單一
-         配色、無雙配色示範，H1 直接放完整商品名稱。 -->
+         「財」原本是輕巧版 8 款圖案之一（見 js/sand-art-gallery.js 的
+         PATTERNS.cai：條紋＋梅花，15cm，純沙），這頁是給它一個獨立
+         商品頁／連結，做法跟「春」「福」完全一致——單一配色、無雙配色
+         示範，H1 直接放完整商品名稱。 -->
     <header class="work__intro">
-      <h1 class="work-heading fade-in"><span class="inner">春聯砂畫材料包・福（基礎款）</span></h1>
+      <h1 class="work-heading fade-in"><span class="inner">春聯砂畫材料包・財（基礎款）</span></h1>
       <p class="work-heading__version fade-in delay-1"><span class="work-heading__version-marks" aria-hidden="true"><span></span></span>基礎款</p>
       <p class="work-heading__sub fade-in delay-1">2026</p>
       <p class="intro fade-in delay-2">撕開、倒沙、鋪色，<br>簡單技法，拼貼出陪伴一年的春聯。</p>
 
-      <!-- 成品主圖：跟 sand-art-chun.html 同一套 .work__intro-photo
-           元件（見 css/products.css），置中窄版方形主圖。 -->
+      <!-- 成品主圖：跟 sand-art-chun.html／sand-art-fu.html 同一套
+           .work__intro-photo 元件（見 css/products.css），置中窄版
+           方形主圖。 -->
       <div class="work__intro-photo fade-in delay-2">
-        <img src="../assets/images/products/sand-art-fu/sand-art-fu-main.jpg" alt="春聯砂畫材料包・福 成品參考圖" width="800" height="800" loading="lazy">
+        <img src="../assets/images/products/sand-art-cai/sand-art-cai-main.jpg" alt="春聯砂畫材料包・財 成品參考圖" width="800" height="800" loading="lazy">
       </div>
 
-      <!-- 「福」跟「春」一樣只有一組配色（棗紅底，白色／洋黃／青色／
-           粉紅／冰紫／深膚六色點綴星星與福字，使用者確認過的定案色，
-           取代 js/sand-art-gallery.js 的 PATTERNS.fu 舊描述「酒紅底＋
-           金字」），不是雙配色示範——沒有選項可選，不需要色票／縮圖卡
-           選擇器，也不需要「目前選擇」提示，買列直接接在開場句後面。
-           價格跟「春」一樣先用 $__ 佔位（使用者確認過兩者價格一致，
-           等正式定價後一起改）。 -->
+      <!-- 「財」跟「春」「福」一樣只有一組配色，圈選色卡 7 色：珊瑚紅、
+           湖藍、明黃、深膚、亞麻、芥黃、黑色（使用者確認過的定案色）——
+           不是雙配色示範，沒有選項可選，不需要色票／縮圖卡選擇器，
+           也不需要「目前選擇」提示，買列直接接在開場句後面。價格跟
+           「春」「福」一樣先用 $__ 佔位。 -->
       <div class="work-heading__buy-row fade-in delay-3">
         <div class="work-heading__buy-text">
           <p class="work-heading__price">$__</p>
@@ -85,7 +84,7 @@
             <span data-qty-value>1</span>
             <button type="button" data-qty-plus aria-label="增加數量">＋</button>
           </div>
-          <button type="button" class="work__cta work__cta--primary" data-add-to-cart data-product="sand-art-fu">
+          <button type="button" class="work__cta work__cta--primary" data-add-to-cart data-product="sand-art-cai">
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
             <span class="work__cta-label">ＢＵＹ</span>
           </button>
@@ -93,10 +92,10 @@
       </div>
     </header>
 
-    <!-- 第三章：商品詳細。跟「春」一樣是基礎款配置，不含集沙盤、教學
-         影片 QR Code（那兩項是進階款才有）。分裝沙 7 色是使用者確認過
-         的定案色（棗紅、白色、洋黃、青色、粉紅、冰紫、深膚），不是
-         待補佔位。 -->
+    <!-- 第三章：商品詳細。跟「春」「福」一樣是基礎款配置，不含集沙盤、
+         教學影片 QR Code（那兩項是進階款才有）。分裝沙 7 色是使用者
+         確認過的定案色（珊瑚紅、湖藍、明黃、深膚、亞麻、芥黃、黑色），
+         不是待補佔位。 -->
     <section class="chapter">
       <h2 class="chapter__title fade-in">商品詳細</h2>
       <p class="kit-section__size-hint fade-in delay-1">成品尺寸：15×15cm<br>顏色數：7色</p>
@@ -106,7 +105,7 @@
       <p class="chapter__intro fade-in delay-2">內附材料：</p>
       <ul class="kit-list fade-in delay-2">
         <li><span aria-hidden="true">✦</span><span>砂畫底板〔15×15cm〕... 1張</span></li>
-        <li><span aria-hidden="true">✦</span><span>分裝沙〔7色：棗紅、白色、洋黃、青色、粉紅、冰紫、深膚〕... 每色1管</span></li>
+        <li><span aria-hidden="true">✦</span><span>分裝沙〔7色：珊瑚紅、湖藍、明黃、深膚、亞麻、芥黃、黑色〕... 每色1管</span></li>
         <li><span aria-hidden="true">✦</span><span>排刷 ... 1支</span></li>
         <li><span aria-hidden="true">✦</span><span>夾子 ... 1支</span></li>
         <li><span aria-hidden="true">✦</span><span>一次性防污桌布 ... 1張</span></li>
@@ -114,40 +113,38 @@
       </ul>
     </section>
 
-    <!-- 第四章：顏色細節。使用者確認過的定案色（跟「春」一樣不是待補
-         佔位）：棗紅是底色，其餘 6 色是疊在底色上的顯色（星星／福字），
-         補上跟「春」同一套 .color-swatches 色點列。跟「春」重複的色名
-         （粉紅、冰紫、白）直接沿用同一個估色值，不重新估一次。 -->
+    <!-- 第四章：顏色細節。使用者確認過的定案色，跟「春」「福」同一套
+         .color-swatches 色點列。跟其他款重複的色名（湖藍、深膚、黑色）
+         直接沿用同一個估色值，不重新估一次。 -->
     <section class="chapter">
       <h2 class="chapter__title fade-in">顏色細節</h2>
       <ul class="color-swatches fade-in delay-1">
-        <li class="color-swatch"><span class="color-swatch__dot" style="background: var(--swatch-fu-jujube-red)"></span><span class="color-swatch__label">棗紅</span></li>
-        <li class="color-swatch"><span class="color-swatch__dot" style="background: var(--swatch-fu-white)"></span><span class="color-swatch__label">白色</span></li>
-        <li class="color-swatch"><span class="color-swatch__dot" style="background: var(--swatch-fu-golden-yellow)"></span><span class="color-swatch__label">洋黃</span></li>
-        <li class="color-swatch"><span class="color-swatch__dot" style="background: var(--swatch-fu-cyan)"></span><span class="color-swatch__label">青色</span></li>
-        <li class="color-swatch"><span class="color-swatch__dot" style="background: var(--swatch-fu-pink)"></span><span class="color-swatch__label">粉紅</span></li>
-        <li class="color-swatch"><span class="color-swatch__dot" style="background: var(--swatch-fu-ice-purple)"></span><span class="color-swatch__label">冰紫</span></li>
-        <li class="color-swatch"><span class="color-swatch__dot" style="background: var(--swatch-fu-deep-tan)"></span><span class="color-swatch__label">深膚</span></li>
+        <li class="color-swatch"><span class="color-swatch__dot" style="background: var(--swatch-cai-coral-red)"></span><span class="color-swatch__label">珊瑚紅</span></li>
+        <li class="color-swatch"><span class="color-swatch__dot" style="background: var(--swatch-cai-lake-blue)"></span><span class="color-swatch__label">湖藍</span></li>
+        <li class="color-swatch"><span class="color-swatch__dot" style="background: var(--swatch-cai-bright-yellow)"></span><span class="color-swatch__label">明黃</span></li>
+        <li class="color-swatch"><span class="color-swatch__dot" style="background: var(--swatch-cai-deep-tan)"></span><span class="color-swatch__label">深膚</span></li>
+        <li class="color-swatch"><span class="color-swatch__dot" style="background: var(--swatch-cai-linen)"></span><span class="color-swatch__label">亞麻</span></li>
+        <li class="color-swatch"><span class="color-swatch__dot" style="background: var(--swatch-cai-mustard)"></span><span class="color-swatch__label">芥黃</span></li>
+        <li class="color-swatch"><span class="color-swatch__dot" style="background: var(--swatch-cai-black)"></span><span class="color-swatch__label">黑色</span></li>
       </ul>
       <div class="chapter__banner-photo fade-in delay-2">
-        <div class="placeholder-box placeholder-box--photo" aria-hidden="true"><svg class="placeholder-box__icon" viewBox="0 0 24 24" width="1.8em" height="1.8em" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1.5"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 16l-5.5-5.5a1 1 0 0 0-1.4 0L6 19"/></svg><span class="placeholder-box__text">建議拍攝：色沙材料細節展示圖（窄橫幅，依棗紅→白色→洋黃→青色→粉紅→冰紫→深膚排序拍攝）</span></div>
+        <div class="placeholder-box placeholder-box--photo" aria-hidden="true"><svg class="placeholder-box__icon" viewBox="0 0 24 24" width="1.8em" height="1.8em" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1.5"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 16l-5.5-5.5a1 1 0 0 0-1.4 0L6 19"/></svg><span class="placeholder-box__text">建議拍攝：色沙材料細節展示圖（窄橫幅，依珊瑚紅→湖藍→明黃→深膚→亞麻→芥黃→黑色排序拍攝）</span></div>
       </div>
     </section>
 
-    <!-- 第五章：商品介紹。跟「春」同一種「一句話陳述＋補充說明＋圖片」
-         節奏，順序也照「春」最後確認過的邏輯——先講「這次選用的配色」
-         （具體會收到什麼），再講「搭配自己的顏色」（自由混色的延伸
-         空間）。「搭配自己的顏色」那段原文提到「金箔灑在哪裡」，但
-         「福」材料清單裡沒有碎金箔，比照「春」那次的修正拿掉這幾個字，
-         不是漏改。 -->
+    <!-- 第五章：商品介紹。跟「春」「福」同一種「一句話陳述＋補充說明＋
+         圖片」節奏，順序也一致——先講「這次選用的配色」，再講「搭配
+         自己的顏色」。「搭配自己的顏色」那段原文提到「金箔灑在哪裡」，
+         但「財」材料清單裡沒有碎金箔，比照「春」「福」的修正拿掉這幾
+         個字，不是漏改。 -->
     <section class="chapter">
       <h2 class="chapter__title fade-in">商品介紹</h2>
 
       <div class="chapter__block fade-in delay-1">
         <p class="chapter__statement">這次選用的配色</p>
-        <p class="chapter__prose">底色：棗紅<br>自由搭配：白色、洋黃、青色、粉紅、冰紫、深膚</p>
-        <p class="chapter__prose">選用較深的棗紅作底，襯托出淺色顯色的層次，深淺對比讓每一種配色都好看，很難失敗。</p>
-        <p class="chapter__prose">白色、洋黃、青色、粉紅、冰紫、深膚，六種顏色，不只落在星星上，也能倒進福字裡。</p>
+        <p class="chapter__prose">底色：五色條紋（湖藍、明黃、深膚、亞麻、芥黃）<br>花色：珊瑚紅<br>字色：黑色「財」</p>
+        <p class="chapter__prose">發財發財，花財花財～</p>
+        <p class="chapter__prose">五種顏色搭配紅色花簾，就像是把財，帶進了家門。</p>
       </div>
 
       <div class="chapter__block fade-in delay-2">
@@ -161,10 +158,9 @@
       </div>
     </section>
 
-    <!-- 請注意：安全須知，跟「春」同一種處理方式——一直顯示，不藏進
-         「購買前請閱讀」手風琴裡。內容通用（不含碎金箔／亮粉專屬提醒），
-         跟「春」逐字相同，之後如果全站基礎款頁面數量夠多，可以考慮
-         比照 js/product-terms.js 的做法抽成共用資料。 -->
+    <!-- 請注意：安全須知，跟「春」「福」同一種處理方式——一直顯示，
+         不藏進「購買前請閱讀」手風琴裡。內容通用（不含碎金箔／亮粉
+         專屬提醒），逐字相同。 -->
     <div class="safety-notice fade-in">
       <p class="safety-notice__title">請注意</p>
       <ul class="safety-notice__list">
@@ -177,7 +173,7 @@
     </div>
 
     <!-- 第六章：怎麼玩。跟其他基礎款材料包一字不差，固定展開、位置在
-         請注意後面（跟「春」統一過的順序一致）。 -->
+         請注意後面（跟「春」「福」統一過的順序一致）。 -->
     <section class="chapter">
       <h2 class="chapter__title fade-in">怎麼玩</h2>
       <div class="chapter__prose fade-in delay-1">
@@ -218,7 +214,7 @@
     </section>
 
     <!-- 延伸創作：跟其他基礎款材料包共用同一組加購商品（額外顏色沙／
-         純貼紙），不是「福」專屬的加購項目。 -->
+         純貼紙），不是「財」專屬的加購項目。 -->
     <section class="chapter addon-section">
       <h2 class="chapter__title fade-in">延伸創作</h2>
       <div class="addon-carousel fade-in delay-1">
@@ -257,8 +253,9 @@
       </div>
     </section>
 
-    <!-- 購買前請閱讀：內容改抽到 js/product-terms.js 共用資料，跟「春」
-         一起吃同一份 sand-art 材質內容。容器留空、由 script 渲染進去。 -->
+    <!-- 購買前請閱讀：內容改抽到 js/product-terms.js 共用資料，跟其他
+         基礎款材料包一起吃同一份 sand-art 材質內容。容器留空、由
+         script 渲染進去。 -->
     <details class="accordion fade-in">
       <summary class="accordion__toggle">購買前請閱讀</summary>
       <div class="accordion__body" data-product-terms="sand-art"></div>

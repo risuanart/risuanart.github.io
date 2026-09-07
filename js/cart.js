@@ -41,6 +41,7 @@
     "sand-art-artist-sheep": { name: "春聯砂畫材料包・羊群報福（進階款）", price: 0, category: "sand-art", tagline: "致敬馬諦斯《舞蹈》，羊群報福紅藍兩色任選" },
     "sand-art-chun": { name: "春聯砂畫材料包・春（基礎款）", price: 0, category: "sand-art", hasVariant: false, tagline: "（待補）" },
     "sand-art-fu": { name: "春聯砂畫材料包・福（基礎款）", price: 0, category: "sand-art", hasVariant: false, tagline: "（待補）" },
+    "sand-art-cai": { name: "春聯砂畫材料包・財（基礎款）", price: 0, category: "sand-art", hasVariant: false, tagline: "（待補）" },
     "fluid-art-canvas-kit": { name: "空白畫布＋字貼＋架高杯", price: 0, category: "fluid-art", hasVariant: false, hidden: true },
     "sand-art-extra-color": { name: "額外顏色沙・固定套組", price: 0, category: "sand-art", hasVariant: false, hidden: true },
     "sand-art-sticker-only": { name: "純貼紙加購・單款", price: 0, category: "sand-art", hasVariant: false, hidden: true },
@@ -117,6 +118,7 @@
   const PRODUCT_IMAGES = {
     "sand-art-chun": BASE_PREFIX + "assets/images/products/sand-art-chun/sand-art-chun-main.jpg",
     "sand-art-fu": BASE_PREFIX + "assets/images/products/sand-art-fu/sand-art-fu-main.jpg",
+    "sand-art-cai": BASE_PREFIX + "assets/images/products/sand-art-cai/sand-art-cai-main.jpg",
   };
 
   // 砂畫目前還沒有任何實拍素材，SCHEME_IMAGES 查不到對應圖時，縮圖改畫一個
@@ -148,6 +150,7 @@
     "sand-art-artist-sheep": BASE_PREFIX + "products/sand-art-artist-sheep.html",
     "sand-art-chun": BASE_PREFIX + "products/sand-art-chun.html",
     "sand-art-fu": BASE_PREFIX + "products/sand-art-fu.html",
+    "sand-art-cai": BASE_PREFIX + "products/sand-art-cai.html",
   };
 
   const CART_PAGE_URL = BASE_PREFIX + "cart.html";
