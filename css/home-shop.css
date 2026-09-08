@@ -1,0 +1,541 @@
+/* home-shop.css —— 正式首頁（選物店風格）專屬樣式，服務 index.html。
+   （檔名／這份註解都是首頁改版定案、從 home-preview.html 轉正後更新的，
+   舊版本叫 home-preview.css，內容邏輯沒變）不動 products.css／home.css
+   既有規則，也不影響其他頁面。延續全站「直角＋克制」的視覺語彙：
+   色票／字體只用 colors.css／tokens.css 既有 token，不新增字體、不做
+   圓角 pill、不做漸層卡片。
+
+   內容欄寬統一比照 .shop-grid 桌面版的 1100px 上限（見 products.css），
+   讓整頁（大圖／格狀商品／Follow Us／footer）在寬螢幕上共用同一條欄寬
+   基準線，不是各區塊各自選一個數字。 */
+
+.preview-footer {
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ---------- 頂部列：漢堡選單（左）＋ logo（中）＋ 購物車（右） ----------
+   .site-header 本身（fixed 定位、內距、透明底）是 home.css 的共用規則，
+   這裡只覆寫這一頁特有的三欄排版——原本共用版本是「返回連結／文字標題／
+   購物車」，這裡换成「選單鈕／置中 logo／購物車」。 */
+.site-header__menu-toggle {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.site-header__logo {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.site-header__logo img {
+  display: block;
+  height: 22px;
+  width: auto;
+}
+
+/* ---------- 選單面板：從頂部列下方滑出，蓋在背景遮罩上面 ----------
+   用 transform 滑動（不是 hidden/display），才能有平滑的開合過場；
+   關閉狀態整片位移到螢幕外（不是 opacity:0），鍵盤 tab 也不會停在
+   看不見的連結上。z-index 比 .site-header（home.css 定義為 25）低，
+   讓頂部列（漢堡鈕本身）在選單展開時仍然疊在最上層、可以再點一次關掉。 */
+.site-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 24;
+  padding: calc(var(--editorial-header-height) + 69px + var(--space-4)) var(--pad-h) var(--space-6);
+  background: var(--color-surface-light);
+  border-bottom: 1px solid color-mix(in srgb, var(--color-text-secondary) 25%, transparent);
+  display: flex;
+  flex-direction: column;
+  transform: translateY(-100%);
+  transition: transform var(--duration-normal) var(--ease-standard);
+}
+
+.site-menu.is-open {
+  transform: translateY(0);
+}
+
+.site-menu a,
+.site-menu__disabled {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-4) 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--color-text-secondary) 15%, transparent);
+  font-size: 15px;
+  color: var(--color-text-primary);
+}
+
+.site-menu a:last-child,
+.site-menu__disabled:last-child {
+  border-bottom: none;
+}
+
+/* 「即將推出」的項目維持在清單裡（讓訪客知道這個分類存在），但用較淺的
+   顏色＋不能點的游標，跟真的連結明確區分開，不是假裝有內容的死連結。 */
+.site-menu__disabled {
+  color: var(--color-text-secondary);
+  cursor: not-allowed;
+}
+
+.site-menu__soon {
+  flex: none;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--color-text-secondary);
+}
+
+/* 「課程」這個分類目前沒有自己的頁面，但子項目本身是真的存在的課程
+   （只是還沒各自成頁），照實列出來比整個標成「即將推出」更誠實──跟
+   .site-menu a／.site-menu__disabled 用同一條底線分隔全站選單列表的
+   節奏，只是裡面塞了子清單＋一個真的連結（預約須知），不是單行。 */
+.site-menu__group {
+  padding: var(--space-4) 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--color-text-secondary) 15%, transparent);
+}
+
+.site-menu__group-title {
+  margin: 0 0 var(--space-2);
+  font-size: 15px;
+  color: var(--color-text-primary);
+}
+
+.site-menu__sublist {
+  margin: 0 0 var(--space-3);
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+}
+
+.site-menu__sublist li {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}
+
+.site-menu__sublink {
+  display: inline-block;
+  font-size: 13px;
+  color: var(--color-interactive);
+  border-bottom: 1px solid currentColor;
+}
+
+.site-menu-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 23;
+  background: color-mix(in srgb, var(--color-surface-dark) 40%, transparent);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--duration-normal) var(--ease-standard);
+}
+
+.site-menu-backdrop.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ---------- 精選輪播：滿版（不跟其他區塊一樣收在 1100px 欄寬裡）。
+   比例 2:3——比對 panacea-q.com 實測的參考值（見對話紀錄：他們輪播圖片
+   都是 800px 高的直式素材，換算接近 2:3），比 9:16 矮一截，桌機版滿版
+   寬度下不會拉得那麼誇張，但之後放的照片/影片如果原始是 9:16（IG Reels
+   常見格式），上傳前需要自己先裁掉上下各約 15% 才會剛好塞滿這個框，
+   不會自動裁切。中間試過 5:4／9:16，內部留白（.preview-hero__photo 的
+   提示文字／.preview-hero__overlay 的真文字）用的都是不依賴比例的最小
+   必要間距（見下方 padding 註解），換任何比例都不會重疊，不用每次都
+   回來重調。用負 margin 抵銷 .product-page／.work 的左右
+   內距（跟 shop.html 的
+   .quick-nav__categories 滿版分類列同一招），讓這區塊真的頂到螢幕左右
+   兩側，不是被 --pad-h 內縮的「看起來很寬」而已，也因此不套用
+   --radius-sharp 圓角——滿版本來就該是直角貼齊螢幕邊緣，套圓角反而
+   會露出兩側背景色的三角縫隙。
+
+   垂直方向也要滿版：.product-page 預設會用 padding-top（見 products.css，
+   給 .site-header 的固定高度留白，讓一般內容不會被頂部列蓋住）把所有
+   內容往下推，這裡用等值的負 margin-top 抵銷掉，讓輪播真的頂到螢幕最
+   頂端、貼在 .site-header 後面——.site-header 本身在 home.css 裡預設是
+   透明底（還沒捲動時），文字/圖示會浮貼在輪播照片正上方，這才是參考站
+   （panacea-q.com）真正的滿版做法：不是「輪播比較寬」而已，是「照片從
+   螢幕最頂端就開始，頂部列浮貼在照片上面」。
+
+   照片位置先用全站既有的 .placeholder-box 誠實佔位（見 home-preview.html
+   內的用法，跟 sand-art-intro.html 首頁首圖沒素材時做法一致），真的會
+   自動播放＋可以點圓點跳頁／滑鼠移入暫停（見 js/home-preview.js）。
+   文字疊在照片下方，深色漸層墊底維持可讀性，色票只用 colors.css 既有
+   token（深底用 --color-surface-dark，不是新色）。 */
+.preview-hero {
+  position: relative;
+  margin-top: calc(-1 * (var(--editorial-header-height) + 69px));
+  margin-left: calc(-1 * var(--pad-h));
+  margin-right: calc(-1 * var(--pad-h));
+  aspect-ratio: 2 / 3;
+  overflow: hidden;
+}
+
+/* .site-header 浮貼在輪播照片上面那段時間（還沒捲動、背景透明），文字／
+   圖示要換成淺色才看得清楚——底下是深色佔位框（之後是深色情境照）。
+   一旦捲動超過輪播、.is-scrolled 生效（毛玻璃底），改回全站預設的深色字，
+   因為那時候固定列底下換成別的（可能是淺色）內容，維持原本在其他頁面上
+   已經驗證過的對比度，不用這裡另外重新調一次。 */
+.site-header:not(.is-scrolled) .site-header__back,
+.site-header:not(.is-scrolled) .site-header__title,
+.site-header:not(.is-scrolled) .cart-badge-wrap {
+  color: var(--color-surface-light);
+}
+
+.preview-hero__slides {
+  position: absolute;
+  inset: 0;
+}
+
+.preview-hero__slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  z-index: 1;
+  transition: opacity 1s var(--ease-standard);
+}
+
+.preview-hero__slide.is-active {
+  opacity: 1;
+  z-index: 2;
+}
+
+/* 全站 .placeholder-box 預設是淺色虛線框＋深色說明字（見 products.css），
+   放在這裡會跟疊在上面的淺色文字（.preview-hero__overlay，是設計給真的
+   深色情境照配的）幾乎融在一起、看不清楚。這裡覆寫成深色底＋淺色虛線／
+   說明字，維持「還沒有真的照片」的誠實佔位語彙，但先確保現在（照片還沒
+   到位）疊字本身就是可讀的，不用等真的照片上了才看得出效果對不對。 */
+.preview-hero__photo.placeholder-box {
+  position: absolute;
+  inset: 0;
+  background: var(--color-surface-dark);
+  border-color: color-mix(in srgb, var(--color-surface-light) 30%, transparent);
+  color: color-mix(in srgb, var(--color-surface-light) 55%, transparent);
+  /* 「首圖待補」提示釘在貼齊頂部列下緣的位置（小固定內距，不是比例化的
+     大留白）——.placeholder-box--photo 是 column flex，垂直位置要用
+     justify-content（不是 align-items，那個管的是水平置中，不能動）。
+     這裡故意縮到最小尺寸：這個框的比例（aspect-ratio）之後可能會換
+     （例如 9:16 ↔ 5:4 ↔ 其他），矮比例時整個框的高度可能塞不下「大留白
+     的提示文字」＋「.preview-hero__overlay 的真文字」兩組內容，提示文字
+     縮到最小、貼齊頂部，才能在任何比例下都跟下面的 overlay 留出安全
+     距離，不用每次換比例都回來重調這裡的留白數字。 */
+  justify-content: flex-start;
+  padding-top: var(--space-4);
+}
+
+.preview-hero__overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
+  /* 同一個理由：padding／gap 都縮到最小必要值（下緣仍要留夠空間給
+     .preview-hero__dots，見下方），矮比例（例如 5:4）時才不會整組文字
+     被壓到跟上面的佔位提示文字疊在一起。比例夠高（例如 9:16）時只是
+     多留一些空白，不會有排版問題。 */
+  padding: var(--space-6) var(--space-6) var(--space-10);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+  background: linear-gradient(
+    to top,
+    color-mix(in srgb, var(--color-surface-dark) 78%, transparent) 0%,
+    transparent 75%
+  );
+}
+
+.preview-hero__kicker {
+  margin: 0;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  color: color-mix(in srgb, var(--color-surface-light) 85%, transparent);
+}
+
+.preview-hero__title {
+  margin: 0;
+  font-size: 28px;
+  line-height: 1.25;
+  font-weight: 700;
+  color: var(--color-surface-light);
+}
+
+.preview-hero__tagline {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.8;
+  color: color-mix(in srgb, var(--color-surface-light) 88%, transparent);
+  max-width: 34ch;
+}
+
+.preview-hero__overlay .work__cta--primary {
+  margin-top: var(--space-2);
+  text-decoration: none;
+}
+
+@media (min-width: 768px) {
+  .preview-hero__title {
+    font-size: 38px;
+  }
+
+  .preview-hero__tagline {
+    font-size: 15px;
+  }
+}
+
+.preview-hero__dots {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: var(--space-4);
+  z-index: 4;
+  display: flex;
+  justify-content: center;
+  gap: var(--space-2);
+}
+
+.preview-hero__dots button {
+  width: 7px;
+  height: 7px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--color-surface-light) 45%, transparent);
+  cursor: pointer;
+  transition: background var(--duration-fast) var(--ease-standard),
+    transform var(--duration-fast) var(--ease-standard);
+}
+
+.preview-hero__dots button.is-active {
+  background: var(--color-surface-light);
+  transform: scale(1.2);
+}
+
+/* ---------- 商品格狀：卡片本身沿用 .shop-grid／.shop-card（見
+   products.css），這裡只覆寫文字排版，範圍限定在 .preview-shop——
+   products/shop.html 那頁的卡片維持原樣不受影響，卡片其餘樣式（縮圖、
+   新品標、加入購物車按鈕位置）兩頁完全共用，沒有重複定義。
+
+   品名（.shop-card__name）的數字是使用者直接在 panacea-q.com 上用
+   Inspect Element 量出來的運算後樣式（.product-title）：font-size
+   12.92px（Flatsome 主題 em 層層繼承算出來的怪數字）→ 換成乾淨的
+   13px；line-height 20.672px 換算剛好是 1.6 倍 font-size；letter-
+   spacing 是 normal（沒有額外拉字距）；font-weight 400（Regular，
+   不是粗體）。眉標（.category.product-cat）跟價格
+   （.woocommerce-Price-amount）同樣是使用者用 Inspect Element 量出來的
+   運算後樣式：眉標 12px／行高 1.2 倍／letter-spacing 0.04em／
+   text-transform:uppercase／顏色是黑色 80% 透明度；價格 12.92px（一樣
+   取整為 13px）／行高剛好 1 倍（貼齊字級沒有額外行距）／letter-spacing
+   normal／字重 700（三行文字裡最粗，用來強調價格）。
+
+   顏色沒有照抄參考站的純黑（rgb(0,0,0)／rgb(17,17,17)）——colors.css
+   明文規定全站文字最深不超過 --color-text-primary，不用更接近純黑的
+   顏色（見該檔案 --color-text-primary 註解），這裡改用全站既有色階裡
+   最深/最淺的兩個對應角色（價格用最深的 --color-text-primary，眉標維持
+   繼承自 .shop-card__category 本身的 --color-text-secondary），保留
+   「價格最深、眉標最淺」這組相對層次，但顏色本身還是走全站色票，不是
+   另外硬編碼一組黑色進來。
+
+   間距（.shop-grid 欄距、卡片內部三段垂直間距）同樣是使用者用
+   Inspect Element 在 361px 寬（手機 2 欄）下量出來的：格狀列表左右
+   跟螢幕邊緣各留 15px（用負 margin 抵銷 .product-page 預設的
+   --pad-h，再補回 15px，不是直接改全站 --pad-h——那個 token 全站到處
+   在用，改了會牽動其他頁面）；圖片間距（column-gap／row-gap）都是
+   30px。卡片內部三段垂直間距，真實量到的數字（圖片→眉標 10px、
+   眉標→品名／品名→價格都只有 1.3px，因為三行都是 <p>，上下 margin
+   collapse 只取較大值一次）使用者自己說那個 1.3px 是意外緊貼、不是
+   刻意設計，建議改用更乾淨的 4px／2px／2px 分層——這裡採用建議值，
+   不是照抄有 margin-collapse 副作用的原始數字。 */
+/* padding 是 5px 不是 15px：.shop-grid 本身在 products.css 裡已經內建
+   0 10px 的內縮（見該檔案 .shop-grid 註解），這裡的 5px 加上那個 10px
+   合計才是量到的 15px，不是忘記扣掉、也不是隨便選的數字。 */
+.preview-shop {
+  margin-left: calc(-1 * var(--pad-h));
+  margin-right: calc(-1 * var(--pad-h));
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.preview-shop .shop-grid {
+  column-gap: 30px;
+  row-gap: 45px;
+}
+
+.preview-shop .shop-card {
+  gap: 4px;
+}
+
+/* 「新品」標只在這頁關掉——徽章本身（.shop-card__badge）跟資料來源
+   （cart.js 的 isNew 欄位）是 shop.html 共用的，這裡只用 CSS 隱藏顯示，
+   不動共用邏輯，products/shop.html 那頁的「新品」標維持原樣不受影響。 */
+.preview-shop .shop-card__badge {
+  display: none;
+}
+
+/* 右上角快速加入購物車的「+」鍵同樣只在這頁關掉，做法跟「新品」標一樣：
+   純 CSS 隱藏，不動 .shop-card__add 本身或 initAddToCart() 的共用邏輯，
+   shop.html 那頁維持原樣。 */
+.preview-shop .shop-card__add {
+  display: none;
+}
+
+.preview-shop .shop-card__info {
+  align-items: center;
+  padding-left: 0;
+  gap: 2px;
+  text-align: center;
+}
+
+.preview-shop .shop-card__heading {
+  align-items: center;
+  gap: 2px;
+}
+
+.preview-shop .shop-card__category {
+  font-size: 12px;
+  line-height: 1.2;
+  letter-spacing: 0.04em;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.preview-shop .shop-card__name {
+  font-size: 13px;
+  line-height: 1.6;
+  letter-spacing: normal;
+  font-weight: 400;
+}
+
+.preview-shop .shop-card__price {
+  font-size: 13px;
+  line-height: 1;
+  letter-spacing: normal;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+/* ---------- Follow Us / Instagram：字級／格狀間距／留白都是使用者在
+   361px 寬下用 Inspect Element 量出來的運算後樣式，8 格貼文本身先用
+   .placeholder-box 誠實佔位（見 home-preview.html 註解，還沒接 API）。
+
+   顏色沒有照抄參考站量到的 rgb(130,109,78)——那組咖啡棕色跟全站色票
+   都不完全一樣，這裡改用最接近的既有角色 --color-text-secondary（同樣
+   是偏暖、次要標籤性質的顏色），理由跟前面商品卡片改顏色時一樣：
+   colors.css 不允許在這裡另外硬編碼一組色碼。
+
+   左右留白量到左 15px／右 19px，使用者自己也說這組不對稱只是量測誤差
+   （肉眼看不出來），這裡改成左右對稱的 15px——跟 .preview-shop 商品
+   格狀那邊的邊距用同一個數字，讓整頁的左右留白基準線一致，不是各自
+   選一個數字。上下留白用量到的 80px；下緣量到的 110px 是「CSS 本身
+   80px＋參考站那顆 IG 外掛元件自己多留的間距」疊加出來的，我們沒有用
+   那顆外掛，不需要照抄那個疊加後的數字，用乾淨的 80px 就好。 */
+.preview-follow {
+  margin-left: calc(-1 * var(--pad-h));
+  margin-right: calc(-1 * var(--pad-h));
+  padding: 80px 15px;
+  text-align: center;
+}
+
+.preview-follow__heading {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: var(--space-6);
+}
+
+.preview-follow__kicker {
+  margin: 0;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+}
+
+.preview-follow__title {
+  margin: 0;
+  font-size: 15px;
+  letter-spacing: normal;
+  font-weight: 700;
+  color: var(--color-text-secondary);
+}
+
+.preview-follow__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 4px;
+  row-gap: 3px;
+}
+
+.preview-follow__item {
+  aspect-ratio: 1 / 1;
+  font-size: 11px;
+}
+
+/* 真的貼文載入後（見 js/home-preview.js），佔位框會被換成
+   <a class="preview-follow__item preview-follow__item--photo"><img></a>——
+   沿用同一個 class 名稱＋這裡加的 modifier，正方形／格狀位置不用重新宣告，
+   只補圖片本身需要的樣式。 */
+.preview-follow__item--photo {
+  display: block;
+  overflow: hidden;
+}
+
+.preview-follow__item--photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ---------- Footer：品牌自介＋社群＋版權 ---------- */
+.preview-footer {
+  margin-top: var(--space-24);
+  padding: var(--space-10) 0 var(--space-6);
+  border-top: 1px solid color-mix(in srgb, var(--color-text-secondary) 25%, transparent);
+  text-align: center;
+}
+
+.preview-footer h2 {
+  margin: 0 0 var(--space-2);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.preview-footer p {
+  margin: 0 0 var(--space-4);
+  font-size: 14px;
+  color: var(--color-text-secondary);
+}
+
+.preview-footer a {
+  color: var(--color-interactive);
+  border-bottom: 1px solid currentColor;
+}
+
+.preview-footer__bottom {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-4);
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}
