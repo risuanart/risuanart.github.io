@@ -57,7 +57,11 @@
   right: 0;
   z-index: 24;
   padding: calc(var(--editorial-header-height) + 69px + var(--space-4)) var(--pad-h) var(--space-6);
-  background: var(--color-surface-light);
+  /* 冷灰底色：沿用 colors.css 既有的 --color-surface-neutral（中性淺灰，
+     本來就是給「疊在頁面底色上的小型 UI 元件」用的，見該檔案註解），
+     不是暖米色 --color-surface-light，也不是另開一個新色票——這正好是
+     那個 token 原本就設計好要被沿用的情境。 */
+  background: var(--color-surface-neutral);
   border-bottom: 1px solid color-mix(in srgb, var(--color-text-secondary) 25%, transparent);
   display: flex;
   flex-direction: column;
