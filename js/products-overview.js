@@ -15,6 +15,13 @@
   const PLUS_ICON =
     '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>';
 
+  // 商品卡最上面那行小字（呼應選物店常見的「系列名」眉標），直接從
+  // PRODUCTS 既有的 category 欄位對應過來，不是另外維護一份分類資料。
+  const CATEGORY_LABELS = {
+    "fluid-art": "流動畫材料包",
+    "sand-art": "砂畫材料包",
+  };
+
   function priceText(product) {
     return product.price ? `$${product.price.toLocaleString()}` : "$__";
   }
@@ -38,13 +45,21 @@
     const variantInput = defaultScheme
       ? `<select class="variant-select" hidden aria-hidden="true"><option value="${defaultScheme}" selected></option></select>`
       : "";
+    const categoryLabel = CATEGORY_LABELS[product.category];
+    const eyebrow = categoryLabel ? `<p class="shop-card__category">${categoryLabel}</p>` : "";
+    // 「新品」是真的新上架商品才標（見 cart.js PRODUCTS 的 isNew），不是
+    // 隨便挑幾個貼熱銷/精選這種沒有真實數據支撐的行銷標籤。
+    const newBadge = product.isNew ? `<span class="shop-card__badge">新品</span>` : "";
     return `
       <div class="shop-card" data-product-card>
-        <a class="shop-card__media" href="${url}">${thumb}${hoverThumb}</a>
+        <a class="shop-card__media" href="${url}">${thumb}${hoverThumb}${newBadge}</a>
         <button type="button" class="shop-card__add" data-add-to-cart data-product="${key}" aria-label="加入購物車：${product.name}">${PLUS_ICON}</button>
         ${variantInput}
         <a class="shop-card__info" href="${url}">
-          <p class="shop-card__name">${product.name}</p>
+          <div class="shop-card__heading">
+            ${eyebrow}
+            <p class="shop-card__name">${product.name}</p>
+          </div>
           <p class="shop-card__price price-text">${priceText(product)}</p>
         </a>
       </div>`;

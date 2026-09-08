@@ -46,7 +46,7 @@
          真實商品，之後商品增加，這個格子會自動跟著長，不用改版型結構。 -->
     <section class="chapter">
       <h1 class="chapter__title fade-in">所有材料包</h1>
-      <p class="chapter__intro fade-in delay-1">格狀版型先做出來，商品清單之後陸續補齊。</p>
+      <p class="chapter__intro fade-in delay-1">在家就能完成的手作材料包，慢慢挑，慢慢做。</p>
 
       <div class="quick-nav fade-in delay-2">
         <div class="quick-nav__search">
@@ -56,22 +56,26 @@
         </div>
 
         <!-- 4 個分類先只做視覺區塊，還沒決定連結目標（輕巧包/加購牽涉多個
-             商品頁，暫時不接連結），之後方向確定再補上 href。 -->
+             商品頁，暫時不接連結），之後方向確定再補上 href。這裡先把 4 個
+             一律用同一個佔位圖示（虛線圓＋一般資料夾線圖）換成各自對應
+             真實意涵的手繪線條圖示（不用 emoji，跟全站 SVG 線圖示規則一致）：
+             輕巧包＝簡易包裝盒、禮盒＝緞帶蝴蝶結禮盒、創作＝調色盤、
+             加購＝吊牌，四個輪廓彼此明顯不同，一眼能分辨。 -->
         <div class="quick-nav__categories">
           <div class="quick-nav__cat">
-            <span class="quick-nav__cat-thumb" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="1.5"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 16l-5.5-5.5a1 1 0 0 0-1.4 0L6 19"/></svg></span>
+            <span class="quick-nav__cat-thumb" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l7-4 7 4"/><rect x="5" y="9" width="14" height="10" rx="1"/><path d="M12 9v10"/></svg></span>
             <span class="quick-nav__cat-label">輕巧包</span>
           </div>
           <div class="quick-nav__cat">
-            <span class="quick-nav__cat-thumb" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="1.5"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 16l-5.5-5.5a1 1 0 0 0-1.4 0L6 19"/></svg></span>
+            <span class="quick-nav__cat-thumb" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="10" rx="1"/><path d="M4 10h16"/><path d="M12 10v10"/><path d="M12 10c-1.6 0-3-1.1-3-2.6C9 6.1 10.1 5 11.3 5c.9 0 1.5.6 1.5 1.4 0-.8.6-1.4 1.5-1.4C15.5 5 16 6.1 16 7.4c0 1.5-1.4 2.6-3 2.6Z"/></svg></span>
             <span class="quick-nav__cat-label">禮盒</span>
           </div>
           <div class="quick-nav__cat">
-            <span class="quick-nav__cat-thumb" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="1.5"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 16l-5.5-5.5a1 1 0 0 0-1.4 0L6 19"/></svg></span>
+            <span class="quick-nav__cat-thumb" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4a8 8 0 1 0 8 8c0-1.1-.9-2-2-2h-1.7a1.3 1.3 0 0 1-1.3-1.3c0-.4.2-.8.5-1.1.3-.3.5-.7.5-1.2C16 4.9 14.2 4 12 4Z"/><circle cx="8.3" cy="10.3" r="1.1"/><circle cx="7.8" cy="14.3" r="1.1"/><circle cx="11.8" cy="16.3" r="1.1"/></svg></span>
             <span class="quick-nav__cat-label">創作</span>
           </div>
           <div class="quick-nav__cat">
-            <span class="quick-nav__cat-thumb" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="1.5"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 16l-5.5-5.5a1 1 0 0 0-1.4 0L6 19"/></svg></span>
+            <span class="quick-nav__cat-thumb" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4h5l4 4v5l-8 8-9-9 8-8Z"/><circle cx="14.7" cy="8.3" r="1.1"/></svg></span>
             <span class="quick-nav__cat-label">加購</span>
           </div>
         </div>

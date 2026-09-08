@@ -1096,6 +1096,9 @@ button.text-link {
   scroll-snap-align: start;
 }
 
+/* 底色從中性灰虛線圓改成品牌橄欖綠的極淺暈染，四個分類圖示現在各自
+   不同（見 shop.html 註解），實心暖色圓底讓這排看起來像「精選分類」
+   而不是還沒做完的佔位圖示。 */
 .quick-nav__cat-thumb {
   width: 57px;
   height: 57px;
@@ -1103,9 +1106,9 @@ button.text-link {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px dashed color-mix(in srgb, var(--color-text-secondary) 40%, transparent);
-  background: color-mix(in srgb, var(--color-text-secondary) 8%, transparent);
-  color: var(--color-text-secondary);
+  border: 1px solid color-mix(in srgb, var(--color-brand) 30%, transparent);
+  background: color-mix(in srgb, var(--color-brand) 7%, transparent);
+  color: var(--color-brand);
 }
 
 .quick-nav__cat-label {
@@ -1170,6 +1173,25 @@ button.text-link {
   font-size: 0.55rem;
 }
 
+/* 「新品」標——只有 cart.js PRODUCTS 裡真的標 isNew:true 的商品才會
+   輸出這個元素（見 products-overview.js），不是隨便貼熱銷/精選這種沒有
+   真實數據支撐的行銷標籤。方正直角、細邊框、低飽和底色，跟卡片本身
+   的極簡風格一致，不用滿版飽和色的搶眼徽章。 */
+.shop-card__badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 2;
+  padding: 3px 8px;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  line-height: 1.4;
+  color: var(--color-brand);
+  background: color-mix(in srgb, var(--color-brand) 10%, var(--color-surface-light) 90%);
+  border: 1px solid color-mix(in srgb, var(--color-brand) 35%, transparent);
+  border-radius: var(--radius-sharp);
+}
+
 /* 電腦版 hover 換圖用的第二張圖，疊在主圖正上方、預設透明——只有
    js/products-overview.js 真的查得到「第二張圖」的商品才會輸出這個
    元素，觸發 hover 的規則在下面 @media (min-width: 1024px) 那段，
@@ -1223,6 +1245,21 @@ button.text-link {
   flex-direction: column;
   gap: 9px;
   padding-left: 5px;
+}
+
+.shop-card__heading {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* 眉標（系列名）：呼應選物店常見的「先講這是哪一系列，再講品名」順序，
+   字級小、字距拉開、用次要文字色，跟下面主標名稱拉出明確的主副層次。 */
+.shop-card__category {
+  margin: 0;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--color-text-secondary);
 }
 
 /* text-decoration-color（不是 text-decoration-line）可以平滑轉場，底線
