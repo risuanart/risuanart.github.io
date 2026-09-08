@@ -15,6 +15,15 @@
      深橄欖黑，跟品牌主色同色相延伸，維持一致、偏手作溫暖感。 */
   --color-surface-dark: #2E2F16;
 
+  /* 純黑底色：使用者明確表示不要 --color-surface-dark 那種偏橄欖綠的深色，
+     要更接近中性黑。目前只有首頁選單（.site-menu）在用，範圍刻意限縮在
+     那裡，沒有連動改掉 --color-surface-dark（影響範圍是全站 header／
+     footer／深色 section，包括同一頁輪播疊字的深色底），避免使用者只是
+     針對選單這一個地方的意見、卻牽動到其他還沒確認要不要一起改的地方。
+     如果之後確定要整組深色系統都改成這個中性黑，直接把
+     --color-surface-dark 的值換成這個、刪掉這個獨立 token 即可。 */
+  --color-surface-black: #121212;
+
   /* 主要按鈕色：一般功能性按鈕（CTA、送出、連結按鈕）的填色。牛仔灰藍。 */
   --color-button-primary: #6E85A0;
 
