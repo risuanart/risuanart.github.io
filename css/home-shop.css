@@ -147,7 +147,9 @@
   position: fixed;
   inset: 0;
   z-index: 23;
-  background: color-mix(in srgb, var(--color-surface-dark) 40%, transparent);
+  /* 同一次「不要綠色」的修正，這裡跟選單本體一樣改用 --color-surface-black
+     （中性近黑），原本用 --color-surface-dark 疊出來的暗色遮罩也偏橄欖綠。 */
+  background: color-mix(in srgb, var(--color-surface-black) 40%, transparent);
   opacity: 0;
   pointer-events: none;
   transition: opacity var(--duration-normal) var(--ease-standard);
