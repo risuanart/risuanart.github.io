@@ -482,11 +482,28 @@
   color: var(--color-text-secondary);
 }
 
+/* 手機 2 欄（實測數字）／平板 3 欄／電腦 4 欄，跟 .shop-grid（商品格狀，
+   見 products.css）用同一組斷點（768px、1024px 是全站已經在用的兩個
+   斷點），不是另外挑數字——欄數變多時，欄與欄的間距沒有跟著放大，
+   維持原本量到的「幾乎貼齊」緊湊感，不會因為欄數變多、每格變小就顯得
+   間距過寬。 */
 .preview-follow__grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   column-gap: 4px;
   row-gap: 3px;
+}
+
+@media (min-width: 768px) {
+  .preview-follow__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .preview-follow__grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 .preview-follow__item {
