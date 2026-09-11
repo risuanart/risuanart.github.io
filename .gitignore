@@ -4,3 +4,12 @@ docs/
 # 手機拍攝的原始影片檔（未壓縮，動輒上百 MB），只有壓縮過的 .mp4 才進版控。
 *.MOV
 *.mov
+
+# 企業課程案例頁的原始素材庫（未壓縮的相機原始檔，動輒單資料夾上百 MB，
+# 網頁本身不會讀取這些資料夾，只是給挑圖用），只有壓縮過、放在資料夾
+# 外層的優化版 .jpg 才進版控。
+assets/images/enterprise/porsche-more/
+assets/images/enterprise/candle/candle-more/
+assets/images/enterprise/fluid-family-day/fluid-more/
+assets/images/enterprise/pet-portrait/南港展覽館/
+assets/images/enterprise/pet-portrait/寵物展/

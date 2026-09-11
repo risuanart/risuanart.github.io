@@ -87,6 +87,21 @@ a {
   color: var(--color-price);
 }
 
+/* 視覺上隱藏但螢幕閱讀器／搜尋引擎讀得到——首頁用 logo 圖片當視覺識別，
+   沒有真的顯示文字標題，用這個補一個語意正確的 <h1> 給每個頁面用，
+   不影響版面。 */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 /* 全域處理：使用者開啟「減少動態」偏好時，關閉／大幅縮短所有動畫與轉場。
    不論後續哪個階段加了什麼動畫，都必須尊重這個設定，不可個別覆寫繞過。 */
 @media (prefers-reduced-motion: reduce) {

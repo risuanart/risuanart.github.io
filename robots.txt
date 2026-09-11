@@ -1,0 +1,22 @@
+User-agent: *
+Allow: /
+
+# AI 搜尋／回答用 bot（即時查資料、回答問題、附引用連結）——放行
+User-agent: OAI-SearchBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+User-agent: Claude-SearchBot
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: Perplexity-User
+Allow: /
+
+# AI 模型訓練用 bot——擋掉，內容不會被拿去訓練模型
+User-agent: GPTBot
+Disallow: /
+User-agent: ClaudeBot
+Disallow: /
+
+Sitemap: https://risuanart.github.io/sitemap.xml
