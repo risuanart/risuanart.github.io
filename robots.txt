@@ -19,4 +19,4 @@ Disallow: /
 User-agent: ClaudeBot
 Disallow: /
 
-Sitemap: https://risuanart.github.io/sitemap.xml
+Sitemap: https://risuanart.com/sitemap.xml
