@@ -6,14 +6,8 @@
    圓角 pill、不做漸層卡片。
 
    內容欄寬統一比照 .shop-grid 桌面版的 1100px 上限（見 products.css），
-   讓整頁（大圖／格狀商品／Follow Us／footer）在寬螢幕上共用同一條欄寬
-   基準線，不是各區塊各自選一個數字。 */
-
-.preview-footer {
-  max-width: 1100px;
-  margin-left: auto;
-  margin-right: auto;
-}
+   讓大圖／格狀商品／Follow Us 在寬螢幕上共用同一條欄寬基準線，不是各
+   區塊各自選一個數字。Footer 例外，滿版深色底，見該區塊自己的規則。 */
 
 /* ---------- 頂部列：漢堡選單（左）＋ logo（中）＋ 購物車（右） ----------
    .site-header 本身（fixed 定位、內距、透明底）是 home.css 的共用規則，
@@ -532,36 +526,90 @@
   display: block;
 }
 
-/* ---------- Footer：品牌自介＋社群＋版權 ---------- */
+/* ---------- Footer：ABOUT／INFO 兩欄＋版權列 ----------
+   滿版深色底，跟輪播／選單同一個 --color-surface-black（中性近黑，
+   使用者先前明確要求不要橄欖綠），不是另外挑一個新顏色，維持全站深色
+   區塊一致。手機版兩欄堆疊，桌機版才並排（見下面 768px 斷點）。 */
 .preview-footer {
   margin-top: var(--space-24);
-  padding: var(--space-10) 0 var(--space-6);
-  border-top: 1px solid color-mix(in srgb, var(--color-text-secondary) 25%, transparent);
-  text-align: center;
+  margin-left: calc(-1 * var(--pad-h));
+  margin-right: calc(-1 * var(--pad-h));
+  padding: var(--space-10) var(--pad-h) var(--space-6);
+  background: var(--color-surface-black);
 }
 
-.preview-footer h2 {
-  margin: 0 0 var(--space-2);
-  font-size: 20px;
+.preview-footer__col {
+  padding: var(--space-6) 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--color-surface-light) 15%, transparent);
+}
+
+.preview-footer__col:first-child {
+  padding-top: 0;
+}
+
+.preview-footer__heading {
+  margin: 0 0 var(--space-4);
+  font-size: 13px;
   font-weight: 700;
-  color: var(--color-text-primary);
+  letter-spacing: 0.08em;
+  color: var(--color-surface-light);
 }
 
-.preview-footer p {
+.preview-footer__about {
   margin: 0 0 var(--space-4);
   font-size: 14px;
-  color: var(--color-text-secondary);
+  line-height: 1.8;
+  color: color-mix(in srgb, var(--color-surface-light) 75%, transparent);
+  max-width: 40ch;
 }
 
-.preview-footer a {
-  color: var(--color-interactive);
-  border-bottom: 1px solid currentColor;
+.preview-footer__social {
+  display: flex;
+  gap: var(--space-3);
+}
+
+.preview-footer__social a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid color-mix(in srgb, var(--color-surface-light) 30%, transparent);
+  border-radius: 50%;
+  color: var(--color-surface-light);
+}
+
+.preview-footer__links {
+  display: flex;
+  flex-direction: column;
+}
+
+.preview-footer__links a {
+  padding: var(--space-2) 0;
+  font-size: 14px;
+  color: color-mix(in srgb, var(--color-surface-light) 85%, transparent);
 }
 
 .preview-footer__bottom {
-  display: flex;
-  justify-content: center;
-  gap: var(--space-4);
+  padding-top: var(--space-6);
+  text-align: center;
   font-size: 12px;
-  color: var(--color-text-secondary);
+  color: color-mix(in srgb, var(--color-surface-light) 55%, transparent);
+}
+
+@media (min-width: 768px) {
+  .preview-footer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: var(--space-10);
+  }
+
+  .preview-footer__col {
+    border-bottom: none;
+  }
+
+  .preview-footer__bottom {
+    grid-column: 1 / -1;
+    border-top: 1px solid color-mix(in srgb, var(--color-surface-light) 15%, transparent);
+  }
 }

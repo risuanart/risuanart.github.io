@@ -1,0 +1,277 @@
+/* enterprise.css —— 企業課程總覽（enterprise.html）＋案例細節頁
+   （enterprise-porsche.html，之後每個新案例都是同樣命名 enterprise-xxx.html）
+   共用樣式。不動 products.css／home.css 既有規則，也不影響其他頁面。
+   「美術館網站」的調性：大圖、留白多、文字克制，色票／字體只用
+   colors.css／tokens.css 既有 token，不新增字體、不做圓角 pill。 */
+
+/* ---------- 案例細節頁：開頭大圖 ---------- */
+.ent-hero {
+  margin-top: var(--space-4);
+}
+
+.ent-hero__photo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: var(--radius-sharp);
+}
+
+.ent-hero__caption {
+  margin-top: var(--space-6);
+}
+
+.ent-hero__eyebrow {
+  margin: 0;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  color: var(--color-text-secondary);
+}
+
+.ent-hero__title {
+  margin: var(--space-2) 0 0;
+  font-size: 24px;
+  line-height: 1.35;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.ent-hero__credit {
+  margin: var(--space-3) 0 0;
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}
+
+@media (min-width: 768px) {
+  .ent-hero__photo {
+    aspect-ratio: 21 / 9;
+  }
+
+  .ent-hero__title {
+    font-size: 32px;
+  }
+}
+
+/* 寵物肖像畫那頁的素材幾乎全是橫式（3:2），跟保時捷／流動畫／蠟燭那幾頁
+   的直式素材相反——用預設 4:5／21:9 會在手機版裁掉近一半寬度。用額外的
+   .is-landscape 修飾類別（疊加在 .ent-hero__photo／.ent-gallery__viewport
+   上，選擇器優先權比單一 class 高，不用 !important）局部覆寫，只有加了
+   這個 class 的頁面會變，其他頁面的直式比例不受影響。 */
+.ent-hero__photo.is-landscape {
+  aspect-ratio: 4 / 3;
+}
+
+@media (min-width: 768px) {
+  .ent-hero__photo.is-landscape {
+    aspect-ratio: 16 / 9;
+  }
+}
+
+.ent-gallery__viewport.is-landscape {
+  aspect-ratio: 4 / 3;
+}
+
+/* ---------- 總覽頁：案例清單，一個案例一個 .ent-entry ----------
+   目前只有一個案例，排版設計成之後直接複製整個 <a class="ent-entry">
+   區塊、換照片／文字／連結就能加下一個，不用重構版面。 */
+.ent-list {
+  margin-top: var(--editorial-gap);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-10);
+}
+
+.ent-entry {
+  display: block;
+  color: inherit;
+}
+
+.ent-entry__media {
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: var(--radius-sharp);
+}
+
+.ent-entry__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--duration-normal) var(--ease-standard);
+}
+
+.ent-entry:hover .ent-entry__media img,
+.ent-entry:focus-visible .ent-entry__media img {
+  transform: scale(1.03);
+}
+
+.ent-entry__body {
+  margin-top: var(--space-4);
+}
+
+.ent-entry__eyebrow {
+  margin: 0;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  color: var(--color-text-secondary);
+}
+
+.ent-entry__title {
+  margin: var(--space-2) 0 0;
+  font-size: 20px;
+  line-height: 1.4;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.ent-entry__desc {
+  margin: var(--space-2) 0 0;
+  font-size: var(--font-size-sm);
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+  max-width: 46ch;
+}
+
+.ent-entry__link {
+  display: inline-block;
+  margin-top: var(--space-3);
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  border-bottom: 1px solid var(--color-text-primary);
+}
+
+@media (min-width: 768px) {
+  .ent-entry {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-10);
+    align-items: center;
+  }
+
+  .ent-entry__media {
+    aspect-ratio: 1 / 1;
+  }
+
+  .ent-entry__body {
+    margin-top: 0;
+  }
+}
+
+/* 「設計理念」段落開頭的線條動畫，維持 2:1 橫幅比例（跟其他案例頁的
+   banner 節奏一致，這裡允許裁切），但車子在原始素材裡本來就落在偏下
+   的位置（不是正中央），2:1 裁切窗口只會露出素材高度的 40%，用預設
+   50% 50% 置中會切到車頂以上的空景、看不到車身——改用 object-position
+   把裁切窗口下移，讓車子維持在畫面裡。 */
+.chapter__banner-video {
+  width: 100%;
+  aspect-ratio: 2 / 1;
+  border-radius: var(--radius-sharp);
+  overflow: hidden;
+  margin-top: var(--space-2);
+}
+
+.chapter__banner-video video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 58%;
+}
+
+/* products.css 的 .chapter__banner-photo 預設 2:1（給橫式情境照用），
+   但這裡案例頁放的兩張真的素材（保時捷線稿設計圖 577x720、線條動畫影片
+   800x1000）都是直式、比例接近 4:5，硬套 2:1 會裁掉快一半畫面。
+   這份 enterprise.css 只有企業課程這幾頁會載入（見各頁 <head>），改這裡
+   不會影響 products.css 原本 6 個商品頁的 .chapter__banner-photo 用法。 */
+.chapter__banner-photo {
+  aspect-ratio: 4 / 5;
+}
+
+/* ---------- 案例細節頁：活動花絮輪播（真實照片）----------
+   排版邏輯跟首頁 .preview-hero 完全一樣（自動播放＋圓點手動切換／滑鼠
+   移入暫停，見 js/enterprise-gallery.js）。比例跟上面 .chapter__banner-photo
+   一樣改成 4:5——這 9 張真的照片原始都是直式（約 2:3～4:5），套橫式框
+   一樣會裁太多，改直式跟上面設計理念的圖片維持同一種節奏。dots 疊在
+   照片下方（不是蓋在照片上），色票用文字色 token，不是 .preview-hero
+   那組給深色照片配的淺色 token——這裡照片底色深淺不一，疊在上面容易看不清楚。 */
+.ent-gallery {
+  margin-top: var(--space-6);
+}
+
+.ent-gallery__viewport {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: var(--radius-sharp);
+}
+
+.ent-gallery__slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  z-index: 1;
+  transition: opacity 1s var(--ease-standard);
+}
+
+.ent-gallery__slide.is-active {
+  opacity: 1;
+  z-index: 2;
+}
+
+.ent-gallery__slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ent-gallery__dots {
+  margin-top: var(--space-3);
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.ent-gallery__dots button {
+  width: 7px;
+  height: 7px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--color-text-secondary) 35%, transparent);
+  cursor: pointer;
+  transition: background var(--duration-fast) var(--ease-standard),
+    transform var(--duration-fast) var(--ease-standard);
+}
+
+.ent-gallery__dots button.is-active {
+  background: var(--color-text-primary);
+  transform: scale(1.2);
+}
+
+/* ---------- 結尾洽詢區塊 ---------- */
+.ent-cta {
+  margin-top: var(--space-24);
+  padding-top: var(--space-10);
+  border-top: 1px solid color-mix(in srgb, var(--color-text-secondary) 25%, transparent);
+  text-align: center;
+}
+
+.ent-cta__text {
+  margin: 0 auto;
+  max-width: 40ch;
+  font-size: var(--font-size-sm);
+  line-height: 1.8;
+  color: var(--color-text-primary);
+}
+
+.ent-cta__actions {
+  margin-top: var(--space-6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-6);
+}
