@@ -9,6 +9,7 @@
 - [首頁](https://risuanart.com/): 材料包商店與課程總覽
 - [所有材料包](https://risuanart.com/products/shop.html): 石英砂肌理畫、流動畫材料包商品列表
 - [企業／團體課程](https://risuanart.com/enterprise.html): 品牌合作與企業包班案例（保時捷、KPMG 企業家庭日、砂畫蠟燭、寵物肖像畫）
+- [學員作品集](https://risuanart.com/gallery.html): 依課程與主題篩選瀏覽學員作品
 - [常見問題](https://risuanart.com/faq.html): 交通、預約、付款、現場規範、寵物課須知等真實問答
 
 ## 聯絡方式
