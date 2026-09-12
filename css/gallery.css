@@ -1,0 +1,109 @@
+/* gallery.css —— 學員作品集頁（gallery.html）專屬樣式。
+   延續全站「直角＋克制」語彙：色票只用 colors.css／tokens.css 既有
+   token，不新增顏色，篩選鈕跟格狀相簿都用 --radius-sharp，不做圓角 pill。 */
+
+.gallery-filters {
+  margin-top: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.gallery-filters__group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.gallery-filters__label {
+  margin: 0 0 var(--space-2);
+  font-size: var(--font-size-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+}
+
+/* 課程＝單選（跟 .pill-nav 分類列同一種「一次只能選一個」邏輯），
+   主題＝複選（可以同時亮好幾個），兩組視覺故意做出差異：課程用實色填滿
+   當作 active 狀態，主題用邊框＋打勾符號，一眼能分辨「這兩組篩選規則
+   不一樣」，不是照抄同一顆按鈕兩次。 */
+.gallery-filters__chip {
+  appearance: none;
+  border: 1px solid color-mix(in srgb, var(--color-text-secondary) 35%, transparent);
+  border-radius: var(--radius-sharp);
+  background: none;
+  padding: var(--space-1) var(--space-4);
+  font-family: inherit;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+  cursor: pointer;
+  transition: background var(--duration-fast) var(--ease-standard),
+    color var(--duration-fast) var(--ease-standard),
+    border-color var(--duration-fast) var(--ease-standard);
+}
+
+.gallery-filters__chip[data-gallery-course].is-active {
+  background: var(--color-brand);
+  border-color: var(--color-brand);
+  color: var(--color-surface-light);
+}
+
+.gallery-filters__chip[data-gallery-theme].is-active {
+  border-color: var(--color-text-primary);
+  border-width: 2px;
+  padding: calc(var(--space-1) - 1px) calc(var(--space-4) - 1px);
+}
+
+.gallery-grid {
+  margin-top: var(--space-6);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-2);
+}
+
+@media (min-width: 768px) {
+  .gallery-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .gallery-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.gallery-grid__item {
+  margin: 0;
+  aspect-ratio: 1 / 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.gallery-grid__item img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.gallery-grid__caption {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: var(--space-2);
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0) 100%);
+  color: var(--color-surface-light);
+  font-size: var(--font-size-xs);
+}
+
+.gallery-empty {
+  margin-top: var(--space-10);
+  padding: var(--space-10) var(--space-4);
+  text-align: center;
+  border: 1px dashed color-mix(in srgb, var(--color-text-secondary) 40%, transparent);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}

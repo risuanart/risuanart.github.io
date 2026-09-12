@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>學員作品集｜日宣繪畫室</title>
+  <meta name="description" content="日宣繪畫室學員作品集，依課程與主題篩選瀏覽，可以比較同一個主題用不同材料、技法畫出來的差異。">
+  <link rel="canonical" href="https://risuanart.com/gallery.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="學員作品集｜日宣繪畫室">
+  <meta property="og:description" content="依課程與主題篩選瀏覽學員作品，比較同主題不同材料的創作差異。">
+  <meta property="og:image" content="https://risuanart.com/assets/images/logo-risuan拷貝.png">
+  <meta property="og:url" content="https://risuanart.com/gallery.html">
+  <meta property="og:locale" content="zh_TW">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="學員作品集｜日宣繪畫室">
+  <meta name="twitter:description" content="依課程與主題篩選瀏覽學員作品，比較同主題不同材料的創作差異。">
+  <meta name="twitter:image" content="https://risuanart.com/assets/images/logo-risuan拷貝.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=ABeeZee&family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;600;700&family=Poppins:wght@700&family=Noto+Serif+TC:wght@500;700&family=Noto+Sans+TC:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/colors.css">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/home.css">
+  <link rel="stylesheet" href="css/products.css">
+  <link rel="stylesheet" href="css/cart.css">
+  <link rel="stylesheet" href="css/gallery.css">
+</head>
+<body>
+
+  <div class="ambient-bg" aria-hidden="true"></div>
+  <div class="ambient-grain" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <a class="site-header__back" href="index.html" data-back-fixed aria-label="回到首頁"><img src="assets/images/logo-risuan拷貝.png" alt="日宣繪畫室"></a>
+    <div class="site-header__title">學員作品集</div>
+    <div class="cart-badge-wrap">
+      <button type="button" class="cart-badge" aria-haspopup="true" aria-expanded="false" aria-label="購物車，目前 0 件">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+        <span class="cart-badge__count">0</span>
+      </button>
+      <div class="cart-preview" hidden>
+        <ul class="cart-preview__list"></ul>
+        <p class="cart-preview__empty">購物車是空的</p>
+        <p class="cart-preview__total"></p>
+        <div class="cart-preview__actions">
+          <a class="cart-preview__view" href="cart.html">查看購物車</a>
+          <button type="button" class="cart-preview__continue">繼續選購</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="product-page work">
+
+    <!-- 資料跟畫面分開：GALLERY_ITEMS（見 js/gallery-data.js）目前是空的，
+         之後有真的照片直接在那個檔案加資料，這裡的 HTML／篩選邏輯都不用
+         改。課程單選、主題複選的篩選鈕先寫死在 HTML（跟 shop.html 的
+         .quick-nav__categories 一樣，選項不常變，不需要為了 7-8 個固定
+         按鈕另外寫動態產生的程式碼），格狀相簿本身才由 js/gallery.js
+         動態產生。 -->
+    <h1 class="chapter__title fade-in">學員作品集</h1>
+    <p class="chapter__intro fade-in delay-1">依課程或主題篩選瀏覽，也可以比較同一個主題、不同材料畫出來的差異。</p>
+
+    <section class="gallery-filters fade-in delay-1">
+      <div>
+        <p class="gallery-filters__label">課程</p>
+        <div class="gallery-filters__group">
+          <button type="button" class="gallery-filters__chip is-active" data-gallery-course="all">全部</button>
+          <button type="button" class="gallery-filters__chip" data-gallery-course="石英砂肌理畫">石英砂肌理畫</button>
+          <button type="button" class="gallery-filters__chip" data-gallery-course="刮刀油畫">刮刀油畫</button>
+          <button type="button" class="gallery-filters__chip" data-gallery-course="流動畫">流動畫</button>
+          <button type="button" class="gallery-filters__chip" data-gallery-course="抽象畫">抽象畫</button>
+          <button type="button" class="gallery-filters__chip" data-gallery-course="自己帶圖創作">自己帶圖創作</button>
+          <button type="button" class="gallery-filters__chip" data-gallery-course="鏡子拼貼">鏡子拼貼</button>
+          <button type="button" class="gallery-filters__chip" data-gallery-course="串珠">串珠</button>
+        </div>
+      </div>
+      <div>
+        <p class="gallery-filters__label">主題（可複選）</p>
+        <div class="gallery-filters__group">
+          <button type="button" class="gallery-filters__chip" data-gallery-theme="海洋生物">海洋生物</button>
+          <button type="button" class="gallery-filters__chip" data-gallery-theme="陸地動物">陸地動物</button>
+          <button type="button" class="gallery-filters__chip" data-gallery-theme="植物花卉">植物花卉</button>
+          <button type="button" class="gallery-filters__chip" data-gallery-theme="人像">人像</button>
+          <button type="button" class="gallery-filters__chip" data-gallery-theme="抽象圖案">抽象圖案</button>
+          <button type="button" class="gallery-filters__chip" data-gallery-theme="節慶／季節">節慶／季節</button>
+          <button type="button" class="gallery-filters__chip" data-gallery-theme="風景">風景</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="gallery-grid fade-in delay-2" id="gallery-grid" role="list" aria-label="學員作品"></div>
+    <p class="gallery-empty fade-in delay-2" id="gallery-empty" hidden></p>
+
+  </main>
+
+  <script src="js/gallery-data.js"></script>
+  <script src="js/gallery.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/site-header-scroll.js"></script>
+  <script src="js/scroll-reveal.js"></script>
+</body>
+</html>
