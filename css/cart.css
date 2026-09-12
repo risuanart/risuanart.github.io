@@ -298,7 +298,10 @@
    本身就是主畫面，不需要收合）。 */
 .cart-collapse {
   appearance: none;
-  border: none;
+  /* --color-surface-light 現在跟頁面底色一樣是純白（見 colors.css），
+     單靠底色已經畫不出邊界，補一條跟 .quick-nav__search-results 同一套
+     配方的細邊框（color-mix 淡化過的次要文字色），不是另外發明新規則。 */
+  border: 1px solid color-mix(in srgb, var(--color-text-secondary) 30%, transparent);
   width: 100%;
   display: flex;
   align-items: center;
@@ -952,6 +955,8 @@
   padding: var(--space-4);
   border-radius: 10px;
   background: var(--color-surface-light);
+  /* --color-surface-light 現在是純白，跟 .cart-collapse 同理補邊框。 */
+  border: 1px solid color-mix(in srgb, var(--color-text-secondary) 30%, transparent);
   max-width: 40ch;
 }
 
@@ -1001,7 +1006,8 @@
 
 .shipping-option {
   appearance: none;
-  border: none;
+  /* --color-surface-light 現在是純白，跟 .cart-collapse 同理補邊框。 */
+  border: 1px solid color-mix(in srgb, var(--color-text-secondary) 30%, transparent);
   border-radius: 10px;
   background: var(--color-surface-light);
   padding: var(--space-2) var(--space-4);
@@ -1194,8 +1200,10 @@
   display: flex;
   align-items: center;
   gap: var(--space-2);
-  /* 沿用底部懸浮列（.pill-nav，見 home.css）同一種做法：不描邊框，
-     單純用底色跟圓角區隔出範圍，跟頁面背景本身有沒有邊框無關。 */
+  /* 原本不描邊框、單純用底色跟圓角區隔範圍——但 --color-surface-light
+     現在改成純白（見 colors.css），跟頁面底色一樣，單靠底色已經看不出
+     邊界，補一條跟 .cart-collapse 同一套配方的細邊框。 */
+  border: 1px solid color-mix(in srgb, var(--color-text-secondary) 30%, transparent);
   border-radius: 10px;
   padding: 0 var(--space-4);
   background: var(--color-surface-light);

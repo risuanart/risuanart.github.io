@@ -6,6 +6,10 @@
   const header = document.querySelector(".site-header");
   if (!header) return;
 
+  // 跑馬燈列（首頁限定，見 css/home-shop.css .promo-bar）跟頂部列共用
+  // 同一個捲動偵測，捲動超過門檻就一起隱藏，不是各自寫一套判斷。
+  const promoBar = document.querySelector(".promo-bar");
+
   const scrollEl = document.querySelector(".product-page") || window;
   const getScrollTop = () =>
     scrollEl === window ? window.scrollY : scrollEl.scrollTop;
@@ -13,7 +17,9 @@
   const THRESHOLD = 4;
 
   function update() {
-    header.classList.toggle("is-scrolled", getScrollTop() > THRESHOLD);
+    const isScrolled = getScrollTop() > THRESHOLD;
+    header.classList.toggle("is-scrolled", isScrolled);
+    if (promoBar) promoBar.classList.toggle("is-scrolled", isScrolled);
   }
 
   scrollEl.addEventListener("scroll", update, { passive: true });

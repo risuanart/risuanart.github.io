@@ -9,10 +9,62 @@
    讓大圖／格狀商品／Follow Us 在寬螢幕上共用同一條欄寬基準線，不是各
    區塊各自選一個數字。Footer 例外，滿版深色底，見該區塊自己的規則。 */
 
+/* ---------- 跑馬燈列：疊在 .site-header 上方，兩者一起固定貼齊頂端 ----------
+   高度用一個變數集中定義，.site-header 的 top 位移／.preview-hero 的
+   負 margin 都要扣掉這個高度，三處數字才不會各自寫死、之後改高度只要
+   改這裡一個地方。捲動後隱藏（.is-scrolled，邏輯見
+   js/site-header-scroll.js，跟 .site-header 共用同一個捲動偵測，只是
+   多切一個 class 到這個元素上）。 */
+:root {
+  --promo-bar-height: 36px;
+}
+
+.promo-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 26;
+  height: var(--promo-bar-height);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 var(--pad-h);
+  background: var(--color-surface-black);
+  color: var(--color-surface-light);
+  font-size: 12px;
+  letter-spacing: var(--editorial-tracking);
+  text-align: center;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity var(--duration-fast) var(--ease-standard),
+    visibility var(--duration-fast) var(--ease-standard);
+}
+
+.promo-bar.is-scrolled {
+  opacity: 0;
+  visibility: hidden;
+}
+
 /* ---------- 頂部列：漢堡選單（左）＋ logo（中）＋ 購物車（右） ----------
    .site-header 本身（fixed 定位、內距、透明底）是 home.css 的共用規則，
    這裡只覆寫這一頁特有的三欄排版——原本共用版本是「返回連結／文字標題／
-   購物車」，這裡换成「選單鈕／置中 logo／購物車」。 */
+   購物車」，這裡换成「選單鈕／置中 logo／購物車」。top 位移改成跑馬燈列
+   高度（原本 home.css 是 0，這裡覆寫），讓頂部列緊接在跑馬燈列下方，不是
+   疊在它上面。捲動、跑馬燈列淡出後，頂部列跟著滑到最頂端補上那段空隙
+   （.is-scrolled），不是留一塊空白在畫面最上方——transition 要整條重寫
+   （不能只加 top 那組，不然會蓋掉 home.css 原本的 background 轉場，
+   兩條要寫在同一個宣告裡）。 */
+.site-header {
+  top: var(--promo-bar-height);
+  transition: background var(--duration-normal) var(--ease-standard),
+    top var(--duration-fast) var(--ease-standard);
+}
+
+.site-header.is-scrolled {
+  top: 0;
+}
+
 .site-header__menu-toggle {
   flex: none;
   display: flex;
@@ -37,6 +89,212 @@
   display: block;
   height: 22px;
   width: auto;
+}
+
+/* ---------- 桌面文字導覽列（≥1024px，取代漢堡選單抽屜） ----------
+   捲動經過輪播照片、頂部列還透明時，文字跟其他頂部列文字（logo／購物車）
+   一樣切成淺色（見下方 .site-header:not(.is-scrolled) 那條既有規則，這裡
+   把 .site-header__nav a 加進同一組選擇器），捲動後跟著 .is-scrolled 毛
+   玻璃背景切回全站預設深色文字，不用另外定義深色狀態。手機版（<1024px）
+   維持現在的漢堡選單抽屜，兩組（漢堡 vs 文字列）互斥顯示，見下方 media
+   query，不影響手機版任何行為。
+
+   字級／字距／行高：使用者明確要求改成 panacea-q.com 量到的原始數字
+   （12.8px／0.256px／line-height 40px），不是套 --editorial-label-
+   font-size／--editorial-tracking 這兩個 token——這裡是使用者確認過的
+   例外，刻意跟頂部列其他文字（返回連結／標題）的字級規則不同調，不要
+   誤改回 token。 */
+.site-header__nav {
+  display: none;
+  color: var(--color-text-primary);
+}
+
+.site-header__nav a,
+.site-header__nav-dropdown-toggle {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-family: inherit;
+  font-size: 12.8px;
+  letter-spacing: 0.256px;
+  line-height: 40px;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: inherit;
+  background: none;
+  border: none;
+  text-decoration: none;
+  padding: 10px 0;
+  opacity: 0.7;
+  cursor: pointer;
+  transition: opacity var(--duration-fast) var(--ease-standard);
+}
+
+.site-header__nav a:hover,
+.site-header__nav a[aria-current="page"],
+.site-header__nav-dropdown-toggle:hover,
+.site-header__nav-item.is-open .site-header__nav-dropdown-toggle {
+  opacity: 1;
+}
+
+.site-header__nav-dropdown-toggle svg {
+  transition: transform var(--duration-fast) var(--ease-standard);
+}
+
+.site-header__nav-item.is-open .site-header__nav-dropdown-toggle svg {
+  transform: rotate(180deg);
+}
+
+/* 「課程」下拉——內容直接借用漢堡選單抽屜（.site-menu__sublist／
+   __sublink）同一套「黑底白字＋子項目降透明度」樣式，不是另外做一套新
+   視覺語言。位置浮貼在「課程」文字正下方，不管頂部列當下是透明疊在
+   照片上還是捲動後的毛玻璃底，這裡都用自己不透明的深色底，才不會疊在
+   照片上看不清楚。 */
+.site-header__nav-item {
+  position: relative;
+}
+
+.site-header__nav-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 0;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-6);
+  padding: var(--space-6);
+  background: var(--color-surface-black);
+  text-align: left;
+  opacity: 0;
+  visibility: hidden;
+  /* 開合是淡入淡出（跟使用者在 panacea-q.com 量到的 SHOP 下拉選單一樣，
+     transition opacity／visibility，不是位移或瞬間切換），套用全站既有
+     的快速轉場 token，不是另外訂一個新的時間長度。 */
+  transition: opacity var(--duration-fast) var(--ease-standard),
+    visibility var(--duration-fast) var(--ease-standard);
+}
+
+.site-header__nav-item.is-open .site-header__nav-dropdown {
+  opacity: 1;
+  visibility: visible;
+}
+
+.site-header__nav-dropdown-menu {
+  flex: none;
+  min-width: 180px;
+}
+
+/* 子項目清單：手機版抽屜（.site-menu__sublist）原本是換行的標籤群組排法
+   （見該處定義），這裡改成單欄直式清單、字級拉大一點——參考站量到的
+   是每列 40px、16px 字，這裡改用最接近的既有 token（--body-font-size
+   14px），不是照抄站外那組數字。只在桌面下拉選單這個範圍覆寫，不影響
+   手機抽屜本身的排法。 */
+.site-header__nav-dropdown .site-menu__sublist {
+  display: block;
+  margin-bottom: var(--space-4);
+}
+
+.site-header__nav-dropdown .site-menu__sublist li {
+  padding: var(--space-2) 0;
+  font-size: var(--body-font-size);
+  white-space: nowrap;
+}
+
+/* 課程分類照片：先佔位，排版邏輯見 index.html 註解。寬高比跟首頁精選
+   輪播（.preview-hero）同一個 2:3，全站已經在用的直式比例，不是另外
+   挑一個新比例。 */
+.site-header__nav-dropdown-photos {
+  flex: none;
+  display: flex;
+  gap: var(--space-2);
+}
+
+/* 選擇器故意寫成兩層 class（.site-header__nav-dropdown-photos 底下的
+   .site-header__nav-dropdown-photo），特異度才蓋得過上面 .site-header__nav a
+   那條通用連結樣式（它多一個元素型別選擇器，特異度反而更高）——不然這裡
+   設的 display:block 會被那條的 display:flex 蓋掉，圖片格跟文字說明會
+   變成並排而不是上下堆疊。同理，那條通用樣式設過的字級／字距／大寫／
+   透明度／內距，這裡也要整組覆寫回來，不能只設 display。 */
+.site-header__nav-dropdown-photos .site-header__nav-dropdown-photo {
+  display: block;
+  width: 120px;
+  text-decoration: none;
+  color: var(--color-surface-light);
+  text-transform: none;
+  letter-spacing: normal;
+  font-weight: 400;
+  padding: 0;
+  opacity: 1;
+}
+
+.site-header__nav-dropdown-photo .placeholder-box {
+  aspect-ratio: 2 / 3;
+  font-size: 10px;
+  border-color: color-mix(in srgb, var(--color-surface-light) 30%, transparent);
+  background: color-mix(in srgb, var(--color-surface-light) 8%, transparent);
+  color: color-mix(in srgb, var(--color-surface-light) 55%, transparent);
+}
+
+.site-header__nav-dropdown-photo__label {
+  display: block;
+  margin-top: var(--space-2);
+  font-size: var(--font-size-xs);
+  text-align: center;
+}
+
+@media (min-width: 1024px) {
+  /* 兩排：第一排 logo（置中）／購物車（右），第二排文字導覽列整排置中，
+     跟參考站（panacea-q.com）一樣導覽列在 logo 正下方，不是塞在 logo
+     旁邊。用 grid-row/grid-column 明確指定每個子元素的位置，不能只靠
+     原本 DOM 順序（漢堡鈕隱藏後，靠自動排列 nav 會補位跑到第一排）。 */
+  .site-header {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    grid-template-rows: auto auto;
+    /* logo 底部到導覽文字之間，使用者確認要 25px：導覽連結自己已經有
+       10px 的上內距（量 panacea-q.com 那組規格），這裡的 row-gap 補上
+       另外 15px，兩個加起來剛好 25px，不用改連結自己的內距（改那個會
+       連帶動到連結下緣的點擊區域高度，不是只影響上面的間距）。 */
+    row-gap: 15px;
+    /* 導覽文字到毛玻璃區塊底部：使用者確認要 5px，原本（home.css 共用
+       規則）上下都是 20px，這裡只覆寫 bottom，logo 上方那段留白不變，
+       維持 20px。 */
+    padding-bottom: 5px;
+  }
+
+  .site-header__menu-toggle {
+    display: none;
+  }
+
+  .site-header__logo {
+    grid-row: 1;
+    grid-column: 2;
+    justify-self: center;
+  }
+
+  /* 桌面版 logo 放大——手機版的 22px 是在窄版頂部列（漢堡＋logo＋購物車
+     單排）量出來的尺寸，桌面版現在是獨立兩排（logo 自己一排），22px
+     顯得太小、跟參考站量到的 91px 大 logo 落差太大，這裡不是照抄那組
+     數字，改成折衷、還是克制的 40px，只在桌面這個範圍覆寫。 */
+  .site-header__logo img {
+    height: 40px;
+  }
+
+  .site-header .cart-badge-wrap {
+    grid-row: 1;
+    grid-column: 3;
+    justify-self: end;
+  }
+
+  .site-header__nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-6);
+    grid-row: 2;
+    grid-column: 1 / -1;
+  }
 }
 
 /* ---------- 選單面板：從頂部列下方滑出，蓋在背景遮罩上面 ----------
@@ -181,10 +439,15 @@
    內的用法，跟 sand-art-intro.html 首頁首圖沒素材時做法一致），真的會
    自動播放＋可以點圓點跳頁／滑鼠移入暫停（見 js/home-preview.js）。
    文字疊在照片下方，深色漸層墊底維持可讀性，色票只用 colors.css 既有
-   token（深底用 --color-surface-dark，不是新色）。 */
+   token（深底用 --color-surface-dark，不是新色）。
+
+   加了跑馬燈列之後，這裡的負 margin 再加回 --promo-bar-height：先照
+   原本公式完全抵銷 .product-page 的 padding-top（讓輪播回到「假設沒有
+   跑馬燈列」時的最頂端），再往下推回跑馬燈列的高度，讓輪播貼在跑馬燈
+   列正下方，不是被跑馬燈列蓋住、也不是兩者中間留一塊空白。 */
 .preview-hero {
   position: relative;
-  margin-top: calc(-1 * (var(--editorial-header-height) + 69px));
+  margin-top: calc(-1 * (var(--editorial-header-height) + 69px) + var(--promo-bar-height));
   margin-left: calc(-1 * var(--pad-h));
   margin-right: calc(-1 * var(--pad-h));
   aspect-ratio: 2 / 3;
@@ -198,8 +461,29 @@
    已經驗證過的對比度，不用這裡另外重新調一次。 */
 .site-header:not(.is-scrolled) .site-header__back,
 .site-header:not(.is-scrolled) .site-header__title,
+.site-header:not(.is-scrolled) .site-header__nav,
+.site-header:not(.is-scrolled) .site-header__menu-toggle,
 .site-header:not(.is-scrolled) .cart-badge-wrap {
   color: var(--color-surface-light);
+}
+
+/* .cart-badge（購物車袋子按鈕本身）在 cart.css 直接宣告了自己的
+   color: var(--color-text-primary)，元素自己的宣告會蓋掉從
+   .cart-badge-wrap 繼承下來的顏色（不是特異度問題，是「元素自己有沒有
+   直接宣告 color」的問題），上面那組規則單靠 .cart-badge-wrap 蓋不到
+   袋子圖示本身，這裡另外明確覆寫 .cart-badge。 */
+.site-header:not(.is-scrolled) .cart-badge {
+  color: var(--color-surface-light);
+}
+
+/* logo 圖檔本身是橄欖綠色塊（品牌色，見 colors.css --color-brand），沒有
+   另外做一張白色版本，改用濾鏡把不透明的橄欖綠像素統一轉成白色——logo
+   中間的「臉」細節本來就是鏤空透明（不是白色色塊疊上去），濾鏡不會影響
+   到那些洞，效果等同真的換了一張白色 logo。只在還沒捲動、疊在深色照片
+   上這段套用，捲動後跟其他文字一樣改回全站預設色（這裡是原本的品牌
+   橄欖綠，不需要另外宣告），避免白色 logo 疊在毛玻璃淺色底上看不清楚。 */
+.site-header:not(.is-scrolled) .site-header__logo img {
+  filter: brightness(0) invert(1);
 }
 
 .preview-hero__slides {
@@ -305,6 +589,9 @@
 }
 
 .preview-hero__dots {
+  /* 尺寸／間距是使用者在 panacea-q.com 用 Claude in Chrome 量出來的運算後
+     樣式：點點 12×12px、3px 實色邊框、未選中透明+opacity 0.4／選中填滿+
+     opacity 1、點距 10px——比原本 7px 小點更明顯，桌機／手機都更好點擊辨識。 */
   position: absolute;
   left: 0;
   right: 0;
@@ -312,24 +599,24 @@
   z-index: 4;
   display: flex;
   justify-content: center;
-  gap: var(--space-2);
+  gap: 10px;
 }
 
 .preview-hero__dots button {
-  width: 7px;
-  height: 7px;
+  width: 12px;
+  height: 12px;
   padding: 0;
-  border: none;
+  border: 3px solid var(--color-surface-light);
   border-radius: 50%;
-  background: color-mix(in srgb, var(--color-surface-light) 45%, transparent);
+  background: transparent;
+  opacity: 0.4;
   cursor: pointer;
-  transition: background var(--duration-fast) var(--ease-standard),
-    transform var(--duration-fast) var(--ease-standard);
+  transition: opacity var(--duration-fast) var(--ease-standard);
 }
 
 .preview-hero__dots button.is-active {
   background: var(--color-surface-light);
-  transform: scale(1.2);
+  opacity: 1;
 }
 
 /* ---------- 商品格狀：卡片本身沿用 .shop-grid／.shop-card（見
@@ -491,6 +778,13 @@
   grid-template-columns: repeat(2, 1fr);
   column-gap: 4px;
   row-gap: 3px;
+  /* 跟 .shop-grid（商品格狀，見 products.css）共用同一條 1100px 欄寬
+     基準線——寬螢幕上這排貼文格不該比商品格狀更寬，見使用者比對
+     panacea-q.com 後的要求。窄螢幕上這個上限本來就不會生效，不用另外
+     包一層 media query。 */
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 @media (min-width: 768px) {
@@ -536,6 +830,17 @@
   margin-right: calc(-1 * var(--pad-h));
   padding: var(--space-10) var(--pad-h) var(--space-6);
   background: var(--color-surface-black);
+}
+
+/* 深色底本身維持滿版貼齊螢幕邊緣（上面 .preview-footer 的負 margin 做的
+   事沒有變），但 ABOUT／INFO 文字內容跟版權列改包進這層，套跟 .shop-grid
+   （商品格狀，見 products.css）同一條 1100px 欄寬基準線並置中——寬螢幕
+   上文字不該比商品格狀更寬、也不該無限貼齊螢幕邊緣，見使用者比對
+   panacea-q.com 後的要求。 */
+.preview-footer__inner {
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .preview-footer__col {
@@ -598,7 +903,7 @@
 }
 
 @media (min-width: 768px) {
-  .preview-footer {
+  .preview-footer__inner {
     display: grid;
     grid-template-columns: 1fr 1fr;
     column-gap: var(--space-10);

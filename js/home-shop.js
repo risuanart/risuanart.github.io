@@ -118,3 +118,35 @@
 
   if (backdrop) backdrop.addEventListener("click", closeMenu);
 })();
+
+/* 桌面文字導覽列的「課程」下拉：點按鈕切換子選單顯示／隱藏，點選單外
+   任何地方或按 Esc 都會關閉，邏輯跟上面漢堡選單抽屜同一套模式，只是
+   換成單一下拉區塊。 */
+(function () {
+  const item = document.querySelector(".site-header__nav-item");
+  const toggle = document.getElementById("nav-courses-toggle");
+  if (!item || !toggle) return;
+
+  function close() {
+    item.classList.remove("is-open");
+    toggle.setAttribute("aria-expanded", "false");
+  }
+
+  toggle.addEventListener("click", (event) => {
+    event.stopPropagation();
+    const isOpen = item.classList.contains("is-open");
+    if (isOpen) close();
+    else {
+      item.classList.add("is-open");
+      toggle.setAttribute("aria-expanded", "true");
+    }
+  });
+
+  document.addEventListener("click", (event) => {
+    if (!item.contains(event.target)) close();
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") close();
+  });
+})();
