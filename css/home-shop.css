@@ -201,6 +201,26 @@
   white-space: nowrap;
 }
 
+/* 「石英砂肌理畫」「串珠」這兩個真連結（.site-menu__sublink）跟上面
+   還沒上架的 <li> 文字放在同一份清單裡，視覺上應該一樣大小，但
+   .site-menu__sublink 本身是 <a>，會被上面 .site-header__nav a（給
+   頂部橫排導覽用的樣式，12.8px／line-height 40px／10px 內距／大寫／
+   font-weight 700）疊過去——原因跟 .site-header__nav-dropdown-photo
+   那組兩層 class 選擇器要解決的問題一樣（見該處註解），這裡也要整組
+   覆寫回來，不能只改 font-size：line-height 40px／padding 10px 這兩個
+   沒改的話，即使字級調小，整顆連結的可點擊區塊還是會比旁邊的 <li> 高
+   很多，看起來還是偏大。 */
+.site-header__nav-dropdown-menu .site-menu__sublink {
+  display: inline-block;
+  font-size: 13px;
+  letter-spacing: normal;
+  line-height: normal;
+  text-transform: none;
+  font-weight: 400;
+  padding: var(--space-2) 0;
+  opacity: 1;
+}
+
 /* 課程分類照片：先佔位，排版邏輯見 index.html 註解。寬高比跟首頁精選
    輪播（.preview-hero）同一個 2:3，全站已經在用的直式比例，不是另外
    挑一個新比例。 */
