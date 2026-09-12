@@ -221,6 +221,18 @@
   opacity: 1;
 }
 
+/* 「石英砂肌理畫」「串珠」現在改回放在 <ul> 裡面（<li><a>...），跟旁邊
+   還沒上架的 <li> 文字共用同一份清單，這兩個字才會看起來是課程清單的
+   其中兩項，而不是被搬到清單外面、跟「預約須知」擠成另一排、像多了一層
+   新選單（見 index.html 裡的說明）。<li> 本身已經有 var(--space-2) 0
+   的內距了（上面那條規則），這裡疊在 <li> 裡面的 .site-menu__sublink
+   要把自己的內距歸零，不然兩層內距疊加，這一整列會比其他 <li> 明顯高
+   一截，看起來又變成特別大。 */
+.site-header__nav-dropdown-menu .site-menu__sublist li .site-menu__sublink {
+  display: inline;
+  padding: 0;
+}
+
 /* 課程分類照片：先佔位，排版邏輯見 index.html 註解。寬高比跟首頁精選
    輪播（.preview-hero）同一個 2:3，全站已經在用的直式比例，不是另外
    挑一個新比例。 */
@@ -413,6 +425,23 @@
   font-size: 13px;
   color: var(--color-surface-light);
   border-bottom: 1px solid currentColor;
+}
+
+/* 「石英砂肌理畫」「串珠」現在跟桌面版下拉選單一樣，改回放在 <li> 裡面、
+   混在課程標籤群組裡（見 index.html 說明），但 .site-menu a（給「商品
+   總覽」「材料包」「預約須知」這種整排選單列用的樣式，15px／
+   display:flex／space-between／整排底線）選擇器範圍是整個 .site-menu
+   底下所有 <a>，不管巢狀多深都選得到，會把這兩個標籤也撐成整排選單列
+   的樣子，在标籤群組裡看起來會突兀地跳出來自己佔一行。這裡用更高特異度
+   的選擇器把它們縮回標籤原本該有的樣子（跟其他 <li> 標籤同一種尺寸
+   邏輯，只是保留底線／全白字這兩個區分「已上架」的視覺提示）。 */
+.site-menu__sublist li .site-menu__sublink {
+  display: inline;
+  justify-content: normal;
+  gap: 0;
+  padding: 0;
+  border-bottom: 1px solid currentColor;
+  font-size: 13px;
 }
 
 .site-menu-backdrop {

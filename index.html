@@ -84,19 +84,22 @@
         </button>
         <div class="site-header__nav-dropdown" id="nav-courses-menu">
           <div class="site-header__nav-dropdown-menu">
+            <!-- 串珠、石英砂肌理畫已經有獨立課程介紹頁（courses/beading.html／
+                 courses/sand-texture.html），維持在原本的課程清單位置裡
+                 （用 <a> 包住文字，而不是移出清單另外群組），視覺上才看得出
+                 這兩個是「課程清單裡的其中兩項」，不是另外一個母層級的東西
+                 ——之前試過把它們搬到清單外面、跟「預約須知」放在一起，
+                 但「預約須知」根本不是課程，混在一起看起來像多了一層新的
+                 選單，不像課程的子項目，所以改回來。 -->
             <ul class="site-menu__sublist">
+              <li><a class="site-menu__sublink" href="courses/sand-texture.html">石英砂肌理畫</a></li>
               <li>刮刀油畫</li>
               <li>流動畫</li>
               <li>抽象畫</li>
               <li>自己帶圖創作</li>
               <li>鏡子拼貼</li>
+              <li><a class="site-menu__sublink" href="courses/beading.html">串珠</a></li>
             </ul>
-            <!-- 串珠、石英砂肌理畫是目前已經有獨立課程介紹頁的項目
-                 （courses/beading.html／courses/sand-texture.html），移出
-                 上面不能點的清單，改成真連結，跟「預約須知」同一套
-                 .site-menu__sublink 樣式。 -->
-            <a class="site-menu__sublink" href="courses/sand-texture.html">石英砂肌理畫</a>
-            <a class="site-menu__sublink" href="courses/beading.html">串珠</a>
             <a class="site-menu__sublink" href="faq.html">預約須知</a>
           </div>
           <!-- 課程分類照片：先佔位（跟全站其他還沒有實拍照片的格子同一套
@@ -156,20 +159,22 @@
     <!-- 課程子項目大部分還沒有各自獨立的頁面（舊首頁也是同樣狀態，點了
          只是純文字清單，不是連結，見 archive/README.md 的 CATEGORIES
          資料），照實列出來（不能點）。串珠、石英砂肌理畫已經有獨立介紹頁
-         （courses/beading.html／courses/sand-texture.html），移出
-         清單改成真連結；「預約須知」是原本就有內容的連結，直接接手
-         原本孤兒頁 faq.html 的入口。 -->
+         （courses/beading.html／courses/sand-texture.html），維持在原本
+         課程清單裡的位置（<a> 包住文字），不搬出去跟「預約須知」放一起
+         ——理由同桌面版下拉選單那邊的註解，混在一起會看起來像多了一層
+         新選單，不像課程本身的子項目。「預約須知」是原本就有內容的連結，
+         直接接手原本孤兒頁 faq.html 的入口，這個維持獨立在清單外面。 -->
     <div class="site-menu__group">
       <p class="site-menu__group-title">課程</p>
       <ul class="site-menu__sublist">
+        <li><a class="site-menu__sublink" href="courses/sand-texture.html">石英砂肌理畫</a></li>
         <li>刮刀油畫</li>
         <li>流動畫</li>
         <li>抽象畫</li>
         <li>自己帶圖創作</li>
         <li>鏡子拼貼</li>
+        <li><a class="site-menu__sublink" href="courses/beading.html">串珠</a></li>
       </ul>
-      <a class="site-menu__sublink" href="courses/sand-texture.html">石英砂肌理畫</a>
-      <a class="site-menu__sublink" href="courses/beading.html">串珠</a>
       <a class="site-menu__sublink" href="faq.html">預約須知</a>
     </div>
     <a href="enterprise.html">團體／企業課程</a>
