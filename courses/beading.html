@@ -113,23 +113,23 @@
       </div>
     </section>
 
-    <!-- 學員作品：第一格是使用者提供的真實學員作品影片，其餘 3 格還沒有
-         真實素材，先用 .placeholder-box 誠實佔位，之後有照片/影片直接
-         替換即可。沿用 .ent-gallery 輪播元件（自動播放／點圓點切換／
-         手機可滑動），跟企業案例頁同一套邏輯。viewport 比例覆寫成 9:16
-         （原本預設 4:5 是給橫向裁切空間較多的照片用，這裡的影片是手機
-         直式 9:16 原始素材，套 4:5 會裁到畫面）。 -->
+    <!-- 學員作品：影片跟照片分開放，不共用同一個輪播。原本把影片當作
+         輪播第一格，但 .ent-gallery 是固定 4 秒自動換下一張，影片（約
+         21 秒）還沒播完就被切掉，所以改成：影片獨立播放到底（沿用
+         .chapter__banner-video，跟上面「珠款選擇」的大小珠比較影片同一
+         套樣式），下面另外接一個純照片的 .ent-gallery 輪播（目前 3 格
+         都還沒有真實照片，先用 .placeholder-box 誠實佔位）。 -->
     <section class="chapter fade-in delay-2">
       <div class="chapter__block">
         <p class="chapter__statement">學員作品</p>
         <p class="chapter__prose">每個人挑的珠款、配色都不一樣，做出來的項鍊也各有各的味道。</p>
       </div>
+      <div class="chapter__banner-video is-portrait-video">
+        <video src="../assets/videos/courses/beading/學生作品.MP4" preload="auto" autoplay muted loop playsinline aria-label="學員完成的串珠項鍊作品"></video>
+      </div>
       <div class="ent-gallery" data-autoplay="4000">
         <div class="ent-gallery__viewport is-portrait-video">
           <div class="ent-gallery__slide is-active">
-            <video src="../assets/videos/courses/beading/學生作品.MP4" preload="auto" autoplay muted loop playsinline aria-label="學員完成的串珠項鍊作品"></video>
-          </div>
-          <div class="ent-gallery__slide">
             <div class="placeholder-box placeholder-box--photo" aria-hidden="true">
               <svg class="placeholder-box__icon" viewBox="0 0 24 24" width="1.6em" height="1.6em" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1.5"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 16l-5.5-5.5a1 1 0 0 0-1.4 0L6 19"/></svg>
               <span class="placeholder-box__text">學員作品待補</span>
@@ -148,11 +148,10 @@
             </div>
           </div>
         </div>
-        <div class="ent-gallery__dots" role="tablist" aria-label="學員作品輪播切換">
+        <div class="ent-gallery__dots" role="tablist" aria-label="學員作品照片輪播切換">
           <button type="button" class="is-active" data-index="0" role="tab" aria-selected="true" aria-label="第 1 張"></button>
           <button type="button" data-index="1" role="tab" aria-selected="false" aria-label="第 2 張"></button>
           <button type="button" data-index="2" role="tab" aria-selected="false" aria-label="第 3 張"></button>
-          <button type="button" data-index="3" role="tab" aria-selected="false" aria-label="第 4 張"></button>
         </div>
       </div>
     </section>
