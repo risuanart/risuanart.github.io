@@ -95,6 +95,42 @@
   }
 }
 
+/* 課程首圖滿版：仿照首頁 .preview-hero 的做法（見 home-shop.css），用負
+   margin 抵銷 .product-page 左右的 --pad-h 內距，讓影片真的貼齊螢幕
+   兩側，不是被內距內縮、兩側露出一圈看起來像白框的邊界。滿版不套圓角，
+   理由跟 .preview-hero 一樣：貼齊螢幕邊緣時圓角反而會露出兩側背景色的
+   三角縫隙。只在手機斷點滿版——桌面版維持上面 .is-portrait-video 原本
+   「限制最大寬度、置中」的處理，直式影片桌面滿版會變成誇張的高度，
+   跟 .is-portrait-video 想避免的問題一樣，見上方 @media (min-width: 768px)
+   裡的重設。
+
+   width 用 calc(100% + pad-h*2) 明寫，不是像 .preview-hero／
+   .addon-carousel__track 那樣單靠負 margin 讓 width:auto 自動撐開——
+   那招對 <div> 有效，但 <video> 是 replaced element，width:auto 的計算
+   規則不一樣，會直接吃素材本身的原始像素寬度（這裡的影片是 720px，
+   實測過確實整個爆版），不會乖乖填滿容器，所以改用明確的 calc 公式。
+   另外補 max-width: none，蓋掉 base.css 對所有 video 的預設
+   max-width: 100%（響應式媒體的基本防溢出寫法）——那個 100% 是相對
+   還沒被負 margin 撐開的 .ent-hero 容器寬度算的，會把 calc 算出來的
+   寬度整個夾住，兩個都要改才有效。 */
+.ent-hero__photo.is-full-bleed {
+  width: calc(100% + var(--pad-h) * 2);
+  max-width: none;
+  margin-left: calc(-1 * var(--pad-h));
+  margin-right: calc(-1 * var(--pad-h));
+  border-radius: 0;
+}
+
+@media (min-width: 768px) {
+  .ent-hero__photo.is-full-bleed {
+    width: 100%;
+    max-width: 420px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: var(--radius-sharp);
+  }
+}
+
 .ent-gallery__viewport.is-landscape {
   aspect-ratio: 4 / 3;
 }
