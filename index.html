@@ -91,8 +91,11 @@
               <li>抽象畫</li>
               <li>自己帶圖創作</li>
               <li>鏡子拼貼</li>
-              <li>串珠</li>
             </ul>
+            <!-- 串珠是目前唯一已經有獨立課程介紹頁的項目（courses/beading.html，
+                 第一篇「畫室常態課程」介紹頁），移出上面不能點的清單，改成
+                 真連結，跟「預約須知」同一套 .site-menu__sublink 樣式。 -->
+            <a class="site-menu__sublink" href="courses/beading.html">串珠</a>
             <a class="site-menu__sublink" href="faq.html">預約須知</a>
           </div>
           <!-- 課程分類照片：先佔位（跟全站其他還沒有實拍照片的格子同一套
@@ -148,10 +151,12 @@
   <nav class="site-menu" id="site-menu" aria-label="全站選單">
     <a href="products/shop.html">商品總覽</a>
     <a href="products/index.html">材料包</a>
-    <!-- 課程子項目目前沒有各自獨立的頁面（舊首頁也是同樣狀態，點了只是
-         純文字清單，不是連結，見 archive/README.md 的 CATEGORIES 資料），
-         這裡照實列出來（不能點），底下「預約須知」是唯一真的有內容的
-         連結，直接接手原本孤兒頁 faq.html 的入口。 -->
+    <!-- 課程子項目大部分還沒有各自獨立的頁面（舊首頁也是同樣狀態，點了
+         只是純文字清單，不是連結，見 archive/README.md 的 CATEGORIES
+         資料），照實列出來（不能點）。串珠已經有獨立介紹頁
+         （courses/beading.html，第一篇「畫室常態課程」介紹頁），移出
+         清單改成真連結；「預約須知」是原本就有內容的連結，直接接手
+         原本孤兒頁 faq.html 的入口。 -->
     <div class="site-menu__group">
       <p class="site-menu__group-title">課程</p>
       <ul class="site-menu__sublist">
@@ -161,8 +166,8 @@
         <li>抽象畫</li>
         <li>自己帶圖創作</li>
         <li>鏡子拼貼</li>
-        <li>串珠</li>
       </ul>
+      <a class="site-menu__sublink" href="courses/beading.html">串珠</a>
       <a class="site-menu__sublink" href="faq.html">預約須知</a>
     </div>
     <a href="enterprise.html">團體／企業課程</a>

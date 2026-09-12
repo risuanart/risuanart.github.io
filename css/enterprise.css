@@ -67,6 +67,34 @@
   }
 }
 
+/* 手機直式影片素材（9:16，courses/beading.html 那 4 支手機拍的示範片）：
+   手機版維持滿版直式，本來就接近手機螢幕形狀；桌面版如果也滿版套 9:16，
+   寬度乘出來的高度會誇張地高（實測約 2000px），逼使用者捲很多才能看到
+   下一段，違背 .is-landscape 那組「桌面版改用短扁比例」想避免的問題。
+   這裡改成桌面版限制最大寬度、置中，維持完整直式構圖不裁切（跟裁成
+   短扁比例比起來，直式影片裁切掉上下會流失掉大半內容，不適合套用
+   .is-landscape 那種靠改比例裁切的做法）。 */
+.ent-hero__photo.is-portrait-video,
+.ent-gallery__viewport.is-portrait-video,
+.chapter__banner-video.is-portrait-video {
+  aspect-ratio: 9 / 16;
+}
+
+@media (min-width: 768px) {
+  .ent-hero__photo.is-portrait-video,
+  .ent-gallery__viewport.is-portrait-video {
+    max-width: 420px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .bead-compare {
+    max-width: 420px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
 .ent-gallery__viewport.is-landscape {
   aspect-ratio: 4 / 3;
 }
@@ -220,11 +248,29 @@
   z-index: 2;
 }
 
-.ent-gallery__slide img {
+.ent-gallery__slide img,
+.ent-gallery__slide video {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+/* 大珠款／小珠款示範片並排比較（courses/beading.html），跟
+   products.css 既有的 .sticker-compare／.howto-compare 同一套兩格網格
+   語言，這裡是課程頁的比較內容，另開一組類別名稱，不共用那兩個。 */
+.bead-compare {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+}
+
+.bead-compare__label {
+  margin: var(--space-2) 0 0;
+  text-align: center;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
 }
 
 .ent-gallery__dots {
