@@ -261,9 +261,15 @@
    語言，這裡是課程頁的比較內容，另開一組類別名稱，不共用那兩個。 */
 .bead-compare {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--space-4);
   margin-top: var(--space-4);
+}
+
+/* 同 .material-steps／.texture-methods 的修正（見下方註解）：格子裡是
+   <video>，欄位要加 min-width: 0，不然手機版兩欄會被素材寬度撐開擠不下。 */
+.bead-compare__cell {
+  min-width: 0;
 }
 
 .bead-compare__label {
@@ -283,9 +289,19 @@
 .material-steps,
 .texture-methods {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--space-4);
   margin-top: var(--space-4);
+}
+
+/* 網格子項目要加 min-width: 0——grid 欄位預設 min-width 是 auto，
+   裡面放 <video> 這種本身有素材寬度的元素時，瀏覽器會用素材寬度去撐開
+   欄位（不受 1fr 限制），手機版會變成兩欄擠不下、實際上看起來像每格
+   自己佔一整排、直往下疊。這裡跟上面 grid-template-columns 改用
+   minmax(0, 1fr) 是同一個修正的兩個必要部分，缺一個都不夠。 */
+.material-steps > div,
+.texture-methods > div {
+  min-width: 0;
 }
 
 .material-steps__label,
