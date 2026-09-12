@@ -22,3 +22,10 @@ assets/images/enterprise/pet-portrait/寵物展/
 # 電腦裡不刪，但不進版控。
 assets/images/courses/sand-texture/材料組成/*.gif
 assets/images/courses/sand-texture/成型方式/*.gif
+
+# 首頁輪播「春聯流動畫」的原始檔：使用者放的是 HEVC 編碼（.MP4 副檔名但
+# codec 是 h265），瀏覽器相容性不像全站其他影片統一用的 H.264 可靠（部分
+# 瀏覽器/系統不支援硬體解 HEVC），另外用 ffmpeg 轉出 H.264 版本（同檔名
+# 春聯流動畫.MP4，那份才是網頁真的引用的檔案），原始 HEVC 檔改名加
+# 「-原始檔」保留在電腦裡，不進版控。
+assets/videos/home/春聯流動畫-原始檔.MP4

@@ -224,11 +224,14 @@
           </div>
         </div>
 
+        <!-- 使用者提供的真實春聯流動畫材料包示範片（原始檔是 HEVC 編碼，
+             為了跨瀏覽器相容性用 ffmpeg 轉成全站統一的 H.264，原始檔改名
+             加「-原始檔」保留在電腦裡不進版控，見 .gitignore 說明）。
+             影片內容（教學手冊、材料包裝、倒膠完成的紅金春聯、貼兔年
+             貼紙）跟這格「禮盒版」的商品文案相符，直接置換掉原本的
+             .placeholder-box，文案本身不用改。 -->
         <div class="preview-hero__slide" data-index="2">
-          <div class="placeholder-box placeholder-box--photo preview-hero__photo" aria-hidden="true">
-            <svg class="placeholder-box__icon" viewBox="0 0 24 24" width="1.8em" height="1.8em" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1.5"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 16l-5.5-5.5a1 1 0 0 0-1.4 0L6 19"/></svg>
-            <span class="placeholder-box__text">首圖待補：流動畫禮盒版情境照</span>
-          </div>
+          <video class="preview-hero__photo" src="assets/videos/home/春聯流動畫.MP4" autoplay muted loop playsinline preload="auto" aria-label="春聯流動畫材料包示範影片"></video>
           <div class="preview-hero__overlay">
             <p class="preview-hero__kicker">流動畫材料包</p>
             <h2 class="preview-hero__title">禮盒版</h2>
