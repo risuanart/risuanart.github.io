@@ -540,6 +540,18 @@
   margin-top: var(--space-4);
 }
 
+/* 40ch 是為了桌面版長行閱讀舒適度設的上限，但手機版容器本來就窄
+   （--pad-h 20px），40ch 換算出來的實際寬度反而比旁邊滿版的圖片／
+   影片窄一截，兩者對不齊。手機版乾脆不設上限，讓文字貼齊滿版媒材；
+   桌面版容器沒有另外置中收窄（.product-page 是滿版), 40ch 才需要
+   保留，避免一行字拉到整個螢幕那麼寬。 */
+@media (max-width: 768px) {
+  .chapter__intro,
+  .chapter__prose {
+    max-width: none;
+  }
+}
+
 /* 純展示用的主題標籤（自己帶圖創作課程頁），視覺借用 gallery.css
    篩選鈕的邊框樣式，但不是按鈕、不能點，所以另外命名一組 class，
    不共用 .gallery-filters__chip（那顆有 cursor:pointer，用在這裡會
