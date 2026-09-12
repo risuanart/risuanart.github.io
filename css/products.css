@@ -540,6 +540,27 @@
   margin-top: var(--space-4);
 }
 
+/* 純展示用的主題標籤（自己帶圖創作課程頁），視覺借用 gallery.css
+   篩選鈕的邊框樣式，但不是按鈕、不能點，所以另外命名一組 class，
+   不共用 .gallery-filters__chip（那顆有 cursor:pointer，用在這裡會
+   讓人以為點了會有反應）。 */
+.theme-tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: var(--space-4) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.theme-tag {
+  border: 1px solid color-mix(in srgb, var(--color-text-secondary) 35%, transparent);
+  border-radius: var(--radius-sharp);
+  padding: var(--space-1) var(--space-4);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+}
+
 /* ---------- 商品介紹：「一句話陳述＋補充說明＋圖片」節奏 ----------
    跟「藝術家系列」範本頁（product-template.css）的 .ptpl-story-block
    是同樣的排版邏輯——陳述句字級拉大、字重加重，跟下面補充說明的一般
