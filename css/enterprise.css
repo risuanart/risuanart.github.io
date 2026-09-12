@@ -273,6 +273,60 @@
   color: var(--color-text-secondary);
 }
 
+/* 石英砂肌理畫課程頁（courses/sand-texture.html）的兩組 2x2 示範網格：
+   「材料組成」（石英砂＋壓克力顏料怎麼混合）跟「成型方式」（刮刀／
+   刮板／擠花袋／石膏繃帶四種塑形工具）。網格結構跟上面 .bead-compare
+   一樣（2 欄，4 格自然折成 2 排），但內容不同，照專案慣例另開一組
+   類別名稱，不共用。每格比 .bead-compare 多一行說明文字，所以另外
+   加 __desc（.bead-compare 只需要一個名稱當 label，這裡的每個技法
+   需要一句話說明差異，兩顆星星硬套同一個 class 意義會不清楚）。 */
+.material-steps,
+.texture-methods {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+}
+
+.material-steps__label,
+.texture-methods__label {
+  margin: var(--space-2) 0 0;
+  text-align: center;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+/* 「材料組成」每格直接放 <video>，不像「成型方式」疊一層
+   .chapter__banner-video 外框（那組影片是使用者原本就有的示範片，
+   跟「珠款選擇」的 .bead-compare 邏輯一樣沿用既有外框類別；這組是
+   額外轉出來的 mp4，直接給 video 本身定尺寸更單純），所以另外補一條
+   選取器，讓 video 本身撐滿格子、維持 9:16 直式比例、跟其他影片區塊
+   一樣的圓角。 */
+.material-steps video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  object-fit: cover;
+  border-radius: var(--radius-sharp);
+}
+
+/* 「成型方式」網格下方的組合示範影片（同色系異材質處理範例），是單獨
+   一支影片，不是四格並排比較，只需要跟上面網格留一點距離；寬度／置中
+   邏輯沿用裡面 .chapter__banner-video.is-portrait-video 本身既有的
+   規則，這裡不重複定義。 */
+.texture-methods-demo {
+  margin-top: var(--space-6);
+}
+
+.material-steps__desc,
+.texture-methods__desc {
+  margin: var(--space-1) 0 0;
+  text-align: center;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
 .ent-gallery__dots {
   margin-top: var(--space-3);
   display: flex;

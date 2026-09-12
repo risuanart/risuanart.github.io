@@ -13,3 +13,12 @@ assets/images/enterprise/candle/candle-more/
 assets/images/enterprise/fluid-family-day/fluid-more/
 assets/images/enterprise/pet-portrait/南港展覽館/
 assets/images/enterprise/pet-portrait/寵物展/
+
+# 石英砂肌理畫課程頁（courses/sand-texture.html）的素材：使用者原始放的是
+# .gif（材料組成/ 4 支）或「同一個技法一份 mp4＋一份 gif 重複放」
+# （成型方式/ 4 組），gif 版本檔案大小是對應 mp4 的 30-40 倍卻沒有更多
+# 內容，網頁只會用 mp4（材料組成/ 底下另外用 ffmpeg 轉了等效的 .mp4，
+# 成型方式/ 底下直接用使用者本來就有放的子資料夾 mp4），原始 .gif 留在
+# 電腦裡不刪，但不進版控。
+assets/images/courses/sand-texture/材料組成/*.gif
+assets/images/courses/sand-texture/成型方式/*.gif
