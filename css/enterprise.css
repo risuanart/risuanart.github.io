@@ -9,6 +9,31 @@
   margin-top: var(--space-4);
 }
 
+/* 課程首圖靠頂：跟首頁 .preview-hero 同一招（見 home-shop.css），用負
+   margin 抵銷 .product-page 的 padding-top（=header 高度 58px ＋額外
+   69px 留白，見 tokens.css --editorial-header-height／products.css
+   .product-page），讓影片真的貼齊螢幕最上緣，不是隔著一段空白才開始。
+   .site-header 本身預設就是透明背景（home.css），捲動前會直接浮貼在
+   影片上面，跟首頁效果一致，不用另外處理——只有首頁另外把文字圖示
+   強制改成淺色（home-shop.css），是因為首頁的圖是深色照片；這裡沒有
+   跟著改，因為每支課程影片明暗不一樣，深色文字（全站預設）對石英砂
+   這種偏亮的影片反而比較清楚，先不強制套用，之後個別影片顏色不合適
+   再單獨處理。只加在有 .is-full-bleed 影片的課程首圖（目前串珠、石英砂
+   肌理畫兩頁），不動其他案例頁 .ent-hero 的既有位置。桌面版跟
+   .is-full-bleed 一樣還原成原本置中、有間距的樣子——影片本身桌面版
+   已經不是滿版（見 .is-full-bleed 的 @media (min-width: 768px)），
+   header 貼在畫面正中央那截影片上緣，看起來會很奇怪，維持桌面版原本
+   的位置比較乾淨。 */
+.ent-hero.is-flush-top {
+  margin-top: calc(-1 * (var(--editorial-header-height) + 69px));
+}
+
+@media (min-width: 768px) {
+  .ent-hero.is-flush-top {
+    margin-top: var(--space-4);
+  }
+}
+
 .ent-hero__photo {
   display: block;
   width: 100%;
