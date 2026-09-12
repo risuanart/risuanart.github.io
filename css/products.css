@@ -1626,6 +1626,19 @@ button.text-link {
    掃過全部內容；第二層（預約細節層）資訊量大，用分類＋<details> 手風琴
    收合＋錨點導覽，服務已經決定要來、需要查詢細節的訪客。兩層要有明顯
    的視覺層次區隔（見任務規格書驗收標準 2）。 */
+/* 這頁（faq.html）沒有商品圖／色票選擇器這類天生就會撐開版面的元件，
+   寬螢幕下如果不特別處理，內容會維持手機版那樣整塊貼齊左邊，右邊留一
+   大片空白，跟上面已經置中的 .work__intro 標題區對不齊，看起來像沒有
+   為桌面版另外調整過。用跟 .intro（見上面 max-width: 34ch; margin: ...
+   auto）同一招，給兩層內容各自一個閱讀寬度＋置中，不用另外包一層
+   容器、也不影響其他頁面（.faq-tier1／.faq-tier2 只有這頁在用）。 */
+.faq-tier1,
+.faq-tier2 {
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .faq-tier1 {
   margin-top: var(--space-10);
   padding-left: var(--space-4);
