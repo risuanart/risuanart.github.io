@@ -9,13 +9,13 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="同一座山，三種材料的呈現｜材料指南｜日宣繪畫室">
   <meta property="og:description" content="油畫＋筆刷、油畫＋刮刀、壓克力＋石英砂＋刮刀，同樣畫一座山，質感差異一次看懂。">
-  <meta property="og:image" content="https://risuanart.com/assets/images/guides/material-compare-mountain/sand-texture-mountain.jpg">
+  <meta property="og:image" content="https://risuanart.com/assets/images/guides/material-compare-mountain/sand-texture/01.jpg">
   <meta property="og:url" content="https://risuanart.com/guides/material-compare-mountain.html">
   <meta property="og:locale" content="zh_TW">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="同一座山，三種材料的呈現｜材料指南｜日宣繪畫室">
   <meta name="twitter:description" content="油畫＋筆刷、油畫＋刮刀、壓克力＋石英砂＋刮刀，同樣畫一座山，質感差異一次看懂。">
-  <meta name="twitter:image" content="https://risuanart.com/assets/images/guides/material-compare-mountain/sand-texture-mountain.jpg">
+  <meta name="twitter:image" content="https://risuanart.com/assets/images/guides/material-compare-mountain/sand-texture/01.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=ABeeZee&family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;600;700&family=Poppins:wght@700&family=Noto+Serif+TC:wght@500;700&family=Noto+Sans+TC:wght@400;600;700&display=swap" rel="stylesheet">
@@ -70,21 +70,30 @@
            不是另一種沒有加砂的材料，標題跟連結都用完整的三個材料名稱，
            避免跟刮刀油畫（沒加砂）搞混。
 
-         三張真實作品照（2026-09-13 補上）：使用者在 Mac 原生「照片」App
-         建了「山」資料夾，底下三個相簿（石英砂／油畫筆刷／刮刀油畫）各自
-         放了同一系列的真實照片，透過 AppleScript 操控 Photos.app 匯出
-         （石英砂 8 張、油畫筆刷 14 張、刮刀油畫 9 張，不是只有 3 張)，
-         逐張看過內容後每個材料各選一張最能代表該材料特色、畫面乾淨的
-         成品照：
-         - 石英砂：IMG_0446，滑雪場雪山場景，跟原始 IG 貼文
-           （DX6tmJxAe5W）描述的示範作品是同一張。
-         - 油畫＋筆刷：IMG_0445，富士山＋電線桿＋枯草地，電線桿等
-           「小物件」的細節正好對應貼文原文「小物件需要繪製」的說明。
-         - 油畫＋刮刀：IMG_0433，綠黃粉藍等顏色交錯堆疊的抽象山景，
-           最能呈現貼文說的「顏色混合的不可控性、像開盲盒」。
-         三張都用 sips 從手機原圖（1.6-4MB）縮到長邊 1400px、JPEG 82%
-         畫質（跟 assets/images/enterprise/ 底下其他真實照片同一套壓縮
-         慣例），存在 assets/images/guides/material-compare-mountain/。 -->
+         真實作品照輪播（2026-09-13 補上，2026-09-13 再改成多張輪播）：
+         使用者在 Mac 原生「照片」App 建了「山」資料夾，底下三個相簿
+         （石英砂／油畫筆刷／刮刀油畫）各自放了同一系列的真實照片，透過
+         AppleScript 操控 Photos.app 匯出（石英砂 8 張、油畫筆刷 14 張、
+         刮刀油畫 9 張，共 31 張），逐張看過確認都是真實成品／繪製過程照
+         （沒有模糊、重複、不相關的照片）後，三個相簿「整組」直接放進
+         對應材料區塊做成橫向滑動輪播（不再只挑一張代表照），使用者
+         2026-09-13 原話：「我想要做成多張照片輪播，等於是把對應相簿的
+         照片直接放進相對應的材料」。
+         每個材料區塊第一張沿用先前確認過最能代表該材料特色的那張（石英砂
+         IMG_0446 滑雪場雪山、油畫＋筆刷 IMG_0445 富士山＋電線桿、
+         油畫＋刮刀 IMG_0433 顏色交錯的抽象山景），其餘依原始 IMG 編號
+         順序排列，每張 <img alt> 都是逐張看過真實畫面內容寫的具體描述，
+         不是套版文字。
+         全部 31 張都用 sips 從手機原圖縮到長邊 1400px、JPEG 82% 畫質
+         （跟 assets/images/enterprise/ 底下其他真實照片同一套壓縮慣例），
+         存在 assets/images/guides/material-compare-mountain/{sand-texture,
+         oil-brush,oil-knife}/01.jpg ~ NN.jpg（原本只有一張代表照時期的
+         *-mountain.jpg 三個檔案已經被這批多張版取代並刪除）。
+         輪播用的 .material-photo-carousel 是新加的 CSS（css/products.css），
+         沿用 .pattern-carousel__track／.addon-carousel__track 同一套「逃出
+         版面留白＋scroll-snap 橫向滑動」手法，但張數最多到 14 張，沒有像
+         .pattern-carousel 那樣加逐張圓點（點太多是雜訊），單純讓使用者
+         滑過去看。 -->
 
     <section class="chapter fade-in">
       <p><a class="text-link" href="index.html">← 材料指南</a></p>
@@ -94,8 +103,23 @@
 
     <section class="chapter fade-in delay-1">
       <div class="chapter__block">
-        <div class="ent-entry__media">
-          <img src="../assets/images/guides/material-compare-mountain/oil-brush-mountain.jpg" alt="油畫＋筆刷畫的富士山，前景有電線桿與枯草地">
+        <div class="material-photo-carousel">
+          <div class="material-photo-carousel__track">
+            <img src="../assets/images/guides/material-compare-mountain/oil-brush/01.jpg" alt="油畫＋筆刷畫的富士山，前景有電線桿與枯草地">
+            <img src="../assets/images/guides/material-compare-mountain/oil-brush/02.jpg" alt="油畫＋筆刷畫的富士山，前景有紅色鳥居">
+            <img src="../assets/images/guides/material-compare-mountain/oil-brush/03.jpg" alt="油畫＋筆刷畫的山谷景色，畫面中有一列小火車行駛過草原">
+            <img src="../assets/images/guides/material-compare-mountain/oil-brush/04.jpg" alt="油畫＋筆刷畫的層疊山巒，籠罩著藍綠色薄霧">
+            <img src="../assets/images/guides/material-compare-mountain/oil-brush/05.jpg" alt="油畫＋筆刷畫的夕陽山巒，暖橘色天空與藍紫色山影層疊">
+            <img src="../assets/images/guides/material-compare-mountain/oil-brush/06.jpg" alt="油畫＋筆刷畫的雪山，一旁夾著參考的實景照片">
+            <img src="../assets/images/guides/material-compare-mountain/oil-brush/07.jpg" alt="油畫＋筆刷畫的富士山與櫻花，湖面倒映著粉色天空">
+            <img src="../assets/images/guides/material-compare-mountain/oil-brush/08.jpg" alt="油畫＋筆刷畫的岩石山壁與海面，海上有一艘小船">
+            <img src="../assets/images/guides/material-compare-mountain/oil-brush/09.jpg" alt="油畫＋筆刷畫的海邊步道，沿岸山巒與一排路燈">
+            <img src="../assets/images/guides/material-compare-mountain/oil-brush/10.jpg" alt="油畫＋筆刷畫的深藍色夜間山景，遠方透出微光">
+            <img src="../assets/images/guides/material-compare-mountain/oil-brush/11.jpg" alt="油畫＋筆刷畫的櫻花大道，盡頭是富士山">
+            <img src="../assets/images/guides/material-compare-mountain/oil-brush/12.jpg" alt="油畫＋筆刷畫的綠色丘陵與湖泊，前景點綴粉色花朵">
+            <img src="../assets/images/guides/material-compare-mountain/oil-brush/13.jpg" alt="油畫＋筆刷畫的雪山與深藍色海面，海上有一艘小船">
+            <img src="../assets/images/guides/material-compare-mountain/oil-brush/14.jpg" alt="油畫＋筆刷畫的富士山，透過窗框構圖望向湖面小船">
+          </div>
         </div>
         <p class="chapter__statement">油畫＋筆刷</p>
         <p class="chapter__prose">油畫＋筆刷是常見處理細緻圖面的基本材料，用筆容易控制，可以繪製精緻度較高的細部圖面，顏色漸層與變化也能高度控制。</p>
@@ -105,8 +129,18 @@
       </div>
 
       <div class="chapter__block">
-        <div class="ent-entry__media">
-          <img src="../assets/images/guides/material-compare-mountain/oil-knife-mountain.jpg" alt="油畫＋刮刀畫的山，綠黃粉藍等顏色交錯堆疊出抽象質感">
+        <div class="material-photo-carousel">
+          <div class="material-photo-carousel__track">
+            <img src="../assets/images/guides/material-compare-mountain/oil-knife/01.jpg" alt="油畫＋刮刀畫的山，綠黃粉藍等顏色交錯堆疊出抽象質感">
+            <img src="../assets/images/guides/material-compare-mountain/oil-knife/02.jpg" alt="刮刀油畫的翠綠山脈，刮刀堆疊出粗獷的筆觸質感">
+            <img src="../assets/images/guides/material-compare-mountain/oil-knife/03.jpg" alt="刮刀油畫繪製中，畫家用刮刀在畫布上堆疊色彩">
+            <img src="../assets/images/guides/material-compare-mountain/oil-knife/04.jpg" alt="刮刀油畫的灰白雪山群峰，山腳下有一間小屋">
+            <img src="../assets/images/guides/material-compare-mountain/oil-knife/05.jpg" alt="刮刀油畫的粉白雪山，夜空中有一彎新月與星星">
+            <img src="../assets/images/guides/material-compare-mountain/oil-knife/06.jpg" alt="刮刀油畫的沙丘山景，橘藍色調的夕陽">
+            <img src="../assets/images/guides/material-compare-mountain/oil-knife/07.jpg" alt="刮刀油畫的黑灰色馬特洪峰，前景是秋天的紅黃樹叢">
+            <img src="../assets/images/guides/material-compare-mountain/oil-knife/08.jpg" alt="刮刀油畫的海岸崖壁，浪花拍打岸邊，前景有紅色小花">
+            <img src="../assets/images/guides/material-compare-mountain/oil-knife/09.jpg" alt="刮刀油畫繪製中，畫家用刮刀勾勒海岸崖壁的細節">
+          </div>
         </div>
         <p class="chapter__statement">油畫＋刮刀</p>
         <p class="chapter__prose">刮刀跟肌理畫用的是同一個工具，差別在材料，這裡用的是質地較重、乾得比較慢的油畫顏料。</p>
@@ -116,8 +150,17 @@
       </div>
 
       <div class="chapter__block">
-        <div class="ent-entry__media">
-          <img src="../assets/images/guides/material-compare-mountain/sand-texture-mountain.jpg" alt="石英砂肌理畫的雪山滑雪場景，表面有明顯的顆粒立體質感">
+        <div class="material-photo-carousel">
+          <div class="material-photo-carousel__track">
+            <img src="../assets/images/guides/material-compare-mountain/sand-texture/01.jpg" alt="石英砂肌理畫的雪山滑雪場景，表面有明顯的顆粒立體質感">
+            <img src="../assets/images/guides/material-compare-mountain/sand-texture/02.jpg" alt="石英砂肌理畫的海邊夕陽山景，畫面前景有海浪與飛鳥">
+            <img src="../assets/images/guides/material-compare-mountain/sand-texture/03.jpg" alt="石英砂肌理畫的藍紫漸層天空下的雪山倒影">
+            <img src="../assets/images/guides/material-compare-mountain/sand-texture/04.jpg" alt="石英砂肌理畫的富士山，前景點綴楓紅樹葉">
+            <img src="../assets/images/guides/material-compare-mountain/sand-texture/05.jpg" alt="石英砂肌理畫的富士山，畫面飄落粉紅櫻花">
+            <img src="../assets/images/guides/material-compare-mountain/sand-texture/06.jpg" alt="石英砂肌理畫的湖邊山景，森林稜線倒映在藍色湖面上">
+            <img src="../assets/images/guides/material-compare-mountain/sand-texture/07.jpg" alt="石英砂肌理畫的馬特洪峰造型雪山，背景是藍天">
+            <img src="../assets/images/guides/material-compare-mountain/sand-texture/08.jpg" alt="石英砂肌理畫的山谷雪景，兩側山壁夾著中間的雪坡">
+          </div>
         </div>
         <p class="chapter__statement">壓克力＋石英砂＋刮刀</p>
         <p class="chapter__prose">肌理畫的基本組成是壓克力＋石英砂＋刮刀，壓克力乾燥快速，石英砂用來增加粗糙感與立體感，刮刀則讓顏料在堆疊時可以短時間內做出想要的層次。</p>

@@ -1538,6 +1538,42 @@ button.text-link {
   transform: scale(1.3);
 }
 
+/* ---------- 單一材料的多張真實作品照橫向滑動（材料指南比較頁專用） ----------
+   跟 .pattern-carousel__track／.addon-carousel__track 同一套逃出版面留白、
+   scroll-snap 橫向滑動的手法，差別只在這裡放的是純照片（沒有卡片邊框、
+   沒有文字說明、沒有點擊選取語意），單純讓人滑過去看同一材料的多張
+   成品。張數多（最多 14 張）時不用 .pattern-carousel__dots 那種逐張圓點，
+   點太多反而變雜訊，直接靠原生滑動手感＋卡片邊緣露出一截提示「還有更多」
+   就夠了。 */
+.material-photo-carousel {
+  margin-top: var(--space-4);
+}
+
+.material-photo-carousel__track {
+  display: flex;
+  gap: var(--space-3);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  margin-left: calc(-1 * var(--pad-h));
+  margin-right: calc(-1 * var(--pad-h));
+  padding: var(--space-1) 9vw var(--space-2);
+  scrollbar-width: none;
+}
+
+.material-photo-carousel__track::-webkit-scrollbar {
+  display: none;
+}
+
+.material-photo-carousel__track img {
+  flex: 0 0 82vw;
+  max-width: 320px;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: var(--radius-sharp);
+  scroll-snap-align: center;
+}
+
 /* 套組內容章節：「成品尺寸」隨選中圖案即時更新，見 js/sand-art-gallery.js applyPattern()。 */
 .kit-section__size-hint {
   margin-top: var(--space-4);
