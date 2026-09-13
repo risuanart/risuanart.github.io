@@ -22,6 +22,7 @@
   <link rel="stylesheet" href="css/home.css">
   <link rel="stylesheet" href="css/products.css">
   <link rel="stylesheet" href="css/cart.css">
+  <link rel="stylesheet" href="css/site-menu.css">
 </head>
 <body>
 
@@ -29,10 +30,9 @@
   <div class="ambient-grain" aria-hidden="true"></div>
 
   <header class="site-header">
-    <!-- 結帳流程會整頁導去綠界電子地圖選門市再導回這頁，history 裡會夾著
-         那個外部頁面；固定回材料包母頁，不用瀏覽器上一頁（見
-         js/site-header-scroll.js data-back-fixed 的說明）。 -->
-    <a class="site-header__back" href="index.html" data-back-fixed aria-label="回到首頁"><img src="assets/images/logo-risuan拷貝.png" alt="日宣繪畫室"></a>
+    <button type="button" class="site-header__menu-toggle" id="menu-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="site-menu" aria-label="開啟選單">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
     <div class="site-header__title">購物車</div>
     <!-- 填收件資料往下滑、上面那條「確認訂單詳情」橫條捲出畫面之後，橫條
          會併進這一列頂部導覽（.site-header.is-order-docked）：標題位置換成
@@ -60,6 +60,9 @@
     </div>
     <span class="site-header__order-total" hidden></span>
   </header>
+
+  <div class="site-menu-backdrop" id="site-menu-backdrop"></div>
+  <nav class="site-menu" id="site-menu" aria-label="全站選單"></nav>
 
   <nav class="pill-nav" aria-label="全站分類導覽">
     <a href="index.html" data-cat="group">團體課</a>
@@ -391,5 +394,6 @@
   <script src="js/cart-cross-sell.js"></script>
   <script src="js/site-header-scroll.js"></script>
   <script src="js/scroll-reveal.js"></script>
+  <script src="js/site-menu.js"></script>
 </body>
 </html>

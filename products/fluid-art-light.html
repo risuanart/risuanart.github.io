@@ -41,6 +41,7 @@
   <link rel="stylesheet" href="../css/home.css">
   <link rel="stylesheet" href="../css/products.css">
   <link rel="stylesheet" href="../css/cart.css">
+  <link rel="stylesheet" href="../css/site-menu.css">
 </head>
 <body data-kit-version="light">
 
@@ -48,7 +49,9 @@
   <div class="ambient-grain" aria-hidden="true"></div>
 
   <header class="site-header">
-    <a class="site-header__back" href="../index.html" data-back-fixed aria-label="回到首頁"><img src="../assets/images/logo-risuan拷貝.png" alt="日宣繪畫室"></a>
+    <button type="button" class="site-header__menu-toggle" id="menu-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="site-menu" aria-label="開啟選單">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
     <div class="site-header__title">春聯流動畫材料包・輕巧版</div>
     <div class="cart-badge-wrap">
       <button type="button" class="cart-badge" aria-haspopup="true" aria-expanded="false" aria-label="購物車，目前 0 件">
@@ -66,6 +69,9 @@
       </div>
     </div>
   </header>
+
+  <div class="site-menu-backdrop" id="site-menu-backdrop"></div>
+  <nav class="site-menu" id="site-menu" aria-label="全站選單" data-menu-base="../"></nav>
 
   <!-- 8 個材料包子頁彼此輪替：左右不再連回首頁的團體課／課程（那兩個
        目前只是待補頁面的暫時佔位連結），改成材料包子頁自己的上一項／
@@ -242,5 +248,6 @@
   <script src="../js/product-terms.js"></script>
   <script src="../js/site-header-scroll.js"></script>
   <script src="../js/scroll-reveal.js"></script>
+  <script src="../js/site-menu.js"></script>
 </body>
 </html>

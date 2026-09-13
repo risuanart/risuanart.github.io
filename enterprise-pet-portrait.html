@@ -26,6 +26,7 @@
   <link rel="stylesheet" href="css/products.css">
   <link rel="stylesheet" href="css/cart.css">
   <link rel="stylesheet" href="css/enterprise.css">
+  <link rel="stylesheet" href="css/site-menu.css">
 </head>
 <body>
 
@@ -33,7 +34,9 @@
   <div class="ambient-grain" aria-hidden="true"></div>
 
   <header class="site-header">
-    <a class="site-header__back" href="enterprise.html" data-back-fixed aria-label="回到企業課程列表"><img src="assets/images/logo-risuan拷貝.png" alt="日宣繪畫室"></a>
+    <button type="button" class="site-header__menu-toggle" id="menu-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="site-menu" aria-label="開啟選單">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
     <div class="site-header__title">企業課程案例</div>
     <div class="cart-badge-wrap">
       <button type="button" class="cart-badge" aria-haspopup="true" aria-expanded="false" aria-label="購物車，目前 0 件">
@@ -51,6 +54,9 @@
       </div>
     </div>
   </header>
+
+  <div class="site-menu-backdrop" id="site-menu-backdrop"></div>
+  <nav class="site-menu" id="site-menu" aria-label="全站選單"></nav>
 
   <main class="product-page work">
 
@@ -159,5 +165,6 @@
   <script src="js/site-header-scroll.js"></script>
   <script src="js/scroll-reveal.js"></script>
   <script src="js/enterprise-gallery.js"></script>
+  <script src="js/site-menu.js"></script>
 </body>
 </html>

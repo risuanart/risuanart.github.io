@@ -148,7 +148,6 @@ html {
   -webkit-backdrop-filter: blur(30px);
 }
 
-.site-header__back,
 .site-header__title,
 .site-header__action {
   font-size: var(--editorial-label-font-size);
@@ -157,25 +156,8 @@ html {
   color: var(--color-text-primary);
 }
 
-.site-header__back,
 .site-header__action {
   flex: none;
-}
-
-/* 左上角改成品牌 logo（可點回首頁），取代原本的「← 返回」文字連結——
-   跟首頁自己的 .logo 圖案共用同一張圖檔，但這裡是排在 .site-header
-   這排 flex 列裡的一般子元素（不是像首頁那樣 position:fixed 懸浮），
-   高度對齊 products/index.html 底部懸浮列 .pill-nav__home img 用的
-   20px 尺寸級距，全站「logo＝回首頁」的視覺語彙保持一致。 */
-.site-header__back {
-  display: flex;
-  align-items: center;
-}
-
-.site-header__back img {
-  display: block;
-  height: 22px;
-  width: auto;
 }
 
 .site-header__title {

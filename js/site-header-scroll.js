@@ -25,7 +25,8 @@
   scrollEl.addEventListener("scroll", update, { passive: true });
   update();
 
-  // 左上角原本是「← 返回」文字連結、可能攔截成 history.back()，現在改成
-  // 固定連回首頁的品牌 logo（見各頁 .site-header__back 的 data-back-fixed
-  // 屬性），單純的 <a href>，這裡不用再處理點擊行為。
+  // 左上角原本是「← 返回」文字連結（可能攔截成 history.back()），後來
+  // 改成固定連回首頁的品牌 logo，2026-09-13 再統一改成漢堡選單按鈕
+  // （見 js/site-menu.js），這裡從頭到尾都跟左上角本身的點擊行為無關，
+  // 只負責頂部列的捲動毛玻璃效果，不用調整。
 })();

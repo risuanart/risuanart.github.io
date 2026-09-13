@@ -1,0 +1,138 @@
+/* site-menu.css —— 全站共用的漢堡選單／抽屜（左上角目錄按鈕）。
+   2026-09-13 使用者要求「全站左上角統一改成目錄點擊」：原本只有
+   index.html 左上角是漢堡按鈕點開抽屜選單，其餘 28 個子頁
+   （courses/／products/／guides/／enterprise*.html／gallery.html／
+   cart.html／faq.html）左上角是「回首頁」的品牌 logo 連結，兩種行為不
+   一致。這裡把 index.html 已經有的這組視覺（原本定義在 css/home-shop.css
+   裡）抽出獨立成這份共用檔案，讓子頁可以引用同一套樣式，不用整份
+   home-shop.css（那份還有首頁專屬的輪播、桌面版文字導覽列等子頁用不到
+   的內容）。index.html 自己維持用 home-shop.css 裡原本那份規則、不改
+   不重複載入這份檔案，避免影響已經調好的首頁版面（首頁桌面版≥1024px
+   還有完全不同的文字導覽列，子頁不套用那套，維持任何寬度都是漢堡鈕）。 */
+
+.site-header__menu-toggle {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+/* 選單面板：從頂部列下方滑出，蓋在背景遮罩上面。用 transform 滑動
+   （不是 hidden/display），才能有平滑的開合過場；關閉狀態整片位移到
+   螢幕外（不是 opacity:0），鍵盤 tab 也不會停在看不見的連結上。
+   z-index 比 .site-header（home.css 定義為 25）低，讓頂部列（漢堡鈕
+   本身）在選單展開時仍然疊在最上層、可以再點一次關掉。
+   padding-top 用 --editorial-header-height（tokens.css：母頁頂部列
+   實測高度 58px）＋69px，跟 .product-page／enterprise.css 的
+   margin-top 是同一套算式，本來就是給子頁這種單排頂部列算的，不是
+   首頁專屬數字。 */
+.site-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 24;
+  padding: calc(var(--editorial-header-height) + 69px + var(--space-4)) var(--pad-h) var(--space-6);
+  background: var(--color-surface-black);
+  border-bottom: 1px solid color-mix(in srgb, var(--color-surface-light) 20%, transparent);
+  display: flex;
+  flex-direction: column;
+  transform: translateY(-100%);
+  transition: transform var(--duration-normal) var(--ease-standard);
+}
+
+.site-menu.is-open {
+  transform: translateY(0);
+}
+
+.site-menu a,
+.site-menu__disabled {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-4) 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--color-surface-light) 15%, transparent);
+  font-size: 15px;
+  color: var(--color-surface-light);
+}
+
+.site-menu a:last-child,
+.site-menu__disabled:last-child {
+  border-bottom: none;
+}
+
+.site-menu__disabled {
+  color: color-mix(in srgb, var(--color-surface-light) 55%, transparent);
+  cursor: not-allowed;
+}
+
+.site-menu__soon {
+  flex: none;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: color-mix(in srgb, var(--color-surface-light) 55%, transparent);
+}
+
+.site-menu__group {
+  padding: var(--space-4) 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--color-surface-light) 15%, transparent);
+}
+
+.site-menu__group-title {
+  margin: 0 0 var(--space-2);
+  font-size: 15px;
+  color: var(--color-surface-light);
+}
+
+.site-menu__sublist {
+  margin: 0 0 var(--space-3);
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+}
+
+.site-menu__sublist li {
+  font-size: 12px;
+  color: color-mix(in srgb, var(--color-surface-light) 55%, transparent);
+}
+
+.site-menu__sublink {
+  display: inline-block;
+  font-size: 13px;
+  color: var(--color-surface-light);
+  border-bottom: 1px solid currentColor;
+}
+
+.site-menu__sublist li .site-menu__sublink {
+  display: inline;
+  justify-content: normal;
+  gap: 0;
+  padding: 0;
+  border-bottom: 1px solid currentColor;
+  font-size: 13px;
+}
+
+.site-menu-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 23;
+  background: color-mix(in srgb, var(--color-surface-black) 40%, transparent);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--duration-normal) var(--ease-standard);
+}
+
+.site-menu-backdrop.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
