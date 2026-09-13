@@ -25,7 +25,46 @@
 //   src: "assets/images/gallery/2026-09-01-sand-texture-flower.jpg",
 //   alt: "石英砂肌理畫，花卉主題",
 // }
-window.GALLERY_ITEMS = [];
+// 2026-09-13 新增：「山」系列 29 件（材料指南〈同一座山，三種材料的
+// 呈現〉頁面同一批真實照片，使用者確認這些是真正的學員作品，不是畫室
+// 示範，照實歸進對應課程）。原始相簿共 31 張，這裡排除 2 張刮刀油畫
+// 的「繪製過程」特寫照（IMG_0428／IMG_0435，是同一件作品畫到一半的
+// 過程紀錄，不是獨立完成的作品，放進作品集會重複計算），其餘 29 張
+// 都是各自獨立完成的作品。date 沒有精確的完成日期紀錄，先統一用新增
+// 這筆資料的日期，之後有更準確的日期可以再改。
+window.GALLERY_ITEMS = [
+  { course: "石英砂肌理畫", themes: ["風景"], date: "2026-09-13", src: "assets/images/guides/material-compare-mountain/sand-texture/01.jpg", alt: "石英砂肌理畫的滑雪場雪山空拍景色，畫面上有滑雪的人群與紅色旗幟" },
+  { course: "石英砂肌理畫", themes: ["風景"], date: "2026-09-13", src: "assets/images/guides/material-compare-mountain/sand-texture/02.jpg", alt: "石英砂肌理畫的海邊夕陽山景，畫面前景有海浪與飛鳥" },
+  { course: "石英砂肌理畫", themes: ["風景"], date: "2026-09-13", src: "assets/images/guides/material-compare-mountain/sand-texture/03.jpg", alt: "石英砂肌理畫的藍紫漸層天空下的雪山倒影" },
+  { course: "石英砂肌理畫", themes: ["風景"], date: "2026-09-13", src: "assets/images/guides/material-compare-mountain/sand-texture/04.jpg", alt: "石英砂肌理畫的富士山，前景點綴楓紅樹葉" },
+  { course: "石英砂肌理畫", themes: ["風景"], date: "2026-09-13", src: "assets/images/guides/material-compare-mountain/sand-texture/05.jpg", alt: "石英砂肌理畫的富士山，畫面飄落粉紅櫻花" },
+  { course: "石英砂肌理畫", themes: ["風景"], date: "2026-09-13", src: "assets/images/guides/material-compare-mountain/sand-texture/06.jpg", alt: "石英砂肌理畫的湖邊山景，森林稜線倒映在藍色湖面上" },
+  { course: "石英砂肌理畫", themes: ["風景"], date: "2026-09-13", src: "assets/images/guides/material-compare-mountain/sand-texture/07.jpg", alt: "石英砂肌理畫的馬特洪峰造型雪山，背景是藍天" },
+  { course: "石英砂肌理畫", themes: ["風景"], date: "2026-09-13", src: "assets/images/guides/material-compare-mountain/sand-texture/08.jpg", alt: "石英砂肌理畫的山谷雪景，兩側山壁夾著中間的雪坡" },
+
+  { course: "自己帶圖創作", themes: ["風景"], date: "2026-09-13", src: "assets/images/guides/material-compare-mountain/oil-brush/01.jpg", alt: "油畫＋筆刷畫的富士山，前景有電線桿與枯草地" },
+  { course: "自己帶圖創作", themes: ["風景"], date: "2026-09-13", src: "assets/images/guides/material-compare-mountain/oil-brush/02.jpg", alt: "油畫＋筆刷畫的富士山，前景有紅色鳥居" },
+  { course: "自己帶圖創作", themes: ["風景"], date: "2026-09-13", src: "assets/images/guides/material-compare-mountain/oil-brush/03.jpg", alt: "油畫＋筆刷畫的山谷景色，畫面中有一列小火車行駛過草原" },
+  { course: "自己帶圖創作", themes: ["風景"], date: "2026-09-13", src: "assets/images/guides/material-compare-mountain/oil-brush/04.jpg", alt: "油畫＋筆刷畫的層疊山巒，籠罩著藍綠色薄霧" },
+  { course: "自己帶圖創作", themes: ["風景"], date: "2026-09-13", src: "assets/images/guides/material-compare-mountain/oil-brush/05.jpg", alt: "油畫＋筆刷畫的夕陽山巒，暖橘色天空與藍紫色山影層疊" },
+  { course: "自己帶圖創作", themes: ["風景"], date: "2026-09-13", src: "assets/images/guides/material-compare-mountain/oil-brush/06.jpg", alt: "油畫＋筆刷畫的雪山，一旁夾著參考的實景照片" },
+  { course: "自己帶圖創作", themes: ["風景"], date: "2026-09-13", src: "assets/images/guides/material-compare-mountain/oil-brush/07.jpg", alt: "油畫＋筆刷畫的富士山與櫻花，湖面倒映著粉色天空" },
+  { course: "自己帶圖創作", themes: ["風景"], date: "2026-09-13", src: "assets/images/guides/material-compare-mountain/oil-brush/08.jpg", alt: "油畫＋筆刷畫的岩石山壁與海面，海上有一艘小船" },
+  { course: "自己帶圖創作", themes: ["風景"], date: "2026-09-13", src: "assets/images/guides/material-compare-mountain/oil-brush/09.jpg", alt: "油畫＋筆刷畫的海邊步道，沿岸山巒與一排路燈" },
+  { course: "自己帶圖創作", themes: ["風景"], date: "2026-09-13", src: "assets/images/guides/material-compare-mountain/oil-brush/10.jpg", alt: "油畫＋筆刷畫的深藍色夜間山景，遠方透出微光" },
+  { course: "自己帶圖創作", themes: ["風景"], date: "2026-09-13", src: "assets/images/guides/material-compare-mountain/oil-brush/11.jpg", alt: "油畫＋筆刷畫的櫻花大道，盡頭是富士山" },
+  { course: "自己帶圖創作", themes: ["風景"], date: "2026-09-13", src: "assets/images/guides/material-compare-mountain/oil-brush/12.jpg", alt: "油畫＋筆刷畫的綠色丘陵與湖泊，前景點綴粉色花朵" },
+  { course: "自己帶圖創作", themes: ["風景"], date: "2026-09-13", src: "assets/images/guides/material-compare-mountain/oil-brush/13.jpg", alt: "油畫＋筆刷畫的雪山與深藍色海面，海上有一艘小船" },
+  { course: "自己帶圖創作", themes: ["風景"], date: "2026-09-13", src: "assets/images/guides/material-compare-mountain/oil-brush/14.jpg", alt: "油畫＋筆刷畫的富士山，透過窗框構圖望向湖面小船" },
+
+  { course: "刮刀油畫", themes: ["風景"], date: "2026-09-13", src: "assets/images/guides/material-compare-mountain/oil-knife/01.jpg", alt: "油畫＋刮刀畫的山，綠黃粉藍等顏色交錯堆疊出抽象質感" },
+  { course: "刮刀油畫", themes: ["風景"], date: "2026-09-13", src: "assets/images/guides/material-compare-mountain/oil-knife/02.jpg", alt: "刮刀油畫的翠綠山脈，刮刀堆疊出粗獷的筆觸質感" },
+  { course: "刮刀油畫", themes: ["風景"], date: "2026-09-13", src: "assets/images/guides/material-compare-mountain/oil-knife/04.jpg", alt: "刮刀油畫的灰白雪山群峰，山腳下有一間小屋" },
+  { course: "刮刀油畫", themes: ["風景"], date: "2026-09-13", src: "assets/images/guides/material-compare-mountain/oil-knife/05.jpg", alt: "刮刀油畫的粉白雪山，夜空中有一彎新月與星星" },
+  { course: "刮刀油畫", themes: ["風景"], date: "2026-09-13", src: "assets/images/guides/material-compare-mountain/oil-knife/06.jpg", alt: "刮刀油畫的沙丘山景，橘藍色調的夕陽" },
+  { course: "刮刀油畫", themes: ["風景"], date: "2026-09-13", src: "assets/images/guides/material-compare-mountain/oil-knife/07.jpg", alt: "刮刀油畫的黑灰色馬特洪峰，前景是秋天的紅黃樹叢" },
+  { course: "刮刀油畫", themes: ["風景"], date: "2026-09-13", src: "assets/images/guides/material-compare-mountain/oil-knife/08.jpg", alt: "刮刀油畫的海岸崖壁，浪花拍打岸邊，前景有紅色小花" },
+];
 
 // 課程篩選鈕的選項清單，跟首頁「課程」選單、faq.html 裡提到的課程名稱
 // 一致，不是另外編一套名稱。
