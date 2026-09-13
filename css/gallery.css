@@ -61,6 +61,18 @@
   gap: var(--space-2);
 }
 
+/* 修正 bug：瀏覽器內建樣式表的 [hidden] { display: none } 選擇器特異度
+   跟上面 .gallery-grid { display: grid } 打平（都是 0,1,0），瀏覽器自己
+   的樣式表雖然通常最先套用，但當開發者樣式表（這份 CSS）晚載入、特異度
+   又打平時，後載入的這條 display: grid 會贏，導致 js/gallery.js／
+   js/gallery-course-preview.js 設定 grid.hidden = true 時畫面上完全沒有
+   視覺效果——格子還是用 display: grid 繼續顯示，篩選到沒有符合的作品時
+   舊的照片還是會留在畫面上。這裡明寫一條特異度打平但排在後面的規則，
+   確保 hidden 屬性真的會生效。 */
+.gallery-grid[hidden] {
+  display: none;
+}
+
 @media (min-width: 768px) {
   .gallery-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));

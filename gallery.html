@@ -56,38 +56,33 @@
 
     <!-- 資料跟畫面分開：GALLERY_ITEMS（見 js/gallery-data.js）目前是空的，
          之後有真的照片直接在那個檔案加資料，這裡的 HTML／篩選邏輯都不用
-         改。課程單選、主題複選的篩選鈕先寫死在 HTML（跟 shop.html 的
-         .quick-nav__categories 一樣，選項不常變，不需要為了 7-8 個固定
-         按鈕另外寫動態產生的程式碼），格狀相簿本身才由 js/gallery.js
-         動態產生。 -->
+         改。
+
+         課程／主題篩選鈕原本是寫死在這份 HTML 裡的（跟 shop.html 的
+         .quick-nav__categories 一樣的想法：選項不常變，不值得為了 7-8 個
+         固定按鈕寫動態產生的程式碼）。但實際上courses 陸續增加（寵物
+         肖像畫、大幅畫布訂製）、themes 也陸續增加（山、海邊、動漫／
+         角色、星空／月亮）時，這裡的按鈕清單好幾次忘記同步更新——
+         2026-09-13 使用者發現「主題裡面沒有山也沒有海邊」就是這個問題：
+         不是設計上刻意不加，是每次改 js/gallery-data.js 的
+         GALLERY_COURSES／GALLERY_THEMES 時，忘記回來手動同步這裡的按鈕。
+         改成從 js/gallery-data.js 動態產生（見 js/gallery.js
+         renderFilterButtons()）後，兩份清單只會有一份事實來源，之後
+         新增課程／主題只要改 gallery-data.js，這裡的按鈕會自動出現，
+         不會再漏掉。「全部」是特殊項目（不對應任何課程），維持寫死。 -->
     <h1 class="chapter__title fade-in">學員作品集</h1>
     <p class="chapter__intro fade-in delay-1">依課程或主題篩選瀏覽，也可以比較同一個主題、不同材料畫出來的差異。</p>
 
     <section class="gallery-filters fade-in delay-1">
       <div>
         <p class="gallery-filters__label">課程</p>
-        <div class="gallery-filters__group">
+        <div class="gallery-filters__group" id="gallery-course-filters">
           <button type="button" class="gallery-filters__chip is-active" data-gallery-course="all">全部</button>
-          <button type="button" class="gallery-filters__chip" data-gallery-course="石英砂肌理畫">石英砂肌理畫</button>
-          <button type="button" class="gallery-filters__chip" data-gallery-course="刮刀油畫">刮刀油畫</button>
-          <button type="button" class="gallery-filters__chip" data-gallery-course="流動畫">流動畫</button>
-          <button type="button" class="gallery-filters__chip" data-gallery-course="抽象畫">抽象畫</button>
-          <button type="button" class="gallery-filters__chip" data-gallery-course="自己帶圖創作">自己帶圖創作</button>
-          <button type="button" class="gallery-filters__chip" data-gallery-course="鏡子拼貼">鏡子拼貼</button>
-          <button type="button" class="gallery-filters__chip" data-gallery-course="串珠">串珠</button>
         </div>
       </div>
       <div>
         <p class="gallery-filters__label">主題（可複選）</p>
-        <div class="gallery-filters__group">
-          <button type="button" class="gallery-filters__chip" data-gallery-theme="海洋生物">海洋生物</button>
-          <button type="button" class="gallery-filters__chip" data-gallery-theme="陸地動物">陸地動物</button>
-          <button type="button" class="gallery-filters__chip" data-gallery-theme="植物花卉">植物花卉</button>
-          <button type="button" class="gallery-filters__chip" data-gallery-theme="人像">人像</button>
-          <button type="button" class="gallery-filters__chip" data-gallery-theme="抽象圖案">抽象圖案</button>
-          <button type="button" class="gallery-filters__chip" data-gallery-theme="節慶／季節">節慶／季節</button>
-          <button type="button" class="gallery-filters__chip" data-gallery-theme="風景">風景</button>
-        </div>
+        <div class="gallery-filters__group" id="gallery-theme-filters"></div>
       </div>
     </section>
 

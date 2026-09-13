@@ -5,11 +5,42 @@
 (function () {
   const grid = document.getElementById("gallery-grid");
   const emptyState = document.getElementById("gallery-empty");
-  const courseButtons = document.querySelectorAll("[data-gallery-course]");
-  const themeButtons = document.querySelectorAll("[data-gallery-theme]");
+  const courseFilterGroup = document.getElementById("gallery-course-filters");
+  const themeFilterGroup = document.getElementById("gallery-theme-filters");
   if (!grid) return;
 
   const items = window.GALLERY_ITEMS || [];
+
+  // 課程／主題按鈕從 GALLERY_COURSES／GALLERY_THEMES（見 js/gallery-data.js）
+  // 動態產生，不是寫死在 HTML 裡——這樣以後在 gallery-data.js 加新課程
+  // 或新主題，這裡的篩選鈕會自動跟著出現，不用回來改兩個地方、也不會
+  // 再發生「加了新主題，篩選鈕卻忘記同步」的問題。「全部」按鈕是特殊
+  // 項目（不對應任何課程），維持寫在 gallery.html 裡，這裡只補課程清單
+  // 後面的按鈕。
+  if (courseFilterGroup) {
+    (window.GALLERY_COURSES || []).forEach((course) => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "gallery-filters__chip";
+      btn.setAttribute("data-gallery-course", course);
+      btn.textContent = course;
+      courseFilterGroup.appendChild(btn);
+    });
+  }
+
+  if (themeFilterGroup) {
+    (window.GALLERY_THEMES || []).forEach((theme) => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "gallery-filters__chip";
+      btn.setAttribute("data-gallery-theme", theme);
+      btn.textContent = theme;
+      themeFilterGroup.appendChild(btn);
+    });
+  }
+
+  const courseButtons = document.querySelectorAll("[data-gallery-course]");
+  const themeButtons = document.querySelectorAll("[data-gallery-theme]");
 
   // 課程頁「查看更多這堂課的作品」連結會帶 ?course=課程名稱 過來（見
   // js/gallery-course-preview.js），這裡讀網址參數決定進頁面時要先選
