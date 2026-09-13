@@ -9,14 +9,16 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="寵物肖像畫課程｜日宣繪畫室">
   <meta property="og:description" content="帶家裡毛孩的照片來畫室，用油畫顏料畫出牠的肖像，單隻寵物通常一堂課就能完成。">
-  <!-- 這堂課目前還沒有真實的課程／學員作品照片或影片，og:image 先不放
-       （沒有素材硬塞一張不相關的圖，比沒有這個標籤更誤導），等真的素材
-       到位再補上。 -->
+  <!-- 2026-09-14 補上：首圖換成使用者提供的真實繪製過程影片後，用影片
+       截的一幀（hero-poster.jpg）當 og:image，twitter:card 也跟著升級成
+       summary_large_image（其他有真實首圖的課程頁同一套做法）。 -->
+  <meta property="og:image" content="https://risuanart.com/assets/images/courses/pet-portrait/hero-poster.jpg">
   <meta property="og:url" content="https://risuanart.com/courses/pet-portrait.html">
   <meta property="og:locale" content="zh_TW">
-  <meta name="twitter:card" content="summary">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="寵物肖像畫課程｜日宣繪畫室">
   <meta name="twitter:description" content="帶家裡毛孩的照片來畫室，用油畫顏料畫出牠的肖像，單隻寵物通常一堂課就能完成。">
+  <meta name="twitter:image" content="https://risuanart.com/assets/images/courses/pet-portrait/hero-poster.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=ABeeZee&family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;600;700&family=Poppins:wght@700&family=Noto+Serif+TC:wght@500;700&family=Noto+Sans+TC:wght@400;600;700&display=swap" rel="stylesheet">
@@ -96,14 +98,21 @@
             確認課程流程／技法／品牌語氣等 faq.html 沒寫的部分，沒有
             兩邊互相矛盾就都保留，有衝突的地方（時長、有沒有涵蓋貓與
             其他寵物）一律採用 faq.html 的版本。
-         5. 目前完全沒有真實課程／學員作品照片或影片，首圖跟學員作品格
-            都維持 .placeholder-box／gallery-course-preview 誠實佔位。 -->
+         5. 2026-09-14 補上首圖：使用者放了一支真實繪製過程影片
+            （寵物油畫.mov，內容是白底虎斑貓、戴紫色小兜帽、抱著咖啡色
+            玩偶，從調色、畫五官到完成裝框的完整過程），已經是 H.264，
+            用 ffmpeg -c copy 直接重新封裝成 .mp4（不重新編碼，畫質
+            不受影響），取代原本的 .placeholder-box。做法比照
+            courses/sand-texture.html／courses/palette-knife-oil.html
+            首圖（.ent-hero.is-flush-top＋.ent-hero__photo
+            .is-portrait-video.is-full-bleed），另外截一幀當
+            hero-poster.jpg，同時當 <video poster> 跟 og:image／
+            twitter:image。學員作品格維持 gallery-course-preview 誠實
+            佔位，這支影片是繪製過程紀錄，不是可篩選分類的完成品照片，
+            不會另外塞進 js/gallery-data.js。 -->
 
-    <section class="ent-hero fade-in">
-      <div class="ent-hero__photo placeholder-box placeholder-box--photo" aria-hidden="true">
-        <svg class="placeholder-box__icon" viewBox="0 0 24 24" width="1.8em" height="1.8em" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1.5"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 16l-5.5-5.5a1 1 0 0 0-1.4 0L6 19"/></svg>
-        <span class="placeholder-box__text">首圖待補：學員完成的寵物肖像油畫作品</span>
-      </div>
+    <section class="ent-hero fade-in is-flush-top">
+      <video class="ent-hero__photo is-portrait-video is-full-bleed" src="../assets/videos/courses/pet-portrait/寵物油畫.mp4" poster="../assets/images/courses/pet-portrait/hero-poster.jpg" preload="auto" autoplay muted loop playsinline aria-label="寵物肖像畫繪製過程：戴紫色小兜帽的貓咪肖像"></video>
       <div class="ent-hero__caption">
         <p class="ent-hero__eyebrow">畫室常態課程</p>
         <h1 class="ent-hero__title">寵物肖像畫</h1>
