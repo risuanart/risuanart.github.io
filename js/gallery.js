@@ -61,7 +61,7 @@
         <img src="${item.src}" alt="${item.alt || ""}" loading="lazy">
         <figcaption class="gallery-grid__caption">${item.course}${
           item.themes && item.themes.length ? "・" + item.themes.join("、") : ""
-        }</figcaption>
+        }${item.sessions ? "・" + (item.sessions === 1 ? "一堂完成" : item.sessions + "堂完成") : ""}</figcaption>
       </figure>`
       )
       .join("");
