@@ -29,3 +29,9 @@ assets/images/courses/sand-texture/成型方式/*.gif
 # 春聯流動畫.MP4，那份才是網頁真的引用的檔案），原始 HEVC 檔改名加
 # 「-原始檔」保留在電腦裡，不進版控。
 assets/videos/home/春聯流動畫-原始檔.MP4
+
+# 「大幅畫布訂製」課程頁的兩支示範影片原始檔，同樣是手機拍的 HEVC
+# 編碼（.MP4 副檔名但 codec 是 h265），另外用 ffmpeg 轉出 720px 寬的
+# H.264 版本（同資料夾同檔名不加「-原始檔」的那兩份，網頁引用的是
+# 那兩份），原始檔保留在電腦裡不進版控，理由跟上面春聯流動畫一樣。
+assets/videos/courses/large-canvas/*-原始檔.MP4

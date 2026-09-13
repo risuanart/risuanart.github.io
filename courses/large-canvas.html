@@ -87,9 +87,21 @@
          - 抽象畫目前站內還沒有自己的課程頁（首頁選單還是純文字），這頁
            提到抽象畫時不加連結；肌理畫類技法（石英砂、刮刀）已經有
            課程頁，直接連過去，不在這頁重複教怎麼畫。
-         - 目前完全沒有真實成品／學員作品照片（2 張截圖畫面是材料特寫
-           跟手部動作，不是完整成品），首圖跟學員作品格都維持
-           .placeholder-box／gallery-course-preview 誠實佔位。 -->
+         - 目前完全沒有真實成品／學員作品照片，首圖跟學員作品格維持
+           .placeholder-box／gallery-course-preview 誠實佔位。
+
+         2026-09-13 追加：使用者上傳了 2 支真實示範影片（原始檔是手機拍的
+         HEVC，用 ffmpeg 轉成 720px 寬 H.264，原始檔改名加「-原始檔」
+         留在電腦裡不進版控，見 .gitignore）。看過內容後確認：兩支影片
+         都是同一種做法（石英砂混合壓克力堆疊塑形、最後貼金箔），差別
+         只在最後選的配色（一支灰色系、一支粉彩色系），不是兩種不同
+         技法，所以沒有分別當成「首圖」跟「章節示範」各放一支，而是用
+         courses/beading.html「大珠款／小珠款」同一套 .bead-compare
+         兩欄並排比較，放在「完成的樣子」這個新章節裡，緊接在「為什麼
+         可以當天完成」後面（影片內容剛好示範那段文字說的堆疊、貼金箔
+         過程）。首圖 .placeholder-box 維持不變——這兩支影片沒有哪一支
+         比較適合當作滿版首圖 loop（都有前段材料準備的畫面，不是純粹
+         的完成品展示），等有更適合的素材再換。 -->
 
     <section class="ent-hero fade-in">
       <div class="ent-hero__photo placeholder-box placeholder-box--photo" aria-hidden="true">
@@ -121,6 +133,35 @@
         <p class="chapter__statement">為什麼可以當天完成</p>
         <p class="chapter__prose">大幅畫布用的是全水性、乾燥速度快的材料，過程中可以不斷堆疊、修改，吹一吹很快就能再疊加一層，同時也可以搭配使用不同的工具跟材料。</p>
         <p class="chapter__prose">因為乾得快，才能在一堂課的尾聲貼上金箔或銀箔，當天就把整幅畫完成，不用另外再約時間。</p>
+      </div>
+    </section>
+
+    <!-- 完成的樣子：使用者上傳的 2 支真實示範影片（2026-09-13），都是
+         石英砂材質做的大幅畫布，差別在最後選的配色不同（灰色系／粉彩
+         色系），不是兩種不同技法。排版沿用 courses/beading.html 比較
+         「大珠款／小珠款」同一套 .bead-compare 兩欄網格（css/enterprise.css
+         既有樣式，不用另外寫 CSS），道理一樣：同一種做法，兩種呈現方式
+         並排比較最清楚。原始檔是手機拍的 HEVC 編碼，用 ffmpeg 轉成
+         720px 寬的 H.264（跟站內其他影片同一套壓縮慣例），原始檔改名
+         加「-原始檔」保留在電腦裡，不進版控（見 .gitignore）。 -->
+    <section class="chapter fade-in delay-1">
+      <div class="chapter__block">
+        <p class="chapter__statement">完成的樣子</p>
+        <p class="chapter__prose">同樣是石英砂材質的大幅畫布，換一種配色，完成的氣氛就完全不一樣。</p>
+      </div>
+      <div class="bead-compare">
+        <div class="bead-compare__cell">
+          <div class="chapter__banner-video is-portrait-video">
+            <video src="../assets/videos/courses/large-canvas/石英砂大畫布灰色系.mp4" preload="auto" autoplay muted loop playsinline aria-label="石英砂大畫布示範：灰色系配色，最後點綴金箔"></video>
+          </div>
+          <p class="bead-compare__label">灰色系＋金箔</p>
+        </div>
+        <div class="bead-compare__cell">
+          <div class="chapter__banner-video is-portrait-video">
+            <video src="../assets/videos/courses/large-canvas/石英砂大畫布粉彩系.mp4" preload="auto" autoplay muted loop playsinline aria-label="石英砂大畫布示範：粉彩色系配色，最後點綴金箔"></video>
+          </div>
+          <p class="bead-compare__label">粉彩色系＋金箔</p>
+        </div>
       </div>
     </section>
 
