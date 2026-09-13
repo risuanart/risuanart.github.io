@@ -170,17 +170,21 @@
 }
 
 /* 「查看課程」連結：只有 gallery.html 綜合瀏覽頁點開的燈箱才會出現
-   （見 js/gallery.js／js/gallery-lightbox.js 的說明），.text-link 原本的
-   border-bottom 用 --color-text-primary（深色，給淺色背景用），燈箱是
-   深色背景，這裡另外覆寫成淺色，不然底線會幾乎看不見。 */
+   （見 js/gallery.js／js/gallery-lightbox.js 的說明）。使用者反饋：原本
+   沿用 .text-link（跟圖說一樣淺色、字級也一樣）看起來太像圖說的延伸，
+   分不清楚哪裡開始是可以點的連結；也不喜歡底線的做法。這裡改用
+   --color-interactive（全站語意上本來就是「連結／可點擊元素」專用色）
+   取代淺色文字，拿掉底線，字重加粗，跟圖說之間也拉開更多間距，靠顏色、
+   字重、位置三個線索疊加造成區別，不靠底線。 */
 .gallery-lightbox__course-link {
-  margin: 0;
+  margin: var(--space-4) 0 0;
   font-size: var(--font-size-sm);
 }
 
 .gallery-lightbox__course-link .text-link {
-  color: var(--color-surface-light);
-  border-bottom-color: var(--color-surface-light);
+  color: var(--color-interactive);
+  font-weight: 700;
+  border-bottom: none;
 }
 
 .gallery-lightbox__close,
