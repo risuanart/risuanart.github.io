@@ -8,6 +8,8 @@
   let overlay = null;
   let imgEl = null;
   let captionEl = null;
+  let courseLinkWrap = null;
+  let courseLinkEl = null;
   let prevBtn = null;
   let nextBtn = null;
   let currentItems = [];
@@ -31,12 +33,15 @@
       <figure class="gallery-lightbox__figure">
         <img class="gallery-lightbox__img" src="" alt="">
         <figcaption class="gallery-lightbox__caption"></figcaption>
+        <p class="gallery-lightbox__course-link"><a class="text-link" href="#"></a></p>
       </figure>
     `;
     document.body.appendChild(overlay);
 
     imgEl = overlay.querySelector(".gallery-lightbox__img");
     captionEl = overlay.querySelector(".gallery-lightbox__caption");
+    courseLinkWrap = overlay.querySelector(".gallery-lightbox__course-link");
+    courseLinkEl = courseLinkWrap.querySelector("a");
     prevBtn = overlay.querySelector(".gallery-lightbox__nav--prev");
     nextBtn = overlay.querySelector(".gallery-lightbox__nav--next");
 
@@ -65,6 +70,21 @@
     imgEl.alt = img.alt || "";
     captionEl.textContent = caption ? caption.textContent : "";
     captionEl.hidden = !caption;
+
+    // 「查看課程」連結：只有 js/gallery.js 產生格子時才會補
+    // data-course-link（見該檔案），課程頁自己的「學員作品」預覽區
+    // （js/gallery-course-preview.js）不會補，所以這裡讀不到屬性時
+    // 直接把整段連結藏起來，不會顯示壞掉的連結。
+    const courseLink = figure.getAttribute("data-course-link");
+    const courseName = figure.getAttribute("data-course-name");
+    if (courseLink) {
+      courseLinkEl.href = courseLink;
+      courseLinkEl.textContent = "查看「" + courseName + "」課程 →";
+      courseLinkWrap.hidden = false;
+    } else {
+      courseLinkWrap.hidden = true;
+    }
+
     const multiple = currentItems.length > 1;
     prevBtn.hidden = !multiple;
     nextBtn.hidden = !multiple;

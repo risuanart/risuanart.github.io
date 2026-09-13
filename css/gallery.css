@@ -169,6 +169,20 @@
   text-align: center;
 }
 
+/* 「查看課程」連結：只有 gallery.html 綜合瀏覽頁點開的燈箱才會出現
+   （見 js/gallery.js／js/gallery-lightbox.js 的說明），.text-link 原本的
+   border-bottom 用 --color-text-primary（深色，給淺色背景用），燈箱是
+   深色背景，這裡另外覆寫成淺色，不然底線會幾乎看不見。 */
+.gallery-lightbox__course-link {
+  margin: 0;
+  font-size: var(--font-size-sm);
+}
+
+.gallery-lightbox__course-link .text-link {
+  color: var(--color-surface-light);
+  border-bottom-color: var(--color-surface-light);
+}
+
 .gallery-lightbox__close,
 .gallery-lightbox__nav {
   position: fixed;
