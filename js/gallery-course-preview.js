@@ -50,7 +50,7 @@
     grid.innerHTML = matched
       .map(
         (item) => `
-      <figure class="gallery-grid__item">
+      <figure class="gallery-grid__item" tabindex="0" role="button" aria-label="放大看：${item.alt || item.course}">
         <img src="${base}${item.src}" alt="${item.alt || ""}" loading="lazy">
       </figure>`
       )

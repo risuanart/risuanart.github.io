@@ -88,7 +88,7 @@
     grid.innerHTML = visible
       .map(
         (item) => `
-      <figure class="gallery-grid__item">
+      <figure class="gallery-grid__item" tabindex="0" role="button" aria-label="放大看：${item.alt || item.course}">
         <img src="${item.src}" alt="${item.alt || ""}" loading="lazy">
         <figcaption class="gallery-grid__caption">${item.course}${
           item.themes && item.themes.length ? "・" + item.themes.join("、") : ""
