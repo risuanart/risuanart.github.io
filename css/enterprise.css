@@ -185,7 +185,7 @@
   position: absolute;
   left: 50%;
   bottom: var(--space-4);
-  transform: translate(-50%, 0);
+  transform: translateX(-50%);
   display: flex;
   align-items: center;
   gap: 4px;
@@ -196,22 +196,57 @@
   font-size: 11px;
   letter-spacing: 0.08em;
   pointer-events: none;
-  animation: ent-hero-scroll-hint 1.6s ease-in-out infinite;
-}
-
-.ent-hero__scroll-hint svg {
-  flex-shrink: 0;
-}
-
-@keyframes ent-hero-scroll-hint {
-  0%, 100% { transform: translate(-50%, 0); }
-  50% { transform: translate(-50%, 5px); }
 }
 
 @media (min-width: 768px) {
   .ent-hero__scroll-hint {
     display: none;
   }
+}
+
+/* 箭頭本體（2026-09-14 換成「C2 圓頭單箭頭」畫法，來源：使用者提供的
+   往下滑_C2圓頭單箭頭_程式碼.md）：兩條圓頭線段（::before/::after）
+   拼成 V 形往下的箭頭，純 CSS 畫出來，不用 SVG／圖檔。原始設計稿寫死
+   顏色（假設淺色文字疊在照片上），這裡改用 currentColor 直接繼承
+   .ent-hero__scroll-hint 已經設定好的 --color-surface-light——同一個
+   組件在深色膠囊底上使用，顏色邏輯不一樣，跟著容器走比寫死更不會之後
+   對比度跑掉。只有箭頭本身上下浮動＋透明度變化（不含文字，維持原本
+   排版），緩動用全站既有的 --ease-standard。減少動態偏好已經由
+   base.css 全域關掉所有動畫，這裡比照前面既有寫法不再另外覆寫。 */
+.ent-hero__scroll-hint-arrow {
+  position: relative;
+  width: 20px;
+  height: 8px;
+  flex-shrink: 0;
+  animation: ent-hero-scroll-hint-bob 1.8s var(--ease-standard) infinite;
+}
+
+.ent-hero__scroll-hint-arrow::before,
+.ent-hero__scroll-hint-arrow::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 10px;
+  height: 2px;
+  background: currentColor;
+  border-radius: 2px;
+}
+
+.ent-hero__scroll-hint-arrow::before {
+  left: 0;
+  transform-origin: left center;
+  transform: rotate(38deg);
+}
+
+.ent-hero__scroll-hint-arrow::after {
+  right: 0;
+  transform-origin: right center;
+  transform: rotate(-38deg);
+}
+
+@keyframes ent-hero-scroll-hint-bob {
+  0%, 100% { transform: translateY(0); opacity: 0.5; }
+  50% { transform: translateY(4px); opacity: 1; }
 }
 
 .ent-gallery__viewport.is-landscape {
