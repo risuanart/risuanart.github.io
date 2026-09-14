@@ -156,6 +156,64 @@
   }
 }
 
+/* 首圖影片下方的「往下滑」提示：手機版滿版直式影片（.is-full-bleed）
+   如果剛好跟裝置螢幕高度差不多高，使用者進頁面時看起來像整頁只有這支
+   影片、看不出下面還有內容（真實使用情境：串珠／石英砂肌理畫／刮刀
+   油畫／寵物肖像畫／自己帶圖創作這五頁都是同樣結構）。加一個貼在影片
+   底部、會微微上下彈跳的箭頭圖示＋文字提示還可以往下滑，用 line icon
+   （全站慣例不用 emoji）。深色底、淺色字的小標籤，不管影片本身亮或暗
+   （石英砂那支偏亮、寵物那支偏暗）都維持可讀，不用另外為每支影片
+   調顏色。減少動態偏好已經由 base.css 全域關掉所有動畫（*, *::before,
+   *::after 的 animation-duration 強制歸零），這裡不用另外寫
+   @media (prefers-reduced-motion) 覆寫。純粹是視覺提示、不影響頁面
+   實際內容，加 aria-hidden 讓螢幕報讀器略過。只在手機斷點顯示——桌面版
+   影片本身已經不是滿版（見上面 .is-full-bleed 的 @media (min-width: 768px)），
+   四周看得到夠多留白跟下一段內容，不需要這個提示。
+
+   影片是 <video> replaced element，本身裡面塞子元素不會顯示在畫面上
+   （那是原生的「不支援時的後備內容」），所以提示不能塞進 <video> 標籤
+   裡，改用 .ent-hero__media 包一層 wrapper，提示絕對定位貼在 wrapper
+   底部——wrapper 沒有另外設寬高，高度自動撐成跟影片一樣高（影片的
+   aspect-ratio 是用它自己的 box 寬度去算高度，不受水平負 margin 影響），
+   所以提示的 bottom 位置精準對齊影片底部，不是對齊到 .ent-hero 整個
+   區塊（包含下面 .ent-hero__caption 文字）的底部。 */
+.ent-hero__media {
+  position: relative;
+}
+
+.ent-hero__scroll-hint {
+  position: absolute;
+  left: 50%;
+  bottom: var(--space-4);
+  transform: translate(-50%, 0);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 10px;
+  border-radius: var(--radius-soft);
+  background: color-mix(in srgb, var(--color-surface-dark) 55%, transparent);
+  color: var(--color-surface-light);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  pointer-events: none;
+  animation: ent-hero-scroll-hint 1.6s ease-in-out infinite;
+}
+
+.ent-hero__scroll-hint svg {
+  flex-shrink: 0;
+}
+
+@keyframes ent-hero-scroll-hint {
+  0%, 100% { transform: translate(-50%, 0); }
+  50% { transform: translate(-50%, 5px); }
+}
+
+@media (min-width: 768px) {
+  .ent-hero__scroll-hint {
+    display: none;
+  }
+}
+
 .ent-gallery__viewport.is-landscape {
   aspect-ratio: 4 / 3;
 }
