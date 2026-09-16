@@ -34,7 +34,7 @@
       <ul class="site-menu__sublist">
         <li><a class="site-menu__sublink" href="${base}courses/sand-texture.html">石英砂肌理畫</a></li>
         <li><a class="site-menu__sublink" href="${base}courses/palette-knife-oil.html">刮刀油畫</a></li>
-        <li>流動畫</li>
+        <li><a class="site-menu__sublink" href="${base}courses/fluid-art.html">流動畫</a></li>
         <li>抽象畫</li>
         <li><a class="site-menu__sublink" href="${base}courses/custom-photo-oil.html">自己帶圖創作</a></li>
         <li><a class="site-menu__sublink" href="${base}courses/pet-portrait.html">寵物肖像畫</a></li>

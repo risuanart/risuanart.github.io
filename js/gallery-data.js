@@ -91,15 +91,17 @@ window.GALLERY_COURSES = [
 
 // 2026-09-13 新增：課程名稱對應到該課程頁面的路徑（相對於網站根目錄），
 // 給 js/gallery.js 產生「查看課程」連結用（見 js/gallery-lightbox.js 的
-// 燈箱下方連結）。只列出已經有獨立頁面的課程——流動畫、抽象畫、鏡子拼貼
+// 燈箱下方連結）。只列出已經有獨立頁面的課程——抽象畫、鏡子拼貼
 // 目前沒有自己的頁面，不列在這裡，燈箱看到這幾堂課的作品時就不會顯示
 // 連結，不會連到不存在的頁面。這個連結只在 gallery.html（綜合瀏覽頁）
 // 顯示，各課程頁自己的「學員作品」預覽區（js/gallery-course-preview.js）
 // 不會顯示——使用者已經在那堂課的頁面上了，再跳一次「前往這堂課」是
 // 繞一圈回原地，沒有意義。
+// 2026-09-16 新增「流動畫」：courses/fluid-art.html 上線。
 window.GALLERY_COURSE_LINKS = {
   "石英砂肌理畫": "courses/sand-texture.html",
   "刮刀油畫": "courses/palette-knife-oil.html",
+  "流動畫": "courses/fluid-art.html",
   "自己帶圖創作": "courses/custom-photo-oil.html",
   "寵物肖像畫": "courses/pet-portrait.html",
   "串珠": "courses/beading.html",

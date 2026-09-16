@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>流動畫課程｜日宣繪畫室</title>
+  <meta name="description" content="流動畫體驗課程：壓克力顏料倒膠技法，沒有固定畫法限制，老師示範配色與調色後自由創作，1.5小時完成一幅專屬作品，適合初學者、送禮與情侶約會。">
+  <link rel="canonical" href="https://risuanart.com/courses/fluid-art.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="流動畫課程｜日宣繪畫室">
+  <meta property="og:description" content="壓克力顏料倒膠技法，沒有固定畫法限制，老師示範配色與調色後自由創作，1.5小時完成一幅專屬作品。">
+  <!-- 還沒有真實課程照片或影片，og:image 先不放（沒有素材硬塞一張不
+       相關的圖，比沒有這個標籤更誤導），等真的素材到位再補上。 -->
+  <meta property="og:url" content="https://risuanart.com/courses/fluid-art.html">
+  <meta property="og:locale" content="zh_TW">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="流動畫課程｜日宣繪畫室">
+  <meta name="twitter:description" content="壓克力顏料倒膠技法，沒有固定畫法限制，老師示範配色與調色後自由創作，1.5小時完成一幅專屬作品。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=ABeeZee&family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;600;700&family=Poppins:wght@700&family=Noto+Serif+TC:wght@500;700&family=Noto+Sans+TC:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/colors.css">
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/home.css">
+  <link rel="stylesheet" href="../css/products.css">
+  <link rel="stylesheet" href="../css/cart.css">
+  <link rel="stylesheet" href="../css/enterprise.css">
+  <link rel="stylesheet" href="../css/gallery.css">
+  <link rel="stylesheet" href="../css/site-menu.css">
+</head>
+<body>
+
+  <div class="ambient-bg" aria-hidden="true"></div>
+  <div class="ambient-grain" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <button type="button" class="site-header__menu-toggle" id="menu-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="site-menu" aria-label="開啟選單">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <div class="site-header__title">流動畫課程</div>
+    <div class="cart-badge-wrap">
+      <button type="button" class="cart-badge" aria-haspopup="true" aria-expanded="false" aria-label="購物車，目前 0 件">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+        <span class="cart-badge__count">0</span>
+      </button>
+      <div class="cart-preview" hidden>
+        <ul class="cart-preview__list"></ul>
+        <p class="cart-preview__empty">購物車是空的</p>
+        <p class="cart-preview__total"></p>
+        <div class="cart-preview__actions">
+          <a class="cart-preview__view" href="../cart.html">查看購物車</a>
+          <button type="button" class="cart-preview__continue">繼續選購</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="site-menu-backdrop" id="site-menu-backdrop"></div>
+  <nav class="site-menu" id="site-menu" aria-label="全站選單" data-menu-base="../"></nav>
+
+  <main class="product-page work">
+
+    <!-- 「流動畫」課程介紹頁，結構沿用其他畫室常態課程頁（beading.html／
+         sand-texture.html／palette-knife-oil.html）同一套元件
+         （.ent-hero／.chapter／.ent-cta），語氣是開放報名的體驗課程，
+         不是企業包班服務。
+
+         資料來源：使用者提供 Pinkoi 上架的同一堂課連結
+         （https://hk.pinkoi.com/product/68viLNaF，用 WebFetch 讀取），
+         「課程內容」相關資訊（媒材、上課流程、適合對象、時長、地點、
+         穿著建議）已確認為真實資料直接使用；價格（依尺寸分級）、開課
+         3天前取消退費規則等「交易條件」，比照石英砂肌理畫／刮刀油畫／
+         串珠三堂課同樣的處理方式（下定付款流程還沒定案），這階段先不
+         寫進頁面。乾燥天數同時對照 faq.html 既有「流動畫：3天」的站內
+         既有資料（faq.html:453）——跟 Pinkoi 頁面寫的「約2-3天」相符，
+         這裡採用 faq.html 的說法，維持全站同一個數字。「壓克力顏料
+         沾到衣服不易清洗」這點也對照 faq.html 既有的通用說明
+         （faq.html:377），不是新增的說法。
+
+         首頁上方選單「流動畫」原本連到材料包頁面
+         （products/fluid-art-intro.html，「春聯流動畫材料包」是可以
+         帶回家自己動手做的年節主題商品，跟這堂在畫室現場上課、自由
+         配色的體驗課程是兩回事），這頁做好後改連過來，做法跟當初
+         「石英砂肌理畫」有了自己的課程頁後把連結從材料包頁面改過來
+         一樣（見 index.html 該處註解）。
+
+         目前還沒有這堂課專屬的真實照片／影片素材，首圖跟學員作品格都
+         先用全站既有的 .placeholder-box 誠實佔位，已經開好
+         assets/videos/courses/fluid-art/、
+         assets/images/courses/fluid-art/ 兩個資料夾等使用者上傳，之後
+         有素材直接替換就好，不用動排版。 -->
+
+    <section class="ent-hero fade-in">
+      <div class="ent-hero__photo placeholder-box placeholder-box--photo" aria-hidden="true">
+        <svg class="placeholder-box__icon" viewBox="0 0 24 24" width="1.8em" height="1.8em" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1.5"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 16l-5.5-5.5a1 1 0 0 0-1.4 0L6 19"/></svg>
+        <span class="placeholder-box__text">首圖待補：完成的流動畫作品</span>
+      </div>
+      <div class="ent-hero__caption">
+        <p class="ent-hero__eyebrow">畫室常態課程</p>
+        <h1 class="ent-hero__title">流動畫</h1>
+      </div>
+    </section>
+
+    <section class="chapter fade-in delay-1">
+      <div class="chapter__intro">
+        <p>用壓克力顏料倒膠，讓顏色自然流動、交融，完成一幅獨一無二的抽象作品。</p>
+        <p>沒有固定畫法限制，配色跟流動的紋路每次都不一樣，很適合第一次接觸繪畫的人。</p>
+      </div>
+    </section>
+
+    <section class="chapter fade-in delay-1">
+      <div class="chapter__block">
+        <p class="chapter__statement">媒材與技法</p>
+        <p class="chapter__prose">使用壓克力顏料倒膠的流動畫技法，把調好的顏料直接倒在畫布上，讓顏色自己流動、暈開、交融出紋理，不是用筆刷一筆一筆畫出來的，成品帶有隨機、自然的層次感。</p>
+      </div>
+      <div class="chapter__block">
+        <p class="chapter__statement">上課怎麼進行</p>
+        <p class="chapter__prose">一堂課大約1.5小時，會先介紹會用到的材料跟工具，接著由老師講解配色的搭配方式，帶大家練習調色，再示範倒膠的技法。熟悉做法之後就是自己動手創作的時間，最後老師會說明作品完成後怎麼保存。</p>
+      </div>
+    </section>
+
+    <section class="chapter fade-in delay-2">
+      <div class="chapter__block">
+        <p class="chapter__statement">作品保存</p>
+        <p class="chapter__prose">壓克力顏料乾燥大約需要3天，沒辦法馬上帶走，可以預約時間再回來領取，保管期限是一個月內，記得要來拿。</p>
+        <p class="chapter__prose">壓克力顏料是水性，但乾燥後會形成不溶於水的膠膜，一旦沾到衣服就很難完全洗掉，建議穿不怕弄髒的衣服來上課。</p>
+      </div>
+    </section>
+
+    <!-- 學員作品：目前沒有這堂課的真實照片，用跟其他課程頁一樣的
+         gallery-course-preview 元件抓「流動畫」分類底下的作品，資料到位
+         就會自動出現，現在會顯示 data-gallery-preview-empty 那句提示。 -->
+    <section class="chapter fade-in delay-2">
+      <div class="chapter__block">
+        <p class="chapter__statement">學員作品</p>
+        <p class="chapter__prose">每個人選的顏色、倒的順序都不一樣，流動出來的紋路也各有各的樣子，沒有兩幅會完全相同。</p>
+      </div>
+      <div data-gallery-course-preview="流動畫" data-gallery-preview-base="../">
+        <div class="gallery-grid" data-gallery-preview-grid hidden></div>
+        <p class="gallery-empty" data-gallery-preview-empty hidden>學員作品陸續整理中，敬請期待。</p>
+        <a class="text-link" data-gallery-preview-more hidden>查看更多這堂課的作品 →</a>
+      </div>
+    </section>
+
+    <section class="chapter fade-in delay-2">
+      <div class="chapter__block">
+        <p class="chapter__statement">適合誰來上</p>
+        <p class="chapter__prose">沒有任何繪畫基礎也能直接上手，是很多人接觸繪畫的第一堂課；也適合情侶約會、朋友相約，或是當作送禮，親手完成一幅裝飾畫給重要的人。建議12歲以上參加。</p>
+      </div>
+    </section>
+
+    <section class="chapter fade-in delay-3">
+      <p class="chapter__statement">常見問題</p>
+      <details class="faq-item">
+        <summary class="faq-item__toggle">完全沒有畫畫基礎也可以上嗎？</summary>
+        <p class="faq-item__body">可以，流動畫不是用筆刷畫出來的，靠的是顏料自己流動、交融，沒有繪畫基礎也能完成一幅完整的作品，很適合當作接觸繪畫的第一堂課。</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-item__toggle">配色可以自己決定嗎？</summary>
+        <p class="faq-item__body">可以，老師會先講解配色的搭配方式並帶大家練習調色，實際要用哪些顏色、怎麼組合，還是由自己決定，每個人做出來的成品都不一樣。</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-item__toggle">畫完可以馬上帶走嗎？</summary>
+        <p class="faq-item__body">沒辦法，壓克力顏料乾燥大約需要3天，可以預約時間再回來領取，保管期限是一個月內。</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-item__toggle">小朋友可以參加嗎？</summary>
+        <p class="faq-item__body">建議12歲以上參加，年紀更小的話操作顏料跟畫布會比較吃力。</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-item__toggle">適合當禮物或約會活動嗎？</summary>
+        <p class="faq-item__body">適合，很多同學是情侶或朋友一起來，邊聊天邊各自完成作品；也有人是為了送禮特地來上課，親手做的畫會比買現成的更有心意。</p>
+      </details>
+    </section>
+
+    <footer class="ent-cta fade-in">
+      <p class="ent-cta__text">想了解更多課程細節或想報名，歡迎直接傳訊息與我們討論！</p>
+      <div class="ent-cta__actions">
+        <a class="work__cta work__cta--primary" href="https://instagram.com/ri.suan_art" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg>
+          私訊洽詢
+        </a>
+        <a class="text-link" href="../index.html">← 回到首頁</a>
+      </div>
+    </footer>
+
+  </main>
+
+  <script src="../js/cart.js"></script>
+  <script src="../js/site-header-scroll.js"></script>
+  <script src="../js/scroll-reveal.js"></script>
+  <script src="../js/video-inview.js"></script>
+  <script src="../js/gallery-data.js"></script>
+  <script src="../js/gallery-course-preview.js"></script>
+  <script src="../js/gallery-lightbox.js"></script>
+  <script src="../js/site-menu.js"></script>
+</body>
+</html>
