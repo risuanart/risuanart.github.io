@@ -159,12 +159,17 @@
 /* 首圖影片下方的「往下滑」提示：手機版滿版直式影片（.is-full-bleed）
    如果剛好跟裝置螢幕高度差不多高，使用者進頁面時看起來像整頁只有這支
    影片、看不出下面還有內容（真實使用情境：串珠／石英砂肌理畫／刮刀
-   油畫／寵物肖像畫／自己帶圖創作這五頁都是同樣結構）。加一個貼在影片
-   底部、會微微上下彈跳的箭頭圖示＋文字提示還可以往下滑，用 line icon
-   （全站慣例不用 emoji）。深色底、淺色字的小標籤，不管影片本身亮或暗
-   （石英砂那支偏亮、寵物那支偏暗）都維持可讀，不用另外為每支影片
-   調顏色。減少動態偏好已經由 base.css 全域關掉所有動畫（*, *::before,
-   *::after 的 animation-duration 強制歸零），這裡不用另外寫
+   油畫／寵物肖像畫／自己帶圖創作這五頁都是同樣結構）。
+
+   排列方式（2026-09-16 定案）：模擬過「文字＋箭頭並排」「直排」「文字
+   獨立＋圓徽章」等幾種版本給使用者看過（見對話紀錄的比較稿），最後選
+   「只留箭頭，不放文字」這個最安靜的版本——不放膠囊底色，純粹是一個
+   會微微上下彈跳的箭頭浮在影片上，靠動作本身傳達「還可以往下滑」，
+   不會分散注意力搶過影片本身。因為拿掉了深色膠囊底，改用
+   drop-shadow 確保箭頭在亮/暗任何影片背景上都看得清楚（石英砂那支
+   偏亮、寵物那支偏暗，都不用另外為個別影片調顏色）。減少動態偏好
+   已經由 base.css 全域關掉所有動畫（*, *::before, *::after 的
+   animation-duration 強制歸零），這裡不用另外寫
    @media (prefers-reduced-motion) 覆寫。純粹是視覺提示、不影響頁面
    實際內容，加 aria-hidden 讓螢幕報讀器略過。只在手機斷點顯示——桌面版
    影片本身已經不是滿版（見上面 .is-full-bleed 的 @media (min-width: 768px)），
@@ -186,15 +191,8 @@
   left: 50%;
   bottom: var(--space-4);
   transform: translateX(-50%);
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  padding: 6px 10px;
-  border-radius: var(--radius-soft);
-  background: color-mix(in srgb, var(--color-surface-dark) 55%, transparent);
   color: var(--color-surface-light);
-  font-size: 11px;
-  letter-spacing: 0.08em;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.55));
   pointer-events: none;
 }
 
@@ -204,20 +202,18 @@
   }
 }
 
-/* 箭頭本體（2026-09-14 換成「C2 圓頭單箭頭」畫法，來源：使用者提供的
-   往下滑_C2圓頭單箭頭_程式碼.md）：兩條圓頭線段（::before/::after）
+/* 箭頭本體：「C2 圓頭單箭頭」畫法，來源：使用者提供的
+   往下滑_C2圓頭單箭頭_程式碼.md。兩條圓頭線段（::before/::after）
    拼成 V 形往下的箭頭，純 CSS 畫出來，不用 SVG／圖檔。原始設計稿寫死
    顏色（假設淺色文字疊在照片上），這裡改用 currentColor 直接繼承
-   .ent-hero__scroll-hint 已經設定好的 --color-surface-light——同一個
-   組件在深色膠囊底上使用，顏色邏輯不一樣，跟著容器走比寫死更不會之後
-   對比度跑掉。只有箭頭本身上下浮動＋透明度變化（不含文字，維持原本
-   排版），緩動用全站既有的 --ease-standard。減少動態偏好已經由
-   base.css 全域關掉所有動畫，這裡比照前面既有寫法不再另外覆寫。 */
+   .ent-hero__scroll-hint 已經設定好的 --color-surface-light，跟著
+   容器走比寫死更不會之後對比度跑掉。現在是畫面上唯一的視覺元素（沒有
+   文字陪襯），尺寸比原本並排版本大一點更好辨識。緩動用全站既有的
+   --ease-standard。 */
 .ent-hero__scroll-hint-arrow {
   position: relative;
-  width: 20px;
-  height: 8px;
-  flex-shrink: 0;
+  width: 30px;
+  height: 12px;
   animation: ent-hero-scroll-hint-bob 1.8s var(--ease-standard) infinite;
 }
 
@@ -226,8 +222,8 @@
   content: "";
   position: absolute;
   top: 0;
-  width: 10px;
-  height: 2px;
+  width: 15px;
+  height: 2.5px;
   background: currentColor;
   border-radius: 2px;
 }
