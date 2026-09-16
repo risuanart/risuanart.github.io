@@ -87,6 +87,7 @@ window.GALLERY_COURSES = [
   "鏡子拼貼",
   "串珠",
   "大幅畫布訂製",
+  "特殊材質客製",
 ];
 
 // 2026-09-13 新增：課程名稱對應到該課程頁面的路徑（相對於網站根目錄），
@@ -98,6 +99,8 @@ window.GALLERY_COURSES = [
 // 不會顯示——使用者已經在那堂課的頁面上了，再跳一次「前往這堂課」是
 // 繞一圈回原地，沒有意義。
 // 2026-09-16 新增「流動畫」：courses/fluid-art.html 上線。
+// 2026-09-16 新增「特殊材質客製」：courses/custom-material.html 上線，
+// 跟「大幅畫布訂製」同樣是客製服務性質，不是固定期別的技法課。
 window.GALLERY_COURSE_LINKS = {
   "石英砂肌理畫": "courses/sand-texture.html",
   "刮刀油畫": "courses/palette-knife-oil.html",
@@ -106,6 +109,7 @@ window.GALLERY_COURSE_LINKS = {
   "寵物肖像畫": "courses/pet-portrait.html",
   "串珠": "courses/beading.html",
   "大幅畫布訂製": "courses/large-canvas.html",
+  "特殊材質客製": "courses/custom-material.html",
 };
 
 // 主題標籤的起始清單——先列出來，之後看實際作品內容隨時可以增加，

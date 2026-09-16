@@ -41,6 +41,7 @@
         <li>鏡子拼貼</li>
         <li><a class="site-menu__sublink" href="${base}courses/beading.html">串珠</a></li>
         <li><a class="site-menu__sublink" href="${base}courses/large-canvas.html">大幅畫布訂製</a></li>
+        <li><a class="site-menu__sublink" href="${base}courses/custom-material.html">特殊材質客製</a></li>
       </ul>
       <a class="site-menu__sublink" href="${base}faq.html">預約須知</a>
     </div>

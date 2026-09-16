@@ -9,13 +9,13 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="流動畫課程｜日宣繪畫室">
   <meta property="og:description" content="壓克力顏料倒膠技法，沒有固定畫法限制，老師示範配色與調色後自由創作，1.5小時完成一幅專屬作品。">
-  <!-- 還沒有真實課程照片或影片，og:image 先不放（沒有素材硬塞一張不
-       相關的圖，比沒有這個標籤更誤導），等真的素材到位再補上。 -->
+  <meta property="og:image" content="https://risuanart.com/assets/images/courses/fluid-art/hero-poster.jpg">
   <meta property="og:url" content="https://risuanart.com/courses/fluid-art.html">
   <meta property="og:locale" content="zh_TW">
-  <meta name="twitter:card" content="summary">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="流動畫課程｜日宣繪畫室">
   <meta name="twitter:description" content="壓克力顏料倒膠技法，沒有固定畫法限制，老師示範配色與調色後自由創作，1.5小時完成一幅專屬作品。">
+  <meta name="twitter:image" content="https://risuanart.com/assets/images/courses/fluid-art/hero-poster.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=ABeeZee&family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;600;700&family=Poppins:wght@700&family=Noto+Serif+TC:wght@500;700&family=Noto+Sans+TC:wght@400;600;700&display=swap" rel="stylesheet">
@@ -85,17 +85,22 @@
          「石英砂肌理畫」有了自己的課程頁後把連結從材料包頁面改過來
          一樣（見 index.html 該處註解）。
 
-         目前還沒有這堂課專屬的真實照片／影片素材，首圖跟學員作品格都
-         先用全站既有的 .placeholder-box 誠實佔位，已經開好
-         assets/videos/courses/fluid-art/、
-         assets/images/courses/fluid-art/ 兩個資料夾等使用者上傳，之後
-         有素材直接替換就好，不用動排版。 -->
+         首圖影片（2026-09-16 補上）：使用者上傳的「流動畫宣傳影片.MP4」，
+         已經是 H.264、720×406，是橫式（約16:9）畫面，不是全站其他課程
+         頁常見的手機直式9:16，所以套用跟 enterprise-pet-portrait.html
+         首圖照片同一個 .is-landscape 修飾類別（見 css/enterprise.css），
+         不是 is-flush-top／is-full-bleed 那套滿版直式的做法——橫式素材
+         套滿版直式的比例公式會失真，直接沿用既有的橫式 recipe 最單純。
+         影片內容：畫室帶著品牌「Ri suan」浮水印的宣傳片，畫面依序是
+         好幾位同學圍著桌子調色、用筆刷／刮刀在畫布上推開顏料倒出紋路、
+         用噴槍消泡一塊圓形畫布、最後是一塊完成的圓形流動畫（墨綠、粉、
+         黑交融的大理石紋路）。Poster 用最後那格完成的圓形畫布（18.5s），
+         是全片最像「成品」的一格。因為是橫式構圖，畫面高度本來就不會
+         佔滿整個手機螢幕，不會有「看起來像整頁只有這支影片」的問題，
+         不需要另外加往下滑提示（跟其他直式滿版首圖影片的處理不同）。 -->
 
     <section class="ent-hero fade-in">
-      <div class="ent-hero__photo placeholder-box placeholder-box--photo" aria-hidden="true">
-        <svg class="placeholder-box__icon" viewBox="0 0 24 24" width="1.8em" height="1.8em" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1.5"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 16l-5.5-5.5a1 1 0 0 0-1.4 0L6 19"/></svg>
-        <span class="placeholder-box__text">首圖待補：完成的流動畫作品</span>
-      </div>
+      <video class="ent-hero__photo is-landscape" src="../assets/videos/courses/fluid-art/流動畫宣傳影片.MP4" poster="../assets/images/courses/fluid-art/hero-poster.jpg" preload="auto" autoplay muted loop playsinline aria-label="流動畫宣傳影片：學員調色與倒膠，完成大理石紋路的圓形畫布"></video>
       <div class="ent-hero__caption">
         <p class="ent-hero__eyebrow">畫室常態課程</p>
         <h1 class="ent-hero__title">流動畫</h1>
