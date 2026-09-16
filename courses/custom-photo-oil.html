@@ -61,21 +61,23 @@
 
   <main class="product-page work">
 
-    <!-- 首圖影片（2026-09-14 補上）：使用者上傳的
-         「畫室自己帶圖繪畫課首圖.MP4」，本身已經是 H.264 720×1280，
-         用 ffmpeg -c copy -movflags +faststart 重新封裝（不重新編碼），
-         跟寵物肖像畫首圖影片同一個處理方式（見 assets/videos/courses/
-         pet-portrait/），原始檔加「-原始檔」保留在電腦裡、不進版控
-         （見 .gitignore）。
-         影片內容（用 ffmpeg 抽格 + Read 工具實際看過）：畫室內多位
-         同學各自帶自己的照片來畫，畫面依序是——鉛筆起稿一隻狗的頭像、
-         對照參考照片畫人像（紅格紋襯衫）、刮刀特寫（黃色系構圖）、
-         用細筆刷畫一隻三花貓的臉部特寫（毛髮、眼神都畫得很細緻）、
-         另一位同學對照片作畫、最後帶到畫室內兩位同學跟老師互動的
-         環境全景——正好呼應這堂課「主題很廣、有人畫毛孩有人畫人像」
-         的特色，所以直接當首圖影片，不裁成單一畫面。
-         Poster 用貓咪臉部特寫那格（22.5s），是全片視覺最完整、
-         最像「完成品」的一格。
+    <!-- 首圖影片（2026-09-16 換成使用者新上傳的版本）：原本是
+         「畫室自己帶圖繪畫課首圖.MP4」，換成使用者後來上傳的
+         「畫室繪畫課宣傳.MP4」，本身已經是 H.264 720×1280，用 ffmpeg
+         -c copy -movflags +faststart 重新封裝（不重新編碼），原始檔
+         加「-原始檔」保留在電腦裡、不進版控（見 .gitignore）；換掉的
+         舊版影片／poster 已從版控移除，還在 git 歷史裡可以找回來。
+         影片內容（用 ffmpeg 抽格 + Read 工具實際看過）：畫室的整體
+         宣傳短片，畫面依序是——畫室環境全景（老師在畫架前調色作畫）、
+         一幅完成的濱海／山徑風景畫特寫、一幅黃昏牧場風景畫（木柵欄＋
+         草地＋遠山，粉紫色天空）、對照手機裡的照片畫一對人與狗在夕陽下
+         散步的畫面（畫布上還看得到鉛筆稿）、一隻黃棕色大耳朵狗的
+         肖像特寫、最後是畫室品牌收尾畫面（葉子＋Ri. Suan 浮水印文字）。
+         比起前一版只拍「畫的過程」，這支多了好幾幅真正完成的風景／
+         寵物作品，更能呈現這堂課主題很廣（風景、人像、寵物都有）的
+         特色，所以換成首圖影片。
+         Poster 用狗狗肖像特寫那格（35s），五官毛髮都畫得很細緻，
+         是全片最像「完成品」的一格。
 
          內容依據：
          1. 「自己帶圖創作」是使用者自己在 IG 上長期發文的一個課程分類，
@@ -100,7 +102,7 @@
 
     <section class="ent-hero fade-in is-flush-top">
       <div class="ent-hero__media">
-        <video class="ent-hero__photo is-portrait-video is-full-bleed" src="../assets/videos/courses/custom-photo-oil/自己帶圖創作首圖.mp4" poster="../assets/images/courses/custom-photo-oil/hero-poster.jpg" preload="auto" autoplay muted loop playsinline aria-label="自己帶圖創作課堂實況：同學各自對照自己的照片作畫，包含毛孩肖像與人像"></video>
+        <video class="ent-hero__photo is-portrait-video is-full-bleed" src="../assets/videos/courses/custom-photo-oil/自己帶圖創作首圖.mp4" poster="../assets/images/courses/custom-photo-oil/hero-poster.jpg" preload="auto" autoplay muted loop playsinline aria-label="畫室宣傳短片：完成的風景畫、對照手機照片畫人與狗散步的畫面、狗狗肖像特寫"></video>
         <div class="ent-hero__scroll-hint" aria-hidden="true">
           <div class="ent-hero__scroll-hint-arrow"></div>
         </div>
