@@ -315,9 +315,11 @@
         btn.className = "booking-timeslot-inline";
         btn.disabled = !enough;
         btn.setAttribute("aria-pressed", ds === selectedDate && s.time === selectedTime ? "true" : "false");
-        btn.innerHTML = `<span class="booking-timeslot-inline__time">${s.time}</span><span class="booking-timeslot-inline__remaining">${
-          enough ? `剩 ${s.remaining} 位` : `不足${qty}人`
-        }</span>`;
+        // 剩 0 位不管這次要訂幾人都是真的額滿，直接講「額滿」；剩下的
+        // 名額大於 0 但還是不夠這次人數，才需要講「不足 N 人」——這種
+        // 情況還有名額、只是不夠這組人一起坐，跟真的額滿是兩回事。
+        const remainingLabel = s.remaining === 0 ? "額滿" : enough ? `剩 ${s.remaining} 位` : `不足${qty}人`;
+        btn.innerHTML = `<span class="booking-timeslot-inline__time">${s.time}</span><span class="booking-timeslot-inline__remaining">${remainingLabel}</span>`;
         btn.addEventListener("click", () => {
           selectedDate = ds;
           selectedTime = s.time;
