@@ -37,7 +37,7 @@
         <li><a class="site-menu__sublink" href="${base}courses/fluid-art.html">流動畫</a></li>
         <li>抽象畫</li>
         <li><a class="site-menu__sublink" href="${base}courses/custom-photo-oil.html">自己帶圖創作</a></li>
-        <li><a class="site-menu__sublink" href="${base}courses/pet-portrait.html">寵物肖像畫</a></li>
+        <li><a class="site-menu__sublink" href="${base}courses/pet-portrait.html">寵物油畫</a></li>
         <li>鏡子拼貼</li>
         <li><a class="site-menu__sublink" href="${base}courses/beading.html">串珠</a></li>
         <li><a class="site-menu__sublink" href="${base}courses/large-canvas.html">大幅畫布訂製</a></li>

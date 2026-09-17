@@ -74,21 +74,28 @@ window.GALLERY_ITEMS = [
   { course: "刮刀油畫", themes: ["山"], date: "2026-09-13", src: "assets/images/guides/material-compare-mountain/oil-knife/07.jpg", alt: "刮刀油畫的黑灰色馬特洪峰，前景是秋天的紅黃樹叢", sessions: 1 },
   { course: "刮刀油畫", themes: ["海邊"], date: "2026-09-13", src: "assets/images/guides/material-compare-mountain/oil-knife/08.jpg", alt: "刮刀油畫的海岸崖壁，浪花拍打岸邊，前景有紅色小花", sessions: 1 },
 
-  // 2026-09-17 新增：「寵物肖像畫」10 件，使用者從 Mac 照片 App 的
+  // 2026-09-17 新增：「寵物油畫」10 件，使用者從 Mac 照片 App 的
   // 「狗狗油畫」相簿匯出，確認都是完全沒有畫畫經驗的同學一堂課完成的
   // 真實作品（同一批照片使用者也發了 IG 貼文，見 courses/pet-portrait.html
   // 「學員作品」段落引言的文案同步更新）。date 用照片本身的拍攝日期
-  // （檔名 EXIF 對應到的檔案時間），不是上傳日期。
-  { course: "寵物肖像畫", themes: ["陸地動物"], date: "2024-07-01", src: "assets/images/gallery/pet-portrait/01.jpg", alt: "白色蓬鬆毛狗狗肖像油畫，吐舌微笑，綠色草叢背景，畫面簽名Kobe", sessions: 1 },
-  { course: "寵物肖像畫", themes: ["陸地動物"], date: "2024-07-12", src: "assets/images/gallery/pet-portrait/02.jpg", alt: "哈士奇犬肖像油畫，灰白毛色、尖耳朵，淺藍色背景", sessions: 1 },
-  { course: "寵物肖像畫", themes: ["陸地動物"], date: "2024-07-18", src: "assets/images/gallery/pet-portrait/03.jpg", alt: "白色蓬鬆小狗肖像油畫，雙腳搭在藍色椅墊上，背景點綴白色小花", sessions: 1 },
-  { course: "寵物肖像畫", themes: ["陸地動物"], date: "2024-07-28", src: "assets/images/gallery/pet-portrait/04.jpg", alt: "白色與淺棕色毛小狗肖像油畫特寫，綠色背景", sessions: 1 },
-  { course: "寵物肖像畫", themes: ["陸地動物"], date: "2024-08-25", src: "assets/images/gallery/pet-portrait/05.jpg", alt: "白色吉娃娃肖像油畫，大耳朵豎起，淺藍色背景", sessions: 1 },
-  { course: "寵物肖像畫", themes: ["陸地動物"], date: "2024-08-28", src: "assets/images/gallery/pet-portrait/06.jpg", alt: "白色法國鬥牛犬肖像油畫，頭戴花朵頭飾，暖橘色背景", sessions: 1 },
-  { course: "寵物肖像畫", themes: ["陸地動物"], date: "2024-09-08", src: "assets/images/gallery/pet-portrait/07.jpg", alt: "黑白毛色狗狗肖像油畫，向前跳躍張嘴的瞬間，藍天與土黃色地面背景", sessions: 1 },
-  { course: "寵物肖像畫", themes: ["陸地動物"], date: "2024-09-22", src: "assets/images/gallery/pet-portrait/08.jpg", alt: "兩幅並排的淺棕色狗狗肖像油畫，分別戴著紫色與粉色項圈，淺藍色背景", sessions: 1 },
-  { course: "寵物肖像畫", themes: ["陸地動物"], date: "2024-10-10", src: "assets/images/gallery/pet-portrait/09.jpg", alt: "黑白毛色小狗肖像油畫，吐舌微笑，藍天與黃色地面背景", sessions: 1 },
-  { course: "寵物肖像畫", themes: ["陸地動物"], date: "2024-10-12", src: "assets/images/gallery/pet-portrait/10.jpg", alt: "米白色捲毛狗狗肖像油畫，張嘴微笑，淺藍色背景", sessions: 1 },
+  // （檔名 EXIF 對應到的檔案時間），不是上傳日期。themes 標「狗狗」
+  // （不是泛用的「陸地動物」）——使用者 2026-09-18 明確要求寵物油畫的
+  // 學員作品要分「狗狗」「貓咪」「兩隻以上」三類（貓咪、兩隻以上目前
+  // 還沒有真的照片，先把標籤加進 GALLERY_THEMES，等照片到位直接套用，
+  // 見下方 GALLERY_THEMES 的說明；courses/pet-portrait.html 的「學員
+  // 作品」段落也同步改成三個分類各自一條輪播，不再用這裡的
+  // GALLERY_ITEMS 資料餵那個區塊——這份資料現在只給 gallery.html 總覽頁
+  // 篩選用。
+  { course: "寵物油畫", themes: ["狗狗"], date: "2024-07-01", src: "assets/images/gallery/pet-portrait/01.jpg", alt: "白色蓬鬆毛狗狗肖像油畫，吐舌微笑，綠色草叢背景，畫面簽名Kobe", sessions: 1 },
+  { course: "寵物油畫", themes: ["狗狗"], date: "2024-07-12", src: "assets/images/gallery/pet-portrait/02.jpg", alt: "哈士奇犬肖像油畫，灰白毛色、尖耳朵，淺藍色背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["狗狗"], date: "2024-07-18", src: "assets/images/gallery/pet-portrait/03.jpg", alt: "白色蓬鬆小狗肖像油畫，雙腳搭在藍色椅墊上，背景點綴白色小花", sessions: 1 },
+  { course: "寵物油畫", themes: ["狗狗"], date: "2024-07-28", src: "assets/images/gallery/pet-portrait/04.jpg", alt: "白色與淺棕色毛小狗肖像油畫特寫，綠色背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["狗狗"], date: "2024-08-25", src: "assets/images/gallery/pet-portrait/05.jpg", alt: "白色吉娃娃肖像油畫，大耳朵豎起，淺藍色背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["狗狗"], date: "2024-08-28", src: "assets/images/gallery/pet-portrait/06.jpg", alt: "白色法國鬥牛犬肖像油畫，頭戴花朵頭飾，暖橘色背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["狗狗"], date: "2024-09-08", src: "assets/images/gallery/pet-portrait/07.jpg", alt: "黑白毛色狗狗肖像油畫，向前跳躍張嘴的瞬間，藍天與土黃色地面背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["狗狗"], date: "2024-09-22", src: "assets/images/gallery/pet-portrait/08.jpg", alt: "兩幅並排的淺棕色狗狗肖像油畫，分別戴著紫色與粉色項圈，淺藍色背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["狗狗"], date: "2024-10-10", src: "assets/images/gallery/pet-portrait/09.jpg", alt: "黑白毛色小狗肖像油畫，吐舌微笑，藍天與黃色地面背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["狗狗"], date: "2024-10-12", src: "assets/images/gallery/pet-portrait/10.jpg", alt: "米白色捲毛狗狗肖像油畫，張嘴微笑，淺藍色背景", sessions: 1 },
 ];
 
 // 課程篩選鈕的選項清單，跟首頁「課程」選單、faq.html 裡提到的課程名稱
@@ -99,7 +106,7 @@ window.GALLERY_COURSES = [
   "流動畫",
   "抽象畫",
   "自己帶圖創作",
-  "寵物肖像畫",
+  "寵物油畫",
   "鏡子拼貼",
   "串珠",
   "大幅畫布訂製",
@@ -122,7 +129,7 @@ window.GALLERY_COURSE_LINKS = {
   "刮刀油畫": "courses/palette-knife-oil.html",
   "流動畫": "courses/fluid-art.html",
   "自己帶圖創作": "courses/custom-photo-oil.html",
-  "寵物肖像畫": "courses/pet-portrait.html",
+  "寵物油畫": "courses/pet-portrait.html",
   "串珠": "courses/beading.html",
   "大幅畫布訂製": "courses/large-canvas.html",
   "特殊材質客製": "courses/custom-material.html",
@@ -135,6 +142,10 @@ window.GALLERY_COURSE_LINKS = {
 // 的作品併入既有的「海洋生物」標籤，不另開新標籤。
 // 2026-09-13 再新增「山」標籤：使用者認為「風景」底下分類太雜，山本身
 // 就是熱門主題，值得獨立出來，不用再併在「風景」裡。
+// 2026-09-18 新增「狗狗」「貓咪」「兩隻以上」三個標籤：寵物油畫的學員
+// 作品要分這三類呈現（見 courses/pet-portrait.html「學員作品」段落），
+// 比泛用的「陸地動物」更精確。「貓咪」「兩隻以上」目前還沒有真的照片，
+// 先把標籤加進來，之後有照片直接套用，不用再回頭改這個陣列。
 window.GALLERY_THEMES = [
   "海洋生物",
   "陸地動物",
@@ -147,4 +158,7 @@ window.GALLERY_THEMES = [
   "山",
   "動漫／角色",
   "星空／月亮",
+  "狗狗",
+  "貓咪",
+  "兩隻以上",
 ];
