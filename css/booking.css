@@ -1,0 +1,409 @@
+/* booking.css —— 官網「線上預約課程」頁面專屬樣式。跟 cart.css 一樣的
+   分工方式：共用元件（.confirm-field／.step-badge／.order-sheet／
+   .checkout-error／.chapter／.work__cta 等）直接沿用 products.css／
+   cart.css 既有的，這裡只放這頁真的新增的東西——課程選擇卡片、月曆、
+   時段清單，全站目前沒有這幾個元件可以直接借用。 */
+
+/* ---------- 課前預約須知：分頁籤。2026-09-17 使用者參考 tinybot 預約頁
+   的截圖，要求改成分頁點選，不要 5 段內容全部展開堆疊、捲很長不好讀。
+   視覺沿用 gallery.css 篩選鈕（.gallery-filters__chip）同一種「直角邊框、
+   選中反轉底色」語言，但選中色改用 --color-text-primary（不是
+   --color-brand）——這頁其他所有「已選」狀態（月曆、時段、課程）都是
+   用 --color-text-primary，保持這頁內部一致；colors.css 也註明
+   --color-brand「僅 Logo／識別強調，不做按鈕填色」。 ---------- */
+.booking-notice {
+  margin-top: var(--space-4);
+}
+
+.booking-notice__tabs {
+  display: flex;
+  gap: var(--space-2);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid color-mix(in srgb, var(--color-text-secondary) 25%, transparent);
+}
+
+.booking-notice__tab {
+  appearance: none;
+  flex: none;
+  white-space: nowrap;
+  border: 1px solid color-mix(in srgb, var(--color-text-secondary) 35%, transparent);
+  border-radius: var(--radius-sharp);
+  background: none;
+  padding: var(--space-1) var(--space-4);
+  font-family: inherit;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+  cursor: pointer;
+  transition: background var(--duration-fast) var(--ease-standard), color var(--duration-fast) var(--ease-standard);
+}
+
+.booking-notice__tab[aria-selected="true"] {
+  background: var(--color-text-primary);
+  border-color: var(--color-text-primary);
+  color: var(--color-surface-light);
+}
+
+.booking-notice__panel {
+  margin-top: var(--space-4);
+}
+
+.booking-notice__panel[hidden] {
+  display: none;
+}
+
+.booking-notice__list {
+  margin: 0;
+  padding-left: 1.2em;
+  font-size: var(--font-size-xs);
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+}
+
+.booking-notice__list li {
+  margin-bottom: var(--space-1);
+}
+
+.booking-notice__list li:last-child {
+  margin-bottom: 0;
+}
+
+/* ---------- 每人一列的課程選擇 ----------
+   2026-09-17 從原生 <select> 改成自訂按鈕＋彈出清單：原生 <option>
+   裡的文字沒辦法用 CSS 排版，課程名稱＋價格只能寫死接在一起，價格會
+   黏在名字後面、對不齊，使用者反映不整齊。改成真的 <button>，用
+   flexbox 把名稱靠左、價格靠右排整齊——彈出清單（.booking-course-picker-*）
+   也是同一個理由，不是隨意換掉原生元件。 */
+.attendee-course-row + .attendee-course-row {
+  margin-top: var(--space-4);
+}
+
+.attendee-course-row__label {
+  display: block;
+  margin-bottom: var(--space-2);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  letter-spacing: 0.08em;
+}
+
+.attendee-course-picker {
+  appearance: none;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  border: 1px solid color-mix(in srgb, var(--color-text-secondary) 30%, transparent);
+  border-radius: 10px;
+  background: var(--color-surface-light);
+  padding: var(--space-2) var(--space-4);
+  font-family: inherit;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+  cursor: pointer;
+}
+
+.attendee-course-picker__name {
+  flex: 1;
+  min-width: 0;
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.attendee-course-picker__price {
+  flex: none;
+}
+
+.attendee-course-picker .confirm-field__chevron {
+  flex: none;
+  color: var(--color-text-secondary);
+}
+
+/* 彈出清單：跟 .shipping-options／.shipping-option 同一套視覺語言
+   （常駐卡片、選中反轉底色），內容換成課程名稱靠左、價格靠右。 */
+.booking-course-picker-list {
+  margin: var(--space-6) 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.booking-course-picker-option {
+  appearance: none;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  border: 1px solid color-mix(in srgb, var(--color-text-secondary) 30%, transparent);
+  border-radius: 10px;
+  background: var(--color-surface-light);
+  padding: var(--space-2) var(--space-4);
+  font-family: inherit;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+  cursor: pointer;
+  transition: background var(--duration-fast) var(--ease-standard);
+}
+
+.booking-course-picker-option[aria-pressed="true"] {
+  background: var(--color-text-primary);
+  color: var(--color-surface-light);
+}
+
+/* ---------- 月曆：選日期用。全站目前沒有這個元件，這裡是唯一定義的地方。
+   刻意做得單純——7 欄星期、格子按鈕，有名額的日期才能點，不做拖曳／
+   範圍選取這類複雜互動，跟全站「克制」的調性一致。 ---------- */
+.booking-calendar {
+  margin-top: var(--space-4);
+  max-width: 46ch;
+}
+
+.booking-calendar__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-4);
+}
+
+.booking-calendar__month {
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.booking-calendar__nav {
+  appearance: none;
+  border: 1px solid color-mix(in srgb, var(--color-text-secondary) 30%, transparent);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-surface-light);
+  color: var(--color-text-primary);
+  cursor: pointer;
+}
+
+.booking-calendar__nav:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.booking-calendar__weekdays,
+.booking-calendar__grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: var(--space-1);
+}
+
+.booking-calendar__weekdays {
+  margin-bottom: var(--space-2);
+}
+
+.booking-calendar__weekdays span {
+  text-align: center;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
+.booking-calendar__day {
+  appearance: none;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  background: none;
+  font-family: inherit;
+  font-size: var(--font-size-xs);
+  font-variant-numeric: tabular-nums;
+  color: var(--color-text-primary);
+  cursor: pointer;
+}
+
+.booking-calendar__day:disabled {
+  color: color-mix(in srgb, var(--color-text-secondary) 55%, transparent);
+  cursor: not-allowed;
+}
+
+.booking-calendar__day--empty {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* 有名額的日期，數字下方一個小點提示「可以點」——不用文字標籤，格子
+   本身已經很小，塞字會擠爆。 */
+.booking-calendar__day-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--color-interactive);
+}
+
+.booking-calendar__day:disabled .booking-calendar__day-dot {
+  visibility: hidden;
+}
+
+.booking-calendar__day[aria-pressed="true"] {
+  background: var(--color-text-primary);
+  color: var(--color-surface-light);
+}
+
+.booking-calendar__day[aria-pressed="true"] .booking-calendar__day-dot {
+  background: var(--color-surface-light);
+}
+
+/* 已選日期時段的摘要行，選了才顯示，跟 .confirm-store 同一套「已完成
+   選擇」卡片語言。 */
+.booking-selected-slot {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+  padding: var(--space-4);
+  border-radius: 10px;
+  background: var(--color-surface-light);
+  border: 1px solid color-mix(in srgb, var(--color-text-secondary) 30%, transparent);
+  max-width: 40ch;
+}
+
+.booking-selected-slot[hidden] {
+  display: none;
+}
+
+.booking-selected-slot__icon {
+  flex: none;
+  color: var(--color-text-secondary);
+}
+
+.booking-selected-slot__text {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+/* ---------- 時段面板：跟著參考截圖（997studio tinybot 預約頁）的做法，
+   選了日期直接在月曆下面列出早上／下午／晚上三欄，不用另外點開彈出
+   面板——這是這次改版唯一比較特別的地方，全站沒有其他頁面有這種
+   「三欄時段」排法，先前 order-sheet 彈出式的版本已經整個換掉。 ---------- */
+.booking-timeslots-inline {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-2);
+  margin-top: var(--space-6);
+}
+
+.booking-timeslots-inline[hidden] {
+  display: none;
+}
+
+.booking-timeslots-inline__label {
+  margin: 0 0 var(--space-2);
+  text-align: center;
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  color: var(--color-text-secondary);
+}
+
+.booking-timeslots-inline__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.booking-timeslot-inline {
+  appearance: none;
+  width: 100%;
+  border: 1px solid color-mix(in srgb, var(--color-text-secondary) 30%, transparent);
+  border-radius: 10px;
+  background: var(--color-surface-light);
+  padding: var(--space-2) var(--space-1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  font-family: inherit;
+  color: inherit;
+  cursor: pointer;
+  transition: background var(--duration-fast) var(--ease-standard);
+}
+
+.booking-timeslot-inline:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.booking-timeslot-inline[aria-pressed="true"] {
+  background: var(--color-text-primary);
+}
+
+.booking-timeslot-inline[aria-pressed="true"] .booking-timeslot-inline__time,
+.booking-timeslot-inline[aria-pressed="true"] .booking-timeslot-inline__remaining {
+  color: var(--color-surface-light);
+}
+
+.booking-timeslot-inline__time {
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.booking-timeslot-inline__remaining {
+  font-size: 0.65rem;
+  color: var(--color-text-secondary);
+  text-align: center;
+}
+
+/* 這個時段段落沒有任何時段的空位提示（例如晚上沒有開課），跟時段
+   按鈕同一個高度區塊，維持三欄視覺整齊，不會忽高忽低。 */
+.booking-timeslots-inline__empty {
+  display: block;
+  text-align: center;
+  padding: var(--space-2) 0;
+  color: color-mix(in srgb, var(--color-text-secondary) 60%, transparent);
+}
+
+/* 人數輸入：跟 .confirm-field 同一套外框語言，數字欄位不需要圖示。 */
+.booking-qty-field input[type="number"] {
+  max-width: 6ch;
+}
+
+/* 金額小結行，跟 .confirm-total 同一套排版（靠右、粗體、等寬數字）。 */
+.booking-total {
+  margin: var(--space-4) 0 0;
+  text-align: right;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  max-width: 50ch;
+}
+
+/* 付款完成後的結果畫面（成功／失敗／查詢中），跟 #confirm-error 同一套
+   「單獨一個 chapter，置中說明文字」排版。 */
+.booking-result__icon {
+  margin: 0 auto var(--space-4);
+  display: block;
+  width: 48px;
+  height: 48px;
+  color: var(--color-interactive);
+}
+
+.booking-result__icon.is-error {
+  color: var(--color-warning);
+}
+
+.booking-result[hidden],
+.booking-form-view[hidden] {
+  display: none;
+}

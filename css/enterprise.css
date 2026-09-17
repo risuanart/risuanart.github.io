@@ -537,6 +537,7 @@
 .ent-cta__actions {
   margin-top: var(--space-6);
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   gap: var(--space-6);

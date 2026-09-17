@@ -179,13 +179,20 @@
       </details>
     </section>
 
+    <!-- CTA 三連：「線上預約」是新的主要動作（2026-09 加，直接刷卡付款
+         排課，不用等私訊回覆），私訊洽詢降級成文字連結但保留——流動畫的
+         尺寸／配色還是有人想先討論再決定，兩個入口並存，不是取代關係。
+         課程頁的 query slug（?course=fluid-art）對照 js/booking.js 的
+         COURSE_SLUG_DEFAULT，帶到預約頁會預選「流動畫－33*24cm」這個
+         款式，客人到那邊還是能改選其他尺寸。 -->
     <footer class="ent-cta fade-in">
-      <p class="ent-cta__text">想了解更多課程細節或想報名，歡迎直接傳訊息與我們討論！</p>
+      <p class="ent-cta__text">可以直接線上刷卡預約，或私訊討論細節，兩種方式都能安排上課！</p>
       <div class="ent-cta__actions">
-        <a class="work__cta work__cta--primary" href="https://instagram.com/ri.suan_art" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg>
-          私訊洽詢
+        <a class="work__cta work__cta--primary" href="../booking.html?course=fluid-art">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>
+          線上預約
         </a>
+        <a class="text-link" href="https://instagram.com/ri.suan_art" target="_blank" rel="noopener">私訊洽詢</a>
         <a class="text-link" href="../index.html">← 回到首頁</a>
       </div>
     </footer>
