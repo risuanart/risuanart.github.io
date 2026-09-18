@@ -14,6 +14,13 @@
 // 的主題列。因為主題按鈕現在會被整批重新產生，改用事件代理（監聽整個
 // 容器的 click，不是幫每顆按鈕各自掛監聽器），不用在每次重新產生按鈕
 // 後重新綁定。
+//
+// 2026-09-18 再改版：曾經讓「狗狗／貓咪／兩隻以上」三個標籤彼此排他
+// （選一個自動取消另外兩個），但使用者後來明確要求相反的行為——瀏覽
+// 「貓咪」時，有貓的兩隻合照也要一起出現；瀏覽「狗狗」也一樣；有貓有狗
+// 的合照兩邊都要出現。所以拿掉了排他邏輯，這三個標籤現在跟其他主題
+// 標籤一樣是單純的複選 OR，資料面則在 js/gallery-data.js 把「兩隻以上」
+// 的每一筆同時疊上對應的「狗狗」／「貓咪」標籤。
 (function () {
   const grid = document.getElementById("gallery-grid");
   const emptyState = document.getElementById("gallery-empty");
@@ -49,15 +56,6 @@
 
   let activeCourse = "all";
   const activeThemes = new Set();
-
-  // 「狗狗／貓咪／兩隻以上」這三個標籤語意上互斥——一件作品不可能同時
-  // 是「只有一隻狗」又是「兩隻以上」，跟山／海邊那種本來就可以同時成立
-  // 的跨主題標籤不一樣（複選 OR 邏輯是為那種情境設計的）。如果直接沿用
-  // 一般複選邏輯，會讓人誤以為「只點兩隻以上」結果卻看到單隻狗的作品
-  // （其實是因為狗狗那個標籤也還勾著）——2026-09-18 使用者實際點過遇到
-  // 這個狀況。這裡讓這三者彼此排他：選了其中一個會自動取消另外兩個，
-  // 其餘標籤（山、海邊等）不受影響，還是正常的多選。
-  const EXCLUSIVE_THEME_GROUP = ["狗狗", "貓咪", "兩隻以上"];
 
   // 選「全部」時顯示完整主題清單（跨課程瀏覽本來就需要看到所有主題）；
   // 選特定課程時，只列出這堂課的作品裡實際用過的主題，順序仍照
@@ -160,14 +158,6 @@
         activeThemes.delete(theme);
         btn.classList.remove("is-active");
       } else {
-        if (EXCLUSIVE_THEME_GROUP.includes(theme)) {
-          EXCLUSIVE_THEME_GROUP.forEach((t) => activeThemes.delete(t));
-          themeFilterGroup.querySelectorAll("[data-gallery-theme]").forEach((b) => {
-            if (EXCLUSIVE_THEME_GROUP.includes(b.getAttribute("data-gallery-theme"))) {
-              b.classList.remove("is-active");
-            }
-          });
-        }
         activeThemes.add(theme);
         btn.classList.add("is-active");
       }
