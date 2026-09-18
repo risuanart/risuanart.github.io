@@ -37,6 +37,66 @@
     <button type="button" class="site-header__menu-toggle" id="menu-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="site-menu" aria-label="開啟選單">
       <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
     </button>
+    <!-- 2026-09-18 新增：桌面版（≥1024px）文字導覽列，取代漢堡選單抽屜；
+         手機版隱藏，維持現有漢堡選單不變。內容／邏輯跟首頁 index.html
+         那份一致，樣式見 css/site-menu.css .site-header__nav（子頁置中
+         logo 用 .site-header__title，不是首頁專屬的 .site-header__logo，
+         見該檔案開頭說明），下拉開合邏輯見 js/site-menu.js 「課程」下拉
+         那個 IIFE。 -->
+    <nav class="site-header__nav" aria-label="主選單">
+      <a href="../index.html">首頁</a>
+      <a href="../products/shop.html">商品總覽</a>
+      <a href="../products/index.html">材料包</a>
+      <div class="site-header__nav-item">
+        <button type="button" class="site-header__nav-dropdown-toggle" id="nav-courses-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="nav-courses-menu">
+          課程
+          <svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="site-header__nav-dropdown" id="nav-courses-menu">
+          <div class="site-header__nav-dropdown-menu">
+            <ul class="site-menu__sublist">
+              <li><a class="site-menu__sublink" href="../courses/sand-texture.html">石英砂肌理畫</a></li>
+              <li><a class="site-menu__sublink" href="../courses/palette-knife-oil.html">刮刀油畫</a></li>
+              <li><a class="site-menu__sublink" href="../courses/fluid-art.html">流動畫</a></li>
+              <li>抽象畫</li>
+              <li><a class="site-menu__sublink" href="../courses/custom-photo-oil.html">自己帶圖創作</a></li>
+              <li><a class="site-menu__sublink" href="../courses/pet-portrait.html">寵物油畫</a></li>
+              <li>鏡子拼貼</li>
+              <li><a class="site-menu__sublink" href="../courses/beading.html">串珠</a></li>
+              <li><a class="site-menu__sublink" href="../courses/large-canvas.html">大幅畫布訂製</a></li>
+              <li><a class="site-menu__sublink" href="../courses/custom-material.html">特殊材質客製</a></li>
+            </ul>
+            <a class="site-menu__sublink" href="../faq.html">預約須知</a>
+          </div>
+          <div class="site-header__nav-dropdown-photos">
+            <a class="site-header__nav-dropdown-photo" href="../courses/sand-texture.html">
+              <div class="placeholder-box placeholder-box--photo" aria-hidden="true">
+                <svg class="placeholder-box__icon" viewBox="0 0 24 24" width="1.4em" height="1.4em" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1.5"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 16l-5.5-5.5a1 1 0 0 0-1.4 0L6 19"/></svg>
+                <span class="placeholder-box__text">照片待補</span>
+              </div>
+              <span class="site-header__nav-dropdown-photo__label">石英砂肌理畫</span>
+            </a>
+            <a class="site-header__nav-dropdown-photo" href="../courses/fluid-art.html">
+              <div class="placeholder-box placeholder-box--photo" aria-hidden="true">
+                <svg class="placeholder-box__icon" viewBox="0 0 24 24" width="1.4em" height="1.4em" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1.5"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 16l-5.5-5.5a1 1 0 0 0-1.4 0L6 19"/></svg>
+                <span class="placeholder-box__text">照片待補</span>
+              </div>
+              <span class="site-header__nav-dropdown-photo__label">流動畫</span>
+            </a>
+            <a class="site-header__nav-dropdown-photo" href="../enterprise.html">
+              <div class="placeholder-box placeholder-box--photo" aria-hidden="true">
+                <svg class="placeholder-box__icon" viewBox="0 0 24 24" width="1.4em" height="1.4em" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1.5"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 16l-5.5-5.5a1 1 0 0 0-1.4 0L6 19"/></svg>
+                <span class="placeholder-box__text">照片待補</span>
+              </div>
+              <span class="site-header__nav-dropdown-photo__label">團體／企業課程</span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <a href="../guides/index.html">材料指南</a>
+      <a href="../gallery.html">學員作品</a>
+      <a href="../enterprise.html">團體／企業課程</a>
+    </nav>
     <a class="site-header__title" href="../index.html" aria-label="回到首頁"><img src="../assets/images/logo-risuan拷貝.png" alt="日宣繪畫室"></a>
     <div class="cart-badge-wrap">
       <button type="button" class="cart-badge" aria-haspopup="true" aria-expanded="false" aria-label="購物車，目前 0 件">
