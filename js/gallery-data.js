@@ -134,6 +134,23 @@ window.GALLERY_ITEMS = [
   { course: "寵物油畫", themes: ["兩隻以上", "貓咪"], date: "2025-10-04", src: "assets/images/gallery/pet-portrait/29.jpg", alt: "兩隻蓬鬆長毛貓合照肖像油畫，都穿著草莓圖案洋裝、戴紅色蝴蝶結，粉色背景", sessions: 1 },
   { course: "寵物油畫", themes: ["兩隻以上", "貓咪"], date: "2025-10-11", src: "assets/images/gallery/pet-portrait/30.jpg", alt: "白色蓬鬆貓咪倒臥吐舌與棕色虎斑貓合照的肖像油畫，簽名「Bruna Chen」，藍色背景", sessions: 1 },
   { course: "寵物油畫", themes: ["兩隻以上", "貓咪"], date: "2025-10-22", src: "assets/images/gallery/pet-portrait/31.jpg", alt: "兩隻長毛貓互相伸手依偎的肖像油畫，一隻灰白色一隻棕色虎斑，藍色背景", sessions: 1 },
+
+  // 2026-09-18 新增：「貓咪」（單隻貓）13 件，使用者從「單隻貓咪油畫
+  // 照片」資料夾提供，逐張看過畫面內容才寫 alt——同一套方法論（見上方
+  // 「兩隻以上」的說明）。date 用照片本身的拍攝日期。
+  { course: "寵物油畫", themes: ["貓咪"], date: "2026-02-08", src: "assets/images/gallery/pet-portrait/32.jpg", alt: "咖啡色虎斑貓肖像油畫，前爪搭在木箱邊緣，黃綠色眼睛，米白色背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["貓咪"], date: "2026-02-10", src: "assets/images/gallery/pet-portrait/33.jpg", alt: "橘白色貓咪肖像油畫，仰頭向上看，米色背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["貓咪"], date: "2026-02-10", src: "assets/images/gallery/pet-portrait/34.jpg", alt: "咖啡色虎斑幼貓肖像油畫，張嘴喵叫的瞬間，米色背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["貓咪"], date: "2026-02-14", src: "assets/images/gallery/pet-portrait/35.jpg", alt: "灰藍色虎斑貓肖像油畫，抬頭仰望，藍色背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["貓咪"], date: "2026-05-01", src: "assets/images/gallery/pet-portrait/36.jpg", alt: "黑白毛色貓咪肖像油畫特寫，米黃色背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["貓咪"], date: "2026-05-01", src: "assets/images/gallery/pet-portrait/37.jpg", alt: "灰黑色貓咪肖像油畫，白色胸口毛色，低頭往下看，藍色背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["貓咪"], date: "2026-05-01", src: "assets/images/gallery/pet-portrait/38.jpg", alt: "黑白賓士貓肖像油畫，紅棕與草綠色交錯的背景，點綴黃色與紅色圓點", sessions: 1 },
+  { course: "寵物油畫", themes: ["貓咪"], date: "2026-05-01", src: "assets/images/gallery/pet-portrait/39.jpg", alt: "橘白色貓咪肖像油畫，前爪交疊，淺粉色背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["貓咪"], date: "2026-05-17", src: "assets/images/gallery/pet-portrait/40.jpg", alt: "灰色貓咪肖像油畫，畫面寫著貓咪名字「KUMU」，藍色背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["貓咪"], date: "2025-02-22", src: "assets/images/gallery/pet-portrait/41.jpg", alt: "咖啡色虎斑貓肖像油畫，粉色背景，簽名「Meng Chin 2025」", sessions: 1 },
+  { course: "寵物油畫", themes: ["貓咪"], date: "2025-02-22", src: "assets/images/gallery/pet-portrait/42.jpg", alt: "咖啡色虎斑貓肖像油畫特寫，大眼睛直視前方，淺藍色背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["貓咪"], date: "2025-02-28", src: "assets/images/gallery/pet-portrait/43.jpg", alt: "橘白色貓咪肖像油畫特寫，米白色背景，簽名「lin.」", sessions: 1 },
+  { course: "寵物油畫", themes: ["貓咪"], date: "2025-02-28", src: "assets/images/gallery/pet-portrait/44.jpg", alt: "黑白賓士貓肖像油畫，藍色背景", sessions: 1 },
 ];
 
 // 課程篩選鈕的選項清單，跟首頁「課程」選單、faq.html 裡提到的課程名稱
@@ -182,11 +199,10 @@ window.GALLERY_COURSE_LINKS = {
 // 就是熱門主題，值得獨立出來，不用再併在「風景」裡。
 // 2026-09-18 新增「狗狗」「貓咪」「兩隻以上」三個標籤：寵物油畫的學員
 // 作品要分這三類呈現（見 courses/pet-portrait.html「學員作品」段落），
-// 比泛用的「陸地動物」更精確。「兩隻以上」已有 21 件真實照片（見上方
-// GALLERY_ITEMS），且同時疊加「狗狗」／「貓咪」標籤——瀏覽「貓咪」時
-// 有貓的兩隻合照也要一起出現，瀏覽「狗狗」也一樣，這三個標籤是可以
-// 同時成立的一般主題標籤，不是互斥分類。「貓咪」（單隻貓）目前還沒有
-// 真的照片，標籤先留著，之後有照片直接套用。
+// 比泛用的「陸地動物」更精確。「兩隻以上」21 件、單隻「貓咪」13 件都已
+// 有真實照片（見上方 GALLERY_ITEMS），且「兩隻以上」同時疊加「狗狗」／
+// 「貓咪」標籤——瀏覽「貓咪」時有貓的兩隻合照也要一起出現，瀏覽「狗狗」
+// 也一樣，這三個標籤是可以同時成立的一般主題標籤，不是互斥分類。
 window.GALLERY_THEMES = [
   "海洋生物",
   "陸地動物",
