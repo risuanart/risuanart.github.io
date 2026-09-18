@@ -100,6 +100,34 @@ window.GALLERY_ITEMS = [
   { course: "寵物油畫", themes: ["狗狗"], date: "2024-09-22", src: "assets/images/gallery/pet-portrait/08.jpg", alt: "兩幅各自獨立完成的單隻狗狗肖像油畫並排展示，淺棕色毛色，分別戴著紫色與粉色項圈，淺藍色背景", sessions: 1 },
   { course: "寵物油畫", themes: ["狗狗"], date: "2024-10-10", src: "assets/images/gallery/pet-portrait/09.jpg", alt: "黑白毛色小狗肖像油畫，吐舌微笑，藍天與黃色地面背景", sessions: 1 },
   { course: "寵物油畫", themes: ["狗狗"], date: "2024-10-12", src: "assets/images/gallery/pet-portrait/10.jpg", alt: "米白色捲毛狗狗肖像油畫，張嘴微笑，淺藍色背景", sessions: 1 },
+
+  // 2026-09-18 新增：「兩隻以上」21 件，使用者從「兩隻以上油畫照片」
+  // 資料夾提供（根目錄放狗貓合照、兩狗／兩貓各自分裝子資料夾）。同樣逐張
+  // 打開實際看過畫面內容才標的分類跟寫 alt。原始資料夾兩貓子資料夾裡有
+  // 一張 DSCF1788 2.JPG，畫面拍到的是還握著畫筆、手伸進畫面裡補眼睛細節
+  // 的繪製過程照，不是完成品，比照「山」系列排除過程照的先例，這張不放
+  // 進作品集。date 用照片本身的拍攝日期（跟寵物油畫狗狗那批一樣）。
+  { course: "寵物油畫", themes: ["兩隻以上"], date: "2025-08-09", src: "assets/images/gallery/pet-portrait/11.jpg", alt: "橘色虎斑貓與白色吉娃娃合照肖像油畫，貓咪表情驚訝，狗狗吐舌微笑，淺藍色背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["兩隻以上"], date: "2025-10-24", src: "assets/images/gallery/pet-portrait/12.jpg", alt: "金黃色狗狗與虎斑貓合照肖像油畫，畫面寫著狗狗名字「甜甜」與貓咪名字「Ari」，白色背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["兩隻以上"], date: "2025-04-07", src: "assets/images/gallery/pet-portrait/13.jpg", alt: "兩隻金棕色長毛狗狗依偎在綠色沙發上的肖像油畫，互相靠著頭休息", sessions: 1 },
+  { course: "寵物油畫", themes: ["兩隻以上"], date: "2026-09-05", src: "assets/images/gallery/pet-portrait/14.jpg", alt: "小型白色蓬鬆狗狗疊坐在金黃色狗狗頭頂上的肖像油畫，金黃色狗狗戴著金屬項圈與吊牌，淺藍色背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["兩隻以上"], date: "2024-08-07", src: "assets/images/gallery/pet-portrait/15.jpg", alt: "兩隻黑白花色狗狗肖像油畫，其中一隻戴藍色胸背帶並吐舌，綠色背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["兩隻以上"], date: "2024-08-28", src: "assets/images/gallery/pet-portrait/16.jpg", alt: "兩隻法國鬥牛犬幼犬肖像油畫，一隻深棕色一隻淺褐色，米黃色背景搭配布簾", sessions: 1 },
+  { course: "寵物油畫", themes: ["兩隻以上"], date: "2024-10-10", src: "assets/images/gallery/pet-portrait/17.jpg", alt: "兩隻小型犬合照肖像油畫，白色蓬鬆狗狗吐舌，另一隻穿紅色毛衣，淺藍與黃色背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["兩隻以上"], date: "2025-12-12", src: "assets/images/gallery/pet-portrait/18.jpg", alt: "兩隻白色捲毛蓬鬆狗狗肖像油畫，一隻吐舌微笑，淺藍色背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["兩隻以上"], date: "2026-02-09", src: "assets/images/gallery/pet-portrait/19.jpg", alt: "灰色虎斑貓與棕色虎斑幼貓依偎的肖像油畫，綠色豹紋圖案背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["兩隻以上"], date: "2026-05-17", src: "assets/images/gallery/pet-portrait/20.jpg", alt: "黑貓與白色長毛貓合照肖像油畫，兩隻都是綠色眼睛，橘色背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["兩隻以上"], date: "2026-05-21", src: "assets/images/gallery/pet-portrait/21.jpg", alt: "三隻虎斑與白底貓咪的臉部並排肖像油畫，米白色背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["兩隻以上"], date: "2025-07-06", src: "assets/images/gallery/pet-portrait/22.jpg", alt: "黑貓與白色長毛貓合照肖像油畫，簽名「波仕」，綠色背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["兩隻以上"], date: "2025-07-06", src: "assets/images/gallery/pet-portrait/23.jpg", alt: "米白色貓咪與棕色虎斑貓合照肖像油畫，虎斑貓戴著粉色花朵項圈，粉色背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["兩隻以上"], date: "2025-07-13", src: "assets/images/gallery/pet-portrait/24.jpg", alt: "橘白色貓咪與棕色虎斑貓依偎肖像油畫，簽名「Latte」，米棕色背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["兩隻以上"], date: "2025-08-07", src: "assets/images/gallery/pet-portrait/25.jpg", alt: "灰白色貓咪與深灰色貓咪合照肖像油畫，簽名「Alma 2025.8」，米白色背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["兩隻以上"], date: "2025-08-09", src: "assets/images/gallery/pet-portrait/26.jpg", alt: "白色貓咪與黑白賓士貓合照肖像油畫，簽名「Tatiana 2025」，米黃色背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["兩隻以上"], date: "2025-08-21", src: "assets/images/gallery/pet-portrait/27.jpg", alt: "兩隻灰白色虎斑幼貓臉頰依偎熟睡的肖像油畫，米色背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["兩隻以上"], date: "2025-09-20", src: "assets/images/gallery/pet-portrait/28.jpg", alt: "兩隻貓咪與福字貓抓箱的肖像油畫，灰色虎斑貓趴在箱頂，橘色虎斑貓從箱子洞口探頭，簽名「囉瑪＆腰果」", sessions: 1 },
+  { course: "寵物油畫", themes: ["兩隻以上"], date: "2025-10-04", src: "assets/images/gallery/pet-portrait/29.jpg", alt: "兩隻蓬鬆長毛貓合照肖像油畫，都穿著草莓圖案洋裝、戴紅色蝴蝶結，粉色背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["兩隻以上"], date: "2025-10-11", src: "assets/images/gallery/pet-portrait/30.jpg", alt: "白色蓬鬆貓咪倒臥吐舌與棕色虎斑貓合照的肖像油畫，簽名「Bruna Chen」，藍色背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["兩隻以上"], date: "2025-10-22", src: "assets/images/gallery/pet-portrait/31.jpg", alt: "兩隻長毛貓互相伸手依偎的肖像油畫，一隻灰白色一隻棕色虎斑，藍色背景", sessions: 1 },
 ];
 
 // 課程篩選鈕的選項清單，跟首頁「課程」選單、faq.html 裡提到的課程名稱
@@ -148,8 +176,9 @@ window.GALLERY_COURSE_LINKS = {
 // 就是熱門主題，值得獨立出來，不用再併在「風景」裡。
 // 2026-09-18 新增「狗狗」「貓咪」「兩隻以上」三個標籤：寵物油畫的學員
 // 作品要分這三類呈現（見 courses/pet-portrait.html「學員作品」段落），
-// 比泛用的「陸地動物」更精確。「貓咪」「兩隻以上」目前還沒有真的照片，
-// 先把標籤加進來，之後有照片直接套用，不用再回頭改這個陣列。
+// 比泛用的「陸地動物」更精確。「兩隻以上」已有 21 件真實照片（見上方
+// GALLERY_ITEMS）；「貓咪」（單隻貓）目前還沒有真的照片，標籤先留著，
+// 之後有照片直接套用。
 window.GALLERY_THEMES = [
   "海洋生物",
   "陸地動物",
