@@ -384,6 +384,14 @@
   line-height: 1.7;
   color: var(--color-text-primary);
   max-width: 40ch;
+  /* 2026-09-18 補上左右 auto margin：桌面版 .product-page 是滿版寬度
+     （見容器註解），max-width 只限制了文字欄本身的寬度，沒有置中，
+     結果整欄文字貼在容器最左邊、右側留一大片空白，使用者實測發現
+     新建立的課程頁在電腦版「文字都擠在左邊」。手機版本來就用下面
+     @media (max-width: 768px) 把 max-width 重設成 none（欄寬滿版貼齊
+     圖片），auto margin 在那個狀態下沒有作用，不影響手機版排版。 */
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* 色系故事現在是多段落（見 product-gallery.js renderStory()，一段一個 <p>，
@@ -534,6 +542,9 @@
   font-size: var(--font-size-sm);
   line-height: 1.7;
   color: var(--color-text-primary);
+  /* 置中理由同 .chapter__intro 上面的說明。 */
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .chapter__prose > * + * {
@@ -584,10 +595,31 @@
 }
 
 .chapter__statement {
-  margin: var(--space-4) 0 var(--space-4);
+  margin: var(--space-4) auto var(--space-4);
+  /* 跟 .chapter__prose 同一欄寬置中，不然標題貼在容器最左邊、底下的
+     內文卻置中收窄在畫面中間，兩者對不上。但不能直接抄一樣的「40ch」
+     ——ch 是「這個元素自己的字級」下 0 這個字元的寬度，.chapter__statement
+     字級是 --font-size-lg（20px），比 .chapter__prose 的 --font-size-sm
+     （14px）大，同樣寫 40ch 換算成實際 px 會寬了快 1.43 倍（20/14），
+     兩欄置中後左邊界對不齊。28ch＝40 × (14/20)，換算成 20px 字級下的
+     實際寬度，會跟 .chapter__prose 的 40ch／14px 得出同一個 px 值，兩欄
+     視覺上才會左邊界對齊。手機版 28ch 換算出來的寬度還是比滿版內容窄，
+     下面另外有一個 768px 媒體查詢把它重設回 none，跟 .chapter__prose
+     手機版滿版貼齊的處理一致（沒有放進上面 .chapter__prose 那個 768px
+     查詢區塊裡，是因為那段在原始碼位置上比這條規則早，同樣選擇器＋
+     同樣寫在 media query 裡但「位置在前」還是會被後面沒有 media
+     query 包住的這條蓋掉，CSS cascade 只看原始碼順序不看 media query
+     條件，所以要另外寫一個在後面的區塊）。 */
+  max-width: 28ch;
   font-size: var(--font-size-lg);
   font-weight: 600;
   color: var(--color-text-primary);
+}
+
+@media (max-width: 768px) {
+  .chapter__statement {
+    max-width: none;
+  }
 }
 
 /* ---------- 請注意：安全須知 ----------
