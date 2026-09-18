@@ -51,6 +51,15 @@
   let activeCourse = "all";
   const activeThemes = new Set();
 
+  // 「狗狗／貓咪／兩隻以上」這三個標籤語意上互斥——一件作品不可能同時
+  // 是「只有一隻狗」又是「兩隻以上」，跟山／海邊那種本來就可以同時成立
+  // 的跨主題標籤不一樣（複選 OR 邏輯是為那種情境設計的）。如果直接沿用
+  // 一般複選邏輯，會讓人誤以為「只點兩隻以上」結果卻看到單隻狗的作品
+  // （其實是因為狗狗那個標籤也還勾著）——2026-09-18 使用者實際點過遇到
+  // 這個狀況。這裡讓這三者彼此排他：選了其中一個會自動取消另外兩個，
+  // 其餘標籤（山、海邊等）不受影響，還是正常的多選。
+  const EXCLUSIVE_THEME_GROUP = ["狗狗", "貓咪", "兩隻以上"];
+
   function matches(item) {
     if (activeCourse !== "all" && item.course !== activeCourse) return false;
     if (activeThemes.size > 0) {
@@ -75,6 +84,7 @@
 
     if (visible.length === 0) {
       grid.hidden = true;
+      grid.innerHTML = ""; // 清掉舊的格子，不留著隱藏的過期內容
       if (emptyState) {
         emptyState.hidden = false;
         emptyState.textContent = "這個篩選條件目前還沒有符合的作品，換個標籤看看。";
@@ -117,6 +127,14 @@
         activeThemes.delete(theme);
         btn.classList.remove("is-active");
       } else {
+        if (EXCLUSIVE_THEME_GROUP.includes(theme)) {
+          EXCLUSIVE_THEME_GROUP.forEach((t) => activeThemes.delete(t));
+          themeButtons.forEach((b) => {
+            if (EXCLUSIVE_THEME_GROUP.includes(b.getAttribute("data-gallery-theme"))) {
+              b.classList.remove("is-active");
+            }
+          });
+        }
         activeThemes.add(theme);
         btn.classList.add("is-active");
       }
