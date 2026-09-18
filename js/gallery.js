@@ -18,9 +18,19 @@
 // 2026-09-18 再改版：曾經讓「狗狗／貓咪／兩隻以上」三個標籤彼此排他
 // （選一個自動取消另外兩個），但使用者後來明確要求相反的行為——瀏覽
 // 「貓咪」時，有貓的兩隻合照也要一起出現；瀏覽「狗狗」也一樣；有貓有狗
-// 的合照兩邊都要出現。所以拿掉了排他邏輯，這三個標籤現在跟其他主題
-// 標籤一樣是單純的複選 OR，資料面則在 js/gallery-data.js 把「兩隻以上」
-// 的每一筆同時疊上對應的「狗狗」／「貓咪」標籤。
+// 的合照兩邊都要出現。所以拿掉了排他邏輯，資料面在 js/gallery-data.js
+// 把「兩隻以上」的每一筆同時疊上對應的「狗狗」／「貓咪」標籤。
+//
+// 2026-09-18 又再改版：如果這三個標籤跟其他主題一樣走單純複選 OR，會
+// 出現使用者實測到的怪狀況——同時勾「貓咪」＋「兩隻以上」，OR 邏輯下
+// 只要符合其中一個標籤就顯示，結果只有兩隻狗、沒有貓的作品也會跑出來
+// （因為它符合「兩隻以上」）。但「狗狗／貓咪」是「哪個物種」，
+// 「兩隻以上」是「幾隻」，這兩者其實是不同維度，使用者同時勾選時期待
+// 的是「兩隻以上的貓」這種交集縮小範圍，不是「貓的作品 OR 兩隻以上的
+// 作品」這種聯集擴大範圍。所以把這三個標籤獨立出一組，組內用 AND（勾了
+// 幾個就要同時符合幾個），其餘主題標籤（山、海邊等）維持原本的 OR，兩組
+// 之間再用 AND 合併——大多數情境下不會同時跨兩組選，但邏輯上這樣合併
+// 最合理。
 (function () {
   const grid = document.getElementById("gallery-grid");
   const emptyState = document.getElementById("gallery-empty");
@@ -29,6 +39,8 @@
   if (!grid) return;
 
   const items = window.GALLERY_ITEMS || [];
+
+  const SPECIES_COUNT_THEMES = ["狗狗", "貓咪", "兩隻以上"];
 
   // 課程按鈕從 GALLERY_COURSES（見 js/gallery-data.js）動態產生，不是
   // 寫死在 HTML 裡——這樣以後加新課程，這裡的篩選鈕會自動跟著出現。
@@ -86,11 +98,26 @@
 
   function matches(item) {
     if (activeCourse !== "all" && item.course !== activeCourse) return false;
-    if (activeThemes.size > 0) {
-      const itemThemes = item.themes || [];
-      const hasAny = itemThemes.some((t) => activeThemes.has(t));
+    if (activeThemes.size === 0) return true;
+
+    const itemThemes = item.themes || [];
+
+    // 「狗狗／貓咪／兩隻以上」這組是 AND：勾了幾個這組裡的標籤，作品就
+    // 要同時具備幾個，例如勾「貓咪」＋「兩隻以上」要顯示「兩隻以上的
+    // 貓」，不是「貓的作品」跟「兩隻以上的作品」的聯集（見檔頭說明）。
+    const activeSpeciesCount = SPECIES_COUNT_THEMES.filter((t) => activeThemes.has(t));
+    if (activeSpeciesCount.length > 0) {
+      const matchesAll = activeSpeciesCount.every((t) => itemThemes.includes(t));
+      if (!matchesAll) return false;
+    }
+
+    // 其餘主題（山、海邊等）維持原本的複選 OR：勾了任一個就算符合。
+    const activeOther = Array.from(activeThemes).filter((t) => !SPECIES_COUNT_THEMES.includes(t));
+    if (activeOther.length > 0) {
+      const hasAny = itemThemes.some((t) => activeOther.includes(t));
       if (!hasAny) return false;
     }
+
     return true;
   }
 
