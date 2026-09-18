@@ -92,8 +92,20 @@
       </div>
     </section>
 
-    <div class="gallery-grid fade-in delay-2" id="gallery-grid" role="list" aria-label="學員作品"></div>
-    <p class="gallery-empty fade-in delay-2" id="gallery-empty" hidden></p>
+    <!-- 2026-09-18 移除 fade-in：js/scroll-reveal.js 的 IntersectionObserver
+         門檻是 15% 面積要進到可視範圍才觸發淡入。這個格子是動態塞進 JS
+         算出來的作品數量，手機版窄螢幕下欄數少、格子疊得非常高（例如
+         60 件作品時可以高達 5000px 以上，是手機視窗高度的 7 倍多）——
+         這種情況下無論怎麼捲動，畫面同時能看到的比例永遠不可能達到
+         15%，導致 is-visible 永遠不會被加上、格子永遠停在 opacity:0，
+         使用者會看到「進頁面沒有照片」，而且怎麼捲動都不會出現（實測
+         直接把捲動容器 scrollTop 設到底也一樣觸發不了）。桌機版因為
+         欄數多、格子沒那麼高，加上視窗本身也比較高，門檻剛好還跨得過
+         去，所以只有手機版會出現這個問題。拿掉這兩個元素的 fade-in，
+         直接一開始就正常顯示，不受高度影響；上面的標題／篩選列維持
+         fade-in（本來就矮，正常吃得到門檻）。 -->
+    <div class="gallery-grid" id="gallery-grid" role="list" aria-label="學員作品"></div>
+    <p class="gallery-empty" id="gallery-empty" hidden></p>
 
   </main>
 
