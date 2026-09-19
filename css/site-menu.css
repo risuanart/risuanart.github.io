@@ -264,7 +264,10 @@
 
 .site-header__nav-dropdown-photos .site-header__nav-dropdown-photo {
   display: block;
-  width: 120px;
+  /* 2026-09-19：從 120px 放大到 180px，理由跟 home-shop.css 同一條規則
+     的說明一致（比對 panacea-q.com SHOP 下拉選單，見該處註解）。 */
+  width: 180px;
+  overflow: hidden;
   text-decoration: none;
   color: var(--color-surface-light);
   text-transform: none;
@@ -280,6 +283,14 @@
   border-color: color-mix(in srgb, var(--color-surface-light) 30%, transparent);
   background: color-mix(in srgb, var(--color-surface-light) 8%, transparent);
   color: color-mix(in srgb, var(--color-surface-light) 55%, transparent);
+  /* 2026-09-19：懸浮放大效果，理由跟 home-shop.css 同一條規則的說明
+     一致（比對 panacea-q.com 實測到的 scale(1.1)／0.6s，這裡先保守用
+     1.06，等真的照片上去後再重新評估）。 */
+  transition: transform var(--duration-slow) var(--ease-standard);
+}
+
+.site-header__nav-dropdown-photo:hover .placeholder-box {
+  transform: scale(1.06);
 }
 
 .site-header__nav-dropdown-photo__label {

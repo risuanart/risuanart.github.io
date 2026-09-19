@@ -250,7 +250,12 @@
    透明度／內距，這裡也要整組覆寫回來，不能只設 display。 */
 .site-header__nav-dropdown-photos .site-header__nav-dropdown-photo {
   display: block;
-  width: 120px;
+  /* 2026-09-19：從 120px 放大到 180px——比對 panacea-q.com SHOP 下拉選單
+     實測（262px 寬），他們的照片格明顯比我們大很多、更有存在感，這裡
+     沒有照抄到那個確切數字（那是他們自己版面比例量出來的），改用視覺上
+     明顯放大、但還不會讓整個下拉選單過寬的中間值。 */
+  width: 180px;
+  overflow: hidden;
   text-decoration: none;
   color: var(--color-surface-light);
   text-transform: none;
@@ -266,6 +271,16 @@
   border-color: color-mix(in srgb, var(--color-surface-light) 30%, transparent);
   background: color-mix(in srgb, var(--color-surface-light) 8%, transparent);
   color: color-mix(in srgb, var(--color-surface-light) 55%, transparent);
+  /* 2026-09-19：滑鼠移到照片上會放大——比對 panacea-q.com 實測到的懸浮
+     動效（圖片本身 scale(1.1)，0.6s 漸變），這裡用比較保守的 1.06 倍
+     （現在放的還是「照片待補」佔位框，連文字帶邊框一起放大太多會顯得
+     怪，等真的照片上去後可以視覺重新評估要不要拉到 1.1）。--duration-
+     slow 剛好是 600ms，跟參考站量到的 0.6s 一致，不用另外訂新的時間。 */
+  transition: transform var(--duration-slow) var(--ease-standard);
+}
+
+.site-header__nav-dropdown-photo:hover .placeholder-box {
+  transform: scale(1.06);
 }
 
 .site-header__nav-dropdown-photo__label {

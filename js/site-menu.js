@@ -76,27 +76,52 @@
 })();
 
 // 桌面文字導覽列（≥1024px）的「課程」下拉：2026-09-18 新增，邏輯照抄
-// js/home-shop.js 首頁那份同名 IIFE——點按鈕切換子選單顯示／隱藏，點
-// 選單外任何地方或按 Esc 都會關閉。獨立成自己的 IIFE（不是塞進上面
+// js/home-shop.js 首頁那份同名 IIFE。獨立成自己的 IIFE（不是塞進上面
 // 漢堡選單那個），因為兩者是各自獨立的開關狀態，混在一起容易誤觸發。
+//
+// 2026-09-19 改成滑鼠移過去就展開（hover），不再只能點擊——使用者比對
+// panacea-q.com 的 SHOP 下拉選單後要求跟進同一種互動方式。保留 click
+// 邏輯不拿掉：鍵盤使用者 tab 到按鈕按 Enter 會觸發 click（他們的滑鼠
+// 沒有真的「移過去」），拿掉 click 會讓鍵盤操作完全打不開這個選單。
+// mouseleave 延遲 150ms 才真的關閉，不是滑鼠一離開按鈕就立刻收合——
+// 滑鼠從「課程」文字移到下拉選單本身之間有一小段垂直距離，沒有延遲的話
+// 移動過程中滑鼠會短暫離開兩者的 hit area，選單會在使用者還沒到達
+// 下拉內容之前就先關掉，跟 js/home-shop.js 同一份邏輯保持一致。
 (function () {
   const item = document.querySelector(".site-header__nav-item");
   const toggle = document.getElementById("nav-courses-toggle");
   if (!item || !toggle) return;
+
+  let closeTimer = null;
+
+  function open() {
+    clearTimeout(closeTimer);
+    item.classList.add("is-open");
+    toggle.setAttribute("aria-expanded", "true");
+  }
 
   function close() {
     item.classList.remove("is-open");
     toggle.setAttribute("aria-expanded", "false");
   }
 
+  function scheduleClose() {
+    clearTimeout(closeTimer);
+    closeTimer = setTimeout(close, 150);
+  }
+
+  item.addEventListener("mouseenter", open);
+  item.addEventListener("mouseleave", scheduleClose);
+
+  // 滑鼠點擊一定會先觸發 mouseenter（游標移到按鈕上才點得到），所以到這裡
+  // is-open 幾乎都已經被上面的 open() 設成 true 了——如果還寫「反轉目前
+  // 狀態」的 toggle 邏輯，滑鼠使用者每次點擊都會立刻把剛因為 hover 打開的
+  // 選單關掉。這裡改成單純呼叫 open()（本來就開著也沒差），click 存在的
+  // 意義只剩鍵盤使用者 tab 過來按 Enter（沒有滑鼠移入，不會被 hover 搶先
+  // 打開），關閉一律交給 Esc／點外面／滑鼠移開。
   toggle.addEventListener("click", (event) => {
     event.stopPropagation();
-    const isOpen = item.classList.contains("is-open");
-    if (isOpen) close();
-    else {
-      item.classList.add("is-open");
-      toggle.setAttribute("aria-expanded", "true");
-    }
+    open();
   });
 
   document.addEventListener("click", (event) => {

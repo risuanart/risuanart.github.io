@@ -119,27 +119,45 @@
   if (backdrop) backdrop.addEventListener("click", closeMenu);
 })();
 
-/* 桌面文字導覽列的「課程」下拉：點按鈕切換子選單顯示／隱藏，點選單外
-   任何地方或按 Esc 都會關閉，邏輯跟上面漢堡選單抽屜同一套模式，只是
-   換成單一下拉區塊。 */
+/* 桌面文字導覽列的「課程」下拉，邏輯跟上面漢堡選單抽屜同一套模式，只是
+   換成單一下拉區塊。
+   2026-09-19 改成滑鼠移過去就展開（hover），理由跟 js/site-menu.js 那份
+   同名 IIFE 完全一致（見該處說明——比對 panacea-q.com 的 SHOP 下拉選單
+   後要求跟進；保留 click 給鍵盤 Enter 用；mouseleave 延遲 150ms 才關閉，
+   給滑鼠從按鈕移到下拉選單本身的移動時間），兩邊要同步改才不會全站
+   行為不一致。 */
 (function () {
   const item = document.querySelector(".site-header__nav-item");
   const toggle = document.getElementById("nav-courses-toggle");
   if (!item || !toggle) return;
+
+  let closeTimer = null;
+
+  function open() {
+    clearTimeout(closeTimer);
+    item.classList.add("is-open");
+    toggle.setAttribute("aria-expanded", "true");
+  }
 
   function close() {
     item.classList.remove("is-open");
     toggle.setAttribute("aria-expanded", "false");
   }
 
+  function scheduleClose() {
+    clearTimeout(closeTimer);
+    closeTimer = setTimeout(close, 150);
+  }
+
+  item.addEventListener("mouseenter", open);
+  item.addEventListener("mouseleave", scheduleClose);
+
+  // 理由同 js/site-menu.js 那份同名 IIFE：click 一定被 mouseenter 搶先
+  // 觸發過 open()，寫成 toggle 會讓滑鼠使用者每次點擊都立刻關掉剛打開的
+  // 選單，改成單純呼叫 open()，click 只是給鍵盤 Enter 用。
   toggle.addEventListener("click", (event) => {
     event.stopPropagation();
-    const isOpen = item.classList.contains("is-open");
-    if (isOpen) close();
-    else {
-      item.classList.add("is-open");
-      toggle.setAttribute("aria-expanded", "true");
-    }
+    open();
   });
 
   document.addEventListener("click", (event) => {
