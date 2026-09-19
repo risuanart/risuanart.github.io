@@ -6,7 +6,19 @@
    顏色／字級／圓角／間距／動態一律吃 colors.css／tokens.css 既有變數，
    不在這裡另外定義任何色碼或動態曲線；能重用 products.css 既有 class
    （.placeholder-box／.qty-stepper／.variant-select／.price-text／
-   .chapter__title／.shop-grid／.shop-card 系列）的地方就直接重用，不重刻。 */
+   .chapter__title／.shop-grid／.shop-card 系列）的地方就直接重用，不重刻。
+
+   2026-09-19：這個樣板本來完全靠 .product-page 的環境留白撐出左右安全
+   邊界（見下面 .product-page 補回的 padding），那組留白已經整個拿掉
+   （見 products.css .product-page 說明），這裡補回來只是恢復原本就有
+   的手機/桌面基本留白，不是新加的功能。這個樣板的內容（圖庫＋購買面板
+   兩欄、色系比較工具）形狀跟一般文字頁不一樣，本來就需要比 840px 更寬
+   的版面（見下面 .ptpl-hero 兩欄／.ptpl-color-compare 900px），所以
+   沒有跟著套用全站 840px 內文容器，維持這個樣板自己原本的寬度數字。 */
+.product-page {
+  padding-left: var(--content-pad);
+  padding-right: var(--content-pad);
+}
 
 /* ---------- 頂部公告橫幅（可留可不留，示範用） ----------
    跟 .site-header 一起包在 .site-topbar 裡（見下方），疊在整個頁面最上面

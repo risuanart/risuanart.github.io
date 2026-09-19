@@ -105,6 +105,20 @@
   --pad-h: 30px;
   --editorial-gap: 90px;
   --editorial-gap-double: 180px;
+
+  /* ---------- 全站內文寬度上限（2026-09-19 定案）----------
+     使用者實測發現寬螢幕（1920px 等）下內文貼齊邊緣，追查後確認 .product-page
+     本身沒有內文寬度上限，`--pad-h` 這組安全邊界原本是「小螢幕留白＋大螢幕逃出
+     滿版用的基準值」兩種用途混在一起，這是問題根源。這裡另外獨立出一組「內文
+     容器」專用數值，跟 --pad-h 分開：--content-max-width 是容器本身固定寬度
+     （841px 以上生效，840 以下容器變滿版寬度，交界處見 .content-container 的
+     media query），--content-pad 是容器自己的內距（不隨斷點變動，手機桌面都是
+     20px，所以手機版容器 padding 剛好等於原本 --pad-h 20px，數字延續下來，
+     但意義不同——這是容器自己的內距，不是靠外層 .product-page 留白撐出來的）。
+     全站任何新的內文區塊（標題／段落／清單／照片格）都應該用這兩個變數，不要
+     另外發明寬度數字或自己補 padding，見 products.css .chapter 的實際套用方式。 */
+  --content-max-width: 840px;
+  --content-pad: 20px;
   --editorial-header-height: 58px; /* 母頁頂部列實測高度（20px 內距＋文字行高），
     .site-header 靠自己的 padding 自然撐出這個高度，這裡是給需要「保留頂部列
     佔用空間」的頁面（例如 .product-page 固定版面）拿來算 padding-top 用的。 */

@@ -87,14 +87,16 @@
      或 JS 還沒跑完前都不會蓋住內容。 */
   padding-top: calc(var(--ptpl-topbar-height, var(--editorial-header-height)) + 69px);
   padding-bottom: var(--space-24);
-  /* 左右安全邊界改用 --pad-h（跟母頁、.site-header、.pill-nav 同一組編輯式
-     版面節奏 token，見 tokens.css），內容才會真的置中在螢幕正中間，
-     手機/桌面斷點也會自動跟著母頁的規格切換，不用另外寫一次媒體查詢。 */
-  padding-left: var(--pad-h);
-}
-
-.work {
-  padding-right: var(--pad-h);
+  /* 2026-09-19 拿掉原本這裡的左右 padding（曾經是 --pad-h，跟 .work 的
+     padding-right 兩邊合起來湊出安全邊界）。這組留白原本身兼兩種用途——
+     小螢幕的安全邊界，跟大螢幕橫滑卡片列「逃出滿版」要抵銷的基準值——
+     混在一起是使用者實測發現「寬螢幕內文貼齊邊緣」的根源：這裡的留白
+     從來沒有寬度上限，只會在小螢幕看起來剛好、大螢幕完全不夠。改成
+     不在容器層留白，內文寬度上限與留白統一交給 .content-container 這組
+     規則（見 tokens.css 的 --content-max-width／--content-pad，以及
+     products.css 的 .chapter），每個內文區塊自己決定寬度，不再依賴外層
+     容器「剛好留了多少」。原本逃出這裡留白的橫滑卡片列（.addon-carousel__
+     track 等）已同步改用 --content-pad 當基準，不再依賴這裡的留白。 */
 }
 
 /* ---------- 捲動淡入（跟母頁 products/index.html 同一套 .fade-in／
@@ -125,6 +127,20 @@
      置中，用自己的 justify-content 覆寫，不會被這裡的 text-align 影響
      （text-align 只管行內內容，flex 容器的排列方式看自己的宣告）。 */
   text-align: center;
+  /* 2026-09-19：跟 .chapter 套用同一組全站內文容器規則（見該處說明）——
+     這是購物車／FAQ／預約／各商品敘事子頁的標題區，同樣直接是
+     .product-page 的子層，沒有其他容器頂著寬度。 */
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--content-pad);
+  padding-right: var(--content-pad);
+}
+
+@media (min-width: 841px) {
+  .work__intro {
+    max-width: var(--content-max-width);
+  }
 }
 
 .work-heading {
@@ -364,16 +380,57 @@
   object-fit: cover;
 }
 
+/* ---------- 全站共用內文容器（2026-09-19 定案，取代 9-19 稍早的 1100px 版本） ----------
+   使用者實測發現寬螢幕下內文貼齊邊緣，追查後決定：內文寬度上限與留白不該
+   分散在 .product-page 的環境留白（--pad-h）跟各元件各自的 ch 數值裡，改成
+   全站統一一份規則——841px 以上固定寬度 840px、左右置中；840px 以下改回
+   100% 滿版寬度；不論哪個狀態，容器自己固定內距 --content-pad（20px），
+   跟 .product-page 是否有留白無關（.product-page 已經拿掉左右留白，見該
+   規則註解）。這是給「以後任何新頁面」直接套用的共用 class，不用另外發明
+   寬度數字或自己補 padding。 */
+.content-container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--content-pad);
+  padding-right: var(--content-pad);
+}
+
+@media (min-width: 841px) {
+  .content-container {
+    max-width: var(--content-max-width);
+  }
+}
+
 /* ---------- 章節共用節奏 ---------- */
 .chapter {
   /* 章節與章節之間的大留白，改用 --editorial-gap（母頁的大區塊間距節奏，
      見 tokens.css），手機/桌面斷點會跟著母頁一起變，不用另外維護一份。 */
   margin-top: var(--editorial-gap);
+  /* 寬度／留白邏輯跟 .content-container 完全一致（見上面），這裡沒有直接
+     用那個 class 名稱，是因為 .chapter 已經是全站幾乎每一頁都在用的既有
+     class，直接在這裡套用同一組規則，舊頁面不用改 HTML 就自動套用到。 */
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--content-pad);
+  padding-right: var(--content-pad);
+}
+
+@media (min-width: 841px) {
+  .chapter {
+    max-width: var(--content-max-width);
+  }
 }
 
 /* 字級/字重/行高/字距不在這裡另外宣告：跟 base.css 的 h1-h6 預設規格
    （17px／600／行高30px，字距靠 body 繼承的 1px）完全一樣，直接讓它
    繼承下來就好，不用重複寫一次數值。 */
+/* 寬度／留白交給外層 <section class="chapter"> 負責（見上面 .chapter
+   規則）——.chapter__title／.chapter__intro 本身不再各自加一次 padding，
+   不然巢狀在 .chapter 裡面時會兩層留白疊加。全站每一頁的 .chapter__title
+   ／.chapter__intro 都應該包在 .chapter 裡面用（gallery.html 原本沒包，
+   已經一併補上，見 gallery.html）。 */
 .chapter__title {
   margin: 0;
 }
@@ -383,15 +440,6 @@
   font-size: var(--font-size-sm);
   line-height: 1.7;
   color: var(--color-text-primary);
-  max-width: 40ch;
-  /* 2026-09-18 補上左右 auto margin：桌面版 .product-page 是滿版寬度
-     （見容器註解），max-width 只限制了文字欄本身的寬度，沒有置中，
-     結果整欄文字貼在容器最左邊、右側留一大片空白，使用者實測發現
-     新建立的課程頁在電腦版「文字都擠在左邊」。手機版本來就用下面
-     @media (max-width: 768px) 把 max-width 重設成 none（欄寬滿版貼齊
-     圖片），auto margin 在那個狀態下沒有作用，不影響手機版排版。 */
-  margin-left: auto;
-  margin-right: auto;
 }
 
 /* 色系故事現在是多段落（見 product-gallery.js renderStory()，一段一個 <p>，
@@ -538,29 +586,15 @@
    差別是允許多個 <p> 依序排列，段落間距用 owl selector 統一處理。 */
 .chapter__prose {
   margin-top: var(--space-4);
-  max-width: 40ch;
   font-size: var(--font-size-sm);
   line-height: 1.7;
   color: var(--color-text-primary);
-  /* 置中理由同 .chapter__intro 上面的說明。 */
-  margin-left: auto;
-  margin-right: auto;
+  /* 拿掉原本這裡的 ch 欄寬，理由同 .chapter__intro 上面的說明——外層
+     .chapter 本身已經是統一的 840px 容器，這裡直接貼滿即可。 */
 }
 
 .chapter__prose > * + * {
   margin-top: var(--space-4);
-}
-
-/* 40ch 是為了桌面版長行閱讀舒適度設的上限，但手機版容器本來就窄
-   （--pad-h 20px），40ch 換算出來的實際寬度反而比旁邊滿版的圖片／
-   影片窄一截，兩者對不齊。手機版乾脆不設上限，讓文字貼齊滿版媒材；
-   桌面版容器沒有另外置中收窄（.product-page 是滿版), 40ch 才需要
-   保留，避免一行字拉到整個螢幕那麼寬。 */
-@media (max-width: 768px) {
-  .chapter__intro,
-  .chapter__prose {
-    max-width: none;
-  }
 }
 
 /* 純展示用的主題標籤（自己帶圖創作課程頁），視覺借用 gallery.css
@@ -595,31 +629,15 @@
 }
 
 .chapter__statement {
-  margin: var(--space-4) auto var(--space-4);
-  /* 跟 .chapter__prose 同一欄寬置中，不然標題貼在容器最左邊、底下的
-     內文卻置中收窄在畫面中間，兩者對不上。但不能直接抄一樣的「40ch」
-     ——ch 是「這個元素自己的字級」下 0 這個字元的寬度，.chapter__statement
-     字級是 --font-size-lg（20px），比 .chapter__prose 的 --font-size-sm
-     （14px）大，同樣寫 40ch 換算成實際 px 會寬了快 1.43 倍（20/14），
-     兩欄置中後左邊界對不齊。28ch＝40 × (14/20)，換算成 20px 字級下的
-     實際寬度，會跟 .chapter__prose 的 40ch／14px 得出同一個 px 值，兩欄
-     視覺上才會左邊界對齊。手機版 28ch 換算出來的寬度還是比滿版內容窄，
-     下面另外有一個 768px 媒體查詢把它重設回 none，跟 .chapter__prose
-     手機版滿版貼齊的處理一致（沒有放進上面 .chapter__prose 那個 768px
-     查詢區塊裡，是因為那段在原始碼位置上比這條規則早，同樣選擇器＋
-     同樣寫在 media query 裡但「位置在前」還是會被後面沒有 media
-     query 包住的這條蓋掉，CSS cascade 只看原始碼順序不看 media query
-     條件，所以要另外寫一個在後面的區塊）。 */
-  max-width: 28ch;
+  margin: var(--space-4) 0;
+  /* 拿掉原本這裡跨字級換算 ch 值的做法（40ch/34ch 那套），理由同
+     .chapter__intro／.chapter__prose：外層 .chapter 已經是統一的 840px
+     容器，不需要在裡面再算一次獨立的欄寬，也不用再擔心不同字級的 ch
+     值換算出不同 px 寬度、左邊界對不齊的問題——大家都直接貼滿 .chapter
+     的可用寬度，天然對齊。 */
   font-size: var(--font-size-lg);
   font-weight: 600;
   color: var(--color-text-primary);
-}
-
-@media (max-width: 768px) {
-  .chapter__statement {
-    max-width: none;
-  }
 }
 
 /* ---------- 請注意：安全須知 ----------
@@ -629,7 +647,9 @@
    「購買前請閱讀」手風琴裡——安全須知不管訪客有沒有點開那份條款都該
    看到。 */
 .safety-notice {
-  margin-top: var(--editorial-gap);
+  /* 2026-09-19：margin-top 拿掉——現在包在 <section class="chapter"> 裡面
+     （見各商品頁 HTML），外層 .chapter 自己的 margin-top 已經提供章節間
+     大留白，這裡不用再加一次，不然變成雙倍間距。 */
   padding: var(--space-4);
   border: 1px solid color-mix(in srgb, var(--color-text-secondary) 25%, transparent);
   border-radius: var(--radius-sharp);
@@ -955,8 +975,12 @@ button.text-link {
    按鈕才一併加購）。這顆按鈕跟主商品共用同一套 data-add-to-cart／
    initAddToCart() 邏輯（見 js/cart.js），data-product 指向這個加購項目
    自己在 PRODUCTS 裡的商品鍵（見 js/cart.js）。
-   逃出 .product-page／.work 版面留白讓卡片列貼齊螢幕邊緣、可以往右滑，
-   手法跟 .pattern-carousel__track 同一套。 */
+   逃出 .chapter 自己的內距讓卡片列貼齊容器邊緣、可以往右滑，手法跟
+   .pattern-carousel__track 同一套。2026-09-19：改用 --content-pad
+   （固定 20px）取代原本的 --pad-h——現在 .product-page 已經不留白，
+   卡片列真正要抵銷的是外層 .chapter 自己的內距，不是 .product-page，
+   兩者數值曾經剛好一樣所以沒發現問題，現在拆開後要各自對應正確的
+   來源，見 tokens.css 對 --content-pad 的說明。 */
 .addon-carousel {
   margin-top: var(--space-4);
 }
@@ -966,8 +990,8 @@ button.text-link {
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
-  margin-left: calc(-1 * var(--pad-h));
-  margin-right: calc(-1 * var(--pad-h));
+  margin-left: calc(-1 * var(--content-pad));
+  margin-right: calc(-1 * var(--content-pad));
   padding: var(--space-1) 9vw var(--space-2);
   scrollbar-width: none;
 }
@@ -1147,17 +1171,18 @@ button.text-link {
   font-size: 13px;
 }
 
-/* 分類圖示列滿版貼齊視窗邊緣，手法跟 .addon-carousel__track 同一套
-   （負 margin 抵銷 .product-page／.work 的左右內距，再用同樣的內距補
-   回來）。項目之間刻意不另外加 flex gap：每個項目寬 81px、圓形縮圖 57px
+/* 分類圖示列滿版貼齊容器邊緣，手法跟 .addon-carousel__track 同一套
+   （負 margin 抵銷 .chapter 自己的內距，再用同樣的內距補回來，2026-09-19
+   從 --pad-h 改成 --content-pad，理由同 .addon-carousel__track 上面的
+   說明）。項目之間刻意不另外加 flex gap：每個項目寬 81px、圓形縮圖 57px
    置中，兩個相鄰圓形之間自然就是 24px 的間隙、中心距等於 81px 的項目
    寬——這兩個數字是直接量測參考圖算出來的，不是巧合。 */
 .quick-nav__categories {
   display: flex;
   margin-top: var(--space-4);
-  margin-left: calc(-1 * var(--pad-h));
-  margin-right: calc(-1 * var(--pad-h));
-  padding: 0 var(--pad-h) 6px;
+  margin-left: calc(-1 * var(--content-pad));
+  margin-right: calc(-1 * var(--content-pad));
+  padding: 0 var(--content-pad) 6px;
   overflow-x: auto;
   scroll-snap-type: x proximity;
 }
@@ -1369,7 +1394,12 @@ button.text-link {
 @media (min-width: 768px) {
   .shop-grid {
     grid-template-columns: repeat(4, 1fr);
-    max-width: 1100px;
+    /* 2026-09-19 從 1100px 改成跟全站內文容器同一個 840px（見 tokens.css
+       --content-max-width）。.shop-grid 在 products/shop.html 是巢狀在
+       .chapter 裡面（外層已經有 840px 上限，這裡其實不會生效），但
+       .cart-cross-sell（cart.html）底下也重用同一顆 .shop-grid，那裡
+       沒有外層容器頂著，這條規則才是實際生效的地方，兩處數值要一致。 */
+    max-width: var(--content-max-width);
     margin-left: auto;
     margin-right: auto;
   }
@@ -1522,11 +1552,13 @@ button.text-link {
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
-  /* 逃出 .product-page／.work 左右各 --pad-h 的版面留白，讓滑動軌道真的
-     貼齊螢幕左右邊緣。用 vw 而非 % 算卡片寬度：% 是相對「已經被留白吃掉
-     一塊」的容器寬度去算，vw 才是相對真正的螢幕寬度。 */
-  margin-left: calc(-1 * var(--pad-h));
-  margin-right: calc(-1 * var(--pad-h));
+  /* 逃出 .chapter 自己的內距，讓滑動軌道貼齊容器左右邊緣（2026-09-19：
+     從 --pad-h 改成 --content-pad，理由同 .addon-carousel__track 上面
+     的說明——.product-page 已經不留白，這裡要抵銷的是 .chapter 自己的
+     內距）。卡片寬度仍用 9vw（相對真正的螢幕寬度），不是 %，維持原本
+     「捲到底也能置中」的手感。 */
+  margin-left: calc(-1 * var(--content-pad));
+  margin-right: calc(-1 * var(--content-pad));
   padding: var(--space-1) 9vw var(--space-2);
   scrollbar-width: none;
 }
@@ -1587,8 +1619,10 @@ button.text-link {
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
-  margin-left: calc(-1 * var(--pad-h));
-  margin-right: calc(-1 * var(--pad-h));
+  /* 2026-09-19：從 --pad-h 改成 --content-pad，理由同 .addon-carousel__track
+     上面的說明。 */
+  margin-left: calc(-1 * var(--content-pad));
+  margin-right: calc(-1 * var(--content-pad));
   padding: var(--space-1) 9vw var(--space-2);
   scrollbar-width: none;
 }
@@ -1727,17 +1761,24 @@ button.text-link {
    掃過全部內容；第二層（預約細節層）資訊量大，用分類＋<details> 手風琴
    收合＋錨點導覽，服務已經決定要來、需要查詢細節的訪客。兩層要有明顯
    的視覺層次區隔（見任務規格書驗收標準 2）。 */
-/* 這頁（faq.html）沒有商品圖／色票選擇器這類天生就會撐開版面的元件，
-   寬螢幕下如果不特別處理，內容會維持手機版那樣整塊貼齊左邊，右邊留一
-   大片空白，跟上面已經置中的 .work__intro 標題區對不齊，看起來像沒有
-   為桌面版另外調整過。用跟 .intro（見上面 max-width: 34ch; margin: ...
-   auto）同一招，給兩層內容各自一個閱讀寬度＋置中，不用另外包一層
-   容器、也不影響其他頁面（.faq-tier1／.faq-tier2 只有這頁在用）。 */
+/* 2026-09-19：原本這裡是獨立補的 640px（跟 .work__intro 對不齊問題的
+   一次性修法），現在改成套用全站統一的內文容器規則（同 .chapter／
+   .work__intro，見 tokens.css --content-max-width／--content-pad），
+   跟其他頁面用同一套數字，不再是這頁自己專屬的寬度。 */
 .faq-tier1,
 .faq-tier2 {
-  max-width: 640px;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
+  padding-left: var(--content-pad);
+  padding-right: var(--content-pad);
+}
+
+@media (min-width: 841px) {
+  .faq-tier1,
+  .faq-tier2 {
+    max-width: var(--content-max-width);
+  }
 }
 
 .faq-tier1 {

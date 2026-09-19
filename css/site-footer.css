@@ -9,8 +9,10 @@
    區塊一致。手機版兩欄堆疊，桌機版才並排（見下面 768px 斷點）。 */
 .preview-footer {
   margin-top: var(--space-24);
-  margin-left: calc(-1 * var(--pad-h));
-  margin-right: calc(-1 * var(--pad-h));
+  /* 2026-09-19：拿掉原本逃出 .product-page／.work 留白的負 margin——
+     那組留白已經整個拿掉（見 products.css .product-page 說明），這裡
+     本來就是滿版寬度，不用再逃。下面 padding 的 --pad-h 維持不變，
+     視覺留白量完全不變（使用者要求這個黑色區塊維持原樣）。 */
   /* 2026-09-18 新增：頁尾現在會是 .product-page 裡最後一個元素，抵銷
      .product-page 原本的 padding-bottom（--space-24，給沒有頁尾的頁面
      留呼吸感用），不然頁尾深色底下面會多出一截跟頁面背景同色的空白，

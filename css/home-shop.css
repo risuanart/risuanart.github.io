@@ -469,12 +469,11 @@
    不會自動裁切。中間試過 5:4／9:16，內部留白（.preview-hero__photo 的
    提示文字／.preview-hero__overlay 的真文字）用的都是不依賴比例的最小
    必要間距（見下方 padding 註解），換任何比例都不會重疊，不用每次都
-   回來重調。用負 margin 抵銷 .product-page／.work 的左右
-   內距（跟 shop.html 的
-   .quick-nav__categories 滿版分類列同一招），讓這區塊真的頂到螢幕左右
-   兩側，不是被 --pad-h 內縮的「看起來很寬」而已，也因此不套用
-   --radius-sharp 圓角——滿版本來就該是直角貼齊螢幕邊緣，套圓角反而
-   會露出兩側背景色的三角縫隙。
+   回來重調。2026-09-19：.product-page／.work 的左右內距已經整個拿掉
+   （見 products.css .product-page 說明），這裡不用再用負 margin 逃出
+   什麼，天生就是滿版寬度，不套用 --radius-sharp 圓角的理由不變——
+   滿版本來就該是直角貼齊螢幕邊緣，套圓角反而會露出兩側背景色的
+   三角縫隙。
 
    垂直方向也要滿版：.product-page 預設會用 padding-top（見 products.css，
    給 .site-header 的固定高度留白，讓一般內容不會被頂部列蓋住）把所有
@@ -497,8 +496,9 @@
 .preview-hero {
   position: relative;
   margin-top: calc(-1 * (var(--editorial-header-height) + 69px) + var(--promo-bar-height));
-  margin-left: calc(-1 * var(--pad-h));
-  margin-right: calc(-1 * var(--pad-h));
+  /* 2026-09-19：拿掉原本這裡逃出 .product-page／.work 留白的負 margin——
+     那組留白已經整個拿掉了（見 products.css .product-page 規則說明），
+     這裡本來就要滿版貼齊螢幕邊緣，現在不用再逃，天生就是滿版寬度。 */
   aspect-ratio: 2 / 3;
   overflow: hidden;
 }
@@ -720,9 +720,10 @@
 /* padding 是 5px 不是 15px：.shop-grid 本身在 products.css 裡已經內建
    0 10px 的內縮（見該檔案 .shop-grid 註解），這裡的 5px 加上那個 10px
    合計才是量到的 15px，不是忘記扣掉、也不是隨便選的數字。 */
+/* 2026-09-19：拿掉原本逃出 .product-page／.work 留白的負 margin（那組
+   留白已經整個拿掉，見 products.css .product-page 說明），只留下真正
+   決定視覺留白量的 5px padding，效果不變。 */
 .preview-shop {
-  margin-left: calc(-1 * var(--pad-h));
-  margin-right: calc(-1 * var(--pad-h));
   padding-left: 5px;
   padding-right: 5px;
 }
@@ -800,9 +801,9 @@
    選一個數字。上下留白用量到的 80px；下緣量到的 110px 是「CSS 本身
    80px＋參考站那顆 IG 外掛元件自己多留的間距」疊加出來的，我們沒有用
    那顆外掛，不需要照抄那個疊加後的數字，用乾淨的 80px 就好。 */
+/* 2026-09-19：拿掉原本逃出 .product-page／.work 留白的負 margin（理由同
+   .preview-shop 上面的說明），只留下真正決定視覺留白量的 15px padding。 */
 .preview-follow {
-  margin-left: calc(-1 * var(--pad-h));
-  margin-right: calc(-1 * var(--pad-h));
   padding: 80px 15px;
   text-align: center;
 }

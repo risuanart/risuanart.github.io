@@ -7,6 +7,22 @@
 /* ---------- 案例細節頁：開頭大圖 ---------- */
 .ent-hero {
   margin-top: var(--space-4);
+  /* 2026-09-19：套用全站統一內文容器規則（同 products.css 的 .chapter，
+     見該處＋tokens.css --content-max-width／--content-pad 的說明）。
+     .ent-hero 現在自己負責留白（.product-page 已經拿掉環境留白），
+     .is-full-bleed 影片本身另外用負 margin 逃出這層限制（見下面
+     .ent-hero__photo.is-full-bleed），不受這裡影響。 */
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--content-pad);
+  padding-right: var(--content-pad);
+}
+
+@media (min-width: 841px) {
+  .ent-hero {
+    max-width: var(--content-max-width);
+  }
 }
 
 /* 課程首圖靠頂：跟首頁 .preview-hero 同一招（見 home-shop.css），用負
@@ -129,7 +145,7 @@
    跟 .is-portrait-video 想避免的問題一樣，見上方 @media (min-width: 768px)
    裡的重設。
 
-   width 用 calc(100% + pad-h*2) 明寫，不是像 .preview-hero／
+   width 用 calc(100% + content-pad*2) 明寫，不是像 .preview-hero／
    .addon-carousel__track 那樣單靠負 margin 讓 width:auto 自動撐開——
    那招對 <div> 有效，但 <video> 是 replaced element，width:auto 的計算
    規則不一樣，會直接吃素材本身的原始像素寬度（這裡的影片是 720px，
@@ -137,12 +153,14 @@
    另外補 max-width: none，蓋掉 base.css 對所有 video 的預設
    max-width: 100%（響應式媒體的基本防溢出寫法）——那個 100% 是相對
    還沒被負 margin 撐開的 .ent-hero 容器寬度算的，會把 calc 算出來的
-   寬度整個夾住，兩個都要改才有效。 */
+   寬度整個夾住，兩個都要改才有效。2026-09-19：從 --pad-h 改成
+   --content-pad，理由同 products.css .addon-carousel__track 的說明
+   ——這裡要抵銷的是 .ent-hero 自己的內距，不是 .product-page。 */
 .ent-hero__photo.is-full-bleed {
-  width: calc(100% + var(--pad-h) * 2);
+  width: calc(100% + var(--content-pad) * 2);
   max-width: none;
-  margin-left: calc(-1 * var(--pad-h));
-  margin-right: calc(-1 * var(--pad-h));
+  margin-left: calc(-1 * var(--content-pad));
+  margin-right: calc(-1 * var(--content-pad));
   border-radius: 0;
 }
 
@@ -257,6 +275,20 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-10);
+  /* 2026-09-19：套用全站統一內文容器規則（同 .chapter，見 products.css
+     該處說明），跟上面 .chapter 標題區是分開的兩個 section（不是巢狀），
+     要自己各自套一次。 */
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--content-pad);
+  padding-right: var(--content-pad);
+}
+
+@media (min-width: 841px) {
+  .ent-list {
+    max-width: var(--content-max-width);
+  }
 }
 
 .ent-entry {

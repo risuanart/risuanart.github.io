@@ -274,16 +274,22 @@
          獨立一個一直顯示的區塊，不是藏進手風琴裡。跟羊群報福那頁同一種
          用意，但「春」材料裡沒有碎金箔／亮粉這類細緻顆粒，拿掉那條
          專屬提醒，其餘 5 條通用。 -->
-    <div class="safety-notice fade-in">
-      <p class="safety-notice__title">請注意</p>
-      <ul class="safety-notice__list">
-        <li>幼童使用時請大人隨旁陪伴使用。</li>
-        <li>材料包含細小顆粒，吞嚥會有嗆入或誤食風險。</li>
-        <li>沙料若沾染衣物或家具，建議盡快輕拍清除，避免顆粒卡入纖維縫隙。</li>
-        <li>操作時建議鋪好桌布，避免沙料灑落。</li>
-        <li>請將材料存放在幼兒與寵物無法取得之處。</li>
-      </ul>
-    </div>
+    <!-- 2026-09-19：補上 <section class="chapter"> 外層，理由同 gallery.html
+         的補法（見該頁註解）——.safety-notice 原本直接放在 .product-page
+         底下，沒有跟其他章節一樣包在 .chapter 裡，寬螢幕下會漏掉全站
+         統一的內文容器寬度。 -->
+    <section class="chapter">
+      <div class="safety-notice fade-in">
+        <p class="safety-notice__title">請注意</p>
+        <ul class="safety-notice__list">
+          <li>幼童使用時請大人隨旁陪伴使用。</li>
+          <li>材料包含細小顆粒，吞嚥會有嗆入或誤食風險。</li>
+          <li>沙料若沾染衣物或家具，建議盡快輕拍清除，避免顆粒卡入纖維縫隙。</li>
+          <li>操作時建議鋪好桌布，避免沙料灑落。</li>
+          <li>請將材料存放在幼兒與寵物無法取得之處。</li>
+        </ul>
+      </div>
+    </section>
 
     <!-- 第六章：怎麼玩。原本用 <details> 預設收合放在頁面前段，使用者
          確認過改成固定展開、不能收合，位置也挪到「請注意」後面——操作

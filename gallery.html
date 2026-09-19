@@ -137,36 +137,42 @@
          renderFilterButtons()）後，兩份清單只會有一份事實來源，之後
          新增課程／主題只要改 gallery-data.js，這裡的按鈕會自動出現，
          不會再漏掉。「全部」是特殊項目（不對應任何課程），維持寫死。 -->
-    <h1 class="chapter__title fade-in">學員作品集</h1>
-    <p class="chapter__intro fade-in delay-1">依課程或主題篩選瀏覽，也可以比較同一個主題、不同材料畫出來的差異。</p>
+    <!-- 2026-09-19：補上 <section class="chapter"> 外層——原本這幾個元素
+         直接放在 .product-page 底下，沒有跟其他頁面一樣包在 .chapter 裡，
+         寬螢幕下會漏掉全站統一的內文容器寬度（見 css/products.css .chapter
+         規則），改成跟其他頁面同樣的包法，不用另外幫這頁寫一套專屬規則。 -->
+    <section class="chapter">
+      <h1 class="chapter__title fade-in">學員作品集</h1>
+      <p class="chapter__intro fade-in delay-1">依課程或主題篩選瀏覽，也可以比較同一個主題、不同材料畫出來的差異。</p>
 
-    <section class="gallery-filters fade-in delay-1">
-      <div>
-        <p class="gallery-filters__label">課程</p>
-        <div class="gallery-filters__group" id="gallery-course-filters">
-          <button type="button" class="gallery-filters__chip is-active" data-gallery-course="all">全部</button>
+      <section class="gallery-filters fade-in delay-1">
+        <div>
+          <p class="gallery-filters__label">課程</p>
+          <div class="gallery-filters__group" id="gallery-course-filters">
+            <button type="button" class="gallery-filters__chip is-active" data-gallery-course="all">全部</button>
+          </div>
         </div>
-      </div>
-      <div>
-        <p class="gallery-filters__label">主題（可複選）</p>
-        <div class="gallery-filters__group" id="gallery-theme-filters"></div>
-      </div>
-    </section>
+        <div>
+          <p class="gallery-filters__label">主題（可複選）</p>
+          <div class="gallery-filters__group" id="gallery-theme-filters"></div>
+        </div>
+      </section>
 
-    <!-- 2026-09-18 移除 fade-in：js/scroll-reveal.js 的 IntersectionObserver
-         門檻是 15% 面積要進到可視範圍才觸發淡入。這個格子是動態塞進 JS
-         算出來的作品數量，手機版窄螢幕下欄數少、格子疊得非常高（例如
-         60 件作品時可以高達 5000px 以上，是手機視窗高度的 7 倍多）——
-         這種情況下無論怎麼捲動，畫面同時能看到的比例永遠不可能達到
-         15%，導致 is-visible 永遠不會被加上、格子永遠停在 opacity:0，
-         使用者會看到「進頁面沒有照片」，而且怎麼捲動都不會出現（實測
-         直接把捲動容器 scrollTop 設到底也一樣觸發不了）。桌機版因為
-         欄數多、格子沒那麼高，加上視窗本身也比較高，門檻剛好還跨得過
-         去，所以只有手機版會出現這個問題。拿掉這兩個元素的 fade-in，
-         直接一開始就正常顯示，不受高度影響；上面的標題／篩選列維持
-         fade-in（本來就矮，正常吃得到門檻）。 -->
-    <div class="gallery-grid" id="gallery-grid" role="list" aria-label="學員作品"></div>
-    <p class="gallery-empty" id="gallery-empty" hidden></p>
+      <!-- 2026-09-18 移除 fade-in：js/scroll-reveal.js 的 IntersectionObserver
+           門檻是 15% 面積要進到可視範圍才觸發淡入。這個格子是動態塞進 JS
+           算出來的作品數量，手機版窄螢幕下欄數少、格子疊得非常高（例如
+           60 件作品時可以高達 5000px 以上，是手機視窗高度的 7 倍多）——
+           這種情況下無論怎麼捲動，畫面同時能看到的比例永遠不可能達到
+           15%，導致 is-visible 永遠不會被加上、格子永遠停在 opacity:0，
+           使用者會看到「進頁面沒有照片」，而且怎麼捲動都不會出現（實測
+           直接把捲動容器 scrollTop 設到底也一樣觸發不了）。桌機版因為
+           欄數多、格子沒那麼高，加上視窗本身也比較高，門檻剛好還跨得過
+           去，所以只有手機版會出現這個問題。拿掉這兩個元素的 fade-in，
+           直接一開始就正常顯示，不受高度影響；上面的標題／篩選列維持
+           fade-in（本來就矮，正常吃得到門檻）。 -->
+      <div class="gallery-grid" id="gallery-grid" role="list" aria-label="學員作品"></div>
+      <p class="gallery-empty" id="gallery-empty" hidden></p>
+    </section>
 
     <footer class="preview-footer">
       <div class="preview-footer__inner">
