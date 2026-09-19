@@ -42,7 +42,8 @@
 
     if (moreLink) {
       moreLink.hidden = false;
-      moreLink.href = base + "gallery.html?course=" + encodeURIComponent(course);
+      // 2026-09-20：全站改乾淨網址，gallery.html 變成 gallery/。
+      moreLink.href = base + "gallery/?course=" + encodeURIComponent(course);
     }
 
     if (!grid) return;

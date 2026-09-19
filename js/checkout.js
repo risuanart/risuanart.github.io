@@ -420,7 +420,10 @@
     confirmView.hidden = true;
     expandCartEditView();
     if (new URLSearchParams(window.location.search).has("orderId")) {
-      history.pushState(null, "", "cart.html");
+      // 2026-09-20：不再寫死 "cart.html"——這支腳本本來就只會在購物車頁
+      // 自己身上跑，直接拿目前的 pathname（不管全站網址規則之後怎麼調整，
+      // 這裡永遠是「目前這頁自己的路徑」）清掉 query string 就好。
+      history.pushState(null, "", window.location.pathname);
     }
   }
 
@@ -646,7 +649,9 @@
 
   if (backToCartBtn) {
     backToCartBtn.addEventListener("click", () => {
-      window.location.href = "cart.html";
+      // 理由同上面 showCartEditView()：不寫死 "cart.html"，直接用目前
+      // pathname，這支腳本本來就只會在購物車頁自己身上跑。
+      window.location.href = window.location.pathname;
     });
   }
 

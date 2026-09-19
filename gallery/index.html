@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>學員作品集｜日宣繪畫室</title>
+  <meta name="description" content="日宣繪畫室學員作品集，依課程與主題篩選瀏覽，可以比較同一個主題用不同材料、技法畫出來的差異。">
+  <link rel="canonical" href="https://risuanart.com/gallery/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="學員作品集｜日宣繪畫室">
+  <meta property="og:description" content="依課程與主題篩選瀏覽學員作品，比較同主題不同材料的創作差異。">
+  <meta property="og:image" content="https://risuanart.com/assets/images/logo-risuan拷貝.png">
+  <meta property="og:url" content="https://risuanart.com/gallery/">
+  <meta property="og:locale" content="zh_TW">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="學員作品集｜日宣繪畫室">
+  <meta name="twitter:description" content="依課程與主題篩選瀏覽學員作品，比較同主題不同材料的創作差異。">
+  <meta name="twitter:image" content="https://risuanart.com/assets/images/logo-risuan拷貝.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=ABeeZee&family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;600;700&family=Poppins:wght@700&family=Noto+Serif+TC:wght@500;700&family=Noto+Sans+TC:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/colors.css">
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/home.css">
+  <link rel="stylesheet" href="../css/products.css">
+  <link rel="stylesheet" href="../css/cart.css">
+  <link rel="stylesheet" href="../css/gallery.css">
+  <link rel="stylesheet" href="../css/site-menu.css">
+  <link rel="stylesheet" href="../css/site-footer.css">
+</head>
+<body>
+
+  <div class="ambient-bg" aria-hidden="true"></div>
+  <div class="ambient-grain" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <button type="button" class="site-header__menu-toggle" id="menu-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="site-menu" aria-label="開啟選單">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <!-- 2026-09-18 新增：桌面版（≥1024px）文字導覽列，取代漢堡選單抽屜；
+         手機版隱藏，維持現有漢堡選單不變。內容／邏輯跟首頁 index.html
+         那份一致，樣式見 css/site-menu.css .site-header__nav（子頁置中
+         logo 用 .site-header__title，不是首頁專屬的 .site-header__logo，
+         見該檔案開頭說明），下拉開合邏輯見 js/site-menu.js 「課程」下拉
+         那個 IIFE。 -->
+    <nav class="site-header__nav" aria-label="主選單">
+      <a href="../">首頁</a>
+      <a href="../products/shop/">商品總覽</a>
+      <a href="../products/">材料包</a>
+      <div class="site-header__nav-item">
+        <button type="button" class="site-header__nav-dropdown-toggle" id="nav-courses-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="nav-courses-menu">
+          課程
+          <svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="site-header__nav-dropdown" id="nav-courses-menu">
+          <div class="site-header__nav-dropdown-menu">
+            <ul class="site-menu__sublist">
+              <li><a class="site-menu__sublink" href="../courses/sand-texture/">石英砂肌理畫</a></li>
+              <li><a class="site-menu__sublink" href="../courses/palette-knife-oil/">刮刀油畫</a></li>
+              <li><a class="site-menu__sublink" href="../courses/fluid-art/">流動畫</a></li>
+              <li>抽象畫</li>
+              <li><a class="site-menu__sublink" href="../courses/custom-photo-oil/">自己帶圖創作</a></li>
+              <li><a class="site-menu__sublink" href="../courses/pet-portrait/">寵物油畫</a></li>
+              <li>鏡子拼貼</li>
+              <li><a class="site-menu__sublink" href="../courses/beading/">串珠</a></li>
+              <li><a class="site-menu__sublink" href="../courses/large-canvas/">大幅畫布訂製</a></li>
+              <li><a class="site-menu__sublink" href="../courses/custom-material/">特殊材質客製</a></li>
+            </ul>
+            <a class="site-menu__sublink" href="../faq/">預約須知</a>
+          </div>
+          <div class="site-header__nav-dropdown-photos">
+            <a class="site-header__nav-dropdown-photo" href="../courses/sand-texture/">
+              <div class="placeholder-box placeholder-box--photo" aria-hidden="true">
+                <svg class="placeholder-box__icon" viewBox="0 0 24 24" width="1.4em" height="1.4em" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1.5"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 16l-5.5-5.5a1 1 0 0 0-1.4 0L6 19"/></svg>
+                <span class="placeholder-box__text">照片待補</span>
+              </div>
+              <span class="site-header__nav-dropdown-photo__label">石英砂肌理畫</span>
+            </a>
+            <a class="site-header__nav-dropdown-photo" href="../courses/fluid-art/">
+              <div class="placeholder-box placeholder-box--photo" aria-hidden="true">
+                <svg class="placeholder-box__icon" viewBox="0 0 24 24" width="1.4em" height="1.4em" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1.5"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 16l-5.5-5.5a1 1 0 0 0-1.4 0L6 19"/></svg>
+                <span class="placeholder-box__text">照片待補</span>
+              </div>
+              <span class="site-header__nav-dropdown-photo__label">流動畫</span>
+            </a>
+            <a class="site-header__nav-dropdown-photo" href="../enterprise/">
+              <div class="placeholder-box placeholder-box--photo" aria-hidden="true">
+                <svg class="placeholder-box__icon" viewBox="0 0 24 24" width="1.4em" height="1.4em" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1.5"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 16l-5.5-5.5a1 1 0 0 0-1.4 0L6 19"/></svg>
+                <span class="placeholder-box__text">照片待補</span>
+              </div>
+              <span class="site-header__nav-dropdown-photo__label">團體／企業課程</span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <a href="../guides/">材料指南</a>
+      <a href="./" aria-current="page">學員作品</a>
+      <a href="../enterprise/">團體／企業課程</a>
+    </nav>
+    <a class="site-header__title" href="../" aria-label="回到首頁"><img src="../assets/images/logo-risuan拷貝.png" alt="日宣繪畫室"></a>
+    <div class="cart-badge-wrap">
+      <button type="button" class="cart-badge" aria-haspopup="true" aria-expanded="false" aria-label="購物車，目前 0 件">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+        <span class="cart-badge__count">0</span>
+      </button>
+      <div class="cart-preview" hidden>
+        <ul class="cart-preview__list"></ul>
+        <p class="cart-preview__empty">購物車是空的</p>
+        <p class="cart-preview__total"></p>
+        <div class="cart-preview__actions">
+          <a class="cart-preview__view" href="../cart/">查看購物車</a>
+          <button type="button" class="cart-preview__continue">繼續選購</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="site-menu-backdrop" id="site-menu-backdrop"></div>
+  <nav class="site-menu" id="site-menu" aria-label="全站選單" data-menu-base="../"></nav>
+
+  <main class="product-page work">
+
+    <!-- 資料跟畫面分開：GALLERY_ITEMS（見 js/gallery-data.js）目前是空的，
+         之後有真的照片直接在那個檔案加資料，這裡的 HTML／篩選邏輯都不用
+         改。
+
+         課程／主題篩選鈕原本是寫死在這份 HTML 裡的（跟 shop.html 的
+         .quick-nav__categories 一樣的想法：選項不常變，不值得為了 7-8 個
+         固定按鈕寫動態產生的程式碼）。但實際上courses 陸續增加（寵物
+         肖像畫、大幅畫布訂製）、themes 也陸續增加（山、海邊、動漫／
+         角色、星空／月亮）時，這裡的按鈕清單好幾次忘記同步更新——
+         2026-09-13 使用者發現「主題裡面沒有山也沒有海邊」就是這個問題：
+         不是設計上刻意不加，是每次改 js/gallery-data.js 的
+         GALLERY_COURSES／GALLERY_THEMES 時，忘記回來手動同步這裡的按鈕。
+         改成從 js/gallery-data.js 動態產生（見 js/gallery.js
+         renderFilterButtons()）後，兩份清單只會有一份事實來源，之後
+         新增課程／主題只要改 gallery-data.js，這裡的按鈕會自動出現，
+         不會再漏掉。「全部」是特殊項目（不對應任何課程），維持寫死。 -->
+    <!-- 2026-09-19：補上 <section class="chapter"> 外層——原本這幾個元素
+         直接放在 .product-page 底下，沒有跟其他頁面一樣包在 .chapter 裡，
+         寬螢幕下會漏掉全站統一的內文容器寬度（見 css/products.css .chapter
+         規則），改成跟其他頁面同樣的包法，不用另外幫這頁寫一套專屬規則。 -->
+    <section class="chapter">
+      <h1 class="chapter__title fade-in">學員作品集</h1>
+      <p class="chapter__intro fade-in delay-1">依課程或主題篩選瀏覽，也可以比較同一個主題、不同材料畫出來的差異。</p>
+
+      <section class="gallery-filters fade-in delay-1">
+        <div>
+          <p class="gallery-filters__label">課程</p>
+          <div class="gallery-filters__group" id="gallery-course-filters">
+            <button type="button" class="gallery-filters__chip is-active" data-gallery-course="all">全部</button>
+          </div>
+        </div>
+        <div>
+          <p class="gallery-filters__label">主題（可複選）</p>
+          <div class="gallery-filters__group" id="gallery-theme-filters"></div>
+        </div>
+      </section>
+
+      <!-- 2026-09-18 移除 fade-in：js/scroll-reveal.js 的 IntersectionObserver
+           門檻是 15% 面積要進到可視範圍才觸發淡入。這個格子是動態塞進 JS
+           算出來的作品數量，手機版窄螢幕下欄數少、格子疊得非常高（例如
+           60 件作品時可以高達 5000px 以上，是手機視窗高度的 7 倍多）——
+           這種情況下無論怎麼捲動，畫面同時能看到的比例永遠不可能達到
+           15%，導致 is-visible 永遠不會被加上、格子永遠停在 opacity:0，
+           使用者會看到「進頁面沒有照片」，而且怎麼捲動都不會出現（實測
+           直接把捲動容器 scrollTop 設到底也一樣觸發不了）。桌機版因為
+           欄數多、格子沒那麼高，加上視窗本身也比較高，門檻剛好還跨得過
+           去，所以只有手機版會出現這個問題。拿掉這兩個元素的 fade-in，
+           直接一開始就正常顯示，不受高度影響；上面的標題／篩選列維持
+           fade-in（本來就矮，正常吃得到門檻）。 -->
+      <div class="gallery-grid" id="gallery-grid" role="list" aria-label="學員作品"></div>
+      <p class="gallery-empty" id="gallery-empty" hidden></p>
+    </section>
+
+    <footer class="preview-footer">
+      <div class="preview-footer__inner">
+        <div class="preview-footer__col">
+          <p class="preview-footer__heading">ABOUT</p>
+          <p class="preview-footer__about">日宣繪畫室，繪畫課程與手作材料包，在家也能重現課堂的手感溫度。</p>
+          <div class="preview-footer__social">
+            <a href="https://instagram.com/ri.suan_art" target="_blank" rel="noopener" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg>
+            </a>
+            <a href="mailto:risuan.art@gmail.com" aria-label="Email">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="preview-footer__col">
+          <p class="preview-footer__heading">INFO</p>
+          <nav class="preview-footer__links">
+            <a href="../products/shop/">所有材料包</a>
+            <a href="../faq/">常見問題</a>
+          </nav>
+        </div>
+        <div class="preview-footer__bottom">
+          <span>© 日宣繪畫室 2026</span>
+        </div>
+      </div>
+    </footer>
+
+  </main>
+
+  <script src="../js/gallery-data.js"></script>
+  <script src="../js/gallery.js"></script>
+  <script src="../js/gallery-lightbox.js"></script>
+  <script src="../js/cart.js"></script>
+  <script src="../js/site-header-scroll.js"></script>
+  <script src="../js/scroll-reveal.js"></script>
+  <script src="../js/site-menu.js"></script>
+</body>
+</html>

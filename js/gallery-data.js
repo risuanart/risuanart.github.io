@@ -27,7 +27,7 @@
 //   course: "石英砂肌理畫",
 //   themes: ["植物花卉"],
 //   date: "2026-09-01",
-//   src: "assets/images/gallery/2026-09-01-sand-texture-flower.jpg",
+//   src: "../assets/images/gallery/2026-09-01-sand-texture-flower.jpg",
 //   alt: "石英砂肌理畫，花卉主題",
 //   sessions: 1,
 // }
@@ -42,37 +42,37 @@
 // oil-knife/08.jpg：畫面實際內容是海岸崖壁＋浪花＋沙灘小花，不是山，
 // 照實標「海邊」而不是套用整批的「山」標籤。
 window.GALLERY_ITEMS = [
-  { course: "石英砂肌理畫", themes: ["山"], date: "2026-09-13", src: "assets/images/guides/material-compare-mountain/sand-texture/01.jpg", alt: "石英砂肌理畫的滑雪場雪山空拍景色，畫面上有滑雪的人群與紅色旗幟", sessions: 1 },
-  { course: "石英砂肌理畫", themes: ["山"], date: "2026-09-13", src: "assets/images/guides/material-compare-mountain/sand-texture/02.jpg", alt: "石英砂肌理畫的海邊夕陽山景，畫面前景有海浪與飛鳥", sessions: 1 },
-  { course: "石英砂肌理畫", themes: ["山"], date: "2026-09-13", src: "assets/images/guides/material-compare-mountain/sand-texture/03.jpg", alt: "石英砂肌理畫的藍紫漸層天空下的雪山倒影", sessions: 1 },
-  { course: "石英砂肌理畫", themes: ["山"], date: "2026-09-13", src: "assets/images/guides/material-compare-mountain/sand-texture/04.jpg", alt: "石英砂肌理畫的富士山，前景點綴楓紅樹葉", sessions: 1 },
-  { course: "石英砂肌理畫", themes: ["山"], date: "2026-09-13", src: "assets/images/guides/material-compare-mountain/sand-texture/05.jpg", alt: "石英砂肌理畫的富士山，畫面飄落粉紅櫻花", sessions: 1 },
-  { course: "石英砂肌理畫", themes: ["山"], date: "2026-09-13", src: "assets/images/guides/material-compare-mountain/sand-texture/06.jpg", alt: "石英砂肌理畫的湖邊山景，森林稜線倒映在藍色湖面上", sessions: 1 },
-  { course: "石英砂肌理畫", themes: ["山"], date: "2026-09-13", src: "assets/images/guides/material-compare-mountain/sand-texture/07.jpg", alt: "石英砂肌理畫的馬特洪峰造型雪山，背景是藍天", sessions: 1 },
-  { course: "石英砂肌理畫", themes: ["山"], date: "2026-09-13", src: "assets/images/guides/material-compare-mountain/sand-texture/08.jpg", alt: "石英砂肌理畫的山谷雪景，兩側山壁夾著中間的雪坡", sessions: 1 },
+  { course: "石英砂肌理畫", themes: ["山"], date: "2026-09-13", src: "../assets/images/guides/material-compare-mountain/sand-texture/01.jpg", alt: "石英砂肌理畫的滑雪場雪山空拍景色，畫面上有滑雪的人群與紅色旗幟", sessions: 1 },
+  { course: "石英砂肌理畫", themes: ["山"], date: "2026-09-13", src: "../assets/images/guides/material-compare-mountain/sand-texture/02.jpg", alt: "石英砂肌理畫的海邊夕陽山景，畫面前景有海浪與飛鳥", sessions: 1 },
+  { course: "石英砂肌理畫", themes: ["山"], date: "2026-09-13", src: "../assets/images/guides/material-compare-mountain/sand-texture/03.jpg", alt: "石英砂肌理畫的藍紫漸層天空下的雪山倒影", sessions: 1 },
+  { course: "石英砂肌理畫", themes: ["山"], date: "2026-09-13", src: "../assets/images/guides/material-compare-mountain/sand-texture/04.jpg", alt: "石英砂肌理畫的富士山，前景點綴楓紅樹葉", sessions: 1 },
+  { course: "石英砂肌理畫", themes: ["山"], date: "2026-09-13", src: "../assets/images/guides/material-compare-mountain/sand-texture/05.jpg", alt: "石英砂肌理畫的富士山，畫面飄落粉紅櫻花", sessions: 1 },
+  { course: "石英砂肌理畫", themes: ["山"], date: "2026-09-13", src: "../assets/images/guides/material-compare-mountain/sand-texture/06.jpg", alt: "石英砂肌理畫的湖邊山景，森林稜線倒映在藍色湖面上", sessions: 1 },
+  { course: "石英砂肌理畫", themes: ["山"], date: "2026-09-13", src: "../assets/images/guides/material-compare-mountain/sand-texture/07.jpg", alt: "石英砂肌理畫的馬特洪峰造型雪山，背景是藍天", sessions: 1 },
+  { course: "石英砂肌理畫", themes: ["山"], date: "2026-09-13", src: "../assets/images/guides/material-compare-mountain/sand-texture/08.jpg", alt: "石英砂肌理畫的山谷雪景，兩側山壁夾著中間的雪坡", sessions: 1 },
 
-  { course: "自己帶圖創作", themes: ["山"], date: "2026-09-13", src: "assets/images/guides/material-compare-mountain/oil-brush/01.jpg", alt: "油畫＋筆刷畫的富士山，前景有電線桿與枯草地", sessions: 1 },
-  { course: "自己帶圖創作", themes: ["山"], date: "2026-09-13", src: "assets/images/guides/material-compare-mountain/oil-brush/02.jpg", alt: "油畫＋筆刷畫的富士山，前景有紅色鳥居", sessions: 1 },
-  { course: "自己帶圖創作", themes: ["山"], date: "2026-09-13", src: "assets/images/guides/material-compare-mountain/oil-brush/03.jpg", alt: "油畫＋筆刷畫的山谷景色，畫面中有一列小火車行駛過草原", sessions: 1 },
-  { course: "自己帶圖創作", themes: ["山"], date: "2026-09-13", src: "assets/images/guides/material-compare-mountain/oil-brush/04.jpg", alt: "油畫＋筆刷畫的層疊山巒，籠罩著藍綠色薄霧", sessions: 1 },
-  { course: "自己帶圖創作", themes: ["山"], date: "2026-09-13", src: "assets/images/guides/material-compare-mountain/oil-brush/05.jpg", alt: "油畫＋筆刷畫的夕陽山巒，暖橘色天空與藍紫色山影層疊", sessions: 1 },
-  { course: "自己帶圖創作", themes: ["山"], date: "2026-09-13", src: "assets/images/guides/material-compare-mountain/oil-brush/06.jpg", alt: "油畫＋筆刷畫的雪山，一旁夾著參考的實景照片", sessions: 1 },
-  { course: "自己帶圖創作", themes: ["山"], date: "2026-09-13", src: "assets/images/guides/material-compare-mountain/oil-brush/07.jpg", alt: "油畫＋筆刷畫的富士山與櫻花，湖面倒映著粉色天空", sessions: 1 },
-  { course: "自己帶圖創作", themes: ["山"], date: "2026-09-13", src: "assets/images/guides/material-compare-mountain/oil-brush/08.jpg", alt: "油畫＋筆刷畫的岩石山壁與海面，海上有一艘小船", sessions: 1 },
-  { course: "自己帶圖創作", themes: ["山"], date: "2026-09-13", src: "assets/images/guides/material-compare-mountain/oil-brush/09.jpg", alt: "油畫＋筆刷畫的海邊步道，沿岸山巒與一排路燈", sessions: 1 },
-  { course: "自己帶圖創作", themes: ["山"], date: "2026-09-13", src: "assets/images/guides/material-compare-mountain/oil-brush/10.jpg", alt: "油畫＋筆刷畫的深藍色夜間山景，遠方透出微光", sessions: 1 },
-  { course: "自己帶圖創作", themes: ["山"], date: "2026-09-13", src: "assets/images/guides/material-compare-mountain/oil-brush/11.jpg", alt: "油畫＋筆刷畫的櫻花大道，盡頭是富士山", sessions: 1 },
-  { course: "自己帶圖創作", themes: ["山"], date: "2026-09-13", src: "assets/images/guides/material-compare-mountain/oil-brush/12.jpg", alt: "油畫＋筆刷畫的綠色丘陵與湖泊，前景點綴粉色花朵", sessions: 1 },
-  { course: "自己帶圖創作", themes: ["山"], date: "2026-09-13", src: "assets/images/guides/material-compare-mountain/oil-brush/13.jpg", alt: "油畫＋筆刷畫的雪山與深藍色海面，海上有一艘小船", sessions: 1 },
-  { course: "自己帶圖創作", themes: ["山"], date: "2026-09-13", src: "assets/images/guides/material-compare-mountain/oil-brush/14.jpg", alt: "油畫＋筆刷畫的富士山，透過窗框構圖望向湖面小船", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["山"], date: "2026-09-13", src: "../assets/images/guides/material-compare-mountain/oil-brush/01.jpg", alt: "油畫＋筆刷畫的富士山，前景有電線桿與枯草地", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["山"], date: "2026-09-13", src: "../assets/images/guides/material-compare-mountain/oil-brush/02.jpg", alt: "油畫＋筆刷畫的富士山，前景有紅色鳥居", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["山"], date: "2026-09-13", src: "../assets/images/guides/material-compare-mountain/oil-brush/03.jpg", alt: "油畫＋筆刷畫的山谷景色，畫面中有一列小火車行駛過草原", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["山"], date: "2026-09-13", src: "../assets/images/guides/material-compare-mountain/oil-brush/04.jpg", alt: "油畫＋筆刷畫的層疊山巒，籠罩著藍綠色薄霧", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["山"], date: "2026-09-13", src: "../assets/images/guides/material-compare-mountain/oil-brush/05.jpg", alt: "油畫＋筆刷畫的夕陽山巒，暖橘色天空與藍紫色山影層疊", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["山"], date: "2026-09-13", src: "../assets/images/guides/material-compare-mountain/oil-brush/06.jpg", alt: "油畫＋筆刷畫的雪山，一旁夾著參考的實景照片", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["山"], date: "2026-09-13", src: "../assets/images/guides/material-compare-mountain/oil-brush/07.jpg", alt: "油畫＋筆刷畫的富士山與櫻花，湖面倒映著粉色天空", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["山"], date: "2026-09-13", src: "../assets/images/guides/material-compare-mountain/oil-brush/08.jpg", alt: "油畫＋筆刷畫的岩石山壁與海面，海上有一艘小船", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["山"], date: "2026-09-13", src: "../assets/images/guides/material-compare-mountain/oil-brush/09.jpg", alt: "油畫＋筆刷畫的海邊步道，沿岸山巒與一排路燈", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["山"], date: "2026-09-13", src: "../assets/images/guides/material-compare-mountain/oil-brush/10.jpg", alt: "油畫＋筆刷畫的深藍色夜間山景，遠方透出微光", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["山"], date: "2026-09-13", src: "../assets/images/guides/material-compare-mountain/oil-brush/11.jpg", alt: "油畫＋筆刷畫的櫻花大道，盡頭是富士山", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["山"], date: "2026-09-13", src: "../assets/images/guides/material-compare-mountain/oil-brush/12.jpg", alt: "油畫＋筆刷畫的綠色丘陵與湖泊，前景點綴粉色花朵", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["山"], date: "2026-09-13", src: "../assets/images/guides/material-compare-mountain/oil-brush/13.jpg", alt: "油畫＋筆刷畫的雪山與深藍色海面，海上有一艘小船", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["山"], date: "2026-09-13", src: "../assets/images/guides/material-compare-mountain/oil-brush/14.jpg", alt: "油畫＋筆刷畫的富士山，透過窗框構圖望向湖面小船", sessions: 1 },
 
-  { course: "刮刀油畫", themes: ["山"], date: "2026-09-13", src: "assets/images/guides/material-compare-mountain/oil-knife/01.jpg", alt: "油畫＋刮刀畫的山，綠黃粉藍等顏色交錯堆疊出抽象質感", sessions: 1 },
-  { course: "刮刀油畫", themes: ["山"], date: "2026-09-13", src: "assets/images/guides/material-compare-mountain/oil-knife/02.jpg", alt: "刮刀油畫的翠綠山脈，刮刀堆疊出粗獷的筆觸質感", sessions: 1 },
-  { course: "刮刀油畫", themes: ["山"], date: "2026-09-13", src: "assets/images/guides/material-compare-mountain/oil-knife/04.jpg", alt: "刮刀油畫的灰白雪山群峰，山腳下有一間小屋", sessions: 1 },
-  { course: "刮刀油畫", themes: ["山"], date: "2026-09-13", src: "assets/images/guides/material-compare-mountain/oil-knife/05.jpg", alt: "刮刀油畫的粉白雪山，夜空中有一彎新月與星星", sessions: 1 },
-  { course: "刮刀油畫", themes: ["山"], date: "2026-09-13", src: "assets/images/guides/material-compare-mountain/oil-knife/06.jpg", alt: "刮刀油畫的沙丘山景，橘藍色調的夕陽", sessions: 1 },
-  { course: "刮刀油畫", themes: ["山"], date: "2026-09-13", src: "assets/images/guides/material-compare-mountain/oil-knife/07.jpg", alt: "刮刀油畫的黑灰色馬特洪峰，前景是秋天的紅黃樹叢", sessions: 1 },
-  { course: "刮刀油畫", themes: ["海邊"], date: "2026-09-13", src: "assets/images/guides/material-compare-mountain/oil-knife/08.jpg", alt: "刮刀油畫的海岸崖壁，浪花拍打岸邊，前景有紅色小花", sessions: 1 },
+  { course: "刮刀油畫", themes: ["山"], date: "2026-09-13", src: "../assets/images/guides/material-compare-mountain/oil-knife/01.jpg", alt: "油畫＋刮刀畫的山，綠黃粉藍等顏色交錯堆疊出抽象質感", sessions: 1 },
+  { course: "刮刀油畫", themes: ["山"], date: "2026-09-13", src: "../assets/images/guides/material-compare-mountain/oil-knife/02.jpg", alt: "刮刀油畫的翠綠山脈，刮刀堆疊出粗獷的筆觸質感", sessions: 1 },
+  { course: "刮刀油畫", themes: ["山"], date: "2026-09-13", src: "../assets/images/guides/material-compare-mountain/oil-knife/04.jpg", alt: "刮刀油畫的灰白雪山群峰，山腳下有一間小屋", sessions: 1 },
+  { course: "刮刀油畫", themes: ["山"], date: "2026-09-13", src: "../assets/images/guides/material-compare-mountain/oil-knife/05.jpg", alt: "刮刀油畫的粉白雪山，夜空中有一彎新月與星星", sessions: 1 },
+  { course: "刮刀油畫", themes: ["山"], date: "2026-09-13", src: "../assets/images/guides/material-compare-mountain/oil-knife/06.jpg", alt: "刮刀油畫的沙丘山景，橘藍色調的夕陽", sessions: 1 },
+  { course: "刮刀油畫", themes: ["山"], date: "2026-09-13", src: "../assets/images/guides/material-compare-mountain/oil-knife/07.jpg", alt: "刮刀油畫的黑灰色馬特洪峰，前景是秋天的紅黃樹叢", sessions: 1 },
+  { course: "刮刀油畫", themes: ["海邊"], date: "2026-09-13", src: "../assets/images/guides/material-compare-mountain/oil-knife/08.jpg", alt: "刮刀油畫的海岸崖壁，浪花拍打岸邊，前景有紅色小花", sessions: 1 },
 
   // 2026-09-17 新增：「寵物油畫」10 件，使用者從 Mac 照片 App 的
   // 「狗狗油畫」相簿匯出，確認都是完全沒有畫畫經驗的同學一堂課完成的
@@ -86,20 +86,20 @@ window.GALLERY_ITEMS = [
   // 作品」段落也同步改成三個分類各自一條輪播，不再用這裡的
   // GALLERY_ITEMS 資料餵那個區塊——這份資料現在只給 gallery.html 總覽頁
   // 篩選用。
-  { course: "寵物油畫", themes: ["狗狗"], date: "2024-07-01", src: "assets/images/gallery/pet-portrait/01.jpg", alt: "白色蓬鬆毛狗狗肖像油畫，吐舌微笑，綠色草叢背景，畫面簽名Kobe", sessions: 1 },
-  { course: "寵物油畫", themes: ["狗狗"], date: "2024-07-12", src: "assets/images/gallery/pet-portrait/02.jpg", alt: "哈士奇犬肖像油畫，灰白毛色、尖耳朵，淺藍色背景", sessions: 1 },
-  { course: "寵物油畫", themes: ["狗狗"], date: "2024-07-18", src: "assets/images/gallery/pet-portrait/03.jpg", alt: "白色蓬鬆小狗肖像油畫，雙腳搭在藍色椅墊上，背景點綴白色小花", sessions: 1 },
-  { course: "寵物油畫", themes: ["狗狗"], date: "2024-07-28", src: "assets/images/gallery/pet-portrait/04.jpg", alt: "白色與淺棕色毛小狗肖像油畫特寫，綠色背景", sessions: 1 },
-  { course: "寵物油畫", themes: ["狗狗"], date: "2024-08-25", src: "assets/images/gallery/pet-portrait/05.jpg", alt: "白色吉娃娃肖像油畫，大耳朵豎起，淺藍色背景", sessions: 1 },
-  { course: "寵物油畫", themes: ["狗狗"], date: "2024-08-28", src: "assets/images/gallery/pet-portrait/06.jpg", alt: "白色法國鬥牛犬肖像油畫，頭戴花朵頭飾，暖橘色背景", sessions: 1 },
-  { course: "寵物油畫", themes: ["狗狗"], date: "2024-09-08", src: "assets/images/gallery/pet-portrait/07.jpg", alt: "黑白毛色狗狗肖像油畫，向前跳躍張嘴的瞬間，藍天與土黃色地面背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["狗狗"], date: "2024-07-01", src: "../assets/images/gallery/pet-portrait/01.jpg", alt: "白色蓬鬆毛狗狗肖像油畫，吐舌微笑，綠色草叢背景，畫面簽名Kobe", sessions: 1 },
+  { course: "寵物油畫", themes: ["狗狗"], date: "2024-07-12", src: "../assets/images/gallery/pet-portrait/02.jpg", alt: "哈士奇犬肖像油畫，灰白毛色、尖耳朵，淺藍色背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["狗狗"], date: "2024-07-18", src: "../assets/images/gallery/pet-portrait/03.jpg", alt: "白色蓬鬆小狗肖像油畫，雙腳搭在藍色椅墊上，背景點綴白色小花", sessions: 1 },
+  { course: "寵物油畫", themes: ["狗狗"], date: "2024-07-28", src: "../assets/images/gallery/pet-portrait/04.jpg", alt: "白色與淺棕色毛小狗肖像油畫特寫，綠色背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["狗狗"], date: "2024-08-25", src: "../assets/images/gallery/pet-portrait/05.jpg", alt: "白色吉娃娃肖像油畫，大耳朵豎起，淺藍色背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["狗狗"], date: "2024-08-28", src: "../assets/images/gallery/pet-portrait/06.jpg", alt: "白色法國鬥牛犬肖像油畫，頭戴花朵頭飾，暖橘色背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["狗狗"], date: "2024-09-08", src: "../assets/images/gallery/pet-portrait/07.jpg", alt: "黑白毛色狗狗肖像油畫，向前跳躍張嘴的瞬間，藍天與土黃色地面背景", sessions: 1 },
   // 08.jpg 一張照片裡拍到兩幅畫，但兩幅各自都是「單隻狗」的獨立作品
   // 並排拍在一起，不是一幅畫裡畫兩隻寵物——2026-09-18 使用者特別確認
   // 這張不屬於「兩隻以上」分類，themes 標「狗狗」是對的，alt 文字也
   // 特別寫清楚「各自獨立完成」避免以後被誤會成兩隻以上的合照作品。
-  { course: "寵物油畫", themes: ["狗狗"], date: "2024-09-22", src: "assets/images/gallery/pet-portrait/08.jpg", alt: "兩幅各自獨立完成的單隻狗狗肖像油畫並排展示，淺棕色毛色，分別戴著紫色與粉色項圈，淺藍色背景", sessions: 1 },
-  { course: "寵物油畫", themes: ["狗狗"], date: "2024-10-10", src: "assets/images/gallery/pet-portrait/09.jpg", alt: "黑白毛色小狗肖像油畫，吐舌微笑，藍天與黃色地面背景", sessions: 1 },
-  { course: "寵物油畫", themes: ["狗狗"], date: "2024-10-12", src: "assets/images/gallery/pet-portrait/10.jpg", alt: "米白色捲毛狗狗肖像油畫，張嘴微笑，淺藍色背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["狗狗"], date: "2024-09-22", src: "../assets/images/gallery/pet-portrait/08.jpg", alt: "兩幅各自獨立完成的單隻狗狗肖像油畫並排展示，淺棕色毛色，分別戴著紫色與粉色項圈，淺藍色背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["狗狗"], date: "2024-10-10", src: "../assets/images/gallery/pet-portrait/09.jpg", alt: "黑白毛色小狗肖像油畫，吐舌微笑，藍天與黃色地面背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["狗狗"], date: "2024-10-12", src: "../assets/images/gallery/pet-portrait/10.jpg", alt: "米白色捲毛狗狗肖像油畫，張嘴微笑，淺藍色背景", sessions: 1 },
 
   // 2026-09-18 新增：「兩隻以上」21 件，使用者從「兩隻以上油畫照片」
   // 資料夾提供（根目錄放狗貓合照、兩狗／兩貓各自分裝子資料夾）。同樣逐張
@@ -113,44 +113,44 @@ window.GALLERY_ITEMS = [
   // 有貓有狗的合照兩邊都要出現。這三個標籤因此不再是互斥關係，改成
   // 跟山／海邊那種可以同時成立的一般主題標籤一樣（見 js/gallery.js
   // 移除 EXCLUSIVE_THEME_GROUP 的說明）。
-  { course: "寵物油畫", themes: ["兩隻以上", "狗狗", "貓咪"], date: "2025-08-09", src: "assets/images/gallery/pet-portrait/11.jpg", alt: "橘色虎斑貓與白色吉娃娃合照肖像油畫，貓咪表情驚訝，狗狗吐舌微笑，淺藍色背景", sessions: 1 },
-  { course: "寵物油畫", themes: ["兩隻以上", "狗狗", "貓咪"], date: "2025-10-24", src: "assets/images/gallery/pet-portrait/12.jpg", alt: "金黃色狗狗與虎斑貓合照肖像油畫，畫面寫著狗狗名字「甜甜」與貓咪名字「Ari」，白色背景", sessions: 1 },
-  { course: "寵物油畫", themes: ["兩隻以上", "狗狗"], date: "2025-04-07", src: "assets/images/gallery/pet-portrait/13.jpg", alt: "兩隻金棕色長毛狗狗依偎在綠色沙發上的肖像油畫，互相靠著頭休息", sessions: 1 },
-  { course: "寵物油畫", themes: ["兩隻以上", "狗狗"], date: "2026-09-05", src: "assets/images/gallery/pet-portrait/14.jpg", alt: "小型白色蓬鬆狗狗疊坐在金黃色狗狗頭頂上的肖像油畫，金黃色狗狗戴著金屬項圈與吊牌，淺藍色背景", sessions: 1 },
-  { course: "寵物油畫", themes: ["兩隻以上", "狗狗"], date: "2024-08-07", src: "assets/images/gallery/pet-portrait/15.jpg", alt: "兩隻黑白花色狗狗肖像油畫，其中一隻戴藍色胸背帶並吐舌，綠色背景", sessions: 1 },
-  { course: "寵物油畫", themes: ["兩隻以上", "狗狗"], date: "2024-08-28", src: "assets/images/gallery/pet-portrait/16.jpg", alt: "兩隻法國鬥牛犬幼犬肖像油畫，一隻深棕色一隻淺褐色，米黃色背景搭配布簾", sessions: 1 },
-  { course: "寵物油畫", themes: ["兩隻以上", "狗狗"], date: "2024-10-10", src: "assets/images/gallery/pet-portrait/17.jpg", alt: "兩隻小型犬合照肖像油畫，白色蓬鬆狗狗吐舌，另一隻穿紅色毛衣，淺藍與黃色背景", sessions: 1 },
-  { course: "寵物油畫", themes: ["兩隻以上", "狗狗"], date: "2025-12-12", src: "assets/images/gallery/pet-portrait/18.jpg", alt: "兩隻白色捲毛蓬鬆狗狗肖像油畫，一隻吐舌微笑，淺藍色背景", sessions: 1 },
-  { course: "寵物油畫", themes: ["兩隻以上", "貓咪"], date: "2026-02-09", src: "assets/images/gallery/pet-portrait/19.jpg", alt: "灰色虎斑貓與棕色虎斑幼貓依偎的肖像油畫，綠色豹紋圖案背景", sessions: 1 },
-  { course: "寵物油畫", themes: ["兩隻以上", "貓咪"], date: "2026-05-17", src: "assets/images/gallery/pet-portrait/20.jpg", alt: "黑貓與白色長毛貓合照肖像油畫，兩隻都是綠色眼睛，橘色背景", sessions: 1 },
-  { course: "寵物油畫", themes: ["兩隻以上", "貓咪"], date: "2026-05-21", src: "assets/images/gallery/pet-portrait/21.jpg", alt: "三隻虎斑與白底貓咪的臉部並排肖像油畫，米白色背景", sessions: 1 },
-  { course: "寵物油畫", themes: ["兩隻以上", "貓咪"], date: "2025-07-06", src: "assets/images/gallery/pet-portrait/22.jpg", alt: "黑貓與白色長毛貓合照肖像油畫，簽名「波仕」，綠色背景", sessions: 1 },
-  { course: "寵物油畫", themes: ["兩隻以上", "貓咪"], date: "2025-07-06", src: "assets/images/gallery/pet-portrait/23.jpg", alt: "米白色貓咪與棕色虎斑貓合照肖像油畫，虎斑貓戴著粉色花朵項圈，粉色背景", sessions: 1 },
-  { course: "寵物油畫", themes: ["兩隻以上", "貓咪"], date: "2025-07-13", src: "assets/images/gallery/pet-portrait/24.jpg", alt: "橘白色貓咪與棕色虎斑貓依偎肖像油畫，簽名「Latte」，米棕色背景", sessions: 1 },
-  { course: "寵物油畫", themes: ["兩隻以上", "貓咪"], date: "2025-08-07", src: "assets/images/gallery/pet-portrait/25.jpg", alt: "灰白色貓咪與深灰色貓咪合照肖像油畫，簽名「Alma 2025.8」，米白色背景", sessions: 1 },
-  { course: "寵物油畫", themes: ["兩隻以上", "貓咪"], date: "2025-08-09", src: "assets/images/gallery/pet-portrait/26.jpg", alt: "白色貓咪與黑白賓士貓合照肖像油畫，簽名「Tatiana 2025」，米黃色背景", sessions: 1 },
-  { course: "寵物油畫", themes: ["兩隻以上", "貓咪"], date: "2025-08-21", src: "assets/images/gallery/pet-portrait/27.jpg", alt: "兩隻灰白色虎斑幼貓臉頰依偎熟睡的肖像油畫，米色背景", sessions: 1 },
-  { course: "寵物油畫", themes: ["兩隻以上", "貓咪"], date: "2025-09-20", src: "assets/images/gallery/pet-portrait/28.jpg", alt: "兩隻貓咪與福字貓抓箱的肖像油畫，灰色虎斑貓趴在箱頂，橘色虎斑貓從箱子洞口探頭，簽名「囉瑪＆腰果」", sessions: 1 },
-  { course: "寵物油畫", themes: ["兩隻以上", "貓咪"], date: "2025-10-04", src: "assets/images/gallery/pet-portrait/29.jpg", alt: "兩隻蓬鬆長毛貓合照肖像油畫，都穿著草莓圖案洋裝、戴紅色蝴蝶結，粉色背景", sessions: 1 },
-  { course: "寵物油畫", themes: ["兩隻以上", "貓咪"], date: "2025-10-11", src: "assets/images/gallery/pet-portrait/30.jpg", alt: "白色蓬鬆貓咪倒臥吐舌與棕色虎斑貓合照的肖像油畫，簽名「Bruna Chen」，藍色背景", sessions: 1 },
-  { course: "寵物油畫", themes: ["兩隻以上", "貓咪"], date: "2025-10-22", src: "assets/images/gallery/pet-portrait/31.jpg", alt: "兩隻長毛貓互相伸手依偎的肖像油畫，一隻灰白色一隻棕色虎斑，藍色背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["兩隻以上", "狗狗", "貓咪"], date: "2025-08-09", src: "../assets/images/gallery/pet-portrait/11.jpg", alt: "橘色虎斑貓與白色吉娃娃合照肖像油畫，貓咪表情驚訝，狗狗吐舌微笑，淺藍色背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["兩隻以上", "狗狗", "貓咪"], date: "2025-10-24", src: "../assets/images/gallery/pet-portrait/12.jpg", alt: "金黃色狗狗與虎斑貓合照肖像油畫，畫面寫著狗狗名字「甜甜」與貓咪名字「Ari」，白色背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["兩隻以上", "狗狗"], date: "2025-04-07", src: "../assets/images/gallery/pet-portrait/13.jpg", alt: "兩隻金棕色長毛狗狗依偎在綠色沙發上的肖像油畫，互相靠著頭休息", sessions: 1 },
+  { course: "寵物油畫", themes: ["兩隻以上", "狗狗"], date: "2026-09-05", src: "../assets/images/gallery/pet-portrait/14.jpg", alt: "小型白色蓬鬆狗狗疊坐在金黃色狗狗頭頂上的肖像油畫，金黃色狗狗戴著金屬項圈與吊牌，淺藍色背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["兩隻以上", "狗狗"], date: "2024-08-07", src: "../assets/images/gallery/pet-portrait/15.jpg", alt: "兩隻黑白花色狗狗肖像油畫，其中一隻戴藍色胸背帶並吐舌，綠色背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["兩隻以上", "狗狗"], date: "2024-08-28", src: "../assets/images/gallery/pet-portrait/16.jpg", alt: "兩隻法國鬥牛犬幼犬肖像油畫，一隻深棕色一隻淺褐色，米黃色背景搭配布簾", sessions: 1 },
+  { course: "寵物油畫", themes: ["兩隻以上", "狗狗"], date: "2024-10-10", src: "../assets/images/gallery/pet-portrait/17.jpg", alt: "兩隻小型犬合照肖像油畫，白色蓬鬆狗狗吐舌，另一隻穿紅色毛衣，淺藍與黃色背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["兩隻以上", "狗狗"], date: "2025-12-12", src: "../assets/images/gallery/pet-portrait/18.jpg", alt: "兩隻白色捲毛蓬鬆狗狗肖像油畫，一隻吐舌微笑，淺藍色背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["兩隻以上", "貓咪"], date: "2026-02-09", src: "../assets/images/gallery/pet-portrait/19.jpg", alt: "灰色虎斑貓與棕色虎斑幼貓依偎的肖像油畫，綠色豹紋圖案背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["兩隻以上", "貓咪"], date: "2026-05-17", src: "../assets/images/gallery/pet-portrait/20.jpg", alt: "黑貓與白色長毛貓合照肖像油畫，兩隻都是綠色眼睛，橘色背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["兩隻以上", "貓咪"], date: "2026-05-21", src: "../assets/images/gallery/pet-portrait/21.jpg", alt: "三隻虎斑與白底貓咪的臉部並排肖像油畫，米白色背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["兩隻以上", "貓咪"], date: "2025-07-06", src: "../assets/images/gallery/pet-portrait/22.jpg", alt: "黑貓與白色長毛貓合照肖像油畫，簽名「波仕」，綠色背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["兩隻以上", "貓咪"], date: "2025-07-06", src: "../assets/images/gallery/pet-portrait/23.jpg", alt: "米白色貓咪與棕色虎斑貓合照肖像油畫，虎斑貓戴著粉色花朵項圈，粉色背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["兩隻以上", "貓咪"], date: "2025-07-13", src: "../assets/images/gallery/pet-portrait/24.jpg", alt: "橘白色貓咪與棕色虎斑貓依偎肖像油畫，簽名「Latte」，米棕色背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["兩隻以上", "貓咪"], date: "2025-08-07", src: "../assets/images/gallery/pet-portrait/25.jpg", alt: "灰白色貓咪與深灰色貓咪合照肖像油畫，簽名「Alma 2025.8」，米白色背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["兩隻以上", "貓咪"], date: "2025-08-09", src: "../assets/images/gallery/pet-portrait/26.jpg", alt: "白色貓咪與黑白賓士貓合照肖像油畫，簽名「Tatiana 2025」，米黃色背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["兩隻以上", "貓咪"], date: "2025-08-21", src: "../assets/images/gallery/pet-portrait/27.jpg", alt: "兩隻灰白色虎斑幼貓臉頰依偎熟睡的肖像油畫，米色背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["兩隻以上", "貓咪"], date: "2025-09-20", src: "../assets/images/gallery/pet-portrait/28.jpg", alt: "兩隻貓咪與福字貓抓箱的肖像油畫，灰色虎斑貓趴在箱頂，橘色虎斑貓從箱子洞口探頭，簽名「囉瑪＆腰果」", sessions: 1 },
+  { course: "寵物油畫", themes: ["兩隻以上", "貓咪"], date: "2025-10-04", src: "../assets/images/gallery/pet-portrait/29.jpg", alt: "兩隻蓬鬆長毛貓合照肖像油畫，都穿著草莓圖案洋裝、戴紅色蝴蝶結，粉色背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["兩隻以上", "貓咪"], date: "2025-10-11", src: "../assets/images/gallery/pet-portrait/30.jpg", alt: "白色蓬鬆貓咪倒臥吐舌與棕色虎斑貓合照的肖像油畫，簽名「Bruna Chen」，藍色背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["兩隻以上", "貓咪"], date: "2025-10-22", src: "../assets/images/gallery/pet-portrait/31.jpg", alt: "兩隻長毛貓互相伸手依偎的肖像油畫，一隻灰白色一隻棕色虎斑，藍色背景", sessions: 1 },
 
   // 2026-09-18 新增：「貓咪」（單隻貓）13 件，使用者從「單隻貓咪油畫
   // 照片」資料夾提供，逐張看過畫面內容才寫 alt——同一套方法論（見上方
   // 「兩隻以上」的說明）。date 用照片本身的拍攝日期。
-  { course: "寵物油畫", themes: ["貓咪"], date: "2026-02-08", src: "assets/images/gallery/pet-portrait/32.jpg", alt: "咖啡色虎斑貓肖像油畫，前爪搭在木箱邊緣，黃綠色眼睛，米白色背景", sessions: 1 },
-  { course: "寵物油畫", themes: ["貓咪"], date: "2026-02-10", src: "assets/images/gallery/pet-portrait/33.jpg", alt: "橘白色貓咪肖像油畫，仰頭向上看，米色背景", sessions: 1 },
-  { course: "寵物油畫", themes: ["貓咪"], date: "2026-02-10", src: "assets/images/gallery/pet-portrait/34.jpg", alt: "咖啡色虎斑幼貓肖像油畫，張嘴喵叫的瞬間，米色背景", sessions: 1 },
-  { course: "寵物油畫", themes: ["貓咪"], date: "2026-02-14", src: "assets/images/gallery/pet-portrait/35.jpg", alt: "灰藍色虎斑貓肖像油畫，抬頭仰望，藍色背景", sessions: 1 },
-  { course: "寵物油畫", themes: ["貓咪"], date: "2026-05-01", src: "assets/images/gallery/pet-portrait/36.jpg", alt: "黑白毛色貓咪肖像油畫特寫，米黃色背景", sessions: 1 },
-  { course: "寵物油畫", themes: ["貓咪"], date: "2026-05-01", src: "assets/images/gallery/pet-portrait/37.jpg", alt: "灰黑色貓咪肖像油畫，白色胸口毛色，低頭往下看，藍色背景", sessions: 1 },
-  { course: "寵物油畫", themes: ["貓咪"], date: "2026-05-01", src: "assets/images/gallery/pet-portrait/38.jpg", alt: "黑白賓士貓肖像油畫，紅棕與草綠色交錯的背景，點綴黃色與紅色圓點", sessions: 1 },
-  { course: "寵物油畫", themes: ["貓咪"], date: "2026-05-01", src: "assets/images/gallery/pet-portrait/39.jpg", alt: "橘白色貓咪肖像油畫，前爪交疊，淺粉色背景", sessions: 1 },
-  { course: "寵物油畫", themes: ["貓咪"], date: "2026-05-17", src: "assets/images/gallery/pet-portrait/40.jpg", alt: "灰色貓咪肖像油畫，畫面寫著貓咪名字「KUMU」，藍色背景", sessions: 1 },
-  { course: "寵物油畫", themes: ["貓咪"], date: "2025-02-22", src: "assets/images/gallery/pet-portrait/41.jpg", alt: "咖啡色虎斑貓肖像油畫，粉色背景，簽名「Meng Chin 2025」", sessions: 1 },
-  { course: "寵物油畫", themes: ["貓咪"], date: "2025-02-22", src: "assets/images/gallery/pet-portrait/42.jpg", alt: "咖啡色虎斑貓肖像油畫特寫，大眼睛直視前方，淺藍色背景", sessions: 1 },
-  { course: "寵物油畫", themes: ["貓咪"], date: "2025-02-28", src: "assets/images/gallery/pet-portrait/43.jpg", alt: "橘白色貓咪肖像油畫特寫，米白色背景，簽名「lin.」", sessions: 1 },
-  { course: "寵物油畫", themes: ["貓咪"], date: "2025-02-28", src: "assets/images/gallery/pet-portrait/44.jpg", alt: "黑白賓士貓肖像油畫，藍色背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["貓咪"], date: "2026-02-08", src: "../assets/images/gallery/pet-portrait/32.jpg", alt: "咖啡色虎斑貓肖像油畫，前爪搭在木箱邊緣，黃綠色眼睛，米白色背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["貓咪"], date: "2026-02-10", src: "../assets/images/gallery/pet-portrait/33.jpg", alt: "橘白色貓咪肖像油畫，仰頭向上看，米色背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["貓咪"], date: "2026-02-10", src: "../assets/images/gallery/pet-portrait/34.jpg", alt: "咖啡色虎斑幼貓肖像油畫，張嘴喵叫的瞬間，米色背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["貓咪"], date: "2026-02-14", src: "../assets/images/gallery/pet-portrait/35.jpg", alt: "灰藍色虎斑貓肖像油畫，抬頭仰望，藍色背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["貓咪"], date: "2026-05-01", src: "../assets/images/gallery/pet-portrait/36.jpg", alt: "黑白毛色貓咪肖像油畫特寫，米黃色背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["貓咪"], date: "2026-05-01", src: "../assets/images/gallery/pet-portrait/37.jpg", alt: "灰黑色貓咪肖像油畫，白色胸口毛色，低頭往下看，藍色背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["貓咪"], date: "2026-05-01", src: "../assets/images/gallery/pet-portrait/38.jpg", alt: "黑白賓士貓肖像油畫，紅棕與草綠色交錯的背景，點綴黃色與紅色圓點", sessions: 1 },
+  { course: "寵物油畫", themes: ["貓咪"], date: "2026-05-01", src: "../assets/images/gallery/pet-portrait/39.jpg", alt: "橘白色貓咪肖像油畫，前爪交疊，淺粉色背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["貓咪"], date: "2026-05-17", src: "../assets/images/gallery/pet-portrait/40.jpg", alt: "灰色貓咪肖像油畫，畫面寫著貓咪名字「KUMU」，藍色背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["貓咪"], date: "2025-02-22", src: "../assets/images/gallery/pet-portrait/41.jpg", alt: "咖啡色虎斑貓肖像油畫，粉色背景，簽名「Meng Chin 2025」", sessions: 1 },
+  { course: "寵物油畫", themes: ["貓咪"], date: "2025-02-22", src: "../assets/images/gallery/pet-portrait/42.jpg", alt: "咖啡色虎斑貓肖像油畫特寫，大眼睛直視前方，淺藍色背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["貓咪"], date: "2025-02-28", src: "../assets/images/gallery/pet-portrait/43.jpg", alt: "橘白色貓咪肖像油畫特寫，米白色背景，簽名「lin.」", sessions: 1 },
+  { course: "寵物油畫", themes: ["貓咪"], date: "2025-02-28", src: "../assets/images/gallery/pet-portrait/44.jpg", alt: "黑白賓士貓肖像油畫，藍色背景", sessions: 1 },
 ];
 
 // 課程篩選鈕的選項清單，跟首頁「課程」選單、faq.html 裡提到的課程名稱
@@ -179,15 +179,17 @@ window.GALLERY_COURSES = [
 // 2026-09-16 新增「流動畫」：courses/fluid-art.html 上線。
 // 2026-09-16 新增「特殊材質客製」：courses/custom-material.html 上線，
 // 跟「大幅畫布訂製」同樣是客製服務性質，不是固定期別的技法課。
+// 2026-09-20：全站改乾淨網址，gallery.html 本身也搬進 gallery/index.html
+// （多了一層），這裡的路徑要補上 "../" 才能正確回頭指到 courses/ 底下。
 window.GALLERY_COURSE_LINKS = {
-  "石英砂肌理畫": "courses/sand-texture.html",
-  "刮刀油畫": "courses/palette-knife-oil.html",
-  "流動畫": "courses/fluid-art.html",
-  "自己帶圖創作": "courses/custom-photo-oil.html",
-  "寵物油畫": "courses/pet-portrait.html",
-  "串珠": "courses/beading.html",
-  "大幅畫布訂製": "courses/large-canvas.html",
-  "特殊材質客製": "courses/custom-material.html",
+  "石英砂肌理畫": "../courses/sand-texture/",
+  "刮刀油畫": "../courses/palette-knife-oil/",
+  "流動畫": "../courses/fluid-art/",
+  "自己帶圖創作": "../courses/custom-photo-oil/",
+  "寵物油畫": "../courses/pet-portrait/",
+  "串珠": "../courses/beading/",
+  "大幅畫布訂製": "../courses/large-canvas/",
+  "特殊材質客製": "../courses/custom-material/",
 };
 
 // 主題標籤的起始清單——先列出來，之後看實際作品內容隨時可以增加，

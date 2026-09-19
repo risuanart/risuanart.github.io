@@ -8,11 +8,21 @@
   // 絕對路徑（/ 開頭）在本機用 python -m http.server 測試時沒問題，但在某些
   // 本機預覽工具（例如 VS Code 的預覽/Live Preview）裡，"/" 不一定等於專案
   // 根目錄，會被那些工具的安全機制擋掉（「File does not reside within a
-  // trusted folder」）。改回用「相對於目前這一層」的字首，這份 JS 會在不同
-  // 深度的頁面執行（首頁、cart.html 在根目錄，商品頁在 /products/ 底下），
-  // 用網址路徑判斷現在是哪一層，自動決定要不要多加一層 ../，不用依賴絕對路徑
-  // 也能在任何伺服器環境下正確運作。
-  const BASE_PREFIX = /\/products\//.test(window.location.pathname) ? "../" : "";
+  // trusted folder」）。這份 JS 會在很多不同深度的頁面執行（首頁在根目錄、
+  // 舊版商品頁在一層深、2026-09-20 全站改乾淨網址後大部分頁面變兩層深），
+  // 原本用「網址路徑符不符合 /products/」猜層數，全站改版後深度組合變多，
+  // 猜規則的寫法遲早又會漏掉新頁面。改成直接讀「這支 <script> 標籤自己的
+  // src 是怎麼寫的」反推層數——每個頁面的作者本來就得把 src 寫對這份 JS
+  // 才載得進來，這裡直接借用那個已經正確的相對路徑當基準，不用另外維護
+  // 一份判斷邏輯，之後不管網站目錄結構怎麼調整都不用回來改這裡。
+  const BASE_PREFIX = (function () {
+    const script =
+      document.currentScript ||
+      Array.from(document.getElementsByTagName("script")).find((s) => /(^|\/)cart\.js(\?|$)/.test(s.getAttribute("src") || ""));
+    const src = script ? script.getAttribute("src") || "" : "";
+    const match = src.match(/^(.*\/)?js\/cart\.js/);
+    return match && match[1] ? match[1] : "";
+  })();
 
   // 商品資料集中在這裡：cart.js 是唯一需要知道「品項＋價格」的地方，
   // 商品頁本身不需要知道價格邏輯，只需要在按鈕上標明 data-product 是哪一個品項。
@@ -141,19 +151,20 @@
     return `<div class="${className} placeholder-box placeholder-box--photo" aria-hidden="true">${PLACEHOLDER_PHOTO_ICON}<span class="placeholder-box__text">圖片待補</span></div>`;
   }
 
-  // 縮圖／品名點下去要連去哪個商品頁。
+  // 縮圖／品名點下去要連去哪個商品頁。2026-09-20：全站改乾淨網址，目標
+  // 從檔案變成資料夾。
   const PRODUCT_URLS = {
-    "fluid-art-light": BASE_PREFIX + "products/fluid-art-light.html",
-    "fluid-art-gift": BASE_PREFIX + "products/fluid-art-gift.html",
-    "sand-art-light": BASE_PREFIX + "products/sand-art-light.html",
-    "sand-art-collection": BASE_PREFIX + "products/sand-art-collection.html",
-    "sand-art-artist-sheep": BASE_PREFIX + "products/sand-art-artist-sheep.html",
-    "sand-art-chun": BASE_PREFIX + "products/sand-art-chun.html",
-    "sand-art-fu": BASE_PREFIX + "products/sand-art-fu.html",
-    "sand-art-cai": BASE_PREFIX + "products/sand-art-cai.html",
+    "fluid-art-light": BASE_PREFIX + "products/fluid-art-light/",
+    "fluid-art-gift": BASE_PREFIX + "products/fluid-art-gift/",
+    "sand-art-light": BASE_PREFIX + "products/sand-art-light/",
+    "sand-art-collection": BASE_PREFIX + "products/sand-art-collection/",
+    "sand-art-artist-sheep": BASE_PREFIX + "products/sand-art-artist-sheep/",
+    "sand-art-chun": BASE_PREFIX + "products/sand-art-chun/",
+    "sand-art-fu": BASE_PREFIX + "products/sand-art-fu/",
+    "sand-art-cai": BASE_PREFIX + "products/sand-art-cai/",
   };
 
-  const CART_PAGE_URL = BASE_PREFIX + "cart.html";
+  const CART_PAGE_URL = BASE_PREFIX + "cart/";
 
   function readCart() {
     try {

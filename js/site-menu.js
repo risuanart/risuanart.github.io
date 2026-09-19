@@ -25,29 +25,32 @@
   // 手動同步一次是目前唯一還沒解決的重複——首頁的漢堡選單維持獨立一份
   // 是刻意的（避免牽動已經調好的首頁邏輯），但這代表往後新增/調整課程
   // 清單時，記得 index.html 的 #site-menu 跟這裡兩處都要改。
+  // 2026-09-20：全站改成乾淨網址（不帶 .html），連結目標從「檔案」
+  // 改成「資料夾」，所以這裡的 .html 全部拿掉、後面補上 /。${base} 本身
+  // 不用改，還是同一組「往回幾層到根目錄」的相對路徑前綴。
   menu.innerHTML = `
-    <a href="${base}index.html">首頁</a>
-    <a href="${base}products/shop.html">商品總覽</a>
-    <a href="${base}products/index.html">材料包</a>
+    <a href="${base}">首頁</a>
+    <a href="${base}products/shop/">商品總覽</a>
+    <a href="${base}products/">材料包</a>
     <div class="site-menu__group">
       <p class="site-menu__group-title">課程</p>
       <ul class="site-menu__sublist">
-        <li><a class="site-menu__sublink" href="${base}courses/sand-texture.html">石英砂肌理畫</a></li>
-        <li><a class="site-menu__sublink" href="${base}courses/palette-knife-oil.html">刮刀油畫</a></li>
-        <li><a class="site-menu__sublink" href="${base}courses/fluid-art.html">流動畫</a></li>
+        <li><a class="site-menu__sublink" href="${base}courses/sand-texture/">石英砂肌理畫</a></li>
+        <li><a class="site-menu__sublink" href="${base}courses/palette-knife-oil/">刮刀油畫</a></li>
+        <li><a class="site-menu__sublink" href="${base}courses/fluid-art/">流動畫</a></li>
         <li>抽象畫</li>
-        <li><a class="site-menu__sublink" href="${base}courses/custom-photo-oil.html">自己帶圖創作</a></li>
-        <li><a class="site-menu__sublink" href="${base}courses/pet-portrait.html">寵物油畫</a></li>
+        <li><a class="site-menu__sublink" href="${base}courses/custom-photo-oil/">自己帶圖創作</a></li>
+        <li><a class="site-menu__sublink" href="${base}courses/pet-portrait/">寵物油畫</a></li>
         <li>鏡子拼貼</li>
-        <li><a class="site-menu__sublink" href="${base}courses/beading.html">串珠</a></li>
-        <li><a class="site-menu__sublink" href="${base}courses/large-canvas.html">大幅畫布訂製</a></li>
-        <li><a class="site-menu__sublink" href="${base}courses/custom-material.html">特殊材質客製</a></li>
+        <li><a class="site-menu__sublink" href="${base}courses/beading/">串珠</a></li>
+        <li><a class="site-menu__sublink" href="${base}courses/large-canvas/">大幅畫布訂製</a></li>
+        <li><a class="site-menu__sublink" href="${base}courses/custom-material/">特殊材質客製</a></li>
       </ul>
-      <a class="site-menu__sublink" href="${base}faq.html">預約須知</a>
+      <a class="site-menu__sublink" href="${base}faq/">預約須知</a>
     </div>
-    <a href="${base}guides/index.html">材料指南</a>
-    <a href="${base}gallery.html">學員作品</a>
-    <a href="${base}enterprise.html">團體／企業課程</a>
+    <a href="${base}guides/">材料指南</a>
+    <a href="${base}gallery/">學員作品</a>
+    <a href="${base}enterprise/">團體／企業課程</a>
   `;
 
   function openMenu() {

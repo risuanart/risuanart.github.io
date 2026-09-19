@@ -3,7 +3,10 @@
    對應規格書②「選中色系時輪播切換至對應色系圖組」。 */
 
 (function () {
-  const IMG_BASE = "../assets/images/products/fluid-art/";
+  // 2026-09-20：全站改乾淨網址後，載入這支腳本的三個商品頁（fluid-art-gift／
+  // fluid-art-light／fluid-art-intro）都多搬深一層，原本寫死的 "../" 要
+  // 變成 "../../"。
+  const IMG_BASE = "../../assets/images/products/fluid-art/";
 
   const COLOR_SCHEMES = {
     "classic-red": {

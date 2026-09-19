@@ -72,9 +72,9 @@
     <!-- 桌面版（≥1024px）文字導覽列，取代漢堡選單抽屜；手機版隱藏，維持
          現有漢堡選單不變。見 css/home-shop.css .site-header__nav。 -->
     <nav class="site-header__nav" aria-label="主選單">
-      <a href="index.html" aria-current="page">首頁</a>
-      <a href="products/shop.html">商品總覽</a>
-      <a href="products/index.html">材料包</a>
+      <a href="./" aria-current="page">首頁</a>
+      <a href="products/shop/">商品總覽</a>
+      <a href="products/">材料包</a>
       <!-- 課程子項目目前沒有各自獨立的頁面（跟漢堡選單抽屜 #site-menu 裡的
            同一組清單狀態一致，見該處註解），這裡照實列出來（不能點），
            只有「預約須知」是真的連結。開合邏輯見 js/home-shop.js。 -->
@@ -106,18 +106,18 @@
                  放進同一個課程清單裡，只是排在清單最後兩項，跟前面純
                  技法課稍微區隔。 -->
             <ul class="site-menu__sublist">
-              <li><a class="site-menu__sublink" href="courses/sand-texture.html">石英砂肌理畫</a></li>
-              <li><a class="site-menu__sublink" href="courses/palette-knife-oil.html">刮刀油畫</a></li>
-              <li><a class="site-menu__sublink" href="courses/fluid-art.html">流動畫</a></li>
+              <li><a class="site-menu__sublink" href="courses/sand-texture/">石英砂肌理畫</a></li>
+              <li><a class="site-menu__sublink" href="courses/palette-knife-oil/">刮刀油畫</a></li>
+              <li><a class="site-menu__sublink" href="courses/fluid-art/">流動畫</a></li>
               <li>抽象畫</li>
-              <li><a class="site-menu__sublink" href="courses/custom-photo-oil.html">自己帶圖創作</a></li>
-              <li><a class="site-menu__sublink" href="courses/pet-portrait.html">寵物油畫</a></li>
+              <li><a class="site-menu__sublink" href="courses/custom-photo-oil/">自己帶圖創作</a></li>
+              <li><a class="site-menu__sublink" href="courses/pet-portrait/">寵物油畫</a></li>
               <li>鏡子拼貼</li>
-              <li><a class="site-menu__sublink" href="courses/beading.html">串珠</a></li>
-              <li><a class="site-menu__sublink" href="courses/large-canvas.html">大幅畫布訂製</a></li>
-              <li><a class="site-menu__sublink" href="courses/custom-material.html">特殊材質客製</a></li>
+              <li><a class="site-menu__sublink" href="courses/beading/">串珠</a></li>
+              <li><a class="site-menu__sublink" href="courses/large-canvas/">大幅畫布訂製</a></li>
+              <li><a class="site-menu__sublink" href="courses/custom-material/">特殊材質客製</a></li>
             </ul>
-            <a class="site-menu__sublink" href="faq.html">預約須知</a>
+            <a class="site-menu__sublink" href="faq/">預約須知</a>
           </div>
           <!-- 課程分類照片：先佔位（跟全站其他還沒有實拍照片的格子同一套
                .placeholder-box 語彙），之後有真的照片直接把 placeholder-box
@@ -126,21 +126,21 @@
                products/fluid-art-intro.html，那兩頁賣的是可以帶回家自己
                做的材料包，跟這裡在畫室現場上課是兩回事）改指過去。 -->
           <div class="site-header__nav-dropdown-photos">
-            <a class="site-header__nav-dropdown-photo" href="courses/sand-texture.html">
+            <a class="site-header__nav-dropdown-photo" href="courses/sand-texture/">
               <div class="placeholder-box placeholder-box--photo" aria-hidden="true">
                 <svg class="placeholder-box__icon" viewBox="0 0 24 24" width="1.4em" height="1.4em" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1.5"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 16l-5.5-5.5a1 1 0 0 0-1.4 0L6 19"/></svg>
                 <span class="placeholder-box__text">照片待補</span>
               </div>
               <span class="site-header__nav-dropdown-photo__label">石英砂肌理畫</span>
             </a>
-            <a class="site-header__nav-dropdown-photo" href="courses/fluid-art.html">
+            <a class="site-header__nav-dropdown-photo" href="courses/fluid-art/">
               <div class="placeholder-box placeholder-box--photo" aria-hidden="true">
                 <svg class="placeholder-box__icon" viewBox="0 0 24 24" width="1.4em" height="1.4em" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1.5"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 16l-5.5-5.5a1 1 0 0 0-1.4 0L6 19"/></svg>
                 <span class="placeholder-box__text">照片待補</span>
               </div>
               <span class="site-header__nav-dropdown-photo__label">流動畫</span>
             </a>
-            <a class="site-header__nav-dropdown-photo" href="enterprise.html">
+            <a class="site-header__nav-dropdown-photo" href="enterprise/">
               <div class="placeholder-box placeholder-box--photo" aria-hidden="true">
                 <svg class="placeholder-box__icon" viewBox="0 0 24 24" width="1.4em" height="1.4em" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1.5"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 16l-5.5-5.5a1 1 0 0 0-1.4 0L6 19"/></svg>
                 <span class="placeholder-box__text">照片待補</span>
@@ -150,11 +150,11 @@
           </div>
         </div>
       </div>
-      <a href="guides/index.html">材料指南</a>
-      <a href="gallery.html">學員作品</a>
-      <a href="enterprise.html">團體／企業課程</a>
+      <a href="guides/">材料指南</a>
+      <a href="gallery/">學員作品</a>
+      <a href="enterprise/">團體／企業課程</a>
     </nav>
-    <a class="site-header__logo" href="index.html" aria-label="回到首頁"><img src="assets/images/logo-risuan拷貝.png" alt="日宣繪畫室"></a>
+    <a class="site-header__logo" href="./" aria-label="回到首頁"><img src="assets/images/logo-risuan拷貝.png" alt="日宣繪畫室"></a>
     <div class="cart-badge-wrap">
       <button type="button" class="cart-badge" aria-haspopup="true" aria-expanded="false" aria-label="購物車，目前 0 件">
         <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
@@ -165,7 +165,7 @@
         <p class="cart-preview__empty">購物車是空的</p>
         <p class="cart-preview__total"></p>
         <div class="cart-preview__actions">
-          <a class="cart-preview__view" href="cart.html">查看購物車</a>
+          <a class="cart-preview__view" href="cart/">查看購物車</a>
           <button type="button" class="cart-preview__continue">繼續選購</button>
         </div>
       </div>
@@ -174,8 +174,8 @@
 
   <div class="site-menu-backdrop" id="site-menu-backdrop"></div>
   <nav class="site-menu" id="site-menu" aria-label="全站選單">
-    <a href="products/shop.html">商品總覽</a>
-    <a href="products/index.html">材料包</a>
+    <a href="products/shop/">商品總覽</a>
+    <a href="products/">材料包</a>
     <!-- 課程子項目大部分還沒有各自獨立的頁面（舊首頁也是同樣狀態，點了
          只是純文字清單，不是連結，見 archive/README.md 的 CATEGORIES
          資料），照實列出來（不能點）。串珠、石英砂肌理畫、自己帶圖創作、
@@ -193,22 +193,22 @@
     <div class="site-menu__group">
       <p class="site-menu__group-title">課程</p>
       <ul class="site-menu__sublist">
-        <li><a class="site-menu__sublink" href="courses/sand-texture.html">石英砂肌理畫</a></li>
-        <li><a class="site-menu__sublink" href="courses/palette-knife-oil.html">刮刀油畫</a></li>
-        <li><a class="site-menu__sublink" href="courses/fluid-art.html">流動畫</a></li>
+        <li><a class="site-menu__sublink" href="courses/sand-texture/">石英砂肌理畫</a></li>
+        <li><a class="site-menu__sublink" href="courses/palette-knife-oil/">刮刀油畫</a></li>
+        <li><a class="site-menu__sublink" href="courses/fluid-art/">流動畫</a></li>
         <li>抽象畫</li>
-        <li><a class="site-menu__sublink" href="courses/custom-photo-oil.html">自己帶圖創作</a></li>
-        <li><a class="site-menu__sublink" href="courses/pet-portrait.html">寵物油畫</a></li>
+        <li><a class="site-menu__sublink" href="courses/custom-photo-oil/">自己帶圖創作</a></li>
+        <li><a class="site-menu__sublink" href="courses/pet-portrait/">寵物油畫</a></li>
         <li>鏡子拼貼</li>
-        <li><a class="site-menu__sublink" href="courses/beading.html">串珠</a></li>
-        <li><a class="site-menu__sublink" href="courses/large-canvas.html">大幅畫布訂製</a></li>
-              <li><a class="site-menu__sublink" href="courses/custom-material.html">特殊材質客製</a></li>
+        <li><a class="site-menu__sublink" href="courses/beading/">串珠</a></li>
+        <li><a class="site-menu__sublink" href="courses/large-canvas/">大幅畫布訂製</a></li>
+              <li><a class="site-menu__sublink" href="courses/custom-material/">特殊材質客製</a></li>
       </ul>
-      <a class="site-menu__sublink" href="faq.html">預約須知</a>
+      <a class="site-menu__sublink" href="faq/">預約須知</a>
     </div>
-    <a href="guides/index.html">材料指南</a>
-    <a href="gallery.html">學員作品</a>
-    <a href="enterprise.html">團體／企業課程</a>
+    <a href="guides/">材料指南</a>
+    <a href="gallery/">學員作品</a>
+    <a href="enterprise/">團體／企業課程</a>
   </nav>
 
   <main class="product-page work">
@@ -248,7 +248,7 @@
             <p class="preview-hero__kicker">精選系列</p>
             <h2 class="preview-hero__title">羊群報福</h2>
             <p class="preview-hero__tagline">致敬馬諦斯《舞蹈》，羊群報福紅藍兩色任選。</p>
-            <a class="work__cta work__cta--primary" href="products/sand-art-artist-sheep.html">
+            <a class="work__cta work__cta--primary" href="products/sand-art-artist-sheep/">
               <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
               查看這款材料包
             </a>
@@ -267,7 +267,7 @@
             <p class="preview-hero__kicker">流動畫材料包</p>
             <h2 class="preview-hero__title">禮盒版</h2>
             <p class="preview-hero__tagline">雙幅成品，完整的流動畫體驗。</p>
-            <a class="work__cta work__cta--primary" href="products/fluid-art-gift.html">
+            <a class="work__cta work__cta--primary" href="products/fluid-art-gift/">
               <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
               查看這款材料包
             </a>
@@ -283,7 +283,7 @@
             <p class="preview-hero__kicker">砂畫材料包</p>
             <h2 class="preview-hero__title">自由創作組</h2>
             <p class="preview-hero__tagline">5 款精選圖案＋26 色顏料，自由創作一整套。</p>
-            <a class="work__cta work__cta--primary" href="products/sand-art-collection.html">
+            <a class="work__cta work__cta--primary" href="products/sand-art-collection/">
               <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
               查看這款材料包
             </a>
@@ -353,8 +353,8 @@
         <div class="preview-footer__col">
           <p class="preview-footer__heading">INFO</p>
           <nav class="preview-footer__links">
-            <a href="products/shop.html">所有材料包</a>
-            <a href="faq.html">常見問題</a>
+            <a href="products/shop/">所有材料包</a>
+            <a href="faq/">常見問題</a>
           </nav>
         </div>
         <div class="preview-footer__bottom">
