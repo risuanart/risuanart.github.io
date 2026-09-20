@@ -550,6 +550,126 @@
   transform: scale(1.2);
 }
 
+/* ---------- 總覽頁：開場短句宣言 ----------
+   比照 vazzle.co/pages/brand-collab 的「What We Offer」置中短句拆行寫法。
+   沿用 .chapter__statement／.chapter__prose 既有字級，不新增字體或顏色，
+   只是這裡置中、且段落間距縮小（--space-2，原本 .chapter__prose 預設
+   --space-4 是給一般內文段落用，這裡每行都很短，維持預設間距看起來會
+   一行一行散得太開，改小間距讓拆行的短句讀起來像一段連貫的宣言）。 */
+.ent-lede {
+  text-align: center;
+}
+
+.ent-lede .chapter__statement {
+  margin-bottom: var(--space-2);
+}
+
+.ent-lede .chapter__prose {
+  margin-top: var(--space-2);
+  max-width: none;
+}
+
+/* ---------- 總覽頁：服務說明，交錯圖文區塊 ----------
+   2026-09-20：原本這裡只有純文字段落，使用者參考 vazzle.co/pages/brand-collab
+   的「What We Offer」區塊（圖文交錯、每個重點配一張真實照片，比純文字
+   豐富很多）要求加強。跟 .ent-entry 同一套「桌面版 1fr 1fr 網格」邏輯，
+   但這裡不是可點擊卡片（不用 <a>、不用 hover 縮放），另外命名一組類別；
+   .ent-feature--reverse 讓圖文左右交錯排列，跟 vazzle 一樣不會每段都是
+   同一個方向。.ent-feature__media--collage 是 2x2 小圖拼貼（同樣用既有
+   案例的真實照片，不是新拍素材），用在「同構圖換色」「不同場地形式」
+   這種需要多張照片佐證同一句話的段落。 */
+.ent-features {
+  margin-top: var(--space-16);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+}
+
+.ent-features + .chapter__block {
+  margin-top: var(--space-16);
+}
+
+.ent-feature {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.ent-feature__media {
+  aspect-ratio: 4 / 5;
+  border-radius: var(--radius-sharp);
+  overflow: hidden;
+}
+
+.ent-feature__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 還沒有適合的通用素材時（不是特定案例的照片，是泛用說明用途），先放
+   .placeholder-box 佔位，沿用全站既有慣例（同 .chapter__banner-photo／
+   .chapter__step-photo），不要為了填滿版面硬塞不相關案例的照片進來。 */
+.ent-feature__media .placeholder-box {
+  width: 100%;
+  height: 100%;
+}
+
+/* 2x2 均分拼貼：用在「同構圖換色」這種四張照片份量相同、沒有主從關係
+   的段落。間距從原本 2px 改成 --space-2，原本擠在一起看起來像縮圖列表，
+   跟 .ent-hero／.ent-entry 大圖留白多的調性不搭。 */
+.ent-feature__media--collage {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: var(--space-2);
+}
+
+.ent-feature__media--collage img {
+  border-radius: 0;
+}
+
+/* 不均分拼貼：一大二小，用在「場地形式多元」這種有一張主要代表照、
+   其他當佐證的段落，跟上面單純四等份的拼貼做出構圖差異，整頁三個
+   段落才不會看起來像同一格式複製三次。 */
+.ent-feature__media--mosaic {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: var(--space-2);
+}
+
+.ent-feature__media--mosaic img:first-child {
+  grid-column: 1 / 3;
+}
+
+.ent-feature__media--mosaic img {
+  border-radius: 0;
+}
+
+@media (min-width: 768px) {
+  .ent-feature {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-10);
+  }
+
+  .ent-feature__media,
+  .ent-feature__body {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  .ent-feature__media {
+    aspect-ratio: 1 / 1;
+  }
+
+  .ent-feature--reverse {
+    flex-direction: row-reverse;
+  }
+}
+
 /* ---------- 結尾洽詢區塊 ---------- */
 .ent-cta {
   margin-top: var(--space-24);
@@ -573,4 +693,200 @@
   justify-content: center;
   align-items: center;
   gap: var(--space-6);
+}
+
+/* ---------- 總覽頁：企業報價彈跳視窗 ----------
+   跟 cart.css 的 .order-sheet 同一套「底部滑出面板」手法（position:fixed
+   蓋在畫面上、遮罩＋面板兩層、面板本身 max-height + overflow-y:auto
+   捲動），另開一組 .quote-sheet 類別名稱，不共用 .order-sheet——這頁
+   沒有載入處理購物車面板的那段 checkout.js，內容性質也不同（訂單明細
+   vs 報價表單），照專案慣例每個情境各自一組名稱，不勉強共用。開合行為
+   見 js/enterprise-quote.js。 */
+.quote-sheet {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.quote-sheet[hidden] {
+  display: none;
+}
+
+.quote-sheet__backdrop {
+  position: absolute;
+  inset: 0;
+  background: color-mix(in srgb, var(--color-text-primary) 45%, transparent);
+  animation: quote-sheet-fade var(--duration-normal) var(--ease-standard);
+}
+
+.quote-sheet__panel {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  max-height: 85vh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: var(--space-6) var(--pad-h) calc(var(--space-6) + env(safe-area-inset-bottom, 0px));
+  border-radius: 16px 16px 0 0;
+  background: var(--color-surface-light);
+  box-shadow: var(--shadow-raised);
+  animation: quote-sheet-rise var(--duration-normal) var(--ease-standard);
+}
+
+@media (min-width: 768px) {
+  .quote-sheet__panel {
+    margin-bottom: var(--space-10);
+    border-radius: var(--radius-sharp);
+  }
+}
+
+@keyframes quote-sheet-fade {
+  from { opacity: 0; }
+}
+
+@keyframes quote-sheet-rise {
+  from { transform: translateY(100%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .quote-sheet__backdrop,
+  .quote-sheet__panel {
+    animation: none;
+  }
+}
+
+.quote-sheet__head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.quote-sheet__title {
+  flex: 1;
+  margin: 0;
+}
+
+.quote-sheet__close {
+  appearance: none;
+  border: none;
+  background: none;
+  flex: none;
+  padding: var(--space-1);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+}
+
+.quote-sheet__close svg {
+  display: block;
+}
+
+/* 「怎麼開始」段落直接放的開啟按鈕，跟上面條列清單留一點距離。 */
+.quote-lede-cta {
+  margin-top: var(--space-4);
+}
+
+/* 欄位本身（.confirm-field／.confirm-radio-group／.confirm-checkbox）
+   沿用 cart.css 收件表單那套視覺語言（這頁本來就有載入 cart.css），
+   這裡只補兩件事：①表單本身的直排＋間距（跟 cart.css #customer-section
+   同一套 flex column + gap 手法，只是換一個 ID）；② cart.css 完全沒有
+   textarea 規則（購物車表單沒有用到多行輸入），這裡是全站第一個
+   textarea，補上跟 .confirm-field input 一致的視覺（無邊框、透明底、
+   繼承外層 .confirm-field__control 的框線）。 */
+#quote-form {
+  margin-top: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-4);
+  max-width: 480px;
+}
+
+#quote-single-fields,
+#quote-multi-fields,
+#quote-date-confirmed-field,
+#quote-date-unconfirmed-field {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+#quote-single-fields[hidden],
+#quote-multi-fields[hidden],
+#quote-date-confirmed-field[hidden],
+#quote-date-unconfirmed-field[hidden] {
+  display: none;
+}
+
+/* 修正：cart.css 的 .confirm-field input { flex:1 } 是給
+   .confirm-field__control 裡的文字輸入框設計的（讓輸入框吃滿圖示旁邊
+   剩下的寬度）。這裡的表單把 .confirm-radio-group／.confirm-checkbox
+   包在 .confirm-field 裡面（用 .confirm-field 的 <span> 當作整組單選/
+   複選的標題），連帶讓 radio／checkbox 的 <input> 也符合 `.confirm-field
+   input` 這個選擇器，跟 .confirm-radio input／.confirm-checkbox input
+   原本設定的 20px 固定尺寸「特異度打平手，看載入順序」互撞，結果 flex:1
+   贏了，radio 被拉伸成兩百多 px 寬的怪異方塊，文字也被推到最右邊。
+   這裡用 #quote-form 提高特異度明確蓋回來，不影響 cart.css 原本的
+   輸入框（那邊的 radio/checkbox 不是包在 .confirm-field 裡面，不受
+   影響）。 */
+#quote-form .confirm-radio input,
+#quote-form .confirm-checkbox input {
+  flex: none;
+  width: 20px;
+  height: 20px;
+}
+
+.confirm-field__control:has(textarea) {
+  align-items: flex-start;
+  padding: var(--space-2) var(--space-4);
+}
+
+.confirm-field textarea {
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+  min-height: 4.5em;
+  font-family: inherit;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+  border: none;
+  background: none;
+  padding: 0;
+  resize: vertical;
+}
+
+.confirm-field textarea:focus {
+  outline: none;
+}
+
+.confirm-field textarea::placeholder {
+  color: color-mix(in srgb, var(--color-text-secondary) 70%, transparent);
+}
+
+.quote-hint {
+  margin: 0;
+  font-size: var(--font-size-xs);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  max-width: 46ch;
+}
+
+#quote-submit {
+  margin-top: var(--space-2);
+}
+
+#quote-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+#quote-success {
+  margin-top: var(--space-6);
+}
+
+.quote-sheet .checkout-error {
+  max-width: none;
 }

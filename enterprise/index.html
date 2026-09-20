@@ -121,16 +121,114 @@
 
   <main class="product-page work">
 
+    <!-- 2026-09-20：原本這裡放 .ent-hero 開頭大圖（南港展覽館室內團課合照），
+         使用者看過後說「首圖選得很爛先拿掉」，先移除，等有更適合的首圖
+         再補回來——不要為了「有圖」硬留一張使用者不滿意的照片。 -->
     <!-- 企業課程總覽：目前只有一個案例（保時捷），排版設計成之後可以直接
          複製 .ent-entry 這個區塊、換上下一個案例的照片跟連結，不用重構
          版面。開頭這段介紹文字是真的——直接引用 IG 貼文原文「品牌合作」
          的自我介紹句，不是新編的行銷文案（見下方案例本身的貼文來源）。 -->
     <section class="chapter fade-in">
       <h1 class="chapter__title">企業課程</h1>
-      <p class="chapter__intro">品牌合作、企業包班、客製化課程訂製，針對不同的活動需求，提供從構圖設計、材料選色到現場帶班的整套規劃。以下是實際合作過的案例紀錄。</p>
+      <p class="chapter__intro">品牌合作、企業包班、客製化課程訂製，針對不同的活動需求，提供從構圖設計、材料選色到現場帶班的整套規劃。</p>
     </section>
 
-    <section class="ent-list fade-in delay-1">
+    <!-- 2026-09-20 新增：服務說明區塊，放在案例列表之前。原本這頁一開頭
+         就是案例列表，等於讓還在評估的客戶自己腦補「這間工作室能幫我做
+         什麼」；這裡先講清楚兩種課程規劃方式、場地彈性、怎麼開始，
+         再進入案例瀏覽（先了解服務、再看案例佐證）。內容都是既有真實
+         事實的整理，不是新編的行銷數字：既定主題／客製化主題、依人數
+         時長建議主題尺寸，來自使用者原本的石英砂團課文案；場地彈性
+         直接對應下面已有的案例（保時捷台中展間、企業家庭日戶外草坪、
+         南港展覽館室內場地、寵物展大型會場）。 -->
+    <section class="chapter fade-in delay-1">
+      <!-- 2026-09-20 新增：開場一段短句宣言，比照使用者參考的
+           vazzle.co/pages/brand-collab「What We Offer」寫法（短句拆行、
+           置中）。內容是既有真實服務範圍的重新組織（媒材種類、整套規劃
+           流程），不是新編的誇大宣傳詞。 -->
+      <div class="chapter__block ent-lede">
+        <p class="chapter__statement">我們提供什麼</p>
+        <p class="chapter__prose">從個人課程到團體活動，</p>
+        <p class="chapter__prose">日宣繪畫室擅長把肌理砂畫、流動畫、油畫、串珠等多種媒材，</p>
+        <p class="chapter__prose">轉化成不需要繪畫基礎也能上手的團體體驗課程。</p>
+        <p class="chapter__prose">從構圖設計、材料選色到現場帶班，</p>
+        <p class="chapter__prose">提供活動需求的整套規劃，</p>
+        <p class="chapter__prose">讓每一場合作都能留下真正動手完成的作品。</p>
+      </div>
+
+      <div class="ent-features">
+        <!-- 2026-09-20 改版：原本這裡放保時捷案例的照片（同構圖四種配色、
+             車型設計稿），使用者指出這樣寫反而不好——這段本來是在講「我們
+             提供的服務」，不是特定某個案例，硬塞單一案例的照片（尤其一堆
+             車子）等於暗示這個服務等於保時捷案例，範圍被綁死，也會跟下面
+             案例列表的照片重複，顯得案例量很少還硬湊。改成中性文案＋
+             .placeholder-box 佔位（沿用全站慣例，見 enterprise.css 該處
+             說明），等之後有適合的通用素材（不屬於特定案例）再補上。
+             文案角度也改成畫室真正的差異化賣點：課程/媒材夠多元，企業可以
+             長期合作、每次活動搭配不同形式，不是只有單一種材料——這點是
+             真的，見 site-menu.js 課程下拉選單列出的肌理畫／流動畫／油畫／
+             串珠／蠟燭等分類。比照使用者指定參考的 vazzle.co/pages/brand-collab
+             寫法：粗體短標籤＋一句話說明，方便快速掃視，不是長段落。 -->
+        <div class="ent-feature">
+          <div class="ent-feature__media">
+            <div class="placeholder-box placeholder-box--photo" aria-hidden="true">
+              <svg class="placeholder-box__icon" viewBox="0 0 24 24" width="1.4em" height="1.4em" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1.5"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 16l-5.5-5.5a1 1 0 0 0-1.4 0L6 19"/></svg>
+              <span class="placeholder-box__text">照片待補</span>
+            </div>
+          </div>
+          <div class="ent-feature__body">
+            <p class="chapter__statement">多元媒材，長期合作更彈性</p>
+            <p class="chapter__prose"><strong>跨媒材選擇：</strong>肌理砂畫、流動畫、油畫、串珠、蠟燭等多種課程，不侷限單一材料，可依活動屬性挑選最合適的形式。</p>
+            <p class="chapter__prose"><strong>主題彈性：</strong>預算有限可以挑選現成好上手的主題現場完成；想要更貼近品牌或活動的圖案，我們也能重新規劃專屬構圖。</p>
+            <p class="chapter__prose"><strong>長期合作：</strong>同一個企業辦不同場次的活動，每次都能搭配不同課程與主題，不必重複同一種形式。</p>
+          </div>
+        </div>
+
+        <div class="ent-feature ent-feature--reverse">
+          <div class="ent-feature__media ent-feature__media--mosaic">
+            <img src="../assets/images/enterprise/pet-portrait/pet-nangang-signage.jpg" alt="室內場地，挑高空間與大面採光窗">
+            <img src="../assets/images/enterprise/fluid-family-day/fluid-outdoor-tables.jpg" alt="企業家庭日，戶外草坪場地教學">
+            <img src="../assets/images/enterprise/pet-portrait/pet-expo-booth2.jpg" alt="寵物展，大型展覽會場攤位教學">
+          </div>
+          <div class="ent-feature__body">
+            <p class="chapter__statement">場地與形式都能配合</p>
+            <p class="chapter__prose">不管是室內展間、戶外草坪，還是租借場地舉辦的展會活動，我們都實際帶過課程，會依照現場空間、人數與時間長度調整教學方式跟材料準備，不侷限單一場地形式。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2026-09-20 新增：比照使用者參考的 vazzle「策劃支援」區塊寫法
+           （粗體短標籤＋一句話說明）。這裡沒有配圖——內容是服務流程本身
+           （事先備料、現場帶班方式、整套規劃），不是特定場景，硬找一張
+           照片來配反而不準確，文字本身已經足夠清楚，比照「怎麼開始」
+           也是純文字的既有慣例。三個標籤都是既有真實內容重新整理，不是
+           新編：「事先調配顏色材料」出自使用者原本的石英砂團課文案；
+           「不論基礎、一步步帶著做」是 enterprise-pet-portrait.html 現場
+           流程段落已經寫過的真實服務方式；「整套規劃」呼應上面 What We
+           Offer 段落與各案例頁一致的說法。 -->
+      <div class="chapter__block">
+        <p class="chapter__statement">現場帶班，全程陪伴</p>
+        <p class="chapter__prose"><strong>材料事先備妥：</strong>依照構圖需求先調配好顏色材料，現場不用等待調色，同學到場就能直接開始創作。</p>
+        <p class="chapter__prose"><strong>不論基礎，一步步帶著做：</strong>就算完全沒畫過畫也沒關係，我們會一步一步帶著大家上色、完成，把時間留給創作本身。</p>
+        <p class="chapter__prose"><strong>完整規劃到收尾：</strong>從構圖設計、材料選色到現場帶班，我們負責整套流程，讓窗口只需要專心籌備活動本身。</p>
+      </div>
+
+      <div class="chapter__block">
+        <p class="chapter__statement">怎麼開始</p>
+        <ol class="feature-list">
+          <li>填寫報價表單，或私訊告訴我們需求</li>
+          <li>我們依照這些條件建議合適的主題、尺寸與報價</li>
+          <li>確認合作內容後，我們準備材料並安排現場帶班</li>
+        </ol>
+        <button type="button" class="work__cta work__cta--primary quote-lede-cta" data-quote-open>填寫報價表單</button>
+      </div>
+    </section>
+
+    <section class="chapter fade-in delay-2">
+      <h2 class="chapter__title">實際合作案例</h2>
+    </section>
+
+    <section class="ent-list fade-in delay-2">
       <a class="ent-entry" href="../enterprise-porsche/">
         <div class="ent-entry__media">
           <img src="../assets/images/enterprise/porsche/porsche-venue.jpg" alt="保時捷台中展間肌理畫課程現場">
@@ -184,9 +282,10 @@
       </a>
     </section>
 
-    <footer class="ent-cta fade-in delay-2">
-      <p class="ent-cta__text">如果有企業的課程需求，可以直接傳訊息與我們討論，我們會提供合適的課程！</p>
+    <footer class="ent-cta fade-in delay-3">
+      <p class="ent-cta__text">如果有企業的課程需求，歡迎填寫報價表單，或直接傳訊息與我們討論，我們會提供合適的課程！</p>
       <div class="ent-cta__actions">
+        <button type="button" class="work__cta work__cta--primary" data-quote-open>填寫報價表單</button>
         <a class="work__cta work__cta--primary" href="https://instagram.com/ri.suan_art" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg>
           私訊洽詢
@@ -223,9 +322,249 @@
 
   </main>
 
+  <!-- 2026-09-20 改版：企業報價表單原本直接鋪在頁面中間（案例列表前），
+       使用者看過覺得「案例都還沒看到就被要求填一大串資料」，改成彈跳
+       視窗——頁面本身維持簡短，願意填的人再點按鈕叫出來。跟購物車頁
+       的 .order-sheet 同一套「底部滑出面板」機制（position:fixed 蓋在
+       畫面上，不影響底下 main 自己的捲動位置，見 cart.css .order-sheet
+       開頭說明），另開一組 .quote-sheet 類別名稱，不共用 .order-sheet
+       （這頁沒有載入處理購物車面板開合的那段 checkout.js 邏輯，且內容
+       性質不同——訂單明細 vs 報價表單）。開合／關閉行為由
+       js/enterprise-quote.js 處理，data-quote-open 是觸發按鈕（「怎麼
+       開始」區塊、頁尾 CTA 各放一個），data-quote-sheet-close 是遮罩／
+       關閉按鈕。表單欄位本身跟後端 risuan-checkout 專案 api/course-booking.js
+       的 action=quote 必填規則要保持一致，兩邊改動要一起改。 -->
+  <div class="quote-sheet" id="quote-sheet" hidden>
+    <div class="quote-sheet__backdrop" data-quote-sheet-close></div>
+    <div class="quote-sheet__panel" role="dialog" aria-modal="true" aria-labelledby="quote-sheet-title">
+      <div class="quote-sheet__head">
+        <h2 class="quote-sheet__title" id="quote-sheet-title">企業報價表單</h2>
+        <button type="button" class="quote-sheet__close" data-quote-sheet-close aria-label="關閉報價表單">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </div>
+      <p class="chapter__intro">填寫以下資訊，我們會盡快回信給您，提供初步報價與建議。</p>
+
+      <form id="quote-form">
+        <label class="confirm-field">
+          <span>公司／品牌名稱（選填）</span>
+          <div class="confirm-field__control">
+            <input type="text" id="quote-company" maxlength="60" placeholder="貴公司或品牌名稱">
+          </div>
+        </label>
+
+        <div class="confirm-field-row">
+          <label class="confirm-field">
+            <span>聯絡人姓名</span>
+            <div class="confirm-field__control">
+              <input type="text" id="quote-contact-name" required maxlength="30" placeholder="您的稱呼">
+            </div>
+          </label>
+          <label class="confirm-field">
+            <span>Email</span>
+            <div class="confirm-field__control">
+              <input type="email" id="quote-email" required placeholder="you@example.com">
+            </div>
+          </label>
+        </div>
+
+        <!-- 活動形式：先問單一地點／多地點，再依選擇顯示對應欄位——直接
+             問「地點數量」容易讓沒想過拆場次的人搞不清楚在問什麼。 -->
+        <div class="confirm-field">
+          <span>活動形式</span>
+          <div class="confirm-radio-group">
+            <label class="confirm-radio">
+              <input type="radio" name="eventFormat" id="quote-format-single" value="single" checked required>
+              <span>單一地點（單場活動，當天結束）</span>
+            </label>
+            <label class="confirm-radio">
+              <input type="radio" name="eventFormat" id="quote-format-multi" value="multi">
+              <span>多地點／多場次（不同地點或時間分開進行）</span>
+            </label>
+          </div>
+        </div>
+
+        <div id="quote-single-fields">
+          <label class="confirm-field">
+            <span>預計參加人數</span>
+            <div class="confirm-field__control">
+              <input type="number" id="quote-attendee-count" min="1" step="1" required placeholder="例如 20">
+            </div>
+          </label>
+        </div>
+
+        <div id="quote-multi-fields" hidden>
+          <div class="confirm-field-row">
+            <label class="confirm-field">
+              <span>預計地點/場次數量</span>
+              <div class="confirm-field__control">
+                <input type="number" id="quote-location-count" min="1" step="1" placeholder="例如 3">
+              </div>
+            </label>
+            <label class="confirm-field">
+              <span>總預計人數（可先抓大概）</span>
+              <div class="confirm-field__control">
+                <input type="number" id="quote-total-attendees" min="1" step="1" placeholder="例如 60">
+              </div>
+            </label>
+          </div>
+          <p class="quote-hint">詳細場次安排我們會在回信時進一步確認。</p>
+        </div>
+
+        <div class="confirm-field">
+          <span>想安排的課程／材料（選填，可複選）</span>
+          <div class="confirm-radio-group">
+            <label class="confirm-checkbox">
+              <input type="checkbox" name="materials" value="sand-texture">
+              <span>石英砂肌理畫</span>
+            </label>
+            <label class="confirm-checkbox">
+              <input type="checkbox" name="materials" value="fluid-art">
+              <span>流動畫</span>
+            </label>
+            <label class="confirm-checkbox">
+              <input type="checkbox" name="materials" value="palette-knife-oil">
+              <span>刮刀油畫</span>
+            </label>
+            <label class="confirm-checkbox">
+              <input type="checkbox" name="materials" value="pet-portrait">
+              <span>寵物油畫</span>
+            </label>
+            <label class="confirm-checkbox">
+              <input type="checkbox" name="materials" value="beading">
+              <span>串珠</span>
+            </label>
+            <label class="confirm-checkbox">
+              <input type="checkbox" name="materials" value="candle">
+              <span>蠟燭</span>
+            </label>
+            <label class="confirm-checkbox">
+              <input type="checkbox" name="materials" value="custom-photo-oil">
+              <span>自己帶圖創作</span>
+            </label>
+            <label class="confirm-checkbox">
+              <input type="checkbox" name="materials" value="large-canvas">
+              <span>大幅畫布訂製</span>
+            </label>
+            <label class="confirm-checkbox">
+              <input type="checkbox" name="materials" value="custom-material">
+              <span>特殊材質客製</span>
+            </label>
+            <label class="confirm-checkbox">
+              <input type="checkbox" name="materials" value="undecided">
+              <span>尚未決定／需要建議</span>
+            </label>
+          </div>
+        </div>
+
+        <label class="confirm-field">
+          <span>活動內容／主題補充（選填）</span>
+          <div class="confirm-field__control">
+            <textarea id="quote-activity-note" rows="3" maxlength="500" placeholder="例如：尾牙活動、品牌快閃體驗、員工旅遊…"></textarea>
+          </div>
+        </label>
+
+        <div class="confirm-field">
+          <span>活動日期</span>
+          <div class="confirm-radio-group">
+            <label class="confirm-radio">
+              <input type="radio" name="dateStatus" id="quote-date-confirmed" value="confirmed" required>
+              <span>已確定</span>
+            </label>
+            <label class="confirm-radio">
+              <input type="radio" name="dateStatus" id="quote-date-unconfirmed" value="unconfirmed" checked>
+              <span>尚未確定</span>
+            </label>
+          </div>
+        </div>
+
+        <div id="quote-date-confirmed-field" hidden>
+          <label class="confirm-field">
+            <span>活動日期</span>
+            <div class="confirm-field__control">
+              <input type="date" id="quote-event-date">
+            </div>
+          </label>
+        </div>
+
+        <div id="quote-date-unconfirmed-field">
+          <label class="confirm-field">
+            <span>預計月份</span>
+            <div class="confirm-field__control">
+              <input type="text" id="quote-event-month" required maxlength="20" placeholder="例如：12 月">
+            </div>
+          </label>
+        </div>
+
+        <div class="confirm-field">
+          <span>現場操作人力</span>
+          <div class="confirm-radio-group">
+            <label class="confirm-radio">
+              <input type="radio" name="staffing" value="onsite" checked required>
+              <span>工作室到場教學</span>
+            </label>
+            <label class="confirm-radio">
+              <input type="radio" name="staffing" value="self">
+              <span>貴司自行安排人員（材料包＋教學影片）</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- 預算是必填，但一定要有一個「不方便透露」的正式選項——這題對
+             畫室最關鍵（曾經吃過報價跟對方預算對不上的虧），但硬性要求
+             確切數字容易讓人乾脆放棄整張表單，給一個台階下比拿掉這題
+             更好。輔助說明文字先講清楚「有沒有到場」是價差關鍵，再讓
+             對方選區間。 -->
+        <div class="confirm-field">
+          <span>每人預算區間</span>
+          <div class="confirm-radio-group">
+            <label class="confirm-radio">
+              <input type="radio" name="budget" value="under-600" required>
+              <span>600 元以下</span>
+            </label>
+            <label class="confirm-radio">
+              <input type="radio" name="budget" value="600-1000">
+              <span>600～1,000 元</span>
+            </label>
+            <label class="confirm-radio">
+              <input type="radio" name="budget" value="1000-1500">
+              <span>1,000～1,500 元</span>
+            </label>
+            <label class="confirm-radio">
+              <input type="radio" name="budget" value="over-1500">
+              <span>1,500 元以上</span>
+            </label>
+            <label class="confirm-radio">
+              <input type="radio" name="budget" value="unsure">
+              <span>尚未確定／不方便透露</span>
+            </label>
+          </div>
+          <p class="quote-hint">現場教學每人通常落在 1,300～1,600 元；若不需要到場、只需材料包加教學影片，則多落在 600 元以下，實際仍依課程內容與材料調整。</p>
+        </div>
+
+        <label class="confirm-field">
+          <span>其他需求（選填）</span>
+          <div class="confirm-field__control">
+            <textarea id="quote-other-notes" rows="3" maxlength="500" placeholder="還有什麼想讓我們知道的嗎？"></textarea>
+          </div>
+        </label>
+
+        <p class="checkout-error" id="quote-error" role="alert" hidden></p>
+
+        <button type="submit" class="work__cta work__cta--primary" id="quote-submit">送出報價需求</button>
+      </form>
+
+      <div id="quote-success" hidden>
+        <p class="chapter__statement">已收到您的需求</p>
+        <p class="chapter__prose">我們會盡快回信給您，提供初步報價與建議，請留意信箱（包含垃圾郵件夾）。</p>
+      </div>
+    </div>
+  </div>
+
   <script src="../js/cart.js"></script>
   <script src="../js/site-header-scroll.js"></script>
   <script src="../js/scroll-reveal.js"></script>
   <script src="../js/site-menu.js"></script>
+  <script src="../js/enterprise-quote.js"></script>
 </body>
 </html>

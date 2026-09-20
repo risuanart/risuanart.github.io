@@ -896,26 +896,34 @@ button.text-link {
   border-bottom-color: var(--color-text-primary);
 }
 
-/* ---------- 怎麼玩／通用特色：純文字清單，不用圖示卡片 ---------- */
+/* ---------- 怎麼玩／通用特色：純文字清單，不用圖示卡片 ----------
+   2026-09-20：原本用 "—" 當項目符號，使用者指出這個符號之前就規定不能用
+   （看起來太像中文數字「一」，跟全站中文內文禁用一字線的規則一樣）。
+   這裡的清單內容本來就是有先後順序的步驟（先私訊、再收到建議、才確認
+   合作），改成真的數字編號比純裝飾用的符號更準確，用 CSS counter 自動
+   編號，HTML 端配合改成 <ol>。 */
 .feature-list {
   margin: var(--space-4) 0 0;
   padding: 0;
   list-style: none;
+  counter-reset: feature-list;
   max-width: 40ch;
 }
 
 .feature-list li {
   position: relative;
-  padding-left: var(--space-4);
+  counter-increment: feature-list;
+  padding-left: var(--space-6);
   font-size: var(--font-size-base);
   line-height: 1.7;
   color: var(--color-text-primary);
 }
 
 .feature-list li::before {
-  content: "—";
+  content: counter(feature-list) ".";
   position: absolute;
   left: 0;
+  font-weight: 600;
   color: var(--color-text-secondary);
 }
 
