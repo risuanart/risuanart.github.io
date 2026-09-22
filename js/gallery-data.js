@@ -151,6 +151,42 @@ window.GALLERY_ITEMS = [
   { course: "寵物油畫", themes: ["貓咪"], date: "2025-02-22", src: "../assets/images/gallery/pet-portrait/42.jpg", alt: "咖啡色虎斑貓肖像油畫特寫，大眼睛直視前方，淺藍色背景", sessions: 1 },
   { course: "寵物油畫", themes: ["貓咪"], date: "2025-02-28", src: "../assets/images/gallery/pet-portrait/43.jpg", alt: "橘白色貓咪肖像油畫特寫，米白色背景，簽名「lin.」", sessions: 1 },
   { course: "寵物油畫", themes: ["貓咪"], date: "2025-02-28", src: "../assets/images/gallery/pet-portrait/44.jpg", alt: "黑白賓士貓肖像油畫，藍色背景", sessions: 1 },
+
+  // 2026-09-21 新增：「石英砂肌理畫」海邊主題 32 件，使用者從相簿匯出
+  // 一批石英砂海景/海浪真實學員作品照片。沒有精確的完成日期紀錄，先統一
+  // 用新增這筆資料的日期，之後有更準確的日期可以再改。
+  { course: "石英砂肌理畫", themes: ["海邊"], date: "2026-09-21", src: "../assets/images/gallery/sand-texture/01.jpg", alt: "黑白海浪肌理畫特寫，深色浪頭夾雜白色浪花" },
+  { course: "石英砂肌理畫", themes: ["海邊"], date: "2026-09-21", src: "../assets/images/gallery/sand-texture/02.jpg", alt: "海浪與沙灘交界特寫，沙灘上刻著英文字「BARCELONA」" },
+  { course: "石英砂肌理畫", themes: ["海邊"], date: "2026-09-21", src: "../assets/images/gallery/sand-texture/03.jpg", alt: "藍色海浪肌理畫特寫，浪花翻湧的立體堆疊" },
+  { course: "石英砂肌理畫", themes: ["海邊"], date: "2026-09-21", src: "../assets/images/gallery/sand-texture/04.jpg", alt: "夕陽海景肌理畫，金黃沙灘搭配藍色海面，天空點綴飛鳥剪影" },
+  { course: "石英砂肌理畫", themes: ["海邊"], date: "2026-09-21", src: "../assets/images/gallery/sand-texture/05.jpg", alt: "學員身穿日宣圍裙，手持沙灘與海浪主題的肌理畫作品" },
+  { course: "石英砂肌理畫", themes: ["海邊"], date: "2026-09-21", src: "../assets/images/gallery/sand-texture/06.jpg", alt: "暖色調海浪肌理畫特寫，藍橘交織的浪花質感" },
+  { course: "石英砂肌理畫", themes: ["海邊"], date: "2026-09-21", src: "../assets/images/gallery/sand-texture/07.jpg", alt: "黑白海浪肌理畫，深色海面搭配立體白色浪花" },
+  { course: "石英砂肌理畫", themes: ["海邊"], date: "2026-09-21", src: "../assets/images/gallery/sand-texture/08.jpg", alt: "學員手持畫筆繪製黑白海浪肌理畫的過程" },
+  { course: "石英砂肌理畫", themes: ["海邊"], date: "2026-09-21", src: "../assets/images/gallery/sand-texture/09.jpg", alt: "灰藍色海浪肌理畫，粗獷立體的浪花堆疊" },
+  { course: "石英砂肌理畫", themes: ["海邊"], date: "2026-09-21", src: "../assets/images/gallery/sand-texture/10.jpg", alt: "深色海浪與白色浪花交界特寫" },
+  { course: "石英砂肌理畫", themes: ["海邊"], date: "2026-09-21", src: "../assets/images/gallery/sand-texture/11.jpg", alt: "繪製藍灰色海浪肌理畫的過程，畫筆沾著顏料" },
+  { course: "石英砂肌理畫", themes: ["海邊"], date: "2026-09-21", src: "../assets/images/gallery/sand-texture/12.jpg", alt: "粉色沙灘肌理畫，畫面點綴多個色彩繽紛的迷你人形剪影" },
+  { course: "石英砂肌理畫", themes: ["海邊"], date: "2026-09-21", src: "../assets/images/gallery/sand-texture/13.jpg", alt: "黑藍色海浪與白色浪花交界特寫" },
+  { course: "石英砂肌理畫", themes: ["海邊"], date: "2026-09-21", src: "../assets/images/gallery/sand-texture/14.jpg", alt: "完成的海景肌理畫，夕陽海面搭配立體浪花與礁岸" },
+  { course: "石英砂肌理畫", themes: ["海邊"], date: "2026-09-21", src: "../assets/images/gallery/sand-texture/15.jpg", alt: "夕陽海景肌理畫特寫，畫面點綴飛鳥剪影與閃亮沙粒" },
+  { course: "石英砂肌理畫", themes: ["海邊"], date: "2026-09-21", src: "../assets/images/gallery/sand-texture/16.jpg", alt: "繪製藍色海浪肌理畫的過程，沙灘與海浪交界處" },
+  { course: "石英砂肌理畫", themes: ["海邊"], date: "2026-09-21", src: "../assets/images/gallery/sand-texture/17.jpg", alt: "完成的海景肌理畫，藍紫天空、粉色霞光搭配沙灘浪花" },
+  { course: "石英砂肌理畫", themes: ["海邊"], date: "2026-09-21", src: "../assets/images/gallery/sand-texture/18.jpg", alt: "完成的黑藍色對角海浪肌理畫，強烈明暗對比" },
+  { course: "石英砂肌理畫", themes: ["海邊"], date: "2026-09-21", src: "../assets/images/gallery/sand-texture/19.jpg", alt: "完成的夕陽海景肌理畫，粉橘天空搭配深藍海浪" },
+  { course: "石英砂肌理畫", themes: ["海邊"], date: "2026-09-21", src: "../assets/images/gallery/sand-texture/20.jpg", alt: "學員手持畫筆繪製灰藍色海浪肌理畫的過程" },
+  { course: "石英砂肌理畫", themes: ["海邊"], date: "2026-09-21", src: "../assets/images/gallery/sand-texture/21.jpg", alt: "藍色海浪與沙灘交界特寫" },
+  { course: "石英砂肌理畫", themes: ["海邊"], date: "2026-09-21", src: "../assets/images/gallery/sand-texture/22.jpg", alt: "藍白沙灘與浪花肌理畫特寫，抽象立體質感" },
+  { course: "石英砂肌理畫", themes: ["海邊"], date: "2026-09-21", src: "../assets/images/gallery/sand-texture/23.jpg", alt: "完成的海景肌理畫，深藍夜色海面搭配金黃沙灘與白色浪花" },
+  { course: "石英砂肌理畫", themes: ["海邊"], date: "2026-09-21", src: "../assets/images/gallery/sand-texture/24.jpg", alt: "完成的海景肌理畫，粉紫夕陽霞光搭配沙灘與浪花" },
+  { course: "石英砂肌理畫", themes: ["海邊"], date: "2026-09-21", src: "../assets/images/gallery/sand-texture/25.jpg", alt: "藍綠色海浪與沙灘交界特寫" },
+  { course: "石英砂肌理畫", themes: ["海邊"], date: "2026-09-21", src: "../assets/images/gallery/sand-texture/26.jpg", alt: "完成的夕陽海景肌理畫，剪影山丘與兩艘帆船點綴海面" },
+  { course: "石英砂肌理畫", themes: ["海邊"], date: "2026-09-21", src: "../assets/images/gallery/sand-texture/27.jpg", alt: "學員手持黑白粉色調的海浪肌理畫作品" },
+  { course: "石英砂肌理畫", themes: ["海邊"], date: "2026-09-21", src: "../assets/images/gallery/sand-texture/28.jpg", alt: "完成的海景肌理畫，藍天與山丘剪影，搭配藍綠海面與沙灘" },
+  { course: "石英砂肌理畫", themes: ["海邊"], date: "2026-09-21", src: "../assets/images/gallery/sand-texture/29.jpg", alt: "學員身穿日宣圍裙，手持藍綠色海浪主題的肌理畫作品" },
+  { course: "石英砂肌理畫", themes: ["海邊"], date: "2026-09-21", src: "../assets/images/gallery/sand-texture/30.jpg", alt: "學員手持米黃與赭紅色系的沙丘肌理畫作品" },
+  { course: "石英砂肌理畫", themes: ["海邊"], date: "2026-09-21", src: "../assets/images/gallery/sand-texture/31.jpg", alt: "粉紫漸層肌理畫，白色浪花狀鏤空愛心圖案" },
+  { course: "石英砂肌理畫", themes: ["海邊"], date: "2026-09-21", src: "../assets/images/gallery/sand-texture/32.jpg", alt: "藍粉夕陽海景肌理畫，前景點綴繽紛花束" },
 ];
 
 // 課程篩選鈕的選項清單，跟首頁「課程」選單、faq.html 裡提到的課程名稱
