@@ -8,7 +8,14 @@
    在手機上很難點準。加上左右滑動偵測（見下方 touchstart/touchmove/
    touchend），門檻抓 40px、且橫向位移要大於縱向位移才觸發，避免使用者
    只是想直向捲動頁面卻被誤判成滑動換圖。用 passive listener（沒有呼叫
-   preventDefault），不會擋到原本的頁面捲動。 */
+   preventDefault），不會擋到原本的頁面捲動。
+   滑動提示（2026-09-25 新增）：使用者反饋手機上只看得到下面的小圓點，
+   不會知道其實可以左右滑動。與其一頁一頁手動加提示 HTML（全站有多個
+   頁面用到 .ent-gallery），改成用 JS 統一在圓點後面插入一個提示元素
+   （文字＋左右箭頭圖示），這樣新增案例頁只要沿用既有的 .ent-gallery
+   標記就會自動帶有提示，不用每頁重複貼一樣的 HTML。提示本身用 CSS 控制
+   只在手機寬度顯示（見 css/enterprise.css .ent-gallery__swipe-hint），
+   桌面版滑鼠使用者用不到滑動手勢，不需要看到這個提示。 */
 (function () {
   const galleries = document.querySelectorAll(".ent-gallery");
 
@@ -16,7 +23,17 @@
     const viewport = gallery.querySelector(".ent-gallery__viewport");
     const slides = Array.from(gallery.querySelectorAll(".ent-gallery__slide"));
     const dots = Array.from(gallery.querySelectorAll(".ent-gallery__dots button"));
+    const dotsEl = gallery.querySelector(".ent-gallery__dots");
     const AUTOPLAY_MS = parseInt(gallery.dataset.autoplay, 10) || 4000;
+
+    if (slides.length > 1 && dotsEl && !gallery.querySelector(".ent-gallery__swipe-hint")) {
+      const hint = document.createElement("p");
+      hint.className = "ent-gallery__swipe-hint";
+      hint.setAttribute("aria-hidden", "true");
+      hint.innerHTML =
+        '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 7 3 12l5 5M16 7l5 5-5 5"/></svg>左右滑動看更多';
+      dotsEl.insertAdjacentElement("afterend", hint);
+    }
     let current = 0;
     let timer = null;
 

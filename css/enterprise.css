@@ -567,6 +567,31 @@
   transform: scale(1.2);
 }
 
+/* 滑動提示（js/enterprise-gallery.js 統一插入，見該檔案開頭說明）：
+   只在手機寬度顯示，桌面版滑鼠使用者不需要滑動手勢，圖示用簡單的左右
+   雙箭頭，跟著文字淡入淡出樣式維持低調，不搶輪播本身的注意力。 */
+.ent-gallery__swipe-hint {
+  margin-top: var(--space-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-xs);
+  opacity: 0.75;
+  pointer-events: none;
+}
+
+.ent-gallery__swipe-hint svg {
+  flex: none;
+}
+
+@media (min-width: 768px) {
+  .ent-gallery__swipe-hint {
+    display: none;
+  }
+}
+
 /* ---------- 總覽頁：開場短句宣言 ----------
    比照 vazzle.co/pages/brand-collab 的「What We Offer」置中短句拆行寫法。
    沿用 .chapter__statement／.chapter__prose 既有字級，不新增字體或顏色，
