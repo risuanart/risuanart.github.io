@@ -94,7 +94,7 @@ window.GALLERY_ITEMS = [
   { course: "刮刀油畫", themes: ["植物花卉"], date: "2026-09-24", src: "../assets/images/gallery/palette-knife-oil/13.jpg", alt: "刮刀油畫的藍色花瓶插花，粉紫色野花束", sessions: 1 },
   { course: "刮刀油畫", themes: ["植物花卉"], date: "2026-09-24", src: "../assets/images/gallery/palette-knife-oil/14.jpg", alt: "刮刀油畫的粉白色系植物花卉，淺灰色背景", sessions: 1 },
   { course: "刮刀油畫", themes: ["植物花卉"], date: "2026-09-24", src: "../assets/images/gallery/palette-knife-oil/15.jpg", alt: "刮刀油畫的粉彩野花草地，藍天背景", sessions: 1 },
-  { course: "刮刀油畫", themes: ["植物花卉"], date: "2026-09-24", src: "../assets/images/gallery/palette-knife-oil/16.jpg", alt: "刮刀油畫的玫瑰與雛菊花束，灰色背景隱約可見貓咪剪影", sessions: 1 },
+  { course: "刮刀油畫", themes: ["植物花卉"], date: "2026-09-24", src: "../assets/images/gallery/palette-knife-oil/16.jpg", alt: "刮刀油畫的玫瑰與雛菊花束，灰色背景", sessions: 1 },
   { course: "刮刀油畫", themes: ["植物花卉"], date: "2026-09-24", src: "../assets/images/gallery/palette-knife-oil/17.jpg", alt: "刮刀油畫的白色與米色花朵特寫", sessions: 1 },
   { course: "刮刀油畫", themes: ["植物花卉"], date: "2026-09-24", src: "../assets/images/gallery/palette-knife-oil/18.jpg", alt: "刮刀油畫的粉彩野花草地全幅畫面", sessions: 1 },
   { course: "刮刀油畫", themes: ["植物花卉"], date: "2026-09-24", src: "../assets/images/gallery/palette-knife-oil/19.jpg", alt: "刮刀油畫的粉彩花卉，點綴金色葉片裝飾", sessions: 1 },
