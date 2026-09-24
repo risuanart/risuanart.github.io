@@ -255,6 +255,30 @@
         <p class="chapter__prose">選圖時建議盡量找本來就是用刮刀完成的參考畫作，如果是想畫自己的插花作品或花束照片，也會建議找刮刀畫的參考圖來臨摹，會比直接照著相片畫更容易掌握。</p>
         <p class="chapter__prose">畫室不提供固定的參考圖，希望大家依照自己的喜好選圖，可以先傳圖片跟我們討論適合用什麼材料跟工具。</p>
       </div>
+      <!-- 2026-09-24 新增：使用者上傳一批真實學員完成作品照片（見
+           js/gallery-data.js 同批新增的「刮刀油畫」植物花卉學員作品），
+           這裡另外挑了製作過程與合照這類不適合放進學員作品格子頁、但很
+           適合說明「適合的圖案」的照片，跟學員作品那組是分開挑選、不
+           重複同一張。輪播用 .ent-gallery（跟企業案例頁同一套元件），
+           所以另外補上 js/enterprise-gallery.js 的 script 標籤。 -->
+      <div class="ent-gallery" data-autoplay="4000">
+        <div class="ent-gallery__viewport">
+          <div class="ent-gallery__slide is-active"><img src="../../assets/images/courses/palette-knife-oil/適合的圖案/process-knife-flower.jpg" alt="刮刀堆疊白色花朵花瓣的製作過程特寫"></div>
+          <div class="ent-gallery__slide"><img src="../../assets/images/courses/palette-knife-oil/適合的圖案/wildflower-closeup.jpg" alt="完成的粉彩野花草地刮刀油畫，全幅構圖"></div>
+          <div class="ent-gallery__slide"><img src="../../assets/images/courses/palette-knife-oil/適合的圖案/pearl-floral-closeup.jpg" alt="完成的粉彩花卉刮刀油畫，點綴小珍珠裝飾"></div>
+          <div class="ent-gallery__slide"><img src="../../assets/images/courses/palette-knife-oil/適合的圖案/process-dark-floral.jpg" alt="刮刀在深色背景上堆疊白色花朵的製作過程"></div>
+          <div class="ent-gallery__slide"><img src="../../assets/images/courses/palette-knife-oil/適合的圖案/bouquet-cat-closeup.jpg" alt="完成的花束刮刀油畫特寫，背景隱約可見貓咪剪影"></div>
+          <div class="ent-gallery__slide"><img src="../../assets/images/courses/palette-knife-oil/適合的圖案/group-holding-works.jpg" alt="兩位學員展示完成的刮刀油畫作品"></div>
+        </div>
+        <div class="ent-gallery__dots" role="tablist" aria-label="適合的圖案範例輪播切換">
+          <button type="button" class="is-active" data-index="0" role="tab" aria-selected="true" aria-label="第 1 張"></button>
+          <button type="button" data-index="1" role="tab" aria-selected="false" aria-label="第 2 張"></button>
+          <button type="button" data-index="2" role="tab" aria-selected="false" aria-label="第 3 張"></button>
+          <button type="button" data-index="3" role="tab" aria-selected="false" aria-label="第 4 張"></button>
+          <button type="button" data-index="4" role="tab" aria-selected="false" aria-label="第 5 張"></button>
+          <button type="button" data-index="5" role="tab" aria-selected="false" aria-label="第 6 張"></button>
+        </div>
+      </div>
       <div class="chapter__block">
         <p class="chapter__statement">適合誰來上</p>
         <p class="chapter__prose">喜歡立體筆觸、又想要比石英砂肌理畫更細膩溫潤質感的人，會很適合刮刀油畫。</p>
@@ -383,6 +407,7 @@
   <script src="../../js/gallery-data.js"></script>
   <script src="../../js/gallery-course-preview.js"></script>
   <script src="../../js/gallery-lightbox.js"></script>
+  <script src="../../js/enterprise-gallery.js"></script>
   <script src="../../js/site-menu.js"></script>
 </body>
 </html>

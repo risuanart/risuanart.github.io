@@ -74,6 +74,38 @@ window.GALLERY_ITEMS = [
   { course: "刮刀油畫", themes: ["山"], date: "2026-09-13", src: "../assets/images/guides/material-compare-mountain/oil-knife/07.jpg", alt: "刮刀油畫的黑灰色馬特洪峰，前景是秋天的紅黃樹叢", sessions: 1 },
   { course: "刮刀油畫", themes: ["海邊"], date: "2026-09-13", src: "../assets/images/guides/material-compare-mountain/oil-knife/08.jpg", alt: "刮刀油畫的海岸崖壁，浪花拍打岸邊，前景有紅色小花", sessions: 1 },
 
+  // 2026-09-24 新增：「刮刀油畫」花卉主題 26 件，使用者上傳一批真實學員
+  // 完成作品照片，逐張看過內容後排除明顯是製作過程（畫面裡有手跟刮刀
+  // 在動作）或跟其他張是同一幅作品重複構圖的照片，只保留每幅作品各一張
+  // 最完整的成品照。沒有精確的完成日期紀錄，先統一用新增這筆資料的
+  // 日期，之後有更準確的日期可以再改。
+  { course: "刮刀油畫", themes: ["植物花卉"], date: "2026-09-24", src: "../assets/images/gallery/palette-knife-oil/01.jpg", alt: "刮刀油畫的蒲公英與野花草地，粉藍黃色系的柔和背景", sessions: 1 },
+  { course: "刮刀油畫", themes: ["植物花卉"], date: "2026-09-24", src: "../assets/images/gallery/palette-knife-oil/02.jpg", alt: "刮刀油畫的粉色虞美人花特寫，白底搭配綠色枝葉", sessions: 1 },
+  { course: "刮刀油畫", themes: ["植物花卉"], date: "2026-09-24", src: "../assets/images/gallery/palette-knife-oil/03.jpg", alt: "刮刀油畫的野花草地，橘、白、藍紫色小花錯落其中", sessions: 1 },
+  { course: "刮刀油畫", themes: ["植物花卉", "海邊"], date: "2026-09-24", src: "../assets/images/gallery/palette-knife-oil/04.jpg", alt: "刮刀油畫的海岸崖壁景色，前景點綴白色與粉色野花", sessions: 1 },
+  { course: "刮刀油畫", themes: ["植物花卉"], date: "2026-09-24", src: "../assets/images/gallery/palette-knife-oil/05.jpg", alt: "刮刀油畫的粉彩花束，黃綠色背景搭配橘色大理菊", sessions: 1 },
+  { course: "刮刀油畫", themes: ["植物花卉"], date: "2026-09-24", src: "../assets/images/gallery/palette-knife-oil/06.jpg", alt: "刮刀油畫的白色與藍色花朵，深藍色背景襯托立體花瓣", sessions: 1 },
+  { course: "刮刀油畫", themes: ["植物花卉"], date: "2026-09-24", src: "../assets/images/gallery/palette-knife-oil/07.jpg", alt: "刮刀油畫的粉色牡丹花特寫，淺藍綠色背景", sessions: 1 },
+  { course: "刮刀油畫", themes: ["植物花卉"], date: "2026-09-24", src: "../assets/images/gallery/palette-knife-oil/08.jpg", alt: "刮刀油畫的橘色與白色花朵特寫，深藍色背景", sessions: 1 },
+  { course: "刮刀油畫", themes: ["植物花卉"], date: "2026-09-24", src: "../assets/images/gallery/palette-knife-oil/09.jpg", alt: "刮刀油畫的藍色花朵，深灰黑色背景襯托立體花瓣", sessions: 1 },
+  { course: "刮刀油畫", themes: ["植物花卉"], date: "2026-09-24", src: "../assets/images/gallery/palette-knife-oil/10.jpg", alt: "刮刀油畫的粉彩花朵特寫，點綴小珍珠裝飾", sessions: 1 },
+  { course: "刮刀油畫", themes: ["植物花卉"], date: "2026-09-24", src: "../assets/images/gallery/palette-knife-oil/11.jpg", alt: "刮刀油畫的玫瑰與雛菊花束，點綴小珍珠裝飾", sessions: 1 },
+  { course: "刮刀油畫", themes: ["植物花卉"], date: "2026-09-24", src: "../assets/images/gallery/palette-knife-oil/12.jpg", alt: "刮刀油畫的向日葵與薰衣草，藍紫色點綴其中", sessions: 1 },
+  { course: "刮刀油畫", themes: ["植物花卉"], date: "2026-09-24", src: "../assets/images/gallery/palette-knife-oil/13.jpg", alt: "刮刀油畫的藍色花瓶插花，粉紫色野花束", sessions: 1 },
+  { course: "刮刀油畫", themes: ["植物花卉"], date: "2026-09-24", src: "../assets/images/gallery/palette-knife-oil/14.jpg", alt: "刮刀油畫的粉白色系植物花卉，淺灰色背景", sessions: 1 },
+  { course: "刮刀油畫", themes: ["植物花卉"], date: "2026-09-24", src: "../assets/images/gallery/palette-knife-oil/15.jpg", alt: "刮刀油畫的粉彩野花草地，藍天背景", sessions: 1 },
+  { course: "刮刀油畫", themes: ["植物花卉"], date: "2026-09-24", src: "../assets/images/gallery/palette-knife-oil/16.jpg", alt: "刮刀油畫的玫瑰與雛菊花束，灰色背景隱約可見貓咪剪影", sessions: 1 },
+  { course: "刮刀油畫", themes: ["植物花卉"], date: "2026-09-24", src: "../assets/images/gallery/palette-knife-oil/17.jpg", alt: "刮刀油畫的白色與米色花朵特寫", sessions: 1 },
+  { course: "刮刀油畫", themes: ["植物花卉"], date: "2026-09-24", src: "../assets/images/gallery/palette-knife-oil/18.jpg", alt: "刮刀油畫的粉彩野花草地全幅畫面", sessions: 1 },
+  { course: "刮刀油畫", themes: ["植物花卉"], date: "2026-09-24", src: "../assets/images/gallery/palette-knife-oil/19.jpg", alt: "刮刀油畫的粉彩花卉，點綴金色葉片裝飾", sessions: 1 },
+  { course: "刮刀油畫", themes: ["植物花卉"], date: "2026-09-24", src: "../assets/images/gallery/palette-knife-oil/20.jpg", alt: "刮刀油畫的粉藍紫色系花束特寫", sessions: 1 },
+  { course: "刮刀油畫", themes: ["植物花卉"], date: "2026-09-24", src: "../assets/images/gallery/palette-knife-oil/21.jpg", alt: "刮刀油畫的藍紫白色系野花束特寫", sessions: 1 },
+  { course: "刮刀油畫", themes: ["植物花卉"], date: "2026-09-24", src: "../assets/images/gallery/palette-knife-oil/22.jpg", alt: "刮刀油畫的紫色薰衣草花穗特寫", sessions: 1 },
+  { course: "刮刀油畫", themes: ["植物花卉"], date: "2026-09-24", src: "../assets/images/gallery/palette-knife-oil/23.jpg", alt: "刮刀油畫的粉彩花卉，淺灰綠色背景", sessions: 1 },
+  { course: "刮刀油畫", themes: ["植物花卉", "風景"], date: "2026-09-24", src: "../assets/images/gallery/palette-knife-oil/24.jpg", alt: "刮刀油畫的湖景風光，前景點綴繽紛野花", sessions: 1 },
+  { course: "刮刀油畫", themes: ["植物花卉"], date: "2026-09-24", src: "../assets/images/gallery/palette-knife-oil/25.jpg", alt: "刮刀油畫的密集野花草地，點綴水鑽裝飾", sessions: 1 },
+  { course: "刮刀油畫", themes: ["植物花卉"], date: "2026-09-24", src: "../assets/images/gallery/palette-knife-oil/26.jpg", alt: "刮刀油畫的灰綠色系玫瑰花特寫", sessions: 1 },
+
   // 2026-09-17 新增：「寵物油畫」10 件，使用者從 Mac 照片 App 的
   // 「狗狗油畫」相簿匯出，確認都是完全沒有畫畫經驗的同學一堂課完成的
   // 真實作品（同一批照片使用者也發了 IG 貼文，見 courses/pet-portrait.html
