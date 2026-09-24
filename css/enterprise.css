@@ -409,6 +409,19 @@
   margin-top: var(--space-6);
 }
 
+/* 縮小版輪播（.ent-gallery--compact）：手機版維持滿版（本來就會自動配合
+   螢幕寬度），桌面版限制最大寬度、置中，跟 .is-portrait-video 那組「桌面
+   版限制寬度」的做法同一個邏輯，用在單張照片不需要滿版大小的情境（例如
+   一個段落裡要並排放兩組主題輪播），數值先用 360px，跟同段落文字寬度
+   比起來不會太突兀。 */
+@media (min-width: 768px) {
+  .ent-gallery--compact {
+    max-width: 360px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
 .ent-gallery__viewport {
   position: relative;
   width: 100%;

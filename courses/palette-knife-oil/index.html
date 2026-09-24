@@ -250,18 +250,47 @@
     <section class="chapter fade-in delay-2">
       <div class="chapter__block">
         <p class="chapter__statement">適合的圖案</p>
-        <p class="chapter__prose">山景是很適合刮刀表現的主題之一，堆疊出來的稜角跟立體感很有味道。</p>
-        <p class="chapter__prose">花卉、花束也是很多同學喜歡畫的主題，不過花瓣數量比較多的花會比較難上手，容錯率也比較低。</p>
-        <p class="chapter__prose">選圖時建議盡量找本來就是用刮刀完成的參考畫作，如果是想畫自己的插花作品或花束照片，也會建議找刮刀畫的參考圖來臨摹，會比直接照著相片畫更容易掌握。</p>
-        <p class="chapter__prose">畫室不提供固定的參考圖，希望大家依照自己的喜好選圖，可以先傳圖片跟我們討論適合用什麼材料跟工具。</p>
       </div>
-      <!-- 2026-09-24 新增：使用者上傳一批真實學員完成作品照片（見
-           js/gallery-data.js 同批新增的「刮刀油畫」植物花卉學員作品），
-           這裡另外挑了製作過程與合照這類不適合放進學員作品格子頁、但很
-           適合說明「適合的圖案」的照片，跟學員作品那組是分開挑選、不
-           重複同一張。輪播用 .ent-gallery（跟企業案例頁同一套元件），
-           所以另外補上 js/enterprise-gallery.js 的 script 標籤。 -->
-      <div class="ent-gallery" data-autoplay="4000">
+
+      <!-- 2026-09-24 新增，2026-09-25 改版：原本山／花共用一組輪播，
+           使用者反饋這段文字同時提到山跟花兩種主題，輪播卻混在一起放，
+           希望拆成各自獨立的輪播；同時原本的 .ent-gallery__viewport
+           在桌面版是滿版寬度，使用者覺得單張照片太大，改成新增的
+           .ent-gallery--compact 修飾類別（見 css/enterprise.css，桌面版
+           限制最大寬度 360px、置中，手機版維持原本滿版）。
+           山景輪播用 assets/images/guides/material-compare-mountain/
+           oil-knife/ 既有的 6 張完成品照片（跟 js/gallery-data.js 裡
+           「刮刀油畫」山主題學員作品同一批，03、09 是製作過程照片，這裡
+           不重複收錄）。花卉輪播沿用原本挑選的 6 張過程／合照照片
+           （跟學員作品格子頁的 26 張完成品是分開挑選、不重複同一張）。 -->
+      <div class="chapter__block">
+        <p class="chapter__statement">山</p>
+        <p class="chapter__prose">山景是很適合刮刀表現的主題之一，堆疊出來的稜角跟立體感很有味道。</p>
+      </div>
+      <div class="ent-gallery ent-gallery--compact" data-autoplay="4000">
+        <div class="ent-gallery__viewport">
+          <div class="ent-gallery__slide is-active"><img src="../../assets/images/guides/material-compare-mountain/oil-knife/01.jpg" alt="油畫＋刮刀畫的山，綠黃粉藍等顏色交錯堆疊出抽象質感"></div>
+          <div class="ent-gallery__slide"><img src="../../assets/images/guides/material-compare-mountain/oil-knife/02.jpg" alt="刮刀油畫的翠綠山脈，刮刀堆疊出粗獷的筆觸質感"></div>
+          <div class="ent-gallery__slide"><img src="../../assets/images/guides/material-compare-mountain/oil-knife/04.jpg" alt="刮刀油畫的灰白雪山群峰，山腳下有一間小屋"></div>
+          <div class="ent-gallery__slide"><img src="../../assets/images/guides/material-compare-mountain/oil-knife/05.jpg" alt="刮刀油畫的粉白雪山，夜空中有一彎新月與星星"></div>
+          <div class="ent-gallery__slide"><img src="../../assets/images/guides/material-compare-mountain/oil-knife/06.jpg" alt="刮刀油畫的沙丘山景，橘藍色調的夕陽"></div>
+          <div class="ent-gallery__slide"><img src="../../assets/images/guides/material-compare-mountain/oil-knife/07.jpg" alt="刮刀油畫的黑灰色馬特洪峰，前景是秋天的紅黃樹叢"></div>
+        </div>
+        <div class="ent-gallery__dots" role="tablist" aria-label="山景範例輪播切換">
+          <button type="button" class="is-active" data-index="0" role="tab" aria-selected="true" aria-label="第 1 張"></button>
+          <button type="button" data-index="1" role="tab" aria-selected="false" aria-label="第 2 張"></button>
+          <button type="button" data-index="2" role="tab" aria-selected="false" aria-label="第 3 張"></button>
+          <button type="button" data-index="3" role="tab" aria-selected="false" aria-label="第 4 張"></button>
+          <button type="button" data-index="4" role="tab" aria-selected="false" aria-label="第 5 張"></button>
+          <button type="button" data-index="5" role="tab" aria-selected="false" aria-label="第 6 張"></button>
+        </div>
+      </div>
+
+      <div class="chapter__block">
+        <p class="chapter__statement">花</p>
+        <p class="chapter__prose">花卉、花束也是很多同學喜歡畫的主題，不過花瓣數量比較多的花會比較難上手，容錯率也比較低。</p>
+      </div>
+      <div class="ent-gallery ent-gallery--compact" data-autoplay="4000">
         <div class="ent-gallery__viewport">
           <div class="ent-gallery__slide is-active"><img src="../../assets/images/courses/palette-knife-oil/適合的圖案/process-knife-flower.jpg" alt="刮刀堆疊白色花朵花瓣的製作過程特寫"></div>
           <div class="ent-gallery__slide"><img src="../../assets/images/courses/palette-knife-oil/適合的圖案/wildflower-closeup.jpg" alt="完成的粉彩野花草地刮刀油畫，全幅構圖"></div>
@@ -270,7 +299,7 @@
           <div class="ent-gallery__slide"><img src="../../assets/images/courses/palette-knife-oil/適合的圖案/bouquet-cat-closeup.jpg" alt="完成的花束刮刀油畫特寫，背景隱約可見貓咪剪影"></div>
           <div class="ent-gallery__slide"><img src="../../assets/images/courses/palette-knife-oil/適合的圖案/group-holding-works.jpg" alt="兩位學員展示完成的刮刀油畫作品"></div>
         </div>
-        <div class="ent-gallery__dots" role="tablist" aria-label="適合的圖案範例輪播切換">
+        <div class="ent-gallery__dots" role="tablist" aria-label="花卉範例輪播切換">
           <button type="button" class="is-active" data-index="0" role="tab" aria-selected="true" aria-label="第 1 張"></button>
           <button type="button" data-index="1" role="tab" aria-selected="false" aria-label="第 2 張"></button>
           <button type="button" data-index="2" role="tab" aria-selected="false" aria-label="第 3 張"></button>
@@ -278,6 +307,11 @@
           <button type="button" data-index="4" role="tab" aria-selected="false" aria-label="第 5 張"></button>
           <button type="button" data-index="5" role="tab" aria-selected="false" aria-label="第 6 張"></button>
         </div>
+      </div>
+
+      <div class="chapter__block">
+        <p class="chapter__prose">選圖時建議盡量找本來就是用刮刀完成的參考畫作，如果是想畫自己的插花作品或花束照片，也會建議找刮刀畫的參考圖來臨摹，會比直接照著相片畫更容易掌握。</p>
+        <p class="chapter__prose">畫室不提供固定的參考圖，希望大家依照自己的喜好選圖，可以先傳圖片跟我們討論適合用什麼材料跟工具。</p>
       </div>
       <div class="chapter__block">
         <p class="chapter__statement">適合誰來上</p>
