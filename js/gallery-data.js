@@ -106,6 +106,20 @@ window.GALLERY_ITEMS = [
   { course: "刮刀油畫", themes: ["植物花卉"], date: "2026-09-24", src: "../assets/images/gallery/palette-knife-oil/25.jpg", alt: "刮刀油畫的密集野花草地，點綴水鑽裝飾", sessions: 1 },
   { course: "刮刀油畫", themes: ["植物花卉"], date: "2026-09-24", src: "../assets/images/gallery/palette-knife-oil/26.jpg", alt: "刮刀油畫的灰綠色系玫瑰花特寫", sessions: 1 },
 
+  // 2026-09-30 新增：「刮刀油畫」8 件，使用者上傳一批真實學員完成作品，
+  // 題材比較多元（動漫角色、水果、蛋糕、披薩），逐張看過內容後排除一張
+  // 明顯是製作過程（手＋刮刀入鏡，蛋糕那幅的過程照）跟這批分開放，那張
+  // 改放進課程頁「刮刀油畫是什麼」段落當技法示範用。沒有精確的完成日期
+  // 紀錄，先統一用新增這筆資料的日期，之後有更準確的日期可以再改。
+  { course: "刮刀油畫", themes: ["動漫／角色"], date: "2026-09-30", src: "../assets/images/gallery/palette-knife-oil/27.jpg", alt: "刮刀油畫的龍貓（吉卜力動畫角色），站在大樹下的草地上，周圍點綴白色小花", sessions: 1 },
+  { course: "刮刀油畫", themes: ["動漫／角色"], date: "2026-09-30", src: "../assets/images/gallery/palette-knife-oil/28.jpg", alt: "刮刀油畫的拉拉熊，趴在粉色床鋪上的慵懶姿勢", sessions: 1 },
+  { course: "刮刀油畫", themes: ["食物", "風景"], date: "2026-09-30", src: "../assets/images/gallery/palette-knife-oil/29.jpg", alt: "刮刀油畫的水蜜桃靜物，木籃裝著水蜜桃放在沙灘桌巾上，背景是海景", sessions: 1 },
+  { course: "刮刀油畫", themes: ["食物"], date: "2026-09-30", src: "../assets/images/gallery/palette-knife-oil/30.jpg", alt: "刮刀油畫的杯子蛋糕靜物，白色奶油上放著一顆紅色櫻桃，花紋瓷盤盛裝", sessions: 1 },
+  { course: "刮刀油畫", themes: ["風景", "山"], date: "2026-09-30", src: "../assets/images/gallery/palette-knife-oil/31.jpg", alt: "刮刀油畫的海景與遠山，藍色海面搭配前景的黃白色野花", sessions: 1 },
+  { course: "刮刀油畫", themes: ["食物"], date: "2026-09-30", src: "../assets/images/gallery/palette-knife-oil/32.jpg", alt: "刮刀油畫的披薩靜物，一片披薩放在沙地上，背景有建築物與藍天白雲", sessions: 1 },
+  { course: "刮刀油畫", themes: ["食物"], date: "2026-09-30", src: "../assets/images/gallery/palette-knife-oil/33.jpg", alt: "刮刀油畫的水蜜桃與李子特寫，藍色水面背景", sessions: 1 },
+  { course: "刮刀油畫", themes: ["風景", "海邊"], date: "2026-09-30", src: "../assets/images/gallery/palette-knife-oil/34.jpg", alt: "刮刀油畫的海邊放風箏景色，紅色與黃色風箏飛在海浪上方", sessions: 1 },
+
   // 2026-09-17 新增：「寵物油畫」10 件，使用者從 Mac 照片 App 的
   // 「狗狗油畫」相簿匯出，確認都是完全沒有畫畫經驗的同學一堂課完成的
   // 真實作品（同一批照片使用者也發了 IG 貼文，見 courses/pet-portrait.html
@@ -273,6 +287,9 @@ window.GALLERY_COURSE_LINKS = {
 // 有真實照片（見上方 GALLERY_ITEMS），且「兩隻以上」同時疊加「狗狗」／
 // 「貓咪」標籤——瀏覽「貓咪」時有貓的兩隻合照也要一起出現，瀏覽「狗狗」
 // 也一樣，這三個標籤是可以同時成立的一般主題標籤，不是互斥分類。
+// 2026-09-30 新增「食物」標籤：使用者上傳一批刮刀油畫學員作品裡有水蜜桃、
+// 蛋糕、披薩這類食物靜物題材，之前的分類都不合適（不是植物花卉、也不是
+// 節慶／季節），獨立開一個「食物」標籤。
 window.GALLERY_THEMES = [
   "海洋生物",
   "陸地動物",
@@ -283,6 +300,7 @@ window.GALLERY_THEMES = [
   "風景",
   "海邊",
   "山",
+  "食物",
   "動漫／角色",
   "星空／月亮",
   "狗狗",
