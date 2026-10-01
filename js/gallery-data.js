@@ -247,6 +247,48 @@ window.GALLERY_ITEMS = [
   { course: "石英砂肌理畫", themes: ["海邊"], date: "2026-09-21", src: "../assets/images/gallery/sand-texture/30.jpg", alt: "學員手持米黃與赭紅色系的沙丘肌理畫作品" },
   { course: "石英砂肌理畫", themes: ["海邊"], date: "2026-09-21", src: "../assets/images/gallery/sand-texture/31.jpg", alt: "粉紫漸層肌理畫，白色浪花狀鏤空愛心圖案" },
   { course: "石英砂肌理畫", themes: ["海邊"], date: "2026-09-21", src: "../assets/images/gallery/sand-texture/32.jpg", alt: "藍粉夕陽海景肌理畫，前景點綴繽紛花束" },
+
+  // 2026-10-01 新增：「自己帶圖創作」星空油畫學員作品 37 件，技法是壓克力
+  // 打底後用油畫顏料畫星辰、星雲、極光，部分作品完成後會撒星星／亮粉裝飾。
+  // 使用者確認皆為「一堂完成」的真實學員作品。沒有精確完成日期紀錄，先
+  // 統一用新增這筆資料的日期，之後有更準確的日期可以再改。
+  { course: "自己帶圖創作", themes: ["星空／月亮"], date: "2026-10-01", src: "../assets/images/gallery/star-sky/01.jpg", alt: "星空油畫的藍色星雲特寫，畫面點綴細小星點", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["星空／月亮"], date: "2026-10-01", src: "../assets/images/gallery/star-sky/02.jpg", alt: "星空油畫的復活節島摩艾石像剪影，頭頂是銀河與極光", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["星空／月亮"], date: "2026-10-01", src: "../assets/images/gallery/star-sky/03.jpg", alt: "星空油畫的綠色極光，針葉林剪影環繞畫面下方", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["星空／月亮", "山"], date: "2026-10-01", src: "../assets/images/gallery/star-sky/04.jpg", alt: "星空油畫的山林湖泊倒影，滿天星點灑落水面", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["星空／月亮", "山"], date: "2026-10-01", src: "../assets/images/gallery/star-sky/05.jpg", alt: "學員正在繪製星空山景湖泊畫作的過程", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["星空／月亮"], date: "2026-10-01", src: "../assets/images/gallery/star-sky/06.jpg", alt: "星空油畫的針葉林剪影，天空有一彎新月與點點繁星", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["星空／月亮"], date: "2026-10-01", src: "../assets/images/gallery/star-sky/07.jpg", alt: "星空油畫的銀河特寫，前景是階梯與建築剪影", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["星空／月亮", "山"], date: "2026-10-01", src: "../assets/images/gallery/star-sky/08.jpg", alt: "圓形畫布的星空山景湖泊倒影作品", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["星空／月亮"], date: "2026-10-01", src: "../assets/images/gallery/star-sky/09.jpg", alt: "星空油畫，一人站在荒原上仰望滿天繁星的剪影", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["星空／月亮", "山"], date: "2026-10-01", src: "../assets/images/gallery/star-sky/10.jpg", alt: "星空油畫的綠色極光灑落山脊，點綴流星雨", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["星空／月亮", "山"], date: "2026-10-01", src: "../assets/images/gallery/star-sky/11.jpg", alt: "星空油畫的紫色銀河，山景與湖泊剪影倒映其中", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["星空／月亮"], date: "2026-10-01", src: "../assets/images/gallery/star-sky/12.jpg", alt: "圓形畫布的彩色星雲特寫，藍綠紅三色交織", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["星空／月亮", "抽象圖案"], date: "2026-10-01", src: "../assets/images/gallery/star-sky/13.jpg", alt: "星空油畫的鑰匙孔造型構圖，孔內是星雲與行星，一人剪影站在孔前", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["星空／月亮"], date: "2026-10-01", src: "../assets/images/gallery/star-sky/14.jpg", alt: "星空油畫的直幅銀河，兩人剪影站在山丘上仰望", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["星空／月亮", "山"], date: "2026-10-01", src: "../assets/images/gallery/star-sky/15.jpg", alt: "星空油畫，流星劃過粉紫色銀河，山巒剪影在粉色霞光下", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["星空／月亮", "抽象圖案"], date: "2026-10-01", src: "../assets/images/gallery/star-sky/16.jpg", alt: "星空油畫，星座連線圖搭配抽象裂痕狀銀白色紋理", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["星空／月亮"], date: "2026-10-01", src: "../assets/images/gallery/star-sky/17.jpg", alt: "星空油畫的直幅銀河，針葉林剪影在畫面下方", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["星空／月亮", "山"], date: "2026-10-01", src: "../assets/images/gallery/star-sky/18.jpg", alt: "星空油畫，山巒剪影搭配粉紫色霞光與滿天繁星", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["星空／月亮", "山"], date: "2026-10-01", src: "../assets/images/gallery/star-sky/19.jpg", alt: "星空油畫，山巒剪影搭配藍紫色銀河與粉色霞光", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["星空／月亮"], date: "2026-10-01", src: "../assets/images/gallery/star-sky/20.jpg", alt: "星空油畫的銀河特寫，針葉林剪影環繞畫面下方", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["星空／月亮"], date: "2026-10-01", src: "../assets/images/gallery/star-sky/21.jpg", alt: "星空油畫，綠色極光籠罩帳篷營地，針葉林環繞", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["星空／月亮"], date: "2026-10-01", src: "../assets/images/gallery/star-sky/22.jpg", alt: "星空油畫，流星劃過湖面，月光倒映水中", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["星空／月亮", "山"], date: "2026-10-01", src: "../assets/images/gallery/star-sky/23.jpg", alt: "學員正在繪製極光山脊畫作的過程", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["星空／月亮"], date: "2026-10-01", src: "../assets/images/gallery/star-sky/24.jpg", alt: "星空油畫，流星劃過森林與湖面倒影上方", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["星空／月亮"], date: "2026-10-01", src: "../assets/images/gallery/star-sky/25.jpg", alt: "學員正在繪製藍白色星雲特寫畫作的過程", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["星空／月亮"], date: "2026-10-01", src: "../assets/images/gallery/star-sky/26.jpg", alt: "星空油畫，流星雨劃過湖面，一艘小船剪影停靠岸邊", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["星空／月亮"], date: "2026-10-01", src: "../assets/images/gallery/star-sky/27.jpg", alt: "星空油畫，鄉間道路搭配電線桿剪影，天空是直幅銀河", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["星空／月亮", "山"], date: "2026-10-01", src: "../assets/images/gallery/star-sky/28.jpg", alt: "星空油畫，富士山形山景搭配極光與湖泊倒影", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["星空／月亮"], date: "2026-10-01", src: "../assets/images/gallery/star-sky/29.jpg", alt: "星空油畫，小王子剪影站在金色沙丘與玫瑰花叢前仰望星空", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["星空／月亮"], date: "2026-10-01", src: "../assets/images/gallery/star-sky/30.jpg", alt: "星空油畫，發光星團點綴粉橘色霞光天空，樹木剪影在地平線上", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["星空／月亮", "山"], date: "2026-10-01", src: "../assets/images/gallery/star-sky/31.jpg", alt: "學員手持極光雪山主題的星空油畫作品", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["星空／月亮"], date: "2026-10-01", src: "../assets/images/gallery/star-sky/32.jpg", alt: "星空油畫，北斗七星星座與流星劃過山脊上方", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["星空／月亮", "海洋生物"], date: "2026-10-01", src: "../assets/images/gallery/star-sky/33.jpg", alt: "星空背景下的座頭鯨與水母插畫風油畫", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["星空／月亮", "植物花卉"], date: "2026-10-01", src: "../assets/images/gallery/star-sky/34.jpg", alt: "星空油畫，櫻花樹倒映水面，上方是星球與夜空", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["星空／月亮"], date: "2026-10-01", src: "../assets/images/gallery/star-sky/35.jpg", alt: "星空油畫的直幅星雲特寫，樹木剪影在畫面左下角", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["星空／月亮"], date: "2026-10-01", src: "../assets/images/gallery/star-sky/36.jpg", alt: "星空油畫，小屋剪影佇立在星空下的小徑旁", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["星空／月亮"], date: "2026-10-01", src: "../assets/images/gallery/star-sky/37.jpg", alt: "星空油畫，枯樹林剪影佇立在湖畔，天空是流動的極光雲彩", sessions: 1 },
 ];
 
 // 課程篩選鈕的選項清單，跟首頁「課程」選單、faq.html 裡提到的課程名稱
