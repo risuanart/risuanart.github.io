@@ -120,6 +120,20 @@ window.GALLERY_ITEMS = [
   { course: "刮刀油畫", themes: ["食物"], date: "2026-09-30", src: "../assets/images/gallery/palette-knife-oil/33.jpg", alt: "刮刀油畫的水蜜桃與李子特寫，藍色水面背景", sessions: 1 },
   { course: "刮刀油畫", themes: ["風景", "海邊"], date: "2026-09-30", src: "../assets/images/gallery/palette-knife-oil/34.jpg", alt: "刮刀油畫的海邊放風箏景色，紅色與黃色風箏飛在海浪上方", sessions: 1 },
 
+  // 2026-10-01 新增：「刮刀油畫」10 件風景主題學員作品，使用者上傳時
+  // 確認都是「一堂完成」的真實成品。沒有精確的完成日期紀錄，先統一用
+  // 新增這筆資料的日期，之後有更準確的日期可以再改。
+  { course: "刮刀油畫", themes: ["風景", "山"], date: "2026-10-01", src: "../assets/images/gallery/palette-knife-oil/35.jpg", alt: "刮刀油畫的湖畔小屋秋景，楓紅樹林與遠山倒映在湖面", sessions: 1 },
+  { course: "刮刀油畫", themes: ["風景", "海邊"], date: "2026-10-01", src: "../assets/images/gallery/palette-knife-oil/36.jpg", alt: "刮刀油畫的夕陽海景，一艘帆船航行在波光粼粼的海面上", sessions: 1 },
+  { course: "刮刀油畫", themes: ["風景"], date: "2026-10-01", src: "../assets/images/gallery/palette-knife-oil/37.jpg", alt: "刮刀油畫的雪地狗拉雪橇景色，針葉林環繞", sessions: 1 },
+  { course: "刮刀油畫", themes: ["風景"], date: "2026-10-01", src: "../assets/images/gallery/palette-knife-oil/38.jpg", alt: "刮刀油畫的金黃色樹冠特寫，藍天為背景", sessions: 1 },
+  { course: "刮刀油畫", themes: ["風景", "植物花卉"], date: "2026-10-01", src: "../assets/images/gallery/palette-knife-oil/39.jpg", alt: "刮刀油畫的花卉草地景色，遠方有一棟白色房屋", sessions: 1 },
+  { course: "刮刀油畫", themes: ["風景", "山", "植物花卉"], date: "2026-10-01", src: "../assets/images/gallery/palette-knife-oil/40.jpg", alt: "刮刀油畫的阿爾卑斯山小屋，野花草地點綴小珍珠裝飾", sessions: 1 },
+  { course: "刮刀油畫", themes: ["風景", "海邊"], date: "2026-10-01", src: "../assets/images/gallery/palette-knife-oil/41.jpg", alt: "刮刀油畫的海岸岩壁景色，草地上有幾隻海鳥剪影", sessions: 1 },
+  { course: "刮刀油畫", themes: ["風景", "山"], date: "2026-10-01", src: "../assets/images/gallery/palette-knife-oil/42.jpg", alt: "刮刀油畫的河濱自行車道景色，金黃草地與遠山，有人騎單車經過", sessions: 1 },
+  { course: "刮刀油畫", themes: ["節慶／季節", "風景"], date: "2026-10-01", src: "../assets/images/gallery/palette-knife-oil/43.jpg", alt: "刮刀油畫的聖誕雪景，窗邊擺著聖誕樹，窗外是飄雪的街道", sessions: 1 },
+  { course: "刮刀油畫", themes: ["風景", "植物花卉"], date: "2026-10-01", src: "../assets/images/gallery/palette-knife-oil/44.jpg", alt: "刮刀油畫的森林野花草地，陽光點點灑落在石頭與花叢間", sessions: 1 },
+
   // 2026-09-17 新增：「寵物油畫」10 件，使用者從 Mac 照片 App 的
   // 「狗狗油畫」相簿匯出，確認都是完全沒有畫畫經驗的同學一堂課完成的
   // 真實作品（同一批照片使用者也發了 IG 貼文，見 courses/pet-portrait.html
