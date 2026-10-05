@@ -540,6 +540,13 @@
 .ptpl-materials__banner {
   aspect-ratio: 3 / 1;
   border-radius: var(--radius-sharp);
+  overflow: hidden;
+}
+.ptpl-materials__banner img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 /* ---------- 顏色比較：橫向色票選單（圖例兼分頁）＋連動照片 ----------
