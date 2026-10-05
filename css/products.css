@@ -38,36 +38,38 @@
   --swatch-artist-sheep-red: #7C1F30;
   --swatch-artist-sheep-blue: #4A8FA3;
 
-  /* 「春」款分裝沙 7 色，跟上面同一批肉眼估色（依材料名稱估，不是正式
-     色卡編號），色名相同的直接沿用同一個值（湖藍＝--swatch-artist-sheep-blue
-     那組估色）。 */
-  --swatch-chun-black: #2B2B2B;
-  --swatch-chun-ink-blue: #1F3A5F;
-  --swatch-chun-pink: #E8A0B4;
-  --swatch-chun-ice-blue: #A8D4E0;
-  --swatch-chun-lake-blue: #4A8FA3;
-  --swatch-chun-light-pink: #F0C4D0;
-  --swatch-chun-ice-purple: #C8B8E0;
+  /* 「春」款分裝沙 7 色，2026-10-05 依新上傳的「春沙子顏色拷貝.jpg」
+     實拍照換成實際對色（原本是肉眼依色名猜的估色，現在直接從照片裡
+     每一管的顏色取色）。 */
+  --swatch-chun-black: #23282D;
+  --swatch-chun-ink-blue: #35424C;
+  --swatch-chun-pink: #DD7584;
+  --swatch-chun-ice-blue: #B9D3DD;
+  --swatch-chun-lake-blue: #3D8396;
+  --swatch-chun-light-pink: #E8C7CE;
+  --swatch-chun-ice-purple: #D1BEDB;
 
-  /* 「福」款分裝沙 7 色，同一批肉眼估色。跟「春」「羊群報福」重複的
-     色名（粉紅、冰紫、白）直接沿用同一個值，不重新估一次。 */
-  --swatch-fu-jujube-red: #8B3626;
-  --swatch-fu-white: #F5F0E8;
-  --swatch-fu-golden-yellow: #E0A83C;
-  --swatch-fu-cyan: #4A9B8E;
-  --swatch-fu-pink: #E8A0B4;
-  --swatch-fu-ice-purple: #C8B8E0;
+  /* 「福」款分裝沙 7 色，2026-10-05 依「福沙子顏色拷貝.jpg」實拍照
+     換成實際對色。注意：照片裡只拍到 6 管，「深膚」這管沒拍進去，
+     沿用原本肉眼估色，之後補拍再換成真實對色。 */
+  --swatch-fu-jujube-red: #4A2E35;
+  --swatch-fu-white: #F2EDE3;
+  --swatch-fu-golden-yellow: #E8C23E;
+  --swatch-fu-cyan: #2E96A3;
+  --swatch-fu-pink: #E0768A;
+  --swatch-fu-ice-purple: #CBAFC9;
   --swatch-fu-deep-tan: #C99B6E;
 
-  /* 「財」款分裝沙 7 色，同一批肉眼估色。跟其他款重複的色名（湖藍、
-     深膚、黑色）直接沿用同一個值，不重新估一次。 */
-  --swatch-cai-coral-red: #E8735A;
-  --swatch-cai-lake-blue: #4A8FA3;
-  --swatch-cai-bright-yellow: #F0C020;
-  --swatch-cai-deep-tan: #C99B6E;
-  --swatch-cai-linen: #D9C9A8;
-  --swatch-cai-mustard: #C4A63C;
-  --swatch-cai-black: #2B2B2B;
+  /* 「財」款分裝沙 7 色，2026-10-05 依「財沙子顏色拷貝.jpg」實拍照
+     換成實際對色。照片沒有色名標籤，對應順序是肉眼比對猜的（亞麻／
+     深膚兩個相近的膚色調最容易猜錯），之後確認有誤再個別調整。 */
+  --swatch-cai-coral-red: #C23B3E;
+  --swatch-cai-lake-blue: #2E7A8C;
+  --swatch-cai-bright-yellow: #E8C23E;
+  --swatch-cai-deep-tan: #D99784;
+  --swatch-cai-linen: #C9A68E;
+  --swatch-cai-mustard: #A68A3D;
+  --swatch-cai-black: #20262E;
 }
 
 .product-page {
