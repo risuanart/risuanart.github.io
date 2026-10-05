@@ -306,10 +306,22 @@
          安全須知原本固定寫在這個 section 最下面，後來移到「商品介紹／
          規格資訊」分頁下方（見 .ptpl-description 後面），不是分頁裡面：
          這是不管讀者點開哪個分頁都該看到的資訊，放進單一分頁裡容易被
-         只看另一個分頁的讀者整個錯過。 -->
+         只看另一個分頁的讀者整個錯過。
+
+         2026-10-05 材料平拍圖改法：原本規劃一張工具與配件合拍的俯視圖，
+         使用者反應不同商品很難每次重拍出一模一樣的構圖，改成拆兩張——
+         排刷、夾子、一次性防污桌布這幾樣全系列（含「春」「福」「財」）
+         通用的工具單獨拍一張（見 assets/images/products/sand-art-tools/，
+         這幾樣工具沒換，不用重拍），底板＋集沙盤這兩樣羊群報福專屬的
+         配件另外拍。版型改用 .howto-compare 雙欄圖，不再是整組合拍的
+         .kit-section__photo，理由跟改動細節見 sand-art-chun/index.html
+         同一處註解。 -->
     <section class="ptpl-materials fade-in delay-2">
       <h2>商品詳細</h2>
-      <div class="placeholder-box kit-section__photo">圖片待補・材料平拍俯視圖（僅工具與配件，不含色沙，紅藍兩色通用，之後換色不用重拍）</div>
+      <div class="howto-compare">
+        <div class="howto-compare__cell placeholder-box">圖片待補・底板＋集沙盤特寫（20×20cm 底板＋集沙盤）</div>
+        <div class="howto-compare__cell"><img src="../../assets/images/products/sand-art-tools/sand-art-tools-common.jpg" alt="沙畫材料包共通工具實拍：排刷、夾子、一次性防污桌布" loading="lazy"></div>
+      </div>
       <ul class="kit-list">
         <li><span aria-hidden="true">✦</span><span>砂畫底板〔20×20cm〕... 1張</span></li>
         <li><span aria-hidden="true">✦</span><span>集沙盤 ... 1個</span></li>
