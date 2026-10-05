@@ -290,11 +290,13 @@ window.GALLERY_ITEMS = [
   { course: "自己帶圖創作", themes: ["星空／月亮"], date: "2026-10-01", src: "../assets/images/gallery/star-sky/36.jpg", alt: "星空油畫，小屋剪影佇立在星空下的小徑旁", sessions: 1 },
   { course: "自己帶圖創作", themes: ["星空／月亮"], date: "2026-10-01", src: "../assets/images/gallery/star-sky/37.jpg", alt: "星空油畫，枯樹林剪影佇立在湖畔，天空是流動的極光雲彩", sessions: 1 },
 
-  // 2026-10-05 新增：「自己帶圖創作」鯨魚主題學員作品 12 件，使用者
-  // 確認皆為「一堂完成」的真實學員作品。多數是鯨魚悠游於星空／夜空的
-  // 構圖，同時疊加「星空／月亮」標籤；寫實海面特寫（02、04、10）沒有
-  // 明顯星空元素，只標「海洋生物」。沒有精確完成日期紀錄，先統一用
-  // 新增這筆資料的日期，之後有更準確的日期可以再改。
+  // 2026-10-05 新增：鯨魚主題學員作品 12 件，使用者確認皆為「一堂完成」
+  // 的真實學員作品。多數是鯨魚悠游於星空／夜空的構圖，同時疊加「星空／
+  // 月亮」標籤；寫實海面特寫（02、04、10）沒有明顯星空元素，只標
+  // 「海洋生物」。09（圓形畫布虎鯨悠游滿月前）材質其實是石英砂，不是
+  // 油畫＋筆刷，使用者看到學員作品頁才發現這張課程歸錯，已改標
+  // 「石英砂肌理畫」，其餘 11 件維持「自己帶圖創作」。沒有精確完成
+  // 日期紀錄，先統一用新增這筆資料的日期，之後有更準確的日期可以再改。
   { course: "自己帶圖創作", themes: ["海洋生物", "星空／月亮"], date: "2026-10-05", src: "../assets/images/gallery/whale/01.jpg", alt: "油畫的鯨魚悠游於星雲星空中，一旁點綴行星與星座連線", sessions: 1 },
   { course: "自己帶圖創作", themes: ["海洋生物"], date: "2026-10-05", src: "../assets/images/gallery/whale/02.jpg", alt: "油畫的座頭鯨母子在海面下悠游，光線從水面灑落", sessions: 1 },
   { course: "自己帶圖創作", themes: ["海洋生物", "星空／月亮"], date: "2026-10-05", src: "../assets/images/gallery/whale/03.jpg", alt: "油畫的鯨魚悠游於紫藍色星雲星空中", sessions: 1 },
@@ -303,7 +305,7 @@ window.GALLERY_ITEMS = [
   { course: "自己帶圖創作", themes: ["海洋生物", "星空／月亮"], date: "2026-10-05", src: "../assets/images/gallery/whale/06.jpg", alt: "油畫的滿月與帆船倒影，一隻鯨魚悠游於月光海面下", sessions: 1 },
   { course: "自己帶圖創作", themes: ["海洋生物", "星空／月亮"], date: "2026-10-05", src: "../assets/images/gallery/whale/07.jpg", alt: "油畫的鯨魚躍出星空般的深色背景，光束灑落，一旁有魚群剪影", sessions: 1 },
   { course: "自己帶圖創作", themes: ["海洋生物", "星空／月亮"], date: "2026-10-05", src: "../assets/images/gallery/whale/08.jpg", alt: "油畫的鯨魚悠游於星空中，下方是金黃色秋天樹林", sessions: 1 },
-  { course: "自己帶圖創作", themes: ["海洋生物", "星空／月亮"], date: "2026-10-05", src: "../assets/images/gallery/whale/09.jpg", alt: "圓形畫布的虎鯨悠游於滿月前，黑白對比構圖", sessions: 1 },
+  { course: "石英砂肌理畫", themes: ["海洋生物", "星空／月亮"], date: "2026-10-05", src: "../assets/images/gallery/whale/09.jpg", alt: "圓形畫布的虎鯨悠游於滿月前，黑白對比構圖", sessions: 1 },
   { course: "自己帶圖創作", themes: ["海洋生物"], date: "2026-10-05", src: "../assets/images/gallery/whale/10.jpg", alt: "寫實風格的座頭鯨悠游於深藍海水中，近水面特寫", sessions: 1 },
   { course: "自己帶圖創作", themes: ["海洋生物", "星空／月亮"], date: "2026-10-05", src: "../assets/images/gallery/whale/11.jpg", alt: "油畫的兩隻鯨魚悠游於星空中，下方是山景與針葉林剪影，一人站立仰望", sessions: 1 },
   { course: "自己帶圖創作", themes: ["海洋生物", "星空／月亮"], date: "2026-10-05", src: "../assets/images/gallery/whale/12.jpg", alt: "油畫的大小鯨魚悠游於星空中，近景特寫", sessions: 1 },
