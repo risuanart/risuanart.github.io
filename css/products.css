@@ -84,6 +84,17 @@
   --swatch-yingchun-ice-blue: #A7C0CD;
   --swatch-yingchun-dark-green: #2A332E;
   --swatch-yingchun-black: #222527;
+
+  /* 「納福（格子版）」分裝沙 7 色（5 色細砂＋2 色亮粉），2026-10-06
+     新增商品。色碼依「春聯沙畫平放照片-2.jpg」材料照肉眼取色，亮粉
+     兩色（鉑金／香檳銀）是閃粉質感，色碼只能抓大概色調。 */
+  --swatch-nafu-lake-blue: #3F7E8C;
+  --swatch-nafu-orange-red: #E2735A;
+  --swatch-nafu-peacock-green: #2E4A45;
+  --swatch-nafu-ink-blue: #3A4652;
+  --swatch-nafu-platinum: #E8E4DD;
+  --swatch-nafu-champagne-silver: #D4B873;
+  --swatch-nafu-wine-red: #6B2430;
 }
 
 .product-page {
