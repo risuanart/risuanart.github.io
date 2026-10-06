@@ -95,6 +95,18 @@
   --swatch-nafu-platinum: #E8E4DD;
   --swatch-nafu-champagne-silver: #D4B873;
   --swatch-nafu-wine-red: #6B2430;
+
+  /* 「迎春（基礎款／燈籠圖案）」分裝沙 3 色，2026-10-06 新增商品。
+     色碼依「春聯沙畫平放照片-3.jpg」材料照肉眼取色。 */
+  --swatch-yingchun-lantern-chestnut-red: #6B3A3E;
+  --swatch-yingchun-lantern-blue: #3A7FC4;
+  --swatch-yingchun-lantern-champagne-silver: #E8E3D8;
+
+  /* 「納福（基礎款／燈籠圖案）」分裝沙 3 色，2026-10-06 新增商品。
+     色碼依「春聯沙畫平放照片-4.jpg」材料照肉眼取色。 */
+  --swatch-nafu-lantern-red: #D1555A;
+  --swatch-nafu-lantern-peacock-green: #3A4F4D;
+  --swatch-nafu-lantern-platinum: #D9C68E;
 }
 
 .product-page {

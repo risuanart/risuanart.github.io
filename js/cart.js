@@ -54,6 +54,8 @@
     "sand-art-cai": { name: "春聯砂畫材料包・財（基礎款）", price: 450, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true },
     "sand-art-ying-chun": { name: "春聯砂畫材料包・迎春（格紋版）", price: 450, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true },
     "sand-art-na-fu": { name: "春聯砂畫材料包・納福（格子版）", price: 450, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true },
+    "sand-art-ying-chun-lantern": { name: "春聯砂畫材料包・迎春（基礎款）", price: 450, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true },
+    "sand-art-na-fu-lantern": { name: "春聯砂畫材料包・納福（基礎款）", price: 450, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true },
     "fluid-art-canvas-kit": { name: "空白畫布＋字貼＋架高杯", price: 0, category: "fluid-art", hasVariant: false, hidden: true },
     "sand-art-extra-color": { name: "額外顏色沙・固定套組", price: 0, category: "sand-art", hasVariant: false, hidden: true },
     "sand-art-sticker-only": { name: "純貼紙加購・單款", price: 0, category: "sand-art", hasVariant: false, hidden: true },
@@ -133,6 +135,8 @@
     "sand-art-cai": BASE_PREFIX + "assets/images/products/sand-art-cai/sand-art-cai-main.jpg",
     "sand-art-ying-chun": BASE_PREFIX + "assets/images/products/sand-art-ying-chun/sand-art-ying-chun-main.jpg",
     "sand-art-na-fu": BASE_PREFIX + "assets/images/products/sand-art-na-fu/sand-art-na-fu-main.jpg",
+    "sand-art-ying-chun-lantern": BASE_PREFIX + "assets/images/products/sand-art-ying-chun-lantern/sand-art-ying-chun-lantern-main.jpg",
+    "sand-art-na-fu-lantern": BASE_PREFIX + "assets/images/products/sand-art-na-fu-lantern/sand-art-na-fu-lantern-main.jpg",
   };
 
   // 砂畫目前還沒有任何實拍素材，SCHEME_IMAGES 查不到對應圖時，縮圖改畫一個
@@ -168,6 +172,8 @@
     "sand-art-cai": BASE_PREFIX + "products/sand-art-cai/",
     "sand-art-ying-chun": BASE_PREFIX + "products/sand-art-ying-chun/",
     "sand-art-na-fu": BASE_PREFIX + "products/sand-art-na-fu/",
+    "sand-art-ying-chun-lantern": BASE_PREFIX + "products/sand-art-ying-chun-lantern/",
+    "sand-art-na-fu-lantern": BASE_PREFIX + "products/sand-art-na-fu-lantern/",
   };
 
   const CART_PAGE_URL = BASE_PREFIX + "cart/";
