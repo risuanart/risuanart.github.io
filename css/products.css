@@ -72,18 +72,18 @@
   --swatch-cai-mustard: #A68A3D;
   --swatch-cai-black: #20262E;
 
-  /* 「迎春（格紋版）」分裝沙 7 色，2026-10-06 新增商品。色碼是依使用者
-     提供的色名肉眼估的，不是從材料平拍照裡取色——這批實拍照的 7 管沙
-     看起來是「春」同一組粉彩漸層色，跟這裡的「珊瑚紅」「墨綠」「白色」
-     對不起來，還沒確認是不是真的沿用「春」的色沙，所以先用名稱估色，
-     等確認後再換成實拍對色。 */
-  --swatch-yingchun-pink: #E8A0B4;
-  --swatch-yingchun-black: #23282D;
-  --swatch-yingchun-ice-blue: #B9D3DD;
-  --swatch-yingchun-light-skin: #E6C3A8;
-  --swatch-yingchun-coral-red: #E8735A;
-  --swatch-yingchun-dark-green: #2F4A33;
-  --swatch-yingchun-white: #F2EDE3;
+  /* 「迎春（格紋版）」分裝沙 7 色，2026-10-06 新增商品。原本誤用「沙子
+     基礎工具組-上架照片」資料夾裡搞混的材料照猜色，使用者後來指出正確
+     的色沙實拍照其實是同一個資料夾裡的「迎春格子沙子顏色拷貝.jpg」，
+     7 管由左至右剛好對上白色→淺膚→粉紅→珊瑚紅→冰藍→墨綠→黑色，順序
+     跟色名都對得起來，色碼依這張照片重新取色。 */
+  --swatch-yingchun-white: #EDE8E2;
+  --swatch-yingchun-light-skin: #E7C5BA;
+  --swatch-yingchun-pink: #DC7E86;
+  --swatch-yingchun-coral-red: #9A3C42;
+  --swatch-yingchun-ice-blue: #A7C0CD;
+  --swatch-yingchun-dark-green: #2A332E;
+  --swatch-yingchun-black: #222527;
 }
 
 .product-page {
