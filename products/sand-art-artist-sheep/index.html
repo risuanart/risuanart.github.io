@@ -213,7 +213,7 @@
             紅
           </button>
           <button type="button" class="color-picker__chip work-heading__preview-cell" data-scheme="artist-sheep-blue" aria-pressed="false">
-            <span class="placeholder-box">拍攝中</span>
+            <img src="../../assets/images/products/sand-art-artist/sand-art-artist-blue-main.jpg" alt="羊化春聯砂畫藍款參考圖" width="80" height="80" loading="lazy">
             藍
           </button>
         </div>
@@ -703,9 +703,11 @@
       // 不是隨便取名——加了 artist-sheep 前綴是因為 SCHEME_NAMES 是全站
       // 共用的一個扁平命名空間，以後「藝術家系列」如果推出其他畫作／
       // 生肖，各自的色款鍵值不會互撞。
-      // 藍色目前還沒有實際主圖照片，沿用縮圖二～四那套「沒有 data-src 就
-      // 顯示待補文字」的邏輯，等真的照片給了，把 src 補進
-      // VARIANT_DATA["artist-sheep-blue"] 就好，不用改邏輯。
+      // 2026-10-06：紅、藍兩款都已經換上使用者提供的設計稿正圖
+      // （馬蒂斯羊舞蹈_打樣01-01／01-02，菱形構圖，置中裁成方圖），
+      // VARIANT_DATA 兩邊都有 src 了；src 為 null 時會退回縮圖二～四
+      // 那套「沒有 data-src 就顯示待補文字」的邏輯，之後如果還有別款
+      // 沒照片可以沿用同一套。
       const VARIANT_DATA = {
         "artist-sheep-red": {
           gallery: {
@@ -716,7 +718,7 @@
         },
         "artist-sheep-blue": {
           gallery: {
-            src: null,
+            src: "../assets/images/products/sand-art-artist/sand-art-artist-blue-main.jpg",
             alt: "羊諦斯之舞・春聯砂畫（藍）完成品主圖",
             label: "藍色主圖",
           },
