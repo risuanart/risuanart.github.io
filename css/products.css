@@ -50,15 +50,16 @@
   --swatch-chun-ice-purple: #D1BEDB;
 
   /* 「福」款分裝沙 7 色，2026-10-05 依「福沙子顏色拷貝.jpg」實拍照
-     換成實際對色。注意：照片裡只拍到 6 管，「深膚」這管沒拍進去，
-     沿用原本肉眼估色，之後補拍再換成真實對色。 */
+     換成實際對色。2026-10-06：使用者重新拍攝的材料平拍照補齊了原本
+     沒拍到的第 7 管，同時確認那管顏色本來就要換成淺藍（取代「深膚」，
+     變數也跟著改名），色值依新照片重新取色。 */
   --swatch-fu-jujube-red: #4A2E35;
   --swatch-fu-white: #F2EDE3;
   --swatch-fu-golden-yellow: #E8C23E;
   --swatch-fu-cyan: #2E96A3;
   --swatch-fu-pink: #E0768A;
   --swatch-fu-ice-purple: #CBAFC9;
-  --swatch-fu-deep-tan: #C99B6E;
+  --swatch-fu-light-blue: #AEC9DC;
 
   /* 「財」款分裝沙 7 色，2026-10-05 依「財沙子顏色拷貝.jpg」實拍照
      換成實際對色。照片沒有色名標籤，對應順序是肉眼比對猜的（亞麻／
