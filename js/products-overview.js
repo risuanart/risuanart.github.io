@@ -58,7 +58,7 @@
         <a class="shop-card__info" href="${url}">
           <div class="shop-card__heading">
             ${eyebrow}
-            <p class="shop-card__name">${product.name}</p>
+            <p class="shop-card__name">${product.shortName || product.name}</p>
           </div>
           <p class="shop-card__price price-text">${priceText(product)}</p>
         </a>

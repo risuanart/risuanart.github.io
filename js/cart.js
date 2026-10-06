@@ -43,19 +43,24 @@
   // .addon-card__cta），但不是訪客會在材料包總覽購物頁單獨瀏覽、選購的品項，
   // 所以在 products-overview.js 組總覽卡片時要排除掉（見那支檔案 init()
   // 開頭的 hidden 過濾），只在各自主商品頁的「延伸創作」區塊才看得到。
+  // shortName：購物車頁分組清單、材料包總覽卡片都已經在旁邊放了分類字
+  // （「春聯流動畫」「流動畫材料包」之類），這兩處再用全名會重複念一次
+  // 「春聯流動畫材料包」，所以這兩處改用 shortName 只顯示款式本身。name
+  // 保留完整寫法給搜尋比對、加入購物車的 aria-label、訂單明細面板這些沒有
+  // 分類字陪在旁邊的地方用，不能直接拿掉。
   const PRODUCTS = {
-    "fluid-art-light": { name: "春聯流動畫材料包・輕巧版", price: 800, category: "fluid-art", tagline: "單幅 15cm，最快抵達的新年儀式" },
-    "fluid-art-gift": { name: "春聯流動畫材料包・禮盒版", price: 1100, category: "fluid-art", tagline: "雙幅成品，完整的流動畫體驗" },
-    "sand-art-light": { name: "春聯砂畫材料包・輕巧版", price: 0, category: "sand-art", tagline: "8 款圖案任選，撕貼倒沙鋪出你的春聯" },
-    "sand-art-collection": { name: "春聯砂畫材料包・自由創作組", price: 0, category: "sand-art", hasVariant: false, tagline: "5 款精選圖案＋26色顏料，自由創作一整套" },
-    "sand-art-artist-sheep": { name: "春聯砂畫材料包・羊群報福（進階款）", price: 0, category: "sand-art", tagline: "致敬馬諦斯《舞蹈》，羊群報福紅藍兩色任選" },
-    "sand-art-chun": { name: "春聯砂畫材料包・春（基礎款）", price: 450, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true },
-    "sand-art-fu": { name: "春聯砂畫材料包・福（基礎款）", price: 450, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true },
-    "sand-art-cai": { name: "春聯砂畫材料包・財（基礎款）", price: 450, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true },
-    "sand-art-ying-chun": { name: "春聯砂畫材料包・迎春（格紋版）", price: 450, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true },
-    "sand-art-na-fu": { name: "春聯砂畫材料包・納福（格子版）", price: 450, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true },
-    "sand-art-ying-chun-lantern": { name: "春聯砂畫材料包・迎春（燈籠版）", price: 450, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true },
-    "sand-art-na-fu-lantern": { name: "春聯砂畫材料包・納福（燈籠版）", price: 450, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true },
+    "fluid-art-light": { name: "春聯流動畫材料包・輕巧版", shortName: "輕巧版", price: 800, category: "fluid-art", tagline: "單幅 15cm，最快抵達的新年儀式" },
+    "fluid-art-gift": { name: "春聯流動畫材料包・禮盒版", shortName: "禮盒版", price: 1100, category: "fluid-art", tagline: "雙幅成品，完整的流動畫體驗" },
+    "sand-art-light": { name: "春聯砂畫材料包・輕巧版", shortName: "輕巧版", price: 0, category: "sand-art", tagline: "8 款圖案任選，撕貼倒沙鋪出你的春聯" },
+    "sand-art-collection": { name: "春聯砂畫材料包・自由創作組", shortName: "自由創作組", price: 0, category: "sand-art", hasVariant: false, tagline: "5 款精選圖案＋26色顏料，自由創作一整套" },
+    "sand-art-artist-sheep": { name: "春聯砂畫材料包・羊群報福（進階款）", shortName: "羊群報福（進階款）", price: 0, category: "sand-art", tagline: "致敬馬諦斯《舞蹈》，羊群報福紅藍兩色任選" },
+    "sand-art-chun": { name: "春聯砂畫材料包・春（基礎款）", shortName: "春（基礎款）", price: 450, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true },
+    "sand-art-fu": { name: "春聯砂畫材料包・福（基礎款）", shortName: "福（基礎款）", price: 450, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true },
+    "sand-art-cai": { name: "春聯砂畫材料包・財（基礎款）", shortName: "財（基礎款）", price: 450, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true },
+    "sand-art-ying-chun": { name: "春聯砂畫材料包・迎春（格紋版）", shortName: "迎春（格紋版）", price: 450, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true },
+    "sand-art-na-fu": { name: "春聯砂畫材料包・納福（格子版）", shortName: "納福（格子版）", price: 450, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true },
+    "sand-art-ying-chun-lantern": { name: "春聯砂畫材料包・迎春（燈籠版）", shortName: "迎春（燈籠版）", price: 450, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true },
+    "sand-art-na-fu-lantern": { name: "春聯砂畫材料包・納福（燈籠版）", shortName: "納福（燈籠版）", price: 450, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true },
     "fluid-art-canvas-kit": { name: "空白畫布＋字貼＋架高杯", price: 0, category: "fluid-art", hasVariant: false, hidden: true },
     "sand-art-extra-color": { name: "額外顏色沙・固定套組", price: 0, category: "sand-art", hasVariant: false, hidden: true },
     "sand-art-sticker-only": { name: "純貼紙加購・單款", price: 0, category: "sand-art", hasVariant: false, hidden: true },
@@ -696,7 +701,7 @@
       </a>
       <div class="cart-item__body">
         <div class="cart-item__info">
-          <a class="cart-item__name" href="${productUrl}">${product.name}</a>
+          <a class="cart-item__name" href="${productUrl}">${product.shortName || product.name}</a>
           ${schemeSelectHTML}
         </div>
         <div class="cart-item__meta">
