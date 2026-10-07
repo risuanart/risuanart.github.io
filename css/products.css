@@ -203,6 +203,18 @@
   color: var(--color-text-secondary);
 }
 
+/* 系列名眉標：放在 H1 正上方的小字，例如「春聯砂畫材料包」——這是
+   分類詞，不是商品真正的名字（迎春、納福……才是），之前整串塞進 H1
+   用同一個大字級，分類詞反而比商品名更佔視覺重量。拆出來用跟
+   .work-heading__sub 同一套「小字、次要色」語彙，H1 只留下商品自己
+   的名字。 */
+.work-heading__series {
+  margin: 0 0 var(--space-2);
+  font-size: var(--font-size-xs);
+  letter-spacing: 0.05em;
+  color: var(--color-text-secondary);
+}
+
 /* 版本標籤：原本只是副標裡一段不起眼的小寫字，滑過去很容易沒注意到是
    輕巧版還是禮盒版。改成有邊框的標籤，邊框色呼應「加入購物車」按鈕的底色
    （--color-button-primary），視覺上讓人先注意到「這是哪個版本」。 */
