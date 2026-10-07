@@ -621,6 +621,14 @@
   height: 100%;
 }
 
+.chapter__step-photo img,
+.chapter__step-photo video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 /* 敘事類多段落文案（怎麼玩／字貼工藝／黏土說明），跟 .chapter__intro 同一套字級節奏，
    差別是允許多個 <p> 依序排列，段落間距用 owl selector 統一處理。 */
 .chapter__prose {
