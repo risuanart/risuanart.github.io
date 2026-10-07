@@ -572,12 +572,17 @@
 .chapter__steps {
   display: flex;
   flex-direction: column;
-  gap: var(--space-8);
+  /* 2026-10 修正：原本寫 var(--space-8)，但 tokens.css 從來沒有定義過
+     這個變數，等於 gap:0，導致上一步的照片跟下一步的編號幾乎貼在一起，
+     反而比編號跟自己那張照片的間距（--space-4）更近，讀起來像是在講
+     上面那支影片。改用確實存在的 --space-10，讓「換到新步驟」的間距
+     明顯大於「標題接自己照片」的間距。 */
+  gap: var(--space-10);
   margin-top: var(--space-6);
 }
 
 .chapter__step + .chapter__step {
-  padding-top: var(--space-8);
+  padding-top: var(--space-10);
   border-top: 1px solid color-mix(in srgb, var(--color-text-secondary) 25%, transparent);
 }
 
@@ -602,7 +607,9 @@
 
 .chapter__step-caption {
   margin: var(--space-2) 0 0;
-  max-width: 34ch;
+  /* 原本的 max-width: 34ch 比現有說明句都窄，中文單句常態性被迫斷成
+     兩行；這幾句都是一句話的操作說明，不是長段落，不需要另外限制
+     每行字數，交給外層 .chapter 本身的寬度上限就好。 */
   font-size: var(--font-size-sm);
   line-height: 1.7;
   color: var(--color-text-primary);
