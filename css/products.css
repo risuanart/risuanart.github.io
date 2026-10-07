@@ -62,13 +62,15 @@
   --swatch-fu-light-blue: #AEC9DC;
 
   /* 「財」款分裝沙 7 色，2026-10-05 依「財沙子顏色拷貝.jpg」實拍照
-     換成實際對色。照片沒有色名標籤，對應順序是肉眼比對猜的（亞麻／
-     深膚兩個相近的膚色調最容易猜錯），之後確認有誤再個別調整。 */
+     換成實際對色。照片沒有色名標籤，對應順序是肉眼比對猜的（淺膚／
+     深膚兩個相近的膚色調最容易猜錯），之後確認有誤再個別調整。
+     2026-10：使用者確認「亞麻」改名「淺膚」、「明黃」改名「檸黃」，
+     CSS 變數跟著從 linen／bright-yellow 改成 light-skin／lemon-yellow。 */
   --swatch-cai-coral-red: #C23B3E;
   --swatch-cai-lake-blue: #2E7A8C;
-  --swatch-cai-bright-yellow: #E8C23E;
+  --swatch-cai-lemon-yellow: #E8C23E;
   --swatch-cai-deep-tan: #D99784;
-  --swatch-cai-linen: #C9A68E;
+  --swatch-cai-light-skin: #C9A68E;
   --swatch-cai-mustard: #A68A3D;
   --swatch-cai-black: #20262E;
 
