@@ -309,6 +309,15 @@ window.GALLERY_ITEMS = [
   { course: "自己帶圖創作", themes: ["海洋生物"], date: "2026-10-05", src: "../assets/images/gallery/whale/10.jpg", alt: "寫實風格的座頭鯨悠游於深藍海水中，近水面特寫", sessions: 1 },
   { course: "自己帶圖創作", themes: ["海洋生物", "星空／月亮"], date: "2026-10-05", src: "../assets/images/gallery/whale/11.jpg", alt: "油畫的兩隻鯨魚悠游於星空中，下方是山景與針葉林剪影，一人站立仰望", sessions: 1 },
   { course: "自己帶圖創作", themes: ["海洋生物", "星空／月亮"], date: "2026-10-05", src: "../assets/images/gallery/whale/12.jpg", alt: "油畫的大小鯨魚悠游於星空中，近景特寫", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["海邊"], date: "2026-10-07", src: "../assets/images/gallery/sea-oil/01.jpg", alt: "圓形畫布的海鷗展翅飛掠海面，陽光灑落波光粼粼", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["海邊", "植物花卉"], date: "2026-10-07", src: "../assets/images/gallery/sea-oil/02.jpg", alt: "油畫的衝浪者剪影站在夕陽海灘上，前景點綴白色野花", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["海邊"], date: "2026-10-07", src: "../assets/images/gallery/sea-oil/03.jpg", alt: "油畫的白衣女子漫步夕陽海灘，一群飛鳥掠過天空", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["海邊"], date: "2026-10-07", src: "../assets/images/gallery/sea-oil/04.jpg", alt: "油畫的晴朗海景，海鷗飛掠湛藍海面與白雲", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["海邊", "狗狗"], date: "2026-10-07", src: "../assets/images/gallery/sea-oil/05.jpg", alt: "黑白色調油畫，一隻狗在海灘浪花中奔跑，逆光剪影", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["海邊"], date: "2026-10-07", src: "../assets/images/gallery/sea-oil/06.jpg", alt: "圓形畫布的海浪特寫，深藍色浪頭捲起白色浪花", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["海邊", "風景"], date: "2026-10-07", src: "../assets/images/gallery/sea-oil/07.jpg", alt: "油畫的夕陽海景，金黃天空下山巒剪影倒映在海面上", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["海邊", "風景"], date: "2026-10-07", src: "../assets/images/gallery/sea-oil/08.jpg", alt: "黑白色調油畫的港邊帆船，山巒剪影倒映在平靜水面", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["海邊", "風景"], date: "2026-10-07", src: "../assets/images/gallery/sea-oil/09.jpg", alt: "油畫的海濱泳池景色，碧藍海浪拍打石砌堤岸", sessions: 1 },
 ];
 
 // 課程篩選鈕的選項清單，跟首頁「課程」選單、faq.html 裡提到的課程名稱
