@@ -629,6 +629,16 @@
   object-fit: cover;
 }
 
+/* 步驟影片／照片旁的小提醒（例如拍攝當時試色跟出貨顏色不同），跟
+   .work-heading__sub 同一套「小字、次要色」語彙，不用另外做警示樣式——
+   這不是安全警告，只是澄清畫面跟實際商品的差異。 */
+.chapter__step-note {
+  margin-top: var(--space-4);
+  font-size: var(--font-size-xs);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+
 /* 敘事類多段落文案（怎麼玩／字貼工藝／黏土說明），跟 .chapter__intro 同一套字級節奏，
    差別是允許多個 <p> 依序排列，段落間距用 owl selector 統一處理。 */
 .chapter__prose {
