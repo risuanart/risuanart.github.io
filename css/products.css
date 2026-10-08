@@ -717,9 +717,10 @@
   margin-top: var(--space-6);
 }
 
+/* 2026-10：拿掉步驟之間的分隔線，只留間距——使用者反饋線本身顯得多餘，
+   間距已經足夠區隔「換到新步驟」。 */
 .chapter__step + .chapter__step {
   padding-top: var(--space-10);
-  border-top: 1px solid color-mix(in srgb, var(--color-text-secondary) 25%, transparent);
 }
 
 .chapter__step-head {
