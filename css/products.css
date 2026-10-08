@@ -1286,6 +1286,139 @@ button.text-link {
   margin: 0;
 }
 
+/* ---------- 相關商品：跨商品導流橫向捲動列 ----------
+   2026-10 新增，版面比例參考使用者提供的外部商品頁實測規格（圖片 1:1
+   正方形、卡片文字置中、滑鼠移過圖片放大 110%、箭頭平常輕微隱藏靠近
+   卡片列才顯示），但顏色／字體走我們自己既有的 token 系統，不照抄對方
+   的視覺風格，只借版面比例邏輯。
+
+   跟上面的 .addon-carousel（本商品的加購配件，例如額外顏色沙／純貼紙）
+   用途不同——那是「你可能還需要」，這裡是「你可能也會喜歡別款材料包」，
+   分開放、標題也分開寫，避免客人分不清楚點進去是加購同一款還是換款。
+   卡片內容由 js/related-products.js 動態產生（讀 cart.js 的 PRODUCTS，
+   排除目前頁面自己跟隱藏的加購項目），不在 HTML 裡手寫。 */
+.related-products {
+  position: relative;
+  margin-top: var(--space-4);
+}
+
+.related-products__track {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding: var(--space-1) 0 var(--space-2);
+  scrollbar-width: none;
+}
+
+.related-products__track::-webkit-scrollbar {
+  display: none;
+}
+
+/* 一排顯示張數跟著寬度變：手機 2 張、平板 3 張、桌面 4 張——比例换算自
+   參考頁面實測的斷點與欄數，間距（20px）乘上 (n-1) 要從卡寬裡扣掉，
+   卡片才不會因為 gap 擠出容器外。 */
+.related-card {
+  flex: 0 0 calc(50% - 10px);
+  scroll-snap-align: start;
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+@media (min-width: 550px) {
+  .related-card {
+    flex-basis: calc(33.333% - 13.4px);
+  }
+}
+
+@media (min-width: 850px) {
+  .related-card {
+    flex-basis: calc(25% - 15px);
+  }
+}
+
+.related-card__media {
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: var(--color-surface-neutral);
+}
+
+.related-card__thumb {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--duration-slow) var(--ease-standard);
+}
+
+.related-card:hover .related-card__thumb,
+.related-card:focus-visible .related-card__thumb {
+  transform: scale(1.1);
+}
+
+.related-card__body {
+  margin-top: var(--space-2);
+  text-align: center;
+}
+
+.related-card__eyebrow {
+  margin: 0;
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  color: var(--color-text-secondary);
+}
+
+.related-card__name {
+  margin: 2px 0 0;
+  font-size: var(--font-size-xs);
+  line-height: 1.4;
+  color: var(--color-text-primary);
+}
+
+.related-card__price {
+  margin: 2px 0 0;
+}
+
+/* 左右箭頭：平常透明貼在卡片列邊緣，滑鼠移進整個 .related-products
+   範圍才淡入顯示（對應參考頁面的「reveal」手法）。手機沒有真正的 hover
+   狀態，直接靠手指滑動捲動，箭頭用 media query 關掉，不是忘記做。 */
+.related-products__nav {
+  position: absolute;
+  top: 0;
+  bottom: var(--space-6);
+  width: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: color-mix(in srgb, var(--color-surface-light) 85%, transparent);
+  color: var(--color-text-primary);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity var(--duration-fast) var(--ease-standard);
+}
+
+.related-products:hover .related-products__nav,
+.related-products__nav:focus-visible {
+  opacity: 1;
+}
+
+.related-products__nav--prev {
+  left: 0;
+}
+
+.related-products__nav--next {
+  right: 0;
+}
+
+@media (max-width: 549px) {
+  .related-products__nav {
+    display: none;
+  }
+}
+
 /* ---------- 材料包總覽購物頁（products/shop.html）：搜尋列＋橫向分類圖示列 ----------
    從 products/index.html 搬過來這裡——這個總覽格狀購物頁比原本的敘事式
    母頁更適合放搜尋／分類快速入口，兩邊不用重複維護同一組 UI。搜尋清單
