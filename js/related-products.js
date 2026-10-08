@@ -42,7 +42,10 @@
     const thumb = colorwayFrames
       ? carouselFramesHTML(product, colorwayFrames, "related-card__thumb")
       : cart.thumbHTML({ productKey: key, scheme: defaultScheme || "" }, "related-card__thumb");
-    const carouselAttr = colorwayFrames ? " data-hero-carousel" : "";
+    // 跟首圖／商品總覽格狀卡不同，這裡用 data-carousel-loop 讓它播完一輪
+    // 不停、重頭再播——「相關商品」在頁面偏下方，訪客通常滑到這裡時，
+    // 「播一輪就停」早就播完停在主圖了，等於看不到配色動態展示的效果。
+    const carouselAttr = colorwayFrames ? " data-hero-carousel data-carousel-loop" : "";
     const eyebrow = CATEGORY_LABELS[product.category] || "";
     return `
       <a class="related-card" href="${url}">

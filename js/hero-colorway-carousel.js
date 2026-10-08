@@ -1,8 +1,14 @@
-/* hero-colorway-carousel.js —— 配色動態展示（商品頁首圖／商品總覽格狀卡
-   縮圖共用）。套在 [data-hero-carousel] 容器上：進頁面自動播一輪（主圖→
-   配色二→配色三→淡回主圖後停止），不循環、不可點擊切換——這些商品只會
-   出貨圖一那個固定配色，其餘兩張純粹是搭配參考，故意不做縮圖點擊選單，
-   避免讓客人誤會成出貨也能挑配色。
+/* hero-colorway-carousel.js —— 配色動態展示（商品頁首圖／商品總覽格狀卡／
+   相關商品卡片縮圖共用）。套在 [data-hero-carousel] 容器上：進頁面自動播
+   （主圖→配色二→配色三），不可點擊切換——這些商品只會出貨圖一那個固定
+   配色，其餘兩張純粹是搭配參考，故意不做縮圖點擊選單，避免讓客人誤會成
+   出貨也能挑配色。
+
+   預設播完一輪就停在主圖不循環（首圖／商品總覽格狀卡）；如果容器上有
+   data-carousel-loop 屬性，播完一輪會接著重頭再播，不停（相關商品卡片
+   在用——使用者反饋那個區塊在頁面偏下方，訪客通常滑到那裡時「播一輪
+   就停」早就播完了，看到的時候已經定格在主圖，等於看不到配色動態展示
+   的效果，所以改成一直循環）。
 
    商品頁的版本有暫停鍵／進度點點（.hero-carousel__toggle／
    .hero-carousel__dots），給想定格看、或 prefers-reduced-motion 的人用；
@@ -29,6 +35,7 @@
       root.querySelectorAll(".hero-carousel__dots span")
     );
     const toggle = root.querySelector(".hero-carousel__toggle");
+    const loop = root.hasAttribute("data-carousel-loop");
 
     let index = 0;
     let timer = null;
@@ -58,7 +65,7 @@
         if (index >= frames.length) {
           index = 0;
           show(0);
-          pause();
+          if (!loop) pause();
           return;
         }
         show(index);
