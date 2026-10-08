@@ -318,6 +318,14 @@ window.GALLERY_ITEMS = [
   { course: "自己帶圖創作", themes: ["海邊", "風景"], date: "2026-10-07", src: "../assets/images/gallery/sea-oil/07.jpg", alt: "油畫的夕陽海景，金黃天空下山巒剪影倒映在海面上", sessions: 1 },
   { course: "自己帶圖創作", themes: ["海邊", "風景"], date: "2026-10-07", src: "../assets/images/gallery/sea-oil/08.jpg", alt: "黑白色調油畫的港邊帆船，山巒剪影倒映在平靜水面", sessions: 1 },
   { course: "自己帶圖創作", themes: ["海邊", "風景"], date: "2026-10-07", src: "../assets/images/gallery/sea-oil/09.jpg", alt: "油畫的海濱泳池景色，碧藍海浪拍打石砌堤岸", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["風景", "植物花卉"], date: "2026-10-08", src: "../assets/images/gallery/landscape-oil/01.jpg", alt: "油畫的開啟窗景，窗外是飄落櫻花瓣的枯枝樹林", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["風景"], date: "2026-10-08", src: "../assets/images/gallery/landscape-oil/02.jpg", alt: "油畫的林蔭道路景色，一輛露營車行駛其中", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["風景", "植物花卉"], date: "2026-10-08", src: "../assets/images/gallery/landscape-oil/03.jpg", alt: "油畫的夢幻雲彩天空，前景點綴陽台盆栽植物", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["風景"], date: "2026-10-08", src: "../assets/images/gallery/landscape-oil/04.jpg", alt: "黑白色調油畫，雪地裡的枯樹林與一輪明月", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["風景", "植物花卉"], date: "2026-10-08", src: "../assets/images/gallery/landscape-oil/05.jpg", alt: "油畫的孤樹花海景色，藍天下一人漫步經過，一彎新月高掛", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["風景", "植物花卉"], date: "2026-10-08", src: "../assets/images/gallery/landscape-oil/06.jpg", alt: "油畫的棕櫚樹庭院景色，粉色大門搭配仙人掌造景", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["風景"], date: "2026-10-08", src: "../assets/images/gallery/landscape-oil/07.jpg", alt: "油畫的雪地月夜景色，樹林剪影間一棟小屋透出燈光", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["植物花卉"], date: "2026-10-08", src: "../assets/images/gallery/landscape-oil/08.jpg", alt: "油畫的窗邊靜物，陶瓶插著枯枝與落葉，雪景窗框", sessions: 1 },
 ];
 
 // 課程篩選鈕的選項清單，跟首頁「課程」選單、faq.html 裡提到的課程名稱
