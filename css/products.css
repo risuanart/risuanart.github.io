@@ -471,6 +471,16 @@
    出貨也能挑配色。右下角保留一顆暫停鍵給想定格看某張配色的人，也給
    prefers-reduced-motion 的人手動播放；左下角點點只標示播放進度，
    本身不可互動。行為邏輯見 js/hero-colorway-carousel.js。 */
+/* 配色示範圖二、圖三（combo-2／combo-3.png）四個角是透明的，不是白色——
+   菱形圖案本身只佔正方形畫布中間一塊。出貨主圖是不透明的近白色實拍照，
+   角落跟純白頁面背景幾乎無縫，但容器本身沒設背景色時，透明角落會露出
+   更上層的底色，跟主圖的白不一定一致（曾經就露出不該有的灰／米白）。
+   這裡明講 background，不靠繼承，三個會跑這組輪播的地方（這裡／
+   .shop-card__media／.related-card__media）都要同樣明講，不能只改一處。 */
+.work__intro-photo--carousel {
+  background: var(--color-surface-light);
+}
+
 .work__intro-photo--carousel img {
   position: absolute;
   inset: 0;
@@ -1363,7 +1373,16 @@ button.text-link {
    data-hero-carousel）：跟 .shop-card__media[data-hero-carousel] 同一套
    堆疊邏輯，只是換成 .related-card 的命名空間。疊圖本身的 opacity
    轉場（播放進度）跟外面的 hover 放大轉場是兩條獨立的 transform／
-   opacity，互不干擾。 */
+   opacity，互不干擾。
+
+   配色示範圖二、圖三角落是透明的（見 .work__intro-photo--carousel 的
+   說明），.related-card__media 原本的底色是中性灰 --color-surface-
+   neutral，透出來跟出貨主圖的純白角落對不起來，這裡限定在
+   [data-hero-carousel] 卡片裡覆寫成純白。 */
+.related-card__media[data-hero-carousel] {
+  background: var(--color-surface-light);
+}
+
 .related-card__media[data-hero-carousel] .related-card__thumb[data-carousel-frame] {
   position: absolute;
   inset: 0;
@@ -1638,7 +1657,17 @@ button.text-link {
    太小，不塞暫停鍵／進度點點——輪播本來就只播一輪就停、不循環，沒有
    控制元件也不影響使用。用屬性選擇器限定在 [data-hero-carousel] 卡片裡，
    不影響其他商品原本的 .shop-card__thumb（單張靜態圖）或
-   .shop-card__thumb--hover（流動畫的滑鼠移入換圖，兩套機制互斥）。 */
+   .shop-card__thumb--hover（流動畫的滑鼠移入換圖，兩套機制互斥）。
+
+   配色示範圖二、圖三角落是透明的（見 .work__intro-photo--carousel 上面
+   同一條說明），.shop-card__media 原本的底色是「次要文字色 8% 透明度」
+   （暖橄欖灰褐調），透出來會變成一層肉眼看得出來的米白色，跟出貨主圖
+   的純白角落對不起來。這裡限定在 [data-hero-carousel] 卡片裡覆寫成
+   純白，不影響其他還沒有照片、要顯示待補佔位色的商品卡。 */
+.shop-card__media[data-hero-carousel] {
+  background: var(--color-surface-light);
+}
+
 .shop-card__media[data-hero-carousel] .shop-card__thumb[data-carousel-frame] {
   position: absolute;
   inset: 0;
