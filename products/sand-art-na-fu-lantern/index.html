@@ -183,12 +183,14 @@
     </header>
 
     <!-- 完整示範影片：客人拍的 9:16 直式完整製作過程，跟「怎麼玩」裡
-         4:3 的三支步驟特寫片段不同用途，獨立成一個小節。用
-         <video controls> 讓客人自己決定要不要看，不自動播放。 -->
+         4:3 的三支步驟特寫片段不同用途，獨立成一個小節。原本用
+         <video controls> 讓客人自己按播放，使用者反饋想要自動循環、
+         不留播放鍵，改成 autoplay+muted+loop（本來就沒有聲軌，muted
+         只是確保自動播放在各瀏覽器都生效）。 -->
     <section class="chapter">
       <h2 class="chapter__title fade-in">完整示範影片</h2>
       <div class="demo-video fade-in delay-1">
-        <video src="../../assets/videos/products/sand-art-na-fu-lantern/full-demo.mp4" poster="../../assets/images/products/sand-art-na-fu-lantern/sand-art-na-fu-lantern-demo-poster.jpg" controls playsinline aria-label="燈上納福 Lit in Na Fu 完整製作過程示範影片"></video>
+        <video src="../../assets/videos/products/sand-art-na-fu-lantern/full-demo.mp4" poster="../../assets/images/products/sand-art-na-fu-lantern/sand-art-na-fu-lantern-demo-poster.jpg" autoplay muted loop playsinline aria-label="燈上納福 Lit in Na Fu 完整製作過程示範影片，自動循環播放"></video>
       </div>
     </section>
 
