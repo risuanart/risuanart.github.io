@@ -38,6 +38,28 @@
   --swatch-artist-sheep-red: #7C1F30;
   --swatch-artist-sheep-blue: #4A8FA3;
 
+  /* 羊Diss舞蹈紅款／藍款分開獨立頁後（原本紅藍共用一頁、用互動色票比對），
+     「顏色細節」改成跟其他單一配色沙畫同一套 .color-swatches 靜態色點
+     清單，不再用可點擊切換的比對色票。色碼沿用原本頁面「顏色比較」
+     區塊已經實測對色過的色碼（見下面個別色碼的沿用說明），不是重新估的。 */
+  --swatch-artist-sheep-red-wine-red: #6B1F2E;
+  --swatch-artist-sheep-red-gold-brown: #8C6B2E;
+  --swatch-artist-sheep-red-white: #E8E6E0;
+  --swatch-artist-sheep-red-gold: #C9A227;
+  --swatch-artist-sheep-red-red: #D1495A;
+  --swatch-artist-sheep-red-pink: #E0708C;
+  --swatch-artist-sheep-red-malt: #E0A878;
+  --swatch-artist-sheep-red-tide-blue: #2F7DB0;
+
+  --swatch-artist-sheep-blue-lake-blue: #1E3F9E;
+  --swatch-artist-sheep-blue-green: #1F5E3A;
+  --swatch-artist-sheep-blue-deep-orange: #C0392B;
+  --swatch-artist-sheep-blue-light-orange: #D97A3F;
+  --swatch-artist-sheep-blue-silver: #C8C8C8;
+  --swatch-artist-sheep-blue-champagne-silver: #EDE8D8;
+  --swatch-artist-sheep-blue-red: #C23B4A;
+  --swatch-artist-sheep-blue-coral-red: #E08080;
+
   /* 「春」款分裝沙 7 色，2026-10-05 依新上傳的「春沙子顏色拷貝.jpg」
      實拍照換成實際對色（原本是肉眼依色名猜的估色，現在直接從照片裡
      每一管的顏色取色）。 */

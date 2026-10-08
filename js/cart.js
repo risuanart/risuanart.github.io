@@ -53,7 +53,8 @@
     "fluid-art-gift": { name: "春聯流動畫材料包・禮盒版", shortName: "禮盒版", price: 1100, category: "fluid-art", tagline: "雙幅成品，完整的流動畫體驗" },
     "sand-art-light": { name: "春聯砂畫材料包・輕巧版", shortName: "輕巧版", price: 0, category: "sand-art", tagline: "8 款圖案任選，撕貼倒沙鋪出你的春聯" },
     "sand-art-collection": { name: "春聯砂畫材料包・自由創作組", shortName: "自由創作組", price: 0, category: "sand-art", hasVariant: false, tagline: "5 款精選圖案＋26色顏料，自由創作一整套" },
-    "sand-art-artist-sheep": { name: "藝術家系列・羊Diss舞蹈 Sheep La Danse", shortName: "羊Diss舞蹈 Sheep La Danse", price: 820, category: "sand-art", tagline: "致敬馬諦斯《舞蹈》，紅藍兩色任選" },
+    "sand-art-artist-sheep-red": { name: "藝術家系列・羊Diss舞蹈 Sheep La Danse（紅）", shortName: "羊Diss舞蹈 Sheep La Danse（紅）", price: 820, category: "sand-art", hasVariant: false, tagline: "致敬馬諦斯《舞蹈》，喜氣酒紅款" },
+    "sand-art-artist-sheep-blue": { name: "藝術家系列・羊Diss舞蹈 Sheep La Danse（藍）", shortName: "羊Diss舞蹈 Sheep La Danse（藍）", price: 820, category: "sand-art", hasVariant: false, tagline: "致敬馬諦斯《舞蹈》，原畫配色藍款" },
     "sand-art-chun": { name: "春聯砂畫材料包・春結 Chun Tied", shortName: "春結 Chun Tied", price: 560, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true },
     "sand-art-fu": { name: "春聯砂畫材料包・福星 Starry Fu", shortName: "福星 Starry Fu", price: 560, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true },
     "sand-art-cai": { name: "春聯砂畫材料包・花財 Cai in Bloom", shortName: "花財 Cai in Bloom", price: 560, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true },
@@ -77,12 +78,14 @@
     "fluid-art-light": ["classic-red", "welcome-pink"],
     "fluid-art-gift": ["classic-red", "welcome-pink"],
     "sand-art-light": ["nafu-wave", "yingchun-wave", "yingchun-grid", "nafu-grid", "chun", "fu", "cai", "fu-sheep"],
-    "sand-art-artist-sheep": ["artist-sheep-red", "artist-sheep-blue"],
   };
 
-  // artist-sheep-red／artist-sheep-blue 特地加了 artist-sheep 前綴，不是
-  // 直接叫 red／blue——SCHEME_NAMES 是全站共用的一個扁平命名空間，「藝術家
-  // 系列」以後如果推出其他畫作／生肖再製，各自的色款鍵值才不會互撞。
+  // 2026-10：羊Diss舞蹈紅／藍兩款原本是同一個商品鍵下的兩個 scheme（購買
+  // 時選款式），使用者確認改成兩個完全獨立的商品頁／商品鍵（sand-art-
+  // artist-sheep-red／-blue，hasVariant:false），不再是「同一款選顏色」。
+  // artist-sheep-red／artist-sheep-blue 這兩個 scheme 鍵值已經不再使用
+  // （原本只有這個商品在用，現在改用商品鍵本身區分顏色），SCHEME_NAMES／
+  // SCHEME_IMAGES 裡原本的對應項目一併移除，不留死鍵值。
   const SCHEME_NAMES = {
     "classic-red": "經典紅",
     "welcome-pink": "迎春粉",
@@ -94,8 +97,6 @@
     "fu": "福",
     "cai": "財",
     "fu-sheep": "福（羊Diss舞蹈 Sheep La Danse）",
-    "artist-sheep-red": "紅",
-    "artist-sheep-blue": "藍",
   };
 
   // 單件商品的單價／整行小計，購物車頁與迷你購物車預覽共用同一套計算，
@@ -115,8 +116,6 @@
   const SCHEME_IMAGES = {
     "classic-red": BASE_PREFIX + "assets/images/products/fluid-art/RS_05.7_產品圖片_800x800拷貝.jpg",
     "welcome-pink": BASE_PREFIX + "assets/images/products/fluid-art/RS_05.8_產品圖片_800x800拷貝.jpg",
-    "artist-sheep-red": BASE_PREFIX + "assets/images/products/sand-art-artist/sand-art-artist-red-main.jpg",
-    "artist-sheep-blue": BASE_PREFIX + "assets/images/products/sand-art-artist/sand-art-artist-blue-main.jpg",
   };
 
   // 總覽格狀購物頁（products/shop.html）電腦版 hover 換圖用的「第二張圖」：
@@ -143,6 +142,8 @@
     "sand-art-na-fu": BASE_PREFIX + "assets/images/products/sand-art-na-fu/sand-art-na-fu-main.jpg",
     "sand-art-ying-chun-lantern": BASE_PREFIX + "assets/images/products/sand-art-ying-chun-lantern/sand-art-ying-chun-lantern-main.jpg",
     "sand-art-na-fu-lantern": BASE_PREFIX + "assets/images/products/sand-art-na-fu-lantern/sand-art-na-fu-lantern-main.jpg",
+    "sand-art-artist-sheep-red": BASE_PREFIX + "assets/images/products/sand-art-artist/sand-art-artist-red-main.jpg",
+    "sand-art-artist-sheep-blue": BASE_PREFIX + "assets/images/products/sand-art-artist/sand-art-artist-blue-main.jpg",
   };
 
   // 這 7 款單一配色沙畫的商品頁首圖都做了「配色動態展示」輪播（出貨配色→
@@ -215,7 +216,8 @@
     "fluid-art-gift": BASE_PREFIX + "products/fluid-art-gift/",
     "sand-art-light": BASE_PREFIX + "products/sand-art-light/",
     "sand-art-collection": BASE_PREFIX + "products/sand-art-collection/",
-    "sand-art-artist-sheep": BASE_PREFIX + "products/sand-art-artist-sheep/",
+    "sand-art-artist-sheep-red": BASE_PREFIX + "products/sand-art-artist-sheep-red/",
+    "sand-art-artist-sheep-blue": BASE_PREFIX + "products/sand-art-artist-sheep-blue/",
     "sand-art-chun": BASE_PREFIX + "products/sand-art-chun/",
     "sand-art-fu": BASE_PREFIX + "products/sand-art-fu/",
     "sand-art-cai": BASE_PREFIX + "products/sand-art-cai/",

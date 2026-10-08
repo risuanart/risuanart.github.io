@@ -19,7 +19,8 @@
 
    目前引用頁面：
    - sand-art（data-product-terms="sand-art"）：sand-art-chun.html、
-     sand-art-artist-sheep.html
+     sand-art-artist-sheep-red.html、sand-art-artist-sheep-blue.html
+     （2026-10：原本的 sand-art-artist-sheep.html 拆成紅／藍兩個獨立頁）
    - fluid-art（data-product-terms="fluid-art"）：fluid-art-light.html、
      fluid-art-gift.html
    sand-art-light.html／sand-art-collection.html 暫時維持各自貼上的舊版
