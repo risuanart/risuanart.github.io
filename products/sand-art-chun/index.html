@@ -166,9 +166,17 @@
            主圖，跟通用的 .kit-section__photo（滿版寬度，給 chapter 內
            材料照用）分開一個頁面專屬 class，因為這裡在 .work__intro
            窄版標題區內，需要限制寬度＋置中，不是滿版。 -->
-      <div class="work__intro-photo fade-in delay-2">
-        <img src="../../assets/images/products/sand-art-chun/sand-art-chun-main.jpg" alt="春聯砂畫材料包・春 成品參考圖" width="800" height="800" loading="lazy">
+      <div class="work__intro-photo work__intro-photo--carousel fade-in delay-2" data-hero-carousel>
+        <img src="../../assets/images/products/sand-art-chun/sand-art-chun-main.jpg" alt="春聯砂畫材料包・春結 Chun Tied 成品參考圖（出貨配色）" width="800" height="800" loading="lazy" class="is-active" data-carousel-frame>
+        <img src="../../assets/images/products/sand-art-chun/sand-art-chun-combo-2.png" alt="「春結 Chun Tied」配色示範，僅供搭配參考，非出貨配色" loading="lazy" data-carousel-frame>
+        <img src="../../assets/images/products/sand-art-chun/sand-art-chun-combo-3.png" alt="「春結 Chun Tied」配色示範，僅供搭配參考，非出貨配色" loading="lazy" data-carousel-frame>
+        <div class="hero-carousel__dots" aria-hidden="true"><span class="is-active"></span><span></span><span></span></div>
+        <button type="button" class="hero-carousel__toggle" aria-label="暫停配色展示">
+          <svg class="icon-pause" viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14"></rect><rect x="14" y="5" width="4" height="14"></rect></svg>
+          <svg class="icon-play" viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M7 5 L19 12 L7 19 Z"></path></svg>
+        </button>
       </div>
+      <p class="work-heading__colorway-note fade-in delay-2">出貨為圖一配色（固定），其餘為搭配參考，不是可選配色。</p>
 
       <!-- 「春」目前確認只有一組配色（確切色名待命名，見下面商品詳細的
            分裝沙備註），不是雙配色示範——沒有選項可選，不需要色票／
@@ -430,6 +438,7 @@
 
   <script src="../../js/cart.js"></script>
   <script src="../../js/product-terms.js"></script>
+  <script src="../../js/hero-colorway-carousel.js"></script>
   <script src="../../js/site-header-scroll.js"></script>
   <script src="../../js/scroll-reveal.js"></script>
   <script src="../../js/site-menu.js"></script>

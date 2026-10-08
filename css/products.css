@@ -412,12 +412,14 @@
   color: var(--color-text-primary);
 }
 
-/* 標題區成品主圖：目前只有 sand-art-chun.html 在用——那頁只有單一配色，
+/* 標題區成品主圖：7 款單一配色的春聯砂畫材料包在用（春結／福星／花財／
+   格裡迎春／格裡納福／燈上迎春／燈上納福）——這些頁面只有單一配色，
    沒有色系選擇器／圖案卡可以順便帶出「做完長什麼樣子」的縮圖，需要
    獨立補一張。跟 .kit-section__photo（給 chapter 內滿版材料照用）分開
    一個頁面標題專屬 class：這裡在 .work__intro 窄版標題區內，要限制
    寬度＋置中，不是滿版鋪滿螢幕寬度。 */
 .work__intro-photo {
+  position: relative;
   width: 100%;
   max-width: 280px;
   aspect-ratio: 1 / 1;
@@ -431,6 +433,100 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+/* 配色動態展示（--carousel 變體）：2026-10 新增。出貨只會有一種固定
+   配色（圖一，跟材料包底板同色），另外兩張是「同組顏色重新分配」的
+   搭配參考（跟下面「搭配自己的顏色」用的是同一批圖，這裡只挑圖二、
+   圖三——圖一跟出貨主圖是同一個配色，不重複播放同一張）。
+   進頁面自動播一輪（淡入淡出，不做位移/縮放）：主圖→配色二→配色三→
+   淡回主圖後停止，不循環，也不設計成可點擊切換——這款材料包只會出貨
+   圖一那個配色，不是「選配色」，刻意不做縮圖點擊，避免讓客人誤會成
+   出貨也能挑配色。右下角保留一顆暫停鍵給想定格看某張配色的人，也給
+   prefers-reduced-motion 的人手動播放；左下角點點只標示播放進度，
+   本身不可互動。行為邏輯見 js/hero-colorway-carousel.js。 */
+.work__intro-photo--carousel img {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1.1s ease;
+}
+
+.work__intro-photo--carousel img.is-active {
+  opacity: 1;
+}
+
+.hero-carousel__dots {
+  position: absolute;
+  bottom: var(--space-2);
+  left: var(--space-2);
+  z-index: 2;
+  display: flex;
+  gap: 5px;
+}
+
+.hero-carousel__dots span {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.55);
+  transition: background 0.25s, transform 0.25s;
+}
+
+.hero-carousel__dots span.is-active {
+  background: #fff;
+  transform: scale(1.3);
+}
+
+.hero-carousel__toggle {
+  position: absolute;
+  bottom: var(--space-2);
+  right: var(--space-2);
+  z-index: 2;
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.85);
+  color: var(--color-text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  cursor: pointer;
+}
+
+.hero-carousel__toggle:focus-visible {
+  outline: 2px solid var(--color-button-primary);
+  outline-offset: 2px;
+}
+
+.hero-carousel__toggle svg {
+  width: 13px;
+  height: 13px;
+}
+
+.hero-carousel__toggle .icon-play {
+  display: none;
+}
+
+.work__intro-photo--carousel.is-paused .hero-carousel__toggle .icon-pause {
+  display: none;
+}
+
+.work__intro-photo--carousel.is-paused .hero-carousel__toggle .icon-play {
+  display: block;
+}
+
+/* 配色動態展示下方的提醒文字：跟主圖同寬置中，講清楚出貨配色是固定的，
+   另外兩張動態展示只是搭配參考，不是客人可選的出貨配色。 */
+.work-heading__colorway-note {
+  margin: var(--space-2) auto 0;
+  max-width: 280px;
+  font-size: var(--font-size-xs);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  text-align: center;
 }
 
 /* ---------- 全站共用內文容器（2026-09-19 定案，取代 9-19 稍早的 1100px 版本） ----------

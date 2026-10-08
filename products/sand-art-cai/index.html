@@ -161,9 +161,17 @@
       <!-- 成品主圖：跟 sand-art-chun.html／sand-art-fu.html 同一套
            .work__intro-photo 元件（見 css/products.css），置中窄版
            方形主圖。 -->
-      <div class="work__intro-photo fade-in delay-2">
-        <img src="../../assets/images/products/sand-art-cai/sand-art-cai-main.jpg" alt="春聯砂畫材料包・財 成品參考圖" width="800" height="800" loading="lazy">
+      <div class="work__intro-photo work__intro-photo--carousel fade-in delay-2" data-hero-carousel>
+        <img src="../../assets/images/products/sand-art-cai/sand-art-cai-main.jpg" alt="春聯砂畫材料包・花財 Cai in Bloom 成品參考圖（出貨配色）" width="800" height="800" loading="lazy" class="is-active" data-carousel-frame>
+        <img src="../../assets/images/products/sand-art-cai/sand-art-cai-combo-2.png" alt="「花財 Cai in Bloom」配色示範，僅供搭配參考，非出貨配色" loading="lazy" data-carousel-frame>
+        <img src="../../assets/images/products/sand-art-cai/sand-art-cai-combo-3.png" alt="「花財 Cai in Bloom」配色示範，僅供搭配參考，非出貨配色" loading="lazy" data-carousel-frame>
+        <div class="hero-carousel__dots" aria-hidden="true"><span class="is-active"></span><span></span><span></span></div>
+        <button type="button" class="hero-carousel__toggle" aria-label="暫停配色展示">
+          <svg class="icon-pause" viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14"></rect><rect x="14" y="5" width="4" height="14"></rect></svg>
+          <svg class="icon-play" viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M7 5 L19 12 L7 19 Z"></path></svg>
+        </button>
       </div>
+      <p class="work-heading__colorway-note fade-in delay-2">出貨為圖一配色（固定），其餘為搭配參考，不是可選配色。</p>
 
       <!-- 「財」跟「春」「福」一樣只有一組配色，圈選色卡 7 色：珊瑚紅、
            湖藍、檸黃、深膚、淺膚、芥黃、黑色（使用者確認過的定案色）——
@@ -404,6 +412,7 @@
 
   <script src="../../js/cart.js"></script>
   <script src="../../js/product-terms.js"></script>
+  <script src="../../js/hero-colorway-carousel.js"></script>
   <script src="../../js/site-header-scroll.js"></script>
   <script src="../../js/scroll-reveal.js"></script>
   <script src="../../js/site-menu.js"></script>

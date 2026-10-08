@@ -160,9 +160,17 @@
 
       <!-- 成品主圖：跟 sand-art-chun.html 同一套 .work__intro-photo
            元件（見 css/products.css），置中窄版方形主圖。 -->
-      <div class="work__intro-photo fade-in delay-2">
-        <img src="../../assets/images/products/sand-art-fu/sand-art-fu-main.jpg" alt="春聯砂畫材料包・福 成品參考圖" width="800" height="800" loading="lazy">
+      <div class="work__intro-photo work__intro-photo--carousel fade-in delay-2" data-hero-carousel>
+        <img src="../../assets/images/products/sand-art-fu/sand-art-fu-main.jpg" alt="春聯砂畫材料包・福星 Starry Fu 成品參考圖（出貨配色）" width="800" height="800" loading="lazy" class="is-active" data-carousel-frame>
+        <img src="../../assets/images/products/sand-art-fu/sand-art-fu-combo-2.png" alt="「福星 Starry Fu」配色示範，僅供搭配參考，非出貨配色" loading="lazy" data-carousel-frame>
+        <img src="../../assets/images/products/sand-art-fu/sand-art-fu-combo-3.png" alt="「福星 Starry Fu」配色示範，僅供搭配參考，非出貨配色" loading="lazy" data-carousel-frame>
+        <div class="hero-carousel__dots" aria-hidden="true"><span class="is-active"></span><span></span><span></span></div>
+        <button type="button" class="hero-carousel__toggle" aria-label="暫停配色展示">
+          <svg class="icon-pause" viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14"></rect><rect x="14" y="5" width="4" height="14"></rect></svg>
+          <svg class="icon-play" viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M7 5 L19 12 L7 19 Z"></path></svg>
+        </button>
       </div>
+      <p class="work-heading__colorway-note fade-in delay-2">出貨為圖一配色（固定），其餘為搭配參考，不是可選配色。</p>
 
       <!-- 「福」跟「春」一樣只有一組配色（棗紅底，白色／洋黃／青色／
            粉紅／冰紫／淺藍六色點綴星星與福字，使用者確認過的定案色，
@@ -412,6 +420,7 @@
 
   <script src="../../js/cart.js"></script>
   <script src="../../js/product-terms.js"></script>
+  <script src="../../js/hero-colorway-carousel.js"></script>
   <script src="../../js/site-header-scroll.js"></script>
   <script src="../../js/scroll-reveal.js"></script>
   <script src="../../js/site-menu.js"></script>
