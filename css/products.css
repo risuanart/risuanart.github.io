@@ -435,6 +435,31 @@
   object-fit: cover;
 }
 
+/* 完整示範影片：2026-10 新增，首款套用在燈上納福。客人拍的是 9:16
+   直式影片（手機拍攝的完整製作過程），跟「怎麼玩」裡 4:3 的三支步驟
+   特寫片段不同用途——那三支是分解動作特寫，這支是從頭到尾一鏡到底的
+   完整示範，放法也不一樣：獨立成一個小節放在首圖輪播跟「商品詳細」
+   中間，用 <video controls> 讓客人自己決定要不要看、要看多久，不像
+   步驟片段那樣自動播放循環。寬度限制在 360px、不像 .kit-section__photo
+   滿版——直式影片滿版寬度在桌面版會變得又細又長，跟窄版主圖同一種
+   「限制寬度＋置中」處理。 */
+.demo-video {
+  width: 100%;
+  max-width: 360px;
+  aspect-ratio: 9 / 16;
+  margin: var(--space-6) auto 0;
+  border-radius: var(--radius-sharp);
+  overflow: hidden;
+  background: var(--color-surface-neutral);
+}
+
+.demo-video video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 /* 配色動態展示（--carousel 變體）：2026-10 新增。出貨只會有一種固定
    配色（圖一，跟材料包底板同色），另外兩張是「同組顏色重新分配」的
    搭配參考（跟下面「搭配自己的顏色」用的是同一批圖，這裡只挑圖二、
