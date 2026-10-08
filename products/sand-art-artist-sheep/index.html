@@ -531,37 +531,21 @@
       <div class="accordion__body" data-product-terms="sand-art"></div>
     </details>
 
-    <section class="ptpl-related fade-in delay-2">
-      <h2 class="ptpl-related__title">相關商品</h2>
-      <div class="shop-grid" role="list" aria-label="相關商品">
-        <div class="shop-card" data-product-card>
-          <div class="shop-card__media"><div class="placeholder-box shop-card__thumb">圖片待補</div></div>
-          <div class="shop-card__info">
-            <p class="shop-card__name">相關商品名稱一</p>
-            <p class="shop-card__price price-text">$__</p>
-          </div>
-        </div>
-        <div class="shop-card" data-product-card>
-          <div class="shop-card__media"><div class="placeholder-box shop-card__thumb">圖片待補</div></div>
-          <div class="shop-card__info">
-            <p class="shop-card__name">相關商品名稱二</p>
-            <p class="shop-card__price price-text">$__</p>
-          </div>
-        </div>
-        <div class="shop-card" data-product-card>
-          <div class="shop-card__media"><div class="placeholder-box shop-card__thumb">圖片待補</div></div>
-          <div class="shop-card__info">
-            <p class="shop-card__name">相關商品名稱三</p>
-            <p class="shop-card__price price-text">$__</p>
-          </div>
-        </div>
-        <div class="shop-card" data-product-card>
-          <div class="shop-card__media"><div class="placeholder-box shop-card__thumb">圖片待補</div></div>
-          <div class="shop-card__info">
-            <p class="shop-card__name">相關商品名稱四</p>
-            <p class="shop-card__price price-text">$__</p>
-          </div>
-        </div>
+    <!-- 相關商品：原本是「快速產品頁」舊模板留下的假資料（寫死四張
+         「相關商品名稱一～四」、$__ 待補），換成跟其他沙畫產品頁同一套
+         真實元件。卡片內容由 js/related-products.js 動態讀 cart.js 的
+         PRODUCTS 產生，排除這頁自己（data-exclude）跟隱藏的加購項目，
+         不在這裡手寫商品清單。 -->
+    <section class="chapter">
+      <h2 class="chapter__title fade-in">相關商品</h2>
+      <div class="related-products fade-in delay-1" data-related-products data-exclude="sand-art-artist-sheep">
+        <button type="button" class="related-products__nav related-products__nav--prev" aria-label="上一組">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <div class="related-products__track"></div>
+        <button type="button" class="related-products__nav related-products__nav--next" aria-label="下一組">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+        </button>
       </div>
     </section>
 
@@ -596,6 +580,8 @@
 
   <script src="../../js/cart.js"></script>
   <script src="../../js/product-terms.js"></script>
+  <script src="../../js/hero-colorway-carousel.js"></script>
+  <script src="../../js/related-products.js"></script>
   <script src="../../js/site-header-scroll.js"></script>
   <script src="../../js/scroll-reveal.js"></script>
   <script>
