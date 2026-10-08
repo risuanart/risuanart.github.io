@@ -17,8 +17,8 @@
   const PATTERNS = {
     "nafu-wave": { name: "納福", shortLabel: "納福（波浪紋）", style: "波浪幾何紋", colorDesc: "深綠＋酒紅＋金字", size: 15, material: "純沙" },
     "yingchun-wave": { name: "迎春", shortLabel: "迎春（波浪紋）", style: "波浪幾何紋", colorDesc: "朱紅＋深藍＋金字", size: 15, material: "純沙＋特殊材質（待試色）" },
-    "yingchun-grid": { name: "迎春", shortLabel: "迎春（格紋版）", style: "格紋邊框＋植物（梅花／松枝）", colorDesc: "粉膚色底＋黑字", size: 20, material: "純沙" },
-    "nafu-grid": { name: "納福", shortLabel: "納福（格紋版）", style: "格紋邊框＋植物（龜背芋葉／梅花）", colorDesc: "酒紅底＋金字", size: 20, material: "純沙" },
+    "yingchun-grid": { name: "迎春", shortLabel: "格裡迎春 Checked in Chun", style: "格紋邊框＋植物（梅花／松枝）", colorDesc: "粉膚色底＋黑字", size: 20, material: "純沙" },
+    "nafu-grid": { name: "納福", shortLabel: "格裡納福 Checked in Na Fu", style: "格紋邊框＋植物（龜背芋葉／梅花）", colorDesc: "酒紅底＋金字", size: 20, material: "純沙" },
     "chun": { name: "春", shortLabel: "春", style: "素色底＋星星＋蝴蝶結", colorDesc: "藍灰／淺紫底＋黑字（雙配色示範）", size: 15, material: "純沙" },
     "fu": { name: "福", shortLabel: "福", style: "素色底＋星星點綴", colorDesc: "酒紅底＋金字", size: 15, material: "純沙" },
     "cai": { name: "財", shortLabel: "財", style: "條紋＋梅花", colorDesc: "淺藍底＋黑字", size: 15, material: "純沙" },
