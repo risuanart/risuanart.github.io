@@ -22,7 +22,7 @@
     "chun": { name: "春", shortLabel: "春", style: "素色底＋星星＋蝴蝶結", colorDesc: "藍灰／淺紫底＋黑字（雙配色示範）", size: 15, material: "純沙" },
     "fu": { name: "福", shortLabel: "福", style: "素色底＋星星點綴", colorDesc: "酒紅底＋金字", size: 15, material: "純沙" },
     "cai": { name: "財", shortLabel: "財", style: "條紋＋梅花", colorDesc: "淺藍底＋黑字", size: 15, material: "純沙" },
-    "fu-sheep": { name: "福（羊Diss舞蹈）", shortLabel: "福（羊Diss舞蹈）", style: "動物插畫（多角色構圖）", colorDesc: "酒紅／寶藍底（雙配色示範）", size: 20, material: "植絨粉＋金箔或亮粉（待試色）" },
+    "fu-sheep": { name: "福（羊Diss舞蹈 Sheep La Danse）", shortLabel: "福（羊Diss舞蹈 Sheep La Danse）", style: "動物插畫（多角色構圖）", colorDesc: "酒紅／寶藍底（雙配色示範）", size: 20, material: "植絨粉＋金箔或亮粉（待試色）" },
   };
 
   // 順序照規格書表格 1-8 號。

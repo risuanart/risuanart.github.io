@@ -53,7 +53,7 @@
     "fluid-art-gift": { name: "春聯流動畫材料包・禮盒版", shortName: "禮盒版", price: 1100, category: "fluid-art", tagline: "雙幅成品，完整的流動畫體驗" },
     "sand-art-light": { name: "春聯砂畫材料包・輕巧版", shortName: "輕巧版", price: 0, category: "sand-art", tagline: "8 款圖案任選，撕貼倒沙鋪出你的春聯" },
     "sand-art-collection": { name: "春聯砂畫材料包・自由創作組", shortName: "自由創作組", price: 0, category: "sand-art", hasVariant: false, tagline: "5 款精選圖案＋26色顏料，自由創作一整套" },
-    "sand-art-artist-sheep": { name: "藝術家系列・羊Diss舞蹈（進階款）", shortName: "羊Diss舞蹈（進階款）", price: 0, category: "sand-art", tagline: "致敬馬諦斯《舞蹈》，紅藍兩色任選" },
+    "sand-art-artist-sheep": { name: "藝術家系列・羊Diss舞蹈 Sheep La Danse", shortName: "羊Diss舞蹈 Sheep La Danse", price: 0, category: "sand-art", tagline: "致敬馬諦斯《舞蹈》，紅藍兩色任選" },
     "sand-art-chun": { name: "春聯砂畫材料包・春結 Chun Tied", shortName: "春結 Chun Tied", price: 450, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true },
     "sand-art-fu": { name: "春聯砂畫材料包・福星 Starry Fu", shortName: "福星 Starry Fu", price: 450, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true },
     "sand-art-cai": { name: "春聯砂畫材料包・花財 Cai in Bloom", shortName: "花財 Cai in Bloom", price: 450, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true },
@@ -93,7 +93,7 @@
     "chun": "春",
     "fu": "福",
     "cai": "財",
-    "fu-sheep": "福（羊Diss舞蹈）",
+    "fu-sheep": "福（羊Diss舞蹈 Sheep La Danse）",
     "artist-sheep-red": "紅",
     "artist-sheep-blue": "藍",
   };
