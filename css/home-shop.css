@@ -516,6 +516,10 @@
      這裡本來就要滿版貼齊螢幕邊緣，現在不用再逃，天生就是滿版寬度。 */
   aspect-ratio: 2 / 3;
   overflow: hidden;
+  /* 手機手指左右滑動切換輪播（見 js/home-shop.js touchstart／touchend）：
+     只接管水平手勢，垂直方向仍交給瀏覽器原生處理頁面捲動，不然訪客會
+     沒辦法直接在輪播範圍內往下滑看其他內容。 */
+  touch-action: pan-y;
 }
 
 /* .site-header 浮貼在輪播照片上面那段時間（還沒捲動、背景透明），文字／

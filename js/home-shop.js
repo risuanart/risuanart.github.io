@@ -1,7 +1,7 @@
 /* home-shop.js —— 正式首頁（選物店風格）專屬邏輯：輪播（自動播放＋圓點
-   手動切換＋滑鼠移入暫停）＋頂部漢堡選單開合。只服務 index.html 這一頁，
-   不是全站共用元件。輪播播放秒數讀 .preview-hero 的 data-autoplay
-   （毫秒），沒有的話預設 5000ms。 */
+   手動切換＋滑鼠移入暫停＋手機手指左右滑動切換）＋頂部漢堡選單開合。
+   只服務 index.html 這一頁，不是全站共用元件。輪播播放秒數讀
+   .preview-hero 的 data-autoplay（毫秒），沒有的話預設 5000ms。 */
 (function () {
   const hero = document.querySelector(".preview-hero");
   if (!hero) return;
@@ -47,6 +47,45 @@
   // 自動播放不受影響。
   hero.addEventListener("mouseenter", stop);
   hero.addEventListener("mouseleave", start);
+
+  // 手機手指左右滑動切換上一張／下一張。只量測水平位移，位移量比垂直
+  // 位移小、或小於門檻值，當作是在滑頁面（直向捲動），不觸發切換——
+  // 不然訪客想往下滑看其他內容，手指稍微斜一點點就會誤觸輪播切換。
+  // touch-action: pan-y（見 css/home-shop.css）讓瀏覽器原生還是能處理
+  // 垂直捲動，這裡只負責判斷「這次觸控算不算一次換頁滑動」。
+  let touchStartX = null;
+  let touchStartY = null;
+  const SWIPE_THRESHOLD = 40;
+
+  hero.addEventListener(
+    "touchstart",
+    (e) => {
+      if (e.touches.length !== 1) return;
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+    },
+    { passive: true }
+  );
+
+  hero.addEventListener(
+    "touchend",
+    (e) => {
+      if (touchStartX === null) return;
+      const touch = e.changedTouches[0];
+      const deltaX = touch.clientX - touchStartX;
+      const deltaY = touch.clientY - touchStartY;
+      touchStartX = null;
+      touchStartY = null;
+      if (Math.abs(deltaX) < SWIPE_THRESHOLD || Math.abs(deltaX) < Math.abs(deltaY)) return;
+      if (deltaX < 0) {
+        next();
+      } else {
+        goTo(current - 1);
+      }
+      start(); // 手動切換後重新計時，同一套理由同上面圓點點擊
+    },
+    { passive: true }
+  );
 
   if (slides.length > 1) start();
 })();
