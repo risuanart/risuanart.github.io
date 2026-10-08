@@ -145,6 +145,49 @@
     "sand-art-na-fu-lantern": BASE_PREFIX + "assets/images/products/sand-art-na-fu-lantern/sand-art-na-fu-lantern-main.jpg",
   };
 
+  // 這 7 款單一配色沙畫的商品頁首圖都做了「配色動態展示」輪播（出貨配色→
+  // 配色示範二→配色示範三→淡回出貨配色後停止，見 js/hero-colorway-carousel.js）。
+  // 商品總覽格狀卡／首頁商品格狀（都共用 js/products-overview.js）也要套同一種
+  // 展示，縮圖來源就是這裡——[0] 是出貨配色（跟上面 PRODUCT_IMAGES 同一張圖），
+  // [1][2] 是另外兩張配色示範圖（combo-1 跟出貨配色是同一張，不重複收錄）。
+  const PRODUCT_COLORWAY_FRAMES = {
+    "sand-art-chun": [
+      PRODUCT_IMAGES["sand-art-chun"],
+      BASE_PREFIX + "assets/images/products/sand-art-chun/sand-art-chun-combo-2.png",
+      BASE_PREFIX + "assets/images/products/sand-art-chun/sand-art-chun-combo-3.png",
+    ],
+    "sand-art-fu": [
+      PRODUCT_IMAGES["sand-art-fu"],
+      BASE_PREFIX + "assets/images/products/sand-art-fu/sand-art-fu-combo-2.png",
+      BASE_PREFIX + "assets/images/products/sand-art-fu/sand-art-fu-combo-3.png",
+    ],
+    "sand-art-cai": [
+      PRODUCT_IMAGES["sand-art-cai"],
+      BASE_PREFIX + "assets/images/products/sand-art-cai/sand-art-cai-combo-2.png",
+      BASE_PREFIX + "assets/images/products/sand-art-cai/sand-art-cai-combo-3.png",
+    ],
+    "sand-art-ying-chun": [
+      PRODUCT_IMAGES["sand-art-ying-chun"],
+      BASE_PREFIX + "assets/images/products/sand-art-ying-chun/sand-art-ying-chun-combo-2.png",
+      BASE_PREFIX + "assets/images/products/sand-art-ying-chun/sand-art-ying-chun-combo-3.png",
+    ],
+    "sand-art-na-fu": [
+      PRODUCT_IMAGES["sand-art-na-fu"],
+      BASE_PREFIX + "assets/images/products/sand-art-na-fu/sand-art-na-fu-combo-2.png",
+      BASE_PREFIX + "assets/images/products/sand-art-na-fu/sand-art-na-fu-combo-3.png",
+    ],
+    "sand-art-ying-chun-lantern": [
+      PRODUCT_IMAGES["sand-art-ying-chun-lantern"],
+      BASE_PREFIX + "assets/images/products/sand-art-ying-chun-lantern/sand-art-ying-chun-lantern-combo-2.png",
+      BASE_PREFIX + "assets/images/products/sand-art-ying-chun-lantern/sand-art-ying-chun-lantern-combo-3.png",
+    ],
+    "sand-art-na-fu-lantern": [
+      PRODUCT_IMAGES["sand-art-na-fu-lantern"],
+      BASE_PREFIX + "assets/images/products/sand-art-na-fu-lantern/sand-art-na-fu-lantern-combo-2.png",
+      BASE_PREFIX + "assets/images/products/sand-art-na-fu-lantern/sand-art-na-fu-lantern-combo-3.png",
+    ],
+  };
+
   // 砂畫目前還沒有任何實拍素材，SCHEME_IMAGES 查不到對應圖時，縮圖改畫一個
   // 文字佔位框（跟商品頁 .placeholder-box 同一套視覺語言），不要留一個空的
   // src 讓瀏覽器顯示破圖圖示。className 決定實際尺寸／圓角（見 cart.css
@@ -837,6 +880,7 @@
     PRODUCT_URLS,
     thumbHTML,
     detailImageSrc,
+    PRODUCT_COLORWAY_FRAMES,
     // initAddToCart 在這支檔案自己的 init() 時已經跑過一次，但那時候總覽頁的
     // 商品卡片還沒被 products-overview.js 動態建立出來，掃描不到任何按鈕。
     // 開放這個函式讓總覽頁卡片建好之後可以重新呼叫一次，掛上「加入購物車」

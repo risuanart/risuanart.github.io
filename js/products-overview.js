@@ -26,16 +26,37 @@
     return product.price ? `$${product.price.toLocaleString()}` : "$__";
   }
 
+  // 這 7 款單一配色沙畫在商品頁首圖已經有「配色動態展示」輪播（出貨配色→
+  // 配色示範二→配色示範三→淡回出貨配色後停止，見 js/hero-colorway-carousel.js／
+  // cart.js PRODUCT_COLORWAY_FRAMES），總覽格狀卡／首頁商品格狀套同一組圖＋
+  // 同一套播放邏輯。格狀卡位置太小，不塞暫停鍵／進度點點——輪播本來就只
+  // 播一輪就停，不循環，沒有控制元件也不會造成困擾。
+  function carouselThumbHTML(key, product, frames, className) {
+    const imgs = frames
+      .map((src, i) => {
+        const alt = i === 0 ? `${product.name} 成品參考圖（出貨配色）` : "";
+        const activeClass = i === 0 ? " is-active" : "";
+        const hiddenAttr = i === 0 ? "" : ` aria-hidden="true"`;
+        return `<img class="${className}${activeClass}" src="${src}" alt="${alt}"${hiddenAttr} loading="lazy" data-carousel-frame>`;
+      })
+      .join("");
+    return imgs;
+  }
+
   function cardHTML(key, product, cart) {
     const variants = cart.VARIANT_OPTIONS[key];
     const defaultScheme = variants && variants[0];
     const url = (cart.PRODUCT_URLS && cart.PRODUCT_URLS[key]) || "#";
-    const thumb = cart.thumbHTML({ productKey: key, scheme: defaultScheme || "" }, "shop-card__thumb");
+    const colorwayFrames = cart.PRODUCT_COLORWAY_FRAMES && cart.PRODUCT_COLORWAY_FRAMES[key];
+    const thumb = colorwayFrames
+      ? carouselThumbHTML(key, product, colorwayFrames, "shop-card__thumb")
+      : cart.thumbHTML({ productKey: key, scheme: defaultScheme || "" }, "shop-card__thumb");
+    const carouselAttr = colorwayFrames ? " data-hero-carousel" : "";
     // 電腦版 hover 換圖：只有「查得到第二張圖」的商品才輸出這個 <img>——
     // 目前只有流動畫兩個色系有真的第二張照片（內容物全展開，跟主圖不同
-    // 角度），砂畫還沒有任何實拍素材，就不會有這個元素，CSS 那邊也不會有
-    // 東西可以換，不是刻意關掉 hover 效果。
-    const detailSrc = defaultScheme && cart.detailImageSrc ? cart.detailImageSrc(defaultScheme) : null;
+    // 角度）。有配色動態展示的商品（colorwayFrames 存在）兩套機制互斥，
+    // 不會同時輸出 hover 換圖，避免 hover 跟自動輪播互相打架。
+    const detailSrc = !colorwayFrames && defaultScheme && cart.detailImageSrc ? cart.detailImageSrc(defaultScheme) : null;
     const hoverThumb = detailSrc
       ? `<img class="shop-card__thumb shop-card__thumb--hover" src="${detailSrc}" alt="" aria-hidden="true" loading="lazy">`
       : "";
@@ -52,7 +73,7 @@
     const newBadge = product.isNew ? `<span class="shop-card__badge">新品</span>` : "";
     return `
       <div class="shop-card" data-product-card>
-        <a class="shop-card__media" href="${url}">${thumb}${hoverThumb}${newBadge}</a>
+        <a class="shop-card__media" href="${url}"${carouselAttr}>${thumb}${hoverThumb}${newBadge}</a>
         <button type="button" class="shop-card__add" data-add-to-cart data-product="${key}" aria-label="加入購物車：${product.name}">${PLUS_ICON}</button>
         ${variantInput}
         <a class="shop-card__info" href="${url}">
@@ -149,6 +170,12 @@
     // 卡片是剛剛才動態建出來的，cart.js 自己 init() 時掃過一次「加入購物車」
     // 按鈕那時候這些卡片還不存在，這裡重新呼叫一次掛上點擊行為。
     cart.initAddToCart();
+
+    // 同理，js/hero-colorway-carousel.js 載入時這些卡片還不存在，它自己
+    // 的自動掃描（initAll(document)）掃不到，這裡卡片建好後手動呼叫一次。
+    if (window.HeroColorwayCarousel) {
+      window.HeroColorwayCarousel.initAll(grid);
+    }
 
     initQuickNavSearch(cart);
   }

@@ -1456,6 +1456,23 @@ button.text-link {
   font-size: 0.55rem;
 }
 
+/* 配色動態展示（總覽格狀卡／首頁商品格狀版）：跟商品頁 .work__intro-photo
+   --carousel 同一套邏輯（js/hero-colorway-carousel.js），只是格狀卡位置
+   太小，不塞暫停鍵／進度點點——輪播本來就只播一輪就停、不循環，沒有
+   控制元件也不影響使用。用屬性選擇器限定在 [data-hero-carousel] 卡片裡，
+   不影響其他商品原本的 .shop-card__thumb（單張靜態圖）或
+   .shop-card__thumb--hover（流動畫的滑鼠移入換圖，兩套機制互斥）。 */
+.shop-card__media[data-hero-carousel] .shop-card__thumb[data-carousel-frame] {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1.1s ease;
+}
+
+.shop-card__media[data-hero-carousel] .shop-card__thumb[data-carousel-frame].is-active {
+  opacity: 1;
+}
+
 /* 「新品」標——只有 cart.js PRODUCTS 裡真的標 isNew:true 的商品才會
    輸出這個元素（見 products-overview.js），不是隨便貼熱銷/精選這種沒有
    真實數據支撐的行銷標籤。方正直角、細邊框、低飽和底色，跟卡片本身
