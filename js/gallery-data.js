@@ -326,6 +326,8 @@ window.GALLERY_ITEMS = [
   { course: "自己帶圖創作", themes: ["風景", "植物花卉"], date: "2026-10-08", src: "../assets/images/gallery/landscape-oil/06.jpg", alt: "油畫的棕櫚樹庭院景色，粉色大門搭配仙人掌造景", sessions: 1 },
   { course: "自己帶圖創作", themes: ["風景"], date: "2026-10-08", src: "../assets/images/gallery/landscape-oil/07.jpg", alt: "油畫的雪地月夜景色，樹林剪影間一棟小屋透出燈光", sessions: 1 },
   { course: "自己帶圖創作", themes: ["植物花卉"], date: "2026-10-08", src: "../assets/images/gallery/landscape-oil/08.jpg", alt: "油畫的窗邊靜物，陶瓶插著枯枝與落葉，雪景窗框", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["風景"], date: "2026-10-08", src: "../assets/images/gallery/landscape-oil/09.jpg", alt: "學員正在繪製黃昏孤樹剪影畫作的過程，橘粉漸層天空搭配單一色系樹枝", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["風景"], date: "2026-10-08", src: "../assets/images/gallery/landscape-oil/10.jpg", alt: "學員繪製棕櫚樹海景底稿的過程，灰階階段旁放著參考照片", sessions: 1 },
 ];
 
 // 課程篩選鈕的選項清單，跟首頁「課程」選單、faq.html 裡提到的課程名稱
