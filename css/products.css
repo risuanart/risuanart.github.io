@@ -1803,6 +1803,15 @@ button.text-link {
   max-width: 40ch;
 }
 
+/* 三格版：「搭配自己的顏色」章節原本只有兩張示範圖的版位，2026-10
+   使用者補了「原版配色＋兩款重新分配」三張同系列插圖（同一組顏色，
+   色塊位置不同），三張並排比兩張更能呈現「同材料、不同效果」這件事，
+   加一個三欄變體，不動原本雙欄版本（其他頁面可能還在用）。 */
+.howto-compare--triple {
+  grid-template-columns: repeat(3, 1fr);
+  max-width: 56ch;
+}
+
 .howto-compare__cell {
   aspect-ratio: 1 / 1;
   border-radius: var(--radius-sharp);
