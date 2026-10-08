@@ -20,18 +20,33 @@
     return product.price ? `$${product.price.toLocaleString()}` : "$__";
   }
 
+  // 跟 js/products-overview.js 的 carouselThumbHTML() 同一套邏輯：有配色
+  // 動態展示素材的商品（cart.PRODUCT_COLORWAY_FRAMES 查得到）輸出多張疊圖
+  // 讓 js/hero-colorway-carousel.js 接手播放，沒有的商品退回單張靜態圖。
+  function carouselFramesHTML(product, frames, className) {
+    return frames
+      .map((src, i) => {
+        const alt = i === 0 ? `${product.name} 成品參考圖（出貨配色）` : "";
+        const activeClass = i === 0 ? " is-active" : "";
+        const hiddenAttr = i === 0 ? "" : ` aria-hidden="true"`;
+        return `<img class="${className}${activeClass}" src="${src}" alt="${alt}"${hiddenAttr} loading="lazy" data-carousel-frame>`;
+      })
+      .join("");
+  }
+
   function cardHTML(key, product, cart) {
     const variants = cart.VARIANT_OPTIONS[key];
     const defaultScheme = variants && variants[0];
     const url = (cart.PRODUCT_URLS && cart.PRODUCT_URLS[key]) || "#";
-    const thumb = cart.thumbHTML(
-      { productKey: key, scheme: defaultScheme || "" },
-      "related-card__thumb"
-    );
+    const colorwayFrames = cart.PRODUCT_COLORWAY_FRAMES && cart.PRODUCT_COLORWAY_FRAMES[key];
+    const thumb = colorwayFrames
+      ? carouselFramesHTML(product, colorwayFrames, "related-card__thumb")
+      : cart.thumbHTML({ productKey: key, scheme: defaultScheme || "" }, "related-card__thumb");
+    const carouselAttr = colorwayFrames ? " data-hero-carousel" : "";
     const eyebrow = CATEGORY_LABELS[product.category] || "";
     return `
       <a class="related-card" href="${url}">
-        <div class="related-card__media">${thumb}</div>
+        <div class="related-card__media"${carouselAttr}>${thumb}</div>
         <div class="related-card__body">
           <p class="related-card__eyebrow">${eyebrow}</p>
           <p class="related-card__name">${product.shortName || product.name}</p>
@@ -50,6 +65,12 @@
       .map((key) => cardHTML(key, cart.PRODUCTS[key], cart))
       .join("");
     track.innerHTML = html;
+
+    // 卡片是剛剛才動態建出來的，js/hero-colorway-carousel.js 載入時掃不到，
+    // 這裡建好後手動呼叫一次（跟 js/products-overview.js 同一個理由）。
+    if (window.HeroColorwayCarousel) {
+      window.HeroColorwayCarousel.initAll(track);
+    }
 
     const prevBtn = section.querySelector(".related-products__nav--prev");
     const nextBtn = section.querySelector(".related-products__nav--next");

@@ -1340,6 +1340,7 @@ button.text-link {
 }
 
 .related-card__media {
+  position: relative;
   aspect-ratio: 1 / 1;
   overflow: hidden;
   background: var(--color-surface-neutral);
@@ -1356,6 +1357,22 @@ button.text-link {
 .related-card:hover .related-card__thumb,
 .related-card:focus-visible .related-card__thumb {
   transform: scale(1.1);
+}
+
+/* 有配色動態展示素材的商品（js/related-products.js 輸出多張疊圖＋
+   data-hero-carousel）：跟 .shop-card__media[data-hero-carousel] 同一套
+   堆疊邏輯，只是換成 .related-card 的命名空間。疊圖本身的 opacity
+   轉場（播放進度）跟外面的 hover 放大轉場是兩條獨立的 transform／
+   opacity，互不干擾。 */
+.related-card__media[data-hero-carousel] .related-card__thumb[data-carousel-frame] {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1.1s ease, transform var(--duration-slow) var(--ease-standard);
+}
+
+.related-card__media[data-hero-carousel] .related-card__thumb[data-carousel-frame].is-active {
+  opacity: 1;
 }
 
 .related-card__body {
