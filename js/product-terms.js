@@ -21,8 +21,9 @@
    - sand-art（data-product-terms="sand-art"）：sand-art-chun.html、
      sand-art-artist-sheep-red.html、sand-art-artist-sheep-blue.html
      （2026-10：原本的 sand-art-artist-sheep.html 拆成紅／藍兩個獨立頁）
-   - fluid-art（data-product-terms="fluid-art"）：fluid-art-light.html、
-     fluid-art-gift.html
+   - fluid-art（data-product-terms="fluid-art"）：fluid-art-light-red.html、
+     fluid-art-light-pink.html、fluid-art-gift.html
+     （2026-10：原本的 fluid-art-light.html 拆成紅／粉兩個獨立頁）
    sand-art-light.html／sand-art-collection.html 暫時維持各自貼上的舊版
    純 HTML，還沒接上這份共用資料（使用者確認過先不動這兩頁，等輕巧版／
    自由創作組的頁面結構定案後再一起接上）。 */

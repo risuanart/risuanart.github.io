@@ -20,11 +20,12 @@
       // 都燒進了「材料包內含15cm、5cm春聯各一幅」或無痕黏土上牆配件的文字／畫面，輕巧版
       // （單一15cm、無上牆黏土）套用會變成錯誤宣稱。lightPlaceholder：輕巧版此格改顯示文字
       // 說明應該拍什麼，取代照片。notInLight：輕巧版根本沒有這個配件／概念，直接跳過這格，
-      // 不佔輪播格數。沒有這兩個欄位的維持原樣，兩版共用同一張。
+      // 不佔輪播格數。沒有這兩個欄位的維持原樣，兩版共用同一張。lightFile：輕巧版已經有
+      // 實拍的平鋪材料照（2026-10 補拍），優先於 lightPlaceholder 使用，見 buildGallery()。
       gallery: [
         { file: "RS+_04.1_產品主圖_800x800拷貝.jpg", alt: "春聯流動畫材料包，包裝盒與福字菱形成品合照", caption: "包裝與成品", lightPlaceholder: "建議拍攝：輕巧版包裝與福字菱形成品合照" },
         { file: "RS_05.7_產品圖片_800x800拷貝.jpg", alt: "成品模擬圖，四款福字菱形排列", caption: "成品模擬圖" },
-        { file: "RS_05.1_產品圖片_800x800拷貝.jpg", alt: "經典紅內容物全展開", caption: "內容物全展開", lightPlaceholder: "建議拍攝：輕巧版內容物全展開（單一 15cm 畫布＋基本工具）" },
+        { file: "RS_05.1_產品圖片_800x800拷貝.jpg", alt: "經典紅內容物全展開", caption: "內容物全展開", lightFile: "fluid-art-light-kit-red.jpg" },
         { file: "RS_05.3_產品圖片_800x800拷貝.jpg", alt: "材料完整，開盒即用", caption: "開盒即用", lightPlaceholder: "建議拍攝：輕巧版包裝開盒即用" },
         { file: "RS_05.5_產品圖片_800x800拷貝.jpg", alt: "倒顏料操作，獨一無二的變化性", caption: "倒顏料" },
         { video: "RS_video-gold-sticker.mp4", alt: "金色字貼近拍，實際手貼上畫布的過程，日光下微微閃耀", caption: "春字貼特寫" },
@@ -32,7 +33,7 @@
         { file: "RS_05.4_產品圖片_800x800拷貝.jpg", alt: "上牆材料，已幫你準備好", caption: "上牆材料", notInLight: true },
       ],
       kitPhoto: { file: "RS_05.1_產品圖片_800x800拷貝.jpg", alt: "經典紅內容物全展開" },
-      kitPhotoLightPlaceholder: "建議拍攝：輕巧版內容物全展開（單一 15cm 畫布＋基本工具）",
+      kitPhotoLight: { file: "fluid-art-light-kit-red.jpg", alt: "經典紅輕巧版材料包內容物平鋪" },
       paints: ["絳紅", "過年紅", "金", "鉑金"],
       paintsPlaceholder: false,
       swatches: ["var(--swatch-jiang-red)", "var(--swatch-newyear-red)", "var(--swatch-gold)", "var(--swatch-platinum)"],
@@ -61,7 +62,7 @@
       gallery: [
         { file: "RS+_04.2_產品主圖_800x800拷貝.jpg", alt: "春聯流動畫材料包，包裝盒與春字菱形成品合照", caption: "包裝與成品", lightPlaceholder: "建議拍攝：輕巧版包裝與春字菱形成品合照" },
         { file: "RS_05.8_產品圖片_800x800拷貝.jpg", alt: "成品模擬圖，四款春字菱形排列", caption: "成品模擬圖" },
-        { file: "RS_05.2_產品圖片_800x800拷貝.jpg", alt: "迎春粉內容物全展開", caption: "內容物全展開", lightPlaceholder: "建議拍攝：輕巧版內容物全展開（單一 15cm 畫布＋基本工具）" },
+        { file: "RS_05.2_產品圖片_800x800拷貝.jpg", alt: "迎春粉內容物全展開", caption: "內容物全展開", lightFile: "fluid-art-light-kit-pink.jpg" },
         { file: "RS_05.5P_產品圖片_800x800拷貝.jpg", alt: "倒顏料操作，獨一無二的變化性", caption: "倒顏料" },
         { file: "RS_05.6_產品圖片_800x800拷貝.jpg", alt: "福字貼特寫，日光下微微閃耀", caption: "福字貼特寫" },
         { file: "RS_05.12_產品圖片_800x800拷貝.jpg", alt: "春字貼應用中，15cm 規格", caption: "春字貼應用", lightPlaceholder: "建議拍攝：春字貼應用，15cm 規格（需重新拍攝，現有圖片印有「內含15cm、5cm各一幅」字樣，不適用輕巧版）" },
@@ -69,7 +70,7 @@
         { file: "RS_05.4_產品圖片_800x800拷貝.jpg", alt: "上牆材料，已幫你準備好", caption: "上牆材料", notInLight: true },
       ],
       kitPhoto: { file: "RS_05.2_產品圖片_800x800拷貝.jpg", alt: "迎春粉內容物全展開" },
-      kitPhotoLightPlaceholder: "建議拍攝：輕巧版內容物全展開（單一 15cm 畫布＋基本工具）",
+      kitPhotoLight: { file: "fluid-art-light-kit-pink.jpg", alt: "迎春粉輕巧版材料包內容物平鋪" },
       paints: ["櫻粉", "朱紅", "鉑金", "銀"],
       paintsPlaceholder: false,
       swatches: ["var(--swatch-cherry-pink)", "var(--swatch-vermillion)", "var(--swatch-pink-platinum)", "var(--swatch-silver)"],
@@ -130,7 +131,10 @@
     // 有 lightPlaceholder 的格子在輕巧版改顯示文字說明，不是放實拍照片——因為那些照片是照著
     // 禮盒版（雙尺寸、無痕黏土等）拍的，直接沿用會變成對輕巧版的錯誤宣稱。
     const items = scheme.gallery.filter((img) => !(version === "light" && img.notInLight));
-    const showPlaceholder = (img) => version === "light" && img.lightPlaceholder;
+    // lightFile 存在代表這格輕巧版已經有實拍照（取代原本的文字說明佔位），
+    // 優先於 lightPlaceholder；兩者都沒有的格子兩版共用同一張 file。
+    const showPlaceholder = (img) => version === "light" && img.lightPlaceholder && !img.lightFile;
+    const fileFor = (img) => (version === "light" && img.lightFile ? img.lightFile : img.file);
 
     const images = items.map((img, i) => {
       let el;
@@ -149,7 +153,7 @@
         el.setAttribute("aria-label", img.alt);
       } else {
         el = document.createElement("img");
-        el.src = IMG_BASE + img.file;
+        el.src = IMG_BASE + fileFor(img);
         el.alt = img.alt;
         el.width = 800;
         el.height = 800;
@@ -311,9 +315,13 @@
       if (stopGallery) stopGallery(); // 換色系前先關掉舊的自動輪播計時器，避免疊加
       stopGallery = buildGallery(frame, captionsList, scheme, version);
       if (kitPhoto) {
-        // 現有的內容物全展開照片是照禮盒版（雙尺寸＋完整配件）拍的，輕巧版套用會誤導，
-        // 改顯示文字說明應該拍什麼，等輕巧版實拍照片到位後再換回真的 <img>。
-        if (version === "light" && scheme.kitPhotoLightPlaceholder) {
+        // 現有的內容物全展開照片是照禮盒版（雙尺寸＋完整配件）拍的，輕巧版套用會誤導。
+        // kitPhotoLight 是輕巧版自己的實拍平鋪照（2026-10 補拍），優先使用；還沒補拍的
+        // 版本（理論上現在兩色都有了，保留這個分支給之後萬一新增配色時的過渡期）
+        // 改顯示文字說明應該拍什麼。
+        if (version === "light" && scheme.kitPhotoLight) {
+          kitPhoto.innerHTML = `<img src="${IMG_BASE + scheme.kitPhotoLight.file}" alt="${scheme.kitPhotoLight.alt}" width="800" height="800">`;
+        } else if (version === "light" && scheme.kitPhotoLightPlaceholder) {
           kitPhoto.innerHTML = `<div class="placeholder-box">${scheme.kitPhotoLightPlaceholder}</div>`;
         } else {
           kitPhoto.innerHTML = `<img src="${IMG_BASE + scheme.kitPhoto.file}" alt="${scheme.kitPhoto.alt}" width="800" height="800">`;
@@ -342,7 +350,10 @@
       chip.addEventListener("click", () => applyScheme(chip.dataset.scheme));
     });
 
-    applyScheme("classic-red");
+    // 輕巧版紅／粉拆成獨立商品頁後，各自頁面沒有色系選擇器（chips 是空的
+    // NodeList），用 <body data-fixed-scheme="..."> 鎖定這頁唯一的色系；
+    // 沒有這個屬性的頁面（禮盒版）維持原本預設經典紅、靠 chips 點擊切換。
+    applyScheme(document.body.dataset.fixedScheme || "classic-red");
   }
 
   // 九宮格動畫：點擊/Enter/空白鍵可以重播一次。有 data-autoplay 的（目前只有

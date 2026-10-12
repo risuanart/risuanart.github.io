@@ -49,7 +49,12 @@
   // 保留完整寫法給搜尋比對、加入購物車的 aria-label、訂單明細面板這些沒有
   // 分類字陪在旁邊的地方用，不能直接拿掉。
   const PRODUCTS = {
-    "fluid-art-light": { name: "春聯流動畫材料包・輕巧版", shortName: "輕巧版", price: 800, category: "fluid-art", tagline: "單幅 15cm，最快抵達的新年儀式" },
+    // 2026-10：輕巧版紅／粉兩款原本跟禮盒版共用同一個商品鍵＋色系選擇器（VARIANT_OPTIONS
+    // 裡的 scheme），比照羊Diss舞蹈紅／藍的先例拆成兩個完全獨立的商品頁／商品鍵
+    // （hasVariant:false，不再是「同一款選顏色」）。禮盒版維持原本的色系選擇器不動，
+    // classic-red／welcome-pink 這兩個 scheme 鍵值繼續保留給禮盒版用，不能刪。
+    "fluid-art-light-red": { name: "春聯流動畫材料包・輕巧版（經典紅）", shortName: "輕巧版（經典紅）", price: 800, category: "fluid-art", hasVariant: false, tagline: "單幅 15cm，最快抵達的新年儀式" },
+    "fluid-art-light-pink": { name: "春聯流動畫材料包・輕巧版（迎春粉）", shortName: "輕巧版（迎春粉）", price: 800, category: "fluid-art", hasVariant: false, tagline: "單幅 15cm，最快抵達的新年儀式" },
     "fluid-art-gift": { name: "春聯流動畫材料包・禮盒版", shortName: "禮盒版", price: 1100, category: "fluid-art", tagline: "雙幅成品，完整的流動畫體驗" },
     "sand-art-light": { name: "春聯砂畫材料包・輕巧版", shortName: "輕巧版", price: 0, category: "sand-art", tagline: "8 款圖案任選，撕貼倒沙鋪出你的春聯" },
     "sand-art-collection": { name: "春聯砂畫材料包・自由創作組", shortName: "自由創作組", price: 0, category: "sand-art", hasVariant: false, tagline: "5 款精選圖案＋26色顏料，自由創作一整套" },
@@ -75,7 +80,6 @@
   // 的選項」，不是把全站所有色系／圖案混在同一份清單裡（不然砂畫商品的下拉會
   // 出現流動畫的「經典紅」，或流動畫商品出現砂畫的圖案，兩邊互不相干）。
   const VARIANT_OPTIONS = {
-    "fluid-art-light": ["classic-red", "welcome-pink"],
     "fluid-art-gift": ["classic-red", "welcome-pink"],
     "sand-art-light": ["nafu-wave", "yingchun-wave", "yingchun-grid", "nafu-grid", "chun", "fu", "cai", "fu-sheep"],
   };
@@ -135,6 +139,8 @@
   // 固定組合）沒有「scheme」概念可以查 SCHEME_IMAGES，縮圖改直接用商品鍵
   // 查這張表，thumbHTML() 在 SCHEME_IMAGES 查無結果時會退回來查這裡。
   const PRODUCT_IMAGES = {
+    "fluid-art-light-red": BASE_PREFIX + "assets/images/products/fluid-art/RS_05.7_產品圖片_800x800拷貝.jpg",
+    "fluid-art-light-pink": BASE_PREFIX + "assets/images/products/fluid-art/RS_05.8_產品圖片_800x800拷貝.jpg",
     "sand-art-chun": BASE_PREFIX + "assets/images/products/sand-art-chun/sand-art-chun-main.jpg",
     "sand-art-fu": BASE_PREFIX + "assets/images/products/sand-art-fu/sand-art-fu-main.jpg",
     "sand-art-cai": BASE_PREFIX + "assets/images/products/sand-art-cai/sand-art-cai-main.jpg",
@@ -212,7 +218,8 @@
   // 縮圖／品名點下去要連去哪個商品頁。2026-09-20：全站改乾淨網址，目標
   // 從檔案變成資料夾。
   const PRODUCT_URLS = {
-    "fluid-art-light": BASE_PREFIX + "products/fluid-art-light/",
+    "fluid-art-light-red": BASE_PREFIX + "products/fluid-art-light-red/",
+    "fluid-art-light-pink": BASE_PREFIX + "products/fluid-art-light-pink/",
     "fluid-art-gift": BASE_PREFIX + "products/fluid-art-gift/",
     "sand-art-light": BASE_PREFIX + "products/sand-art-light/",
     "sand-art-collection": BASE_PREFIX + "products/sand-art-collection/",
