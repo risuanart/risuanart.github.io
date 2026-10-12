@@ -22,14 +22,18 @@
       // 說明應該拍什麼，取代照片。notInLight：輕巧版根本沒有這個配件／概念，直接跳過這格，
       // 不佔輪播格數。沒有這兩個欄位的維持原樣，兩版共用同一張。lightFile：輕巧版已經有
       // 實拍的平鋪材料照（2026-10 補拍），優先於 lightPlaceholder 使用，見 buildGallery()。
+      // 2026-10：輕巧版的「作品成色」改成只留真實照片（成品模擬圖＋內容物全展開），
+      // 拿掉動圖跟其餘佔位說明格，讓頁面感覺更接近沙畫介紹頁的精簡度——這幾格
+      // 禮盒版仍然是真實內容，只是不想在輕巧版出現，所以用 notInLight 排除，
+      // 不是刪掉（刪掉會連禮盒版也一起不見）。
       gallery: [
-        { file: "RS+_04.1_產品主圖_800x800拷貝.jpg", alt: "春聯流動畫材料包，包裝盒與福字菱形成品合照", caption: "包裝與成品", lightPlaceholder: "建議拍攝：輕巧版包裝與福字菱形成品合照" },
+        { file: "RS+_04.1_產品主圖_800x800拷貝.jpg", alt: "春聯流動畫材料包，包裝盒與福字菱形成品合照", caption: "包裝與成品", lightPlaceholder: "建議拍攝：輕巧版包裝與福字菱形成品合照", notInLight: true },
         { file: "RS_05.7_產品圖片_800x800拷貝.jpg", alt: "成品模擬圖，四款福字菱形排列", caption: "成品模擬圖", lightFile: "fluid-art-light-main-red.jpg", lightAlt: "經典紅成品模擬圖，金色「福」字菱形畫布" },
         { file: "RS_05.1_產品圖片_800x800拷貝.jpg", alt: "經典紅內容物全展開", caption: "內容物全展開", lightFile: "fluid-art-light-kit-red.jpg" },
-        { file: "RS_05.3_產品圖片_800x800拷貝.jpg", alt: "材料完整，開盒即用", caption: "開盒即用", lightPlaceholder: "建議拍攝：輕巧版包裝開盒即用" },
-        { file: "RS_05.5_產品圖片_800x800拷貝.jpg", alt: "倒顏料操作，獨一無二的變化性", caption: "倒顏料" },
-        { video: "RS_video-gold-sticker.mp4", alt: "金色字貼近拍，實際手貼上畫布的過程，日光下微微閃耀", caption: "春字貼特寫" },
-        { file: "RS_05.10_產品圖片_800x800拷貝.jpg", alt: "福字貼近拍，15cm 規格", caption: "福字貼近拍", lightPlaceholder: "建議拍攝：福字貼近拍，15cm 規格（需重新拍攝，現有圖片印有「內含15cm、5cm各一幅」字樣，不適用輕巧版）" },
+        { file: "RS_05.3_產品圖片_800x800拷貝.jpg", alt: "材料完整，開盒即用", caption: "開盒即用", lightPlaceholder: "建議拍攝：輕巧版包裝開盒即用", notInLight: true },
+        { file: "RS_05.5_產品圖片_800x800拷貝.jpg", alt: "倒顏料操作，獨一無二的變化性", caption: "倒顏料", notInLight: true },
+        { video: "RS_video-gold-sticker.mp4", alt: "金色字貼近拍，實際手貼上畫布的過程，日光下微微閃耀", caption: "春字貼特寫", notInLight: true },
+        { file: "RS_05.10_產品圖片_800x800拷貝.jpg", alt: "福字貼近拍，15cm 規格", caption: "福字貼近拍", lightPlaceholder: "建議拍攝：福字貼近拍，15cm 規格（需重新拍攝，現有圖片印有「內含15cm、5cm各一幅」字樣，不適用輕巧版）", notInLight: true },
         { file: "RS_05.4_產品圖片_800x800拷貝.jpg", alt: "上牆材料，已幫你準備好", caption: "上牆材料", notInLight: true },
       ],
       kitPhoto: { file: "RS_05.1_產品圖片_800x800拷貝.jpg", alt: "經典紅內容物全展開" },
@@ -59,13 +63,15 @@
       name: "迎春粉",
       dot: "var(--swatch-welcome-pink)",
       ctaText: "var(--color-text-primary)",
+      // 2026-10：理由同經典紅那組同名註解，輕巧版「作品成色」只留成品模擬圖＋
+      // 內容物全展開兩張真實照片，其餘格子用 notInLight 排除（禮盒版不受影響）。
       gallery: [
-        { file: "RS+_04.2_產品主圖_800x800拷貝.jpg", alt: "春聯流動畫材料包，包裝盒與春字菱形成品合照", caption: "包裝與成品", lightPlaceholder: "建議拍攝：輕巧版包裝與春字菱形成品合照" },
+        { file: "RS+_04.2_產品主圖_800x800拷貝.jpg", alt: "春聯流動畫材料包，包裝盒與春字菱形成品合照", caption: "包裝與成品", lightPlaceholder: "建議拍攝：輕巧版包裝與春字菱形成品合照", notInLight: true },
         { file: "RS_05.8_產品圖片_800x800拷貝.jpg", alt: "成品模擬圖，四款春字菱形排列", caption: "成品模擬圖", lightFile: "fluid-art-light-main-pink.jpg", lightAlt: "迎春粉成品模擬圖，黑色「春」字菱形畫布" },
         { file: "RS_05.2_產品圖片_800x800拷貝.jpg", alt: "迎春粉內容物全展開", caption: "內容物全展開", lightFile: "fluid-art-light-kit-pink.jpg" },
-        { file: "RS_05.5P_產品圖片_800x800拷貝.jpg", alt: "倒顏料操作，獨一無二的變化性", caption: "倒顏料" },
-        { file: "RS_05.6_產品圖片_800x800拷貝.jpg", alt: "福字貼特寫，日光下微微閃耀", caption: "福字貼特寫" },
-        { file: "RS_05.12_產品圖片_800x800拷貝.jpg", alt: "春字貼應用中，15cm 規格", caption: "春字貼應用", lightPlaceholder: "建議拍攝：春字貼應用，15cm 規格（需重新拍攝，現有圖片印有「內含15cm、5cm各一幅」字樣，不適用輕巧版）" },
+        { file: "RS_05.5P_產品圖片_800x800拷貝.jpg", alt: "倒顏料操作，獨一無二的變化性", caption: "倒顏料", notInLight: true },
+        { file: "RS_05.6_產品圖片_800x800拷貝.jpg", alt: "福字貼特寫，日光下微微閃耀", caption: "福字貼特寫", notInLight: true },
+        { file: "RS_05.12_產品圖片_800x800拷貝.jpg", alt: "春字貼應用中，15cm 規格", caption: "春字貼應用", lightPlaceholder: "建議拍攝：春字貼應用，15cm 規格（需重新拍攝，現有圖片印有「內含15cm、5cm各一幅」字樣，不適用輕巧版）", notInLight: true },
         { file: "RS_05.11_產品圖片_800x800拷貝.jpg", alt: "福字貼近拍，5cm 規格", caption: "福字貼近拍", notInLight: true },
         { file: "RS_05.4_產品圖片_800x800拷貝.jpg", alt: "上牆材料，已幫你準備好", caption: "上牆材料", notInLight: true },
       ],
