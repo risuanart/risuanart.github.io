@@ -139,8 +139,8 @@
   // 固定組合）沒有「scheme」概念可以查 SCHEME_IMAGES，縮圖改直接用商品鍵
   // 查這張表，thumbHTML() 在 SCHEME_IMAGES 查無結果時會退回來查這裡。
   const PRODUCT_IMAGES = {
-    "fluid-art-light-red": BASE_PREFIX + "assets/images/products/fluid-art/RS_05.7_產品圖片_800x800拷貝.jpg",
-    "fluid-art-light-pink": BASE_PREFIX + "assets/images/products/fluid-art/RS_05.8_產品圖片_800x800拷貝.jpg",
+    "fluid-art-light-red": BASE_PREFIX + "assets/images/products/fluid-art/fluid-art-light-main-red.jpg",
+    "fluid-art-light-pink": BASE_PREFIX + "assets/images/products/fluid-art/fluid-art-light-main-pink.jpg",
     "sand-art-chun": BASE_PREFIX + "assets/images/products/sand-art-chun/sand-art-chun-main.jpg",
     "sand-art-fu": BASE_PREFIX + "assets/images/products/sand-art-fu/sand-art-fu-main.jpg",
     "sand-art-cai": BASE_PREFIX + "assets/images/products/sand-art-cai/sand-art-cai-main.jpg",

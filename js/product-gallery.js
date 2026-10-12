@@ -24,7 +24,7 @@
       // 實拍的平鋪材料照（2026-10 補拍），優先於 lightPlaceholder 使用，見 buildGallery()。
       gallery: [
         { file: "RS+_04.1_產品主圖_800x800拷貝.jpg", alt: "春聯流動畫材料包，包裝盒與福字菱形成品合照", caption: "包裝與成品", lightPlaceholder: "建議拍攝：輕巧版包裝與福字菱形成品合照" },
-        { file: "RS_05.7_產品圖片_800x800拷貝.jpg", alt: "成品模擬圖，四款福字菱形排列", caption: "成品模擬圖" },
+        { file: "RS_05.7_產品圖片_800x800拷貝.jpg", alt: "成品模擬圖，四款福字菱形排列", caption: "成品模擬圖", lightFile: "fluid-art-light-main-red.jpg", lightAlt: "經典紅成品模擬圖，金色「福」字菱形畫布" },
         { file: "RS_05.1_產品圖片_800x800拷貝.jpg", alt: "經典紅內容物全展開", caption: "內容物全展開", lightFile: "fluid-art-light-kit-red.jpg" },
         { file: "RS_05.3_產品圖片_800x800拷貝.jpg", alt: "材料完整，開盒即用", caption: "開盒即用", lightPlaceholder: "建議拍攝：輕巧版包裝開盒即用" },
         { file: "RS_05.5_產品圖片_800x800拷貝.jpg", alt: "倒顏料操作，獨一無二的變化性", caption: "倒顏料" },
@@ -61,7 +61,7 @@
       ctaText: "var(--color-text-primary)",
       gallery: [
         { file: "RS+_04.2_產品主圖_800x800拷貝.jpg", alt: "春聯流動畫材料包，包裝盒與春字菱形成品合照", caption: "包裝與成品", lightPlaceholder: "建議拍攝：輕巧版包裝與春字菱形成品合照" },
-        { file: "RS_05.8_產品圖片_800x800拷貝.jpg", alt: "成品模擬圖，四款春字菱形排列", caption: "成品模擬圖" },
+        { file: "RS_05.8_產品圖片_800x800拷貝.jpg", alt: "成品模擬圖，四款春字菱形排列", caption: "成品模擬圖", lightFile: "fluid-art-light-main-pink.jpg", lightAlt: "迎春粉成品模擬圖，黑色「春」字菱形畫布" },
         { file: "RS_05.2_產品圖片_800x800拷貝.jpg", alt: "迎春粉內容物全展開", caption: "內容物全展開", lightFile: "fluid-art-light-kit-pink.jpg" },
         { file: "RS_05.5P_產品圖片_800x800拷貝.jpg", alt: "倒顏料操作，獨一無二的變化性", caption: "倒顏料" },
         { file: "RS_05.6_產品圖片_800x800拷貝.jpg", alt: "福字貼特寫，日光下微微閃耀", caption: "福字貼特寫" },
@@ -135,6 +135,7 @@
     // 優先於 lightPlaceholder；兩者都沒有的格子兩版共用同一張 file。
     const showPlaceholder = (img) => version === "light" && img.lightPlaceholder && !img.lightFile;
     const fileFor = (img) => (version === "light" && img.lightFile ? img.lightFile : img.file);
+    const altFor = (img) => (version === "light" && img.lightFile && img.lightAlt ? img.lightAlt : img.alt);
 
     const images = items.map((img, i) => {
       let el;
@@ -154,7 +155,7 @@
       } else {
         el = document.createElement("img");
         el.src = IMG_BASE + fileFor(img);
-        el.alt = img.alt;
+        el.alt = altFor(img);
         el.width = 800;
         el.height = 800;
         if (i > 0) el.loading = "lazy";
@@ -171,7 +172,7 @@
       const num = String(i + 1).padStart(2, "0");
       // 說明句預設複用 alt 描述句；輕巧版顯示佔位圖的格子，改顯示佔位說明文字，
       // 讓收合的清單項目點開後也看得到「這裡缺什麼照片」。
-      const desc = showPlaceholder(img) ? img.lightPlaceholder : img.alt;
+      const desc = showPlaceholder(img) ? img.lightPlaceholder : altFor(img);
       li.innerHTML = `<div class="gallery__caption-row"><span class="gallery__caption-dot" aria-hidden="true"></span><span class="gallery__caption-num" aria-hidden="true">${num}</span><span>${img.caption}</span></div><p class="gallery__caption-desc">${desc}</p>`;
       captionsList.appendChild(li);
       return li;
