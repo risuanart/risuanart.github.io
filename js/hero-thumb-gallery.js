@@ -40,6 +40,19 @@
       "(prefers-reduced-motion: reduce)"
     ).matches;
 
+    function scrollThumbIntoView(idx) {
+      // 只捲動縮圖列自己的 scrollLeft，不用 Element.scrollIntoView()——
+      // 那個方法會一路往上找到所有可捲動的祖先容器（包含整個頁面），
+      // 使用者滑到頁面下方時，自動輪播還是會把整個頁面捲回相片牆的
+      // 位置，造成「輪播時頁面往上跳」的 bug。改成直接算縮圖相對縮圖列
+      // 的位置，只動 thumbsWrap 自己的水平捲動，垂直方向完全不碰。
+      var thumb = thumbs[idx];
+      var wrapRect = thumbsWrap.getBoundingClientRect();
+      var thumbRect = thumb.getBoundingClientRect();
+      var delta = (thumbRect.left + thumbRect.width / 2) - (wrapRect.left + wrapRect.width / 2);
+      thumbsWrap.scrollBy({ left: delta, behavior: "smooth" });
+    }
+
     function setActive(idx, scrollThumb) {
       index = idx;
       frames.forEach(function (f, i) {
@@ -49,7 +62,7 @@
         t.classList.toggle("is-active", i === idx);
       });
       if (scrollThumb) {
-        thumbs[idx].scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+        scrollThumbIntoView(idx);
       }
     }
 
