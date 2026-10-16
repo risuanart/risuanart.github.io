@@ -627,6 +627,17 @@
   background: var(--color-surface-light);
 }
 
+/* 藍羊相片牆：客人實際拍攝時是直式長方形構圖（相機原始比例接近
+   4:5），裁成正方形主圖會切掉構圖上下的留白。改成主圖維持 4:5 直式
+   長方形，縮圖列仍然維持正方形（.work__gallery-thumb 本來就是固定
+   60×60，object-fit:cover 自動裁出正方形縮圖，不用另外處理）——只有
+   「上方大圖」需要改比例，縮圖格狀排列本身跟長方形圖片混排會參差
+   不齊，維持正方形縮圖比較整齊。只在藍羊這個 .work__gallery--rect
+   變體套用，紅羊跟其他頁面的 .work__gallery 維持原本 1:1。 */
+.work__gallery--rect .work__gallery-main {
+  aspect-ratio: 4 / 5;
+}
+
 .work__gallery-main img {
   position: absolute;
   inset: 0;
