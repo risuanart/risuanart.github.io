@@ -8,17 +8,18 @@
    （.placeholder-box／.qty-stepper／.variant-select／.price-text／
    .chapter__title／.shop-grid／.shop-card 系列）的地方就直接重用，不重刻。
 
-   2026-09-19：這個樣板本來完全靠 .product-page 的環境留白撐出左右安全
-   邊界（見下面 .product-page 補回的 padding），那組留白已經整個拿掉
-   （見 products.css .product-page 說明），這裡補回來只是恢復原本就有
-   的手機/桌面基本留白，不是新加的功能。這個樣板的內容（圖庫＋購買面板
-   兩欄、色系比較工具）形狀跟一般文字頁不一樣，本來就需要比 840px 更寬
-   的版面（見下面 .ptpl-hero 兩欄／.ptpl-color-compare 900px），所以
-   沒有跟著套用全站 840px 內文容器，維持這個樣板自己原本的寬度數字。 */
-.product-page {
-  padding-left: var(--content-pad);
-  padding-right: var(--content-pad);
-}
+   2026-10 修正：這個樣板原本靠 .product-page 的環境留白撐出左右安全
+   邊界，products.css 拿掉那組留白後，這裡曾經補回一份「.product-page
+   padding-left/right」想恢復原本的留白——但羊Diss舞蹈紅／藍兩頁混用了
+   兩套系統（.chapter 來自 products.css，自己已經有一份 --content-pad
+   留白；.ptpl-artwork／.ptpl-transform 來自這個檔案，原本沒有自己的
+   留白，指望父層 .product-page 給）。兩套都载入同一頁時，.chapter 的
+   留白 + 這裡重新加回的 .product-page 留白疊加起來，變成「商品詳細」
+   這類 .chapter 區塊的左右邊界比其他沙畫頁面多了快一倍——使用者比對
+   後發現這個不一致。改法：拿掉這裡的 .product-page 留白（不要讓它
+   影響全站共用的 .product-page），留白責任全部下放給各元件自己（跟
+   .chapter 的做法一致），.ptpl-artwork／.ptpl-transform 兩個直接補上
+   自己的 --content-pad（見下面），不再依賴父層。 */
 
 /* ---------- 頂部公告橫幅（可留可不留，示範用） ----------
    跟 .site-header 一起包在 .site-topbar 裡（見下方），疊在整個頁面最上面
@@ -274,6 +275,11 @@
    行）。 */
 .ptpl-artwork {
   margin-top: var(--editorial-gap);
+  /* 自己的左右留白，不再依賴 .product-page（見檔案開頭 2026-10 修正
+     說明），跟 products.css 的 .chapter 同一套 --content-pad 數值，
+     維持全站一致的留白寬度。 */
+  padding-left: var(--content-pad);
+  padding-right: var(--content-pad);
 }
 .ptpl-artwork__eyebrow {
   margin: 0 0 var(--space-2);
@@ -340,6 +346,10 @@
    間距改大（--editorial-gap-double）做出明顯區隔。 */
 .ptpl-transform {
   margin-top: var(--space-10);
+  /* 理由同 .ptpl-artwork 開頭註解：自己的左右留白，不再依賴
+     .product-page。 */
+  padding-left: var(--content-pad);
+  padding-right: var(--content-pad);
 }
 .ptpl-transform h2 {
   margin: 0 0 var(--space-6);
