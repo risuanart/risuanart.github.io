@@ -603,6 +603,14 @@
   margin-top: var(--space-6);
 }
 
+/* 相片牆是 .work__intro 的第一個子元素時（商品名搬到下方後的新版面，
+   見 .work__title-block 說明），不需要原本給「上面還有系列眉標／標題
+   文字」預留的 24px 呼吸空間——上面只剩 .product-page 本身為固定定位
+   頂部列保留的留白，兩個疊在一起距離會比其他頁面明顯更遠。 */
+.work__intro > .work__gallery:first-child {
+  margin-top: 0;
+}
+
 .work__gallery-main {
   position: relative;
   width: 100%;
