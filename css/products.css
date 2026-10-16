@@ -254,6 +254,29 @@
   color: var(--color-button-primary);
 }
 
+/* 2026-10：耐性度星級——跟「難度」無關（不評斷使用者做不做得到），
+   評的是要投入多少時間／心力，跟 .work-heading__version 那個款式
+   標籤分開放，不是塞進同一個徽章。星星用純文字（currentColor），
+   不是另外切 SVG 圖，數量跟「約N小時」的實測時間並列：星星給人一眼
+   懂的份量感，時間給人可以驗證的事實，單獨放星星容易被質疑「憑什麼
+   是三顆」，單獨放時間又不夠一眼掃過去。年齡／是否需要家長協助這類
+   資訊刻意不另外寫，星級本身（時間越長、材質越多）會讓家長自己判斷
+   需不需要在旁協助，不用寫成限制文字。 */
+.work-heading__effort {
+  margin-top: var(--space-2);
+  margin-left: var(--space-2);
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--space-1);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.work-heading__effort-stars {
+  color: var(--color-brand);
+  letter-spacing: 1px;
+}
+
 /* 標籤前面的方塊數量＝成品件數：輕巧版一個方塊（單幅成品），禮盒版兩個
    方塊（雙幅成品），用 currentColor 跟著標籤文字同一個顏色走。 */
 .work-heading__version-marks {
