@@ -2391,6 +2391,12 @@ button.text-link {
   padding: 0 var(--space-4) 0 var(--space-4);
 }
 
+/* 2026-10：原本是純文字一行＋次要色小字提示，使用者反饋看不太出來是
+   可以點開的互動元件。改成跟 BUY 按鈕同一個主色（--color-button-primary）
+   的底線強調，用顏色（不是邊框/卡片底色）標出「這裡可以點」；展開後
+   色條與文字變成品牌橄欖綠（--color-brand），用顏色變化本身當作
+   「已展開」的狀態提示，不用額外加圖示。使用者從三個模擬方案
+   （卡片＋箭頭／純換圖示／底線＋變色）裡選的是這個。 */
 .accordion__toggle {
   font-size: var(--font-size-base);
   font-weight: 700;
@@ -2399,6 +2405,11 @@ button.text-link {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding-bottom: var(--space-2);
+  border-bottom: 2px solid var(--color-button-primary);
+  color: var(--color-button-primary);
+  transition: color var(--duration-fast) var(--ease-standard),
+    border-color var(--duration-fast) var(--ease-standard);
 }
 
 .accordion__toggle::-webkit-details-marker {
@@ -2406,10 +2417,14 @@ button.text-link {
 }
 
 .accordion__toggle::after {
-  content: "展開閱讀 ＋";
+  content: "展開 ＋";
   font-size: var(--font-size-xs);
-  font-weight: 400;
-  color: var(--color-text-secondary);
+  font-weight: 600;
+}
+
+.accordion[open] .accordion__toggle {
+  color: var(--color-brand);
+  border-bottom-color: var(--color-brand);
 }
 
 .accordion[open] .accordion__toggle::after {
