@@ -480,6 +480,142 @@
   object-fit: cover;
 }
 
+/* 首圖實拍相片牆：2026-10 新增，首款套用在羊Diss舞蹈（紅）。跟上面
+   .work__intro-photo（單張、限制 280px 窄版）是兩種情境——這款有超過
+   十張客人實拍照（成品、製作過程、材料平拍、情境照），放一張不夠，
+   全部用 .work__intro-photo 的 280px 窄版縮圖列排版又太擠，改成滿版寬度
+   （跟下面 .work-heading__buy-row 同一個內容欄寬），主圖＋單行可橫向
+   滑動的縮圖列，點縮圖切換主圖，手機直接手指滑、桌機 hover 會浮現
+   左右箭頭捲動——箭頭捲動手法直接沿用 .related-products__nav 那一套
+   （見該處說明），不是另外發明一種新的互動模式。
+   行為邏輯見 js/hero-thumb-gallery.js，靠 data-gallery 等 data 屬性掃描
+   初始化，不吃任何 JS 設定參數。 */
+.work__gallery {
+  width: 100%;
+  margin-top: var(--space-6);
+}
+
+.work__gallery-main {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: var(--radius-sharp);
+  background: var(--color-surface-light);
+}
+
+.work__gallery-main img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity var(--duration-fast) var(--ease-standard);
+}
+
+.work__gallery-main img.is-active {
+  opacity: 1;
+}
+
+.work__gallery-caption {
+  position: absolute;
+  left: var(--space-2);
+  bottom: var(--space-2);
+  z-index: 2;
+  padding: 0.3em var(--space-2);
+  border-radius: var(--radius-sharp);
+  background: color-mix(in srgb, #000 55%, transparent);
+  color: #fff;
+  font-size: var(--font-size-xs);
+  letter-spacing: 0.02em;
+}
+
+.work__gallery-strip-wrap {
+  position: relative;
+  margin-top: var(--space-2);
+}
+
+.work__gallery-thumbs {
+  display: flex;
+  gap: var(--space-2);
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+  padding: var(--space-1) 0;
+  scrollbar-width: none;
+}
+
+.work__gallery-thumbs::-webkit-scrollbar {
+  display: none;
+}
+
+.work__gallery-thumb {
+  flex: 0 0 60px;
+  width: 60px;
+  height: 60px;
+  scroll-snap-align: start;
+  border: 2px solid transparent;
+  border-radius: var(--radius-sharp);
+  padding: 0;
+  overflow: hidden;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity var(--duration-fast) var(--ease-standard),
+    border-color var(--duration-fast) var(--ease-standard);
+}
+
+.work__gallery-thumb img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.work__gallery-thumb.is-active {
+  opacity: 1;
+  border-color: var(--color-text-primary);
+}
+
+/* 左右箭頭：跟 .related-products__nav 同一套「平常透明、hover 整組容器
+   才淡入」手法與尺寸，這裡用獨立 class 名稱（而非直接共用
+   .related-products__nav）是因為這裡的容器是 .work__gallery-strip-wrap，
+   不是 .related-products，選取器命名空間要對得上各自的父層。 */
+.work__gallery-nav {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: color-mix(in srgb, var(--color-surface-light) 85%, transparent);
+  color: var(--color-text-primary);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity var(--duration-fast) var(--ease-standard);
+}
+
+.work__gallery-strip-wrap:hover .work__gallery-nav,
+.work__gallery-nav:focus-visible {
+  opacity: 1;
+}
+
+.work__gallery-nav--prev {
+  left: 0;
+}
+
+.work__gallery-nav--next {
+  right: 0;
+}
+
+@media (max-width: 549px) {
+  .work__gallery-nav {
+    display: none;
+  }
+}
+
 /* 完整示範影片：2026-10 新增，首款套用在燈上納福。客人拍的是 9:16
    直式影片（手機拍攝的完整製作過程），跟「怎麼玩」裡 4:3 的三支步驟
    特寫片段不同用途——那三支是分解動作特寫，這支是從頭到尾一鏡到底的
