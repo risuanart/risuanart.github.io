@@ -328,8 +328,13 @@
   font-size: var(--font-size-xs);
 }
 
+/* 系列名用品牌色（跟耐性度星級同一組 --color-brand），兩個都是「品牌
+   自己的分類／評等語彙」，刻意用同一色系區隔於「進階款」那個藍灰色
+   規格標籤（--color-button-primary，呼應購買按鈕色）——顏色本身在
+   做語意分組，不是隨機配色。 */
 .work__title-block__series {
-  color: var(--color-text-secondary);
+  color: var(--color-brand);
+  font-weight: 700;
   letter-spacing: 0.05em;
 }
 
