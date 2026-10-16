@@ -638,6 +638,15 @@
   aspect-ratio: 4 / 5;
 }
 
+/* 主圖第一張是正方形的成品插畫（不是客人拍的照片），放進比它更高的
+   4:5 長方形框時，object-fit:cover 預設會裁掉左右兩側，菱形構圖的角
+   會被切掉。第一張維持 contain（整張完整顯示，上下留白），其餘實拍
+   照片（第二張開始）才用 cover 裁滿長方形——只有第一張是固定 DOM
+   順序（永遠是第一個 img），用 :first-child 鎖定，不用另外加 class。 */
+.work__gallery--rect .work__gallery-main img:first-child {
+  object-fit: contain;
+}
+
 .work__gallery-main img {
   position: absolute;
   inset: 0;
