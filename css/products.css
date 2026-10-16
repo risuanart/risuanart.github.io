@@ -761,8 +761,14 @@
    （font-weight 600）區分出它是一組步驟的標題，不只是欄位提示。放在
    該組第一個 .chapter__step 前面，不是獨立另包一層容器，維持跟現有
    .chapter__steps 同一個 flex column 排列，不用改版面結構。 */
+/* 2026-10 修正：.chapter__steps 的 flex gap 對每個直屬子元素一視同仁，
+   這個標籤跟上一步、跟自己這組第一步的間距原本一樣大，讀起來反而像是
+   在講「上面那支影片」的註解，不是「接下來這組」的標題——跟 .chapter__step
+   那則同類間距 bug 的修正理由一樣（見上方註解），這裡用 margin 蓋過
+   gap：往上額外加大到接近一個新段落的留白（--space-16），往下用負值
+   蓋掉大半 gap，讓它跟自己這組的第一步幾乎貼在一起（--space-2）。 */
 .chapter__step-group-title {
-  margin: 0;
+  margin: calc(var(--space-16) - var(--space-10)) 0 calc(var(--space-2) - var(--space-10));
   font-size: var(--font-size-sm);
   font-weight: 600;
   letter-spacing: 0.02em;
