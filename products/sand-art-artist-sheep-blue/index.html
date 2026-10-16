@@ -149,11 +149,49 @@
     <header class="work__intro">
       <!-- 2026-10：比照紅羊改版（見 css/products.css .work__title-block
            說明）——商品名搬到照片下方、價格正上方，靠左對齊，系列眉標／
-           進階款／耐性度合併成一行小字，一句話介紹放最後。藍羊目前還是
-           單張固定照片（還沒有像紅羊那樣的多張實拍相片牆素材），等照片
-           到位後要把這裡換成 .work__gallery 那組相片牆元件，跟紅羊一樣。 -->
-      <div class="work__intro-photo fade-in">
-        <img src="../../assets/images/products/sand-art-artist/sand-art-artist-blue-main.jpg" alt="藝術家系列・羊Diss舞蹈 Sheep La Danse / 藍成品參考圖" width="800" height="800" loading="lazy">
+           進階款／耐性度合併成一行小字，一句話介紹放最後。 -->
+      <!-- 首圖實拍相片牆：主圖＋可橫向滑動縮圖列，共 13 張（成品、製作
+           過程、材料平拍、細節特寫），跟紅羊同一套元件（見
+           js/hero-thumb-gallery.js／css/products.css .work__gallery
+           說明），進頁面自動循環播放，滑鼠移進去暫停、手動點縮圖／
+           箭頭／滑動縮圖列後永久停止自動播放。藍款比紅款多絨毛砂、
+           碎金箔、亮粉三種材質，縮圖裡刻意涵蓋到亮粉的鋪色／細節
+           特寫，不是只有紅款那組材質的翻版。 -->
+      <div class="work__gallery fade-in" data-gallery>
+        <div class="work__gallery-main" data-gallery-main>
+          <img src="../../assets/images/products/sand-art-artist/sand-art-artist-blue-main.jpg" alt="成品參考圖" width="1600" height="1600" loading="eager" class="is-active" data-gallery-frame>
+          <img src="../../assets/images/products/sand-art-artist/sand-art-artist-blue-gallery-02.jpg" alt="撕開貼紙過程" width="1600" height="1600" loading="lazy" data-gallery-frame>
+          <img src="../../assets/images/products/sand-art-artist/sand-art-artist-blue-gallery-03.jpg" alt="材料與成品合拍" width="1600" height="1600" loading="lazy" data-gallery-frame>
+          <img src="../../assets/images/products/sand-art-artist/sand-art-artist-blue-gallery-04.jpg" alt="銀箔細節操作" width="1600" height="1600" loading="lazy" data-gallery-frame>
+          <img src="../../assets/images/products/sand-art-artist/sand-art-artist-blue-gallery-05.jpg" alt="絨毛砂與金箔細節" width="1600" height="1600" loading="lazy" data-gallery-frame>
+          <img src="../../assets/images/products/sand-art-artist/sand-art-artist-blue-gallery-06.jpg" alt="細砂鋪色特寫" width="1600" height="1600" loading="lazy" data-gallery-frame>
+          <img src="../../assets/images/products/sand-art-artist/sand-art-artist-blue-gallery-07.jpg" alt="倒細砂過程" width="1600" height="1600" loading="lazy" data-gallery-frame>
+          <img src="../../assets/images/products/sand-art-artist/sand-art-artist-blue-gallery-08.jpg" alt="掃入亮粉過程" width="1600" height="1600" loading="lazy" data-gallery-frame>
+          <img src="../../assets/images/products/sand-art-artist/sand-art-artist-blue-gallery-09.jpg" alt="亮粉細節特寫" width="1600" height="1600" loading="lazy" data-gallery-frame>
+          <img src="../../assets/images/products/sand-art-artist/sand-art-artist-blue-gallery-10.jpg" alt="倒亮粉過程" width="1600" height="1600" loading="lazy" data-gallery-frame>
+          <img src="../../assets/images/products/sand-art-artist/sand-art-artist-blue-gallery-11.jpg" alt="絨毛砂草叢特寫" width="1600" height="1600" loading="lazy" data-gallery-frame>
+          <img src="../../assets/images/products/sand-art-artist/sand-art-artist-blue-gallery-12.jpg" alt="製作過程・收尾" width="1600" height="1600" loading="lazy" data-gallery-frame>
+          <img src="../../assets/images/products/sand-art-artist/sand-art-artist-blue-gallery-13.jpg" alt="完成品手持特寫" width="1600" height="1600" loading="lazy" data-gallery-frame>
+        </div>
+        <div class="work__gallery-strip-wrap">
+          <button type="button" class="work__gallery-nav work__gallery-nav--prev" data-gallery-nav="-1" aria-label="上一張"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
+          <div class="work__gallery-thumbs" data-gallery-thumbs>
+            <button type="button" class="work__gallery-thumb is-active" data-gallery-thumb aria-label="切換到：成品參考圖"><img src="../../assets/images/products/sand-art-artist/sand-art-artist-blue-main.jpg" alt="" loading="lazy"></button>
+            <button type="button" class="work__gallery-thumb" data-gallery-thumb aria-label="切換到：撕開貼紙過程"><img src="../../assets/images/products/sand-art-artist/sand-art-artist-blue-gallery-02.jpg" alt="" loading="lazy"></button>
+            <button type="button" class="work__gallery-thumb" data-gallery-thumb aria-label="切換到：材料與成品合拍"><img src="../../assets/images/products/sand-art-artist/sand-art-artist-blue-gallery-03.jpg" alt="" loading="lazy"></button>
+            <button type="button" class="work__gallery-thumb" data-gallery-thumb aria-label="切換到：銀箔細節操作"><img src="../../assets/images/products/sand-art-artist/sand-art-artist-blue-gallery-04.jpg" alt="" loading="lazy"></button>
+            <button type="button" class="work__gallery-thumb" data-gallery-thumb aria-label="切換到：絨毛砂與金箔細節"><img src="../../assets/images/products/sand-art-artist/sand-art-artist-blue-gallery-05.jpg" alt="" loading="lazy"></button>
+            <button type="button" class="work__gallery-thumb" data-gallery-thumb aria-label="切換到：細砂鋪色特寫"><img src="../../assets/images/products/sand-art-artist/sand-art-artist-blue-gallery-06.jpg" alt="" loading="lazy"></button>
+            <button type="button" class="work__gallery-thumb" data-gallery-thumb aria-label="切換到：倒細砂過程"><img src="../../assets/images/products/sand-art-artist/sand-art-artist-blue-gallery-07.jpg" alt="" loading="lazy"></button>
+            <button type="button" class="work__gallery-thumb" data-gallery-thumb aria-label="切換到：掃入亮粉過程"><img src="../../assets/images/products/sand-art-artist/sand-art-artist-blue-gallery-08.jpg" alt="" loading="lazy"></button>
+            <button type="button" class="work__gallery-thumb" data-gallery-thumb aria-label="切換到：亮粉細節特寫"><img src="../../assets/images/products/sand-art-artist/sand-art-artist-blue-gallery-09.jpg" alt="" loading="lazy"></button>
+            <button type="button" class="work__gallery-thumb" data-gallery-thumb aria-label="切換到：倒亮粉過程"><img src="../../assets/images/products/sand-art-artist/sand-art-artist-blue-gallery-10.jpg" alt="" loading="lazy"></button>
+            <button type="button" class="work__gallery-thumb" data-gallery-thumb aria-label="切換到：絨毛砂草叢特寫"><img src="../../assets/images/products/sand-art-artist/sand-art-artist-blue-gallery-11.jpg" alt="" loading="lazy"></button>
+            <button type="button" class="work__gallery-thumb" data-gallery-thumb aria-label="切換到：製作過程・收尾"><img src="../../assets/images/products/sand-art-artist/sand-art-artist-blue-gallery-12.jpg" alt="" loading="lazy"></button>
+            <button type="button" class="work__gallery-thumb" data-gallery-thumb aria-label="切換到：完成品手持特寫"><img src="../../assets/images/products/sand-art-artist/sand-art-artist-blue-gallery-13.jpg" alt="" loading="lazy"></button>
+          </div>
+          <button type="button" class="work__gallery-nav work__gallery-nav--next" data-gallery-nav="1" aria-label="下一張"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+        </div>
       </div>
 
       <div class="work__title-block fade-in delay-1">
