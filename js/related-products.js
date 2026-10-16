@@ -93,6 +93,44 @@
     nextBtn.addEventListener("click", () => {
       track.scrollBy({ left: scrollStep(), behavior: "smooth" });
     });
+
+    // 進場時輕輕「探頭」一下：卡片列只是橫向捲動、沒有左右箭頭常駐可見
+    // （箭頭平常透明，要 hover 才浮現），使用者滑到這個區塊很容易不知道
+    // 右邊還有更多商品。捲進畫面第一次，自動往右探一小段再滑回起點，
+    // 用動作暗示「這排可以滑」，不是真的要使用者看完全部卡片，所以探一下
+    // 就好、不是整排輪播；使用者如果在探頭動畫跑之前就自己動手滑了，
+    // 直接取消這個提示動畫，不要跟手動操作打架。
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    if (!prefersReducedMotion) {
+      let userInteracted = false;
+      const markInteracted = () => {
+        userInteracted = true;
+      };
+      track.addEventListener("pointerdown", markInteracted, { once: true });
+
+      const peekObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            peekObserver.disconnect();
+            setTimeout(() => {
+              if (userInteracted) return;
+              const peek = Math.min(scrollStep() * 0.6, 220);
+              track.scrollBy({ left: peek, behavior: "smooth" });
+              setTimeout(() => {
+                if (userInteracted) return;
+                track.scrollTo({ left: 0, behavior: "smooth" });
+              }, 900);
+            }, 500);
+          });
+        },
+        { threshold: 0 }
+      );
+      peekObserver.observe(track);
+    }
   }
 
   function init() {
