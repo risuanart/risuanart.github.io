@@ -755,6 +755,20 @@
   padding-top: var(--space-10);
 }
 
+/* 2026-10：羊Diss舞蹈進階款材質比基礎款多（細砂＋絨毛砂兩種工法），
+   「怎麼玩」步驟改分成兩組，這個小標籤標出「接下來這幾步是哪種材質」，
+   跟 .work-heading__field-label 同一套「次要色小字」語彙，但稍微加粗
+   （font-weight 600）區分出它是一組步驟的標題，不只是欄位提示。放在
+   該組第一個 .chapter__step 前面，不是獨立另包一層容器，維持跟現有
+   .chapter__steps 同一個 flex column 排列，不用改版面結構。 */
+.chapter__step-group-title {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--color-text-secondary);
+}
+
 .chapter__step-head {
   margin: 0;
   display: flex;
