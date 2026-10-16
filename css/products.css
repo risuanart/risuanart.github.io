@@ -812,15 +812,6 @@
   overflow: hidden;
 }
 
-/* 2026-10：羊Diss舞蹈（紅）／財／福星「怎麼玩」的素材是手機直拍
-   （3:4），跟燈上納福那三支原本就是橫拍、天生吻合 4:3 不一樣——硬套
-   用基礎款的 4:3 框會需要裁掉畫面中快一半的高度。改用這個修飾
-   class 讓框跟著素材本身的方向走（3:4，直式），不裁切，燈上納福
-   那頁沒有加這個 class，維持原本的 4:3 不受影響。 */
-.chapter__step-photo--portrait {
-  aspect-ratio: 3 / 4;
-}
-
 .chapter__step-photo .placeholder-box {
   width: 100%;
   height: 100%;
