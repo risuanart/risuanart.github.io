@@ -518,19 +518,6 @@
   opacity: 1;
 }
 
-.work__gallery-caption {
-  position: absolute;
-  left: var(--space-2);
-  bottom: var(--space-2);
-  z-index: 2;
-  padding: 0.3em var(--space-2);
-  border-radius: var(--radius-sharp);
-  background: color-mix(in srgb, #000 55%, transparent);
-  color: #fff;
-  font-size: var(--font-size-xs);
-  letter-spacing: 0.02em;
-}
-
 .work__gallery-strip-wrap {
   position: relative;
   margin-top: var(--space-2);
