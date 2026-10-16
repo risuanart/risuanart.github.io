@@ -147,18 +147,28 @@
   <main class="product-page work">
 
     <header class="work__intro">
-      <p class="work-heading__series fade-in">藝術家系列</p>
-      <h1 class="work-heading fade-in"><span class="inner">羊Diss舞蹈<br class="work-heading__break">Sheep La Danse / 藍</span></h1>
-      <p class="work-heading__version fade-in delay-1"><span class="work-heading__version-marks" aria-hidden="true"><span></span></span>進階款</p>
-      <p class="work-heading__effort fade-in delay-1" aria-label="耐性度：三顆星，實測完成約需 3 小時"><span class="work-heading__effort-stars" aria-hidden="true">★★★</span><span>耐性度・約3小時</span></p>
-      <p class="work-heading__sub fade-in delay-1">2026</p>
-      <p class="intro fade-in delay-2">撕開、倒沙、鋪色，<br>加入絨毛砂、碎金箔與亮粉，疊出更豐富的層次。</p>
-
-      <div class="work__intro-photo fade-in delay-2">
+      <!-- 2026-10：比照紅羊改版（見 css/products.css .work__title-block
+           說明）——商品名搬到照片下方、價格正上方，靠左對齊，系列眉標／
+           進階款／耐性度合併成一行小字，一句話介紹放最後。藍羊目前還是
+           單張固定照片（還沒有像紅羊那樣的多張實拍相片牆素材），等照片
+           到位後要把這裡換成 .work__gallery 那組相片牆元件，跟紅羊一樣。 -->
+      <div class="work__intro-photo fade-in">
         <img src="../../assets/images/products/sand-art-artist/sand-art-artist-blue-main.jpg" alt="藝術家系列・羊Diss舞蹈 Sheep La Danse / 藍成品參考圖" width="800" height="800" loading="lazy">
       </div>
 
-      <div class="work-heading__buy-row fade-in delay-3">
+      <div class="work__title-block fade-in delay-1">
+        <h1 class="work-heading"><span class="inner"><span class="work-heading__cn">羊Diss舞蹈</span> <span class="work-heading__en">Sheep La Danse / 藍</span></span></h1>
+        <div class="work__title-block__meta">
+          <p class="work-heading__version"><span class="work-heading__version-marks" aria-hidden="true"><span></span></span>進階款</p>
+          <span class="work__title-block__sep" aria-hidden="true">・</span>
+          <span class="work__title-block__series">藝術家系列</span>
+          <span class="work__title-block__sep" aria-hidden="true">・</span>
+          <p class="work-heading__effort" aria-label="耐性度：三顆星，實測完成約需 3 小時"><span class="work-heading__effort-stars" aria-hidden="true">★★★</span><span>耐性度・約3小時</span></p>
+        </div>
+        <p class="work__title-block__intro">撕開、倒沙、鋪色，加入絨毛砂、碎金箔與亮粉，疊出更豐富的層次。</p>
+      </div>
+
+      <div class="work-heading__buy-row fade-in delay-2">
         <div class="work-heading__buy-text">
           <p class="work-heading__price">$820</p>
         </div>
