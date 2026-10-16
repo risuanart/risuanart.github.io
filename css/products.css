@@ -611,6 +611,13 @@
   margin-top: 0;
 }
 
+/* 同樣的道理套用在春聯砂畫 7 款單一配色頁的 .work__intro-photo（配色
+   展示 carousel）——商品名搬到下方後，這組 carousel 也變成 .work__intro
+   的第一個子元素，不需要原本給「上面還有標題文字」預留的 24px。 */
+.work__intro > .work__intro-photo:first-child {
+  margin-top: 0;
+}
+
 .work__gallery-main {
   position: relative;
   width: 100%;

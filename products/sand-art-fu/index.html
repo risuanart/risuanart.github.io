@@ -152,15 +152,13 @@
          這頁是給它一個獨立商品頁／連結，做法跟「春」完全一致——單一
          配色、無雙配色示範，H1 直接放完整商品名稱。 -->
     <header class="work__intro">
-      <p class="work-heading__series fade-in">春聯砂畫材料包</p>
-      <h1 class="work-heading fade-in"><span class="inner">福星<br class="work-heading__break">Starry Fu</span></h1>
-      <p class="work-heading__version fade-in delay-1"><span class="work-heading__version-marks" aria-hidden="true"><span></span></span>基礎款</p>
-      <p class="work-heading__sub fade-in delay-1">2026</p>
-      <p class="intro fade-in delay-2">撕開、倒沙、鋪色，<br>簡單技法，拼貼出陪伴一年的春聯。</p>
-
-      <!-- 成品主圖：跟 sand-art-chun.html 同一套 .work__intro-photo
-           元件（見 css/products.css），置中窄版方形主圖。 -->
-      <div class="work__intro-photo work__intro-photo--carousel fade-in delay-2" data-hero-carousel>
+      <!-- 2026-10：比照紅羊／藍羊改版（見 css/products.css
+           .work__title-block 說明）——商品名搬到配色示範照下方、
+           價格正上方，靠左對齊，系列眉標／基礎款標籤合併成一行
+           小字，一句話介紹放最後。這頁沒有耐性度星級——基礎款
+           材料包還沒有實測完成時間，星級只先用在紅／藍羊兩款
+           進階款，避免憑感覺捏造數字。 -->
+      <div class="work__intro-photo work__intro-photo--carousel fade-in" data-hero-carousel>
         <img src="../../assets/images/products/sand-art-fu/sand-art-fu-main.jpg" alt="春聯砂畫材料包・福星 Starry Fu 成品參考圖（出貨配色）" width="800" height="800" loading="lazy" class="is-active" data-carousel-frame>
         <img src="../../assets/images/products/sand-art-fu/sand-art-fu-combo-2.png" alt="「福星 Starry Fu」配色示範，僅供搭配參考，非出貨配色" loading="lazy" data-carousel-frame>
         <img src="../../assets/images/products/sand-art-fu/sand-art-fu-combo-3.png" alt="「福星 Starry Fu」配色示範，僅供搭配參考，非出貨配色" loading="lazy" data-carousel-frame>
@@ -170,7 +168,18 @@
           <svg class="icon-play" viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M7 5 L19 12 L7 19 Z"></path></svg>
         </button>
       </div>
-      <p class="work-heading__colorway-note fade-in delay-2">砂畫底板出貨為圖一配色（固定），其餘為同組沙色重新搭配參考，無法指定砂畫底板配色。</p>
+      <p class="work-heading__colorway-note fade-in delay-1">砂畫底板出貨為圖一配色（固定），其餘為同組沙色重新搭配參考，無法指定砂畫底板配色。</p>
+
+      <div class="work__title-block fade-in delay-2">
+        <h1 class="work-heading"><span class="inner"><span class="work-heading__cn">福星</span> <span class="work-heading__en">Starry Fu</span></span></h1>
+        <div class="work__title-block__meta">
+          <p class="work-heading__version"><span class="work-heading__version-marks" aria-hidden="true"><span></span></span>基礎款</p>
+          <span class="work__title-block__sep" aria-hidden="true">・</span>
+          <span class="work__title-block__series">春聯砂畫材料包</span>
+        </div>
+        <p class="work__title-block__intro">撕開、倒沙、鋪色，簡單技法，拼貼出陪伴一年的春聯。</p>
+      </div>
+
 
       <!-- 「福」跟「春」一樣只有一組配色（棗紅底，白色／洋黃／青色／
            粉紅／冰紫／淺藍六色點綴星星與福字，使用者確認過的定案色，

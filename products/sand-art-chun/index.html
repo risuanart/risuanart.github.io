@@ -157,19 +157,13 @@
          商品自己的名字（跟羊Diss舞蹈 Sheep La Danse 頁同一套做法，只是那頁眉標換成
          「藝術家系列」，因為它不是春聯主題）。 -->
     <header class="work__intro">
-      <p class="work-heading__series fade-in">春聯砂畫材料包</p>
-      <h1 class="work-heading fade-in"><span class="inner">春結<br class="work-heading__break">Chun Tied</span></h1>
-      <p class="work-heading__version fade-in delay-1"><span class="work-heading__version-marks" aria-hidden="true"><span></span></span>基礎款</p>
-      <p class="work-heading__sub fade-in delay-1">2026</p>
-      <p class="intro fade-in delay-2">撕開、倒沙、鋪色，<br>簡單技法，拼貼出陪伴一年的春聯。</p>
-
-      <!-- 成品主圖：這頁原本完全沒有「做完長什麼樣子」的照片位置（跟其他
-           商品頁不一樣，那些頁面靠色系選擇器/圖案卡的縮圖順便帶到），
-           因為春只有單一配色、沒有選擇器可以借。獨立補一個置中的方形
-           主圖，跟通用的 .kit-section__photo（滿版寬度，給 chapter 內
-           材料照用）分開一個頁面專屬 class，因為這裡在 .work__intro
-           窄版標題區內，需要限制寬度＋置中，不是滿版。 -->
-      <div class="work__intro-photo work__intro-photo--carousel fade-in delay-2" data-hero-carousel>
+      <!-- 2026-10：比照紅羊／藍羊改版（見 css/products.css
+           .work__title-block 說明）——商品名搬到配色示範照下方、
+           價格正上方，靠左對齊，系列眉標／基礎款標籤合併成一行
+           小字，一句話介紹放最後。這頁沒有耐性度星級——基礎款
+           材料包還沒有實測完成時間，星級只先用在紅／藍羊兩款
+           進階款，避免憑感覺捏造數字。 -->
+      <div class="work__intro-photo work__intro-photo--carousel fade-in" data-hero-carousel>
         <img src="../../assets/images/products/sand-art-chun/sand-art-chun-main.jpg" alt="春聯砂畫材料包・春結 Chun Tied 成品參考圖（出貨配色）" width="800" height="800" loading="lazy" class="is-active" data-carousel-frame>
         <img src="../../assets/images/products/sand-art-chun/sand-art-chun-combo-2.png" alt="「春結 Chun Tied」配色示範，僅供搭配參考，非出貨配色" loading="lazy" data-carousel-frame>
         <img src="../../assets/images/products/sand-art-chun/sand-art-chun-combo-3.png" alt="「春結 Chun Tied」配色示範，僅供搭配參考，非出貨配色" loading="lazy" data-carousel-frame>
@@ -179,7 +173,18 @@
           <svg class="icon-play" viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M7 5 L19 12 L7 19 Z"></path></svg>
         </button>
       </div>
-      <p class="work-heading__colorway-note fade-in delay-2">砂畫底板出貨為圖一配色（固定），其餘為同組沙色重新搭配參考，無法指定砂畫底板配色。</p>
+      <p class="work-heading__colorway-note fade-in delay-1">砂畫底板出貨為圖一配色（固定），其餘為同組沙色重新搭配參考，無法指定砂畫底板配色。</p>
+
+      <div class="work__title-block fade-in delay-2">
+        <h1 class="work-heading"><span class="inner"><span class="work-heading__cn">春結</span> <span class="work-heading__en">Chun Tied</span></span></h1>
+        <div class="work__title-block__meta">
+          <p class="work-heading__version"><span class="work-heading__version-marks" aria-hidden="true"><span></span></span>基礎款</p>
+          <span class="work__title-block__sep" aria-hidden="true">・</span>
+          <span class="work__title-block__series">春聯砂畫材料包</span>
+        </div>
+        <p class="work__title-block__intro">撕開、倒沙、鋪色，簡單技法，拼貼出陪伴一年的春聯。</p>
+      </div>
+
 
       <!-- 「春」目前確認只有一組配色（確切色名待命名，見下面商品詳細的
            分裝沙備註），不是雙配色示範——沒有選項可選，不需要色票／
