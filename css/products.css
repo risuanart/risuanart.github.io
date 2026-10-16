@@ -312,6 +312,17 @@
   white-space: nowrap;
 }
 
+/* 中文商品名／英文譯名字距、字級分開處理：中文部分字距拉寬一些，
+   英文部分縮小一階，兩個方向互相抵銷，維持 320px 最窄螢幕也還是
+   一行（拉寬中文會變長，縮小英文會變短，兩個加起來淨變化很小）。 */
+.work-heading__cn {
+  letter-spacing: 0.08em;
+}
+
+.work-heading__en {
+  font-size: 0.85em;
+}
+
 /* 系列眉標／進階款標籤／耐性度星級合併成同一行緊湊小字：跟商品名
    拉開份量差距，所以這裡全部縮小字級、收緊內距，不是直接沿用
    .work-heading__version／.work-heading__effort 原本（給置中大標題
