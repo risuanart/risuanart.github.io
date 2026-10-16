@@ -277,6 +277,58 @@
   letter-spacing: 1px;
 }
 
+/* 商品名搬到相片牆下方：2026-10 新增，首款套用在羊Diss舞蹈（紅）。
+   跟上面 .work-heading（置中、大字級、可以斷行）是同一個商品名稱，
+   但這裡的使用情境不同——相片牆下方、價格正上方，是「靠左、精簡、
+   不斷行」的版面（參考 koyama.com.tw 的商品頁排版），不是首圖上方
+   那種大標題排版，所以用獨立的 .work__title-block 命名空間，不直接
+   覆寫 .work-heading（那個 class 其他敘事頁還在用原本的置中大標題）。
+
+   H1 刻意讓商品名「羊Diss舞蹈 Sheep La Danse（紅）」維持單行不斷行：
+   斷成兩行在這個精簡版面裡會比置中大標題更顯得排版沒設計過。字級用
+   clamp() 隨螢幕寬度縮放，不是固定死一個數字——手機最窄螢幕（320px，
+   扣掉左右 content-pad 20px 剩 280px 可用寬度）需要縮到 16px 才塞得下
+   這串字（用無頭瀏覽器實測過：16px 渲染寬度約 261px，含安全邊界），
+   螢幕越寬字級越大，公式推導見下方計算，不是隨便猜的係數：
+     16px = 320px 螢幕時的目標字級，20px = 480px 螢幕時的目標字級
+     （480px 以上這個情境已經有余裕，不用再繼續放大到跟主標題一樣大）
+     斜率 (20-16)/(4.8vw-3.2vw) = 4/1.6 = 2.5vw，截距 16-3.2*2.5=8px
+     → clamp(1rem, 0.5rem + 2.5vw, 1.3rem)。 */
+.work__title-block {
+  margin-top: var(--space-6);
+  text-align: left;
+}
+
+.work__title-block .work-heading {
+  font-size: clamp(1rem, 0.5rem + 2.5vw, 1.3rem);
+  line-height: 1.25;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+/* 進階款標籤＋耐性度星級合併成同一行：兩個 class 原本各自是獨立的
+   <p>，在其他情境（例如還沒搬動標題前的舊排版）維持直向堆疊，這裡
+   只在 .work__title-block__meta 這個容器裡局部覆寫成同一行內距，不
+   更動 .work-heading__version／.work-heading__effort 本身的規則（這
+   兩個 class 其他商品頁單獨使用時還是要維持各自的 margin-top 直向
+   堆疊行為）。 */
+.work__title-block__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+}
+
+.work__title-block__meta .work-heading__version,
+.work__title-block__meta .work-heading__effort {
+  margin-top: 0;
+}
+
+.work__title-block__meta .work-heading__effort {
+  margin-left: 0;
+}
+
 /* 標籤前面的方塊數量＝成品件數：輕巧版一個方塊（單幅成品），禮盒版兩個
    方塊（雙幅成品），用 currentColor 跟著標籤文字同一個顏色走。 */
 .work-heading__version-marks {
