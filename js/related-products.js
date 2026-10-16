@@ -94,42 +94,88 @@
       track.scrollBy({ left: scrollStep(), behavior: "smooth" });
     });
 
-    // 進場時輕輕「探頭」一下：卡片列只是橫向捲動、沒有左右箭頭常駐可見
+    // 自動往右持續捲動：卡片列只是橫向捲動、沒有左右箭頭常駐可見
     // （箭頭平常透明，要 hover 才浮現），使用者滑到這個區塊很容易不知道
-    // 右邊還有更多商品。捲進畫面第一次，自動往右探一小段再滑回起點，
-    // 用動作暗示「這排可以滑」，不是真的要使用者看完全部卡片，所以探一下
-    // 就好、不是整排輪播；使用者如果在探頭動畫跑之前就自己動手滑了，
-    // 直接取消這個提示動畫，不要跟手動操作打架。
+    // 右邊還有更多商品，光探頭一下使用者可能沒注意到，改成持續慢慢往右
+    // 捲，捲到底就跳回開頭繼續捲，一直循環——這個區塊在頁面偏下方，跟
+    // hero-colorway-carousel.js 給相關商品卡片縮圖用 data-carousel-loop
+    // 的理由一樣：訪客通常滑到這裡時間點不固定，「捲一輪就停」容易停在
+    // 使用者根本沒看到的狀態。滑鼠移進去暫停（手離開繼續），使用者一旦
+    // 手動滑動／點箭頭，永久停止自動捲動、把控制權交還給使用者。
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
 
     if (!prefersReducedMotion) {
-      let userInteracted = false;
-      const markInteracted = () => {
-        userInteracted = true;
-      };
-      track.addEventListener("pointerdown", markInteracted, { once: true });
+      const SPEED_PX_PER_SEC = 28;
+      let rafId = null;
+      let lastTs = null;
+      let stoppedByUser = false;
+      // track.scrollLeft 讀回來一定是整數（瀏覽器會把小數部分捨去），
+      // 每禎只移動不到 1px 的話，讀回來再疊加等於每次都從同一個整數
+      // 重新出發、小數部分永遠被捨掉，畫面看起來完全沒在動。改成自己
+      // 用浮點數變數記錄「真正的」位置，只有寫入 scrollLeft 時才取整數，
+      // 不要用讀回來的值當下一禎計算的基準。
+      let pos = track.scrollLeft;
 
-      const peekObserver = new IntersectionObserver(
+      function tick(ts) {
+        if (lastTs === null) lastTs = ts;
+        const dt = ts - lastTs;
+        lastTs = ts;
+
+        const max = track.scrollWidth - track.clientWidth;
+        if (max > 0) {
+          pos += (SPEED_PX_PER_SEC * dt) / 1000;
+          if (pos >= max) pos = 0;
+          track.scrollLeft = pos;
+        }
+        rafId = requestAnimationFrame(tick);
+      }
+
+      function pauseAutoScroll() {
+        if (rafId) {
+          cancelAnimationFrame(rafId);
+          rafId = null;
+        }
+        lastTs = null;
+        pos = track.scrollLeft;
+        // 卡片列本身用 scroll-snap-type:x mandatory 讓手動滑動／點箭頭時
+        // 停在卡片邊界，自動捲動期間關掉它——不然瀏覽器會一直想把連續
+        // 捲動的中間值吸附回最近的卡片邊界，跟 rAF 逐格微調互相打架，
+        // 畫面會頓頓卡卡的。暫停／停止時恢復，交還給使用者手動操作用。
+        track.style.scrollSnapType = "";
+      }
+
+      function resumeAutoScroll() {
+        if (stoppedByUser || rafId) return;
+        track.style.scrollSnapType = "none";
+        rafId = requestAnimationFrame(tick);
+      }
+
+      function stopAutoScrollForGood() {
+        stoppedByUser = true;
+        pauseAutoScroll();
+      }
+
+      track.addEventListener("pointerdown", stopAutoScrollForGood);
+      prevBtn.addEventListener("click", stopAutoScrollForGood);
+      nextBtn.addEventListener("click", stopAutoScrollForGood);
+      section.addEventListener("mouseenter", pauseAutoScroll);
+      section.addEventListener("mouseleave", resumeAutoScroll);
+
+      const startObserver = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
-            if (!entry.isIntersecting) return;
-            peekObserver.disconnect();
-            setTimeout(() => {
-              if (userInteracted) return;
-              const peek = Math.min(scrollStep() * 0.6, 220);
-              track.scrollBy({ left: peek, behavior: "smooth" });
-              setTimeout(() => {
-                if (userInteracted) return;
-                track.scrollTo({ left: 0, behavior: "smooth" });
-              }, 900);
-            }, 500);
+            if (entry.isIntersecting) {
+              resumeAutoScroll();
+            } else {
+              pauseAutoScroll();
+            }
           });
         },
         { threshold: 0 }
       );
-      peekObserver.observe(track);
+      startObserver.observe(track);
     }
   }
 
