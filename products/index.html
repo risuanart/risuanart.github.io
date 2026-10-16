@@ -373,56 +373,6 @@
   }
   .project-card:hover span{ transform:scale(1.05); }
 
-  /* ---------- Floating bottom pill nav ---------- */
-  .pill-nav{
-    position:fixed;
-    left:50%;
-    bottom:30px;
-    transform:translateX(-50%);
-    width: calc(100% - 60px);
-    max-width: 500px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:30px;
-    padding:12px 24px;
-    border-radius:10px;
-    background-color: rgba(193,193,189,0.25);
-    backdrop-filter: blur(30px);
-    -webkit-backdrop-filter: blur(30px);
-    font-size:11px;
-    letter-spacing:1px;
-    text-transform:uppercase;
-    z-index:20;
-  }
-  /* 中間是「目前捲動到哪個主題」的指示文字，左右是次要的目錄連結——
-     字級加大、顏色加深＋加粗，跟兩側的小字、淺灰、細體拉開層次。 */
-  .pill-nav a{
-    font-size:11px;
-    font-weight:400;
-    color:#666;
-  }
-  .pill-nav .logo{
-    font-size:13px;
-    font-weight:600;
-    letter-spacing:2px;
-    color:var(--ink);
-  }
-  /* 第二狀態：捲動離開 Hero 後，中間從副標題文字換成可點擊回首頁的 logo，
-     預設隱藏，切到 .is-home-mode 才顯示（見下方 <script>）。 */
-  .pill-nav__home{
-    display:none;
-    align-items:center;
-    justify-content:center;
-  }
-  .pill-nav__home img{
-    display:block;
-    height:20px;
-    width:auto;
-  }
-  .pill-nav.is-home-mode .logo{ display:none; }
-  .pill-nav.is-home-mode .pill-nav__home{ display:flex; }
-
   /* ---------- Footer ---------- */
   footer{
     padding: var(--gap-lg) var(--pad-h) calc(var(--gap-lg) + 80px);
@@ -456,7 +406,6 @@
        (.img-box 只有 aspect-ratio、沒有內容撐開寬度) 因此整個垮成 0 寬 0 高、
        完全不可見。手機版改回 stretch，讓圖片跟文字都撐滿整欄寬度。 */
     .split-row, .split-row.reverse{ flex-direction:column; align-items:stretch; }
-    .pill-nav{ gap:16px; padding:10px 18px; }
   }
 </style>
 </head>
@@ -594,18 +543,6 @@
     </div>
   </footer>
 
-  <!-- 課程／團體課目前還沒有各自獨立的頁面（只在首頁側邊分類清單裡），
-       連回首頁，讓訪客自己從那裡點進對應分類（跟其他頁面底部懸浮列的
-       處理方式一致，見 css/home.css .pill-nav 的站台共用版本）。 -->
-  <nav class="pill-nav">
-    <a href="../">課程</a>
-    <span class="logo">在家也可以輕鬆完成</span>
-    <a class="pill-nav__home" href="../" aria-label="回到首頁">
-      <img src="../assets/images/logo-risuan拷貝.png" alt="日宣繪畫室">
-    </a>
-    <a href="../">團體課</a>
-  </nav>
-
   </div><!-- /.page-tint -->
 
   <script>
@@ -632,19 +569,6 @@
         setTimeout(()=> el.classList.add('is-visible'), 100);
       });
     });
-
-    // 底部懸浮列中間：一開始（還在 Hero）顯示副標題文字，捲動離開 Hero
-    // 進到第二區塊之後，換成可以點擊回首頁的 logo 圖案。
-    const pillNav = document.querySelector('.pill-nav');
-    const heroSection = document.querySelector('.hero');
-    if (pillNav && heroSection) {
-      const heroObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          pillNav.classList.toggle('is-home-mode', !entry.isIntersecting);
-        });
-      }, { threshold: 0 });
-      heroObserver.observe(heroSection);
-    }
 
     // 頂部列預設透明，捲動經過內容後才切換成毛玻璃效果
     const siteHeader = document.querySelector('header');
