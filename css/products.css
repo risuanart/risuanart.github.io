@@ -367,7 +367,7 @@
    比畫面更窄的欄寬（34ch 是給 .intro 那種置中窄欄版面用的，這裡不
    適用）。 */
 .work__title-block__intro {
-  margin: var(--space-2) 0 0;
+  margin: var(--space-4) 0 0;
   font-size: var(--font-size-sm);
   line-height: 1.7;
   color: var(--color-text-primary);
