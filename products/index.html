@@ -609,14 +609,20 @@
   </div><!-- /.page-tint -->
 
   <script>
-    // 捲動淡入動畫
+    // 捲動淡入動畫。threshold:0：跟 js/scroll-reveal.js 同一個修正（見
+    // 該處註解）——原本 threshold:0.15 要求元素自己高度的 15% 先進畫面
+    // 才觸發，高區塊會讓使用者捲很深一段都還是空白，容易被誤會成網站
+    // 壞了。（這裡沒有疊加 rootMargin——這頁是標準 document 捲動，不是
+    // 子頁那種 .product-page 固定定位捲動容器，理論上 rootMargin 在這裡
+    // 可以生效，但為了跟 scroll-reveal.js 行為一致、同一套修正邏輯
+    // 兩邊一樣，就不另外加。）
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('is-visible');
         }
       });
-    }, { threshold: 0.15 });
+    }, { threshold: 0 });
 
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
