@@ -262,13 +262,21 @@
       // 就顯示——不然選了人數之後點進去卻發現這天沒有一個時段夠坐。
       const hasAvailability = daySlots.some((s) => s.remaining >= qty);
       const isPast = ds < todayStr;
+      // 「額滿」跟「公休／未開放」在後台是兩種不同狀態（見 risuan-checkout
+      // 後台「批次開時段」的公休／額滿標記），這天確實開過時段、只是全部
+      // 剩 0 位，才算額滿；完全沒有時段資料的日子（公休或還沒排）維持
+      // 原本單純灰階不可點，不特別標示——這裡只標額滿是因為額滿是「刻意
+      // 讓學生看到這天但訂不到」，公休則是單純不開放，不需要特別說明。
+      const isFull = !isPast && daySlots.length > 0 && daySlots.every((s) => s.remaining === 0);
 
       const btn = document.createElement("button");
       btn.type = "button";
-      btn.className = "booking-calendar__day";
+      btn.className = "booking-calendar__day" + (isFull ? " booking-calendar__day--full" : "");
       btn.disabled = isPast || !hasAvailability;
       btn.setAttribute("aria-pressed", ds === selectedDate ? "true" : "false");
-      btn.innerHTML = `<span>${d}</span><span class="booking-calendar__day-dot" aria-hidden="true"></span>`;
+      btn.innerHTML = isFull
+        ? `<span>${d}</span><span class="booking-calendar__day-label">額滿</span>`
+        : `<span>${d}</span><span class="booking-calendar__day-dot" aria-hidden="true"></span>`;
       btn.addEventListener("click", () => selectDate(ds));
       calendarGridEl.appendChild(btn);
     }

@@ -241,6 +241,26 @@
   pointer-events: none;
 }
 
+/* 額滿日期：跟「公休／未開放」用同一種純灰階不可點不一樣，額滿是
+   「這天開過時段、刻意讓學生看得到，只是訂不到」，用 --color-warning
+   淡底色＋文字標籤區隔，全站規則是這個顏色只用在「東西真的不能用」
+   的情境（見 cart.css .checkout-error 同一條規則），額滿剛好符合。
+   用 :disabled 疊出更高特異度蓋過 .booking-calendar__day:disabled
+   原本統一調淡的顏色，不然文字標籤會被那條規則蓋成跟公休日同一種灰。 */
+.booking-calendar__day--full {
+  background: color-mix(in srgb, var(--color-warning) 12%, transparent);
+}
+
+.booking-calendar__day--full:disabled {
+  color: var(--color-warning);
+}
+
+.booking-calendar__day-label {
+  font-size: 9px;
+  line-height: 1;
+  letter-spacing: 0.02em;
+}
+
 /* 有名額的日期，數字下方一個小點提示「可以點」——不用文字標籤，格子
    本身已經很小，塞字會擠爆。 */
 .booking-calendar__day-dot {
