@@ -110,7 +110,10 @@ a {
   font-size: 0.6em;
   font-weight: 700;
   letter-spacing: 0.04em;
-  color: var(--color-interactive);
+  /* 2026-10-17 改成實心藍底白字（原本是空心、藍字藍框），在商品卡片上
+     更顯眼一點，跟旁邊劃掉的原價／折扣後價格區分得更清楚。 */
+  color: var(--color-surface-light);
+  background: var(--color-interactive);
   border: 1px solid var(--color-interactive);
   border-radius: 999px;
   padding: 0.15em 0.6em;
