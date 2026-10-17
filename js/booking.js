@@ -233,9 +233,22 @@
     return "evening";
   }
 
+  // 2026-10-17 使用者要求選定時段摘要顯示整段課程時間（例如「14:00」改
+  // 顯示「14:00 - 17:00」），不是只有開始時間——每個時段本來就是預約
+  // 系統整段保留的 3 小時區塊（見 lib/slots.js COMMON_TIMES 間隔），這裡
+  // 只是把結束時間算出來一起顯示，不影響實際送出的 slotId／time 資料。
+  const SLOT_DURATION_HOURS = 3;
+
+  function formatSlotEndTime(time) {
+    const [hour, minute] = (time || "").split(":").map(Number);
+    if (Number.isNaN(hour) || Number.isNaN(minute)) return "";
+    const endHour = (hour + SLOT_DURATION_HOURS) % 24;
+    return `${String(endHour).padStart(2, "0")}:${String(minute).padStart(2, "0")}`;
+  }
+
   function updateSelectedSlotSummary() {
     if (selectedDate && selectedTime) {
-      selectedSlotTextEl.textContent = `${selectedDate}　${selectedTime}`;
+      selectedSlotTextEl.textContent = `${selectedDate}　${selectedTime} - ${formatSlotEndTime(selectedTime)}`;
       selectedSlotEl.hidden = false;
     } else {
       selectedSlotEl.hidden = true;
@@ -515,7 +528,7 @@
     const handle = m ? m[2] : data.ig || "";
     dmText = [
       `您好，我是 ${data.name || ""}`,
-      `已完成預約：${data.date} ${data.time}`,
+      `已完成預約：${data.date} ${data.time} - ${formatSlotEndTime(data.time)}`,
       describeAttendeeCourses(data.courses) ? `課程：${describeAttendeeCourses(data.courses)}` : "",
       handle ? `聯絡帳號（${platformLabel}）：${handle}` : "",
     ]
@@ -562,7 +575,7 @@
       if (data.status === "confirmed") {
         resultChecking.hidden = true;
         resultConfirmed.hidden = false;
-        document.getElementById("result-confirmed-text").textContent = `${data.date} ${data.time}，${describeAttendeeCourses(
+        document.getElementById("result-confirmed-text").textContent = `${data.date} ${data.time} - ${formatSlotEndTime(data.time)}，${describeAttendeeCourses(
           data.courses
         )}，已收款 ${formatMoney(data.amountReceived)}。期待與您見面！`;
         renderDmCard(data);
