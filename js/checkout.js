@@ -626,7 +626,15 @@
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "建立訂單失敗，請稍後再試一次");
 
-      history.pushState(null, "", `cart.html?orderId=${encodeURIComponent(data.orderId)}`);
+      // 2026-10-17 修正：原本寫死相對路徑 "cart.html?orderId=..."，但這支
+      // 腳本只會在 /cart/（目錄網址，結尾有斜線）上執行，相對路徑是相對
+      // 「目前所在目錄」解析，會變成 /cart/cart.html?orderId=...——這個
+      // 路徑根本不存在，網址列看起來正常（還沒重新整理不會發現），但只要
+      // 使用者重新整理頁面就會打到真的去要求這個檔案，變成 GitHub Pages
+      // 的 404。跟 api/logistics-map-callback.js 等後端那組「寫死 cart.html
+      // 轉址殼」是同一種錯誤，只是這次是前端自己造成的，改用目前真實的
+      // pathname（一定是 /cart/）＋查詢字串就不會有這個問題。
+      history.pushState(null, "", `${window.location.pathname}?orderId=${encodeURIComponent(data.orderId)}`);
       await loadAndShowConfirm(data.orderId);
     } catch (err) {
       showCheckoutError(`結帳發生問題：${err.message}`);

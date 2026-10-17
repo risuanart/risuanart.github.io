@@ -302,17 +302,35 @@
      單靠底色已經畫不出邊界，補一條跟 .quick-nav__search-results 同一套
      配方的細邊框（color-mix 淡化過的次要文字色），不是另外發明新規則。 */
   border: 1px solid color-mix(in srgb, var(--color-text-secondary) 30%, transparent);
+  /* 2026-10-17 修正：這顆按鈕是 .work 底下的直接子層，不在任何 .chapter
+     裡面，沒有套到全站 .chapter／.content-container 那組「跟螢幕邊緣留
+     --content-pad 空隙」的規則，原本 width:100% 會讓這個框直接貼齊螢幕
+     左右邊緣。這裡用跟 .chapter 一樣的留白基準（--content-pad）自己補上，
+     不是另外發明新的間距數字；桌面版同樣跟 .chapter 一樣置中、吃到
+     --content-max-width 的上限，不要隨螢幕越寬就越寬。 */
+  box-sizing: border-box;
   width: 100%;
+  max-width: var(--content-max-width);
   display: flex;
   align-items: center;
   gap: var(--space-2);
   margin-top: var(--space-6);
+  margin-left: auto;
+  margin-right: auto;
   padding: var(--space-4);
   border-radius: 10px;
   background: var(--color-surface-light);
   font-family: inherit;
   text-align: left;
   cursor: pointer;
+}
+
+@media (max-width: 840px) {
+  .cart-collapse {
+    width: calc(100% - var(--content-pad) * 2);
+    margin-left: var(--content-pad);
+    margin-right: var(--content-pad);
+  }
 }
 
 /* 自己宣告了 display:flex，會蓋掉瀏覽器內建的 [hidden]{display:none}，
