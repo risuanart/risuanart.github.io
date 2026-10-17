@@ -19,5 +19,19 @@
     const product = PRODUCTS[addBtn.dataset.product];
     if (!product || !product.price) return;
     priceEl.innerHTML = priceDiscountHTML(product.price, 1);
+
+    // 2026-10-17 使用者要求目前所有在賣的商品都標示預購，文字來源跟
+    // 商品總覽卡片（js/products-overview.js）同一個 window.RisuanCart.
+    // PREORDER_NOTE，純文字接在價格下面，不加色塊／圖示。只插入一次
+    // （這支腳本理論上只會在頁面載入時跑一次，但用 hasAttribute 擋一下
+    // 比較保險，避免以後有人不小心讓這段邏輯跑第二次，價格下面疊兩行
+    // 一樣的字）。
+    if (product.preorder && window.RisuanCart.PREORDER_NOTE && !priceEl.dataset.preorderInjected) {
+      const note = document.createElement("p");
+      note.className = "work-heading__preorder";
+      note.textContent = window.RisuanCart.PREORDER_NOTE;
+      priceEl.insertAdjacentElement("afterend", note);
+      priceEl.dataset.preorderInjected = "1";
+    }
   });
 })();

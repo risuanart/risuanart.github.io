@@ -74,6 +74,12 @@
     // 「新品」是真的新上架商品才標（見 cart.js PRODUCTS 的 isNew），不是
     // 隨便挑幾個貼熱銷/精選這種沒有真實數據支撐的行銷標籤。
     const newBadge = product.isNew ? `<span class="shop-card__badge">新品</span>` : "";
+    // 2026-10-17 使用者要求目前所有在賣的商品都標示預購，文字來源見
+    // js/cart.js PREORDER_NOTE 的說明——純文字（使用者選定的方向，
+    // 不加色塊／圖示），放在價格下面。
+    const preorderNote = product.preorder && cart.PREORDER_NOTE
+      ? `<p class="shop-card__preorder">${cart.PREORDER_NOTE}</p>`
+      : "";
     return `
       <div class="shop-card" data-product-card>
         <a class="shop-card__media" href="${url}"${carouselAttr}>${thumb}${hoverThumb}${newBadge}</a>
@@ -84,7 +90,10 @@
             ${eyebrow}
             <p class="shop-card__name">${product.shortName || product.name}</p>
           </div>
-          <p class="shop-card__price price-text">${priceText(product)}</p>
+          <div class="shop-card__price-group">
+            <p class="shop-card__price price-text">${priceText(product)}</p>
+            ${preorderNote}
+          </div>
         </a>
       </div>`;
   }

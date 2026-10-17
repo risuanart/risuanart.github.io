@@ -553,6 +553,16 @@
   color: var(--color-text-primary);
 }
 
+/* 2026-10-17 預購標示，純文字（跟 .shop-card__preorder 同一個理由／
+   同一份文字來源，見 js/product-price-discount.js）。.work-heading__price
+   的父層 .work-heading__buy-text 本身就是 flex column + gap，這裡不用
+   再自己補 margin-top，跟著容器既有的間距走。 */
+.work-heading__preorder {
+  margin: 0;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
 .intro {
   /* max-width 限制寬度＋auto 左右margin，讓這段文字本身（不只是裡面的字）
      置中在整個標題區塊裡，呼應母頁 .hero .intro 同一種「置中窄欄」排法。
@@ -2102,6 +2112,16 @@ button.text-link {
    回來這裡找。ABeeZee 字型檔在這頁的 <head> 另外引入（見 shop.html）。 */
 .shop-card__price {
   margin: 0;
+}
+
+/* 2026-10-17 預購標示：使用者從幾個排版提案裡選定「純文字、不加色塊／
+   圖示」的方向，跟 --color-text-secondary 的次要說明文字同一套語彙，
+   不用另外發明新顏色搶走價格本身的注意力。文字來源見 js/cart.js
+   PREORDER_NOTE。 */
+.shop-card__preorder {
+  margin: 2px 0 0;
+  font-size: 11px;
+  color: var(--color-text-secondary);
 }
 
 /* ---------- 商品格狀：平板／電腦斷點在 768px，不是 1024px ----------
