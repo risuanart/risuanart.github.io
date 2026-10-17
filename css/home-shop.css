@@ -473,13 +473,15 @@
    文字疊在照片下方，深色漸層墊底維持可讀性，色票只用 colors.css 既有
    token（深底用 --color-surface-dark，不是新色）。
 
-   加了跑馬燈列之後，這裡的負 margin 再加回 --promo-bar-height：先照
-   原本公式完全抵銷 .product-page 的 padding-top（讓輪播回到「假設沒有
-   跑馬燈列」時的最頂端），再往下推回跑馬燈列的高度，讓輪播貼在跑馬燈
-   列正下方，不是被跑馬燈列蓋住、也不是兩者中間留一塊空白。 */
+   2026-10-17 修正：原本這裡手動「先抵銷再加回 --promo-bar-height」，
+   但 .product-page 的 padding-top 這時已經改用 --ptpl-topbar-height
+   （見 products.css），本身就含跑馬燈列高度了——這裡又手動加一次，
+   變成跑馬燈列高度被算了兩次，輪播跟頂部列之間多出一條 36px 的白色
+   空隙。--ptpl-topbar-height 已經自動包含跑馬燈列高度，這裡只要抵銷
+   剩下那段固定的 69px 間距即可，不用再手動處理跑馬燈列。 */
 .preview-hero {
   position: relative;
-  margin-top: calc(-1 * (var(--editorial-header-height) + 69px) + var(--promo-bar-height));
+  margin-top: -69px;
   /* 2026-09-19：拿掉原本這裡逃出 .product-page／.work 留白的負 margin——
      那組留白已經整個拿掉了（見 products.css .product-page 規則說明），
      這裡本來就要滿版貼齊螢幕邊緣，現在不用再逃，天生就是滿版寬度。 */
