@@ -401,22 +401,13 @@
   transform-origin: 50% 62%;
 }
 
-.ptpl-compare__label {
-  position: absolute;
-  top: var(--space-2);
-  left: var(--space-2);
-  padding: 3px var(--space-2);
-  border-radius: var(--radius-sharp);
-  background: color-mix(in srgb, var(--color-surface-dark) 75%, transparent);
-  color: var(--color-surface-light);
-  font-size: var(--font-size-xs);
-  letter-spacing: 0.05em;
-}
-.ptpl-compare__layer--after .ptpl-compare__label {
-  left: auto;
-  right: var(--space-2);
-}
-
+/* 2026-10-17 使用者看過幾個排版提案後選定「保留拖曳，只換手把，拿掉
+   原畫／羊化再創作文字標籤」這個方向（.ptpl-compare__label 整組拿掉，
+   HTML 裡對應的 <span> 也要跟著刪，見 products/sand-art-artist-sheep-*/
+   index.html）：中間的圓形＋⇔符號太像通用 UI 元件、AI 感很重，換成
+   菱形色塊＋虛線分隔，呼應頁面本來就有的虛線分隔線語彙（例如上面
+   「現藏地」那條 .ptpl-artwork__credit 的虛線），看起來比較像這個頁面
+   自己的視覺系統，不是外掛一顆通用拉桿。 */
 .ptpl-compare__handle {
   position: absolute;
   top: 0;
@@ -432,7 +423,9 @@
   cursor: ew-resize;
 }
 .ptpl-compare__handle::before {
-  /* 實際看得到的那條分隔線，跟上面 button 的可點擊判定範圍分開處理 */
+  /* 實際看得到的那條分隔線，跟上面 button 的可點擊判定範圍分開處理。
+     改成虛線（repeating-linear-gradient 畫豎向虛線，CSS 沒有原生的
+     border-style:dashed 可以用在這種單純一條線上，用漸層模擬最簡單）。 */
   content: "";
   position: absolute;
   top: 0;
@@ -440,22 +433,23 @@
   left: 50%;
   width: 2px;
   transform: translateX(-50%);
-  background: var(--color-surface-light);
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--color-surface-light) 0 6px,
+    transparent 6px 11px
+  );
 }
 .ptpl-compare__handle-grip {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  /* 先置中再轉 45 度變成菱形，比正圓更呼應春聯剪紙的菱形構圖（商品本身
+     的春聯／砂畫底板就是菱形），也跟全站「直角、不用圓角 pill」的語彙
+     更一致。 */
+  transform: translate(-50%, -50%) rotate(45deg);
+  width: 16px;
+  height: 16px;
   background: var(--color-surface-light);
-  color: var(--color-text-primary);
-  font-size: 14px;
   box-shadow: var(--shadow-raised);
 }
 

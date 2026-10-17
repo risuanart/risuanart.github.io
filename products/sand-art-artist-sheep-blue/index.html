@@ -248,16 +248,19 @@
       <p class="ptpl-artwork__eyebrow">畫室原創特色</p>
       <h2>羊諦斯之舞</h2>
       <div class="ptpl-compare" id="ptpl-compare" style="--pos: 50%;">
+        <!-- 2026-10-17 拿掉原本的「原畫」「羊化再創作」文字標籤（使用者
+             選定的排版提案 D：保留拖曳互動、只換手把，標籤整個拿掉）——
+             圖片本身的 alt 文字跟手把的 aria-label 已經說明兩張圖分別是
+             什麼，螢幕閱讀器使用者不會少資訊，只是拿掉畫面上疊字的
+             視覺標籤。 -->
         <div class="ptpl-compare__layer ptpl-compare__layer--before">
           <img src="../../assets/images/products/sand-art-artist/sand-art-artist-dance-matisse.jpg" alt="原畫：Henri Matisse《Dance II》">
-          <span class="ptpl-compare__label">原畫</span>
         </div>
         <div class="ptpl-compare__layer ptpl-compare__layer--after">
           <img src="../../assets/images/products/sand-art-artist/sand-art-artist-dance-sheep.jpg" alt="羊化再創作：畫室原創設計，羊群圍成舞蹈隊形，中間是粉色「福」字，結合年節小物">
-          <span class="ptpl-compare__label">羊化再創作</span>
         </div>
         <button type="button" class="ptpl-compare__handle" id="ptpl-compare-handle" role="slider" aria-label="拖曳比較原畫與羊化再創作設計" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
-          <span class="ptpl-compare__handle-grip">⇔</span>
+          <span class="ptpl-compare__handle-grip"></span>
         </button>
       </div>
       <p class="ptpl-transform__note"><strong>致敬馬諦斯《舞蹈》</strong><br>1910年，馬諦斯畫下五個手牽手跳舞的人，用最簡單的橘紅、寶藍、翠綠，畫出最純粹的歡快與生命力。</p>
