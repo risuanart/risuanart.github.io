@@ -21,6 +21,28 @@
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/colors.css">
 <link rel="stylesheet" href="../css/tokens.css">
+<!-- 2026-10-17 使用者反映這頁（比其他頁都早建立）的左上角目錄、置中
+     logo、右上角購物車、頂部跑馬燈列都跟全站其他頁不一樣——因為這頁
+     從頭到尾沒載入 home.css／products.css／cart.css／site-menu.css／
+     promo-bar.css 這組全站共用的頂部列系統，<header> 也是當時自己手刻
+     的（logo 靠左＋純文字「材料包」標題＋純文字「購物車」連結），不是
+     共用的 .site-header／漢堡選單／cart-badge。這裡補上跟其他子頁
+     （例如 faq/index.html）完全一樣的那組 <link>，讓 .site-header／
+     .cart-badge／.site-menu／.promo-bar 這些 class 有樣式可以吃。這頁
+     下面原本自己的 <style>（.hero／.split-row／.meta 表格／.gallery
+     這些頁面獨有的排版）載入順序在後面，同特異度的規則還是這份自己
+     的版本贏，不會被蓋掉——只有新載入的這幾個 class（原本完全沒有
+     定義過）才會生效，不影響這頁原本的版面。 -->
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/home.css">
+<link rel="stylesheet" href="../css/products.css">
+<link rel="stylesheet" href="../css/cart.css">
+<link rel="stylesheet" href="../css/site-menu.css">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
+<link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/css/promo-bar.css">
 <style>
   :root{
     --bg: #f5f5ed;
@@ -116,6 +138,15 @@
      不會有 body 那個「被提升去畫布」的特例問題。 */
   .page-tint{
     background: var(--panel-bg);
+    /* 2026-10-17 新換成的 .site-header 是 position:fixed（原本這頁是
+       position:sticky，會自然把內容往下推，不用額外留白），fixed 元素
+       整個脫離文件流、不會自動幫下面的內容讓出空間，不補 padding-top
+       的話標題「手作材料包」會被頂部列／跑馬燈列蓋住一截。用全站共用的
+       --ptpl-topbar-height（頂部列＋跑馬燈列的高度，見 css/promo-bar.css）
+       把這段高度補回來，跟其他子頁 .product-page 的 padding-top 用同一個
+       變數來源，之後跑馬燈列高度調整這裡會自動跟著變，不用回來改寫死的
+       數字。 */
+    padding-top: var(--ptpl-topbar-height, var(--editorial-header-height));
   }
   h1,h2,h3{
     font-family: var(--font-family-base);
@@ -138,30 +169,13 @@
   .center{text-align:center;}
   .wrap{max-width:1400px; margin:0 auto; padding:0 30px;}
 
-  /* ---------- Header (sticky) ---------- */
-  header{
-    position: sticky;
-    top:0;
-    z-index:10;
-    /* 預設透明，還沒捲動經過任何內容時不擋畫面。捲動後（見下方 <script>
-       監聽 window scroll 切換 .is-scrolled）才切成跟底部懸浮列同一套
-       毛玻璃處理（半透明底色＋強力模糊），維持標題可讀性。 */
-    background: transparent;
-    transition: background .45s ease;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:20px var(--pad-h);
-  }
-  header.is-scrolled{
-    background: var(--pill-bg);
-    backdrop-filter: blur(30px);
-    -webkit-backdrop-filter: blur(30px);
-  }
-  header .back{ display:flex; align-items:center; }
-  header .back img{ display:block; height:22px; width:auto; }
-  header .title{font-size:12px; letter-spacing:1px; text-transform:uppercase;}
-  header .enquire{ }
+  /* 2026-10-17：這頁原本在這裡自己刻了一整組 sticky header 樣式
+     （.back／.title／.enquire），服務的是手動寫死的舊版頭部（logo 靠左
+     ＋純文字「材料包」標題＋純文字「購物車」連結）。現在 <header> 已經
+     換成全站共用的 .site-header（見 <body> 開頭，樣式來自新載入的
+     home.css／site-menu.css），這組舊規則整段拿掉，不留著跟新樣式打架
+     （舊的是裸 header 元素選擇器，雖然特異度打不過 .site-header，但
+     多一份死掉的規則只會讓人搞不清楚現在真正生效的是哪一份）。 */
 
   /* ---------- Hero ---------- */
   .hero{
@@ -408,23 +422,99 @@
     .split-row, .split-row.reverse{ flex-direction:column; align-items:stretch; }
   }
 </style>
-  <link rel="icon" href="/favicon.ico" sizes="any">
-  <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
-  <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 </head>
 <body>
+
+  <div class="promo-bar" id="promo-bar">
+    <div class="promo-bar__track">
+      <span class="promo-bar__msg is-active">材料包早鳥優惠・12/31 前預購享 9 折</span>
+      <span class="promo-bar__msg">追蹤 Instagram @ri.suan_art・掌握最新開課消息</span>
+    </div>
+  </div>
 
   <div class="ambient-bg" aria-hidden="true"></div>
   <div class="ambient-grain" aria-hidden="true"></div>
 
   <div class="page-tint">
 
-  <header>
-    <a class="back" href="../" aria-label="回到首頁"><img src="../assets/images/logo-risuan拷貝.png" alt="日宣繪畫室"></a>
-    <div class="title">材料包</div>
-    <a class="enquire uppercase small" href="../cart/">購物車</a>
+  <header class="site-header">
+    <button type="button" class="site-header__menu-toggle" id="menu-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="site-menu" aria-label="開啟選單">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <nav class="site-header__nav" aria-label="主選單">
+      <a href="../">首頁</a>
+      <a href="../products/shop/">商品總覽</a>
+      <a href="../products/" aria-current="page">材料包</a>
+      <div class="site-header__nav-item">
+        <button type="button" class="site-header__nav-dropdown-toggle" id="nav-courses-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="nav-courses-menu">
+          課程
+          <svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="site-header__nav-dropdown" id="nav-courses-menu">
+          <div class="site-header__nav-dropdown-menu">
+            <ul class="site-menu__sublist">
+              <li><a class="site-menu__sublink" href="../courses/sand-texture/">石英砂肌理畫</a></li>
+              <li><a class="site-menu__sublink" href="../courses/palette-knife-oil/">刮刀油畫</a></li>
+              <li><a class="site-menu__sublink" href="../courses/fluid-art/">流動畫</a></li>
+              <li>抽象畫</li>
+              <li><a class="site-menu__sublink" href="../courses/custom-photo-oil/">自己帶圖創作</a></li>
+              <li><a class="site-menu__sublink" href="../courses/pet-portrait/">寵物油畫</a></li>
+              <li>鏡子拼貼</li>
+              <li><a class="site-menu__sublink" href="../courses/beading/">串珠</a></li>
+              <li><a class="site-menu__sublink" href="../courses/large-canvas/">大幅畫布訂製</a></li>
+              <li><a class="site-menu__sublink" href="../courses/custom-material/">特殊材質客製</a></li>
+            </ul>
+            <a class="site-menu__sublink" href="../faq/">預約須知</a>
+          </div>
+          <div class="site-header__nav-dropdown-photos">
+            <a class="site-header__nav-dropdown-photo" href="../courses/sand-texture/">
+              <div class="placeholder-box placeholder-box--photo" aria-hidden="true">
+                <svg class="placeholder-box__icon" viewBox="0 0 24 24" width="1.4em" height="1.4em" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1.5"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 16l-5.5-5.5a1 1 0 0 0-1.4 0L6 19"/></svg>
+                <span class="placeholder-box__text">照片待補</span>
+              </div>
+              <span class="site-header__nav-dropdown-photo__label">石英砂肌理畫</span>
+            </a>
+            <a class="site-header__nav-dropdown-photo" href="../courses/fluid-art/">
+              <div class="placeholder-box placeholder-box--photo" aria-hidden="true">
+                <svg class="placeholder-box__icon" viewBox="0 0 24 24" width="1.4em" height="1.4em" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1.5"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 16l-5.5-5.5a1 1 0 0 0-1.4 0L6 19"/></svg>
+                <span class="placeholder-box__text">照片待補</span>
+              </div>
+              <span class="site-header__nav-dropdown-photo__label">流動畫</span>
+            </a>
+            <a class="site-header__nav-dropdown-photo" href="../enterprise/">
+              <div class="placeholder-box placeholder-box--photo" aria-hidden="true">
+                <svg class="placeholder-box__icon" viewBox="0 0 24 24" width="1.4em" height="1.4em" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1.5"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 16l-5.5-5.5a1 1 0 0 0-1.4 0L6 19"/></svg>
+                <span class="placeholder-box__text">照片待補</span>
+              </div>
+              <span class="site-header__nav-dropdown-photo__label">團體／企業課程</span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <a href="../guides/">材料指南</a>
+      <a href="../gallery/">學員作品</a>
+      <a href="../enterprise/">團體／企業課程</a>
+    </nav>
+    <a class="site-header__title" href="../" aria-label="回到首頁"><img src="../assets/images/logo-risuan拷貝.png" alt="日宣繪畫室"></a>
+    <div class="cart-badge-wrap">
+      <button type="button" class="cart-badge" aria-haspopup="true" aria-expanded="false" aria-label="購物車，目前 0 件">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+        <span class="cart-badge__count">0</span>
+      </button>
+      <div class="cart-preview" hidden>
+        <ul class="cart-preview__list"></ul>
+        <p class="cart-preview__empty">購物車是空的</p>
+        <p class="cart-preview__total"></p>
+        <div class="cart-preview__actions">
+          <a class="cart-preview__view" href="../cart/">查看購物車</a>
+          <button type="button" class="cart-preview__continue">繼續選購</button>
+        </div>
+      </div>
+    </div>
   </header>
+
+  <div class="site-menu-backdrop" id="site-menu-backdrop"></div>
+  <nav class="site-menu" id="site-menu" aria-label="全站選單" data-menu-base="../"></nav>
 
   <section class="hero">
     <h1 class="fade-in">手作材料包</h1>
@@ -586,15 +676,21 @@
       });
     });
 
-    // 頂部列預設透明，捲動經過內容後才切換成毛玻璃效果
-    const siteHeader = document.querySelector('header');
-    const updateHeaderGlass = () => {
-      siteHeader.classList.toggle('is-scrolled', window.scrollY > 4);
-    };
-    window.addEventListener('scroll', updateHeaderGlass, { passive: true });
-    updateHeaderGlass();
-
   </script>
+
+  <!-- 2026-10-17 跟著上面補的 .site-header／.cart-badge／.site-menu／
+       .promo-bar 一起加：這幾支共用腳本處理頂部列毛玻璃轉場、購物車
+       數量／預覽、漢堡選單開合、跑馬燈輪播，全站其他頁都是這組，這頁
+       原本沒載入所以這些功能全部不會動（購物車圖示一直顯示死的 0，
+       漢堡鈕點了沒反應）。原本自己寫的 updateHeaderGlass() 拿掉，
+       js/site-header-scroll.js 做的是同一件事（且同時處理 promo-bar
+       淡出，原本那支沒有）。這頁本身是 document 捲動（不是其他子頁常見
+       的 .product-page 固定容器），site-header-scroll.js 已經有
+       `.product-page` 找不到就退回 window 的 fallback，不用額外調整。 -->
+  <script src="../js/cart.js"></script>
+  <script src="../js/site-header-scroll.js"></script>
+  <script src="../js/site-menu.js"></script>
+  <script src="/js/promo-bar.js"></script>
 
 </body>
 </html>
