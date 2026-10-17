@@ -55,7 +55,12 @@
     // classic-red／welcome-pink 這兩個 scheme 鍵值繼續保留給禮盒版用，不能刪。
     "fluid-art-light-red": { name: "春聯流動畫材料包・輕巧版（經典紅）", shortName: "輕巧版（經典紅）", price: 800, category: "fluid-art", hasVariant: false, tagline: "單幅 15cm，最快抵達的新年儀式" },
     "fluid-art-light-pink": { name: "春聯流動畫材料包・輕巧版（迎春粉）", shortName: "輕巧版（迎春粉）", price: 800, category: "fluid-art", hasVariant: false, tagline: "單幅 15cm，最快抵達的新年儀式" },
-    "fluid-art-gift": { name: "春聯流動畫材料包・禮盒版", shortName: "禮盒版", price: 1100, category: "fluid-art", tagline: "雙幅成品，完整的流動畫體驗" },
+    // 2026-10-17 使用者要求暫時下架（不是刪除），hidden:true 會讓
+    // products-overview.js／related-products.js／cart-cross-sell.js
+    // 這三個地方自動把它濾掉（跟加購項目用的是同一個既有機制，見那幾支
+    // 檔案開頭的說明），客人在商品總覽、相關商品、購物車加購推薦都不會
+    // 看到。復原時只要把 hidden:true 這行拿掉即可，其他資料原封不動。
+    "fluid-art-gift": { name: "春聯流動畫材料包・禮盒版", shortName: "禮盒版", price: 1100, category: "fluid-art", tagline: "雙幅成品，完整的流動畫體驗", hidden: true },
     "sand-art-light": { name: "春聯砂畫材料包・輕巧版", shortName: "輕巧版", price: 0, category: "sand-art", tagline: "8 款圖案任選，撕貼倒沙鋪出你的春聯" },
     "sand-art-collection": { name: "春聯砂畫材料包・自由創作組", shortName: "自由創作組", price: 0, category: "sand-art", hasVariant: false, tagline: "5 款精選圖案＋26色顏料，自由創作一整套" },
     "sand-art-artist-sheep-red": { name: "藝術家系列・羊Diss舞蹈 Sheep La Danse / 紅", shortName: "羊Diss舞蹈 Sheep La Danse / 紅", price: 820, category: "sand-art", hasVariant: false, tagline: "致敬馬諦斯《舞蹈》，喜氣酒紅款" },

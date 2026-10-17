@@ -266,24 +266,25 @@
           </div>
         </div>
 
-        <!-- 使用者提供的真實春聯流動畫材料包示範片（原始檔是 HEVC 編碼，
-             為了跨瀏覽器相容性用 ffmpeg 轉成全站統一的 H.264，原始檔改名
-             加「-原始檔」保留在電腦裡不進版控，見 .gitignore 說明）。
-             影片內容（教學手冊、材料包裝、倒膠完成的紅金春聯、貼兔年
-             貼紙）跟這格「禮盒版」的商品文案相符，直接置換掉原本的
-             .placeholder-box，文案本身不用改。 -->
-        <div class="preview-hero__slide" data-index="2">
-          <video class="preview-hero__photo" src="assets/videos/home/春聯流動畫.MP4" autoplay muted loop playsinline preload="none" aria-label="春聯流動畫材料包示範影片"></video>
-          <div class="preview-hero__overlay">
-            <p class="preview-hero__kicker">流動畫材料包</p>
-            <h2 class="preview-hero__title">禮盒版</h2>
-            <p class="preview-hero__tagline">雙幅成品，完整的流動畫體驗。</p>
-            <a class="work__cta work__cta--primary" href="products/fluid-art-gift/">
-              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-              查看這款材料包
-            </a>
-          </div>
-        </div>
+        <!-- 2026-10-17 使用者要求流動畫禮盒版（fluid-art-gift）暫時下架
+             （不是刪除，是「消費者看不到」），這格輪播連去那個商品頁，
+             先整格註解掉——carousel 邏輯（js/home-shop.js）單純抓
+             .preview-hero__slide 元素數量，少一格不會壞，data-index
+             也沒有被任何 JS 讀取，留著 0/1/3 跳號不用重新編號。復原時
+             把這整段註解拿掉即可，內容原封不動留在這裡。
+    <div class="preview-hero__slide" data-index="2">
+      <video class="preview-hero__photo" src="assets/videos/home/春聯流動畫.MP4" autoplay muted loop playsinline preload="none" aria-label="春聯流動畫材料包示範影片"></video>
+      <div class="preview-hero__overlay">
+        <p class="preview-hero__kicker">流動畫材料包</p>
+        <h2 class="preview-hero__title">禮盒版</h2>
+        <p class="preview-hero__tagline">雙幅成品，完整的流動畫體驗。</p>
+        <a class="work__cta work__cta--primary" href="products/fluid-art-gift/">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          查看這款材料包
+        </a>
+      </div>
+    </div>
+        -->
 
         <div class="preview-hero__slide" data-index="3">
           <div class="placeholder-box placeholder-box--photo preview-hero__photo" aria-hidden="true">
