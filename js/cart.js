@@ -114,6 +114,42 @@
     return itemUnitPrice(item) * item.qty;
   }
 
+  // 早鳥優惠：跟 risuan-checkout/lib/products.js earlyBirdDiscount() 同一組
+  // 規則（9 折、2026-12-31 台北時區前），這裡是純「顯示用」的前端版本——
+  // 客人加入購物車之前就能看到折扣後的價格，但真正收費永遠是結帳時後端
+  // 重新算一次（不相信前端送出的任何金額），所以就算這裡算錯也不影響
+  // 實際收費是否正確。兩邊常數要一起改，不然顯示的價格跟實際收費會對
+  // 不起來（2026-10-17 使用者要求「官網看到的價格＝刷卡收的價格」）。
+  const EARLY_BIRD_CUTOFF = "2026-12-31";
+  const EARLY_BIRD_RATE = 0.9;
+  function todayInTaipei() {
+    return new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Taipei" }).format(new Date());
+  }
+  function earlyBirdPrice(price) {
+    if (!price || todayInTaipei() > EARLY_BIRD_CUTOFF) return { discounted: price, amount: 0 };
+    const discounted = Math.round(price * EARLY_BIRD_RATE);
+    return { discounted, amount: price - discounted };
+  }
+  // 折扣後的「商品小計」：單價先打折再乘數量，跟後端 priceCart()→
+  // earlyBirdDiscount() 的算法一致（先算出未折扣的 itemsTotal，再對
+  // 整筆小計打折）在數學上等價，四捨五入誤差最多 1 元／件，可接受。
+  function itemLineTotalDiscounted(item) {
+    const unit = itemUnitPrice(item);
+    return earlyBirdPrice(unit).discounted * item.qty;
+  }
+
+  // 統一組「原價（劃線）→折扣後金額→早鳥9折標籤」這段 HTML，給任何有
+  // 足夠空間顯示完整折扣資訊的地方用（購物車頁逐項價格／小計）；空間
+  // 小的地方（迷你購物車預覽）維持只顯示折扣後金額，不用這個。沒有
+  // 折扣時直接退回單純的金額文字，不會多畫出空的劃線價格。
+  function priceDiscountHTML(unitPrice, qty) {
+    const { discounted, amount } = earlyBirdPrice(unitPrice);
+    const originalTotal = unitPrice * qty;
+    const discountedTotal = discounted * qty;
+    if (amount <= 0) return `$${originalTotal.toLocaleString()}`;
+    return `<s class="price-discount__original">$${originalTotal.toLocaleString()}</s> <span class="price-discount__final">$${discountedTotal.toLocaleString()}</span> <span class="price-discount__badge">早鳥9折</span>`;
+  }
+
   // 購物車縮圖用「成品模擬圖」（跟套組內容照片不同張）：這張不管輕巧版或禮盒版都
   // 一樣準確（純粹展示成品長相，不涉及套組內容數量差異），兩版共用同一組縮圖，
   // 不需要另外分版本。
@@ -306,6 +342,10 @@
   }
 
   function cartTotal() {
+    return readCart().reduce((sum, i) => sum + itemLineTotalDiscounted(i), 0);
+  }
+
+  function cartTotalOriginal() {
     return readCart().reduce((sum, i) => sum + itemLineTotal(i), 0);
   }
 
@@ -690,7 +730,7 @@
             <p class="cart-preview__item-name">${product.name}</p>
             <p class="cart-preview__item-meta">${metaParts.join("　")}</p>
           </div>
-          <p class="cart-preview__item-price price-text">$${itemLineTotal(item).toLocaleString()}</p>
+          <p class="cart-preview__item-price price-text">$${itemLineTotalDiscounted(item).toLocaleString()}</p>
         `;
         list.appendChild(li);
       });
@@ -767,7 +807,7 @@
               <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16"/><path d="M9 7V4h6v3"/><path d="M6 7l1 13h10l1-13"/></svg>
             </button>
           </div>
-          <p class="cart-item__price price-text">$${(product.price * item.qty).toLocaleString()}</p>
+          <p class="cart-item__price price-text">${priceDiscountHTML(product.price, item.qty)}</p>
         </div>
       </div>
     `;
@@ -833,7 +873,14 @@
         groupsEl.appendChild(section);
       });
 
-      if (totalEl) totalEl.textContent = `小計 $${cartTotal().toLocaleString()}`;
+      if (totalEl) {
+        const original = cartTotalOriginal();
+        const discounted = cartTotal();
+        totalEl.innerHTML =
+          original > discounted
+            ? `小計 <s class="price-discount__original">$${original.toLocaleString()}</s> <span class="price-discount__final">$${discounted.toLocaleString()}</span> <span class="price-discount__badge">早鳥9折</span>`
+            : `小計 $${discounted.toLocaleString()}`;
+      }
     }
 
     render();
@@ -868,6 +915,8 @@
   window.RisuanCart = {
     readCart,
     cartTotal,
+    earlyBirdPrice,
+    priceDiscountHTML,
     getCheckoutPayload() {
       return readCart().map((item) => {
         const product = PRODUCTS[item.productKey];

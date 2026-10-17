@@ -1,0 +1,99 @@
+/* promo-bar.css —— 頂部跑馬燈列，原本只有首頁有（見 home-shop.css 舊版
+   註解），2026-10-17 使用者要求改成全站都有，「不管到哪個頁面都看得
+   到」。刻意獨立成一個檔案、刻意載在每一頁所有 CSS 的最後面（見各頁
+   <head> 最後一條 <link>），這樣同特異度的規則（例如 .site-header 的
+   top 位移）一定會蓋過 home.css／products.css 原本的宣告，不用去猜
+   載入順序或拉高特異度。
+
+   跟 products.css 既有的 --ptpl-topbar-height 機制（本來是給
+   product-template.css 的公告橫幅範本預留的掛勾，當時從沒真的接上過，
+   見 .product-page padding-top 那條規則）接在一起用：這裡直接把
+   --ptpl-topbar-height 設成「頂部列高度＋跑馬燈高度」，.product-page
+   的留白／各頁「頂部列下方滿版 hero」的負 margin 公式完全不用改，
+   全部自動跟著多出來的跑馬燈高度調整（因為兩者都是從同一個變數算出
+   來的，不是各自寫死的數字）。 */
+
+:root {
+  --promo-bar-height: 36px;
+  --ptpl-topbar-height: calc(var(--editorial-header-height) + var(--promo-bar-height));
+}
+
+.promo-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 26;
+  height: var(--promo-bar-height);
+  overflow: hidden;
+  padding: 0 var(--pad-h);
+  background: var(--color-surface-black);
+  color: var(--color-surface-light);
+  font-size: 12px;
+  letter-spacing: var(--editorial-tracking);
+  text-align: center;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity var(--duration-fast) var(--ease-standard),
+    visibility var(--duration-fast) var(--ease-standard);
+}
+
+.promo-bar.is-scrolled {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* 文案輪播：好幾句訊息疊在同一個位置，一次只有一句「現役」，輪到下一句
+   時現役那句往上滑出、新的一句從下面滑入——跟客人說「這裡會一直換
+   不同優惠」，不是塞一整串長文字硬擠成一行。純 CSS transition 做位移
+   ／透明度，JS（js/promo-bar.js）只負責定時切換 class，不寫 JS 動畫。 */
+.promo-bar__track {
+  position: relative;
+  height: 100%;
+}
+
+.promo-bar__msg {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(60%);
+  transition: opacity var(--duration-normal) var(--ease-standard),
+    transform var(--duration-normal) var(--ease-standard);
+  pointer-events: none;
+}
+
+.promo-bar__msg.is-active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.promo-bar__msg.is-leaving {
+  opacity: 0;
+  transform: translateY(-60%);
+}
+
+.promo-bar__msg a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--color-surface-light) 50%, transparent);
+  text-underline-offset: 2px;
+}
+
+/* 頂部列（.site-header）跟著跑馬燈列往下讓位，不會疊在上面——
+   home.css／home-shop.css 原本的 top:0 全部在這條之前載入，同特異度
+   由後載入的這條（見檔頭說明）覆蓋過去。 */
+.site-header {
+  top: var(--promo-bar-height);
+}
+
+/* 跑馬燈列捲動淡出後（.is-scrolled，見 js/site-header-scroll.js），頂部
+   列要跟著滑回最頂端補上那段空隙，不然會留一條 36px 的空白在畫面最
+   上方。只蓋 top 這個屬性，home.css 原本 .site-header.is-scrolled 設定
+   的底色毛玻璃轉場不受影響，兩條規則的宣告會一起套用。 */
+.site-header.is-scrolled {
+  top: 0;
+}

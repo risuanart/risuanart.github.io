@@ -52,6 +52,7 @@
   <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
   <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="stylesheet" href="/css/promo-bar.css">
 </head>
 <body>
 
@@ -60,10 +61,16 @@
 
   <h1 class="sr-only">日宣繪畫室</h1>
 
-  <!-- 跑馬燈列：參考站（panacea-q.com）頂部黑底促銷列的位置，但沒有真的
-       優惠可以放（不能編一個假折扣碼），改放中性、真實的邀請文案＋真的
-       Instagram 帳號。捲動後隱藏，邏輯見 js/site-header-scroll.js。 -->
-  <div class="promo-bar" id="promo-bar">材料包早鳥9折・追蹤 IG @ri.suan_art</div>
+  <!-- 跑馬燈列：2026-10-17 改成全站都有（原本只有首頁），文案改成可以
+       輪播好幾句（見 css/promo-bar.css .promo-bar__track／js/promo-bar.js），
+       不用把所有優惠擠成一行長文字。捲動後隱藏，邏輯見
+       js/site-header-scroll.js，跟其他頁共用同一支。 -->
+  <div class="promo-bar" id="promo-bar">
+    <div class="promo-bar__track">
+      <span class="promo-bar__msg is-active">材料包早鳥優惠・12/31 前預購享 9 折</span>
+      <span class="promo-bar__msg">追蹤 Instagram @ri.suan_art・掌握最新開課消息</span>
+    </div>
+  </div>
 
   <!-- 傳統官網結構：左上角漢堡選單（點開跳出目錄）、正中間 logo（點擊
        回首頁——本身就在首頁時等於重新整理）、右上角購物車，跟參考站
@@ -373,6 +380,7 @@
   <script src="js/hero-colorway-carousel.js"></script>
   <script src="js/products-overview.js"></script>
   <script src="js/site-header-scroll.js"></script>
+  <script src="/js/promo-bar.js"></script>
   <script src="js/scroll-reveal.js"></script>
   <script src="js/home-shop.js"></script>
   <script src="js/video-inview.js"></script>

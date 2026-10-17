@@ -9,42 +9,11 @@
    讓大圖／格狀商品／Follow Us 在寬螢幕上共用同一條欄寬基準線，不是各
    區塊各自選一個數字。Footer 例外，滿版深色底，見該區塊自己的規則。 */
 
-/* ---------- 跑馬燈列：疊在 .site-header 上方，兩者一起固定貼齊頂端 ----------
-   高度用一個變數集中定義，.site-header 的 top 位移／.preview-hero 的
-   負 margin 都要扣掉這個高度，三處數字才不會各自寫死、之後改高度只要
-   改這裡一個地方。捲動後隱藏（.is-scrolled，邏輯見
-   js/site-header-scroll.js，跟 .site-header 共用同一個捲動偵測，只是
-   多切一個 class 到這個元素上）。 */
-:root {
-  --promo-bar-height: 36px;
-}
-
-.promo-bar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 26;
-  height: var(--promo-bar-height);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 var(--pad-h);
-  background: var(--color-surface-black);
-  color: var(--color-surface-light);
-  font-size: 12px;
-  letter-spacing: var(--editorial-tracking);
-  text-align: center;
-  opacity: 1;
-  visibility: visible;
-  transition: opacity var(--duration-fast) var(--ease-standard),
-    visibility var(--duration-fast) var(--ease-standard);
-}
-
-.promo-bar.is-scrolled {
-  opacity: 0;
-  visibility: hidden;
-}
+/* ---------- 跑馬燈列 ----------
+   2026-10-17 跑馬燈改成全站共用（--promo-bar-height／.promo-bar／
+   .promo-bar.is-scrolled 都移到 css/promo-bar.css，每一頁都載入），
+   這裡不再重複定義，只留下面這頁專屬的 .site-header 覆寫（多了一條
+   首頁限定的 top 位移動畫轉場，其他頁面沒有這個額外的 transition）。 */
 
 /* ---------- 頂部列：漢堡選單（左）＋ logo（中）＋ 購物車（右） ----------
    .site-header 本身（fixed 定位、內距、透明底）是 home.css 的共用規則，

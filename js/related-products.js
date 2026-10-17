@@ -17,7 +17,8 @@
   };
 
   function priceText(product) {
-    return product.price ? `$${product.price.toLocaleString()}` : "$__";
+    if (!product.price) return "$__";
+    return window.RisuanCart ? window.RisuanCart.priceDiscountHTML(product.price, 1) : `$${product.price.toLocaleString()}`;
   }
 
   // 跟 js/products-overview.js 的 carouselThumbHTML() 同一套邏輯：有配色

@@ -23,7 +23,10 @@
   };
 
   function priceText(product) {
-    return product.price ? `$${product.price.toLocaleString()}` : "$__";
+    if (!product.price) return "$__";
+    // 早鳥折扣用 window.RisuanCart.priceDiscountHTML（見 js/cart.js）統一算，
+    // 不在這裡另外寫一次規則，改折扣期間／折數只要改那一處。
+    return window.RisuanCart ? window.RisuanCart.priceDiscountHTML(product.price, 1) : `$${product.price.toLocaleString()}`;
   }
 
   // 這 7 款單一配色沙畫在商品頁首圖已經有「配色動態展示」輪播（出貨配色→

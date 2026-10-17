@@ -87,6 +87,37 @@ a {
   color: var(--color-price);
 }
 
+/* 早鳥折扣的「原價（劃線）→折扣後金額→9折標籤」共用樣式，給商品頁
+   標題價格、購物車逐項價格／小計、商品卡片共用（見 js/cart.js
+   priceDiscountHTML()／js/product-price-discount.js）。用 em 相對單位
+   跟著各自容器的字級走，同一套規則套進大標題價格或小張商品卡都不用
+   另外調——沒有折扣時這幾個 class 根本不會出現在 DOM 裡，不用額外的
+   「隱藏」狀態。 */
+.price-discount__original {
+  font-size: 0.75em;
+  font-weight: 400;
+  color: var(--color-text-secondary);
+  text-decoration: line-through;
+  text-decoration-color: color-mix(in srgb, var(--color-text-secondary) 60%, transparent);
+}
+
+.price-discount__final {
+  font-weight: inherit;
+}
+
+.price-discount__badge {
+  display: inline-block;
+  font-size: 0.6em;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--color-interactive);
+  border: 1px solid var(--color-interactive);
+  border-radius: 999px;
+  padding: 0.15em 0.6em;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
 /* 視覺上隱藏但螢幕閱讀器／搜尋引擎讀得到——首頁用 logo 圖片當視覺識別，
    沒有真的顯示文字標題，用這個補一個語意正確的 <h1> 給每個頁面用，
    不影響版面。 */
