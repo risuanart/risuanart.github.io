@@ -241,16 +241,24 @@
   pointer-events: none;
 }
 
-/* 額滿日期：跟「公休／未開放」用同一種純灰階不可點不一樣，額滿是
-   「這天開過時段、刻意讓學生看得到，只是訂不到」，用 --color-warning
-   淡底色＋文字標籤區隔，全站規則是這個顏色只用在「東西真的不能用」
-   的情境（見 cart.css .checkout-error 同一條規則），額滿剛好符合。
-   用 :disabled 疊出更高特異度蓋過 .booking-calendar__day:disabled
-   原本統一調淡的顏色，不然文字標籤會被那條規則蓋成跟公休日同一種灰。 */
-.booking-calendar__day--full {
-  background: color-mix(in srgb, var(--color-warning) 12%, transparent);
+/* 可預約日期：原本只有數字下方一個 4px 小點，跟額滿的滿版色塊比起來
+   幾乎看不見，使用者會誤以為額滿才是「有狀態」的日子。改成可預約日
+   期用 --color-interactive（全站語意上就是「可點擊」專用色）淡底色
+   ＋粗體數字，變成視覺上最顯眼的那群；額滿反而調降成跟公休日接近的
+   灰階弱化處理，只留文字標籤，不再用滿版警示色塊搶注意力。 */
+.booking-calendar__day--available {
+  background: color-mix(in srgb, var(--color-interactive) 14%, transparent);
+  font-weight: 700;
 }
 
+.booking-calendar__day--available .booking-calendar__day-dot {
+  background: var(--color-interactive);
+}
+
+/* 額滿日期：跟「公休／未開放」刻意不用一樣的純灰階，額滿是「這天開過
+   時段、刻意讓學生看得到，只是訂不到」，所以還留一個文字標籤區隔，
+   但不再用滿版底色——可預約的日期才該是版面上最搶眼的，額滿只要「看
+   得到、分得出跟公休不同」就好，不需要比可預約更顯眼。 */
 .booking-calendar__day--full:disabled {
   color: var(--color-warning);
 }
@@ -261,8 +269,6 @@
   letter-spacing: 0.02em;
 }
 
-/* 有名額的日期，數字下方一個小點提示「可以點」——不用文字標籤，格子
-   本身已經很小，塞字會擠爆。 */
 .booking-calendar__day-dot {
   width: 4px;
   height: 4px;

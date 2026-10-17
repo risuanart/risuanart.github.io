@@ -271,7 +271,7 @@
 
       const btn = document.createElement("button");
       btn.type = "button";
-      btn.className = "booking-calendar__day" + (isFull ? " booking-calendar__day--full" : "");
+      btn.className = "booking-calendar__day" + (isFull ? " booking-calendar__day--full" : hasAvailability && !isPast ? " booking-calendar__day--available" : "");
       btn.disabled = isPast || !hasAvailability;
       btn.setAttribute("aria-pressed", ds === selectedDate ? "true" : "false");
       btn.innerHTML = isFull
