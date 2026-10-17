@@ -409,7 +409,30 @@
           </section>
 
           <div class="chapter confirm-pay" hidden>
-            <p class="confirm-total"></p>
+            <!-- 2026-10-17 改成跟 .order-sheet__lines（下方滑出的「訂單明細」
+                 面板）同一套逐行拆開的排列，不要再塞成一句「原價…－早鳥優惠
+                 …＝小計…＋運費…＝應付…」的長句子——使用者反映原本那句文字
+                 換行點很怪、看不出哪個數字對應哪個項目。直接沿用同一套
+                 class（.order-sheet__line 等），兩處維持同一套視覺語言，
+                 不用另外發明一組新樣式。 -->
+            <dl class="order-sheet__lines confirm-total-lines">
+              <div class="order-sheet__line">
+                <dt>小計</dt>
+                <dd id="confirm-total-subtotal"></dd>
+              </div>
+              <div class="order-sheet__line order-sheet__line--discount" id="confirm-total-discount-row" hidden>
+                <dt id="confirm-total-discount-label"></dt>
+                <dd id="confirm-total-discount"></dd>
+              </div>
+              <div class="order-sheet__line">
+                <dt id="confirm-total-shipping-label">運費</dt>
+                <dd id="confirm-total-shipping"></dd>
+              </div>
+            </dl>
+            <div class="order-sheet__grand confirm-total-grand">
+              <span>應付金額</span>
+              <span id="confirm-total-grand"></span>
+            </div>
             <button type="submit" class="work__cta work__cta--primary">
               <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
               <span>前往付款</span>

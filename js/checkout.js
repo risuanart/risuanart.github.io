@@ -513,12 +513,21 @@
     if (method) {
       document.getElementById("confirm-shipping-method").value = method;
       const fee = SHIPPING_FEES[method];
-      // 有早鳥折扣時把「原價→折扣」也攤開寫出來，跟 order-sheet 面板
-      // 同一套「不悄悄改價格」的原則（見 renderOrderSheet 的說明）。
-      const discountText = order.discountAmount > 0 ? `原價 ${formatMoney(order.originalItemsTotal)}－${order.discountLabel} ${formatMoney(order.discountAmount)}＝` : "";
-      document.querySelector(".confirm-total").textContent = `${discountText}小計 ${formatMoney(order.itemsTotal)}＋運費 ${formatMoney(
-        fee
-      )} ＝ 應付 ${formatMoney(order.itemsTotal + fee)}`;
+      // 2026-10-17 改成跟 .order-sheet__lines 同一套逐行拆開，不要再塞成
+      // 一句長文字（原本的寫法見 git 歷史）。有早鳥折扣時把「原價→折扣」
+      // 獨立一行列出來，跟 order-sheet 面板同一套「不悄悄改價格」的原則
+      // （見 renderOrderSheet 的說明）。
+      document.getElementById("confirm-total-subtotal").textContent = formatMoney(order.originalItemsTotal ?? order.itemsTotal);
+      const discountRow = document.getElementById("confirm-total-discount-row");
+      if (order.discountAmount > 0) {
+        discountRow.hidden = false;
+        document.getElementById("confirm-total-discount-label").textContent = order.discountLabel;
+        document.getElementById("confirm-total-discount").textContent = `-${formatMoney(order.discountAmount)}`;
+      } else {
+        discountRow.hidden = true;
+      }
+      document.getElementById("confirm-total-shipping").textContent = formatMoney(fee);
+      document.getElementById("confirm-total-grand").textContent = formatMoney(order.itemsTotal + fee);
     }
   }
 

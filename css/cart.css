@@ -973,13 +973,26 @@
   margin-top: var(--space-8);
 }
 
-.confirm-total {
-  margin: 0 0 var(--space-4);
-  text-align: right;
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
-  max-width: 50ch;
+/* 2026-10-17 修正：js/checkout.js 結帳／選完 7-11 門市回來後會
+   customerSection.scrollIntoView({block:"start"})，但 .site-header／
+   .promo-bar 是 position:fixed 浮在畫面最上層，scrollIntoView 只會把
+   目標元素的頂端對齊「捲動容器」的頂端（y=0），不會扣掉這兩層固定列
+   實際佔用、蓋住畫面最上面的高度——結果姓氏／名字／手機欄位被固定列
+   蓋住看不到，使用者看到的其實是 STEP 1 比較下面的部分（Email、訂閱
+   勾選框），反映「捲動還是偏低」。scroll-margin-top 讓原生
+   scrollIntoView／CSS scroll-into-view 自動扣掉這段高度，不用在 JS
+   那邊手動算 offset。 */
+#customer-section {
+  scroll-margin-top: calc(var(--ptpl-topbar-height, var(--editorial-header-height)) + var(--space-4));
 }
+
+/* .confirm-total（整句長文字排列）2026-10-17 已經換成 .confirm-total-lines
+   （沿用 .order-sheet__lines，見 cart/index.html confirm-pay 區塊），這裡
+   不再需要單獨的 class。
+
+   .confirm-total-grand／.confirm-total-lines 這兩個 id/class 只是掛在共用
+   的 .order-sheet__grand／.order-sheet__lines 上做語意標記，視覺完全沿用
+   那兩個既有 class，這裡不用另外補樣式。 */
 
 /* 選定門市卡片：定位圖示＋門市名稱（粗體）＋地址（次要色），跟
    .shipping-option／.confirm-field__control 同一套圓角、surface-light
@@ -995,7 +1008,8 @@
   background: var(--color-surface-light);
   /* --color-surface-light 現在是純白，跟 .cart-collapse 同理補邊框。 */
   border: 1px solid color-mix(in srgb, var(--color-text-secondary) 30%, transparent);
-  max-width: 40ch;
+  /* 2026-10-17 拿掉 max-width:40ch，理由見 .shipping-options 上面的說明——
+     這個區塊裡每個元素各自挑一個 ch 數字造成右邊界對不齊。 */
 }
 
 /* .confirm-store 自己宣告了 display，同一個「作者樣式表蓋過瀏覽器內建
@@ -1033,13 +1047,20 @@
    上下堆疊的橫式列，跟下面收件資訊的輸入格（.confirm-field__control）
    同一套視覺語言：圓角、無邊框、純底色，圖示＋文字橫排，不是左右並排
    的方形卡片。超商取貨是真的 <a> 連結（會離開這頁去綠界電子地圖），
-   宅配到府是 <button>（純本機切換顯示地址欄位，不離開頁面）。 ---------- */
+   宅配到府是 <button>（純本機切換顯示地址欄位，不離開頁面）。
+
+   2026-10-17 拿掉原本的 max-width:46ch：這個 STEP 2 區塊裡同時還有
+   .confirm-store（原本 max-width:40ch）跟下面的訂單小計（原本
+   .confirm-total 是 50ch），三個各自選了不同的 ch 數字，右邊界完全
+   對不齊，使用者反映「左右距離螢幕寬度不一致，整體偏左」。.chapter
+   本身在桌面版已經有 --content-max-width 的欄寬上限，這裡不需要再疊
+   一層更窄的上限，拿掉後三個元素都跟著 .chapter 滿版寬度對齊，彼此
+   右邊界一致。 ---------- */
 .shipping-options {
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
   margin-top: var(--space-4);
-  max-width: 46ch;
 }
 
 .shipping-option {
@@ -1199,6 +1220,9 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
+  /* 2026-10-17：原本沒有 margin-top，直接貼在上面的 .confirm-store（門市
+     卡片）下面，使用者反映距離太近，補上跟其他區塊一致的間距。 */
+  margin-top: var(--space-4);
   width: 100%;
 }
 
