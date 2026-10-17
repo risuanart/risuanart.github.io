@@ -407,3 +407,61 @@
 .booking-form-view[hidden] {
   display: none;
 }
+
+/* 步驟標籤：這頁借用 cart.css 的 .step-badge（空心圓圈＋數字），但使用者
+   2026-10-17 反映圓圈在這裡不夠清楚，先改成無框的「STEP 1」文字標籤，
+   再從 4 個模擬提案（see step-badge-variants.html）裡選定 Variant 4：
+   STEP 用小字＋主色（不是灰色），後面接一個次要色小圓點再接標題，
+   跟同頁 .booking-notice__tab 同一種視覺語彙，只在這頁套用，不動
+   cart.css 的共用圓圈（購物車那邊的步驟沒人反映過看不清楚）。 */
+.step-badge--label {
+  width: auto;
+  height: auto;
+  border: none;
+  padding: 0;
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--color-text-primary);
+  vertical-align: middle;
+}
+
+.step-badge__dot {
+  margin: 0 var(--space-2);
+  color: var(--color-text-secondary);
+  font-size: 0.6em;
+  vertical-align: middle;
+}
+
+/* 「我已閱讀並同意」勾選列：這一列跟上面的 footer（.work__close）都不在
+   任何 .chapter 裡面，沒有 .chapter 自動帶的左右內距（--content-pad），
+   勾選框因此直接貼齊容器邊緣。.work__close 自己另外補了 padding，這裡
+   補上同一組內距讓勾選框對齊上方表單欄位，不是全站 .confirm-checkbox
+   的通用問題（cart.html 的勾選框都包在 .chapter 裡，不受影響）。 */
+#booking-form > .confirm-checkbox {
+  margin-top: var(--editorial-gap);
+  padding-left: var(--content-pad);
+  padding-right: var(--content-pad);
+}
+
+/* 同一顆勾選框在這頁縮小：cart.css 的 .confirm-checkbox input 預設
+   20×20px（照觸控面積建議放大過），但使用者 2026-10-17 反映這頁的
+   方框看起來太大，這裡單獨調小，不動 cart.html 收件流程原本的尺寸。 */
+#booking-form > .confirm-checkbox input {
+  width: 16px;
+  height: 16px;
+}
+
+/* 「聯絡資訊」欄位群：cart.html 對應的 #customer-section／#receiver-section
+   有自己的 flex column＋gap（見 cart.css #customer-section 規則），
+   讓欄位與欄位之間（16px）明顯比欄位內「標籤到輸入框」（8px）更寬，
+   閱讀時才看得出哪個標籤對應哪個輸入框。booking 頁的 #contact-section
+   是獨立的 .chapter，沒套到那條規則，欄位之間因此沒有額外間距、
+   視覺上緊貼在一起，使用者 2026-10-17 反映「聯絡方式」的標籤看起來
+   像是接在上一欄「姓名」輸入框下面。補上同一套 flex column＋gap。 */
+#contact-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-4);
+}
