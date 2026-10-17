@@ -909,7 +909,8 @@
   background: var(--color-surface-neutral);
   padding: var(--space-2) var(--space-4);
   font-family: inherit;
-  font-size: var(--font-size-sm);
+  /* 同 .confirm-field input：16px 門檻避免 iOS 點進欄位時頁面自動放大。 */
+  font-size: var(--font-size-base);
   color: var(--color-text-primary);
   transition: box-shadow var(--duration-fast) var(--ease-standard);
 }
@@ -1250,7 +1251,11 @@
   flex: 1;
   min-width: 0;
   font-family: inherit;
-  font-size: var(--font-size-sm);
+  /* 16px（--font-size-base）是 iOS Safari 不會在 focus 時自動放大頁面的
+     門檻值——原本用 --font-size-sm（14px），手機點進欄位輸入時 Safari 會
+     自動把整頁縮放放大，使用者就會覺得「輸入資料時頁面會放大」，其實
+     不是版面寬度的問題，是這個瀏覽器行為。 */
+  font-size: var(--font-size-base);
   color: var(--color-text-primary);
   border: none;
   background: none;
@@ -1277,7 +1282,8 @@
   border: none;
   background: none;
   font-family: inherit;
-  font-size: var(--font-size-sm);
+  /* 同 .confirm-field input：16px 門檻避免 iOS 點開選單時頁面自動放大。 */
+  font-size: var(--font-size-base);
   color: var(--color-text-primary);
   padding: var(--space-2) 0;
   cursor: pointer;
