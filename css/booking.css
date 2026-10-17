@@ -491,3 +491,82 @@
   align-items: flex-start;
   gap: var(--space-4);
 }
+
+/* 聯絡帳號的平台切換（IG／FB 單選一個）：跟 cart.css .shipping-option
+   同一套「未選=描邊白底、已選=實色填滿」語言，橫排兩顆方便大拇指點，
+   不用下拉選單——這裡只有兩個選項，下拉反而多一次點擊。 */
+.contact-platform {
+  display: flex;
+  gap: var(--space-2);
+  width: 100%;
+}
+
+.contact-platform__btn {
+  appearance: none;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  border: 1px solid color-mix(in srgb, var(--color-text-secondary) 30%, transparent);
+  border-radius: 10px;
+  background: var(--color-surface-light);
+  padding: var(--space-2) var(--space-4);
+  font-family: inherit;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: background var(--duration-fast) var(--ease-standard), color var(--duration-fast) var(--ease-standard), box-shadow var(--duration-fast) var(--ease-standard);
+}
+
+.contact-platform__btn:active {
+  box-shadow: 0 0 0 2px var(--color-text-primary);
+}
+
+.contact-platform__btn.is-active {
+  background: var(--color-text-primary);
+  color: var(--color-surface-light);
+  border-color: var(--color-text-primary);
+}
+
+/* 付款完成後的「複製預約資訊私訊我們」卡片：跟 .confirm-field__control
+   同一套圓角／邊框語言，文字區塊用 <pre> 保留換行，使用者點複製後
+   直接貼到 IG／FB 聊天室就是排好版的內容，不用自己重新斷行。 */
+.booking-dm-card {
+  margin: 0 auto 20px;
+  max-width: 40ch;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.booking-dm-card__hint {
+  text-align: center;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.booking-dm-card__text {
+  margin: 0;
+  padding: var(--space-4);
+  border: 1px solid color-mix(in srgb, var(--color-text-secondary) 30%, transparent);
+  border-radius: 10px;
+  background: var(--color-surface-light);
+  font-family: inherit;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.booking-dm-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  justify-content: center;
+}
+
+.booking-dm-card__actions .work__cta {
+  flex: 1 1 auto;
+  justify-content: center;
+}

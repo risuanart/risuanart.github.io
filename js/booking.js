@@ -33,6 +33,28 @@
   const totalEl = document.getElementById("booking-total");
   const agreeNoticeCheckbox = document.getElementById("booking-agree-notice");
 
+  // ---------- 聯絡帳號：IG／FB 平台切換 ----------
+  // 單選一個（不是兩個都填），選中的平台存在 currentPlatform，送出表單
+  // 時跟帳號一起打包成 payload.platform／payload.ig（見下面 submit
+  // handler），後端組成 "IG:帳號" 或 "FB:帳號" 存進既有的 ig 欄位
+  // （見 api/course-booking.js handleCreate 的說明，沒有另外新增
+  // 欄位）。IG 是預設、也是畫室比較常用來回覆的平台。
+  const platformBtns = Array.from(document.querySelectorAll(".contact-platform__btn"));
+  const igInput = document.getElementById("booking-ig");
+  let currentPlatform = "IG";
+  const PLATFORM_PLACEHOLDER = { IG: "@your_ig", FB: "您的 Facebook 名稱" };
+  platformBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      currentPlatform = btn.dataset.platform;
+      platformBtns.forEach((b) => {
+        const active = b === btn;
+        b.classList.toggle("is-active", active);
+        b.setAttribute("aria-pressed", active ? "true" : "false");
+      });
+      igInput.placeholder = PLATFORM_PLACEHOLDER[currentPlatform] || "";
+    });
+  });
+
   // ---------- 課前預約須知：分頁籤 ----------
   // 2026-09-17 使用者參考 tinybot 預約頁截圖，要求改成分頁點選（一次
   // 只顯示一類內容），不要 5 段全部展開堆疊、捲很長不好讀。
@@ -442,6 +464,7 @@
       contact: document.getElementById("booking-contact").value.trim(),
       email: document.getElementById("booking-email").value.trim(),
       ig: document.getElementById("booking-ig").value.trim(),
+      platform: currentPlatform,
       note: document.getElementById("booking-note").value.trim(),
     };
 
@@ -479,6 +502,52 @@
       .join("、");
   }
 
+  // 付款完成後，把預約資訊整理成一段客人可以直接複製貼去 IG／FB 私訊
+  // 的文字——這頁是付款導回來的全新頁面載入，表單裡打過的姓名／帳號
+  // 都不在了，name／ig 改由 handleStatus() 從後端存的那筆預約紀錄
+  // 補回來（見 api/course-booking.js handleStatus 的說明）。
+  let dmText = "";
+  function renderDmCard(data) {
+    const dmCard = document.getElementById("booking-dm-card");
+    if (!dmCard) return;
+    const m = /^(IG|FB):(.*)$/.exec(data.ig || "");
+    const platformLabel = m ? (m[1] === "FB" ? "Facebook" : "Instagram") : "Instagram";
+    const handle = m ? m[2] : data.ig || "";
+    dmText = [
+      `您好，我是 ${data.name || ""}`,
+      `已完成預約：${data.date} ${data.time}`,
+      describeAttendeeCourses(data.courses) ? `課程：${describeAttendeeCourses(data.courses)}` : "",
+      handle ? `聯絡帳號（${platformLabel}）：${handle}` : "",
+    ]
+      .filter(Boolean)
+      .join("\n");
+    document.getElementById("booking-dm-text").textContent = dmText;
+    dmCard.hidden = false;
+  }
+
+  const dmCopyBtn = document.getElementById("booking-dm-copy");
+  if (dmCopyBtn) {
+    dmCopyBtn.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(dmText);
+        const label = dmCopyBtn.querySelector("span");
+        const original = label.textContent;
+        label.textContent = "已複製！";
+        setTimeout(() => {
+          label.textContent = original;
+        }, 1800);
+      } catch (err) {
+        // 瀏覽器不支援 Clipboard API（少見，通常是非 HTTPS 環境）——
+        // 退而求其次選取文字，使用者自己長按複製。
+        const range = document.createRange();
+        range.selectNodeContents(document.getElementById("booking-dm-text"));
+        const selection = window.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+      }
+    });
+  }
+
   // ---------- 付款完成後回來這頁：輪詢付款結果 ----------
   async function pollBookingStatus(bookingId, attempt) {
     const resultChecking = document.getElementById("result-checking");
@@ -496,6 +565,7 @@
         document.getElementById("result-confirmed-text").textContent = `${data.date} ${data.time}，${describeAttendeeCourses(
           data.courses
         )}，已收款 ${formatMoney(data.amountReceived)}。期待與您見面！`;
+        renderDmCard(data);
         return;
       }
       if (data.status === "pending" && attempt < 6) {
