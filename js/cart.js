@@ -53,8 +53,12 @@
     // 裡的 scheme），比照羊Diss舞蹈紅／藍的先例拆成兩個完全獨立的商品頁／商品鍵
     // （hasVariant:false，不再是「同一款選顏色」）。禮盒版維持原本的色系選擇器不動，
     // classic-red／welcome-pink 這兩個 scheme 鍵值繼續保留給禮盒版用，不能刪。
-    "fluid-art-light-red": { name: "春聯流動畫材料包・輕巧版（經典紅）", shortName: "輕巧版（經典紅）", price: 800, category: "fluid-art", hasVariant: false, tagline: "單幅 15cm，最快抵達的新年儀式" },
-    "fluid-art-light-pink": { name: "春聯流動畫材料包・輕巧版（迎春粉）", shortName: "輕巧版（迎春粉）", price: 800, category: "fluid-art", hasVariant: false, tagline: "單幅 15cm，最快抵達的新年儀式" },
+    // 2026-10-17 使用者要求拿掉「輕巧版」這個字眼：禮盒版已經暫時下架
+    // （見下面 fluid-art-gift 的 hidden:true），流動畫材料包只剩這兩款，
+    // 沒有另一個版本可以比較，「輕巧版」這個相對詞就不成立了，改回單純
+    // 的「春聯流動畫材料包」。
+    "fluid-art-light-red": { name: "春聯流動畫材料包（經典紅）", shortName: "經典紅", price: 800, category: "fluid-art", hasVariant: false, tagline: "單幅 15cm，最快抵達的新年儀式" },
+    "fluid-art-light-pink": { name: "春聯流動畫材料包（迎春粉）", shortName: "迎春粉", price: 800, category: "fluid-art", hasVariant: false, tagline: "單幅 15cm，最快抵達的新年儀式" },
     // 2026-10-17 使用者要求暫時下架（不是刪除），hidden:true 會讓
     // products-overview.js／related-products.js／cart-cross-sell.js
     // 這三個地方自動把它濾掉（跟加購項目用的是同一個既有機制，見那幾支
