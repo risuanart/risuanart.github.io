@@ -1324,6 +1324,34 @@
   vertical-align: middle;
 }
 
+/* 2026-10-17：booking.html 原本用這個空心圓圈，使用者反映圓圈數字不夠
+   清楚，改成無框的「STEP 1」文字標籤（見下面兩條規則），4 個模擬提案
+   （see step-badge-variants.html）裡選定 Variant 4：STEP 用小字＋主色
+   （不是灰色），後面接一個次要色小圓點再接標題，跟 .booking-notice__tab
+   同一種視覺語彙。使用者後來（同日）要求購物車結帳頁的步驟也改成同一套，
+   從 booking.css 搬過來跟 .step-badge 放一起，兩頁共用——要套用這個樣式，
+   在 .step-badge 後面再加一個 .step-badge--label class（.chapter__title
+   裡「STEP 1」文字＋一個 .step-badge__dot「·」，取代原本純數字圓圈）。 */
+.step-badge--label {
+  width: auto;
+  height: auto;
+  margin-right: 0;
+  border: none;
+  padding: 0;
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--color-text-primary);
+  vertical-align: middle;
+}
+
+.step-badge__dot {
+  margin: 0 var(--space-2);
+  color: var(--color-text-secondary);
+  font-size: 0.6em;
+  vertical-align: middle;
+}
+
 /* ---------- 購物車頁底部：您可能對此有興趣 ----------
    照參考站的購物車頁排法：這個區塊在小計／結帳按鈕「下面」、滿版寬度，
    不是跟小計並排擠成窄欄（先前做過並排版本，使用者比對參考站截圖後

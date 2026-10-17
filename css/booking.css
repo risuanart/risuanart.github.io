@@ -434,30 +434,11 @@
   display: none;
 }
 
-/* 步驟標籤：這頁借用 cart.css 的 .step-badge（空心圓圈＋數字），但使用者
-   2026-10-17 反映圓圈在這裡不夠清楚，先改成無框的「STEP 1」文字標籤，
-   再從 4 個模擬提案（see step-badge-variants.html）裡選定 Variant 4：
-   STEP 用小字＋主色（不是灰色），後面接一個次要色小圓點再接標題，
-   跟同頁 .booking-notice__tab 同一種視覺語彙，只在這頁套用，不動
-   cart.css 的共用圓圈（購物車那邊的步驟沒人反映過看不清楚）。 */
-.step-badge--label {
-  width: auto;
-  height: auto;
-  border: none;
-  padding: 0;
-  font-size: var(--font-size-xs);
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  color: var(--color-text-primary);
-  vertical-align: middle;
-}
-
-.step-badge__dot {
-  margin: 0 var(--space-2);
-  color: var(--color-text-secondary);
-  font-size: 0.6em;
-  vertical-align: middle;
-}
+/* 2026-10-17：.step-badge--label／.step-badge__dot（「STEP 1」文字標籤
+   樣式）搬到 cart.css 跟 .step-badge 放在一起——這頁原本的註解說「只在
+   這頁套用」，但使用者後來反過來要求購物車結帳頁也要換成同一套，變成
+   兩頁共用，照這份檔案開頭「共用元件放 cart.css」的分工原則搬過去，
+   這裡不再重複定義。 */
 
 /* 「我已閱讀並同意」勾選列：這一列跟上面的 footer（.work__close）都不在
    任何 .chapter 裡面，沒有 .chapter 自動帶的左右內距（--content-pad），

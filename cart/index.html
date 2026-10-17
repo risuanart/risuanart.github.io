@@ -228,7 +228,7 @@
           <input type="hidden" name="shippingMethod" id="confirm-shipping-method">
 
           <section class="chapter" id="customer-section">
-            <h2 class="chapter__title"><span class="step-badge">1</span>聯絡資訊</h2>
+            <h2 class="chapter__title"><span class="step-badge step-badge--label">STEP 1</span><span class="step-badge__dot">·</span>聯絡資訊</h2>
             <!-- 姓名分成名字／姓氏左右並排，送出時用 #confirm-customer-name
                  這個隱藏欄位把兩個值合併成後端原本認得的單一 customerName
                  （見 js/checkout.js syncCustomerName()），不改後端契約。 -->
@@ -277,7 +277,7 @@
                要改選另一種方式，直接點另一顆按鈕（超商取貨會整頁導去綠界
                電子地圖重新選店；宅配到府純本機切換）。 -->
           <section class="chapter" id="shipping-section">
-            <h2 class="chapter__title"><span class="step-badge">2</span>送貨方式</h2>
+            <h2 class="chapter__title"><span class="step-badge step-badge--label">STEP 2</span><span class="step-badge__dot">·</span>送貨方式</h2>
 
             <div id="shipping-picker" class="shipping-options">
               <a class="shipping-option" id="shipping-cvs-link" href="#" aria-pressed="false">
@@ -330,7 +330,7 @@
                disabled）；取消勾選才能自己填一組不同的收件人資料。地址只在
                宅配到府才需要。 -->
           <section class="chapter" id="receiver-section" hidden>
-            <h2 class="chapter__title"><span class="step-badge">3</span>收件資料</h2>
+            <h2 class="chapter__title"><span class="step-badge step-badge--label">STEP 3</span><span class="step-badge__dot">·</span>收件資料</h2>
 
             <div id="receiver-fields">
               <label class="confirm-field">

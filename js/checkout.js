@@ -193,6 +193,7 @@
   const confirmPayEl = document.querySelector(".confirm-pay");
   const backToCartBtn = document.getElementById("confirm-back-to-cart");
 
+  const customerSection = document.getElementById("customer-section");
   const shippingSection = document.getElementById("shipping-section");
   const shippingCvsLink = document.getElementById("shipping-cvs-link");
   const shippingHomeBtn = document.getElementById("shipping-home-btn");
@@ -565,10 +566,13 @@
     // 訂單已經建立起來了，購物車編輯區收合成一條橫條，把畫面讓給下面的
     // 送貨方式／收件資料；要回頭確認或修改內容，點那條橫條就會再展開。
     collapseCartEditView();
-    // 內容整個渲染完成、高度定型之後才捲動，直接把「送貨方式」帶到畫面
-    // 最上面（而不是整個 order-confirm-view 的頂端，那前面還有一段收合
-    // 起來的「你選購的商品」）。
-    if (wasHidden) shippingSection.scrollIntoView({ behavior: "smooth", block: "start" });
+    // 內容整個渲染完成、高度定型之後才捲動，帶到「聯絡資訊」（step 1）
+    // 最上面——而不是整個 order-confirm-view 的頂端（那前面還有一段收合
+    // 起來的「你選購的商品」），但也不能跳過 step 1 直接帶到「送貨方式」
+    // （之前的寫法）：客人這時候姓氏／名字／手機／Email 都還沒填，捲到
+    // 送貨方式會把整個 step 1 推到畫面上方看不到，下面又緊接著 footer，
+    // 看起來反而像是捲到了頁面最下面。
+    if (wasHidden) customerSection.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
   // 點「宅配到府」按鈕：不管目前是哪種狀態（還沒選／已選超商門市），
