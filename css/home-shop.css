@@ -336,6 +336,11 @@
   border-bottom: 1px solid color-mix(in srgb, var(--color-surface-light) 20%, transparent);
   display: flex;
   flex-direction: column;
+  /* 2026-10-17 修正，同 css/site-menu.css 子頁那份的說明：選單項目變多
+     後面板會比螢幕高，下面的項目（例如「學員作品」）整個看不到也點不到，
+     補上 max-height／overflow-y 讓超出的部分可以在面板內自己捲動。 */
+  max-height: 100dvh;
+  overflow-y: auto;
   transform: translateY(-100%);
   transition: transform var(--duration-normal) var(--ease-standard);
 }

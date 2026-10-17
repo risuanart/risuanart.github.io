@@ -52,6 +52,14 @@
   border-bottom: 1px solid color-mix(in srgb, var(--color-surface-light) 20%, transparent);
   display: flex;
   flex-direction: column;
+  /* 2026-10-17 修正：選單項目（課程子清單展開＋新加的「線上預約課程」）
+     越來越多，沒有 max-height／overflow 的話，面板會長得比螢幕還高，
+     下面的項目（例如「學員作品」）整個超出畫面，使用者沒辦法捲動也點
+     不到。用 100dvh（行動瀏覽器網址列會動態加減高度，比 100vh 準）扣掉
+     最上面的小計留白，超過的部分自己可以在面板內捲動，不影響背後整頁
+     的捲動位置。 */
+  max-height: 100dvh;
+  overflow-y: auto;
   transform: translateY(-100%);
   transition: transform var(--duration-normal) var(--ease-standard);
 }
