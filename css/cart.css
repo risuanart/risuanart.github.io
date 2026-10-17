@@ -1122,10 +1122,16 @@
 /* <form> 現在整個往外拉，同時包住「聯絡資訊」「收件資料」兩個
    <section>＋最後的小計／送出按鈕，本身只負責統一最大寬度，不再是
    欄位直接排列用的 flex 容器——欄位排列（flex column＋gap）改放到
-   #customer-section／#receiver-section 這一層，見下面。 */
-#confirm-form {
-  max-width: 40ch;
-}
+   #customer-section／#receiver-section 這一層，見下面。
+
+   2026-10-17 拿掉 max-width:40ch：這條跟先前 .shipping-options／
+   .confirm-store／.confirm-total 是同一種問題（見那幾處的說明），差別
+   是這個 <form> 外層本身沒有 margin:auto 置中，被這個上限截斷後整個
+   貼齊左邊，右邊憑空多出一塊空白，使用者反映「送貨方式的框框還是沒有
+   置中」——姓氏／名字兩欄並排本來就比 40ch 窄所以沒踩到，但下面單欄
+   滿版的送貨方式／收件資料／金額全部被這個上限切掉，兩種元件寬度對不
+   齊，看起來像沒置中。拿掉後 <form> 內的每個區塊都跟著各自的 .chapter
+   滿版寬度走，不再疊一層更窄的上限。 */
 
 /* 「聯絡資訊」「收件資料」內部的欄位（標題、姓名列、手機、Email……）
    用同一套 flex column＋gap 排列，取代原本掛在 #confirm-form 上的那套
