@@ -63,10 +63,13 @@
 
     /* 背景版本開關（背景1／背景2）：block＝背景1（下面 .ambient-bg／
        .ambient-grain 的暈染動畫，原本設計）／none＝背景2（純白底，目前
-       啟用，測試用）。這個開關 home.css 也有一份幾乎一樣的，但 home.css
-       整份沒有載入這頁（component 太多、怕互相污染），這裡只能維持獨立
-       一份。--panel-bg（.page-tint 用）已經改吃上面新載入的 colors.css，
-       不用在這裡重複宣告。 */
+       啟用，測試用）。這個開關 home.css 也有一份幾乎一樣的，2026-10-17
+       這頁已經補載 home.css（給新加的 .site-header 用，見上面 <head>
+       說明），但這裡的 .ambient-bg／.ambient-grain 是這頁原本就有、獨立
+       於 home.css 那份的規則（class 名稱一樣，靠後面載入順序贏），維持
+       獨立一份不合併，避免牽動 home.css 那份首頁專屬的參數。--panel-bg
+       （.page-tint 用）已經改吃上面新載入的 colors.css，不用在這裡重複
+       宣告。 */
     --ambient-display: none; /* 背景1用：block */
   }
   .p30{ padding-left: var(--pad-h); padding-right: var(--pad-h); }
@@ -81,6 +84,20 @@
     font-size:14px;
     line-height:1.5;
     letter-spacing: var(--letter-spacing-base);
+    /* 2026-10-17 補上這行：剛載入的 home.css 把 body 設成 overflow:hidden
+       （html,body{height:100%}＋body{overflow:hidden}），那組規則是給
+       全站其他頁面的 .product-page 固定容器架構用的（.product-page 自己
+       position:fixed + overflow-y:auto 負責捲動，所以 body 本身故意不給
+       捲動）。這頁從來就不是那套架構，一直是最單純的「整頁本身捲動」，
+       套用 home.css 的 body{overflow:hidden} 之後，超出一個螢幕高度的
+       內容完全沒辦法捲上去看，使用者反映「後面就都沒有了，無法往下
+       滑」——這裡用跟 home.css 同特異度的規則（這段 <style> 載入順序
+       在後面，同特異度後者贏）蓋回正常的可捲動狀態，不用整頁改架構。 */
+    height: auto;
+    overflow: visible;
+  }
+  html{
+    height: auto;
   }
 
   /* ---------- 首頁同款動畫底色 ----------
