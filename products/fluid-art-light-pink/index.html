@@ -148,22 +148,35 @@
 
   <main class="product-page work">
 
-    <!-- 標題／簡介：全站開場句，跟頁首、禮盒版共用同一句 -->
+    <!-- 標題／簡介：全站開場句，跟頁首、禮盒版共用同一句。
+         2026-10-17 改用跟 sand-art-artist-sheep-red／blue、春聯砂畫基礎款
+         同一套 .work__title-block 模板（使用者要求兩種模板之後統一用新版，
+         以後只要維護一套）：圖放最前面，標題／版本標籤／年份／一句話
+         介紹包進 .work__title-block，買列殿後。原本「H1／版本標籤／年份／
+         介紹」各自獨立並排在最前面、圖片排在中間的舊排法拿掉，不再保留
+         ——內容本身完全沒變，只是搬動位置＋補上 .work__title-block 外殼。 -->
     <header class="work__intro">
-      <h1 class="work-heading fade-in"><span class="inner">春聯流動畫材料包</span></h1>
-      <!-- 版本標籤前面的方塊數量＝成品件數（輕巧版1幅／禮盒版2幅），
-           用符號多傳遞一個規格資訊，不只是純裝飾。2026-10：紅／粉拆成
-           獨立商品頁後，版本標籤直接加上色系名稱（跟 sand-art-artist-
-           sheep-red／blue 的 H1 做法一致），不再需要縮圖切換器。 -->
-      <p class="work-heading__version fade-in delay-1"><span class="work-heading__version-marks" aria-hidden="true"><span></span></span>迎春粉</p>
-      <p class="work-heading__sub fade-in delay-1">2026</p>
-      <p class="intro fade-in delay-2">單幅 15cm，最快抵達的新年儀式。<br>跟著簡易圖解，第一次嘗試也能安心完成。</p>
-
       <!-- 成品主圖：比照 sand-art-artist-sheep-red／blue 的做法，單一配色、
            沒有 combo-2／combo-3 配色示範圖可以借，不套 data-hero-carousel，
            就是靜態的一張成品參考圖。 -->
-      <div class="work__intro-photo fade-in delay-2">
+      <div class="work__intro-photo fade-in">
         <img src="../../assets/images/products/fluid-art/fluid-art-light-main-pink.jpg" alt="春聯流動畫材料包（迎春粉）成品參考圖" width="800" height="800" loading="lazy">
+      </div>
+
+      <div class="work__title-block fade-in delay-1">
+        <h1 class="work-heading"><span class="inner">春聯流動畫材料包</span></h1>
+        <!-- 版本標籤前面的方塊數量＝成品件數（輕巧版1幅／禮盒版2幅），
+             用符號多傳遞一個規格資訊，不只是純裝飾。2026-10：紅／粉拆成
+             獨立商品頁後，版本標籤直接加上色系名稱（跟 sand-art-artist-
+             sheep-red／blue 的 H1 做法一致），不再需要縮圖切換器。年份
+             併進同一行小字（跟 .work__title-block__series 同一個位置），
+             不再另外佔一整行。 -->
+        <div class="work__title-block__meta">
+          <p class="work-heading__version"><span class="work-heading__version-marks" aria-hidden="true"><span></span></span>迎春粉</p>
+          <span class="work__title-block__sep" aria-hidden="true">・</span>
+          <span class="work__title-block__series">2026</span>
+        </div>
+        <p class="work__title-block__intro">單幅 15cm，最快抵達的新年儀式。<br>跟著簡易圖解，第一次嘗試也能安心完成。</p>
       </div>
 
       <!-- 標題區也放一組加入購物車：跟最底部那組共用同一個 data-add-to-cart 機制
@@ -171,7 +184,7 @@
            讓已經決定要買的人不用滑完整頁故事才找得到入口；想看完故事再決定的人，
            底部收尾那組還在。上面加一條分隔線＋留白，跟純敘事的文字內容明確切開，
            讓人一眼看出「這裡開始是可以動手的區塊」，不是接著往下讀的介紹文字。 -->
-      <div class="work-heading__buy-row fade-in delay-4">
+      <div class="work-heading__buy-row fade-in delay-2">
         <div class="work-heading__buy-text">
           <p class="work-heading__price">$800</p>
         </div>
