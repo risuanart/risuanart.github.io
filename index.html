@@ -291,6 +291,8 @@
     </div>
         -->
 
+        <!-- 2026-10-17 使用者要求砂畫輕巧版／自由創作組暫時下架，這張
+             輪播卡片跟著註解掉，不刪除，復原時拿掉註解即可：
         <div class="preview-hero__slide" data-index="3">
           <div class="placeholder-box placeholder-box--photo preview-hero__photo" aria-hidden="true">
             <svg class="placeholder-box__icon" viewBox="0 0 24 24" width="1.8em" height="1.8em" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1.5"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 16l-5.5-5.5a1 1 0 0 0-1.4 0L6 19"/></svg>
@@ -306,13 +308,22 @@
             </a>
           </div>
         </div>
+        -->
       </div>
 
+      <!-- 2026-10-17 跟著上面兩張被註解掉的輪播卡片（禮盒版／自由創作組）
+           一起調整：js/home-shop.js 的 goTo() 用「圓點在 DOM 裡的順位」
+           （不是 data-index 字面值）去對應目前第幾張 slide——圓點數量跟
+           真正還在播的 slide 數量對不上的話，多出來的圓點會變成點了沒
+           反應的死圓點。這裡拿掉兩顆，保留的兩顆重新編號，復原禮盒版／
+           自由創作組時記得一起把這兩顆圓點的註解拿掉、編號改回來。 -->
       <div class="preview-hero__dots" role="tablist" aria-label="輪播切換">
         <button type="button" class="is-active" data-index="0" aria-label="第 1 張" role="tab" aria-selected="true"></button>
         <button type="button" data-index="1" aria-label="第 2 張" role="tab" aria-selected="false"></button>
+        <!--
         <button type="button" data-index="2" aria-label="第 3 張" role="tab" aria-selected="false"></button>
         <button type="button" data-index="3" aria-label="第 4 張" role="tab" aria-selected="false"></button>
+        -->
       </div>
     </section>
 
