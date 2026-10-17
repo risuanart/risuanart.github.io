@@ -206,6 +206,127 @@
   }
 }
 
+/* ---------- 商品頁首圖＋買列：iPad 以上改兩欄並排 ----------
+   2026-10-17 使用者參考 koyama.com.tw 的商品頁截圖，反映目前這裡不管
+   螢幕多寬都維持手機那種單欄置中排版（首圖被鎖在 280px 窄版置中、下面
+   的標題／價格/購買列也整塊置中），iPad portrait（實測約 820px）以上
+   螢幕兩側留大片空白、要一直往下滑才看得到價格跟購買按鈕，閱讀效率差。
+
+   全站 .work__intro 不是只有商品頁在用（booking／cart／faq／
+   products/faq.html 這幾頁的頁首也是同一個 class，只有標題＋一句話
+   介紹，沒有圖＋買列），不能整個 class 套兩欄排版，不然那幾頁的標題
+   會被拆成兩欄。用 :has(.work-heading__buy-row) 把範圍收斂到「真的有
+   買列」的商品頁，CSS 層級就能分辨，不用在 HTML 另外加一個頁面專屬
+   class。
+
+   商品頁本身還有兩種不同模板（先 grep 過全部商品頁才確認的，不是
+   猜的）：
+   （A）.work__title-block 包起來的新版（大部分春聯砂畫基礎款／進階款
+       都是這套）：子層依序是 [圖說]／標題區／買列。
+   （B）沒有 .work__title-block 的舊版（流動畫經典紅／迎春粉是目前還在
+       賣、唯二用這套的）：H1／版本標籤／年份小字／一句話介紹是各自
+       獨立的平行子層，不是包在同一個容器裡，買列單獨殿後。
+   兩套模板的子層數量／名稱都不一樣，没辦法共用同一組「grid-row 數字」，
+   分成兩條 :has() 規則各自處理，互不影響；哪天商品頁模板又改版、
+   子層結構變了，多加一條新的 :has() 規則即可，不用動到這裡既有的。
+
+   兩套模板都用同一個技巧：右欄排版只給「真的有內容」的列各自固定
+   grid-row，最後再多留一列空的、用 1fr 把「左欄圖片比右欄文字高」
+   多出來的高度吃掉——不這樣做的話，瀏覽器會把多出來的高度硬塞進中間
+   某一列（通常是字最少的那列），變成標題跟買列中間憑空多一大段空白，
+   不是像參考站那樣把空白留在整欄最下面、文字本身維持緊湊。
+
+   斷點用 768px（既有的手機／非手機分界，tokens.css --pad-h 用的也是
+   同一個），不是另外挑一個新數字。
+
+   這個 @media 區塊寫在檔案前面（.work__intro-photo／.work__gallery 等
+   base rule 還沒定義到的位置），選取器前面都加上 .work__intro 這層
+   後代組合器，把特異度墊高到贏過後面那些 base rule（單純 class
+   selector），不然同特異度時「寫在檔案後面的 base rule」會贏，這組
+   覆寫就變成寫了但沒作用。 ---------- */
+@media (min-width: 768px) {
+  .work__intro:has(.work-heading__buy-row) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: start;
+    column-gap: var(--space-10);
+    text-align: left;
+  }
+
+  .work__intro:has(.work-heading__buy-row) .work__intro-photo,
+  .work__intro:has(.work-heading__buy-row) .work__gallery {
+    grid-column: 1;
+    grid-row: 1 / -1;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+  }
+
+  /* 模板 A：.work__title-block 版 ---------- */
+  .work__intro:has(.work__title-block) {
+    grid-template-rows: auto auto auto 1fr; /* 圖說／標題區／買列／填充 */
+  }
+
+  .work__intro .work-heading__colorway-note {
+    grid-column: 2;
+    grid-row: 1;
+    /* 原本是「單張小圖下面的圖說」，max-width:280px＋置中文字是配合
+       那張窄版小圖寫的，兩欄並排後右欄已經有自己的寬度，改回跟標題
+       區一樣滿版靠左，不然會變成窄窄一欄字卡在寬欄正中間。 */
+    max-width: none;
+    margin: 0 0 var(--space-4);
+    text-align: left;
+  }
+
+  .work__intro .work__title-block {
+    grid-column: 2;
+    grid-row: 2;
+    margin-top: 0;
+  }
+
+  .work__intro:has(.work__title-block) .work-heading__buy-row {
+    grid-column: 2;
+    grid-row: 3;
+  }
+
+  /* 模板 B：沒有 .work__title-block 的舊版（目前只有流動畫經典紅／
+     迎春粉在用）：H1／版本標籤／年份／一句話介紹四個各自獨立的子層，
+     依序排進右欄第 1～4 列，買列排第 5 列，第 6 列留空墊高度。 ---------- */
+  .work__intro:not(:has(.work__title-block)):has(.work-heading__buy-row) {
+    grid-template-rows: auto auto auto auto auto 1fr;
+  }
+
+  .work__intro:not(:has(.work__title-block)) > .work-heading {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .work__intro:not(:has(.work__title-block)) > .work-heading__version {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .work__intro:not(:has(.work__title-block)) > .work-heading__sub {
+    grid-column: 2;
+    grid-row: 3;
+  }
+
+  .work__intro:not(:has(.work__title-block)) > .intro {
+    grid-column: 2;
+    grid-row: 4;
+    /* base rule 的 max-width:34ch + margin:auto 是配合單欄置中版面寫的
+       「置中窄欄」效果，兩欄並排、文字改左對齊之後，auto 置中會讓這段
+       文字看起來比上面的標題／標籤縮排一截，改回貼齊左邊。 */
+    max-width: none;
+    margin: var(--space-2) 0 0;
+  }
+
+  .work__intro:not(:has(.work__title-block)) > .work-heading__buy-row {
+    grid-column: 2;
+    grid-row: 5;
+  }
+}
+
 .work-heading {
   margin: 0;
   font-family: var(--font-family-base);
