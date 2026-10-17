@@ -96,6 +96,9 @@
   const orderSheetSubtotal = orderSheet.querySelector("[data-sheet-subtotal]");
   const orderSheetShipping = orderSheet.querySelector("[data-sheet-shipping]");
   const orderSheetGrand = orderSheet.querySelector("[data-sheet-grand]");
+  const orderSheetDiscountRow = orderSheet.querySelector("[data-sheet-discount-row]");
+  const orderSheetDiscountLabel = orderSheet.querySelector("[data-sheet-discount-label]");
+  const orderSheetDiscount = orderSheet.querySelector("[data-sheet-discount]");
 
   // 縮圖只有前端的商品資料（cart.js 的 SCHEME_IMAGES）才有，後端回傳的
   // 品項沒有；用「品名＋規格名」把後端品項對回本機購物車那一筆，拿得到
@@ -143,7 +146,18 @@
     // 還沒選送貨方式就還不知道運費，那一行顯示「選擇後計算」而不是硬掛
     // 一個 $0，避免看起來像「這筆免運」。
     const fee = method ? SHIPPING_FEES[method] : null;
-    orderSheetSubtotal.textContent = formatMoney(order.itemsTotal);
+    // 「合計」改顯示折扣前的原價，折扣另外列一行「-$XX」，客人才看得出來
+    // 自己真的有拿到早鳥優惠，不是悄悄把價格改低（見 api/start-checkout.js
+    // earlyBirdDiscount 的說明）。沒有折扣時 originalItemsTotal 就等於
+    // itemsTotal，這行永遠安全。
+    orderSheetSubtotal.textContent = formatMoney(order.originalItemsTotal ?? order.itemsTotal);
+    if (order.discountAmount > 0) {
+      orderSheetDiscountRow.hidden = false;
+      orderSheetDiscountLabel.textContent = order.discountLabel;
+      orderSheetDiscount.textContent = `-${formatMoney(order.discountAmount)}`;
+    } else {
+      orderSheetDiscountRow.hidden = true;
+    }
     orderSheetShipping.textContent = fee === null ? "選擇送貨方式後計算" : formatMoney(fee);
     orderSheetGrand.textContent = formatMoney(order.itemsTotal + (fee || 0));
   }
@@ -498,7 +512,10 @@
     if (method) {
       document.getElementById("confirm-shipping-method").value = method;
       const fee = SHIPPING_FEES[method];
-      document.querySelector(".confirm-total").textContent = `小計 ${formatMoney(order.itemsTotal)}＋運費 ${formatMoney(
+      // 有早鳥折扣時把「原價→折扣」也攤開寫出來，跟 order-sheet 面板
+      // 同一套「不悄悄改價格」的原則（見 renderOrderSheet 的說明）。
+      const discountText = order.discountAmount > 0 ? `原價 ${formatMoney(order.originalItemsTotal)}－${order.discountLabel} ${formatMoney(order.discountAmount)}＝` : "";
+      document.querySelector(".confirm-total").textContent = `${discountText}小計 ${formatMoney(order.itemsTotal)}＋運費 ${formatMoney(
         fee
       )} ＝ 應付 ${formatMoney(order.itemsTotal + fee)}`;
     }

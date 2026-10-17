@@ -585,6 +585,25 @@
   font-variant-numeric: tabular-nums;
 }
 
+/* 早鳥折扣那一行：「合計」刻意顯示折扣前的原價（見 js/checkout.js
+   renderOrderSheet 的說明），這行獨立列出折扣金額，用 --color-interactive
+   （全站語意上是「可點擊／有新狀態」的強調色，不是 --color-warning——
+   那個全站規則只用在真正的破壞性/錯誤情境）讓客人一眼看到自己有拿到
+   優惠，不是只有數字悄悄變小。 */
+.order-sheet__line--discount dt,
+.order-sheet__line--discount dd {
+  color: var(--color-interactive);
+  font-weight: 700;
+}
+
+/* 同一個「.order-sheet__line{display:flex} 蓋過瀏覽器內建 [hidden]」
+   成因（見 cart.css #home-address-fields[hidden] 那條的說明），這裡
+   用 class＋屬性選擇器疊出更高特異度蓋回 display:none，不然沒有早鳥
+   折扣時這行會一直空白顯示在那裡。 */
+.order-sheet__line--discount[hidden] {
+  display: none;
+}
+
 .order-sheet__grand {
   display: flex;
   align-items: baseline;
