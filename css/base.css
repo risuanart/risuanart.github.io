@@ -116,7 +116,8 @@ a {
   background: var(--color-interactive);
   border: 1px solid var(--color-interactive);
   border-radius: 999px;
-  padding: 0.15em 0.6em;
+  /* 2026-10-17 上下內距從 0.15em 加大到 0.3em，使用者反映太扁。 */
+  padding: 0.3em 0.6em;
   white-space: nowrap;
   vertical-align: middle;
 }

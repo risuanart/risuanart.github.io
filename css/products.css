@@ -2055,12 +2055,12 @@ button.text-link {
   cursor: not-allowed;
 }
 
-/* 名稱／價格文字左緣比圖片左緣多內縮 5px，名稱到價格間距 9px——
-   同樣是照參考圖實測的節奏，不是隨手選的數字。 */
+/* 名稱／價格文字左緣比圖片左緣多內縮 5px。名稱到價格間距原本 9px，
+   2026-10-17 使用者反映早鳥價格那排跟上面品名擠在一起，改成 14px。 */
 .shop-card__info {
   display: flex;
   flex-direction: column;
-  gap: 9px;
+  gap: 14px;
   padding-left: 5px;
 }
 
