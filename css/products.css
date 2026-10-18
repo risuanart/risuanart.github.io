@@ -251,6 +251,19 @@
    後代組合器，把特異度墊高到贏過後面那些 base rule（單純 class
    selector），不然同特異度時「寫在檔案後面的 base rule」會贏，這組
    覆寫就變成寫了但沒作用。 ---------- */
+/* 2026-10-18 使用者參考 panacea-q.com 商品頁截圖，反映桌機寬度下
+   首圖／標題跟上面導覽列距離太近，桌機版導覽列比手機版多一排橫向選單
+   （首頁／商品總覽／材料包...），視覺上留白比手機版更需要一點呼吸
+   空間，不是單純沿用 .product-page 原本給全站（含首頁／商品總覽／
+   FAQ）共用的 69px 留白就好。只在 1024px 以上另外加一段 margin-top，
+   不影響手機／平板版面，也不影響其他共用 .product-page 的頁面
+   （首頁、商品總覽、FAQ 這些沒有改版需求）。 */
+@media (min-width: 1024px) {
+  .work__intro:has(.work-heading__buy-row) {
+    margin-top: var(--space-16);
+  }
+}
+
 @media (min-width: 768px) {
   .work__intro:has(.work-heading__buy-row) {
     display: grid;
