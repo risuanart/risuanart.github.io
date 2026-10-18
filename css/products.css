@@ -765,7 +765,8 @@
   background: var(--color-surface-light);
 }
 
-.work__gallery-main img {
+.work__gallery-main img,
+.work__gallery-main video {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -775,7 +776,8 @@
   transition: opacity var(--duration-fast) var(--ease-standard);
 }
 
-.work__gallery-main img.is-active {
+.work__gallery-main img.is-active,
+.work__gallery-main video.is-active {
   opacity: 1;
 }
 

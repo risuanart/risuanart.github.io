@@ -148,24 +148,56 @@
          配色文字（底色／字色／格紋／花朵）是使用者提供的定稿文案，
          直接採用，沒有另外改寫。 -->
     <header class="work__intro">
+      <!-- 首圖實拍相片牆：跟 sand-art-chun／sand-art-cai／sand-art-fu／
+           sand-art-artist-sheep-red／blue 同一套 .work__gallery（主圖＋
+           可橫向滑動縮圖列），取代原本的配色自動輪播。2026-10-18 使用者
+           反映這款實拍照片拍得比較少，想試試在相片牆裡混一支影片（不是
+           另外開「完整示範影片」小節，是直接當成相片牆裡的一「張」），
+           看看效果適不適合——[data-gallery-frame] 本來就是用 opacity
+           疊圖切換，不限定只能是 <img>，css/products.css 補上
+           .work__gallery-main video 的對應樣式就能直接混用，縮圖列那顆
+           小縮圖用影片擷取的畫面當封面圖，跟其他縮圖視覺上沒有差異，
+           點下去才會發現是影片。自動輪播（hero-thumb-gallery.js）每
+           2.6 秒換一張，影片本身是 autoplay+muted+loop，輪到它之前／
+           之後都在背景持續播放，不會從頭開始，使用者點縮圖手動停在
+           這張時可以看到完整內容。如果效果不好、使用者反映不適合，
+           把這個 data-gallery-frame／縮圖拿掉、檔案留著即可，不影響
+           其他張照片。 -->
+      <div class="work__gallery fade-in" data-gallery>
+        <div class="work__gallery-main" data-gallery-main>
+          <img src="../../assets/images/products/sand-art-ying-chun/sand-art-ying-chun-main.jpg" alt="成品參考圖（出貨配色）" width="1600" height="1600" loading="eager" class="is-active" data-gallery-frame>
+          <video src="../../assets/videos/products/sand-art-ying-chun/sand-art-ying-chun-gallery-reveal.mp4" poster="../../assets/images/products/sand-art-ying-chun/sand-art-ying-chun-gallery-02-poster.jpg" autoplay muted loop playsinline aria-label="完成的「迎春」成品展示影片" data-gallery-frame></video>
+          <img src="../../assets/images/products/sand-art-ying-chun/sand-art-ying-chun-gallery-03.jpg" alt="窗邊手持完成的「迎春」成品" loading="lazy" data-gallery-frame>
+          <img src="../../assets/images/products/sand-art-ying-chun/sand-art-ying-chun-gallery-04.jpg" alt="貓咪陪伴作品（情境）" loading="lazy" data-gallery-frame>
+          <img src="../../assets/images/products/sand-art-ying-chun/sand-art-ying-chun-gallery-05.jpg" alt="貓咪伸手碰觸作品（情境）" loading="lazy" data-gallery-frame>
+          <img src="../../assets/images/products/sand-art-ying-chun/sand-art-ying-chun-gallery-06.jpg" alt="用排刷鋪色的製作過程特寫" loading="lazy" data-gallery-frame>
+          <img src="../../assets/images/products/sand-art-ying-chun/sand-art-ying-chun-gallery-07.jpg" alt="倒沙鋪色的製作過程特寫" loading="lazy" data-gallery-frame>
+          <img src="../../assets/images/products/sand-art-ying-chun/sand-art-ying-chun-gallery-08.jpg" alt="撕開大面積貼紙的特寫" loading="lazy" data-gallery-frame>
+          <img src="../../assets/images/products/sand-art-ying-chun/sand-art-ying-chun-gallery-09.jpg" alt="貓咪陪伴製作過程（情境）" loading="lazy" data-gallery-frame>
+        </div>
+        <div class="work__gallery-strip-wrap">
+          <button type="button" class="work__gallery-nav work__gallery-nav--prev" data-gallery-nav="-1" aria-label="上一張"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
+          <div class="work__gallery-thumbs" data-gallery-thumbs>
+            <button type="button" class="work__gallery-thumb is-active" data-gallery-thumb aria-label="切換到：成品參考圖"><img src="../../assets/images/products/sand-art-ying-chun/sand-art-ying-chun-main.jpg" alt="" loading="lazy"></button>
+            <button type="button" class="work__gallery-thumb" data-gallery-thumb aria-label="切換到：成品展示影片"><img src="../../assets/images/products/sand-art-ying-chun/sand-art-ying-chun-gallery-02-poster.jpg" alt="" loading="lazy"></button>
+            <button type="button" class="work__gallery-thumb" data-gallery-thumb aria-label="切換到：窗邊手持成品"><img src="../../assets/images/products/sand-art-ying-chun/sand-art-ying-chun-gallery-03.jpg" alt="" loading="lazy"></button>
+            <button type="button" class="work__gallery-thumb" data-gallery-thumb aria-label="切換到：貓咪陪伴情境一"><img src="../../assets/images/products/sand-art-ying-chun/sand-art-ying-chun-gallery-04.jpg" alt="" loading="lazy"></button>
+            <button type="button" class="work__gallery-thumb" data-gallery-thumb aria-label="切換到：貓咪陪伴情境二"><img src="../../assets/images/products/sand-art-ying-chun/sand-art-ying-chun-gallery-05.jpg" alt="" loading="lazy"></button>
+            <button type="button" class="work__gallery-thumb" data-gallery-thumb aria-label="切換到：鋪色過程"><img src="../../assets/images/products/sand-art-ying-chun/sand-art-ying-chun-gallery-06.jpg" alt="" loading="lazy"></button>
+            <button type="button" class="work__gallery-thumb" data-gallery-thumb aria-label="切換到：倒沙過程"><img src="../../assets/images/products/sand-art-ying-chun/sand-art-ying-chun-gallery-07.jpg" alt="" loading="lazy"></button>
+            <button type="button" class="work__gallery-thumb" data-gallery-thumb aria-label="切換到：撕貼紙過程"><img src="../../assets/images/products/sand-art-ying-chun/sand-art-ying-chun-gallery-08.jpg" alt="" loading="lazy"></button>
+            <button type="button" class="work__gallery-thumb" data-gallery-thumb aria-label="切換到：貓咪陪伴情境三"><img src="../../assets/images/products/sand-art-ying-chun/sand-art-ying-chun-gallery-09.jpg" alt="" loading="lazy"></button>
+          </div>
+          <button type="button" class="work__gallery-nav work__gallery-nav--next" data-gallery-nav="1" aria-label="下一張"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+        </div>
+      </div>
+
       <!-- 2026-10：比照紅羊／藍羊改版（見 css/products.css
-           .work__title-block 說明）——商品名搬到配色示範照下方、
+           .work__title-block 說明）——商品名搬到相片牆下方、
            價格正上方，靠左對齊，系列眉標／基礎款標籤合併成一行
            小字，一句話介紹放最後。這頁沒有耐性度星級——基礎款
            材料包還沒有實測完成時間，星級只先用在紅／藍羊兩款
            進階款，避免憑感覺捏造數字。 -->
-      <div class="work__intro-photo work__intro-photo--carousel fade-in" data-hero-carousel>
-        <img src="../../assets/images/products/sand-art-ying-chun/sand-art-ying-chun-main.jpg" alt="春聯砂畫材料包・格裡迎春 Checked in Chun 成品參考圖（出貨配色）" width="800" height="800" loading="lazy" class="is-active" data-carousel-frame>
-        <img src="../../assets/images/products/sand-art-ying-chun/sand-art-ying-chun-combo-2.png" alt="「格裡迎春 Checked in Chun」配色示範，僅供搭配參考，非出貨配色" loading="lazy" data-carousel-frame>
-        <img src="../../assets/images/products/sand-art-ying-chun/sand-art-ying-chun-combo-3.png" alt="「格裡迎春 Checked in Chun」配色示範，僅供搭配參考，非出貨配色" loading="lazy" data-carousel-frame>
-        <div class="hero-carousel__dots" aria-hidden="true"><span class="is-active"></span><span></span><span></span></div>
-        <button type="button" class="hero-carousel__toggle" aria-label="暫停配色展示">
-          <svg class="icon-pause" viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14"></rect><rect x="14" y="5" width="4" height="14"></rect></svg>
-          <svg class="icon-play" viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M7 5 L19 12 L7 19 Z"></path></svg>
-        </button>
-      </div>
-      <p class="work-heading__colorway-note fade-in delay-1">砂畫底板出貨為圖一配色（固定），其餘為同組沙色重新搭配參考，無法指定砂畫底板配色。</p>
-
       <div class="work__title-block fade-in delay-2">
         <h1 class="work-heading"><span class="inner"><span class="work-heading__cn">格裡迎春</span> <span class="work-heading__en">Checked in Chun</span></span></h1>
         <div class="work__title-block__meta">
@@ -421,6 +453,7 @@
   <script src="../../js/product-price-discount.js"></script>
   <script src="../../js/product-terms.js"></script>
   <script src="../../js/hero-colorway-carousel.js"></script>
+  <script src="../../js/hero-thumb-gallery.js"></script>
   <script src="../../js/related-products.js"></script>
   <script src="../../js/site-header-scroll.js"></script>
   <script src="../../js/scroll-reveal.js"></script>
