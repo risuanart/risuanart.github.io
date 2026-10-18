@@ -2219,6 +2219,19 @@ button.text-link {
   object-fit: cover;
 }
 
+/* 2026-10-18 依成品實際尺寸（cm）按比例內縮縮圖——見
+   js/products-overview.js sizeScalePadding() 說明，20cm 的羊Diss舞蹈
+   Sheep La Danse 跟 15cm 的其他單一配色商品原本在卡片裡一樣大，沒有
+   反映真實尺寸差異。padding 由該檔案算好、用 inline style 帶進來，這裡
+   只負責讓 padding 正確把縮圖往內推（box-sizing:border-box，不會把
+   padding 加到容器本身的尺寸外面），角標（.shop-card__badges）是這層
+   的手足元素，不受影響，照樣貼在 .shop-card__media 的實際邊角。 */
+.shop-card__thumb-inset {
+  position: absolute;
+  inset: 0;
+  box-sizing: border-box;
+}
+
 .shop-card__thumb.placeholder-box {
   font-size: 0.55rem;
 }

@@ -49,7 +49,23 @@
     return imgs;
   }
 
-  function cardHTML(key, product, cart) {
+  // 2026-10-18 使用者反映格狀卡片裡，20×20cm 的羊Diss舞蹈 Sheep La
+  // Danse 跟其他 15×15cm 的單一配色商品看起來一樣大——卡片縮圖容器固定
+  // 正方形、圖滿版鋪滿（object-fit:cover），不管成品實際尺寸，所以沒有
+  // 反映出真實比例落差，不是哪次調整時改壞的，是這套版面從一開始就
+  // 沒有依實際尺寸縮放的機制。這裡用 PRODUCTS 的 sizeCm（cm）算出每張
+  // 卡片相對於全部卡片裡最大尺寸的比例，轉成圖片四周的留白百分比——
+  // 最大尺寸的商品滿版鋪滿（留白 0%），比較小的商品按比例內縮，視覺
+  // 大小才會反映實際成品尺寸差異。沒有標 sizeCm 的商品（流動畫禮盒版等
+  // 不是單一方形成品的）維持原本滿版鋪滿，不強制套用這套比例。
+  function sizeScalePadding(sizeCm, maxSizeCm) {
+    if (!sizeCm || !maxSizeCm) return null;
+    const ratio = sizeCm / maxSizeCm;
+    const paddingPercent = ((1 - ratio) / 2) * 100;
+    return paddingPercent > 0.05 ? paddingPercent : 0;
+  }
+
+  function cardHTML(key, product, cart, maxSizeCm) {
     const variants = cart.VARIANT_OPTIONS[key];
     const defaultScheme = variants && variants[0];
     const url = (cart.PRODUCT_URLS && cart.PRODUCT_URLS[key]) || "#";
@@ -74,20 +90,17 @@
       : "";
     const categoryLabel = CATEGORY_LABELS[product.category];
     const eyebrow = categoryLabel ? `<p class="shop-card__category">${categoryLabel}</p>` : "";
-    // 「新品」是真的新上架商品才標（見 cart.js PRODUCTS 的 isNew），不是
-    // 隨便挑幾個貼熱銷/精選這種沒有真實數據支撐的行銷標籤。
-    const newBadge = product.isNew ? `<span class="shop-card__badge">新品</span>` : "";
-    // 2026-10-18 早鳥折扣角標：空心框＋warning 橘色，跟商品頁首圖角落的
-    // .discount-badge-corner 同一套樣式。跟「新品」一起收進 .shop-card__
-    // badges 堆疊容器（見 css/products.css 說明）——卡片右上角已經有一顆
-    // 浮出邊界的「加入購物車」圓鈕，SALE 不能貼右上角，兩個角標都收在
-    // 左上角直式堆疊，不是各自貼左右上角硬閃開。
+    // 2026-10-18 使用者要求拿掉「新品」標籤，不再標示。早鳥折扣角標
+    // （SALE，空心框＋warning 橘色，跟商品頁首圖角落的 .discount-badge-
+    // corner 同一套樣式）改用 .shop-card__badges 容器單獨包著，貼齊
+    // 圖片左上角——雖然現在只剩這一個角標，容器還是保留，之後如果
+    // 又有別的角標要加，接上同一套堆疊邏輯就好，不用重新設計版面。
     const discountActive = product.price && cart.earlyBirdActive && cart.earlyBirdActive();
     const discountBadge = discountActive
       ? `<span class="discount-badge-corner">SALE</span>`
       : "";
-    const badgesWrap = (newBadge || discountBadge)
-      ? `<div class="shop-card__badges">${newBadge}${discountBadge}</div>`
+    const badgesWrap = discountBadge
+      ? `<div class="shop-card__badges">${discountBadge}</div>`
       : "";
     // 2026-10-17 使用者要求目前所有在賣的商品都標示預購，文字來源見
     // js/cart.js PREORDER_NOTE 的說明——純文字（使用者選定的方向，
@@ -100,9 +113,18 @@
     const discountTagline = discountActive
       ? `<p class="shop-card__discount-tagline">${cart.EARLY_BIRD_TAGLINE}</p>`
       : "";
+    // 比例內縮：見上面 sizeScalePadding() 說明。padding 加在縮圖外面
+    // 再包一層 .shop-card__thumb-inset，不是直接加在 .shop-card__media
+    // 本身——角標（SALE）要留在 .shop-card__media 的實際邊角，不能跟著
+    // 縮圖一起內縮。
+    const insetPadding = sizeScalePadding(product.sizeCm, maxSizeCm);
+    const thumbInsetStyle = insetPadding ? ` style="padding:${insetPadding.toFixed(2)}%"` : "";
+    const thumbBlock = insetPadding
+      ? `<div class="shop-card__thumb-inset"${thumbInsetStyle}>${thumb}${hoverThumb}</div>`
+      : `${thumb}${hoverThumb}`;
     return `
       <div class="shop-card" data-product-card>
-        <a class="shop-card__media" href="${url}"${carouselAttr}>${thumb}${hoverThumb}${badgesWrap}</a>
+        <a class="shop-card__media" href="${url}"${carouselAttr}>${thumbBlock}${badgesWrap}</a>
         <button type="button" class="shop-card__add" data-add-to-cart data-product="${key}" aria-label="加入購物車：${product.name}">${PLUS_ICON}</button>
         ${variantInput}
         <a class="shop-card__info" href="${url}">
@@ -194,9 +216,16 @@
     if (!grid || !window.RisuanCart) return;
 
     const cart = window.RisuanCart;
-    const html = Object.keys(cart.PRODUCTS)
-      .filter((key) => !cart.PRODUCTS[key].hidden)
-      .map((key) => cardHTML(key, cart.PRODUCTS[key], cart))
+    const visibleKeys = Object.keys(cart.PRODUCTS).filter((key) => !cart.PRODUCTS[key].hidden);
+    // 比例內縮要用「目前這個格狀頁實際會顯示的商品」裡最大的 sizeCm 當
+    // 基準，不是寫死 20——之後尺寸更大的商品上架，這裡會自動跟著調整，
+    // 不用回來改這個數字。
+    const maxSizeCm = visibleKeys.reduce((max, key) => {
+      const sizeCm = cart.PRODUCTS[key].sizeCm;
+      return sizeCm && sizeCm > max ? sizeCm : max;
+    }, 0);
+    const html = visibleKeys
+      .map((key) => cardHTML(key, cart.PRODUCTS[key], cart, maxSizeCm))
       .join("");
     grid.innerHTML = html;
 

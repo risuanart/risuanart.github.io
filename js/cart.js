@@ -57,8 +57,8 @@
     // （見下面 fluid-art-gift 的 hidden:true），流動畫材料包只剩這兩款，
     // 沒有另一個版本可以比較，「輕巧版」這個相對詞就不成立了，改回單純
     // 的「春聯流動畫材料包」。
-    "fluid-art-light-red": { name: "春聯流動畫材料包（經典紅）", shortName: "經典紅", price: 800, category: "fluid-art", hasVariant: false, tagline: "單幅 15cm，最快抵達的新年儀式", preorder: true },
-    "fluid-art-light-pink": { name: "春聯流動畫材料包（迎春粉）", shortName: "迎春粉", price: 800, category: "fluid-art", hasVariant: false, tagline: "單幅 15cm，最快抵達的新年儀式", preorder: true },
+    "fluid-art-light-red": { name: "春聯流動畫材料包（經典紅）", shortName: "經典紅", price: 800, category: "fluid-art", hasVariant: false, tagline: "單幅 15cm，最快抵達的新年儀式", preorder: true, sizeCm: 15 },
+    "fluid-art-light-pink": { name: "春聯流動畫材料包（迎春粉）", shortName: "迎春粉", price: 800, category: "fluid-art", hasVariant: false, tagline: "單幅 15cm，最快抵達的新年儀式", preorder: true, sizeCm: 15 },
     // 2026-10-17 使用者要求暫時下架（不是刪除），hidden:true 會讓
     // products-overview.js／related-products.js／cart-cross-sell.js
     // 這三個地方自動把它濾掉（跟加購項目用的是同一個既有機制，見那幾支
@@ -69,15 +69,15 @@
     // fluid-art-gift 的 hidden:true 說明。
     "sand-art-light": { name: "春聯砂畫材料包・輕巧版", shortName: "輕巧版", price: 0, category: "sand-art", tagline: "8 款圖案任選，撕貼倒沙鋪出你的春聯", hidden: true },
     "sand-art-collection": { name: "春聯砂畫材料包・自由創作組", shortName: "自由創作組", price: 0, category: "sand-art", hasVariant: false, tagline: "5 款精選圖案＋26色顏料，自由創作一整套", hidden: true },
-    "sand-art-artist-sheep-red": { name: "藝術家系列・羊Diss舞蹈 Sheep La Danse / 紅", shortName: "羊Diss舞蹈 Sheep La Danse / 紅", price: 820, category: "sand-art", hasVariant: false, tagline: "致敬馬諦斯《舞蹈》，喜氣酒紅款", preorder: true },
-    "sand-art-artist-sheep-blue": { name: "藝術家系列・羊Diss舞蹈 Sheep La Danse / 藍", shortName: "羊Diss舞蹈 Sheep La Danse / 藍", price: 820, category: "sand-art", hasVariant: false, tagline: "致敬馬諦斯《舞蹈》，原畫配色藍款", preorder: true },
-    "sand-art-chun": { name: "春聯砂畫材料包・春結 Chun Tied", shortName: "春結 Chun Tied", price: 560, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true, preorder: true },
-    "sand-art-fu": { name: "春聯砂畫材料包・福星 Starry Fu", shortName: "福星 Starry Fu", price: 560, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true, preorder: true },
-    "sand-art-cai": { name: "春聯砂畫材料包・花財 Cai in Bloom", shortName: "花財 Cai in Bloom", price: 560, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true, preorder: true },
-    "sand-art-ying-chun": { name: "春聯砂畫材料包・格裡迎春 Checked in Chun", shortName: "格裡迎春 Checked in Chun", price: 560, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true, preorder: true },
-    "sand-art-na-fu": { name: "春聯砂畫材料包・格裡納福 Checked in Na Fu", shortName: "格裡納福 Checked in Na Fu", price: 560, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true, preorder: true },
-    "sand-art-ying-chun-lantern": { name: "春聯砂畫材料包・燈上迎春 Lit in Chun", shortName: "燈上迎春 Lit in Chun", price: 470, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true, preorder: true },
-    "sand-art-na-fu-lantern": { name: "春聯砂畫材料包・燈上納福 Lit in Na Fu", shortName: "燈上納福 Lit in Na Fu", price: 470, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true, preorder: true },
+    "sand-art-artist-sheep-red": { name: "藝術家系列・羊Diss舞蹈 Sheep La Danse / 紅", shortName: "羊Diss舞蹈 Sheep La Danse / 紅", price: 820, category: "sand-art", hasVariant: false, tagline: "致敬馬諦斯《舞蹈》，喜氣酒紅款", preorder: true, sizeCm: 20 },
+    "sand-art-artist-sheep-blue": { name: "藝術家系列・羊Diss舞蹈 Sheep La Danse / 藍", shortName: "羊Diss舞蹈 Sheep La Danse / 藍", price: 820, category: "sand-art", hasVariant: false, tagline: "致敬馬諦斯《舞蹈》，原畫配色藍款", preorder: true, sizeCm: 20 },
+    "sand-art-chun": { name: "春聯砂畫材料包・春結 Chun Tied", shortName: "春結 Chun Tied", price: 560, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true, preorder: true, sizeCm: 15 },
+    "sand-art-fu": { name: "春聯砂畫材料包・福星 Starry Fu", shortName: "福星 Starry Fu", price: 560, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true, preorder: true, sizeCm: 15 },
+    "sand-art-cai": { name: "春聯砂畫材料包・花財 Cai in Bloom", shortName: "花財 Cai in Bloom", price: 560, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true, preorder: true, sizeCm: 15 },
+    "sand-art-ying-chun": { name: "春聯砂畫材料包・格裡迎春 Checked in Chun", shortName: "格裡迎春 Checked in Chun", price: 560, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true, preorder: true, sizeCm: 15 },
+    "sand-art-na-fu": { name: "春聯砂畫材料包・格裡納福 Checked in Na Fu", shortName: "格裡納福 Checked in Na Fu", price: 560, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true, preorder: true, sizeCm: 15 },
+    "sand-art-ying-chun-lantern": { name: "春聯砂畫材料包・燈上迎春 Lit in Chun", shortName: "燈上迎春 Lit in Chun", price: 470, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true, preorder: true, sizeCm: 15 },
+    "sand-art-na-fu-lantern": { name: "春聯砂畫材料包・燈上納福 Lit in Na Fu", shortName: "燈上納福 Lit in Na Fu", price: 470, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true, preorder: true, sizeCm: 15 },
     "fluid-art-canvas-kit": { name: "空白畫布＋字貼＋架高杯", price: 0, category: "fluid-art", hasVariant: false, hidden: true },
     "sand-art-extra-color": { name: "額外顏色沙・固定套組", price: 0, category: "sand-art", hasVariant: false, hidden: true },
     "sand-art-sticker-only": { name: "純貼紙加購・單款", price: 0, category: "sand-art", hasVariant: false, hidden: true },
