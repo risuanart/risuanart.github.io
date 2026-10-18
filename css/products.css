@@ -254,7 +254,9 @@
 @media (min-width: 768px) {
   .work__intro:has(.work-heading__buy-row) {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    /* 參考 koyama.com.tw 的商品頁比例，圖片欄略寬於文字欄（約 55:45），
+       不是機械對半分。 */
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
     align-items: start;
     column-gap: var(--space-10);
     text-align: left;
@@ -267,6 +269,14 @@
     width: 100%;
     max-width: none;
     margin: 0;
+  }
+
+  /* 手機維持正方形主圖，平板以上（兩欄並排）改長方形直幅，比例參考
+     koyama.com.tw 商品頁的直幅主圖（約 11:16）。縮圖列仍維持正方形，
+     不受這個覆寫影響（.work__gallery-thumb 沒被選到）。 */
+  .work__intro:has(.work-heading__buy-row) .work__intro-photo,
+  .work__intro:has(.work-heading__buy-row) .work__gallery-main {
+    aspect-ratio: 11 / 16;
   }
 
   /* 模板 A：.work__title-block 版 ---------- */
