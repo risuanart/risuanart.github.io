@@ -955,6 +955,48 @@
   object-fit: cover;
 }
 
+/* 2026-10-18 參考 koyama.com.tw 商品頁做法：示範影片本身是直式 9:16，
+   手機單欄滿版沒問題，但平板／桌機寬版面下兩側會留下很大的空白，版面
+   看起來沒設計感。平板以上改成左右並排——左邊維持原本的示範影片，
+   右邊放一張手持成品靜照，動態／靜態互相對照，順便把寬版面填滿。
+   手機（<768px）.demo-video-combo__photo 預設不顯示，只有示範影片
+   單欄滿版，跟改版前的手機版行為完全一樣。 */
+.demo-video-combo__photo {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .demo-video-combo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-6);
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .demo-video-combo .demo-video {
+    max-width: none;
+    margin: 0;
+  }
+
+  .demo-video-combo__photo {
+    display: block;
+    width: 100%;
+    aspect-ratio: 9 / 16;
+    border-radius: var(--radius-sharp);
+    overflow: hidden;
+    background: var(--color-surface-neutral);
+  }
+
+  .demo-video-combo__photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
 /* 配色動態展示（--carousel 變體）：2026-10 新增。出貨只會有一種固定
    配色（圖一，跟材料包底板同色），另外兩張是「同組顏色重新分配」的
    搭配參考（跟下面「搭配自己的顏色」用的是同一批圖，這裡只挑圖二、
