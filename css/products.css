@@ -271,12 +271,13 @@
     margin: 0;
   }
 
-  /* 手機維持正方形主圖，平板以上（兩欄並排）改長方形直幅，比例參考
-     koyama.com.tw 商品頁的直幅主圖（約 11:16）。縮圖列仍維持正方形，
-     不受這個覆寫影響（.work__gallery-thumb 沒被選到）。 */
+  /* 手機維持正方形主圖，平板以上（兩欄並排）改長方形直幅，比例貼近
+     原始照片檔案本身的 4:5（相片牆照片多半是 1280×1600 左右），裁切
+     最少。縮圖列仍維持正方形，不受這個覆寫影響
+     （.work__gallery-thumb 沒被選到）。 */
   .work__intro:has(.work-heading__buy-row) .work__intro-photo,
   .work__intro:has(.work-heading__buy-row) .work__gallery-main {
-    aspect-ratio: 11 / 16;
+    aspect-ratio: 4 / 5;
   }
 
   /* 模板 A：.work__title-block 版 ---------- */
