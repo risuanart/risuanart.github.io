@@ -703,15 +703,17 @@
 }
 
 /* 2026-10-18 常駐顯示的購買重點（出貨時間／顏色提醒／材料保存／
-   操作提醒），放在買列下方——參考 fisherm.co 商品頁做法，使用者反饋
-   這幾項太重要，不該摺在「購買前請閱讀」手風琴裡才看得到。內容由
-   js/product-terms.js 的 renderHighlightsHTML() 動態填入，這裡只管
-   版面。.work__intro 本身是 text-align:center，這個區塊要靠左讀，
-   所以自己訂 text-align:left。 */
+   操作提醒）——參考 fisherm.co 商品頁做法，使用者反饋這幾項太重要，
+   不該摺在「購買前請閱讀」手風琴裡才看得到。內容由 js/product-terms.js
+   的 renderHighlightsHTML() 動態填入，這裡只管版面。原本放在買列
+   下方，2026-10-18 當天使用者又反饋改放到「規格資訊」區塊下方、手風琴
+   正上方（跟手風琴一樣是頁面後段的「詳細資訊」脈絡，不是買列決策當下
+   就要看到的東西），搬進獨立的 <section class="chapter"> 容器，版面
+   間距交給 .chapter 本身的 margin-top 處理，這裡不用再自己加
+   margin-top／分隔線。.work__intro 本身是 text-align:center，但
+   .chapter 預設不是，這裡仍保留 text-align:left 以防萬一套進
+   text-align:center 的容器。 */
 .info-highlights {
-  margin-top: var(--space-6);
-  padding-top: var(--space-5);
-  border-top: 1px solid color-mix(in srgb, var(--color-text-secondary) 25%, transparent);
   text-align: left;
 }
 
