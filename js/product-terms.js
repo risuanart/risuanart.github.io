@@ -1,32 +1,38 @@
-/* js/product-terms.js —— 材料包「購買前請閱讀」條款，全站（流動畫＋砂畫）
-   共用同一份資料來源，不是各材質分開各自維護。
+/* js/product-terms.js —— 材料包購買資訊，全站（流動畫＋砂畫）共用同一份
+   資料來源，不是各材質分開各自維護。
+
+   2026-10-18：參考 fisherm.co 商品頁做法，使用者反饋出貨時間、顏色落差、
+   材料保存、操作提醒這幾項太重要，不該摺在「購買前請閱讀」手風琴裡才
+   看得到。拆成兩塊輸出：
+   - renderHighlightsHTML()：常駐展開的重點區塊（出貨時間／顏色提醒／
+     材料保存／操作提醒），放在買列下方，不需要點開。
+   - renderTermsHTML()：手風琴裡的完整條款，份量較重、較少影響購買
+     決策的部分（下單與付款、退換貨政策、版權聲明等）留在這裡，不重複
+     放已經常駐顯示的出貨／材料保存／操作提醒。
 
    比對過流動畫（輕巧版／禮盒版）跟砂畫（春／羊Diss舞蹈 Sheep La Danse）原本各自貼死的
-   條款內容，發現約一半是逐字相同的通用政策文字（開頭問候語、商品資訊
-   第一段、下單與付款、出貨安排、退換貨政策第一句、版權聲明第二段），
-   跟材質完全無關；另一半才是真的因材質不同而需要分開寫（使用前準備、
-   操作提醒、材料保存，以及幾段提到具體材質字眼的句子）。這裡把兩層
-   拆開：UNIVERSAL 放通用文字，MATERIALS 依材質分別放專屬文字，
-   renderTermsHTML(materialKey) 組合成最終內容——通用政策要改，只要改
-   UNIVERSAL 一次，流動畫／砂畫所有頁面一起更新；材質專屬文字則各自
-   維護在 MATERIALS 底下對應的鍵值。
+   條款內容，發現約一半是逐字相同的通用政策文字，跟材質完全無關；另一半
+   才是真的因材質不同而需要分開寫。這裡把兩層拆開：UNIVERSAL 放通用
+   文字，MATERIALS 依材質分別放專屬文字——通用政策要改，只要改 UNIVERSAL
+   一次，流動畫／砂畫所有頁面一起更新；材質專屬文字則各自維護在
+   MATERIALS 底下對應的鍵值。
 
-   套用方式：頁面裡放一個空的容器 <div class="accordion__body"
-   data-product-terms="sand-art"></div>（或 data-product-terms=
-   "fluid-art"，依頁面材質決定），外層還是各自的 <details
-   class="accordion">＋<summary>，摺疊互動跟樣式沿用既有 .accordion
-   元件，這支 script 只負責把內容填進容器，不碰版面。
+   套用方式：
+   - 常駐重點區塊：<div class="info-highlights" data-product-info-
+     highlights="sand-art"></div>（或 "fluid-art"），放在
+     .work-heading__buy-row 下方、</header> 之前。
+   - 手風琴條款：<div class="accordion__body" data-product-terms=
+     "sand-art"></div>（或 "fluid-art"），外層 <details class="accordion">
+     ＋<summary>，摺疊互動跟樣式沿用既有 .accordion 元件。
+   這支 script 只負責把內容填進容器，不碰版面。
 
    目前引用頁面：
-   - sand-art（data-product-terms="sand-art"）：sand-art-chun.html、
-     sand-art-artist-sheep-red.html、sand-art-artist-sheep-blue.html
-     （2026-10：原本的 sand-art-artist-sheep.html 拆成紅／藍兩個獨立頁）
-   - fluid-art（data-product-terms="fluid-art"）：fluid-art-light-red.html、
-     fluid-art-light-pink.html、fluid-art-gift.html
-     （2026-10：原本的 fluid-art-light.html 拆成紅／粉兩個獨立頁）
+   - sand-art：sand-art-chun、sand-art-cai、sand-art-fu、sand-art-na-fu、
+     sand-art-na-fu-lantern、sand-art-ying-chun、sand-art-ying-chun-lantern、
+     sand-art-artist-sheep-red、sand-art-artist-sheep-blue
+   - fluid-art：fluid-art-light-red、fluid-art-light-pink、fluid-art-gift
    sand-art-light.html／sand-art-collection.html 暫時維持各自貼上的舊版
-   純 HTML，還沒接上這份共用資料（使用者確認過先不動這兩頁，等輕巧版／
-   自由創作組的頁面結構定案後再一起接上）。 */
+   純 HTML，還沒接上這份共用資料（已下架，不補）。 */
 (function () {
   const UNIVERSAL = {
     intro: "感謝你選擇 Ri Suan Studio 的材料包與手作商品。為了確保每位創作者都有順暢的購買體驗，請花些時間閱讀以下內容。當你在本網站完成訂購，即代表你已閱讀並同意此內容。",
@@ -58,8 +64,65 @@
     },
   };
 
+  /* 常駐重點區塊的短列點版本——跟上面 MATERIALS／UNIVERSAL 的完整句子
+     分開維護，因為這裡要的是精簡、一眼看完的列點，不是手風琴裡的完整
+     句子。改這裡不會影響手風琴內容，反之亦然。 */
+  const HIGHLIGHTS_UNIVERSAL = {
+    shipping: [
+      "商品依訂購順序安排出貨，出貨時程將於下單頁面另行公告",
+      "預購商品將於公告的出貨區間內陸續寄出，不逐一另行通知",
+      "如遇國定假日或出貨量較大時期，時程可能略有延後",
+    ],
+    color: [
+      "因螢幕顯示設定不同，頁面照片與實際收到的材料包顏色可能有些微落差",
+      "設計稿為參考範例，色塊位置與顏色皆可依個人喜好調整安排",
+    ],
+  };
+
+  const HIGHLIGHTS_MATERIALS = {
+    "sand-art": {
+      storage: [
+        "沙粒與貼紙開封後請保持乾燥，避免受潮結塊",
+        "建議於陰涼乾燥處保存，避免長時間日曬",
+      ],
+      handling: [
+        "倒沙時建議在平坦桌面進行，鋪上包裝內附的一次性桌布",
+        "避免細沙灑落不易清理",
+      ],
+    },
+    "fluid-art": {
+      storage: [
+        "顏料開封後請盡快使用完畢",
+        "避免長時間曝曬或高溫存放",
+      ],
+      handling: [
+        "顏料使用前請輕輕搖晃均勻，避免大力搖晃產生氣泡",
+        "顏料如沾染衣物不易清洗，建議穿著不介意弄髒的服飾並配戴手套",
+      ],
+    },
+  };
+
   const escapeHtml = (str) =>
     str.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+  function renderHighlightsHTML(materialKey) {
+    const m = HIGHLIGHTS_MATERIALS[materialKey];
+    if (!m) return "";
+
+    const sections = [
+      { title: "出貨時間", items: HIGHLIGHTS_UNIVERSAL.shipping },
+      { title: "顏色提醒", items: HIGHLIGHTS_UNIVERSAL.color },
+      { title: "材料保存", items: m.storage },
+      { title: "操作提醒", items: m.handling },
+    ];
+
+    return sections.map((section) => {
+      const items = section.items.map((item) =>
+        `<li><span class="info-highlights__bullet" aria-hidden="true">✦</span><span>${escapeHtml(item)}</span></li>`
+      ).join("");
+      return `<div class="info-highlights__section"><p class="info-highlights__title">【 ${escapeHtml(section.title)} 】</p><ul class="info-highlights__list">${items}</ul></div>`;
+    }).join("");
+  }
 
   function renderTermsHTML(materialKey) {
     const m = MATERIALS[materialKey];
@@ -69,10 +132,7 @@
       { intro: UNIVERSAL.intro },
       { title: "商品資訊", paragraphs: [UNIVERSAL.productInfoFirst, m.productInfoSecond] },
       m.prep ? { title: "使用前準備", paragraphs: [m.prep] } : null,
-      { title: "操作提醒", paragraphs: [m.handling] },
       { title: "下單與付款", paragraphs: [UNIVERSAL.ordering] },
-      { title: "出貨安排", paragraphs: [UNIVERSAL.shipping] },
-      { title: "材料保存", paragraphs: [m.storage] },
       { title: "退換貨政策", paragraphs: [UNIVERSAL.returnPolicyFirst, m.returnDefect, m.returnCraft] },
       { title: "版權聲明", paragraphs: [m.copyrightFirst, UNIVERSAL.copyrightSecond] },
     ].filter(Boolean);
@@ -85,6 +145,9 @@
   }
 
   function init() {
+    document.querySelectorAll("[data-product-info-highlights]").forEach((el) => {
+      el.innerHTML = renderHighlightsHTML(el.dataset.productInfoHighlights);
+    });
     document.querySelectorAll("[data-product-terms]").forEach((el) => {
       el.innerHTML = renderTermsHTML(el.dataset.productTerms);
     });

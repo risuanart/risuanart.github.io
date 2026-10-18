@@ -702,6 +702,54 @@
   color: var(--color-text-secondary);
 }
 
+/* 2026-10-18 常駐顯示的購買重點（出貨時間／顏色提醒／材料保存／
+   操作提醒），放在買列下方——參考 fisherm.co 商品頁做法，使用者反饋
+   這幾項太重要，不該摺在「購買前請閱讀」手風琴裡才看得到。內容由
+   js/product-terms.js 的 renderHighlightsHTML() 動態填入，這裡只管
+   版面。.work__intro 本身是 text-align:center，這個區塊要靠左讀，
+   所以自己訂 text-align:left。 */
+.info-highlights {
+  margin-top: var(--space-6);
+  padding-top: var(--space-5);
+  border-top: 1px solid color-mix(in srgb, var(--color-text-secondary) 25%, transparent);
+  text-align: left;
+}
+
+.info-highlights__section + .info-highlights__section {
+  margin-top: var(--space-4);
+}
+
+.info-highlights__title {
+  margin: 0 0 var(--space-2);
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--color-text-primary);
+}
+
+.info-highlights__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--font-size-sm);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+
+.info-highlights__list li {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.info-highlights__list li + li {
+  margin-top: var(--space-1);
+}
+
+.info-highlights__bullet {
+  flex: none;
+  color: var(--color-text-secondary);
+}
+
 .intro {
   /* max-width 限制寬度＋auto 左右margin，讓這段文字本身（不只是裡面的字）
      置中在整個標題區塊裡，呼應母頁 .hero .intro 同一種「置中窄欄」排法。
