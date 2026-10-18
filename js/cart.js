@@ -57,8 +57,12 @@
     // （見下面 fluid-art-gift 的 hidden:true），流動畫材料包只剩這兩款，
     // 沒有另一個版本可以比較，「輕巧版」這個相對詞就不成立了，改回單純
     // 的「春聯流動畫材料包」。
-    "fluid-art-light-red": { name: "春聯流動畫材料包（經典紅）", shortName: "經典紅", price: 800, category: "fluid-art", hasVariant: false, tagline: "單幅 15cm，最快抵達的新年儀式", preorder: true, sizeCm: 15 },
-    "fluid-art-light-pink": { name: "春聯流動畫材料包（迎春粉）", shortName: "迎春粉", price: 800, category: "fluid-art", hasVariant: false, tagline: "單幅 15cm，最快抵達的新年儀式", preorder: true, sizeCm: 15 },
+    // sizeCm 不加在流動畫商品上——流動畫縮圖是完整實拍照（有背景、沒去背），
+    // 不是像砂畫那種邊緣乾淨的菱形成品圖，按比例內縮會在照片外面多出一圈
+    // 不自然的白邊，不是只是把「圖」縮小這麼單純（見下面 sizeScalePadding
+    // 只套用在有 sizeCm 的商品，流動畫這兩款維持原本滿版鋪滿）。
+    "fluid-art-light-red": { name: "春聯流動畫材料包（經典紅）", shortName: "經典紅", price: 800, category: "fluid-art", hasVariant: false, tagline: "單幅 15cm，最快抵達的新年儀式", preorder: true },
+    "fluid-art-light-pink": { name: "春聯流動畫材料包（迎春粉）", shortName: "迎春粉", price: 800, category: "fluid-art", hasVariant: false, tagline: "單幅 15cm，最快抵達的新年儀式", preorder: true },
     // 2026-10-17 使用者要求暫時下架（不是刪除），hidden:true 會讓
     // products-overview.js／related-products.js／cart-cross-sell.js
     // 這三個地方自動把它濾掉（跟加購項目用的是同一個既有機制，見那幾支
