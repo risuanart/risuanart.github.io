@@ -2212,6 +2212,53 @@ button.text-link {
   border-radius: var(--radius-sharp);
 }
 
+/* 2026-10-18 早鳥折扣角標——仿 koyama／simpleisstudio 商品頁做法，取代
+   原本價格旁邊的圓角藍底「早鳥9折」徽章（.price-discount__badge，購物車頁
+   還在用，這裡不動）。空心框＋warning 橘色，跟上面「新品」徽章同一套
+   方正直角＋細邊框風格，只是換個顏色區分。商品頁首圖預設貼左上角
+   （.work__gallery-main／.work__intro-photo 裡還沒有別的角標可能衝突）；
+   商品總覽卡片的圖片角落左上角已經被「新品」占用，這裡用
+   --right 修飾類別改貼右上角，兩個標同時出現時不會疊在一起（見
+   js/product-price-discount.js／js/products-overview.js）。 */
+.discount-badge-corner {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 2;
+  padding: 3px 8px;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  line-height: 1.4;
+  color: var(--color-warning);
+  background: color-mix(in srgb, var(--color-warning) 10%, var(--color-surface-light) 90%);
+  border: 1px solid color-mix(in srgb, var(--color-warning) 45%, transparent);
+  border-radius: var(--radius-sharp);
+}
+
+.discount-badge-corner--right {
+  left: auto;
+  right: 8px;
+}
+
+/* 買列價格正上方的早鳥文字行（商品頁）／標題下方價格上方（商品總覽
+   卡片），文字來源同一個 window.RisuanCart.EARLY_BIRD_TAGLINE，跟上面
+   .discount-badge-corner 同一個 warning 橘色，兩者搭配呼應。 */
+.work-heading__discount-tagline {
+  margin: 0 0 var(--space-1);
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: var(--color-warning);
+}
+
+.shop-card__discount-tagline {
+  margin: 2px 0 0;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: var(--color-warning);
+}
+
 /* 電腦版 hover 換圖用的第二張圖，疊在主圖正上方、預設透明——只有
    js/products-overview.js 真的查得到「第二張圖」的商品才會輸出這個
    元素，觸發 hover 的規則在下面 @media (min-width: 1024px) 那段，

@@ -169,6 +169,26 @@
     return `<s class="price-discount__original">$${originalTotal.toLocaleString()}</s> <span class="price-discount__final">$${discountedTotal.toLocaleString()}</span> <span class="price-discount__badge">早鳥9折</span>`;
   }
 
+  // 2026-10-18 使用者要求商品頁／商品總覽卡片的早鳥折扣改成仿 koyama／
+  // simpleisstudio 的呈現：圖片角落空心「SALE」標＋標題附近一行橘色文字
+  // 「EARLY BIRD · 10% OFF」，取代原本價格旁邊的圓角藍底徽章。這兩處改用
+  // priceDiscountHTMLPlain()（只有劃線原價＋折扣後金額，不帶徽章）＋
+  // EARLY_BIRD_TAGLINE 文字＋CSS 角標，購物車頁（逐項價格／小計）維持原本
+  // priceDiscountHTML() 的徽章樣式不變，兩種情境分開，不互相影響。
+  function priceDiscountHTMLPlain(unitPrice, qty) {
+    const { discounted, amount } = earlyBirdPrice(unitPrice);
+    const originalTotal = unitPrice * qty;
+    const discountedTotal = discounted * qty;
+    if (amount <= 0) return `$${originalTotal.toLocaleString()}`;
+    return `<s class="price-discount__original">$${originalTotal.toLocaleString()}</s> <span class="price-discount__final">$${discountedTotal.toLocaleString()}</span>`;
+  }
+
+  const EARLY_BIRD_TAGLINE = "EARLY BIRD · 10% OFF";
+
+  function earlyBirdActive() {
+    return todayInTaipei() <= EARLY_BIRD_CUTOFF;
+  }
+
   // 購物車縮圖用「成品模擬圖」（跟套組內容照片不同張）：這張不管輕巧版或禮盒版都
   // 一樣準確（純粹展示成品長相，不涉及套組內容數量差異），兩版共用同一組縮圖，
   // 不需要另外分版本。
@@ -935,7 +955,10 @@
     readCart,
     cartTotal,
     earlyBirdPrice,
+    earlyBirdActive,
     priceDiscountHTML,
+    priceDiscountHTMLPlain,
+    EARLY_BIRD_TAGLINE,
     PREORDER_NOTE,
     getCheckoutPayload() {
       return readCart().map((item) => {

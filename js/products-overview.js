@@ -24,9 +24,12 @@
 
   function priceText(product) {
     if (!product.price) return "$__";
-    // 早鳥折扣用 window.RisuanCart.priceDiscountHTML（見 js/cart.js）統一算，
-    // 不在這裡另外寫一次規則，改折扣期間／折數只要改那一處。
-    return window.RisuanCart ? window.RisuanCart.priceDiscountHTML(product.price, 1) : `$${product.price.toLocaleString()}`;
+    // 早鳥折扣用 window.RisuanCart.priceDiscountHTMLPlain（見 js/cart.js）
+    // 統一算，不在這裡另外寫一次規則，改折扣期間／折數只要改那一處。
+    // 2026-10-18：改用「Plain」版本（不含圓角藍底徽章），徽章改成卡片縮圖
+    // 角落的 SALE 角標＋標題下方的橘色文字行，見下面 discountBadge／
+    // discountTagline。
+    return window.RisuanCart ? window.RisuanCart.priceDiscountHTMLPlain(product.price, 1) : `$${product.price.toLocaleString()}`;
   }
 
   // 這 7 款單一配色沙畫在商品頁首圖已經有「配色動態展示」輪播（出貨配色→
@@ -74,15 +77,27 @@
     // 「新品」是真的新上架商品才標（見 cart.js PRODUCTS 的 isNew），不是
     // 隨便挑幾個貼熱銷/精選這種沒有真實數據支撐的行銷標籤。
     const newBadge = product.isNew ? `<span class="shop-card__badge">新品</span>` : "";
+    // 2026-10-18 早鳥折扣角標：跟「新品」同樣貼在圖片角落，但「新品」固定
+    // 貼左上角，這裡改貼右上角，兩個標同時出現時才不會疊在一起。空心框＋
+    // warning 橘色，跟商品頁首圖角落的 .discount-badge-corner 同一套樣式。
+    const discountActive = product.price && cart.earlyBirdActive && cart.earlyBirdActive();
+    const discountBadge = discountActive
+      ? `<span class="discount-badge-corner discount-badge-corner--right">SALE</span>`
+      : "";
     // 2026-10-17 使用者要求目前所有在賣的商品都標示預購，文字來源見
     // js/cart.js PREORDER_NOTE 的說明——純文字（使用者選定的方向，
     // 不加色塊／圖示），放在價格下面。
     const preorderNote = product.preorder && cart.PREORDER_NOTE
       ? `<p class="shop-card__preorder">${cart.PREORDER_NOTE}</p>`
       : "";
+    // 早鳥文字行放在標題下方、價格上方，跟商品頁買列同一套文字來源
+    // （cart.EARLY_BIRD_TAGLINE），不是另外寫一次「EARLY BIRD · 10% OFF」。
+    const discountTagline = discountActive
+      ? `<p class="shop-card__discount-tagline">${cart.EARLY_BIRD_TAGLINE}</p>`
+      : "";
     return `
       <div class="shop-card" data-product-card>
-        <a class="shop-card__media" href="${url}"${carouselAttr}>${thumb}${hoverThumb}${newBadge}</a>
+        <a class="shop-card__media" href="${url}"${carouselAttr}>${thumb}${hoverThumb}${newBadge}${discountBadge}</a>
         <button type="button" class="shop-card__add" data-add-to-cart data-product="${key}" aria-label="加入購物車：${product.name}">${PLUS_ICON}</button>
         ${variantInput}
         <a class="shop-card__info" href="${url}">
@@ -90,6 +105,7 @@
             ${eyebrow}
             <p class="shop-card__name">${product.shortName || product.name}</p>
           </div>
+          ${discountTagline}
           <div class="shop-card__price-group">
             <p class="shop-card__price price-text">${priceText(product)}</p>
             ${preorderNote}
