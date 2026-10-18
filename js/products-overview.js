@@ -77,12 +77,17 @@
     // 「新品」是真的新上架商品才標（見 cart.js PRODUCTS 的 isNew），不是
     // 隨便挑幾個貼熱銷/精選這種沒有真實數據支撐的行銷標籤。
     const newBadge = product.isNew ? `<span class="shop-card__badge">新品</span>` : "";
-    // 2026-10-18 早鳥折扣角標：跟「新品」同樣貼在圖片角落，但「新品」固定
-    // 貼左上角，這裡改貼右上角，兩個標同時出現時才不會疊在一起。空心框＋
-    // warning 橘色，跟商品頁首圖角落的 .discount-badge-corner 同一套樣式。
+    // 2026-10-18 早鳥折扣角標：空心框＋warning 橘色，跟商品頁首圖角落的
+    // .discount-badge-corner 同一套樣式。跟「新品」一起收進 .shop-card__
+    // badges 堆疊容器（見 css/products.css 說明）——卡片右上角已經有一顆
+    // 浮出邊界的「加入購物車」圓鈕，SALE 不能貼右上角，兩個角標都收在
+    // 左上角直式堆疊，不是各自貼左右上角硬閃開。
     const discountActive = product.price && cart.earlyBirdActive && cart.earlyBirdActive();
     const discountBadge = discountActive
-      ? `<span class="discount-badge-corner discount-badge-corner--right">SALE</span>`
+      ? `<span class="discount-badge-corner">SALE</span>`
+      : "";
+    const badgesWrap = (newBadge || discountBadge)
+      ? `<div class="shop-card__badges">${newBadge}${discountBadge}</div>`
       : "";
     // 2026-10-17 使用者要求目前所有在賣的商品都標示預購，文字來源見
     // js/cart.js PREORDER_NOTE 的說明——純文字（使用者選定的方向，
@@ -97,7 +102,7 @@
       : "";
     return `
       <div class="shop-card" data-product-card>
-        <a class="shop-card__media" href="${url}"${carouselAttr}>${thumb}${hoverThumb}${newBadge}${discountBadge}</a>
+        <a class="shop-card__media" href="${url}"${carouselAttr}>${thumb}${hoverThumb}${badgesWrap}</a>
         <button type="button" class="shop-card__add" data-add-to-cart data-product="${key}" aria-label="加入購物車：${product.name}">${PLUS_ICON}</button>
         ${variantInput}
         <a class="shop-card__info" href="${url}">

@@ -2240,48 +2240,64 @@ button.text-link {
 /* 「新品」標——只有 cart.js PRODUCTS 裡真的標 isNew:true 的商品才會
    輸出這個元素（見 products-overview.js），不是隨便貼熱銷/精選這種沒有
    真實數據支撐的行銷標籤。方正直角、細邊框、低飽和底色，跟卡片本身
-   的極簡風格一致，不用滿版飽和色的搶眼徽章。 */
+   的極簡風格一致，不用滿版飽和色的搶眼徽章。2026-10-18 使用者反饋角標
+   要跟參考網站（koyama／simpleisstudio）一樣貼齊圖片邊角，不留 8px
+   邊——改成 top:0／left:0 沒有外距，底色也從淺色調 tint 改純白，跟
+   參考網站的角標做法一致。 */
 .shop-card__badge {
-  position: absolute;
-  top: 8px;
-  left: 8px;
+  position: static;
   z-index: 2;
   padding: 3px 8px;
   font-size: 10px;
   letter-spacing: 0.08em;
   line-height: 1.4;
   color: var(--color-brand);
-  background: color-mix(in srgb, var(--color-brand) 10%, var(--color-surface-light) 90%);
-  border: 1px solid color-mix(in srgb, var(--color-brand) 35%, transparent);
-  border-radius: var(--radius-sharp);
+  background: var(--color-surface-light);
+  border: 1px solid color-mix(in srgb, var(--color-brand) 45%, transparent);
 }
 
 /* 2026-10-18 早鳥折扣角標——仿 koyama／simpleisstudio 商品頁做法，取代
    原本價格旁邊的圓角藍底「早鳥9折」徽章（.price-discount__badge，購物車頁
    還在用，這裡不動）。空心框＋warning 橘色，跟上面「新品」徽章同一套
-   方正直角＋細邊框風格，只是換個顏色區分。商品頁首圖預設貼左上角
-   （.work__gallery-main／.work__intro-photo 裡還沒有別的角標可能衝突）；
-   商品總覽卡片的圖片角落左上角已經被「新品」占用，這裡用
-   --right 修飾類別改貼右上角，兩個標同時出現時不會疊在一起（見
-   js/product-price-discount.js／js/products-overview.js）。 */
+   方正直角＋細邊框風格，只是換個顏色區分、底色改純白、貼齊圖片邊角
+   （理由同上）。商品頁首圖沒有「新品」標可能衝突，直接貼左上角（見
+   下面 .discount-badge-corner--standalone）；商品總覽卡片的「新品」／
+   SALE 兩個角標改成直式堆疊在同一個左上角容器裡（.shop-card__badges，
+   見 js/products-overview.js），不是分貼左右上角硬閃開——卡片右上角本來
+   就有一顆浮出邊界的「加入購物車」圓鈕（.shop-card__add），SALE 改貼
+   右上角會跟那顆鈕疊在一起，所以兩個角標統一收進左上角直式排列。 */
 .discount-badge-corner {
-  position: absolute;
-  top: 8px;
-  left: 8px;
+  position: static;
   z-index: 2;
   padding: 3px 8px;
   font-size: 10px;
   letter-spacing: 0.08em;
   line-height: 1.4;
   color: var(--color-warning);
-  background: color-mix(in srgb, var(--color-warning) 10%, var(--color-surface-light) 90%);
-  border: 1px solid color-mix(in srgb, var(--color-warning) 45%, transparent);
-  border-radius: var(--radius-sharp);
+  background: var(--color-surface-light);
+  border: 1px solid color-mix(in srgb, var(--color-warning) 55%, transparent);
 }
 
-.discount-badge-corner--right {
-  left: auto;
-  right: 8px;
+/* 商品頁首圖：角標只有這一個、沒有別的角標可能疊在一起，不需要
+   .shop-card__badges 那層堆疊容器，直接貼圖片左上角邊角。 */
+.discount-badge-corner--standalone {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* 商品總覽卡片用的角標堆疊容器：貼齊圖片左上角邊角，裡面的
+   .shop-card__badge／.discount-badge-corner 改回 position:static，
+   順著 flex column 由上而下排列（新品在上、SALE 在下），不用各自算
+   絕對座標。只有一個角標時容器照常只包一顆，排版不受影響。 */
+.shop-card__badges {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 /* 買列價格正上方的早鳥文字行（商品頁）／標題下方價格上方（商品總覽

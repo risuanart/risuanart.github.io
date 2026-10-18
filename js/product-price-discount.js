@@ -40,7 +40,7 @@
       const photoWrap = header && header.querySelector(".work__gallery-main, .work__intro-photo");
       if (photoWrap && !photoWrap.querySelector(".discount-badge-corner")) {
         const badge = document.createElement("span");
-        badge.className = "discount-badge-corner";
+        badge.className = "discount-badge-corner discount-badge-corner--standalone";
         badge.textContent = "SALE";
         photoWrap.appendChild(badge);
       }
