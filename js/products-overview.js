@@ -54,13 +54,19 @@
   // 正方形、圖滿版鋪滿（object-fit:cover），不管成品實際尺寸，所以沒有
   // 反映出真實比例落差，不是哪次調整時改壞的，是這套版面從一開始就
   // 沒有依實際尺寸縮放的機制。這裡用 PRODUCTS 的 sizeCm（cm）算出每張
-  // 卡片相對於全部卡片裡最大尺寸的比例，轉成圖片四周的留白百分比——
-  // 最大尺寸的商品滿版鋪滿（留白 0%），比較小的商品按比例內縮，視覺
-  // 大小才會反映實際成品尺寸差異。沒有標 sizeCm 的商品（流動畫禮盒版等
-  // 不是單一方形成品的）維持原本滿版鋪滿，不強制套用這套比例。
+  // 卡片相對於全部卡片裡最大尺寸的比例，轉成圖片四周的留白百分比，
+  // 讓視覺大小反映實際成品尺寸差異。沒有標 sizeCm 的商品（流動畫等不是
+  // 乾淨去背菱形圖的）維持原本滿版鋪滿，不強制套用這套比例。
+  //
+  // MAX_FILL_RATIO：使用者反饋最大尺寸的商品（目前是 20cm 羊Diss舞蹈）
+  // 滿版鋪滿（留白 0%）看起來太大，改成最大尺寸也留一點邊（82% 滿版），
+  // 其他商品依「20cm 改小後的新基準」照比例再縮小，不是相對滿版的
+  // 100% 去算，兩層縮放疊在一起算進同一個 padding 百分比裡。
+  const MAX_FILL_RATIO = 0.82;
+
   function sizeScalePadding(sizeCm, maxSizeCm) {
     if (!sizeCm || !maxSizeCm) return null;
-    const ratio = sizeCm / maxSizeCm;
+    const ratio = (sizeCm / maxSizeCm) * MAX_FILL_RATIO;
     const paddingPercent = ((1 - ratio) / 2) * 100;
     return paddingPercent > 0.05 ? paddingPercent : 0;
   }
