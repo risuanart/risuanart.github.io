@@ -141,8 +141,11 @@
      目前最新版本補齊，含同一次新增的 align-items: stretch（兩欄等高，
      避免清單項目比照片欄高、下面留一塊空白）。 */
   align-items: stretch;
-  gap: var(--space-6);
-  padding: var(--space-6);
+  /* 2026-10-20：面板 padding／gap 歸零，改成清單欄自己帶背景色＋內距，
+     跟 css/site-menu.css 同一次調整同步——理由跟原因看那份檔案同一條
+     規則的註解，這裡不重複。 */
+  gap: 0;
+  padding: 0;
   background: var(--color-surface-black);
   text-align: left;
   opacity: 0;
@@ -163,10 +166,15 @@
   flex: none;
   min-width: 180px;
   /* 配合上面 align-items: stretch，清單欄本身也要是直向排列的 flex
-     容器，「預約須知」才能被推到跟右側照片欄同高的最底部。 */
+     容器，「預約須知」才能被推到跟右側照片欄同高的最底部。
+     2026-10-20：背景改用 --color-surface-dark＋自己的內距，讓這一欄
+     變成有顏色的色塊跟右側照片欄區隔開，理由跟 css/site-menu.css 同一條
+     規則的註解一致。 */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  background: var(--color-surface-dark);
+  padding: var(--space-6) var(--space-6) var(--space-6) var(--space-10);
 }
 
 /* 子項目清單：手機版抽屜（.site-menu__sublist）原本是換行的標籤群組排法

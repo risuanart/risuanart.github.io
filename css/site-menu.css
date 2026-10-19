@@ -222,8 +222,16 @@
      一截，下面因此多出一塊空蕩蕩的深色區塊。改成 stretch 讓兩欄互相撐到
      同一個高度，不管哪邊內容天生比較高，都不會留空。 */
   align-items: stretch;
-  gap: var(--space-6);
-  padding: var(--space-6);
+  /* 2026-10-20：原本面板本身有 padding + gap，清單欄跟照片欄共用同一塊
+     純黑底，結果整片下拉選單看起來像沒有分隔的一大塊黑，使用者比對
+     panacea-q.com 截圖後說「差超多」——對方的左欄是整塊貼齊面板邊緣的
+     深橄欖棕色塊（#4c3e29），跟右側照片用顏色直接切開，不是靠面板留白
+     分隔。改法：面板本身的 padding／gap 都歸零，改成清單欄自己帶背景色
+     跟內距（見下面 .site-header__nav-dropdown-menu），色塊貼齊面板
+     上／左／下三邊，右邊緊接照片欄，兩欄之間完全沒有縫隙，純粹靠顏色
+     斷開。 */
+  gap: 0;
+  padding: 0;
   background: var(--color-surface-black);
   text-align: left;
   opacity: 0;
@@ -245,10 +253,22 @@
      推到跟對方「See all products」一樣的最底部，而不是緊貼在清單最後一項
      下面。justify-content: space-between 在清單天生就比照片欄高的情況下
      不會製造多餘空隙（兩欄一樣高時這條規則形同沒作用），只有在清單比
-     照片矮的狀況才會把「預約須知」往下推、填滿多出來的高度。 */
+     照片矮的狀況才會把「預約須知」往下推、填滿多出來的高度。
+     2026-10-20：背景改用 --color-surface-dark（我們自己的深橄欖黑，跟
+     panacea 的 #4c3e29 同色相方向），搭配內距，讓這一欄自己變成一塊有
+     顏色的色塊，不再是跟右側共用同一片純黑。這裡是全站選單系統裡唯一
+     刻意重新用回橄欖調深色的地方——使用者先前明確要選單走中性純黑
+     （見 colors.css --color-surface-black 註解），這次是使用者看過
+     panacea 截圖比對後，特地選了「比照 panacea 用深橄欖色塊」這個方向，
+     不是沒注意到先前的決定，是這次針對「跟右欄做出顏色區隔」這個具體
+     情境另外做的選擇。內距比照對方量到的 30px 30px 30px 40px，取最接近
+     的既有 token（--space-6＝24px、--space-10＝40px），不是照抄站外的
+     絕對數字。 */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  background: var(--color-surface-dark);
+  padding: var(--space-6) var(--space-6) var(--space-6) var(--space-10);
 }
 
 .site-header__nav-dropdown .site-menu__sublist {
