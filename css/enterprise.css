@@ -389,6 +389,18 @@
   object-position: center 58%;
 }
 
+/* 2026-10-20：串珠課程頁新增「上課情境」兩張真實照片（學員製作過程中
+   的候拍照，不是示範影片），直接沿用這個容器已有的 9:16 直式比例
+   （.is-portrait-video 修飾類別）跟外框樣式，不用另外開一組新的 class
+   系統——這個容器的語意本來就是「章節用的滿版媒材畫面」，不是
+   video 專屬，只是先前只有影片素材才用到過。 */
+.chapter__banner-video img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 /* products.css 的 .chapter__banner-photo 預設 2:1（給橫式情境照用），
    但這裡案例頁放的兩張真的素材（保時捷線稿設計圖 577x720、線條動畫影片
    800x1000）都是直式、比例接近 4:5，硬套 2:1 會裁掉快一半畫面。

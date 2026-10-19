@@ -200,6 +200,48 @@
           <p class="bead-compare__label">小珠款</p>
         </div>
       </div>
+      <!-- 材料特寫：使用者提供的珠珠收納盒實拍照，不是學員完成品，是
+           材料本身的照片，放在「珠款選擇」段落呼應上面文字（日本玻璃珠、
+           捷克玻璃珠、水晶、珍珠、金屬管珠等）。張數不多（5 張）但用
+           橫向滑動呈現，沿用 .material-photo-carousel——這個 class 本來
+           就是給「材料指南比較頁」放同一種材料的多張真實照片用的（見
+           css/products.css 該處註解），語意完全對得上，不用另外做新的
+           排版。 -->
+      <div class="material-photo-carousel">
+        <div class="material-photo-carousel__track">
+          <img src="../../assets/images/courses/beading/material-01.jpg" alt="珠珠收納盒特寫，白色、透明與深色珠子分格收納" loading="lazy">
+          <img src="../../assets/images/courses/beading/material-02.jpg" alt="珠珠收納盒特寫，黑色、墨綠與奶茶色珠子分格收納" loading="lazy">
+          <img src="../../assets/images/courses/beading/material-03.jpg" alt="多個轉盤式珠珠收納盒，金屬管珠與金色小珠分裝其中" loading="lazy">
+          <img src="../../assets/images/courses/beading/material-04.jpg" alt="整排小珠珠收納格特寫，各種顏色的玻璃小珠與管珠" loading="lazy">
+          <img src="../../assets/images/courses/beading/material-05.jpg" alt="珠珠收納盒與轉盤特寫，一旁放著學員完成的串珠戒指" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <!-- 上課情境：使用者提供的候拍照（學員製作過程中被拍下的真實瞬間，
+         不是擺拍示範），用來傳達「動手做」的臨場感，跟上面「珠款選擇」
+         的示範影片、下面「學員作品」的完成品照片是三種不同性質的素材
+         （材料／過程／成果）。版面沿用上面已經在用的 .bead-compare 兩格
+         並排＋ .chapter__banner-video.is-portrait-video 直式媒材框，
+         這裡放的是 img 不是 video，見 css/enterprise.css
+         .chapter__banner-video img 規則。 -->
+    <section class="chapter fade-in delay-2">
+      <div class="chapter__block">
+        <p class="chapter__statement">上課情境</p>
+        <p class="chapter__prose">專注挑珠子、穿線，一顆一顆串起來的時間，也是這堂課很療癒的部分。</p>
+      </div>
+      <div class="bead-compare">
+        <div class="bead-compare__cell">
+          <div class="chapter__banner-video is-portrait-video">
+            <img src="../../assets/images/courses/beading/process-01.jpg" alt="學員手持鑷子，專注地將珠子穿上串珠線" loading="lazy">
+          </div>
+        </div>
+        <div class="bead-compare__cell">
+          <div class="chapter__banner-video is-portrait-video">
+            <img src="../../assets/images/courses/beading/process-02.jpg" alt="學員坐在畫室窗邊的工作桌前，挑選珠子製作項鍊" loading="lazy">
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- 學員作品：影片跟照片分開放。影片獨立播放到底（沿用
