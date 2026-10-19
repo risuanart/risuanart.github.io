@@ -197,9 +197,12 @@
 
 .site-header__nav-dropdown .site-menu__sublist li {
   padding: var(--space-2) 0;
-  font-size: var(--body-font-size);
+  /* 2026-10-20：比照 css/site-menu.css 同名規則，改成對方實測的 16px
+     （這組數字先前就量過，就記在這份檔案開頭的歷史註解裡）——我們原本
+     用壓小的 13px，字級落差是使用者覺得「完全不一樣」的主因之一。 */
+  font-size: 16px;
   white-space: nowrap;
-  /* 2026-10-20：比照 css/site-menu.css 同名規則——覆寫掉全域 55% 透明白，
+  /* 比照 css/site-menu.css 同名規則——覆寫掉全域 55% 透明白，
      左欄文字跟 panacea 一樣是純白，不分級。 */
   color: var(--color-surface-light);
 }
@@ -215,7 +218,8 @@
    很多，看起來還是偏大。 */
 .site-header__nav-dropdown-menu .site-menu__sublink {
   display: inline-block;
-  font-size: 13px;
+  /* 跟旁邊 <li> 文字一樣改成對方實測的 16px，理由同上。 */
+  font-size: 16px;
   letter-spacing: normal;
   line-height: normal;
   text-transform: none;
