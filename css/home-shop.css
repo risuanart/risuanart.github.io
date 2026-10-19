@@ -130,7 +130,17 @@
   transform: translateX(-50%);
   margin-top: 0;
   display: flex;
-  align-items: flex-start;
+  /* 2026-10-19：這個檔案（首頁專屬，index.html 不載入 site-menu.css）
+     之前漏掉了 10/18 那次 panacea-q.com 下拉選單重做——HTML 已經換成
+     新的 __frame／__shade／__label 結構，但這份 CSS 還停在重做之前的
+     .placeholder-box 寫法，導致首頁的「課程」下拉選單一直沒有套用到
+     新樣式（零間距照片、左下角疊字標籤、深色漸層），跟其他 41 個子頁
+     （都讀 css/site-menu.css）長得不一樣，就是使用者這次回報「跟
+     panacea-q.com 差距還是非常非常大」的真正原因。這整段（到
+     .site-header__nav-dropdown-photo__label 為止）直接比照 site-menu.css
+     目前最新版本補齊，含同一次新增的 align-items: stretch（兩欄等高，
+     避免清單項目比照片欄高、下面留一塊空白）。 */
+  align-items: stretch;
   gap: var(--space-6);
   padding: var(--space-6);
   background: var(--color-surface-black);
@@ -152,6 +162,11 @@
 .site-header__nav-dropdown-menu {
   flex: none;
   min-width: 180px;
+  /* 配合上面 align-items: stretch，清單欄本身也要是直向排列的 flex
+     容器，「預約須知」才能被推到跟右側照片欄同高的最底部。 */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 /* 子項目清單：手機版抽屜（.site-menu__sublist）原本是換行的標籤群組排法
@@ -202,13 +217,13 @@
   padding: 0;
 }
 
-/* 課程分類照片：先佔位，排版邏輯見 index.html 註解。寬高比跟首頁精選
-   輪播（.preview-hero）同一個 2:3，全站已經在用的直式比例，不是另外
-   挑一個新比例。 */
+/* 課程分類照片：比照 site-menu.css 同名規則——零間距滿版並排，標籤疊在
+   照片左下角（白字＋陰影，底下墊由下往上的深色漸層幫助辨識），不是
+   先前每張照片獨立一張卡片、標籤放照片下方置中的舊版排法。 */
 .site-header__nav-dropdown-photos {
   flex: none;
   display: flex;
-  gap: var(--space-2);
+  gap: 0;
 }
 
 /* 選擇器故意寫成兩層 class（.site-header__nav-dropdown-photos 底下的
@@ -218,6 +233,7 @@
    變成並排而不是上下堆疊。同理，那條通用樣式設過的字級／字距／大寫／
    透明度／內距，這裡也要整組覆寫回來，不能只設 display。 */
 .site-header__nav-dropdown-photos .site-header__nav-dropdown-photo {
+  position: relative;
   display: block;
   /* 2026-09-19：從 120px 放大到 180px——比對 panacea-q.com SHOP 下拉選單
      實測（262px 寬），他們的照片格明顯比我們大很多、更有存在感，這裡
@@ -234,29 +250,56 @@
   opacity: 1;
 }
 
-.site-header__nav-dropdown-photo .placeholder-box {
-  aspect-ratio: 2 / 3;
-  font-size: 10px;
-  border-color: color-mix(in srgb, var(--color-surface-light) 30%, transparent);
+.site-header__nav-dropdown-photo__frame {
+  position: relative;
+  display: block;
+  /* 清單項目比 panacea-q.com 多（10 項 vs 對方 5 項），如果鎖死 2:3
+     固定比例，清單欄撐高之後照片欄還是對不齊、留白。改用 height: 100%
+     撐滿 align-items: stretch 分配到的高度，img 用 object-fit: cover
+     不會變形。 */
+  height: 100%;
+  overflow: hidden;
   background: color-mix(in srgb, var(--color-surface-light) 8%, transparent);
-  color: color-mix(in srgb, var(--color-surface-light) 55%, transparent);
-  /* 2026-09-19：滑鼠移到照片上會放大——比對 panacea-q.com 實測到的懸浮
-     動效（圖片本身 scale(1.1)，0.6s 漸變），這裡用比較保守的 1.06 倍
-     （現在放的還是「照片待補」佔位框，連文字帶邊框一起放大太多會顯得
-     怪，等真的照片上去後可以視覺重新評估要不要拉到 1.1）。--duration-
-     slow 剛好是 600ms，跟參考站量到的 0.6s 一致，不用另外訂新的時間。 */
+}
+
+.site-header__nav-dropdown-photo__frame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* 2026-09-19：懸浮放大效果，比對 panacea-q.com 實測到的 scale(1.1)／
+     0.6s，這裡用 1.08。 */
   transition: transform var(--duration-slow) var(--ease-standard);
 }
 
-.site-header__nav-dropdown-photo:hover .placeholder-box {
-  transform: scale(1.06);
+.site-header__nav-dropdown-photo:hover .site-header__nav-dropdown-photo__frame img {
+  transform: scale(1.08);
+}
+
+.site-header__nav-dropdown-photo__shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.65) 0%,
+    rgba(0, 0, 0, 0.4) 35%,
+    rgba(0, 0, 0, 0.4) 100%
+  );
+  pointer-events: none;
 }
 
 .site-header__nav-dropdown-photo__label {
-  display: block;
-  margin-top: var(--space-2);
-  font-size: var(--font-size-xs);
-  text-align: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0;
+  padding: var(--space-2) var(--space-4) var(--space-4);
+  color: var(--color-surface-light);
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  text-align: left;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
 }
 
 @media (min-width: 1024px) {

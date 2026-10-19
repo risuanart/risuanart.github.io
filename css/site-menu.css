@@ -215,7 +215,13 @@
   transform: translateX(-50%);
   margin-top: 0;
   display: flex;
-  align-items: flex-start;
+  /* 2026-10-19：實測 panacea-q.com SHOP 下拉選單左右兩欄（.col.large-3／
+     .col.large-9）同高（都是 393.66px），內層那排的 class 叫 align-equal，
+     名稱本身就是「兩欄等高對齊」的意思。我們原本是 align-items:
+     flex-start，課程清單（10 項）比對方（5 項）多，清單欄天然比照片欄高
+     一截，下面因此多出一塊空蕩蕩的深色區塊。改成 stretch 讓兩欄互相撐到
+     同一個高度，不管哪邊內容天生比較高，都不會留空。 */
+  align-items: stretch;
   gap: var(--space-6);
   padding: var(--space-6);
   background: var(--color-surface-black);
@@ -234,6 +240,15 @@
 .site-header__nav-dropdown-menu {
   flex: none;
   min-width: 180px;
+  /* 2026-10-19：配合上面 .site-header__nav-dropdown 的 align-items:
+     stretch——清單欄本身也要是直向排列的 flex 容器，「預約須知」才能被
+     推到跟對方「See all products」一樣的最底部，而不是緊貼在清單最後一項
+     下面。justify-content: space-between 在清單天生就比照片欄高的情況下
+     不會製造多餘空隙（兩欄一樣高時這條規則形同沒作用），只有在清單比
+     照片矮的狀況才會把「預約須知」往下推、填滿多出來的高度。 */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .site-header__nav-dropdown .site-menu__sublist {
@@ -305,7 +320,15 @@
 .site-header__nav-dropdown-photo__frame {
   position: relative;
   display: block;
-  aspect-ratio: 2 / 3;
+  /* 2026-10-19：原本用 aspect-ratio: 2/3 固定比例（對方實測 262×393px≈
+     2:3），但那是在「兩欄本來就等高」的前提下量到的數字——對方清單只有
+     5 項，天生跟照片一樣高，比例才剛好是 2:3。我們清單項目較多，如果
+     繼續鎖死 2:3，照片欄會維持原本的矮高度，清單欄撐高之後兩者還是對不
+     齊。改成 height: 100%（撐滿 .site-header__nav-dropdown-photo 被
+     align-items: stretch 分配到的高度），寬度仍是 180px，img 用
+     object-fit: cover 不會變形，只是清單比較長的時候照片會比 2:3 瘦長
+     一些，換取兩欄視覺上真正切齊、不留空。 */
+  height: 100%;
   overflow: hidden;
   background: color-mix(in srgb, var(--color-surface-light) 8%, transparent);
 }
