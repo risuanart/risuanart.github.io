@@ -164,7 +164,9 @@
 
 .site-header__nav-dropdown-menu {
   flex: none;
-  min-width: 180px;
+  /* 2026-10-20：改兩欄排列（見下面 .site-menu__sublist column-count: 2），
+     寬度比照 css/site-menu.css 同名規則加大到 340px。 */
+  min-width: 340px;
   /* 配合上面 align-items: stretch，清單欄本身也要是直向排列的 flex
      容器，「預約須知」才能被推到跟右側照片欄同高的最底部。
      2026-10-20：背景改用 --color-surface-dark＋自己的內距，讓這一欄
@@ -183,7 +185,13 @@
    14px），不是照抄站外那組數字。只在桌面下拉選單這個範圍覆寫，不影響
    手機抽屜本身的排法。 */
 .site-header__nav-dropdown .site-menu__sublist {
-  display: block;
+  /* 2026-10-20：比照 css/site-menu.css 同名規則——改用 CSS Grid（5 列＋
+     grid-auto-flow: column）強制分兩欄，不用 column-count（在 flex
+     column 裡沒有明確高度，balance 不可靠，理由見該處註解）。 */
+  display: grid;
+  grid-template-rows: repeat(5, auto);
+  grid-auto-flow: column;
+  column-gap: var(--space-6);
   margin-bottom: var(--space-4);
 }
 
@@ -295,11 +303,12 @@
 .site-header__nav-dropdown-photo__shade {
   position: absolute;
   inset: 0;
+  /* 2026-10-20：比照 css/site-menu.css 同名規則——使用者回報太暗，改成
+     只在底部標籤文字那一小段加深，照片中上段幾乎不疊色。 */
   background: linear-gradient(
     to top,
-    rgba(0, 0, 0, 0.65) 0%,
-    rgba(0, 0, 0, 0.4) 35%,
-    rgba(0, 0, 0, 0.4) 100%
+    rgba(0, 0, 0, 0.55) 0%,
+    rgba(0, 0, 0, 0) 55%
   );
   pointer-events: none;
 }

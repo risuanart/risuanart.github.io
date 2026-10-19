@@ -247,7 +247,13 @@
 
 .site-header__nav-dropdown-menu {
   flex: none;
-  min-width: 180px;
+  /* 2026-10-20：原本單欄 180px，10 個課程項目疊起來非常高，面板整體比例
+     接近正方形，使用者要求比照 panacea 做成比較長的橫向長方形。課程
+     項目數量沒辦法刪減，改成兩欄排列（見下面 .site-menu__sublist
+     column-count: 2）——項目高度大致砍半，面板自然變矮；清單欄本身也
+     變寬，面板整體跟著變寬，兩個方向同時讓比例往橫向長方形靠。寬度從
+     180px 加大到 340px，容納兩欄文字＋欄距。 */
+  min-width: 340px;
   /* 2026-10-19：配合上面 .site-header__nav-dropdown 的 align-items:
      stretch——清單欄本身也要是直向排列的 flex 容器，「預約須知」才能被
      推到跟對方「See all products」一樣的最底部，而不是緊貼在清單最後一項
@@ -272,7 +278,18 @@
 }
 
 .site-header__nav-dropdown .site-menu__sublist {
-  display: block;
+  /* 2026-10-20：改兩欄排列把面板壓矮、撐寬，理由見上面
+     .site-header__nav-dropdown-menu 的註解。原本用 column-count: 2
+     （CSS 多欄），但這個清單在 flex column（align-items: stretch 撐高）
+     裡沒有明確高度，多欄的 balance 演算法在這種情境下不可靠，實測結果
+     是 10 項全部擠成一整排、面板整個爆版。改用 CSS Grid 明確指定
+     5 列（grid-template-rows）＋ grid-auto-flow: column，強制先排滿
+     第一欄 5 項、再接第二欄，不依賴瀏覽器自動平衡。固定 10 個課程項目
+     才用 5 列，之後清單項目數量改變要記得同步調整這個數字。 */
+  display: grid;
+  grid-template-rows: repeat(5, auto);
+  grid-auto-flow: column;
+  column-gap: var(--space-6);
   margin-bottom: var(--space-4);
 }
 
@@ -383,11 +400,13 @@
 .site-header__nav-dropdown-photo__shade {
   position: absolute;
   inset: 0;
+  /* 2026-10-20：使用者回報照片太暗——原本整張照片都疊了至少 0.4 的黑，
+     改成只在底部（標籤文字那一小段）加深，照片中上段幾乎不疊色，維持
+     照片本身的亮度，只確保白字標籤在照片上看得清楚就好。 */
   background: linear-gradient(
     to top,
-    rgba(0, 0, 0, 0.65) 0%,
-    rgba(0, 0, 0, 0.4) 35%,
-    rgba(0, 0, 0, 0.4) 100%
+    rgba(0, 0, 0, 0.55) 0%,
+    rgba(0, 0, 0, 0) 55%
   );
   pointer-events: none;
 }
