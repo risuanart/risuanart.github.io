@@ -328,6 +328,67 @@ window.GALLERY_ITEMS = [
   { course: "自己帶圖創作", themes: ["植物花卉"], date: "2026-10-08", src: "../assets/images/gallery/landscape-oil/08.jpg", alt: "油畫的窗邊靜物，陶瓶插著枯枝與落葉，雪景窗框", sessions: 1 },
   { course: "自己帶圖創作", themes: ["風景"], date: "2026-10-08", src: "../assets/images/gallery/landscape-oil/09.jpg", alt: "學員正在繪製黃昏孤樹剪影畫作的過程，橘粉漸層天空搭配單一色系樹枝", sessions: 1 },
   { course: "自己帶圖創作", themes: ["風景"], date: "2026-10-08", src: "../assets/images/gallery/landscape-oil/10.jpg", alt: "學員繪製棕櫚樹海景底稿的過程，灰階階段旁放著參考照片", sessions: 1 },
+
+  // 2026-10-19 新增：「串珠」課程第一批真實學員作品 50 件，使用者從
+  // raw-uploads/beading/ 底下幾個子資料夾（大珠珠項鍊、小珠珠項鍊、戒指、
+  // 手鏈、大小珠珠合照、大小珠珠混串）整理提供。逐張打開實際看過畫面內容
+  // 才挑選，排除「製作過程中」（畫面裡有手在穿線、拿鑷子、鏡面托盤旁邊
+  // 放著珠珠分格收納盒等工作台場景）或跟其他張是「同一件作品重複構圖」的
+  // 照片，只保留每件作品最完整、最能代表成品的一張。也排除了帶有文字浮水印
+  // 的行銷風格圖（例如標示材質名稱、IG 帳號、吐槽文案的截圖），這些是原始
+  // 社群貼文素材，不是乾淨的作品照。沒有精確的完成日期紀錄，先統一用新增
+  // 這筆資料的日期，之後有更準確的日期可以再改。themes 標記飾品類型
+  // （項鍊／手鏈／戒指），少數同張照片拍到不只一種飾品的疊加標記。
+  { course: "串珠", themes: ["項鍊"], date: "2026-10-19", src: "../assets/images/gallery/beading/01.jpg", alt: "大珠項鍊手持展示，珍珠與銀色圓珠點綴，尾端有蝴蝶結造型墜飾", sessions: 1 },
+  { course: "串珠", themes: ["項鍊"], date: "2026-10-19", src: "../assets/images/gallery/beading/02.jpg", alt: "兩條大珠項鍊手持展示，琥珀色、湖水藍與透明大顆珠石交錯", sessions: 1 },
+  { course: "串珠", themes: ["項鍊"], date: "2026-10-19", src: "../assets/images/gallery/beading/03.jpg", alt: "兩條大珠項鍊手持展示，墨綠、琥珀與珍珠大珠交錯排列", sessions: 1 },
+  { course: "串珠", themes: ["項鍊"], date: "2026-10-19", src: "../assets/images/gallery/beading/04.jpg", alt: "兩條大珠項鍊特寫，琥珀色與灰藍色大珠串搭配鏤空花朵墜飾", sessions: 1 },
+  { course: "串珠", themes: ["項鍊"], date: "2026-10-19", src: "../assets/images/gallery/beading/05.jpg", alt: "多條大珠項鍊並排懸掛，白色貝殼、淺藍花朵與透明大珠造型各異", sessions: 1 },
+  { course: "串珠", themes: ["項鍊"], date: "2026-10-19", src: "../assets/images/gallery/beading/06.jpg", alt: "大珠項鍊戴在手腕展示，珊瑚橘、白珍珠與琥珀大珠交錯", sessions: 1 },
+  { course: "串珠", themes: ["項鍊", "手鏈"], date: "2026-10-19", src: "../assets/images/gallery/beading/07.jpg", alt: "大珠項鍊與手鍊放在圓鏡面托盤上，透明與湖水藍大珠搭配珍珠", sessions: 1 },
+  { course: "串珠", themes: ["項鍊"], date: "2026-10-19", src: "../assets/images/gallery/beading/08.jpg", alt: "大珠項鍊戴在頸間展示，墨綠大珠與白色貝殼造型墜飾", sessions: 1 },
+  { course: "串珠", themes: ["項鍊"], date: "2026-10-19", src: "../assets/images/gallery/beading/09.jpg", alt: "大珠項鍊特寫，透明水晶大珠搭配白色鏤空花朵墜飾", sessions: 1 },
+  { course: "串珠", themes: ["項鍊"], date: "2026-10-19", src: "../assets/images/gallery/beading/10.jpg", alt: "大珠項鍊特寫，珍珠與湖水綠大珠間點綴銀色花朵墜飾", sessions: 1 },
+  { course: "串珠", themes: ["項鍊"], date: "2026-10-19", src: "../assets/images/gallery/beading/11.jpg", alt: "多條大珠項鍊並排懸掛，粉色、黃色、湖水藍大珠色彩繽紛", sessions: 1 },
+  { course: "串珠", themes: ["項鍊"], date: "2026-10-19", src: "../assets/images/gallery/beading/12.jpg", alt: "大珠項鍊戴在手腕展示，透明水晶花朵墜飾搭配淺藍與淺棕大珠", sessions: 1 },
+  { course: "串珠", themes: ["項鍊"], date: "2026-10-19", src: "../assets/images/gallery/beading/13.jpg", alt: "大珠項鍊特寫，白色貝殼與淺藍鏤空花朵大珠造型", sessions: 1 },
+  { course: "串珠", themes: ["項鍊"], date: "2026-10-19", src: "../assets/images/gallery/beading/14.jpg", alt: "大珠項鍊戴在頸間展示，橘色、墨綠、淺藍大珠與蛋白石大珠交錯", sessions: 1 },
+  { course: "串珠", themes: ["項鍊"], date: "2026-10-19", src: "../assets/images/gallery/beading/15.jpg", alt: "兩條大珠項鍊手持展示，紫水晶、湖水藍與珍珠大珠交錯排列", sessions: 1 },
+  { course: "串珠", themes: ["項鍊"], date: "2026-10-19", src: "../assets/images/gallery/beading/16.jpg", alt: "小珠項鍊全貌，米白與灰色小珠串成，點綴幾顆透明珠", sessions: 1 },
+  { course: "串珠", themes: ["手鏈"], date: "2026-10-19", src: "../assets/images/gallery/beading/17.jpg", alt: "兩條小珠手鍊放在圓鏡面托盤上，白色小珠點綴珍珠", sessions: 1 },
+  { course: "串珠", themes: ["項鍊"], date: "2026-10-19", src: "../assets/images/gallery/beading/18.jpg", alt: "小珠項鍊全貌，白色與淺藍小珠交錯，點綴珍珠與湖水藍大珠", sessions: 1 },
+  { course: "串珠", themes: ["項鍊"], date: "2026-10-19", src: "../assets/images/gallery/beading/19.jpg", alt: "小珠項鍊特寫，珍珠白小珠串成蝴蝶結造型墜飾", sessions: 1 },
+  { course: "串珠", themes: ["項鍊"], date: "2026-10-19", src: "../assets/images/gallery/beading/20.jpg", alt: "小珠項鍊手持展示，白色與粉紫色小珠交錯，點綴桃紅色珠", sessions: 1 },
+  { course: "串珠", themes: ["項鍊", "戒指"], date: "2026-10-19", src: "../assets/images/gallery/beading/21.jpg", alt: "多條小珠項鍊與戒指手持展示，黑色小珠與白色、粉彩小珠交錯", sessions: 1 },
+  { course: "串珠", themes: ["項鍊"], date: "2026-10-19", src: "../assets/images/gallery/beading/22.jpg", alt: "小珠項鍊全貌，藍色與白色小珠交錯，點綴湖水藍大珠與珍珠", sessions: 1 },
+  { course: "串珠", themes: ["項鍊"], date: "2026-10-19", src: "../assets/images/gallery/beading/23.jpg", alt: "小珠項鍊全貌，白色小珠串起多顆珍珠與淺灰珠", sessions: 1 },
+  { course: "串珠", themes: ["項鍊"], date: "2026-10-19", src: "../assets/images/gallery/beading/24.jpg", alt: "多條小珠項鍊手持展示，米白、海軍藍與琥珀色小珠交錯", sessions: 1 },
+  { course: "串珠", themes: ["手鏈"], date: "2026-10-19", src: "../assets/images/gallery/beading/25.jpg", alt: "小珠手鍊放在圓鏡面托盤上，白色小珠點綴粉藍與湖水綠花朵珠", sessions: 1 },
+  { course: "串珠", themes: ["項鍊"], date: "2026-10-19", src: "../assets/images/gallery/beading/26.jpg", alt: "多條小珠項鍊特寫，淺藍、粉色與湖水綠花朵造型珠交錯點綴", sessions: 1 },
+  { course: "串珠", themes: ["項鍊"], date: "2026-10-19", src: "../assets/images/gallery/beading/27.jpg", alt: "多條小珠項鍊手持展示，琥珀、寶藍與珍珠白小珠色彩繽紛", sessions: 1 },
+  { course: "串珠", themes: ["項鍊"], date: "2026-10-19", src: "../assets/images/gallery/beading/28.jpg", alt: "項鍊特寫，白色與黑色小珠串搭配湖水藍鏤空花朵大珠墜飾", sessions: 1 },
+  { course: "串珠", themes: ["項鍊"], date: "2026-10-19", src: "../assets/images/gallery/beading/29.jpg", alt: "多條項鍊手持展示，白色、粉紫與淺橘大小珠交錯", sessions: 1 },
+  { course: "串珠", themes: ["項鍊"], date: "2026-10-19", src: "../assets/images/gallery/beading/30.jpg", alt: "項鍊特寫，灰色與黑色大小珠交錯，尾端有白色蝴蝶結墜飾", sessions: 1 },
+  { course: "串珠", themes: ["項鍊"], date: "2026-10-19", src: "../assets/images/gallery/beading/31.jpg", alt: "多條項鍊特寫，白色、淺灰與琥珀色大小珠交錯排列", sessions: 1 },
+  { course: "串珠", themes: ["項鍊"], date: "2026-10-19", src: "../assets/images/gallery/beading/32.jpg", alt: "項鍊特寫，銀灰色珍珠大珠與藍綠色小珠交錯", sessions: 1 },
+  { course: "串珠", themes: ["項鍊"], date: "2026-10-19", src: "../assets/images/gallery/beading/33.jpg", alt: "項鍊全貌，墨綠與透明大小珠交錯，點綴蛋白石大珠", sessions: 1 },
+  { course: "串珠", themes: ["項鍊"], date: "2026-10-19", src: "../assets/images/gallery/beading/34.jpg", alt: "項鍊全貌，粉橘、淺紫與珍珠色大小珠交錯排列", sessions: 1 },
+  { course: "串珠", themes: ["項鍊"], date: "2026-10-19", src: "../assets/images/gallery/beading/35.jpg", alt: "多條項鍊放在圓鏡面托盤上，透明水晶、珍珠與黑曜石大珠交錯", sessions: 1 },
+  { course: "串珠", themes: ["項鍊"], date: "2026-10-19", src: "../assets/images/gallery/beading/36.jpg", alt: "多條項鍊並排懸掛，灰藍、粉紫與珍珠大小珠色彩交錯", sessions: 1 },
+  { course: "串珠", themes: ["項鍊"], date: "2026-10-19", src: "../assets/images/gallery/beading/37.jpg", alt: "多條項鍊並排懸掛，琥珀、粉色與湖水藍大小珠交錯，點綴貝殼墜飾", sessions: 1 },
+  { course: "串珠", themes: ["戒指"], date: "2026-10-19", src: "../assets/images/gallery/beading/38.jpg", alt: "珍珠戒指與蝴蝶結造型珍珠戒指戴在手指上展示", sessions: 1 },
+  { course: "串珠", themes: ["戒指"], date: "2026-10-19", src: "../assets/images/gallery/beading/39.jpg", alt: "三只戒指放在圓鏡面托盤上，紅色、淺藍愛心與粉色花朵款式各異", sessions: 1 },
+  { course: "串珠", themes: ["戒指"], date: "2026-10-19", src: "../assets/images/gallery/beading/40.jpg", alt: "戒指戴在手指上展示，深色愛心珠搭配灰藍與珍珠小珠", sessions: 1 },
+  { course: "串珠", themes: ["戒指"], date: "2026-10-19", src: "../assets/images/gallery/beading/41.jpg", alt: "戒指戴在手指上展示，白色鏤空花朵珠搭配紅白條紋小珠", sessions: 1 },
+  { course: "串珠", themes: ["戒指"], date: "2026-10-19", src: "../assets/images/gallery/beading/42.jpg", alt: "六只戒指放在黑色圓鏡面托盤上，湖水藍、靛藍與珍珠白款式各異", sessions: 1 },
+  { course: "串珠", themes: ["戒指", "項鍊"], date: "2026-10-19", src: "../assets/images/gallery/beading/43.jpg", alt: "戒指與項鍊放在圓鏡面托盤上，透明與珍珠色小珠交錯", sessions: 1 },
+  { course: "串珠", themes: ["戒指"], date: "2026-10-19", src: "../assets/images/gallery/beading/44.jpg", alt: "戒指戴在手指上展示，珍珠白小珠編織成蝴蝶結造型", sessions: 1 },
+  { course: "串珠", themes: ["戒指"], date: "2026-10-19", src: "../assets/images/gallery/beading/45.jpg", alt: "三只戒指懸掛展示，藍色、灰白與透明小珠款式各異，後方襯著綠葉", sessions: 1 },
+  { course: "串珠", themes: ["戒指"], date: "2026-10-19", src: "../assets/images/gallery/beading/46.jpg", alt: "六只戒指放在圓鏡面托盤上，米色、灰綠與靛藍寶石款式各異", sessions: 1 },
+  { course: "串珠", themes: ["戒指"], date: "2026-10-19", src: "../assets/images/gallery/beading/47.jpg", alt: "兩只戒指戴在手指上展示，淺藍小珠搭配湖水藍大珠", sessions: 1 },
+  { course: "串珠", themes: ["戒指"], date: "2026-10-19", src: "../assets/images/gallery/beading/48.jpg", alt: "戒指戴在手指上展示，淺藍水滴大珠搭配金色與白色小珠", sessions: 1 },
+  { course: "串珠", themes: ["戒指"], date: "2026-10-19", src: "../assets/images/gallery/beading/49.jpg", alt: "戒指戴在手指上展示，銀色圓珠串成，一旁疊戴白色珍珠戒指", sessions: 1 },
+  { course: "串珠", themes: ["手鏈"], date: "2026-10-19", src: "../assets/images/gallery/beading/50.jpg", alt: "兩條手鍊戴在手腕上展示，淺藍鏤空花朵珠與透明大珠交錯", sessions: 1 },
 ];
 
 // 課程篩選鈕的選項清單，跟首頁「課程」選單、faq.html 裡提到的課程名稱
@@ -385,6 +446,10 @@ window.GALLERY_COURSE_LINKS = {
 // 2026-09-30 新增「食物」標籤：使用者上傳一批刮刀油畫學員作品裡有水蜜桃、
 // 蛋糕、披薩這類食物靜物題材，之前的分類都不合適（不是植物花卉、也不是
 // 節慶／季節），獨立開一個「食物」標籤。
+// 2026-10-19 新增「項鍊」「手鏈」「戒指」三個標籤：「串珠」課程第一批真實
+// 學員作品上架，之前的標籤都是給繪畫主題用的，沒有適合珠寶飾品的分類。
+// 這三個照實標記作品的飾品類型（不是材質或珠子大小），同一件作品只會有
+// 其中一種（項鍊、手鏈、戒指互斥，不像山／海邊那種可以疊加的主題標籤）。
 window.GALLERY_THEMES = [
   "海洋生物",
   "陸地動物",
@@ -401,4 +466,7 @@ window.GALLERY_THEMES = [
   "狗狗",
   "貓咪",
   "兩隻以上",
+  "項鍊",
+  "手鏈",
+  "戒指",
 ];
