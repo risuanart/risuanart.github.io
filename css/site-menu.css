@@ -280,6 +280,12 @@
   padding: var(--space-2) 0;
   font-size: var(--body-font-size);
   white-space: nowrap;
+  /* 2026-10-20：使用者比對 panacea-q.com 截圖後要求左欄文字「不要底線、
+     要白色」——這裡覆寫掉 .site-menu__sublist li 全域規則的 55% 透明白
+     （那是手機抽屜選單用來做「已上架／未上架」視覺分級的淡化效果），
+     只在桌面下拉選單這個範圍改成純白，跟旁邊真的連結（.site-menu__sublink）
+     一樣亮，不分級。手機抽屜本身不受影響。 */
+  color: var(--color-surface-light);
 }
 
 .site-header__nav-dropdown-menu .site-menu__sublink {
@@ -291,11 +297,17 @@
   font-weight: 400;
   padding: var(--space-2) 0;
   opacity: 1;
+  color: var(--color-surface-light);
+  /* 2026-10-20：.site-menu__sublink 全域規則有 border-bottom: 1px solid
+     currentColor 當底線（手機抽屜選單用），panacea 的左欄文字沒有底線，
+     這裡在下拉選單範圍內覆寫拿掉。 */
+  border-bottom: none;
 }
 
 .site-header__nav-dropdown-menu .site-menu__sublist li .site-menu__sublink {
   display: inline;
   padding: 0;
+  border-bottom: none;
 }
 
 /* 課程分類照片：2026-10-18 使用者提供 panacea-q.com SHOP 下拉選單

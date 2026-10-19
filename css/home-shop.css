@@ -191,6 +191,9 @@
   padding: var(--space-2) 0;
   font-size: var(--body-font-size);
   white-space: nowrap;
+  /* 2026-10-20：比照 css/site-menu.css 同名規則——覆寫掉全域 55% 透明白，
+     左欄文字跟 panacea 一樣是純白，不分級。 */
+  color: var(--color-surface-light);
 }
 
 /* 「石英砂肌理畫」「串珠」這兩個真連結（.site-menu__sublink）跟上面
@@ -211,6 +214,10 @@
   font-weight: 400;
   padding: var(--space-2) 0;
   opacity: 1;
+  color: var(--color-surface-light);
+  /* 2026-10-20：拿掉 .site-menu__sublink 全域的底線（border-bottom:1px
+     solid currentColor，手機抽屜選單用），panacea 的左欄文字沒有底線。 */
+  border-bottom: none;
 }
 
 /* 「石英砂肌理畫」「串珠」現在改回放在 <ul> 裡面（<li><a>...），跟旁邊
@@ -223,6 +230,7 @@
 .site-header__nav-dropdown-menu .site-menu__sublist li .site-menu__sublink {
   display: inline;
   padding: 0;
+  border-bottom: none;
 }
 
 /* 課程分類照片：比照 site-menu.css 同名規則——零間距滿版並排，標籤疊在
