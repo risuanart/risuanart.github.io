@@ -284,6 +284,22 @@
   // 事件，不能只靠打字時的即時同步。
   form.addEventListener("submit", syncCustomerName);
 
+  // ---------- 收據：勾選才展開抬頭／統編欄位 ----------
+  const receiptWantedInput = document.getElementById("receipt-wanted");
+  const receiptFields = document.getElementById("receipt-fields");
+  const receiptTitleInput = document.getElementById("receipt-title");
+  const receiptTaxIdInput = document.getElementById("receipt-tax-id");
+  function syncReceiptFieldsVisibility() {
+    receiptFields.hidden = !receiptWantedInput.checked;
+  }
+  receiptWantedInput.addEventListener("change", syncReceiptFieldsVisibility);
+  syncReceiptFieldsVisibility();
+  // 抬頭沒填的話後端會退回用收件人姓名（見 risuan-checkout
+  // api/create-order.js），這裡不用前端預先帶入，placeholder 已經說明了
+  // 這個退回規則，避免預先帶入「跟使用者自己打的不一樣」造成混淆（例如
+  // 姓名欄位用「姓氏＋名字」兩格合併，順序不一定是客人想要的收據抬頭
+  // 寫法）。
+
   // ---------- 聯絡資訊草稿：存在 sessionStorage，撐過綠界導頁 ----------
   // 超商取貨選門市會整頁離開網站去綠界電子地圖，選完再導回來——這是一次
   // 全新的頁面載入，DOM 裡任何還沒送出的欄位內容都會消失（純靜態站，沒有
@@ -299,7 +315,16 @@
   // 30 分鐘是保險，同時也讓分頁忘了關、隔了一段時間才被別人碰到同一台
   // 裝置時，草稿裡的聯絡資訊不會一直有效，縮短暴露的時間窗。
   const DRAFT_MAX_AGE_MS = 30 * 60 * 1000;
-  const draftInputs = [customerFirstNameInput, customerLastNameInput, customerPhoneInput, customerEmailInput, marketingOptInInput];
+  const draftInputs = [
+    customerFirstNameInput,
+    customerLastNameInput,
+    customerPhoneInput,
+    customerEmailInput,
+    marketingOptInInput,
+    receiptWantedInput,
+    receiptTitleInput,
+    receiptTaxIdInput,
+  ];
 
   function saveDraft() {
     const draft = { savedAt: Date.now() };
@@ -340,6 +365,9 @@
       }
     });
     syncCustomerName();
+    // 草稿還原是直接改 .checked，不會觸發 change 事件，收據欄位的顯示／
+    // 隱藏要自己再同步一次，不然勾選狀態還原了但欄位還是維持隱藏。
+    syncReceiptFieldsVisibility();
   }
 
   draftInputs.forEach((el) => {

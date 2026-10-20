@@ -409,6 +409,42 @@
             </div>
           </section>
 
+          <!-- 收據：2026-10-20 使用者研究過免用統一發票收據的開立方式後
+               決定做成「結帳時勾選＋後端自動產生 PDF 附在付款成功通知信」
+               （見 risuan-checkout/lib/receipt.js），不是繼續手寫空白
+               收據。這裡只收兩個欄位：抬頭（公司或個人名稱，沒填的話
+               後端會退回用收件人姓名）、統一編號（選填，只有要用公司
+               抬頭報帳才需要填，8 碼數字，後端 api/create-order.js 會
+               驗證格式）。沒有另外問「地址」——免用統一發票收據法規上
+               要記載的「地址」是指賣方（工作室）自己的登記地址，不是
+               買方的，賣方資訊在後端用環境變數設定（見 risuan-checkout
+               README「免用統一發票收據設定」），不需要在這裡問客人。
+               欄位預設收合（checkbox 沒勾不顯示），大部分客人不需要
+               收據，不要預設展開占用版面。 -->
+          <section class="chapter" id="receipt-section">
+            <h2 class="chapter__title"><span class="step-badge step-badge--label">STEP 4</span><span class="step-badge__dot">·</span>收據</h2>
+            <label class="confirm-checkbox">
+              <input type="checkbox" id="receipt-wanted" name="wantsReceipt" value="true">
+              <span>我需要免用統一發票收據（付款成功後會以 PDF 附件寄到您填寫的 Email）</span>
+            </label>
+            <div id="receipt-fields" hidden>
+              <label class="confirm-field">
+                <span>收據抬頭（個人姓名或公司名稱）</span>
+                <div class="confirm-field__control">
+                  <svg class="confirm-field__icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
+                  <input type="text" name="receiptTitle" id="receipt-title" maxlength="30" placeholder="沒填的話預設用收件人姓名">
+                </div>
+              </label>
+              <label class="confirm-field">
+                <span>統一編號（公司報帳才需要，個人收據可留空）</span>
+                <div class="confirm-field__control">
+                  <svg class="confirm-field__icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="1.5"/><path d="M7 9h6M7 13h10"/></svg>
+                  <input type="text" name="receiptTaxId" id="receipt-tax-id" maxlength="8" pattern="[0-9]{8}" inputmode="numeric" placeholder="8 碼數字，選填">
+                </div>
+              </label>
+            </div>
+          </section>
+
           <div class="chapter confirm-pay" hidden>
             <!-- 2026-10-17 改成跟 .order-sheet__lines（下方滑出的「訂單明細」
                  面板）同一套逐行拆開的排列，不要再塞成一句「原價…－早鳥優惠
