@@ -1152,11 +1152,21 @@
   display: none;
 }
 
-/* #receiver-fields／#home-address-fields 本身只是純 <div>（不是外層
-   flex 容器的直接子項自己不會自動排列），裡面的欄位原本完全沒有間距，
-   會黏在一起——這裡補上跟外層一致的 flex＋gap。 */
+/* #receiver-fields／#home-address-fields／#receipt-fields 本身只是純
+   <div>（不是 #customer-section／#receiver-section 那種外層本身就宣告
+   flex＋gap 的容器，純 <div> 的直接子項不會自動排列），裡面的欄位原本
+   完全沒有間距，會黏在一起——這裡補上跟外層一致的 flex＋gap。
+
+   ⚠️ 這是這份表單裡重複出現過的同一種 bug（#receipt-fields 這次又
+   踩了一次）：只要新增一個「包住多個 .confirm-field 的純 <div>」當
+   欄位容器（通常是某個勾選框底下才展開的條件欄位區），一定要記得把
+   新的 id 加進這條規則，或自己另外補一條一樣的 display:flex +
+   flex-direction:column + gap:var(--space-4) + width:100%，不要以為
+   「外層 section 都是 flex column 了，裡面會自動繼承排列」——只有
+   直接子項才會被 flex 排列，多包一層純 <div> 就不會了。 */
 #receiver-fields,
-#home-address-fields {
+#home-address-fields,
+#receipt-fields {
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
