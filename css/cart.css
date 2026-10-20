@@ -12,6 +12,14 @@
   top: var(--space-4);
   right: var(--space-4);
   z-index: 30;
+  /* 2026-10-20 新增會員登入圖示（js/account-widget.js 動態插入成這裡的
+     第一個子元素）後補上 display:flex，讓帳號圖示跟購物車圖示並排——
+     理由見該檔案開頭註解：這裡刻意不改動 position／grid 版位規則本身，
+     只加這一條，全站既有的版位覆寫（home.css／home-shop.css／
+     site-menu.css）維持原樣就會自動套用到兩個圖示。 */
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
 }
 
 .cart-badge {
@@ -62,6 +70,122 @@
   color: var(--color-surface-light);
   font-size: var(--font-size-xs);
   font-variant-numeric: tabular-nums;
+}
+
+/* ---------- 會員登入圖示：跟購物車圖示並排在 .cart-badge-wrap 裡
+   （js/account-widget.js 動態插入），視覺語彙直接沿用購物車圖示＋下拉
+   面板那一套（線條圖示、點了彈出貼齊下方的面板），不另外發明一種
+   互動模式。 ---------- */
+.account-badge-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.account-badge {
+  appearance: none;
+  border: none;
+  background: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  color: var(--color-text-primary);
+  cursor: pointer;
+  transition: opacity var(--duration-fast) var(--ease-standard);
+}
+
+.account-badge:active {
+  opacity: 0.6;
+}
+
+.account-badge svg {
+  display: block;
+  width: 20px;
+  height: 20px;
+}
+
+.account-preview {
+  position: absolute;
+  top: calc(100% + var(--space-2));
+  right: 0;
+  width: min(260px, calc(100vw - 2 * var(--space-4)));
+  background: var(--panel-bg);
+  border: 1px solid color-mix(in srgb, var(--color-text-secondary) 25%, transparent);
+  box-shadow: var(--shadow-raised);
+  border-radius: var(--radius-sharp);
+  padding: var(--space-4);
+}
+
+.account-preview__hint {
+  margin: 0 0 var(--space-2);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
+.account-preview__google-btn {
+  display: flex;
+  justify-content: center;
+}
+
+.account-preview__profile {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
+}
+
+.account-preview__avatar {
+  flex: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.account-preview__avatar--placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-surface-dark);
+  color: var(--color-surface-light);
+  font-size: var(--font-size-sm);
+  text-transform: uppercase;
+}
+
+.account-preview__who {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.account-preview__who strong {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+}
+
+.account-preview__who span {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.account-preview__logout {
+  appearance: none;
+  width: 100%;
+  border: 1px solid color-mix(in srgb, var(--color-text-secondary) 35%, transparent);
+  background: none;
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sharp);
+  color: var(--color-text-primary);
+  font-size: var(--font-size-xs);
+  cursor: pointer;
+  transition: opacity var(--duration-fast) var(--ease-standard);
+}
+
+.account-preview__logout:active {
+  opacity: 0.6;
 }
 
 /* ---------- 迷你購物車下拉：點購物車圖示先看一眼內容，再決定要去結帳

@@ -227,6 +227,11 @@
         <form id="confirm-form" method="POST" action="">
           <input type="hidden" name="orderId" id="confirm-order-id">
           <input type="hidden" name="shippingMethod" id="confirm-shipping-method">
+          <!-- 登入中的會員 token（js/checkout.js 從 window.RisuanAccount
+               讀出來寫進這裡），讓後端 create-order.js 知道這筆訂單是哪個
+               會員送出的，才能把這次填的資料記回會員資料，給下次結帳自動
+               帶入用；訪客結帳這格留空，後端當成訪客處理。 -->
+          <input type="hidden" name="customerToken" id="confirm-customer-token">
 
           <section class="chapter" id="customer-section">
             <h2 class="chapter__title"><span class="step-badge step-badge--label">STEP 1</span><span class="step-badge__dot">·</span>聯絡資訊</h2>
@@ -238,13 +243,13 @@
                 <span>姓氏</span>
                 <div class="confirm-field__control">
                   <svg class="confirm-field__icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-3.5 3-6 7-6s7 2.5 7 6"/></svg>
-                  <input type="text" id="customer-last-name" required maxlength="10" autocomplete="family-name" placeholder="姓氏">
+                  <input type="text" id="customer-last-name" name="customerLastName" required maxlength="10" autocomplete="family-name" placeholder="姓氏">
                 </div>
               </label>
               <label class="confirm-field">
                 <span>名字</span>
                 <div class="confirm-field__control">
-                  <input type="text" id="customer-first-name" required maxlength="10" autocomplete="given-name" placeholder="名字">
+                  <input type="text" id="customer-first-name" name="customerFirstName" required maxlength="10" autocomplete="given-name" placeholder="名字">
                 </div>
               </label>
             </div>
@@ -546,11 +551,17 @@
     </div>
   </div>
 
+  <!-- account-auth.js 要排在 checkout.js 前面：checkout.js 的會員自動帶入
+       邏輯在自己的 <script> 執行當下（不是等 DOMContentLoaded）就會讀
+       window.RisuanAccount，如果排在後面，checkout.js 執行那一刻這個
+       全域變數還不存在。 -->
+  <script src="../js/account-auth.js"></script>
   <script src="../js/cart.js"></script>
   <script src="../js/tw-postal-codes.js"></script>
   <script src="../js/checkout.js"></script>
   <script src="../js/cart-cross-sell.js"></script>
   <script src="../js/site-header-scroll.js"></script>
+  <script src="../js/account-widget.js"></script>
   <script src="../js/scroll-reveal.js"></script>
   <script src="../js/site-menu.js"></script>
   <script src="/js/promo-bar.js"></script>

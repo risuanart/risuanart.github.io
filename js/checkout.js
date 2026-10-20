@@ -375,6 +375,67 @@
   });
   restoreDraft();
 
+  // ---------- 會員登入自動帶入 ----------
+  // 跟上面的草稿救援是兩套獨立機制：草稿管「同一次結帳過程、撐過綠界
+  // 導頁」的短期記憶，這裡管「登入過的會員，下次結帳自動帶入上次填的
+  // 資料」的長期記憶，見 js/account-auth.js／risuan-checkout
+  // api/create-order.js。草稿優先——草稿是這次結帳過程中更新的資料，
+  // 比會員資料庫裡「上一次」結帳留下的舊資料更準，所以這裡一律只補
+  // 還是空的欄位（寫法跟 restoreDraft() 同一個原則），不會覆蓋掉草稿
+  // 已經還原進去的值。
+  const customerTokenInput = document.getElementById("confirm-customer-token");
+  function syncCustomerToken() {
+    customerTokenInput.value = window.RisuanAccount ? window.RisuanAccount.getToken() || "" : "";
+  }
+  form.addEventListener("submit", syncCustomerToken);
+  syncCustomerToken();
+
+  // 把合併地址字串（"縣市鄉鎮市區詳細地址"，後端只存這個合併後的單一
+  // 字串，見 risuan-checkout lib/order.js）拆回縣市／鄉鎮市區／詳細地址
+  // 三格，靠 window.TW_POSTAL_CODES 當字典反查——縣市／鄉鎮市區的名稱是
+  // 固定封閉詞彙表，從頭比對字串開頭一定能唯一拆出來，不是用猜的。
+  function splitHomeAddress(receiverAddress) {
+    if (!receiverAddress || !window.TW_POSTAL_CODES) return null;
+    for (const county of Object.keys(window.TW_POSTAL_CODES)) {
+      if (!receiverAddress.startsWith(county)) continue;
+      const rest = receiverAddress.slice(county.length);
+      for (const district of Object.keys(window.TW_POSTAL_CODES[county])) {
+        if (rest.startsWith(district)) {
+          return { county, district, detail: rest.slice(district.length) };
+        }
+      }
+    }
+    return null;
+  }
+
+  function fillIfEmpty(el, value) {
+    if (!el || !value || el.value) return;
+    el.value = value;
+    el.dispatchEvent(new Event(el.tagName === "SELECT" ? "change" : "input", { bubbles: true }));
+  }
+
+  if (window.RisuanAccount) {
+    window.RisuanAccount.syncProfile().then((customer) => {
+      if (!customer) return;
+      const contact = customer.lastContact;
+      if (contact) {
+        fillIfEmpty(customerLastNameInput, contact.lastName);
+        fillIfEmpty(customerFirstNameInput, contact.firstName);
+        fillIfEmpty(customerPhoneInput, contact.phone);
+        fillIfEmpty(customerEmailInput, contact.email);
+        syncCustomerName();
+      }
+      if (customer.lastShippingMethod === "home" && customer.lastHomeAddress) {
+        const parsed = splitHomeAddress(customer.lastHomeAddress.receiverAddress);
+        if (parsed) {
+          fillIfEmpty(receiverCountySelect, parsed.county);
+          fillIfEmpty(receiverDistrictSelect, parsed.district);
+          fillIfEmpty(receiverAddressDetailInput, parsed.detail);
+        }
+      }
+    });
+  }
+
   // 收件資料勾選「與聯絡資訊一樣」（預設勾選——多數訂單本人自己收）：
   // 姓名／電話／Email 改唯讀，即時鏡射聯絡資訊剛剛填的資料。這裡故意用
   // readOnly 不是 disabled——disabled 的欄位送出表單時整個不會出現在
