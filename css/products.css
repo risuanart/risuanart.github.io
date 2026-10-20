@@ -1124,7 +1124,22 @@
    跟 .product-page 是否有留白無關（.product-page 已經拿掉左右留白，見該
    規則註解）。這是給「以後任何新頁面」直接套用的共用 class，不用另外發明
    寬度數字或自己補 padding。 */
-.content-container {
+/* 2026-10-20：.work__close（頁面結尾的小計／送出按鈕 footer，cart.html／
+   booking/index.html／5 個商品頁在用）跟 .cart-cross-sell（購物車頁「您
+   可能對此有興趣」）補進同一組規則——這兩個都是 <main class="...work">
+   的直接子層（<footer>／<section>），不是包在 .chapter 裡面，一直沒有
+   套到這組寬度限制，寬螢幕下會整條貼齊螢幕左右邊緣（使用者截圖回報，
+   cart.html 的小計 footer 跟商品格狀列表、booking 頁的付款 footer 都
+   踩到）。.work__close 自己原本就有 `padding: var(--space-6)
+   var(--space-4) 0`（見下面該規則，16px 左右內距），比這裡的
+   --content-pad（20px）窄一點點，但那是刻意的既有設計（跟
+   .work-heading__buy-row 同一個理由），不要覆蓋掉——這裡只補寬度限制
+   跟置中，padding 由 .work__close 自己那條規則接手（CSS 層疊規則：
+   同特異度時後面的宣告蓋過前面，.work__close 定義在這份檔案更後面，
+   它的 padding 會蓋掉這裡的 padding-left/right，不會打架）。 */
+.content-container,
+.work__close,
+.cart-cross-sell {
   width: 100%;
   margin-left: auto;
   margin-right: auto;
@@ -1133,7 +1148,9 @@
 }
 
 @media (min-width: 841px) {
-  .content-container {
+  .content-container,
+  .work__close,
+  .cart-cross-sell {
     max-width: var(--content-max-width);
   }
 }

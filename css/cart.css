@@ -1216,6 +1216,19 @@
   cursor: pointer;
 }
 
+/* 收據勾選框（#receipt-wanted）縮小到 16×16px，比照 css/booking.css
+   `#booking-form > .confirm-checkbox input` 同一次尺寸調整（2026-10-17
+   使用者反映 .confirm-checkbox 預設 20×20px 看起來太大，那次只改了
+   booking 頁，cart.html 原本的收件流程維持 20px 沒動）。2026-10-20
+   使用者要求收據勾選框也要套用同樣縮小的尺寸——這裡用 ID 選到單一這顆
+   勾選框，不是整份 .confirm-checkbox 都改，不影響這頁其他勾選框
+   （行銷通知那顆維持 20px）。 */
+#receipt-wanted {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
 .confirm-checkbox input {
   width: 20px;
   height: 20px;
