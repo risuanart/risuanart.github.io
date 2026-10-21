@@ -326,16 +326,27 @@
 }
 
 .account-points__balance {
-  margin: 0;
+  margin: 0 0 var(--space-6);
   font-size: var(--font-size-xl);
   font-weight: 600;
   color: var(--color-text-primary);
   font-variant-numeric: tabular-nums;
 }
 
+/* 點數餘額下面那句「1 點＝NT$1……」說明文字用的 .sub（全站通用的
+   說明文字樣式，見 base.css），緊接在 .account-points__balance 後面；
+   .account-points__balance 的 margin-bottom 已經把「數字」跟「下面的
+   說明文字＋清單」整組隔開，說明文字自己不用再加一次間距。 */
+
+.account-page__subheading + .account-points-list,
+.account-page__subheading + .account-order-list,
+.account-page__subheading + .account-booking-list {
+  margin-top: var(--space-2);
+}
+
 .account-points-list {
   list-style: none;
-  margin: var(--space-2) 0 0;
+  margin: var(--space-4) 0 0;
   padding: 0;
   display: flex;
   flex-direction: column;
@@ -373,6 +384,12 @@
   display: flex;
   gap: var(--space-6);
   align-items: flex-start;
+  /* 跟拿掉 .chapter 的 pane 不一樣，.account-page__layout 本身還是
+     main 底下第一層的區塊，需要自己補上跟其他 .chapter 一致的大區塊
+     間距（原本靠 .chapter 的 margin-top: var(--editorial-gap) 帶，見
+     products.css .chapter 規則），不然會貼著上面的「會員中心」
+     標題／banner，沒有呼吸空間。 */
+  margin-top: var(--space-10);
 }
 
 .account-page__nav {
@@ -388,19 +405,26 @@
 .account-page__nav-item {
   appearance: none;
   border: none;
+  /* 左邊一條透明佔位的粗邊框，選中時換成品牌互動色——用邊框佔位
+     而不是「選中才加邊框」，是因為後者會讓選中項目的文字跟著位移
+     2px（邊框本身佔寬度），未選中項目維持對齊。 */
+  border-left: 2px solid transparent;
   background: none;
   text-align: left;
-  padding: var(--space-2) var(--space-2);
-  border-radius: var(--radius-sharp);
+  padding: var(--space-2) var(--space-4);
   font-size: var(--font-size-sm);
   color: var(--color-text-secondary);
   cursor: pointer;
-  transition: color var(--duration-fast) var(--ease-standard), background var(--duration-fast) var(--ease-standard);
+  transition: color var(--duration-fast) var(--ease-standard), border-color var(--duration-fast) var(--ease-standard);
+}
+
+.account-page__nav-item:hover {
+  color: var(--color-text-primary);
 }
 
 .account-page__nav-item.is-active {
   color: var(--color-interactive);
-  background: var(--color-surface-neutral);
+  border-left-color: var(--color-interactive);
   font-weight: 600;
 }
 
@@ -409,9 +433,22 @@
   min-width: 0;
 }
 
+.account-page__pane {
+  border: 1px solid color-mix(in srgb, var(--color-text-secondary) 20%, transparent);
+  border-radius: var(--radius-sharp);
+  background: var(--panel-bg);
+  padding: var(--space-6);
+}
+
+.account-page__pane .chapter__title {
+  margin: 0 0 var(--space-4);
+  font-size: var(--font-size-lg);
+}
+
 @media (max-width: 840px) {
   .account-page__layout {
     flex-direction: column;
+    margin-top: var(--space-6);
   }
 
   .account-page__nav {
@@ -419,13 +456,24 @@
     width: 100%;
     flex-direction: row;
     overflow-x: auto;
-    gap: var(--space-2);
+    gap: var(--space-1);
     padding-bottom: var(--space-1);
   }
 
   .account-page__nav-item {
     flex: none;
     white-space: nowrap;
+    border-left: none;
+    border-bottom: 2px solid transparent;
+  }
+
+  .account-page__nav-item.is-active {
+    border-left-color: transparent;
+    border-bottom-color: var(--color-interactive);
+  }
+
+  .account-page__pane {
+    padding: var(--space-4);
   }
 }
 
