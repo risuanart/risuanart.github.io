@@ -232,11 +232,24 @@
   font-size: var(--font-size-xs);
 }
 
+/* is-ok 原本只是一行跟說明文字差不多灰的小字，使用者反映「存檔前後
+   畫面長得幾乎一樣，會怕自己是不是誤按／沒存到」——改成有底色的提示
+   條，跟 .account-page__banner（選完門市那個提示）同一種視覺語彙，
+   存檔成功這個狀態才會真的「跳出來」讓人注意到，不是要瞇眼找小字。
+   按鈕本身也有對應的瞬間文字變化（見 js/account-page.js），兩處一起
+   做才夠明顯。 */
 .account-page__save-hint.is-ok {
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-sharp);
+  background: var(--color-surface-neutral);
   color: var(--color-interactive);
+  font-weight: 600;
 }
 
 .account-page__save-hint.is-error {
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-sharp);
+  background: color-mix(in srgb, var(--color-warning) 12%, transparent);
   color: var(--color-warning);
 }
 

@@ -146,9 +146,34 @@
       cvsLinkEl.href = `${window.RisuanAccount.API_BASE}/api/logistics-map?mode=profile&token=${encodeURIComponent(token)}`;
     }
 
+    // 「填完資料→按儲存→結果」這三個狀態要讓客人明顯感覺到有差異，不然
+    // 使用者反映「儲存前後畫面長得幾乎一樣，會怕自己是不是誤按／沒存到」
+    // ——不是只加一行小字，按鈕本身的文字也要跟著變，兩個地方一起給
+    // 回饋（按鈕是手指剛剛按下去、視線還停留的地方；下面的提示文字是
+    // 給已經移開視線、回頭確認結果用的，兩者互補，不是重複）。
+    const saveBtn = profileForm.querySelector(".account-page__save-btn");
+    const saveBtnDefaultText = saveBtn.textContent;
+    let resetBtnTimer = null;
+
+    // 使用者在「已儲存」還顯示著的時候又手動改了欄位，代表那個提示
+    // 已經是舊的了（現在畫面上的內容跟剛剛存進去的不是同一份），要
+    // 馬上藏起來，不然會誤以為「這次新改的也已經存了」。
+    function clearStaleSaveHint() {
+      if (!profileHint.hidden && profileHint.classList.contains("is-ok")) {
+        profileHint.hidden = true;
+      }
+    }
+    [lastNameInput, firstNameInput, phoneInput, countySelect, districtSelect, addressDetailInput].forEach((el) => {
+      el.addEventListener("input", clearStaleSaveHint);
+      el.addEventListener("change", clearStaleSaveHint);
+    });
+
     profileForm.addEventListener("submit", async (e) => {
       e.preventDefault();
       profileHint.hidden = true;
+      clearTimeout(resetBtnTimer);
+      saveBtn.disabled = true;
+      saveBtn.textContent = "儲存中…";
       const receiverAddress = countySelect.value && districtSelect.value
         ? `${countySelect.value}${districtSelect.value}${addressDetailInput.value.trim()}`
         : "";
@@ -168,10 +193,21 @@
         profileHint.textContent = "已儲存";
         profileHint.className = "account-page__save-hint is-ok";
         profileHint.hidden = false;
+        saveBtn.textContent = "已儲存";
+        // 按鈕文字停留一下讓人看到「已儲存」這個瞬間狀態，再變回原本的
+        // 「儲存變更」——跟上面 .account-page__save-hint 的提示文字不同：
+        // 按鈕這裡是要抓住「剛剛按下去」那個當下的注意力，提示文字是
+        // 給之後回頭看的，兩個各司其職，故意都做、不是留一個就好。
+        resetBtnTimer = setTimeout(() => {
+          saveBtn.textContent = saveBtnDefaultText;
+        }, 1600);
       } catch (err) {
         profileHint.textContent = err.message;
         profileHint.className = "account-page__save-hint is-error";
         profileHint.hidden = false;
+        saveBtn.textContent = saveBtnDefaultText;
+      } finally {
+        saveBtn.disabled = false;
       }
     });
 
