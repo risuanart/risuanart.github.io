@@ -1137,9 +1137,17 @@
    跟置中，padding 由 .work__close 自己那條規則接手（CSS 層疊規則：
    同特異度時後面的宣告蓋過前面，.work__close 定義在這份檔案更後面，
    它的 padding 會蓋掉這裡的 padding-left/right，不會打架）。 */
+/* 2026-10-21：account/index.html 的 .account-page__layout（會員中心
+   側邊欄＋面板容器）也是 <main class="...work"> 的直接子層、沒有包在
+   .chapter 裡面，同一種疏漏，見上面 .work__close／.cart-cross-sell
+   2026-09-19 那次的說明——這類「新增的 main 直接子層忘記套用寬度限制」
+   已經踩過不只一次，之後新增任何這種區塊，第一件事就是檢查這裡、把
+   新的 class 名稱加進這個選擇器清單，不要假設外層 .product-page／
+   main 會自動幫子層限制寬度（不會，寬度限制只在這一條規則上）。 */
 .content-container,
 .work__close,
-.cart-cross-sell {
+.cart-cross-sell,
+.account-page__layout {
   width: 100%;
   margin-left: auto;
   margin-right: auto;
@@ -1150,7 +1158,8 @@
 @media (min-width: 841px) {
   .content-container,
   .work__close,
-  .cart-cross-sell {
+  .cart-cross-sell,
+  .account-page__layout {
     max-width: var(--content-max-width);
   }
 }
