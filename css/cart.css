@@ -376,6 +376,19 @@
   color: var(--color-interactive);
 }
 
+/* ---------- 會員中心標題縮小 ----------
+   .work-heading 是全站共用（購物車／預約／FAQ／所有商品頁都是同一組
+   clamp(1.75rem, 1.3rem+3vw, 2.75rem) 規格），會員中心是查資料用的
+   工具型頁面，不是商品敘事頁，使用者反映大標題在這裡顯得過大、跟下面
+   緊湊的側邊欄/表單不搭調。這裡刻意只縮小 .account-page-intro（只有
+   account/index.html 用這個 class）底下的標題，不動 .work-heading
+   本身的全站規格——購物車/預約/商品頁那種比較需要大標題撐場面的頁面
+   維持原樣，不是全站規則，只是這一頁的例外（2026-10-21 使用者確認
+   範圍只要這一頁）。 ---------- */
+.account-page-intro .work-heading {
+  font-size: clamp(1.5rem, 1.2rem + 1.5vw, 2rem);
+}
+
 /* ---------- 會員中心側邊欄切換（參考 koyama.com.tw 會員後台，拿掉
    「變更密碼」）。桌面版左側固定寬度導覽欄＋右側內容面板；手機版
    （<841px，沿用 --content-max-width 斷點慣例）導覽欄改橫向可捲動的
