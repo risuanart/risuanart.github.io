@@ -365,6 +365,89 @@
   color: var(--color-interactive);
 }
 
+/* ---------- 會員中心側邊欄切換（參考 koyama.com.tw 會員後台，拿掉
+   「變更密碼」）。桌面版左側固定寬度導覽欄＋右側內容面板；手機版
+   （<841px，沿用 --content-max-width 斷點慣例）導覽欄改橫向可捲動的
+   分頁列，不疊版面。 ---------- */
+.account-page__layout {
+  display: flex;
+  gap: var(--space-6);
+  align-items: flex-start;
+}
+
+.account-page__nav {
+  flex: none;
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  position: sticky;
+  top: var(--space-4);
+}
+
+.account-page__nav-item {
+  appearance: none;
+  border: none;
+  background: none;
+  text-align: left;
+  padding: var(--space-2) var(--space-2);
+  border-radius: var(--radius-sharp);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: color var(--duration-fast) var(--ease-standard), background var(--duration-fast) var(--ease-standard);
+}
+
+.account-page__nav-item.is-active {
+  color: var(--color-interactive);
+  background: var(--color-surface-neutral);
+  font-weight: 600;
+}
+
+.account-page__panel {
+  flex: 1;
+  min-width: 0;
+}
+
+@media (max-width: 840px) {
+  .account-page__layout {
+    flex-direction: column;
+  }
+
+  .account-page__nav {
+    position: static;
+    width: 100%;
+    flex-direction: row;
+    overflow-x: auto;
+    gap: var(--space-2);
+    padding-bottom: var(--space-1);
+  }
+
+  .account-page__nav-item {
+    flex: none;
+    white-space: nowrap;
+  }
+}
+
+.account-page__cvs-store {
+  margin: 0 0 var(--space-2);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+}
+
+.account-page__cvs-link {
+  display: inline-block;
+}
+
+.account-page__banner {
+  margin: 0 0 var(--space-4);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-sharp);
+  background: var(--color-surface-neutral);
+  color: var(--color-interactive);
+  font-size: var(--font-size-sm);
+}
+
 /* ---------- 迷你購物車下拉：點購物車圖示先看一眼內容，再決定要去結帳
    還是留在原頁面繼續選購，不是點了就直接被導離目前的商品頁。 ---------- */
 .cart-preview {

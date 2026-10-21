@@ -69,6 +69,8 @@
       <p class="intro">您的基本資料、收件地址、訂單進度與課程預約紀錄。</p>
     </header>
 
+    <p class="account-page__banner" id="account-store-picked-banner" hidden>已更新您的預設超商門市。</p>
+
     <!-- 未登入：顯示登入提示，GSI 按鈕渲染邏輯沿用全站共用的
          window.RisuanAccount.mountGoogleButton()（見 js/account-auth.js），
          跟 header 帳號面板是同一份邏輯，不是這裡另外寫一份。 -->
@@ -78,100 +80,124 @@
       <div class="account-page__google-btn" id="account-page-google-btn"></div>
     </section>
 
-    <div id="account-member" hidden>
+    <!-- 參考 koyama.com.tw 的 WooCommerce 會員後台（左側欄切換，不是
+         全部攤開在同一頁捲動），但拿掉「變更密碼」——這個網站只有
+         Google 登入，沒有密碼這回事。四個區塊同一時間只顯示一個，
+         切換邏輯見 js/account-page.js，不用個別頁面／不用額外 action，
+         純粹是畫面顯示哪個區塊的切換。 -->
+    <div id="account-member" class="account-page__layout" hidden>
 
-      <section class="chapter">
-        <h2 class="chapter__title">我的點數</h2>
-        <p class="account-points__balance"><span id="account-points-balance">0</span> 點</p>
-        <p class="sub">1 點＝NT$1，結帳時可以折抵訂單金額。</p>
-        <ul class="account-points-list" id="account-points-list">
-          <li class="account-page__empty">載入中…</li>
-        </ul>
-      </section>
+      <nav class="account-page__nav" aria-label="會員中心選單">
+        <button type="button" class="account-page__nav-item is-active" data-panel="points" aria-current="page">我的點數</button>
+        <button type="button" class="account-page__nav-item" data-panel="profile">基本資料</button>
+        <button type="button" class="account-page__nav-item" data-panel="orders">我的訂單</button>
+        <button type="button" class="account-page__nav-item" data-panel="bookings">課程預約紀錄</button>
+      </nav>
 
-      <section class="chapter">
-        <h2 class="chapter__title">基本資料</h2>
-        <form id="account-profile-form">
-          <div class="confirm-field-row">
+      <div class="account-page__panel">
+
+        <section class="chapter account-page__pane" id="account-pane-points">
+          <h2 class="chapter__title">我的點數</h2>
+          <p class="account-points__balance"><span id="account-points-balance">0</span> 點</p>
+          <p class="sub">1 點＝NT$1，結帳時可以折抵訂單金額。</p>
+          <ul class="account-points-list" id="account-points-list">
+            <li class="account-page__empty">載入中…</li>
+          </ul>
+        </section>
+
+        <section class="chapter account-page__pane" id="account-pane-profile" hidden>
+          <h2 class="chapter__title">基本資料</h2>
+          <form id="account-profile-form">
+            <div class="confirm-field-row">
+              <label class="confirm-field">
+                <span>姓氏</span>
+                <div class="confirm-field__control">
+                  <input type="text" id="account-last-name" required maxlength="10" autocomplete="family-name">
+                </div>
+              </label>
+              <label class="confirm-field">
+                <span>名字</span>
+                <div class="confirm-field__control">
+                  <input type="text" id="account-first-name" required maxlength="10" autocomplete="given-name">
+                </div>
+              </label>
+            </div>
             <label class="confirm-field">
-              <span>姓氏</span>
+              <span>Email（登入帳號，不可修改）</span>
               <div class="confirm-field__control">
-                <input type="text" id="account-last-name" required maxlength="10" autocomplete="family-name">
+                <input type="email" id="account-email" readonly>
               </div>
             </label>
             <label class="confirm-field">
-              <span>名字</span>
+              <span>手機</span>
               <div class="confirm-field__control">
-                <input type="text" id="account-first-name" required maxlength="10" autocomplete="given-name">
+                <input type="tel" id="account-phone" pattern="09[0-9]{8}" placeholder="09XXXXXXXX" autocomplete="tel">
               </div>
             </label>
-          </div>
-          <label class="confirm-field">
-            <span>Email（登入帳號，不可修改）</span>
-            <div class="confirm-field__control">
-              <input type="email" id="account-email" readonly>
-            </div>
-          </label>
-          <label class="confirm-field">
-            <span>手機</span>
-            <div class="confirm-field__control">
-              <input type="tel" id="account-phone" pattern="09[0-9]{8}" placeholder="09XXXXXXXX" autocomplete="tel">
-            </div>
-          </label>
 
-          <h3 class="account-page__subheading">預設收件地址</h3>
-          <div class="confirm-field-row">
+            <h3 class="account-page__subheading">預設收件地址</h3>
+            <div class="confirm-field-row">
+              <label class="confirm-field">
+                <span>縣市</span>
+                <div class="confirm-field__control">
+                  <select id="account-county">
+                    <option value="">請選擇</option>
+                  </select>
+                  <svg class="confirm-field__chevron" viewBox="0 0 10 6" width="10" height="6" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg>
+                </div>
+              </label>
+              <label class="confirm-field">
+                <span>鄉鎮市區</span>
+                <div class="confirm-field__control">
+                  <select id="account-district" disabled>
+                    <option value="">請先選縣市</option>
+                  </select>
+                  <svg class="confirm-field__chevron" viewBox="0 0 10 6" width="10" height="6" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg>
+                </div>
+              </label>
+            </div>
             <label class="confirm-field">
-              <span>縣市</span>
+              <span>郵遞區號</span>
               <div class="confirm-field__control">
-                <select id="account-county">
-                  <option value="">請選擇</option>
-                </select>
-                <svg class="confirm-field__chevron" viewBox="0 0 10 6" width="10" height="6" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg>
+                <input type="text" id="account-zipcode" readonly placeholder="選擇縣市／鄉鎮市區後自動帶入">
               </div>
             </label>
             <label class="confirm-field">
-              <span>鄉鎮市區</span>
+              <span>詳細地址（路名、門牌號）</span>
               <div class="confirm-field__control">
-                <select id="account-district" disabled>
-                  <option value="">請先選縣市</option>
-                </select>
-                <svg class="confirm-field__chevron" viewBox="0 0 10 6" width="10" height="6" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg>
+                <input type="text" id="account-address-detail" maxlength="40" placeholder="例如：松仁路100號" autocomplete="address-line1">
               </div>
             </label>
-          </div>
-          <label class="confirm-field">
-            <span>郵遞區號</span>
-            <div class="confirm-field__control">
-              <input type="text" id="account-zipcode" readonly placeholder="選擇縣市／鄉鎮市區後自動帶入">
-            </div>
-          </label>
-          <label class="confirm-field">
-            <span>詳細地址（路名、門牌號）</span>
-            <div class="confirm-field__control">
-              <input type="text" id="account-address-detail" maxlength="40" placeholder="例如：松仁路100號" autocomplete="address-line1">
-            </div>
-          </label>
 
-          <p class="account-page__save-hint" id="account-profile-hint" hidden></p>
-          <button type="submit" class="work__cta work__cta--primary account-page__save-btn">儲存變更</button>
-        </form>
-      </section>
+            <p class="account-page__save-hint" id="account-profile-hint" hidden></p>
+            <button type="submit" class="work__cta work__cta--primary account-page__save-btn">儲存變更</button>
+          </form>
 
-      <section class="chapter">
-        <h2 class="chapter__title">我的訂單</h2>
-        <ul class="account-order-list" id="account-order-list">
-          <li class="account-page__empty">載入中…</li>
-        </ul>
-      </section>
+          <!-- 預設超商門市：跟上面的收件地址表單是分開送出的，門市一定
+               要透過綠界官方電子地圖選，不能用文字輸入（見
+               js/account-page.js renderCvsStore()／risuan-checkout
+               api/logistics-map.js 的 mode=profile 說明），所以這裡是
+               一個連結按鈕整頁導去選店，不是表單欄位。 -->
+          <h3 class="account-page__subheading">預設超商門市</h3>
+          <p class="account-page__cvs-store" id="account-cvs-store">尚未設定</p>
+          <a class="work__cta account-page__cvs-link" id="account-cvs-link" href="#">選擇門市</a>
+        </section>
 
-      <section class="chapter">
-        <h2 class="chapter__title">課程預約紀錄</h2>
-        <ul class="account-booking-list" id="account-booking-list">
-          <li class="account-page__empty">載入中…</li>
-        </ul>
-      </section>
+        <section class="chapter account-page__pane" id="account-pane-orders" hidden>
+          <h2 class="chapter__title">我的訂單</h2>
+          <ul class="account-order-list" id="account-order-list">
+            <li class="account-page__empty">載入中…</li>
+          </ul>
+        </section>
 
+        <section class="chapter account-page__pane" id="account-pane-bookings" hidden>
+          <h2 class="chapter__title">課程預約紀錄</h2>
+          <ul class="account-booking-list" id="account-booking-list">
+            <li class="account-page__empty">載入中…</li>
+          </ul>
+        </section>
+
+      </div>
     </div>
 
     <footer class="preview-footer">

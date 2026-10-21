@@ -41,6 +41,27 @@
     const bookingListEl = document.getElementById("account-booking-list");
     const pointsBalanceEl = document.getElementById("account-points-balance");
     const pointsListEl = document.getElementById("account-points-list");
+    const cvsStoreEl = document.getElementById("account-cvs-store");
+    const cvsLinkEl = document.getElementById("account-cvs-link");
+
+    // ---------- 側邊欄分頁切換（參考 koyama.com.tw 會員後台，拿掉
+    // 「變更密碼」——這個網站只有 Google 登入）。四個區塊同時只顯示
+    // 一個，純粹是畫面顯示切換，各區塊的資料仍然在登入當下就一次全部
+    // 載入（見 showMember()），不是切到哪個分頁才現載，資料量不大，
+    // 不值得為此多一層「哪個分頁載入過了」的狀態管理。 ----------
+    const navItems = document.querySelectorAll(".account-page__nav-item");
+    navItems.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        navItems.forEach((b) => {
+          b.classList.toggle("is-active", b === btn);
+          if (b === btn) b.setAttribute("aria-current", "page");
+          else b.removeAttribute("aria-current");
+        });
+        document.querySelectorAll(".account-page__pane").forEach((pane) => {
+          pane.hidden = pane.id !== `account-pane-${btn.dataset.panel}`;
+        });
+      });
+    });
 
     // ---------- 縣市／鄉鎮市區下拉選單（跟 js/checkout.js 結帳頁同一套
     // window.TW_POSTAL_CODES 資料來源，選單填充邏輯各自獨立一份——這塊
@@ -106,6 +127,23 @@
         phoneInput.value = contact.phone || "";
       }
       fillAddress(customer.lastHomeAddress);
+      renderCvsStore(customer.lastCvsStore);
+    }
+
+    // 門市一定要透過綠界官方電子地圖選，這裡只是顯示目前設定的門市＋
+    // 一個整頁導去選店的連結（跟結帳頁選店是同一套流程，見
+    // risuan-checkout api/logistics-map.js 的 mode=profile 模式），不是
+    // 表單欄位、不能用文字輸入。
+    function renderCvsStore(cvsStore) {
+      if (cvsStore && cvsStore.CVSStoreName) {
+        cvsStoreEl.textContent = `${cvsStore.CVSStoreName}（${cvsStore.CVSAddress || ""}）`;
+        cvsLinkEl.textContent = "更改門市";
+      } else {
+        cvsStoreEl.textContent = "尚未設定";
+        cvsLinkEl.textContent = "選擇門市";
+      }
+      const token = window.RisuanAccount.getToken();
+      cvsLinkEl.href = `${window.RisuanAccount.API_BASE}/api/logistics-map?mode=profile&token=${encodeURIComponent(token)}`;
     }
 
     profileForm.addEventListener("submit", async (e) => {
@@ -276,5 +314,14 @@
     if (cached) showMember(cached);
     else showGuest();
     window.RisuanAccount.syncProfile();
+
+    // 選完預設門市後，risuan-checkout api/logistics-map-callback.js 會
+    // 導回這頁、帶 ?storePicked=1，顯示一下成功提示，然後把這段查詢
+    // 字串從網址列拿掉（history.replaceState），重新整理這頁不會一直
+    // 顯示同一個提示。
+    if (new URLSearchParams(location.search).get("storePicked") === "1") {
+      document.getElementById("account-store-picked-banner").hidden = false;
+      history.replaceState(null, "", location.pathname);
+    }
   });
 })();
