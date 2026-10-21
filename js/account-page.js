@@ -39,6 +39,8 @@
 
     const orderListEl = document.getElementById("account-order-list");
     const bookingListEl = document.getElementById("account-booking-list");
+    const pointsBalanceEl = document.getElementById("account-points-balance");
+    const pointsListEl = document.getElementById("account-points-list");
 
     // ---------- 縣市／鄉鎮市區下拉選單（跟 js/checkout.js 結帳頁同一套
     // window.TW_POSTAL_CODES 資料來源，選單填充邏輯各自獨立一份——這塊
@@ -222,6 +224,32 @@
       }
     }
 
+    // ---------- 我的點數 ----------
+    const POINTS_TYPE_LABEL = { signup: "新會員禮", earn: "購物回饋", redeem: "結帳折抵" };
+    async function loadPoints() {
+      try {
+        const data = await window.RisuanAccount.apiFetch("/api/account?action=points");
+        pointsBalanceEl.textContent = data.balance;
+        if (data.ledger.length === 0) {
+          pointsListEl.innerHTML = `<li class="account-page__empty">目前沒有點數異動紀錄</li>`;
+          return;
+        }
+        pointsListEl.innerHTML = data.ledger
+          .map((entry) => {
+            const sign = entry.amount > 0 ? "+" : "";
+            return `
+          <li class="account-points-item">
+            <span class="account-points-item__date">${escapeHtml(formatDate(entry.createdAt))}</span>
+            <span class="account-points-item__type">${escapeHtml(POINTS_TYPE_LABEL[entry.type] || entry.type)}</span>
+            <span class="account-points-item__amount">${sign}${entry.amount}</span>
+          </li>`;
+          })
+          .join("");
+      } catch (err) {
+        pointsListEl.innerHTML = `<li class="account-page__empty">點數載入失敗：${escapeHtml(err.message)}</li>`;
+      }
+    }
+
     // ---------- 登入狀態切換 ----------
     function showGuest() {
       guestSection.hidden = false;
@@ -235,6 +263,7 @@
       fillProfileForm(customer);
       loadOrders();
       loadBookings();
+      loadPoints();
     }
 
     window.addEventListener(window.RisuanAccount.CHANGE_EVENT, () => {

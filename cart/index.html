@@ -450,6 +450,26 @@
             </div>
           </section>
 
+          <!-- 點數折抵：只有登入會員、而且有點數可用才顯示（見
+               js/checkout.js 讀 window.RisuanAccount.syncProfile() 的
+               customer.pointsBalance），訪客結帳完全看不到這區塊，也不
+               會送出 pointsToRedeem 這個欄位。刻意不即時重算
+               #confirm-total-grand（見 risuan-checkout
+               api/create-order.js 開頭的設計說明）——這裡只是「選擇要
+               折抵多少」，真正生效的金額由後端算好、反映在綠界付款頁
+               上，跟 wantsReceipt 這些欄位是同一種處理方式，不用額外
+               串接三處各自獨立的總金額渲染邏輯。 -->
+          <section class="chapter" id="points-redeem-section" hidden>
+            <h2 class="chapter__title"><span class="step-badge step-badge--label">STEP 5</span><span class="step-badge__dot">·</span>點數折抵</h2>
+            <p class="sub" id="points-redeem-hint"></p>
+            <label class="confirm-field">
+              <span>要折抵的點數（1 點＝NT$1）</span>
+              <div class="confirm-field__control">
+                <input type="number" name="pointsToRedeem" id="points-to-redeem" min="0" step="1" value="0">
+              </div>
+            </label>
+          </section>
+
           <div class="chapter confirm-pay" hidden>
             <!-- 2026-10-17 改成跟 .order-sheet__lines（下方滑出的「訂單明細」
                  面板）同一套逐行拆開的排列，不要再塞成一句「原價…－早鳥優惠

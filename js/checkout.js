@@ -415,6 +415,17 @@
           fillIfEmpty(receiverAddressDetailInput, parsed.detail);
         }
       }
+      // 點數折抵區塊：只有登入會員、而且有點數可用才顯示。這裡的
+      // max 只是前端先擋一次、給客人一個合理上限，真正的範圍（不能
+      // 扣超過當下真實餘額、不能把訂單扣成 0 元）由後端
+      // api/create-order.js 在送出當下重新夾一次，不信任這裡的值。
+      if (customer.pointsBalance > 0) {
+        const pointsSection = document.getElementById("points-redeem-section");
+        const pointsInput = document.getElementById("points-to-redeem");
+        document.getElementById("points-redeem-hint").textContent = `您目前有 ${customer.pointsBalance} 點可以折抵`;
+        pointsInput.max = customer.pointsBalance;
+        pointsSection.hidden = false;
+      }
     });
   }
 
