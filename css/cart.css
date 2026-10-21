@@ -171,6 +171,22 @@
   white-space: nowrap;
 }
 
+.account-preview__link {
+  display: block;
+  text-align: center;
+  margin-bottom: var(--space-2);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sharp);
+  color: var(--color-interactive);
+  font-size: var(--font-size-xs);
+  text-decoration: none;
+  transition: opacity var(--duration-fast) var(--ease-standard);
+}
+
+.account-preview__link:active {
+  opacity: 0.6;
+}
+
 .account-preview__logout {
   appearance: none;
   width: 100%;
@@ -186,6 +202,127 @@
 
 .account-preview__logout:active {
   opacity: 0.6;
+}
+
+/* ---------- 會員中心頁面（account/index.html）專屬樣式 ----------
+   表單／清單外觀直接沿用上面已經有的 .confirm-field／.cart-preview__item
+   視覺語彙，這裡只補頁面專屬、還沒有既有樣式可以沿用的部分。 ---------- */
+
+/* 跟 #customer-section／#receiver-section（結帳頁）同一個理由：純
+   <form> 直接包 .confirm-field，不會自動取得 flex+gap 排列，一定要自己
+   補——見本檔案 #receiver-fields／#home-address-fields／#receipt-fields
+   那一條規則開頭的說明，這是同一種、已經踩過兩次的 bug，這裡直接照著
+   補，不要漏掉。 */
+#account-profile-form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-4);
+}
+
+.account-page__subheading {
+  margin: var(--space-2) 0 0;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.account-page__save-hint {
+  margin: 0;
+  font-size: var(--font-size-xs);
+}
+
+.account-page__save-hint.is-ok {
+  color: var(--color-interactive);
+}
+
+.account-page__save-hint.is-error {
+  color: var(--color-warning);
+}
+
+.account-page__google-btn {
+  margin-top: var(--space-4);
+}
+
+.account-page__empty {
+  list-style: none;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.account-order-list,
+.account-booking-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.account-order-item {
+  border: 1px solid color-mix(in srgb, var(--color-text-secondary) 20%, transparent);
+  border-radius: var(--radius-sharp);
+}
+
+.account-order-item__summary {
+  appearance: none;
+  width: 100%;
+  border: none;
+  background: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-4);
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+  cursor: pointer;
+  text-align: left;
+}
+
+.account-order-item__id {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-xs);
+}
+
+.account-order-item__total {
+  font-variant-numeric: tabular-nums;
+  margin-left: auto;
+}
+
+.account-order-item__status {
+  font-size: var(--font-size-xs);
+  color: var(--color-interactive);
+}
+
+.account-order-item__detail {
+  padding: 0 var(--space-4) var(--space-4);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
+.account-order-item__items {
+  list-style: none;
+  margin: 0 0 var(--space-2);
+  padding: 0;
+}
+
+.account-booking-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-4);
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid color-mix(in srgb, var(--color-text-secondary) 20%, transparent);
+  border-radius: var(--radius-sharp);
+  font-size: var(--font-size-sm);
+}
+
+.account-booking-item__status {
+  margin-left: auto;
+  font-size: var(--font-size-xs);
+  color: var(--color-interactive);
 }
 
 /* ---------- 迷你購物車下拉：點購物車圖示先看一眼內容，再決定要去結帳

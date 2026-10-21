@@ -45,19 +45,16 @@
       <p class="account-preview__hint">用 Google 帳號登入，下次結帳自動帶入資料</p>
       <div class="account-preview__google-btn" id="account-google-btn"></div>
     `;
-    window.RisuanAccount.getGoogleClientId().then((clientId) => {
-      if (!clientId) {
-        panel.querySelector(".account-preview__hint").textContent = "會員登入功能尚未設定完成";
-        return;
-      }
-      mountGoogleButton(clientId, panel.querySelector("#account-google-btn"));
-    });
+    // GSI 按鈕渲染邏輯跟會員中心（js/account-page.js）共用，見
+    // js/account-auth.js 的 mountGoogleButton() 說明。
+    window.RisuanAccount.mountGoogleButton(panel.querySelector("#account-google-btn"));
   }
 
   function renderLoggedIn(panel, customer) {
     const avatar = customer.picture
       ? `<img class="account-preview__avatar" src="${escapeHtml(customer.picture)}" alt="">`
       : `<span class="account-preview__avatar account-preview__avatar--placeholder">${escapeHtml((customer.name || customer.email || "?").slice(0, 1))}</span>`;
+    const accountHref = `${window.RisuanAccount.BASE_PREFIX}account/`;
     panel.innerHTML = `
       <div class="account-preview__profile">
         ${avatar}
@@ -66,6 +63,7 @@
           <span>${escapeHtml(customer.email)}</span>
         </div>
       </div>
+      <a class="account-preview__link" href="${escapeHtml(accountHref)}">會員中心</a>
       <button type="button" class="account-preview__logout">登出</button>
     `;
     panel.querySelector(".account-preview__logout").addEventListener("click", () => {
@@ -80,43 +78,6 @@
     } else {
       renderLoggedOut(panel);
     }
-  }
-
-  let gsiLoadPromise = null;
-  function loadGsiScript() {
-    if (!gsiLoadPromise) {
-      gsiLoadPromise = new Promise((resolve, reject) => {
-        const script = document.createElement("script");
-        script.src = "https://accounts.google.com/gsi/client";
-        script.async = true;
-        script.defer = true;
-        script.onload = resolve;
-        script.onerror = reject;
-        document.head.appendChild(script);
-      });
-    }
-    return gsiLoadPromise;
-  }
-
-  function mountGoogleButton(clientId, container) {
-    loadGsiScript()
-      .then(() => {
-        window.google.accounts.id.initialize({
-          client_id: clientId,
-          callback: (response) => handleCredentialResponse(response, container),
-        });
-        window.google.accounts.id.renderButton(container, { type: "standard", theme: "outline", size: "medium", width: 220 });
-      })
-      .catch(() => {
-        container.textContent = "Google 登入元件載入失敗，請稍後再試";
-      });
-  }
-
-  function handleCredentialResponse(response, container) {
-    container.textContent = "登入中…";
-    window.RisuanAccount.loginWithGoogleCredential(response.credential).catch((err) => {
-      container.textContent = `登入失敗：${err.message}`;
-    });
   }
 
   document.addEventListener("DOMContentLoaded", () => {

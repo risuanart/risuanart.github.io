@@ -390,24 +390,6 @@
   form.addEventListener("submit", syncCustomerToken);
   syncCustomerToken();
 
-  // 把合併地址字串（"縣市鄉鎮市區詳細地址"，後端只存這個合併後的單一
-  // 字串，見 risuan-checkout lib/order.js）拆回縣市／鄉鎮市區／詳細地址
-  // 三格，靠 window.TW_POSTAL_CODES 當字典反查——縣市／鄉鎮市區的名稱是
-  // 固定封閉詞彙表，從頭比對字串開頭一定能唯一拆出來，不是用猜的。
-  function splitHomeAddress(receiverAddress) {
-    if (!receiverAddress || !window.TW_POSTAL_CODES) return null;
-    for (const county of Object.keys(window.TW_POSTAL_CODES)) {
-      if (!receiverAddress.startsWith(county)) continue;
-      const rest = receiverAddress.slice(county.length);
-      for (const district of Object.keys(window.TW_POSTAL_CODES[county])) {
-        if (rest.startsWith(district)) {
-          return { county, district, detail: rest.slice(district.length) };
-        }
-      }
-    }
-    return null;
-  }
-
   function fillIfEmpty(el, value) {
     if (!el || !value || el.value) return;
     el.value = value;
@@ -426,7 +408,7 @@
         syncCustomerName();
       }
       if (customer.lastShippingMethod === "home" && customer.lastHomeAddress) {
-        const parsed = splitHomeAddress(customer.lastHomeAddress.receiverAddress);
+        const parsed = window.RisuanAccount.splitHomeAddress(customer.lastHomeAddress.receiverAddress);
         if (parsed) {
           fillIfEmpty(receiverCountySelect, parsed.county);
           fillIfEmpty(receiverDistrictSelect, parsed.district);

@@ -119,8 +119,100 @@
     return configPromise;
   }
 
+  // 帶 Authorization header 呼叫 api/account.js 的共用介面，給會員中心
+  // （js/account-page.js）的 orders／bookings／order-detail／
+  // update-profile 這幾個一定要帶 token 的 action 用，不用每個呼叫點各自
+  // 重複組 header、各自重複判斷「沒 token 就不用送」。沒有 token 時直接
+  // 丟出例外，呼叫端統一用 try/catch 處理「未登入」。
+  async function apiFetch(pathWithQuery, options = {}) {
+    const token = getToken();
+    if (!token) throw new Error("尚未登入");
+    const res = await fetch(`${API_BASE}${pathWithQuery}`, {
+      ...options,
+      headers: {
+        ...(options.body ? { "Content-Type": "application/json" } : {}),
+        Authorization: `Bearer ${token}`,
+        ...(options.headers || {}),
+      },
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || "請求失敗");
+    return data;
+  }
+
+  // Google Identity Services 登入按鈕的共用渲染邏輯——header 的帳號面板
+  // （js/account-widget.js）跟會員中心未登入時的提示（js/account-page.js）
+  // 都要渲染同一顆按鈕，抽成這裡一份，不要兩邊各自複製一份 GSI 載入／
+  // 初始化邏輯。container 是要插入按鈕的 DOM 元素，沒設定 Google 登入
+  // 的話會把 container 的文字改成提示訊息。
+  let gsiLoadPromise = null;
+  function loadGsiScript() {
+    if (!gsiLoadPromise) {
+      gsiLoadPromise = new Promise((resolve, reject) => {
+        const script = document.createElement("script");
+        script.src = "https://accounts.google.com/gsi/client";
+        script.async = true;
+        script.defer = true;
+        script.onload = resolve;
+        script.onerror = reject;
+        document.head.appendChild(script);
+      });
+    }
+    return gsiLoadPromise;
+  }
+
+  function mountGoogleButton(container, options = {}) {
+    getGoogleClientId().then((clientId) => {
+      if (!clientId) {
+        container.textContent = "會員登入功能尚未設定完成";
+        return;
+      }
+      loadGsiScript()
+        .then(() => {
+          window.google.accounts.id.initialize({
+            client_id: clientId,
+            callback: (response) => {
+              container.textContent = "登入中…";
+              loginWithGoogleCredential(response.credential)
+                .then((customer) => {
+                  if (options.onLogin) options.onLogin(customer);
+                })
+                .catch((err) => {
+                  container.textContent = `登入失敗：${err.message}`;
+                });
+            },
+          });
+          window.google.accounts.id.renderButton(container, { type: "standard", theme: "outline", size: "medium", width: options.width || 220 });
+        })
+        .catch(() => {
+          container.textContent = "Google 登入元件載入失敗，請稍後再試";
+        });
+    });
+  }
+
+  // 把合併地址字串（"縣市鄉鎮市區詳細地址"，後端只存這個合併後的單一
+  // 字串，見 risuan-checkout lib/order.js／lib/customer.js）拆回縣市／
+  // 鄉鎮市區／詳細地址三格，靠 window.TW_POSTAL_CODES 當字典反查——縣市／
+  // 鄉鎮市區的名稱是固定封閉詞彙表，從頭比對字串開頭一定能唯一拆出來，
+  // 不是用猜的。結帳頁自動帶入（js/checkout.js）跟會員中心編輯收件地址
+  // （js/account-page.js）共用這一份，不要兩處各自維護一份拆解邏輯。
+  function splitHomeAddress(receiverAddress) {
+    if (!receiverAddress || !window.TW_POSTAL_CODES) return null;
+    for (const county of Object.keys(window.TW_POSTAL_CODES)) {
+      if (!receiverAddress.startsWith(county)) continue;
+      const rest = receiverAddress.slice(county.length);
+      for (const district of Object.keys(window.TW_POSTAL_CODES[county])) {
+        if (rest.startsWith(district)) {
+          return { county, district, detail: rest.slice(district.length) };
+        }
+      }
+    }
+    return null;
+  }
+
   window.RisuanAccount = {
     BASE_PREFIX,
+    API_BASE,
     CHANGE_EVENT,
     getCustomer,
     getToken,
@@ -128,5 +220,8 @@
     logout,
     syncProfile,
     getGoogleClientId,
+    apiFetch,
+    mountGoogleButton,
+    splitHomeAddress,
   };
 })();
