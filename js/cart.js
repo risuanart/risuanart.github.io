@@ -659,6 +659,33 @@
     return { getQty, setQty };
   }
 
+  // 延伸創作加購卡各自獨立的數量選擇器（data-addon-qty，不是主商品買列
+  // 用的 data-buy-qty）——跟 initBuyQty() 的「全頁所有同款選擇器同步成
+  // 一個值」設計刻意相反：每張卡片自己的選擇器只在自己身上生效，卡片
+  // 之間、跟主商品買列，彼此完全獨立，改其中一張卡的數量不會牽動到
+  // 別張卡或主商品。目前只有 products/sand-art-fu/index.html 的加購卡
+  // 有這個 data 屬性，其他頁面的加購卡沒有，這支函式對它們完全是
+  // no-op。
+  function initAddonQty() {
+    const MAX_QTY = 20;
+    document.querySelectorAll("[data-addon-qty]").forEach((stepper) => {
+      const valueEl = stepper.querySelector("[data-qty-value]");
+      const minusBtn = stepper.querySelector("[data-qty-minus]");
+      const plusBtn = stepper.querySelector("[data-qty-plus]");
+
+      function setQty(qty) {
+        qty = Math.max(1, Math.min(MAX_QTY, qty));
+        valueEl.textContent = qty;
+        minusBtn.disabled = qty <= 1;
+        plusBtn.disabled = qty >= MAX_QTY;
+      }
+
+      minusBtn.addEventListener("click", () => setQty(parseInt(valueEl.textContent, 10) - 1));
+      plusBtn.addEventListener("click", () => setQty(parseInt(valueEl.textContent, 10) + 1));
+      setQty(1);
+    });
+  }
+
   // 「已加入」暫時提示用的勾勾圖示（跟全站圖示同一套線條風格：
   // stroke-width 2、圓端），純圖示鈕（沒有 .work__cta-label 文字，例如
   // 加購卡、總覽格狀商品卡的圓形「+」）點下去換成這個，不是換文字。
@@ -687,9 +714,13 @@
         // 內部 id 用的 scheme key，畫面上不顯示這個字，SCHEME_NAMES 也不會有
         // 對應項目，下面組文字時全部用「有沒有拿到色系名稱」判斷要不要顯示。
         const scheme = activeScheme(scope) || "default";
-        // 延伸創作加購卡（scope 有值）沒有數量選擇器，固定一次加購 1 件；
-        // 主商品的兩個進入點（scope 是 undefined）才讀取數量選擇器目前的數字。
-        const qty = !scope && buyQty ? buyQty.getQty() : 1;
+        // 主商品的兩個進入點（scope 是 undefined）讀取買列的數量選擇器；
+        // 延伸創作加購卡（scope 有值）大多沒有數量選擇器、固定一次加購
+        // 1 件，但如果這張卡自己有 [data-addon-qty]（見 initAddonQty()，
+        // 目前只有 sand-art-fu 頁面的加購卡有）就讀那個卡片自己的數字，
+        // 不是固定 1。
+        const addonQtyEl = scope && scope.querySelector("[data-addon-qty] [data-qty-value]");
+        const qty = !scope && buyQty ? buyQty.getQty() : addonQtyEl ? parseInt(addonQtyEl.textContent, 10) || 1 : 1;
         addItem(productKey, scheme, qty);
         playCartChime();
         // 飛入購物車的動畫要用原本的圖示（複製一份去飛），一定要在下面換成
@@ -701,6 +732,12 @@
         const qtyDetail = qty > 1 ? `　×${qty}` : "";
         showCartToast(`已加入：${product ? product.name : ""}${detail}${qtyDetail}`);
         if (!scope && buyQty) buyQty.setQty(1);
+        if (addonQtyEl) {
+          addonQtyEl.textContent = "1";
+          const stepper = addonQtyEl.closest("[data-addon-qty]");
+          stepper.querySelector("[data-qty-minus]").disabled = true;
+          stepper.querySelector("[data-qty-plus]").disabled = false;
+        }
 
         btn.disabled = true;
         if (label) {
@@ -716,6 +753,45 @@
           }
           btn.disabled = false;
         }, 1200);
+      });
+    });
+  }
+
+  // Buy Now：跳過「加入購物車→進購物車頁」這段，直接用當下買列選的
+  // 數量組一筆只有這一件商品的訂單草稿，送 start-checkout 拿到
+  // orderId 後整頁導去 cart/?orderId=xxx——購物車頁本來就支援「網址帶
+  // orderId 直接顯示結帳確認畫面」（原本是給綠界電子地圖選店回來用的，
+  // 見 js/checkout.js loadAndShowConfirm()），這裡只是提早觸發同一套
+  // 流程，不用另外做一個結帳頁。目前只有 products/sand-art-fu/index.html
+  // 有 [data-buy-now] 這顆按鈕，其他頁面沒有這個 data 屬性，這支函式
+  // 對它們是 no-op。
+  function initBuyNow(buyQty) {
+    const CHECKOUT_API_BASE = "https://risuan-checkout.vercel.app";
+    document.querySelectorAll("[data-buy-now]").forEach((btn) => {
+      const productKey = btn.dataset.product;
+      const originalLabel = btn.textContent;
+      btn.addEventListener("click", async () => {
+        const product = PRODUCTS[productKey];
+        if (!product) return;
+        const qty = buyQty ? buyQty.getQty() : 1;
+        btn.disabled = true;
+        btn.textContent = "處理中…";
+        try {
+          const res = await fetch(`${CHECKOUT_API_BASE}/api/start-checkout`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              cartItems: [{ productKey, name: product.name, schemeName: "", qty }],
+            }),
+          });
+          const data = await res.json();
+          if (!res.ok) throw new Error(data.error || "建立訂單失敗");
+          window.location.href = `${BASE_PREFIX}cart/?orderId=${encodeURIComponent(data.orderId)}`;
+        } catch (err) {
+          alert(`無法直接購買：${err.message}，請改用「加入購物車」`);
+          btn.disabled = false;
+          btn.textContent = originalLabel;
+        }
       });
     });
   }
@@ -939,6 +1015,8 @@
     initColorHint();
     const buyQty = initBuyQty();
     initAddToCart(buyQty);
+    initAddonQty();
+    initBuyNow(buyQty);
     initCartPreview();
     renderCartPage();
   }

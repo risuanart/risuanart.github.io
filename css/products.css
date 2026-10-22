@@ -715,6 +715,55 @@
   color: var(--color-text-secondary);
 }
 
+/* ---------- 限時優惠陣列提示（參考 orlo.co，2026-10-22，目前只有
+   products/sand-art-fu/index.html 用到這個 class）----------
+   純靜態文字，不是倒數計時器，日期用虛線底線強調「有時效性」，折扣
+   內容加粗——跟全站克制調性一致，不做底色色塊／圓角標籤。 ---------- */
+.work-heading__urgency {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  margin: var(--space-2) 0 0;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
+.work-heading__urgency-date {
+  text-decoration: underline dashed;
+  text-underline-offset: 2px;
+  color: var(--color-text-primary);
+}
+
+.work-heading__urgency strong {
+  color: var(--color-warning);
+}
+
+/* ---------- Buy Now（參考 orlo.co，2026-10-22，目前只有
+   products/sand-art-fu/index.html 用到這個 class）----------
+   跟「加入購物車」的 .work__cta--primary 並排，用 --color-surface-black
+   （colors.css 既有色票，目前只有首頁選單在用，不是新增顏色）做出
+   跟主要按鈕色相不同的視覺區隔，不用額外發明一組新顏色。互動邏輯見
+   js/cart.js initBuyNow()。 ---------- */
+.work__cta--buy-now {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: var(--space-1) var(--space-4);
+  border: none;
+  border-bottom: none;
+  border-radius: var(--radius-sharp);
+  background: var(--color-surface-black);
+  color: var(--color-surface-light);
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+}
+
+.work__cta--buy-now:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
 /* 2026-10-18 常駐顯示的購買重點（出貨時間／顏色提醒／材料保存／
    操作提醒）——參考 fisherm.co 商品頁做法，使用者反饋這幾項太重要，
    不該摺在「購買前請閱讀」手風琴裡才看得到。內容由 js/product-terms.js
@@ -940,6 +989,61 @@
 
 @media (max-width: 549px) {
   .work__gallery-nav {
+    display: none;
+  }
+}
+
+/* ---------- 桌面版縮圖牆移到主圖左側（參考 orlo.co，2026-10-22）----------
+   這是頁面限定的 modifier class，只有 products/sand-art-fu/index.html
+   的 .work__gallery 掛了這個 class，其他 8 個共用同一套模板的商品頁
+   沒有、完全不受影響——跟全站共用的 .work__gallery 水平縮圖條規則
+   並存，不是取代它（<1024px 時這個 class 不生效，維持原本水平條）。
+   互動邏輯見 js/hero-thumb-gallery.js 開頭說明：縮圖切換主圖靠陣列
+   索引、不依賴 DOM 順序，這裡用 flex-direction: row-reverse 純粹讓
+   視覺順序顛倒（縮圖牆在左、主圖在右），HTML 裡主圖還是第一個子
+   元素，不用為了這個排版改 HTML 結構。 */
+@media (min-width: 1024px) {
+  .work__gallery--thumbs-left {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: flex-start;
+    gap: var(--space-4);
+  }
+
+  .work__gallery--thumbs-left .work__gallery-main {
+    flex: 1;
+    min-width: 0;
+  }
+
+  /* 縮圖牆固定寬度直欄，跟主圖並排；原本 .work__gallery-strip-wrap 是
+     疊在主圖正下方、靠 margin-top 跟主圖隔開，現在是並排的獨立欄位，
+     不需要那個上邊距。 */
+  .work__gallery--thumbs-left .work__gallery-strip-wrap {
+    flex: 0 0 96px;
+    margin-top: 0;
+    align-self: stretch;
+  }
+
+  .work__gallery--thumbs-left .work__gallery-thumbs {
+    flex-direction: column;
+    overflow-x: hidden;
+    overflow-y: auto;
+    max-height: 100%;
+  }
+
+  /* 水平牆用容器寬度換算出「一次看到 4 張」的寬度，直欄牆改成固定
+     方形縮圖（跟 .work__gallery-strip-wrap 的固定寬度一致），不再套
+     用那組水平換算公式。 */
+  .work__gallery--thumbs-left .work__gallery-thumb {
+    flex: 0 0 96px;
+    width: 96px;
+  }
+
+  /* 左右箭頭是給水平捲動用的，直欄牆改用滑鼠滾輪／拖曳捲動，箭頭
+     沒有對應的「上一張/下一張」方向感，直接藏起來（JS 那邊的點擊
+     邏輯本身不受影響，只是用垂直捲動取代水平捲動，見
+     js/hero-thumb-gallery.js）。 */
+  .work__gallery--thumbs-left .work__gallery-nav {
     display: none;
   }
 }
@@ -1887,6 +1991,71 @@ button.text-link {
    間距的覆寫，不重新定義顏色或字重——避免同一個動作在不同地方長得不一樣。
    只留圖示、拿掉文字後，可及性名稱改由 markup 上的 aria-label 提供。
    min-height:44px 的觸控下限在 .work__cta--primary 本體上，這裡不動它。 */
+/* ---------- 加購區橫列版（參考 orlo.co「Buy Together and Save More」，
+   2026-10-22）----------
+   頁面限定 modifier，只有 products/sand-art-fu/index.html 的加購卡加了
+   .addon-carousel--list／.addon-card--row，其他頁面的 .addon-carousel／
+   .addon-card 本身毫無變動，繼續用原本可橫滑的直式卡片。這裡改成整組
+   直欄清單（每張卡一整列：縮圖＋名稱＋數量選擇＋價格＋按鈕），不是
+   橫向捲動，所以 track 的 overflow/margin 補償（抵銷 .chapter 內距讓
+   卡片貼齊邊緣捲動）整組不適用，要蓋掉。 */
+.addon-carousel--list .addon-carousel__track {
+  flex-direction: column;
+  overflow-x: visible;
+  margin-left: 0;
+  margin-right: 0;
+  padding: 0;
+  gap: var(--space-2);
+}
+
+.addon-card--row {
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  margin: 0;
+}
+
+.addon-card--row .addon-card__thumb {
+  flex: 0 0 56px;
+  width: 56px;
+  aspect-ratio: 1 / 1;
+}
+
+.addon-card--row .addon-card__body {
+  flex: 1;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  min-width: 0;
+  padding: var(--space-2);
+  gap: var(--space-1) var(--space-2);
+}
+
+.addon-card--row .addon-card__name {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.addon-card--row .addon-card__note {
+  flex-basis: 100%;
+}
+
+.addon-card--row .addon-card__footer {
+  flex: 0 0 auto;
+  margin-top: 0;
+  padding-bottom: 0;
+  gap: var(--space-2);
+}
+
+/* 加購卡各自獨立的數量選擇器，跟買列的 .qty-stepper 同一套視覺語言、
+   縮小尺寸塞進橫列卡片裡；互動邏輯見 js/cart.js initAddonQty()——用
+   data-addon-qty（不是買列用的 data-buy-qty），避免被全頁同步成單一
+   值的既有邏輯吃到（見該函式開頭的說明）。 */
+.addon-card__qty {
+  transform: scale(0.85);
+  transform-origin: right center;
+}
+
 .addon-card__cta {
   flex-shrink: 0;
   width: auto;
@@ -3027,6 +3196,43 @@ button.text-link {
 }
 
 /* ---------- Credits／購買前請閱讀：手風琴，比照參考規格的 max-height 轉場 ---------- */
+/* ---------- 商品規格分頁切換（參考 orlo.co 的 Description／
+   Shipping & Payment，2026-10-22，目前只有
+   products/sand-art-fu/index.html 用到）----------
+   跟 .accordion 同一種克制調性：純文字＋底線標示「可互動／選中」，
+   不做圓角 pill／色塊背景。互動邏輯見 js/product-tabs.js。 ---------- */
+.product-tabs__nav {
+  display: flex;
+  gap: var(--space-6);
+  border-bottom: 1px solid color-mix(in srgb, var(--color-text-secondary) 25%, transparent);
+}
+
+.product-tabs__btn {
+  appearance: none;
+  border: none;
+  background: none;
+  padding: 0 0 var(--space-2);
+  margin-bottom: -1px;
+  border-bottom: 2px solid transparent;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: color var(--duration-fast) var(--ease-standard), border-color var(--duration-fast) var(--ease-standard);
+}
+
+.product-tabs__btn.is-active {
+  color: var(--color-text-primary);
+  border-bottom-color: var(--color-text-primary);
+}
+
+.product-tabs__panel {
+  margin-top: var(--space-4);
+  font-size: var(--font-size-sm);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+
 .accordion {
   margin-top: var(--editorial-gap);
   padding: 0 var(--space-4) 0 var(--space-4);
