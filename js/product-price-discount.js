@@ -23,7 +23,16 @@
 
   document.querySelectorAll(".work-heading__buy-row").forEach((row) => {
     const priceEl = row.querySelector(".work-heading__price");
-    const addBtn = row.querySelector("[data-add-to-cart]");
+    // 2026-10-22：sand-art-fu 頁面把「加入購物車」按鈕搬到頁面下方的
+    // 滿版 CTA 橫條（見 .product-buy-bar），不再跟價格擠在同一個
+    // .work-heading__buy-row 容器裡，這裡原本的 row.querySelector() 會
+    // 找不到按鈕。退回用 row 自己身上的 data-product 屬性（那一頁的
+    // .work-heading__buy-row 有補這個屬性）在全頁找同一個商品鍵的
+    // [data-add-to-cart]，其他 8 頁沒有這個 data 屬性、也沒有把按鈕
+    // 搬出容器，第一個 querySelector 就找得到，不會走到這個 fallback。
+    const addBtn =
+      row.querySelector("[data-add-to-cart]") ||
+      (row.dataset.product && document.querySelector(`[data-add-to-cart][data-product="${row.dataset.product}"]`));
     if (!priceEl || !addBtn) return;
     const product = PRODUCTS[addBtn.dataset.product];
     if (!product || !product.price) return;

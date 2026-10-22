@@ -40,17 +40,37 @@
       "(prefers-reduced-motion: reduce)"
     ).matches;
 
+    // 2026-10-22 新增：桌面版縮圖牆移到主圖左側時（見
+    // css/products.css .work__gallery--thumbs-left，目前只有
+    // products/sand-art-fu/index.html 用），縮圖列從水平排列改垂直排列，
+    // 捲動方向也要跟著從水平改垂直——只在「真的掛了這個 class、而且
+    // 當下螢幕寬度有套用那組 ≥1024px CSS」才切換，其他 8 個沒有這個
+    // class 的頁面、或這一頁在窄螢幕下，isVertical() 都回傳 false，
+    // 行為跟原本完全一樣。
+    function isVertical() {
+      return (
+        root.classList.contains("work__gallery--thumbs-left") &&
+        window.matchMedia("(min-width: 1024px)").matches
+      );
+    }
+
     function scrollThumbIntoView(idx) {
-      // 只捲動縮圖列自己的 scrollLeft，不用 Element.scrollIntoView()——
-      // 那個方法會一路往上找到所有可捲動的祖先容器（包含整個頁面），
-      // 使用者滑到頁面下方時，自動輪播還是會把整個頁面捲回相片牆的
-      // 位置，造成「輪播時頁面往上跳」的 bug。改成直接算縮圖相對縮圖列
-      // 的位置，只動 thumbsWrap 自己的水平捲動，垂直方向完全不碰。
+      // 只捲動縮圖列自己的 scrollLeft／scrollTop，不用
+      // Element.scrollIntoView()——那個方法會一路往上找到所有可捲動的
+      // 祖先容器（包含整個頁面），使用者滑到頁面下方時，自動輪播還是會
+      // 把整個頁面捲回相片牆的位置，造成「輪播時頁面往上跳」的 bug。
+      // 改成直接算縮圖相對縮圖列的位置，只動 thumbsWrap 自己的捲動，
+      // 另一個方向完全不碰。
       var thumb = thumbs[idx];
       var wrapRect = thumbsWrap.getBoundingClientRect();
       var thumbRect = thumb.getBoundingClientRect();
-      var delta = (thumbRect.left + thumbRect.width / 2) - (wrapRect.left + wrapRect.width / 2);
-      thumbsWrap.scrollBy({ left: delta, behavior: "smooth" });
+      if (isVertical()) {
+        var deltaY = (thumbRect.top + thumbRect.height / 2) - (wrapRect.top + wrapRect.height / 2);
+        thumbsWrap.scrollBy({ top: deltaY, behavior: "smooth" });
+      } else {
+        var deltaX = (thumbRect.left + thumbRect.width / 2) - (wrapRect.left + wrapRect.width / 2);
+        thumbsWrap.scrollBy({ left: deltaX, behavior: "smooth" });
+      }
     }
 
     function setActive(idx, scrollThumb) {
@@ -97,7 +117,11 @@
       btn.addEventListener("click", function () {
         stopAutoplayForGood();
         var dir = parseInt(btn.getAttribute("data-gallery-nav"), 10);
-        thumbsWrap.scrollBy({ left: dir * 140, behavior: "smooth" });
+        if (isVertical()) {
+          thumbsWrap.scrollBy({ top: dir * 110, behavior: "smooth" });
+        } else {
+          thumbsWrap.scrollBy({ left: dir * 140, behavior: "smooth" });
+        }
       });
     });
 

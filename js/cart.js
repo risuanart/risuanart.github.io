@@ -691,6 +691,31 @@
   // 加購卡、總覽格狀商品卡的圓形「+」）點下去換成這個，不是換文字。
   const CHECK_ICON_HTML = '<path d="M5 13l4 4L19 7"/>';
 
+  // 「一起加購」勾選清單（參考 orlo.co「Buy Together and Save More」，
+  // 2026-10-22，目前只有 products/sand-art-fu/index.html 有
+  // [data-addon-select]）：讀取目前勾選的加購項目＋各自的數量，給
+  // initAddToCart()／initBuyNow() 的主商品按鈕一起帶走用。其他頁面
+  // 沒有這個 data 屬性，一律回傳空陣列，對它們完全不影響行為。
+  function getSelectedAddons() {
+    const items = [];
+    document.querySelectorAll("[data-addon-select]:checked").forEach((checkbox) => {
+      const productKey = checkbox.dataset.product;
+      const row = checkbox.closest("[data-addon-row]");
+      const qtyEl = row && row.querySelector("[data-addon-qty] [data-qty-value]");
+      const qty = qtyEl ? parseInt(qtyEl.textContent, 10) || 1 : 1;
+      items.push({ productKey, qty });
+    });
+    return items;
+  }
+
+  // 加完購物車／送出 Buy Now 之後，把勾選狀態清掉，避免客人下一次按
+  // 「加入購物車」時，不小心又把上次已經加過的加購項目重複加一次。
+  function resetSelectedAddons() {
+    document.querySelectorAll("[data-addon-select]:checked").forEach((checkbox) => {
+      checkbox.checked = false;
+    });
+  }
+
   // 商品頁「加入購物車」按鈕：讀取當下選中的色系 chip（跟 product-gallery.js
   // 共用同一批 .color-picker__chip，不用另外維護一份選色狀態）。按鈕內有圖示＋
   // 文字兩個子元素的（.work__cta-label 存在），「已加入」的暫時提示只換文字
@@ -722,6 +747,18 @@
         const addonQtyEl = scope && scope.querySelector("[data-addon-qty] [data-qty-value]");
         const qty = !scope && buyQty ? buyQty.getQty() : addonQtyEl ? parseInt(addonQtyEl.textContent, 10) || 1 : 1;
         addItem(productKey, scheme, qty);
+        // 主商品按鈕（scope 是 undefined）順便把「一起加購」勾選的項目
+        // 一起加進購物車，見 getSelectedAddons() 的說明。延伸創作加購卡
+        // 自己按鈕（scope 有值）不會觸發這段，避免遞迴重複加購。
+        let addonCount = 0;
+        if (!scope) {
+          getSelectedAddons().forEach((addon) => {
+            if (!addon.productKey) return;
+            addItem(addon.productKey, "default", addon.qty);
+            addonCount += 1;
+          });
+          resetSelectedAddons();
+        }
         playCartChime();
         // 飛入購物車的動畫要用原本的圖示（複製一份去飛），一定要在下面換成
         // 勾勾之前呼叫，不然飛出去的會是勾勾而不是原本按下去那顆圖示。
@@ -730,7 +767,8 @@
         const schemeName = SCHEME_NAMES[scheme] || "";
         const detail = schemeName ? `（${schemeName}）` : "";
         const qtyDetail = qty > 1 ? `　×${qty}` : "";
-        showCartToast(`已加入：${product ? product.name : ""}${detail}${qtyDetail}`);
+        const addonDetail = addonCount > 0 ? `　＋加購 ${addonCount} 項` : "";
+        showCartToast(`已加入：${product ? product.name : ""}${detail}${qtyDetail}${addonDetail}`);
         if (!scope && buyQty) buyQty.setQty(1);
         if (addonQtyEl) {
           addonQtyEl.textContent = "1";
@@ -774,24 +812,47 @@
         const product = PRODUCTS[productKey];
         if (!product) return;
         const qty = buyQty ? buyQty.getQty() : 1;
+        // 跟「加入購物車」同一個理由：把「一起加購」勾選的項目一起帶進
+        // 這筆草稿訂單，不是只有主商品，見 getSelectedAddons() 的說明。
+        const cartItems = [{ productKey, name: product.name, schemeName: "", qty }];
+        getSelectedAddons().forEach((addon) => {
+          const addonProduct = PRODUCTS[addon.productKey];
+          if (!addonProduct) return;
+          cartItems.push({ productKey: addon.productKey, name: addonProduct.name, schemeName: "", qty: addon.qty });
+        });
         btn.disabled = true;
         btn.textContent = "處理中…";
         try {
           const res = await fetch(`${CHECKOUT_API_BASE}/api/start-checkout`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              cartItems: [{ productKey, name: product.name, schemeName: "", qty }],
-            }),
+            body: JSON.stringify({ cartItems }),
           });
           const data = await res.json();
           if (!res.ok) throw new Error(data.error || "建立訂單失敗");
+          resetSelectedAddons();
           window.location.href = `${BASE_PREFIX}cart/?orderId=${encodeURIComponent(data.orderId)}`;
         } catch (err) {
           alert(`無法直接購買：${err.message}，請改用「加入購物車」`);
           btn.disabled = false;
           btn.textContent = originalLabel;
         }
+      });
+    });
+  }
+
+  // 「一起加購」預設收合、點擊展開（參考 orlo.co「Buy Together and
+  // Save More」，2026-10-22，目前只有 products/sand-art-fu/index.html
+  // 有 [data-addon-toggle]，其他頁面沒有這個 data 屬性，對它們是
+  // no-op）。
+  function initAddonToggle() {
+    document.querySelectorAll("[data-addon-toggle]").forEach((btn) => {
+      const list = document.getElementById(btn.getAttribute("aria-controls"));
+      if (!list) return;
+      btn.addEventListener("click", () => {
+        const expanded = btn.getAttribute("aria-expanded") === "true";
+        btn.setAttribute("aria-expanded", String(!expanded));
+        list.hidden = expanded;
       });
     });
   }
@@ -1016,6 +1077,7 @@
     const buyQty = initBuyQty();
     initAddToCart(buyQty);
     initAddonQty();
+    initAddonToggle();
     initBuyNow(buyQty);
     initCartPreview();
     renderCartPage();

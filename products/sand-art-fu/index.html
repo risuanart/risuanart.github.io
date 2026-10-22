@@ -154,7 +154,7 @@
          PATTERNS.fu：素色底＋星星點綴，酒紅底＋金字，15cm，純沙），
          這頁是給它一個獨立商品頁／連結，做法跟「春」完全一致——單一
          配色、無雙配色示範，H1 直接放完整商品名稱。 -->
-    <header class="work__intro">
+    <header class="work__intro work__intro--orlo-buy">
       <!-- 首圖實拍相片牆：跟 sand-art-chun／sand-art-cai／
            sand-art-artist-sheep-red／blue 同一套 .work__gallery（主圖＋
            可橫向滑動縮圖列），取代原本的配色自動輪播
@@ -221,33 +221,80 @@
            價格跟「春」一樣先用 $__ 佔位（使用者確認過兩者價格一致，
            等正式定價後一起改）。 -->
       <!-- 2026-10-22 參考 orlo.co 的限時優惠陣列提示，純靜態文字（不是
-           倒數計時器），套用在現有的早鳥 9 折——跟
-           js/product-price-discount.js 自動注入全站商品頁的「EARLY
-           BIRD · 10% OFF」小字是兩回事，那支共用腳本沒有動，這裡是這
-           頁額外加的一段，優惠期過了要手動拿掉，不會自動隱藏。 -->
-      <p class="work-heading__urgency fade-in delay-3">
-        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
-        <span class="work-heading__urgency-date">12/31 00:00</span> 前下單，材料包享 <strong>9 折優惠</strong>
-      </p>
+           倒數計時器），套用在現有的早鳥 9 折，位置在價格正上方（不是
+           標題上方）——跟 js/product-price-discount.js 自動注入的
+           「EARLY BIRD · 10% OFF」小字是兩回事，那支共用腳本沒有動，
+           這裡是這頁額外加的一段，優惠期過了要手動拿掉，不會自動
+           隱藏。 -->
+      <blockquote class="work-heading__urgency fade-in delay-3">
+        <p><span class="work-heading__urgency-date">12/31 00:00</span> 前下單，材料包享 <strong>9 折優惠</strong></p>
+      </blockquote>
 
-      <div class="work-heading__buy-row fade-in delay-3">
+      <!-- 「加入購物車」／「直接購買」改到頁面下方的滿版 CTA 橫條
+           （見「一起加購」區塊後面的 .product-buy-bar），這裡只留價格
+           跟數量選擇器。data-product 屬性給 js/product-price-
+           discount.js 的 fallback 查找用（按鈕不在這個容器裡了），
+           詳見該檔案說明。 -->
+      <div class="work-heading__buy-row fade-in delay-3" data-product="sand-art-fu">
         <div class="work-heading__buy-text">
           <p class="work-heading__price">$560</p>
         </div>
-        <div class="buy-action">
-          <div class="qty-stepper" data-buy-qty>
-            <button type="button" data-qty-minus aria-label="減少數量">−</button>
-            <span data-qty-value>1</span>
-            <button type="button" data-qty-plus aria-label="增加數量">＋</button>
-          </div>
-          <button type="button" class="work__cta work__cta--primary" data-add-to-cart data-product="sand-art-fu">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
-            <span class="work__cta-label">ＢＵＹ</span>
-          </button>
-          <!-- Buy Now：跳過購物車，直接帶這一件商品進結帳確認頁，見
-               js/cart.js initBuyNow()。 -->
-          <button type="button" class="work__cta work__cta--buy-now" data-buy-now data-product="sand-art-fu">直接購買</button>
+      </div>
+
+      <div class="work-heading__qty fade-in delay-3">
+        <div class="qty-stepper" data-buy-qty>
+          <button type="button" data-qty-minus aria-label="減少數量">−</button>
+          <span data-qty-value>1</span>
+          <button type="button" data-qty-plus aria-label="增加數量">＋</button>
         </div>
+      </div>
+
+      <!-- 一起加購（參考 orlo.co「Buy Together and Save More」）：預設
+           收合，點開才看到清單，每列 checkbox＋縮圖＋名稱＋數量＋價格，
+           跟主商品一起用下面的滿版按鈕送出，不是各自獨立的「加入購物
+           車」按鈕。互動邏輯見 js/cart.js initAddonToggle()／
+           getSelectedAddons()。 -->
+      <section class="chapter addon-section fade-in delay-3">
+        <button type="button" class="addon-toggle" data-addon-toggle aria-expanded="false" aria-controls="addon-list-fu">一起加購，材料更齊全</button>
+        <div class="addon-list" id="addon-list-fu" data-addon-list hidden>
+          <div class="addon-row" data-addon-row>
+            <input type="checkbox" class="addon-row__checkbox" data-addon-select data-product="sand-art-extra-color" aria-label="加購：額外顏色沙・固定套組">
+            <div class="addon-row__thumb">
+              <div class="placeholder-box placeholder-box--photo" aria-hidden="true"><svg class="placeholder-box__icon" viewBox="0 0 24 24" width="1.2em" height="1.2em" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1.5"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 16l-5.5-5.5a1 1 0 0 0-1.4 0L6 19"/></svg></div>
+            </div>
+            <span class="addon-row__name">額外顏色沙・固定套組</span>
+            <div class="qty-stepper addon-row__qty" data-addon-qty>
+              <button type="button" data-qty-minus aria-label="減少數量">−</button>
+              <span data-qty-value>1</span>
+              <button type="button" data-qty-plus aria-label="增加數量">＋</button>
+            </div>
+            <p class="addon-row__price price-text">$__</p>
+          </div>
+          <div class="addon-row" data-addon-row>
+            <input type="checkbox" class="addon-row__checkbox" data-addon-select data-product="sand-art-sticker-only" aria-label="加購：純貼紙加購・單款">
+            <div class="addon-row__thumb">
+              <div class="placeholder-box placeholder-box--photo" aria-hidden="true"><svg class="placeholder-box__icon" viewBox="0 0 24 24" width="1.2em" height="1.2em" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1.5"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 16l-5.5-5.5a1 1 0 0 0-1.4 0L6 19"/></svg></div>
+            </div>
+            <span class="addon-row__name">純貼紙加購・單款</span>
+            <div class="qty-stepper addon-row__qty" data-addon-qty>
+              <button type="button" data-qty-minus aria-label="減少數量">−</button>
+              <span data-qty-value>1</span>
+              <button type="button" data-qty-plus aria-label="增加數量">＋</button>
+            </div>
+            <p class="addon-row__price price-text">$__</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 滿版 CTA：「加入購物車」會把主商品＋上面勾選的加購項目一起
+           加進購物車；「直接購買」同理，一起帶進結帳確認頁，見
+           js/cart.js initAddToCart()／initBuyNow()。 -->
+      <div class="product-buy-bar fade-in delay-3">
+        <button type="button" class="work__cta work__cta--primary" data-add-to-cart data-product="sand-art-fu">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+          <span class="work__cta-label">加入購物車</span>
+        </button>
+        <button type="button" class="work__cta work__cta--buy-now" data-buy-now data-product="sand-art-fu">直接購買</button>
       </div>
     </header>
 
@@ -401,17 +448,21 @@
     </section>
 
     <!-- 2026-10-22 參考 orlo.co 的 Description／Shipping & Payment
-         分頁切換，把原本各自獨立的「規格資訊」chapter 跟「出貨時間／
-         顏色提醒／材料保存／操作提醒」常駐區塊包進同一組分頁——兩者
-         內容完全不重疊（見 js/product-terms.js 開頭說明：highlights 是
-         精簡列點版，跟手風琴裡下單付款/退換貨/版權等較重的條款是分開
-         維護的兩份資料），手風琴「購買前請閱讀」維持原樣接在分頁
-         下方，不塞進分頁本身。頁面限定元件，見 js/product-tabs.js／
+         分頁切換，把原本各自獨立的「規格資訊」chapter、「出貨時間／
+         顏色提醒／材料保存／操作提醒」常駐區塊、跟「購買前請閱讀」
+         手風琴，三個都包進同一組分頁——三者內容完全不重疊（見
+         js/product-terms.js 開頭說明：highlights 是精簡列點版，跟
+         下單付款/退換貨/版權等較重的條款是分開維護的兩份資料）。
+         「購買前請閱讀」那個面板內部的 .accordion__body class 保留
+         （不是真的手風琴了，純粹沿用它既有的文字排版樣式，見
+         css/products.css .accordion__body，不用重寫一份一樣的字級/
+         行距規則）。頁面限定元件，見 js/product-tabs.js／
          css/products.css .product-tabs 開頭說明，只有這一頁用到。 -->
     <section class="chapter product-tabs fade-in" data-product-tabs>
       <div class="product-tabs__nav">
         <button type="button" class="product-tabs__btn is-active" data-tab="spec" aria-current="page">規格</button>
         <button type="button" class="product-tabs__btn" data-tab="care">出貨與保存須知</button>
+        <button type="button" class="product-tabs__btn" data-tab="terms">購買前請閱讀</button>
       </div>
       <div class="product-tabs__panel" data-tab-panel="spec">
         <p class="chapter__prose">商品：春聯砂畫材料包・福星 Starry Fu<br>成品尺寸：15×15cm<br>顏色數：7色</p>
@@ -420,12 +471,10 @@
       <div class="product-tabs__panel" data-tab-panel="care" hidden>
         <div class="info-highlights" data-product-info-highlights="sand-art"></div>
       </div>
+      <div class="product-tabs__panel" data-tab-panel="terms" hidden>
+        <div class="accordion__body" data-product-terms="sand-art"></div>
+      </div>
     </section>
-
-    <details class="accordion fade-in">
-      <summary class="accordion__toggle">購買前請閱讀</summary>
-      <div class="accordion__body" data-product-terms="sand-art"></div>
-    </details>
 
 
     <!-- 尾聲：導引至自由創作組，跟其他基礎款材料包共用同一句。 -->
@@ -436,61 +485,9 @@
       -->
     </section>
 
-    <!-- 延伸創作：跟其他基礎款材料包共用同一組加購商品（額外顏色沙／
-         純貼紙），不是「福」專屬的加購項目。 -->
-    <section class="chapter addon-section">
-      <h2 class="chapter__title fade-in">延伸創作</h2>
-      <!-- 2026-10-22 參考 orlo.co「Buy Together and Save More」改成橫列
-           清單（.addon-carousel--list／.addon-card--row，頁面限定
-           modifier，見 css/products.css 開頭說明，不影響其他頁面）。
-           每張卡新增獨立的數量選擇器（data-addon-qty，跟主商品買列的
-           data-buy-qty 是兩套各自獨立的邏輯，見 js/cart.js
-           initAddonQty()）。 -->
-      <div class="addon-carousel addon-carousel--list fade-in delay-1">
-        <div class="addon-carousel__track">
-          <div class="addon-card addon-card--row" data-product-card>
-            <div class="addon-card__thumb">
-              <div class="placeholder-box placeholder-box--photo" aria-hidden="true"><svg class="placeholder-box__icon" viewBox="0 0 24 24" width="1.4em" height="1.4em" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1.5"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 16l-5.5-5.5a1 1 0 0 0-1.4 0L6 19"/></svg><span class="placeholder-box__text">固定套組色沙全展開</span></div>
-            </div>
-            <div class="addon-card__body">
-              <p class="addon-card__name">額外顏色沙・固定套組</p>
-              <p class="addon-card__note">沙色為固定套組搭配，不開放單色自選，材料不夠用時直接加購。</p>
-              <div class="addon-card__footer">
-                <div class="qty-stepper addon-card__qty" data-addon-qty>
-                  <button type="button" data-qty-minus aria-label="減少數量">−</button>
-                  <span data-qty-value>1</span>
-                  <button type="button" data-qty-plus aria-label="增加數量">＋</button>
-                </div>
-                <p class="addon-card__price price-text">$__</p>
-                <button type="button" class="work__cta work__cta--primary addon-card__cta" data-add-to-cart data-product="sand-art-extra-color" aria-label="加入購物車">
-                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
-                </button>
-              </div>
-            </div>
-          </div>
-          <div class="addon-card addon-card--row" data-product-card>
-            <div class="addon-card__thumb">
-              <div class="placeholder-box placeholder-box--photo" aria-hidden="true"><svg class="placeholder-box__icon" viewBox="0 0 24 24" width="1.4em" height="1.4em" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1.5"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 16l-5.5-5.5a1 1 0 0 0-1.4 0L6 19"/></svg><span class="placeholder-box__text">單張貼紙圖案特寫</span></div>
-            </div>
-            <div class="addon-card__body">
-              <p class="addon-card__name">純貼紙加購・單款</p>
-              <p class="addon-card__note">已有顏色沙的你，可單獨加購其他款式圖案（8 款圖案任選）。</p>
-              <div class="addon-card__footer">
-                <div class="qty-stepper addon-card__qty" data-addon-qty>
-                  <button type="button" data-qty-minus aria-label="減少數量">−</button>
-                  <span data-qty-value>1</span>
-                  <button type="button" data-qty-plus aria-label="增加數量">＋</button>
-                </div>
-                <p class="addon-card__price price-text">$__</p>
-                <button type="button" class="work__cta work__cta--primary addon-card__cta" data-add-to-cart data-product="sand-art-sticker-only" aria-label="加入購物車">
-                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    <!-- 「延伸創作」加購區塊已經搬到上面買列附近的「一起加購」
+         （.addon-section，參考 orlo.co「Buy Together and Save More」，
+         跟滿版 CTA 按鈕一起決策），這裡不再重複一份。 -->
 
     <!-- 購買前請閱讀：內容改抽到 js/product-terms.js 共用資料，跟「春」
          一起吃同一份 sand-art 材質內容。容器留空、由 script 渲染進去。 -->

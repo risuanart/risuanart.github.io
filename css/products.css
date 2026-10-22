@@ -717,15 +717,19 @@
 
 /* ---------- 限時優惠陣列提示（參考 orlo.co，2026-10-22，目前只有
    products/sand-art-fu/index.html 用到這個 class）----------
-   純靜態文字，不是倒數計時器，日期用虛線底線強調「有時效性」，折扣
-   內容加粗——跟全站克制調性一致，不做底色色塊／圓角標籤。 ---------- */
+   2026-10-22 使用者反饋要改成 orlo 那種「左側一條直線的引用塊」樣式，
+   位置也要在價格正上方（原本在標題上方）——純靜態文字，不是倒數
+   計時器，日期用虛線底線強調「有時效性」，折扣內容加粗。 ---------- */
 .work-heading__urgency {
-  display: flex;
-  align-items: center;
-  gap: var(--space-1);
-  margin: var(--space-2) 0 0;
+  margin: 0 0 var(--space-2);
+  padding-left: var(--space-2);
+  border-left: 2px solid var(--color-text-primary);
   font-size: var(--font-size-xs);
   color: var(--color-text-secondary);
+}
+
+.work-heading__urgency p {
+  margin: 0;
 }
 
 .work-heading__urgency-date {
@@ -738,12 +742,41 @@
   color: var(--color-warning);
 }
 
+/* ---------- 數量選擇器獨立一行（參考 orlo.co，2026-10-22，目前只有
+   products/sand-art-fu/index.html 用到）----------
+   原本的 .qty-stepper 是跟 CTA 按鈕擠在同一個 .buy-action 群組裡，這
+   頁的 CTA 按鈕搬到頁面下方的滿版橫條（見 .product-buy-bar），數量
+   選擇器留在價格正下方、自己獨立一行，所以需要自己的上下間距。 ---------- */
+.work-heading__qty {
+  margin: var(--space-2) 0 var(--space-6);
+}
+
+/* ---------- 滿版 CTA 橫條（參考 orlo.co，2026-10-22，目前只有
+   products/sand-art-fu/index.html 用到）----------
+   「加入購物車」／「直接購買」改成放在「一起加購」區塊下方的滿版
+   橫條，兩顆各占一半寬——[data-add-to-cart] 這顆按鈕本身還是同一個
+   DOM 節點，js/product-price-discount.js 共用腳本原本靠
+   `.work-heading__buy-row` 容器內找這顆按鈕來插入早鳥標籤／價格折扣，
+   現在移出那個容器了，改用該腳本新增的 fallback（靠
+   `.work-heading__buy-row` 身上的 `data-product` 屬性在全頁找同一個
+   商品鍵的按鈕），詳見該檔案的說明。 ---------- */
+.product-buy-bar {
+  display: flex;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+}
+
+.product-buy-bar [data-add-to-cart],
+.product-buy-bar [data-buy-now] {
+  flex: 1;
+  width: auto;
+}
+
 /* ---------- Buy Now（參考 orlo.co，2026-10-22，目前只有
    products/sand-art-fu/index.html 用到這個 class）----------
-   跟「加入購物車」的 .work__cta--primary 並排，用 --color-surface-black
-   （colors.css 既有色票，目前只有首頁選單在用，不是新增顏色）做出
-   跟主要按鈕色相不同的視覺區隔，不用額外發明一組新顏色。互動邏輯見
-   js/cart.js initBuyNow()。 ---------- */
+   跟「加入購物車」並排、同寬，用 --color-surface-black（colors.css
+   既有色票，目前只有首頁選單在用，不是新增顏色）做出跟主要按鈕色相
+   不同的視覺區隔。互動邏輯見 js/cart.js initBuyNow()。 ---------- */
 .work__cta--buy-now {
   display: inline-flex;
   align-items: center;
@@ -993,6 +1026,61 @@
   }
 }
 
+/* ---------- 買列右欄新增區塊的 grid 排位（2026-10-22，目前只有
+   products/sand-art-fu/index.html 用到 .work__intro--orlo-buy 這個
+   頁面限定 modifier）----------
+   全站共用的 .work__intro:has(.work__title-block) 在 ≥768px 是兩欄
+   grid（見上面「模板 A」規則），右欄（grid-column:2）原本只有「圖說／
+   標題區／買列」三列＋一列填充。這頁在買列前後新增了早鳥提示、獨立
+   數量列、一起加購、滿版 CTA 四個新區塊，沒有明確指定 grid-row 的話
+   會被瀏覽器自動排進隱性格線，跑到不該出現的位置（實測：整欄內容
+   消失、版面整個跑掉）。這裡用頁面限定 class 明確改寫右欄的列數跟
+   每個子層的 grid-row，用更高的選擇器特異度（兩個 class 疊加）蓋過
+   前面「模板 A」規則的 grid-row:3，不動那條規則本身，其他 8 頁沒有
+   .work__intro--orlo-buy 這個 class，完全不受影響。
+
+   2026-10-22 補充：第一版這裡用 .work__intro--orlo-buy .xxx（兩個
+   class 的特異度）寫 grid-row，結果「模板 A」原本那條
+   .work__intro:has(.work__title-block) .work-heading__buy-row
+   （:has() 裡的 class 也算一個特異度，相當於三個 class）特異度比較
+   高，買列仍然被那條舊規則排到 grid-row:3，跟這裡的早鳥提示疊在
+   同一格，買列真正該在的 grid-row:4 反而空著——實測右欄內容消失、
+   縮圖牆被拉得異常高，根因就是這個特異度輸了，不是 flex/grid 本身
+   算錯。這裡把每一條都改成 .work__intro.work__intro--orlo-buy（兩個
+   class 疊在同一個元素上，等同三個 class 特異度），確保真的蓋過
+   「模板 A」的規則。 */
+@media (min-width: 768px) {
+  .work__intro.work__intro--orlo-buy {
+    grid-template-rows: auto auto auto auto auto auto auto 1fr;
+  }
+
+  .work__intro.work__intro--orlo-buy .work-heading__urgency {
+    grid-column: 2;
+    grid-row: 3;
+  }
+
+  .work__intro.work__intro--orlo-buy .work-heading__buy-row {
+    grid-column: 2;
+    grid-row: 4;
+  }
+
+  .work__intro.work__intro--orlo-buy .work-heading__qty {
+    grid-column: 2;
+    grid-row: 5;
+  }
+
+  .work__intro.work__intro--orlo-buy .addon-section {
+    grid-column: 2;
+    grid-row: 6;
+    margin-top: 0;
+  }
+
+  .work__intro.work__intro--orlo-buy .product-buy-bar {
+    grid-column: 2;
+    grid-row: 7;
+  }
+}
+
 /* ---------- 桌面版縮圖牆移到主圖左側（參考 orlo.co，2026-10-22）----------
    這是頁面限定的 modifier class，只有 products/sand-art-fu/index.html
    的 .work__gallery 掛了這個 class，其他 8 個共用同一套模板的商品頁
@@ -1003,32 +1091,60 @@
    視覺順序顛倒（縮圖牆在左、主圖在右），HTML 裡主圖還是第一個子
    元素，不用為了這個排版改 HTML 結構。 */
 @media (min-width: 1024px) {
+  /* 2026-10-22 二次修正：原本用 flex + align-items:stretch 讓縮圖欄
+     跟主圖「一樣高」，結果縮圖牆反而把主圖撐得比正常比例高很多（實測
+     main/strip 都變成 1200px，遠超過主圖 aspect-ratio 4/5 該有的高度）。
+     根因是 flex 的 auto-height 容器在算「要多高」時，會用兩個子項目
+     「不被拉伸前」的自然高度取最大值——縮圖牆雖然有 overflow-y:auto，
+     但 overflow:auto 不會讓瀏覽器算自然高度時忽略裡面全部縮圖疊起來的
+     高度（12 張縮圖疊起來遠超過主圖高度），於是這個「自然高度最大值」
+     變成縮圖牆的疊起來高度，容器被撐到那麼高，再透過 stretch 把主圖
+     拉伸到同樣誇張的高度，兩邊「一樣高」沒錯，但一樣高在一個錯誤的
+     數字上。
+     改法：讓縮圖牆脫離正常版面流（position:absolute），這樣容器算
+     自身高度時只看主圖（唯一還留在版面流裡的子項目，高度完全由
+     aspect-ratio 4/5 決定），縮圖牆再用 top:0;bottom:0 貼齊這個
+     「已經正確」的高度，內部才能真正靠 overflow-y:auto 捲動。 */
   .work__gallery--thumbs-left {
-    display: flex;
-    flex-direction: row-reverse;
-    align-items: flex-start;
-    gap: var(--space-4);
+    position: relative;
   }
 
+  /* .work__gallery-main 本來有 width:100%（line 915），margin-left 只會
+     把它往右推、不會自動讓寬度跟著縮水（width:100% 是相對 gallery 容器
+     寬度算的，跟 margin 無關），不補 calc() 的話主圖會整個往右超出
+     gallery 容器邊界。 */
   .work__gallery--thumbs-left .work__gallery-main {
-    flex: 1;
+    margin-left: calc(96px + var(--space-4));
+    width: calc(100% - 96px - var(--space-4));
     min-width: 0;
   }
 
   /* 縮圖牆固定寬度直欄，跟主圖並排；原本 .work__gallery-strip-wrap 是
      疊在主圖正下方、靠 margin-top 跟主圖隔開，現在是並排的獨立欄位，
-     不需要那個上邊距。 */
+     不需要那個上邊距。position:absolute + top:0;bottom:0 貼齊主圖的
+     實際高度（見上方說明），本身也要是 flex column，才能讓裡面的
+     .work__gallery-thumbs 用 flex:1 撐滿扣掉上下箭頭之後剩下的高度
+     （見下面）。 */
   .work__gallery--thumbs-left .work__gallery-strip-wrap {
-    flex: 0 0 96px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 96px;
+    display: flex;
+    flex-direction: column;
     margin-top: 0;
-    align-self: stretch;
   }
 
+  /* min-height:0 是讓 flex item 內部真的能出現 overflow 捲動的關鍵
+     （沒有這條，flex item 預設 min-height:auto 會被內容撐開，
+     overflow-y:auto 等於沒作用，縮圖還是會把容器往下撐爆）。 */
   .work__gallery--thumbs-left .work__gallery-thumbs {
+    flex: 1;
+    min-height: 0;
     flex-direction: column;
     overflow-x: hidden;
     overflow-y: auto;
-    max-height: 100%;
   }
 
   /* 水平牆用容器寬度換算出「一次看到 4 張」的寬度，直欄牆改成固定
@@ -1039,12 +1155,28 @@
     width: 96px;
   }
 
-  /* 左右箭頭是給水平捲動用的，直欄牆改用滑鼠滾輪／拖曳捲動，箭頭
-     沒有對應的「上一張/下一張」方向感，直接藏起來（JS 那邊的點擊
-     邏輯本身不受影響，只是用垂直捲動取代水平捲動，見
-     js/hero-thumb-gallery.js）。 */
+  /* 上下箭頭：原本的左右箭頭樣式（absolute, top:0;bottom:0，水平置中
+     在縮圖列兩側）改成固定在縮圖欄頂部／底部、橫跨整個寬度，捲動方向
+     也要從水平改垂直（見 js/hero-thumb-gallery.js 的對應分支），使用者
+     2026-10-22 要求保留箭頭可以點擊捲動，不是單純藏起來改靠滑鼠滾輪。 */
   .work__gallery--thumbs-left .work__gallery-nav {
-    display: none;
+    position: static;
+    width: 100%;
+    height: 28px;
+    flex: 0 0 auto;
+    opacity: 1;
+    background: var(--panel-bg);
+  }
+
+  .work__gallery--thumbs-left .work__gallery-strip-wrap:hover .work__gallery-nav,
+  .work__gallery--thumbs-left .work__gallery-nav:focus-visible {
+    opacity: 1;
+  }
+
+  /* 箭頭圖示本身是左右方向的 chevron（見 HTML 內的 <svg>），垂直牆要
+     指向上／下，直接轉 90 度沿用同一份 SVG，不用另外畫一組圖示。 */
+  .work__gallery--thumbs-left .work__gallery-nav svg {
+    transform: rotate(90deg);
   }
 }
 
@@ -1991,75 +2123,110 @@ button.text-link {
    間距的覆寫，不重新定義顏色或字重——避免同一個動作在不同地方長得不一樣。
    只留圖示、拿掉文字後，可及性名稱改由 markup 上的 aria-label 提供。
    min-height:44px 的觸控下限在 .work__cta--primary 本體上，這裡不動它。 */
-/* ---------- 加購區橫列版（參考 orlo.co「Buy Together and Save More」，
-   2026-10-22）----------
-   頁面限定 modifier，只有 products/sand-art-fu/index.html 的加購卡加了
-   .addon-carousel--list／.addon-card--row，其他頁面的 .addon-carousel／
-   .addon-card 本身毫無變動，繼續用原本可橫滑的直式卡片。這裡改成整組
-   直欄清單（每張卡一整列：縮圖＋名稱＋數量選擇＋價格＋按鈕），不是
-   橫向捲動，所以 track 的 overflow/margin 補償（抵銷 .chapter 內距讓
-   卡片貼齊邊緣捲動）整組不適用，要蓋掉。 */
-.addon-carousel--list .addon-carousel__track {
-  flex-direction: column;
-  overflow-x: visible;
-  margin-left: 0;
-  margin-right: 0;
-  padding: 0;
-  gap: var(--space-2);
-}
-
-.addon-card--row {
-  flex-direction: row;
-  align-items: center;
+/* ---------- 一起加購（參考 orlo.co「Buy Together and Save More」，
+   2026-10-22，目前只有 products/sand-art-fu/index.html 用到）----------
+   跟原本可橫滑的 .addon-carousel／.addon-card（其他商品頁還在用，
+   完全沒動）是兩套獨立元件，不是改寫同一套——orlo 的呈現是「可收合的
+   直欄清單」，每列 checkbox＋縮圖＋名稱＋數量＋價格，跟主商品一起
+   送出，不是每張卡各自獨立的「加入購物車」按鈕，版面/互動模式差異
+   大到沒辦法用 modifier class 疊在舊元件上，所以另開一組新 class。
+   互動邏輯見 js/cart.js（getSelectedAddons()／initAddonToggle()）。 */
+.addon-toggle {
+  appearance: none;
   width: 100%;
-  margin: 0;
-}
-
-.addon-card--row .addon-card__thumb {
-  flex: 0 0 56px;
-  width: 56px;
-  aspect-ratio: 1 / 1;
-}
-
-.addon-card--row .addon-card__body {
-  flex: 1;
-  flex-direction: row;
-  flex-wrap: wrap;
+  border: none;
+  background: var(--color-surface-neutral);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-sharp);
+  display: flex;
   align-items: center;
-  min-width: 0;
-  padding: var(--space-2);
-  gap: var(--space-1) var(--space-2);
-}
-
-.addon-card--row .addon-card__name {
-  flex: 1 1 auto;
-  min-width: 0;
-}
-
-.addon-card--row .addon-card__note {
-  flex-basis: 100%;
-}
-
-.addon-card--row .addon-card__footer {
-  flex: 0 0 auto;
-  margin-top: 0;
-  padding-bottom: 0;
   gap: var(--space-2);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  cursor: pointer;
 }
 
-/* 加購卡各自獨立的數量選擇器，跟買列的 .qty-stepper 同一套視覺語言、
-   縮小尺寸塞進橫列卡片裡；互動邏輯見 js/cart.js initAddonQty()——用
-   data-addon-qty（不是買列用的 data-buy-qty），避免被全頁同步成單一
-   值的既有邏輯吃到（見該函式開頭的說明）。 */
-.addon-card__qty {
+.addon-toggle::after {
+  content: "展開 ＋";
+  margin-left: auto;
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+
+.addon-toggle[aria-expanded="true"]::after {
+  content: "收合 －";
+}
+
+.addon-list {
+  margin-top: var(--space-2);
+  display: flex;
+  flex-direction: column;
+}
+
+/* 跟 cart.css #receiver-section[hidden] 同一種已經踩過的坑：自己宣告了
+   display:flex，特異度蓋過瀏覽器內建的 [hidden]{display:none}，JS 設
+   hidden=true 時這個元素其實還是會整個顯示出來。這裡明確補上覆蓋。 */
+.addon-list[hidden] {
+  display: none;
+}
+
+.addon-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) 0;
+  border-top: 1px solid color-mix(in srgb, var(--color-text-secondary) 15%, transparent);
+}
+
+.addon-row:first-child {
+  border-top: none;
+}
+
+/* 原生 checkbox 放大到跟全站其他勾選框（.confirm-checkbox input）同一個
+   尺寸量級，觸控好按，不用瀏覽器預設的小尺寸。 */
+.addon-row__checkbox {
+  flex: none;
+  width: 18px;
+  height: 18px;
+}
+
+.addon-row__thumb {
+  flex: 0 0 48px;
+  width: 48px;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius-sharp);
+  overflow: hidden;
+}
+
+.addon-row__thumb .placeholder-box {
+  width: 100%;
+  height: 100%;
+  padding: var(--space-1);
+  font-size: 0.45rem;
+}
+
+.addon-row__name {
+  flex: 1;
+  min-width: 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+}
+
+/* 數量選擇器縮小尺寸塞進橫列，互動邏輯沿用既有 js/cart.js
+   initAddonQty()，用 data-addon-qty（不是買列用的 data-buy-qty），
+   避免被全頁同步成單一值的既有邏輯吃到（見該函式開頭的說明）。 */
+.addon-row__qty {
+  flex: none;
   transform: scale(0.85);
-  transform-origin: right center;
 }
 
-.addon-card__cta {
-  flex-shrink: 0;
-  width: auto;
+.addon-row__price {
+  flex: none;
   margin: 0;
+  min-width: 4.5em;
+  text-align: right;
 }
 
 /* ---------- 相關商品：跨商品導流橫向捲動列 ----------
