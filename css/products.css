@@ -797,6 +797,53 @@
   opacity: 0.5;
 }
 
+/* ---------- 手機版固定在螢幕最下方的購買列（參考 orlo.co，2026-10-22，
+   目前只有 products/sand-art-fu/index.html 用到）----------
+   使用者截圖回報 orlo.co 在手機上不管捲到哪裡，畫面最下面都釘著一條
+   「加入購物車／直接購買」，我們原本的按鈕是跟著頁面內容一起捲走的
+   （在「一起加購」下面那條 .product-buy-bar）。這裡是另外一份獨立
+   的 HTML／按鈕（不是用 CSS 把同一顆按鈕搬過來），固定在螢幕底部，
+   只在 <768px（手機）顯示；≥768px 進入兩欄排版後買列本身離頁面頂端
+   不遠，捲動幅度有限，不需要再重複一份固定列。
+   safe-area-inset-bottom 是給有實體 Home Indicator 的 iPhone 用的，
+   避免按鈕被系統手勢列擋住或貼得太緊。 */
+.mobile-sticky-buy {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .mobile-sticky-buy {
+    display: flex;
+    gap: var(--space-2);
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 40;
+    padding: var(--space-2) var(--space-4) calc(var(--space-2) + env(safe-area-inset-bottom));
+    background: var(--panel-bg);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.08);
+  }
+
+  .mobile-sticky-buy [data-add-to-cart],
+  .mobile-sticky-buy [data-buy-now] {
+    flex: 1;
+    width: auto;
+  }
+
+  /* 固定列會一直蓋在頁面最下面，商品頁本身最後面的內容（頁尾）要留出
+     跟固定列差不多高的空間，不然頁尾文字會被蓋住、捲到底也看不完整。
+     .product-page 原本就有 padding-bottom:var(--space-24)（96px，全站
+     共用的一般留白，不是為了這個固定列準備的），這裡要「疊加」固定列
+     實際佔用的高度（量測約 61px，含上下 padding）＋安全間距，不能直接
+     寫一個差不多大小的數字去蓋掉，不然等於只多留 4px、頁尾還是會被
+     蓋住（實測過一次才發現）。 */
+  .product-page:has(.mobile-sticky-buy) {
+    padding-bottom: calc(var(--space-24) + 76px);
+  }
+}
+
 /* 2026-10-18 常駐顯示的購買重點（出貨時間／顏色提醒／材料保存／
    操作提醒）——參考 fisherm.co 商品頁做法，使用者反饋這幾項太重要，
    不該摺在「購買前請閱讀」手風琴裡才看得到。內容由 js/product-terms.js

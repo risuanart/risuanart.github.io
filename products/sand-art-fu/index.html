@@ -536,6 +536,21 @@
       </div>
     </footer>
 
+    <!-- 手機版固定在螢幕最下方的購買列，參考 orlo.co：不管捲到頁面
+         哪裡都看得到、按得到「加入購物車／直接購買」，跟上面買列區塊
+         的 .product-buy-bar 是兩份獨立的按鈕（各自綁定同一套
+         data-add-to-cart／data-buy-now 邏輯，見 js/cart.js），不是同一顆
+         按鈕用 CSS 搬過來的，彼此不會互相干擾。只在手機／平板斷點顯示
+         （見 css/products.css 的 .mobile-sticky-buy），桌面版已經能在
+         捲動不多的範圍內看到買列，不需要重複一份固定列。 -->
+    <div class="mobile-sticky-buy">
+      <button type="button" class="work__cta work__cta--primary" data-add-to-cart data-product="sand-art-fu">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+        <span class="work__cta-label">加入購物車</span>
+      </button>
+      <button type="button" class="work__cta work__cta--buy-now" data-buy-now data-product="sand-art-fu">直接購買</button>
+    </div>
+
   </main>
 
   <script src="../../js/cart.js"></script>
