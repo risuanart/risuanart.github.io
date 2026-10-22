@@ -1053,6 +1053,29 @@
   .work__intro.work__intro--orlo-buy {
     grid-template-rows: auto auto auto auto auto auto auto 1fr;
   }
+}
+
+/* ---------- 整體放大比照 orlo.co（2026-10-22 第三次調整）----------
+   使用者反映跟 orlo.co 原始商品頁相比，我們的主圖／標題看起來明顯偏
+   小。直接拿 Playwright 量測兩邊在同一個 1440px 視窗寬度下的真實
+   CSS px（不是截圖像素，截圖會因為瀏覽器視窗大小/縮放不同而失真）：
+   orlo 主圖 415×554、容器寬 958px、標題 28px；我們主圖 303×378、
+   容器寬 840px（= 全站共用的 --content-max-width token，booking／
+   cart／faq 等其他頁面也在用，不能直接改這個全域變數）、標題 24px。
+   這裡用頁面限定的 .work__intro--orlo-buy 把容器放寬到 1040px、
+   標題字級加大，縮圖欄寬度也在上面從 96px 收窄到 76px（更貼近 orlo
+   的 71px），讓主圖實際可用寬度一起變大，其他 8 頁沒有這個 class，
+   完全不受影響。 */
+@media (min-width: 841px) {
+  .work__intro.work__intro--orlo-buy {
+    max-width: 1040px;
+  }
+}
+
+@media (min-width: 768px) {
+  .work__intro.work__intro--orlo-buy .work-heading {
+    font-size: clamp(1.3rem, 1rem + 1vw, 1.75rem);
+  }
 
   .work__intro.work__intro--orlo-buy .work-heading__urgency {
     grid-column: 2;
@@ -1114,8 +1137,8 @@
      寬度算的，跟 margin 無關），不補 calc() 的話主圖會整個往右超出
      gallery 容器邊界。 */
   .work__gallery--thumbs-left .work__gallery-main {
-    margin-left: calc(96px + var(--space-4));
-    width: calc(100% - 96px - var(--space-4));
+    margin-left: calc(76px + var(--space-4));
+    width: calc(100% - 76px - var(--space-4));
     min-width: 0;
   }
 
@@ -1130,7 +1153,7 @@
     left: 0;
     top: 0;
     bottom: 0;
-    width: 96px;
+    width: 76px;
     display: flex;
     flex-direction: column;
     margin-top: 0;
@@ -1151,8 +1174,8 @@
      方形縮圖（跟 .work__gallery-strip-wrap 的固定寬度一致），不再套
      用那組水平換算公式。 */
   .work__gallery--thumbs-left .work__gallery-thumb {
-    flex: 0 0 96px;
-    width: 96px;
+    flex: 0 0 76px;
+    width: 76px;
   }
 
   /* 上下箭頭：原本的左右箭頭樣式（absolute, top:0;bottom:0，水平置中
