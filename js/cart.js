@@ -87,7 +87,10 @@
     // 使用者提供 12 組漸層色沙實拍照後正式上線，改成真的可以自選色的加購品。
     // 沿用同一個商品鍵（沒有改名），避免要去改全部 8 個商品頁「一起加購」
     // 區塊裡原本寫死的 data-product="sand-art-extra-color" 參照。
-    "sand-art-extra-color": { name: "漸層沙・自選色", price: 150, category: "sand-art", tagline: "12 組漸層色任選，材料更齊全", hidden: true },
+    // 2026-10-22 補充：原本 hidden:true（比照像框上線前的做法，只在加購
+    // 區塊看得到），使用者後來要求跟像框一樣有自己的商品頁、也要能在
+    // 商品總覽／相關商品被看到，不是只能從加購區塊進來，拿掉 hidden。
+    "sand-art-extra-color": { name: "漸層沙・自選色", price: 150, category: "sand-art", tagline: "12 組漸層色任選，材料更齊全" },
     "sand-art-sticker-only": { name: "純貼紙加購・單款", price: 0, category: "sand-art", hasVariant: false, hidden: true },
     // 2026-10-22：沙畫加購像框，兩個尺寸是實體上完全不同的兩個木框（不是同一個
     // 商品選尺寸），比照羊Diss舞蹈紅／藍的先例用兩個獨立商品鍵——也是技術上
