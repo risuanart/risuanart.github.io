@@ -83,7 +83,11 @@
     "sand-art-ying-chun-lantern": { name: "春聯砂畫材料包・燈上迎春 Lit in Chun", shortName: "燈上迎春 Lit in Chun", price: 470, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true, preorder: true, sizeCm: 15 },
     "sand-art-na-fu-lantern": { name: "春聯砂畫材料包・燈上納福 Lit in Na Fu", shortName: "燈上納福 Lit in Na Fu", price: 470, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true, preorder: true, sizeCm: 15 },
     "fluid-art-canvas-kit": { name: "空白畫布＋字貼＋架高杯", price: 0, category: "fluid-art", hasVariant: false, hidden: true },
-    "sand-art-extra-color": { name: "額外顏色沙・固定套組", price: 0, category: "sand-art", hasVariant: false, hidden: true },
+    // 2026-10-22：原本是「額外顏色沙・固定套組」佔位商品（$__，不開放選色），
+    // 使用者提供 12 組漸層色沙實拍照後正式上線，改成真的可以自選色的加購品。
+    // 沿用同一個商品鍵（沒有改名），避免要去改全部 8 個商品頁「一起加購」
+    // 區塊裡原本寫死的 data-product="sand-art-extra-color" 參照。
+    "sand-art-extra-color": { name: "漸層沙・自選色", price: 150, category: "sand-art", tagline: "12 組漸層色任選，材料更齊全", hidden: true },
     "sand-art-sticker-only": { name: "純貼紙加購・單款", price: 0, category: "sand-art", hasVariant: false, hidden: true },
   };
   const CATEGORY_LABELS = { "fluid-art": "春聯流動畫", "sand-art": "春聯砂畫" };
@@ -97,6 +101,20 @@
   const VARIANT_OPTIONS = {
     "fluid-art-gift": ["classic-red", "welcome-pink"],
     "sand-art-light": ["nafu-wave", "yingchun-wave", "yingchun-grid", "nafu-grid", "chun", "fu", "cai", "fu-sheep"],
+    "sand-art-extra-color": [
+      "warm-apricot",
+      "mustard-brown",
+      "forest-green",
+      "ocean-blue",
+      "moss-jade",
+      "sunset-orange",
+      "ink-grey",
+      "lake-teal",
+      "sakura-pink",
+      "wisteria-purple",
+      "rouge-red",
+      "spring-sprout",
+    ],
   };
 
   // 2026-10：羊Diss舞蹈紅／藍兩款原本是同一個商品鍵下的兩個 scheme（購買
@@ -116,6 +134,21 @@
     "fu": "福",
     "cai": "財",
     "fu-sheep": "福（羊Diss舞蹈 Sheep La Danse）",
+    // 2026-10-22：漸層沙・自選色（sand-art-extra-color）12 組和色名，見
+    // products/sand-art-extra-color/index.html 色票選色器，每組對應的
+    // 實際 5 色內容寫在那個頁面的色票說明文字裡，這裡只放色號本身。
+    "warm-apricot": "暖杏",
+    "mustard-brown": "芥褐",
+    "forest-green": "森綠",
+    "ocean-blue": "海藍",
+    "moss-jade": "苔玉",
+    "sunset-orange": "夕橙",
+    "ink-grey": "墨灰",
+    "lake-teal": "湖青",
+    "sakura-pink": "櫻粉",
+    "wisteria-purple": "藤紫",
+    "rouge-red": "胭脂",
+    "spring-sprout": "春芽",
   };
 
   // 單件商品的單價／整行小計，購物車頁與迷你購物車預覽共用同一套計算，
@@ -199,6 +232,18 @@
   const SCHEME_IMAGES = {
     "classic-red": BASE_PREFIX + "assets/images/products/fluid-art/RS_05.7_產品圖片_800x800拷貝.jpg",
     "welcome-pink": BASE_PREFIX + "assets/images/products/fluid-art/RS_05.8_產品圖片_800x800拷貝.jpg",
+    "warm-apricot": BASE_PREFIX + "assets/images/products/sand-art-extra-color/sand-art-extra-color-warm-apricot.jpg",
+    "mustard-brown": BASE_PREFIX + "assets/images/products/sand-art-extra-color/sand-art-extra-color-mustard-brown.jpg",
+    "forest-green": BASE_PREFIX + "assets/images/products/sand-art-extra-color/sand-art-extra-color-forest-green.jpg",
+    "ocean-blue": BASE_PREFIX + "assets/images/products/sand-art-extra-color/sand-art-extra-color-ocean-blue.jpg",
+    "moss-jade": BASE_PREFIX + "assets/images/products/sand-art-extra-color/sand-art-extra-color-moss-jade.jpg",
+    "sunset-orange": BASE_PREFIX + "assets/images/products/sand-art-extra-color/sand-art-extra-color-sunset-orange.jpg",
+    "ink-grey": BASE_PREFIX + "assets/images/products/sand-art-extra-color/sand-art-extra-color-ink-grey.jpg",
+    "lake-teal": BASE_PREFIX + "assets/images/products/sand-art-extra-color/sand-art-extra-color-lake-teal.jpg",
+    "sakura-pink": BASE_PREFIX + "assets/images/products/sand-art-extra-color/sand-art-extra-color-sakura-pink.jpg",
+    "wisteria-purple": BASE_PREFIX + "assets/images/products/sand-art-extra-color/sand-art-extra-color-wisteria-purple.jpg",
+    "rouge-red": BASE_PREFIX + "assets/images/products/sand-art-extra-color/sand-art-extra-color-rouge-red.jpg",
+    "spring-sprout": BASE_PREFIX + "assets/images/products/sand-art-extra-color/sand-art-extra-color-spring-sprout.jpg",
   };
 
   // 總覽格狀購物頁（products/shop.html）電腦版 hover 換圖用的「第二張圖」：

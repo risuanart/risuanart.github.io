@@ -1250,6 +1250,78 @@
   }
 }
 
+/* ---------- 漸層沙・自選色（2026-10-22，只有
+   products/sand-art-extra-color/index.html 用到）----------
+   這頁沒有「圖說」格（不是材料包敘事頁），買列上面多了一排色號選色器，
+   跟 sand-art-fu 的 .work__intro--orlo-buy 同樣道理：全站共用的
+   .work__intro:has(.work__title-block) 只預留 3 列內容（標題區／買列／
+   填充），這頁在標題區跟買列之間多塞了「色號」欄位標籤＋12 色選色器
+   兩個區塊，沒有明確指定 grid-row 會被瀏覽器亂塞進隱性格線，所以這裡
+   用頁面限定 class 重新寫列數＋逐一指定每個子層的 grid-row（兩個 class
+   疊加确保蓋過「模板 A」規則，原因詳見 .work__intro--orlo-buy 那段
+   說明，同一個特異度陷阱）。 */
+@media (min-width: 768px) {
+  .work__intro.work__intro--extra-color {
+    grid-template-rows: auto auto auto auto auto 1fr;
+  }
+
+  .work__intro.work__intro--extra-color .work-heading__field-label {
+    grid-column: 2;
+    grid-row: 3;
+  }
+
+  .work__intro.work__intro--extra-color .gradient-sand-picker {
+    grid-column: 2;
+    grid-row: 4;
+  }
+
+  .work__intro.work__intro--extra-color .work-heading__buy-row {
+    grid-column: 2;
+    grid-row: 5;
+  }
+}
+
+/* 12 色色票選色器：跟 .color-picker（文字＋底線 tab，只有 2 款時夠用）
+   不是同一回事，12 個縮圖排成一列會爆版，改用會自動換行的 grid。縮圖
+   跟底下色號名稱疊在一起用 .color-picker__chip 本身既有的 click／
+   aria-pressed 機制（見 js/gradient-sand-picker.js），這裡只覆寫外觀。 */
+.gradient-sand-picker {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
+  gap: var(--space-4) var(--space-2);
+  margin-top: var(--space-2);
+}
+
+.gradient-sand-picker .color-picker__chip {
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  padding: 0;
+  border-bottom: none;
+  font-size: var(--font-size-xs);
+  text-align: center;
+}
+
+.gradient-sand-picker .color-picker__chip img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: var(--radius-sharp);
+  border: 2px solid transparent;
+  transition: border-color var(--duration-fast) var(--ease-standard),
+    box-shadow var(--duration-fast) var(--ease-standard);
+}
+
+.gradient-sand-picker .color-picker__chip[aria-pressed="true"] img {
+  border-color: var(--color-text-primary);
+  box-shadow: var(--shadow-raised);
+}
+
+.gradient-sand-picker .color-picker__chip[aria-pressed="true"] .color-picker__chip-name {
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
 /* 完整示範影片：2026-10 新增，首款套用在燈上納福。客人拍的是 9:16
    直式影片（手機拍攝的完整製作過程），跟「怎麼玩」裡 4:3 的三支步驟
    特寫片段不同用途——那三支是分解動作特寫，這支是從頭到尾一鏡到底的
@@ -2148,6 +2220,15 @@ button.text-link {
   font-size: 0.5rem;
 }
 
+/* 「漸層沙・自選色」2026-10-22 補上真的實拍照後第一次有加購卡用到真照片，
+   這裡補上 img 規則（之前這格全部都是 placeholder-box，沒有 img 出現過）。 */
+.addon-card__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
 .addon-card__body {
   flex: 1;
   padding: 8px 8px 0;
@@ -2297,6 +2378,32 @@ button.text-link {
   margin: 0;
   min-width: 4.5em;
   text-align: right;
+}
+
+/* 「漸層沙・自選色」這類需要先選色才能加購的項目，不是勾選就能直接送出
+   的 checkbox 列，整排改成可以點的連結，導去獨立的選色頁。沿用同一套
+   .addon-row__thumb／__name／__price 外觀（少了 checkbox／數量選擇器，
+   flex 排列照樣成立），額外補一個不必 title 屬性就看得懂的箭頭圖示，
+   跟純文字列區隔出「這是連結，不是這裡直接完成的動作」。 */
+.addon-row--link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.addon-row--link:hover .addon-row__name {
+  text-decoration: underline;
+}
+
+.addon-row__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.addon-row__arrow {
+  flex: none;
+  color: var(--color-text-secondary);
 }
 
 /* ---------- 相關商品：跨商品導流橫向捲動列 ----------
