@@ -94,12 +94,26 @@
    把 8 個「貼文待補」佔位框換成真的貼文縮圖。後端還沒設定 Instagram 相關
    環境變數、或這次 fetch 失敗（網路問題／API 額度等）時，回傳的 posts 會是
    空陣列或整個 fetch 失敗——兩種情況都直接維持原本的佔位框，不拿掉、不報錯
-   給訪客看，首頁其他部分完全不受影響。 */
+   給訪客看，首頁其他部分完全不受影響。
+
+   2026-10-22 使用者反映全站載入偏慢，實測發現 post.imageUrl 是 Instagram
+   CDN 的全解析度原圖（單張 900KB～3.5MB，8 張疊起來佔首頁重量快 11MB），
+   但這裡的格子只有約 270px 見方（見 css/home-shop.css .preview-follow__
+   grid 的欄寬換算）。改用 images.weserv.nl 這個公開、免費、不用申請
+   金鑰的圖片代理服務，在圖片抓到我們這裡之前先在它的伺服器上縮小＋轉
+   webp 再送過來，瀏覽器只下載縮小後的版本，不用動 risuan-checkout 後端
+   （Instagram Graph API 的 media_url 本來就沒有內建縮圖尺寸參數可以選）。
+   w=600 是抓「電腦 4 欄、retina 2x」情境下的實際需要寬度（270px × 2），
+   比這個更小的螢幕/欄數一樣夠用。 */
 (function () {
   const grid = document.querySelector(".preview-follow__grid");
   if (!grid) return;
 
   const API_BASE = "https://risuan-checkout.vercel.app";
+
+  function resizedThumbUrl(originalUrl) {
+    return `https://images.weserv.nl/?url=${encodeURIComponent(originalUrl.replace(/^https?:\/\//, ""))}&w=600&q=75&output=webp`;
+  }
 
   fetch(`${API_BASE}/api/instagram-posts?limit=8`)
     .then((res) => (res.ok ? res.json() : Promise.reject(new Error(`HTTP ${res.status}`))))
@@ -117,7 +131,7 @@
         link.rel = "noopener";
         link.setAttribute("aria-label", post.caption ? post.caption.slice(0, 60) : "查看這則 Instagram 貼文");
         const img = document.createElement("img");
-        img.src = post.imageUrl;
+        img.src = resizedThumbUrl(post.imageUrl);
         img.alt = "";
         img.loading = "lazy";
         link.appendChild(img);
