@@ -643,6 +643,14 @@
   margin-left: auto;
 }
 
+/* 同一個 [hidden] 特異度坑（.addon-list／.addon-modal__buy-row 都補過
+   同樣的覆寫）：products/sand-art-frame/index.html 的兩顆尺寸各自的
+   加入購物車按鈕放在這裡切換 hidden，.work__cta--primary 的
+   display:inline-flex 一樣會蓋過瀏覽器內建的 [hidden]{display:none}。 */
+.buy-action [hidden] {
+  display: none;
+}
+
 /* 買列的數量選擇器：跟購物車清單裡的 .cart-item__qty 同一套視覺語言
    （方角、細邊框、中間數字），但這裡是加入購物車「之前」先選好要買
    幾件，不是購物車頁那種已經加入、事後修改的情境，用獨立的 class
@@ -1320,6 +1328,72 @@
 .gradient-sand-picker .color-picker__chip[aria-pressed="true"] .color-picker__chip-name {
   font-weight: 700;
   color: var(--color-text-primary);
+}
+
+/* ---------- 沙畫加購像框（2026-10-22，只有
+   products/sand-art-frame/index.html 用到）----------
+   這頁買列上面有兩組各自獨立的選擇器（尺寸／預覽款式），各自前面都有
+   一個 .work-heading__field-label，兩個 label 是同一個 class，沒辦法
+   直接用 class 選到「第一個」「第二個」分開給不同 grid-row——所以
+   HTML 端把「label＋它的選擇器」包成一組 .frame-field 容器，CSS 只要
+   對容器本身排 grid-row，容器內部的 label／選擇器維持自然排列，不用
+   個別處理。比 .work__intro--orlo-buy／--extra-color 多一列（兩組
+   欄位各自一列，不是共用一列），所以是獨立的 modifier class，不是
+   沿用既有兩個。 */
+@media (min-width: 768px) {
+  .work__intro.work__intro--frame {
+    grid-template-rows: auto auto auto auto auto 1fr;
+  }
+
+  .work__intro.work__intro--frame .frame-field--size {
+    grid-column: 2;
+    grid-row: 3;
+  }
+
+  .work__intro.work__intro--frame .frame-field--design {
+    grid-column: 2;
+    grid-row: 4;
+  }
+
+  .work__intro.work__intro--frame .work-heading__buy-row {
+    grid-column: 2;
+    grid-row: 5;
+  }
+}
+
+/* 尺寸選擇器：只有 2 個選項，但要同時顯示尺寸＋價錢兩行文字，用跟
+   12 色選色器不同的卡片式樣（有邊框、橫向並排），不是照片縮圖
+   style，畢竟這裡沒有「每個尺寸長什麼樣」的照片可以放，純文字資訊
+   用卡片比較清楚。 */
+.frame-size-picker {
+  display: flex;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+}
+
+.frame-size-picker__chip {
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid color-mix(in srgb, var(--color-text-secondary) 30%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--color-text-secondary) 30%, transparent);
+  border-radius: var(--radius-sharp);
+}
+
+.frame-size-picker__chip[aria-pressed="true"] {
+  border-color: var(--color-text-primary);
+  background: color-mix(in srgb, var(--color-text-primary) 6%, transparent);
+}
+
+.frame-size-picker__label {
+  font-weight: 700;
+}
+
+.frame-size-picker__price {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
 }
 
 /* 完整示範影片：2026-10 新增，首款套用在燈上納福。客人拍的是 9:16
@@ -3796,5 +3870,127 @@ button.text-link {
 
 .intro-hero__forks a:active {
   opacity: 0.6;
+}
+
+/* ---------- 加購彈窗（2026-10-22，像框加購專用，9 個砂畫商品頁共用
+   同一套 CSS／JS，見 js/frame-addon-modal.js）----------
+   參考使用者截圖的 davincified.com 加購卡片點下去彈出詳細資訊視窗的
+   互動模式，但視覺維持全站克制調性（純色底、直角、沒有圓角卡片／
+   繽紛配色）。z-index:100 蓋過全站目前最高的 .mobile-sticky-buy（40）
+   跟 .site-menu（24），確保彈窗一定疊在最上層。 */
+.addon-modal[hidden] {
+  display: none;
+}
+
+.addon-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+}
+
+.addon-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: color-mix(in srgb, var(--color-text-primary) 55%, transparent);
+}
+
+.addon-modal__dialog {
+  position: relative;
+  background: var(--panel-bg);
+  max-width: 640px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: var(--radius-sharp);
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 640px) {
+  .addon-modal__dialog {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.addon-modal__close {
+  position: absolute;
+  top: var(--space-2);
+  right: var(--space-2);
+  z-index: 1;
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: color-mix(in srgb, var(--color-surface-light) 85%, transparent);
+  border-radius: var(--radius-sharp);
+  cursor: pointer;
+  font-size: 20px;
+  line-height: 1;
+  color: var(--color-text-primary);
+}
+
+.addon-modal__media {
+  background: var(--color-surface-light);
+}
+
+.addon-modal__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.addon-modal__body {
+  padding: var(--space-6) var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.addon-modal__title {
+  margin: 0;
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+}
+
+.addon-modal__note {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.addon-modal__buy-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+}
+
+/* 同一個已經踩過好幾次的坑（.addon-list[hidden]／#receiver-section
+   [hidden] 都遇過）：.work__cta--primary 自己宣告 display:inline-flex，
+   特異度蓋過瀏覽器內建的 [hidden]{display:none}，兩顆尺寸各自的加入
+   購物車按鈕切換 hidden 時其中一顆看起來還是會露出來。這裡明確補上
+   覆蓋，只在彈窗買列裡生效，不影響其他地方的 [hidden] 元素。 */
+.addon-modal__buy-row [hidden] {
+  display: none;
+}
+
+.addon-modal__price {
+  margin: 0;
+  font-weight: 700;
+  font-size: var(--font-size-lg);
+  flex: 1;
+}
+
+.addon-modal__link {
+  margin-top: var(--space-1);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
 }
 

@@ -89,6 +89,15 @@
     // 區塊裡原本寫死的 data-product="sand-art-extra-color" 參照。
     "sand-art-extra-color": { name: "漸層沙・自選色", price: 150, category: "sand-art", tagline: "12 組漸層色任選，材料更齊全", hidden: true },
     "sand-art-sticker-only": { name: "純貼紙加購・單款", price: 0, category: "sand-art", hasVariant: false, hidden: true },
+    // 2026-10-22：沙畫加購像框，兩個尺寸是實體上完全不同的兩個木框（不是同一個
+    // 商品選尺寸），比照羊Diss舞蹈紅／藍的先例用兩個獨立商品鍵——也是技術上
+    // 必須這樣做的原因：目前的購物車架構價格只綁在 productKey 上，沒有「同一個
+    // 商品、不同規格各自不同價錢」的機制，兩個尺寸價錢不一樣（$150／$199），
+    // 用 VARIANT_OPTIONS 的色系/款式選擇器硬套會變成兩個尺寸同一個價錢，不對。
+    // hidden:false（這兩個商品可以單獨購買，不是只能加購，所以不排除在商品
+    // 總覽／相關商品之外），有自己的頁面 products/sand-art-frame/。
+    "sand-art-frame-15": { name: "沙畫加購像框・15×15cm", shortName: "像框 15×15cm", price: 150, category: "sand-art", hasVariant: false, tagline: "內徑 15×15cm，木質畫框，讓作品直接上牆" },
+    "sand-art-frame-20": { name: "沙畫加購像框・20×20cm", shortName: "像框 20×20cm", price: 199, category: "sand-art", hasVariant: false, tagline: "內徑 20×20cm，木質畫框，讓作品直接上牆" },
   };
   const CATEGORY_LABELS = { "fluid-art": "春聯流動畫", "sand-art": "春聯砂畫" };
   // 購物車頁分組顯示的固定順序，不跟著「使用者先加哪一類商品」變動——不然同一個
@@ -274,6 +283,8 @@
     "sand-art-na-fu-lantern": BASE_PREFIX + "assets/images/products/sand-art-na-fu-lantern/sand-art-na-fu-lantern-main.jpg",
     "sand-art-artist-sheep-red": BASE_PREFIX + "assets/images/products/sand-art-artist/sand-art-artist-red-main.jpg",
     "sand-art-artist-sheep-blue": BASE_PREFIX + "assets/images/products/sand-art-artist/sand-art-artist-blue-main.jpg",
+    "sand-art-frame-15": BASE_PREFIX + "assets/images/products/sand-art-frame/mockup-fu-15.jpg",
+    "sand-art-frame-20": BASE_PREFIX + "assets/images/products/sand-art-frame/mockup-fu-20.jpg",
   };
 
   // 這 7 款單一配色沙畫的商品頁首圖都做了「配色動態展示」輪播（出貨配色→
@@ -356,6 +367,9 @@
     "sand-art-na-fu": BASE_PREFIX + "products/sand-art-na-fu/",
     "sand-art-ying-chun-lantern": BASE_PREFIX + "products/sand-art-ying-chun-lantern/",
     "sand-art-na-fu-lantern": BASE_PREFIX + "products/sand-art-na-fu-lantern/",
+    "sand-art-extra-color": BASE_PREFIX + "products/sand-art-extra-color/",
+    "sand-art-frame-15": BASE_PREFIX + "products/sand-art-frame/",
+    "sand-art-frame-20": BASE_PREFIX + "products/sand-art-frame/",
   };
 
   const CART_PAGE_URL = BASE_PREFIX + "cart/";
