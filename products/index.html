@@ -642,16 +642,25 @@
   <section class="content-block">
     <div class="content-block__head">
       <p class="content-block__title">材料包系列</p>
-      <p class="content-block__hint">點選圖片進入該技法的材料包入口</p>
+      <p class="content-block__hint">點選圖片瀏覽該技法的所有款式</p>
     </div>
+    <!-- 2026-10-24 使用者發現這兩格原本連到的 fluid-art-intro／sand-art-intro
+         是很久以前做的舊版 hub 頁（沒有真的 header／promo-bar，整頁還有
+         「首圖待補」佔位框），sand-art-intro 甚至連去 sand-art-light／
+         sand-art-collection 這兩個已經下架的舊商品頁，跟現在官網的設計
+         完全不符。這裡改連到真正符合現在設計的商品總覽頁（products/shop/，
+         已經確認會列出全部現役的流動畫／砂畫款式），不是連到任何一個
+         舊版 hub 頁或單一商品頁——以後真的要做「技法入口頁」（跟首頁／
+         課程 hub 頁同一批規劃），再從頭依照現在的設計規則做一頁新的，
+         不是修補這兩個舊頁面。 -->
     <div class="product-row">
-      <a class="product-card" href="fluid-art-intro/">
+      <a class="product-card" href="shop/">
         <div class="product-card__media"><img src="../assets/images/products/fluid-art/fluid-art-light-kit-red.jpg" alt="流動畫材料包"></div>
         <p class="product-card__en">Fluid Art</p>
         <p class="product-card__title">流動畫材料包</p>
         <p class="product-card__desc">顏料自然流動交融，呈色隨機多變，每一幅都是獨一無二的作品。</p>
       </a>
-      <a class="product-card" href="sand-art-intro/">
+      <a class="product-card" href="shop/">
         <div class="product-card__media"><img src="../assets/images/products/sand-art-fu/sand-art-fu-kit.jpg" alt="砂畫材料包"></div>
         <p class="product-card__en">Sand Art</p>
         <p class="product-card__title">砂畫材料包</p>
