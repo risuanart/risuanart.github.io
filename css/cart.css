@@ -1158,6 +1158,7 @@
 }
 
 .cart-item__thumb-link {
+  position: relative;
   flex: none;
   display: block;
   transition: opacity var(--duration-fast) var(--ease-standard);
@@ -1321,6 +1322,20 @@
   margin: 0;
   min-width: 6ch;
   text-align: right;
+}
+
+/* 2026-10-23：跟商品頁／商品總覽卡片同一套早鳥折扣呈現（角標＋橘字
+   tagline＋價格本身不帶徽章），全站統一，不再是購物車頁單獨一套圓角
+   藍底徽章樣式。放在 .cart-item__info 裡（商品名下方），不是
+   .cart-item__meta 那個數量／價格的 flex row 裡——那排本來就排滿
+   （數量在左、價格在右貼齊 space-between），硬塞第三個 flex 子項目
+   會逼數量跟價格分家跳成三行，放名稱下方不會動到既有排版。 */
+.cart-item__discount-tagline {
+  margin: 2px 0 0;
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: var(--color-warning);
 }
 
 /* 垃圾桶線條圖示取代「移除」文字，跟購物車徽章、加入購物車按鈕同一套圖示語言。

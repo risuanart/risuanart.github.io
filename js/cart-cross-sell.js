@@ -8,9 +8,13 @@
 (function () {
   const PLUS_ICON = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>';
 
+  // 2026-10-23：跟商品總覽卡片（js/products-overview.js）同一套早鳥折扣
+  // 呈現方式，原本這裡用的是購物車頁那套圓角藍底徽章
+  // （priceDiscountHTML），這張卡片本來就是直接沿用 .shop-card 結構，
+  // 理當跟真正的商品總覽卡片長一樣，不是另外一套樣式。
   function priceText(product) {
     if (!product.price) return "$__";
-    return window.RisuanCart ? window.RisuanCart.priceDiscountHTML(product.price, 1) : `$${product.price.toLocaleString()}`;
+    return window.RisuanCart ? window.RisuanCart.priceDiscountHTMLPlain(product.price, 1) : `$${product.price.toLocaleString()}`;
   }
 
   function cardHTML(key, product, cart) {
@@ -21,13 +25,17 @@
     const variantInput = defaultScheme
       ? `<select class="variant-select" hidden aria-hidden="true"><option value="${defaultScheme}" selected></option></select>`
       : "";
+    const discountActive = product.price && cart.earlyBirdActive && cart.earlyBirdActive();
+    const cornerBadge = discountActive ? `<span class="discount-badge-corner discount-badge-corner--standalone">SALE</span>` : "";
+    const discountTagline = discountActive ? `<p class="shop-card__discount-tagline">${cart.EARLY_BIRD_TAGLINE}</p>` : "";
     return `
       <div class="shop-card" data-product-card>
-        <a class="shop-card__media" href="${url}">${thumb}</a>
+        <a class="shop-card__media" href="${url}">${thumb}${cornerBadge}</a>
         <button type="button" class="shop-card__add" data-add-to-cart data-product="${key}" aria-label="加入購物車：${product.name}">${PLUS_ICON}</button>
         ${variantInput}
         <a class="shop-card__info" href="${url}">
           <p class="shop-card__name">${product.name}</p>
+          ${discountTagline}
           <p class="shop-card__price price-text">${priceText(product)}</p>
         </a>
       </div>`;

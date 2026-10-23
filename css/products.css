@@ -2601,6 +2601,16 @@ button.text-link {
   margin: 2px 0 0;
 }
 
+/* 2026-10-23：跟 .shop-card__discount-tagline 同一套（商品總覽卡片），
+   全站早鳥折扣呈現統一。 */
+.related-card__discount-tagline {
+  margin: 2px 0 0;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: var(--color-warning);
+}
+
 /* 左右箭頭：平常透明貼在卡片列邊緣，滑鼠移進整個 .related-products
    範圍才淡入顯示（對應參考頁面的「reveal」手法）。手機沒有真正的 hover
    狀態，直接靠手指滑動捲動，箭頭用 media query 關掉，不是忘記做。 */

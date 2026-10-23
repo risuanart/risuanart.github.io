@@ -16,9 +16,13 @@
     "sand-art": "砂畫材料包",
   };
 
+  // 2026-10-23：跟商品總覽卡片（js/products-overview.js）同一套早鳥折扣
+  // 呈現方式——角標＋橘字 tagline＋priceDiscountHTMLPlain（價格本身不帶
+  // 徽章），原本這裡用的是購物車頁那套圓角藍底徽章（priceDiscountHTML），
+  // 跟商品頁／商品總覽不一致，使用者要求全站統一。
   function priceText(product) {
     if (!product.price) return "$__";
-    return window.RisuanCart ? window.RisuanCart.priceDiscountHTML(product.price, 1) : `$${product.price.toLocaleString()}`;
+    return window.RisuanCart ? window.RisuanCart.priceDiscountHTMLPlain(product.price, 1) : `$${product.price.toLocaleString()}`;
   }
 
   // 跟 js/products-overview.js 的 carouselThumbHTML() 同一套邏輯：有配色
@@ -48,12 +52,16 @@
     // 「播一輪就停」早就播完停在主圖了，等於看不到配色動態展示的效果。
     const carouselAttr = colorwayFrames ? " data-hero-carousel data-carousel-loop" : "";
     const eyebrow = CATEGORY_LABELS[product.category] || "";
+    const discountActive = product.price && cart.earlyBirdActive && cart.earlyBirdActive();
+    const cornerBadge = discountActive ? `<span class="discount-badge-corner discount-badge-corner--standalone">SALE</span>` : "";
+    const discountTagline = discountActive ? `<p class="related-card__discount-tagline">${cart.EARLY_BIRD_TAGLINE}</p>` : "";
     return `
       <a class="related-card" href="${url}">
-        <div class="related-card__media"${carouselAttr}>${thumb}</div>
+        <div class="related-card__media"${carouselAttr}>${thumb}${cornerBadge}</div>
         <div class="related-card__body">
           <p class="related-card__eyebrow">${eyebrow}</p>
           <p class="related-card__name">${product.shortName || product.name}</p>
+          ${discountTagline}
           <p class="related-card__price price-text">${priceText(product)}</p>
         </div>
       </a>`;

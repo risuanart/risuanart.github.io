@@ -206,24 +206,16 @@
     return earlyBirdPrice(unit).discounted * item.qty;
   }
 
-  // 統一組「原價（劃線）→折扣後金額→早鳥9折標籤」這段 HTML，給任何有
-  // 足夠空間顯示完整折扣資訊的地方用（購物車頁逐項價格／小計）；空間
-  // 小的地方（迷你購物車預覽）維持只顯示折扣後金額，不用這個。沒有
-  // 折扣時直接退回單純的金額文字，不會多畫出空的劃線價格。
-  function priceDiscountHTML(unitPrice, qty) {
-    const { discounted, amount } = earlyBirdPrice(unitPrice);
-    const originalTotal = unitPrice * qty;
-    const discountedTotal = discounted * qty;
-    if (amount <= 0) return `$${originalTotal.toLocaleString()}`;
-    return `<s class="price-discount__original">$${originalTotal.toLocaleString()}</s> <span class="price-discount__final">$${discountedTotal.toLocaleString()}</span> <span class="price-discount__badge">早鳥9折</span>`;
-  }
-
   // 2026-10-18 使用者要求商品頁／商品總覽卡片的早鳥折扣改成仿 koyama／
   // simpleisstudio 的呈現：圖片角落空心「SALE」標＋標題附近一行橘色文字
-  // 「EARLY BIRD · 10% OFF」，取代原本價格旁邊的圓角藍底徽章。這兩處改用
-  // priceDiscountHTMLPlain()（只有劃線原價＋折扣後金額，不帶徽章）＋
-  // EARLY_BIRD_TAGLINE 文字＋CSS 角標，購物車頁（逐項價格／小計）維持原本
-  // priceDiscountHTML() 的徽章樣式不變，兩種情境分開，不互相影響。
+  // 「EARLY BIRD · 10% OFF」，取代原本價格旁邊的圓角藍底徽章。
+  // 2026-10-23：這套呈現方式推廣成全站唯一一套——購物車頁逐項價格／
+  // 小計、相關商品、購物車頁「您可能對此有興趣」原本各自還在用一個
+  // 只有這幾處在用的 priceDiscountHTML()（劃線原價＋折扣後金額＋圓角
+  // 藍底「早鳥9折」徽章），使用者指出這樣視覺不統一，全部改用這支
+  // Plain 版本（不帶徽章，徽章改由呼叫端自己視情況加 discount-badge-
+  // corner／tagline），priceDiscountHTML() 已經沒有任何地方在呼叫，
+  // 直接整支刪掉，不留死函式。
   function priceDiscountHTMLPlain(unitPrice, qty) {
     const { discounted, amount } = earlyBirdPrice(unitPrice);
     const originalTotal = unitPrice * qty;
@@ -1029,14 +1021,25 @@
           .map((key) => `<option value="${key}"${key === item.scheme ? " selected" : ""}>${SCHEME_NAMES[key] || key}</option>`)
           .join("")}</select>`
       : "";
+    // 2026-10-23 使用者指出早鳥折扣呈現方式（商品頁／商品總覽已經改成
+    // 角標＋橘字 tagline＋無徽章價格）跟購物車頁、相關商品還是兩套不同
+    // 樣式並存，要求全站統一——這裡拿掉原本購物車頁專屬的
+    // .price-discount__badge 圓角藍底徽章，改用跟商品總覽卡片同一套
+    // discount-badge-corner（縮圖角標）＋ EARLY_BIRD_TAGLINE（價格上方
+    // 橘字）＋priceDiscountHTMLPlain（價格本身不帶徽章），三處視覺語言
+    // 完全一致，不再各自一套。
+    const discountActive = product.price && earlyBirdActive();
+    const cornerBadge = discountActive ? `<span class="discount-badge-corner discount-badge-corner--standalone">SALE</span>` : "";
+    const discountTagline = discountActive ? `<p class="cart-item__discount-tagline">${EARLY_BIRD_TAGLINE}</p>` : "";
     li.innerHTML = `
       <a class="cart-item__thumb-link" href="${productUrl}">
-        ${thumbHTML(item, "cart-item__thumb")}
+        ${thumbHTML(item, "cart-item__thumb")}${cornerBadge}
       </a>
       <div class="cart-item__body">
         <div class="cart-item__info">
           <a class="cart-item__name" href="${productUrl}">${product.shortName || product.name}</a>
           ${schemeSelectHTML}
+          ${discountTagline}
         </div>
         <div class="cart-item__meta">
           <div class="cart-item__qty-actions">
@@ -1049,7 +1052,7 @@
               <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16"/><path d="M9 7V4h6v3"/><path d="M6 7l1 13h10l1-13"/></svg>
             </button>
           </div>
-          <p class="cart-item__price price-text">${priceDiscountHTML(product.price, item.qty)}</p>
+          <p class="cart-item__price price-text">${priceDiscountHTMLPlain(product.price, item.qty)}</p>
         </div>
       </div>
     `;
@@ -1118,9 +1121,12 @@
       if (totalEl) {
         const original = cartTotalOriginal();
         const discounted = cartTotal();
+        // 小計是一行加總文字，不是單一商品卡片，沒有縮圖可以貼角標，也
+        // 沒有特定商品名稱可以接 tagline，統一拿掉徽章、只留劃線原價＋
+        // 折扣後金額（跟 priceDiscountHTMLPlain 同一種呈現），不是漏改。
         totalEl.innerHTML =
           original > discounted
-            ? `小計 <s class="price-discount__original">$${original.toLocaleString()}</s> <span class="price-discount__final">$${discounted.toLocaleString()}</span> <span class="price-discount__badge">早鳥9折</span>`
+            ? `小計 <s class="price-discount__original">$${original.toLocaleString()}</s> <span class="price-discount__final">$${discounted.toLocaleString()}</span>`
             : `小計 $${discounted.toLocaleString()}`;
       }
     }
@@ -1162,7 +1168,6 @@
     cartTotal,
     earlyBirdPrice,
     earlyBirdActive,
-    priceDiscountHTML,
     priceDiscountHTMLPlain,
     EARLY_BIRD_TAGLINE,
     PREORDER_NOTE,
