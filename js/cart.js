@@ -101,6 +101,14 @@
     // 總覽／相關商品之外），有自己的頁面 products/sand-art-frame/。
     "sand-art-frame-15": { name: "沙畫加購像框・15×15cm", shortName: "像框 15×15cm", price: 150, category: "sand-art", hasVariant: false, tagline: "內徑 15×15cm，木質畫框，讓作品直接上牆" },
     "sand-art-frame-20": { name: "沙畫加購像框・20×20cm", shortName: "像框 20×20cm", price: 199, category: "sand-art", hasVariant: false, tagline: "內徑 20×20cm，木質畫框，讓作品直接上牆" },
+    // 2026-10-24：72 色沙（A／B／C 三組各 24 色）加購品，單組與全組是兩個
+    // 價錢不同的獨立商品鍵（跟上面 sand-art-frame-15／-20 兩個尺寸同一個
+    //理由——cart.js 的價格只綁在 productKey 上，沒有「同一商品、不同
+    // 購買方式各自不同價錢」的機制）。單組（sand-art-24color）有 A／B／C
+    // 三個 scheme 可選（見 VARIANT_OPTIONS），全組（sand-art-24color-
+    // bundle）固定是 A+B+C 一次買齊，hasVariant:false，沒有色組選擇。
+    "sand-art-24color": { name: "砂畫・24色任選組", price: 560, category: "sand-art", tagline: "24 色單組，A／B／C 任選一組" },
+    "sand-art-24color-bundle": { name: "砂畫・24色任選組（72色全組）", shortName: "72色全組", price: 1480, category: "sand-art", hasVariant: false, tagline: "A＋B＋C 一次買齊 72 色，比分開買三組更划算" },
   };
   const CATEGORY_LABELS = { "fluid-art": "春聯流動畫", "sand-art": "春聯砂畫" };
   // 購物車頁分組顯示的固定順序，不跟著「使用者先加哪一類商品」變動——不然同一個
@@ -127,6 +135,7 @@
       "rouge-red",
       "spring-sprout",
     ],
+    "sand-art-24color": ["set-a", "set-b", "set-c"],
   };
 
   // 2026-10：羊Diss舞蹈紅／藍兩款原本是同一個商品鍵下的兩個 scheme（購買
@@ -161,6 +170,14 @@
     "wisteria-purple": "藤紫",
     "rouge-red": "胭脂",
     "spring-sprout": "春芽",
+    // 2026-10-24：72 色沙（sand-art-24color）A／B／C 三組，色號清單見
+    // products/sand-art-24color/index.html 色票選色器的 alt 文字，這裡
+    // 只放色組名稱本身。刻意不比照上面 5 色組那套詩意命名（暖杏／海藍
+    // 之類），使用者要求用「字母＋色系描述」區隔開兩個不同商品，選購
+    // 時能一眼看出色系內容。
+    "set-a": "A｜暖色組",
+    "set-b": "B｜藍紫組",
+    "set-c": "C｜綠棕組",
   };
 
   // 單件商品的單價／整行小計，購物車頁與迷你購物車預覽共用同一套計算，
@@ -248,6 +265,9 @@
     "wisteria-purple": BASE_PREFIX + "assets/images/products/sand-art-extra-color/sand-art-extra-color-wisteria-purple.jpg",
     "rouge-red": BASE_PREFIX + "assets/images/products/sand-art-extra-color/sand-art-extra-color-rouge-red.jpg",
     "spring-sprout": BASE_PREFIX + "assets/images/products/sand-art-extra-color/sand-art-extra-color-spring-sprout.jpg",
+    "set-a": BASE_PREFIX + "assets/images/products/sand-art-24color/sand-art-24color-set-a.jpg",
+    "set-b": BASE_PREFIX + "assets/images/products/sand-art-24color/sand-art-24color-set-b.jpg",
+    "set-c": BASE_PREFIX + "assets/images/products/sand-art-24color/sand-art-24color-set-c.jpg",
   };
 
   // 總覽格狀購物頁（products/shop.html）電腦版 hover 換圖用的「第二張圖」：
@@ -280,6 +300,7 @@
     "sand-art-artist-sheep-blue": BASE_PREFIX + "assets/images/products/sand-art-artist/sand-art-artist-blue-main.jpg",
     "sand-art-frame-15": BASE_PREFIX + "assets/images/products/sand-art-frame/mockup-fu-15.jpg",
     "sand-art-frame-20": BASE_PREFIX + "assets/images/products/sand-art-frame/mockup-fu-20.jpg",
+    "sand-art-24color-bundle": BASE_PREFIX + "assets/images/products/sand-art-24color/sand-art-24color-bundle.jpg",
   };
 
   // 這 7 款單一配色沙畫的商品頁首圖都做了「配色動態展示」輪播（出貨配色→
@@ -365,6 +386,8 @@
     "sand-art-extra-color": BASE_PREFIX + "products/sand-art-extra-color/",
     "sand-art-frame-15": BASE_PREFIX + "products/sand-art-frame/",
     "sand-art-frame-20": BASE_PREFIX + "products/sand-art-frame/",
+    "sand-art-24color": BASE_PREFIX + "products/sand-art-24color/",
+    "sand-art-24color-bundle": BASE_PREFIX + "products/sand-art-24color/",
   };
 
   const CART_PAGE_URL = BASE_PREFIX + "cart/";

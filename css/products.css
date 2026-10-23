@@ -1396,6 +1396,61 @@
   color: var(--color-text-secondary);
 }
 
+/* ---------- 砂畫・24色任選組（2026-10-24，只有
+   products/sand-art-24color/index.html 用到）----------
+   跟上面「沙畫加購像框」同一個排版道理：買列上面有兩組各自獨立的
+   選擇器（購買方式：單組／全組，跟色組：A／B／C），各自包成
+   .sand24-field 容器再各自指定 grid-row，不直接沿用 .frame-field--size
+   ／--design 那組名稱（語意上是不同東西，沿用名字會讓人誤會這頁也在
+   選尺寸／款式）。購買方式卡片外觀直接沿用上面 .frame-size-picker 那組
+   既有樣式（卡片式、文字＋價錢兩行），不用另外寫一份一樣的 CSS。 */
+@media (min-width: 768px) {
+  .work__intro.work__intro--24color {
+    grid-template-rows: auto auto auto auto auto 1fr;
+  }
+
+  .work__intro.work__intro--24color .sand24-field--tier {
+    grid-column: 2;
+    grid-row: 3;
+  }
+
+  .work__intro.work__intro--24color .sand24-field--scheme {
+    grid-column: 2;
+    grid-row: 4;
+  }
+
+  .work__intro.work__intro--24color .work-heading__buy-row {
+    grid-column: 2;
+    grid-row: 5;
+  }
+}
+
+/* 購買方式卡片（.sand24-tier-picker__chip）刻意不套用 .color-picker__chip
+   這個共用 class——雖然樣式上想借用它的按鈕重置（appearance:none／
+   display:flex／cursor:pointer），但 js/cart.js 的 activeScheme()／
+   initColorHint() 是用 document 範圍找「第一個
+   .color-picker__chip[aria-pressed=true]」來判斷目前選的色系，這頁
+   DOM 順序購買方式卡片在色組選色器前面，掛同一個 class 會被誤判成
+   「目前選的色系」，色組永遠讀到 undefined、purchase 時 scheme 會
+   被 fallback 成 "default"，選的 A／B／C 整個沒生效。這裡用一組獨立的
+   class 補回同樣的按鈕重置，不借用 .color-picker__chip，兩組選擇器
+   徹底不共用 class，不會再互相干擾。 */
+.sand24-tier-picker__chip {
+  appearance: none;
+  display: flex;
+  background: none;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+}
+
+/* 全組（72色，A+B+C 一次買齊）不需要選色組，.sand24-field--scheme 整個
+   隱藏時，手機版（flex/grid 直向堆疊）跟桌機版（上面固定 grid-row）都
+   要讓後面的買列自然往上貼，不留空格——這裡沒有任何規則把
+   .sand24-field--scheme 設成 flex/grid 之類會跟瀏覽器預設
+   [hidden]{display:none} 打架的 display 值，所以切換 hidden 屬性本身
+   就夠，不用額外覆寫。 */
+
 /* 完整示範影片：2026-10 新增，首款套用在燈上納福。客人拍的是 9:16
    直式影片（手機拍攝的完整製作過程），跟「怎麼玩」裡 4:3 的三支步驟
    特寫片段不同用途——那三支是分解動作特寫，這支是從頭到尾一鏡到底的
