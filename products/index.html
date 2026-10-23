@@ -38,6 +38,10 @@
 <link rel="stylesheet" href="../css/products.css">
 <link rel="stylesheet" href="../css/cart.css">
 <link rel="stylesheet" href="../css/site-menu.css">
+<!-- 2026-10-24 補完頁面內容時一併補上全站共用黑色頁尾（原本這頁用自己
+     手刻的淺色 <footer>，跟其他頁都不一樣，見下方 <footer class="preview-footer">
+     說明）。 -->
+<link rel="stylesheet" href="../css/site-footer.css">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
 <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16">
@@ -404,6 +408,83 @@
   }
   .project-card:hover span{ transform:scale(1.05); }
 
+  /* ================= 頁面補完（2026-10-24） =================
+     這頁原本的 .meta 比較表格／.gallery／.more-projects 都是當年還沒拍
+     照片時留下的草稿佔位內容（見 git 歷史），現在用討論過的模擬圖定案
+     版面補完：材料包系列改成技法入口卡（流動畫／砂畫，圖片在上、文字
+     在下，不顯示價格，因為這兩個入口涵蓋該技法底下所有款式，不是單一
+     商品）；新增「加購配件」滿版 banner 讓 12 色漸層沙的選色組圖有地方
+     曝光；「其他服務」兩張卡片換成真的實體課程／企業活動照片。版面寬度
+     套用全站既有的 840px 置中規則（--content-max-width／--content-pad，
+     見 products.css .content-container 那組規則），不是自己發明寬度。 */
+  .content-block--hero .hero{
+    padding:0;
+    text-align:center;
+  }
+
+  .content-block{
+    width:100%;
+    margin-left:auto;
+    margin-right:auto;
+    padding-left:var(--content-pad);
+    padding-right:var(--content-pad);
+    padding-top:var(--gap-lg);
+  }
+  @media (min-width:841px){
+    .content-block{ max-width:var(--content-max-width); }
+    .overview{
+      max-width:var(--content-max-width);
+      margin-left:auto;
+      margin-right:auto;
+      padding-left:var(--content-pad);
+      padding-right:var(--content-pad);
+    }
+  }
+  .content-block__head{ display:flex; align-items:baseline; justify-content:space-between; gap:8px; flex-wrap:wrap; margin-bottom:20px; }
+  .content-block__title{ font-size:12px; text-transform:uppercase; letter-spacing:1px; }
+  .content-block__hint{ font-size:11px; color:#666; }
+
+  /* 材料包系列：技法入口卡，圖片在上、中英文標題＋差異化說明在下 */
+  .product-row{ display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+  .product-card{ display:block; }
+  .product-card__media{ aspect-ratio:16/9.5; overflow:hidden; background:#2E2F16; }
+  .product-card__media img{ width:100%; height:100%; object-fit:cover; transition:transform .5s ease; }
+  .product-card:hover .product-card__media img{ transform:scale(1.035); }
+  .product-card__en{ margin-top:18px; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:#999; }
+  .product-card__title{ margin-top:6px; font-size:19px; font-weight:700; letter-spacing:0.5px; }
+  .product-card__desc{ margin-top:8px; font-size:13px; line-height:1.7; color:#666; }
+  @media (max-width:768px){
+    .product-row{ grid-template-columns:1fr; gap:36px; }
+    .product-card{ text-align:center; }
+    .product-card__media{ aspect-ratio:16/10; }
+  }
+
+  .feature-tile{ position:relative; overflow:hidden; display:block; aspect-ratio:16/6.2; background:#2E2F16; }
+  .feature-tile img{ width:100%; height:100%; object-fit:cover; }
+  .feature-tile__overlay{ position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; padding:0 clamp(20px,5vw,48px); background:linear-gradient(90deg, rgba(20,20,10,0.72) 0%, rgba(20,20,10,0.18) 58%, rgba(20,20,10,0) 85%); }
+  .feature-tile__eyebrow{ color:#E8C989; font-size:11px; letter-spacing:2px; text-transform:uppercase; margin-bottom:10px; }
+  .feature-tile__title{ color:#f5f5ed; font-size:clamp(17px,2.2vw,24px); letter-spacing:0.5px; max-width:400px; line-height:1.5; }
+  .feature-tile__cta{ margin-top:14px; display:inline-flex; color:#f5f5ed; font-size:11px; letter-spacing:2px; text-transform:uppercase; border-bottom:1px solid rgba(245,245,237,0.55); padding-bottom:4px; width:fit-content; }
+  @media (max-width:768px){
+    .feature-tile{ aspect-ratio:4/3.2; }
+    .feature-tile__overlay{ background:linear-gradient(180deg, rgba(20,20,10,0.1) 0%, rgba(20,20,10,0.75) 72%); justify-content:flex-end; padding:0 20px 20px; }
+    .feature-tile__title{ font-size:16px; }
+  }
+
+  .tile{ position:relative; overflow:hidden; display:block; background:#2E2F16; }
+  .tile img{ width:100%; height:100%; object-fit:cover; transition:transform .5s ease; }
+  .tile:hover img{ transform:scale(1.035); }
+  .tile__overlay{ position:absolute; inset:0; display:flex; flex-direction:column; justify-content:flex-end; padding:18px; background:linear-gradient(180deg, rgba(20,20,10,0) 45%, rgba(20,20,10,0.72) 100%); }
+  .tile__name{ color:#fff; font-size:15px; font-weight:700; margin-bottom:4px; }
+  .tile__price{ color:rgba(255,255,255,0.86); font-size:11px; }
+  .tile-row{ display:grid; gap:14px; }
+  .service-row{ grid-template-columns:1fr 1fr; }
+  .service-tile{ aspect-ratio:1.3/1; }
+  @media (max-width:768px){
+    .service-row{ grid-template-columns:1fr; }
+    .service-tile{ aspect-ratio:4/3; }
+  }
+
   /* ---------- Footer ---------- */
   footer{
     padding: var(--gap-lg) var(--pad-h) calc(var(--gap-lg) + 80px);
@@ -534,15 +615,16 @@
   <div class="site-menu-backdrop" id="site-menu-backdrop"></div>
   <nav class="site-menu" id="site-menu" aria-label="全站選單" data-menu-base="../"></nav>
 
-  <section class="hero">
-    <h1 class="fade-in">手作材料包</h1>
-    <div class="tagline fade-in delay-1">Color Your Own New Year</div>
-    <p class="intro fade-in delay-2">
-      一份禮，不只迎新，也留住一段節氣的美好。<br><br>
-      如果你已經對制式的新春禮盒提不起興趣，<br>
-      今年，換一種方式迎接新年。
-    </p>
-    <div class="hero-image fade-in delay-2"><span class="photo-note">建議拍攝：材料包全家福或開箱情境照，呼應「一份禮，不只迎新」的節慶氛圍</span></div>
+  <section class="content-block content-block--hero fade-in">
+    <div class="hero">
+      <h1 class="fade-in">手作材料包</h1>
+      <div class="tagline fade-in delay-1">Color Your Own New Year</div>
+      <p class="intro fade-in delay-2">
+        一份禮，不只迎新，也留住一段節氣的美好。<br><br>
+        如果你已經對制式的新春禮盒提不起興趣，<br>
+        今年，換一種方式迎接新年。
+      </p>
+    </div>
   </section>
 
   <section class="overview">
@@ -557,114 +639,89 @@
     </div>
   </section>
 
-  <!-- 2026-10-17 使用者要求拿掉「輕巧版」字眼：禮盒版暫時下架後，流動畫
-       材料包只剩這一款，沒有另一個版本可以相對比較，標籤改回單純的
-       「流動畫材料包」。 -->
-  <a class="split-row" href="fluid-art-light-red/">
-    <div class="col img-box fade-in"><span class="photo-note">建議拍攝：流動畫材料包成品／包裝照</span></div>
-    <div class="col text-box fade-in delay-1">
-      <strong>流動畫材料包</strong><br>
-      單幅 15cm，最快抵達的新年儀式
+  <section class="content-block">
+    <div class="content-block__head">
+      <p class="content-block__title">材料包系列</p>
+      <p class="content-block__hint">點選圖片進入該技法的材料包入口</p>
     </div>
-  </a>
-
-  <!-- 2026-10-17 流動畫禮盒版（fluid-art-gift）暫時下架，不是刪除——
-       整段註解掉，復原時拿掉註解即可，內容原封不動。
-  <a class="split-row reverse" href="fluid-art-gift/">
-    <div class="col img-box fade-in"><span class="photo-note">建議拍攝：流動畫材料包禮盒版成品／包裝照</span></div>
-    <div class="col text-box fade-in delay-1">
-      <strong>禮盒版材料包</strong><br>
-      雙幅成品，完整的流動畫體驗
-    </div>
-  </a>
-  -->
-
-  <!-- 比較表格：內容直接取自各商品頁已經確定的名稱／價格／一句話標語
-       （js/cart.js PRODUCTS），不是另外編的行銷文案。2026-10-17 流動畫
-       禮盒版、砂畫輕巧版、自由創作組都暫時下架，表格裡現在只剩流動畫
-       材料包這一列還在賣，「版本」欄沒有另一個版本可以相對比較，這格
-       留空；下架的三列整個註解掉，不是只改文字。 -->
-  <section class="meta">
-    <div class="meta-table-wrap">
-      <table class="fade-in">
-        <thead>
-          <tr>
-            <th>版本</th>
-            <th>材料包</th>
-            <th>價格</th>
-            <th>特色</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="tier"></td>
-            <td>春聯流動畫材料包</td>
-            <td class="price">$800</td>
-            <td>單幅 15cm，最快抵達的新年儀式</td>
-          </tr>
-          <!-- 2026-10-17 禮盒版、砂畫輕巧版、自由創作組都暫時下架，這三列
-               跟著註解掉，不刪除，復原時拿掉註解即可：
-          <tr>
-            <td class="tier">輕巧版</td>
-            <td>春聯砂畫材料包</td>
-            <td class="price">$__</td>
-            <td>8 款圖案任選，撕貼倒沙鋪出你的春聯</td>
-          </tr>
-          <tr>
-            <td class="tier">禮盒版</td>
-            <td>春聯流動畫材料包</td>
-            <td class="price">$1,100</td>
-            <td>雙幅成品，完整的流動畫體驗</td>
-          </tr>
-          <tr>
-            <td class="tier">創作組</td>
-            <td>春聯砂畫材料包</td>
-            <td class="price">$__</td>
-            <td>5 款精選圖案＋26色顏料，自由創作一整套</td>
-          </tr>
-          -->
-        </tbody>
-      </table>
+    <div class="product-row">
+      <a class="product-card" href="fluid-art-intro/">
+        <div class="product-card__media"><img src="../assets/images/products/fluid-art/fluid-art-light-kit-red.jpg" alt="流動畫材料包"></div>
+        <p class="product-card__en">Fluid Art</p>
+        <p class="product-card__title">流動畫材料包</p>
+        <p class="product-card__desc">顏料自然流動交融，呈色隨機多變，每一幅都是獨一無二的作品。</p>
+      </a>
+      <a class="product-card" href="sand-art-intro/">
+        <div class="product-card__media"><img src="../assets/images/products/sand-art-fu/sand-art-fu-kit.jpg" alt="砂畫材料包"></div>
+        <p class="product-card__en">Sand Art</p>
+        <p class="product-card__title">砂畫材料包</p>
+        <p class="product-card__desc">分層鋪色、堆疊出圖案，步驟清楚好上手，新手也能做出細緻成品。</p>
+      </a>
     </div>
   </section>
 
-  <section class="gallery">
-    <a class="gallery-item fade-in" href="fluid-art-light-red/">
-      <div class="img-box"><span class="photo-note">建議拍攝：流動畫材料包成品</span></div>
-      <p class="gallery-item__label">流動畫材料包</p>
-    </a>
-    <!-- 2026-10-17 砂畫輕巧版、自由創作組、流動畫禮盒版都暫時下架，這
-         三張卡片跟著註解掉，不刪除，復原時拿掉註解即可：
-    <a class="gallery-item fade-in" href="sand-art-light/">
-      <div class="img-box"><span class="photo-note">建議拍攝：砂畫材料包輕巧版成品或操作過程</span></div>
-      <p class="gallery-item__label">沙畫輕巧版</p>
-    </a>
-    <a class="gallery-item fade-in" href="sand-art-collection/">
-      <div class="img-box"><span class="photo-note">建議拍攝：砂畫材料包創作組成品或操作過程</span></div>
-      <p class="gallery-item__label">沙畫創作版</p>
-    </a>
-    <a class="gallery-item fade-in" href="fluid-art-gift/">
-      <div class="img-box"><span class="photo-note">建議拍攝：流動畫材料包禮盒版成品</span></div>
-      <p class="gallery-item__label">流動畫禮盒版</p>
-    </a>
-    -->
-  </section>
-
-  <section class="more-projects">
-    <h2>其他服務</h2>
-    <a class="project-card fade-in" href="../"><span>實體繪畫課程</span><span class="photo-note">建議拍攝：畫室實體上課情境照</span></a>
-    <a class="project-card fade-in delay-1" href="../"><span>企業/團體課程</span><span class="photo-note">建議拍攝：企業/團體包班活動情境照</span></a>
-  </section>
-
-  <footer>
-    <h2 class="fade-in">日宣繪畫室</h2>
-    <div class="contact fade-in delay-1">
-      對材料包有任何疑問，歡迎私訊
-      <a href="https://instagram.com/ri.suan_art" target="_blank" rel="noopener">@ri.suan_art</a>
+  <section class="content-block">
+    <div class="content-block__head">
+      <p class="content-block__title">加購配件</p>
+      <p class="content-block__hint">12 組漸層色任選</p>
     </div>
-    <div class="bottom-row">
-      <span>© 日宣繪畫室 2026</span>
-      <a href="https://instagram.com/ri.suan_art" target="_blank" rel="noopener">Instagram</a>
+    <a class="feature-tile" href="sand-art-extra-color/">
+      <img src="../assets/images/products/sand-art-extra-color/sand-art-extra-color-12color-grid.jpg" alt="漸層沙・自選色，12 色拼圖">
+      <div class="feature-tile__overlay">
+        <p class="feature-tile__eyebrow">12 色任選</p>
+        <p class="feature-tile__title">漸層沙・自選色，材料更齊全，一次看懂所有色號</p>
+        <span class="feature-tile__cta">查看全部 12 色 →</span>
+      </div>
+    </a>
+  </section>
+
+  <section class="content-block">
+    <div class="content-block__head">
+      <p class="content-block__title">其他服務</p>
+      <p class="content-block__hint">除了材料包，也能到現場或邀請我們到你的場地</p>
+    </div>
+    <div class="tile-row service-row">
+      <a class="tile service-tile" href="../courses/palette-knife-oil/">
+        <img src="../assets/images/courses/palette-knife-oil/hero-poster.jpg" alt="實體繪畫課程">
+        <div class="tile__overlay">
+          <p class="tile__name">實體繪畫課程</p>
+          <p class="tile__price">到畫室跟著老師一步步完成</p>
+        </div>
+      </a>
+      <a class="tile service-tile" href="../enterprise/">
+        <img src="../assets/images/enterprise/fluid-family-day/fluid-booth-wide.jpg" alt="企業/團體課程">
+        <div class="tile__overlay">
+          <p class="tile__name">企業/團體課程</p>
+          <p class="tile__price">包班／快閃活動，邀請我們到你的現場</p>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <footer class="preview-footer">
+    <div class="preview-footer__inner">
+      <div class="preview-footer__col">
+        <p class="preview-footer__heading">ABOUT</p>
+        <p class="preview-footer__about">日宣繪畫室，繪畫課程與手作材料包，在家也能重現課堂的手感溫度。</p>
+        <div class="preview-footer__social">
+          <a href="https://instagram.com/ri.suan_art" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg>
+          </a>
+          <a href="mailto:risuan.art@gmail.com" aria-label="Email">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="preview-footer__col">
+        <p class="preview-footer__heading">INFO</p>
+        <nav class="preview-footer__links">
+          <a href="shop/">所有材料包</a>
+          <a href="../faq/">常見問題</a>
+        </nav>
+      </div>
+      <div class="preview-footer__bottom">
+        <span>© 日宣繪畫室 2026</span>
+      </div>
     </div>
   </footer>
 
