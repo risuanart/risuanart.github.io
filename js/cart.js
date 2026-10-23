@@ -107,8 +107,8 @@
     // 購買方式各自不同價錢」的機制）。單組（sand-art-24color）有 A／B／C
     // 三個 scheme 可選（見 VARIANT_OPTIONS），全組（sand-art-24color-
     // bundle）固定是 A+B+C 一次買齊，hasVariant:false，沒有色組選擇。
-    "sand-art-24color": { name: "砂畫・24色任選組", price: 560, category: "sand-art", tagline: "24 色單組，A／B／C 任選一組" },
-    "sand-art-24color-bundle": { name: "砂畫・24色任選組（72色全組）", shortName: "72色全組", price: 1480, category: "sand-art", hasVariant: false, tagline: "A＋B＋C 一次買齊 72 色，比分開買三組更划算" },
+    "sand-art-24color": { name: "砂畫・24色任選組", price: 450, category: "sand-art", tagline: "24 色單組，A／B／C 任選一組" },
+    "sand-art-24color-bundle": { name: "砂畫・24色任選組（72色全組）", shortName: "72色全組", price: 950, category: "sand-art", hasVariant: false, tagline: "A＋B＋C 一次買齊 72 色，比分開買三組更划算" },
   };
   const CATEGORY_LABELS = { "fluid-art": "春聯流動畫", "sand-art": "春聯砂畫" };
   // 購物車頁分組顯示的固定順序，不跟著「使用者先加哪一類商品」變動——不然同一個
