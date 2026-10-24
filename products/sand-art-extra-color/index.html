@@ -164,53 +164,60 @@
       </div>
 
       <p class="work-heading__field-label fade-in delay-2">色號（12 選 1）</p>
+      <!-- 2026-10-24：選色器從「成品相片縮圖」改成「色條卡」（使用者從
+           色票呈現改版提案裡選定的方向 A）——5 色是同一組由淺到深排好的
+           漸層，色條比相片縮圖更準確傳達「拆開是這些顏色」。色碼目前是
+           估色（.color-picker__chip-swatches 內的 inline style），等
+           實拍分裝沙校色後再換成準確值，互動邏輯不變，主圖切換改讀
+           data-main-img（原本讀 chip 內的 <img src>，縮圖拿掉後改放在
+           按鈕自己的 data 屬性上），見 js/gradient-sand-picker.js。 -->
       <div class="gradient-sand-picker fade-in delay-2" role="group" aria-label="選擇色號">
-        <button type="button" class="color-picker__chip" data-scheme="warm-apricot" data-colors="淺膚、膚、深膚、麥芽、薑黃" aria-pressed="true">
-          <img src="../../assets/images/products/sand-art-extra-color/sand-art-extra-color-warm-apricot.jpg" alt="暖杏：淺膚、膚、深膚、麥芽、薑黃" width="90" height="90" loading="lazy">
+        <button type="button" class="color-picker__chip color-picker__chip--strip" data-scheme="warm-apricot" data-colors="淺膚、膚、深膚、麥芽、薑黃" data-main-img="../../assets/images/products/sand-art-extra-color/sand-art-extra-color-warm-apricot.jpg" aria-pressed="true">
+          <span class="color-picker__chip-swatches" aria-hidden="true"><span style="background:#F4D9BE"></span><span style="background:#EFC9A0"></span><span style="background:#D9A876"></span><span style="background:#C98F4E"></span><span style="background:#C77F2D"></span></span>
           <span class="color-picker__chip-name">暖杏</span>
         </button>
-        <button type="button" class="color-picker__chip" data-scheme="mustard-brown" data-colors="柳黃、芥黃、黃棕、淺棕、棕" aria-pressed="false">
-          <img src="../../assets/images/products/sand-art-extra-color/sand-art-extra-color-mustard-brown.jpg" alt="芥褐：柳黃、芥黃、黃棕、淺棕、棕" width="90" height="90" loading="lazy">
+        <button type="button" class="color-picker__chip color-picker__chip--strip" data-scheme="mustard-brown" data-colors="柳黃、芥黃、黃棕、淺棕、棕" data-main-img="../../assets/images/products/sand-art-extra-color/sand-art-extra-color-mustard-brown.jpg" aria-pressed="false">
+          <span class="color-picker__chip-swatches" aria-hidden="true"><span style="background:#E9DD6B"></span><span style="background:#D8B83A"></span><span style="background:#B98A3D"></span><span style="background:#C6A179"></span><span style="background:#8B5E34"></span></span>
           <span class="color-picker__chip-name">芥褐</span>
         </button>
-        <button type="button" class="color-picker__chip" data-scheme="forest-green" data-colors="淺松、綠、翠綠、深綠、墨綠" aria-pressed="false">
-          <img src="../../assets/images/products/sand-art-extra-color/sand-art-extra-color-forest-green.jpg" alt="森綠：淺松、綠、翠綠、深綠、墨綠" width="90" height="90" loading="lazy">
+        <button type="button" class="color-picker__chip color-picker__chip--strip" data-scheme="forest-green" data-colors="淺松、綠、翠綠、深綠、墨綠" data-main-img="../../assets/images/products/sand-art-extra-color/sand-art-extra-color-forest-green.jpg" aria-pressed="false">
+          <span class="color-picker__chip-swatches" aria-hidden="true"><span style="background:#B7D1A3"></span><span style="background:#4F8F52"></span><span style="background:#2E9E4F"></span><span style="background:#1F5C32"></span><span style="background:#16432A"></span></span>
           <span class="color-picker__chip-name">森綠</span>
         </button>
-        <button type="button" class="color-picker__chip" data-scheme="ocean-blue" data-colors="冰藍、蔚藍、虹藍、孔藍、寶藍" aria-pressed="false">
-          <img src="../../assets/images/products/sand-art-extra-color/sand-art-extra-color-ocean-blue.jpg" alt="海藍：冰藍、蔚藍、虹藍、孔藍、寶藍" width="90" height="90" loading="lazy">
+        <button type="button" class="color-picker__chip color-picker__chip--strip" data-scheme="ocean-blue" data-colors="冰藍、蔚藍、虹藍、孔藍、寶藍" data-main-img="../../assets/images/products/sand-art-extra-color/sand-art-extra-color-ocean-blue.jpg" aria-pressed="false">
+          <span class="color-picker__chip-swatches" aria-hidden="true"><span style="background:#CFE9F2"></span><span style="background:#5FA8D3"></span><span style="background:#3E7FC0"></span><span style="background:#2A6FA0"></span><span style="background:#2451A3"></span></span>
           <span class="color-picker__chip-name">海藍</span>
         </button>
-        <button type="button" class="color-picker__chip" data-scheme="moss-jade" data-colors="淺綠、玉綠、豆青綠、深松、苔綠" aria-pressed="false">
-          <img src="../../assets/images/products/sand-art-extra-color/sand-art-extra-color-moss-jade.jpg" alt="苔玉：淺綠、玉綠、豆青綠、深松、苔綠" width="90" height="90" loading="lazy">
+        <button type="button" class="color-picker__chip color-picker__chip--strip" data-scheme="moss-jade" data-colors="淺綠、玉綠、豆青綠、深松、苔綠" data-main-img="../../assets/images/products/sand-art-extra-color/sand-art-extra-color-moss-jade.jpg" aria-pressed="false">
+          <span class="color-picker__chip-swatches" aria-hidden="true"><span style="background:#BFE0A9"></span><span style="background:#6CB876"></span><span style="background:#8FBE63"></span><span style="background:#3F6B3C"></span><span style="background:#4C6B3A"></span></span>
           <span class="color-picker__chip-name">苔玉</span>
         </button>
-        <button type="button" class="color-picker__chip" data-scheme="sunset-orange" data-colors="洋黃、桔黃、桔紅、紅、珊瑚紅" aria-pressed="false">
-          <img src="../../assets/images/products/sand-art-extra-color/sand-art-extra-color-sunset-orange.jpg" alt="夕橙：洋黃、桔黃、桔紅、紅、珊瑚紅" width="90" height="90" loading="lazy">
+        <button type="button" class="color-picker__chip color-picker__chip--strip" data-scheme="sunset-orange" data-colors="洋黃、桔黃、桔紅、紅、珊瑚紅" data-main-img="../../assets/images/products/sand-art-extra-color/sand-art-extra-color-sunset-orange.jpg" aria-pressed="false">
+          <span class="color-picker__chip-swatches" aria-hidden="true"><span style="background:#F2C94C"></span><span style="background:#F2994A"></span><span style="background:#EB6A3E"></span><span style="background:#D6372D"></span><span style="background:#F08670"></span></span>
           <span class="color-picker__chip-name">夕橙</span>
         </button>
-        <button type="button" class="color-picker__chip" data-scheme="ink-grey" data-colors="白、淺灰、深灰、墨藍、黑" aria-pressed="false">
-          <img src="../../assets/images/products/sand-art-extra-color/sand-art-extra-color-ink-grey.jpg" alt="墨灰：白、淺灰、深灰、墨藍、黑" width="90" height="90" loading="lazy">
+        <button type="button" class="color-picker__chip color-picker__chip--strip" data-scheme="ink-grey" data-colors="白、淺灰、深灰、墨藍、黑" data-main-img="../../assets/images/products/sand-art-extra-color/sand-art-extra-color-ink-grey.jpg" aria-pressed="false">
+          <span class="color-picker__chip-swatches" aria-hidden="true"><span style="background:#F7F5F0"></span><span style="background:#D8D5CC"></span><span style="background:#8B887D"></span><span style="background:#2C3550"></span><span style="background:#1A1A1A"></span></span>
           <span class="color-picker__chip-name">墨灰</span>
         </button>
-        <button type="button" class="color-picker__chip" data-scheme="lake-teal" data-colors="天青、青、松石綠、湖綠、孔綠" aria-pressed="false">
-          <img src="../../assets/images/products/sand-art-extra-color/sand-art-extra-color-lake-teal.jpg" alt="湖青：天青、青、松石綠、湖綠、孔綠" width="90" height="90" loading="lazy">
+        <button type="button" class="color-picker__chip color-picker__chip--strip" data-scheme="lake-teal" data-colors="天青、青、松石綠、湖綠、孔綠" data-main-img="../../assets/images/products/sand-art-extra-color/sand-art-extra-color-lake-teal.jpg" aria-pressed="false">
+          <span class="color-picker__chip-swatches" aria-hidden="true"><span style="background:#AEDCE0"></span><span style="background:#4FAFB5"></span><span style="background:#3FA08C"></span><span style="background:#3E9C7C"></span><span style="background:#2E7D6A"></span></span>
           <span class="color-picker__chip-name">湖青</span>
         </button>
-        <button type="button" class="color-picker__chip" data-scheme="sakura-pink" data-colors="淺粉、粉紫、粉紅、百花粉、洋紅" aria-pressed="false">
-          <img src="../../assets/images/products/sand-art-extra-color/sand-art-extra-color-sakura-pink.jpg" alt="櫻粉：淺粉、粉紫、粉紅、百花粉、洋紅" width="90" height="90" loading="lazy">
+        <button type="button" class="color-picker__chip color-picker__chip--strip" data-scheme="sakura-pink" data-colors="淺粉、粉紫、粉紅、百花粉、洋紅" data-main-img="../../assets/images/products/sand-art-extra-color/sand-art-extra-color-sakura-pink.jpg" aria-pressed="false">
+          <span class="color-picker__chip-swatches" aria-hidden="true"><span style="background:#F7D9DF"></span><span style="background:#E3B9D6"></span><span style="background:#F0A6C1"></span><span style="background:#E88AAE"></span><span style="background:#C83C78"></span></span>
           <span class="color-picker__chip-name">櫻粉</span>
         </button>
-        <button type="button" class="color-picker__chip" data-scheme="wisteria-purple" data-colors="藤紫、紫、油紫、紫羅藍、酞青藍" aria-pressed="false">
-          <img src="../../assets/images/products/sand-art-extra-color/sand-art-extra-color-wisteria-purple.jpg" alt="藤紫：藤紫、紫、油紫、紫羅藍、酞青藍" width="90" height="90" loading="lazy">
+        <button type="button" class="color-picker__chip color-picker__chip--strip" data-scheme="wisteria-purple" data-colors="藤紫、紫、油紫、紫羅藍、酞青藍" data-main-img="../../assets/images/products/sand-art-extra-color/sand-art-extra-color-wisteria-purple.jpg" aria-pressed="false">
+          <span class="color-picker__chip-swatches" aria-hidden="true"><span style="background:#B7A3D1"></span><span style="background:#7C5BA6"></span><span style="background:#6A4A8E"></span><span style="background:#5B3F94"></span><span style="background:#1F4FA0"></span></span>
           <span class="color-picker__chip-name">藤紫</span>
         </button>
-        <button type="button" class="color-picker__chip" data-scheme="rouge-red" data-colors="粉、百花粉、桃粉、玫紅、栗紅" aria-pressed="false">
-          <img src="../../assets/images/products/sand-art-extra-color/sand-art-extra-color-rouge-red.jpg" alt="胭脂：粉、百花粉、桃粉、玫紅、栗紅" width="90" height="90" loading="lazy">
+        <button type="button" class="color-picker__chip color-picker__chip--strip" data-scheme="rouge-red" data-colors="粉、百花粉、桃粉、玫紅、栗紅" data-main-img="../../assets/images/products/sand-art-extra-color/sand-art-extra-color-rouge-red.jpg" aria-pressed="false">
+          <span class="color-picker__chip-swatches" aria-hidden="true"><span style="background:#F6D6DE"></span><span style="background:#E88AAE"></span><span style="background:#F3B3C0"></span><span style="background:#D23E6B"></span><span style="background:#7A2A2E"></span></span>
           <span class="color-picker__chip-name">胭脂</span>
         </button>
-        <button type="button" class="color-picker__chip" data-scheme="spring-sprout" data-colors="米黃、明黃、艾綠、碧綠、湖綠" aria-pressed="false">
-          <img src="../../assets/images/products/sand-art-extra-color/sand-art-extra-color-spring-sprout.jpg" alt="春芽：米黃、明黃、艾綠、碧綠、湖綠" width="90" height="90" loading="lazy">
+        <button type="button" class="color-picker__chip color-picker__chip--strip" data-scheme="spring-sprout" data-colors="米黃、明黃、艾綠、碧綠、湖綠" data-main-img="../../assets/images/products/sand-art-extra-color/sand-art-extra-color-spring-sprout.jpg" aria-pressed="false">
+          <span class="color-picker__chip-swatches" aria-hidden="true"><span style="background:#EDE0BD"></span><span style="background:#F5DA3D"></span><span style="background:#8FA869"></span><span style="background:#2E9E71"></span><span style="background:#3E9C7C"></span></span>
           <span class="color-picker__chip-name">春芽</span>
         </button>
       </div>

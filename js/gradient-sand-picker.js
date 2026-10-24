@@ -27,10 +27,13 @@
     chip.addEventListener("click", () => {
       chips.forEach((c) => c.setAttribute("aria-pressed", c === chip ? "true" : "false"));
       const name = chip.querySelector(".color-picker__chip-name");
-      const thumbImg = chip.querySelector("img");
-      if (mainImg && thumbImg) {
-        mainImg.src = thumbImg.src;
-        mainImg.alt = thumbImg.alt;
+      // 2026-10-24：色票選色器改用色條卡（.color-picker__chip-swatches，
+      // 估色色塊）取代相片縮圖，chip 本身不再有 <img>，主圖來源改讀
+      // chip 自己的 data-main-img（舊版縮圖 <img> 的 src／alt 搬過來）。
+      const mainImgSrc = chip.dataset.mainImg;
+      if (mainImg && mainImgSrc) {
+        mainImg.src = mainImgSrc;
+        mainImg.alt = name ? `${name.textContent} 漸層沙成品參考圖` : "";
       }
       if (hintName && name) hintName.textContent = name.textContent;
       if (hintColors && chip.dataset.colors) hintColors.textContent = chip.dataset.colors;

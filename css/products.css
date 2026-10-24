@@ -1422,6 +1422,40 @@
   color: var(--color-text-primary);
 }
 
+/* 2026-10-24：漸層沙・自選色的色票改用「色條卡」（方向 A，使用者從
+   色票呈現改版提案裡選定），橫向排 5 色由淺到深，取代原本的相片縮圖
+   ——這 5 色是同一組排好的漸層，色條比相片縮圖更準確傳達「拆開是這些
+   顏色」。只加 .color-picker__chip--strip 這個 modifier，不動上面
+   img 版本的規則（sand-art-24color 頁面的 A／B／C 色組選擇器共用同一個
+   .gradient-sand-picker 容器，還是縮圖卡，不受影響）。
+   欄寬也比照放寬：縮圖版 72px 夠放正方形相片，色條卡需要看得出 5 色
+   分色，用 .work__intro--extra-color 這個頁面限定 class 往下找，不改
+   .gradient-sand-picker 本身的 grid-template-columns（24color 頁面的
+   3 顆色組縮圖卡維持原本 72px 欄寬）。 */
+.work__intro--extra-color .gradient-sand-picker {
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+}
+
+.color-picker__chip-swatches {
+  display: flex;
+  width: 100%;
+  aspect-ratio: 5 / 2;
+  border-radius: var(--radius-sharp);
+  overflow: hidden;
+  border: 2px solid transparent;
+  transition: border-color var(--duration-fast) var(--ease-standard),
+    box-shadow var(--duration-fast) var(--ease-standard);
+}
+
+.color-picker__chip-swatches span {
+  flex: 1;
+}
+
+.color-picker__chip--strip[aria-pressed="true"] .color-picker__chip-swatches {
+  border-color: var(--color-text-primary);
+  box-shadow: var(--shadow-raised);
+}
+
 /* ---------- 沙畫加購像框（2026-10-22，只有
    products/sand-art-frame/index.html 用到）----------
    這頁買列上面有兩組各自獨立的選擇器（尺寸／預覽款式），各自前面都有
@@ -2419,6 +2453,61 @@ button.text-link {
 .color-reference-list dd {
   margin: 0;
   color: var(--color-text-secondary);
+}
+
+/* ---------- 圓點色票牆（2026-10-24，只有 products/sand-art-24color/
+   index.html 的「3 組色號一覽」用到，取代原本的 .color-reference-list
+   純文字清單）----------
+   參考 retrojamtaiwan.com 油墨色票頁：每色一個圓點＋色名，這裡是真正
+   的「目錄」情境（查色號、對照還缺哪色），比純文字清單好讀很多。
+   sand-art-extra-color（5 色組）那頁的選色器改用色條卡（見上面
+   .color-picker__chip--strip），兩邊用途不同（選一組 vs. 查目錄），
+   不是同一個元件改名共用。色碼目前是估色（HTML 內 inline style），
+   等實拍分裝沙校色後再換成準確值，不影響這裡的版面結構。 */
+.color-dot-wall {
+  margin-top: var(--space-4);
+}
+
+.color-dot-wall__group {
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--color-brand);
+  margin: var(--space-6) 0 var(--space-2);
+}
+
+.color-dot-wall__group:first-child {
+  margin-top: 0;
+}
+
+.color-dot-wall__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(76px, 1fr));
+  gap: var(--space-4) var(--space-2);
+}
+
+.color-dot-wall__chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-1);
+}
+
+.color-dot-wall__circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid color-mix(in srgb, var(--color-text-primary) 10%, transparent);
+  flex: none;
+}
+
+.color-dot-wall__name {
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  line-height: 1.3;
 }
 
 /* ---------- 加購項目：可往右滑的商品卡片列（圖上、字下） ----------

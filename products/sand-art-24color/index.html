@@ -226,20 +226,102 @@
       </div>
     </section>
 
-    <!-- 2026-10-24 新增：A／B／C 三組各自實際包含哪 24 色，跟
-         sand-art-extra-color（5 色組）那頁同一個理由跟同一套
-         .color-reference-list 樣式——方便比較 5 色組跟 24 色組的差異，
-         或材料包用完想對照看還缺哪色的人。 -->
+    <!-- 2026-10-24：A／B／C 三組各自實際包含哪 24 色，原本是純文字
+         <dl>（跟 sand-art-extra-color 那頁同一套 .color-reference-list，
+         那頁維持不動），使用者反饋查色號全靠猜色名太簡陋，改成「圓點
+         色票牆」（方向 B，參考 retrojamtaiwan.com 油墨色票頁，使用者從
+         色票呈現改版提案裡選定）——這裡是真正的「目錄」情境（查色號、
+         對照還缺哪色），不是像上面選色器要挑一組，每色一個獨立圓點＋
+         色名最適合。色碼目前是估色（.color-dot-wall__circle 的 inline
+         style），等實拍分裝沙校色後再換成準確值，不影響結構本身。 -->
     <section class="chapter fade-in delay-1">
       <h2 class="chapter__title">3 組色號一覽</h2>
       <div class="chapter__intro">
         <p>每組 24 色，三組合計 72 色，選色時可以對照下面的色名，或跟「漸層沙・自選色」5 色組比較想要哪一種色系。</p>
       </div>
-      <dl class="color-reference-list">
-        <div><dt>A｜暖色組</dt><dd>米黃、明黃、檸黃、洋黃、黃色、藤黃、金黃、桔黃、橙色、桔紅、紅色、珊瑚紅、淡粉、淺粉、冰紫、深粉、粉紫、洋紅、粉紅、百花紅、桃紅、玫紅、棗紅、栗紅</dd></div>
-        <div><dt>B｜藍紫組</dt><dd>冰藍、天青、青色、松石綠、湖藍、蔚藍、藍色、潮藍、虹藍、孔藍、寶藍、紫羅蘭、淺膚、膚色、深膚、亞麻、麥芽、姜黃、芥黃、藤紫、紫色、油紫、酞青藍、墨藍</dd></div>
-        <div><dt>C｜綠棕組</dt><dd>柳黃、淺綠、艾綠、玉綠、淺松、綠色、碧綠、翠綠、湖綠、深綠、墨綠、孔綠、豆青綠、深松、苔綠、黃棕、紅棕、淺棕、茶褐、棕色、白色、淺灰、深灰、黑色</dd></div>
-      </dl>
+      <div class="color-dot-wall">
+        <p class="color-dot-wall__group">A｜暖色組</p>
+        <div class="color-dot-wall__grid">
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#EDE0BD"></span><span class="color-dot-wall__name">米黃</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#F5DA3D"></span><span class="color-dot-wall__name">明黃</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#F7E55A"></span><span class="color-dot-wall__name">檸黃</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#F2C94C"></span><span class="color-dot-wall__name">洋黃</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#F6D52E"></span><span class="color-dot-wall__name">黃色</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#F2C53D"></span><span class="color-dot-wall__name">藤黃</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#E8B923"></span><span class="color-dot-wall__name">金黃</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#F2994A"></span><span class="color-dot-wall__name">桔黃</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#F08A2E"></span><span class="color-dot-wall__name">橙色</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#EB6A3E"></span><span class="color-dot-wall__name">桔紅</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#D6372D"></span><span class="color-dot-wall__name">紅色</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#F08670"></span><span class="color-dot-wall__name">珊瑚紅</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#FBE4E9"></span><span class="color-dot-wall__name">淡粉</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#F7D9DF"></span><span class="color-dot-wall__name">淺粉</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#D9CDEB"></span><span class="color-dot-wall__name">冰紫</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#E8739E"></span><span class="color-dot-wall__name">深粉</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#E3B9D6"></span><span class="color-dot-wall__name">粉紫</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#C83C78"></span><span class="color-dot-wall__name">洋紅</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#F0A6C1"></span><span class="color-dot-wall__name">粉紅</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#D94E78"></span><span class="color-dot-wall__name">百花紅</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#E8577F"></span><span class="color-dot-wall__name">桃紅</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#D23E6B"></span><span class="color-dot-wall__name">玫紅</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#7C2430"></span><span class="color-dot-wall__name">棗紅</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#7A2A2E"></span><span class="color-dot-wall__name">栗紅</span></div>
+        </div>
+        <p class="color-dot-wall__group">B｜藍紫組</p>
+        <div class="color-dot-wall__grid">
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#CFE9F2"></span><span class="color-dot-wall__name">冰藍</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#AEDCE0"></span><span class="color-dot-wall__name">天青</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#4FAFB5"></span><span class="color-dot-wall__name">青色</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#3FA08C"></span><span class="color-dot-wall__name">松石綠</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#4A9FC9"></span><span class="color-dot-wall__name">湖藍</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#5FA8D3"></span><span class="color-dot-wall__name">蔚藍</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#2F6FB5"></span><span class="color-dot-wall__name">藍色</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#3A7FBE"></span><span class="color-dot-wall__name">潮藍</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#3E7FC0"></span><span class="color-dot-wall__name">虹藍</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#2A6FA0"></span><span class="color-dot-wall__name">孔藍</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#2451A3"></span><span class="color-dot-wall__name">寶藍</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#6B5CA5"></span><span class="color-dot-wall__name">紫羅蘭</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#F4D9BE"></span><span class="color-dot-wall__name">淺膚</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#EFC9A0"></span><span class="color-dot-wall__name">膚色</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#D9A876"></span><span class="color-dot-wall__name">深膚</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#E4D2B0"></span><span class="color-dot-wall__name">亞麻</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#C98F4E"></span><span class="color-dot-wall__name">麥芽</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#C77F2D"></span><span class="color-dot-wall__name">姜黃</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#D8B83A"></span><span class="color-dot-wall__name">芥黃</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#B7A3D1"></span><span class="color-dot-wall__name">藤紫</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#7C5BA6"></span><span class="color-dot-wall__name">紫色</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#6A4A8E"></span><span class="color-dot-wall__name">油紫</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#1F4FA0"></span><span class="color-dot-wall__name">酞青藍</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#2C3550"></span><span class="color-dot-wall__name">墨藍</span></div>
+        </div>
+        <p class="color-dot-wall__group">C｜綠棕組</p>
+        <div class="color-dot-wall__grid">
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#E9DD6B"></span><span class="color-dot-wall__name">柳黃</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#BFE0A9"></span><span class="color-dot-wall__name">淺綠</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#8FA869"></span><span class="color-dot-wall__name">艾綠</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#6CB876"></span><span class="color-dot-wall__name">玉綠</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#B7D1A3"></span><span class="color-dot-wall__name">淺松</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#4F8F52"></span><span class="color-dot-wall__name">綠色</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#2E9E71"></span><span class="color-dot-wall__name">碧綠</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#2E9E4F"></span><span class="color-dot-wall__name">翠綠</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#3E9C7C"></span><span class="color-dot-wall__name">湖綠</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#1F5C32"></span><span class="color-dot-wall__name">深綠</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#16432A"></span><span class="color-dot-wall__name">墨綠</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#2E7D6A"></span><span class="color-dot-wall__name">孔綠</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#8FBE63"></span><span class="color-dot-wall__name">豆青綠</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#3F6B3C"></span><span class="color-dot-wall__name">深松</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#4C6B3A"></span><span class="color-dot-wall__name">苔綠</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#B98A3D"></span><span class="color-dot-wall__name">黃棕</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#9C5A33"></span><span class="color-dot-wall__name">紅棕</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#C6A179"></span><span class="color-dot-wall__name">淺棕</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#6B4423"></span><span class="color-dot-wall__name">茶褐</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#8B5E34"></span><span class="color-dot-wall__name">棕色</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#F7F5F0"></span><span class="color-dot-wall__name">白色</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#D8D5CC"></span><span class="color-dot-wall__name">淺灰</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#8B887D"></span><span class="color-dot-wall__name">深灰</span></div>
+          <div class="color-dot-wall__chip"><span class="color-dot-wall__circle" style="background:#1A1A1A"></span><span class="color-dot-wall__name">黑色</span></div>
+        </div>
+      </div>
     </section>
 
     <section class="chapter fade-in delay-2">
