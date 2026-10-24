@@ -42,6 +42,7 @@
      手刻的淺色 <footer>，跟其他頁都不一樣，見下方 <footer class="preview-footer">
      說明）。 -->
 <link rel="stylesheet" href="../css/site-footer.css">
+<link rel="stylesheet" href="../css/hub-blocks.css">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
 <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16">
@@ -416,22 +417,16 @@
      商品）；新增「加購配件」滿版 banner 讓 12 色漸層沙的選色組圖有地方
      曝光；「其他服務」兩張卡片換成真的實體課程／企業活動照片。版面寬度
      套用全站既有的 840px 置中規則（--content-max-width／--content-pad，
-     見 products.css .content-container 那組規則），不是自己發明寬度。 */
+     見 products.css .content-container 那組規則），不是自己發明寬度。
+     .content-block／.product-row／.feature-tile／.tile 這組共用區塊元件
+     已經抽到 ../css/hub-blocks.css（課程 hub 頁、首頁拼貼區塊都會共用
+     同一份），這裡只留這頁自己專屬的 .overview 寬度覆寫跟 Hero 樣式。 */
   .content-block--hero .hero{
     padding:0;
     text-align:center;
   }
 
-  .content-block{
-    width:100%;
-    margin-left:auto;
-    margin-right:auto;
-    padding-left:var(--content-pad);
-    padding-right:var(--content-pad);
-    padding-top:var(--gap-lg);
-  }
   @media (min-width:841px){
-    .content-block{ max-width:var(--content-max-width); }
     .overview{
       max-width:var(--content-max-width);
       margin-left:auto;
@@ -439,50 +434,6 @@
       padding-left:var(--content-pad);
       padding-right:var(--content-pad);
     }
-  }
-  .content-block__head{ display:flex; align-items:baseline; justify-content:space-between; gap:8px; flex-wrap:wrap; margin-bottom:20px; }
-  .content-block__title{ font-size:12px; text-transform:uppercase; letter-spacing:1px; }
-  .content-block__hint{ font-size:11px; color:#666; }
-
-  /* 材料包系列：技法入口卡，圖片在上、中英文標題＋差異化說明在下 */
-  .product-row{ display:grid; grid-template-columns:1fr 1fr; gap:24px; }
-  .product-card{ display:block; }
-  .product-card__media{ aspect-ratio:16/9.5; overflow:hidden; background:#2E2F16; }
-  .product-card__media img{ width:100%; height:100%; object-fit:cover; transition:transform .5s ease; }
-  .product-card:hover .product-card__media img{ transform:scale(1.035); }
-  .product-card__en{ margin-top:18px; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:#999; }
-  .product-card__title{ margin-top:6px; font-size:19px; font-weight:700; letter-spacing:0.5px; }
-  .product-card__desc{ margin-top:8px; font-size:13px; line-height:1.7; color:#666; }
-  @media (max-width:768px){
-    .product-row{ grid-template-columns:1fr; gap:36px; }
-    .product-card{ text-align:center; }
-    .product-card__media{ aspect-ratio:16/10; }
-  }
-
-  .feature-tile{ position:relative; overflow:hidden; display:block; aspect-ratio:16/6.2; background:#2E2F16; }
-  .feature-tile img{ width:100%; height:100%; object-fit:cover; }
-  .feature-tile__overlay{ position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; padding:0 clamp(20px,5vw,48px); background:linear-gradient(90deg, rgba(20,20,10,0.72) 0%, rgba(20,20,10,0.18) 58%, rgba(20,20,10,0) 85%); }
-  .feature-tile__eyebrow{ color:#E8C989; font-size:11px; letter-spacing:2px; text-transform:uppercase; margin-bottom:10px; }
-  .feature-tile__title{ color:#f5f5ed; font-size:clamp(17px,2.2vw,24px); letter-spacing:0.5px; max-width:400px; line-height:1.5; }
-  .feature-tile__cta{ margin-top:14px; display:inline-flex; color:#f5f5ed; font-size:11px; letter-spacing:2px; text-transform:uppercase; border-bottom:1px solid rgba(245,245,237,0.55); padding-bottom:4px; width:fit-content; }
-  @media (max-width:768px){
-    .feature-tile{ aspect-ratio:4/3.2; }
-    .feature-tile__overlay{ background:linear-gradient(180deg, rgba(20,20,10,0.1) 0%, rgba(20,20,10,0.75) 72%); justify-content:flex-end; padding:0 20px 20px; }
-    .feature-tile__title{ font-size:16px; }
-  }
-
-  .tile{ position:relative; overflow:hidden; display:block; background:#2E2F16; }
-  .tile img{ width:100%; height:100%; object-fit:cover; transition:transform .5s ease; }
-  .tile:hover img{ transform:scale(1.035); }
-  .tile__overlay{ position:absolute; inset:0; display:flex; flex-direction:column; justify-content:flex-end; padding:18px; background:linear-gradient(180deg, rgba(20,20,10,0) 45%, rgba(20,20,10,0.72) 100%); }
-  .tile__name{ color:#fff; font-size:15px; font-weight:700; margin-bottom:4px; }
-  .tile__price{ color:rgba(255,255,255,0.86); font-size:11px; }
-  .tile-row{ display:grid; gap:14px; }
-  .service-row{ grid-template-columns:1fr 1fr; }
-  .service-tile{ aspect-ratio:1.3/1; }
-  @media (max-width:768px){
-    .service-row{ grid-template-columns:1fr; }
-    .service-tile{ aspect-ratio:4/3; }
   }
 
   /* ---------- Footer ---------- */
