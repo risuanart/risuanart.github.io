@@ -150,13 +150,16 @@
          最少的一款，kit-list／顏色細節都照實際的 3 色呈現，不是待補。
          商品名稱、配色文案、材料清單都是使用者提供的定稿文字，直接
          採用，沒有另外改寫。 -->
-    <header class="work__intro">
+    <header class="work__intro work__intro--orlo-buy">
       <!-- 2026-10：比照紅羊／藍羊改版（見 css/products.css
            .work__title-block 說明）——商品名搬到配色示範照下方、
            價格正上方，靠左對齊，系列眉標／基礎款標籤合併成一行
            小字，一句話介紹放最後。這頁沒有耐性度星級——基礎款
            材料包還沒有實測完成時間，星級只先用在紅／藍羊兩款
-           進階款，避免憑感覺捏造數字。 -->
+           進階款，避免憑感覺捏造數字。
+           2026-10-25：買列部分比照福星同步整組 orlo.co 改版，首圖
+           維持原本配色輪播，不套用縮圖牆樣式，理由見
+           sand-art-na-fu-lantern/index.html 同一處說明。 -->
       <div class="work__intro-photo work__intro-photo--carousel fade-in" data-hero-carousel>
         <img src="../../assets/images/products/sand-art-ying-chun-lantern/sand-art-ying-chun-lantern-main.jpg" alt="春聯砂畫材料包・燈上迎春 Lit in Chun 成品參考圖（出貨配色）" width="800" height="800" loading="lazy" class="is-active" data-carousel-frame>
         <img src="../../assets/images/products/sand-art-ying-chun-lantern/sand-art-ying-chun-lantern-combo-2.png" alt="「燈上迎春 Lit in Chun」配色示範，僅供搭配參考，非出貨配色" loading="lazy" data-carousel-frame>
@@ -180,21 +183,102 @@
       </div>
 
 
-      <div class="work-heading__buy-row fade-in delay-3">
+      <blockquote class="work-heading__urgency fade-in delay-3">
+        <p><span class="work-heading__urgency-date">12/31 00:00</span> 前下單，材料包享 <strong>9 折優惠</strong></p>
+      </blockquote>
+
+      <div class="work-heading__buy-row fade-in delay-3" data-product="sand-art-ying-chun-lantern">
         <div class="work-heading__buy-text">
           <p class="work-heading__price">$470</p>
         </div>
-        <div class="buy-action">
-          <div class="qty-stepper" data-buy-qty>
-            <button type="button" data-qty-minus aria-label="減少數量">−</button>
-            <span data-qty-value>1</span>
-            <button type="button" data-qty-plus aria-label="增加數量">＋</button>
-          </div>
-          <button type="button" class="work__cta work__cta--primary" data-add-to-cart data-product="sand-art-ying-chun-lantern">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
-            <span class="work__cta-label">ＢＵＹ</span>
-          </button>
+      </div>
+
+      <div class="work-heading__qty fade-in delay-3">
+        <div class="qty-stepper" data-buy-qty>
+          <button type="button" data-qty-minus aria-label="減少數量">−</button>
+          <span data-qty-value>1</span>
+          <button type="button" data-qty-plus aria-label="增加數量">＋</button>
         </div>
+      </div>
+
+      <section class="chapter addon-section addon-section--orlo fade-in delay-3">
+        <button type="button" class="addon-toggle" data-addon-toggle aria-expanded="false" aria-controls="addon-list-ying-chun-lantern">一起加購，材料更齊全 <span class="addon-toggle__en">Buy Together</span></button>
+        <div class="addon-list" id="addon-list-ying-chun-lantern" data-addon-list hidden>
+          <div class="addon-row" data-addon-row>
+            <input type="checkbox" class="addon-row__checkbox" data-addon-select data-product="sand-art-extra-color" aria-label="加購：漸層沙・自選色">
+            <div class="addon-row__thumb">
+              <img data-addon-variant-thumb src="../../assets/images/products/sand-art-extra-color/sand-art-extra-color-warm-apricot.jpg" alt="漸層沙・自選色" loading="lazy">
+            </div>
+            <div class="addon-row__content">
+              <p class="addon-row__name">漸層沙・自選色 <span class="addon-row__name-en">Gradient Sand</span>（12 色任選）</p>
+              <div class="addon-row__meta">
+                <select class="addon-row__select" data-addon-scheme aria-label="選擇漸層沙色組">
+                  <option value="warm-apricot" data-thumb="../../assets/images/products/sand-art-extra-color/sand-art-extra-color-warm-apricot.jpg">暖杏</option>
+                  <option value="mustard-brown" data-thumb="../../assets/images/products/sand-art-extra-color/sand-art-extra-color-mustard-brown.jpg">芥褐</option>
+                  <option value="forest-green" data-thumb="../../assets/images/products/sand-art-extra-color/sand-art-extra-color-forest-green.jpg">森綠</option>
+                  <option value="ocean-blue" data-thumb="../../assets/images/products/sand-art-extra-color/sand-art-extra-color-ocean-blue.jpg">海藍</option>
+                  <option value="moss-jade" data-thumb="../../assets/images/products/sand-art-extra-color/sand-art-extra-color-moss-jade.jpg">苔玉</option>
+                  <option value="sunset-orange" data-thumb="../../assets/images/products/sand-art-extra-color/sand-art-extra-color-sunset-orange.jpg">夕橙</option>
+                  <option value="ink-grey" data-thumb="../../assets/images/products/sand-art-extra-color/sand-art-extra-color-ink-grey.jpg">墨灰</option>
+                  <option value="lake-teal" data-thumb="../../assets/images/products/sand-art-extra-color/sand-art-extra-color-lake-teal.jpg">湖青</option>
+                  <option value="sakura-pink" data-thumb="../../assets/images/products/sand-art-extra-color/sand-art-extra-color-sakura-pink.jpg">櫻粉</option>
+                  <option value="wisteria-purple" data-thumb="../../assets/images/products/sand-art-extra-color/sand-art-extra-color-wisteria-purple.jpg">藤紫</option>
+                  <option value="rouge-red" data-thumb="../../assets/images/products/sand-art-extra-color/sand-art-extra-color-rouge-red.jpg">胭脂</option>
+                  <option value="spring-sprout" data-thumb="../../assets/images/products/sand-art-extra-color/sand-art-extra-color-spring-sprout.jpg">春芽</option>
+                </select>
+                <div class="qty-stepper addon-row__qty" data-addon-qty>
+                  <button type="button" data-qty-minus aria-label="減少數量">−</button>
+                  <span data-qty-value>1</span>
+                  <button type="button" data-qty-plus aria-label="增加數量">＋</button>
+                </div>
+                <p class="addon-row__price price-text">$150</p>
+              </div>
+            </div>
+          </div>
+          <div class="addon-row" data-addon-row>
+            <input type="checkbox" class="addon-row__checkbox" data-addon-select data-product="sand-art-sticker-only" aria-label="加購：純貼紙加購・單款">
+            <div class="addon-row__thumb">
+              <div class="placeholder-box placeholder-box--photo" aria-hidden="true"><svg class="placeholder-box__icon" viewBox="0 0 24 24" width="1.2em" height="1.2em" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1.5"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 16l-5.5-5.5a1 1 0 0 0-1.4 0L6 19"/></svg></div>
+            </div>
+            <div class="addon-row__content">
+              <p class="addon-row__name">純貼紙加購 <span class="addon-row__name-en">Sticker Refill</span>・單款</p>
+              <div class="addon-row__meta">
+                <div class="qty-stepper addon-row__qty" data-addon-qty>
+                  <button type="button" data-qty-minus aria-label="減少數量">−</button>
+                  <span data-qty-value>1</span>
+                  <button type="button" data-qty-plus aria-label="增加數量">＋</button>
+                </div>
+                <p class="addon-row__price price-text">$__</p>
+              </div>
+            </div>
+          </div>
+          <div class="addon-row" data-addon-row>
+            <input type="checkbox" class="addon-row__checkbox" data-addon-select data-product="sand-art-frame-15" aria-label="加購：沙畫加購像框">
+            <div class="addon-row__thumb">
+              <img data-addon-variant-thumb src="../../assets/images/products/sand-art-frame/sand-art-frame-plain-15.jpg" alt="沙畫加購像框（空框，實際出貨款式）" loading="lazy">
+            </div>
+            <div class="addon-row__content">
+              <p class="addon-row__name">沙畫加購像框 <span class="addon-row__name-en">Wood Frame</span>（15×15cm）</p>
+              <div class="addon-row__meta">
+                <div class="qty-stepper addon-row__qty" data-addon-qty>
+                  <button type="button" data-qty-minus aria-label="減少數量">−</button>
+                  <span data-qty-value>1</span>
+                  <button type="button" data-qty-plus aria-label="增加數量">＋</button>
+                </div>
+                <p class="addon-row__price price-text">$150</p>
+                <button type="button" class="addon-row__preview-link" data-addon-preview-toggle data-mockup-src="../../assets/images/products/sand-art-frame/mockup-ying-chun-lantern-15.jpg" data-mockup-alt="燈上迎春 Lit in Chun 裝進像框的模擬效果" data-plain-src="../../assets/images/products/sand-art-frame/sand-art-frame-plain-15.jpg" data-plain-alt="沙畫加購像框（空框，實際出貨款式）">預覽放進像框的效果 →</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="product-buy-bar fade-in delay-3">
+        <button type="button" class="work__cta work__cta--primary" data-add-to-cart data-product="sand-art-ying-chun-lantern">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+          <span class="work__cta-label">加入購物車</span>
+        </button>
+        <button type="button" class="work__cta work__cta--buy-now" data-buy-now data-product="sand-art-ying-chun-lantern">直接購買</button>
       </div>
     </header>
 
@@ -300,122 +384,26 @@
       </div>
     </section>
 
-    <!-- 規格資訊：跟羊Diss舞蹈紅／藍兩頁同一套簡短規格段落，全站沙畫
-         單一款式商品頁統一補上。 -->
-    <section class="chapter">
-      <h2 class="chapter__title fade-in">規格資訊</h2>
-      <p class="chapter__prose fade-in delay-1">商品：春聯砂畫材料包・燈上迎春 Lit in Chun<br>成品尺寸：15×15cm<br>顏色數：3色</p>
-      <p class="work__shipping-note fade-in delay-2">出貨依訂購順序安排，時程將於下單頁面公告。</p>
-    </section>
-
-    <!-- 購買前請閱讀：排在規格資訊（含出貨備註）正下方，不是頁面
-         最底部——使用者反饋這段重要的購買須知排序太低，容易被忽略，
-         内容改抽到 js/product-terms.js 共用資料，容器留空由 script
-         渲染進去。 -->
-    <!-- 2026-10-18 使用者反饋「出貨時間／顏色提醒／材料保存／操作
-         提醒」這組常駐重點從買列底下搬到這裡——規格資訊正下方、手風琴
-         正上方，跟手風琴一樣屬於頁面後段的詳細資訊脈絡，不佔買列決策
-         當下的版面。 -->
-    <section class="chapter">
-      <div class="info-highlights fade-in" data-product-info-highlights="sand-art"></div>
-    </section>
-
-    <details class="accordion fade-in">
-      <summary class="accordion__toggle">購買前請閱讀</summary>
-      <div class="accordion__body" data-product-terms="sand-art"></div>
-    </details>
-
-
-    <section class="chapter addon-section">
-      <h2 class="chapter__title fade-in">延伸創作</h2>
-      <div class="addon-carousel fade-in delay-1">
-        <div class="addon-carousel__track">
-          <div class="addon-card" data-product-card>
-            <div class="addon-card__thumb">
-              <img src="../../assets/images/products/sand-art-extra-color/sand-art-extra-color-warm-apricot.jpg" alt="漸層沙・自選色" loading="lazy">
-            </div>
-            <div class="addon-card__body">
-              <p class="addon-card__name">漸層沙・自選色</p>
-              <p class="addon-card__note">12 組協調好的五階漸層色沙任選，材料不夠用或想讓作品更有層次時加購。</p>
-              <div class="addon-card__footer">
-                <p class="addon-card__price price-text">$150</p>
-                <a class="work__cta work__cta--primary addon-card__cta" href="../sand-art-extra-color/" aria-label="選色購買">
-                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="addon-card" data-product-card>
-            <div class="addon-card__thumb">
-              <div class="placeholder-box placeholder-box--photo" aria-hidden="true"><svg class="placeholder-box__icon" viewBox="0 0 24 24" width="1.4em" height="1.4em" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1.5"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 16l-5.5-5.5a1 1 0 0 0-1.4 0L6 19"/></svg><span class="placeholder-box__text">單張貼紙圖案特寫</span></div>
-            </div>
-            <div class="addon-card__body">
-              <p class="addon-card__name">純貼紙加購・單款</p>
-              <p class="addon-card__note">已有顏色沙的你，可單獨加購其他款式圖案（8 款圖案任選）。</p>
-              <div class="addon-card__footer">
-                <p class="addon-card__price price-text">$__</p>
-                <button type="button" class="work__cta work__cta--primary addon-card__cta" data-add-to-cart data-product="sand-art-sticker-only" aria-label="加入購物車">
-                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
-                </button>
-              </div>
-            </div>
-          </div>
-          <!-- 2026-10-22：像框加購，點下去跳出彈窗顯示「這款放進像框」的
-               合成預覽圖＋尺寸選擇＋加入購物車，不用離開這一頁。彈窗內容
-               見下面 [data-addon-modal]，互動邏輯見 js/frame-addon-modal.js
-               （9 個砂畫商品頁共用同一套）。 -->
-          <div class="addon-card" data-product-card>
-            <div class="addon-card__thumb">
-              <img src="../../assets/images/products/sand-art-frame/sand-art-frame-plain-15.jpg" alt="沙畫加購像框（空框，實際出貨款式）" loading="lazy">
-            </div>
-            <div class="addon-card__body">
-              <p class="addon-card__name">沙畫加購像框</p>
-              <p class="addon-card__note">木質畫框，15／20cm 兩種尺寸，讓作品直接上牆。</p>
-              <div class="addon-card__footer">
-                <p class="addon-card__price price-text">$150 起</p>
-                <button type="button" class="work__cta work__cta--primary addon-card__cta" data-addon-modal-trigger aria-label="查看像框">
-                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+    <!-- 2026-10-25：規格資訊／出貨與保存須知／購買前請閱讀整併進分頁
+         切換，延伸創作（加購）搬到上面買列附近的「一起加購」，比照
+         福星頁，見 products/sand-art-fu/index.html 同一處說明。 -->
+    <section class="chapter product-tabs fade-in" data-product-tabs>
+      <div class="product-tabs__nav">
+        <button type="button" class="product-tabs__btn is-active" data-tab="spec" aria-current="page">規格</button>
+        <button type="button" class="product-tabs__btn" data-tab="care">出貨與保存須知</button>
+        <button type="button" class="product-tabs__btn" data-tab="terms">購買前請閱讀</button>
+      </div>
+      <div class="product-tabs__panel" data-tab-panel="spec">
+        <p class="chapter__prose">商品：春聯砂畫材料包・燈上迎春 Lit in Chun<br>成品尺寸：15×15cm<br>顏色數：3色</p>
+        <p class="work__shipping-note">出貨依訂購順序安排，時程將於下單頁面公告。</p>
+      </div>
+      <div class="product-tabs__panel" data-tab-panel="care" hidden>
+        <div class="info-highlights" data-product-info-highlights="sand-art"></div>
+      </div>
+      <div class="product-tabs__panel" data-tab-panel="terms" hidden>
+        <div class="accordion__body" data-product-terms="sand-art"></div>
       </div>
     </section>
-
-    <div class="addon-modal" data-addon-modal data-design="ying-chun-lantern" hidden>
-      <div class="addon-modal__backdrop" data-addon-modal-close></div>
-      <div class="addon-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="frame-modal-title">
-        <button type="button" class="addon-modal__close" data-addon-modal-close aria-label="關閉">×</button>
-        <div class="addon-modal__media">
-          <img data-frame-modal-img src="../../assets/images/products/sand-art-frame/mockup-ying-chun-lantern-15.jpg" alt="燈上迎春 Lit in Chun 裝進像框的模擬效果">
-        </div>
-        <div class="addon-modal__body">
-          <h2 id="frame-modal-title" class="addon-modal__title">沙畫加購像框</h2>
-          <p class="addon-modal__note">木質畫框，讓完成的砂畫作品直接上牆。</p>
-          <div class="frame-size-picker" role="group" aria-label="選擇尺寸">
-            <button type="button" class="color-picker__chip frame-size-picker__chip" data-size="15" data-price="150" aria-pressed="true">
-              <span class="frame-size-picker__label">15×15cm</span>
-              <span class="frame-size-picker__price">$150</span>
-            </button>
-            <button type="button" class="color-picker__chip frame-size-picker__chip" data-size="20" data-price="199" aria-pressed="false">
-              <span class="frame-size-picker__label">20×20cm</span>
-              <span class="frame-size-picker__price">$199</span>
-            </button>
-          </div>
-          <div class="addon-modal__buy-row">
-            <p class="addon-modal__price" data-frame-modal-price>$150</p>
-            <button type="button" class="work__cta work__cta--primary" data-add-to-cart data-product="sand-art-frame-15" data-frame-modal-add-btn="15">
-              <span class="work__cta-label">加入購物車</span>
-            </button>
-            <button type="button" class="work__cta work__cta--primary" data-add-to-cart data-product="sand-art-frame-20" data-frame-modal-add-btn="20" hidden>
-              <span class="work__cta-label">加入購物車</span>
-            </button>
-          </div>
-          <a class="addon-modal__link" href="../sand-art-frame/">查看完整商品頁，預覽其他款式 →</a>
-        </div>
-      </div>
-    </div>
 
     <!-- 相關商品：跨商品導流，跟上面「延伸創作」（本商品的加購配件）
          用途不同。卡片內容由 js/related-products.js 動態讀 cart.js 的
@@ -462,14 +450,25 @@
       </div>
     </footer>
 
+    <div class="mobile-sticky-buy">
+      <button type="button" class="work__cta work__cta--primary" data-add-to-cart data-product="sand-art-ying-chun-lantern">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+        <span class="work__cta-label">加入購物車</span>
+      </button>
+      <button type="button" class="work__cta work__cta--buy-now" data-buy-now data-product="sand-art-ying-chun-lantern">直接購買</button>
+    </div>
+
   </main>
 
   <script src="../../js/cart.js"></script>
   <script src="../../js/product-price-discount.js"></script>
   <script src="../../js/product-terms.js"></script>
+  <script src="../../js/product-tabs.js"></script>
   <script src="../../js/hero-colorway-carousel.js"></script>
   <script src="../../js/related-products.js"></script>
-  <script src="../../js/frame-addon-modal.js"></script>
+  <script src="../../js/addon-variant-select.js"></script>
+  <script src="../../js/addon-frame-preview-toggle.js"></script>
+  <script src="../../js/mobile-sticky-buy-reveal.js"></script>
   <script src="../../js/site-header-scroll.js"></script>
   <script src="../../js/account-auth.js"></script>
   <script src="../../js/account-widget.js"></script>
