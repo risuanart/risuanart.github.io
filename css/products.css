@@ -2849,6 +2849,15 @@ button.text-link {
   outline-offset: 2px;
 }
 
+/* 2026-10-25：使用者澄清上一輪要補英文的其實是「一起加購，材料更
+   齊全」這顆切換按鈕本身（不是只有展開後的品項標題），比照品項標題
+   同一套「中文為主、英文小字輔助」處理，字級比中文小一號、顏色沿用
+   這顆按鈕原本的灰字，不額外加對比色搶走主文字。 */
+.addon-section--orlo .addon-toggle__en {
+  font-size: 11px;
+  color: rgb(153, 153, 153);
+}
+
 .addon-section--orlo .addon-toggle::after {
   font-size: 13px;
   font-weight: 400;
