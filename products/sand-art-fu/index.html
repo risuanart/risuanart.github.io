@@ -330,13 +330,19 @@
             <input type="checkbox" class="addon-row__checkbox" data-addon-select data-product="sand-art-frame-15" aria-label="加購：沙畫加購像框">
             <p class="addon-row__name">沙畫加購像框（15／20cm）</p>
             <div class="addon-row__body">
+              <!-- 2026-10-24：首圖改用純像框實拍照（不帶任何砂畫設計）
+                   ——之前用 mockup-fu-15/20.jpg（福星放進像框的合成示意
+                   圖）當縮圖，使用者反饋容易讓客人誤會加購「含砂畫
+                   作品」，實際加購的是空框本身。模擬效果圖沒有拿掉，
+                   改放進下面的「預覽放進像框的效果」連結，點開才看到，
+                   不再是列表裡第一眼看到的縮圖。 -->
               <div class="addon-row__thumb">
-                <img data-addon-variant-thumb src="../../assets/images/products/sand-art-frame/mockup-fu-15.jpg" alt="沙畫加購像框" loading="lazy">
+                <img data-addon-variant-thumb src="../../assets/images/products/sand-art-frame/sand-art-frame-plain-15.jpg" alt="沙畫加購像框（空框，實際出貨款式）" loading="lazy">
               </div>
               <div class="addon-row__meta">
                 <select class="addon-row__select" data-addon-variant aria-label="選擇像框尺寸">
-                  <option value="sand-art-frame-15" data-price="150" data-thumb="../../assets/images/products/sand-art-frame/mockup-fu-15.jpg">15×15cm・$150</option>
-                  <option value="sand-art-frame-20" data-price="199" data-thumb="../../assets/images/products/sand-art-frame/mockup-fu-20.jpg">20×20cm・$199</option>
+                  <option value="sand-art-frame-15" data-price="150" data-thumb="../../assets/images/products/sand-art-frame/sand-art-frame-plain-15.jpg" data-mockup="../../assets/images/products/sand-art-frame/mockup-fu-15.jpg">15×15cm・$150</option>
+                  <option value="sand-art-frame-20" data-price="199" data-thumb="../../assets/images/products/sand-art-frame/sand-art-frame-plain-20.jpg" data-mockup="../../assets/images/products/sand-art-frame/mockup-fu-20.jpg">20×20cm・$199</option>
                 </select>
                 <div class="qty-stepper addon-row__qty" data-addon-qty>
                   <button type="button" data-qty-minus aria-label="減少數量">−</button>
@@ -344,6 +350,7 @@
                   <button type="button" data-qty-plus aria-label="增加數量">＋</button>
                 </div>
                 <p class="addon-row__price price-text">$150</p>
+                <a class="addon-row__preview-link" data-addon-preview-link href="../../assets/images/products/sand-art-frame/mockup-fu-15.jpg" target="_blank" rel="noopener">預覽放進像框的效果 →</a>
               </div>
             </div>
           </div>

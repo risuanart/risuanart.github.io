@@ -298,8 +298,12 @@
     "sand-art-na-fu-lantern": BASE_PREFIX + "assets/images/products/sand-art-na-fu-lantern/sand-art-na-fu-lantern-main.jpg",
     "sand-art-artist-sheep-red": BASE_PREFIX + "assets/images/products/sand-art-artist/sand-art-artist-red-main.jpg",
     "sand-art-artist-sheep-blue": BASE_PREFIX + "assets/images/products/sand-art-artist/sand-art-artist-blue-main.jpg",
-    "sand-art-frame-15": BASE_PREFIX + "assets/images/products/sand-art-frame/mockup-fu-15.jpg",
-    "sand-art-frame-20": BASE_PREFIX + "assets/images/products/sand-art-frame/mockup-fu-20.jpg",
+    // 2026-10-24：購物車／結帳頁顯示的像框縮圖改用純像框實拍照（不帶
+    // 任何砂畫設計），原本借用 mockup-fu-15/20.jpg（福星放進像框的合成
+    // 示意圖）——使用者反饋這樣容易讓客人誤會像框加購「含砂畫作品」，
+    // 實際加購的是空框本身，設計款式見各商品頁自己的「模擬圖」。
+    "sand-art-frame-15": BASE_PREFIX + "assets/images/products/sand-art-frame/sand-art-frame-plain-15.jpg",
+    "sand-art-frame-20": BASE_PREFIX + "assets/images/products/sand-art-frame/sand-art-frame-plain-20.jpg",
     "sand-art-24color-bundle": BASE_PREFIX + "assets/images/products/sand-art-24color/sand-art-24color-bundle.jpg",
   };
 

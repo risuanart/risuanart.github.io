@@ -19,6 +19,7 @@
     const thumb = row.querySelector("[data-addon-variant-thumb]");
     const priceEl = row.querySelector(".addon-row__price");
     const checkbox = row.querySelector("[data-addon-select]");
+    const previewLink = row.querySelector("[data-addon-preview-link]");
     const isProductSelect = select.hasAttribute("data-addon-variant");
 
     function sync() {
@@ -27,6 +28,9 @@
       if (thumb && opt.dataset.thumb) thumb.src = opt.dataset.thumb;
       if (priceEl && opt.dataset.price) priceEl.textContent = `$${opt.dataset.price}`;
       if (checkbox && isProductSelect && opt.value) checkbox.dataset.product = opt.value;
+      // 2026-10-24：縮圖改用純像框照，「模擬效果」改放進這顆連結裡，
+      // 選單換尺寸時連結要跟著換成對應尺寸的合成示意圖，不是固定一張。
+      if (previewLink && opt.dataset.mockup) previewLink.href = opt.dataset.mockup;
     }
 
     select.addEventListener("change", sync);

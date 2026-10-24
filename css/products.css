@@ -2883,6 +2883,15 @@ button.text-link {
   font-size: 13px;
 }
 
+/* 2026-10-24：像框列的「預覽放進像框的效果」連結——縮圖本身改用純
+   像框照（避免讓客人誤會加購含砂畫作品），合成示意圖改成點進去才看到，
+   文字連結比照全站次要連結的克制調性（純文字＋底線，不做按鈕外觀）。 */
+.addon-section--orlo .addon-row__preview-link {
+  font-size: 12px;
+  color: rgb(107, 107, 107);
+  text-decoration: underline;
+}
+
 /* 數量選擇器：三個各自獨立的方塊並排（不是共用一個外框），相鄰邊框用
    margin-left:-1px 重疊，「−」disabled 時維持黑字，不套用全站共用
    .qty-stepper button:disabled 那條變灰規則。 */
