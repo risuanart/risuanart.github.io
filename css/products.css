@@ -2865,27 +2865,33 @@ button.text-link {
    （小尺寸 36px，不再是 60px 大圖），第二列（款式下拉／數量／價格／
    預覽連結）改成橫向 flex-wrap 排列（不再是縱向堆疊），兩列就能顯示
    完，不用再往下疊到第三、四行。 */
+/* 2026-10-25 第二輪：使用者反饋 checkbox 太貼灰底左右邊緣（原本
+   padding:14px 0，左右完全沒留白），比對 orlo.co 截圖後補上左右內距，
+   checkbox／內容不再直接頂到灰底邊界，看起來比較有設計感、不侷促。
+   縮圖也嫌太小，從 36px 放大到 56px，跟 orlo.co 的縮圖比例接近——
+   行高因此會跟著變高一些，這是使用者明確要求的取捨（寧可這列高一點，
+   也要縮圖大小看得清楚）。 */
 .addon-section--orlo .addon-row:not(.addon-row--link) {
   position: relative;
   display: grid;
-  grid-template-columns: 16px 36px 1fr;
+  grid-template-columns: 16px 56px 1fr;
   grid-template-areas: "checkbox thumb name" ". . meta";
-  column-gap: 10px;
+  column-gap: 12px;
   row-gap: 8px;
   align-items: center;
-  padding: 14px 0;
+  padding: 16px;
   background: rgba(204, 204, 204, 0.2);
   border-top: none;
   text-align: left;
 }
 
-/* 分隔線：1px solid #ddd，左右內縮 14px（不是整列貼齊邊緣），用
-   ::after 絕對定位處理，不用額外的 wrapper 元素。 */
+/* 分隔線：1px solid #ddd，左右內縮跟上面的 padding 對齊，不是整列貼齊
+   邊緣，用 ::after 絕對定位處理，不用額外的 wrapper 元素。 */
 .addon-section--orlo .addon-row:not(.addon-row--link)::after {
   content: "";
   position: absolute;
-  left: 14px;
-  right: 14px;
+  left: 16px;
+  right: 16px;
   bottom: 0;
   height: 1px;
   background: rgb(221, 221, 221);
@@ -2906,8 +2912,8 @@ button.text-link {
    checkbox／標題的行高比較接稓，不會把第一列撐得比文字高很多。 */
 .addon-section--orlo .addon-row__thumb {
   grid-area: thumb;
-  width: 36px;
-  height: 36px;
+  width: 56px;
+  height: 56px;
 }
 
 .addon-section--orlo .addon-row__name {
