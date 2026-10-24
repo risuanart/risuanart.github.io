@@ -795,22 +795,19 @@
   margin-bottom: 10px;
 }
 
-/* 2026-10-24：使用者指定照 orlo.co 實測的固定尺寸（196px／38px，手機
-   164px），不是用 flex:1 等比例分配寬度——這裡刻意把 min-height 從全站
-   共用的 44px（觸控目標下限）降到 38px，是使用者在看過前一輪「保留
-   44px」的回覆後再次明確要求的例外，不是疏漏；只在這個滿版 CTA 橫條
-   （.product-buy-bar）裡覆寫，.work__cta--primary／--buy-now 的全站
-   基礎規則本身沒有改，其他地方的按鈕還是維持 44px。
-   選擇器刻意疊加 .work__cta class（不是只用 [data-add-to-cart] 屬性
-   選擇器）：下面修過的 .work__cta.work__cta--buy-now 特異度是兩個
-   class（0,2,0），跟原本這裡的「1 class＋1 屬性」也是 0,2,0，特異度
-   打平時看定義順序，兩邊都在改就很容易互相蓋過——這裡直接疊加到三個
-   class 等級（0,3,0），不管誰先誰後都保證這裡贏，不用每次改完都要
-   回頭檢查兩條規則誰定義在後面。 */
+/* 2026-10-25：原本照 orlo.co 實測寫死固定寬度（196px／手機 164px），
+   使用者反饋這條橫條左邊有貼齊內容欄左緣，右邊卻沒有頂到右緣——固定
+   寬度是抓 orlo.co 當下那個視窗寬度量出來的數字，我們的文字欄實際
+   寬度會隨裝置寬度／grid 排版微調，不是每個斷點都剛好等於 196×2+8，
+   寫死寬度在不是那個精確寬度的螢幕上就會有一邊留白。改成 flex:1
+   讓兩顆各自平分欄寬，永遠貼齊左右兩側，不用再對應某個特定視窗寬度
+   才會準。min-height 38px（使用者先前明確要求的例外，見下方說明）
+   維持不變，.work__cta--primary／--buy-now 的全站基礎規則沒有改。
+   選擇器疊加 .work__cta class 的理由（避免特異度打平時被基底規則蓋過）
+   跟之前一樣，不重複說明。 */
 .product-buy-bar .work__cta[data-add-to-cart],
 .product-buy-bar .work__cta[data-buy-now] {
-  flex: none;
-  width: 196px;
+  flex: 1;
   min-height: 38px;
   height: 38px;
   padding: 6px 12px;
@@ -829,13 +826,6 @@
 .product-buy-bar .work__cta[data-add-to-cart] {
   background: var(--color-surface-black);
   color: var(--color-surface-light);
-}
-
-@media (max-width: 768px) {
-  .product-buy-bar .work__cta[data-add-to-cart],
-  .product-buy-bar .work__cta[data-buy-now] {
-    width: 164px;
-  }
 }
 
 /* ---------- Buy Now（參考 orlo.co，2026-10-22，目前只有
