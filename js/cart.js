@@ -69,10 +69,11 @@
     // 檔案開頭的說明），客人在商品總覽、相關商品、購物車加購推薦都不會
     // 看到。復原時只要把 hidden:true 這行拿掉即可，其他資料原封不動。
     "fluid-art-gift": { name: "春聯流動畫材料包・禮盒版", shortName: "禮盒版", price: 1100, category: "fluid-art", tagline: "雙幅成品，完整的流動畫體驗", hidden: true },
-    // 2026-10-17 使用者要求這兩款也暫時下架（不是刪除），理由同上面
-    // fluid-art-gift 的 hidden:true 說明。
-    "sand-art-light": { name: "春聯砂畫材料包・輕巧版", shortName: "輕巧版", price: 0, category: "sand-art", tagline: "8 款圖案任選，撕貼倒沙鋪出你的春聯", hidden: true },
-    "sand-art-collection": { name: "春聯砂畫材料包・自由創作組", shortName: "自由創作組", price: 0, category: "sand-art", hasVariant: false, tagline: "5 款精選圖案＋26色顏料，自由創作一整套", hidden: true },
+    // 2026-10-24：sand-art-light／sand-art-collection（輕巧版／自由創作組）
+    // 原本是 hidden:true 暫時下架，連同對應頁面（products/sand-art-light/、
+    // products/sand-art-collection/，都還是沒拍照的破圖草稿頁）一起整個
+    // 刪除，不是暫時下架了——這裡的商品定義、下面 VARIANT_OPTIONS／
+    // PRODUCT_URLS 對應項目都一併移除，不留死鍵值指向已經刪掉的頁面。
     "sand-art-artist-sheep-red": { name: "藝術家系列・羊Diss舞蹈 Sheep La Danse / 紅", shortName: "羊Diss舞蹈 Sheep La Danse / 紅", price: 820, category: "sand-art", hasVariant: false, tagline: "致敬馬諦斯《舞蹈》，喜氣酒紅款", preorder: true, sizeCm: 20 },
     "sand-art-artist-sheep-blue": { name: "藝術家系列・羊Diss舞蹈 Sheep La Danse / 藍", shortName: "羊Diss舞蹈 Sheep La Danse / 藍", price: 820, category: "sand-art", hasVariant: false, tagline: "致敬馬諦斯《舞蹈》，原畫配色藍款", preorder: true, sizeCm: 20 },
     "sand-art-chun": { name: "春聯砂畫材料包・春結 Chun Tied", shortName: "春結 Chun Tied", price: 560, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true, preorder: true, sizeCm: 15 },
@@ -120,7 +121,6 @@
   // 出現流動畫的「經典紅」，或流動畫商品出現砂畫的圖案，兩邊互不相干）。
   const VARIANT_OPTIONS = {
     "fluid-art-gift": ["classic-red", "welcome-pink"],
-    "sand-art-light": ["nafu-wave", "yingchun-wave", "yingchun-grid", "nafu-grid", "chun", "fu", "cai", "fu-sheep"],
     "sand-art-extra-color": [
       "warm-apricot",
       "mustard-brown",
@@ -372,8 +372,6 @@
     "fluid-art-light-red": BASE_PREFIX + "products/fluid-art-light-red/",
     "fluid-art-light-pink": BASE_PREFIX + "products/fluid-art-light-pink/",
     "fluid-art-gift": BASE_PREFIX + "products/fluid-art-gift/",
-    "sand-art-light": BASE_PREFIX + "products/sand-art-light/",
-    "sand-art-collection": BASE_PREFIX + "products/sand-art-collection/",
     "sand-art-artist-sheep-red": BASE_PREFIX + "products/sand-art-artist-sheep-red/",
     "sand-art-artist-sheep-blue": BASE_PREFIX + "products/sand-art-artist-sheep-blue/",
     "sand-art-chun": BASE_PREFIX + "products/sand-art-chun/",
