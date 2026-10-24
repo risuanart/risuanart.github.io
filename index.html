@@ -48,6 +48,7 @@
   <link rel="stylesheet" href="css/cart.css">
   <link rel="stylesheet" href="css/home-shop.css">
   <link rel="stylesheet" href="css/site-footer.css">
+  <link rel="stylesheet" href="css/hub-blocks.css">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
   <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16">
@@ -307,6 +308,31 @@
         <button type="button" data-index="2" aria-label="第 3 張" role="tab" aria-selected="false"></button>
         <button type="button" data-index="3" aria-label="第 4 張" role="tab" aria-selected="false"></button>
         -->
+      </div>
+    </section>
+
+    <!-- 拼貼式入口區塊（2026-10-24 新增）：參考使用者提供的 koyama.com.tw
+         /store/ 截圖，輪播下面接一排等寬大圖塊，各自連到一個「統整介紹」
+         的 hub 頁，不是直接連單一商品——材料包／課程現在都有自己的 hub 頁
+         （products/、courses/），這裡用全站共用的 .content-block／
+         .tile-row／.tile（見 css/hub-blocks.css，材料包母頁、課程 hub 頁
+         都是同一套）做兩個等寬疊字 banner，不是另外發明一套新樣式。 -->
+    <section class="content-block">
+      <div class="tile-row service-row">
+        <a class="tile service-tile" href="products/">
+          <img src="assets/images/products/fluid-art/RS+_04.1_產品主圖_800x800拷貝.jpg" alt="手作材料包">
+          <div class="tile__overlay">
+            <p class="tile__name">手作材料包</p>
+            <p class="tile__price">在家就能完成的新年儀式</p>
+          </div>
+        </a>
+        <a class="tile service-tile" href="courses/">
+          <img src="assets/images/courses/palette-knife-oil/hero-poster.jpg" alt="繪畫課程">
+          <div class="tile__overlay">
+            <p class="tile__name">繪畫課程</p>
+            <p class="tile__price">從肌理砂畫到油畫，找到喜歡的媒材</p>
+          </div>
+        </a>
       </div>
     </section>
 
