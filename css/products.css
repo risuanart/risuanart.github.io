@@ -883,6 +883,14 @@
      加了一條 border-left 分隔線，使用者反饋拿掉，兩顆純粹靠留白
      （各自 padding）分界，不另外畫線。整體高度也要求再矮一點，
      min-height 從 56px 降到 44px（全站觸控目標下限，不再往下縮）。 */
+  /* 2026-10-25：使用者反饋這條固定列不該跟頁面裡原本那條
+     .product-buy-bar 同時出現在畫面上（兩組「加入購物車／直接購買」
+     重複）——改成預設隱藏（opacity:0 + 往下位移 + pointer-events:none，
+     不用 display:none，否則沒有轉場效果，也不影響固定定位的版面流），
+     只有當 .product-buy-bar 整個捲出畫面上緣之後才淡入＋滑入，捲回來
+     看到 .product-buy-bar 時自動淡出，判斷邏輯見
+     js/mobile-sticky-buy-reveal.js（只有這頁用到，IntersectionObserver
+     盯著 .product-buy-bar 進出畫面）。 */
   .mobile-sticky-buy {
     display: flex;
     position: fixed;
@@ -892,6 +900,17 @@
     z-index: 40;
     background: var(--color-surface-black);
     padding-bottom: env(safe-area-inset-bottom);
+    opacity: 0;
+    transform: translateY(100%);
+    pointer-events: none;
+    transition: opacity var(--duration-fast) var(--ease-standard),
+      transform var(--duration-fast) var(--ease-standard);
+  }
+
+  .mobile-sticky-buy.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
     box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.08);
   }
 
