@@ -779,6 +779,12 @@
   // [data-addon-select]）：讀取目前勾選的加購項目＋各自的數量，給
   // initAddToCart()／initBuyNow() 的主商品按鈕一起帶走用。其他頁面
   // 沒有這個 data 屬性，一律回傳空陣列，對它們完全不影響行為。
+  // 2026-10-24：部分加購項目改成 checkbox＋款式下拉選單（漸層沙選色組、
+  // 像框選尺寸，見 products/sand-art-fu/index.html），像框是換商品鍵
+  // （由 js/addon-variant-select.js 直接改寫 checkbox.dataset.product，
+  // 這裡不用額外處理），漸層沙是同一個商品鍵、不同 scheme——要讀出列
+  // 裡 [data-addon-scheme] 選單目前的值，沒有這個選單的列（例如純貼紙）
+  // 一律回傳 "default"，跟改之前行為一致。
   function getSelectedAddons() {
     const items = [];
     document.querySelectorAll("[data-addon-select]:checked").forEach((checkbox) => {
@@ -786,7 +792,9 @@
       const row = checkbox.closest("[data-addon-row]");
       const qtyEl = row && row.querySelector("[data-addon-qty] [data-qty-value]");
       const qty = qtyEl ? parseInt(qtyEl.textContent, 10) || 1 : 1;
-      items.push({ productKey, qty });
+      const schemeSelect = row && row.querySelector("[data-addon-scheme]");
+      const scheme = schemeSelect ? schemeSelect.value : "default";
+      items.push({ productKey, qty, scheme });
     });
     return items;
   }
@@ -837,7 +845,7 @@
         if (!scope) {
           getSelectedAddons().forEach((addon) => {
             if (!addon.productKey) return;
-            addItem(addon.productKey, "default", addon.qty);
+            addItem(addon.productKey, addon.scheme || "default", addon.qty);
             addonCount += 1;
           });
           resetSelectedAddons();
@@ -901,7 +909,8 @@
         getSelectedAddons().forEach((addon) => {
           const addonProduct = PRODUCTS[addon.productKey];
           if (!addonProduct) return;
-          cartItems.push({ productKey: addon.productKey, name: addonProduct.name, schemeName: "", qty: addon.qty });
+          const schemeName = SCHEME_NAMES[addon.scheme] || "";
+          cartItems.push({ productKey: addon.productKey, name: addonProduct.name, schemeName, qty: addon.qty });
         });
         btn.disabled = true;
         btn.textContent = "處理中…";

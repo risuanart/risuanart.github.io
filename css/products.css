@@ -821,6 +821,16 @@
   border-radius: 4px;
 }
 
+/* 2026-10-24：使用者比對 orlo.co 原版規格，兩顆按鈕都是純黑，確認
+   這頁的「加入購物車」也要改黑（不用全站共用的品牌藍
+   --color-button-primary）——只在這條滿版 CTA 橫條／下面的手機固定列
+   覆寫，.work__cta--primary 全站基礎規則不動，其他頁面的「加入購物車」
+   還是維持品牌藍。 */
+.product-buy-bar .work__cta[data-add-to-cart] {
+  background: var(--color-surface-black);
+  color: var(--color-surface-light);
+}
+
 @media (max-width: 768px) {
   .product-buy-bar .work__cta[data-add-to-cart],
   .product-buy-bar .work__cta[data-buy-now] {
@@ -894,6 +904,13 @@
   .mobile-sticky-buy [data-buy-now] {
     flex: 1;
     width: auto;
+  }
+
+  /* 跟上面 .product-buy-bar 同一個理由：這頁兩顆按鈕都要純黑，不是
+     品牌藍，只在這條手機固定列覆寫。 */
+  .mobile-sticky-buy [data-add-to-cart] {
+    background: var(--color-surface-black);
+    color: var(--color-surface-light);
   }
 
   /* 固定列會一直蓋在頁面最下面，商品頁本身最後面的內容（頁尾）要留出
@@ -2762,6 +2779,21 @@ button.text-link {
   gap: 8px;
 }
 
+/* 2026-10-24 新增：漸層沙選色組／像框選尺寸的款式下拉選單，取代原本
+   「跳頁／跳彈窗」的連結列（見 js/addon-variant-select.js），外觀比照
+   旁邊的數量選擇器三方塊同一套黑白線框語彙，不用額外的圓角／色塊。 */
+.addon-section--orlo .addon-row__select {
+  width: 160px;
+  max-width: 100%;
+  height: 34px;
+  padding: 4px 8px;
+  border: 1px solid rgba(204, 204, 204, 0.5);
+  border-radius: 0;
+  background: #fff;
+  color: rgb(0, 0, 0);
+  font-size: 13px;
+}
+
 /* 數量選擇器：三個各自獨立的方塊並排（不是共用一個外框），相鄰邊框用
    margin-left:-1px 重疊，「−」disabled 時維持黑字，不套用全站共用
    .qty-stepper button:disabled 那條變灰規則。 */
@@ -2815,29 +2847,9 @@ button.text-link {
   color: rgb(0, 0, 0);
 }
 
-/* 連結型加購列（漸層沙・自選色／沙畫加購像框）維持單行 flex，只跟著
-   更新縮圖尺寸／字級，呼應同一組實測數字，不套用 grid 直欄排法——這兩列
-   本來就沒有數量選擇器，用不到那個直欄結構。使用者確認過這兩列先不要
-   自行改成 checkbox 型，等這輪結構對了再問。 */
-.addon-section--orlo .addon-row--link {
-  padding: 20px 0;
-  background: rgba(204, 204, 204, 0.2);
-  text-align: left;
-}
-
-.addon-section--orlo .addon-row--link + .addon-row--link {
-  border-top: 1px solid rgb(221, 221, 221);
-}
-
-.addon-section--orlo .addon-row--link .addon-row__thumb {
-  width: 60px;
-}
-
-.addon-section--orlo .addon-row--link .addon-row__name {
-  font-size: 16px;
-  font-weight: 400;
-  color: rgb(0, 0, 0);
-}
+/* 2026-10-24：漸層沙／像框兩列已經改成跟「純貼紙」一樣的 checkbox 型
+   （見上面 HTML 改動說明），.addon-row--link 在這頁不再使用，原本這裡
+   的連結列專屬覆寫已經整段移除，不留死規則。 */
 
 @media (max-width: 768px) {
   .addon-section--orlo .addon-row__qty {
