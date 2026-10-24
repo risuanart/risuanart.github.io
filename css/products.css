@@ -2868,26 +2868,28 @@ button.text-link {
   margin-top: 10px;
 }
 
-/* 2026-10-25：使用者反饋清單一直往下堆疊、太佔畫面高度——根因是縮圖
-   自己佔一整列（checkbox＋標題一列，縮圖＋款式/數量/價格又疊三行一列），
-   比 orlo.co 原版還要高。改成縮圖搬到第一列跟 checkbox／標題同一行
-   （小尺寸 36px，不再是 60px 大圖），第二列（款式下拉／數量／價格／
-   預覽連結）改成橫向 flex-wrap 排列（不再是縱向堆疊），兩列就能顯示
-   完，不用再往下疊到第三、四行。 */
-/* 2026-10-25 第二輪：使用者反饋 checkbox 太貼灰底左右邊緣（原本
-   padding:14px 0，左右完全沒留白），比對 orlo.co 截圖後補上左右內距，
-   checkbox／內容不再直接頂到灰底邊界，看起來比較有設計感、不侷促。
-   縮圖也嫌太小，從 36px 放大到 56px，跟 orlo.co 的縮圖比例接近——
-   行高因此會跟著變高一些，這是使用者明確要求的取捨（寧可這列高一點，
-   也要縮圖大小看得清楚）。 */
+/* 2026-10-25 第三輪：使用者反饋 checkbox／縮圖／標題擠在同一列，
+   縮圖被迫限制在很小尺寸，放大又會撐寬整列。改成 flex（不再是 grid）：
+   checkbox 自己一欄（固定寬、對齊標題第一行），縮圖一欄，剩下標題＋
+   數量／價格包成 .addon-row__content 直欄排列、自己一欄。縮圖用
+   align-self:stretch＋aspect-ratio:1/1，不手動寫死尺寸——flex 預設的
+   stretch 行為會讓縮圖高度自動等於 content 欄（標題＋數量/價格疊起來）
+   的實際高度，寬度再用 aspect-ratio 等比例算出來，縮圖可以比之前大
+   張很多，也不會把整列撐寬（高度由內容決定，不是寫死的 px）。 */
+/* 用 grid（不是 flex）排這三欄：縮圖的高度要「自動等於 content 欄
+   content 欄（標題＋數量/價格）的實際高度」，flex 的 align-self:stretch
+   在縮圖本身是 <img>（有自己的原始像素尺寸）時會失效——auto 寬高＋
+   aspect-ratio 算出來的不是「撐滿欄位高度」，而是直接長成原始圖片的
+   像素尺寸（實測跑出 2000px 寬的縮圖）。grid 的列高是「先量其他欄位
+   算出來，縮圖欄位的 height:100% 不會回頭影響列高」，兩階段分開算，
+   不會有這個循環依賴問題，縮圖才能真的乖乖撐滿、不會被內部圖片的
+   原始尺寸牽著跑。 */
 .addon-section--orlo .addon-row:not(.addon-row--link) {
   position: relative;
   display: grid;
-  grid-template-columns: 16px 56px 1fr;
-  grid-template-areas: "checkbox thumb name" ". . meta";
+  grid-template-columns: 16px auto 1fr;
   column-gap: 12px;
-  row-gap: 8px;
-  align-items: center;
+  align-items: start;
   padding: 16px;
   background: rgba(204, 204, 204, 0.2);
   border-top: none;
@@ -2911,22 +2913,48 @@ button.text-link {
 }
 
 .addon-section--orlo .addon-row__checkbox {
-  grid-area: checkbox;
   width: 16px;
   height: 16px;
+  /* 跟標題第一行文字對齊（標題字級 14px／行高 1.4，checkbox 本身
+     16px，往下微調幾 px 讓視覺上落在文字中線附近，不是貼著頂端）。 */
+  margin-top: 3px;
 }
 
-/* 2026-10-25：縮圖搬進第一列，跟 checkbox／標題同一行，不再自己佔
-   一整列——這是這輪壓縮高度的主要改動。尺寸從 60px 縮到 36px，跟
-   checkbox／標題的行高比較接稓，不會把第一列撐得比文字高很多。 */
+/* 縮圖：width:auto 搭配 height:100% 讓寬度隨列高等比例縮放
+   （aspect-ratio:1/1），列高則由旁邊的 content 欄內容自然撐開
+   （grid 列高計算跟這裡的 height:100% 是分開兩階段，不會互相循環
+   依賴，見上面規則的說明）。 */
 .addon-section--orlo .addon-row__thumb {
-  grid-area: thumb;
-  width: 56px;
-  height: 56px;
+  position: relative;
+  width: auto;
+  height: 100%;
+  aspect-ratio: 1 / 1;
+}
+
+/* <img> 本身有原始像素尺寸（例如實拍照 2000×2000px），當父層
+   .addon-row__thumb 是 width:auto 靠 aspect-ratio 反推寬度時，img 的
+   width:100%/height:100% 會在「父層尺寸還沒算出來」的中間狀態退回去
+   用原始像素尺寸頂上去，整個欄位因此被撐到跟原始照片一樣大（實測
+   跑出 2000px 寬的縮圖）。改成 position:absolute 鋪滿父層，img 就不會
+   再貢獻自己的原始尺寸給父層的版面計算，父層的 width:auto 乾淨地只
+   由 height:100%＋aspect-ratio 決定，不受裡面放的是哪張圖影響。 */
+.addon-section--orlo .addon-row__thumb img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* 標題＋數量／價格包成同一個直欄，整欄的高度就是縮圖要撐滿的高度。 */
+.addon-section--orlo .addon-row__content {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
 }
 
 .addon-section--orlo .addon-row__name {
-  grid-area: name;
   margin: 0;
   font-size: 14px;
   font-weight: 400;
@@ -2950,7 +2978,6 @@ button.text-link {
    往下堆疊導致長度太長」的主因。橫向排列後，寬度不夠才換行，大部分
    寬度（≥375px）都能一行放完選單＋數量＋價格。 */
 .addon-section--orlo .addon-row__meta {
-  grid-area: meta;
   display: flex;
   flex-wrap: wrap;
   align-items: center;

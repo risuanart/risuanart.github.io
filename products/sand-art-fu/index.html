@@ -272,37 +272,43 @@
                checkbox 的 data-product，邏輯見 js/addon-variant-select.js；
                色組會連同 scheme 一起送進購物車，見 js/cart.js
                getSelectedAddons() 的 data-addon-scheme 讀取。 -->
-          <!-- 2026-10-25：縮圖搬到跟 checkbox／標題同一列（第一列），
-               款式下拉／數量／價格搬到第二列橫向排列，不再是「標題
-               一列、縮圖又疊三行」的縱向堆疊——使用者反饋原本版面太
-               佔畫面高度，見 css/products.css 同一處說明。 -->
+          <!-- 2026-10-25 第三輪：使用者反饋 checkbox／縮圖／標題擠在
+               同一列會限制縮圖只能很小張，放大又會撐寬整列。改成縮圖
+               搬到跟「標題＋數量／價格」整個直欄並列（不是跟 checkbox
+               同一列），縮圖高度＝標題＋數量／價格疊起來的總高度（用
+               flex align-self:stretch＋aspect-ratio:1 讓縮圖自動撐滿
+               這個高度，寬度跟著等比例變化，不用手動寫死數字），縮圖
+               可以比之前大張很多，也不會把整列撐寬。見 css/products.css
+               同一處說明。 -->
           <div class="addon-row" data-addon-row>
             <input type="checkbox" class="addon-row__checkbox" data-addon-select data-product="sand-art-extra-color" aria-label="加購：漸層沙・自選色">
             <div class="addon-row__thumb">
               <img data-addon-variant-thumb src="../../assets/images/products/sand-art-extra-color/sand-art-extra-color-warm-apricot.jpg" alt="漸層沙・自選色" loading="lazy">
             </div>
-            <p class="addon-row__name">漸層沙・自選色 <span class="addon-row__name-en">Gradient Sand</span>（12 色任選）</p>
-            <div class="addon-row__meta">
-              <select class="addon-row__select" data-addon-scheme aria-label="選擇漸層沙色組">
-                <option value="warm-apricot" data-thumb="../../assets/images/products/sand-art-extra-color/sand-art-extra-color-warm-apricot.jpg">暖杏</option>
-                <option value="mustard-brown" data-thumb="../../assets/images/products/sand-art-extra-color/sand-art-extra-color-mustard-brown.jpg">芥褐</option>
-                <option value="forest-green" data-thumb="../../assets/images/products/sand-art-extra-color/sand-art-extra-color-forest-green.jpg">森綠</option>
-                <option value="ocean-blue" data-thumb="../../assets/images/products/sand-art-extra-color/sand-art-extra-color-ocean-blue.jpg">海藍</option>
-                <option value="moss-jade" data-thumb="../../assets/images/products/sand-art-extra-color/sand-art-extra-color-moss-jade.jpg">苔玉</option>
-                <option value="sunset-orange" data-thumb="../../assets/images/products/sand-art-extra-color/sand-art-extra-color-sunset-orange.jpg">夕橙</option>
-                <option value="ink-grey" data-thumb="../../assets/images/products/sand-art-extra-color/sand-art-extra-color-ink-grey.jpg">墨灰</option>
-                <option value="lake-teal" data-thumb="../../assets/images/products/sand-art-extra-color/sand-art-extra-color-lake-teal.jpg">湖青</option>
-                <option value="sakura-pink" data-thumb="../../assets/images/products/sand-art-extra-color/sand-art-extra-color-sakura-pink.jpg">櫻粉</option>
-                <option value="wisteria-purple" data-thumb="../../assets/images/products/sand-art-extra-color/sand-art-extra-color-wisteria-purple.jpg">藤紫</option>
-                <option value="rouge-red" data-thumb="../../assets/images/products/sand-art-extra-color/sand-art-extra-color-rouge-red.jpg">胭脂</option>
-                <option value="spring-sprout" data-thumb="../../assets/images/products/sand-art-extra-color/sand-art-extra-color-spring-sprout.jpg">春芽</option>
-              </select>
-              <div class="qty-stepper addon-row__qty" data-addon-qty>
-                <button type="button" data-qty-minus aria-label="減少數量">−</button>
-                <span data-qty-value>1</span>
-                <button type="button" data-qty-plus aria-label="增加數量">＋</button>
+            <div class="addon-row__content">
+              <p class="addon-row__name">漸層沙・自選色 <span class="addon-row__name-en">Gradient Sand</span>（12 色任選）</p>
+              <div class="addon-row__meta">
+                <select class="addon-row__select" data-addon-scheme aria-label="選擇漸層沙色組">
+                  <option value="warm-apricot" data-thumb="../../assets/images/products/sand-art-extra-color/sand-art-extra-color-warm-apricot.jpg">暖杏</option>
+                  <option value="mustard-brown" data-thumb="../../assets/images/products/sand-art-extra-color/sand-art-extra-color-mustard-brown.jpg">芥褐</option>
+                  <option value="forest-green" data-thumb="../../assets/images/products/sand-art-extra-color/sand-art-extra-color-forest-green.jpg">森綠</option>
+                  <option value="ocean-blue" data-thumb="../../assets/images/products/sand-art-extra-color/sand-art-extra-color-ocean-blue.jpg">海藍</option>
+                  <option value="moss-jade" data-thumb="../../assets/images/products/sand-art-extra-color/sand-art-extra-color-moss-jade.jpg">苔玉</option>
+                  <option value="sunset-orange" data-thumb="../../assets/images/products/sand-art-extra-color/sand-art-extra-color-sunset-orange.jpg">夕橙</option>
+                  <option value="ink-grey" data-thumb="../../assets/images/products/sand-art-extra-color/sand-art-extra-color-ink-grey.jpg">墨灰</option>
+                  <option value="lake-teal" data-thumb="../../assets/images/products/sand-art-extra-color/sand-art-extra-color-lake-teal.jpg">湖青</option>
+                  <option value="sakura-pink" data-thumb="../../assets/images/products/sand-art-extra-color/sand-art-extra-color-sakura-pink.jpg">櫻粉</option>
+                  <option value="wisteria-purple" data-thumb="../../assets/images/products/sand-art-extra-color/sand-art-extra-color-wisteria-purple.jpg">藤紫</option>
+                  <option value="rouge-red" data-thumb="../../assets/images/products/sand-art-extra-color/sand-art-extra-color-rouge-red.jpg">胭脂</option>
+                  <option value="spring-sprout" data-thumb="../../assets/images/products/sand-art-extra-color/sand-art-extra-color-spring-sprout.jpg">春芽</option>
+                </select>
+                <div class="qty-stepper addon-row__qty" data-addon-qty>
+                  <button type="button" data-qty-minus aria-label="減少數量">−</button>
+                  <span data-qty-value>1</span>
+                  <button type="button" data-qty-plus aria-label="增加數量">＋</button>
+                </div>
+                <p class="addon-row__price price-text">$150</p>
               </div>
-              <p class="addon-row__price price-text">$150</p>
             </div>
           </div>
           <div class="addon-row" data-addon-row>
@@ -310,14 +316,16 @@
             <div class="addon-row__thumb">
               <div class="placeholder-box placeholder-box--photo" aria-hidden="true"><svg class="placeholder-box__icon" viewBox="0 0 24 24" width="1.2em" height="1.2em" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1.5"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 16l-5.5-5.5a1 1 0 0 0-1.4 0L6 19"/></svg></div>
             </div>
-            <p class="addon-row__name">純貼紙加購 <span class="addon-row__name-en">Sticker Refill</span>・單款</p>
-            <div class="addon-row__meta">
-              <div class="qty-stepper addon-row__qty" data-addon-qty>
-                <button type="button" data-qty-minus aria-label="減少數量">−</button>
-                <span data-qty-value>1</span>
-                <button type="button" data-qty-plus aria-label="增加數量">＋</button>
+            <div class="addon-row__content">
+              <p class="addon-row__name">純貼紙加購 <span class="addon-row__name-en">Sticker Refill</span>・單款</p>
+              <div class="addon-row__meta">
+                <div class="qty-stepper addon-row__qty" data-addon-qty>
+                  <button type="button" data-qty-minus aria-label="減少數量">−</button>
+                  <span data-qty-value>1</span>
+                  <button type="button" data-qty-plus aria-label="增加數量">＋</button>
+                </div>
+                <p class="addon-row__price price-text">$__</p>
               </div>
-              <p class="addon-row__price price-text">$__</p>
             </div>
           </div>
           <!-- 2026-10-25：使用者反饋這頁（福星，15×15cm 商品）的像框
@@ -332,15 +340,17 @@
             <div class="addon-row__thumb">
               <img data-addon-variant-thumb src="../../assets/images/products/sand-art-frame/sand-art-frame-plain-15.jpg" alt="沙畫加購像框（空框，實際出貨款式）" loading="lazy">
             </div>
-            <p class="addon-row__name">沙畫加購像框 <span class="addon-row__name-en">Wood Frame</span>（15×15cm）</p>
-            <div class="addon-row__meta">
-              <div class="qty-stepper addon-row__qty" data-addon-qty>
-                <button type="button" data-qty-minus aria-label="減少數量">−</button>
-                <span data-qty-value>1</span>
-                <button type="button" data-qty-plus aria-label="增加數量">＋</button>
+            <div class="addon-row__content">
+              <p class="addon-row__name">沙畫加購像框 <span class="addon-row__name-en">Wood Frame</span>（15×15cm）</p>
+              <div class="addon-row__meta">
+                <div class="qty-stepper addon-row__qty" data-addon-qty>
+                  <button type="button" data-qty-minus aria-label="減少數量">−</button>
+                  <span data-qty-value>1</span>
+                  <button type="button" data-qty-plus aria-label="增加數量">＋</button>
+                </div>
+                <p class="addon-row__price price-text">$150</p>
+                <button type="button" class="addon-row__preview-link" data-addon-preview-toggle data-mockup-src="../../assets/images/products/sand-art-frame/mockup-fu-15.jpg" data-mockup-alt="福星 Starry Fu 裝進像框的模擬效果" data-plain-src="../../assets/images/products/sand-art-frame/sand-art-frame-plain-15.jpg" data-plain-alt="沙畫加購像框（空框，實際出貨款式）">預覽放進像框的效果 →</button>
               </div>
-              <p class="addon-row__price price-text">$150</p>
-              <button type="button" class="addon-row__preview-link" data-addon-preview-toggle data-mockup-src="../../assets/images/products/sand-art-frame/mockup-fu-15.jpg" data-mockup-alt="福星 Starry Fu 裝進像框的模擬效果" data-plain-src="../../assets/images/products/sand-art-frame/sand-art-frame-plain-15.jpg" data-plain-alt="沙畫加購像框（空框，實際出貨款式）">預覽放進像框的效果 →</button>
             </div>
           </div>
         </div>
