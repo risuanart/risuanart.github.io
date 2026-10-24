@@ -153,6 +153,22 @@
 .hub-category-head__en{ font-size:12px; letter-spacing:3px; text-transform:uppercase; color:var(--color-text-secondary); }
 .hub-category-head__title{ margin-top:6px; font-size:20px; font-weight:700; letter-spacing:1px; }
 
+/* 分類區塊上方的示範影片（目前只有首頁「砂畫材料包」在用）：橫式
+   16:9，跟商品頁用的 .demo-video（9:16 直式、限寬 360px）是不同情境，
+   不要共用同一個 class，不然任何一邊要調整比例都會互相牽動。 */
+.hub-showcase-video{
+  aspect-ratio:16/9;
+  overflow:hidden;
+  margin-bottom:28px;
+  background:#2E2F16;
+}
+.hub-showcase-video video{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
 .hub-more-link{
   display:flex;
   align-items:center;

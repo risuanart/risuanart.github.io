@@ -381,6 +381,15 @@
         <p class="hub-category-head__en">Sand Art</p>
         <p class="hub-category-head__title">砂畫材料包</p>
       </div>
+      <!-- 2026-10-24 新增：使用者提供的春聯沙畫旋轉卡片示範影片，原始檔
+           1920×1080／9.5MB，用 ffmpeg 壓到 960px 寬／拿掉音軌／調整
+           bitrate，607KB（見 assets/videos/home/ 同目錄其他首頁影片的
+           壓縮慣例）。跟 .demo-video（商品頁用，9:16 直式）不是同一組
+           class——這支是橫式 16:9，另外用 .hub-showcase-video（見
+           css/hub-blocks.css）。 -->
+      <div class="hub-showcase-video">
+        <video src="assets/videos/home/春聯沙畫-旋轉卡片.mp4" autoplay muted loop playsinline preload="metadata" aria-label="春聯砂畫材料包成品旋轉展示"></video>
+      </div>
       <div class="shop-grid" data-shop-grid-category="sand-art" data-shop-grid-limit="4" role="list" aria-label="砂畫材料包"></div>
       <a class="hub-more-link" href="products/shop/?category=sand-art">ＭＯＲＥ</a>
     </section>
