@@ -74,6 +74,92 @@
   .service-tile{ aspect-ratio:4/3; }
 }
 
+/* ---------- Banner 圖文卡（照抄 koyama.com.tw/store/ 的排版） ----------
+   2026-10-24 使用者指定直接照抄 koyama.com.tw/store/「Boooo! It's
+   Halloween!」／「Sciuscià edited by koyama」那組 banner 的圖片比例／
+   字體配對／小內文樣式，還有下面「for KIDS／Coucou Suzette／Book」那排
+   手機版可以左滑的排版——實際數字是派 agent 用 Playwright 量那個網站的
+   真實 computed CSS 得出來的（不是目測），只有 hover 文字變色用的顏色
+   改成我們自己的 --color-interactive（原站是跟我們品牌色不搭的螢光藍
+   rgb(37,195,229)，其餘比例／字體／間距數字都照實測值）：
+   - 圖片：沒有裁切效果，比例照該站source image的實測比例——雙欄 banner
+     是 2:1，三欄 banner 是 1.4134:1（800×566）。
+   - 標題：Noto Serif TC，雙欄 20px／letter-spacing 2px，三欄 18px／
+     letter-spacing 1px，字重 500，色 #333，靠左。
+   - 內文：Open Sans（我們本來就有載入），13px／行高 23.4px（≈1.8）／
+     letter-spacing 1px，色用跟原站色號幾乎一致的 --color-text-secondary，
+     靠左，沒有刻意窄寬度逼兩行。
+   - 圖片到標題 20px、標題到內文 15px（原站是圖片 margin-bottom:10px
+     ＋標題 margin-top:10px／margin-bottom:15px 疊加出來的）。
+   - hover：只有文字變色，圖片不做任何縮放/位移（原站也沒有）。
+   - 手機版：雙欄維持直向堆疊；三欄那組改成橫向可滑動（flex+
+     overflow-x:auto，原站也沒有 scroll-snap／點點/箭頭，純粹原生觸控
+     橫向捲動），不是另外接一套輪播套件。 */
+.banner-row{ display:grid; gap:20px; }
+.banner-row--duo{ grid-template-columns:1fr 1fr; }
+.banner-row--trio{ grid-template-columns:repeat(3,1fr); }
+
+.banner-tile{ display:block; }
+.banner-tile__media{ overflow:hidden; background:#2E2F16; }
+.banner-row--duo .banner-tile__media{ aspect-ratio:2/1; }
+.banner-row--trio .banner-tile__media{ aspect-ratio:1.4134/1; }
+.banner-tile__media img{ width:100%; height:100%; object-fit:cover; }
+.banner-tile__title{
+  margin:10px 0 15px;
+  font-family:"Noto Serif TC", serif;
+  font-weight:500;
+  color:#333;
+  transition:color .2s ease;
+}
+.banner-row--duo .banner-tile__title{ font-size:20px; letter-spacing:2px; }
+.banner-row--trio .banner-tile__title{ font-size:18px; letter-spacing:1px; margin-top:10px; }
+.banner-tile__desc{
+  margin:0;
+  font-size:13px;
+  line-height:23.4px;
+  letter-spacing:1px;
+  color:var(--color-text-secondary);
+  transition:color .2s ease;
+}
+.banner-tile:hover .banner-tile__title,
+.banner-tile:hover .banner-tile__desc{ color:var(--color-interactive); }
+
+@media (max-width:768px){
+  .banner-row--duo{ grid-template-columns:1fr; }
+  .banner-row--trio{
+    display:flex;
+    overflow-x:auto;
+    gap:16px;
+    margin:0 calc(-1 * var(--content-pad));
+    padding:0 var(--content-pad);
+    scrollbar-width:none;
+  }
+  .banner-row--trio::-webkit-scrollbar{ display:none; }
+  .banner-row--trio .banner-tile{ flex:0 0 72%; }
+}
+
+/* ---------- 分類商品區塊（參考 miyukifactory.com 新品/精選分區） ----------
+   使用者這部分是「參考」不是「直接照抄」，結構沿用（分類標題置中＋限制
+   張數＋置中「更多」按鈕），但視覺維持我們自己的字體／色票系統，不是
+   照搬對方網站的 Montserrat／純黑按鈕。 */
+.hub-category-head{ text-align:center; margin-bottom:28px; }
+.hub-category-head__en{ font-size:12px; letter-spacing:3px; text-transform:uppercase; color:var(--color-text-secondary); }
+.hub-category-head__title{ margin-top:6px; font-size:20px; font-weight:700; letter-spacing:1px; }
+
+.hub-more-link{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:160px;
+  height:48px;
+  margin:28px auto 0;
+  background:var(--color-surface-black);
+  color:#fff;
+  font-size:12px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+}
+
 /* 誠實佔位框：還沒有實拍照片的項目用這個，不是硬套一張不相關的圖片
    湊數——跟全站既有 .placeholder-box 同一套視覺語言（圖示在上、文字在
    下），但套進 .product-card__media／.tile 的圖片容器比例，跟真的有

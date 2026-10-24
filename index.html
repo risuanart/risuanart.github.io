@@ -39,7 +39,12 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=ABeeZee&family=Poppins:wght@700&family=Noto+Sans+TC:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- 2026-10-24 新增 Noto Serif TC：使用者要求照抄 koyama.com.tw/store/
+       「Boooo! It's Halloween!」／「Sciuscià edited by koyama」那組圖文
+       banner 的字體配對（實測結果見 .banner-tile__title 註解），全站其他
+       地方維持原本的 Open Sans／Noto Sans TC 無襯線字，這個襯線字只用在
+       首頁這幾個 banner 標題，不是全站字體系統變更。 -->
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=ABeeZee&family=Poppins:wght@700&family=Noto+Sans+TC:wght@400;600;700&family=Noto+Serif+TC:wght@500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/colors.css">
   <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/base.css">
@@ -311,36 +316,73 @@
       </div>
     </section>
 
-    <!-- 拼貼式入口區塊（2026-10-24 新增）：參考使用者提供的 koyama.com.tw
-         /store/ 截圖，輪播下面接一排等寬大圖塊，各自連到一個「統整介紹」
-         的 hub 頁，不是直接連單一商品——材料包／課程現在都有自己的 hub 頁
-         （products/、courses/），這裡用全站共用的 .content-block／
-         .tile-row／.tile（見 css/hub-blocks.css，材料包母頁、課程 hub 頁
-         都是同一套）做兩個等寬疊字 banner，不是另外發明一套新樣式。 -->
+    <!-- 拼貼式入口區塊（2026-10-24，照抄 koyama.com.tw/store/ 排版）：
+         輪播下面第一排是課程／企業團體課兩個 banner（.banner-row--duo，
+         見 css/hub-blocks.css 的實測規格說明），取代上一版用疊字格狀卡
+         做的材料包／課程入口——材料包本身已經在下面的商品分類區塊直接
+         露出真實商品，不用再疊一次入口。 -->
     <section class="content-block">
-      <div class="tile-row service-row">
-        <a class="tile service-tile" href="products/">
-          <img src="assets/images/products/fluid-art/RS+_04.1_產品主圖_800x800拷貝.jpg" alt="手作材料包">
-          <div class="tile__overlay">
-            <p class="tile__name">手作材料包</p>
-            <p class="tile__price">在家就能完成的新年儀式</p>
-          </div>
+      <div class="banner-row banner-row--duo">
+        <a class="banner-tile" href="courses/">
+          <div class="banner-tile__media"><img src="assets/images/courses/palette-knife-oil/hero-poster.jpg" alt="繪畫課程"></div>
+          <p class="banner-tile__title">繪畫課程</p>
+          <p class="banner-tile__desc">肌理砂畫、刮刀油畫、流動畫⋯選好喜歡的媒材，現場就能完成一幅專屬作品。</p>
         </a>
-        <a class="tile service-tile" href="courses/">
-          <img src="assets/images/courses/palette-knife-oil/hero-poster.jpg" alt="繪畫課程">
-          <div class="tile__overlay">
-            <p class="tile__name">繪畫課程</p>
-            <p class="tile__price">從肌理砂畫到油畫，找到喜歡的媒材</p>
-          </div>
+        <a class="banner-tile" href="enterprise/">
+          <div class="banner-tile__media"><img src="assets/images/enterprise/fluid-family-day/fluid-booth-wide.jpg" alt="企業／團體課程"></div>
+          <p class="banner-tile__title">企業／團體課程</p>
+          <p class="banner-tile__desc">品牌合作、企業包班、客製化課程訂製，提供從構圖設計到現場帶班的整套規劃。</p>
         </a>
       </div>
     </section>
 
-    <!-- 商品格狀：跟 products/shop.html 共用同一套 js/products-overview.js
-         ＋ .shop-grid／.shop-card（見 products.css），資料一份、卡片長相
-         完全一致，不是這裡另外刻一份重複的商品清單。 -->
-    <section class="preview-shop fade-in delay-2">
-      <div class="shop-grid" id="shop-grid" role="list" aria-label="材料包商品"></div>
+    <!-- 第二排：材料指南 3 篇文章（.banner-row--trio），手機版改成橫向
+         可滑動，桌機版維持三欄並排，比例跟字體規格同上。 -->
+    <section class="content-block">
+      <div class="content-block__head">
+        <p class="content-block__title">材料指南</p>
+        <p class="content-block__hint">動手前，先看看這些</p>
+      </div>
+      <div class="banner-row banner-row--trio">
+        <a class="banner-tile" href="guides/star-sky/">
+          <div class="banner-tile__media"><img src="assets/images/gallery/star-sky/07.jpg" alt="星空油畫的銀河特寫"></div>
+          <p class="banner-tile__title">星空油畫教學</p>
+          <p class="banner-tile__desc">從黑夜打底到星塵堆疊，一幅只屬於自己的星空。</p>
+        </a>
+        <a class="banner-tile" href="guides/sand-texture-sea/">
+          <div class="banner-tile__media"><img src="assets/images/gallery/sand-texture/14.jpg" alt="石英砂肌理畫的海景"></div>
+          <p class="banner-tile__title">石英砂肌理畫材料指南</p>
+          <p class="banner-tile__desc">怎麼用沙與顏料畫出海浪的立體質感。</p>
+        </a>
+        <a class="banner-tile" href="guides/material-compare-mountain/">
+          <div class="banner-tile__media"><img src="assets/images/guides/material-compare-mountain/sand-texture/01.jpg" alt="雪山滑雪場景"></div>
+          <p class="banner-tile__title">同一座山，三種材料的呈現</p>
+          <p class="banner-tile__desc">同一個主題，換一種媒材會長什麼樣子。</p>
+        </a>
+      </div>
+    </section>
+
+    <!-- 商品分類區塊（參考 miyukifactory.com 的新品／精選分區，見
+         css/hub-blocks.css 說明）：取代原本單一大格狀列表，改成流動畫／
+         砂畫各自限制 4 件＋置中「更多」按鈕，不是全數列出。卡片一樣用
+         js/products-overview.js 既有的 cardHTML()／initAddToCart()，
+         只是改成依分類各自建一個 grid（見該檔案 initCategoryGrids()）。 -->
+    <section class="content-block fade-in delay-2">
+      <div class="hub-category-head">
+        <p class="hub-category-head__en">Fluid Art</p>
+        <p class="hub-category-head__title">流動畫材料包</p>
+      </div>
+      <div class="shop-grid" data-shop-grid-category="fluid-art" data-shop-grid-limit="4" role="list" aria-label="流動畫材料包"></div>
+      <a class="hub-more-link" href="products/shop/?category=fluid-art">更多</a>
+    </section>
+
+    <section class="content-block fade-in delay-2">
+      <div class="hub-category-head">
+        <p class="hub-category-head__en">Sand Art</p>
+        <p class="hub-category-head__title">砂畫材料包</p>
+      </div>
+      <div class="shop-grid" data-shop-grid-category="sand-art" data-shop-grid-limit="4" role="list" aria-label="砂畫材料包"></div>
+      <a class="hub-more-link" href="products/shop/?category=sand-art">更多</a>
     </section>
 
     <!-- Follow Us / Instagram：版面（字級、格狀間距、留白）是使用者用

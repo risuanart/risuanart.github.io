@@ -217,12 +217,19 @@
     });
   }
 
-  function init() {
+  function initShopGrid() {
     const grid = document.getElementById("shop-grid");
     if (!grid || !window.RisuanCart) return;
 
     const cart = window.RisuanCart;
-    const visibleKeys = Object.keys(cart.PRODUCTS).filter((key) => !cart.PRODUCTS[key].hidden);
+    let visibleKeys = Object.keys(cart.PRODUCTS).filter((key) => !cart.PRODUCTS[key].hidden);
+    // 2026-10-24：首頁「流動畫／砂畫」分類區塊的「更多」按鈕連到這裡，
+    // 帶 ?category=fluid-art／sand-art，讓商品總覽頁直接落在對應分類，
+    // 不是連過來才發現沒有真的篩選、看到一樣的全部商品。
+    const categoryParam = new URLSearchParams(window.location.search).get("category");
+    if (categoryParam) {
+      visibleKeys = visibleKeys.filter((key) => cart.PRODUCTS[key].category === categoryParam);
+    }
     // 比例內縮要用「目前這個格狀頁實際會顯示的商品」裡最大的 sizeCm 當
     // 基準，不是寫死 20——之後尺寸更大的商品上架，這裡會自動跟著調整，
     // 不用回來改這個數字。
@@ -246,6 +253,40 @@
     }
 
     initQuickNavSearch(cart);
+  }
+
+  // 2026-10-24：首頁「流動畫／砂畫」分類區塊（參考 miyukifactory.com 的
+  // 新品／精選分區，見 css/hub-blocks.css 說明）——跟上面 init() 的
+  // #shop-grid 是不同元素（[data-shop-grid-category]），兩套邏輯不會
+  // 互相影響：商品總覽頁只有 #shop-grid，首頁只有這幾個分類 grid，不會
+  // 同一頁兩套都跑到。卡片一樣重用 cardHTML()，不是另外寫一份。
+  function initCategoryGrids() {
+    const grids = document.querySelectorAll("[data-shop-grid-category]");
+    if (!grids.length || !window.RisuanCart) return;
+    const cart = window.RisuanCart;
+
+    grids.forEach((grid) => {
+      const category = grid.dataset.shopGridCategory;
+      const limit = parseInt(grid.dataset.shopGridLimit, 10) || Infinity;
+      const keys = Object.keys(cart.PRODUCTS)
+        .filter((key) => !cart.PRODUCTS[key].hidden && cart.PRODUCTS[key].category === category)
+        .slice(0, limit);
+      const maxSizeCm = keys.reduce((max, key) => {
+        const sizeCm = cart.PRODUCTS[key].sizeCm;
+        return sizeCm && sizeCm > max ? sizeCm : max;
+      }, 0);
+      grid.innerHTML = keys.map((key) => cardHTML(key, cart.PRODUCTS[key], cart, maxSizeCm)).join("");
+    });
+
+    cart.initAddToCart();
+    if (window.HeroColorwayCarousel) {
+      grids.forEach((grid) => window.HeroColorwayCarousel.initAll(grid));
+    }
+  }
+
+  function init() {
+    initShopGrid();
+    initCategoryGrids();
   }
 
   if (document.readyState === "loading") {
