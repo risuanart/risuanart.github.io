@@ -727,26 +727,46 @@
    products/sand-art-fu/index.html 用到這個 class）----------
    2026-10-22 使用者反饋要改成 orlo 那種「左側一條直線的引用塊」樣式，
    位置也要在價格正上方（原本在標題上方）——純靜態文字，不是倒數
-   計時器，日期用虛線底線強調「有時效性」，折扣內容加粗。 ---------- */
+   計時器，日期用虛線底線強調「有時效性」。
+   2026-10-24：使用者用內嵌 1440px 同源框架在 orlo.co 真實商品頁
+   （month-undated-monthly-planner）量出 computed style，這裡照實際
+   數字重新對齊，之前是憑印象抓的：
+   - 原站 border-left（3px solid #000）是畫在每一條「門檻」自己的 <p>
+     上，不是外層容器，padding 也是 0 8px（左右都有），不是只有
+     padding-left。外層 .promotion-wrap 本身沒有邊框，只有上下各 20px
+     的 padding。我們目前只有一條門檻（9折優惠），比照同一個結構套用，
+     以後如果要加第二條門檻，直接複製一個 <p> 就會自動套到同樣樣式。
+   - font-size 14px（不是 12px）、line-height 25px，文字顏色是純黑
+     （不是 --color-text-secondary 那個偏灰的次要色）。
+   - 日期是 border-bottom:1px dashed（不是 text-decoration），「Until」
+     跟日期本身都是 rgb(153,153,153) 的灰色，不是只有日期本身變色。
+   - 折扣內容（9折優惠）原站是純黑、字重 400，沒有特別加粗或換色。這裡
+     刻意維持我們自己原本的 --color-warning 橘色強調（2026-10-22 使用者
+     明確要求過的既有決定，見上一版註解「折扣內容加粗」），只有版面
+     間距／字級跟原站對齊，顏色強調是我們自己的設計選擇，不是照抄
+     漏掉。 ---------- */
 .work-heading__urgency {
-  margin: 0 0 var(--space-2);
-  padding-left: var(--space-2);
-  border-left: 2px solid var(--color-text-primary);
-  font-size: var(--font-size-xs);
-  color: var(--color-text-secondary);
+  margin: 0 0 20px;
+  padding: 20px 0;
 }
 
 .work-heading__urgency p {
   margin: 0;
-}
-
-.work-heading__urgency-date {
-  text-decoration: underline dashed;
-  text-underline-offset: 2px;
+  padding: 0 8px;
+  border-left: 3px solid var(--color-text-primary);
+  font-size: var(--font-size-sm);
+  line-height: 25px;
   color: var(--color-text-primary);
 }
 
+.work-heading__urgency-date {
+  text-decoration: none;
+  border-bottom: 1px dashed var(--color-text-secondary);
+  color: var(--color-text-secondary);
+}
+
 .work-heading__urgency strong {
+  font-weight: 700;
   color: var(--color-warning);
 }
 
@@ -1110,26 +1130,43 @@
   }
 }
 
-/* ---------- 整體放大比照 orlo.co（2026-10-22 第三次調整）----------
-   使用者反映跟 orlo.co 原始商品頁相比，我們的主圖／標題看起來明顯偏
-   小。直接拿 Playwright 量測兩邊在同一個 1440px 視窗寬度下的真實
-   CSS px（不是截圖像素，截圖會因為瀏覽器視窗大小/縮放不同而失真）：
-   orlo 主圖 415×554、容器寬 958px、標題 28px；我們主圖 303×378、
-   容器寬 840px（= 全站共用的 --content-max-width token，booking／
-   cart／faq 等其他頁面也在用，不能直接改這個全域變數）、標題 24px。
-   這裡用頁面限定的 .work__intro--orlo-buy 把容器放寬到 1040px、
-   標題字級加大，縮圖欄寬度也在上面從 96px 收窄到 76px（更貼近 orlo
-   的 71px），讓主圖實際可用寬度一起變大，其他 8 頁沒有這個 class，
-   完全不受影響。 */
+/* ---------- 整體放大比照 orlo.co（2026-10-22 第三次調整／2026-10-24
+   用真實 computed style 重新校正）----------
+   2026-10-22 當時是拿 Playwright 量兩邊在 1440px 視窗下的大致 px 做的
+   第一輪校正（容器寬 958px）。2026-10-24 使用者用內嵌同源框架在
+   orlo.co 真實商品頁重新量到更精確的數字：.ProductDetail-product
+   實際內容寬 988px（x=226 到 x=1214，置中）、圖片欄 550px、文字欄
+   435px（比例 550:435 ≈ 1.264:1）、主圖 415×553.5（約 3:4，不是我們
+   原本套的 4:5）。這裡用這組更準的數字取代第一輪的概估值，容器寬度
+   改成 988px，並且新增欄寬比例／主圖比例的頁面限定覆寫，其他 8 頁
+   沒有 .work__intro--orlo-buy 這個 class，完全不受影響。 */
 @media (min-width: 841px) {
   .work__intro.work__intro--orlo-buy {
-    max-width: 1040px;
+    max-width: 988px;
   }
 }
 
 @media (min-width: 768px) {
+  .work__intro.work__intro--orlo-buy {
+    /* 全站共用「模板 A」是 minmax(0,1.2fr) minmax(0,1fr)，這裡改成實測
+       的 550:435 比例，更貼近 orlo 圖片欄略寬一點的實際觀感。 */
+    grid-template-columns: minmax(0, 550fr) minmax(0, 435fr);
+  }
+
+  .work__intro.work__intro--orlo-buy .work__gallery-main {
+    /* 全站共用規則是 4/5（0.8），orlo 實測主圖是 415×553.5，約 3/4
+       （0.75），更窄更長一點，這裡只覆寫這一頁。 */
+    aspect-ratio: 3 / 4;
+  }
+
   .work__intro.work__intro--orlo-buy .work-heading {
     font-size: clamp(1.3rem, 1rem + 1vw, 1.75rem);
+  }
+
+  .work__intro.work__intro--orlo-buy .work-heading__price {
+    /* orlo 實測價格字重是 700（我們全站共用的 .work-heading__price
+       是 600），只在這頁覆寫，不動共用規則。 */
+    font-weight: 700;
   }
 
   .work__intro.work__intro--orlo-buy .work-heading__urgency {
@@ -1191,9 +1228,11 @@
      把它往右推、不會自動讓寬度跟著縮水（width:100% 是相對 gallery 容器
      寬度算的，跟 margin 無關），不補 calc() 的話主圖會整個往右超出
      gallery 容器邊界。 */
+  /* 2026-10-24：縮圖寬度／跟主圖的間距改成 orlo.co 實測的 72px／28px
+     （原本是概估的 76px／--space-4=16px）。 */
   .work__gallery--thumbs-left .work__gallery-main {
-    margin-left: calc(76px + var(--space-4));
-    width: calc(100% - 76px - var(--space-4));
+    margin-left: calc(72px + 28px);
+    width: calc(100% - 72px - 28px);
     min-width: 0;
   }
 
@@ -1208,7 +1247,7 @@
     left: 0;
     top: 0;
     bottom: 0;
-    width: 76px;
+    width: 72px;
     display: flex;
     flex-direction: column;
     margin-top: 0;
@@ -1229,8 +1268,8 @@
      方形縮圖（跟 .work__gallery-strip-wrap 的固定寬度一致），不再套
      用那組水平換算公式。 */
   .work__gallery--thumbs-left .work__gallery-thumb {
-    flex: 0 0 76px;
-    width: 76px;
+    flex: 0 0 72px;
+    width: 72px;
   }
 
   /* 上下箭頭：原本的左右箭頭樣式（absolute, top:0;bottom:0，水平置中
