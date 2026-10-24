@@ -356,6 +356,14 @@
   // placeholder-box--photo 排版邏輯（圖示在上、文字在下）。
   const PLACEHOLDER_PHOTO_ICON = `<svg class="placeholder-box__icon" viewBox="0 0 24 24" width="1.8em" height="1.8em" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1.5"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 16l-5.5-5.5a1 1 0 0 0-1.4 0L6 19"/></svg>`;
 
+  // 2026-10-24 新增：商品總覽格狀卡片的色號快選縮圖（參考 orlo.co 商品
+  // 卡片下方可以直接點縮圖切換顏色的做法），只需要查「這個 scheme 的
+  // 圖長怎樣」，不需要 thumbHTML() 整段 <img> 標籤或找不到圖時的佔位框，
+  // 所以另外開一個單純回傳圖片網址的查詢函式，不是重複一份 SCHEME_IMAGES。
+  function schemeImageSrc(scheme) {
+    return SCHEME_IMAGES[scheme] || null;
+  }
+
   function thumbHTML(item, className) {
     const src = SCHEME_IMAGES[item.scheme] || PRODUCT_IMAGES[item.productKey];
     if (src) {
@@ -1212,6 +1220,7 @@
     CATEGORY_LABELS,
     PRODUCT_URLS,
     thumbHTML,
+    schemeImageSrc,
     detailImageSrc,
     PRODUCT_COLORWAY_FRAMES,
     // initAddToCart 在這支檔案自己的 init() 時已經跑過一次，但那時候總覽頁的

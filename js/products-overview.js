@@ -71,6 +71,26 @@
     return paddingPercent > 0.05 ? paddingPercent : 0;
   }
 
+  // 2026-10-24 新增：參考 orlo.co 商品卡片下方可以直接點縮圖切換顏色的
+  // 做法——有多個色號可選的商品（12 色漸層沙／24 色任選組），卡片上原本
+  // 只顯示預設色，使用者要進商品頁才看得到其他色。這裡在卡片裡加一排
+  // 小縮圖，點了就直接換主圖＋更新 .variant-select 的值（給「加入購物
+  // 車」讀取），不用整頁跳轉。只有 2 個以上色號的商品才輸出這排（單一
+  // 配色的商品只有一個選項，點了也沒有變化，不需要這排 UI）。
+  function swatchesHTML(variants, cart) {
+    if (!variants || variants.length < 2) return "";
+    const chips = variants
+      .map((scheme, i) => {
+        const src = cart.schemeImageSrc(scheme);
+        const name = cart.SCHEME_NAMES[scheme] || scheme;
+        const activeClass = i === 0 ? " is-active" : "";
+        const bg = src ? ` style="background-image:url('${src}')"` : "";
+        return `<button type="button" class="shop-card__swatch${activeClass}" data-swatch-scheme="${scheme}" aria-label="${name}"${bg}></button>`;
+      })
+      .join("");
+    return `<div class="shop-card__swatches" role="group" aria-label="選擇色號">${chips}</div>`;
+  }
+
   function cardHTML(key, product, cart, maxSizeCm) {
     const variants = cart.VARIANT_OPTIONS[key];
     const defaultScheme = variants && variants[0];
@@ -91,9 +111,16 @@
     // 隱藏的規格輸入只在「這個商品真的有規格可選」時才輸出，沒有變體的商品
     // （例如自由創作組）維持跟它主商品頁按鈕一樣，不带 scope 內的 chip／select，
     // activeScheme() 自然 fallback 成 "default"。
+    // 2026-10-24：原本固定只放第一個選項（反正只是給「加入購物車」讀取
+    // 預設規格用），現在卡片上多了可以切換色號的縮圖排（見下面
+    // swatchesHTML()），<select> 要放「全部」選項，點縮圖時才能把這個
+    // <select> 的 value 換成對應色號——initSwatches() 靠 cart.js 既有的
+    // activeScheme() 讀 .variant-select 的值，不用另外教 initAddToCart()
+    // 認得新的資料來源。
     const variantInput = defaultScheme
-      ? `<select class="variant-select" hidden aria-hidden="true"><option value="${defaultScheme}" selected></option></select>`
+      ? `<select class="variant-select" hidden aria-hidden="true">${variants.map((v, i) => `<option value="${v}"${i === 0 ? " selected" : ""}></option>`).join("")}</select>`
       : "";
+    const swatches = swatchesHTML(variants, cart);
     const categoryLabel = CATEGORY_LABELS[product.category];
     const eyebrow = categoryLabel ? `<p class="shop-card__category">${categoryLabel}</p>` : "";
     // 2026-10-18 使用者要求拿掉「新品」標籤，不再標示。早鳥折扣角標
@@ -144,6 +171,7 @@
             ${preorderNote}
           </div>
         </a>
+        ${swatches}
       </div>`;
   }
 
@@ -284,9 +312,39 @@
     }
   }
 
+  // 2026-10-24 新增：卡片色號縮圖的點擊行為，用事件代理掛在 document
+  // 上（不是個別卡片各自綁一次），因為卡片是動態建出來的，而且商品總覽
+  // 頁／首頁分類區塊可能同時存在、各自重複呼叫 render，掛一次代理就能
+  // 涵蓋所有現在跟之後建出來的卡片，不用每次重新渲染後再重新綁定。
+  function initSwatchSwitching() {
+    document.addEventListener("click", (e) => {
+      const chip = e.target.closest(".shop-card__swatch");
+      if (!chip) return;
+      const card = chip.closest(".shop-card");
+      if (!card) return;
+      const scheme = chip.dataset.swatchScheme;
+
+      card.querySelectorAll(".shop-card__swatch").forEach((c) => c.classList.toggle("is-active", c === chip));
+
+      // 主縮圖只有一張 <img class="shop-card__thumb">（有配色輪播／hover
+      // 換圖的商品不會同時有色號選擇器，見 cardHTML() 說明，不會選到
+      // 錯的那張）。背景圖網址直接從縮圖按鈕自己的 background-image
+      // 讀出來，不用再查一次 cart.SCHEME_IMAGES，瀏覽器已經幫忙解析好
+      // 完整網址，兩邊資料來源保證一致。
+      const mainImg = card.querySelector(".shop-card__media .shop-card__thumb");
+      const bg = getComputedStyle(chip).backgroundImage;
+      const match = bg.match(/url\(["']?(.*?)["']?\)/);
+      if (mainImg && match) mainImg.src = match[1];
+
+      const select = card.querySelector(".variant-select");
+      if (select) select.value = scheme;
+    });
+  }
+
   function init() {
     initShopGrid();
     initCategoryGrids();
+    initSwatchSwitching();
   }
 
   if (document.readyState === "loading") {

@@ -3153,6 +3153,40 @@ button.text-link {
   margin: 0;
 }
 
+/* ---------- 色號快選縮圖（參考 orlo.co，2026-10-24） ----------
+   使用者指出 orlo.co 的商品卡片下方可以直接點縮圖切換顏色，我們原本
+   多色號的商品（漸層沙・自選色 12 色／砂畫・24色任選組）在總覽格狀卡
+   只顯示預設色，要進商品頁才看得到其他色——這裡加一排小縮圖，點了就
+   換卡片主圖＋更新隱藏的 .variant-select（給「加入購物車」讀取選到的
+   色號），互動邏輯見 js/products-overview.js initSwatchSwitching()。
+   只有變體數 ≥2 的商品才會有這排（見 swatchesHTML()），單一配色商品
+   卡片維持原樣，不會多出一排空的。 */
+.shop-card__swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+  padding-left: 5px;
+}
+
+.shop-card__swatch {
+  appearance: none;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: var(--radius-sharp);
+  background-color: var(--color-surface-light);
+  background-size: cover;
+  background-position: center;
+  cursor: pointer;
+  transition: border-color var(--duration-fast) var(--ease-standard);
+}
+
+.shop-card__swatch.is-active {
+  border-color: var(--color-text-primary);
+}
+
 /* 2026-10-17 預購標示：使用者從幾個排版提案裡選定「純文字、不加色塊／
    圖示」的方向，跟 --color-text-secondary 的次要說明文字同一套語彙，
    不用另外發明新顏色搶走價格本身的注意力。文字來源見 js/cart.js
