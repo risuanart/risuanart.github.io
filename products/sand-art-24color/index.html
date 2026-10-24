@@ -180,15 +180,15 @@
       <div class="sand24-field sand24-field--scheme fade-in delay-2">
         <p class="work-heading__field-label">色組（單組任選其一）</p>
         <div class="gradient-sand-picker" role="group" aria-label="選擇色組" data-sand24-scheme-picker>
-          <button type="button" class="color-picker__chip" data-scheme="set-a" aria-pressed="true">
+          <button type="button" class="color-picker__chip" data-scheme="set-a" data-colors="米黃、明黃、檸黃、洋黃、黃色、藤黃、金黃、桔黃、橙色、桔紅、紅色、珊瑚紅、淡粉、淺粉、冰紫、深粉、粉紫、洋紅、粉紅、百花紅、桃紅、玫紅、棗紅、栗紅" aria-pressed="true">
             <img src="../../assets/images/products/sand-art-24color/sand-art-24color-set-a.jpg" alt="A｜暖色組：米黃、明黃、檸黃、洋黃、黃色、藤黃、金黃、桔黃、橙色、桔紅、紅色、珊瑚紅、淡粉、淺粉、冰紫、深粉、粉紫、洋紅、粉紅、百花紅、桃紅、玫紅、棗紅、栗紅" width="90" height="90" loading="lazy">
             <span class="color-picker__chip-name">A｜暖色組</span>
           </button>
-          <button type="button" class="color-picker__chip" data-scheme="set-b" aria-pressed="false">
+          <button type="button" class="color-picker__chip" data-scheme="set-b" data-colors="冰藍、天青、青色、松石綠、湖藍、蔚藍、藍色、潮藍、虹藍、孔藍、寶藍、紫羅蘭、淺膚、膚色、深膚、亞麻、麥芽、姜黃、芥黃、藤紫、紫色、油紫、酞青藍、墨藍" aria-pressed="false">
             <img src="../../assets/images/products/sand-art-24color/sand-art-24color-set-b.jpg" alt="B｜藍紫組：冰藍、天青、青色、松石綠、湖藍、蔚藍、藍色、潮藍、虹藍、孔藍、寶藍、紫羅蘭、淺膚、膚色、深膚、亞麻、麥芽、姜黃、芥黃、藤紫、紫色、油紫、酞青藍、墨藍" width="90" height="90" loading="lazy">
             <span class="color-picker__chip-name">B｜藍紫組</span>
           </button>
-          <button type="button" class="color-picker__chip" data-scheme="set-c" aria-pressed="false">
+          <button type="button" class="color-picker__chip" data-scheme="set-c" data-colors="柳黃、淺綠、艾綠、玉綠、淺松、綠色、碧綠、翠綠、湖綠、深綠、墨綠、孔綠、豆青綠、深松、苔綠、黃棕、紅棕、淺棕、茶褐、棕色、白色、淺灰、深灰、黑色" aria-pressed="false">
             <img src="../../assets/images/products/sand-art-24color/sand-art-24color-set-c.jpg" alt="C｜綠棕組：柳黃、淺綠、艾綠、玉綠、淺松、綠色、碧綠、翠綠、湖綠、深綠、墨綠、孔綠、豆青綠、深松、苔綠、黃棕、紅棕、淺棕、茶褐、棕色、白色、淺灰、深灰、黑色" width="90" height="90" loading="lazy">
             <span class="color-picker__chip-name">C｜綠棕組</span>
           </button>
@@ -226,7 +226,23 @@
       </div>
     </section>
 
+    <!-- 2026-10-24 新增：A／B／C 三組各自實際包含哪 24 色，跟
+         sand-art-extra-color（5 色組）那頁同一個理由跟同一套
+         .color-reference-list 樣式——方便比較 5 色組跟 24 色組的差異，
+         或材料包用完想對照看還缺哪色的人。 -->
     <section class="chapter fade-in delay-1">
+      <h2 class="chapter__title">3 組色號一覽</h2>
+      <div class="chapter__intro">
+        <p>每組 24 色，三組合計 72 色，選色時可以對照下面的色名，或跟「漸層沙・自選色」5 色組比較想要哪一種色系。</p>
+      </div>
+      <dl class="color-reference-list">
+        <div><dt>A｜暖色組</dt><dd>米黃、明黃、檸黃、洋黃、黃色、藤黃、金黃、桔黃、橙色、桔紅、紅色、珊瑚紅、淡粉、淺粉、冰紫、深粉、粉紫、洋紅、粉紅、百花紅、桃紅、玫紅、棗紅、栗紅</dd></div>
+        <div><dt>B｜藍紫組</dt><dd>冰藍、天青、青色、松石綠、湖藍、蔚藍、藍色、潮藍、虹藍、孔藍、寶藍、紫羅蘭、淺膚、膚色、深膚、亞麻、麥芽、姜黃、芥黃、藤紫、紫色、油紫、酞青藍、墨藍</dd></div>
+        <div><dt>C｜綠棕組</dt><dd>柳黃、淺綠、艾綠、玉綠、淺松、綠色、碧綠、翠綠、湖綠、深綠、墨綠、孔綠、豆青綠、深松、苔綠、黃棕、紅棕、淺棕、茶褐、棕色、白色、淺灰、深灰、黑色</dd></div>
+      </dl>
+    </section>
+
+    <section class="chapter fade-in delay-2">
       <h2 class="chapter__title">材料保存</h2>
       <div class="chapter__intro">
         <p>沙粒開封後請保持乾燥，避免受潮結塊，建議於陰涼乾燥處保存。</p>

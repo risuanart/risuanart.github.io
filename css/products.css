@@ -2331,6 +2331,43 @@ button.text-link {
   font-style: italic;
 }
 
+/* ---------- 色號一覽（2026-10-24，漸層沙・自選色／砂畫・24色任選組
+   共用）----------
+   使用者要求每組實際包含哪幾色要清楚列出來，不是只藏在縮圖 alt 文字
+   裡——用 <dl> 語意正確地表達「色組名稱→內含色號」的對應關係，桌機
+   版兩欄並排（內容量不大，單欄會拉得太長），手機維持單欄。 */
+.color-reference-list {
+  margin-top: var(--space-4);
+  display: grid;
+  gap: var(--space-2) var(--space-6);
+}
+
+@media (min-width: 600px) {
+  .color-reference-list {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.color-reference-list > div {
+  display: flex;
+  gap: var(--space-2);
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid color-mix(in srgb, var(--color-text-secondary) 15%, transparent);
+  font-size: var(--font-size-sm);
+  line-height: 1.6;
+}
+
+.color-reference-list dt {
+  flex: 0 0 auto;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.color-reference-list dd {
+  margin: 0;
+  color: var(--color-text-secondary);
+}
+
 /* ---------- 加購項目：可往右滑的商品卡片列（圖上、字下） ----------
    加購的是「另一件商品」，不是主商品身上勾選的附加選項——每張卡自己有一顆
    「加入購物車」按鈕，按下去直接獨立加入購物車（不用先勾選、等主商品的
