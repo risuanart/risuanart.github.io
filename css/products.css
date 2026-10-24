@@ -886,31 +886,41 @@
 }
 
 @media (max-width: 767px) {
+  /* 2026-10-25：使用者比對 orlo.co 截圖指出這條固定列應該是「一整條
+     滿版黑底」，中間一條細線分隔兩個按鈕，不是兩顆各自獨立、中間留
+     空隙的圓角黑色按鈕——固定列本身直接是黑底（不是淺色底托著兩顆
+     按鈕），左右不留邊距，貼齊螢幕兩側，按鈕本身改透明背景＋白字，
+     靠固定列的黑底撐顏色，兩顆之間用 border-left 當分隔線。 */
   .mobile-sticky-buy {
     display: flex;
-    gap: var(--space-2);
     position: fixed;
     left: 0;
     right: 0;
     bottom: 0;
     z-index: 40;
-    padding: var(--space-2) var(--space-4) calc(var(--space-2) + env(safe-area-inset-bottom));
-    background: var(--panel-bg);
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    background: var(--color-surface-black);
+    padding-bottom: env(safe-area-inset-bottom);
     box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.08);
   }
 
-  .mobile-sticky-buy [data-add-to-cart],
-  .mobile-sticky-buy [data-buy-now] {
+  /* 疊加 .work__cta class（特異度三個 class 等級），確保蓋過
+     .work__cta.work__cta--buy-now 那條共用基底規則，不管兩條誰定義在
+     後面都一定是這裡贏，同一個特異度陷阱見上面 .product-buy-bar 的
+     說明。 */
+  .mobile-sticky-buy .work__cta[data-add-to-cart],
+  .mobile-sticky-buy .work__cta[data-buy-now] {
     flex: 1;
     width: auto;
+    min-height: 56px;
+    height: auto;
+    padding: var(--space-2) var(--space-4);
+    border-radius: 0;
+    background: transparent;
+    color: var(--color-surface-light);
   }
 
-  /* 跟上面 .product-buy-bar 同一個理由：這頁兩顆按鈕都要純黑，不是
-     品牌藍，只在這條手機固定列覆寫。 */
-  .mobile-sticky-buy [data-add-to-cart] {
-    background: var(--color-surface-black);
-    color: var(--color-surface-light);
+  .mobile-sticky-buy .work__cta[data-buy-now] {
+    border-left: 1px solid rgba(255, 255, 255, 0.25);
   }
 
   /* 固定列會一直蓋在頁面最下面，商品頁本身最後面的內容（頁尾）要留出
