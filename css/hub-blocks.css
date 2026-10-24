@@ -125,7 +125,14 @@
 .banner-tile:hover .banner-tile__desc{ color:var(--color-interactive); }
 
 @media (max-width:768px){
+  /* 手機版字級／對齊再次用 agent 在同一個 389px 寬度實測 koyama 真正的
+     結果修過：雙欄（banner-top）手機版標題縮成 18px、標題＋內文都改置中
+     （桌機是靠左）；三欄（banner-ft）手機版標題縮成 16px，但維持靠左，
+     跟雙欄的對齊規則不一樣，不是同一套直接套用。 */
   .banner-row--duo{ grid-template-columns:1fr; }
+  .banner-row--duo .banner-tile__title{ font-size:18px; text-align:center; }
+  .banner-row--duo .banner-tile__desc{ text-align:center; }
+  .banner-row--trio .banner-tile__title{ font-size:16px; }
   .banner-row--trio{
     display:flex;
     overflow-x:auto;
