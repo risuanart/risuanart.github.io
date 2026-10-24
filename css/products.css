@@ -2859,14 +2859,21 @@ button.text-link {
   margin-top: 10px;
 }
 
+/* 2026-10-25：使用者反饋清單一直往下堆疊、太佔畫面高度——根因是縮圖
+   自己佔一整列（checkbox＋標題一列，縮圖＋款式/數量/價格又疊三行一列），
+   比 orlo.co 原版還要高。改成縮圖搬到第一列跟 checkbox／標題同一行
+   （小尺寸 36px，不再是 60px 大圖），第二列（款式下拉／數量／價格／
+   預覽連結）改成橫向 flex-wrap 排列（不再是縱向堆疊），兩列就能顯示
+   完，不用再往下疊到第三、四行。 */
 .addon-section--orlo .addon-row:not(.addon-row--link) {
   position: relative;
   display: grid;
-  grid-template-columns: 16px 1fr;
-  grid-template-areas: "checkbox name" ". body";
+  grid-template-columns: 16px 36px 1fr;
+  grid-template-areas: "checkbox thumb name" ". . meta";
   column-gap: 10px;
-  align-items: start;
-  padding: 20px 0;
+  row-gap: 8px;
+  align-items: center;
+  padding: 14px 0;
   background: rgba(204, 204, 204, 0.2);
   border-top: none;
   text-align: left;
@@ -2892,43 +2899,45 @@ button.text-link {
   grid-area: checkbox;
   width: 16px;
   height: 16px;
-  margin-top: 9px;
+}
+
+/* 2026-10-25：縮圖搬進第一列，跟 checkbox／標題同一行，不再自己佔
+   一整列——這是這輪壓縮高度的主要改動。尺寸從 60px 縮到 36px，跟
+   checkbox／標題的行高比較接稓，不會把第一列撐得比文字高很多。 */
+.addon-section--orlo .addon-row__thumb {
+  grid-area: thumb;
+  width: 36px;
+  height: 36px;
 }
 
 .addon-section--orlo .addon-row__name {
   grid-area: name;
-  margin: 0 0 14px;
-  font-size: 16px;
+  margin: 0;
+  font-size: 14px;
   font-weight: 400;
-  line-height: 27px;
+  line-height: 1.4;
   color: rgb(0, 0, 0);
   text-align: left;
 }
 
-.addon-section--orlo .addon-row__body {
-  grid-area: body;
-  display: flex;
-  gap: 10px;
-}
-
-.addon-section--orlo .addon-row__thumb {
-  width: 60px;
-  height: 60px;
-  flex: none;
-}
-
+/* 第二列（款式下拉／數量選擇器／價格／預覽連結）改成橫向排列、允許
+   換行，不是縱向一路往下疊——原本縱向堆疊時，有下拉選單的項目會變成
+   選單、數量、價格三行疊起來，比 orlo.co 原版還高，是使用者反饋「一直
+   往下堆疊導致長度太長」的主因。橫向排列後，寬度不夠才換行，大部分
+   寬度（≥375px）都能一行放完選單＋數量＋價格。 */
 .addon-section--orlo .addon-row__meta {
+  grid-area: meta;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
 }
 
 /* 2026-10-24 新增：漸層沙選色組／像框選尺寸的款式下拉選單，取代原本
    「跳頁／跳彈窗」的連結列（見 js/addon-variant-select.js），外觀比照
    旁邊的數量選擇器三方塊同一套黑白線框語彙，不用額外的圓角／色塊。 */
 .addon-section--orlo .addon-row__select {
-  width: 160px;
+  width: 140px;
   max-width: 100%;
   height: 34px;
   padding: 4px 8px;
@@ -2941,8 +2950,11 @@ button.text-link {
 
 /* 2026-10-24：像框列的「預覽放進像框的效果」連結——縮圖本身改用純
    像框照（避免讓客人誤會加購含砂畫作品），合成示意圖改成點進去才看到，
-   文字連結比照全站次要連結的克制調性（純文字＋底線，不做按鈕外觀）。 */
+   文字連結比照全站次要連結的克制調性（純文字＋底線，不做按鈕外觀）。
+   2026-10-25：改成橫向 meta 列的一員，寬度不夠會自動換到下一行，不用
+   再另外處理版面。 */
 .addon-section--orlo .addon-row__preview-link {
+  flex-basis: 100%;
   font-size: 12px;
   color: rgb(107, 107, 107);
   text-decoration: underline;
@@ -2950,10 +2962,13 @@ button.text-link {
 
 /* 數量選擇器：三個各自獨立的方塊並排（不是共用一個外框），相鄰邊框用
    margin-left:-1px 重疊，「−」disabled 時維持黑字，不套用全站共用
-   .qty-stepper button:disabled 那條變灰規則。 */
+   .qty-stepper button:disabled 那條變灰規則。2026-10-25：使用者反饋
+   「－」「＋」字重太細、看不清楚，比照 orlo.co 加粗；寬度也從原本
+   「獨自佔一整行」的 132/198px 縮小成跟款式下拉／價格同一行並排的
+   緊湊尺寸，兩個斷點共用同一組數字，不用再分桌機／手機兩套。 */
 .addon-section--orlo .addon-row__qty {
-  width: 132px;
-  height: 38px;
+  width: 104px;
+  height: 34px;
   border: none;
   border-radius: 0;
   overflow: visible;
@@ -2965,13 +2980,15 @@ button.text-link {
 }
 
 .addon-section--orlo .addon-row__qty button {
-  width: 37px;
-  height: 38px;
+  width: 32px;
+  height: 34px;
   border: 1px solid rgba(204, 204, 204, 0.5);
   border-radius: 0;
   background: #fff;
   color: rgb(0, 0, 0);
-  padding: 6px 12px;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 6px 8px;
   margin-left: -1px;
 }
 
@@ -2985,8 +3002,8 @@ button.text-link {
 }
 
 .addon-section--orlo .addon-row__qty span {
-  width: 60px;
-  height: 38px;
+  width: 40px;
+  height: 34px;
   min-width: 0;
   border: 1px solid rgba(204, 204, 204, 0.5);
   margin-left: -1px;
@@ -2997,23 +3014,13 @@ button.text-link {
 .addon-section--orlo .addon-row__price {
   min-width: 0;
   text-align: left;
-  font-size: 16px;
+  font-size: 15px;
   color: rgb(0, 0, 0);
 }
 
 /* 2026-10-24：漸層沙／像框兩列已經改成跟「純貼紙」一樣的 checkbox 型
    （見上面 HTML 改動說明），.addon-row--link 在這頁不再使用，原本這裡
    的連結列專屬覆寫已經整段移除，不留死規則。 */
-
-@media (max-width: 768px) {
-  .addon-section--orlo .addon-row__qty {
-    width: 198px;
-  }
-
-  .addon-section--orlo .addon-row__qty span {
-    width: 126px;
-  }
-}
 
 /* ---------- 相關商品：跨商品導流橫向捲動列 ----------
    2026-10 新增，版面比例參考使用者提供的外部商品頁實測規格（圖片 1:1
