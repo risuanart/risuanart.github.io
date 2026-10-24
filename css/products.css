@@ -779,6 +779,32 @@
   margin: var(--space-2) 0 var(--space-6);
 }
 
+/* 2026-10-25：使用者比對 orlo.co 截圖反饋——這顆數量選擇器被拉成
+   滿版寬度後，中間的數字沒有跟著撐開，「－」「＋」還是黏在左側一小
+   塊，右邊留了一大截空白，不是「－在最左、數字置中、＋在最右」。
+   根因是共用的 .qty-stepper 本身是 flex 容器但沒有任何一個子層會
+   「長大」去吃滿寬度——.qty-stepper 自己因為是 block-level flex
+   容器會撐滿父層寬度，但裡面的 button／span 都是 shrink-to-fit，三個
+   加起來還是一小搓擠在最左邊。只在這顆（.work-heading__qty 底下）
+   覆寫，不動共用的 .qty-stepper 本身（「一起加購」清單裡那些迷你
+   數量選擇器還是維持原本緊湊的樣子，不用變寬）。高度也一併拉高到
+   全站 44px 觸控下限，不是原本的 24px。 */
+.work-heading__qty .qty-stepper {
+  width: 100%;
+  height: 44px;
+}
+
+.work-heading__qty .qty-stepper button {
+  flex: none;
+  width: 48px;
+  font-size: var(--font-size-lg);
+}
+
+.work-heading__qty .qty-stepper span {
+  flex: 1;
+  font-size: var(--font-size-lg);
+}
+
 /* ---------- 滿版 CTA 橫條（參考 orlo.co，2026-10-22，目前只有
    products/sand-art-fu/index.html 用到）----------
    「加入購物車」／「直接購買」改成放在「一起加購」區塊下方的滿版
