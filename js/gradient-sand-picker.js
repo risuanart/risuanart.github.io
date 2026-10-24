@@ -7,13 +7,19 @@
    點擊的 .color-picker__chip 本身帶 aria-pressed 屬性，js/cart.js 的
    activeScheme() 會自動讀取頁面上 aria-pressed="true" 的那顆、取它的
    data-scheme 當作加入購物車時的規格，這裡不用額外處理「加入購物車」
-   按鈕本身，只需要負責畫面上的選色互動（主圖、文字提示）。 */
+   按鈕本身，只需要負責畫面上的選色互動（主圖、文字提示）。
+
+   2026-10-25：使用者要求主圖能左右切換 12 張色票照——手機滑動、桌機
+   點箭頭——不是只能從下面縮圖點選。改成 index-based：select(idx) 統一
+   處理「換圖＋換選中狀態＋換提示文字」，點縮圖、點箭頭、滑動手勢都呼叫
+   同一個函式，不是三套各自獨立的邏輯。 */
 (function () {
   const root = document.querySelector("[data-gradient-sand-picker]");
   if (!root) return;
 
   const chips = Array.from(root.querySelectorAll(".color-picker__chip"));
   const mainImg = root.querySelector("[data-gradient-sand-main-img]");
+  const mainWrap = root.querySelector("[data-gradient-sand-main]");
   const hintName = root.querySelector("[data-gradient-sand-hint-name]");
   // 2026-10-24：使用者要求每組實際包含哪 5 色要清楚標示出來，不是只能
   // 從縮圖的 alt 文字（滑鼠移過去或螢幕閱讀器才讀得到）才看得到，方便
@@ -23,20 +29,67 @@
   const hintColors = root.querySelector("[data-gradient-sand-hint-colors]");
   if (!chips.length) return;
 
-  chips.forEach((chip) => {
-    chip.addEventListener("click", () => {
-      chips.forEach((c) => c.setAttribute("aria-pressed", c === chip ? "true" : "false"));
-      const name = chip.querySelector(".color-picker__chip-name");
-      // 2026-10-24：色票選色器改用色條卡（.color-picker__chip-swatches，
-      // 估色色塊）取代相片縮圖，chip 本身不再有 <img>，主圖來源改讀
-      // chip 自己的 data-main-img（舊版縮圖 <img> 的 src／alt 搬過來）。
-      const mainImgSrc = chip.dataset.mainImg;
-      if (mainImg && mainImgSrc) {
-        mainImg.src = mainImgSrc;
-        mainImg.alt = name ? `${name.textContent} 漸層沙成品參考圖` : "";
-      }
-      if (hintName && name) hintName.textContent = name.textContent;
-      if (hintColors && chip.dataset.colors) hintColors.textContent = chip.dataset.colors;
+  let index = chips.findIndex((c) => c.getAttribute("aria-pressed") === "true");
+  if (index < 0) index = 0;
+
+  function select(idx) {
+    index = (idx + chips.length) % chips.length;
+    const chip = chips[index];
+    chips.forEach((c, i) => c.setAttribute("aria-pressed", i === index ? "true" : "false"));
+    const name = chip.querySelector(".color-picker__chip-name");
+    const thumbImg = chip.querySelector("img");
+    if (mainImg && thumbImg) {
+      mainImg.src = thumbImg.src;
+      mainImg.alt = thumbImg.alt;
+    }
+    if (hintName && name) hintName.textContent = name.textContent;
+    if (hintColors && chip.dataset.colors) hintColors.textContent = chip.dataset.colors;
+  }
+
+  chips.forEach((chip, i) => {
+    chip.addEventListener("click", () => select(i));
+  });
+
+  root.querySelectorAll("[data-gradient-sand-nav]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const dir = parseInt(btn.getAttribute("data-gradient-sand-nav"), 10);
+      select(index + dir);
     });
   });
+
+  // 觸控滑動（手機）：只在主圖容器內判斷，且水平位移要明顯大於垂直
+  // 位移才當作換色手勢，避免跟頁面正常垂直捲動互相干擾；listener 用
+  // passive，不呼叫 preventDefault()，捲動本身不會被卡住。
+  if (mainWrap) {
+    let startX = 0;
+    let startY = 0;
+    let tracking = false;
+
+    mainWrap.addEventListener(
+      "touchstart",
+      (e) => {
+        if (e.touches.length !== 1) return;
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+        tracking = true;
+      },
+      { passive: true }
+    );
+
+    mainWrap.addEventListener(
+      "touchend",
+      (e) => {
+        if (!tracking) return;
+        tracking = false;
+        const touch = e.changedTouches[0];
+        const dx = touch.clientX - startX;
+        const dy = touch.clientY - startY;
+        if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy)) return;
+        select(index + (dx < 0 ? 1 : -1));
+      },
+      { passive: true }
+    );
+  }
+
+  select(index);
 })();

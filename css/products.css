@@ -1422,38 +1422,24 @@
   color: var(--color-text-primary);
 }
 
-/* 2026-10-24：漸層沙・自選色的色票改用「色條卡」（方向 A，使用者從
-   色票呈現改版提案裡選定），橫向排 5 色由淺到深，取代原本的相片縮圖
-   ——這 5 色是同一組排好的漸層，色條比相片縮圖更準確傳達「拆開是這些
-   顏色」。只加 .color-picker__chip--strip 這個 modifier，不動上面
-   img 版本的規則（sand-art-24color 頁面的 A／B／C 色組選擇器共用同一個
-   .gradient-sand-picker 容器，還是縮圖卡，不受影響）。
-   欄寬也比照放寬：縮圖版 72px 夠放正方形相片，色條卡需要看得出 5 色
-   分色，用 .work__intro--extra-color 這個頁面限定 class 往下找，不改
-   .gradient-sand-picker 本身的 grid-template-columns（24color 頁面的
-   3 顆色組縮圖卡維持原本 72px 欄寬）。 */
-.work__intro--extra-color .gradient-sand-picker {
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+/* 2026-10-25：色條卡（方向 A）試過一輪後，使用者反饋選色器本身還是
+   實拍沙子質感比較好，改回上面的相片縮圖版本（.gradient-sand-picker
+   .color-picker__chip img）。色條的概念保留，縮小後改用在下面「12 組
+   色號一覽」那份對照清單裡（.color-reference-list__swatch，非互動、
+   純粹輔助對照色名），不是這裡的選色互動主體。 */
+
+/* 主圖左右箭頭：沿用 .work__gallery-nav 既有樣式（手機 <550px 自動隱藏
+   靠滑動，桌機 hover 才淡入，見上面 .work__gallery-strip-wrap 那組
+   規則），這裡的容器是 .work__gallery-main 本身（這頁沒有縮圖列），
+   另外補一條 hover 觸發規則，父層選擇器不同，沿用規則打不到。 */
+.work__gallery-main:hover .work__gallery-nav {
+  opacity: 1;
 }
 
-.color-picker__chip-swatches {
-  display: flex;
-  width: 100%;
-  aspect-ratio: 5 / 2;
-  border-radius: var(--radius-sharp);
-  overflow: hidden;
-  border: 2px solid transparent;
-  transition: border-color var(--duration-fast) var(--ease-standard),
-    box-shadow var(--duration-fast) var(--ease-standard);
-}
-
-.color-picker__chip-swatches span {
-  flex: 1;
-}
-
-.color-picker__chip--strip[aria-pressed="true"] .color-picker__chip-swatches {
-  border-color: var(--color-text-primary);
-  box-shadow: var(--shadow-raised);
+/* 手機滑動換色時，只攔截水平手勢，垂直捲動要維持正常，不能被 JS
+   的 touchstart/touchend 判斷卡住。 */
+[data-gradient-sand-main] {
+  touch-action: pan-y;
 }
 
 /* ---------- 沙畫加購像框（2026-10-22，只有
@@ -2455,13 +2441,29 @@ button.text-link {
   color: var(--color-text-secondary);
 }
 
+/* 2026-10-25：每列名稱前補一小條 5 色色條，輔助對照色名用（非按鈕、
+   不互動），色碼跟上面選色器相片縮圖的實際色序對應，只是縮小呈現。 */
+.color-reference-list__swatch {
+  display: flex;
+  flex: none;
+  width: 44px;
+  height: 18px;
+  border-radius: var(--radius-sharp);
+  overflow: hidden;
+  align-self: center;
+}
+
+.color-reference-list__swatch span {
+  flex: 1;
+}
+
 /* ---------- 圓點色票牆（2026-10-24，只有 products/sand-art-24color/
    index.html 的「3 組色號一覽」用到，取代原本的 .color-reference-list
    純文字清單）----------
    參考 retrojamtaiwan.com 油墨色票頁：每色一個圓點＋色名，這裡是真正
    的「目錄」情境（查色號、對照還缺哪色），比純文字清單好讀很多。
-   sand-art-extra-color（5 色組）那頁的選色器改用色條卡（見上面
-   .color-picker__chip--strip），兩邊用途不同（選一組 vs. 查目錄），
+   sand-art-extra-color（5 色組）那頁的對照清單改用小色條（見上面
+   .color-reference-list__swatch），兩邊用途不同（選一組 vs. 查目錄），
    不是同一個元件改名共用。色碼目前是估色（HTML 內 inline style），
    等實拍分裝沙校色後再換成準確值，不影響這裡的版面結構。 */
 .color-dot-wall {
