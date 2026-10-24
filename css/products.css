@@ -2574,6 +2574,145 @@ button.text-link {
   color: var(--color-text-secondary);
 }
 
+/* ---------- 「一起加購」orlo.co 版面校正（2026-10-24，只有
+   products/sand-art-fu/index.html 的 .addon-section--orlo 用到）----------
+   使用者用內嵌同源框架在 orlo.co「2027-ikigai-full-set」商品頁實測
+   「Buy Together and Save More」的真實 computed style。結構上最大的
+   差異：原站不是單行 flex（checkbox／縮圖／名稱／數量／價格擠成一排），
+   桌機版是 checkbox＋縮圖在左、名稱＋數量＋價格疊成一個直欄在右；手機版
+   再拆成兩列（checkbox＋名稱一列，縮圖＋數量＋價格一列）。改用 CSS
+   Grid named areas 處理：.addon-row__name／__meta 是跟 checkbox／thumb
+   同層的 grid 直接子層（不是巢狀在彼此裡面），兩個斷點只要切換
+   grid-template-areas 的排法，不用動 HTML。sand-art-artist-sheep-red／
+   blue 兩頁的 .addon-row--link 沒有這個 class，維持原本的單行樣式。 */
+.addon-section--orlo .addon-toggle {
+  width: 400px;
+  max-width: 100%;
+  height: 45px;
+  padding: 10px 15px 10px 19px;
+  background: rgba(204, 204, 204, 0.5);
+  border-radius: 0;
+  font-size: 13px;
+  font-weight: 400;
+  color: rgb(153, 153, 153);
+  line-height: 25px;
+}
+
+.addon-section--orlo .addon-toggle::after {
+  font-size: 13px;
+  font-weight: 400;
+  color: rgb(153, 153, 153);
+}
+
+.addon-section--orlo .addon-list {
+  margin-top: 10px;
+}
+
+.addon-section--orlo .addon-row:not(.addon-row--link) {
+  display: grid;
+  grid-template-columns: auto 60px 1fr;
+  grid-template-areas: "checkbox thumb name" "checkbox thumb meta";
+  column-gap: 10px;
+  align-items: start;
+  padding: 20px 0;
+  background: rgba(204, 204, 204, 0.2);
+  border-top: none;
+}
+
+.addon-section--orlo .addon-row:not(.addon-row--link) + .addon-row:not(.addon-row--link) {
+  border-top: 1px solid rgb(221, 221, 221);
+  margin-top: 0;
+}
+
+.addon-section--orlo .addon-row__checkbox {
+  grid-area: checkbox;
+  width: 16px;
+  height: 16px;
+  margin-top: 9px;
+}
+
+.addon-section--orlo .addon-row__thumb {
+  grid-area: thumb;
+  width: 60px;
+  flex: none;
+}
+
+.addon-section--orlo .addon-row__name {
+  grid-area: name;
+  margin: 0 0 8px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 27px;
+  color: rgb(0, 0, 0);
+}
+
+.addon-section--orlo .addon-row__meta {
+  grid-area: meta;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.addon-section--orlo .addon-row__qty {
+  width: 132px;
+  height: 38px;
+  border-radius: 0;
+  border-color: rgba(204, 204, 204, 0.5);
+}
+
+.addon-section--orlo .addon-row__qty button {
+  width: 37px;
+}
+
+.addon-section--orlo .addon-row__qty span {
+  min-width: 60px;
+  border-color: rgba(204, 204, 204, 0.5);
+}
+
+.addon-section--orlo .addon-row__price {
+  min-width: 0;
+  text-align: left;
+  font-size: 16px;
+  color: rgb(0, 0, 0);
+}
+
+/* 連結型加購列（漸層沙・自選色／沙畫加購像框）維持單行 flex，只跟著
+   更新縮圖尺寸／字級，呼應同一組實測數字，不套用 grid 直欄排法——這兩列
+   本來就沒有數量選擇器，用不到那個直欄結構。 */
+.addon-section--orlo .addon-row--link {
+  padding: 20px 0;
+  background: rgba(204, 204, 204, 0.2);
+}
+
+.addon-section--orlo .addon-row--link + .addon-row--link {
+  border-top: 1px solid rgb(221, 221, 221);
+}
+
+.addon-section--orlo .addon-row--link .addon-row__thumb {
+  width: 60px;
+}
+
+.addon-section--orlo .addon-row--link .addon-row__name {
+  font-size: 16px;
+  font-weight: 400;
+  color: rgb(0, 0, 0);
+}
+
+@media (max-width: 768px) {
+  .addon-section--orlo .addon-row:not(.addon-row--link) {
+    grid-template-areas: "checkbox name" "thumb meta";
+    grid-template-columns: auto 1fr;
+  }
+
+  .addon-section--orlo .addon-row__qty {
+    width: 198px;
+  }
+
+  .addon-section--orlo .addon-row__qty span {
+    min-width: 126px;
+  }
+}
+
 /* ---------- 相關商品：跨商品導流橫向捲動列 ----------
    2026-10 新增，版面比例參考使用者提供的外部商品頁實測規格（圖片 1:1
    正方形、卡片文字置中、滑鼠移過圖片放大 110%、箭頭平常輕微隱藏靠近
