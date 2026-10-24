@@ -2814,9 +2814,20 @@ button.text-link {
       col2，用新增的 .addon-row__body（flex）包住縮圖＋meta，col1 第
       二列留空（grid-template-areas 用 "." 表示），兩個斷點共用同一組
       areas，不用像上一輪那樣切換兩套。 */
+/* 2026-10-25：使用者比對 orlo.co「Buy Together and Save More」截圖
+   反饋——我們的灰底切換列沒有頂到買列（數量選擇器／價格）那個同一欄
+   的左右邊界，整條偏窄、兩側多留了一截白邊。根因是 .addon-section
+   沿用全站 .chapter 的共用規則，.chapter 本身會再加一層
+   padding-left/right:var(--content-pad)（全站章節統一的頁面邊距機制），
+   但這個區塊其實是巢狀在 .work__intro 買列欄位裡面，買列欄位自己已經
+   有邊距了，兩層邊距疊加才會比旁邊的數量選擇器／價格窄一截。這裡蓋掉
+   .chapter 的左右 padding，讓這個區塊跟同一欄的其他買列元素共用同一條
+   左右邊界，不要疊加兩層邊距。 */
 .addon-section--orlo {
   text-align: left;
   margin-top: var(--space-2);
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .addon-section--orlo .addon-toggle {
