@@ -887,10 +887,12 @@
 
 @media (max-width: 767px) {
   /* 2026-10-25：使用者比對 orlo.co 截圖指出這條固定列應該是「一整條
-     滿版黑底」，中間一條細線分隔兩個按鈕，不是兩顆各自獨立、中間留
-     空隙的圓角黑色按鈕——固定列本身直接是黑底（不是淺色底托著兩顆
-     按鈕），左右不留邊距，貼齊螢幕兩側，按鈕本身改透明背景＋白字，
-     靠固定列的黑底撐顏色，兩顆之間用 border-left 當分隔線。 */
+     滿版黑底」，不是兩顆各自獨立、中間留空隙的圓角黑色按鈕——固定列
+     本身直接是黑底（不是淺色底托著兩顆按鈕），左右不留邊距，貼齊螢幕
+     兩側，按鈕本身改透明背景＋白字，靠固定列的黑底撐顏色。原本中間
+     加了一條 border-left 分隔線，使用者反饋拿掉，兩顆純粹靠留白
+     （各自 padding）分界，不另外畫線。整體高度也要求再矮一點，
+     min-height 從 56px 降到 44px（全站觸控目標下限，不再往下縮）。 */
   .mobile-sticky-buy {
     display: flex;
     position: fixed;
@@ -911,27 +913,23 @@
   .mobile-sticky-buy .work__cta[data-buy-now] {
     flex: 1;
     width: auto;
-    min-height: 56px;
+    min-height: 44px;
     height: auto;
-    padding: var(--space-2) var(--space-4);
+    padding: var(--space-1) var(--space-4);
     border-radius: 0;
     background: transparent;
     color: var(--color-surface-light);
-  }
-
-  .mobile-sticky-buy .work__cta[data-buy-now] {
-    border-left: 1px solid rgba(255, 255, 255, 0.25);
   }
 
   /* 固定列會一直蓋在頁面最下面，商品頁本身最後面的內容（頁尾）要留出
      跟固定列差不多高的空間，不然頁尾文字會被蓋住、捲到底也看不完整。
      .product-page 原本就有 padding-bottom:var(--space-24)（96px，全站
      共用的一般留白，不是為了這個固定列準備的），這裡要「疊加」固定列
-     實際佔用的高度（量測約 61px，含上下 padding）＋安全間距，不能直接
-     寫一個差不多大小的數字去蓋掉，不然等於只多留 4px、頁尾還是會被
-     蓋住（實測過一次才發現）。 */
+     實際佔用的高度（降矮後實測 44px）＋安全間距，不能直接寫一個差不多
+     大小的數字去蓋掉，不然等於只多留幾 px、頁尾還是會被蓋住（實測過
+     一次才發現）。 */
   .product-page:has(.mobile-sticky-buy) {
-    padding-bottom: calc(var(--space-24) + 76px);
+    padding-bottom: calc(var(--space-24) + 60px);
   }
 }
 
