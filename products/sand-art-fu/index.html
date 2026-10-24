@@ -320,30 +320,27 @@
               <p class="addon-row__price price-text">$__</p>
             </div>
           </div>
-          <!-- 2026-10-24：首圖改用純像框實拍照（不帶任何砂畫設計）
-               ——之前用 mockup-fu-15/20.jpg（福星放進像框的合成示意
-               圖）當縮圖，使用者反饋容易讓客人誤會加購「含砂畫
-               作品」，實際加購的是空框本身。模擬效果圖沒有拿掉，
-               改放進下面的「預覽放進像框的效果」連結，點開才看到，
-               不再是列表裡第一眼看到的縮圖。 -->
+          <!-- 2026-10-25：使用者反饋這頁（福星，15×15cm 商品）的像框
+               加購不需要尺寸選單——客人在這頁加購像框，合理預期就是要
+               裝這幅 15cm 的作品，20cm 像框根本裝不下，列出來是多餘的
+               選項，直接鎖定 15×15cm，資訊量跟著減少（不用選單、不用
+               「／20cm」字樣）。預覽也不用跳頁／開新分頁，改成就地切換
+               縮圖（點一下縮圖直接變成「放進像框」的合成示意圖，再點
+               一下變回空框照），見 js/addon-frame-preview-toggle.js。 -->
           <div class="addon-row" data-addon-row>
             <input type="checkbox" class="addon-row__checkbox" data-addon-select data-product="sand-art-frame-15" aria-label="加購：沙畫加購像框">
             <div class="addon-row__thumb">
               <img data-addon-variant-thumb src="../../assets/images/products/sand-art-frame/sand-art-frame-plain-15.jpg" alt="沙畫加購像框（空框，實際出貨款式）" loading="lazy">
             </div>
-            <p class="addon-row__name">沙畫加購像框 <span class="addon-row__name-en">Wood Frame</span>（15／20cm）</p>
+            <p class="addon-row__name">沙畫加購像框 <span class="addon-row__name-en">Wood Frame</span>（15×15cm）</p>
             <div class="addon-row__meta">
-              <select class="addon-row__select" data-addon-variant aria-label="選擇像框尺寸">
-                <option value="sand-art-frame-15" data-price="150" data-thumb="../../assets/images/products/sand-art-frame/sand-art-frame-plain-15.jpg" data-mockup="../../assets/images/products/sand-art-frame/mockup-fu-15.jpg">15×15cm・$150</option>
-                <option value="sand-art-frame-20" data-price="199" data-thumb="../../assets/images/products/sand-art-frame/sand-art-frame-plain-20.jpg" data-mockup="../../assets/images/products/sand-art-frame/mockup-fu-20.jpg">20×20cm・$199</option>
-              </select>
               <div class="qty-stepper addon-row__qty" data-addon-qty>
                 <button type="button" data-qty-minus aria-label="減少數量">−</button>
                 <span data-qty-value>1</span>
                 <button type="button" data-qty-plus aria-label="增加數量">＋</button>
               </div>
               <p class="addon-row__price price-text">$150</p>
-              <a class="addon-row__preview-link" data-addon-preview-link href="../../assets/images/products/sand-art-frame/mockup-fu-15.jpg" target="_blank" rel="noopener">預覽放進像框的效果 →</a>
+              <button type="button" class="addon-row__preview-link" data-addon-preview-toggle data-mockup-src="../../assets/images/products/sand-art-frame/mockup-fu-15.jpg" data-mockup-alt="福星 Starry Fu 裝進像框的模擬效果" data-plain-src="../../assets/images/products/sand-art-frame/sand-art-frame-plain-15.jpg" data-plain-alt="沙畫加購像框（空框，實際出貨款式）">預覽放進像框的效果 →</button>
             </div>
           </div>
         </div>
@@ -616,6 +613,7 @@
   <script src="../../js/hero-thumb-gallery.js"></script>
   <script src="../../js/related-products.js"></script>
   <script src="../../js/addon-variant-select.js"></script>
+  <script src="../../js/addon-frame-preview-toggle.js"></script>
   <script src="../../js/mobile-sticky-buy-reveal.js"></script>
   <script src="../../js/site-header-scroll.js"></script>
   <script src="../../js/account-auth.js"></script>
