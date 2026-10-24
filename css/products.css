@@ -792,20 +792,56 @@
   display: flex;
   gap: var(--space-2);
   margin-top: var(--space-4);
+  margin-bottom: 10px;
 }
 
-.product-buy-bar [data-add-to-cart],
-.product-buy-bar [data-buy-now] {
-  flex: 1;
-  width: auto;
+/* 2026-10-24：使用者指定照 orlo.co 實測的固定尺寸（196px／38px，手機
+   164px），不是用 flex:1 等比例分配寬度——這裡刻意把 min-height 從全站
+   共用的 44px（觸控目標下限）降到 38px，是使用者在看過前一輪「保留
+   44px」的回覆後再次明確要求的例外，不是疏漏；只在這個滿版 CTA 橫條
+   （.product-buy-bar）裡覆寫，.work__cta--primary／--buy-now 的全站
+   基礎規則本身沒有改，其他地方的按鈕還是維持 44px。
+   選擇器刻意疊加 .work__cta class（不是只用 [data-add-to-cart] 屬性
+   選擇器）：下面修過的 .work__cta.work__cta--buy-now 特異度是兩個
+   class（0,2,0），跟原本這裡的「1 class＋1 屬性」也是 0,2,0，特異度
+   打平時看定義順序，兩邊都在改就很容易互相蓋過——這裡直接疊加到三個
+   class 等級（0,3,0），不管誰先誰後都保證這裡贏，不用每次改完都要
+   回頭檢查兩條規則誰定義在後面。 */
+.product-buy-bar .work__cta[data-add-to-cart],
+.product-buy-bar .work__cta[data-buy-now] {
+  flex: none;
+  width: 196px;
+  min-height: 38px;
+  height: 38px;
+  padding: 6px 12px;
+  border-radius: 3px;
+}
+
+.product-buy-bar .work__cta[data-buy-now] {
+  border-radius: 4px;
+}
+
+@media (max-width: 768px) {
+  .product-buy-bar .work__cta[data-add-to-cart],
+  .product-buy-bar .work__cta[data-buy-now] {
+    width: 164px;
+  }
 }
 
 /* ---------- Buy Now（參考 orlo.co，2026-10-22，目前只有
    products/sand-art-fu/index.html 用到這個 class）----------
    跟「加入購物車」並排、同寬，用 --color-surface-black（colors.css
    既有色票，目前只有首頁選單在用，不是新增顏色）做出跟主要按鈕色相
-   不同的視覺區隔。互動邏輯見 js/cart.js initBuyNow()。 ---------- */
-.work__cta--buy-now {
+   不同的視覺區隔。互動邏輯見 js/cart.js initBuyNow()。
+   2026-10-24 修正一個潛藏 bug：選擇器原本只有單一 class
+   （.work__cta--buy-now），跟後面 4165 行左右的共用基底
+   .work__cta{background:none} 特異度相同，基底規則定義在檔案更後面，
+   同特異度後者贏，background 實際上一直被蓋回 none（透明），不是真的
+   黑底——這次用 Playwright 量 computed style 才抓到（肉眼在截圖上不
+   明顯，按鈕本來就沒什麼內距，透明底疊在淺色頁面背景上不會太突兀）。
+   改成 .work__cta.work__cta--buy-now（兩個 class 疊加），特異度蓋過
+   基底規則，不用去改或搬動基底規則本身。 */
+.work__cta.work__cta--buy-now {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -2611,17 +2647,27 @@ button.text-link {
   color: var(--color-text-secondary);
 }
 
-/* ---------- 「一起加購」orlo.co 版面校正（2026-10-24，只有
+/* ---------- 「一起加購」orlo.co 版面校正（2026-10-24 第二輪，只有
    products/sand-art-fu/index.html 的 .addon-section--orlo 用到）----------
-   使用者用內嵌同源框架在 orlo.co「2027-ikigai-full-set」商品頁實測
-   「Buy Together and Save More」的真實 computed style。結構上最大的
-   差異：原站不是單行 flex（checkbox／縮圖／名稱／數量／價格擠成一排），
-   桌機版是 checkbox＋縮圖在左、名稱＋數量＋價格疊成一個直欄在右；手機版
-   再拆成兩列（checkbox＋名稱一列，縮圖＋數量＋價格一列）。改用 CSS
-   Grid named areas 處理：.addon-row__name／__meta 是跟 checkbox／thumb
-   同層的 grid 直接子層（不是巢狀在彼此裡面），兩個斷點只要切換
-   grid-template-areas 的排法，不用動 HTML。sand-art-artist-sheep-red／
-   blue 兩頁的 .addon-row--link 沒有這個 class，維持原本的單行樣式。 */
+   第一輪只改了數字、沒處理繼承／結構，實測後發現兩個根因：
+   1. .addon-section 是 .chapter＋.work__intro 的子層，.work__intro 在
+      <768px 時是 base 規則 text-align:center（:has() 那條 text-align:left
+      覆寫只在 ≥768px 生效），.addon-section 自己又繼承 .chapter 的
+      margin-top:var(--editorial-gap)（手機版 60px）。這裡直接在
+      .addon-section--orlo 本身覆寫 text-align／margin-top，不依賴外層
+      斷點，兩個寬度都固定是 left／小間距。
+   2. 原本的 grid 用 auto 60px 1fr／手機版 auto 1fr，checkbox 跟縮圖共用
+      同一欄（auto 欄寬取兩者較大值，縮圖 60px 撐開了那一欄，checkbox
+      看起來被塞進縮圖欄、縮圖又跑到 checkbox 正下方）。改成固定
+      16px 1fr 兩欄，col1 只給 checkbox，第二列（縮圖＋meta）整個放進
+      col2，用新增的 .addon-row__body（flex）包住縮圖＋meta，col1 第
+      二列留空（grid-template-areas 用 "." 表示），兩個斷點共用同一組
+      areas，不用像上一輪那樣切換兩套。 */
+.addon-section--orlo {
+  text-align: left;
+  margin-top: var(--space-2);
+}
+
 .addon-section--orlo .addon-toggle {
   width: 400px;
   max-width: 100%;
@@ -2633,6 +2679,12 @@ button.text-link {
   font-weight: 400;
   color: rgb(153, 153, 153);
   line-height: 25px;
+  outline: none;
+}
+
+.addon-section--orlo .addon-toggle:focus-visible {
+  outline: 2px solid var(--color-interactive);
+  outline-offset: 2px;
 }
 
 .addon-section--orlo .addon-toggle::after {
@@ -2646,19 +2698,32 @@ button.text-link {
 }
 
 .addon-section--orlo .addon-row:not(.addon-row--link) {
+  position: relative;
   display: grid;
-  grid-template-columns: auto 60px 1fr;
-  grid-template-areas: "checkbox thumb name" "checkbox thumb meta";
+  grid-template-columns: 16px 1fr;
+  grid-template-areas: "checkbox name" ". body";
   column-gap: 10px;
   align-items: start;
   padding: 20px 0;
   background: rgba(204, 204, 204, 0.2);
   border-top: none;
+  text-align: left;
 }
 
-.addon-section--orlo .addon-row:not(.addon-row--link) + .addon-row:not(.addon-row--link) {
-  border-top: 1px solid rgb(221, 221, 221);
-  margin-top: 0;
+/* 分隔線：1px solid #ddd，左右內縮 14px（不是整列貼齊邊緣），用
+   ::after 絕對定位處理，不用額外的 wrapper 元素。 */
+.addon-section--orlo .addon-row:not(.addon-row--link)::after {
+  content: "";
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 0;
+  height: 1px;
+  background: rgb(221, 221, 221);
+}
+
+.addon-section--orlo .addon-row:not(.addon-row--link):last-child::after {
+  display: none;
 }
 
 .addon-section--orlo .addon-row__checkbox {
@@ -2668,42 +2733,79 @@ button.text-link {
   margin-top: 9px;
 }
 
-.addon-section--orlo .addon-row__thumb {
-  grid-area: thumb;
-  width: 60px;
-  flex: none;
-}
-
 .addon-section--orlo .addon-row__name {
   grid-area: name;
-  margin: 0 0 8px;
+  margin: 0 0 14px;
   font-size: 16px;
   font-weight: 400;
   line-height: 27px;
   color: rgb(0, 0, 0);
+  text-align: left;
+}
+
+.addon-section--orlo .addon-row__body {
+  grid-area: body;
+  display: flex;
+  gap: 10px;
+}
+
+.addon-section--orlo .addon-row__thumb {
+  width: 60px;
+  height: 60px;
+  flex: none;
 }
 
 .addon-section--orlo .addon-row__meta {
-  grid-area: meta;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: 8px;
 }
 
+/* 數量選擇器：三個各自獨立的方塊並排（不是共用一個外框），相鄰邊框用
+   margin-left:-1px 重疊，「−」disabled 時維持黑字，不套用全站共用
+   .qty-stepper button:disabled 那條變灰規則。 */
 .addon-section--orlo .addon-row__qty {
   width: 132px;
   height: 38px;
+  border: none;
   border-radius: 0;
-  border-color: rgba(204, 204, 204, 0.5);
+  overflow: visible;
+  /* 蓋掉共用 .addon-row__qty 的 transform:scale(0.85)——那是給舊版
+     「全部擠一行」的版型縮小塞進去用的，這裡已經是獨立一欄，不需要再
+     縮小，縮放會讓所有量到的 px 數字（37／38／60...）實際渲染出來變
+     成乘以 0.85 後的假尺寸，跟 getComputedStyle 的宣告值對不起來。 */
+  transform: none;
 }
 
 .addon-section--orlo .addon-row__qty button {
   width: 37px;
+  height: 38px;
+  border: 1px solid rgba(204, 204, 204, 0.5);
+  border-radius: 0;
+  background: #fff;
+  color: rgb(0, 0, 0);
+  padding: 6px 12px;
+  margin-left: -1px;
+}
+
+.addon-section--orlo .addon-row__qty button:first-child {
+  margin-left: 0;
+}
+
+.addon-section--orlo .addon-row__qty button:disabled {
+  color: rgb(0, 0, 0);
+  cursor: default;
 }
 
 .addon-section--orlo .addon-row__qty span {
-  min-width: 60px;
-  border-color: rgba(204, 204, 204, 0.5);
+  width: 60px;
+  height: 38px;
+  min-width: 0;
+  border: 1px solid rgba(204, 204, 204, 0.5);
+  margin-left: -1px;
+  background: #fff;
+  color: rgb(0, 0, 0);
 }
 
 .addon-section--orlo .addon-row__price {
@@ -2715,10 +2817,12 @@ button.text-link {
 
 /* 連結型加購列（漸層沙・自選色／沙畫加購像框）維持單行 flex，只跟著
    更新縮圖尺寸／字級，呼應同一組實測數字，不套用 grid 直欄排法——這兩列
-   本來就沒有數量選擇器，用不到那個直欄結構。 */
+   本來就沒有數量選擇器，用不到那個直欄結構。使用者確認過這兩列先不要
+   自行改成 checkbox 型，等這輪結構對了再問。 */
 .addon-section--orlo .addon-row--link {
   padding: 20px 0;
   background: rgba(204, 204, 204, 0.2);
+  text-align: left;
 }
 
 .addon-section--orlo .addon-row--link + .addon-row--link {
@@ -2736,17 +2840,12 @@ button.text-link {
 }
 
 @media (max-width: 768px) {
-  .addon-section--orlo .addon-row:not(.addon-row--link) {
-    grid-template-areas: "checkbox name" "thumb meta";
-    grid-template-columns: auto 1fr;
-  }
-
   .addon-section--orlo .addon-row__qty {
     width: 198px;
   }
 
   .addon-section--orlo .addon-row__qty span {
-    min-width: 126px;
+    width: 126px;
   }
 }
 
