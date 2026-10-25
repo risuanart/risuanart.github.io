@@ -99,7 +99,11 @@
     const thumb = colorwayFrames
       ? carouselThumbHTML(key, product, colorwayFrames, "shop-card__thumb")
       : cart.thumbHTML({ productKey: key, scheme: defaultScheme || "" }, "shop-card__thumb");
-    const carouselAttr = colorwayFrames ? " data-hero-carousel" : "";
+    // 2026-10-25：使用者反饋商品總覽格狀卡（首頁材料包分類區塊／
+    // products/shop 材料包頁）播完一輪就停在 combo-1 不動，跟相關商品
+    // 卡片（related-products.js，本來就有 data-carousel-loop）不一致，
+    // 改成一樣持續循環，不要停。
+    const carouselAttr = colorwayFrames ? " data-hero-carousel data-carousel-loop" : "";
     // 電腦版 hover 換圖：只有「查得到第二張圖」的商品才輸出這個 <img>——
     // 目前只有流動畫兩個色系有真的第二張照片（內容物全展開，跟主圖不同
     // 角度）。有配色動態展示的商品（colorwayFrames 存在）兩套機制互斥，

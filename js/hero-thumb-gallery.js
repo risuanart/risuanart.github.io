@@ -36,7 +36,7 @@
   // setActive(0, false) 的說明），比照 hero-colorway-carousel.js 同一天
   // 的改動，讓圖一停留久一點再往下輪播到配色示範二／三、接著才是真實
   // 相片牆的其餘照片。
-  var FIRST_FRAME_MS = 4000;
+  var FIRST_FRAME_MS = 3000;
 
   function initGallery(root) {
     var frames = Array.prototype.slice.call(

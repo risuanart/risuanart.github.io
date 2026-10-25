@@ -31,7 +31,7 @@
   // 時間再往下切，讓訪客有足夠時間先看清楚「這是出貨配色」，再接著看
   // 其餘兩張重新搭配參考——只有圖一（index 0）停留比較久，其餘兩張維持
   // 原本的 INTERVAL_MS 節奏。
-  const FIRST_FRAME_MS = 4000;
+  const FIRST_FRAME_MS = 3000;
 
   function initCarousel(root) {
     const frames = Array.prototype.slice.call(
