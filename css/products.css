@@ -1132,6 +1132,7 @@
      露出 5 張）。改用 calc() 以容器寬度的 1/4 扣掉三個間距算出寬度，
      不寫死 px——不管螢幕多寬都正好 4 張滿版、沒有第 5 張的小尾巴，不用
      針對不同裝置寬度各自試一個數字。 */
+  position: relative;
   flex: 0 0 calc((100% - 3 * var(--space-2)) / 4);
   width: calc((100% - 3 * var(--space-2)) / 4);
   aspect-ratio: 1 / 1;
@@ -1151,6 +1152,23 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+/* 分組縮圖（data-gallery-thumb-count > 1，目前用在 combo-1/2/3 配色輪播
+   縮成一格）內部疊圖：跟主圖同一套 opacity 疊圖手法，縮圖本身也會跟著
+   主圖一起「輪播」，不是靜止的單張圖。 */
+.work__gallery-thumb [data-gallery-thumb-frame] {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity var(--duration-fast) var(--ease-standard);
+}
+
+.work__gallery-thumb [data-gallery-thumb-frame].is-active {
+  opacity: 1;
 }
 
 .work__gallery-thumb.is-active {

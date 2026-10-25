@@ -18,7 +18,17 @@
      切換對應索引的主圖，自動播放時縮圖列也會跟著捲動讓目前這張保持在
      可視範圍內）
    - 容器內的 [data-gallery-nav] 按鈕（value="-1"/"1"）捲動縮圖列，邏輯
-     跟 related-products.js 的左右箭頭一樣，固定捲動一段距離。 */
+     跟 related-products.js 的左右箭頭一樣，固定捲動一段距離。
+
+   2026-10-25 新增「多格主圖對應一個縮圖」的分組功能：原本是嚴格 1
+   對 1（frames.length === thumbs.length），改成某個 [data-gallery-thumb]
+   可以用 data-gallery-thumb-count="3" 宣告自己代表主圖裡連續 3 格
+   （目前用在 combo-1／2／3 配色輪播縮成一個縮圖格——使用者反饋不想要
+   縮圖牆開頭塞 3 個分開的小菱形縮圖，只想要一個縮圖、裡面自己也跟著
+   主圖同步輪播）。縮圖按鈕沒有這個屬性時預設代表 1 格，行為跟改之前
+   完全一樣。分組縮圖內部要放對應張數的
+   [data-gallery-thumb-frame]（img，一樣用 opacity 疊圖），
+   setActive() 切主圖時會同步切縮圖內部對應那一張。 */
 
 (function () {
   var INTERVAL_MS = 2600;
@@ -36,7 +46,32 @@
       root.querySelectorAll("[data-gallery-thumb]")
     );
     var thumbsWrap = root.querySelector("[data-gallery-thumbs]");
-    if (frames.length < 2 || thumbs.length !== frames.length) return;
+    if (frames.length < 2 || thumbs.length < 1) return;
+
+    // frameToThumb[frame 索引] = 對應的縮圖索引；thumbStartFrame[縮圖索引]
+    // = 這個縮圖代表的第一格主圖索引；thumbSubFrames[縮圖索引] = 縮圖內部
+    // 疊圖用的 img 陣列（沒有分組、只代表 1 格的縮圖是 null，用原本單一
+    // <img> 的樣式，不套疊圖邏輯）。
+    var frameToThumb = [];
+    var thumbStartFrame = [];
+    var thumbSubFrames = [];
+    var cursor = 0;
+    thumbs.forEach(function (thumb, tIdx) {
+      var count = parseInt(thumb.getAttribute("data-gallery-thumb-count") || "1", 10);
+      thumbStartFrame[tIdx] = cursor;
+      var subFrames = Array.prototype.slice.call(
+        thumb.querySelectorAll("[data-gallery-thumb-frame]")
+      );
+      thumbSubFrames[tIdx] = subFrames.length ? subFrames : null;
+      for (var k = 0; k < count; k++) {
+        frameToThumb[cursor] = tIdx;
+        cursor++;
+      }
+    });
+    // 分組設定跟實際主圖張數對不上（例如 data-gallery-thumb-count 寫錯），
+    // 直接放棄初始化這個元件，維持全部靜態顯示第一張，不要用錯誤的
+    // index 對應關係硬跑，造成主圖/縮圖對不起來的視覺 bug。
+    if (cursor !== frames.length) return;
 
     var index = 0;
     var timer = null;
@@ -59,14 +94,16 @@
       );
     }
 
-    function scrollThumbIntoView(idx) {
+    function scrollThumbIntoView(thumbIdx) {
       // 只捲動縮圖列自己的 scrollLeft／scrollTop，不用
       // Element.scrollIntoView()——那個方法會一路往上找到所有可捲動的
       // 祖先容器（包含整個頁面），使用者滑到頁面下方時，自動輪播還是會
       // 把整個頁面捲回相片牆的位置，造成「輪播時頁面往上跳」的 bug。
       // 改成直接算縮圖相對縮圖列的位置，只動 thumbsWrap 自己的捲動，
-      // 另一個方向完全不碰。
-      var thumb = thumbs[idx];
+      // 另一個方向完全不碰。參數是縮圖索引（不是主圖索引）——分組縮圖
+      // 底下對應好幾格主圖，捲動目標是那一個縮圖本身，不會每格主圖
+      // 切換都重新捲動一次。
+      var thumb = thumbs[thumbIdx];
       var wrapRect = thumbsWrap.getBoundingClientRect();
       var thumbRect = thumb.getBoundingClientRect();
       if (isVertical()) {
@@ -83,11 +120,21 @@
       frames.forEach(function (f, i) {
         f.classList.toggle("is-active", i === idx);
       });
+      var activeThumbIdx = frameToThumb[idx];
       thumbs.forEach(function (t, i) {
-        t.classList.toggle("is-active", i === idx);
+        t.classList.toggle("is-active", i === activeThumbIdx);
       });
+      // 分組縮圖內部疊圖同步：目前主圖落在這個縮圖代表的第幾格，就讓
+      // 縮圖內部對應那張 is-active，縮圖本身也跟著主圖一起「輪播」。
+      var subFrames = thumbSubFrames[activeThumbIdx];
+      if (subFrames) {
+        var localIdx = idx - thumbStartFrame[activeThumbIdx];
+        subFrames.forEach(function (img, i) {
+          img.classList.toggle("is-active", i === localIdx);
+        });
+      }
       if (scrollThumb) {
-        scrollThumbIntoView(idx);
+        scrollThumbIntoView(activeThumbIdx);
       }
     }
 
@@ -116,7 +163,7 @@
     thumbs.forEach(function (thumb, i) {
       thumb.addEventListener("click", function () {
         stopAutoplayForGood();
-        setActive(i, true);
+        setActive(thumbStartFrame[i], true);
       });
     });
 
