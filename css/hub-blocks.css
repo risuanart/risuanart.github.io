@@ -98,12 +98,27 @@
 .banner-row{ display:grid; gap:20px; }
 .banner-row--duo{ grid-template-columns:1fr 1fr; }
 .banner-row--trio{ grid-template-columns:repeat(3,1fr); }
+.banner-row--quad{ grid-template-columns:repeat(4,1fr); }
 
 .banner-tile{ display:block; }
 .banner-tile__media{ overflow:hidden; background:#2E2F16; }
 .banner-row--duo .banner-tile__media{ aspect-ratio:2/1; }
 .banner-row--trio .banner-tile__media{ aspect-ratio:1.4134/1; }
+.banner-row--quad .banner-tile__media{ aspect-ratio:4/5; }
 .banner-tile__media img{ width:100%; height:100%; object-fit:cover; }
+
+/* 課程卡（.banner-row--quad）比照 miyukifactory.com「JOURNAL」區塊的卡片
+   結構，圖片下方多一行分類標籤（像 #收納のこと），壓在標題上方——其餘
+   三欄版沒有這個欄位，不用共用同一個標題 margin-top 數字。 */
+.banner-tile__tag{
+  display:block;
+  margin-top:14px;
+  font-size:11px;
+  letter-spacing:1px;
+  color:var(--color-text-secondary);
+}
+.banner-tile__tag::before{ content:"#"; }
+
 .banner-tile__title{
   margin:10px 0 15px;
   font-family:"Noto Serif TC", serif;
@@ -113,6 +128,7 @@
 }
 .banner-row--duo .banner-tile__title{ font-size:20px; letter-spacing:2px; }
 .banner-row--trio .banner-tile__title{ font-size:18px; letter-spacing:1px; margin-top:10px; }
+.banner-row--quad .banner-tile__title{ font-size:15px; letter-spacing:0.5px; margin-top:6px; margin-bottom:8px; }
 .banner-tile__desc{
   margin:0;
   font-size:13px;
@@ -121,6 +137,7 @@
   color:var(--color-text-secondary);
   transition:color .2s ease;
 }
+.banner-row--quad .banner-tile__desc{ font-size:12px; line-height:1.7; letter-spacing:0.3px; }
 .banner-tile:hover .banner-tile__title,
 .banner-tile:hover .banner-tile__desc{ color:var(--color-interactive); }
 
@@ -143,6 +160,20 @@
   }
   .banner-row--trio::-webkit-scrollbar{ display:none; }
   .banner-row--trio .banner-tile{ flex:0 0 72%; }
+
+  /* 四欄課程卡（.banner-row--quad）手機版同樣改橫向滑動，卡片比三欄版窄
+     （flex:0 0 52%），一次能露出一張半，暗示還有更多可以滑。 */
+  .banner-row--quad .banner-tile__title{ font-size:14px; }
+  .banner-row--quad{
+    display:flex;
+    overflow-x:auto;
+    gap:14px;
+    margin:0 calc(-1 * var(--content-pad));
+    padding:0 var(--content-pad);
+    scrollbar-width:none;
+  }
+  .banner-row--quad::-webkit-scrollbar{ display:none; }
+  .banner-row--quad .banner-tile{ flex:0 0 52%; }
 }
 
 /* ---------- 分類商品區塊（參考 miyukifactory.com 新品/精選分區） ----------
