@@ -633,7 +633,10 @@
 
     let order;
     try {
-      const res = await fetch(`${CHECKOUT_API_BASE}/api/order-status?orderId=${encodeURIComponent(orderId)}`);
+      // 2026-10-20 後端 api/order-status.js 併進 api/account.js（Vercel
+      // Hobby 12 支函式上限卡滿，不帶 action 參數時行為跟原本完全一樣，
+      // 見該檔案開頭註解）。
+      const res = await fetch(`${CHECKOUT_API_BASE}/api/account?orderId=${encodeURIComponent(orderId)}`);
       order = await res.json();
       if (!res.ok) throw new Error(order.error || "找不到這筆訂單");
     } catch (err) {
