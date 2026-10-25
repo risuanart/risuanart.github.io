@@ -22,6 +22,11 @@
 
 (function () {
   var INTERVAL_MS = 2600;
+  // 2026-10-25：首圖現在固定是配色示範一（combo-1，出貨配色，見下面
+  // setActive(0, false) 的說明），比照 hero-colorway-carousel.js 同一天
+  // 的改動，讓圖一停留久一點再往下輪播到配色示範二／三、接著才是真實
+  // 相片牆的其餘照片。
+  var FIRST_FRAME_MS = 4000;
 
   function initGallery(root) {
     var frames = Array.prototype.slice.call(
@@ -88,7 +93,7 @@
 
     function pauseAutoplay() {
       if (timer) {
-        clearInterval(timer);
+        clearTimeout(timer);
         timer = null;
       }
     }
@@ -96,9 +101,11 @@
     function resumeAutoplay() {
       if (stoppedByUser || prefersReducedMotion) return;
       pauseAutoplay();
-      timer = setInterval(function () {
+      var duration = index === 0 ? FIRST_FRAME_MS : INTERVAL_MS;
+      timer = setTimeout(function () {
         setActive((index + 1) % frames.length, true);
-      }, INTERVAL_MS);
+        resumeAutoplay();
+      }, duration);
     }
 
     function stopAutoplayForGood() {
