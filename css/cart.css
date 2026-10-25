@@ -1971,12 +1971,24 @@
 }
 
 @media (min-width: 1024px) {
-  .cart-page #cart-edit-view {
+  /* .cart-main 只包商品清單／摘要側欄這一組兩欄，不含「您可能對此有
+     興趣」——grid 本身的高度＝這組裡最高的那欄（商品清單），側欄
+     position:sticky 的可移動範圍會被瀏覽器限制在 .cart-main 的高度內，
+     捲過這組之後自然接著正常排版的 .cart-cross-sell，不會互相疊在
+     一起（這組跟 cross-sell 放進同一個 grid 時實測會疊到，見下面
+     HTML 的說明，這裡刻意分成兩層解決）。 */
+  .cart-page .cart-main {
     display: grid;
     grid-template-columns: minmax(0, 1fr) 340px;
     column-gap: var(--space-10);
     align-items: start;
-    max-width: 1180px;
+    /* 2026-10-25 從 1180px 改成 1100px：使用者回報這個兩欄排版比下面
+       深色頁尾（.preview-footer__inner 跟 .cart-cross-sell 的
+       .shop-grid 桌面版都是 1100px，見各自檔案註解）還寬，兩種寬螢幕
+       容器數值對不起來，視覺上像沒對齊。全站目前就只有 840px（一般
+       .chapter 內文）跟 1100px（格狀列表／頁尾這種「比內文寬」的區塊）
+       兩種寬容器基準，這裡改用後者，不要另外發明第三個數字。 */
+    max-width: 1100px;
     margin-left: auto;
     margin-right: auto;
     padding-left: var(--content-pad);
@@ -1985,14 +1997,14 @@
 
   /* grid 子層自己的寬度／留白交給欄寬負責，個別原有的置中留白規則
      （.chapter／.cart-summary 那份 841px 斷點的 max-width）在這個寬度
-     以上不再適用，統一歸零。 */
+     以上不再適用，統一歸零——商品清單的 margin-top 也一併歸零，不然
+     它（.chapter 帶的 editorial-gap）會比右邊 margin-top:0 的摘要卡片
+     低一截，兩欄頂端對不齊。 */
   .cart-page .cart-items,
-  .cart-page .cart-summary,
-  .cart-page .cart-cross-sell {
+  .cart-page .cart-summary {
     width: 100%;
     max-width: none;
-    margin-left: 0;
-    margin-right: 0;
+    margin: 0;
     padding-left: 0;
     padding-right: 0;
   }
@@ -2003,7 +2015,6 @@
 
   .cart-page .cart-summary {
     grid-column: 2;
-    margin-top: 0;
     /* 卡片本身的邊框／內距，讓訂單摘要看起來是一塊獨立的卡片，不是浮在
        空白裡的兩段文字——呼應參考站右側購物車總計那個方框。 */
     padding: var(--space-6);
@@ -2012,7 +2023,8 @@
     background: var(--color-surface-light);
     /* 商品清單比較長的時候，摘要卡片跟著捲動停在看得到的地方，不用滑到
        最下面才看得到結帳按鈕。.product-page 本身就是 overflow-y:auto
-       的捲動容器（見該規則註解），sticky 在裡面一樣有效。 */
+       的捲動容器（見該規則註解），sticky 在裡面一樣有效，可移動範圍見
+       上面 .cart-main 的說明。 */
     position: sticky;
     top: var(--space-10);
   }
@@ -2028,10 +2040,5 @@
 
   .cart-page .cart-summary .work__close .work__cta--primary {
     width: 100%;
-  }
-
-  .cart-page .cart-cross-sell {
-    grid-column: 1 / -1;
-    margin-top: var(--space-16);
   }
 }
