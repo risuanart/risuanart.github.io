@@ -312,39 +312,44 @@
   // 商品總覽格狀卡／首頁商品格狀（都共用 js/products-overview.js）也要套同一種
   // 展示，縮圖來源就是這裡——[0] 是出貨配色（跟上面 PRODUCT_IMAGES 同一張圖），
   // [1][2] 是另外兩張配色示範圖（combo-1 跟出貨配色是同一張，不重複收錄）。
+  // 2026-10-25：配色輪播第一格原本是 main.jpg（實拍出貨配色），使用者
+  // 反饋想要跟其餘兩格一樣都是 combo 配色示範圖（combo-1／2／3 三張一組，
+  // 同一套沙粒質感＋同樣的菱形占版比例，彼此切換不會跳動），改成 combo-1
+  // 當第一格——PRODUCT_IMAGES[key]（main.jpg）不再用在這裡，但其他地方
+  // （商品頁相片牆首圖、購物車縮圖）還是讀 PRODUCT_IMAGES，不受影響。
   const PRODUCT_COLORWAY_FRAMES = {
     "sand-art-chun": [
-      PRODUCT_IMAGES["sand-art-chun"],
+      BASE_PREFIX + "assets/images/products/sand-art-chun/sand-art-chun-combo-1.png",
       BASE_PREFIX + "assets/images/products/sand-art-chun/sand-art-chun-combo-2.png",
       BASE_PREFIX + "assets/images/products/sand-art-chun/sand-art-chun-combo-3.png",
     ],
     "sand-art-fu": [
-      PRODUCT_IMAGES["sand-art-fu"],
+      BASE_PREFIX + "assets/images/products/sand-art-fu/sand-art-fu-combo-1.png",
       BASE_PREFIX + "assets/images/products/sand-art-fu/sand-art-fu-combo-2.png",
       BASE_PREFIX + "assets/images/products/sand-art-fu/sand-art-fu-combo-3.png",
     ],
     "sand-art-cai": [
-      PRODUCT_IMAGES["sand-art-cai"],
+      BASE_PREFIX + "assets/images/products/sand-art-cai/sand-art-cai-combo-1.png",
       BASE_PREFIX + "assets/images/products/sand-art-cai/sand-art-cai-combo-2.png",
       BASE_PREFIX + "assets/images/products/sand-art-cai/sand-art-cai-combo-3.png",
     ],
     "sand-art-ying-chun": [
-      PRODUCT_IMAGES["sand-art-ying-chun"],
+      BASE_PREFIX + "assets/images/products/sand-art-ying-chun/sand-art-ying-chun-combo-1.png",
       BASE_PREFIX + "assets/images/products/sand-art-ying-chun/sand-art-ying-chun-combo-2.png",
       BASE_PREFIX + "assets/images/products/sand-art-ying-chun/sand-art-ying-chun-combo-3.png",
     ],
     "sand-art-na-fu": [
-      PRODUCT_IMAGES["sand-art-na-fu"],
+      BASE_PREFIX + "assets/images/products/sand-art-na-fu/sand-art-na-fu-combo-1.png",
       BASE_PREFIX + "assets/images/products/sand-art-na-fu/sand-art-na-fu-combo-2.png",
       BASE_PREFIX + "assets/images/products/sand-art-na-fu/sand-art-na-fu-combo-3.png",
     ],
     "sand-art-ying-chun-lantern": [
-      PRODUCT_IMAGES["sand-art-ying-chun-lantern"],
+      BASE_PREFIX + "assets/images/products/sand-art-ying-chun-lantern/sand-art-ying-chun-lantern-combo-1.png",
       BASE_PREFIX + "assets/images/products/sand-art-ying-chun-lantern/sand-art-ying-chun-lantern-combo-2.png",
       BASE_PREFIX + "assets/images/products/sand-art-ying-chun-lantern/sand-art-ying-chun-lantern-combo-3.png",
     ],
     "sand-art-na-fu-lantern": [
-      PRODUCT_IMAGES["sand-art-na-fu-lantern"],
+      BASE_PREFIX + "assets/images/products/sand-art-na-fu-lantern/sand-art-na-fu-lantern-combo-1.png",
       BASE_PREFIX + "assets/images/products/sand-art-na-fu-lantern/sand-art-na-fu-lantern-combo-2.png",
       BASE_PREFIX + "assets/images/products/sand-art-na-fu-lantern/sand-art-na-fu-lantern-combo-3.png",
     ],

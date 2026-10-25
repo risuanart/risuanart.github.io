@@ -1,7 +1,10 @@
 /* hero-colorway-carousel.js —— 配色動態展示（商品頁首圖／商品總覽格狀卡／
    相關商品卡片縮圖共用）。套在 [data-hero-carousel] 容器上：進頁面自動播
-   （主圖→配色二→配色三），不可點擊切換——這些商品只會出貨圖一那個固定
-   配色，其餘兩張純粹是搭配參考，故意不做縮圖點擊選單，避免讓客人誤會成
+   （配色一→配色二→配色三，三張都是同一套 combo 配色示範圖，不再混用
+   實拍 main.jpg——2026-10-25 改版前圖一是實拍照、圖二三是示範圖，兩種
+   素材質感／菱形占版比例不一致，切換時會跳動，見 git log 同日期另一次
+   commit 的說明），不可點擊切換——這些商品只會出貨圖一那個固定配色，
+   其餘兩張純粹是搭配參考，故意不做縮圖點擊選單，避免讓客人誤會成
    出貨也能挑配色。
 
    預設播完一輪就停在主圖不循環（首圖／商品總覽格狀卡）；如果容器上有
@@ -24,6 +27,11 @@
 
 (function () {
   const INTERVAL_MS = 2200;
+  // 2026-10-25：圖一（combo-1，出貨配色）使用者要求比其餘兩張多停留一點
+  // 時間再往下切，讓訪客有足夠時間先看清楚「這是出貨配色」，再接著看
+  // 其餘兩張重新搭配參考——只有圖一（index 0）停留比較久，其餘兩張維持
+  // 原本的 INTERVAL_MS 節奏。
+  const FIRST_FRAME_MS = 4000;
 
   function initCarousel(root) {
     const frames = Array.prototype.slice.call(
@@ -45,13 +53,35 @@
       dots.forEach((dot, n) => dot.classList.toggle("is-active", n === i));
     }
 
+    function durationFor(i) {
+      return i === 0 ? FIRST_FRAME_MS : INTERVAL_MS;
+    }
+
     function pause() {
       if (timer) {
-        clearInterval(timer);
+        clearTimeout(timer);
         timer = null;
       }
       root.classList.add("is-paused");
       if (toggle) toggle.setAttribute("aria-label", "播放配色展示");
+    }
+
+    function scheduleNext() {
+      timer = setTimeout(() => {
+        index += 1;
+        if (index >= frames.length) {
+          index = 0;
+          show(0);
+          if (!loop) {
+            pause();
+            return;
+          }
+          scheduleNext();
+          return;
+        }
+        show(index);
+        scheduleNext();
+      }, durationFor(index));
     }
 
     function play() {
@@ -60,16 +90,7 @@
         show(0);
       }
       pause();
-      timer = setInterval(() => {
-        index += 1;
-        if (index >= frames.length) {
-          index = 0;
-          show(0);
-          if (!loop) pause();
-          return;
-        }
-        show(index);
-      }, INTERVAL_MS);
+      scheduleNext();
       root.classList.remove("is-paused");
       if (toggle) toggle.setAttribute("aria-label", "暫停配色展示");
     }
