@@ -28,7 +28,20 @@
    主圖同步輪播）。縮圖按鈕沒有這個屬性時預設代表 1 格，行為跟改之前
    完全一樣。分組縮圖內部要放對應張數的
    [data-gallery-thumb-frame]（img，一樣用 opacity 疊圖），
-   setActive() 切主圖時會同步切縮圖內部對應那一張。 */
+   setActive() 切主圖時會同步切縮圖內部對應那一張。
+
+   2026-10-25 另外修掉一個嚴重的效能 bug：[data-gallery-frame] 裡的
+   <video>（例如鋪色過程展示影片）疊在跟主圖同一個 box 裡用 opacity
+   切換，原本 js/video-inview.js 的 IntersectionObserver 只看「容器有沒有
+   進入畫面」，疊在同一個 box 的好幾支 video 全部會被判定成「進入畫面」
+   而同時 play()，不管哪一支當下其實是 is-active——實測一個商品頁因此
+   同時在背景播放＋下載 3 支影片（共十幾 MB），是「頁面載入變慢」的
+   主因之一。這裡改成由這支腳本自己管理：setActive() 切主圖的同時，只
+   play() 真正 is-active 的那一支 video，其餘全部 pause()；
+   video-inview.js 已經排除了 [data-gallery-frame]，不會再搶著 play()。
+   另外用一個獨立的 IntersectionObserver 盯著整個 [data-gallery] 容器，
+   捲出畫面時暫停目前這支 video、捲回來才恢復播放，補回原本
+   video-inview.js 提供的「離開視野省資源」效果。 */
 
 (function () {
   var INTERVAL_MS = 2600;
@@ -76,9 +89,24 @@
     var index = 0;
     var timer = null;
     var stoppedByUser = false;
+    var galleryInView = true;
     var prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
+
+    // 只 play() 目前 is-active 的 video、其餘全部 pause()——不管容器本身
+    // 有沒有進入畫面都要先套用這個規則，galleryInView 再疊加一層「整個
+    // 相片牆根本不在畫面上」的額外暫停（見下面 IntersectionObserver）。
+    function syncVideoPlayback() {
+      frames.forEach(function (f, i) {
+        if (f.tagName !== "VIDEO") return;
+        if (i === index && galleryInView) {
+          f.play().catch(function () {});
+        } else {
+          f.pause();
+        }
+      });
+    }
 
     // 2026-10-22 新增：桌面版縮圖牆移到主圖左側時（見
     // css/products.css .work__gallery--thumbs-left，目前只有
@@ -136,6 +164,7 @@
       if (scrollThumb) {
         scrollThumbIntoView(activeThumbIdx);
       }
+      syncVideoPlayback();
     }
 
     function pauseAutoplay() {
@@ -182,6 +211,22 @@
     thumbsWrap.addEventListener("pointerdown", stopAutoplayForGood);
     root.addEventListener("mouseenter", pauseAutoplay);
     root.addEventListener("mouseleave", resumeAutoplay);
+
+    // 整個相片牆捲出畫面時暫停目前這支 video（不影響自動輪播的 timer，
+    // 回到畫面時 syncVideoPlayback() 會依照當下 index 重新 play 正確的
+    // 那一支，不是從頭重播）。
+    if (frames.some(function (f) { return f.tagName === "VIDEO"; })) {
+      var visibilityObserver = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            galleryInView = entry.isIntersecting;
+            syncVideoPlayback();
+          });
+        },
+        { threshold: 0.1 }
+      );
+      visibilityObserver.observe(root);
+    }
 
     setActive(0, false);
     resumeAutoplay();
