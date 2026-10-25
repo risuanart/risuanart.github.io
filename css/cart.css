@@ -1910,3 +1910,128 @@
   margin: 0 0 var(--space-6);
   text-align: center;
 }
+
+/* ---------- 2026-10-25 購物車頁：訂單摘要側欄 ----------
+   使用者反映購物車頁在桌面寬螢幕下像半成品：商品清單只佔中間一小條
+   （跟全站敘事類頁面共用的 840px .chapter 寬度），小計／結帳按鈕孤零零
+   吊在最下面右側，兩側留下大片空白。參考使用者提供的 panacea-q.com
+   購物車頁，改成≥1024px 左邊商品清單、右邊訂單摘要卡片並排；<1024px
+   維持改版前的單欄直向排列（商品→摘要→您可能對此有興趣），只是外層
+   多包了一層 <aside class="cart-summary">，視覺跟原本幾乎一樣。
+
+   .work__close（小計／結帳）跟 .cart-discount（折扣碼）原本各自獨立拿
+   .chapter／共用寬度限制規則置中留白，現在收進同一張卡片，改由
+   .cart-summary 統一負責寬度／留白，兩個子層自己的那份歸零，避免內距
+   疊加兩次。.work__close 是 cart.html／商品頁／booking 頁共用的全站
+   class，這裡用 .cart-summary 的後代選擇器去疊加特異度，只影響购物車
+   頁這個巢狀在摘要卡片裡的實例，不會動到其他頁面的 .work__close。 */
+.cart-summary {
+  width: 100%;
+  margin-top: var(--editorial-gap);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--content-pad);
+  padding-right: var(--content-pad);
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 841px) {
+  .cart-summary {
+    max-width: var(--content-max-width);
+  }
+}
+
+.cart-summary .work__close,
+.cart-summary .cart-discount {
+  width: auto;
+  max-width: none;
+  margin: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.cart-summary .work__close {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+}
+
+/* 折扣碼排在小計／結帳按鈕下面（DOM 順序也對調，不是只用 CSS 視覺排序
+   造成跟 tab 鍵順序對不起來），上面補一條分隔線跟卡片頂部那塊內容做出
+   區隔。 */
+.cart-summary .cart-discount {
+  margin-top: var(--space-10);
+  padding-top: var(--space-6);
+  border-top: 1px solid color-mix(in srgb, var(--color-text-secondary) 20%, transparent);
+}
+
+.cart-summary .cart-discount__control {
+  max-width: none;
+}
+
+@media (min-width: 1024px) {
+  .cart-page #cart-edit-view {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 340px;
+    column-gap: var(--space-10);
+    align-items: start;
+    max-width: 1180px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--content-pad);
+    padding-right: var(--content-pad);
+  }
+
+  /* grid 子層自己的寬度／留白交給欄寬負責，個別原有的置中留白規則
+     （.chapter／.cart-summary 那份 841px 斷點的 max-width）在這個寬度
+     以上不再適用，統一歸零。 */
+  .cart-page .cart-items,
+  .cart-page .cart-summary,
+  .cart-page .cart-cross-sell {
+    width: 100%;
+    max-width: none;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .cart-page .cart-items {
+    grid-column: 1;
+  }
+
+  .cart-page .cart-summary {
+    grid-column: 2;
+    margin-top: 0;
+    /* 卡片本身的邊框／內距，讓訂單摘要看起來是一塊獨立的卡片，不是浮在
+       空白裡的兩段文字——呼應參考站右側購物車總計那個方框。 */
+    padding: var(--space-6);
+    border: 1px solid color-mix(in srgb, var(--color-text-secondary) 20%, transparent);
+    border-radius: var(--radius-sharp);
+    background: var(--color-surface-light);
+    /* 商品清單比較長的時候，摘要卡片跟著捲動停在看得到的地方，不用滑到
+       最下面才看得到結帳按鈕。.product-page 本身就是 overflow-y:auto
+       的捲動容器（見該規則註解），sticky 在裡面一樣有效。 */
+    position: sticky;
+    top: var(--space-10);
+  }
+
+  /* 側欄變窄（340px）之後，小計文字＋結帳按鈕原本的左右並排（跟其他
+     頁面的 .work__close 共用那套排法）會擠在同一行，改成上下堆疊、
+     按鈕滿版寬；<1024px 維持原本的左右並排＋自動寬度按鈕，不在這裡動。 */
+  .cart-page .cart-summary .work__close {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-4);
+  }
+
+  .cart-page .cart-summary .work__close .work__cta--primary {
+    width: 100%;
+  }
+
+  .cart-page .cart-cross-sell {
+    grid-column: 1 / -1;
+    margin-top: var(--space-16);
+  }
+}
