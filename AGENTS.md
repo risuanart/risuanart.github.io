@@ -191,3 +191,9 @@ python3 -m http.server 8895
      間距視覺比對，不要只看改動的那一頁順不順眼。
 2. 如果改動涉及共用檔案，額外開 1-2 個沒改過的頁面確認沒有被波及。
 3. 確認後 commit，訊息寫清楚改了什麼、為什麼。
+4. **push 完不要就當作結束，要確認 GitHub Pages 真的部署完成**：
+   `gh api repos/risuanart/risuanart.github.io/pages/builds/latest`，
+   確認回傳的 `commit` 欄位等於剛剛 push 的 commit SHA、`status` 是
+   `built`（不是 `errored`）。2026-10-29 發現的疏漏：之前只確認
+   `git push` 本身成功，沒有再確認 GitHub Pages 有沒有真的重新部署
+   完成，這一步要變成固定習慣，不是事後才想到才查。
