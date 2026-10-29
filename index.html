@@ -369,6 +369,38 @@
       </div>
     </section>
 
+    <!-- 商品分類區塊（參考 miyukifactory.com 的新品／精選分區，見
+         css/hub-blocks.css 說明）：取代原本單一大格狀列表，改成流動畫／
+         砂畫各自限制 4 件＋置中「更多」按鈕，不是全數列出。卡片一樣用
+         js/products-overview.js 既有的 cardHTML()／initAddToCart()，
+         只是改成依分類各自建一個 grid（見該檔案 initCategoryGrids()）。 -->
+    <section class="content-block fade-in delay-2">
+      <div class="hub-category-head">
+        <p class="hub-category-head__en">Sand Art</p>
+        <p class="hub-category-head__title">砂畫材料包</p>
+      </div>
+      <!-- 2026-10-24 新增：使用者提供的春聯沙畫旋轉卡片示範影片，原始檔
+           1920×1080／9.5MB，用 ffmpeg 壓到 960px 寬／拿掉音軌／調整
+           bitrate，607KB（見 assets/videos/home/ 同目錄其他首頁影片的
+           壓縮慣例）。跟 .demo-video（商品頁用，9:16 直式）不是同一組
+           class——這支是橫式 16:9，另外用 .hub-showcase-video（見
+           css/hub-blocks.css）。 -->
+      <div class="hub-showcase-video">
+        <video src="assets/videos/home/春聯沙畫-旋轉卡片.mp4" autoplay muted loop playsinline preload="metadata" aria-label="春聯砂畫材料包成品旋轉展示"></video>
+      </div>
+      <div class="shop-grid" data-shop-grid-category="sand-art" data-shop-grid-limit="4" role="list" aria-label="砂畫材料包"></div>
+      <a class="hub-more-link" href="products/shop/?category=sand-art">ＭＯＲＥ</a>
+    </section>
+
+    <section class="content-block fade-in delay-2">
+      <div class="hub-category-head">
+        <p class="hub-category-head__en">Fluid Art</p>
+        <p class="hub-category-head__title">流動畫材料包</p>
+      </div>
+      <div class="shop-grid" data-shop-grid-category="fluid-art" data-shop-grid-limit="4" role="list" aria-label="流動畫材料包"></div>
+      <a class="hub-more-link" href="products/shop/?category=fluid-art">ＭＯＲＥ</a>
+    </section>
+
     <!-- 材料指南：用一篇主題圖文搭配兩個精簡連結，和上方課程橫列做出節奏差異。 -->
     <section class="content-block home-guide-section">
       <div class="home-section-head">
@@ -391,38 +423,6 @@
         <a href="guides/sand-texture-sea/">石英砂肌理畫材料指南 <span aria-hidden="true">→</span></a>
         <a href="guides/material-compare-mountain/">同一座山，三種材料的呈現 <span aria-hidden="true">→</span></a>
       </div>
-    </section>
-
-    <!-- 商品分類區塊（參考 miyukifactory.com 的新品／精選分區，見
-         css/hub-blocks.css 說明）：取代原本單一大格狀列表，改成流動畫／
-         砂畫各自限制 4 件＋置中「更多」按鈕，不是全數列出。卡片一樣用
-         js/products-overview.js 既有的 cardHTML()／initAddToCart()，
-         只是改成依分類各自建一個 grid（見該檔案 initCategoryGrids()）。 -->
-    <section class="content-block fade-in delay-2">
-      <div class="hub-category-head">
-        <p class="hub-category-head__en">Fluid Art</p>
-        <p class="hub-category-head__title">流動畫材料包</p>
-      </div>
-      <div class="shop-grid" data-shop-grid-category="fluid-art" data-shop-grid-limit="4" role="list" aria-label="流動畫材料包"></div>
-      <a class="hub-more-link" href="products/shop/?category=fluid-art">ＭＯＲＥ</a>
-    </section>
-
-    <section class="content-block fade-in delay-2">
-      <div class="hub-category-head">
-        <p class="hub-category-head__en">Sand Art</p>
-        <p class="hub-category-head__title">砂畫材料包</p>
-      </div>
-      <!-- 2026-10-24 新增：使用者提供的春聯沙畫旋轉卡片示範影片，原始檔
-           1920×1080／9.5MB，用 ffmpeg 壓到 960px 寬／拿掉音軌／調整
-           bitrate，607KB（見 assets/videos/home/ 同目錄其他首頁影片的
-           壓縮慣例）。跟 .demo-video（商品頁用，9:16 直式）不是同一組
-           class——這支是橫式 16:9，另外用 .hub-showcase-video（見
-           css/hub-blocks.css）。 -->
-      <div class="hub-showcase-video">
-        <video src="assets/videos/home/春聯沙畫-旋轉卡片.mp4" autoplay muted loop playsinline preload="metadata" aria-label="春聯砂畫材料包成品旋轉展示"></video>
-      </div>
-      <div class="shop-grid" data-shop-grid-category="sand-art" data-shop-grid-limit="4" role="list" aria-label="砂畫材料包"></div>
-      <a class="hub-more-link" href="products/shop/?category=sand-art">ＭＯＲＥ</a>
     </section>
 
     <!-- Follow Us / Instagram：版面（字級、格狀間距、留白）是使用者用
