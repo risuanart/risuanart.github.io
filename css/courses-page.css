@@ -18,7 +18,8 @@
 
 /* ---------- 敘事式開場：品牌故事，慢慢把人帶進課程 ---------- */
 .course-story {
-  padding: var(--editorial-gap) 0 56px;
+  padding-top: var(--editorial-gap);
+  padding-bottom: 56px;
   border-bottom: 1px solid color-mix(in srgb, var(--color-text-secondary) 25%, transparent);
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -40,12 +41,12 @@
 .course-story__media img { width: 100%; height: 100%; object-fit: cover; }
 
 @media (max-width: 768px) {
-  .course-story { grid-template-columns: 1fr; gap: 28px; padding: var(--editorial-gap) 0 40px; }
+  .course-story { grid-template-columns: 1fr; gap: 28px; padding-top: var(--editorial-gap); padding-bottom: 40px; }
   .course-story__media { order: -1; aspect-ratio: 4/3; }
 }
 
 /* ---------- 賣點特色：快速捕捉 ---------- */
-.course-features { padding: 8px 0 52px; border-bottom: 1px solid color-mix(in srgb, var(--color-text-secondary) 25%, transparent); }
+.course-features { padding-top: 8px; padding-bottom: 52px; border-bottom: 1px solid color-mix(in srgb, var(--color-text-secondary) 25%, transparent); }
 .course-features__title { font-size: clamp(20px, 2.2vw, 26px); font-weight: 800; margin: 0 0 28px; }
 .course-features__grid {
   display: grid;
@@ -130,7 +131,7 @@
 }
 
 /* ---------- 怎麼上課：步驟 ---------- */
-.course-steps { padding: 64px 0 0; }
+.course-steps { padding-top: 64px; }
 .course-steps__title { font-size: clamp(20px, 2.2vw, 26px); font-weight: 800; margin: 0 0 32px; }
 .course-steps__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
 .course-step__num { font-family: var(--price-font-family); font-size: 13px; color: var(--color-brand); font-weight: 700; margin: 0 0 10px; }
@@ -210,7 +211,7 @@
 }
 
 /* ---------- 材料指南：底部延伸閱讀 ---------- */
-.course-guides { padding: 60px 0 0; }
+.course-guides { padding-top: 60px; }
 .course-guides__head {
   display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap;
   margin-bottom: 28px; padding-bottom: 14px; border-bottom: 1px solid color-mix(in srgb, var(--color-text-secondary) 25%, transparent);
