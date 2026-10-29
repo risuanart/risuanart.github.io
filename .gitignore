@@ -42,3 +42,12 @@ assets/videos/courses/large-canvas/*-原始檔.MP4
 # 原始檔案兩份內容等價、直接進版控是重複的體積，所以原始檔改名加
 # 「-原始檔」保留在電腦裡，不進版控。
 assets/videos/courses/custom-photo-oil/*-原始檔.MP4
+
+# 2026-10-29：repo 根目錄的素材暫存區，商品/課程圖片還在整理挑選階段時
+# 先堆在這裡（目前有 sand-art-na-fu、beading 兩批原始照片/影片，共
+# 196MB），選定、優化過後才會搬進 assets/ 底下正式引用。體積大、又是
+# 未篩選的原始檔，不該進版控──全站一致性體檢時發現這個資料夾一直是
+# 未追蹤狀態、沒被排進 .gitignore，純粹是還沒有人不小心 git add 過
+# 才沒事，補進來避免以後誰下 `git add -A` 把整包塞進 repo 歷史（GitHub
+# 單檔超過 100MB 會直接擋 push）。
+raw-uploads/

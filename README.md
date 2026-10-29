@@ -1,25 +1,53 @@
 # 日宣繪畫室官網
 
-Phase 1：專案骨架＋設計系統地基。目前只有結構與設計系統，**沒有任何頁面內容**，
-頁面內容與資訊架構將在 Phase 2 之後補入。
+> **2026-10-29 更新**：這份 README 原本停在「Phase 1 專案骨架、沒有任何頁面內容」
+> 的最初階段，但專案早就已經是近 30 個完整頁面的正式上線網站，README 完全沒跟著
+> 更新過。這次全站一致性體檢順便把它改成反映真實現況，不是重寫歷史。design
+> system 那幾節（色彩／token／設計原則）內容仍然有效、仍在遵守，保留不動。
 
-## 專案結構
+日宣繪畫室的官方網站，純靜態前端，正式上線網址 **risuanart.com**（GitHub Pages
+部署，見 repo 裡的 `CNAME`）。服務對象是散客、企業／團體課程、幼兒園等。
+
+結帳、會員、預約、金流這些需要後端的功能，是**另一個獨立的 repo**
+`risuan-checkout`（Vercel Serverless + Upstash Redis），這個 repo 本身**不存放
+任何會員/訂單資料**，純粹是展示頁面＋呼叫後端 API。
+
+## 專案結構（實際現況）
 
 ```
-index.html          ← 骨架，不含實際內容
-README.md           ← 本檔案
-css/
-  colors.css         ← 色彩變數（全站唯一色彩來源）
-  tokens.css         ← 字級／間距／圓角／陰影／動態 token
-  base.css           ← reset 與基礎樣式
-js/
-  main.js            ← 空白進入點，後續階段的 JS 從這裡開始接
-assets/
-  images/            ← 空資料夾，圖片素材放這裡
-  icons/             ← 空資料夾，圖示素材放這裡
+index.html          ← 首頁
+courses/             ← 10 支課程介紹頁（石英砂肌理畫／刮刀油畫／流動畫／串珠…）
+  index.html          ← 課程總覽（自動輪播＋敘事開場＋怎麼上課＋FAQ）
+  {slug}/index.html   ← 各課程詳細頁
+products/             ← 19 個商品頁＋ shop 總覽（材料包系列）
+cart/                 ← 購物車／結帳確認頁
+booking/              ← 線上預約課程
+account/              ← 會員中心（Google 登入、訂單/預約紀錄、點數）
+faq/                  ← 常見問題／預約須知
+gallery/               ← 學員作品集
+guides/                ← 材料教學文章
+enterprise/            ← 企業／團體課程總覽
+enterprise-{案例}/     ← 5 個企業合作案例頁（獨立資料夾，不在 enterprise/ 底下）
+privacy/                ← 隱私權政策
+css/                    ← 16 支，全站共用（見下方「共用檔案要特別小心」）
+js/                     ← 36 支，全站共用
+assets/                 ← 圖片／影片素材
+raw-uploads/            ← 未篩選的原始素材暫存區，不進版控（見 .gitignore 說明）
 ```
 
-技術架構：純 HTML / CSS / JavaScript，部署目標為 GitHub Pages（靜態網站）。
+**乾淨網址慣例**：每個頁面都是 `資料夾/index.html`，網址不帶 `.html`。舊版有些頁
+面是 `courses/beading.html` 這種扁平檔名，2026-09-20 全站改成資料夾形式後，這些
+舊檔名保留成自動轉址的 stub（`<meta http-equiv="refresh">` 導去新網址），不是真
+正的頁面內容，新增頁面請一律用資料夾形式，不要再用扁平 `.html` 檔名。
+
+**共用檔案要特別小心**（改動會影響多個頁面）：
+- `css/tokens.css`、`css/colors.css`：全站間距／字級／色票的唯一來源。
+- `css/products.css`：商品頁樣板，也是全站寬度容器規則（`.content-container`，
+  840px 標準）的定義處。
+- `js/cart.js`：購物車／結帳核心邏輯，多個頁面共用。
+- `js/account-auth.js`：會員登入邏輯，首頁跟會員中心共用。
+
+技術架構：純 HTML / CSS / JavaScript，部署於 GitHub Pages（靜態網站）。
 **不使用任何框架**（無 React、Vue、Tailwind、Bootstrap 等），**不引入任何 npm 套件或建置工具**。
 
 ## 色彩使用規則
@@ -83,9 +111,10 @@ assets/
    - 過場優先用「元素連續變形」取代硬跳轉，讓使用者能追蹤位置
    - 禁止：彩虹漸層、快速閃爍、大範圍色彩變化、粒子爆炸等公版效果
 
-## 後續階段（本次不做）
+## 目前狀態
 
-- Phase 2：資訊架構與首頁區塊
-- Phase 3：各內頁開發
-- Phase 4：動態與質感細節（進場動畫、過場、材質層）
-- Phase 5：與 bibbidi 設計台的連結整合
+上面「Phase 2-5」的規劃階段實際上都已經完成並上線（資訊架構、各內頁、動態細節都
+已經在近 30 個頁面裡落地）。這份 README 聚焦在專案結構與設計系統規則；更細的
+「哪個功能要連動改哪些檔案」地圖、協作規則，另外整理在 `AGENTS.md`／
+`PROJECT_MAP.md`（如果這兩份檔案已經建立的話，請優先讀那兩份，比這份 README
+更貼近開發現況）。
