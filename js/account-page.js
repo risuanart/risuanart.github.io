@@ -275,15 +275,12 @@
     });
 
     // ---------- 課程預約紀錄（含自助改期／申請取消，2026-10-29 新增）----------
-    // 第一階段只做這個已登入會員中心入口，信件裡免登入的連結留到下一
-    // 階段——見 risuan-checkout/HANDOFF.md「學生自助改期/取消申請」。
-    const BOOKING_STATUS_LABEL = { confirmed: "已確認", cancelled: "已取消" };
-
-    function bookingStatusText(b) {
-      if (b.status === "cancelled") return "已取消";
-      if (b.cancelRequestedAt) return "取消申請處理中";
-      return BOOKING_STATUS_LABEL[b.status] || b.status;
-    }
+    // 第一階段做了這個已登入會員中心入口；第二階段（信件免登入連結，
+    // booking-manage/ 頁面）畫面長得一模一樣，渲染邏輯已經抽成共用的
+    // js/booking-detail-ui.js（window.BookingDetailUI），這支檔案跟
+    // js/booking-manage.js 都載入同一份，不要再各自維護一份重複的
+    // HTML 模板。
+    const { bookingStatusText, renderBookingDetailStatic, renderBookingDetail } = window.BookingDetailUI;
 
     async function loadBookings() {
       try {
@@ -316,55 +313,6 @@
       }
     }
 
-    // 已取消、或已經送出取消申請的預約，不用再打改期選項那支 API——
-    // 結果一定是「不符合資格」，省一次網路往返，直接顯示固定文字。
-    function renderBookingDetailStatic(container, b) {
-      if (b.status === "cancelled") {
-        container.innerHTML = `<p class="account-booking-item__msg">這筆預約已經取消。</p>`;
-        return true;
-      }
-      if (b.cancelRequestedAt) {
-        container.innerHTML = `<p class="account-booking-item__msg">您已送出取消申請，我們會依網站公告的退費政策盡快為您處理，處理完成後會寄信通知您，請留意信箱。</p>`;
-        return true;
-      }
-      return false;
-    }
-
-    function renderBookingDetail(container, b, rescheduleData) {
-      const policyHtml = `<p class="account-booking-item__policy ${rescheduleData.eligible ? "" : "is-blocked"}">${escapeHtml(rescheduleData.reason)}</p>`;
-      const slotsHtml = rescheduleData.eligible
-        ? rescheduleData.options.length
-          ? `
-          <ul class="account-booking-item__slots">
-            ${rescheduleData.options
-              .map(
-                (o, i) => `
-              <li class="account-booking-item__slot-option">
-                <label style="display:flex;align-items:center;gap:var(--space-2);width:100%;cursor:pointer;">
-                  <input type="radio" name="reschedule-slot-${escapeHtml(b.bookingId)}" value="${escapeHtml(o.slotId)}" ${i === 0 ? "checked" : ""}>
-                  <span>${escapeHtml(o.date)} ${escapeHtml(o.time)}（剩 ${escapeHtml(o.remaining)} 位）</span>
-                </label>
-              </li>`
-              )
-              .join("")}
-          </ul>
-          <button type="button" class="work__cta account-booking-item__reschedule-confirm">確認改期</button>
-          `
-          : `<p class="account-booking-item__msg">目前沒有可以改期的未來時段，請私訊我們協助安排。</p>`
-        : "";
-      const cancelHtml = `
-        <div class="account-booking-item__actions">
-          <button type="button" class="work__cta account-booking-item__cancel-toggle">申請取消這筆預約</button>
-        </div>
-        <div class="account-booking-item__cancel-form" hidden>
-          <textarea class="account-booking-item__cancel-note" placeholder="取消原因（選填）"></textarea>
-          <div class="account-booking-item__actions">
-            <button type="button" class="work__cta work__cta--primary account-booking-item__cancel-submit">送出取消申請</button>
-          </div>
-        </div>
-      `;
-      container.innerHTML = `${policyHtml}${slotsHtml}${cancelHtml}<p class="account-booking-item__msg" hidden></p>`;
-    }
 
     bookingListEl.addEventListener("click", async (e) => {
       const summaryBtn = e.target.closest(".account-booking-item__summary");
