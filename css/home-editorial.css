@@ -1,4 +1,4 @@
-/* 首頁影片下方三個導覽區塊專用，避免改動其他頁面共用的入口卡片。 */
+/* 首頁影片下方主要服務入口、課程精選與材料指南專用。 */
 .home-entry-section,
 .home-course-section,
 .home-guide-section {
@@ -7,27 +7,32 @@
 
 .home-entry-row {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--space-6);
+  grid-template-columns: 1fr;
+  gap: var(--space-10);
+}
+
+.home-entry-section .home-section-head {
+  align-items: center;
 }
 
 .home-entry {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.45fr);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
   grid-template-areas: "media copy";
   align-items: center;
-  gap: var(--space-4);
+  gap: var(--space-6);
   color: var(--color-text-primary);
   text-decoration: none;
 }
 
 .home-entry--reverse {
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
   grid-template-areas: "copy media";
 }
 
 .home-entry__media {
   grid-area: media;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 16 / 10;
   overflow: hidden;
 }
 
@@ -42,8 +47,14 @@
   grid-area: copy;
 }
 
+.home-entry__eyebrow {
+  margin: 0 0 var(--space-2);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-xs);
+}
+
 .home-entry__title {
-  margin: 0 0 var(--space-1);
+  margin: 0 0 var(--space-2);
   font-size: var(--font-size-lg);
   font-weight: 600;
   line-height: 1.5;
@@ -52,7 +63,7 @@
 .home-entry__desc {
   margin: 0;
   color: var(--color-text-secondary);
-  font-size: var(--font-size-xs);
+  font-size: var(--font-size-sm);
   line-height: 1.7;
 }
 
@@ -195,8 +206,16 @@
 
 @media (max-width: 768px) {
   .home-entry {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.55fr);
+    grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
     gap: var(--space-4);
+  }
+
+  .home-entry--reverse {
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr);
+  }
+
+  .home-entry__media {
+    aspect-ratio: 4 / 3;
   }
 
   .home-course-section .banner-row--quad .banner-tile__media {
@@ -219,10 +238,6 @@
 }
 
 @media (min-width: 601px) and (max-width: 768px) {
-  .home-entry-row {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
   .home-course-section .banner-row--quad .banner-tile {
     flex-basis: 30%;
   }
