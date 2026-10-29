@@ -274,8 +274,17 @@
       detail.hidden = false;
     });
 
-    // ---------- 課程預約紀錄 ----------
+    // ---------- 課程預約紀錄（含自助改期／申請取消，2026-10-29 新增）----------
+    // 第一階段只做這個已登入會員中心入口，信件裡免登入的連結留到下一
+    // 階段——見 risuan-checkout/HANDOFF.md「學生自助改期/取消申請」。
     const BOOKING_STATUS_LABEL = { confirmed: "已確認", cancelled: "已取消" };
+
+    function bookingStatusText(b) {
+      if (b.status === "cancelled") return "已取消";
+      if (b.cancelRequestedAt) return "取消申請處理中";
+      return BOOKING_STATUS_LABEL[b.status] || b.status;
+    }
+
     async function loadBookings() {
       try {
         const data = await window.RisuanAccount.apiFetch("/api/account?action=bookings");
@@ -286,17 +295,167 @@
         bookingListEl.innerHTML = data.bookings
           .map(
             (b) => `
-          <li class="account-booking-item">
-            <span class="account-booking-item__date">${escapeHtml(b.date)} ${escapeHtml(b.time)}</span>
-            <span class="account-booking-item__courses">${escapeHtml((b.courses || []).join("、"))}</span>
-            <span class="account-booking-item__status">${escapeHtml(BOOKING_STATUS_LABEL[b.status] || b.status)}</span>
+          <li class="account-booking-item" data-booking-id="${escapeHtml(b.bookingId)}">
+            <button type="button" class="account-booking-item__summary">
+              <span class="account-booking-item__date">${escapeHtml(b.date)} ${escapeHtml(b.time)}</span>
+              <span class="account-booking-item__courses">${escapeHtml((b.courses || []).join("、"))}</span>
+              <span class="account-booking-item__status">${escapeHtml(bookingStatusText(b))}</span>
+            </button>
+            <div class="account-booking-item__detail" hidden></div>
           </li>`
           )
           .join("");
+        // 摘要資料（status／cancelRequestedAt／rescheduleCount）直接存
+        // 在對應的 <li> 元素上，點開展開明細時不用為了這幾個欄位再打
+        // 一次 API，見下面點擊事件處理裡的 renderBookingDetailStatic()。
+        bookingListEl.querySelectorAll(".account-booking-item").forEach((li, i) => {
+          li.__bookingSummary = data.bookings[i];
+        });
       } catch (err) {
         bookingListEl.innerHTML = `<li class="account-page__empty">課程紀錄載入失敗：${escapeHtml(err.message)}</li>`;
       }
     }
+
+    // 已取消、或已經送出取消申請的預約，不用再打改期選項那支 API——
+    // 結果一定是「不符合資格」，省一次網路往返，直接顯示固定文字。
+    function renderBookingDetailStatic(container, b) {
+      if (b.status === "cancelled") {
+        container.innerHTML = `<p class="account-booking-item__msg">這筆預約已經取消。</p>`;
+        return true;
+      }
+      if (b.cancelRequestedAt) {
+        container.innerHTML = `<p class="account-booking-item__msg">您已送出取消申請，我們會依網站公告的退費政策盡快為您處理，處理完成後會寄信通知您，請留意信箱。</p>`;
+        return true;
+      }
+      return false;
+    }
+
+    function renderBookingDetail(container, b, rescheduleData) {
+      const policyHtml = `<p class="account-booking-item__policy ${rescheduleData.eligible ? "" : "is-blocked"}">${escapeHtml(rescheduleData.reason)}</p>`;
+      const slotsHtml = rescheduleData.eligible
+        ? rescheduleData.options.length
+          ? `
+          <ul class="account-booking-item__slots">
+            ${rescheduleData.options
+              .map(
+                (o, i) => `
+              <li class="account-booking-item__slot-option">
+                <label style="display:flex;align-items:center;gap:var(--space-2);width:100%;cursor:pointer;">
+                  <input type="radio" name="reschedule-slot-${escapeHtml(b.bookingId)}" value="${escapeHtml(o.slotId)}" ${i === 0 ? "checked" : ""}>
+                  <span>${escapeHtml(o.date)} ${escapeHtml(o.time)}（剩 ${escapeHtml(o.remaining)} 位）</span>
+                </label>
+              </li>`
+              )
+              .join("")}
+          </ul>
+          <button type="button" class="work__cta account-booking-item__reschedule-confirm">確認改期</button>
+          `
+          : `<p class="account-booking-item__msg">目前沒有可以改期的未來時段，請私訊我們協助安排。</p>`
+        : "";
+      const cancelHtml = `
+        <div class="account-booking-item__actions">
+          <button type="button" class="work__cta account-booking-item__cancel-toggle">申請取消這筆預約</button>
+        </div>
+        <div class="account-booking-item__cancel-form" hidden>
+          <textarea class="account-booking-item__cancel-note" placeholder="取消原因（選填）"></textarea>
+          <div class="account-booking-item__actions">
+            <button type="button" class="work__cta work__cta--primary account-booking-item__cancel-submit">送出取消申請</button>
+          </div>
+        </div>
+      `;
+      container.innerHTML = `${policyHtml}${slotsHtml}${cancelHtml}<p class="account-booking-item__msg" hidden></p>`;
+    }
+
+    bookingListEl.addEventListener("click", async (e) => {
+      const summaryBtn = e.target.closest(".account-booking-item__summary");
+      const rescheduleConfirmBtn = e.target.closest(".account-booking-item__reschedule-confirm");
+      const cancelToggleBtn = e.target.closest(".account-booking-item__cancel-toggle");
+      const cancelSubmitBtn = e.target.closest(".account-booking-item__cancel-submit");
+
+      if (summaryBtn) {
+        const li = summaryBtn.closest(".account-booking-item");
+        const detail = li.querySelector(".account-booking-item__detail");
+        if (!detail.hidden) {
+          detail.hidden = true;
+          return;
+        }
+        detail.hidden = false;
+        if (detail.dataset.loaded) return;
+        // 列表摘要資料（status／cancelRequestedAt）已經在 loadBookings()
+        // 當下拿到了，先存在 li 的 dataset 上，不用為了這點資訊再多打
+        // 一次 API——見 loadBookings() 裡 render 之後緊接著的賦值。
+        const bookingId = li.dataset.bookingId;
+        const summary = li.__bookingSummary;
+        if (renderBookingDetailStatic(detail, summary)) {
+          detail.dataset.loaded = "1";
+          return;
+        }
+        detail.innerHTML = "載入中…";
+        try {
+          const data = await window.RisuanAccount.apiFetch(`/api/account?action=booking-reschedule-options&bookingId=${encodeURIComponent(bookingId)}`);
+          renderBookingDetail(detail, summary, data);
+          detail.dataset.loaded = "1";
+        } catch (err) {
+          detail.innerHTML = `<p class="account-booking-item__msg is-error">載入失敗：${escapeHtml(err.message)}</p>`;
+        }
+        return;
+      }
+
+      if (rescheduleConfirmBtn) {
+        const li = rescheduleConfirmBtn.closest(".account-booking-item");
+        const detail = li.querySelector(".account-booking-item__detail");
+        const msgEl = detail.querySelector(".account-booking-item__msg");
+        const picked = detail.querySelector("input[type=radio]:checked");
+        if (!picked) return;
+        rescheduleConfirmBtn.disabled = true;
+        rescheduleConfirmBtn.textContent = "處理中…";
+        try {
+          const data = await window.RisuanAccount.apiFetch("/api/account", {
+            method: "POST",
+            body: JSON.stringify({ action: "booking-reschedule", bookingId: li.dataset.bookingId, newSlotId: picked.value }),
+          });
+          // 改期成功，這張卡片的狀態整個變了（日期／時段／是否還能再
+          // 改），與其自己手動拼湊新畫面，重新整個列表最單純、最不會
+          // 漏掉哪個欄位沒同步更新。
+          await loadBookings();
+        } catch (err) {
+          msgEl.textContent = err.message;
+          msgEl.className = "account-booking-item__msg is-error";
+          msgEl.hidden = false;
+          rescheduleConfirmBtn.disabled = false;
+          rescheduleConfirmBtn.textContent = "確認改期";
+        }
+        return;
+      }
+
+      if (cancelToggleBtn) {
+        const form = cancelToggleBtn.closest(".account-booking-item__detail").querySelector(".account-booking-item__cancel-form");
+        form.hidden = !form.hidden;
+        return;
+      }
+
+      if (cancelSubmitBtn) {
+        const li = cancelSubmitBtn.closest(".account-booking-item");
+        const detail = li.querySelector(".account-booking-item__detail");
+        const note = detail.querySelector(".account-booking-item__cancel-note").value.trim();
+        const msgEl = detail.querySelector(".account-booking-item__msg");
+        cancelSubmitBtn.disabled = true;
+        cancelSubmitBtn.textContent = "送出中…";
+        try {
+          await window.RisuanAccount.apiFetch("/api/account", {
+            method: "POST",
+            body: JSON.stringify({ action: "booking-cancel-request", bookingId: li.dataset.bookingId, note }),
+          });
+          await loadBookings();
+        } catch (err) {
+          msgEl.textContent = err.message;
+          msgEl.className = "account-booking-item__msg is-error";
+          msgEl.hidden = false;
+          cancelSubmitBtn.disabled = false;
+          cancelSubmitBtn.textContent = "送出取消申請";
+        }
+      }
+    });
 
     // ---------- 我的點數 ----------
     const POINTS_TYPE_LABEL = { signup: "新會員禮", earn: "購物回饋", redeem: "結帳折抵" };
