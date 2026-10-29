@@ -1,0 +1,229 @@
+/* courses-page.css —— courses/index.html 專用樣式，2026-10-29 第二次改版
+   取代原本的「展覽索引」排版（.course-index，見 git 歷史／hub-blocks.css
+   拿掉的那段）。這次參考使用者提供的 miyuki-beads.co.jp「Types of Seed
+   Beads」頁面：大圖橫向輪播＋兩側箭頭，前後討論出完整的一頁：敘事開場
+   →賣點特色→課程輪播→怎麼上課／怎麼預約→學員作品／FAQ→材料指南。
+
+   這份是這一頁專屬的 class（不碰 .content-block／.product-row／
+   .course-index 這些其他頁面或已經刪掉的舊版在用的東西），寬度沿用
+   跟購物車兩欄排版、頁尾同一個 1100px 寬容器基準（不是全站標準
+   840px，理由見下面 .page-wide）。*/
+
+.page-wide {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 var(--content-pad);
+}
+
+/* ---------- 敘事式開場：品牌故事，慢慢把人帶進課程 ---------- */
+.course-story {
+  padding: var(--editorial-gap) 0 56px;
+  border-bottom: 1px solid color-mix(in srgb, var(--color-text-secondary) 25%, transparent);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: center;
+}
+.course-story__text p {
+  font-size: 14.5px;
+  line-height: 2;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+.course-story__text p + p { margin-top: 2px; }
+.course-story__media {
+  aspect-ratio: 5/4;
+  width: 100%;
+  overflow: hidden;
+}
+.course-story__media img { width: 100%; height: 100%; object-fit: cover; }
+
+@media (max-width: 768px) {
+  .course-story { grid-template-columns: 1fr; gap: 28px; padding: var(--editorial-gap) 0 40px; }
+  .course-story__media { order: -1; aspect-ratio: 4/3; }
+}
+
+/* ---------- 賣點特色：快速捕捉 ---------- */
+.course-features { padding: 8px 0 52px; border-bottom: 1px solid color-mix(in srgb, var(--color-text-secondary) 25%, transparent); }
+.course-features__title { font-size: clamp(20px, 2.2vw, 26px); font-weight: 800; margin: 0 0 28px; }
+.course-features__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: color-mix(in srgb, var(--color-text-secondary) 25%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-text-secondary) 25%, transparent);
+}
+.course-feature { background: var(--page-bg); padding: 24px; display: flex; flex-direction: column; gap: 10px; }
+.course-feature__icon { color: var(--color-brand); }
+.course-feature__title { font-size: 14px; font-weight: 700; margin: 0; }
+.course-feature__desc { font-size: 12px; line-height: 1.75; color: var(--color-text-secondary); margin: 0; }
+@media (max-width: 768px) {
+  .course-features__grid { grid-template-columns: 1fr; }
+}
+
+/* ---------- 課程展示：自動輪播的大圖橫列 ----------
+   自動輪播＋hover 暫停＋手動介入後永久停止，跟商品頁配色輪播
+   （js/hero-colorway-carousel.js）同一套互動邏輯，不是另外發明一套
+   新規則，見 js/courses-carousel.js。 */
+.course-showcase {
+  background: var(--color-surface-neutral);
+  margin: 0 calc(50% - 50vw);
+  padding: 56px 0 64px;
+}
+.course-showcase__head {
+  max-width: 1100px; margin: 0 auto; padding: 0 var(--content-pad) 36px;
+  display: grid; grid-template-columns: 1fr 1.3fr; gap: 40px; align-items: start;
+}
+.course-showcase__name { font-size: clamp(22px, 2.6vw, 30px); font-weight: 800; margin: 0; }
+.course-showcase__desc { font-size: 13.5px; line-height: 1.85; color: var(--color-text-secondary); margin: 0; }
+
+.course-carousel { position: relative; }
+.course-carousel__track {
+  display: flex; gap: 20px;
+  padding: 0 max(var(--content-pad), calc(50% - 550px + var(--content-pad)));
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+.course-carousel__track::-webkit-scrollbar { display: none; }
+.course-carousel__tile {
+  position: relative; flex: 0 0 auto; width: 260px;
+  text-decoration: none; color: inherit;
+  opacity: 0.4; transition: opacity .4s ease, transform .4s ease;
+  transform: scale(0.96);
+}
+.course-carousel__tile.is-active { opacity: 1; transform: scale(1); }
+.course-carousel__media { position: relative; aspect-ratio: 4/5; width: 100%; overflow: hidden; background: var(--page-bg); }
+.course-carousel__media img { width: 100%; height: 100%; object-fit: cover; }
+.course-carousel__tag {
+  position: absolute; top: 12px; left: 12px; z-index: 1;
+  font-size: 9.5px; letter-spacing: 0.08em; text-transform: uppercase;
+  color: #fff; background: rgba(0,0,0,.45); padding: 4px 8px;
+}
+.course-carousel__label { margin-top: 14px; font-size: 14px; font-weight: 700; }
+.course-carousel__en { margin-top: 2px; font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-text-secondary); }
+.course-carousel__meta { margin-top: 6px; font-size: 11px; color: var(--color-brand); font-weight: 700; }
+
+.course-carousel__nav {
+  position: absolute; top: 40%; transform: translateY(-50%);
+  width: 44px; height: 44px; border-radius: 50%;
+  border: none; background: #fff;
+  box-shadow: 0 2px 10px rgba(0,0,0,.18);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; z-index: 2; color: var(--color-text-primary);
+}
+.course-carousel__nav--prev { left: 8px; }
+.course-carousel__nav--next { right: 8px; }
+.course-carousel__nav:active { opacity: .7; }
+
+.course-carousel__dots { display: flex; justify-content: center; gap: 7px; margin-top: 28px; }
+.course-carousel__dot { width: 6px; height: 6px; border-radius: 50%; background: color-mix(in srgb, var(--color-text-secondary) 30%, transparent); border: none; padding: 0; cursor: pointer; }
+.course-carousel__dot.is-active { background: var(--color-text-primary); width: 18px; border-radius: 3px; transition: width .25s ease; }
+
+@media (max-width: 768px) {
+  .course-showcase__head { grid-template-columns: 1fr; gap: 16px; padding-bottom: 28px; }
+  .course-carousel__tile { width: 72vw; max-width: 300px; }
+  .course-carousel__track { scroll-snap-type: x mandatory; }
+  .course-carousel__tile { scroll-snap-align: center; }
+  .course-carousel__nav { width: 38px; height: 38px; }
+}
+
+/* ---------- 怎麼上課：步驟 ---------- */
+.course-steps { padding: 64px 0 0; }
+.course-steps__title { font-size: clamp(20px, 2.2vw, 26px); font-weight: 800; margin: 0 0 32px; }
+.course-steps__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
+.course-step__num { font-family: var(--price-font-family); font-size: 13px; color: var(--color-brand); font-weight: 700; margin: 0 0 10px; }
+.course-step__title { font-size: 15.5px; font-weight: 700; margin: 0 0 8px; }
+.course-step__desc { font-size: 13px; line-height: 1.8; color: var(--color-text-secondary); margin: 0; }
+@media (max-width: 768px) {
+  .course-steps__grid { grid-template-columns: 1fr; gap: 26px; }
+}
+
+/* ---------- 補充說明框（圖片評估／大型客製）---------- */
+.course-note {
+  margin-top: 28px; padding: 24px 26px;
+  border: 1px solid color-mix(in srgb, var(--color-text-secondary) 25%, transparent);
+  background: var(--color-surface-neutral);
+  display: flex; gap: 18px; align-items: flex-start;
+}
+.course-note__icon { flex: none; color: var(--color-brand); margin-top: 2px; }
+.course-note__title { font-size: 13.5px; font-weight: 700; margin: 0 0 6px; }
+.course-note__desc { font-size: 12.5px; line-height: 1.8; color: var(--color-text-secondary); margin: 0; }
+@media (max-width: 768px) {
+  .course-note { flex-direction: column; }
+}
+
+/* ---------- IG 私訊 CTA ---------- */
+.course-ig-cta { margin-top: 28px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.course-ig-cta__btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 11px 20px; border: 1px solid var(--color-text-primary);
+  background: none; color: var(--color-text-primary);
+  font-size: 13px; font-weight: 700; cursor: pointer; text-decoration: none;
+}
+.course-ig-cta__btn:active { opacity: .6; }
+.course-ig-cta__hint { font-size: 11.5px; color: var(--color-text-secondary); }
+.course-ig-cta__copied { color: var(--color-brand); font-weight: 700; }
+
+/* ---------- 學員作品：信任感佐證 ---------- */
+.course-proof { margin-top: 56px; }
+.course-proof__head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; }
+.course-proof__title { font-size: 15px; font-weight: 800; margin: 0; }
+.course-proof__all { font-size: 12px; font-weight: 700; color: var(--color-text-secondary); text-decoration: none; white-space: nowrap; }
+.course-proof__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.course-proof__tile { aspect-ratio: 1/1; overflow: hidden; }
+.course-proof__tile img { width: 100%; height: 100%; object-fit: cover; }
+@media (max-width: 768px) {
+  .course-proof__grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ---------- FAQ ---------- */
+.course-faq { margin-top: 56px; }
+.course-faq__title { font-size: clamp(20px, 2.2vw, 26px); font-weight: 800; margin: 0 0 20px; }
+.course-faq-item { border-top: 1px solid color-mix(in srgb, var(--color-text-secondary) 25%, transparent); }
+.course-faq-item:last-child { border-bottom: 1px solid color-mix(in srgb, var(--color-text-secondary) 25%, transparent); }
+.course-faq-item summary {
+  list-style: none; cursor: pointer;
+  padding: 18px 0; display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  font-size: 14px; font-weight: 700;
+}
+.course-faq-item summary::-webkit-details-marker { display: none; }
+.course-faq-item summary::after {
+  content: "+"; font-size: 20px; font-weight: 400; color: var(--color-text-secondary); flex: none;
+}
+.course-faq-item[open] summary::after { content: "\2212"; }
+.course-faq-item__body { padding: 0 0 20px; font-size: 13px; line-height: 1.85; color: var(--color-text-secondary); max-width: 68ch; }
+
+/* ---------- 預約 CTA 橫幅 ---------- */
+.course-cta-band {
+  margin-top: 52px; padding: 40px 32px;
+  background: var(--color-text-primary); color: #fff;
+  display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;
+}
+.course-cta-band__title { font-size: clamp(18px, 2vw, 22px); font-weight: 800; margin: 0 0 4px; }
+.course-cta-band__desc { font-size: 12.5px; color: rgba(255,255,255,.7); margin: 0; }
+.course-cta-band__btn {
+  flex: none; display: inline-flex; align-items: center; gap: 8px;
+  padding: 13px 26px; background: #fff; color: var(--color-text-primary);
+  text-decoration: none; font-size: 13.5px; font-weight: 700;
+}
+
+/* ---------- 材料指南：底部延伸閱讀 ---------- */
+.course-guides { padding: 60px 0 0; }
+.course-guides__head {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+  margin-bottom: 28px; padding-bottom: 14px; border-bottom: 1px solid color-mix(in srgb, var(--color-text-secondary) 25%, transparent);
+}
+.course-guides__title { font-size: clamp(20px, 2.2vw, 26px); font-weight: 800; margin: 0; }
+.course-guides__all { font-size: 12.5px; font-weight: 700; color: var(--color-text-secondary); text-decoration: none; white-space: nowrap; }
+.course-guides__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+.course-guide-card { display: block; text-decoration: none; color: inherit; }
+.course-guide-card__media { aspect-ratio: 4/3; width: 100%; overflow: hidden; margin-bottom: 14px; }
+.course-guide-card__media img { width: 100%; height: 100%; object-fit: cover; }
+.course-guide-card__eyebrow { font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-brand); font-weight: 700; margin: 0 0 6px; }
+.course-guide-card__title { font-size: 14.5px; font-weight: 700; line-height: 1.5; margin: 0 0 8px; }
+.course-guide-card__desc { font-size: 12px; line-height: 1.7; color: var(--color-text-secondary); margin: 0; }
+@media (max-width: 768px) {
+  .course-guides__grid { grid-template-columns: 1fr; gap: 32px; }
+}

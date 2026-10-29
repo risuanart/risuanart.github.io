@@ -28,6 +28,7 @@
   <link rel="stylesheet" href="../css/site-menu.css">
   <link rel="stylesheet" href="../css/site-footer.css">
   <link rel="stylesheet" href="../css/hub-blocks.css">
+  <link rel="stylesheet" href="../css/courses-page.css">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
   <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16">
@@ -139,110 +140,254 @@
       <p class="intro">從肌理砂畫到油畫，不論有沒有基礎，老師都會依你的程度調整教法。選好喜歡的媒材，現場就能完成一幅專屬作品。</p>
     </header>
 
-    <!-- 2026-10-28：原本是跟首頁／材料包母頁共用的 .content-block／
-         .product-row 單一格狀列表，8 堂性質差很多的課全部長得一樣、沒
-         有分組。改成展覽索引式排版（見 css/hub-blocks.css .course-index
-         開頭那組新 class 的說明），分成「現場體驗課程」「客製委託服務」
-         兩組，各組第一堂課放大當精選。這組 class 是這一頁專屬的，不會
-         影響首頁／材料包母頁繼續使用原本的 .content-block／.product-row。 -->
-    <div class="course-index">
+    <!-- 2026-10-29 第二次改版：取代原本的「展覽索引」排版（純靜態格狀
+         列表），參考使用者提供的 miyuki-beads.co.jp「Types of Seed
+         Beads」頁面做成自動輪播展示，並補上完整的敘事開場、賣點特色、
+         怎麼上課／怎麼預約、學員作品、FAQ、CTA。樣式見
+         css/courses-page.css（這一頁專屬，不影響其他頁面），互動腳本見
+         js/courses-carousel.js。 -->
 
-      <section class="course-index__group">
-        <div class="course-index__group-head">
-          <div>
-            <span class="course-index__num">01 / 02</span>
-            <h2 class="course-index__name">現場體驗課程</h2>
-          </div>
-          <p class="course-index__hint">當天到畫室，跟著老師一步步完成一幅作品</p>
-        </div>
-        <div class="course-index__grid">
-          <a class="course-entry course-entry--feature" href="sand-texture/">
-            <div class="course-entry__media"><img src="../assets/images/courses/sand-texture/hero-poster.jpg" alt="石英砂肌理畫" loading="lazy"></div>
-            <div class="course-entry__text">
-              <span class="course-entry__index">01 — Sand Texture</span>
-              <p class="course-entry__title">石英砂肌理畫</p>
-              <p class="course-entry__desc">石英砂混合壓克力顏料，用刮刀堆疊出立體質感，適合色塊乾淨的圖案，也可以自己帶圖客製。</p>
-            </div>
-          </a>
-          <a class="course-entry" href="palette-knife-oil/">
-            <div class="course-entry__media"><img src="../assets/images/courses/palette-knife-oil/hero-poster.jpg" alt="刮刀油畫" loading="lazy"></div>
-            <div class="course-entry__text">
-              <span class="course-entry__index">02 — Palette Knife</span>
-              <p class="course-entry__title">刮刀油畫</p>
-              <p class="course-entry__desc">用刮刀堆疊厚油畫顏料，做出立體筆觸與細膩的奶油感質感，山景、花卉都很適合。</p>
-            </div>
-          </a>
-          <a class="course-entry" href="fluid-art/">
-            <div class="course-entry__media"><img src="../assets/images/courses/fluid-art/hero-poster.jpg" alt="流動畫" loading="lazy"></div>
-            <div class="course-entry__text">
-              <span class="course-entry__index">03 — Fluid Art</span>
-              <p class="course-entry__title">流動畫</p>
-              <p class="course-entry__desc">壓克力顏料倒膠技法，沒有固定畫法限制，老師示範配色與調色後自由創作。</p>
-              <span class="course-entry__meta">1.5 小時完成一幅作品</span>
-            </div>
-          </a>
-          <a class="course-entry" href="beading/">
-            <div class="course-entry__media"><img src="../assets/images/courses/beading/material-01.jpg" alt="手作串珠項鍊" loading="lazy"></div>
-            <div class="course-entry__text">
-              <span class="course-entry__index">04 — Beading</span>
-              <p class="course-entry__title">手作串珠項鍊</p>
-              <p class="course-entry__desc">日本玻璃珠、捷克玻璃珠、水晶、珍珠等多種珠款自由混搭，串出獨一無二的項鍊。</p>
-            </div>
-          </a>
-        </div>
-      </section>
+    <div class="page-wide course-story">
+      <div class="course-story__text">
+        <p>每一種媒材都有不同的特性，</p>
+        <p>一般油畫可以刻畫細節，</p>
+        <p>石英砂堆疊出粗糙立體的顆粒感，</p>
+        <p>油畫刮刀留下厚重的筆觸與奶油感質地，</p>
+        <p>流動畫則交給顏料自己流動、交融，沒有兩幅會長得一樣。</p>
+        <p>不需要任何基礎，</p>
+        <p>老師會依照同學狀況調整教法，</p>
+        <p>協助你完成獨一無二的作品。</p>
+      </div>
+      <div class="course-story__media">
+        <img src="../assets/images/courses/beading/process-01.jpg" alt="老師協助同學進行課程的過程" loading="lazy">
+      </div>
+    </div>
 
-      <section class="course-index__group">
-        <div class="course-index__group-head">
-          <div>
-            <span class="course-index__num">02 / 02</span>
-            <h2 class="course-index__name">客製委託服務</h2>
-          </div>
-          <p class="course-index__hint">帶你的照片或需求來，由老師評估完成一幅專屬作品</p>
+    <section class="page-wide course-features">
+      <h2 class="course-features__title">為什麼選日宣</h2>
+      <div class="course-features__grid">
+        <div class="course-feature">
+          <svg class="course-feature__icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="14" rx="1.5"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 16l-5.5-5.5a1 1 0 0 0-1.4 0L6 19"/></svg>
+          <p class="course-feature__title">自己選圖，獨一無二</p>
+          <p class="course-feature__desc">不提供固定範本，每一件作品都是你自己挑的圖、自己的故事，不會跟別人撞圖。</p>
         </div>
-        <div class="course-index__grid">
-          <a class="course-entry course-entry--feature" href="custom-photo-oil/">
-            <div class="course-entry__media"><img src="../assets/images/courses/custom-photo-oil/hero-poster.jpg" alt="自己帶圖創作" loading="lazy"></div>
-            <div class="course-entry__text">
-              <span class="course-entry__index">05 — Custom Portrait</span>
-              <p class="course-entry__title">自己帶圖創作</p>
-              <p class="course-entry__desc">帶自己想畫的照片來畫室，用油畫顏料與筆刷技法完成專屬作品，人像、風景、動漫角色等主題都能挑戰。</p>
-            </div>
+        <div class="course-feature">
+          <svg class="course-feature__icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.5 8.5 0 0 1-12.8 7.3L3 20l1.2-5.2A8.5 8.5 0 1 1 21 11.5z"/><path d="M8 11.5l2.3 2.3L16 8.3"/></svg>
+          <p class="course-feature__title">課前一對一圖片評估</p>
+          <p class="course-feature__desc">老師親自評估圖片跟媒材搭不搭，不適合也有辦法調整，不會讓你帶著一張畫不出來的圖現場傻眼。</p>
+        </div>
+        <div class="course-feature">
+          <svg class="course-feature__icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
+          <p class="course-feature__title">一堂課完成作品</p>
+          <p class="course-feature__desc">不用分好幾堂課才看得到成品，當天就能把屬於自己的作品帶回家。</p>
+        </div>
+        <div class="course-feature">
+          <svg class="course-feature__icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="8" r="3.2"/><circle cx="17" cy="9" r="2.6"/><path d="M3 20c0-3 2.5-5.5 5.5-5.5S14 17 14 20"/><path d="M14.5 14.8c2.6.3 4.5 2.5 4.5 5.2"/></svg>
+          <p class="course-feature__title">揪團彈性組課</p>
+          <p class="course-feature__desc">同一時段上課的同學可以各自選不同媒材或圖案，不用整團配合同一張圖。</p>
+        </div>
+        <div class="course-feature">
+          <svg class="course-feature__icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          <p class="course-feature__title">大型／特殊客製規劃</p>
+          <p class="course-feature__desc">大幅畫布、特殊材質都能協助規劃訂製、估算完成時間、建議材料與採購，細節先幫你準備好。</p>
+        </div>
+        <div class="course-feature">
+          <svg class="course-feature__icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5s-7.5-4.5-9.5-9A4.8 4.8 0 0 1 12 6.2 4.8 4.8 0 0 1 21.5 11.5c-2 4.5-9.5 9-9.5 9z"/></svg>
+          <p class="course-feature__title">新手友善，不需基礎</p>
+          <p class="course-feature__desc">老師會依照你的程度調整教法，從挑圖到上色全程陪著你完成。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="course-showcase">
+      <div class="course-showcase__head">
+        <h2 class="course-showcase__name">探索我們的課程</h2>
+        <p class="course-showcase__desc">每一堂課，我們都鼓勵你帶著自己喜歡的圖或想好的風格來，不是跟著固定範本畫出一樣的作品。預約後、上課前先讓我們了解你想畫的內容，評估適合的媒材與工具；一堂課的時間裡，由老師全程協助，陪你完成真正屬於自己的作品。</p>
+      </div>
+
+      <div class="course-carousel">
+        <button class="course-carousel__nav course-carousel__nav--prev" data-nav="-1" aria-label="上一堂課">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button class="course-carousel__nav course-carousel__nav--next" data-nav="1" aria-label="下一堂課">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+        <div class="course-carousel__track">
+          <a class="course-carousel__tile" href="sand-texture/">
+            <div class="course-carousel__media"><img src="../assets/images/courses/sand-texture/hero-poster.jpg" alt="石英砂肌理畫" loading="lazy"><span class="course-carousel__tag">單堂完成</span></div>
+            <p class="course-carousel__en">01 — Sand Texture</p>
+            <p class="course-carousel__label">石英砂肌理畫</p>
           </a>
-          <a class="course-entry" href="pet-portrait/">
-            <div class="course-entry__media"><img src="../assets/images/courses/pet-portrait/hero-poster.jpg" alt="寵物油畫" loading="lazy"></div>
-            <div class="course-entry__text">
-              <span class="course-entry__index">06 — Pet Portrait</span>
-              <p class="course-entry__title">寵物油畫</p>
-              <p class="course-entry__desc">帶家裡毛孩的照片來畫室，用油畫顏料畫出牠的肖像。</p>
-              <span class="course-entry__meta">單隻通常一堂課完成</span>
-            </div>
+          <a class="course-carousel__tile" href="palette-knife-oil/">
+            <div class="course-carousel__media"><img src="../assets/images/courses/palette-knife-oil/hero-poster.jpg" alt="刮刀油畫" loading="lazy"><span class="course-carousel__tag">單堂完成</span></div>
+            <p class="course-carousel__en">02 — Palette Knife</p>
+            <p class="course-carousel__label">刮刀油畫</p>
           </a>
-          <a class="course-entry" href="large-canvas/">
-            <div class="course-entry__media">
+          <a class="course-carousel__tile" href="fluid-art/">
+            <div class="course-carousel__media"><img src="../assets/images/courses/fluid-art/hero-poster.jpg" alt="流動畫" loading="lazy"><span class="course-carousel__tag">單堂完成</span></div>
+            <p class="course-carousel__en">03 — Fluid Art</p>
+            <p class="course-carousel__label">流動畫</p>
+            <p class="course-carousel__meta">約 1.5 小時完成</p>
+          </a>
+          <a class="course-carousel__tile" href="beading/">
+            <div class="course-carousel__media"><img src="../assets/images/courses/beading/material-01.jpg" alt="手作串珠項鍊" loading="lazy"><span class="course-carousel__tag">單堂完成</span></div>
+            <p class="course-carousel__en">04 — Beading</p>
+            <p class="course-carousel__label">手作串珠項鍊</p>
+          </a>
+          <a class="course-carousel__tile" href="custom-photo-oil/">
+            <div class="course-carousel__media"><img src="../assets/images/courses/custom-photo-oil/hero-poster.jpg" alt="自己帶圖創作" loading="lazy"><span class="course-carousel__tag">單堂完成</span></div>
+            <p class="course-carousel__en">05 — Custom Portrait</p>
+            <p class="course-carousel__label">自己帶圖創作</p>
+          </a>
+          <a class="course-carousel__tile" href="pet-portrait/">
+            <div class="course-carousel__media"><img src="../assets/images/courses/pet-portrait/hero-poster.jpg" alt="寵物油畫" loading="lazy"><span class="course-carousel__tag">單堂完成</span></div>
+            <p class="course-carousel__en">06 — Pet Portrait</p>
+            <p class="course-carousel__label">寵物油畫</p>
+            <p class="course-carousel__meta">單隻約一堂課完成</p>
+          </a>
+          <a class="course-carousel__tile" href="large-canvas/">
+            <div class="course-carousel__media">
               <div class="hub-placeholder" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1.5"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 16l-5.5-5.5a1 1 0 0 0-1.4 0L6 19"/></svg>
                 <span>首圖待補：訂製完成的大幅畫布作品</span>
               </div>
+              <span class="course-carousel__tag">客製規劃</span>
             </div>
-            <div class="course-entry__text">
-              <span class="course-entry__index">07 — Large Canvas</span>
-              <p class="course-entry__title">大幅畫布訂製</p>
-              <p class="course-entry__desc">提供客製尺寸的大幅畫布，協助你完成一幅適合喬遷送禮或居家擺飾的作品。</p>
-            </div>
+            <p class="course-carousel__en">07 — Large Canvas</p>
+            <p class="course-carousel__label">大幅畫布訂製</p>
+            <p class="course-carousel__meta">依需求評估報價</p>
           </a>
-          <a class="course-entry" href="custom-material/">
-            <div class="course-entry__media"><img src="../assets/images/courses/custom-material/hero-poster.jpg" alt="特殊材質客製" loading="lazy"></div>
-            <div class="course-entry__text">
-              <span class="course-entry__index">08 — Custom Material</span>
-              <p class="course-entry__title">特殊材質客製</p>
-              <p class="course-entry__desc">雕塑土搭配環氧樹脂、異材質畫布、既有材質客製圖案與尺寸，依照你的想法評估合適的材質與做法。</p>
-            </div>
+          <a class="course-carousel__tile" href="custom-material/">
+            <div class="course-carousel__media"><img src="../assets/images/courses/custom-material/hero-poster.jpg" alt="特殊材質客製" loading="lazy"><span class="course-carousel__tag">客製規劃</span></div>
+            <p class="course-carousel__en">08 — Custom Material</p>
+            <p class="course-carousel__label">特殊材質客製</p>
+            <p class="course-carousel__meta">依需求評估報價</p>
           </a>
+        </div>
+        <div class="course-carousel__dots"></div>
+      </div>
+    </section>
+
+    <section class="page-wide course-steps">
+      <h2 class="course-steps__title">怎麼上課</h2>
+      <div class="course-steps__grid">
+        <div>
+          <p class="course-step__num">01</p>
+          <p class="course-step__title">線上預約（預約制）</p>
+          <p class="course-step__desc">日宣繪畫室採<strong>預約制</strong>，請先完成線上預約再到現場，沒有預約無法直接上課。選好日期、時段、人數與想上的課程，線上刷卡就完成訂位。</p>
+        </div>
+        <div>
+          <p class="course-step__num">02</p>
+          <p class="course-step__title">準備喜歡的圖，或想好的風格</p>
+          <p class="course-step__desc">自己拍的照片、想做的風格都歡迎，不是跟著固定範本畫出一樣的作品——沒有想法也沒關係，直接跟我們聊聊，討論的過程也是認識自己喜好的過程。</p>
+        </div>
+        <div>
+          <p class="course-step__num">03</p>
+          <p class="course-step__title">上課前讓我們了解（建議一週前）</p>
+          <p class="course-step__desc">預約完成後，透過 Instagram 私訊傳圖給我們評估，我們會建議適合的媒材與工具，也提早準備顏料與材料。<strong>請務必提前討論，不要留到上課當天</strong>——現場討論會壓縮實際畫畫的時間。</p>
+        </div>
+        <div>
+          <p class="course-step__num">04</p>
+          <p class="course-step__title">到現場，我們全程協助</p>
+          <p class="course-step__desc">老師在旁陪著每一步，一堂課的時間裡完成真正屬於你自己的作品。</p>
+        </div>
+      </div>
+
+      <div class="course-note">
+        <svg class="course-note__icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="14" rx="1.5"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 16l-5.5-5.5a1 1 0 0 0-1.4 0L6 19"/></svg>
+        <div>
+          <p class="course-note__title">圖片不確定適不適合？</p>
+          <p class="course-note__desc">不是每張圖都能直接照畫——如果圖片跟你選的媒材不完全搭，我們會協助評估，尋找輔助圖或混合媒材的方式調整課程進程，討論後再決定最合適的做法。揪團的話建議先幫忙收集大家的圖一起討論，太複雜的選圖問題也歡迎朋友各自私訊討論；<strong>同一時段上課的同學也可以各自選擇不同媒材或圖案，不用整團配合同一張圖</strong>。如果是要送朋友的驚喜（對方還不知道要畫畫），建議預約時先告訴我們，並提早 10 分鐘到工作室現場討論圖片，實際安排會依預約完成後我們告知的方式為主。</p>
+        </div>
+      </div>
+
+      <div class="course-note">
+        <svg class="course-note__icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        <div>
+          <p class="course-note__title">想做更大尺寸的畫布，或特殊材質？</p>
+          <p class="course-note__desc">大幅畫布訂製、特殊材質客製都提供課前評估——告訴我們尺寸、想法與參考圖，我們協助規劃合適的畫布訂製、估算完成時間、建議材料與採購，細節都先幫你準備好，人到現場就能完成作品。<strong>大幅畫布訂製請提前一週預定</strong>。</p>
+        </div>
+      </div>
+
+      <div class="course-ig-cta">
+        <button class="course-ig-cta__btn" type="button">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg>
+          <span class="course-ig-cta__label">複製訊息，私訊討論圖片</span>
+        </button>
+        <span class="course-ig-cta__hint">會複製一句開場白，直接貼到 Instagram 私訊給我們，附上你的圖就可以開始討論</span>
+      </div>
+
+      <section class="course-proof">
+        <div class="course-proof__head">
+          <h3 class="course-proof__title">學員作品精選</h3>
+          <a class="course-proof__all" href="../gallery/">查看更多學員作品 →</a>
+        </div>
+        <div class="course-proof__grid">
+          <div class="course-proof__tile"><img src="../assets/images/gallery/sand-texture/01.jpg" alt="學員完成的石英砂肌理畫作品" loading="lazy"></div>
+          <div class="course-proof__tile"><img src="../assets/images/gallery/palette-knife-oil/01.jpg" alt="學員完成的刮刀油畫作品" loading="lazy"></div>
+          <div class="course-proof__tile"><img src="../assets/images/gallery/pet-portrait/01.jpg" alt="學員完成的寵物油畫作品" loading="lazy"></div>
+          <div class="course-proof__tile"><img src="../assets/images/gallery/beading/01.jpg" alt="學員完成的手作串珠作品" loading="lazy"></div>
         </div>
       </section>
 
-    </div>
+      <section class="course-faq">
+        <h3 class="course-faq__title">常見問題</h3>
+        <details class="course-faq-item" open>
+          <summary>沒畫過畫，真的可以嗎？</summary>
+          <p class="course-faq-item__body">可以。老師會協助你挑選適合新手、容錯率高、畫面呈現效果最好的參考圖，所以即使沒有基礎，也能在一堂課的時間裡，完成一幅細緻度很高的作品。</p>
+        </details>
+        <details class="course-faq-item">
+          <summary>一定要自己準備圖嗎？</summary>
+          <p class="course-faq-item__body">是的，我們不提供現成範本——自己拍的照片、想做的風格都可以，沒有想法也歡迎直接傳訊息跟我們聊聊，我們會協助評估合適的呈現方式。</p>
+        </details>
+        <details class="course-faq-item">
+          <summary>什麼時候要開始討論圖片？</summary>
+          <p class="course-faq-item__body">建議至少提前一週透過 Instagram 私訊給我們，才能提早準備材料與顏料；當天現場才討論會壓縮實際畫畫的時間，請務必提前。</p>
+        </details>
+        <details class="course-faq-item">
+          <summary>如果我的圖不適合選的媒材怎麼辦？</summary>
+          <p class="course-faq-item__body">不是每張圖都能直接照畫，如果不完全適合，我們會協助評估、尋找輔助圖或混合媒材的方式調整課程進程，討論後再決定最合適的做法。</p>
+        </details>
+      </section>
+
+      <div class="course-cta-band">
+        <div>
+          <p class="course-cta-band__title">準備好動手了嗎？</p>
+          <p class="course-cta-band__desc">挑一個喜歡的媒材，或直接跟我們聊聊你想畫的圖</p>
+        </div>
+        <a class="course-cta-band__btn" href="../booking/">
+          立即預約課程
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </section>
+
+    <section class="page-wide course-guides">
+      <div class="course-guides__head">
+        <h2 class="course-guides__title">材料指南</h2>
+        <a class="course-guides__all" href="../guides/">查看全部材料指南 →</a>
+      </div>
+      <div class="course-guides__grid">
+        <a class="course-guide-card" href="../guides/star-sky/">
+          <div class="course-guide-card__media"><img src="../assets/images/gallery/star-sky/07.jpg" alt="星空油畫的銀河特寫" loading="lazy"></div>
+          <p class="course-guide-card__eyebrow">材料深入介紹</p>
+          <p class="course-guide-card__title">星空油畫教學：從黑夜打底到星塵堆疊，一幅只屬於自己的星空</p>
+          <p class="course-guide-card__desc">前面大半過程都看不出在畫什麼，直到灑上星星的瞬間整張畫才被點亮。</p>
+        </a>
+        <a class="course-guide-card" href="../guides/sand-texture-sea/">
+          <div class="course-guide-card__media"><img src="../assets/images/gallery/sand-texture/14.jpg" alt="完成的海景肌理畫" loading="lazy"></div>
+          <p class="course-guide-card__eyebrow">材料深入介紹</p>
+          <p class="course-guide-card__title">石英砂肌理畫材料指南：怎麼用沙與顏料畫出海浪的立體質感</p>
+          <p class="course-guide-card__desc">沙與顏料的比例怎麼調配、常用工具怎麼選，一次看懂。</p>
+        </a>
+        <a class="course-guide-card" href="../guides/material-compare-mountain/">
+          <div class="course-guide-card__media"><img src="../assets/images/guides/material-compare-mountain/sand-texture/01.jpg" alt="石英砂肌理畫的雪山滑雪場景" loading="lazy"></div>
+          <p class="course-guide-card__eyebrow">材料比較</p>
+          <p class="course-guide-card__title">同一座山，三種材料的呈現</p>
+          <p class="course-guide-card__desc">油畫＋筆刷、油畫＋刮刀、壓克力＋石英砂＋刮刀，質感差異一次看懂。</p>
+        </a>
+      </div>
+    </section>
 
     <footer class="preview-footer">
       <div class="preview-footer__inner">
@@ -278,6 +423,7 @@
   <script src="../js/account-auth.js"></script>
   <script src="../js/account-widget.js"></script>
   <script src="../js/site-menu.js"></script>
+  <script src="../js/courses-carousel.js"></script>
   <script src="/js/promo-bar.js"></script>
 </body>
 </html>
