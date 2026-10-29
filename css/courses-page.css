@@ -169,7 +169,41 @@
 .course-step__title { font-size: 15.5px; font-weight: 700; margin: 0 0 8px; }
 .course-step__desc { font-size: 13px; line-height: 1.8; color: var(--color-text-secondary); margin: 0; }
 @media (max-width: 768px) {
-  .course-steps__grid { grid-template-columns: 1fr; gap: 26px; }
+  /* 使用者反映手機版「怎麼上課」只是數字＋標題＋說明往下疊，看不出
+     「這是一串有順序的步驟」。改成直向時間軸：編號放進圓圈，圓圈之間
+     用一條直線連起來，標題/說明放在圓圈右邊——每個步驟 wrapper（原本
+     num/title/desc 三個獨立子層）改用 grid 排版，道理跟上面
+     .course-feature 手機版那次修正一樣：num 橫跨 title/desc 兩列，
+     不用改 HTML 結構。 */
+  .course-steps__grid { grid-template-columns: 1fr; gap: 0; }
+  .course-steps__grid > div {
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    column-gap: 16px;
+    position: relative;
+    padding-bottom: 30px;
+  }
+  .course-steps__grid > div:not(:last-child)::before {
+    content: "";
+    position: absolute;
+    left: 17.5px;
+    top: 36px;
+    bottom: 2px;
+    width: 1px;
+    background: color-mix(in srgb, var(--color-text-secondary) 25%, transparent);
+  }
+  .course-step__num {
+    grid-column: 1; grid-row: 1 / 3;
+    width: 36px; height: 36px;
+    border: 1.5px solid var(--color-brand);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; margin: 0;
+    background: var(--page-bg);
+    position: relative; z-index: 1;
+  }
+  .course-step__title { grid-column: 2; grid-row: 1; margin: 2px 0 6px; }
+  .course-step__desc { grid-column: 2; grid-row: 2; }
 }
 
 /* ---------- 補充說明框（圖片評估／大型客製）---------- */
