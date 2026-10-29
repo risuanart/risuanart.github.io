@@ -30,7 +30,9 @@
   const payFormBookingId = document.getElementById("pay-form-booking-id");
   const checkoutErrorEl = form.querySelector(".checkout-error");
   const submitBtn = document.getElementById("booking-submit");
-  const totalEl = document.getElementById("booking-total");
+  const totalPriceEl = document.getElementById("booking-total-price");
+  const totalDepositEl = document.getElementById("booking-total-deposit");
+  const totalBalanceEl = document.getElementById("booking-total-balance");
   const agreeNoticeCheckbox = document.getElementById("booking-agree-notice");
 
   // ---------- 聯絡帳號：IG／FB 平台切換 ----------
@@ -86,6 +88,9 @@
     { label: "抽象畫", price: 1800 },
   ];
   const COURSE_PRICE = Object.fromEntries(COURSE_CATALOG.map((c) => [c.label, c.price]));
+  // 2026-10-29：線上只刷這筆固定預約金，要跟後端
+  // risuan-checkout/lib/course-catalog.js 的 DEPOSIT_AMOUNT 保持一致。
+  const DEPOSIT_AMOUNT = 500;
 
   function formatMoney(n) {
     return `$${n.toLocaleString()}`;
@@ -196,7 +201,10 @@
 
   function updateTotal() {
     const sum = attendeeSelections.reduce((total, course) => total + (COURSE_PRICE[course] || 0), 0);
-    totalEl.textContent = `應付 ${formatMoney(sum)}`;
+    const deposit = Math.min(DEPOSIT_AMOUNT, sum);
+    totalPriceEl.textContent = formatMoney(sum);
+    totalDepositEl.textContent = formatMoney(deposit);
+    totalBalanceEl.textContent = formatMoney(sum - deposit);
   }
 
   qtyInput.addEventListener("input", () => {
@@ -575,9 +583,14 @@
       if (data.status === "confirmed") {
         resultChecking.hidden = true;
         resultConfirmed.hidden = false;
+        // 2026-10-29：線上只收 $500 預約金，不是課程全額，付款完成頁要
+        // 清楚講出尾款金額跟現場付款方式，不能只顯示「已收款」讓客人
+        // 以為全部付清了（data.balanceDue 由後端 api/course-booking.js
+        // action=status 計算，見那邊的說明）。
+        const balanceText = data.balanceDue > 0 ? `，尾款 ${formatMoney(data.balanceDue)} 請於上課當天以現金或轉帳支付` : "";
         document.getElementById("result-confirmed-text").textContent = `${data.date} ${data.time} - ${formatSlotEndTime(data.time)}，${describeAttendeeCourses(
           data.courses
-        )}，已收款 ${formatMoney(data.amountReceived)}。期待與您見面！`;
+        )}，已付預約金 ${formatMoney(data.amountReceived)}${balanceText}。期待與您見面！`;
         renderDmCard(data);
         return;
       }

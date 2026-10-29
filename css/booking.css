@@ -406,13 +406,37 @@
   max-width: 6ch;
 }
 
-/* 金額小結行，跟 .confirm-total 同一套排版（靠右、粗體、等寬數字）。 */
+/* 金額小結：2026-10-29 改成總價／預約金／尾款三行（原本是單行「應付
+   $0」）——使用者統一新規則，線上只刷 $500 預約金，不是課程全額，付款
+   頁要讓客人清楚看到尾款金額跟現場付款方式，不能讓人以為線上刷的就是
+   全部費用。三行用兩欄對齊（標籤靠左、金額靠右），尾款那一行加深顏色
+   強調「這筆之後還要另外付」。 */
 .booking-total {
   margin: var(--space-4) 0 0;
-  text-align: right;
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
   max-width: 50ch;
+  margin-left: auto;
+  font-variant-numeric: tabular-nums;
+}
+.booking-total__row {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin: 0;
+  padding: 2px 0;
+  color: color-mix(in srgb, var(--color-text-secondary) 70%, transparent);
+}
+.booking-total__row .price-text {
+  font-weight: 600;
+}
+.booking-total__row--balance {
+  color: var(--color-text-primary);
+  font-weight: 700;
+  border-top: 1px solid color-mix(in srgb, var(--color-text-secondary) 25%, transparent);
+  margin-top: 4px;
+  padding-top: 6px;
+}
+.booking-total__row--balance .price-text {
+  font-weight: 700;
 }
 
 /* 付款完成後的結果畫面（成功／失敗／查詢中），跟 #confirm-error 同一套

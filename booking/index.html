@@ -179,10 +179,19 @@
           </ul>
         </div>
         <div class="booking-notice__panel" role="tabpanel" data-panel="refund" hidden>
+          <!-- 2026-10-29 使用者統一退費/改期規則（跟 faq/index.html
+               「時段調整／取消規則」同一份文字，不要分開改、改一邊忘了
+               改另一邊，之前這兩頁各自有一套不一樣的70%/50%版本跟
+               10%行政費版本，使用者反映不一致要求統一）。 -->
           <ul class="booking-notice__list">
-            <li><strong>個人遲到：</strong>遲到 20 分鐘內，課程照常進行，不影響權益；請留意課程時間仍照原定時間結束，不會因遲到而延長；遲到超過 20 分鐘且未提前告知者，視同放棄本次課程，恕無法改期，亦不予退費。</li>
-            <li><strong>天災不可抗力：</strong>若因天然災害達各縣市政府公告之停班停課標準，依相關法規辦理，可選擇延期或退費。</li>
-            <li><strong>延期規定：</strong>開課前 3 至 7 天提出延期申請，將酌收課程費用 10% 作為行政處理費；開課前 2 天至預約當日，恕不再受理延期申請，惟可將名額轉讓予親友代為出席。</li>
+            <li><strong>預約金與尾款：</strong>每人線上預約需支付 NT$500 預約金，全額折抵課程總價；尾款於上課當天以現金或轉帳支付，恕不提供線上刷卡尾款。</li>
+            <li><strong>7 天前（含）取消：</strong>若尚未使用過免費改期，在開課日 7 天前（含）取消，退還 NT$500 預約金，退回原付款方式。</li>
+            <li><strong>7 天內取消：</strong>若尚未使用過免費改期，在開課日前未滿 7 天取消，預約金不予退還；可選擇使用一次免費改期。</li>
+            <li><strong>免費改期：</strong>每筆預約最多提供一次免費改期，不需說明理由，但須在原訂課程開始前提出申請。已使用免費改期後不能再次改期；之後若取消，預約金不予退還，即使距離新的上課日期仍有 7 天以上也不退。</li>
+            <li><strong>課程開始後：</strong>課程開始後取消，或無故未到場，預約金不予退還。</li>
+            <li><strong>個人遲到：</strong>遲到 20 分鐘內，課程照常進行，不影響權益；課程仍照原定時間結束，不會因遲到而延長；遲到超過 20 分鐘且未提前告知者，視同放棄本次課程，恕無法改期，亦不予退費。</li>
+            <li><strong>天災不可抗力：</strong>若因天然災害達各縣市政府公告之停班停課標準，可選擇改期或退費。</li>
+            <li><strong>退款方式：</strong>退款一律退回原付款方式，不轉換為網站點數或購物金；本工作室不會另外向客人收取或轉嫁刷卡手續費。</li>
           </ul>
         </div>
       </div>
@@ -328,7 +337,16 @@
         <footer class="work__close fade-in delay-3">
           <div class="work__close-text">
             <p class="checkout-error" role="alert" hidden></p>
-            <p class="booking-total price-text" id="booking-total">應付 $0</p>
+            <!-- 2026-10-29 改成總價/預約金/尾款三行拆分（原本只有單行
+                 「應付 $0」）——使用者統一新規則：線上只刷 $500 預約金，
+                 不是課程全額，付款頁要讓客人清楚看到尾款金額跟付款方式，
+                 不能讓人以為線上刷的就是全部費用。算法在 js/booking.js
+                 updateTotal()，要跟後端 DEPOSIT_AMOUNT 保持一致。 -->
+            <div class="booking-total" id="booking-total">
+              <p class="booking-total__row"><span>課程總價</span><span class="price-text" id="booking-total-price">$0</span></p>
+              <p class="booking-total__row"><span>線上預約金（現在刷卡）</span><span class="price-text" id="booking-total-deposit">$0</span></p>
+              <p class="booking-total__row booking-total__row--balance"><span>尾款（上課當天現金或轉帳）</span><span class="price-text" id="booking-total-balance">$0</span></p>
+            </div>
           </div>
           <button type="submit" class="work__cta work__cta--primary" id="booking-submit" disabled>
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
