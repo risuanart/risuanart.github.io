@@ -182,8 +182,23 @@
 .course-note__icon { flex: none; color: var(--color-brand); margin-top: 2px; }
 .course-note__title { font-size: 13.5px; font-weight: 700; margin: 0 0 6px; }
 .course-note__desc { font-size: 12.5px; line-height: 1.8; color: var(--color-text-secondary); margin: 0; }
+.course-note__desc + .course-note__desc { margin-top: 10px; }
 @media (max-width: 768px) {
-  .course-note { flex-direction: column; }
+  /* 使用者反映手機版這兩個補充說明框「讀起來很沈重，像是把資料丟給
+     你」——原本是一大段沒有分段的長文字，塞在跟桌面版一樣重的完整
+     邊框＋底色方盒裡，icon 還疊到文字上面又多佔一截高度。這裡改成
+     左側色條取代整圈邊框（視覺上輕一點，不是一個「公文方盒」），
+     icon 跟文字維持左右並排（不要疊成上下），內距縮小；文字內容本身
+     也在 HTML 拆成多個 <p>（見 courses/index.html），每段之間用上面
+     .course-note__desc + .course-note__desc 的間距自然產生段落節奏，
+     不用整段一次讀完。 */
+  .course-note {
+    gap: 12px;
+    padding: 16px 16px 16px 14px;
+    border: none;
+    border-left: 3px solid var(--color-brand);
+  }
+  .course-note__desc { font-size: 12px; line-height: 1.75; }
 }
 
 /* ---------- IG 私訊 CTA ---------- */
