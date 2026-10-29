@@ -54,6 +54,7 @@
   <link rel="stylesheet" href="css/home-shop.css">
   <link rel="stylesheet" href="css/site-footer.css">
   <link rel="stylesheet" href="css/hub-blocks.css">
+  <link rel="stylesheet" href="css/home-editorial.css">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
   <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16">
@@ -316,92 +317,79 @@
       </div>
     </section>
 
-    <!-- 拼貼式入口區塊（2026-10-24，照抄 koyama.com.tw/store/ 排版）：
-         輪播下面第一排是課程／企業團體課兩個 banner（.banner-row--duo，
-         見 css/hub-blocks.css 的實測規格說明），取代上一版用疊字格狀卡
-         做的材料包／課程入口——材料包本身已經在下面的商品分類區塊直接
-         露出真實商品，不用再疊一次入口。 -->
-    <section class="content-block">
-      <div class="banner-row banner-row--duo">
-        <a class="banner-tile" href="courses/">
-          <div class="banner-tile__media"><img src="assets/images/courses/palette-knife-oil/hero-poster.jpg" alt="繪畫課程"></div>
-          <p class="banner-tile__title">繪畫課程</p>
-          <p class="banner-tile__desc">肌理砂畫、刮刀油畫、流動畫⋯選好喜歡的媒材，現場就能完成一幅專屬作品。</p>
+    <!-- 首頁服務入口：維持影片下方的兩個快速入口，縮成小圖＋短文，避免像第二個主視覺。 -->
+    <section class="content-block home-entry-section">
+      <div class="home-entry-row">
+        <a class="home-entry" href="courses/">
+          <div class="home-entry__media"><img src="assets/images/courses/palette-knife-oil/hero-poster.jpg" alt="刮刀油畫作品"></div>
+          <div class="home-entry__copy">
+            <p class="home-entry__title">繪畫課程</p>
+            <p class="home-entry__desc">肌理砂畫、刮刀油畫、流動畫等，選一種媒材完成專屬作品。</p>
+            <span class="home-entry__link">看課程介紹 <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </div>
         </a>
-        <a class="banner-tile" href="enterprise/">
-          <div class="banner-tile__media"><img src="assets/images/enterprise/fluid-family-day/fluid-booth-wide.jpg" alt="企業／團體課程"></div>
-          <p class="banner-tile__title">企業／團體課程</p>
-          <p class="banner-tile__desc">品牌合作、企業包班、客製化課程訂製，提供從構圖設計到現場帶班的整套規劃。</p>
+        <a class="home-entry" href="enterprise/">
+          <div class="home-entry__media"><img src="assets/images/enterprise/fluid-family-day/fluid-booth-wide.jpg" alt="企業團體戶外創作活動"></div>
+          <div class="home-entry__copy">
+            <p class="home-entry__title">企業／團體課程</p>
+            <p class="home-entry__desc">企業包班、品牌合作與客製活動，從構圖到現場帶班一起規劃。</p>
+            <span class="home-entry__link">看合作方式 <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </div>
         </a>
       </div>
     </section>
 
-    <!-- 課程精選（.banner-row--quad）：參考 miyukifactory.com 首頁
-         JOURNAL／読みもの 區塊的排版結構（圖片＋分類標籤＋標題＋短內文，
-         橫向一排），視覺語言沿用全站既有的 .banner-tile（koyama 照抄版）
-         卡片，只是新增四欄版＋分類標籤（.banner-tile__tag，見
-         css/hub-blocks.css 說明）。8 堂課程只精選 4 堂露出（使用者 2026-
-         10-25 確認選這個版本，不是全部 8 堂塞進來）：肌理畫／刮刀油畫／
-         自己帶圖油畫／寵物油畫，都是目前有實拍 hero-poster 的課程，
-         標題／簡介文字直接沿用各課程頁 <title>／og:description 本來就有
-         的真實文案（簡介有縮短成一句話，意思不變），不是另外編的。 -->
-    <section class="content-block fade-in delay-2">
-      <div class="hub-category-head">
-        <p class="hub-category-head__en">Courses</p>
-        <p class="hub-category-head__title">課程精選</p>
+    <!-- 課程精選：保留已確認的四堂精選，只統一圖片呈現比例並減少裝飾標籤。 -->
+    <section class="content-block fade-in delay-2 home-course-section">
+      <div class="home-section-head">
+        <h2 class="home-section-title">課程精選</h2>
+        <a class="home-section-more" href="courses/">看全部課程 <span aria-hidden="true">→</span></a>
       </div>
       <div class="banner-row banner-row--quad">
         <a class="banner-tile" href="courses/sand-texture/">
           <div class="banner-tile__media"><img src="assets/images/courses/sand-texture/hero-poster.jpg" alt="石英砂肌理畫"></div>
-          <span class="banner-tile__tag">肌理畫</span>
-          <p class="banner-tile__title">石英砂肌理畫課程</p>
-          <p class="banner-tile__desc">石英砂混合壓克力顏料，刮刀堆疊出立體質感。</p>
+          <p class="banner-tile__title">石英砂肌理畫</p>
+          <p class="banner-tile__desc">用石英砂堆疊立體肌理。</p>
         </a>
         <a class="banner-tile" href="courses/palette-knife-oil/">
           <div class="banner-tile__media"><img src="assets/images/courses/palette-knife-oil/hero-poster.jpg" alt="刮刀油畫"></div>
-          <span class="banner-tile__tag">刮刀油畫</span>
-          <p class="banner-tile__title">刮刀油畫課程</p>
-          <p class="banner-tile__desc">用刮刀堆疊厚油畫顏料，做出立體筆觸與奶油感質地。</p>
+          <p class="banner-tile__title">刮刀油畫</p>
+          <p class="banner-tile__desc">用厚實筆觸表現畫面質地。</p>
         </a>
         <a class="banner-tile" href="courses/custom-photo-oil/">
           <div class="banner-tile__media"><img src="assets/images/courses/custom-photo-oil/hero-poster.jpg" alt="自己帶圖創作"></div>
-          <span class="banner-tile__tag">自己帶圖</span>
-          <p class="banner-tile__title">自己帶圖油畫創作課程</p>
-          <p class="banner-tile__desc">帶自己想畫的照片來畫室，用油畫顏料完成專屬作品。</p>
+          <p class="banner-tile__title">自己帶圖創作</p>
+          <p class="banner-tile__desc">帶喜歡的照片來完成作品。</p>
         </a>
         <a class="banner-tile" href="courses/pet-portrait/">
           <div class="banner-tile__media"><img src="assets/images/courses/pet-portrait/hero-poster.jpg" alt="寵物油畫"></div>
-          <span class="banner-tile__tag">寵物油畫</span>
-          <p class="banner-tile__title">寵物油畫課程</p>
-          <p class="banner-tile__desc">帶毛孩的照片來畫室，畫出牠的肖像。</p>
+          <p class="banner-tile__title">寵物油畫</p>
+          <p class="banner-tile__desc">把毛孩畫成專屬肖像。</p>
         </a>
       </div>
-      <a class="hub-more-link" href="courses/">ＭＯＲＥ</a>
     </section>
 
-    <!-- 第二排：材料指南 3 篇文章（.banner-row--trio），手機版改成橫向
-         可滑動，桌機版維持三欄並排，比例跟字體規格同上。 -->
-    <section class="content-block">
-      <div class="content-block__head">
-        <p class="content-block__title">材料指南</p>
-        <p class="content-block__hint">動手前，先看看這些</p>
+    <!-- 材料指南：用一篇主題圖文搭配兩個精簡連結，和上方課程橫列做出節奏差異。 -->
+    <section class="content-block home-guide-section">
+      <div class="home-section-head">
+        <div>
+          <h2 class="home-section-title">材料指南</h2>
+          <p class="home-section-hint">動手前，先看看這些</p>
+        </div>
+        <a class="home-section-more" href="guides/">看全部指南 <span aria-hidden="true">→</span></a>
       </div>
-      <div class="banner-row banner-row--trio">
-        <a class="banner-tile" href="guides/star-sky/">
-          <div class="banner-tile__media"><img src="assets/images/gallery/star-sky/07.jpg" alt="星空油畫的銀河特寫"></div>
-          <p class="banner-tile__title">星空油畫教學</p>
-          <p class="banner-tile__desc">從黑夜打底到星塵堆疊，一幅只屬於自己的星空。</p>
-        </a>
-        <a class="banner-tile" href="guides/sand-texture-sea/">
-          <div class="banner-tile__media"><img src="assets/images/gallery/sand-texture/14.jpg" alt="石英砂肌理畫的海景"></div>
-          <p class="banner-tile__title">石英砂肌理畫材料指南</p>
-          <p class="banner-tile__desc">怎麼用沙與顏料畫出海浪的立體質感。</p>
-        </a>
-        <a class="banner-tile" href="guides/material-compare-mountain/">
-          <div class="banner-tile__media"><img src="assets/images/guides/material-compare-mountain/sand-texture/01.jpg" alt="雪山滑雪場景"></div>
-          <p class="banner-tile__title">同一座山，三種材料的呈現</p>
-          <p class="banner-tile__desc">同一個主題，換一種媒材會長什麼樣子。</p>
-        </a>
+      <a class="home-guide-feature" href="guides/star-sky/">
+        <div class="home-guide-feature__media"><img src="assets/images/gallery/star-sky/07.jpg" alt="星空油畫的銀河特寫"></div>
+        <div class="home-guide-feature__copy">
+          <p class="home-guide-feature__eyebrow">從材料與步驟開始</p>
+          <h3>星空油畫教學</h3>
+          <p>從黑夜打底到星塵堆疊，一幅只屬於自己的星空。</p>
+          <span class="home-entry__link">閱讀指南 <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </div>
+      </a>
+      <div class="home-guide-links">
+        <a href="guides/sand-texture-sea/">石英砂肌理畫材料指南 <span aria-hidden="true">→</span></a>
+        <a href="guides/material-compare-mountain/">同一座山，三種材料的呈現 <span aria-hidden="true">→</span></a>
       </div>
     </section>
 

@@ -1,0 +1,226 @@
+/* 首頁影片下方三個導覽區塊專用，避免改動其他頁面共用的入口卡片。 */
+.home-entry-section,
+.home-course-section,
+.home-guide-section {
+  padding-top: var(--space-10);
+}
+
+.home-entry-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-6);
+}
+
+.home-entry {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.45fr);
+  align-items: center;
+  gap: var(--space-4);
+  color: var(--color-text-primary);
+  text-decoration: none;
+}
+
+.home-entry__media {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+.home-entry__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.home-entry__title {
+  margin: 0 0 var(--space-1);
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.home-entry__desc {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-xs);
+  line-height: 1.7;
+}
+
+.home-entry__link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  margin-top: var(--space-2);
+  color: var(--color-interactive);
+  font-size: var(--font-size-xs);
+}
+
+.home-entry__link svg {
+  flex: none;
+}
+
+.home-section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.home-section-title {
+  margin: 0;
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.home-section-more {
+  color: var(--color-interactive);
+  font-size: var(--font-size-xs);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.home-course-section .banner-row--quad .banner-tile__media {
+  aspect-ratio: 4 / 3;
+}
+
+.home-course-section .banner-tile__title {
+  margin-top: var(--space-2);
+  margin-bottom: var(--space-1);
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1.5;
+}
+
+.home-course-section .banner-tile__desc {
+  font-size: var(--font-size-xs);
+  line-height: 1.6;
+  letter-spacing: 0;
+}
+
+.home-guide-section .home-section-head {
+  align-items: center;
+}
+
+.home-section-hint {
+  margin: var(--space-1) 0 0;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-xs);
+}
+
+.home-guide-feature {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+  align-items: center;
+  gap: var(--space-6);
+  color: var(--color-text-primary);
+  text-decoration: none;
+}
+
+.home-guide-feature__media {
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+}
+
+.home-guide-feature__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.home-guide-feature__eyebrow {
+  margin: 0 0 var(--space-2);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-xs);
+}
+
+.home-guide-feature__copy h3 {
+  margin: 0 0 var(--space-2);
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.home-guide-feature__copy > p:not(.home-guide-feature__eyebrow) {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  line-height: 1.7;
+}
+
+.home-guide-links {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+  border-top: 1px solid var(--color-surface-neutral);
+}
+
+.home-guide-links a {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding-top: var(--space-2);
+  color: var(--color-text-primary);
+  font-size: var(--font-size-xs);
+  line-height: 1.6;
+  text-decoration: none;
+}
+
+.home-guide-links a span {
+  color: var(--color-interactive);
+}
+
+.home-entry:hover .home-entry__title,
+.home-entry:hover .home-entry__link,
+.home-guide-feature:hover h3,
+.home-guide-feature:hover .home-entry__link,
+.home-guide-links a:hover {
+  color: var(--color-interactive);
+}
+
+@media (max-width: 768px) {
+  .home-entry {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.55fr);
+    gap: var(--space-4);
+  }
+
+  .home-course-section .banner-row--quad .banner-tile__media {
+    aspect-ratio: 4 / 3;
+  }
+
+  .home-guide-feature {
+    grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
+    gap: var(--space-4);
+  }
+
+  .home-guide-feature__media {
+    aspect-ratio: 4 / 3;
+  }
+
+  .home-guide-links {
+    grid-template-columns: 1fr;
+    gap: var(--space-2);
+  }
+}
+
+@media (min-width: 601px) and (max-width: 768px) {
+  .home-entry-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .home-course-section .banner-row--quad .banner-tile {
+    flex-basis: 30%;
+  }
+}
+
+@media (max-width: 600px) {
+  .home-entry-row {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+}
