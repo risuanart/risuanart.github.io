@@ -14,13 +14,19 @@
 .home-entry {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1.45fr);
+  grid-template-areas: "media copy";
   align-items: center;
   gap: var(--space-4);
   color: var(--color-text-primary);
   text-decoration: none;
 }
 
+.home-entry--reverse {
+  grid-template-areas: "copy media";
+}
+
 .home-entry__media {
+  grid-area: media;
   aspect-ratio: 4 / 3;
   overflow: hidden;
 }
@@ -30,6 +36,10 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.home-entry__copy {
+  grid-area: copy;
 }
 
 .home-entry__title {
