@@ -590,7 +590,7 @@
         const balanceText = data.balanceDue > 0 ? `，尾款 ${formatMoney(data.balanceDue)} 請於上課當天以現金或轉帳支付` : "";
         document.getElementById("result-confirmed-text").textContent = `${data.date} ${data.time} - ${formatSlotEndTime(data.time)}，${describeAttendeeCourses(
           data.courses
-        )}，已付預約金 ${formatMoney(data.amountReceived)}${balanceText}。期待與您見面！`;
+        )}，已付預約金 ${formatMoney(data.depositAmount)}${balanceText}。期待與您見面！`;
         renderDmCard(data);
         return;
       }
