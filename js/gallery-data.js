@@ -389,6 +389,17 @@ window.GALLERY_ITEMS = [
   { course: "串珠", themes: ["戒指"], date: "2026-10-19", src: "../assets/images/gallery/beading/48.jpg", alt: "戒指戴在手指上展示，淺藍水滴大珠搭配金色與白色小珠", sessions: 1 },
   { course: "串珠", themes: ["戒指"], date: "2026-10-19", src: "../assets/images/gallery/beading/49.jpg", alt: "戒指戴在手指上展示，銀色圓珠串成，一旁疊戴白色珍珠戒指", sessions: 1 },
   { course: "串珠", themes: ["手鏈"], date: "2026-10-19", src: "../assets/images/gallery/beading/50.jpg", alt: "兩條手鍊戴在手腕上展示，淺藍鏤空花朵珠與透明大珠交錯", sessions: 1 },
+
+  // 2026-10-29 新增「大幅畫布訂製」首批真實學員作品 4 件：這堂課原本
+  // 作品牆是空的（courses/large-canvas/index.html 之前完全沒有對應
+  // 照片）。使用者整理的素材夾裡這個分類實際只有 3 件不同的大畫布作品，
+  // 每件各選 1～2 張（全幅構圖照 + 肌理特寫照各一張），不是 11 張素材
+  // 全部收錄——其餘是同一件作品的其他角度／特寫重複照，放進作品集會
+  // 重複計算同一件作品。
+  { course: "大幅畫布訂製", themes: ["植物花卉"], date: "2026-10-29", src: "../assets/images/gallery/large-canvas/01.jpg", alt: "大幅畫布石英砂肌理畫，白底搭配深淺綠色熱帶葉片，畫架斜角擺放", sessions: 1 },
+  { course: "大幅畫布訂製", themes: ["植物花卉"], date: "2026-10-29", src: "../assets/images/gallery/large-canvas/02.jpg", alt: "大幅油畫天堂鳥花與深綠闊葉，粉白背景，兩人雙手扶著畫布展示全貌", sessions: 1 },
+  { course: "大幅畫布訂製", themes: ["植物花卉"], date: "2026-10-29", src: "../assets/images/gallery/large-canvas/03.jpg", alt: "大幅畫布石英砂肌理畫，藍綠龜背芋與羽葉搭配金色線條勾勒的葉形輪廓，學員雙手扶著展示", sessions: 1 },
+  { course: "大幅畫布訂製", themes: ["植物花卉"], date: "2026-10-29", src: "../assets/images/gallery/large-canvas/04.jpg", alt: "大幅畫布石英砂肌理畫局部特寫，藍色羽狀葉片與金色線條勾勒的葉形輪廓", sessions: 1 },
 ];
 
 // 課程篩選鈕的選項清單，跟首頁「課程」選單、faq.html 裡提到的課程名稱
