@@ -5,16 +5,21 @@
    →賣點特色→課程輪播→怎麼上課／怎麼預約→學員作品／FAQ→材料指南。
 
    這份是這一頁專屬的 class（不碰 .content-block／.product-row／
-   .course-index 這些其他頁面或已經刪掉的舊版在用的東西），寬度沿用
-   跟購物車兩欄排版、頁尾同一個 1100px 寬容器基準（不是全站標準
-   840px，理由見下面 .page-wide）。*/
+   .course-index 這些其他頁面或已經刪掉的舊版在用的東西）。
 
-.page-wide {
-  width: 100%;
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 var(--content-pad);
-}
+   2026-10-29 修正：敘事開場／賣點特色／怎麼上課／材料指南這幾個
+   main 直接子層區塊，原本自己發明了一個 .page-wide（max-width:1100px）
+   當寬度容器，結果跟其他頁面（products/、courses/{slug}/ 等）實際
+   採用的全站標準寬度（.content-container，840px，見 products.css
+   「全站共用內文容器」那段註解）不一樣，桌面版寬度看起來比其他頁面
+   寬很多——使用者截圖比對 products/ 才發現。products.css 那段註解
+   講得很清楚：「以後任何新頁面」的 main 直接子層都該直接套用
+   .content-container，不要自己發明寬度數字。已經把這幾個區塊的 HTML
+   class 從 page-wide 換成 content-container，這裡不再需要自己維護
+   一份寬度規則。1100px 這個數字本身不是不能用（.shop-grid／cart.css
+   兩欄／site-footer.css 頁尾是刻意比內文寬的「格狀」區塊，仍在用），
+   但這頁的敘事文字／賣點卡／步驟／FAQ 本質是「內文」，不是格狀列表，
+   套錯了基準。 */
 
 /* ---------- 敘事式開場：品牌故事，慢慢把人帶進課程 ---------- */
 .course-story {
