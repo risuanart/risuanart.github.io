@@ -1824,10 +1824,16 @@
    已經踩過不只一次，之後新增任何這種區塊，第一件事就是檢查這裡、把
    新的 class 名稱加進這個選擇器清單，不要假設外層 .product-page／
    main 會自動幫子層限制寬度（不會，寬度限制只在這一條規則上）。 */
+/* 2026-10-29：account/index.html 的 .account-page__banner（選完超商
+   門市後顯示的「已更新您的預設超商門市」提示條）也是同一種疏漏——
+   平常 hidden，只有使用者真的選過門市才會顯示，所以沒被肉眼發現過，
+   全站一致性體檢用 Playwright 實測 1920px 才抓到：橫跨整個螢幕邊緣，
+   跟旁邊置中 840px 的內容對不齊。第三次同一種坑，加進清單。 */
 .content-container,
 .work__close,
 .cart-cross-sell,
-.account-page__layout {
+.account-page__layout,
+.account-page__banner {
   width: 100%;
   margin-left: auto;
   margin-right: auto;
@@ -1839,7 +1845,8 @@
   .content-container,
   .work__close,
   .cart-cross-sell,
-  .account-page__layout {
+  .account-page__layout,
+  .account-page__banner {
     max-width: var(--content-max-width);
   }
 }
@@ -4064,7 +4071,12 @@ button.text-link {
 .chapter--cta {
   background: var(--color-surface-dark);
   color: var(--color-surface-light);
-  padding: var(--space-6);
+  /* 2026-10-29：原本是 `padding: var(--space-6)` 四邊同值簡寫，會蓋掉
+     .chapter 本身的 padding-left/right:var(--content-pad)（20px 變成
+     24px，全站一致性體檢抓到，影響 4 個流動畫禮盒頁面的深底導購區塊）。
+     改成只設上下，左右留給 .chapter 的既有規則。 */
+  padding-top: var(--space-6);
+  padding-bottom: var(--space-6);
 }
 
 /* 九宮格動畫（.moodboard／.moodboard__cell）目前只有 fluid-art-intro.html 頁首在用，

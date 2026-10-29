@@ -514,7 +514,14 @@
 }
 
 .account-page__banner {
-  margin: 0 0 var(--space-4);
+  /* 2026-10-29：margin 原本是 `0 0 var(--space-4)` 三值簡寫，中間的 0
+     會蓋掉 products.css 共用選擇器清單給這個 class 的
+     margin-left/right:auto（置中用），導致寬螢幕下貼齊左邊、不置中。
+     跟課程頁那次 padding 簡寫蓋掉留白是同一種 bug，這裡改成只設
+     margin-bottom，不去動左右。padding 維持原樣用簡寫覆蓋，是刻意
+     比 .content-container 窄一點的既有設計（跟 .work__close 同一個
+     理由，見 products.css 該選擇器清單上面的註解）。 */
+  margin-bottom: var(--space-4);
   padding: var(--space-2) var(--space-4);
   border-radius: var(--radius-sharp);
   background: var(--color-surface-neutral);
