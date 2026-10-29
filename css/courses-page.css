@@ -65,7 +65,33 @@
 .course-feature__title { font-size: 14px; font-weight: 700; margin: 0; }
 .course-feature__desc { font-size: 12px; line-height: 1.75; color: var(--color-text-secondary); margin: 0; }
 @media (max-width: 768px) {
-  .course-features__grid { grid-template-columns: 1fr; }
+  /* 手機版佔的高度太長（使用者截圖回報滑動距離過長）：原本桌面版的
+     「格狀盒子」排法（icon 在上、標題/說明在下，每格自己 24px 內距）
+     在 1 欄寬度下會把 6 格直接疊成一長串，改成橫列式（icon 在左、文字
+     在右，用細分隔線取代格狀背景），單列高度大幅縮短。 */
+  .course-features__grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+    background: none;
+    border: none;
+    border-top: 1px solid color-mix(in srgb, var(--color-text-secondary) 25%, transparent);
+  }
+  /* .course-feature 的 icon／標題／說明是三個獨立的 flex 子層（不是包在
+     一個文字容器裡），直接用 flex-direction:row 會讓標題欄位自己被擠成
+     一欄、跟說明搶寬度（標題被迫斷成三行）。改用 grid 讓 icon 直接
+     橫跨標題＋說明兩列，不用改 HTML 結構。 */
+  .course-feature {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 14px;
+    row-gap: 4px;
+    align-items: start;
+    padding: 16px 2px;
+    border-bottom: 1px solid color-mix(in srgb, var(--color-text-secondary) 25%, transparent);
+  }
+  .course-feature__icon { grid-column: 1; grid-row: 1 / 3; margin-top: 1px; }
+  .course-feature__title { grid-column: 2; grid-row: 1; }
+  .course-feature__desc { grid-column: 2; grid-row: 2; }
 }
 
 /* ---------- 課程展示：自動輪播的大圖橫列 ----------
