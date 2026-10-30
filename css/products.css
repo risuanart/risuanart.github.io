@@ -4275,8 +4275,26 @@ button.text-link {
   opacity: 0.6;
 }
 
+/* 2026-10-31 使用者回報：products/faq/ 這頁的問答內容貼齊螢幕邊緣，
+   沒有手機版該有的左右留白。.faq-group 是 <main> 底下的直接子層，但
+   從來沒有套用全站的 .content-container／.chapter 寬度規則（840px
+   置中＋--content-pad 內距），只有上面的 .work__intro 標題區有，所以
+   標題置中但下面問答清單整個貼邊——這個「main 直接子層忘記套寬度
+   規則」的錯誤已經在這個專案發生過三次（見記憶 feedback_main_direct_
+   child_width_constraint），這裡補上跟 .chapter 一致的寬度／留白規則。 */
 .faq-group {
   margin-top: var(--space-10);
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--content-pad);
+  padding-right: var(--content-pad);
+}
+
+@media (min-width: 841px) {
+  .faq-group {
+    max-width: var(--content-max-width);
+  }
 }
 
 .faq-group__title {
