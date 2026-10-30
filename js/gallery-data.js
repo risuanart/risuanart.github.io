@@ -400,6 +400,29 @@ window.GALLERY_ITEMS = [
   { course: "大幅畫布訂製", themes: ["植物花卉"], date: "2026-10-29", src: "../assets/images/gallery/large-canvas/02.jpg", alt: "大幅油畫天堂鳥花與深綠闊葉，粉白背景，兩人雙手扶著畫布展示全貌", sessions: 1 },
   { course: "大幅畫布訂製", themes: ["植物花卉"], date: "2026-10-29", src: "../assets/images/gallery/large-canvas/03.jpg", alt: "大幅畫布石英砂肌理畫，藍綠龜背芋與羽葉搭配金色線條勾勒的葉形輪廓，學員雙手扶著展示", sessions: 1 },
   { course: "大幅畫布訂製", themes: ["植物花卉"], date: "2026-10-29", src: "../assets/images/gallery/large-canvas/04.jpg", alt: "大幅畫布石英砂肌理畫局部特寫，藍色羽狀葉片與金色線條勾勒的葉形輪廓", sessions: 1 },
+
+  // 2026-10-29 新增「流動畫」首批真實學員作品 13 件：courses/fluid-art/
+  // 之前作品牆也是空的。使用者整理的素材夾裡這個分類有兩個來源資料夾，
+  // 「流動畫」本資料夾（30 張，工作室日常上課）挑出 13 張構圖完整的
+  // 成品照，排除倒膠/拉色/吹畫等製作過程特寫（那些更適合之後用在
+  // 「怎麼上課」步驟說明，不是作品集）；另一個「流動畫家庭日」資料夾
+  // （27 張）內容是戶外市集擺攤活動照，跟畫室內正式付費課程情境不同，
+  // 先不放進作品集，待使用者確認是否要用在企業合作或活動介紹等其他
+  // 地方。themes 統一標「抽象圖案」：流動畫技法本身就是非具象的顏料
+  // 流動紋理，沒有更細的主題可分。
+  { course: "流動畫", themes: ["抽象圖案"], date: "2026-10-29", src: "../assets/images/gallery/fluid-art/01.jpg", alt: "藍白黑流動畫圓形畫布特寫，搭配同色系小方塊畫布", sessions: 1 },
+  { course: "流動畫", themes: ["抽象圖案"], date: "2026-10-29", src: "../assets/images/gallery/fluid-art/02.jpg", alt: "粉灰白流動畫圓形托盤，大理石紋路由雙手捧著展示", sessions: 1 },
+  { course: "流動畫", themes: ["抽象圖案"], date: "2026-10-29", src: "../assets/images/gallery/fluid-art/03.jpg", alt: "紫金藍流動畫方形畫布兩幅並排，色彩交融出大理石紋理", sessions: 1 },
+  { course: "流動畫", themes: ["抽象圖案"], date: "2026-10-29", src: "../assets/images/gallery/fluid-art/04.jpg", alt: "藍綠橘流動畫方形畫布，戴手套的手捧著展示色彩交融紋理", sessions: 1 },
+  { course: "流動畫", themes: ["抽象圖案"], date: "2026-10-29", src: "../assets/images/gallery/fluid-art/05.jpg", alt: "紅黑白流動畫方形畫布，戲劇化的血紅色紋理交疊黑白紋路", sessions: 1 },
+  { course: "流動畫", themes: ["抽象圖案"], date: "2026-10-29", src: "../assets/images/gallery/fluid-art/06.jpg", alt: "粉藍金流動畫方形畫布，由雙手捧著展示柔和色彩紋理", sessions: 1 },
+  { course: "流動畫", themes: ["抽象圖案"], date: "2026-10-29", src: "../assets/images/gallery/fluid-art/07.jpg", alt: "青銅色流動畫圓形托盤，學員微笑展示放在金屬瀝架上的完成作品", sessions: 1 },
+  { course: "流動畫", themes: ["抽象圖案"], date: "2026-10-29", src: "../assets/images/gallery/fluid-art/08.jpg", alt: "藍白金流動畫方形畫布，學員微笑捧著展示完成作品", sessions: 1 },
+  { course: "流動畫", themes: ["抽象圖案"], date: "2026-10-29", src: "../assets/images/gallery/fluid-art/09.jpg", alt: "灰沙金流動畫方形畫布，老師捧著展示柔和漸層紋理", sessions: 1 },
+  { course: "流動畫", themes: ["抽象圖案"], date: "2026-10-29", src: "../assets/images/gallery/fluid-art/10.jpg", alt: "橘棕色流動畫方形畫布，帶白色氣泡紋路的暖色調大理石紋理", sessions: 1 },
+  { course: "流動畫", themes: ["抽象圖案"], date: "2026-10-29", src: "../assets/images/gallery/fluid-art/11.jpg", alt: "黑灰紫流動畫方形畫布，深色背景襯托出雲霧般的紋理", sessions: 1 },
+  { course: "流動畫", themes: ["抽象圖案"], date: "2026-10-29", src: "../assets/images/gallery/fluid-art/12.jpg", alt: "兩件流動畫圓形托盤並排，前景深藍沙金色、後景粉藕色大理石紋理", sessions: 1 },
+  { course: "流動畫", themes: ["抽象圖案"], date: "2026-10-29", src: "../assets/images/gallery/fluid-art/13.jpg", alt: "粉白棕流動畫圓形托盤，搭配同色系小方塊畫布置於杯座上", sessions: 1 },
 ];
 
 // 課程篩選鈕的選項清單，跟首頁「課程」選單、faq.html 裡提到的課程名稱
