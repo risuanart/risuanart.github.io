@@ -25,7 +25,7 @@
   <link rel="stylesheet" href="../css/home.css">
   <link rel="stylesheet" href="../css/products.css">
   <link rel="stylesheet" href="../css/cart.css">
-  <link rel="stylesheet" href="../css/gallery.css">
+  <link rel="stylesheet" href="../css/gallery.css?v=20261030-gallery">
   <link rel="stylesheet" href="../css/site-menu.css">
   <link rel="stylesheet" href="../css/site-footer.css">
   <link rel="icon" href="/favicon.ico" sizes="any">
@@ -132,7 +132,7 @@
   <div class="site-menu-backdrop" id="site-menu-backdrop"></div>
   <nav class="site-menu" id="site-menu" aria-label="全站選單" data-menu-base="../"></nav>
 
-  <main class="product-page work">
+  <main class="product-page work gallery-page">
 
     <!-- 資料跟畫面分開：GALLERY_ITEMS（見 js/gallery-data.js）目前是空的，
          之後有真的照片直接在那個檔案加資料，這裡的 HTML／篩選邏輯都不用
@@ -155,21 +155,27 @@
          寬螢幕下會漏掉全站統一的內文容器寬度（見 css/products.css .chapter
          規則），改成跟其他頁面同樣的包法，不用另外幫這頁寫一套專屬規則。 -->
     <section class="chapter">
-      <h1 class="chapter__title fade-in">學員作品集</h1>
-      <p class="chapter__intro fade-in delay-1">依課程或主題篩選瀏覽，也可以比較同一個主題、不同材料畫出來的差異。</p>
+      <h1 class="chapter__title fade-in">學員作品</h1>
+      <p class="chapter__intro fade-in delay-1">從喜歡的媒材或主題找靈感。部分作品也標有完成堂數，預約前可以先看看不同創作方式。</p>
 
       <section class="gallery-filters fade-in delay-1">
         <div>
-          <p class="gallery-filters__label">課程</p>
+          <p class="gallery-filters__label">課程／媒材</p>
           <div class="gallery-filters__group" id="gallery-course-filters">
             <button type="button" class="gallery-filters__chip is-active" data-gallery-course="all">全部</button>
           </div>
         </div>
         <div>
-          <p class="gallery-filters__label">主題（可複選）</p>
-          <div class="gallery-filters__group" id="gallery-theme-filters"></div>
+          <p class="gallery-filters__label">主題，可複選</p>
+          <div class="gallery-filters__group gallery-theme-filters is-collapsed" id="gallery-theme-filters"></div>
+          <button type="button" class="gallery-theme-toggle" id="gallery-theme-toggle" aria-expanded="false" hidden>更多主題</button>
         </div>
       </section>
+
+      <div class="gallery-results">
+        <button type="button" class="gallery-filters__chip gallery-session-filter" id="gallery-session-filter" aria-pressed="false">一堂完成</button>
+        <p class="gallery-results__count" id="gallery-results-count" role="status" aria-live="polite"></p>
+      </div>
 
       <!-- 2026-09-18 移除 fade-in：js/scroll-reveal.js 的 IntersectionObserver
            門檻是 15% 面積要進到可視範圍才觸發淡入。這個格子是動態塞進 JS

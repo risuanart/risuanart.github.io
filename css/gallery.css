@@ -3,16 +3,24 @@
    token，不新增顏色，篩選鈕跟格狀相簿都用 --radius-sharp，不做圓角 pill。 */
 
 .gallery-filters {
-  margin-top: var(--space-6);
+  margin-top: var(--space-4);
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
+}
+
+.gallery-page > .chapter:first-child {
+  margin-top: var(--space-10);
 }
 
 .gallery-filters__group {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-2);
+}
+
+.gallery-theme-filters.is-collapsed .gallery-filters__chip:nth-child(n + 9):not(.is-active) {
+  display: none;
 }
 
 .gallery-filters__label {
@@ -43,19 +51,61 @@
 }
 
 .gallery-filters__chip[data-gallery-course].is-active {
-  background: var(--color-brand);
-  border-color: var(--color-brand);
+  background: var(--color-text-primary);
+  border-color: var(--color-text-primary);
   color: var(--color-surface-light);
 }
 
-.gallery-filters__chip[data-gallery-theme].is-active {
+.gallery-filters__chip[data-gallery-theme].is-active,
+.gallery-session-filter.is-active {
+  background: var(--color-text-primary);
   border-color: var(--color-text-primary);
-  border-width: 2px;
-  padding: calc(var(--space-1) - 1px) calc(var(--space-4) - 1px);
+  color: var(--color-surface-light);
+}
+
+.gallery-filters__chip:hover:not(.is-active) {
+  background: var(--color-surface-neutral);
+  border-color: var(--color-text-primary);
+}
+
+.gallery-filters__chip:focus-visible,
+.gallery-theme-toggle:focus-visible {
+  outline: 2px solid var(--color-text-primary);
+  outline-offset: 2px;
+}
+
+.gallery-theme-toggle {
+  appearance: none;
+  margin-top: var(--space-2);
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--color-interactive);
+  font: inherit;
+  font-size: var(--font-size-xs);
+  cursor: pointer;
+}
+
+.gallery-theme-toggle:hover {
+  color: var(--color-text-primary);
+}
+
+.gallery-results {
+  margin-top: var(--space-4);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.gallery-results__count {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-xs);
 }
 
 .gallery-grid {
-  margin-top: var(--space-6);
+  margin-top: var(--space-4);
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--space-2);
@@ -121,6 +171,12 @@
   border: 1px dashed color-mix(in srgb, var(--color-text-secondary) 40%, transparent);
   color: var(--color-text-secondary);
   font-size: var(--font-size-sm);
+}
+
+@media (max-width: 520px) {
+  .gallery-results {
+    align-items: flex-start;
+  }
 }
 
 /* ---------- 作品放大燈箱（js/gallery-lightbox.js）----------

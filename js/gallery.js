@@ -36,6 +36,9 @@
   const emptyState = document.getElementById("gallery-empty");
   const courseFilterGroup = document.getElementById("gallery-course-filters");
   const themeFilterGroup = document.getElementById("gallery-theme-filters");
+  const themeToggle = document.getElementById("gallery-theme-toggle");
+  const sessionFilter = document.getElementById("gallery-session-filter");
+  const resultsCount = document.getElementById("gallery-results-count");
   if (!grid) return;
 
   const items = window.GALLERY_ITEMS || [];
@@ -68,6 +71,9 @@
 
   let activeCourse = "all";
   const activeThemes = new Set();
+  let onlyOneSession = false;
+  let themesExpanded = false;
+  const VISIBLE_THEME_LIMIT = 8;
 
   // 選「全部」時顯示完整主題清單（跨課程瀏覽本來就需要看到所有主題）；
   // 選特定課程時，只列出這堂課的作品裡實際用過的主題，順序仍照
@@ -86,7 +92,8 @@
   function renderThemeButtons() {
     if (!themeFilterGroup) return;
     themeFilterGroup.innerHTML = "";
-    themesForCourse(activeCourse).forEach((theme) => {
+    const themes = themesForCourse(activeCourse);
+    themes.forEach((theme) => {
       const btn = document.createElement("button");
       btn.type = "button";
       btn.className = "gallery-filters__chip" + (activeThemes.has(theme) ? " is-active" : "");
@@ -94,10 +101,18 @@
       btn.textContent = theme;
       themeFilterGroup.appendChild(btn);
     });
+    themeFilterGroup.classList.toggle("is-collapsed", !themesExpanded);
+    if (themeToggle) {
+      const hiddenCount = themes.slice(VISIBLE_THEME_LIMIT).filter((theme) => !activeThemes.has(theme)).length;
+      themeToggle.hidden = themes.length <= VISIBLE_THEME_LIMIT || (!themesExpanded && hiddenCount === 0);
+      themeToggle.textContent = themesExpanded ? "收合主題" : `更多主題（${hiddenCount}）`;
+      themeToggle.setAttribute("aria-expanded", String(themesExpanded));
+    }
   }
 
   function matches(item) {
     if (activeCourse !== "all" && item.course !== activeCourse) return false;
+    if (onlyOneSession && item.sessions !== 1) return false;
     if (activeThemes.size === 0) return true;
 
     const itemThemes = item.themes || [];
@@ -123,6 +138,11 @@
 
   function render() {
     const visible = items.filter(matches);
+    if (resultsCount) {
+      resultsCount.textContent = onlyOneSession
+        ? `找到 ${visible.length} 件一堂完成的作品`
+        : `共 ${visible.length} 件作品`;
+    }
 
     if (items.length === 0) {
       grid.hidden = true;
@@ -171,6 +191,7 @@
       // 重新開始——不局部保留「新課程底下也還適用」的主題，理由見檔頭
       // 說明：局部保留客人不會注意到，全部清空最單純不會讓人困惑。
       activeThemes.clear();
+      themesExpanded = false;
       renderThemeButtons();
       render();
     });
@@ -188,6 +209,22 @@
         activeThemes.add(theme);
         btn.classList.add("is-active");
       }
+      render();
+    });
+  }
+
+  if (themeToggle && themeFilterGroup) {
+    themeToggle.addEventListener("click", () => {
+      themesExpanded = !themesExpanded;
+      renderThemeButtons();
+    });
+  }
+
+  if (sessionFilter) {
+    sessionFilter.addEventListener("click", () => {
+      onlyOneSession = !onlyOneSession;
+      sessionFilter.classList.toggle("is-active", onlyOneSession);
+      sessionFilter.setAttribute("aria-pressed", String(onlyOneSession));
       render();
     });
   }
