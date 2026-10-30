@@ -3963,6 +3963,43 @@ button.text-link {
   scroll-snap-align: center;
 }
 
+/* 2026-10-30 新增：不裁切的展示型相簿，用在「作品範例要讓人看夠」
+   的說明性文章（例如 guides/disney-pixar-reference-guide）——
+   .gallery-grid／.material-photo-carousel／.ent-feature__media 這幾個
+   既有元件都是固定比例＋object-fit: cover，會裁掉照片邊緣，拿來單純
+   「展示很多張完整作品」的情境不合適，裁切掉的部分可能剛好是作品的
+   重要細節。改用 CSS columns 做 Pinterest 式不等高瀑布流，每張圖維持
+   原始比例完整呈現，可選配 figcaption 標註角色/堂數等資訊。 */
+.uncropped-gallery {
+  columns: 2;
+  column-gap: var(--space-3);
+  margin-top: var(--space-4);
+}
+
+@media (min-width: 768px) {
+  .uncropped-gallery {
+    columns: 3;
+  }
+}
+
+.uncropped-gallery figure {
+  margin: 0 0 var(--space-3);
+  break-inside: avoid;
+}
+
+.uncropped-gallery img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-sharp);
+}
+
+.uncropped-gallery figcaption {
+  margin-top: var(--space-1);
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+}
+
 /* 套組內容章節：「成品尺寸」隨選中圖案即時更新，見 js/sand-art-gallery.js applyPattern()。 */
 .kit-section__size-hint {
   margin-top: var(--space-4);
