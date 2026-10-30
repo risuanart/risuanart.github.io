@@ -702,6 +702,22 @@
   border-radius: 0;
 }
 
+/* 2026-10-30：.ent-feature__media 裡面放 .work__gallery（products.css
+   既有的「主圖＋縮圖橫向切換」元件，js/hero-thumb-gallery.js 驅動）
+   時用——使用者參考 MIYUKI FACTORY 官網的相片牆排版（大圖＋下方縮圖
+   列，可以點縮圖或箭頭切換，文字排在旁邊），要求套用在材料指南這種
+   展示很多張作品的文章段落。.work__gallery-main 自己已經有固定比例
+   裁切＋縮圖列排版，不能再疊一層 .ent-feature__media 原本的
+   aspect-ratio／overflow:hidden，不然縮圖列會被外層裁掉看不到，所以
+   這個情境下只拿掉外層自己的比例限制，裡面完全交給 .work__gallery
+   自己管理。這裡會裁切圖片（固定比例＋object-fit:cover，跟 MIYUKI
+   本身一樣），使用者 2026-10-30 確認這個情境可以接受裁切，跟其他
+   段落「盡量不裁切」的原則是刻意的例外，不是忘記套用。 */
+.ent-feature__media--gallery {
+  aspect-ratio: auto;
+  overflow: visible;
+}
+
 /* 2026-10-30：兩張照片對半並排，用在「剛好兩張圖具體對應同一句話」
    的段落（例如課程頁示範手法前後兩步驟、兩種做法的對照）——collage
    是 2x2 四格、mosaic 是一大二小三張，都不適合剛好兩張的情況，補一個
