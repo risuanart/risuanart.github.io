@@ -28,24 +28,40 @@
   // 2026-09-20：全站改成乾淨網址（不帶 .html），連結目標從「檔案」
   // 改成「資料夾」，所以這裡的 .html 全部拿掉、後面補上 /。${base} 本身
   // 不用改，還是同一組「往回幾層到根目錄」的相對路徑前綴。
+  // 2026-10-30 上架前待修清單任務 6：「課程」從固定展開的清單改成點擊
+  // 展開的 accordion（子項目一多，固定展開會把選單拉得很長，常態開課
+  // 的八堂課這裡沒有「哪個比較重要」的排序，收合起來比較好找）。
+  // 子項目第一項加「全部課程」連到課程總覽頁。「預約須知」原本放在
+  // 這個 .site-menu__group 裡、用 .site-menu__sublink 這個次要樣式，
+  // 跟其他子項目一樣沒有上下分隔、間距亂掉；現在搬出來跟首頁／商品
+  // 總覽這些同層級項目一樣用 .site-menu a 的列樣式，分隔線跟間距自動
+  // 跟其他列一致，不用另外調。
   menu.innerHTML = `
     <a href="${base}">首頁</a>
     <a href="${base}products/shop/">商品總覽</a>
     <a href="${base}products/">材料包</a>
     <div class="site-menu__group">
-      <p class="site-menu__group-title">課程</p>
-      <ul class="site-menu__sublist">
-        <li><a class="site-menu__sublink" href="${base}courses/sand-texture/">石英砂肌理畫</a></li>
-        <li><a class="site-menu__sublink" href="${base}courses/palette-knife-oil/">刮刀油畫</a></li>
-        <li><a class="site-menu__sublink" href="${base}courses/fluid-art/">流動畫</a></li>
-        <li><a class="site-menu__sublink" href="${base}courses/custom-photo-oil/">自己帶圖創作</a></li>
-        <li><a class="site-menu__sublink" href="${base}courses/pet-portrait/">寵物油畫</a></li>
-        <li><a class="site-menu__sublink" href="${base}courses/beading/">串珠</a></li>
-        <li><a class="site-menu__sublink" href="${base}courses/large-canvas/">大幅畫布訂製</a></li>
-        <li><a class="site-menu__sublink" href="${base}courses/custom-material/">特殊材質客製</a></li>
-      </ul>
-      <a class="site-menu__sublink" href="${base}faq/">預約須知</a>
+      <button type="button" class="site-menu__group-toggle" aria-expanded="false" aria-controls="site-menu-course-panel">
+        <span>課程</span>
+        <svg class="site-menu__group-chevron" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="site-menu__group-panel" id="site-menu-course-panel">
+        <div class="site-menu__group-panel-inner">
+          <ul class="site-menu__sublist">
+            <li><a class="site-menu__sublink" href="${base}courses/">全部課程</a></li>
+            <li><a class="site-menu__sublink" href="${base}courses/sand-texture/">石英砂肌理畫</a></li>
+            <li><a class="site-menu__sublink" href="${base}courses/palette-knife-oil/">刮刀油畫</a></li>
+            <li><a class="site-menu__sublink" href="${base}courses/fluid-art/">流動畫</a></li>
+            <li><a class="site-menu__sublink" href="${base}courses/custom-photo-oil/">自己帶圖創作</a></li>
+            <li><a class="site-menu__sublink" href="${base}courses/pet-portrait/">寵物油畫</a></li>
+            <li><a class="site-menu__sublink" href="${base}courses/beading/">串珠</a></li>
+            <li><a class="site-menu__sublink" href="${base}courses/large-canvas/">大幅畫布訂製</a></li>
+            <li><a class="site-menu__sublink" href="${base}courses/custom-material/">特殊材質客製</a></li>
+          </ul>
+        </div>
+      </div>
     </div>
+    <a href="${base}faq/">預約須知</a>
     <!-- 2026-10-17 使用者要求目錄要有能直達預約入口的連結，讓已經決定好
          要上哪堂課的同學不用先點進某一堂課程介紹頁才找得到預約表單，
          放在「課程」（瀏覽課程種類／預約須知）跟「材料指南」之間，順著
@@ -80,6 +96,18 @@
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") closeMenu();
   });
+
+  // 「課程」accordion 開合：class 放在 .site-menu__group 上（CSS 靠這個
+  // class 切換 .site-menu__group-panel 的 grid-template-rows 做展開/收合
+  // 動畫，見 css/site-menu.css），這裡只負責切 class 跟 aria-expanded。
+  const courseToggle = menu.querySelector(".site-menu__group-toggle");
+  const courseGroup = menu.querySelector(".site-menu__group");
+  if (courseToggle && courseGroup) {
+    courseToggle.addEventListener("click", () => {
+      const isOpen = courseGroup.classList.toggle("is-open");
+      courseToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    });
+  }
 })();
 
 // 桌面文字導覽列（≥1024px）的「課程」下拉：2026-09-18 新增，邏輯照抄

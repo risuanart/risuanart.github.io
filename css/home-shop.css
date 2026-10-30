@@ -481,32 +481,66 @@
   color: color-mix(in srgb, var(--color-surface-light) 55%, transparent);
 }
 
-/* 「課程」這個分類目前沒有自己的頁面，但子項目本身是真的存在的課程
-   （只是還沒各自成頁），照實列出來比整個標成「即將推出」更誠實──跟
-   .site-menu a／.site-menu__disabled 用同一條底線分隔全站選單列表的
-   節奏，只是裡面塞了子清單＋一個真的連結（預約須知），不是單行。 */
+/* 2026-10-30 上架前待修清單任務 6：「課程」從固定展開改成點擊展開的
+   accordion，跟 css/site-menu.css 子頁那份同步（index.html 不載入那份
+   檔案，維持獨立一份，理由見檔案開頭說明）。 */
 .site-menu__group {
-  padding: var(--space-4) 0;
   border-bottom: 1px solid color-mix(in srgb, var(--color-surface-light) 15%, transparent);
 }
 
-.site-menu__group-title {
-  margin: 0 0 var(--space-2);
+.site-menu__group-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: var(--space-4) 0;
+  border: none;
+  background: none;
+  font: inherit;
   font-size: 15px;
   color: var(--color-surface-light);
+  cursor: pointer;
+}
+
+.site-menu__group-chevron {
+  flex: none;
+  transition: transform var(--duration-normal) var(--ease-standard);
+}
+
+.site-menu__group.is-open .site-menu__group-chevron {
+  transform: rotate(180deg);
+}
+
+.site-menu__group-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows var(--duration-normal) var(--ease-standard),
+    opacity var(--duration-normal) var(--ease-standard);
+}
+
+.site-menu__group.is-open .site-menu__group-panel {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.site-menu__group-panel-inner {
+  overflow: hidden;
+  min-height: 0;
 }
 
 .site-menu__sublist {
   margin: 0 0 var(--space-3);
   padding: 0;
   list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px 14px;
 }
 
 .site-menu__sublist li {
-  font-size: 12px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  padding-left: var(--space-4);
+  font-size: 13px;
   color: color-mix(in srgb, var(--color-surface-light) 55%, transparent);
 }
 
@@ -514,23 +548,13 @@
   display: inline-block;
   font-size: 13px;
   color: var(--color-surface-light);
-  border-bottom: 1px solid currentColor;
 }
 
-/* 「石英砂肌理畫」「串珠」現在跟桌面版下拉選單一樣，改回放在 <li> 裡面、
-   混在課程標籤群組裡（見 index.html 說明），但 .site-menu a（給「商品
-   總覽」「材料包」「預約須知」這種整排選單列用的樣式，15px／
-   display:flex／space-between／整排底線）選擇器範圍是整個 .site-menu
-   底下所有 <a>，不管巢狀多深都選得到，會把這兩個標籤也撐成整排選單列
-   的樣子，在标籤群組裡看起來會突兀地跳出來自己佔一行。這裡用更高特異度
-   的選擇器把它們縮回標籤原本該有的樣子（跟其他 <li> 標籤同一種尺寸
-   邏輯，只是保留底線／全白字這兩個區分「已上架」的視覺提示）。 */
 .site-menu__sublist li .site-menu__sublink {
   display: inline;
   justify-content: normal;
   gap: 0;
   padding: 0;
-  border-bottom: 1px solid currentColor;
   font-size: 13px;
 }
 
@@ -613,7 +637,8 @@
 .site-header:not(.is-scrolled) .site-header__title,
 .site-header:not(.is-scrolled) .site-header__nav,
 .site-header:not(.is-scrolled) .site-header__menu-toggle,
-.site-header:not(.is-scrolled) .cart-badge-wrap {
+.site-header:not(.is-scrolled) .cart-badge-wrap,
+.site-header:not(.is-scrolled) .account-badge-wrap {
   color: var(--color-surface-light);
 }
 
@@ -621,9 +646,37 @@
    color: var(--color-text-primary)，元素自己的宣告會蓋掉從
    .cart-badge-wrap 繼承下來的顏色（不是特異度問題，是「元素自己有沒有
    直接宣告 color」的問題），上面那組規則單靠 .cart-badge-wrap 蓋不到
-   袋子圖示本身，這裡另外明確覆寫 .cart-badge。 */
-.site-header:not(.is-scrolled) .cart-badge {
+   袋子圖示本身，這裡另外明確覆寫 .cart-badge。
+   2026-10-30 上架前待修清單任務 6：.account-badge（帳號圖示本身，
+   js/account-widget.js 動態插入）在 cart.css 也是同樣的「自己宣告
+   color: var(--color-text-primary)」寫法，從加入那天起就沒有跟著補這條
+   覆寫，深色底下用深色圖示幾乎看不見，這裡一起補上。 */
+.site-header:not(.is-scrolled) .cart-badge,
+.site-header:not(.is-scrolled) .account-badge {
   color: var(--color-surface-light);
+}
+
+/* 2026-10-30 上架前待修清單任務 6：圖示顏色切換成淺色只能保證跟「深色」
+   影片畫面有對比，輪播影片／照片本身亮度不固定（例如這一幀剛好是明亮的
+   窗景），淺色圖示疊上去還是可能快要看不見。比照任務建議的第二個方向
+   （導覽列加一層半透明底），在固定列本身疊一層由上往下變淡的深色漸層，
+   只在還沒捲動、疊在輪播上方這段套用，不管底下影片這一幀亮或暗，圖示
+   跟文字都有基本對比度；捲動後交給既有的 .is-scrolled 毛玻璃底接手，
+   這裡不用再管。漸層只做到快要看不見的程度（--space-24 高、不透明度
+   由 0.32 降到 0），不是整條不透明深色列，維持「浮貼在影片上」的視覺。 */
+.site-header:not(.is-scrolled)::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--space-24);
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.32) 0%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  pointer-events: none;
 }
 
 /* logo 圖檔本身是橄欖綠色塊（品牌色，見 colors.css --color-brand），沒有

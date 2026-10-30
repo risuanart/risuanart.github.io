@@ -207,20 +207,32 @@
          下拉選單那邊的註解，混在一起會看起來像多了一層新選單，不像課程
          本身的子項目。「預約須知」是原本就有內容的連結，直接接手原本
          孤兒頁 faq.html 的入口，這個維持獨立在清單外面。 -->
+    <!-- 2026-10-30 上架前待修清單任務 6：改成點擊展開的 accordion，跟
+         js/site-menu.js 子頁那份同步（index.html 維持獨立一份，理由見
+         上面原本的註解）。子項目第一項加「全部課程」，「預約須知」搬出
+         .site-menu__group、改用跟其他同層級項目一樣的列樣式。 -->
     <div class="site-menu__group">
-      <p class="site-menu__group-title">課程</p>
-      <ul class="site-menu__sublist">
-        <li><a class="site-menu__sublink" href="courses/sand-texture/">石英砂肌理畫</a></li>
-        <li><a class="site-menu__sublink" href="courses/palette-knife-oil/">刮刀油畫</a></li>
-        <li><a class="site-menu__sublink" href="courses/fluid-art/">流動畫</a></li>
-        <li><a class="site-menu__sublink" href="courses/custom-photo-oil/">自己帶圖創作</a></li>
-        <li><a class="site-menu__sublink" href="courses/pet-portrait/">寵物油畫</a></li>
-        <li><a class="site-menu__sublink" href="courses/beading/">串珠</a></li>
-        <li><a class="site-menu__sublink" href="courses/large-canvas/">大幅畫布訂製</a></li>
-              <li><a class="site-menu__sublink" href="courses/custom-material/">特殊材質客製</a></li>
-      </ul>
-      <a class="site-menu__sublink" href="faq/">預約須知</a>
+      <button type="button" class="site-menu__group-toggle" aria-expanded="false" aria-controls="site-menu-course-panel">
+        <span>課程</span>
+        <svg class="site-menu__group-chevron" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="site-menu__group-panel" id="site-menu-course-panel">
+        <div class="site-menu__group-panel-inner">
+          <ul class="site-menu__sublist">
+            <li><a class="site-menu__sublink" href="courses/">全部課程</a></li>
+            <li><a class="site-menu__sublink" href="courses/sand-texture/">石英砂肌理畫</a></li>
+            <li><a class="site-menu__sublink" href="courses/palette-knife-oil/">刮刀油畫</a></li>
+            <li><a class="site-menu__sublink" href="courses/fluid-art/">流動畫</a></li>
+            <li><a class="site-menu__sublink" href="courses/custom-photo-oil/">自己帶圖創作</a></li>
+            <li><a class="site-menu__sublink" href="courses/pet-portrait/">寵物油畫</a></li>
+            <li><a class="site-menu__sublink" href="courses/beading/">串珠</a></li>
+            <li><a class="site-menu__sublink" href="courses/large-canvas/">大幅畫布訂製</a></li>
+            <li><a class="site-menu__sublink" href="courses/custom-material/">特殊材質客製</a></li>
+          </ul>
+        </div>
+      </div>
     </div>
+    <a href="faq/">預約須知</a>
     <!-- 2026-10-17 使用者要求目錄要有能直達預約入口的連結，讓已經決定好
          要上哪堂課的同學不用先點進某一堂課程介紹頁才找得到預約表單，
          放在「課程」（瀏覽課程種類／預約須知）跟「材料指南」之間，順著

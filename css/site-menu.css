@@ -97,28 +97,73 @@
   color: color-mix(in srgb, var(--color-surface-light) 55%, transparent);
 }
 
+/* 2026-10-30 上架前待修清單任務 6：「課程」從固定展開改成點擊展開的
+   accordion。.site-menu__group 本身不再直接吃 padding——改成子項目收合
+   時緊貼著跟其他列一樣的分隔線／間距，點開才讓面板自己撐出高度，不然
+   收合狀態下方還是會留一截跟展開時一樣大的空白。 */
 .site-menu__group {
-  padding: var(--space-4) 0;
   border-bottom: 1px solid color-mix(in srgb, var(--color-surface-light) 15%, transparent);
 }
 
-.site-menu__group-title {
-  margin: 0 0 var(--space-2);
+.site-menu__group-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: var(--space-4) 0;
+  border: none;
+  background: none;
+  font: inherit;
   font-size: 15px;
   color: var(--color-surface-light);
+  cursor: pointer;
 }
 
+.site-menu__group-chevron {
+  flex: none;
+  transition: transform var(--duration-normal) var(--ease-standard);
+}
+
+.site-menu__group.is-open .site-menu__group-chevron {
+  transform: rotate(180deg);
+}
+
+/* 展開/收合動畫用 grid-template-rows 0fr→1fr（而不是量測實際高度的
+   max-height trick），子項目數量以後增減都不用回來調整寫死的高度值。
+   .site-menu__group-panel-inner 負責 overflow:hidden，收合過程中內容
+   不會先探出面板邊界再被裁掉。 */
+.site-menu__group-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows var(--duration-normal) var(--ease-standard),
+    opacity var(--duration-normal) var(--ease-standard);
+}
+
+.site-menu__group.is-open .site-menu__group-panel {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.site-menu__group-panel-inner {
+  overflow: hidden;
+  min-height: 0;
+}
+
+/* 子項目改成單欄垂直清單（不用原本的三欄自動換行），每列至少 44px、
+   左側縮排跟主項的文字對齊看得出從屬關係，字級比主項（15px）小一級。 */
 .site-menu__sublist {
   margin: 0 0 var(--space-3);
   padding: 0;
   list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px 14px;
 }
 
 .site-menu__sublist li {
-  font-size: 12px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  padding-left: var(--space-4);
+  font-size: 13px;
   color: color-mix(in srgb, var(--color-surface-light) 55%, transparent);
 }
 
@@ -126,15 +171,18 @@
   display: inline-block;
   font-size: 13px;
   color: var(--color-surface-light);
-  border-bottom: 1px solid currentColor;
 }
 
+/* 2026-10-30 上架前待修清單任務 6：手機抽屜選單子項目文字原本有
+   border-bottom: 1px solid currentColor 當底線，業主要求拿掉——這裡
+   拿掉的是「子項目連結文字」的底線，跟每一列之間的 1px 分隔線
+   （.site-menu a／.site-menu__group 的 border-bottom）是兩回事，分隔線
+   沒有動。 */
 .site-menu__sublist li .site-menu__sublink {
   display: inline;
   justify-content: normal;
   gap: 0;
   padding: 0;
-  border-bottom: 1px solid currentColor;
   font-size: 13px;
 }
 

@@ -170,6 +170,18 @@
   });
 
   if (backdrop) backdrop.addEventListener("click", closeMenu);
+
+  // 2026-10-30 上架前待修清單任務 6：「課程」accordion 開合，邏輯跟
+  // js/site-menu.js 子頁那份同名區塊一致（index.html 維持獨立一份，
+  // 理由見 index.html #site-menu 區塊的註解）。
+  const courseToggle = menu.querySelector(".site-menu__group-toggle");
+  const courseGroup = menu.querySelector(".site-menu__group");
+  if (courseToggle && courseGroup) {
+    courseToggle.addEventListener("click", () => {
+      const isOpen = courseGroup.classList.toggle("is-open");
+      courseToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    });
+  }
 })();
 
 /* 桌面文字導覽列的「課程」下拉，邏輯跟上面漢堡選單抽屜同一套模式，只是
