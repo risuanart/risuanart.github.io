@@ -401,10 +401,18 @@ window.GALLERY_ITEMS = [
   // 欄位說明一致）；03/04 兩張原本 alt 誤寫成「石英砂肌理畫」，但這兩張
   // 實際來源是「石英砂打底＋油畫」資料夾（石英砂堆疊主體＋筆刷描繪
   // 細節的複合做法），不是純石英砂肌理，已經改成正確的材料描述。
+  // 2026-10-30 再新增第 4 件真實作品（05.jpg）：珠寶項鍊肖像特寫，是
+  // 油畫＋筆刷做法（跟「自己帶圖創作」課程同一種技法）＋加大畫布，
+  // 原本只當課程頁開場的情境照用（assets/images/courses/large-canvas/
+  // context-necklace.jpg），使用者確認這張也該算進正式作品集，所以
+  // 另外存一份進 assets/images/gallery/large-canvas/ 加進這裡。themes
+  // 跟其他植物題材的三件不同，標「人像」（畫面主體是人臉下半部＋
+  // 項鍊，不是植物）。
   { course: "大幅畫布訂製", themes: ["植物花卉"], date: "2026-10-29", src: "../assets/images/gallery/large-canvas/01.jpg", alt: "大幅畫布石英砂肌理畫，白底搭配深淺綠色熱帶葉片，畫架斜角擺放" },
   { course: "大幅畫布訂製", themes: ["植物花卉"], date: "2026-10-29", src: "../assets/images/gallery/large-canvas/02.jpg", alt: "大幅油畫天堂鳥花與深綠闊葉，粉白背景，兩人雙手扶著畫布展示全貌" },
   { course: "大幅畫布訂製", themes: ["植物花卉"], date: "2026-10-29", src: "../assets/images/gallery/large-canvas/03.jpg", alt: "大幅畫布石英砂打底＋油畫，藍綠龜背芋與羽葉搭配金色線條勾勒的葉形輪廓，學員雙手扶著展示" },
   { course: "大幅畫布訂製", themes: ["植物花卉"], date: "2026-10-29", src: "../assets/images/gallery/large-canvas/04.jpg", alt: "大幅畫布石英砂打底＋油畫局部特寫，藍色羽狀葉片與金色線條勾勒的葉形輪廓" },
+  { course: "大幅畫布訂製", themes: ["人像"], date: "2026-10-30", src: "../assets/images/gallery/large-canvas/05.jpg", alt: "大幅油畫珠寶項鍊肖像特寫，掛在木質牆面上，學員伸手調整畫作位置" },
 
   // 2026-10-29 新增「流動畫」首批真實學員作品 13 件：courses/fluid-art/
   // 之前作品牆也是空的。使用者整理的素材夾裡這個分類有兩個來源資料夾，
