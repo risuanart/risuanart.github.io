@@ -216,6 +216,28 @@ window.GALLERY_ITEMS = [
   { course: "寵物油畫", themes: ["貓咪"], date: "2025-02-22", src: "../assets/images/gallery/pet-portrait/42.jpg", alt: "咖啡色虎斑貓肖像油畫特寫，大眼睛直視前方，淺藍色背景", sessions: 1 },
   { course: "寵物油畫", themes: ["貓咪"], date: "2025-02-28", src: "../assets/images/gallery/pet-portrait/43.jpg", alt: "橘白色貓咪肖像油畫特寫，米白色背景，簽名「lin.」", sessions: 1 },
   { course: "寵物油畫", themes: ["貓咪"], date: "2025-02-28", src: "../assets/images/gallery/pet-portrait/44.jpg", alt: "黑白賓士貓肖像油畫，藍色背景", sessions: 1 },
+  // 2026-10-30 新增「其他動物／兔子／鳥」12 件：使用者確認這幾個分類
+  // 「就算在寵物畫延伸」，不另開新課程，照實歸在「寵物油畫」。畫面
+  // 主體不是狗/貓，既有「狗狗」「貓咪」「兩隻以上」三個主題標籤都不
+  // 適用，改標「陸地動物」（兔子/松鼠猴/老虎/獅子/麋鹿）；飛馬/獨角獸
+  // 是虛構生物，不算真實陸地動物，改標「動漫／角色」；鳥類沒有專屬
+  // 主題標籤，比照既有慣例併入「陸地動物」一起用（只有 4 張，量不夠
+  // 獨立開新標籤）。18229613941258075.jpg（加大畫布框起來掛牆上那張
+  // 黑獅子）雖然畫面主體跟 18027592147877575.jpg 近似，但資料夾名稱
+  // 「2～3堂、加大畫布」明確標示這是放大尺寸的另一幅作品，不是同一張
+  // 的重複拍攝角度，兩張都收錄。
+  { course: "寵物油畫", themes: ["陸地動物"], date: "2026-10-30", src: "../assets/images/gallery/pet-portrait/45.jpg", alt: "白兔戴著花環項圈，漂浮在藍天白雲中，花瓣飄落", sessions: 1 },
+  { course: "寵物油畫", themes: ["陸地動物"], date: "2026-10-30", src: "../assets/images/gallery/pet-portrait/46.jpg", alt: "棕色兔子頭部特寫，深藍色星空背景，圓形畫布", sessions: 1 },
+  { course: "寵物油畫", themes: ["陸地動物"], date: "2026-10-30", src: "../assets/images/gallery/pet-portrait/47.jpg", alt: "非洲灰鸚鵡特寫，藍色背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["陸地動物"], date: "2026-10-30", src: "../assets/images/gallery/pet-portrait/48.jpg", alt: "兩隻粉紅火鶴站在海邊淺灘，藍色海天背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["陸地動物"], date: "2026-10-30", src: "../assets/images/gallery/pet-portrait/49.jpg", alt: "黑色烏鴉站在紫紅色花朵旁，棕色肌理背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["陸地動物"], date: "2026-10-30", src: "../assets/images/gallery/pet-portrait/50.jpg", alt: "棕色小鳥特寫，綠色樹葉背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["陸地動物"], date: "2026-10-30", src: "../assets/images/gallery/pet-portrait/51.jpg", alt: "松鼠猴特寫，綠色背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["陸地動物"], date: "2026-10-30", src: "../assets/images/gallery/pet-portrait/52.jpg", alt: "老虎幼獸臉部與爪子特寫，白色背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["陸地動物"], date: "2026-10-30", src: "../assets/images/gallery/pet-portrait/53.jpg", alt: "黑白色調獅子側臉特寫，深色星空背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["動漫／角色"], date: "2026-10-30", src: "../assets/images/gallery/pet-portrait/54.jpg", alt: "長著翅膀與獨角的飛馬躍起，深藍星空背景，雲朵環繞", sessions: 1 },
+  { course: "寵物油畫", themes: ["陸地動物"], date: "2026-10-30", src: "../assets/images/gallery/pet-portrait/55.jpg", alt: "公鹿頭部特寫，灰白色調，鹿角分岔", sessions: 2 },
+  { course: "寵物油畫", themes: ["陸地動物"], date: "2026-10-30", src: "../assets/images/gallery/pet-portrait/56.jpg", alt: "黑白色調獅子側臉特寫，加大畫布掛在木質牆面上", sessions: 2 },
 
   // 2026-09-21 新增：「石英砂肌理畫」海邊主題 32 件，使用者從相簿匯出
   // 一批石英砂海景/海浪真實學員作品照片。沒有精確的完成日期紀錄，先統一
@@ -533,6 +555,11 @@ window.GALLERY_ITEMS = [
   { course: "自己帶圖創作", themes: ["吉卜力"], date: "2026-10-30", src: "../assets/images/gallery/ghibli/13.jpg", alt: "神隱少女煤炭精靈群中，一隻粉色絨毛生物舉起雙手", sessions: 1 },
   { course: "自己帶圖創作", themes: ["吉卜力"], date: "2026-10-30", src: "../assets/images/gallery/ghibli/14.jpg", alt: "紅豬波魯克駕駛紅色飛機特寫，另一個拍攝角度", sessions: 1 },
   { course: "自己帶圖創作", themes: ["吉卜力"], date: "2026-10-30", src: "../assets/images/gallery/ghibli/15.jpg", alt: "霍爾的移動城堡霍爾與蘇菲站在開滿野花的山坡上，藍天白雲背景", sessions: 1 },
+
+  // 2026-10-30 新增「名畫再製」1 件：使用者確認這個分類「就算在自己帶圖
+  // （筆刷油畫）」，照實歸在「自己帶圖創作」。只有 1 張素材，量不夠
+  // 獨立開主題標籤，標「人像」即可。
+  { course: "自己帶圖創作", themes: ["人像"], date: "2026-10-30", src: "../assets/images/gallery/portrait-oil/01.jpg", alt: "戴珍珠耳環的少女名畫再製，卡通簡化風格，深色背景", sessions: 1 },
 ];
 
 // 課程篩選鈕的選項清單，跟首頁「課程」選單、faq.html 裡提到的課程名稱
