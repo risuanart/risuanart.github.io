@@ -171,7 +171,26 @@
          黑交融的大理石紋路）。Poster 用最後那格完成的圓形畫布（18.5s），
          是全片最像「成品」的一格。因為是橫式構圖，畫面高度本來就不會
          佔滿整個手機螢幕，不會有「看起來像整頁只有這支影片」的問題，
-         不需要另外加往下滑提示（跟其他直式滿版首圖影片的處理不同）。 -->
+         不需要另外加往下滑提示（跟其他直式滿版首圖影片的處理不同）。
+
+         2026-10-30 使用者更正兩件事，這次一起補上：
+         1. 真實上課流程：原本「上課怎麼進行」只有籠統帶過調色跟倒膠，
+            漏了「5×5cm 迷你畫布試色」這個環節——學員選色後先在迷你
+            畫布試做，確認喜歡的配色跟技法才放大畫到正式畫布，不喜歡
+            可以換色重試，迷你畫布也能帶走。這解釋了部分素材照片裡
+            出現在單個紙杯上那種超小尺寸畫布的由來。
+         2. 情境照分散穿插：第二批流動畫照片裡一些有人物、倒顏料特寫
+            的照片，原本只有進作品集的格狀清單，使用者認為這樣「配置
+            很單薄」，應該分散安排進課程介紹本身，讓同學讀文字的同時
+            就能感受畫面。拆成兩組用 .material-photo-carousel 插入：
+            一組是「新手友善、享受顏料流動」的情境照（人物為主），配在
+            「上課怎麼進行」；一組是倒顏料/調色的質地特寫，配在
+            「媒材與技法」解釋壓克力稀釋劑調整流動性那段。context-
+            presenting.jpg（17988747139878442.jpg）沒有進作品集（跟已
+            收錄的 fluid-art/09.jpg 是同一件作品的另一個角度，避免
+            重複計算），但單純當情境照用在這裡沒有這個限制，所以另存
+            一份在 assets/images/courses/fluid-art/ 底下，不跟作品集
+            共用同一份檔案命名空間。 -->
 
     <section class="ent-hero fade-in">
       <video class="ent-hero__photo is-landscape" src="../../assets/videos/courses/fluid-art/流動畫宣傳影片.MP4" poster="../../assets/images/courses/fluid-art/hero-poster.jpg" preload="auto" autoplay muted loop playsinline aria-label="流動畫宣傳影片：學員調色與倒膠，完成大理石紋路的圓形畫布"></video>
@@ -192,10 +211,30 @@
       <div class="chapter__block">
         <p class="chapter__statement">媒材與技法</p>
         <p class="chapter__prose">使用壓克力顏料倒膠的流動畫技法，把調好的顏料直接倒在畫布上，讓顏色自己流動、暈開、交融出紋理，不是用筆刷一筆一筆畫出來的，成品帶有隨機、自然的層次感。</p>
+        <p class="chapter__prose">顏料會加入壓克力稀釋劑調整濃稠度，讓壓克力顏料變得更有流動性。同一種顏色只要調整濃稀的比例，倒出來的紋路跟流動方式就會不一樣，這也是流動畫每次成品都不會重複的原因之一。</p>
+        <div class="material-photo-carousel">
+          <div class="material-photo-carousel__track">
+            <img src="../../assets/images/gallery/fluid-art/15.jpg" alt="手拿紙杯將藍色顏料倒入黑色方形畫布，畫面已有橘藍色波浪紋路">
+            <img src="../../assets/images/gallery/fluid-art/16.jpg" alt="手拿紙杯將灰藍色顏料倒入另一個紙杯中調色，調整顏料的濃稀比例">
+            <img src="../../assets/images/gallery/fluid-art/17.jpg" alt="手拿紙杯將紅色顏料倒入同一塊黑色方形畫布，疊加出橘藍綠色交錯紋路">
+            <img src="../../assets/images/gallery/fluid-art/24.jpg" alt="老師捧著粉白色大理石紋路方形畫布，向鏡頭展示顏料流動出的質地">
+          </div>
+        </div>
       </div>
       <div class="chapter__block">
         <p class="chapter__statement">上課怎麼進行</p>
-        <p class="chapter__prose">一堂課大約1.5小時，會先介紹會用到的材料跟工具，接著由老師講解配色的搭配方式，帶大家練習調色，再示範倒膠的技法。熟悉做法之後就是自己動手創作的時間，最後老師會說明作品完成後怎麼保存。</p>
+        <p class="chapter__prose">一堂課大約1.5小時，會先介紹會用到的材料跟工具。接著會讓你挑選喜歡的顏色，再依照你的選擇提供配色建議，協助調色。</p>
+        <p class="chapter__prose">調好之後，會先用 5×5cm 的迷你畫布試色——老師示範幾種常見技法，你可以實際倒倒看，不喜歡配色也能換一組顏色再試一次，不用擔心一次就要決定。確定喜歡的配色跟做法之後，再把同樣的顏色放大繪製到正式的畫布上。迷你畫布做完也可以一起帶走，等於多了一次試錯、找到真正喜歡配色的機會。</p>
+        <div class="material-photo-carousel">
+          <div class="material-photo-carousel__track">
+            <img src="../../assets/images/gallery/fluid-art/27.jpg" alt="多位學員與老師圍坐長桌調色，畫室上課情境">
+            <img src="../../assets/images/gallery/fluid-art/14.jpg" alt="學員彎腰用吸管對著白色圓形畫布吹氣，吹出墨綠色放射狀紋路">
+            <img src="../../assets/images/gallery/fluid-art/19.jpg" alt="手拿紙杯將白色顏料倒在白色圓形畫布中央，已暈開墨綠色花朵狀紋路">
+            <img src="../../assets/images/courses/fluid-art/context-presenting.jpg" alt="老師捧著灰沙金色漸層紋路的方形畫布，向鏡頭展示完成的作品">
+            <img src="../../assets/images/gallery/fluid-art/23.jpg" alt="雙手沾滿藍綠色顏料，手指輕觸淺藍金色大理石紋路畫布邊緣特寫">
+          </div>
+        </div>
+        <p class="chapter__prose">沒有繪畫基礎也沒關係，流動畫靠的是享受顏料自己流動、混色的過程，而不是精準的畫技。</p>
       </div>
     </section>
 
@@ -214,6 +253,14 @@
       <div class="chapter__block">
         <p class="chapter__statement">學員作品</p>
         <p class="chapter__prose">每個人選的顏色、倒的順序都不一樣，流動出來的紋路也各有各的樣子，沒有兩幅會完全相同。</p>
+        <div class="material-photo-carousel">
+          <div class="material-photo-carousel__track">
+            <img src="../../assets/images/gallery/fluid-art/20.jpg" alt="白色紙杯壓在紅橘黑綠交錯紋路的方形畫布中央，手指沾滿黑色顏料">
+            <img src="../../assets/images/gallery/fluid-art/22.jpg" alt="手拿紙杯將深色顏料倒入圓形畫布，已有褐灰白交錯的大理石紋路">
+            <img src="../../assets/images/gallery/fluid-art/25.jpg" alt="手指輕觸青綠黃白交錯紋路的圓形畫布邊緣特寫">
+            <img src="../../assets/images/gallery/fluid-art/26.jpg" alt="老師捧著粉藍薄荷綠相間的方形畫布，向鏡頭展示完成的紋路">
+          </div>
+        </div>
       </div>
       <div data-gallery-course-preview="流動畫" data-gallery-preview-base="../../">
         <div class="gallery-grid" data-gallery-preview-grid hidden></div>
@@ -237,7 +284,7 @@
       </details>
       <details class="faq-item">
         <summary class="faq-item__toggle">配色可以自己決定嗎？</summary>
-        <p class="faq-item__body">可以，老師會先講解配色的搭配方式並帶大家練習調色，實際要用哪些顏色、怎麼組合，還是由自己決定，每個人做出來的成品都不一樣。</p>
+        <p class="faq-item__body">可以，老師會先依照你喜歡的顏色提供配色建議並協助調色。調好之後會先用 5×5cm 的迷你畫布試色，不喜歡可以換一組顏色再試，確定喜歡才放大畫到正式畫布上，不用一次就決定，每個人做出來的成品都不一樣。</p>
       </details>
       <details class="faq-item">
         <summary class="faq-item__toggle">畫完可以馬上帶走嗎？</summary>

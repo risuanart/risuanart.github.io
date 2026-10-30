@@ -418,33 +418,33 @@ window.GALLERY_ITEMS = [
   // 資料夾剩下的照片再看一次，補上 14 張構圖不同的過程/展示照
   // （14～27.jpg）；另外 2 張跳過沒收錄，是同一張已經用過的灰沙金
   // 方形畫布（09.jpg）的另一個角度，收錄了只是重複計算同一件作品。
-  { course: "流動畫", themes: ["抽象圖案"], date: "2026-10-29", src: "../assets/images/gallery/fluid-art/01.jpg", alt: "藍白黑流動畫圓形畫布特寫，搭配同色系小方塊畫布", sessions: 1 },
-  { course: "流動畫", themes: ["抽象圖案"], date: "2026-10-29", src: "../assets/images/gallery/fluid-art/02.jpg", alt: "粉灰白流動畫圓形托盤，大理石紋路由雙手捧著展示", sessions: 1 },
-  { course: "流動畫", themes: ["抽象圖案"], date: "2026-10-29", src: "../assets/images/gallery/fluid-art/03.jpg", alt: "紫金藍流動畫方形畫布兩幅並排，色彩交融出大理石紋理", sessions: 1 },
-  { course: "流動畫", themes: ["抽象圖案"], date: "2026-10-29", src: "../assets/images/gallery/fluid-art/04.jpg", alt: "藍綠橘流動畫方形畫布，戴手套的手捧著展示色彩交融紋理", sessions: 1 },
-  { course: "流動畫", themes: ["抽象圖案"], date: "2026-10-29", src: "../assets/images/gallery/fluid-art/05.jpg", alt: "紅黑白流動畫方形畫布，戲劇化的血紅色紋理交疊黑白紋路", sessions: 1 },
-  { course: "流動畫", themes: ["抽象圖案"], date: "2026-10-29", src: "../assets/images/gallery/fluid-art/06.jpg", alt: "粉藍金流動畫方形畫布，由雙手捧著展示柔和色彩紋理", sessions: 1 },
-  { course: "流動畫", themes: ["抽象圖案"], date: "2026-10-29", src: "../assets/images/gallery/fluid-art/07.jpg", alt: "青銅色流動畫圓形托盤，學員微笑展示放在金屬瀝架上的完成作品", sessions: 1 },
-  { course: "流動畫", themes: ["抽象圖案"], date: "2026-10-29", src: "../assets/images/gallery/fluid-art/08.jpg", alt: "藍白金流動畫方形畫布，學員微笑捧著展示完成作品", sessions: 1 },
-  { course: "流動畫", themes: ["抽象圖案"], date: "2026-10-29", src: "../assets/images/gallery/fluid-art/09.jpg", alt: "灰沙金流動畫方形畫布，老師捧著展示柔和漸層紋理", sessions: 1 },
-  { course: "流動畫", themes: ["抽象圖案"], date: "2026-10-29", src: "../assets/images/gallery/fluid-art/10.jpg", alt: "橘棕色流動畫方形畫布，帶白色氣泡紋路的暖色調大理石紋理", sessions: 1 },
-  { course: "流動畫", themes: ["抽象圖案"], date: "2026-10-29", src: "../assets/images/gallery/fluid-art/11.jpg", alt: "黑灰紫流動畫方形畫布，深色背景襯托出雲霧般的紋理", sessions: 1 },
-  { course: "流動畫", themes: ["抽象圖案"], date: "2026-10-29", src: "../assets/images/gallery/fluid-art/12.jpg", alt: "兩件流動畫圓形托盤並排，前景深藍沙金色、後景粉藕色大理石紋理", sessions: 1 },
-  { course: "流動畫", themes: ["抽象圖案"], date: "2026-10-29", src: "../assets/images/gallery/fluid-art/13.jpg", alt: "粉白棕流動畫圓形托盤，搭配同色系小方塊畫布置於杯座上", sessions: 1 },
-  { course: "流動畫", themes: ["抽象圖案"], date: "2026-10-30", src: "../assets/images/gallery/fluid-art/14.jpg", alt: "學員彎腰用吸管對著白色圓形畫布吹氣，吹出墨綠色放射狀紋路" },
-  { course: "流動畫", themes: ["抽象圖案"], date: "2026-10-30", src: "../assets/images/gallery/fluid-art/15.jpg", alt: "手拿紙杯將藍色顏料倒入黑色方形畫布，畫面已有橘藍色波浪紋路" },
-  { course: "流動畫", themes: ["抽象圖案"], date: "2026-10-30", src: "../assets/images/gallery/fluid-art/16.jpg", alt: "手拿紙杯將灰藍色顏料倒入另一個紙杯中調色" },
-  { course: "流動畫", themes: ["抽象圖案"], date: "2026-10-30", src: "../assets/images/gallery/fluid-art/17.jpg", alt: "手拿紙杯將紅色顏料倒入黑色方形畫布，畫面已有橘藍綠色交錯紋路" },
-  { course: "流動畫", themes: ["抽象圖案"], date: "2026-10-30", src: "../assets/images/gallery/fluid-art/18.jpg", alt: "老師彎腰在長桌上調色，桌面擺滿各色顏料紙杯與待畫的空白畫布" },
-  { course: "流動畫", themes: ["抽象圖案"], date: "2026-10-30", src: "../assets/images/gallery/fluid-art/19.jpg", alt: "手拿紙杯將白色顏料倒在白色圓形畫布中央，已暈開墨綠色花朵狀紋路" },
-  { course: "流動畫", themes: ["抽象圖案"], date: "2026-10-30", src: "../assets/images/gallery/fluid-art/20.jpg", alt: "白色紙杯壓在紅橘黑綠交錯紋路的方形畫布中央，手指沾滿黑色顏料" },
-  { course: "流動畫", themes: ["抽象圖案"], date: "2026-10-30", src: "../assets/images/gallery/fluid-art/21.jpg", alt: "雙手捧著白色圓形畫布，正把紙杯裡的深色顏料倒在中央" },
-  { course: "流動畫", themes: ["抽象圖案"], date: "2026-10-30", src: "../assets/images/gallery/fluid-art/22.jpg", alt: "手拿紙杯將深色顏料倒入圓形畫布，已有褐灰白交錯的大理石紋路" },
-  { course: "流動畫", themes: ["抽象圖案"], date: "2026-10-30", src: "../assets/images/gallery/fluid-art/23.jpg", alt: "雙手沾滿藍綠色顏料，手指輕觸淺藍金色大理石紋路畫布邊緣特寫" },
-  { course: "流動畫", themes: ["抽象圖案"], date: "2026-10-30", src: "../assets/images/gallery/fluid-art/24.jpg", alt: "老師捧著粉白色大理石紋路方形畫布，向鏡頭展示完成的作品" },
-  { course: "流動畫", themes: ["抽象圖案"], date: "2026-10-30", src: "../assets/images/gallery/fluid-art/25.jpg", alt: "手指輕觸青綠黃白交錯紋路的圓形畫布邊緣特寫" },
-  { course: "流動畫", themes: ["抽象圖案"], date: "2026-10-30", src: "../assets/images/gallery/fluid-art/26.jpg", alt: "老師捧著粉藍薄荷綠相間的方形畫布，向鏡頭展示完成的紋路" },
-  { course: "流動畫", themes: ["抽象圖案"], date: "2026-10-30", src: "../assets/images/gallery/fluid-art/27.jpg", alt: "多位學員與老師圍坐長桌調色，畫室上課情境" },
+  { course: "流動畫", themes: ["抽象畫"], date: "2026-10-29", src: "../assets/images/gallery/fluid-art/01.jpg", alt: "藍白黑流動畫圓形畫布特寫，搭配同色系小方塊畫布", sessions: 1 },
+  { course: "流動畫", themes: ["抽象畫"], date: "2026-10-29", src: "../assets/images/gallery/fluid-art/02.jpg", alt: "粉灰白流動畫圓形托盤，大理石紋路由雙手捧著展示", sessions: 1 },
+  { course: "流動畫", themes: ["抽象畫"], date: "2026-10-29", src: "../assets/images/gallery/fluid-art/03.jpg", alt: "紫金藍流動畫方形畫布兩幅並排，色彩交融出大理石紋理", sessions: 1 },
+  { course: "流動畫", themes: ["抽象畫"], date: "2026-10-29", src: "../assets/images/gallery/fluid-art/04.jpg", alt: "藍綠橘流動畫方形畫布，戴手套的手捧著展示色彩交融紋理", sessions: 1 },
+  { course: "流動畫", themes: ["抽象畫"], date: "2026-10-29", src: "../assets/images/gallery/fluid-art/05.jpg", alt: "紅黑白流動畫方形畫布，戲劇化的血紅色紋理交疊黑白紋路", sessions: 1 },
+  { course: "流動畫", themes: ["抽象畫"], date: "2026-10-29", src: "../assets/images/gallery/fluid-art/06.jpg", alt: "粉藍金流動畫方形畫布，由雙手捧著展示柔和色彩紋理", sessions: 1 },
+  { course: "流動畫", themes: ["抽象畫"], date: "2026-10-29", src: "../assets/images/gallery/fluid-art/07.jpg", alt: "青銅色流動畫圓形托盤，學員微笑展示放在金屬瀝架上的完成作品", sessions: 1 },
+  { course: "流動畫", themes: ["抽象畫"], date: "2026-10-29", src: "../assets/images/gallery/fluid-art/08.jpg", alt: "藍白金流動畫方形畫布，學員微笑捧著展示完成作品", sessions: 1 },
+  { course: "流動畫", themes: ["抽象畫"], date: "2026-10-29", src: "../assets/images/gallery/fluid-art/09.jpg", alt: "灰沙金流動畫方形畫布，老師捧著展示柔和漸層紋理", sessions: 1 },
+  { course: "流動畫", themes: ["抽象畫"], date: "2026-10-29", src: "../assets/images/gallery/fluid-art/10.jpg", alt: "橘棕色流動畫方形畫布，帶白色氣泡紋路的暖色調大理石紋理", sessions: 1 },
+  { course: "流動畫", themes: ["抽象畫"], date: "2026-10-29", src: "../assets/images/gallery/fluid-art/11.jpg", alt: "黑灰紫流動畫方形畫布，深色背景襯托出雲霧般的紋理", sessions: 1 },
+  { course: "流動畫", themes: ["抽象畫"], date: "2026-10-29", src: "../assets/images/gallery/fluid-art/12.jpg", alt: "兩件流動畫圓形托盤並排，前景深藍沙金色、後景粉藕色大理石紋理", sessions: 1 },
+  { course: "流動畫", themes: ["抽象畫"], date: "2026-10-29", src: "../assets/images/gallery/fluid-art/13.jpg", alt: "粉白棕流動畫圓形托盤，搭配同色系小方塊畫布置於杯座上", sessions: 1 },
+  { course: "流動畫", themes: ["抽象畫"], date: "2026-10-30", src: "../assets/images/gallery/fluid-art/14.jpg", alt: "學員彎腰用吸管對著白色圓形畫布吹氣，吹出墨綠色放射狀紋路" },
+  { course: "流動畫", themes: ["抽象畫"], date: "2026-10-30", src: "../assets/images/gallery/fluid-art/15.jpg", alt: "手拿紙杯將藍色顏料倒入黑色方形畫布，畫面已有橘藍色波浪紋路" },
+  { course: "流動畫", themes: ["抽象畫"], date: "2026-10-30", src: "../assets/images/gallery/fluid-art/16.jpg", alt: "手拿紙杯將灰藍色顏料倒入另一個紙杯中調色" },
+  { course: "流動畫", themes: ["抽象畫"], date: "2026-10-30", src: "../assets/images/gallery/fluid-art/17.jpg", alt: "手拿紙杯將紅色顏料倒入黑色方形畫布，畫面已有橘藍綠色交錯紋路" },
+  { course: "流動畫", themes: ["抽象畫"], date: "2026-10-30", src: "../assets/images/gallery/fluid-art/18.jpg", alt: "老師彎腰在長桌上調色，桌面擺滿各色顏料紙杯與待畫的空白畫布" },
+  { course: "流動畫", themes: ["抽象畫"], date: "2026-10-30", src: "../assets/images/gallery/fluid-art/19.jpg", alt: "手拿紙杯將白色顏料倒在白色圓形畫布中央，已暈開墨綠色花朵狀紋路" },
+  { course: "流動畫", themes: ["抽象畫"], date: "2026-10-30", src: "../assets/images/gallery/fluid-art/20.jpg", alt: "白色紙杯壓在紅橘黑綠交錯紋路的方形畫布中央，手指沾滿黑色顏料" },
+  { course: "流動畫", themes: ["抽象畫"], date: "2026-10-30", src: "../assets/images/gallery/fluid-art/21.jpg", alt: "雙手捧著白色圓形畫布，正把紙杯裡的深色顏料倒在中央" },
+  { course: "流動畫", themes: ["抽象畫"], date: "2026-10-30", src: "../assets/images/gallery/fluid-art/22.jpg", alt: "手拿紙杯將深色顏料倒入圓形畫布，已有褐灰白交錯的大理石紋路" },
+  { course: "流動畫", themes: ["抽象畫"], date: "2026-10-30", src: "../assets/images/gallery/fluid-art/23.jpg", alt: "雙手沾滿藍綠色顏料，手指輕觸淺藍金色大理石紋路畫布邊緣特寫" },
+  { course: "流動畫", themes: ["抽象畫"], date: "2026-10-30", src: "../assets/images/gallery/fluid-art/24.jpg", alt: "老師捧著粉白色大理石紋路方形畫布，向鏡頭展示完成的作品" },
+  { course: "流動畫", themes: ["抽象畫"], date: "2026-10-30", src: "../assets/images/gallery/fluid-art/25.jpg", alt: "手指輕觸青綠黃白交錯紋路的圓形畫布邊緣特寫" },
+  { course: "流動畫", themes: ["抽象畫"], date: "2026-10-30", src: "../assets/images/gallery/fluid-art/26.jpg", alt: "老師捧著粉藍薄荷綠相間的方形畫布，向鏡頭展示完成的紋路" },
+  { course: "流動畫", themes: ["抽象畫"], date: "2026-10-30", src: "../assets/images/gallery/fluid-art/27.jpg", alt: "多位學員與老師圍坐長桌調色，畫室上課情境" },
 ];
 
 // 課程篩選鈕的選項清單，跟首頁「課程」選單、faq.html 裡提到的課程名稱
@@ -506,12 +506,19 @@ window.GALLERY_COURSE_LINKS = {
 // 學員作品上架，之前的標籤都是給繪畫主題用的，沒有適合珠寶飾品的分類。
 // 這三個照實標記作品的飾品類型（不是材質或珠子大小），同一件作品只會有
 // 其中一種（項鍊、手鏈、戒指互斥，不像山／海邊那種可以疊加的主題標籤）。
+// 2026-10-30 新增「抽象畫」標籤：原本「流動畫」的作品全部標成既有的
+// 「抽象圖案」主題，使用者更正——流動畫成品視覺上雖然是抽象的，但
+// 跟 GALLERY_COURSES 裡「抽象畫」這堂課（具象主題的抽象詮釋畫法）
+// 概念不同，不該共用同一個主題標籤，瀏覽「抽象圖案」時不該混進材質
+// 決定紋路的流動畫。新開一個「抽象畫」主題標籤給流動畫專用，「抽象
+// 圖案」保留給之後真的有抽象構圖作品時用，兩個標籤刻意不合併。
 window.GALLERY_THEMES = [
   "海洋生物",
   "陸地動物",
   "植物花卉",
   "人像",
   "抽象圖案",
+  "抽象畫",
   "節慶／季節",
   "風景",
   "海邊",
