@@ -505,6 +505,16 @@ window.GALLERY_ITEMS = [
   { course: "自己帶圖創作", themes: ["迪士尼／皮克斯"], date: "2026-10-30", src: "../assets/images/gallery/disney/28.jpg", alt: "小美人魚愛麗兒臉部特寫，紅髮搭配藍天白雲背景", sessions: 1 },
   { course: "自己帶圖創作", themes: ["迪士尼／皮克斯"], date: "2026-10-30", src: "../assets/images/gallery/disney/29.jpg", alt: "小美人魚愛麗兒坐在礁岩上眺望遠方，深藍海底場景", sessions: 1 },
   { course: "自己帶圖創作", themes: ["迪士尼／皮克斯"], date: "2026-10-30", src: "../assets/images/gallery/disney/30.jpg", alt: "戴眼鏡老先生肖像，一旁有貓咪與櫻桃，畫面簽名 Lydia", sessions: 1 },
+
+  // 2026-10-30 新增「宮崎駿」主題作品 6 件，見上方 GALLERY_THEMES 旁的
+  // 說明。全部是油畫＋筆刷，course 歸在「自己帶圖創作」，另開
+  // assets/images/gallery/ghibli/ 資料夾（比照 disney/ 的做法）。
+  { course: "自己帶圖創作", themes: ["宮崎駿"], date: "2026-10-30", src: "../assets/images/gallery/ghibli/01.jpg", alt: "霍爾的移動城堡霍爾與蘇菲肖像畫兩幅並排", sessions: 2 },
+  { course: "自己帶圖創作", themes: ["宮崎駿"], date: "2026-10-30", src: "../assets/images/gallery/ghibli/02.jpg", alt: "霍爾的移動城堡火惡魔卡西法特寫，抱著一截木柴", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["宮崎駿"], date: "2026-10-30", src: "../assets/images/gallery/ghibli/03.jpg", alt: "龍貓撐傘站在粉紅花海上，深藍夜空背景，一旁跟著小龍貓", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["宮崎駿"], date: "2026-10-30", src: "../assets/images/gallery/ghibli/04.jpg", alt: "風之谷王蟲特寫，灰綠色外殼佈滿藍色眼睛，藍天白雲背景", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["宮崎駿"], date: "2026-10-30", src: "../assets/images/gallery/ghibli/05.jpg", alt: "龍貓小梅趴在草地上，身後跟著一隻小龍貓", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["宮崎駿"], date: "2026-10-30", src: "../assets/images/gallery/ghibli/06.jpg", alt: "龍貓小月站在大龍貓肚子上，深藍夜晚森林場景", sessions: 1 },
 ];
 
 // 課程篩選鈕的選項清單，跟首頁「課程」選單、faq.html 裡提到的課程名稱
@@ -576,6 +586,13 @@ window.GALLERY_COURSE_LINKS = {
 // 學員作品獨立歸成一類，確認這類題材「自己獨立」，不要併進泛用的
 // 「動漫／角色」標籤裡——瀏覽「動漫／角色」時找的是比較廣義的動漫
 // 題材，迪士尼公主/電影角色是更明確、量也夠多的子分類，值得獨立。
+// 2026-10-30 再新增「宮崎駿」標籤：使用者當初把「迪士尼、宮崎駿」
+// 一起列為要各自獨立的主題（原話：「迪士尼、宮崎駿可以自己獨立」），
+// 道理跟迪士尼一樣——不併入「動漫／角色」，另開專屬標籤。素材夾
+// 資料夾名稱用「宮崎駿」，照實沿用這個名稱（不是改用「吉卜力」，
+// 雖然嚴格說霍爾/龍貓是吉卜力工作室作品、風之谷是宮崎駿執導但工作室
+// 成立前的作品，但使用者自己的分類習慣用「宮崎駿」，照她的說法命名，
+// 不用自己發明更精確但使用者沒用過的名詞）。
 window.GALLERY_THEMES = [
   "海洋生物",
   "陸地動物",
@@ -589,6 +606,7 @@ window.GALLERY_THEMES = [
   "食物",
   "動漫／角色",
   "迪士尼／皮克斯",
+  "宮崎駿",
   "星空／月亮",
   "狗狗",
   "貓咪",
