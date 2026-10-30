@@ -161,19 +161,31 @@
   .banner-row--trio::-webkit-scrollbar{ display:none; }
   .banner-row--trio .banner-tile{ flex:0 0 72%; }
 
-  /* 四欄課程卡（.banner-row--quad）手機版同樣改橫向滑動，卡片比三欄版窄
-     （flex:0 0 52%），一次能露出一張半，暗示還有更多可以滑。 */
+  /* 四欄課程卡（.banner-row--quad）手機版同樣改橫向滑動。
+     上架前待修清單任務 2：卡片寬度從 52% 改成約 46%，同時看得到兩張、
+     第三張露一點邊當作可滑的暗示；gap 改用 --space-4（16px，原本是
+     寫死的 14px）；加 scroll-snap 讓手指滑完一次剛好停在下一張卡片
+     邊界，不會停在兩張中間的尷尬位置。 */
   .banner-row--quad .banner-tile__title{ font-size:14px; }
   .banner-row--quad{
     display:flex;
     overflow-x:auto;
-    gap:14px;
+    gap:var(--space-4);
     margin:0 calc(-1 * var(--content-pad));
     padding:0 var(--content-pad);
     scrollbar-width:none;
+    scroll-snap-type:x mandatory;
   }
   .banner-row--quad::-webkit-scrollbar{ display:none; }
-  .banner-row--quad .banner-tile{ flex:0 0 52%; }
+  .banner-row--quad .banner-tile{ flex:0 0 46%; scroll-snap-align:start; }
+
+  /* 說明文字原本沒有限制行數，長短不一會讓卡片底部參差不齊，這裡限
+     一行，超過用省略號截斷。 */
+  .banner-row--quad .banner-tile__desc{
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+  }
 }
 
 /* ---------- 分類商品區塊（參考 miyukifactory.com 新品/精選分區） ----------

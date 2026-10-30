@@ -363,13 +363,21 @@
       </div>
     </section>
 
-    <!-- 課程精選：保留已確認的四堂精選，只統一圖片呈現比例並減少裝飾標籤。 -->
-    <section class="content-block fade-in delay-2 home-course-section">
+    <!-- 課程精選：保留已確認的四堂精選。
+         上架前待修清單任務 2：原本直式手機拍攝的照片被 CSS 強制裁成
+         4:3 橫式，主體被切到邊緣（見 css/home-editorial.css 拿掉覆寫的
+         說明），改回 hub-blocks.css 原本的 4:5 直式比例後問題即解決，
+         不需要再逐張另外調 object-position。data-hscroll／
+         data-hscroll-progress 是手機橫滑進度列的掛勾（js/hscroll-progress.js），
+         .fade-in 留在 section 上是沿用既有 IntersectionObserver 當作
+         「進入畫面」的觸發點，視覺效果（卡片逐張淡入上移）改套用在
+         .banner-tile 本身，見 css/home-editorial.css 說明。 -->
+    <section class="content-block fade-in home-course-section">
       <div class="home-section-head">
         <h2 class="home-section-title">課程精選</h2>
         <a class="home-section-more" href="courses/">看全部課程 <span aria-hidden="true">→</span></a>
       </div>
-      <div class="banner-row banner-row--quad">
+      <div class="banner-row banner-row--quad" data-hscroll>
         <a class="banner-tile" href="courses/sand-texture/">
           <div class="banner-tile__media"><img src="assets/images/courses/sand-texture/hero-poster.jpg" alt="石英砂肌理畫"></div>
           <p class="banner-tile__title">石英砂肌理畫</p>
@@ -390,6 +398,9 @@
           <p class="banner-tile__title">寵物油畫</p>
           <p class="banner-tile__desc">把毛孩畫成專屬肖像。</p>
         </a>
+      </div>
+      <div class="hscroll-progress" data-hscroll-progress aria-hidden="true">
+        <div class="hscroll-progress__bar"></div>
       </div>
     </section>
 
@@ -513,6 +524,7 @@
   <script src="js/account-widget.js"></script>
   <script src="/js/promo-bar.js"></script>
   <script src="js/scroll-reveal.js"></script>
+  <script src="js/hscroll-progress.js"></script>
   <script src="js/home-shop.js"></script>
   <script src="js/video-inview.js"></script>
 </body>

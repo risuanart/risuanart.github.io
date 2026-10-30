@@ -5,6 +5,13 @@
   padding-top: var(--space-10);
 }
 
+/* 上架前待修清單任務 2：課程精選區塊上下留白改用 --space-16（原本跟
+   其他兩個區塊共用 --space-10／40px），這裡用更高特異度的選擇器單獨
+   覆寫，不影響上面兩個區塊既有的間距。 */
+.home-course-section.home-course-section {
+  padding-top: var(--space-16);
+}
+
 .home-entry-row {
   display: grid;
   grid-template-columns: 1fr;
@@ -121,9 +128,9 @@
   white-space: nowrap;
 }
 
-.home-course-section .banner-row--quad .banner-tile__media {
-  aspect-ratio: 4 / 3;
-}
+/* 上架前待修清單任務 2：這裡原本把 hub-blocks.css 預設的 4:5（直式）
+   覆寫成 4:3（橫式），課程精選用的是手機直拍原圖，被強制裁成橫式會
+   切到主體、畫面失重，拿掉這個覆寫，改用 hub-blocks.css 原本的 4:5。 */
 
 .home-course-section .banner-tile__title {
   margin-top: var(--space-2);
@@ -244,10 +251,6 @@
     aspect-ratio: 4 / 3;
   }
 
-  .home-course-section .banner-row--quad .banner-tile__media {
-    aspect-ratio: 4 / 3;
-  }
-
   .home-guide-feature {
     grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
     gap: var(--space-4);
@@ -263,15 +266,76 @@
   }
 }
 
-@media (min-width: 601px) and (max-width: 768px) {
-  .home-course-section .banner-row--quad .banner-tile {
-    flex-basis: 30%;
-  }
-}
-
 @media (max-width: 600px) {
   .home-entry-row {
     grid-template-columns: 1fr;
     gap: var(--space-4);
+  }
+}
+
+/* ---------- 課程精選橫滑：進場動畫／按壓縮放／捲動進度列
+   上架前待修清單任務 2 ---------- */
+
+/* 卡片進場：section 本身沿用 js/scroll-reveal.js 既有的 .fade-in／
+   .is-visible 機制（不用另外寫 IntersectionObserver），但視覺效果從
+   「整個區塊一起淡入」改成「四張卡片各自依序淡入＋上移 8px」，所以
+   這裡讓 section 自己的 .fade-in 效果歸零（opacity:1／transform:none），
+   改成套用在子層的 .banner-tile 上，用 nth-child 做 80ms 階梯延遲。 */
+.home-course-section.fade-in {
+  opacity: 1;
+  transform: none;
+}
+
+.home-course-section .banner-tile {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity var(--duration-normal) var(--ease-standard),
+    transform var(--duration-normal) var(--ease-standard);
+}
+
+.home-course-section.is-visible .banner-tile {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.home-course-section.is-visible .banner-tile:nth-child(1) { transition-delay: 0ms; }
+.home-course-section.is-visible .banner-tile:nth-child(2) { transition-delay: 80ms; }
+.home-course-section.is-visible .banner-tile:nth-child(3) { transition-delay: 160ms; }
+.home-course-section.is-visible .banner-tile:nth-child(4) { transition-delay: 240ms; }
+
+/* 按下卡片：圖片微縮放 1.02，放開時用同一條 transition 回到原本大小。 */
+.home-course-section .banner-tile__media img {
+  transition: transform var(--duration-slow) var(--ease-standard);
+}
+
+.home-course-section .banner-tile:active .banner-tile__media img {
+  transform: scale(1.02);
+}
+
+/* 捲動進度列：1px 髮絲線 + 一段隨捲動位置移動的加粗線，只在手機橫滑
+   模式下有意義（桌機版 .banner-row--quad 是固定格狀、沒有橫向可滑），
+   預設隱藏，跟 .banner-row--quad 本身改橫滑的中斷點（768px）一致。
+   寬度／位移量由 js/hscroll-progress.js 依實際可滑動比例計算，不是
+   寫死的百分比。 */
+.hscroll-progress {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .hscroll-progress {
+    position: relative;
+    display: block;
+    height: 1px;
+    margin-top: var(--space-4);
+    background: color-mix(in srgb, var(--color-text-secondary) 20%, transparent);
+  }
+
+  .hscroll-progress__bar {
+    position: absolute;
+    top: -1px;
+    left: 0;
+    height: 3px;
+    border-radius: 2px;
+    background: var(--color-interactive);
   }
 }
