@@ -200,51 +200,79 @@
       </div>
     </section>
 
+    <!-- 2026-10-30 重新設計：使用者點出這頁所有圖片都塞進同一種
+         .material-photo-carousel（橫向滑動列），四段內容看起來長得
+         一模一樣，單調。研究後發現 enterprise.css 已經有專門給「照片
+         跟文字具體對應」用的 .ent-feature（桌面版圖文左右並排，
+         --reverse 交錯方向，--collage／--mosaic 兩種多圖拼貼），只是
+         從來沒套用在任何課程頁上。這次改成：開場鉤子、媒材質地說明、
+         傾斜流動說明、迷你畫布說明都改用 .ent-feature（四段輪流用
+         mosaic／collage／duo 三種不同的圖片排列＋ default／reverse
+         交錯方向，視覺上才會真的有節奏變化，不是複製四次同一格式）；
+         「上課情境」「作品細節」這兩段本來就是「同性質照片一次看好
+         幾張」的情境，保留 .material-photo-carousel 橫滑，跟上面的
+         .ent-feature 區塊形成對比，不是整頁同一種容器。
+         .ent-feature__media--duo 是這次新增的變化（見 enterprise.css），
+         專門給剛好兩張照片對應同一段文字的情況，collage／mosaic 都是
+         三張或四張，硬塞兩張會留空格。 -->
+
     <section class="chapter fade-in delay-1">
-      <div class="chapter__intro">
-        <p>用壓克力顏料倒膠，讓顏色自然流動、交融，完成一幅獨一無二的抽象作品。</p>
-        <p>沒有固定畫法限制，配色跟流動的紋路每次都不一樣，很適合第一次接觸繪畫的人。</p>
-      </div>
-      <div class="material-photo-carousel">
-        <div class="material-photo-carousel__track">
-          <img src="../../assets/images/gallery/fluid-art/12.jpg" alt="兩件流動畫圓形托盤並排，前景深藍沙金色、後景粉藕色大理石紋理">
-          <img src="../../assets/images/courses/fluid-art/hook-closeup.jpg" alt="黑灰紫流動畫方形畫布局部特寫，雲霧般的紋理由手捧著展示">
-          <img src="../../assets/images/gallery/fluid-art/03.jpg" alt="紫金藍流動畫方形畫布兩幅並排，色彩交融出大理石紋理">
+      <div class="ent-features">
+        <div class="ent-feature">
+          <div class="ent-feature__media ent-feature__media--mosaic">
+            <img src="../../assets/images/gallery/fluid-art/12.jpg" alt="兩件流動畫圓形托盤並排，前景深藍沙金色、後景粉藕色大理石紋理">
+            <img src="../../assets/images/courses/fluid-art/hook-closeup.jpg" alt="黑灰紫流動畫方形畫布局部特寫，雲霧般的紋理由手捧著展示">
+            <img src="../../assets/images/gallery/fluid-art/03.jpg" alt="紫金藍流動畫方形畫布兩幅並排，色彩交融出大理石紋理">
+          </div>
+          <div class="ent-feature__body">
+            <p class="chapter__statement">用壓克力顏料倒膠，讓顏色自己說話</p>
+            <p class="chapter__prose">用壓克力顏料倒膠，讓顏色自然流動、交融，完成一幅獨一無二的抽象作品。</p>
+            <p class="chapter__prose">沒有固定畫法限制，配色跟流動的紋路每次都不一樣，很適合第一次接觸繪畫的人。</p>
+          </div>
+        </div>
+
+        <div class="ent-feature ent-feature--reverse">
+          <div class="ent-feature__media ent-feature__media--collage">
+            <img src="../../assets/images/gallery/fluid-art/15.jpg" alt="手拿紙杯將藍色顏料倒入黑色方形畫布，畫面已有橘藍色波浪紋路">
+            <img src="../../assets/images/gallery/fluid-art/16.jpg" alt="手拿紙杯將灰藍色顏料倒入另一個紙杯中調色，調整顏料的濃稀比例">
+            <img src="../../assets/images/gallery/fluid-art/17.jpg" alt="手拿紙杯將紅色顏料倒入同一塊黑色方形畫布，疊加出橘藍綠色交錯紋路">
+            <img src="../../assets/images/gallery/fluid-art/24.jpg" alt="老師捧著粉白色大理石紋路方形畫布，向鏡頭展示顏料流動出的質地">
+          </div>
+          <div class="ent-feature__body">
+            <p class="chapter__statement">媒材與技法</p>
+            <p class="chapter__prose">使用壓克力顏料倒膠的流動畫技法，把調好的顏料直接倒在畫布上，讓顏色自己流動、暈開、交融出紋理，不是用筆刷一筆一筆畫出來的，成品帶有隨機、自然的層次感。</p>
+            <p class="chapter__prose">顏料會加入壓克力稀釋劑調整濃稠度，讓壓克力顏料變得更有流動性。同一種顏色只要調整濃稀的比例，倒出來的紋路跟流動方式就會不一樣，這也是流動畫每次成品都不會重複的原因之一。</p>
+          </div>
+        </div>
+
+        <div class="ent-feature">
+          <div class="ent-feature__media ent-feature__media--duo">
+            <img src="../../assets/images/gallery/fluid-art/06.jpg" alt="粉藍金流動畫方形畫布，由雙手捧著傾斜展示柔和色彩流動的紋理">
+            <img src="../../assets/images/gallery/fluid-art/04.jpg" alt="藍綠橘流動畫方形畫布，戴手套的手捧著傾斜展示色彩交融流動的紋理">
+          </div>
+          <div class="ent-feature__body">
+            <p class="chapter__statement">拿起畫布，讓顏料繼續流動</p>
+            <p class="chapter__prose">倒色之後，還可以把整塊畫布拿起來傾斜、轉動，讓顏料順著重力繼續流動、暈染出更自然的紋路，不是倒完就結束。</p>
+          </div>
+        </div>
+
+        <div class="ent-feature ent-feature--reverse">
+          <div class="ent-feature__media ent-feature__media--duo">
+            <img src="../../assets/images/gallery/fluid-art/01.jpg" alt="藍白黑流動畫圓形畫布特寫，搭配同色系小方塊的迷你試色畫布">
+            <img src="../../assets/images/gallery/fluid-art/13.jpg" alt="粉白棕流動畫圓形托盤，搭配同色系小方塊的迷你試色畫布置於杯座上">
+          </div>
+          <div class="ent-feature__body">
+            <p class="chapter__statement">先用迷你畫布試色</p>
+            <p class="chapter__prose">調好顏色之後，會先用 5×5cm 的迷你畫布試色——老師示範幾種常見技法，你可以實際倒倒看，不喜歡配色也能換一組顏色再試一次，不用擔心一次就要決定。確定喜歡的配色跟做法之後，再把同樣的顏色放大繪製到正式的畫布上。迷你畫布做完也可以一起帶走，等於多了一次試錯、找到真正喜歡配色的機會。</p>
+          </div>
         </div>
       </div>
     </section>
 
     <section class="chapter fade-in delay-1">
       <div class="chapter__block">
-        <p class="chapter__statement">媒材與技法</p>
-        <p class="chapter__prose">使用壓克力顏料倒膠的流動畫技法，把調好的顏料直接倒在畫布上，讓顏色自己流動、暈開、交融出紋理，不是用筆刷一筆一筆畫出來的，成品帶有隨機、自然的層次感。</p>
-        <p class="chapter__prose">顏料會加入壓克力稀釋劑調整濃稠度，讓壓克力顏料變得更有流動性。同一種顏色只要調整濃稀的比例，倒出來的紋路跟流動方式就會不一樣，這也是流動畫每次成品都不會重複的原因之一。</p>
-        <div class="material-photo-carousel">
-          <div class="material-photo-carousel__track">
-            <img src="../../assets/images/gallery/fluid-art/15.jpg" alt="手拿紙杯將藍色顏料倒入黑色方形畫布，畫面已有橘藍色波浪紋路">
-            <img src="../../assets/images/gallery/fluid-art/16.jpg" alt="手拿紙杯將灰藍色顏料倒入另一個紙杯中調色，調整顏料的濃稀比例">
-            <img src="../../assets/images/gallery/fluid-art/17.jpg" alt="手拿紙杯將紅色顏料倒入同一塊黑色方形畫布，疊加出橘藍綠色交錯紋路">
-            <img src="../../assets/images/gallery/fluid-art/24.jpg" alt="老師捧著粉白色大理石紋路方形畫布，向鏡頭展示顏料流動出的質地">
-          </div>
-        </div>
-        <p class="chapter__prose">倒色之後，還可以把整塊畫布拿起來傾斜、轉動，讓顏料順著重力繼續流動、暈染出更自然的紋路，不是倒完就結束。</p>
-        <div class="material-photo-carousel">
-          <div class="material-photo-carousel__track">
-            <img src="../../assets/images/gallery/fluid-art/06.jpg" alt="粉藍金流動畫方形畫布，由雙手捧著傾斜展示柔和色彩流動的紋理">
-            <img src="../../assets/images/gallery/fluid-art/04.jpg" alt="藍綠橘流動畫方形畫布，戴手套的手捧著傾斜展示色彩交融流動的紋理">
-          </div>
-        </div>
-      </div>
-      <div class="chapter__block">
         <p class="chapter__statement">上課怎麼進行</p>
         <p class="chapter__prose">一堂課大約1.5小時，會先介紹會用到的材料跟工具。接著會讓你挑選喜歡的顏色，再依照你的選擇提供配色建議，協助調色。</p>
-        <p class="chapter__prose">調好之後，會先用 5×5cm 的迷你畫布試色——老師示範幾種常見技法，你可以實際倒倒看，不喜歡配色也能換一組顏色再試一次，不用擔心一次就要決定。確定喜歡的配色跟做法之後，再把同樣的顏色放大繪製到正式的畫布上。迷你畫布做完也可以一起帶走，等於多了一次試錯、找到真正喜歡配色的機會。</p>
-        <div class="material-photo-carousel">
-          <div class="material-photo-carousel__track">
-            <img src="../../assets/images/gallery/fluid-art/01.jpg" alt="藍白黑流動畫圓形畫布特寫，搭配同色系小方塊的迷你試色畫布">
-            <img src="../../assets/images/gallery/fluid-art/13.jpg" alt="粉白棕流動畫圓形托盤，搭配同色系小方塊的迷你試色畫布置於杯座上">
-          </div>
-        </div>
         <div class="material-photo-carousel">
           <div class="material-photo-carousel__track">
             <img src="../../assets/images/gallery/fluid-art/27.jpg" alt="多位學員與老師圍坐長桌調色，畫室上課情境">

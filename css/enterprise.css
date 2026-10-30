@@ -702,6 +702,20 @@
   border-radius: 0;
 }
 
+/* 2026-10-30：兩張照片對半並排，用在「剛好兩張圖具體對應同一句話」
+   的段落（例如課程頁示範手法前後兩步驟、兩種做法的對照）——collage
+   是 2x2 四格、mosaic 是一大二小三張，都不適合剛好兩張的情況，補一個
+   單排兩欄的變化，不用硬湊成三張或四張填滿格子。 */
+.ent-feature__media--duo {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-2);
+}
+
+.ent-feature__media--duo img {
+  border-radius: 0;
+}
+
 @media (min-width: 768px) {
   .ent-feature {
     flex-direction: row;
