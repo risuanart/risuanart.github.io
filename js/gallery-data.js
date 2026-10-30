@@ -251,6 +251,7 @@ window.GALLERY_ITEMS = [
   // 是石英砂肌理畫（不是油畫），照實歸在這堂課，不跟其他 12 件迪士尼
   // 油畫作品混在一起（見本檔案下方「迪士尼」主題批次新增的說明）。
   { course: "石英砂肌理畫", themes: ["迪士尼"], date: "2026-10-30", src: "../assets/images/gallery/sand-texture/33.jpg", alt: "小熊維尼伸手摸驢子屹耳的頭，灰白肌理圓形畫布", sessions: 1 },
+  { course: "石英砂肌理畫", themes: ["迪士尼"], date: "2026-10-30", src: "../assets/images/gallery/sand-texture/34.jpg", alt: "美女與野獸茶壺夫人與奇普茶杯特寫，白色肌理畫背景", sessions: 1 },
 
   // 2026-10-01 新增：「自己帶圖創作」星空油畫學員作品 37 件，技法是壓克力
   // 打底後用油畫顏料畫星辰、星雲、極光，部分作品完成後會撒星星／亮粉裝飾。
@@ -459,17 +460,23 @@ window.GALLERY_ITEMS = [
   { course: "流動畫", themes: [], date: "2026-10-30", src: "../assets/images/gallery/fluid-art/26.jpg", alt: "老師捧著粉藍薄荷綠相間的方形畫布，向鏡頭展示完成的紋路" },
   { course: "流動畫", themes: [], date: "2026-10-30", src: "../assets/images/gallery/fluid-art/27.jpg", alt: "多位學員與老師圍坐長桌調色，畫室上課情境" },
 
-  // 2026-10-30 新增「迪士尼」主題作品 13 件：使用者整理素材夾時把這批
-  // 獨立歸成一類，確認「迪士尼可以自己獨立」（不併入「動漫／角色」）。
-  // 12 件是油畫＋筆刷（course 歸在「自己帶圖創作」，比照 landscape-oil／
+  // 2026-10-30 新增「迪士尼」主題作品，共 32 件：使用者整理素材夾時把
+  // 這批獨立歸成一類，確認「迪士尼可以自己獨立」（不併入「動漫／
+  // 角色」）。第一輪只挑了 13 張「不重複構圖」的作品，使用者更正：
+  // 資料夾裡放的每一張都要收錄，不用自己篩選「重不重複」——同一個
+  // 角色的不同拍攝角度／不同構圖版本，使用者都當成獨立的素材放進去，
+  // 不是失誤。後來使用者又陸續補了 9 張新照片進資料夾，一併收錄，
+  // 最終從 32 張素材全部收錄，不篩選。
+  // 30 件是油畫＋筆刷（course 歸在「自己帶圖創作」，比照 landscape-oil／
   // sea-oil／star-sky／whale 這幾個既有主題資料夾的做法，另開
-  // assets/images/gallery/disney/ 資料夾），1 件（小熊維尼＋驢子）實際
-  // 材質是石英砂肌理畫，不是油畫，course 照實歸在「石英砂肌理畫」、
-  // 照片存進既有的 sand-texture/ 資料夾接續編號（33.jpg），不是硬塞進
-  // disney/ 資料夾湊數。sessions 依照素材夾的資料夾名稱（單堂／2堂／
-  // 3堂／4堂）照實填寫。原始素材共 23 張，排除重複角度/重複構圖的
-  // 照片（例如小美人魚跟比目魚那組有好幾張相近構圖，只留一張代表），
-  // 選出 13 張構圖/角色都不重複的作品。
+  // assets/images/gallery/disney/ 資料夾），2 件（小熊維尼＋驢子、
+  // 茶壺夫人＋奇普）實際材質是石英砂肌理畫，不是油畫，course 照實歸在
+  // 「石英砂肌理畫」、照片存進既有的 sand-texture/ 資料夾接續編號
+  // （33.jpg／34.jpg），不是硬塞進 disney/ 資料夾湊數。sessions 依照
+  // 素材夾的資料夾名稱（單堂／2堂／3堂／4堂）照實填寫。少數幾張角色
+  // 不確定具體是哪一部動畫/哪個角色名稱（例如疑似非迪士尼角色的素材、
+  // 風格化到難以指認是哪位公主的畫面），alt 文字刻意不寫具體片名/
+  // 角色名，避免寫錯造成誤導，只寫畫面實際內容。
   { course: "自己帶圖創作", themes: ["迪士尼"], date: "2026-10-30", src: "../assets/images/gallery/disney/01.jpg", alt: "小美人魚愛麗兒與比目魚，珊瑚粉背景，畫面寫著 Jessie 2022 愛心字樣", sessions: 1 },
   { course: "自己帶圖創作", themes: ["迪士尼"], date: "2026-10-30", src: "../assets/images/gallery/disney/02.jpg", alt: "小美人魚愛麗兒臉部特寫，紅髮搭配金色頭飾，笑容燦爛", sessions: 1 },
   { course: "自己帶圖創作", themes: ["迪士尼"], date: "2026-10-30", src: "../assets/images/gallery/disney/03.jpg", alt: "魔髮奇緣樂佩公主乘船，夜空中飄滿金黃色天燈", sessions: 1 },
@@ -482,6 +489,24 @@ window.GALLERY_ITEMS = [
   { course: "自己帶圖創作", themes: ["迪士尼"], date: "2026-10-30", src: "../assets/images/gallery/disney/10.jpg", alt: "小美人魚愛麗兒手拿粉紅海星，藍色背景，紅髮隨波飄動", sessions: 3 },
   { course: "自己帶圖創作", themes: ["迪士尼"], date: "2026-10-30", src: "../assets/images/gallery/disney/11.jpg", alt: "擬人化牡蠣角色們圍著樹根聊天，深綠色水底場景，氣泡環繞", sessions: 4 },
   { course: "自己帶圖創作", themes: ["迪士尼"], date: "2026-10-30", src: "../assets/images/gallery/disney/12.jpg", alt: "小美人魚愛麗兒與比目魚、賽巴斯汀在海底礁岩，陽光透過水面灑落", sessions: 4 },
+  { course: "自己帶圖創作", themes: ["迪士尼"], date: "2026-10-30", src: "../assets/images/gallery/disney/13.jpg", alt: "小美人魚愛麗兒與比目魚，深藍背景，紅髮大面積鋪滿畫面", sessions: 2 },
+  { course: "自己帶圖創作", themes: ["迪士尼"], date: "2026-10-30", src: "../assets/images/gallery/disney/14.jpg", alt: "魔髮奇緣變色龍帕斯卡站在樂佩公主頭頂，黑色背景特寫", sessions: 2 },
+  { course: "自己帶圖創作", themes: ["迪士尼"], date: "2026-10-30", src: "../assets/images/gallery/disney/15.jpg", alt: "小美人魚愛麗兒與比目魚特寫，深藍背景，紅髮隨波飄動", sessions: 2 },
+  { course: "自己帶圖創作", themes: ["迪士尼"], date: "2026-10-30", src: "../assets/images/gallery/disney/16.jpg", alt: "魔髮奇緣變色龍帕斯卡穿著粉紫小洋裝，站在樂佩公主頭頂特寫", sessions: 2 },
+  { course: "自己帶圖創作", themes: ["迪士尼"], date: "2026-10-30", src: "../assets/images/gallery/disney/17.jpg", alt: "小鹿斑比與兔子桑普、臭鼬花兒在森林相遇，蝴蝶停在斑比尾巴上", sessions: 2 },
+  { course: "自己帶圖創作", themes: ["迪士尼"], date: "2026-10-30", src: "../assets/images/gallery/disney/18.jpg", alt: "小鹿斑比與兔子桑普、臭鼬花兒森林場景，另一張拍攝角度，畫面右下角有簽名", sessions: 2 },
+  { course: "自己帶圖創作", themes: ["迪士尼"], date: "2026-10-30", src: "../assets/images/gallery/disney/19.jpg", alt: "畫筆正在描繪粉藍色翅膀細節，繪製過程特寫", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["迪士尼"], date: "2026-10-30", src: "../assets/images/gallery/disney/20.jpg", alt: "小美人魚愛麗兒與比目魚，珊瑚粉背景，畫面點綴愛心與文字裝飾", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["迪士尼"], date: "2026-10-30", src: "../assets/images/gallery/disney/21.jpg", alt: "阿拉丁茉莉公主墨綠色背景，頭戴藍色寶石頭飾", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["迪士尼"], date: "2026-10-30", src: "../assets/images/gallery/disney/22.jpg", alt: "小美人魚愛麗兒與比目魚、賽巴斯汀在海底礁岩，另一張拍攝角度", sessions: 4 },
+  { course: "自己帶圖創作", themes: ["迪士尼"], date: "2026-10-30", src: "../assets/images/gallery/disney/23.jpg", alt: "動畫角色遭大型毛怪抓住，一旁有小動物丟雪球的逗趣場景", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["迪士尼"], date: "2026-10-30", src: "../assets/images/gallery/disney/24.jpg", alt: "小美人魚反派烏蘇拉特寫，灰紫色皮膚與白髮，背景觸手環繞", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["迪士尼"], date: "2026-10-30", src: "../assets/images/gallery/disney/25.jpg", alt: "唐老鴨與黛絲鴨捧著花束，粉色背景寫著 Donald Duck 字樣", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["迪士尼"], date: "2026-10-30", src: "../assets/images/gallery/disney/26.jpg", alt: "藍髮女子側臉剪影，背景珊瑚與魚群點綴", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["迪士尼"], date: "2026-10-30", src: "../assets/images/gallery/disney/27.jpg", alt: "小美人魚愛麗兒與艾力克王子深情對視，黑白紅紫配色的普普風插畫", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["迪士尼"], date: "2026-10-30", src: "../assets/images/gallery/disney/28.jpg", alt: "小美人魚愛麗兒臉部特寫，紅髮搭配藍天白雲背景", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["迪士尼"], date: "2026-10-30", src: "../assets/images/gallery/disney/29.jpg", alt: "小美人魚愛麗兒坐在礁岩上眺望遠方，深藍海底場景", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["迪士尼"], date: "2026-10-30", src: "../assets/images/gallery/disney/30.jpg", alt: "戴眼鏡老先生肖像，一旁有貓咪與櫻桃，畫面簽名 Lydia", sessions: 1 },
 ];
 
 // 課程篩選鈕的選項清單，跟首頁「課程」選單、faq.html 裡提到的課程名稱
