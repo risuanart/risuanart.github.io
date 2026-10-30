@@ -290,7 +290,11 @@
 
     <section class="chapter fade-in delay-2">
       <div class="chapter__block">
-        <p class="chapter__statement">單堂／2堂／3堂／4堂，完成度差在哪裡</p>
+        <!-- 2026-10-30 使用者更正：原本小美人魚海底場景那 3 張（10/11/12）
+             標成 4 堂完成，使用者要求改成 3 堂（js/gallery-data.js 的
+             sessions 欄位同步修正），原本獨立的「4 堂完成」小節併入
+             「3 堂完成」，標題跟著拿掉「4堂」。 -->
+        <p class="chapter__statement">單堂／2堂／3堂，完成度差在哪裡</p>
         <p class="chapter__prose">同樣的評估邏輯，實際放進真實作品比較會更清楚。以下照堂數分組，都是真實學員作品，不是示意圖。</p>
       </div>
       <div class="ent-feature">
@@ -345,28 +349,28 @@
           <p class="chapter__prose">畫面裡有兩個以上的角色互動，或是背景場景比較完整（森林、星空這種有層次的環境），需要多一堂課的時間處理角色之間的構圖關係跟背景細節。</p>
         </div>
       </div>
-      <div class="chapter__block">
-        <p class="chapter__statement">3 堂完成</p>
-        <p class="chapter__prose">需要細膩漸層、畫面構圖較複雜的作品，會落在 3 堂左右，目前學員作品裡這個堂數的案例比較少，大多數人會選擇一堂或兩堂能完成的風格。</p>
-        <div class="uncropped-gallery">
-          <figure>
-            <img src="../../assets/images/gallery/disney/10.jpg" alt="小美人魚愛麗兒手拿粉紅海星，藍色背景，紅髮隨波飄動">
-            <figcaption>3 堂完成・小美人魚，髮絲漸層與海水波紋細節較多</figcaption>
-          </figure>
+      <div class="ent-feature">
+        <div class="ent-feature__media ent-feature__media--gallery">
+          <div class="work__gallery" data-gallery>
+            <div class="work__gallery-main" data-gallery-main>
+              <img src="../../assets/images/gallery/disney/10.jpg" alt="小美人魚愛麗兒手拿粉紅海星，藍色背景，紅髮隨波飄動" loading="lazy" class="is-active" data-gallery-frame>
+              <img src="../../assets/images/gallery/disney/12.jpg" alt="小美人魚愛麗兒與比目魚、賽巴斯汀在海底礁岩，陽光透過水面灑落" loading="lazy" data-gallery-frame>
+              <img src="../../assets/images/gallery/disney/11.jpg" alt="擬人化牡蠣角色們圍著樹根聊天，深綠色水底場景，氣泡環繞" loading="lazy" data-gallery-frame>
+            </div>
+            <div class="work__gallery-strip-wrap">
+              <button type="button" class="work__gallery-nav work__gallery-nav--prev" data-gallery-nav="-1" aria-label="上一張"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
+              <div class="work__gallery-thumbs" data-gallery-thumbs>
+                <button type="button" class="work__gallery-thumb is-active" data-gallery-thumb aria-label="切換到：小美人魚手拿海星"><img src="../../assets/images/gallery/disney/10.jpg" alt="" loading="lazy"></button>
+                <button type="button" class="work__gallery-thumb" data-gallery-thumb aria-label="切換到：小美人魚海底礁岩"><img src="../../assets/images/gallery/disney/12.jpg" alt="" loading="lazy"></button>
+                <button type="button" class="work__gallery-thumb" data-gallery-thumb aria-label="切換到：擬人化牡蠣角色"><img src="../../assets/images/gallery/disney/11.jpg" alt="" loading="lazy"></button>
+              </div>
+              <button type="button" class="work__gallery-nav work__gallery-nav--next" data-gallery-nav="1" aria-label="下一張"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="chapter__block">
-        <p class="chapter__statement">4 堂完成</p>
-        <p class="chapter__prose">多角色、多層次光影、水面折射或複雜場景交織在一起的畫面，通常要到 4 堂左右才能做出高精緻度的成品——像海底場景同時要處理光線穿透水面的效果、礁岩的質感、好幾隻角色各自的細節，每一層都要花時間堆疊。</p>
-        <div class="uncropped-gallery">
-          <figure>
-            <img src="../../assets/images/gallery/disney/12.jpg" alt="小美人魚愛麗兒與比目魚、賽巴斯汀在海底礁岩，陽光透過水面灑落">
-            <figcaption>4 堂完成・小美人魚，海底光影＋多角色＋礁岩質感</figcaption>
-          </figure>
-          <figure>
-            <img src="../../assets/images/gallery/disney/11.jpg" alt="擬人化牡蠣角色們圍著樹根聊天，深綠色水底場景，氣泡環繞">
-            <figcaption>4 堂完成・多個角色各自的表情與服裝細節</figcaption>
-          </figure>
+        <div class="ent-feature__body">
+          <p class="chapter__statement">3 堂完成</p>
+          <p class="chapter__prose">需要細膩漸層、多角色互動、或是光影層次較複雜的畫面（像海底場景要處理光線穿透水面的效果、礁岩質感、好幾隻角色各自的細節），通常會落在 3 堂左右，目前學員作品裡這個堂數的案例比較少，大多數人會選擇一堂或兩堂能完成的風格。</p>
         </div>
       </div>
     </section>
