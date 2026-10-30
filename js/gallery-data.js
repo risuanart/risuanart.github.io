@@ -247,6 +247,10 @@ window.GALLERY_ITEMS = [
   { course: "石英砂肌理畫", themes: ["海邊"], date: "2026-09-21", src: "../assets/images/gallery/sand-texture/30.jpg", alt: "學員手持米黃與赭紅色系的沙丘肌理畫作品", sessions: 1 },
   { course: "石英砂肌理畫", themes: ["海邊"], date: "2026-09-21", src: "../assets/images/gallery/sand-texture/31.jpg", alt: "粉紫漸層肌理畫，白色浪花狀鏤空愛心圖案", sessions: 1 },
   { course: "石英砂肌理畫", themes: ["海邊"], date: "2026-09-21", src: "../assets/images/gallery/sand-texture/32.jpg", alt: "藍粉夕陽海景肌理畫，前景點綴繽紛花束", sessions: 1 },
+  // 2026-10-30 新增：迪士尼主題作品之一，小熊維尼與驢子屹耳，材質實際
+  // 是石英砂肌理畫（不是油畫），照實歸在這堂課，不跟其他 12 件迪士尼
+  // 油畫作品混在一起（見本檔案下方「迪士尼」主題批次新增的說明）。
+  { course: "石英砂肌理畫", themes: ["迪士尼"], date: "2026-10-30", src: "../assets/images/gallery/sand-texture/33.jpg", alt: "小熊維尼伸手摸驢子屹耳的頭，灰白肌理圓形畫布", sessions: 1 },
 
   // 2026-10-01 新增：「自己帶圖創作」星空油畫學員作品 37 件，技法是壓克力
   // 打底後用油畫顏料畫星辰、星雲、極光，部分作品完成後會撒星星／亮粉裝飾。
@@ -454,6 +458,30 @@ window.GALLERY_ITEMS = [
   { course: "流動畫", themes: [], date: "2026-10-30", src: "../assets/images/gallery/fluid-art/25.jpg", alt: "手指輕觸青綠黃白交錯紋路的圓形畫布邊緣特寫" },
   { course: "流動畫", themes: [], date: "2026-10-30", src: "../assets/images/gallery/fluid-art/26.jpg", alt: "老師捧著粉藍薄荷綠相間的方形畫布，向鏡頭展示完成的紋路" },
   { course: "流動畫", themes: [], date: "2026-10-30", src: "../assets/images/gallery/fluid-art/27.jpg", alt: "多位學員與老師圍坐長桌調色，畫室上課情境" },
+
+  // 2026-10-30 新增「迪士尼」主題作品 13 件：使用者整理素材夾時把這批
+  // 獨立歸成一類，確認「迪士尼可以自己獨立」（不併入「動漫／角色」）。
+  // 12 件是油畫＋筆刷（course 歸在「自己帶圖創作」，比照 landscape-oil／
+  // sea-oil／star-sky／whale 這幾個既有主題資料夾的做法，另開
+  // assets/images/gallery/disney/ 資料夾），1 件（小熊維尼＋驢子）實際
+  // 材質是石英砂肌理畫，不是油畫，course 照實歸在「石英砂肌理畫」、
+  // 照片存進既有的 sand-texture/ 資料夾接續編號（33.jpg），不是硬塞進
+  // disney/ 資料夾湊數。sessions 依照素材夾的資料夾名稱（單堂／2堂／
+  // 3堂／4堂）照實填寫。原始素材共 23 張，排除重複角度/重複構圖的
+  // 照片（例如小美人魚跟比目魚那組有好幾張相近構圖，只留一張代表），
+  // 選出 13 張構圖/角色都不重複的作品。
+  { course: "自己帶圖創作", themes: ["迪士尼"], date: "2026-10-30", src: "../assets/images/gallery/disney/01.jpg", alt: "小美人魚愛麗兒與比目魚，珊瑚粉背景，畫面寫著 Jessie 2022 愛心字樣", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["迪士尼"], date: "2026-10-30", src: "../assets/images/gallery/disney/02.jpg", alt: "小美人魚愛麗兒臉部特寫，紅髮搭配金色頭飾，笑容燦爛", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["迪士尼"], date: "2026-10-30", src: "../assets/images/gallery/disney/03.jpg", alt: "魔髮奇緣樂佩公主乘船，夜空中飄滿金黃色天燈", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["迪士尼"], date: "2026-10-30", src: "../assets/images/gallery/disney/04.jpg", alt: "冰雪奇緣艾莎與雪白冰馬，淺藍色調的夢幻場景", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["迪士尼"], date: "2026-10-30", src: "../assets/images/gallery/disney/05.jpg", alt: "阿拉丁茉莉公主紅色禮服造型，深紅背景，手邊有一隻黑色小猴子", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["迪士尼"], date: "2026-10-30", src: "../assets/images/gallery/disney/06.jpg", alt: "怪獸電力公司大眼仔戴著 MU 棒球帽，木質門板背景", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["迪士尼"], date: "2026-10-30", src: "../assets/images/gallery/disney/07.jpg", alt: "小鹿斑比與兔子桑普、臭鼬花兒在森林空地相遇，蝴蝶停在斑比尾巴上", sessions: 2 },
+  { course: "自己帶圖創作", themes: ["迪士尼"], date: "2026-10-30", src: "../assets/images/gallery/disney/08.jpg", alt: "粉紫色夕陽海邊，人物背影剪影坐在岩石上", sessions: 2 },
+  { course: "自己帶圖創作", themes: ["迪士尼"], date: "2026-10-30", src: "../assets/images/gallery/disney/09.jpg", alt: "獅子王木法沙與辛巴依偎，深藍星空背景", sessions: 2 },
+  { course: "自己帶圖創作", themes: ["迪士尼"], date: "2026-10-30", src: "../assets/images/gallery/disney/10.jpg", alt: "小美人魚愛麗兒手拿粉紅海星，藍色背景，紅髮隨波飄動", sessions: 3 },
+  { course: "自己帶圖創作", themes: ["迪士尼"], date: "2026-10-30", src: "../assets/images/gallery/disney/11.jpg", alt: "擬人化牡蠣角色們圍著樹根聊天，深綠色水底場景，氣泡環繞", sessions: 4 },
+  { course: "自己帶圖創作", themes: ["迪士尼"], date: "2026-10-30", src: "../assets/images/gallery/disney/12.jpg", alt: "小美人魚愛麗兒與比目魚、賽巴斯汀在海底礁岩，陽光透過水面灑落", sessions: 4 },
 ];
 
 // 課程篩選鈕的選項清單，跟首頁「課程」選單、faq.html 裡提到的課程名稱
@@ -521,6 +549,10 @@ window.GALLERY_COURSE_LINKS = {
 // 瀏覽作品集時用「流動畫」課程篩選鈕就夠了，不用再多一層主題篩選。
 // 所以「流動畫」底下所有作品的 themes 改回空陣列 []，「抽象圖案」
 // 這個主題標籤維持只留給其他課程裡真的有抽象構圖的作品用。
+// 2026-10-30 新增「迪士尼」標籤：使用者整理素材夾時把迪士尼主題的
+// 學員作品獨立歸成一類，確認這類題材「自己獨立」，不要併進泛用的
+// 「動漫／角色」標籤裡——瀏覽「動漫／角色」時找的是比較廣義的動漫
+// 題材，迪士尼公主/電影角色是更明確、量也夠多的子分類，值得獨立。
 window.GALLERY_THEMES = [
   "海洋生物",
   "陸地動物",
@@ -533,6 +565,7 @@ window.GALLERY_THEMES = [
   "山",
   "食物",
   "動漫／角色",
+  "迪士尼",
   "星空／月亮",
   "狗狗",
   "貓咪",
