@@ -31,41 +31,29 @@
   color: var(--color-text-secondary);
 }
 
-/* 課程＝單選（跟 .pill-nav 分類列同一種「一次只能選一個」邏輯），
-   主題＝複選（可以同時亮好幾個），兩組視覺故意做出差異：課程用實色填滿
-   當作 active 狀態，主題用邊框＋打勾符號，一眼能分辨「這兩組篩選規則
-   不一樣」，不是照抄同一顆按鈕兩次。 */
+/* 篩選鈕採黑色系，沿用原本的選取狀態：未選取時是黑色描邊，
+   指向或選取後以黑底白字呈現，讓多選主題仍清楚看出目前選了哪些。 */
 .gallery-filters__chip {
   appearance: none;
-  border: 1px solid color-mix(in srgb, var(--color-text-secondary) 35%, transparent);
-  border-radius: var(--radius-sharp);
-  background: none;
-  padding: var(--space-1) var(--space-4);
+  border: none;
+  outline: 3px #181717 solid;
+  outline-offset: -3px;
+  border-radius: 5px;
+  background-color: transparent;
+  padding: 10px 15px;
   font-family: inherit;
   font-size: var(--font-size-sm);
-  color: var(--color-text-primary);
+  color: #181717;
   cursor: pointer;
-  transition: background var(--duration-fast) var(--ease-standard),
-    color var(--duration-fast) var(--ease-standard),
-    border-color var(--duration-fast) var(--ease-standard);
+  transition: 400ms;
 }
 
-.gallery-filters__chip[data-gallery-course].is-active {
-  background: var(--color-text-primary);
-  border-color: var(--color-text-primary);
-  color: var(--color-surface-light);
-}
-
+.gallery-filters__chip[data-gallery-course].is-active,
 .gallery-filters__chip[data-gallery-theme].is-active,
-.gallery-session-filter.is-active {
-  background: var(--color-text-primary);
-  border-color: var(--color-text-primary);
-  color: var(--color-surface-light);
-}
-
-.gallery-filters__chip:hover:not(.is-active) {
-  background: var(--color-surface-neutral);
-  border-color: var(--color-text-primary);
+.gallery-session-filter.is-active,
+.gallery-filters__chip:hover {
+  background-color: #181717;
+  color: white;
 }
 
 .gallery-filters__chip:focus-visible,
