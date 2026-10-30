@@ -206,6 +206,10 @@
 }
 
 .site-header__nav-dropdown {
+  --course-menu-panel: #39342D;
+  --course-menu-text: #D8D2C9;
+  --course-menu-photo-wash: rgba(32, 28, 24, 0.18);
+  --course-menu-divider: rgba(225, 218, 207, 0.30);
   position: absolute;
   top: 100%;
   left: 50%;
@@ -267,7 +271,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background: var(--color-surface-dark);
+  background: var(--course-menu-panel);
   padding: var(--space-6) var(--space-6) var(--space-6) var(--space-10);
 }
 
@@ -303,7 +307,7 @@
      （那是手機抽屜選單用來做「已上架／未上架」視覺分級的淡化效果），
      只在桌面下拉選單這個範圍改成純白，跟旁邊真的連結（.site-menu__sublink）
      一樣亮，不分級。手機抽屜本身不受影響。 */
-  color: var(--color-surface-light);
+  color: var(--course-menu-text);
 }
 
 .site-header__nav-dropdown-menu .site-menu__sublink {
@@ -316,7 +320,7 @@
   font-weight: 400;
   padding: var(--space-2) 0;
   opacity: 1;
-  color: var(--color-surface-light);
+  color: var(--course-menu-text);
   /* 2026-10-20：.site-menu__sublink 全域規則有 border-bottom: 1px solid
      currentColor 當底線（手機抽屜選單用），panacea 的左欄文字沒有底線，
      這裡在下拉選單範圍內覆寫拿掉。 */
@@ -359,7 +363,7 @@
   min-width: 0;
   overflow: hidden;
   text-decoration: none;
-  color: var(--color-surface-light);
+  color: var(--course-menu-text);
   text-transform: none;
   letter-spacing: normal;
   font-weight: 400;
@@ -370,12 +374,12 @@
 .site-header__nav-dropdown-photo + .site-header__nav-dropdown-photo::before {
   content: "";
   position: absolute;
-  z-index: 2;
+  z-index: 4;
   top: 0;
   bottom: 0;
   left: 0;
   width: 1px;
-  background: rgba(255, 255, 255, 0.6);
+  background: var(--course-menu-divider);
   pointer-events: none;
 }
 
@@ -386,6 +390,15 @@
   aspect-ratio: 2 / 3;
   overflow: hidden;
   background: color-mix(in srgb, var(--color-surface-light) 8%, transparent);
+}
+
+.site-header__nav-dropdown-photo__frame::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background: var(--course-menu-photo-wash);
+  pointer-events: none;
 }
 
 .site-header__nav-dropdown-photo__frame img {
@@ -405,6 +418,7 @@
 
 .site-header__nav-dropdown-photo__shade {
   position: absolute;
+  z-index: 2;
   inset: 0;
   /* 2026-10-20：使用者回報照片太暗——原本整張照片都疊了至少 0.4 的黑，
      改成只在底部（標籤文字那一小段）加深，照片中上段幾乎不疊色，維持
@@ -419,12 +433,13 @@
 
 .site-header__nav-dropdown-photo__label {
   position: absolute;
+  z-index: 3;
   left: 0;
   right: 0;
   bottom: 0;
   margin: 0;
   padding: var(--space-2) var(--space-4) var(--space-4);
-  color: var(--color-surface-light);
+  color: var(--course-menu-text);
   font-size: var(--font-size-sm);
   font-weight: 700;
   text-align: left;
