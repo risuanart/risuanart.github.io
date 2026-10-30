@@ -449,7 +449,6 @@ window.GALLERY_ITEMS = [
   { course: "流動畫", themes: [], date: "2026-10-30", src: "../assets/images/gallery/fluid-art/15.jpg", alt: "手拿紙杯將藍色顏料倒入黑色方形畫布，畫面已有橘藍色波浪紋路" },
   { course: "流動畫", themes: [], date: "2026-10-30", src: "../assets/images/gallery/fluid-art/16.jpg", alt: "手拿紙杯將灰藍色顏料倒入另一個紙杯中調色" },
   { course: "流動畫", themes: [], date: "2026-10-30", src: "../assets/images/gallery/fluid-art/17.jpg", alt: "手拿紙杯將紅色顏料倒入黑色方形畫布，畫面已有橘藍綠色交錯紋路" },
-  { course: "流動畫", themes: [], date: "2026-10-30", src: "../assets/images/gallery/fluid-art/18.jpg", alt: "老師彎腰在長桌上調色，桌面擺滿各色顏料紙杯與待畫的空白畫布" },
   { course: "流動畫", themes: [], date: "2026-10-30", src: "../assets/images/gallery/fluid-art/19.jpg", alt: "手拿紙杯將白色顏料倒在白色圓形畫布中央，已暈開墨綠色花朵狀紋路" },
   { course: "流動畫", themes: [], date: "2026-10-30", src: "../assets/images/gallery/fluid-art/20.jpg", alt: "白色紙杯壓在紅橘黑綠交錯紋路的方形畫布中央，手指沾滿黑色顏料" },
   { course: "流動畫", themes: [], date: "2026-10-30", src: "../assets/images/gallery/fluid-art/21.jpg", alt: "雙手捧著白色圓形畫布，正把紙杯裡的深色顏料倒在中央" },
@@ -458,7 +457,6 @@ window.GALLERY_ITEMS = [
   { course: "流動畫", themes: [], date: "2026-10-30", src: "../assets/images/gallery/fluid-art/24.jpg", alt: "老師捧著粉白色大理石紋路方形畫布，向鏡頭展示完成的作品" },
   { course: "流動畫", themes: [], date: "2026-10-30", src: "../assets/images/gallery/fluid-art/25.jpg", alt: "手指輕觸青綠黃白交錯紋路的圓形畫布邊緣特寫" },
   { course: "流動畫", themes: [], date: "2026-10-30", src: "../assets/images/gallery/fluid-art/26.jpg", alt: "老師捧著粉藍薄荷綠相間的方形畫布，向鏡頭展示完成的紋路" },
-  { course: "流動畫", themes: [], date: "2026-10-30", src: "../assets/images/gallery/fluid-art/27.jpg", alt: "多位學員與老師圍坐長桌調色，畫室上課情境" },
 
   // 2026-10-30 新增「迪士尼」主題作品，共 32 件：使用者整理素材夾時把
   // 這批獨立歸成一類，確認「迪士尼可以自己獨立」（不併入「動漫／
