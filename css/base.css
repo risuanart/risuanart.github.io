@@ -126,6 +126,17 @@ a {
   border: 0;
 }
 
+/* 內容待業主補充的佔位文字（例如出貨時間、退換貨規則這類法務/營運細節，
+   不能由 AI 自行編造）——用斜體＋略淡文字跟虛線底線跟正常內文做出區分，
+   訪客看了會知道這段還不是最終內容，不是用 --color-warning（全站規則是
+   那個顏色只給破壞性操作跟錯誤訊息用，這裡不是錯誤，是「尚未提供」）。 */
+.content-pending {
+  font-style: italic;
+  color: color-mix(in srgb, var(--color-text-secondary) 80%, transparent);
+  text-decoration: underline dotted;
+  text-underline-offset: 3px;
+}
+
 /* 全域處理：使用者開啟「減少動態」偏好時，關閉／大幅縮短所有動畫與轉場。
    不論後續哪個階段加了什麼動畫，都必須尊重這個設定，不可個別覆寫繞過。 */
 @media (prefers-reduced-motion: reduce) {

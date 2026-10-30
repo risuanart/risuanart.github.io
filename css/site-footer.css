@@ -96,7 +96,10 @@
 @media (min-width: 768px) {
   .preview-footer__inner {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    /* 2026-10-30 上架前待修清單任務 3：頁尾從 ABOUT／INFO 兩欄改成
+       課程與服務／購物說明／聯絡與到訪三欄，欄寬從 1fr 1fr 改成
+       1fr 1fr 1fr。 */
+    grid-template-columns: 1fr 1fr 1fr;
     column-gap: var(--space-10);
   }
 
