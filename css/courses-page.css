@@ -290,21 +290,35 @@
   text-decoration: none; font-size: 13.5px; font-weight: 700;
 }
 
-/* ---------- 材料指南：底部延伸閱讀 ---------- */
-.course-guides { padding-top: 60px; }
-.course-guides__head {
-  display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap;
-  margin-bottom: 28px; padding-bottom: 14px; border-bottom: 1px solid color-mix(in srgb, var(--color-text-secondary) 25%, transparent);
+/* ---------- 材料指南：底部延伸閱讀 ----------
+   上架前待修清單任務 8：原本的 .course-guides__grid（三張大圖直排卡片）
+   換成跟首頁同一套「主打卡片＋精簡列表」排版，.course-guide-card 系列
+   class 不再使用（改用 home-editorial.css 的 .home-guide-feature）。
+   列表部分（.course-guide-links）是這份清單獨有的規格：一行一列、
+   列高至少 44px、列與列用 1px 髮絲線分隔——跟首頁的 .home-guide-links
+   （兩欄並排，只有一條頂線）不是同一回事，所以沒有直接沿用那組。 */
+.course-guide-links {
+  display: flex;
+  flex-direction: column;
+  margin-top: var(--space-6);
+  border-top: 1px solid var(--color-surface-neutral);
 }
-.course-guides__title { font-size: clamp(20px, 2.2vw, 26px); font-weight: 800; margin: 0; }
-.course-guides__all { font-size: 12.5px; font-weight: 700; color: var(--color-text-secondary); text-decoration: none; white-space: nowrap; }
-.course-guides__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
-.course-guide-card { display: block; text-decoration: none; color: inherit; }
-.course-guide-card__media { aspect-ratio: 4/3; width: 100%; overflow: hidden; margin-bottom: 14px; }
-.course-guide-card__media img { width: 100%; height: 100%; object-fit: cover; }
-.course-guide-card__eyebrow { font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-brand); font-weight: 700; margin: 0 0 6px; }
-.course-guide-card__title { font-size: 14.5px; font-weight: 700; line-height: 1.5; margin: 0 0 8px; }
-.course-guide-card__desc { font-size: 12px; line-height: 1.7; color: var(--color-text-secondary); margin: 0; }
-@media (max-width: 768px) {
-  .course-guides__grid { grid-template-columns: 1fr; gap: 32px; }
+.course-guide-links a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  min-height: 44px;
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--color-surface-neutral);
+  color: var(--color-text-primary);
+  font-size: var(--font-size-sm);
+  text-decoration: none;
+}
+.course-guide-links a span {
+  color: var(--color-interactive);
+  flex: none;
+}
+.course-guide-links a:hover {
+  color: var(--color-interactive);
 }
