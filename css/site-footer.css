@@ -59,17 +59,24 @@
   max-width: 40ch;
 }
 
+/* 2026-10-31 上架前待修清單任務 4：原本 gap 寫的是 var(--space-3)，
+   這個 token 從來沒有在 tokens.css 定義過（全站間距刻度是 1/2/4/6/10/
+   16/24，中間沒有「3」這一階），var() 指到不存在的變數在計算階段視為
+   invalid，gap 等於沒有生效，兩個圖示才會緊貼在一起。改用確實存在、
+   清單建議的 --space-2。 */
 .preview-footer__social {
   display: flex;
-  gap: var(--space-3);
+  gap: var(--space-2);
 }
 
 .preview-footer__social a {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 34px;
-  height: 34px;
+  /* 2026-10-31 上架前待修清單任務 4：原本 34×34px，小於全站手機可點擊
+     元素至少 44px 高的規則，改成 44×44px。 */
+  width: 44px;
+  height: 44px;
   border: 1px solid color-mix(in srgb, var(--color-surface-light) 30%, transparent);
   border-radius: 50%;
   color: var(--color-surface-light);

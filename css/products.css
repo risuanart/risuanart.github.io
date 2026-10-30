@@ -3526,6 +3526,11 @@ button.text-link {
    見 js/products-overview.js），不是分貼左右上角硬閃開——卡片右上角本來
    就有一顆浮出邊界的「加入購物車」圓鈕（.shop-card__add），SALE 改貼
    右上角會跟那顆鈕疊在一起，所以兩個角標統一收進左上角直式排列。 */
+/* 2026-10-31 上架前待修清單任務 9：原本跟其他兩處早鳥文字（見下面
+   .work-heading__discount-tagline／.shop-card__discount-tagline）共用
+   --color-warning。全站規則是這個顏色只給破壞性操作跟錯誤訊息用，
+   促銷標示不是錯誤也不是警告，改用 --color-brand（品牌橄欖綠），三處
+   一起換，維持彼此呼應的視覺。 */
 .discount-badge-corner {
   position: static;
   z-index: 2;
@@ -3533,9 +3538,9 @@ button.text-link {
   font-size: 10px;
   letter-spacing: 0.08em;
   line-height: 1.4;
-  color: var(--color-warning);
+  color: var(--color-brand);
   background: var(--color-surface-light);
-  border: 1px solid color-mix(in srgb, var(--color-warning) 55%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-brand) 55%, transparent);
 }
 
 /* 商品頁首圖：角標只有這一個、沒有別的角標可能疊在一起，不需要
@@ -3562,13 +3567,14 @@ button.text-link {
 
 /* 買列價格正上方的早鳥文字行（商品頁）／標題下方價格上方（商品總覽
    卡片），文字來源同一個 window.RisuanCart.EARLY_BIRD_TAGLINE，跟上面
-   .discount-badge-corner 同一個 warning 橘色，兩者搭配呼應。 */
+   .discount-badge-corner 同一個 --color-brand，兩者搭配呼應（原本是
+   warning 橘色，理由見上面 .discount-badge-corner 的說明）。 */
 .work-heading__discount-tagline {
   margin: 0 0 var(--space-1);
   font-size: var(--font-size-xs);
   font-weight: 700;
   letter-spacing: 0.03em;
-  color: var(--color-warning);
+  color: var(--color-brand);
 }
 
 .shop-card__discount-tagline {
@@ -3576,7 +3582,7 @@ button.text-link {
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.03em;
-  color: var(--color-warning);
+  color: var(--color-brand);
 }
 
 /* 電腦版 hover 換圖用的第二張圖，疊在主圖正上方、預設透明——只有
