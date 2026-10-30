@@ -133,6 +133,11 @@ window.GALLERY_ITEMS = [
   { course: "刮刀油畫", themes: ["風景", "山"], date: "2026-10-01", src: "../assets/images/gallery/palette-knife-oil/42.jpg", alt: "刮刀油畫的河濱自行車道景色，金黃草地與遠山，有人騎單車經過", sessions: 1 },
   { course: "刮刀油畫", themes: ["節慶／季節", "風景"], date: "2026-10-01", src: "../assets/images/gallery/palette-knife-oil/43.jpg", alt: "刮刀油畫的聖誕雪景，窗邊擺著聖誕樹，窗外是飄雪的街道", sessions: 1 },
   { course: "刮刀油畫", themes: ["風景", "植物花卉"], date: "2026-10-01", src: "../assets/images/gallery/palette-knife-oil/44.jpg", alt: "刮刀油畫的森林野花草地，陽光點點灑落在石頭與花叢間", sessions: 1 },
+  // 2026-10-30 新增：吉卜力主題作品之一，龍貓坐在大樹下，原始檔名
+  // 「使用了刮刀油畫.jpg」，材質實際是刮刀油畫不是油畫＋筆刷，照實
+  // 歸在「刮刀油畫」這堂課，不跟其他吉卜力油畫作品混在一起（同樣的
+  // 處理方式見迪士尼主題裡的小熊維尼／茶壺夫人兩件石英砂作品）。
+  { course: "刮刀油畫", themes: ["吉卜力"], date: "2026-10-30", src: "../assets/images/gallery/palette-knife-oil/45.jpg", alt: "龍貓坐在大樹下，刮刀堆疊出樹葉與草地的立體質感", sessions: 1 },
 
   // 2026-09-17 新增：「寵物油畫」10 件，使用者從 Mac 照片 App 的
   // 「狗狗油畫」相簿匯出，確認都是完全沒有畫畫經驗的同學一堂課完成的
@@ -505,16 +510,27 @@ window.GALLERY_ITEMS = [
   { course: "自己帶圖創作", themes: ["迪士尼／皮克斯"], date: "2026-10-30", src: "../assets/images/gallery/disney/28.jpg", alt: "小美人魚愛麗兒臉部特寫，紅髮搭配藍天白雲背景", sessions: 1 },
   { course: "自己帶圖創作", themes: ["迪士尼／皮克斯"], date: "2026-10-30", src: "../assets/images/gallery/disney/29.jpg", alt: "小美人魚愛麗兒坐在礁岩上眺望遠方，深藍海底場景", sessions: 1 },
   { course: "自己帶圖創作", themes: ["迪士尼／皮克斯"], date: "2026-10-30", src: "../assets/images/gallery/disney/30.jpg", alt: "戴眼鏡老先生肖像，一旁有貓咪與櫻桃，畫面簽名 Lydia", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["迪士尼／皮克斯"], date: "2026-10-30", src: "../assets/images/gallery/disney/31.jpg", alt: "美女與野獸被施魔法的玫瑰，玻璃罩特寫，深藍森林背景", sessions: 1 },
 
-  // 2026-10-30 新增「宮崎駿」主題作品 6 件，見上方 GALLERY_THEMES 旁的
-  // 說明。全部是油畫＋筆刷，course 歸在「自己帶圖創作」，另開
-  // assets/images/gallery/ghibli/ 資料夾（比照 disney/ 的做法）。
-  { course: "自己帶圖創作", themes: ["宮崎駿"], date: "2026-10-30", src: "../assets/images/gallery/ghibli/01.jpg", alt: "霍爾的移動城堡霍爾與蘇菲肖像畫兩幅並排", sessions: 2 },
-  { course: "自己帶圖創作", themes: ["宮崎駿"], date: "2026-10-30", src: "../assets/images/gallery/ghibli/02.jpg", alt: "霍爾的移動城堡火惡魔卡西法特寫，抱著一截木柴", sessions: 1 },
-  { course: "自己帶圖創作", themes: ["宮崎駿"], date: "2026-10-30", src: "../assets/images/gallery/ghibli/03.jpg", alt: "龍貓撐傘站在粉紅花海上，深藍夜空背景，一旁跟著小龍貓", sessions: 1 },
-  { course: "自己帶圖創作", themes: ["宮崎駿"], date: "2026-10-30", src: "../assets/images/gallery/ghibli/04.jpg", alt: "風之谷王蟲特寫，灰綠色外殼佈滿藍色眼睛，藍天白雲背景", sessions: 1 },
-  { course: "自己帶圖創作", themes: ["宮崎駿"], date: "2026-10-30", src: "../assets/images/gallery/ghibli/05.jpg", alt: "龍貓小梅趴在草地上，身後跟著一隻小龍貓", sessions: 1 },
-  { course: "自己帶圖創作", themes: ["宮崎駿"], date: "2026-10-30", src: "../assets/images/gallery/ghibli/06.jpg", alt: "龍貓小月站在大龍貓肚子上，深藍夜晚森林場景", sessions: 1 },
+  // 2026-10-30 新增「吉卜力」主題作品，共 15 件（6 件第一批＋9 件使用者
+  // 後續補的），見上方 GALLERY_THEMES 旁的說明。14 件是油畫＋筆刷，
+  // course 歸在「自己帶圖創作」，另開 assets/images/gallery/ghibli/
+  // 資料夾（比照 disney/ 的做法）；1 件（龍貓坐在樹下）材質是刮刀
+  // 油畫，歸在「刮刀油畫」那堂課，見 palette-knife-oil/45.jpg 那筆。
+  { course: "自己帶圖創作", themes: ["吉卜力"], date: "2026-10-30", src: "../assets/images/gallery/ghibli/01.jpg", alt: "霍爾的移動城堡霍爾與蘇菲肖像畫兩幅並排", sessions: 2 },
+  { course: "自己帶圖創作", themes: ["吉卜力"], date: "2026-10-30", src: "../assets/images/gallery/ghibli/02.jpg", alt: "霍爾的移動城堡火惡魔卡西法特寫，抱著一截木柴", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["吉卜力"], date: "2026-10-30", src: "../assets/images/gallery/ghibli/03.jpg", alt: "龍貓撐傘站在粉紅花海上，深藍夜空背景，一旁跟著小龍貓", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["吉卜力"], date: "2026-10-30", src: "../assets/images/gallery/ghibli/04.jpg", alt: "風之谷王蟲特寫，灰綠色外殼佈滿藍色眼睛，藍天白雲背景", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["吉卜力"], date: "2026-10-30", src: "../assets/images/gallery/ghibli/05.jpg", alt: "龍貓小梅趴在草地上，身後跟著一隻小龍貓", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["吉卜力"], date: "2026-10-30", src: "../assets/images/gallery/ghibli/06.jpg", alt: "龍貓小月站在大龍貓肚子上，深藍夜晚森林場景", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["吉卜力"], date: "2026-10-30", src: "../assets/images/gallery/ghibli/07.jpg", alt: "神隱少女煤炭精靈群中，坊寶寶變成的老鼠與湯婆婆的小鳥", sessions: 2 },
+  { course: "自己帶圖創作", themes: ["吉卜力"], date: "2026-10-30", src: "../assets/images/gallery/ghibli/08.jpg", alt: "吉卜力風格石造小屋場景，粉色花海與溪流環繞", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["吉卜力"], date: "2026-10-30", src: "../assets/images/gallery/ghibli/09.jpg", alt: "借物少女艾莉緹側臉特寫，髮夾別著曬衣夾，綠色樹葉背景", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["吉卜力"], date: "2026-10-30", src: "../assets/images/gallery/ghibli/10.jpg", alt: "紅豬波魯克駕駛紅色飛機特寫，戴著飛行帽與護目鏡", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["吉卜力"], date: "2026-10-30", src: "../assets/images/gallery/ghibli/11.jpg", alt: "神隱少女白龍與千尋依偎，深綠色背景", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["吉卜力"], date: "2026-10-30", src: "../assets/images/gallery/ghibli/12.jpg", alt: "崖上的波妞與宗介在森林小路上牽手前行，兩幅畫布並排", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["吉卜力"], date: "2026-10-30", src: "../assets/images/gallery/ghibli/13.jpg", alt: "神隱少女煤炭精靈群中，一隻粉色絨毛生物舉起雙手", sessions: 1 },
+  { course: "自己帶圖創作", themes: ["吉卜力"], date: "2026-10-30", src: "../assets/images/gallery/ghibli/14.jpg", alt: "紅豬波魯克駕駛紅色飛機特寫，另一個拍攝角度", sessions: 1 },
 ];
 
 // 課程篩選鈕的選項清單，跟首頁「課程」選單、faq.html 裡提到的課程名稱
@@ -586,13 +602,15 @@ window.GALLERY_COURSE_LINKS = {
 // 學員作品獨立歸成一類，確認這類題材「自己獨立」，不要併進泛用的
 // 「動漫／角色」標籤裡——瀏覽「動漫／角色」時找的是比較廣義的動漫
 // 題材，迪士尼公主/電影角色是更明確、量也夠多的子分類，值得獨立。
-// 2026-10-30 再新增「宮崎駿」標籤：使用者當初把「迪士尼、宮崎駿」
+// 2026-10-30 再新增「吉卜力」標籤：使用者當初把「迪士尼、宮崎駿」
 // 一起列為要各自獨立的主題（原話：「迪士尼、宮崎駿可以自己獨立」），
-// 道理跟迪士尼一樣——不併入「動漫／角色」，另開專屬標籤。素材夾
-// 資料夾名稱用「宮崎駿」，照實沿用這個名稱（不是改用「吉卜力」，
-// 雖然嚴格說霍爾/龍貓是吉卜力工作室作品、風之谷是宮崎駿執導但工作室
-// 成立前的作品，但使用者自己的分類習慣用「宮崎駿」，照她的說法命名，
-// 不用自己發明更精確但使用者沒用過的名詞）。
+// 道理跟迪士尼一樣——不併入「動漫／角色」，另開專屬標籤。一開始沿用
+// 素材夾資料夾名稱叫「宮崎駿」，後來使用者自己要求改名「吉卜力」，
+// 這批作品也橫跨霍爾的移動城堡、龍貓、風之谷、神隱少女、借物少女
+// 艾莉緹、崖上的波妞、紅豬這幾部不同片，用工作室名稱「吉卜力」當
+// 標籤比「宮崎駿」更準確涵蓋（風之谷是宮崎駿執導但工作室成立前的
+// 作品，借物少女艾莉緹是米林宏昌執導、宮崎駿只掛企劃，「吉卜力」
+// 這個名稱才真的涵蓋得到這些不是宮崎駿本人執導的作品）。
 window.GALLERY_THEMES = [
   "海洋生物",
   "陸地動物",
@@ -606,7 +624,7 @@ window.GALLERY_THEMES = [
   "食物",
   "動漫／角色",
   "迪士尼／皮克斯",
-  "宮崎駿",
+  "吉卜力",
   "星空／月亮",
   "狗狗",
   "貓咪",
