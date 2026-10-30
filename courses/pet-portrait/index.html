@@ -183,7 +183,16 @@
             佔位，這支影片是繪製過程紀錄，不是可篩選分類的完成品照片，
             不會另外塞進 js/gallery-data.js。 -->
 
-    <section class="ent-hero fade-in is-flush-top">
+    <!-- 2026-10-31 使用者回報：桌面版寬螢幕瀏覽時，直式影片（9:16）
+         置中限寬 420px，旁邊空出一大塊沒有利用。改成 .ent-hero--split，
+         桌面版影片跟文字左右並排，文字欄把原本下面 .chapter__intro 的
+         第一段介紹文字搬上來，再加一組價格/時間/尺寸速覽
+         （.ent-hero__facts）。手機版不受影響，CSS 見 css/enterprise.css
+         .ent-hero--split 的說明。價格取自 js/booking.js 的
+         COURSE_CATALOG（寵物油畫－大寵 $1600／小寵 $1400），不是另外
+         編的；時間跟尺寸用頁面下方「上課怎麼進行」「尺寸與畫布」
+         已經寫好的文字改寫，數字一致。 -->
+    <section class="ent-hero fade-in is-flush-top ent-hero--split">
       <div class="ent-hero__media">
         <video class="ent-hero__photo is-portrait-video is-full-bleed" src="../../assets/videos/courses/pet-portrait/寵物油畫.mp4" poster="../../assets/images/courses/pet-portrait/hero-poster.jpg" preload="auto" autoplay muted loop playsinline aria-label="寵物油畫繪製過程：戴紫色小兜帽的貓咪肖像"></video>
         <div class="ent-hero__scroll-hint" aria-hidden="true">
@@ -193,12 +202,17 @@
       <div class="ent-hero__caption">
         <p class="ent-hero__eyebrow">畫室常態課程</p>
         <h1 class="ent-hero__title">寵物油畫</h1>
+        <p class="ent-hero__intro">帶著家裡毛孩的照片來畫室，用油畫顏料畫出屬於牠的肖像。</p>
+        <ul class="ent-hero__facts">
+          <li><span class="ent-hero__facts-label">價格</span><span>小寵 $1,400・大寵 $1,600</span></li>
+          <li><span class="ent-hero__facts-label">時間</span><span>約 2–3 小時，單隻寵物一堂完成</span></li>
+          <li><span class="ent-hero__facts-label">尺寸</span><span>小、大兩種畫布，可選方形、長方形或圓形</span></li>
+        </ul>
       </div>
     </section>
 
     <section class="chapter fade-in delay-1">
       <div class="chapter__intro">
-        <p>帶著家裡毛孩的照片來畫室，用油畫顏料畫出屬於牠的肖像。</p>
         <p>單隻寵物通常一堂課就能完成，是很多同學開始接觸畫畫的第一堂課。</p>
       </div>
     </section>

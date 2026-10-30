@@ -83,6 +83,57 @@
   color: var(--color-text-secondary);
 }
 
+/* 2026-10-31 使用者回報：手機直式影片（9:16）的課程首圖，桌面版影片
+   限制在 420px 寬置中，旁邊留下一大塊空白沒有利用。改成桌面版影片跟
+   文字（標題＋第一段介紹＋價格/時間/尺寸速覽）左右並排，不是影片
+   置中、文字獨立一排擠在下面。只加在 .ent-hero--split 這個修飾類別上
+   （目前只有寵物課頁套用），不影響其他沒有這個 class 的 .ent-hero
+   （保時捷、流動畫等案例頁維持原本版型，那些首圖是橫式照片，沒有
+   「直式影片留白」這個問題）。手機版不受影響，維持原本影片在上、
+   文字在下的堆疊順序。 */
+.ent-hero__intro {
+  margin: var(--space-4) 0 0;
+  font-size: var(--font-size-base);
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+}
+
+.ent-hero__facts {
+  margin: var(--space-6) 0 0;
+  padding: var(--space-4) 0 0;
+  border-top: 1px solid var(--color-surface-neutral);
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.ent-hero__facts li {
+  display: flex;
+  gap: var(--space-4);
+  font-size: var(--font-size-sm);
+  line-height: 1.6;
+}
+
+.ent-hero__facts-label {
+  flex: none;
+  width: 4em;
+  color: var(--color-text-secondary);
+}
+
+@media (min-width: 768px) {
+  .ent-hero--split {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    align-items: center;
+    gap: var(--space-10);
+  }
+
+  .ent-hero--split .ent-hero__caption {
+    margin-top: 0;
+  }
+}
+
 @media (min-width: 768px) {
   .ent-hero__photo {
     aspect-ratio: 21 / 9;
