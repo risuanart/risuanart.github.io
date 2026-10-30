@@ -325,31 +325,39 @@
       </div>
     </section>
 
-    <!-- 首頁主要服務入口：沿用材料指南主題入口的完整圖文層次，兩項服務上下交錯排列。 -->
+    <!-- 上架前待修清單任務 1：手機版排版精簡。
+         - 拿掉區塊副標「個人創作與團體活動，都能找到適合的體驗」跟兩張
+           卡片的小標（.home-entry__eyebrow），文字層級改成「標題＋一行
+           說明」。
+         - 說明文字依業主指定改寫；企業／團體課程原本清單草稿寫「8 人
+           以上可外出到府帶班」，業主明確要求團體人數門檻這類數字完全
+           不要出現在官網上（不管幾人），這裡拿掉「8 人以上」，不是漏寫。
+         - 拿掉「看課程介紹 →」「看合作方式 →」文字連結，改成整張卡片
+           可點、右下保留箭頭圖示（.home-entry__link 現在只放圖示，見
+           home-editorial.css）。
+         - 手機版改上下堆疊（圖滿版在上、文字在下），左右交錯排列只留給
+           ≥768px，見 css/home-editorial.css 的 @media 區塊。 -->
     <section class="content-block home-entry-section">
       <div class="home-section-head">
         <div>
           <h2 class="home-section-title">探索課程與合作方式</h2>
-          <p class="home-section-hint">個人創作與團體活動，都能找到適合的體驗</p>
         </div>
       </div>
       <div class="home-entry-row">
         <a class="home-entry" href="courses/">
           <div class="home-entry__media"><img src="assets/images/courses/palette-knife-oil/hero-poster.jpg" alt="刮刀油畫作品"></div>
           <div class="home-entry__copy">
-            <p class="home-entry__eyebrow">多種媒材・新手也能參加</p>
             <h3 class="home-entry__title">繪畫課程</h3>
-            <p class="home-entry__desc">肌理砂畫、刮刀油畫、流動畫等，選一種媒材完成專屬作品。</p>
-            <span class="home-entry__link">看課程介紹 <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            <p class="home-entry__desc">石英砂肌理畫、刮刀油畫、流動畫，新手也能完成專屬作品。</p>
+            <span class="home-entry__link" aria-hidden="true"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
           </div>
         </a>
         <a class="home-entry home-entry--reverse" href="enterprise/">
           <div class="home-entry__media"><img src="assets/images/enterprise/fluid-family-day/fluid-booth-wide.jpg" alt="企業團體戶外創作活動"></div>
           <div class="home-entry__copy">
-            <p class="home-entry__eyebrow">企業包班・品牌合作・客製活動</p>
             <h3 class="home-entry__title">企業／團體課程</h3>
-            <p class="home-entry__desc">企業包班、品牌合作與客製活動，從構圖到現場帶班一起規劃。</p>
-            <span class="home-entry__link">看合作方式 <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            <p class="home-entry__desc">可外出到府帶班，企業、學校、社團皆可申請。</p>
+            <span class="home-entry__link" aria-hidden="true"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
           </div>
         </a>
       </div>

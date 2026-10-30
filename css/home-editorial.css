@@ -55,7 +55,9 @@
 
 .home-entry__title {
   margin: 0 0 var(--space-2);
-  font-size: var(--font-size-lg);
+  /* 上架前待修清單任務 1：標題字級降一級（原本 --font-size-lg／20px，
+     改用 --font-size-base／16px，比照 tokens.css 的尺度往下一階）。 */
+  font-size: var(--font-size-base);
   font-weight: 600;
   line-height: 1.5;
 }
@@ -64,16 +66,33 @@
   margin: 0;
   color: var(--color-text-secondary);
   font-size: var(--font-size-sm);
-  line-height: 1.7;
+  line-height: 1.6;
+  /* 說明文字限兩行，超過截斷——卡片拿掉小標跟文字連結後，說明文字是
+     唯一的內文區塊，多張卡片並排/堆疊時行數不一致會讓版面參差不齊。 */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* 上架前待修清單任務 1：原本是「看課程介紹 →」這種文字連結，拿掉文字、
+   只留箭頭圖示，固定在卡片文字區右下角，當作「整張卡片可點」的視覺
+   暗示（不是真的另外可以點的次要連結，整個 .home-entry 本身就是
+   <a>，訪客不熟悉網頁操作的話，完全拿掉圖示反而看不出能點）。 */
+.home-entry__copy {
+  position: relative;
+  /* 底部預留箭頭圖示的空間，避免固定在右下角的圖示疊到兩行說明文字
+     （尤其手機版文字欄變寬、兩行文字可能貼到卡片底部）。 */
+  padding-bottom: var(--space-6);
 }
 
 .home-entry__link {
+  position: absolute;
+  right: 0;
+  bottom: 0;
   display: inline-flex;
   align-items: center;
-  gap: var(--space-1);
-  margin-top: var(--space-2);
   color: var(--color-interactive);
-  font-size: var(--font-size-xs);
 }
 
 .home-entry__link svg {
@@ -205,13 +224,20 @@
 }
 
 @media (max-width: 768px) {
+  /* 上架前待修清單任務 1：原本手機版還是維持圖文左右並排（圖只分到
+     0.7fr，實測在手機寬度只剩約 118px），改成圖滿版在上、文字在下的
+     上下堆疊。左右交錯排列（.home-entry--reverse）只在 ≥768px 保留，
+     這裡用同一個選擇器把兩種卡片都壓成同一欄，--reverse 版型也跟著
+     失效，不用另外寫一條規則去抵銷它。 */
   .home-entry {
-    grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
+    grid-template-columns: 1fr;
+    grid-template-areas: "media" "copy";
     gap: var(--space-4);
   }
 
   .home-entry--reverse {
-    grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr);
+    grid-template-columns: 1fr;
+    grid-template-areas: "media" "copy";
   }
 
   .home-entry__media {
