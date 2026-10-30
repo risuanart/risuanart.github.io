@@ -64,7 +64,10 @@
 
 .ent-hero__eyebrow {
   margin: 0;
-  font-size: 12px;
+  /* 2026-10-31：原本寫死 12px，數值跟 --font-size-xs 剛好相等，改用
+     token 本身，跟 .ent-hero__facts-item dt 明確共用同一套字級系統，
+     不是兩個碰巧數字一樣的獨立宣告。 */
+  font-size: var(--font-size-xs);
   letter-spacing: 0.12em;
   color: var(--color-text-secondary);
 }
@@ -92,9 +95,16 @@
    （保時捷、流動畫等案例頁維持原本版型，那些首圖是橫式照片，沒有
    「直式影片留白」這個問題）。手機版不受影響，維持原本影片在上、
    文字在下的堆疊順序。 */
+/* 2026-10-31 使用者回報：這個區塊字級太多種、畫面不統一——光是標題
+   附近就疊了 12px（eyebrow）/16px（intro，這裡原本用的
+   --font-size-base）/14px（facts 的 dd）/11px（facts 的 dt，整個站
+   都沒有別的地方在用這個數字，是另外寫死的）這幾種大小。全站本文
+   段落（.chapter__intro／.chapter__prose）統一是 --font-size-sm
+   （14px），這裡的 intro 改用同一個 token 跟它們對齊，不要自己多開
+   一個 16px 的級別。 */
 .ent-hero__intro {
   margin: var(--space-4) 0 0;
-  font-size: var(--font-size-base);
+  font-size: var(--font-size-sm);
   line-height: 1.7;
   color: var(--color-text-secondary);
 }
@@ -127,7 +137,10 @@
 
 .ent-hero__facts-item dt {
   margin: 0;
-  font-size: 11px;
+  /* 2026-10-31 修正：原本寫死 11px，全站沒有其他地方在用這個數字，
+     改用 --font-size-xs（12px），跟上面 .ent-hero__eyebrow 同一階，
+     兩種「小字標籤」用同一個字級，看起來才是同一套系統。 */
+  font-size: var(--font-size-xs);
   letter-spacing: 0.08em;
   color: var(--color-text-secondary);
 }
