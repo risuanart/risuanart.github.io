@@ -55,7 +55,15 @@ python3 -m http.server 8895
 ## 程式風格與命名規則（以現有專案實際做法為準）
 - **顏色**一律引用 `css/colors.css` 的 `--color-*` 變數，禁止寫死 hex。
 - **間距/字級**一律引用 `css/tokens.css` 的 `--space-*`／`--font-size-*`
-  等 token，不要自己發明數值。
+  等 token，不要自己發明數值。**`--space-*` 的刻度是
+  1/2/4/6/10/16/24，刻意跳號，不是連號**——2026-10-31 發現全站 14 處
+  用到從沒定義過的 `--space-3`／`--space-5`／`--space-8`（包括全站
+  18 個橫滑作品展示共用的 `.material-photo-carousel__track`），
+  `var()` 指到不存在的變數不會報錯，只會讓整條屬性失效（通常間距
+  變成 0），沒有任何 console 警告，肉眼看畫面「擠在一起」或「貼邊」
+  才會發現。寫完任何間距/字級 CSS，先用瀏覽器或 Playwright 確認
+  `getComputedStyle` 真的吃到預期的值，不要只看 token 名稱寫起來
+  「應該合理」就當作完成。
 - **寬度容器**：main 直接子層（不包在 `.chapter` 裡的區塊）一律套用
   `.content-container`（840px，見 `css/products.css`「全站共用內文
   容器」那段註解）。**不要自己發明寬度數字**——這個專案已經踩過好幾次
