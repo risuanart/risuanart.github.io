@@ -17,6 +17,25 @@
   margin-top: var(--space-10);
 }
 
+.gallery-page__title,
+.gallery-page__intro,
+.gallery-page__note {
+  text-align: center;
+}
+
+.gallery-page__intro {
+  max-width: 42rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.gallery-page__note {
+  margin: var(--space-4) auto 0;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-xs);
+  line-height: 1.7;
+}
+
 .gallery-filters__group {
   display: flex;
   flex-wrap: wrap;
