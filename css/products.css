@@ -3951,7 +3951,10 @@ button.text-link {
 
 .material-photo-carousel__track {
   display: flex;
-  gap: var(--space-3);
+  /* 2026-10-31 修正：var(--space-3) 在 tokens.css 沒有定義過，這個橫滑
+     元件全站 18 處都在用，gap 一直沒有生效（圖片緊貼在一起），改用
+     --space-2。 */
+  gap: var(--space-2);
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
@@ -4018,7 +4021,9 @@ button.text-link {
    原始比例完整呈現，可選配 figcaption 標註角色/堂數等資訊。 */
 .uncropped-gallery {
   columns: 2;
-  column-gap: var(--space-3);
+  /* 2026-10-31 修正：var(--space-3) 在 tokens.css 沒有定義過，改用
+     --space-2。 */
+  column-gap: var(--space-2);
   margin-top: var(--space-4);
 }
 
@@ -4029,7 +4034,9 @@ button.text-link {
 }
 
 .uncropped-gallery figure {
-  margin: 0 0 var(--space-3);
+  /* 2026-10-31 修正：var(--space-3) 在 tokens.css 沒有定義過，改用
+     --space-2。 */
+  margin: 0 0 var(--space-2);
   break-inside: avoid;
 }
 

@@ -78,7 +78,8 @@
 }
 
 .ent-hero__credit {
-  margin: var(--space-3) 0 0;
+  /* 2026-10-31 修正：var(--space-3) 在 tokens.css 沒有定義過，改用 --space-2。 */
+  margin: var(--space-2) 0 0;
   font-size: 12px;
   color: var(--color-text-secondary);
 }
@@ -98,27 +99,45 @@
   color: var(--color-text-secondary);
 }
 
+/* 2026-10-31 使用者回報：原本用 <ul><li>「標籤：一整句話」的寫法，
+   讀起來只是一段純文字，數字跟單位混在長句子裡，換行點也不受控制
+   （例如「33×24cm／30×30cm」可能從中間斷行）。改成 <dl> 統計列：
+   每一項目是獨立的小區塊，上面一行小字標籤、下面一行較粗的數字/
+   單位，項目之間用間距隔開（不是逗號接下去），每項自己的內容多短
+   都可以獨立換行，不會波及旁邊的項目。 */
 .ent-hero__facts {
   margin: var(--space-6) 0 0;
   padding: var(--space-4) 0 0;
   border-top: 1px solid var(--color-surface-neutral);
-  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  /* 2026-10-31 修正：原本寫 var(--space-5)／var(--space-8)，這兩個
+     token 在 tokens.css 從來沒定義過（全站間距刻度是 1/2/4/6/10/16/
+     24，沒有 5 跟 8），gap 的值因此整條失效、算成 normal（=0），
+     三個項目才會緊貼在一起看起來像一整段文字。改用實際存在的
+     --space-6／--space-10。 */
+  gap: var(--space-6) var(--space-10);
+}
+
+.ent-hero__facts-item {
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
+  gap: var(--space-1);
 }
 
-.ent-hero__facts li {
-  display: flex;
-  gap: var(--space-4);
-  font-size: var(--font-size-sm);
-  line-height: 1.6;
-}
-
-.ent-hero__facts-label {
-  flex: none;
-  width: 4em;
+.ent-hero__facts-item dt {
+  margin: 0;
+  font-size: 11px;
+  letter-spacing: 0.08em;
   color: var(--color-text-secondary);
+}
+
+.ent-hero__facts-item dd {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  line-height: 1.6;
+  color: var(--color-text-primary);
 }
 
 @media (min-width: 768px) {
@@ -395,7 +414,8 @@
 
 .ent-entry__link {
   display: inline-block;
-  margin-top: var(--space-3);
+  /* 2026-10-31 修正：var(--space-3) 在 tokens.css 沒有定義過，改用 --space-2。 */
+  margin-top: var(--space-2);
   font-size: var(--font-size-sm);
   font-weight: 700;
   color: var(--color-text-primary);
@@ -606,7 +626,8 @@
 }
 
 .ent-gallery__dots {
-  margin-top: var(--space-3);
+  /* 2026-10-31 修正：var(--space-3) 在 tokens.css 沒有定義過，改用 --space-2。 */
+  margin-top: var(--space-2);
   display: flex;
   justify-content: center;
   flex-wrap: wrap;

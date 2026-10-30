@@ -420,7 +420,9 @@
 .booking-total__row {
   display: flex;
   justify-content: space-between;
-  gap: var(--space-3);
+  /* 2026-10-31 修正：原本寫 var(--space-3)，tokens.css 沒有定義過這個
+     變數，gap 等於沒生效。改用 --space-2。 */
+  gap: var(--space-2);
   margin: 0;
   padding: 2px 0;
   color: color-mix(in srgb, var(--color-text-secondary) 70%, transparent);

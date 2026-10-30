@@ -309,7 +309,10 @@
   justify-content: space-between;
   gap: var(--space-2);
   min-height: 44px;
-  padding: var(--space-3) 0;
+  /* 2026-10-31 修正：原本寫 var(--space-3)，tokens.css 沒有定義過這個
+     變數，這裡的上下內距等於沒生效（min-height:44px 還是會撐出最小
+     點擊範圍，只是文字沒有額外呼吸空間）。改用 --space-2。 */
+  padding: var(--space-2) 0;
   border-bottom: 1px solid var(--color-surface-neutral);
   color: var(--color-text-primary);
   font-size: var(--font-size-sm);

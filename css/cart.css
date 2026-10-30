@@ -357,7 +357,9 @@
   color: var(--color-text-secondary);
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
+  /* 2026-10-31 修正：原本寫 var(--space-3)，tokens.css 沒有定義過這個
+     變數，gap 等於沒生效。改用 --space-2。 */
+  gap: var(--space-2);
 }
 /* .work__cta 本身是文字加底線樣式，不是色塊按鈕（見 css/products.css
    該 class 定義）——直接放進這個 flex-column 容器裡會被預設的
@@ -371,7 +373,9 @@
 
 .account-booking-item__policy {
   margin: 0;
-  padding: var(--space-2) var(--space-3);
+  /* 2026-10-31 修正：原本寫 var(--space-3)，tokens.css 沒有定義過這個
+     變數，水平內距等於沒生效。改用 --space-4。 */
+  padding: var(--space-2) var(--space-4);
   border-left: 3px solid var(--color-brand);
   background: var(--color-surface-neutral);
 }
@@ -1534,13 +1538,18 @@
 /* ---------- 結帳確認區塊：購物車頁按下「結帳」後，同一頁往下展開的部分
    （不再跳轉到另一個 checkout-confirm.html），用一個外框把「這是接下來要
    填的東西」跟上面的購物車內容區隔開，避免看起來只是隨頁面散落的文字欄位。 ---------- */
+/* 2026-10-31 修正：這裡跟下面的 .order-confirm-box > .chapter + .chapter
+   原本都寫 var(--space-8)，padding 還多用了 var(--space-5)，tokens.css
+   都沒有定義過這兩個變數，等於margin-top/水平內距沒生效。margin-top
+   改用 --space-10（大區塊間距），padding 水平改用 --space-6（跟垂直
+   內距一致，維持方塊內距對稱）。 */
 .order-confirm-box {
-  margin-top: var(--space-8);
-  padding: var(--space-6) var(--space-5);
+  margin-top: var(--space-10);
+  padding: var(--space-6);
 }
 
 .order-confirm-box > .chapter + .chapter {
-  margin-top: var(--space-8);
+  margin-top: var(--space-10);
 }
 
 /* 2026-10-17 修正：js/checkout.js 結帳／選完 7-11 門市回來後會
