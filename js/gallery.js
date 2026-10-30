@@ -52,6 +52,7 @@
   // 目前選的課程動態產生，不在這裡一次生成全部。
   if (courseFilterGroup) {
     (window.GALLERY_COURSES || []).forEach((course) => {
+      if (course === "鏡子拼貼") return;
       const btn = document.createElement("button");
       btn.type = "button";
       btn.className = "gallery-filters__chip";
@@ -105,7 +106,7 @@
     if (themeToggle) {
       const hiddenCount = themes.slice(VISIBLE_THEME_LIMIT).filter((theme) => !activeThemes.has(theme)).length;
       themeToggle.hidden = themes.length <= VISIBLE_THEME_LIMIT || (!themesExpanded && hiddenCount === 0);
-      themeToggle.textContent = themesExpanded ? "收合主題" : `更多主題（${hiddenCount}）`;
+      themeToggle.textContent = themesExpanded ? "收合主題" : `還有 ${hiddenCount} 個主題`;
       themeToggle.setAttribute("aria-expanded", String(themesExpanded));
     }
   }

@@ -1,12 +1,16 @@
-/* gallery.css —— 學員作品集頁（gallery.html）專屬樣式。
-   延續全站「直角＋克制」語彙：色票只用 colors.css／tokens.css 既有
-   token，不新增顏色，篩選鈕跟格狀相簿都用 --radius-sharp，不做圓角 pill。 */
+/* gallery.css —— 學員作品集頁（gallery.html）專屬樣式。 */
 
 .gallery-filters {
   margin-top: var(--space-4);
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
+  align-items: center;
+}
+
+.gallery-filters > div {
+  width: 100%;
+  text-align: center;
 }
 
 .gallery-page > .chapter:first-child {
@@ -16,6 +20,7 @@
 .gallery-filters__group {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: var(--space-2);
 }
 
@@ -36,8 +41,7 @@
 .gallery-filters__chip {
   appearance: none;
   border: none;
-  outline: 3px #181717 solid;
-  outline-offset: -3px;
+  outline: none;
   border-radius: 5px;
   background-color: transparent;
   padding: 10px 15px;
@@ -64,14 +68,20 @@
 
 .gallery-theme-toggle {
   appearance: none;
-  margin-top: var(--space-2);
+  display: block;
+  margin: var(--space-2) auto 0;
   padding: 0;
   border: 0;
+  border-bottom: 1px solid currentColor;
   background: none;
   color: var(--color-interactive);
   font: inherit;
   font-size: var(--font-size-xs);
   cursor: pointer;
+}
+
+.gallery-theme-toggle[hidden] {
+  display: none;
 }
 
 .gallery-theme-toggle:hover {
@@ -82,7 +92,7 @@
   margin-top: var(--space-4);
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   gap: var(--space-4);
 }
 
