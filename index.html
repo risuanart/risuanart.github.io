@@ -332,9 +332,7 @@
          - 說明文字依業主指定改寫；企業／團體課程原本清單草稿寫「8 人
            以上可外出到府帶班」，業主明確要求團體人數門檻這類數字完全
            不要出現在官網上（不管幾人），這裡拿掉「8 人以上」，不是漏寫。
-         - 拿掉「看課程介紹 →」「看合作方式 →」文字連結，改成整張卡片
-           可點、右下保留箭頭圖示（.home-entry__link 現在只放圖示，見
-           home-editorial.css）。
+         - 拿掉卡片箭頭，保留整張圖片入口與疊在照片上的標題、說明。
          - 手機版改上下堆疊（圖滿版在上、文字在下），左右交錯排列只留給
            ≥768px，見 css/home-editorial.css 的 @media 區塊。 -->
     <section class="content-block home-entry-section">
@@ -345,11 +343,10 @@
       </div>
       <div class="home-entry-row">
         <a class="home-entry" href="courses/">
-          <div class="home-entry__media"><img src="assets/images/courses/palette-knife-oil/hero-poster.jpg" alt="刮刀油畫作品"></div>
+          <div class="home-entry__media"><img src="assets/images/courses/home-painting-studio.jpg" alt="學員在畫室畫架前創作"></div>
           <div class="home-entry__copy">
             <h3 class="home-entry__title">繪畫課程</h3>
             <p class="home-entry__desc">石英砂肌理畫、刮刀油畫、流動畫，新手也能完成專屬作品。</p>
-            <span class="home-entry__link" aria-hidden="true"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
           </div>
         </a>
         <a class="home-entry home-entry--reverse" href="enterprise/">
@@ -357,7 +354,6 @@
           <div class="home-entry__copy">
             <h3 class="home-entry__title">企業／團體課程</h3>
             <p class="home-entry__desc">可外出到府帶班，企業、學校、社團皆可申請。</p>
-            <span class="home-entry__link" aria-hidden="true"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
           </div>
         </a>
       </div>

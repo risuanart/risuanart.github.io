@@ -108,7 +108,7 @@
 
   <main class="product-page work">
 
-    <header class="work__intro account-page-intro">
+    <header class="work__intro account-page-intro fade-in">
       <h1 class="work-heading"><span class="inner">會員中心</span></h1>
       <p class="intro">您的基本資料、收件地址、訂單進度與課程預約紀錄。</p>
     </header>
@@ -118,7 +118,7 @@
     <!-- 未登入：顯示登入提示，GSI 按鈕渲染邏輯沿用全站共用的
          window.RisuanAccount.mountGoogleButton()（見 js/account-auth.js），
          跟 header 帳號面板是同一份邏輯，不是這裡另外寫一份。 -->
-    <section class="chapter" id="account-guest">
+    <section class="chapter fade-in" id="account-guest">
       <h2 class="chapter__title">請先登入</h2>
       <p>用 Google 帳號登入後，可以查看訂單進度、課程預約紀錄，並且編輯您的基本資料與收件地址。</p>
       <p class="account-page__login-note">點擊下方 Google 按鈕後，您會前往 Google 選擇帳戶並完成登入。本站不會要求您輸入 Google 密碼；如需找回帳戶或密碼，請使用 Google 的帳戶復原功能。</p>
@@ -130,7 +130,7 @@
          Google 登入，沒有密碼這回事。四個區塊同一時間只顯示一個，
          切換邏輯見 js/account-page.js，不用個別頁面／不用額外 action，
          純粹是畫面顯示哪個區塊的切換。 -->
-    <div id="account-member" class="account-page__layout" hidden>
+    <div id="account-member" class="account-page__layout fade-in" hidden>
 
       <nav class="account-page__nav" aria-label="會員中心選單">
         <button type="button" class="account-page__nav-item is-active" data-panel="points" aria-current="page">我的點數</button>
@@ -290,5 +290,6 @@
   <script src="../js/site-header-scroll.js"></script>
   <script src="../js/account-widget.js"></script>
   <script src="../js/site-menu.js"></script>
+  <script src="../js/scroll-reveal.js"></script>
 </body>
 </html>

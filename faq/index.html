@@ -294,7 +294,7 @@
 
   <main class="product-page work">
 
-    <header class="work__intro">
+    <header class="work__intro fade-in">
       <h1 class="work-heading"><span class="inner">預約須知</span></h1>
       <p class="intro">來畫室上課前，你可能想先知道的事。<br>找不到答案歡迎直接私訊我們。</p>
     </header>
@@ -302,7 +302,7 @@
     <!-- 第一層：入口篩選層。5 則、無分類、依序呈現，不用手風琴收合——
          這一層要讓還沒決定的訪客一眼掃過去就看到全部內容，不需要先點開。
          用左側色塊＋較大留白跟第二層的收合清單做出明顯的視覺層次區隔。 -->
-    <section class="faq-tier1">
+    <section class="faq-tier1 fade-in">
       <h2 class="faq-tier1__title">入店前，先確認這幾件事</h2>
 
       <div class="faq-tier1__item">
@@ -334,7 +334,7 @@
     <!-- 第二層：預約細節層。分類收合＋錨點導覽，服務已經決定要來、需要
          實際操作資訊的訪客——這層資訊量大，用 <details> 手風琴收合，
          不用像第一層那樣整段攤開。 -->
-    <section class="faq-tier2">
+    <section class="faq-tier2 fade-in">
       <h2 class="faq-tier2__title">預約前，你會需要的細節</h2>
 
       <nav class="faq-tier2__jump" aria-label="預約細節分類導覽">
@@ -347,7 +347,7 @@
         <a href="#pickup">作品完成與領取方式</a>
       </nav>
 
-      <section class="faq-group" id="transport">
+      <section class="faq-group fade-in" id="transport">
         <h3 class="faq-group__title">交通與到達方式</h3>
 
         <details class="faq-item">
@@ -366,7 +366,7 @@
         </details>
       </section>
 
-      <section class="faq-group" id="visit">
+      <section class="faq-group fade-in" id="visit">
         <h3 class="faq-group__title">事先參觀</h3>
 
         <details class="faq-item">
@@ -375,7 +375,7 @@
         </details>
       </section>
 
-      <section class="faq-group" id="booking">
+      <section class="faq-group fade-in" id="booking">
         <h3 class="faq-group__title">預約與付款流程</h3>
 
         <details class="faq-item">
@@ -399,7 +399,7 @@
         </details>
       </section>
 
-      <section class="faq-group" id="cancellation">
+      <section class="faq-group fade-in" id="cancellation">
         <h3 class="faq-group__title">時段調整／取消規則</h3>
 
         <details class="faq-item">
@@ -427,7 +427,7 @@
         </details>
       </section>
 
-      <section class="faq-group" id="onsite">
+      <section class="faq-group fade-in" id="onsite">
         <h3 class="faq-group__title">現場規範</h3>
 
         <details class="faq-item">
@@ -451,7 +451,7 @@
         </details>
       </section>
 
-      <section class="faq-group" id="pet">
+      <section class="faq-group fade-in" id="pet">
         <h3 class="faq-group__title">寵物課特殊須知</h3>
 
         <details class="faq-item">
@@ -508,7 +508,7 @@
         </details>
       </section>
 
-      <section class="faq-group" id="pickup">
+      <section class="faq-group fade-in" id="pickup">
         <h3 class="faq-group__title">作品完成與領取方式</h3>
 
         <details class="faq-item">
@@ -588,5 +588,6 @@
       if (el && el.tagName === "DETAILS") el.open = true;
     })();
   </script>
+  <script src="../js/scroll-reveal.js"></script>
 </body>
 </html>

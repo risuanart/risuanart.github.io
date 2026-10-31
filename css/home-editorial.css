@@ -15,32 +15,41 @@
 .home-entry-row {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--space-10);
+  gap: var(--space-4);
 }
 
 .home-entry-section .home-section-head {
   align-items: center;
 }
 
+/* 首頁兩個主要服務入口改成橫幅：讓照片提供情境，文字直接疊在照片上，
+   比分離的圖文卡更像快速入口。圖片仍使用既有真實素材。 */
 .home-entry {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
-  grid-template-areas: "media copy";
-  align-items: center;
-  gap: var(--space-6);
-  color: var(--color-text-primary);
+  position: relative;
+  display: block;
+  aspect-ratio: 2.2 / 1;
+  overflow: hidden;
+  color: var(--color-surface-light);
   text-decoration: none;
-}
-
-.home-entry--reverse {
-  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
-  grid-template-areas: "copy media";
+  isolation: isolate;
 }
 
 .home-entry__media {
-  grid-area: media;
-  aspect-ratio: 16 / 10;
+  position: absolute;
+  z-index: -2;
+  inset: 0;
   overflow: hidden;
+}
+
+.home-entry__media::after {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    0deg,
+    color-mix(in srgb, var(--color-surface-black) 68%, transparent),
+    color-mix(in srgb, var(--color-surface-black) 6%, transparent) 78%
+  );
+  content: "";
 }
 
 .home-entry__media img {
@@ -48,10 +57,15 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform var(--duration-slow) var(--ease-standard);
 }
 
 .home-entry__copy {
-  grid-area: copy;
+  position: absolute;
+  inset: auto 0 0;
+  padding: var(--space-4);
+  padding-right: var(--space-10);
+  padding-bottom: var(--space-6);
 }
 
 .home-entry__eyebrow {
@@ -62,44 +76,28 @@
 
 .home-entry__title {
   margin: 0 0 var(--space-2);
-  /* 上架前待修清單任務 1：標題字級降一級（原本 --font-size-lg／20px，
-     改用 --font-size-base／16px，比照 tokens.css 的尺度往下一階）。 */
-  font-size: var(--font-size-base);
+  font-size: var(--font-size-lg);
   font-weight: 600;
-  line-height: 1.5;
+  line-height: 1.4;
+  text-shadow: 0 1px 8px color-mix(in srgb, var(--color-surface-black) 45%, transparent);
 }
 
 .home-entry__desc {
+  max-width: 34em;
   margin: 0;
-  color: var(--color-text-secondary);
+  color: color-mix(in srgb, var(--color-surface-light) 90%, transparent);
   font-size: var(--font-size-sm);
-  line-height: 1.6;
-  /* 說明文字限兩行，超過截斷——卡片拿掉小標跟文字連結後，說明文字是
-     唯一的內文區塊，多張卡片並排/堆疊時行數不一致會讓版面參差不齊。 */
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-/* 上架前待修清單任務 1：原本是「看課程介紹 →」這種文字連結，拿掉文字、
-   只留箭頭圖示，固定在卡片文字區右下角，當作「整張卡片可點」的視覺
-   暗示（不是真的另外可以點的次要連結，整個 .home-entry 本身就是
-   <a>，訪客不熟悉網頁操作的話，完全拿掉圖示反而看不出能點）。 */
-.home-entry__copy {
-  position: relative;
-  /* 底部預留箭頭圖示的空間，避免固定在右下角的圖示疊到兩行說明文字
-     （尤其手機版文字欄變寬、兩行文字可能貼到卡片底部）。 */
-  padding-bottom: var(--space-6);
+  line-height: 1.5;
+  text-shadow: 0 1px 8px color-mix(in srgb, var(--color-surface-black) 60%, transparent);
 }
 
 .home-entry__link {
   position: absolute;
-  right: 0;
-  bottom: 0;
+  right: var(--space-4);
+  bottom: var(--space-4);
   display: inline-flex;
   align-items: center;
-  color: var(--color-interactive);
+  color: var(--color-surface-light);
 }
 
 .home-entry__link svg {
@@ -222,33 +220,41 @@
   color: var(--color-interactive);
 }
 
-.home-entry:hover .home-entry__title,
-.home-entry:hover .home-entry__link,
 .home-guide-feature:hover h3,
 .home-guide-feature:hover .home-entry__link,
 .home-guide-links a:hover {
   color: var(--color-interactive);
 }
 
+@media (min-width: 769px) {
+  .home-entry-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 @media (max-width: 768px) {
-  /* 上架前待修清單任務 1：原本手機版還是維持圖文左右並排（圖只分到
-     0.7fr，實測在手機寬度只剩約 118px），改成圖滿版在上、文字在下的
-     上下堆疊。左右交錯排列（.home-entry--reverse）只在 ≥768px 保留，
-     這裡用同一個選擇器把兩種卡片都壓成同一欄，--reverse 版型也跟著
-     失效，不用另外寫一條規則去抵銷它。 */
   .home-entry {
-    grid-template-columns: 1fr;
-    grid-template-areas: "media" "copy";
-    gap: var(--space-4);
+    aspect-ratio: 2.25 / 1;
   }
 
-  .home-entry--reverse {
-    grid-template-columns: 1fr;
-    grid-template-areas: "media" "copy";
+  .home-entry__copy {
+    padding: var(--space-4);
+    padding-right: var(--space-10);
+    padding-bottom: var(--space-6);
   }
 
-  .home-entry__media {
-    aspect-ratio: 4 / 3;
+  .home-entry__title {
+    font-size: var(--font-size-base);
+  }
+
+  .home-entry__link {
+    right: var(--space-4);
+    bottom: var(--space-4);
+  }
+
+  .home-entry:hover .home-entry__media img,
+  .home-entry:focus-visible .home-entry__media img {
+    transform: scale(1.025);
   }
 
   .home-guide-feature {
@@ -263,13 +269,6 @@
   .home-guide-links {
     grid-template-columns: 1fr;
     gap: var(--space-2);
-  }
-}
-
-@media (max-width: 600px) {
-  .home-entry-row {
-    grid-template-columns: 1fr;
-    gap: var(--space-4);
   }
 }
 

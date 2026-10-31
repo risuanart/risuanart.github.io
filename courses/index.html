@@ -138,7 +138,7 @@
          不是另外做一套新樣式——材料包母頁、這頁、之後首頁拼貼區塊要維持
          同一種視覺語言。.work__intro 不帶買列，單純標題＋一段介紹文字，
          跟 faq/index.html 的用法一致。 -->
-    <header class="work__intro">
+    <header class="work__intro fade-in">
       <h1 class="work-heading"><span class="inner">繪畫課程</span></h1>
       <p class="intro">從肌理砂畫到油畫，不論有沒有基礎，老師都會依你的程度調整教法。選好喜歡的媒材，現場就能完成一幅專屬作品。</p>
     </header>
@@ -150,7 +150,7 @@
          css/courses-page.css（這一頁專屬，不影響其他頁面），互動腳本見
          js/courses-carousel.js。 -->
 
-    <div class="content-container course-story">
+    <div class="content-container course-story fade-in">
       <div class="course-story__text">
         <p>每一種媒材都有不同的特性，</p>
         <p>一般油畫可以刻畫細節，</p>
@@ -166,7 +166,7 @@
       </div>
     </div>
 
-    <section class="content-container course-features">
+    <section class="content-container course-features fade-in">
       <h2 class="course-features__title">為什麼選日宣</h2>
       <div class="course-features__grid">
         <div class="course-feature">
@@ -202,7 +202,7 @@
       </div>
     </section>
 
-    <section class="course-showcase">
+    <section class="course-showcase fade-in">
       <div class="course-showcase__head">
         <h2 class="course-showcase__name">探索我們的課程</h2>
         <p class="course-showcase__desc">每一堂課，我們都鼓勵你帶著自己喜歡的圖或想好的風格來，不是跟著固定範本畫出一樣的作品。預約後、上課前先讓我們了解你想畫的內容，評估適合的媒材與工具；一堂課的時間裡，由老師全程協助，陪你完成真正屬於自己的作品。</p>
@@ -280,7 +280,7 @@
       </div>
     </section>
 
-    <section class="content-container course-steps">
+    <section class="content-container course-steps fade-in">
       <h2 class="course-steps__title">怎麼上課</h2>
       <div class="course-steps__grid">
         <div>
@@ -332,7 +332,7 @@
         <span class="course-ig-cta__hint">會複製一句開場白，直接貼到 Instagram 私訊給我們，附上你的圖就可以開始討論</span>
       </div>
 
-      <section class="course-proof">
+      <section class="course-proof fade-in">
         <div class="course-proof__head">
           <h3 class="course-proof__title">學員作品精選</h3>
           <a class="course-proof__all" href="../gallery/">查看更多學員作品 →</a>
@@ -345,7 +345,7 @@
         </div>
       </section>
 
-      <section class="course-faq">
+      <section class="course-faq fade-in">
         <h3 class="course-faq__title">常見問題</h3>
         <details class="course-faq-item" open>
           <summary>沒畫過畫，真的可以嗎？</summary>
@@ -387,7 +387,7 @@
          「一行一列、列高 44px、列間 1px 髮絲線分隔」規格，所以列表部分
          另外用 .course-guide-links（定義在 courses-page.css），不是
          直接沿用 .home-guide-links。 -->
-    <section class="content-container home-guide-section">
+    <section class="content-container home-guide-section fade-in">
       <div class="home-section-head">
         <div>
           <h2 class="home-section-title">材料指南</h2>
@@ -448,5 +448,6 @@
   <script src="../js/site-menu.js"></script>
   <script src="../js/courses-carousel.js"></script>
   <script src="/js/promo-bar.js"></script>
+  <script src="../js/scroll-reveal.js"></script>
 </body>
 </html>
