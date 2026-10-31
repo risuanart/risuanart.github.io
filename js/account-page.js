@@ -10,9 +10,11 @@
   }
 
   const ORDER_STATUS_LABEL = {
-    draft: "尚未付款",
+    awaiting_payment: "待付款",
     paid: "已付款",
     payment_failed: "付款失敗",
+    payment_expired: "繳費期限已過",
+    cancelled: "已取消",
     shipment_created: "已出貨",
   };
 
@@ -40,6 +42,7 @@
     const orderListEl = document.getElementById("account-order-list");
     const bookingListEl = document.getElementById("account-booking-list");
     const pointsBalanceEl = document.getElementById("account-points-balance");
+    const pointsReservationEl = document.getElementById("account-points-reservation");
     const pointsListEl = document.getElementById("account-points-list");
     const cvsStoreEl = document.getElementById("account-cvs-store");
     const cvsLinkEl = document.getElementById("account-cvs-link");
@@ -215,9 +218,9 @@
     async function loadOrders() {
       try {
         const data = await window.RisuanAccount.apiFetch("/api/account?action=orders");
-        // 草稿代表客人開始或進入過結帳流程，尚未成為已確認的訂單；
-        // 付款結果未回報的草稿留在後台追蹤，不放進會員的正式訂單紀錄。
-        const visibleOrders = data.orders.filter((order) => order.status !== "draft");
+        // 後端只回傳已取得付款憑據或有付款結果的正式訂單；這個前端過濾
+        // 是為了兼容部署期間可能仍存在的舊版草稿索引。
+        const visibleOrders = data.orders.filter((order) => !["draft", "payment_attempt"].includes(order.status));
         if (visibleOrders.length === 0) {
           orderListEl.innerHTML = `<li class="account-page__empty">目前沒有訂單紀錄</li>`;
           return;
@@ -246,9 +249,17 @@
         .map((i) => `<li>${escapeHtml(i.name)}${i.schemeName ? `（${escapeHtml(i.schemeName)}）` : ""} × ${i.qty}</li>`)
         .join("");
       const shipping = order.shippingMethod === "cvs" ? "超商取貨" : order.shippingMethod === "home" ? "宅配到府" : "尚未選擇";
+      const paymentType = String(order.paymentType || "");
+      const paymentLabel = paymentType.startsWith("ATM") ? "ATM 虛擬帳號" : paymentType.startsWith("CVS") ? "超商代碼" : paymentType.startsWith("BARCODE") ? "超商條碼" : "";
+      const paymentValue = order.paymentNo
+        ? `<p>${paymentLabel || "繳費資料"}：<strong>${escapeHtml(order.paymentNo)}</strong>${order.bankCode ? `（銀行代碼 ${escapeHtml(order.bankCode)}）` : ""}</p>`
+        : Array.isArray(order.barcode) && order.barcode.length
+          ? `<p>超商條碼：<strong>${order.barcode.map(escapeHtml).join(" ")}</strong></p>`
+          : "";
       container.innerHTML = `
         <ul class="account-order-item__items">${itemsHtml}</ul>
         <p>送貨方式：${escapeHtml(shipping)}</p>
+        ${order.status === "awaiting_payment" ? `<p>付款狀態：待付款${order.paymentExpireAt ? `，請於 ${escapeHtml(order.paymentExpireAt)} 前完成繳費` : ""}</p>${paymentValue}` : ""}
         ${order.shippingStatus ? `<p>物流狀態：${escapeHtml(order.shippingStatus)}</p>` : ""}
       `;
     }
@@ -414,6 +425,13 @@
       try {
         const data = await window.RisuanAccount.apiFetch("/api/account?action=points");
         pointsBalanceEl.textContent = data.balance;
+        if (data.reservedPoints > 0) {
+          pointsReservationEl.hidden = false;
+          pointsReservationEl.textContent = `有 ${data.reservedPoints} 點正在付款流程中暫留，尚未扣除；付款完成後才會列入已使用。您目前可用 ${data.availableBalance} 點。`;
+        } else {
+          pointsReservationEl.hidden = true;
+          pointsReservationEl.textContent = "";
+        }
         if (data.ledger.length === 0) {
           pointsListEl.innerHTML = `<li class="account-page__empty">目前沒有點數異動紀錄</li>`;
           return;

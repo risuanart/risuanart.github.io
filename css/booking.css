@@ -440,6 +440,13 @@
 .booking-total__row--balance .price-text {
   font-weight: 700;
 }
+.booking-payment-note {
+  max-width: 50ch;
+  margin: var(--space-2) 0 0 auto;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-xs);
+  line-height: 1.7;
+}
 
 /* 付款完成後的結果畫面（成功／失敗／查詢中），跟 #confirm-error 同一套
    「單獨一個 chapter，置中說明文字」排版。 */

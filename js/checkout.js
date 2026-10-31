@@ -479,10 +479,18 @@
       // 扣超過當下真實餘額、不能把訂單扣成 0 元）由後端
       // api/create-order.js 在送出當下重新夾一次，不信任這裡的值。
       availablePoints = Math.max(0, Math.floor(Number(customer.pointsBalance) || 0));
-      if (availablePoints > 0) {
-        const pointsSection = document.getElementById("points-redeem-section");
+      const pointsSection = document.getElementById("points-redeem-section");
+      if (customer.pointsReserved > 0) {
+        document.getElementById("points-redeem-hint").textContent = `您目前有 ${availablePoints} 點可用；另有 ${customer.pointsReserved} 點正在付款流程中暫留，尚未扣除。`;
+      } else {
         document.getElementById("points-redeem-hint").textContent = `您目前有 ${availablePoints} 點可以折抵`;
+      }
+      if (availablePoints > 0 || customer.pointsReserved > 0) {
         pointsSection.hidden = false;
+        if (currentOrder && Number.isFinite(Number(currentOrder.pointsRedeemed))) {
+          pointsInput.value = String(Math.max(0, Math.floor(Number(currentOrder.pointsRedeemed) || 0)));
+          if (redeemAllPointsInput) redeemAllPointsInput.checked = false;
+        }
         syncPointsLimit(currentOrder, currentShippingMethod);
         if (currentOrder) {
           renderConfirmTotals(currentOrder, currentShippingMethod);
@@ -718,6 +726,11 @@
     form.action = `${CHECKOUT_API_BASE}/api/create-order`;
 
     currentOrder = order;
+    // 從綠界按「返回商店」時以 orderId 回到這筆結帳草稿，恢復原先輸入的折抵點數。
+    if (pointsInput && Number.isFinite(Number(order.pointsRedeemed))) {
+      pointsInput.value = String(Math.max(0, Math.floor(Number(order.pointsRedeemed) || 0)));
+      if (redeemAllPointsInput) redeemAllPointsInput.checked = false;
+    }
     // 訂單本身如果已經帶著選好的門市（例如剛從綠界地圖選店回來），沿用；
     // 否則維持客人原本選的是不是宅配，同步之後不用重新選一次送貨方式。
     if (order.cvsStore && order.cvsStore.CVSStoreID) isHomeConfirmed = false;
