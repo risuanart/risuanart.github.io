@@ -361,7 +361,7 @@
 .work-heading {
   margin: 0;
   font-family: var(--font-family-base);
-  font-weight: 400;
+  font-weight: var(--page-title-font-weight);
   font-size: var(--page-title-font-size);
   line-height: var(--page-title-line-height);
   text-align: center;
@@ -1025,8 +1025,18 @@
   margin: var(--space-6) auto 0;
   max-width: 34ch;
   font-size: var(--font-size-sm);
+  font-weight: 400;
   line-height: 1.7;
   color: var(--color-text-primary);
+}
+
+/* 資訊頁標題區與固定導覽列之間留出額外呼吸空間，靠近 Miyuki Journal
+   的清爽編排；商品頁有買列，保留原本商品首屏節奏。桌機才增加距離，
+   手機沿用既有版面高度，避免窄螢幕頁首被推得過長。 */
+@media (min-width: 1025px) {
+  .work:not(:has(.work-heading__buy-row)) > .work__intro {
+    margin-top: var(--space-10);
+  }
 }
 
 /* 標題區成品主圖：7 款單一配色的春聯砂畫材料包在用（春結／福星／花財／

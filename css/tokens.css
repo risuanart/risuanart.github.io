@@ -39,6 +39,7 @@
 
   /* 頁面主標題採手機優先，再隨平板與桌機寬度微幅增加。 */
   --page-title-font-size: 18px;
+  --page-title-font-weight: 700;
   --page-title-line-height: 1.4;
   --section-title-font-size: 16px;
   --section-title-line-height: 1.5;
