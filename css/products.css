@@ -1924,6 +1924,33 @@ h1.chapter__title {
   font-style: italic;
 }
 
+/* 購物說明頁的配送清單沿用全站段落字級；用區塊內的項目符號，避免
+   reset 清除 ul 內距後，預設外側 marker 貼近或超出手機內容邊界。 */
+#shipping-fee > ul,
+#shipping-time > ul {
+  display: grid;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+  list-style: none;
+  font-size: var(--body-font-size);
+  line-height: var(--body-line-height);
+}
+
+#shipping-fee > ul > li,
+#shipping-time > ul > li {
+  position: relative;
+  padding-left: 1.25em;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+#shipping-fee > ul > li::before,
+#shipping-time > ul > li::before {
+  position: absolute;
+  left: 0;
+  content: "•";
+}
+
 .chapter__tags {
   margin-top: var(--space-6);
   font-size: var(--font-size-sm);
