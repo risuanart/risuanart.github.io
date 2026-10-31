@@ -145,7 +145,7 @@
 .home-course-section .banner-tile__desc {
   font-size: var(--font-size-xs);
   line-height: 1.6;
-  letter-spacing: 0;
+  letter-spacing: 1px;
 }
 
 .home-guide-section .home-section-head {
