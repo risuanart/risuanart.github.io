@@ -607,11 +607,6 @@ window.GALLERY_ITEMS = [
   { course: "自己帶圖創作", themes: ["吉卜力"], date: "2026-10-30", src: "../assets/images/gallery/ghibli/14.jpg", alt: "紅豬波魯克駕駛紅色飛機特寫，另一個拍攝角度", sessions: 1 },
   { course: "自己帶圖創作", themes: ["吉卜力"], date: "2026-10-30", src: "../assets/images/gallery/ghibli/15.jpg", alt: "霍爾的移動城堡霍爾與蘇菲站在開滿野花的山坡上，藍天白雲背景", sessions: 1 },
 
-  // 2026-10-30 新增「名畫再製」1 件：使用者確認這個分類「就算在自己帶圖
-  // （筆刷油畫）」，照實歸在「自己帶圖創作」。只有 1 張素材，量不夠
-  // 獨立開主題標籤，標「人像」即可。
-  { course: "自己帶圖創作", themes: ["人像"], date: "2026-10-30", src: "../assets/images/gallery/portrait-oil/01.jpg", alt: "戴珍珠耳環的少女名畫再製，卡通簡化風格，深色背景", sessions: 1 },
-
   // 2026-11-01 新增：使用者提供「人油畫筆刷」中的人像單堂、2堂、3堂作品。
   // 依來源資料夾登錄完成堂數；照片日期未知，採整理日期。資料夾 4 堂先不處理。
   { course: "自己帶圖創作", themes: ["人像"], date: "2026-11-01", src: "../assets/images/gallery/portrait-oil/one-session/01.jpg", alt: "背對觀者的長髮人物肖像，手持藍色畫筆", sessions: 1 },
@@ -637,7 +632,6 @@ window.GALLERY_ITEMS = [
   { course: "自己帶圖創作", themes: ["人像"], date: "2026-11-01", src: "../assets/images/gallery/portrait-oil/one-session/21.jpg", alt: "海邊人物合照油畫，畫布放在畫架上", sessions: 1 },
   { course: "自己帶圖創作", themes: ["人像"], date: "2026-11-01", src: "../assets/images/gallery/portrait-oil/one-session/22.jpg", alt: "新人站在草地上的婚紗肖像油畫", sessions: 1 },
   { course: "自己帶圖創作", themes: ["人像"], date: "2026-11-01", src: "../assets/images/gallery/portrait-oil/one-session/23.jpg", alt: "人物肖像油畫創作過程，畫筆正在描繪人物", sessions: 1 },
-  { course: "自己帶圖創作", themes: ["人像"], date: "2026-11-01", src: "../assets/images/gallery/portrait-oil/one-session/24.jpg", alt: "人物肖像油畫作品局部，畫面有手寫字樣", sessions: 1 },
   { course: "自己帶圖創作", themes: ["人像"], date: "2026-11-01", src: "../assets/images/gallery/portrait-oil/one-session/25.jpg", alt: "海邊人物風景油畫，藍色天空與沙灘", sessions: 1 },
   { course: "自己帶圖創作", themes: ["人像"], date: "2026-11-01", src: "../assets/images/gallery/portrait-oil/one-session/26.jpg", alt: "兩位人物坐在海邊的油畫作品", sessions: 1 },
   { course: "自己帶圖創作", themes: ["人像"], date: "2026-11-01", src: "../assets/images/gallery/portrait-oil/one-session/27.jpg", alt: "紅髮女性肖像油畫，紅色背景", sessions: 1 },
@@ -663,7 +657,6 @@ window.GALLERY_ITEMS = [
   { course: "自己帶圖創作", themes: ["人像"], date: "2026-11-01", src: "../assets/images/gallery/portrait-oil/two-sessions/09.jpg", alt: "兩位人物站在校園建築前的油畫作品", sessions: 2 },
   { course: "自己帶圖創作", themes: ["人像"], date: "2026-11-01", src: "../assets/images/gallery/portrait-oil/two-sessions/10.jpg", alt: "人物肖像油畫創作過程，畫筆正在描繪黑白人物", sessions: 2 },
   { course: "自己帶圖創作", themes: ["人像"], date: "2026-11-01", src: "../assets/images/gallery/portrait-oil/three-sessions/01.jpg", alt: "家庭四人合照肖像油畫，背景為城市夜景", sessions: 3 },
-  { course: "自己帶圖創作", themes: ["人像"], date: "2026-11-01", src: "../assets/images/gallery/portrait-oil/three-sessions/02.jpg", alt: "學員手持家庭合照油畫，畫面為描繪過程", sessions: 3 },
   { course: "自己帶圖創作", themes: ["人像"], date: "2026-11-01", src: "../assets/images/gallery/portrait-oil/three-sessions/03.jpg", alt: "畢業生肖像油畫，手捧花束", sessions: 3 },
   { course: "自己帶圖創作", themes: ["人像"], date: "2026-11-01", src: "../assets/images/gallery/portrait-oil/three-sessions/04.jpg", alt: "一對新人坐在公園長椅上的肖像油畫", sessions: 3 },
 ];

@@ -327,15 +327,6 @@
 .preview-gallery-filter-hierarchy-v1 .gallery-filter-group .gallery-filters__group {
   justify-content: flex-start;
 }
-.preview-gallery-filter-hierarchy-v1 .gallery-filter-hint {
-  grid-column: 2;
-  margin: 6px 0 0;
-  color: var(--color-text-secondary);
-  font-size: var(--font-size-xs);
-  line-height: 1.6;
-  text-align: left;
-}
-.preview-gallery-filter-hierarchy-v1 .gallery-filter-hint[hidden] { display: none; }
 .preview-gallery-filter-hierarchy-v1 .gallery-theme-toggle {
   grid-column: 2;
   justify-self: start;
@@ -379,9 +370,7 @@
     padding: 5px 10px;
     font-size: 13px;
   }
-  .preview-gallery-filter-hierarchy-v1 .gallery-filter-hint,
   .preview-gallery-filter-hierarchy-v1 .gallery-theme-toggle { grid-column: 1; }
-  .preview-gallery-filter-hierarchy-v1 .gallery-filter-hint { margin-top: 4px; }
   .preview-gallery-filter-hierarchy-v1 .gallery-theme-toggle { margin-top: 6px; }
   .preview-gallery-filter-hierarchy-v1 .gallery-results { margin-top: 10px; gap: 10px; }
   .preview-gallery-filter-hierarchy-v1 .gallery-results,
