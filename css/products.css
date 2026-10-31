@@ -1924,10 +1924,10 @@ h1.chapter__title {
   font-style: italic;
 }
 
-/* 購物說明頁的配送清單沿用全站段落字級；用區塊內的項目符號，避免
-   reset 清除 ul 內距後，預設外側 marker 貼近或超出手機內容邊界。 */
-#shipping-fee > ul,
-#shipping-time > ul {
+/* 章節內未指定元件 class 的一般文字清單，沿用全站內文字級與行高。
+   用內容區內的項目符號，避免 reset 清除 ul 內距後，原生外側 marker
+   貼近或超出手機內容邊界。已命名的功能清單仍由各自元件樣式控制。 */
+.chapter > ul:not([class]) {
   display: grid;
   gap: var(--space-2);
   margin-top: var(--space-2);
@@ -1936,19 +1936,33 @@ h1.chapter__title {
   line-height: var(--body-line-height);
 }
 
-#shipping-fee > ul > li,
-#shipping-time > ul > li {
+.chapter > ul:not([class]) > li {
   position: relative;
   padding-left: 1.25em;
   font-size: inherit;
   line-height: inherit;
 }
 
-#shipping-fee > ul > li::before,
-#shipping-time > ul > li::before {
+.chapter > ul:not([class]) > li::before {
   position: absolute;
   left: 0;
   content: "•";
+}
+
+/* 購物說明標題目前距導覽列 0px（手機）／40px（桌機）；加一級呼吸空間。
+   副標到第一個章節目前是 60px（手機）／90px（桌機），再拉開 24px。 */
+.work.shopping-info-page > .work__intro {
+  margin-top: var(--space-6);
+}
+
+.work.shopping-info-page > #shipping-fee {
+  margin-top: calc(var(--editorial-gap) + var(--space-6));
+}
+
+@media (min-width: 1025px) {
+  .work.shopping-info-page:not(:has(.work-heading__buy-row)) > .work__intro {
+    margin-top: calc(var(--space-10) + var(--space-4));
+  }
 }
 
 .chapter__tags {
