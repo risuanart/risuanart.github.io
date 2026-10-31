@@ -215,11 +215,14 @@
     async function loadOrders() {
       try {
         const data = await window.RisuanAccount.apiFetch("/api/account?action=orders");
-        if (data.orders.length === 0) {
+        // 草稿代表客人開始或進入過結帳流程，尚未成為已確認的訂單；
+        // 付款結果未回報的草稿留在後台追蹤，不放進會員的正式訂單紀錄。
+        const visibleOrders = data.orders.filter((order) => order.status !== "draft");
+        if (visibleOrders.length === 0) {
           orderListEl.innerHTML = `<li class="account-page__empty">目前沒有訂單紀錄</li>`;
           return;
         }
-        orderListEl.innerHTML = data.orders
+        orderListEl.innerHTML = visibleOrders
           .map(
             (o) => `
           <li class="account-order-item" data-order-id="${escapeHtml(o.orderId)}">
