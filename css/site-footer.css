@@ -103,7 +103,7 @@
 @media (min-width: 768px) {
   .preview-footer__inner {
     display: grid;
-    /* 課程與服務連結已由主選單提供，頁尾保留購物說明與聯絡資訊兩欄。 */
+    /* 頁尾以快速連結與品牌服務簡介兩欄呈現。 */
     grid-template-columns: 1fr 1fr;
     column-gap: var(--space-10);
   }
