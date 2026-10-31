@@ -1,4 +1,4 @@
-/* site-footer.css —— 全站共用頁尾（ABOUT／INFO 兩欄＋版權列）。
+/* site-footer.css —— 全站共用頁尾（購物說明／聯絡與到訪兩欄＋版權列）。
    2026-09-18 從 home-shop.css 搬出來獨立成共用檔——這組樣式原本只服務
    index.html，現在頁尾要推廣到全站每一頁，搬到這裡讓所有頁面都能引用，
    不用每頁都載入整份 home-shop.css（那份還有首頁專屬的選物店輪播等
@@ -24,7 +24,7 @@
 }
 
 /* 深色底本身維持滿版貼齊螢幕邊緣（上面 .preview-footer 的負 margin 做的
-   事沒有變），但 ABOUT／INFO 文字內容跟版權列改包進這層，套跟 .shop-grid
+   事沒有變），但頁尾文字內容跟版權列改包進這層，套跟 .shop-grid
    （商品格狀，見 products.css）同一條 1100px 欄寬基準線並置中——寬螢幕
    上文字不該比商品格狀更寬、也不該無限貼齊螢幕邊緣，見使用者比對
    panacea-q.com 後的要求。 */
@@ -103,10 +103,8 @@
 @media (min-width: 768px) {
   .preview-footer__inner {
     display: grid;
-    /* 2026-10-30 上架前待修清單任務 3：頁尾從 ABOUT／INFO 兩欄改成
-       課程與服務／購物說明／聯絡與到訪三欄，欄寬從 1fr 1fr 改成
-       1fr 1fr 1fr。 */
-    grid-template-columns: 1fr 1fr 1fr;
+    /* 課程與服務連結已由主選單提供，頁尾保留購物說明與聯絡資訊兩欄。 */
+    grid-template-columns: 1fr 1fr;
     column-gap: var(--space-10);
   }
 
