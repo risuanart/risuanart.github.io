@@ -21,6 +21,12 @@
 ## 最後更新
 2026-10-31，Codex 更新
 
+## 本次更新（2026-10-31，補齊新頁面桌面課程導覽）
+
+- 排查首頁導覽後確認：桌面版導覽列是分散在各 HTML 頁面的重複標記；手機版課程選單則由 `js/site-menu.js` 共用注入，兩者不會自動同步。新建的 `access/`、`account/`、`booking-manage/`、`privacy/`、`shopping-info/` 五頁因此漏了桌面「課程」下拉入口。
+- 已在五頁補上與既有頁面一致的課程連結及三張課程圖片導覽。全站掃描確認每個含 `.site-header__nav` 的 HTML 都有 `nav-courses-toggle`；`git diff --check` 通過。
+- 桌面預覽 `http://localhost:8896/shopping-info/?preview=shared-nav-fix` 確認「課程」入口出現在導覽列；窄版預覽使用共用手機選單，課程項目仍由 `js/site-menu.js` 提供。後續新增頁面需依 `TROUBLESHOOTING.md` 同步檢查桌面導覽。
+
 ## 本次更新（2026-10-31，頁面標題層級修正）
 
 - 使用者檢視「清爽置中」後指出主標與副標字重太接近，且桌機標題離導覽列太近。
