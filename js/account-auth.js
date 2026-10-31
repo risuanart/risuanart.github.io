@@ -182,7 +182,14 @@
                 });
             },
           });
-          window.google.accounts.id.renderButton(container, { type: "standard", theme: "outline", size: "medium", width: options.width || 220 });
+          window.google.accounts.id.renderButton(container, {
+            type: "standard",
+            theme: "outline",
+            size: "medium",
+            text: "signin_with",
+            locale: "zh-TW",
+            width: options.width || 220,
+          });
         })
         .catch(() => {
           container.textContent = "Google 登入元件載入失敗，請稍後再試";

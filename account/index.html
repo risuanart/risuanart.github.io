@@ -121,6 +121,7 @@
     <section class="chapter" id="account-guest">
       <h2 class="chapter__title">請先登入</h2>
       <p>用 Google 帳號登入後，可以查看訂單進度、課程預約紀錄，並且編輯您的基本資料與收件地址。</p>
+      <p class="account-page__login-note">點擊下方 Google 按鈕後，您會前往 Google 選擇帳戶並完成登入。本站不會要求您輸入 Google 密碼；如需找回帳戶或密碼，請使用 Google 的帳戶復原功能。</p>
       <div class="account-page__google-btn" id="account-page-google-btn"></div>
     </section>
 
@@ -152,7 +153,10 @@
         </section>
 
         <section class="account-page__pane" id="account-pane-profile" hidden>
-          <h2 class="chapter__title">基本資料</h2>
+          <div class="account-page__profile-heading">
+            <h2 class="chapter__title">基本資料</h2>
+            <button type="button" class="account-page__logout" id="account-page-logout">登出</button>
+          </div>
           <form id="account-profile-form">
             <div class="confirm-field-row">
               <label class="confirm-field">

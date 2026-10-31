@@ -27,6 +27,7 @@
     const guestSection = document.getElementById("account-guest");
     const memberSection = document.getElementById("account-member");
     const googleBtnContainer = document.getElementById("account-page-google-btn");
+    const logoutButton = document.getElementById("account-page-logout");
 
     const profileForm = document.getElementById("account-profile-form");
     const lastNameInput = document.getElementById("account-last-name");
@@ -467,6 +468,8 @@
       loadBookings();
       loadPoints();
     }
+
+    logoutButton.addEventListener("click", () => window.RisuanAccount.logout());
 
     window.addEventListener(window.RisuanAccount.CHANGE_EVENT, () => {
       const customer = window.RisuanAccount.getCustomer();
