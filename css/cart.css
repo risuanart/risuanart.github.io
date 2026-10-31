@@ -570,6 +570,10 @@
 @media (max-width: 840px) {
   .account-page__layout {
     flex-direction: column;
+    /* 切成直向後，align-items:flex-start 會讓右側面板按內容自然寬度
+       展開；基本資料表單因此超出手機視窗。手機版要讓導覽列與內容面板
+       都跟著容器收滿寬度。 */
+    align-items: stretch;
     margin-top: var(--space-6);
   }
 
