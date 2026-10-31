@@ -148,3 +148,33 @@ a {
     scroll-behavior: auto !important;
   }
 }
+
+/* 同站換頁時淡出舊頁；不支援此功能的瀏覽器會照常直接換頁。 */
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-group(root) {
+  animation-duration: 240ms;
+  animation-timing-function: ease-out;
+}
+
+::view-transition-old(root) {
+  animation: site-page-fade-out 240ms ease-out both;
+}
+
+/* 新頁直接顯示，避免和原本 .fade-in 的 0.9 秒區塊進場動畫疊加。 */
+::view-transition-new(root) {
+  animation: none;
+}
+
+@keyframes site-page-fade-out {
+  to { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
+}
