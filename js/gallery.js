@@ -38,7 +38,20 @@
   const themeFilterGroup = document.getElementById("gallery-theme-filters");
   const themeToggle = document.getElementById("gallery-theme-toggle");
   const sessionFilter = document.getElementById("gallery-session-filter");
+  const sessionFilterGroup = document.getElementById("gallery-session-filter-group");
+  const themeHint = document.getElementById("gallery-theme-hint");
+  const themeLabel = document.getElementById("gallery-theme-label");
+  const sessionNote = document.getElementById("gallery-session-note");
+  const clearFilters = document.getElementById("gallery-clear-filters");
   const resultsCount = document.getElementById("gallery-results-count");
+  const filterPreview = new URLSearchParams(window.location.search).get("preview") === "filter-groups-v1";
+
+  if (filterPreview) {
+    if (sessionFilterGroup) sessionFilterGroup.hidden = false;
+    if (themeHint) themeHint.hidden = false;
+    if (themeLabel) themeLabel.textContent = "作品主題・可複選";
+    if (sessionNote) sessionNote.textContent = "部分作品標有完成堂數，選擇後可快速找到一堂完成的創作。";
+  }
   if (!grid) return;
 
   const items = window.GALLERY_ITEMS || [];
@@ -103,6 +116,11 @@
       themeFilterGroup.appendChild(btn);
     });
     themeFilterGroup.classList.toggle("is-collapsed", !themesExpanded);
+    if (themeHint && filterPreview) {
+      themeHint.textContent = activeCourse === "all"
+        ? "選擇課程可縮小主題選項；瀏覽全部時會顯示所有主題。"
+        : `目前只顯示「${activeCourse}」作品中有使用的主題。`;
+    }
     if (themeToggle) {
       const hiddenCount = themes.slice(VISIBLE_THEME_LIMIT).filter((theme) => !activeThemes.has(theme)).length;
       themeToggle.hidden = themes.length <= VISIBLE_THEME_LIMIT || (!themesExpanded && hiddenCount === 0);
@@ -143,6 +161,10 @@
       resultsCount.textContent = onlyOneSession
         ? `找到 ${visible.length} 件一堂完成的作品`
         : `共 ${visible.length} 件作品`;
+    }
+    if (clearFilters) {
+      const hasActiveFilters = activeCourse !== "all" || activeThemes.size > 0 || onlyOneSession;
+      clearFilters.hidden = !filterPreview || !hasActiveFilters;
     }
 
     if (items.length === 0) {
@@ -226,6 +248,25 @@
       onlyOneSession = !onlyOneSession;
       sessionFilter.classList.toggle("is-active", onlyOneSession);
       sessionFilter.setAttribute("aria-pressed", String(onlyOneSession));
+      render();
+    });
+  }
+
+  if (clearFilters) {
+    clearFilters.addEventListener("click", () => {
+      activeCourse = "all";
+      activeThemes.clear();
+      onlyOneSession = false;
+      themesExpanded = false;
+      courseButtons.forEach((btn) => {
+        const isAll = btn.getAttribute("data-gallery-course") === "all";
+        btn.classList.toggle("is-active", isAll);
+      });
+      if (sessionFilter) {
+        sessionFilter.classList.remove("is-active");
+        sessionFilter.setAttribute("aria-pressed", "false");
+      }
+      renderThemeButtons();
       render();
     });
   }
