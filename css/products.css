@@ -362,10 +362,9 @@
   margin: 0;
   font-family: var(--font-family-base);
   font-weight: 400;
-  /* clamp 而非固定斷點：跟首頁 .content-list 同一套「用 vw 連續縮放」慣例，
-     手機到平板寬度之間字級平滑放大，不需要另外寫斷點。 */
-  font-size: clamp(1.75rem, 1.3rem + 3vw, 2.75rem);
-  line-height: 1.1;
+  font-size: var(--page-title-font-size);
+  line-height: var(--page-title-line-height);
+  text-align: center;
   overflow-wrap: anywhere;
   /* 字距用共用 token（--editorial-heading-tracking，見 tokens.css），
      跟母頁的大標題對齊，統一敘事子頁跟母頁的編輯感。 */
@@ -1882,6 +1881,14 @@
    已經一併補上，見 gallery.html）。 */
 .chapter__title {
   margin: 0;
+  font-size: var(--section-title-font-size);
+  line-height: var(--section-title-line-height);
+}
+
+h1.chapter__title {
+  font-size: var(--page-title-font-size);
+  line-height: var(--page-title-line-height);
+  text-align: center;
 }
 
 .chapter__intro {

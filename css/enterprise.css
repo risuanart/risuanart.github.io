@@ -74,9 +74,10 @@
 
 .ent-hero__title {
   margin: var(--space-2) 0 0;
-  font-size: 24px;
-  line-height: 1.35;
-  font-weight: 700;
+  font-size: var(--page-title-font-size);
+  line-height: var(--page-title-line-height);
+  font-weight: 600;
+  text-align: center;
   color: var(--color-text-primary);
 }
 
@@ -169,10 +170,6 @@
 @media (min-width: 768px) {
   .ent-hero__photo {
     aspect-ratio: 21 / 9;
-  }
-
-  .ent-hero__title {
-    font-size: 32px;
   }
 }
 

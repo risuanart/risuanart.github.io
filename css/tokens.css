@@ -37,6 +37,12 @@
   --heading-font-weight: 600;
   --heading-line-height: 30px;
 
+  /* 頁面主標題採手機優先，再隨平板與桌機寬度微幅增加。 */
+  --page-title-font-size: 18px;
+  --page-title-line-height: 1.4;
+  --section-title-font-size: 16px;
+  --section-title-line-height: 1.5;
+
   --body-font-size: 14px;
   --body-font-weight: 400;
   --body-line-height: 25.2px;
@@ -133,5 +139,19 @@
     --pad-h: 20px;
     --editorial-gap: 60px;
     --editorial-gap-double: 100px;
+  }
+}
+
+@media (min-width: 769px) {
+  :root {
+    --page-title-font-size: 19px;
+    --section-title-font-size: 17px;
+  }
+}
+
+@media (min-width: 1025px) {
+  :root {
+    --page-title-font-size: 20px;
+    --section-title-font-size: 18px;
   }
 }
