@@ -14,6 +14,7 @@
 | `guides/` | 材料教學文章 |
 | `enterprise/` + `enterprise-{案例}/` | 企業/團體課程總覽 + 5 個案例頁 |
 | `privacy/` | 隱私權政策 |
+| `access/` | 畫室地址、Google 地圖連結與預約到訪方式 |
 
 ## 資料流
 - 前端本身**不存放任何資料**，純展示 + 呼叫 `risuan-checkout` 的 API。
