@@ -367,7 +367,9 @@
   .preview-gallery-filter-hierarchy-v1 .gallery-filter-group .gallery-filters__label { margin: 0; }
   .preview-gallery-filter-hierarchy-v1 .gallery-filter-group .gallery-filters__group { gap: 6px; }
   .preview-gallery-filter-hierarchy-v1 .gallery-filters__chip {
-    padding: 5px 10px;
+    box-sizing: border-box;
+    height: 35px;
+    padding: 0 10px;
     font-size: 13px;
   }
   .preview-gallery-filter-hierarchy-v1 .gallery-theme-toggle { grid-column: 1; }

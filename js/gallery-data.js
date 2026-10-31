@@ -659,6 +659,11 @@ window.GALLERY_ITEMS = [
   { course: "自己帶圖創作", themes: ["人像"], date: "2026-11-01", src: "../assets/images/gallery/portrait-oil/three-sessions/01.jpg", alt: "家庭四人合照肖像油畫，背景為城市夜景", sessions: 3 },
   { course: "自己帶圖創作", themes: ["人像"], date: "2026-11-01", src: "../assets/images/gallery/portrait-oil/three-sessions/03.jpg", alt: "畢業生肖像油畫，手捧花束", sessions: 3 },
   { course: "自己帶圖創作", themes: ["人像"], date: "2026-11-01", src: "../assets/images/gallery/portrait-oil/three-sessions/04.jpg", alt: "一對新人坐在公園長椅上的肖像油畫", sessions: 3 },
+  { course: "自己帶圖創作", themes: ["人像"], date: "2026-11-01", src: "../assets/images/gallery/portrait-oil/three-sessions/05.jpg", alt: "人物背對畫面整理長髮的肖像油畫", sessions: 3 },
+  { course: "自己帶圖創作", themes: ["人像"], date: "2026-11-01", src: "../assets/images/gallery/portrait-oil/three-sessions/06.jpg", alt: "兩位穿著和服的人站在街景前的肖像油畫", sessions: 3 },
+  { course: "自己帶圖創作", themes: ["人像"], date: "2026-11-01", src: "../assets/images/gallery/portrait-oil/three-sessions/07.jpg", alt: "人物坐姿肖像油畫，旁邊放著手機參考照片", sessions: 3 },
+  { course: "自己帶圖創作", themes: ["人像"], date: "2026-11-01", src: "../assets/images/gallery/portrait-oil/three-sessions/08.jpg", alt: "背對觀者相擁的兩人與夕陽山景油畫", sessions: 3 },
+  { course: "自己帶圖創作", themes: ["人像"], date: "2026-11-01", src: "../assets/images/gallery/portrait-oil/three-sessions/09.jpg", alt: "兩位穿著和服的人站在街景前的肖像油畫近照", sessions: 3 },
 ];
 
 // 課程篩選鈕的選項清單，跟首頁「課程」選單、faq.html 裡提到的課程名稱
