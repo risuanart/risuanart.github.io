@@ -473,24 +473,22 @@
             </div>
           </section>
 
-          <!-- 點數折抵：只有登入會員、而且有點數可用才顯示（見
-               js/checkout.js 讀 window.RisuanAccount.syncProfile() 的
-               customer.pointsBalance），訪客結帳完全看不到這區塊，也不
-               會送出 pointsToRedeem 這個欄位。刻意不即時重算
-               #confirm-total-grand（見 risuan-checkout
-               api/create-order.js 開頭的設計說明）——這裡只是「選擇要
-               折抵多少」，真正生效的金額由後端算好、反映在綠界付款頁
-               上，跟 wantsReceipt 這些欄位是同一種處理方式，不用額外
-               串接三處各自獨立的總金額渲染邏輯。 -->
+          <!-- 點數折抵：只有登入會員且有點數可用才顯示。這裡即時試算折抵與
+               應付金額，送出時仍由後端依最新點數餘額重新確認，不信任前端金額。 -->
           <section class="chapter" id="points-redeem-section" hidden>
             <h2 class="chapter__title"><span class="step-badge step-badge--label">STEP 5</span><span class="step-badge__dot">·</span>點數折抵</h2>
             <p class="sub" id="points-redeem-hint"></p>
             <label class="confirm-field">
               <span>要折抵的點數（1 點＝NT$1）</span>
               <div class="confirm-field__control">
-                <input type="number" name="pointsToRedeem" id="points-to-redeem" min="0" step="1" value="0">
+                <input type="number" name="pointsToRedeem" id="points-to-redeem" min="0" step="1" value="0" inputmode="numeric">
               </div>
             </label>
+            <label class="confirm-checkbox">
+              <input type="checkbox" id="redeem-all-points">
+              <span>折抵目前可用的最高點數</span>
+            </label>
+            <p class="sub">折抵後訂單至少保留 NT$1；送出訂單時會依最新點數餘額確認折抵金額。</p>
           </section>
 
           <div class="chapter confirm-pay" hidden>
@@ -512,6 +510,10 @@
               <div class="order-sheet__line">
                 <dt id="confirm-total-shipping-label">運費</dt>
                 <dd id="confirm-total-shipping"></dd>
+              </div>
+              <div class="order-sheet__line order-sheet__line--discount" id="confirm-total-points-row" hidden>
+                <dt>點數折抵</dt>
+                <dd id="confirm-total-points"></dd>
               </div>
             </dl>
             <div class="order-sheet__grand confirm-total-grand">
@@ -588,6 +590,10 @@
         <div class="order-sheet__line">
           <dt>運費</dt>
           <dd data-sheet-shipping></dd>
+        </div>
+        <div class="order-sheet__line order-sheet__line--discount" data-sheet-points-row hidden>
+          <dt>點數折抵</dt>
+          <dd data-sheet-points></dd>
         </div>
       </dl>
       <div class="order-sheet__grand">

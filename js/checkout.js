@@ -23,6 +23,9 @@
 (function () {
   const CHECKOUT_API_BASE = "https://risuan-checkout.vercel.app";
   const SHIPPING_FEES = { cvs: 65, home: 130 };
+  const pointsInput = document.getElementById("points-to-redeem");
+  const redeemAllPointsInput = document.getElementById("redeem-all-points");
+  let availablePoints = 0;
 
   const cartEditView = document.getElementById("cart-edit-view");
   const confirmView = document.getElementById("order-confirm-view");
@@ -35,6 +38,36 @@
   // 還沒結帳前橫條是隱藏的（購物車本身就是主畫面）。
   const cartCollapseBar = document.querySelector(".cart-collapse");
   const cartCollapseTotal = cartCollapseBar.querySelector(".cart-collapse__total");
+  function maxRedeemablePoints(order, method) {
+    if (!order) return availablePoints;
+    const fee = method ? SHIPPING_FEES[method] : 0;
+    return Math.max(0, Math.min(availablePoints, Math.floor(order.itemsTotal + fee - 1)));
+  }
+  function appliedPoints(order, method) {
+    if (!order || !pointsInput) return 0;
+    const requested = Math.max(0, Math.floor(Number(pointsInput.value) || 0));
+    return Math.min(requested, maxRedeemablePoints(order, method));
+  }
+  function syncPointsLimit(order, method) {
+    if (!pointsInput) return;
+    const max = maxRedeemablePoints(order, method);
+    pointsInput.max = String(max);
+    if (redeemAllPointsInput?.checked) {
+      pointsInput.value = String(max);
+    } else if (pointsInput.value) {
+      const requested = Math.max(0, Math.floor(Number(pointsInput.value) || 0));
+      pointsInput.value = String(Math.min(requested, max));
+    }
+  }
+  function updatePointsDiscountRow(order, method, row, amount) {
+    const redeemed = appliedPoints(order, method);
+    if (!row || redeemed <= 0) {
+      if (row) row.hidden = true;
+      return;
+    }
+    row.hidden = false;
+    amount.textContent = `-${formatMoney(redeemed)}`;
+  }
   function collapseCartEditView() {
     cartEditView.hidden = true;
     cartCollapseBar.hidden = false;
@@ -46,9 +79,31 @@
   // 顯示的就是純商品小計，等選了才會補上運費。
   function updateCollapseBarTotal(order, method) {
     const fee = method ? SHIPPING_FEES[method] : 0;
-    const total = formatMoney(order.itemsTotal + fee);
+    const total = formatMoney(order.itemsTotal + fee - appliedPoints(order, method));
     cartCollapseTotal.textContent = total;
     headerOrderTotal.textContent = total;
+  }
+  function renderConfirmTotals(order, method) {
+    const fee = method ? SHIPPING_FEES[method] : 0;
+    const redeemed = appliedPoints(order, method);
+    document.getElementById("confirm-total-subtotal").textContent = formatMoney(order.originalItemsTotal ?? order.itemsTotal);
+    const discountRow = document.getElementById("confirm-total-discount-row");
+    if (order.discountAmount > 0) {
+      discountRow.hidden = false;
+      document.getElementById("confirm-total-discount-label").textContent = order.discountLabel;
+      document.getElementById("confirm-total-discount").textContent = `-${formatMoney(order.discountAmount)}`;
+    } else {
+      discountRow.hidden = true;
+    }
+    document.getElementById("confirm-total-shipping").textContent = method ? formatMoney(fee) : "選擇送貨方式後計算";
+    updatePointsDiscountRow(
+      order,
+      method,
+      document.getElementById("confirm-total-points-row"),
+      document.getElementById("confirm-total-points")
+    );
+    document.getElementById("confirm-total-grand").textContent = formatMoney(order.itemsTotal + fee - redeemed);
+    updateCollapseBarTotal(order, method);
   }
   function expandCartEditView() {
     cartEditView.hidden = false;
@@ -99,6 +154,8 @@
   const orderSheetDiscountRow = orderSheet.querySelector("[data-sheet-discount-row]");
   const orderSheetDiscountLabel = orderSheet.querySelector("[data-sheet-discount-label]");
   const orderSheetDiscount = orderSheet.querySelector("[data-sheet-discount]");
+  const orderSheetPointsRow = orderSheet.querySelector("[data-sheet-points-row]");
+  const orderSheetPoints = orderSheet.querySelector("[data-sheet-points]");
 
   // 縮圖只有前端的商品資料（cart.js 的 SCHEME_IMAGES）才有，後端回傳的
   // 品項沒有；用「品名＋規格名」把後端品項對回本機購物車那一筆，拿得到
@@ -159,7 +216,9 @@
       orderSheetDiscountRow.hidden = true;
     }
     orderSheetShipping.textContent = fee === null ? "選擇送貨方式後計算" : formatMoney(fee);
-    orderSheetGrand.textContent = formatMoney(order.itemsTotal + (fee || 0));
+    const redeemed = appliedPoints(order, method);
+    updatePointsDiscountRow(order, method, orderSheetPointsRow, orderSheetPoints);
+    orderSheetGrand.textContent = formatMoney(order.itemsTotal + (fee || 0) - redeemed);
   }
 
   function openOrderSheet() {
@@ -419,12 +478,38 @@
       // max 只是前端先擋一次、給客人一個合理上限，真正的範圍（不能
       // 扣超過當下真實餘額、不能把訂單扣成 0 元）由後端
       // api/create-order.js 在送出當下重新夾一次，不信任這裡的值。
-      if (customer.pointsBalance > 0) {
+      availablePoints = Math.max(0, Math.floor(Number(customer.pointsBalance) || 0));
+      if (availablePoints > 0) {
         const pointsSection = document.getElementById("points-redeem-section");
-        const pointsInput = document.getElementById("points-to-redeem");
-        document.getElementById("points-redeem-hint").textContent = `您目前有 ${customer.pointsBalance} 點可以折抵`;
-        pointsInput.max = customer.pointsBalance;
+        document.getElementById("points-redeem-hint").textContent = `您目前有 ${availablePoints} 點可以折抵`;
         pointsSection.hidden = false;
+        syncPointsLimit(currentOrder, currentShippingMethod);
+        if (currentOrder) {
+          renderConfirmTotals(currentOrder, currentShippingMethod);
+          if (!orderSheet.hidden) renderOrderSheet(currentOrder, currentShippingMethod);
+        }
+      }
+    });
+  }
+
+  if (pointsInput && redeemAllPointsInput) {
+    pointsInput.addEventListener("input", () => {
+      redeemAllPointsInput.checked = false;
+      syncPointsLimit(currentOrder, currentShippingMethod);
+      if (currentOrder) {
+        renderConfirmTotals(currentOrder, currentShippingMethod);
+        if (!orderSheet.hidden) renderOrderSheet(currentOrder, currentShippingMethod);
+      }
+    });
+    redeemAllPointsInput.addEventListener("change", () => {
+      if (redeemAllPointsInput.checked) {
+        syncPointsLimit(currentOrder, currentShippingMethod);
+      } else {
+        pointsInput.value = "0";
+      }
+      if (currentOrder) {
+        renderConfirmTotals(currentOrder, currentShippingMethod);
+        if (!orderSheet.hidden) renderOrderSheet(currentOrder, currentShippingMethod);
       }
     });
   }
@@ -579,6 +664,7 @@
 
     syncPickupModeControls(method);
     currentShippingMethod = method;
+    syncPointsLimit(order, method);
     // 聯絡資訊不依賴送貨方式，一開始就能填，不用等選完送貨方式才出現
     // （customerSection 一直是可見的，不隨 method 切換）。收件資料要看
     // 送貨方式跟取貨方式才知道該不該出現（見
@@ -591,26 +677,8 @@
     if (!orderSheet.hidden) renderOrderSheet(order, method);
     // 橫條／頂部導覽上的金額同理，換送貨方式要立刻反映運費，不是只有
     // 結帳當下算一次。
-    updateCollapseBarTotal(order, method);
-    if (method) {
-      document.getElementById("confirm-shipping-method").value = method;
-      const fee = SHIPPING_FEES[method];
-      // 2026-10-17 改成跟 .order-sheet__lines 同一套逐行拆開，不要再塞成
-      // 一句長文字（原本的寫法見 git 歷史）。有早鳥折扣時把「原價→折扣」
-      // 獨立一行列出來，跟 order-sheet 面板同一套「不悄悄改價格」的原則
-      // （見 renderOrderSheet 的說明）。
-      document.getElementById("confirm-total-subtotal").textContent = formatMoney(order.originalItemsTotal ?? order.itemsTotal);
-      const discountRow = document.getElementById("confirm-total-discount-row");
-      if (order.discountAmount > 0) {
-        discountRow.hidden = false;
-        document.getElementById("confirm-total-discount-label").textContent = order.discountLabel;
-        document.getElementById("confirm-total-discount").textContent = `-${formatMoney(order.discountAmount)}`;
-      } else {
-        discountRow.hidden = true;
-      }
-      document.getElementById("confirm-total-shipping").textContent = formatMoney(fee);
-      document.getElementById("confirm-total-grand").textContent = formatMoney(order.itemsTotal + fee);
-    }
+    if (method) document.getElementById("confirm-shipping-method").value = method;
+    renderConfirmTotals(order, method);
   }
 
   // 目前顯示中的訂單／宅配是否已確認，給下面那組「只掛一次」的送貨方式
