@@ -49,7 +49,7 @@
 }
 
 .site-header__logo {
-  flex: 1;
+  flex: none;
   display: flex;
   justify-content: center;
 }

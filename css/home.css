@@ -164,18 +164,12 @@ html {
   font-size: var(--editorial-title-font-size);
 }
 
-/* 2026-10-31 使用者回報：手機寬度 logo 沒有真的置中。原本用
-   flex:1 + text-align:center，logo 只在「扣掉左邊漢堡鈕、右邊帳號+
-   購物車圖示之後剩下的中間那一段」裡置中，但左邊漢堡鈕（32px）跟
-   右邊帳號/購物車圖示組（含數字角標，通常比 32px 寬）兩邊寬度不
-   相等，logo 在「剩餘空間」裡置中，相對於整條頂部列／整個螢幕看
-   起來就會偏向比較窄的那一邊（漢堡鈕那側）。改成絕對定位貼在
-   .site-header（position:fixed，本身就是定位基準）正中央，不再依賴
-   兩側元素的寬度是否對稱。只在 1024px 以下套用——≥1024px 時
-   .site-header 本身改成 grid 版面（見 css/site-menu.css 該斷點），
-   .site-header__title 用 grid-column 置中，這裡的 absolute 定位會
-   跟 grid 版面衝突，所以限定在桌面版文字導覽列生效之前的寬度。 */
-.site-header__title {
+/* 手機版首頁與內頁使用不同的 Logo class（首頁 .site-header__logo、
+   內頁 .site-header__title），但都要相對整條頁首置中。不能靠 flex:1
+   在左右控制項之間置中，因為漢堡鈕和右側帳號／購物車組寬度不對稱，
+   會讓 Logo 偏離螢幕中心。桌面版改由各頁既有的三欄 Grid 置中。 */
+.site-header__title,
+.site-header__logo {
   min-width: 0;
   text-align: center;
   overflow: hidden;
@@ -185,7 +179,8 @@ html {
 }
 
 @media (max-width: 1023px) {
-  .site-header__title {
+  .site-header__title,
+  .site-header__logo {
     position: absolute;
     left: 50%;
     top: 50%;
@@ -194,6 +189,14 @@ html {
 }
 
 @media (min-width: 1024px) {
+  .site-header__title,
+  .site-header__logo {
+    position: static;
+    left: auto;
+    top: auto;
+    transform: none;
+  }
+
   .site-header__title {
     flex: 1;
   }
