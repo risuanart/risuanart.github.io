@@ -359,14 +359,13 @@
          4:3 橫式，主體被切到邊緣（見 css/home-editorial.css 拿掉覆寫的
          說明），改回 hub-blocks.css 原本的 4:5 直式比例後問題即解決，
          不需要再逐張另外調 object-position。data-hscroll／
-         data-hscroll-progress 是手機橫滑進度列的掛勾（js/hscroll-progress.js），
+         手機保留下一張卡片的局部露出，作為可橫向滑動的提示；不另外顯示進度列。
          .fade-in 留在 section 上是沿用既有 IntersectionObserver 當作
          「進入畫面」的觸發點，視覺效果（卡片逐張淡入上移）改套用在
          .banner-tile 本身，見 css/home-editorial.css 說明。 -->
     <section class="content-block fade-in home-course-section">
       <div class="home-section-head">
         <h2 class="home-section-title">課程精選</h2>
-        <a class="home-section-more" href="courses/">看全部課程 <span aria-hidden="true">→</span></a>
       </div>
       <div class="banner-row banner-row--quad" data-hscroll>
         <a class="banner-tile" href="courses/sand-texture/">
@@ -389,9 +388,6 @@
           <p class="banner-tile__title">寵物油畫</p>
           <p class="banner-tile__desc">把毛孩畫成專屬肖像。</p>
         </a>
-      </div>
-      <div class="hscroll-progress" data-hscroll-progress aria-hidden="true">
-        <div class="hscroll-progress__bar"></div>
       </div>
     </section>
 
