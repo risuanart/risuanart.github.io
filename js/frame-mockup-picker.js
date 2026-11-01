@@ -16,7 +16,6 @@
 
   const mainImg = root.querySelector("[data-frame-mockup-main-img]");
   const priceEl = root.querySelector("[data-frame-mockup-price]");
-  const sizeNameEl = root.querySelector("[data-frame-mockup-size-name]");
   const addBtns = Array.from(root.querySelectorAll("[data-frame-mockup-add-btn]"));
   const sizeChips = Array.from(root.querySelectorAll(".frame-size-picker__chip"));
   const designPicker = root.querySelector("[data-frame-design-picker]");
@@ -57,7 +56,6 @@
       sizeChips.forEach((c) => c.setAttribute("aria-pressed", c === chip ? "true" : "false"));
       currentSize = chip.dataset.size;
       if (priceEl) priceEl.textContent = `$${chip.dataset.price}`;
-      if (sizeNameEl) sizeNameEl.textContent = `${currentSize}×${currentSize}cm`;
       addBtns.forEach((btn) => {
         btn.hidden = btn.dataset.frameMockupAddBtn !== currentSize;
       });
