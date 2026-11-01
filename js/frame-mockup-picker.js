@@ -28,6 +28,18 @@
     ? (designChips.find((c) => c.getAttribute("aria-pressed") === "true") || designChips[0]).dataset.design
     : "fu";
 
+  function updateAvailableDesigns() {
+    designChips.forEach((chip) => {
+      const available = !chip.dataset.sizes || chip.dataset.sizes.split(',').includes(currentSize);
+      chip.hidden = !available;
+      chip.style.display = available ? '' : 'none';
+    });
+    if (!designChips.some((chip) => !chip.hidden && chip.dataset.design === currentDesign)) {
+      currentDesign = designChips.find((chip) => !chip.hidden).dataset.design;
+    }
+    designChips.forEach((chip) => chip.setAttribute('aria-pressed', String(chip.dataset.design === currentDesign)));
+  }
+
   function updateMainImage() {
     const designLabel = designChips.find((c) => c.dataset.design === currentDesign);
     const name = designLabel ? designLabel.querySelector(".color-picker__chip-name").textContent : "";
@@ -44,15 +56,18 @@
       addBtns.forEach((btn) => {
         btn.hidden = btn.dataset.frameMockupAddBtn !== currentSize;
       });
+      updateAvailableDesigns();
       updateMainImage();
     });
   });
 
   designChips.forEach((chip) => {
     chip.addEventListener("click", () => {
+      if (chip.hidden) return;
       designChips.forEach((c) => c.setAttribute("aria-pressed", c === chip ? "true" : "false"));
       currentDesign = chip.dataset.design;
       updateMainImage();
     });
   });
+  updateAvailableDesigns();
 })();
