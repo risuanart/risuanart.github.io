@@ -291,14 +291,45 @@
   const nav = root.querySelector('.custom-topics__nav');
   const visual = root.querySelector('.custom-topics__visual');
   const strip = root.querySelector('.custom-topics__thumbs');
-  const hero = root.querySelector('.custom-topics__zoom img');
+  const zoom = root.querySelector('.custom-topics__zoom');
+  const stage = root.querySelector('.custom-topics__stage');
+  let hero = zoom.querySelector('img');
+  const loadStatus = document.createElement('p');
+  loadStatus.className = 'custom-topics__load-status';
+  loadStatus.setAttribute('role', 'status');
+  stage.append(loadStatus);
   const sources = root.querySelector('.custom-topics__lightbox-source');
   let active, current = 0, touchX = 0, touchY = 0, suppressClick = false;
   function select(index) {
     if (!active.images.length) return;
     current = (index + active.images.length) % active.images.length;
-    hero.src = active.images[current].src;
-    hero.alt = active.images[current].alt;
+    // A separate element per request prevents a late image from a previous
+    // selection from showing under the newly selected topic's title.
+    const item = active.images[current];
+    const nextImage = new Image();
+    nextImage.alt = item.alt;
+    nextImage.style.visibility = 'hidden';
+    nextImage.decoding = 'async';
+    stage.setAttribute('aria-busy', 'true');
+    zoom.disabled = true;
+    loadStatus.hidden = false;
+    loadStatus.textContent = '正在載入' + active.label + '作品…';
+    nextImage.onload = async () => {
+      try { await nextImage.decode(); } catch (_) { /* Loaded images can still be displayed. */ }
+      if (hero !== nextImage) return;
+      nextImage.style.visibility = 'visible';
+      stage.setAttribute('aria-busy', 'false');
+      zoom.disabled = false;
+      loadStatus.hidden = true;
+    };
+    nextImage.onerror = () => {
+      if (hero !== nextImage) return;
+      stage.setAttribute('aria-busy', 'false');
+      loadStatus.textContent = '圖片載入失敗，請切換其他作品或稍後再試。';
+    };
+    hero.replaceWith(nextImage);
+    hero = nextImage;
+    nextImage.src = item.src;
     [...strip.children].forEach((button, i) => button.setAttribute('aria-current', String(i === current)));
     const thumb = strip.children[current];
     strip.scrollTo({left: thumb.offsetLeft - strip.offsetLeft - (strip.clientWidth - thumb.clientWidth) / 2, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth'});
@@ -306,6 +337,14 @@
   function render(key) {
     active = topics.find(t => t.key === key) || topics[0];
     current = 0;
+    suppressClick = false;
+    // Invalidate pending load callbacks even when the next topic has no images.
+    const placeholder = new Image();
+    placeholder.alt = '';
+    hero.replaceWith(placeholder);
+    hero = placeholder;
+    stage.setAttribute('aria-busy', 'false');
+    loadStatus.hidden = true;
     nav.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.topic === active.key)));
     root.querySelector('h2').textContent = active.label;
     root.querySelector('.custom-topics__description').innerHTML = active.desc;
@@ -319,7 +358,7 @@
       const image = document.createElement('img'); image.src = item.src; image.alt = ''; image.loading = 'lazy';
       button.append(image); button.addEventListener('click', () => select(i)); strip.append(button);
       const figure = document.createElement('figure'); figure.className = 'gallery-grid__item';
-      const source = document.createElement('img'); source.src = item.src; source.alt = item.alt; source.loading = 'lazy';
+      const source = document.createElement('img'); source.dataset.src = item.src; source.alt = item.alt; source.loading = 'lazy';
       figure.append(source); sources.append(figure);
     });
     select(0);
@@ -327,10 +366,15 @@
   nav.addEventListener('click', e => { const button = e.target.closest('[data-topic]'); if (button) render(button.dataset.topic); });
   root.querySelector('.custom-topics__prev').addEventListener('click', () => select(current - 1));
   root.querySelector('.custom-topics__next').addEventListener('click', () => select(current + 1));
-  root.querySelector('.custom-topics__zoom').addEventListener('click', () => { if (!suppressClick) sources.children[current]?.click(); });
+  zoom.addEventListener('click', () => {
+    if (suppressClick || zoom.disabled) return;
+    // Hidden lightbox entries need URLs only when opening the lightbox.
+    sources.querySelectorAll('img').forEach(image => { image.src = image.dataset.src; });
+    sources.children[current]?.click();
+  });
   visual.addEventListener('keydown', e => { if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') { e.preventDefault(); select(current + (e.key === 'ArrowRight' ? 1 : -1)); } });
-  hero.addEventListener('touchstart', e => { touchX = e.changedTouches[0].clientX; touchY = e.changedTouches[0].clientY; }, {passive: true});
-  hero.addEventListener('touchend', e => {
+  zoom.addEventListener('touchstart', e => { touchX = e.changedTouches[0].clientX; touchY = e.changedTouches[0].clientY; }, {passive: true});
+  zoom.addEventListener('touchend', e => {
     const dx = e.changedTouches[0].clientX - touchX, dy = e.changedTouches[0].clientY - touchY;
     if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) { suppressClick = true; select(current + (dx < 0 ? 1 : -1)); setTimeout(() => { suppressClick = false; }, 350); }
   }, {passive: true});

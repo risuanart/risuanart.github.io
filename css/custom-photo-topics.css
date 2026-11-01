@@ -29,3 +29,8 @@
   .custom-topics__thumbs { margin-top:var(--space-6); }
 }
 .custom-topics__showcase:has(.custom-topics__visual[hidden]) { grid-template-columns:minmax(0,1fr); }
+
+/* Hide the previous bitmap while the newly selected work loads. */
+.custom-topics__load-status { position:absolute; inset:0; display:grid; place-items:center; padding:var(--space-4); margin:0; text-align:center; color:var(--color-text-secondary); font-size:var(--font-size-sm); pointer-events:none; }
+.custom-topics__load-status[hidden] { display:none; }
+.custom-topics__zoom:disabled { cursor:progress; }
