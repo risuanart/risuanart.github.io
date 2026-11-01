@@ -1586,6 +1586,10 @@
   line-height: 1.7;
 }
 
+.work__intro.work__intro--frame .work__title-block {
+  text-align: center;
+}
+
 /* ---------- 砂畫・24色任選組（2026-10-24，只有
    products/sand-art-24color/index.html 用到）----------
    跟上面「沙畫加購像框」同一個排版道理：買列上面有兩組各自獨立的
