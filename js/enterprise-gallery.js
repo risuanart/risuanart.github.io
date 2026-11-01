@@ -24,9 +24,25 @@
     const slides = Array.from(gallery.querySelectorAll(".ent-gallery__slide"));
     const dots = Array.from(gallery.querySelectorAll(".ent-gallery__dots button"));
     const dotsEl = gallery.querySelector(".ent-gallery__dots");
+    const courseControls = gallery.dataset.courseControls === "true";
+    let counterEl = null;
+    let prevControl = null;
+    let nextControl = null;
     const AUTOPLAY_MS = parseInt(gallery.dataset.autoplay, 10) || 4000;
 
-    if (slides.length > 1 && dotsEl && !gallery.querySelector(".ent-gallery__swipe-hint")) {
+    if (slides.length > 1 && courseControls && dotsEl) {
+      const controls = document.createElement("div");
+      controls.className = "ent-gallery__controls";
+      controls.innerHTML = `
+        <button type="button" class="ent-gallery__step" data-direction="prev" aria-label="上一張圖片">←</button>
+        <span class="ent-gallery__counter" aria-live="polite"></span>
+        <button type="button" class="ent-gallery__step" data-direction="next" aria-label="下一張圖片">→</button>`;
+      dotsEl.insertAdjacentElement("afterend", controls);
+      dotsEl.hidden = true;
+      counterEl = controls.querySelector(".ent-gallery__counter");
+      prevControl = controls.querySelector('[data-direction="prev"]');
+      nextControl = controls.querySelector('[data-direction="next"]');
+    } else if (slides.length > 1 && dotsEl && !gallery.querySelector(".ent-gallery__swipe-hint")) {
       const hint = document.createElement("p");
       hint.className = "ent-gallery__swipe-hint";
       hint.setAttribute("aria-hidden", "true");
@@ -45,6 +61,10 @@
         dot.classList.toggle("is-active", isActive);
         dot.setAttribute("aria-selected", String(isActive));
       });
+      if (counterEl) {
+        const pad = (value) => String(value).padStart(2, "0");
+        counterEl.textContent = `${pad(current + 1)} / ${pad(slides.length)}`;
+      }
     }
 
     function next() {
@@ -71,6 +91,8 @@
         start(); // 手動切換後重新計時，不會切完馬上又被自動播放蓋過去
       });
     });
+    if (prevControl) prevControl.addEventListener("click", () => { prev(); start(); });
+    if (nextControl) nextControl.addEventListener("click", () => { next(); start(); });
 
     gallery.addEventListener("mouseenter", stop);
     gallery.addEventListener("mouseleave", start);
@@ -110,6 +132,9 @@
       });
     }
 
-    if (slides.length > 1) start();
+    if (slides.length > 1) {
+      goTo(0);
+      start();
+    }
   });
 })();

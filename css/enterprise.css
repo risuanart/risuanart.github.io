@@ -661,6 +661,45 @@
   transform: scale(1.2);
 }
 
+/* Course galleries use a compact index and direct controls; enterprise case pages
+   retain their established dots and mobile swipe hint until separately approved. */
+.ent-gallery[data-course-controls="true"] .ent-gallery__dots[hidden] {
+  display: none;
+}
+.ent-gallery[data-course-controls="true"] .ent-gallery__controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-xs);
+  letter-spacing: 0.08em;
+}
+.ent-gallery[data-course-controls="true"] .ent-gallery__step {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid color-mix(in srgb, var(--color-text-secondary) 30%, transparent);
+  border-radius: 50%;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  transition: background var(--duration-fast) var(--ease-standard), color var(--duration-fast) var(--ease-standard);
+}
+.ent-gallery[data-course-controls="true"] .ent-gallery__step:hover {
+  background: var(--color-text-primary);
+  color: var(--color-surface-light);
+}
+.ent-gallery[data-course-controls="true"] .ent-gallery__counter {
+  min-width: 4.5em;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
 /* 滑動提示（js/enterprise-gallery.js 統一插入，見該檔案開頭說明）：
    只在手機寬度顯示，桌面版滑鼠使用者不需要滑動手勢，圖示用簡單的左右
    雙箭頭，跟著文字淡入淡出樣式維持低調，不搶輪播本身的注意力。 */
