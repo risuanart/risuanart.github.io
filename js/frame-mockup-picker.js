@@ -43,6 +43,11 @@
   function updateMainImage() {
     const designLabel = designChips.find((c) => c.dataset.design === currentDesign);
     const name = designLabel ? designLabel.querySelector(".color-picker__chip-name").textContent : "";
+    if (currentDesign === "plain") {
+      mainImg.src = `../../assets/images/products/sand-art-frame/sand-art-frame-plain-${currentSize}.jpg`;
+      mainImg.alt = `${currentSize}×${currentSize}cm 木質空畫框`;
+      return;
+    }
     mainImg.src = `../../assets/images/products/sand-art-frame/mockup-${currentDesign}-${currentSize}.jpg`;
     mainImg.alt = `${name} 裝進 ${currentSize}×${currentSize}cm 像框的模擬效果`;
   }
