@@ -1,0 +1,64 @@
+.booking-contact-card {
+  margin: 0 0 var(--space-8);
+  padding: clamp(1.25rem, 4vw, 2rem);
+  border: 1px solid var(--color-border, #deded5);
+  background: #fafaf7;
+}
+
+.booking-contact-card__eyebrow {
+  margin: 0 0 .45rem;
+  color: var(--color-brand, #686f12);
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+}
+
+.booking-contact-card__title {
+  margin: 0 0 .7rem;
+  font-size: clamp(1.25rem, 3vw, 1.6rem);
+}
+
+.booking-contact-card__text {
+  margin: 0 0 1rem;
+  color: #666;
+  line-height: 1.8;
+}
+
+.booking-contact-card__copy {
+  display: block;
+  width: 100%;
+  min-height: 10rem;
+  box-sizing: border-box;
+  padding: .9rem 1rem;
+  border: 1px solid #d8d8ce;
+  border-radius: 0;
+  background: #fff;
+  color: #292820;
+  font: inherit;
+  line-height: 1.7;
+  resize: vertical;
+}
+
+.booking-contact-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+  margin-top: 1rem;
+}
+
+.booking-contact-card__instagram {
+  text-decoration: none;
+}
+
+.booking-contact-card__status {
+  margin: .8rem 0 0;
+  color: var(--color-brand, #686f12);
+  font-size: .9rem;
+}
+
+@media (max-width: 600px) {
+  .booking-contact-card__actions > * {
+    width: 100%;
+    text-align: center;
+  }
+}

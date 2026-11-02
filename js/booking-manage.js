@@ -63,9 +63,14 @@
     async function loadAndRender() {
       root.innerHTML = `<p class="account-page__empty">載入中…</p>`;
       try {
-        const data = await tokenApiFetch(
-          `/api/account?action=booking-reschedule-options&bookingId=${encodeURIComponent(bookingId)}&token=${encodeURIComponent(token)}`
-        );
+        const [data, contactInfo] = await Promise.all([
+          tokenApiFetch(
+            `/api/account?action=booking-reschedule-options&bookingId=${encodeURIComponent(bookingId)}&token=${encodeURIComponent(token)}`
+          ),
+          tokenApiFetch(
+            `/api/account?action=booking-contact-info&bookingId=${encodeURIComponent(bookingId)}&token=${encodeURIComponent(token)}`
+          ),
+        ]);
         // 這支 API 不會回傳 status／cancelRequestedAt（第一階段設計成
         // 只給「查改期資格」用，那兩個欄位是會員中心列表摘要才有的），
         // 這裡沒有列表可以撈摘要，改成直接用 reschedule-options 本身
@@ -76,6 +81,30 @@
         // 的寫法，直接走一般的 renderBookingDetail() 即可。
         const summary = { bookingId, date: data.currentDate, time: data.currentTime };
         renderBookingDetail(root, summary, data);
+        const contactText = [
+          "您好，我想詢問我的課程預約：",
+          `預約編號：${contactInfo.bookingId}`,
+          `姓名：${contactInfo.name || ""}`,
+          `上課日期：${contactInfo.date} ${contactInfo.time}`,
+          `課程：${contactInfo.course}`,
+          `人數：${contactInfo.qty}`,
+          "想詢問的問題：",
+        ].join("\n");
+        const contactCard = document.createElement("aside");
+        contactCard.className = "booking-contact-card";
+        contactCard.id = "contact";
+        contactCard.innerHTML = `
+          <p class="booking-contact-card__eyebrow">CONTACT US</p>
+          <h2 class="booking-contact-card__title">要詢問預約嗎？</h2>
+          <p class="booking-contact-card__text">先複製下面整理好的預約資料，再點 Instagram 私訊我們，貼上後補充你的問題即可。</p>
+          <textarea class="booking-contact-card__copy" readonly aria-label="預約聯絡文字">${escapeHtml(contactText)}</textarea>
+          <div class="booking-contact-card__actions">
+            <button type="button" class="work__cta work__cta--primary booking-contact-card__copy-button">複製預約資料</button>
+            <a class="work__cta booking-contact-card__instagram" href="https://www.instagram.com/ri.suan_art/" target="_blank" rel="noopener">開啟 Instagram</a>
+          </div>
+          <p class="booking-contact-card__status" aria-live="polite" hidden></p>
+        `;
+        root.prepend(contactCard);
         root.dataset.bookingId = bookingId;
       } catch (err) {
         renderInvalidLink(err.message);
@@ -86,6 +115,23 @@
       const rescheduleConfirmBtn = e.target.closest(".account-booking-item__reschedule-confirm");
       const cancelToggleBtn = e.target.closest(".account-booking-item__cancel-toggle");
       const cancelSubmitBtn = e.target.closest(".account-booking-item__cancel-submit");
+      const copyButton = e.target.closest(".booking-contact-card__copy-button");
+
+      if (copyButton) {
+        const copyText = root.querySelector(".booking-contact-card__copy").value;
+        const status = root.querySelector(".booking-contact-card__status");
+        try {
+          await navigator.clipboard.writeText(copyText);
+        } catch {
+          const textarea = root.querySelector(".booking-contact-card__copy");
+          textarea.focus();
+          textarea.select();
+          document.execCommand("copy");
+        }
+        status.textContent = "已複製，現在可以開啟 Instagram 貼上並補充問題。";
+        status.hidden = false;
+        return;
+      }
 
       if (rescheduleConfirmBtn) {
         const msgEl = root.querySelector(".account-booking-item__msg");
