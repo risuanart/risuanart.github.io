@@ -152,7 +152,9 @@
 .ent-hero__facts-item {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: var(--space-1);
+  text-align: center;
 }
 
 .ent-hero__facts-item dt {
@@ -892,6 +894,16 @@
   border-radius: 0;
 }
 
+/* 2026-11-08 使用者反映「也可以帶著真的毛孩一起來」那張四人合照用
+   預設 4:5（直式）裁切，橫式的團體合照被裁掉上方跟右側的人。這張
+   實際比例接近 3:2（1200×801），加這個修飾類別把容器比例改成跟
+   照片本身一致，object-fit:cover 在比例吻合的情況下等同完整顯示，
+   不會裁切。只套在需要完整呈現、不想被裁的橫式照片上，不是全站
+   .ent-feature__media 的預設行為。 */
+.ent-feature__media--wide {
+  aspect-ratio: 3 / 2;
+}
+
 @media (min-width: 768px) {
   .ent-feature {
     flex-direction: row;
@@ -907,6 +919,10 @@
 
   .ent-feature__media {
     aspect-ratio: 1 / 1;
+  }
+
+  .ent-feature__media--wide {
+    aspect-ratio: 3 / 2;
   }
 
   .ent-feature--reverse {
