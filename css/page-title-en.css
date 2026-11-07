@@ -34,9 +34,17 @@ h1:has(> .page-title-en) + .chapter__intro { margin-top: var(--space-6); font-si
 /* 一般頁面主標：中文在上、英文在下。 */
 h1 > .page-title-en { order: 1; }
 
-/* 材料指南手機頁首：導覽下緣至主標由 115px 收為 80px。 */
+/* 一般頁面手機頁首，沿用材料指南確認的 80px 上方距離。 */
 @media (max-width: 768px) {
-  .chapter:has(> .guides-page-intro) {
+  .product-page > :is(.chapter, .work__intro):has(> h1 > .page-title-en) {
     margin-top: calc(60px - 35px);
   }
+}
+
+/* 一般頁首介紹沿用材料指南的置中與主次層級。 */
+h1:has(> .page-title-en) + :is(.intro, .chapter__intro) {
+  text-align: center;
+  margin-top: var(--space-6);
+  font-size: var(--font-size-sm);
+  line-height: 1.8;
 }
