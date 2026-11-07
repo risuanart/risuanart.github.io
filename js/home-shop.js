@@ -7,6 +7,20 @@
   if (!hero) return;
 
   const slides = Array.from(hero.querySelectorAll(".preview-hero__slide"));
+  // 圓點由實際影片產生，避免註解卡片或新增影片後索引錯位。
+  const dotsWrap = hero.querySelector(".preview-hero__dots");
+  if (dotsWrap) {
+    dotsWrap.replaceChildren(...slides.map((_, index) => {
+      const dot = document.createElement("button");
+      dot.type = "button";
+      dot.dataset.index = String(index);
+      dot.setAttribute("role", "tab");
+      dot.setAttribute("aria-label", "第 " + (index + 1) + " 張");
+      dot.setAttribute("aria-selected", String(index === 0));
+      dot.classList.toggle("is-active", index === 0);
+      return dot;
+    }));
+  }
   const dots = Array.from(hero.querySelectorAll(".preview-hero__dots button"));
   const AUTOPLAY_MS = parseInt(hero.dataset.autoplay, 10) || 5000;
   let current = 0;
