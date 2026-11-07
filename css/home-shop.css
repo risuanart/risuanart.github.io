@@ -727,6 +727,20 @@
    深色情境照配的）幾乎融在一起、看不清楚。這裡覆寫成深色底＋淺色虛線／
    說明字，維持「還沒有真的照片」的誠實佔位語彙，但先確保現在（照片還沒
    到位）疊字本身就是可讀的，不用等真的照片上了才看得出效果對不對。 */
+/* 羊Diss舞蹈紅／藍同格輪播：兩張 .preview-hero__photo 疊在同一格裡，
+   靠 opacity 交叉淡入淡出（js/home-shop.js 控制 is-active 切換），不吃
+   外層輪播的圓點。 */
+.preview-hero__sheep-photo {
+  opacity: 0;
+  z-index: 0;
+  transition: opacity 1.2s var(--ease-standard);
+}
+
+.preview-hero__sheep-photo.is-active {
+  opacity: 1;
+  z-index: 1;
+}
+
 .preview-hero__photo.placeholder-box {
   position: absolute;
   inset: 0;
@@ -781,6 +795,23 @@
   line-height: 1.25;
   font-weight: 700;
   color: var(--color-surface-light);
+}
+
+/* 2026-11-07 使用者反映「羊Diss舞蹈 Sheep La Danse」手機寬度下中英文
+   兩段加起來太長會換行，換行後第二行會擋到下面的影片。縮小英文名稱
+   那一截的字級，讓整串標題在手機寬度下擠回一行；桌機（≥768px）寬度
+   夠，字級跟中文部分一樣大，不用縮。 */
+.preview-hero__title-en {
+  font-size: 0.6em;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+@media (min-width: 768px) {
+  .preview-hero__title-en {
+    font-size: 1em;
+    font-weight: 700;
+  }
 }
 
 .preview-hero__tagline {

@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>自選主題油畫｜作品呈現模擬</title>
+<link rel="stylesheet" href="../css/colors.css">
+<link rel="stylesheet" href="../css/tokens.css">
+<link rel="stylesheet" href="../css/base.css">
+<style>
+  body { margin:0; background:var(--color-bg,#fff); color:var(--color-text,#181717); font-family:var(--font-family-base,sans-serif); }
+  .preview-note { padding:10px 20px; background:#f3f2ee; text-align:center; font-size:13px; }
+  .demo { width:min(100% - 40px,840px); margin:56px auto; }
+  .topics { display:flex; gap:8px; flex-wrap:wrap; margin:0 0 34px; }
+  .topic { border:0; border-bottom:1px solid #d8d6ce; background:transparent; color:#555; padding:8px 3px; margin-right:14px; font:inherit; font-size:13px; cursor:pointer; }
+  .topic[aria-pressed="true"] { color:#181717; border-color:#181717; }
+  .showcase { display:grid; grid-template-columns:minmax(0,1.18fr) minmax(260px,.82fr); gap:34px; align-items:start; }
+  .visual { min-width:0; --media-ratio:1.5 / 1; }
+  .stage { inline-size:100%; aspect-ratio:var(--media-ratio); position:relative; display:grid; place-items:center; overflow:visible; background:#f4f3f0; container-type:inline-size; }
+  .stage img { width:100%; height:100%; object-fit:cover; object-position:center center; cursor:zoom-in; }
+  .stage-arrow { position:absolute; z-index:1; top:50%; transform:translateY(-50%); inline-size:clamp(34px, 7.5cqi, 52px); aspect-ratio:1; padding:0; border:0; border-radius:50%; color:#292824; display:grid; place-items:center; cursor:pointer; background-color:rgba(250,249,247,.96); box-shadow:0 2px 12px rgba(30,28,22,.11); transition:background-color .2s ease, box-shadow .2s ease; }
+  .stage-arrow::before { content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none; opacity:.13; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E"); }
+  .stage-arrow:hover { background-color:rgba(226,224,219,.97); box-shadow:0 3px 15px rgba(30,28,22,.15); }
+  .stage-arrow svg { position:relative; width:44%; height:32%; overflow:visible; fill:none; stroke:currentColor; stroke-width:1.35; stroke-linecap:round; stroke-linejoin:round; }
+  .stage-arrow.prev { left:0; transform:translate(-50%,-50%); }
+  .stage-arrow.next { right:0; transform:translate(50%,-50%); }
+  .thumb-row-wrap { margin-top:36px; overflow:hidden; }
+  .thumbs { display:flex; gap:16px; overflow-x:auto; scroll-behavior:smooth; scrollbar-width:none; overscroll-behavior-inline:contain; }
+  .thumbs::-webkit-scrollbar { display:none; }
+  .thumb { position:relative; flex:0 0 calc((100% - 48px) / 3.35); aspect-ratio:var(--media-ratio); overflow:hidden; border:0; border-radius:2px; background:#f3f2ee; padding:0; cursor:pointer; }
+  .thumb img { width:100%; height:100%; object-fit:cover; object-position:center; transition:filter .25s ease; }
+  .thumb[aria-current="true"] img { filter:none; }
+  .thumb:hover img { filter:none; }
+  .copy { padding:4px 0 0; }
+  .eyebrow { color:#898674; font-size:11px; letter-spacing:.12em; margin:0 0 8px; }
+  h1 { font-size:20px; line-height:1.45; font-weight:600; margin:0 0 18px; }
+  .copy p { font-size:13px; line-height:1.9; color:#666; margin:0 0 16px; }
+  .copy .detail { border-top:1px solid #d8d6ce; padding-top:14px; color:#888; font-size:12px; }
+  .count { color:#888; font-size:11px; margin-top:8px; }
+  .lightbox { position:fixed; inset:0; z-index:5; display:none; place-items:center; background:rgba(15,15,15,.94); padding:24px; }
+  .lightbox.is-open { display:grid; }
+  .lightbox img { max-width:min(92vw,1000px); max-height:86vh; object-fit:contain; }
+  .lightbox button { position:absolute; top:14px; right:20px; border:0; background:transparent; color:#fff; font-size:28px; cursor:pointer; }
+  @media (max-width:640px) {
+    .demo { width:calc(100% - 40px); margin:36px auto; }
+    .topics { gap:6px; margin-bottom:24px; }
+    .topic { margin-right:9px; padding:7px 2px; font-size:12px; }
+    .showcase { grid-template-columns:1fr; gap:22px; }
+    .visual { --media-ratio:1.2 / 1; }
+    .stage-arrow { display:none; }
+    .thumb-row-wrap { margin-top:20px; }
+   
+    .copy { grid-row:1; }
+    h1 { font-size:18px; margin-bottom:8px; }
+    .copy p { margin-bottom:8px; }
+    .copy .detail { display:none; }
+  }
+</style>
+</head>
+<body>
+<div class="preview-note">本機版型模擬｜不會影響正式網站</div>
+<main class="demo">
+  <nav class="topics" aria-label="作品主題">
+    <button class="topic" aria-pressed="true" data-topic="disney">迪士尼／皮克斯</button>
+    <button class="topic" aria-pressed="false" data-topic="ghibli">吉卜力</button>
+    <button class="topic" aria-pressed="false" data-topic="botanical">植物花卉</button>
+    <button class="topic" aria-pressed="false" data-topic="anime">動漫／角色</button>
+    <button class="topic" aria-pressed="false" data-topic="animals">其他動物</button>
+  </nav>
+  <section class="showcase" aria-label="主題作品展示">
+    <div class="visual">
+      <div class="stage">
+        <img id="hero-image" src="../assets/images/gallery/disney/07.jpg" alt="迪士尼角色作品">
+        <button class="stage-arrow prev" type="button" aria-label="上一張作品"><svg viewBox="0 0 25 18" aria-hidden="true"><path d="M24 9H2M2 9l7-7M2 9l7 7"/></svg></button>
+        <button class="stage-arrow next" type="button" aria-label="下一張作品"><svg viewBox="0 0 25 18" aria-hidden="true"><path d="M1 9h22M23 9l-7-7M23 9l-7 7"/></svg></button>
+      </div>
+      <div class="thumb-row-wrap">
+        <div class="thumbs" id="thumbs"></div>
+      </div>
+    </div>
+    <div class="copy">
+      <p class="eyebrow" id="eyebrow">自選主題油畫・主題作品</p>
+      <h1 id="title">迪士尼／皮克斯</h1>
+      <p id="description">從熟悉的角色開始，挑一張自己喜歡的畫面，和老師一起評估構圖與難度，再用油畫筆觸完成屬於自己的版本。</p>
+      <p id="detail" class="detail">不同畫面需要的細節與完成時間不同，第一次嘗試也可以先從構圖簡單、色塊清楚的作品開始。</p>
+    </div>
+  </section>
+</main>
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="放大作品"><button type="button" id="close" aria-label="關閉">×</button><img id="lightbox-image" alt=""></div>
+<script>
+const topics={
+ disney:{label:'迪士尼／皮克斯',folder:'disney',files:[7,20,29,2,3,4,5,9,14,28],desc:'從熟悉的角色開始，挑一張自己喜歡的畫面，和老師一起評估構圖與難度，再用油畫筆觸完成屬於自己的版本。',detail:'不同畫面需要的細節與完成時間不同，第一次嘗試也可以先從構圖簡單、色塊清楚的作品開始。',note:'迪士尼／皮克斯作品共 31 件。這裡先展示 10 件，縮圖可左右滑動，點選後更換左側主圖。'},
+ ghibli:{label:'吉卜力',folder:'ghibli',files:[5,3,7,13,10,1,4,6,9,15],desc:'龍貓、神隱少女等角色都有同學畫過。場景可以保留代表性的色彩與輪廓，完成自己的畫面。',detail:'吉卜力作品共 15 件。實際精選可再一起挑，避免相似構圖連續出現。',note:'這裡展示 10 件吉卜力作品作為版型示意。'},
+ botanical:{label:'植物花卉',files:['landscape-oil/01.jpg','landscape-oil/03.jpg','landscape-oil/05.jpg','landscape-oil/06.jpg','landscape-oil/08.jpg','landscape-oil/16.jpg','landscape-oil/19.jpg','star-sky/34.jpg'],desc:'盆栽、花束、庭院造景都能成為靈感，花朵與枝葉的色彩和筆觸可以慢慢堆疊。',detail:'挑選花瓣數量少、造型單純的花會比較容易開始。',note:'目前確認到 8 件植物花卉作品，這裡不為了湊滿 10 張而放入不相符的照片。'},
+ anime:{label:'動漫／角色',files:[],desc:'',detail:'',note:'目前沒有以「動漫／角色」標記的自選主題油畫作品。迪士尼／皮克斯與吉卜力是分開整理的主題。'},
+ animals:{label:'其他動物',files:[],desc:'',detail:'',note:'目前沒有以「其他動物」標記的自選主題油畫作品。寵物油畫作品屬於另一門課程，先不混作示例。'}
+};
+let active='disney', current=0, touchStartX=0, suppressStageClick=false;
+const strip=document.getElementById('thumbs'), hero=document.getElementById('hero-image');
+function srcFor(t,f){return `../assets/images/gallery/${typeof f==='string'?f:`${t.folder}/${String(f).padStart(2,'0')}.jpg`}`}
+function render(){const t=topics[active],has=!!t.files.length;document.querySelector('.visual').hidden=!has;document.getElementById('eyebrow').textContent=has?'自選主題油畫・主題作品':'作品主題';document.getElementById('title').textContent=t.label;document.getElementById('description').textContent=t.desc;document.getElementById('description').hidden=!has;document.getElementById('detail').textContent=t.detail;document.getElementById('detail').hidden=!has;strip.replaceChildren();current=0;if(!has)return;
+ t.files.forEach((f,i)=>{const src=srcFor(t,f),b=document.createElement('button');b.className='thumb';b.type='button';b.setAttribute('aria-current',i===0?'true':'false');b.innerHTML=`<img src="${src}" alt="${t.label}作品 ${i+1}">`;b.onclick=()=>select(i);strip.append(b)});select(0)}
+function select(i){const t=topics[active];current=(i+t.files.length)%t.files.length;const src=srcFor(t,t.files[current]);hero.src=src;hero.alt=`${t.label}作品 ${current+1}`;document.querySelectorAll('.thumb').forEach((b,j)=>b.setAttribute('aria-current',j===current?'true':'false'));const thumb=strip.children[current];if(thumb)thumb.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'})}
+document.querySelectorAll('.topic').forEach(b=>b.onclick=()=>{active=b.dataset.topic;document.querySelectorAll('.topic').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));render()});
+document.querySelector('.stage-arrow.prev').onclick=()=>select(current-1);document.querySelector('.stage-arrow.next').onclick=()=>select(current+1);
+const lightbox=document.getElementById('lightbox'),lbimg=document.getElementById('lightbox-image');hero.addEventListener('touchstart',e=>{touchStartX=e.changedTouches[0].clientX},{passive:true});hero.addEventListener('touchend',e=>{const delta=e.changedTouches[0].clientX-touchStartX;if(Math.abs(delta)>45){suppressStageClick=true;select(current+(delta<0?1:-1));setTimeout(()=>{suppressStageClick=false},350)}},{passive:true});hero.onclick=()=>{if(suppressStageClick)return;lbimg.src=hero.src;lightbox.classList.add('is-open')};document.getElementById('close').onclick=()=>lightbox.classList.remove('is-open');lightbox.onclick=e=>{if(e.target===lightbox)lightbox.classList.remove('is-open')};document.addEventListener('keydown',e=>{if(e.key==='Escape')lightbox.classList.remove('is-open');if(e.key==='ArrowLeft' && !lightbox.classList.contains('is-open'))select(current-1);if(e.key==='ArrowRight' && !lightbox.classList.contains('is-open'))select(current+1)});render();
+</script>
+</body>
+</html>

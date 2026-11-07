@@ -36,7 +36,6 @@
   const emptyState = document.getElementById("gallery-empty");
   const courseFilterGroup = document.getElementById("gallery-course-filters");
   const themeFilterGroup = document.getElementById("gallery-theme-filters");
-  const themeToggle = document.getElementById("gallery-theme-toggle");
   const sessionFilter = document.getElementById("gallery-session-filter");
   const sessionFilterGroup = document.getElementById("gallery-session-filter-group");
   const themeLabel = document.getElementById("gallery-theme-label");
@@ -54,24 +53,22 @@
 
   const SPECIES_COUNT_THEMES = ["狗狗", "貓咪", "兩隻以上"];
 
-  // 課程按鈕從 GALLERY_COURSES（見 js/gallery-data.js）動態產生，不是
-  // 寫死在 HTML 裡——這樣以後加新課程，這裡的篩選鈕會自動跟著出現。
-  // 「全部」按鈕是特殊項目（不對應任何課程），維持寫在 gallery.html 裡，
-  // 這裡只補課程清單後面的按鈕。主題按鈕改成 renderThemeButtons() 依
-  // 目前選的課程動態產生，不在這裡一次生成全部。
+  // 2026-11-07 使用者要求課程／媒材改成下拉選單——課程是單選，跟下拉選單
+  // 「同時間只能選一個」的語意完全吻合，選項一多（現在十幾堂課）比一排
+  // 按鈕省空間很多。選項從 GALLERY_COURSES（見 js/gallery-data.js）動態
+  // 產生，不是寫死在 HTML 裡，這樣以後加新課程，這裡的選項會自動跟著
+  // 出現。「全部」是特殊項目（不對應任何課程），維持寫在 gallery.html
+  // 裡，這裡只補課程清單後面的選項。主題維持原本的按鈕＋複選，改成
+  // renderThemeButtons() 依目前選的課程動態產生。
   if (courseFilterGroup) {
     (window.GALLERY_COURSES || []).forEach((course) => {
       if (course === "鏡子拼貼") return;
-      const btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = "gallery-filters__chip";
-      btn.setAttribute("data-gallery-course", course);
-      btn.textContent = course;
-      courseFilterGroup.appendChild(btn);
+      const option = document.createElement("option");
+      option.value = course;
+      option.textContent = course;
+      courseFilterGroup.appendChild(option);
     });
   }
-
-  const courseButtons = document.querySelectorAll("[data-gallery-course]");
 
   // 課程頁「查看更多這堂課的作品」連結會帶 ?course=課程名稱 過來（見
   // js/gallery-course-preview.js），這裡讀網址參數決定進頁面時要先選
@@ -82,8 +79,6 @@
   let activeCourse = "all";
   const activeThemes = new Set();
   let onlyOneSession = false;
-  let themesExpanded = false;
-  const VISIBLE_THEME_LIMIT = 8;
 
   // 選「全部」時顯示完整主題清單（跨課程瀏覽本來就需要看到所有主題）；
   // 選特定課程時，只列出這堂課的作品裡實際用過的主題，順序仍照
@@ -99,6 +94,8 @@
     return all.filter((t) => used.has(t));
   }
 
+  // 2026-11-07 使用者要求主題拿掉收合／展開，不管幾個都一次全部顯示——
+  // 拿掉 is-collapsed／VISIBLE_THEME_LIMIT／themeToggle 那整套邏輯。
   function renderThemeButtons() {
     if (!themeFilterGroup) return;
     themeFilterGroup.innerHTML = "";
@@ -111,13 +108,6 @@
       btn.textContent = theme;
       themeFilterGroup.appendChild(btn);
     });
-    themeFilterGroup.classList.toggle("is-collapsed", !themesExpanded);
-    if (themeToggle) {
-      const hiddenCount = themes.slice(VISIBLE_THEME_LIMIT).filter((theme) => !activeThemes.has(theme)).length;
-      themeToggle.hidden = themes.length <= VISIBLE_THEME_LIMIT || (!themesExpanded && hiddenCount === 0);
-      themeToggle.textContent = themesExpanded ? "收合主題" : `還有 ${hiddenCount} 個主題`;
-      themeToggle.setAttribute("aria-expanded", String(themesExpanded));
-    }
   }
 
   function matches(item) {
@@ -197,19 +187,17 @@
       .join("");
   }
 
-  courseButtons.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      activeCourse = btn.getAttribute("data-gallery-course");
-      courseButtons.forEach((b) => b.classList.toggle("is-active", b === btn));
+  if (courseFilterGroup) {
+    courseFilterGroup.addEventListener("change", () => {
+      activeCourse = courseFilterGroup.value;
       // 換課程等於換了一組完全不同的主題可能性，已勾選的主題整批清空
       // 重新開始——不局部保留「新課程底下也還適用」的主題，理由見檔頭
       // 說明：局部保留客人不會注意到，全部清空最單純不會讓人困惑。
       activeThemes.clear();
-      themesExpanded = false;
       renderThemeButtons();
       render();
     });
-  });
+  }
 
   if (themeFilterGroup) {
     themeFilterGroup.addEventListener("click", (event) => {
@@ -227,13 +215,6 @@
     });
   }
 
-  if (themeToggle && themeFilterGroup) {
-    themeToggle.addEventListener("click", () => {
-      themesExpanded = !themesExpanded;
-      renderThemeButtons();
-    });
-  }
-
   if (sessionFilter) {
     sessionFilter.addEventListener("click", () => {
       onlyOneSession = !onlyOneSession;
@@ -248,11 +229,7 @@
       activeCourse = "all";
       activeThemes.clear();
       onlyOneSession = false;
-      themesExpanded = false;
-      courseButtons.forEach((btn) => {
-        const isAll = btn.getAttribute("data-gallery-course") === "all";
-        btn.classList.toggle("is-active", isAll);
-      });
+      if (courseFilterGroup) courseFilterGroup.value = "all";
       if (sessionFilter) {
         sessionFilter.classList.remove("is-active");
         sessionFilter.setAttribute("aria-pressed", "false");
@@ -262,11 +239,13 @@
     });
   }
 
-  if (urlCourse && Array.from(courseButtons).some((b) => b.getAttribute("data-gallery-course") === urlCourse)) {
+  if (
+    urlCourse &&
+    courseFilterGroup &&
+    Array.from(courseFilterGroup.options).some((o) => o.value === urlCourse)
+  ) {
     activeCourse = urlCourse;
-    courseButtons.forEach((b) => {
-      b.classList.toggle("is-active", b.getAttribute("data-gallery-course") === urlCourse);
-    });
+    courseFilterGroup.value = urlCourse;
   }
 
   renderThemeButtons();

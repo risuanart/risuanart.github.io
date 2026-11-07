@@ -2162,7 +2162,7 @@ h1.chapter__title {
   margin-top: var(--space-4);
 }
 
-/* 純展示用的主題標籤（自己帶圖創作課程頁），視覺借用 gallery.css
+/* 純展示用的主題標籤（自選主題油畫課程頁），視覺借用 gallery.css
    篩選鈕的邊框樣式，但不是按鈕、不能點，所以另外命名一組 class，
    不共用 .gallery-filters__chip（那顆有 cursor:pointer，用在這裡會
    讓人以為點了會有反應）。 */

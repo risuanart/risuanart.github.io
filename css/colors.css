@@ -24,8 +24,11 @@
      --color-surface-dark 的值換成這個、刪掉這個獨立 token 即可。 */
   --color-surface-black: #121212;
 
-  /* 主要按鈕色：一般功能性按鈕（CTA、送出、連結按鈕）的填色。牛仔灰藍。 */
-  --color-button-primary: #6E85A0;
+  /* 主要按鈕色：一般功能性按鈕（CTA、送出、連結按鈕）的填色。
+     2026-11-07 使用者要求全站藍色按鈕改成跟「ＭＯＲＥ」按鈕
+     （.hub-more-link，見 css/hub-blocks.css）一樣的黑底，直接沿用
+     --color-surface-black 的值，不是另外發明一個新色號。 */
+  --color-button-primary: #121212;
 
   /* 警示色：原則上僅限破壞性操作（如清空、刪除、錯誤提示），不做裝飾用途。南瓜橘，
      跟橄欖綠／牛仔灰藍色相都不同，辨識度高。

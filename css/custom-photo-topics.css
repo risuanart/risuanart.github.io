@@ -1,7 +1,37 @@
 /* Approved preview, scoped to the custom photo course and shared design tokens. */
-.custom-topics__nav { display:flex; flex-wrap:wrap; gap:var(--space-2) var(--space-6); margin-bottom:var(--space-10); }
-.custom-topics__nav button { border:0; border-bottom:1px solid var(--color-surface-neutral); padding:var(--space-2) 0; background:transparent; color:var(--color-text-secondary); font:inherit; font-size:var(--font-size-sm); cursor:pointer; }
-.custom-topics__nav button[aria-pressed="true"] { border-color:var(--color-text-primary); color:var(--color-text-primary); }
+/* 2026-11-07 使用者反映 10 個主題按鈕用 flex-wrap 在手機寬度會擠成 3
+   排，佔掉太多螢幕高度。手機寬度改成單排橫向滑動（跟全站 data-hscroll
+   橫向捲動列同一套手感），桌面寬度夠寬維持原本換行排列。 */
+.custom-topics__nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-6);
+  margin-bottom: var(--space-10);
+}
+
+@media (max-width: 767.98px) {
+  .custom-topics__nav {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    margin-right: calc(-1 * var(--content-pad, var(--space-4)));
+    padding-right: var(--content-pad, var(--space-4));
+    scrollbar-width: none;
+  }
+
+  .custom-topics__nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .custom-topics__nav button {
+    flex: none;
+    white-space: nowrap;
+  }
+}
+
+/* 2026-11-07 使用者先試過實心背景塊，後改為選中狀態用粗體＋深色文字，
+   不加底線也不加背景色塊，是最簡潔、不打擾既有排版的做法。 */
+.custom-topics__nav button { border:0; padding:var(--space-2) 0; background:transparent; color:var(--color-text-secondary); font:inherit; font-size:var(--font-size-sm); font-weight:400; cursor:pointer; }
+.custom-topics__nav button[aria-pressed="true"] { color:var(--color-text-primary); font-weight:700; }
 .custom-topics__showcase { display:grid; grid-template-columns:minmax(0,1.18fr) minmax(0,.82fr); gap:var(--space-10); align-items:start; }
 .custom-topics__visual { min-width:0; }
 .custom-topics__visual[hidden], .custom-topics__empty[hidden], .custom-topics__lightbox-source[hidden] { display:none; }
@@ -23,9 +53,15 @@
 .custom-topics__copy .custom-topics__eyebrow { font-size:var(--font-size-xs); margin-bottom:var(--space-2); }
 .custom-topics__detail:not(:empty) { border-top:1px solid var(--color-surface-neutral); padding-top:var(--space-4); }
 .custom-topics button:focus-visible { outline:2px solid var(--color-interactive); outline-offset:2px; }
+/* 2026-11-07 使用者反映手機寬度下文字區塊（標題／介紹／「怎麼選圖」
+   延伸閱讀連結）原本用 grid-row:1 排在輪播圖「上面」，結果這段文字
+   卡在上方選主題按鈕（.custom-topics__nav）跟輪播圖片之間，點了按鈕
+   切換主題後要往下滑一大段才看得到實際的作品輪播，兩者距離太遠。
+   拿掉這個覆寫，改回跟桌面版一樣的 DOM 順序（輪播圖在前、文字在
+   後），手機版點按鈕切主題後馬上就能看到輪播圖跟著換，文字／延伸
+   閱讀連結往下滑才看到。 */
 @media (max-width:680px) {
   .custom-topics__showcase { grid-template-columns:minmax(0,1fr); gap:var(--space-6); }
-  .custom-topics__copy { grid-row:1; }
   .custom-topics__thumbs { margin-top:var(--space-6); }
 }
 .custom-topics__showcase:has(.custom-topics__visual[hidden]) { grid-template-columns:minmax(0,1fr); }

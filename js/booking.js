@@ -76,7 +76,7 @@
   // 這裡只負責顯示跟預覽金額，真正收費金額一律由後端重新計算，不信任
   // 這裡的價格。
   const COURSE_CATALOG = [
-    { label: "自己帶圖創作", price: 1600 },
+    { label: "自選主題油畫", price: 1600 },
     { label: "石英砂肌理畫", price: 1600 },
     { label: "刮刀油畫", price: 1600 },
     { label: "寵物油畫－大寵", price: 1600 },
@@ -617,7 +617,7 @@
   // 課程（寵物、流動畫、串珠）先預選一個常見款式，客人到這頁還是可以
   // 自己改選其他款式。只套用在第 1 位參加者，其餘人數要自己選。
   const COURSE_SLUG_DEFAULT = {
-    "custom-photo-oil": "自己帶圖創作",
+    "custom-photo-oil": "自選主題油畫",
     "sand-texture": "石英砂肌理畫",
     "palette-knife-oil": "刮刀油畫",
     "pet-portrait": "寵物油畫－大寵",

@@ -58,8 +58,12 @@
   border-radius: var(--radius-sharp);
 }
 
+/* 2026-11-07 使用者要求整個課程首圖文字區塊（英文小標／標題／介紹／
+   價格時間尺寸）改成置中，不要介紹段落跟 facts 列還是左對齊、只有
+   標題置中看起來不一致。 */
 .ent-hero__caption {
   margin-top: var(--space-6);
+  text-align: center;
 }
 
 .ent-hero__eyebrow {
@@ -79,6 +83,19 @@
   font-weight: 600;
   text-align: center;
   color: var(--color-text-primary);
+}
+
+/* 2026-11-07 使用者要求課程內頁的標題加英文，跟首頁「課程精選」／
+   「砂畫材料包」那組標題同一個樣式（.hub-category-head__en，見
+   css/hub-blocks.css）：置中、大寫、灰字、字距拉開，放在中文標題
+   上方當作小標籤，不是另外發明新樣式。 */
+.ent-hero__title-en {
+  margin: 0;
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--color-text-secondary);
 }
 
 .ent-hero__credit {
@@ -104,7 +121,8 @@
    （14px），這裡的 intro 改用同一個 token 跟它們對齊，不要自己多開
    一個 16px 的級別。 */
 .ent-hero__intro {
-  margin: var(--space-4) 0 0;
+  margin: var(--space-4) auto 0;
+  max-width: 46ch;
   font-size: var(--font-size-sm);
   line-height: 1.7;
   color: var(--color-text-secondary);
@@ -122,6 +140,7 @@
   border-top: 1px solid var(--color-surface-neutral);
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   /* 2026-10-31 修正：原本寫 var(--space-5)／var(--space-8)，這兩個
      token 在 tokens.css 從來沒定義過（全站間距刻度是 1/2/4/6/10/16/
      24，沒有 5 跟 8），gap 的值因此整條失效、算成 normal（=0），
@@ -188,17 +207,18 @@
   }
 }
 
-/* 手機直式影片素材（9:16，courses/beading.html 那 4 支手機拍的示範片）：
-   手機版維持滿版直式，本來就接近手機螢幕形狀；桌面版如果也滿版套 9:16，
-   寬度乘出來的高度會誇張地高（實測約 2000px），逼使用者捲很多才能看到
-   下一段，違背 .is-landscape 那組「桌面版改用短扁比例」想避免的問題。
-   這裡改成桌面版限制最大寬度、置中，維持完整直式構圖不裁切（跟裁成
-   短扁比例比起來，直式影片裁切掉上下會流失掉大半內容，不適合套用
-   .is-landscape 那種靠改比例裁切的做法）。 */
+/* 手機直式影片素材（courses/beading.html 那 4 支手機拍的示範片）：
+   原本套影片實際的 9:16 比例，滿版貼齊螢幕高度，但使用者反映這樣容易
+   讓人誤以為整頁只有一支影片，不會主動往下滑看其他資訊。2026-11-07
+   改成跟首頁輪播（.preview-hero，見 home-shop.css）原本同一個 2:3
+   比例——故意比影片實際比例矮一點，讓畫面剛進來就能看到影片下緣
+   已經留出一截其他內容，提示「這裡還可以往下滑」。桌面版如果也滿版
+   套這個比例，寬度乘出來的高度還是會偏高，所以維持原本「限制最大
+   寬度、置中」的處理，不跟著改。 */
 .ent-hero__photo.is-portrait-video,
 .ent-gallery__viewport.is-portrait-video,
 .chapter__banner-video.is-portrait-video {
-  aspect-ratio: 9 / 16;
+  aspect-ratio: 2 / 3;
 }
 
 @media (min-width: 768px) {
@@ -257,7 +277,7 @@
 /* 首圖影片下方的「往下滑」提示：手機版滿版直式影片（.is-full-bleed）
    如果剛好跟裝置螢幕高度差不多高，使用者進頁面時看起來像整頁只有這支
    影片、看不出下面還有內容（真實使用情境：串珠／石英砂肌理畫／刮刀
-   油畫／寵物油畫／自己帶圖創作這五頁都是同樣結構）。
+   油畫／寵物油畫／自選主題油畫這五頁都是同樣結構）。
 
    排列方式（2026-09-16 定案）：模擬過「文字＋箭頭並排」「直排」「文字
    獨立＋圓徽章」等幾種版本給使用者看過（見對話紀錄的比較稿），最後選
@@ -546,6 +566,25 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+/* 「油畫＋筆刷」段落舉例照（courses/custom-photo-oil/），示範刮刀堆疊
+   顏料做出的層次與質感——一張風景（山）、一張人像，呼應上面文字說明。
+   跟 .bead-compare 同一套兩格網格語言，但內容不是「比較」，是單純的
+   示範照片，照專案慣例另開一組類別名稱。 */
+.custom-photo-examples {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+}
+
+.custom-photo-examples__cell img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: var(--radius-sharp);
 }
 
 /* 大珠款／小珠款示範片並排比較（courses/beading.html），跟

@@ -40,11 +40,47 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: var(--space-2);
+  row-gap: var(--space-1);
 }
 
-.gallery-theme-filters.is-collapsed .gallery-filters__chip:nth-child(n + 9):not(.is-active) {
-  display: none;
+/* 2026-11-07 使用者要求課程／媒材改成下拉選單——課程是單選，跟按鈕
+   比起來，選項變多（現在十幾堂課）時下拉選單不會佔用額外的畫面高度。
+   先試過細底線版本，後改成黑底白字小標籤，跟首頁「ＭＯＲＥ」按鈕
+   （.hub-more-link，見 css/hub-blocks.css）同一套視覺語言、直角無
+   圓角。箭頭換成白色，不然黑底上看不到原本的深灰色箭頭。 */
+.gallery-course-select {
+  appearance: none;
+  -webkit-appearance: none;
+  display: inline-block;
+  width: auto;
+  border: none;
+  border-radius: 0;
+  background-color: var(--color-surface-black);
+  /* 2026-11-07：SVG data URI 裡的顏色是寫死的字串，不能吃 CSS 變數，
+     --color-surface-light 改色時要手動同步這裡，不會自動跟著變。 */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23ffffff' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right var(--space-2) center;
+  background-size: 10px 6px;
+  padding: var(--space-2) var(--space-6) var(--space-2) var(--space-4);
+  font-family: inherit;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-align: center;
+  text-align-last: center;
+  color: var(--color-surface-light);
+  cursor: pointer;
+}
+
+.gallery-course-select:hover,
+.gallery-course-select:focus-visible {
+  background-color: color-mix(in srgb, var(--color-surface-black) 85%, white);
+}
+
+.gallery-course-select:focus-visible {
+  outline: 2px solid var(--color-surface-light);
+  outline-offset: 2px;
 }
 
 .gallery-filters__label {
@@ -55,56 +91,48 @@
   color: var(--color-text-secondary);
 }
 
-/* 篩選鈕採黑色系，沿用原本的選取狀態：未選取時是黑色描邊，
-   指向或選取後以黑底白字呈現，讓多選主題仍清楚看出目前選了哪些。 */
+/* 2026-11-07 使用者參考 sensationsprint.com.tw/works 的標籤排版，改成
+   純文字＋「｜」分隔號，拿掉原本黑底填色的按鈕外觀——課程／主題選項
+   一多（主題現在將近 20 個），黑色色塊按鈕一字排開很佔畫面，純文字
+   換行同樣能多選多排，但每排只佔文字高度，整體矮很多。選取狀態改用
+   粗體＋深色文字取代黑底白字。 */
 .gallery-filters__chip {
   appearance: none;
   border: none;
   outline: none;
-  border-radius: 5px;
   background-color: transparent;
-  padding: 10px 15px;
+  padding: 0;
+  line-height: 1.6;
   font-family: inherit;
   font-size: var(--font-size-sm);
-  color: #181717;
+  font-weight: 400;
+  color: var(--color-text-secondary);
   cursor: pointer;
-  transition: 400ms;
+  transition: color 200ms;
 }
 
-.gallery-filters__chip[data-gallery-course].is-active,
 .gallery-filters__chip[data-gallery-theme].is-active,
 .gallery-session-filter.is-active,
 .gallery-filters__chip:hover {
-  background-color: #181717;
-  color: white;
+  color: var(--color-text-primary);
+  font-weight: 700;
 }
 
-.gallery-filters__chip:focus-visible,
-.gallery-theme-toggle:focus-visible {
+/* 「｜」分隔號放在每個按鈕前面（每組第一個除外），純裝飾、不佔點擊
+   範圍。2026-11-07 使用者要求分隔線要明顯一點、跟感官印刷的參考網站
+   一樣，顏色改用跟未選取文字同一個 --color-text-secondary（原本用
+   --color-surface-neutral 太淺，幾乎看不出來）。 */
+.gallery-filters__chip:not(:first-child)::before {
+  content: "｜";
+  display: inline-block;
+  margin: 0 var(--space-2);
+  color: var(--color-text-secondary);
+  font-weight: 400;
+}
+
+.gallery-filters__chip:focus-visible {
   outline: 2px solid var(--color-text-primary);
   outline-offset: 2px;
-}
-
-.gallery-theme-toggle {
-  appearance: none;
-  display: block;
-  margin: var(--space-2) auto 0;
-  padding: 0;
-  border: 0;
-  border-bottom: 1px solid currentColor;
-  background: none;
-  color: var(--color-interactive);
-  font: inherit;
-  font-size: var(--font-size-xs);
-  cursor: pointer;
-}
-
-.gallery-theme-toggle[hidden] {
-  display: none;
-}
-
-.gallery-theme-toggle:hover {
-  color: var(--color-text-primary);
 }
 
 .gallery-results {

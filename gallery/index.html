@@ -99,7 +99,7 @@
                 <img src="../assets/images/courses/custom-photo-oil/hero-poster.jpg" alt="" loading="lazy">
                 <span class="site-header__nav-dropdown-photo__shade" aria-hidden="true"></span>
               </span>
-              <span class="site-header__nav-dropdown-photo__label">自己帶圖創作</span>
+              <span class="site-header__nav-dropdown-photo__label">自選主題油畫</span>
             </a>
             <a class="site-header__nav-dropdown-photo" href="../courses/pet-portrait/">
               <span class="site-header__nav-dropdown-photo__frame">
@@ -166,14 +166,13 @@
       <section class="gallery-filters fade-in delay-1">
         <div class="gallery-filter-group">
           <p class="gallery-filters__label" id="gallery-course-label">課程／媒材</p>
-          <div class="gallery-filters__group" id="gallery-course-filters">
-            <button type="button" class="gallery-filters__chip is-active" data-gallery-course="all">全部</button>
-          </div>
+          <select class="gallery-course-select" id="gallery-course-filters">
+            <option value="all">全部</option>
+          </select>
         </div>
         <div class="gallery-filter-group">
           <p class="gallery-filters__label" id="gallery-theme-label">主題，可複選</p>
-          <div class="gallery-filters__group gallery-theme-filters is-collapsed" id="gallery-theme-filters"></div>
-          <button type="button" class="gallery-theme-toggle" id="gallery-theme-toggle" aria-expanded="false" hidden>更多主題</button>
+          <div class="gallery-filters__group gallery-theme-filters" id="gallery-theme-filters"></div>
         </div>
         <div class="gallery-filter-group" id="gallery-session-filter-group" hidden>
           <p class="gallery-filters__label">完成方式</p>

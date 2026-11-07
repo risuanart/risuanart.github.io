@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>課程選單配色比較｜日宣繪畫室</title>
+  <style>
+    :root { color-scheme: light; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Noto Sans TC", sans-serif; color: #29271f; background: #f3f1ec; }
+    * { box-sizing: border-box; }
+    body { margin: 0; padding: 30px clamp(18px, 4vw, 60px) 48px; }
+    .intro { max-width: 1140px; margin: 0 auto 20px; display: flex; justify-content: space-between; align-items: end; gap: 24px; }
+    h1 { font-size: clamp(20px, 2.3vw, 28px); margin: 0 0 6px; font-weight: 650; letter-spacing: .04em; }
+    .intro p { margin: 0; color: #777366; font-size: 14px; }
+    .choices { max-width: 1140px; margin: 0 auto 14px; display: flex; flex-wrap: wrap; gap: 8px; }
+    button { font: inherit; cursor: pointer; border: 1px solid #d1cdc2; background: #faf9f6; color: #4e4a40; padding: 8px 12px; border-radius: 2px; font-size: 13px; transition: .15s ease; }
+    button:hover { border-color: #847c68; }
+    button[aria-pressed="true"] { background: #514b43; border-color: #514b43; color: #f3f0e9; }
+    button .swatch { display: inline-block; width: 13px; height: 13px; margin: 0 6px 0 0; vertical-align: -2px; border: 1px solid rgba(30,28,24,.24); background: var(--swatch); }
+    .spec { max-width: 1140px; margin: 0 auto 12px; min-height: 22px; color: #777366; font-size: 12px; letter-spacing: .03em; }
+    .frame-wrap { width: 100%; max-width: 1140px; margin: 0 auto; overflow: hidden; background: #fff; border: 1px solid #dedbd3; box-shadow: 0 8px 28px rgba(44,39,28,.08); }
+    .menu-preview { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); width: 100%; }
+    .menu-list { grid-column: 1; min-width: 0; display: flex; flex-direction: column; justify-content: space-between; padding: 24px 24px 24px 40px; background: var(--panel, #2E2F16); color: var(--text, #fff); }
+    .links { display: grid; grid-auto-flow: column; grid-template-rows: repeat(5, auto); grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 18px; margin: -8px 0 16px; }
+    .links a, .booking-link { color: var(--text, #fff); text-decoration: none; white-space: nowrap; font-size: 16px; line-height: 1.4; padding: 8px 0; }
+    .booking-link { font-size: 14px; }
+    .photos { grid-column: 2 / -1; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .photo { position: relative; aspect-ratio: 2 / 3; overflow: hidden; color: var(--text, #fff); }
+    .photo + .photo::before { content: ""; position: absolute; z-index: 3; left: 0; top: 0; bottom: 0; width: 1px; background: var(--divider, rgba(255,255,255,.6)); }
+    .photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    .photo::after { content: ""; position: absolute; inset: 0; background: var(--wash, transparent); pointer-events: none; }
+    .photo .shade { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.55), transparent 55%); }
+    .photo span { position: absolute; z-index: 2; left: 16px; right: 10px; bottom: 16px; font-weight: 700; font-size: 14px; text-shadow: 1px 1px 1px rgba(0,0,0,.5); }
+    .note { max-width: 1140px; margin: 11px auto 0; color: #8a867b; font-size: 12px; }
+    @media (max-width: 700px) { body { padding: 20px 12px 30px; } .intro { display:block; } .choices { gap: 6px; } button { padding: 8px 9px; } }
+  </style>
+</head>
+<body>
+  <header class="intro">
+    <div><h1>課程選單｜色調比較</h1><p>同一個版型、同一組照片，只切換色彩與照片霧感。</p></div>
+  </header>
+  <nav class="choices" aria-label="選擇配色">
+    <button type="button" data-variant="current" aria-pressed="true">目前版本</button>
+    <button type="button" data-variant="warm" aria-pressed="false">暖灰棕</button>
+    <button type="button" data-variant="mushroom" aria-pressed="false">灰褐莫蘭迪</button>
+    <button type="button" data-variant="mist" aria-pressed="false">柔霧 taupe</button>
+    <button type="button" data-variant="deep" aria-pressed="false">深煙燻棕</button>
+    <button type="button" data-variant="deep-plus" aria-pressed="false">深煙燻棕・加深</button>
+    <button type="button" data-variant="olive" aria-pressed="false">深煙燻橄欖</button>
+    <button type="button" data-variant="olive-deep" aria-pressed="false">深灰橄欖</button>
+    <button type="button" data-variant="panacea-brown" aria-pressed="false" style="--swatch:#4C3E29"><span class="swatch"></span>棕色參考 #4C3E29</button>
+    <button type="button" data-variant="olive-1" aria-pressed="false" style="--swatch:#484737"><span class="swatch"></span>橄欖灰棕 #484737</button>
+    <button type="button" data-variant="olive-2" aria-pressed="false" style="--swatch:#424538"><span class="swatch"></span>灰橄欖 #424538</button>
+    <button type="button" data-variant="olive-3" aria-pressed="false" style="--swatch:#3D413A"><span class="swatch"></span>霧灰綠 #3D413A</button>
+    <button type="button" data-variant="olive-4" aria-pressed="false" style="--swatch:#4A493A"><span class="swatch"></span>柔和橄欖 #4A493A</button>
+  </nav>
+  <div class="spec" id="spec" aria-live="polite"></div>
+  <main class="frame-wrap" id="menu-preview"><div class="menu-preview">
+    <section class="menu-list" aria-label="課程選單">
+      <div class="links">
+        <a>石英砂肌理畫</a><a>刮刀油畫</a><a>流動畫</a><a>抽象畫</a><a>自選主題油畫</a>
+        <a>寵物油畫</a><a>鏡子拼貼</a><a>串珠</a><a>大幅畫布訂製</a><a>特殊材質客製</a>
+      </div>
+      <a class="booking-link">預約須知</a>
+    </section>
+    <section class="photos" aria-label="課程照片">
+      <div class="photo"><img src="/assets/images/courses/sand-texture/hero-poster.jpg" alt="石英砂肌理畫"><div class="shade"></div><span>石英砂肌理畫</span></div>
+      <div class="photo"><img src="/assets/images/courses/custom-photo-oil/hero-poster.jpg" alt="自選主題油畫"><div class="shade"></div><span>自選主題油畫</span></div>
+      <div class="photo"><img src="/assets/images/courses/pet-portrait/hero-poster.jpg" alt="寵物油畫"><div class="shade"></div><span>寵物油畫</span></div>
+    </section>
+  </div></main>
+  <p class="note">這是本機配色模擬；選單版型、照片比例與官網目前配置相同，切換不會修改原始 CSS。</p>
+  <script>
+    const variants = {
+      current: { name: '目前版本', panel: '#2E2F16', text: '#FFFFFF', wash: 'transparent', divider: 'rgba(255,255,255,.60)' },
+      warm: { name: '暖灰棕', panel: '#51483D', text: '#E8E2D9', wash: 'rgba(54,47,39,.10)', divider: 'rgba(238,231,218,.38)' },
+      mushroom: { name: '灰褐莫蘭迪', panel: '#514B43', text: '#E3DED5', wash: 'rgba(54,49,43,.14)', divider: 'rgba(232,225,214,.34)' },
+      mist: { name: '柔霧 taupe', panel: '#5B554D', text: '#E7E2DA', wash: 'rgba(60,55,49,.13)', divider: 'rgba(240,235,226,.32)' },
+      deep: { name: '深煙燻棕', panel: '#443E35', text: '#D8D2C9', wash: 'rgba(39,34,29,.18)', divider: 'rgba(225,218,207,.30)' },
+      'deep-plus': { name: '深煙燻棕・加深', panel: '#39342D', text: '#D8D2C9', wash: 'rgba(32,28,24,.18)', divider: 'rgba(225,218,207,.30)' },
+      olive: { name: '深煙燻橄欖', panel: '#3B3D32', text: '#D8D5CC', wash: 'rgba(35,37,31,.18)', divider: 'rgba(225,224,211,.30)' },
+      'olive-deep': { name: '深灰橄欖', panel: '#34372F', text: '#D3D2C9', wash: 'rgba(31,34,29,.20)', divider: 'rgba(221,221,210,.28)' },
+      'panacea-brown': { name: '棕色參考（畫面估色）', panel: '#4C3E29', text: '#F0ECE4', wash: 'rgba(35,29,20,.16)', divider: 'rgba(240,236,228,.34)' },
+      'olive-1': { name: '橄欖灰棕', panel: '#484737', text: '#E5E1D7', wash: 'rgba(34,34,27,.15)', divider: 'rgba(232,229,217,.32)' },
+      'olive-2': { name: '灰橄欖', panel: '#424538', text: '#E1E0D6', wash: 'rgba(31,34,28,.16)', divider: 'rgba(228,229,217,.30)' },
+      'olive-3': { name: '霧灰綠', panel: '#3D413A', text: '#DFE0D8', wash: 'rgba(29,32,29,.16)', divider: 'rgba(225,228,220,.28)' },
+      'olive-4': { name: '柔和橄欖', panel: '#4A493A', text: '#E6E2D7', wash: 'rgba(35,34,27,.14)', divider: 'rgba(233,230,218,.32)' }
+    };
+    let active = 'deep-plus';
+    function applyVariant(key) {
+      active = key;
+      const v = variants[key];
+      document.querySelector('#spec').textContent = `${v.name}　｜　左欄 ${v.panel}　・　文字 ${v.text}　・　照片柔霧 ${v.wash}`;
+      document.querySelectorAll('[data-variant]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.variant === key)));
+      const preview = document.querySelector('#menu-preview');
+      preview.style.setProperty('--panel', v.panel);
+      preview.style.setProperty('--text', v.text);
+      preview.style.setProperty('--wash', v.wash);
+      preview.style.setProperty('--divider', v.divider);
+    }
+    document.querySelectorAll('[data-variant]').forEach(button => button.addEventListener('click', () => applyVariant(button.dataset.variant)));
+    applyVariant(active);
+  </script>
+</body>
+</html>
