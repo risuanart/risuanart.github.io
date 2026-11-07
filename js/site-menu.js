@@ -49,15 +49,15 @@
         <div class="site-menu__group-panel-inner">
           <ul class="site-menu__sublist">
             <li><a class="site-menu__sublink" href="${base}courses/">全部課程</a></li>
-            <li><a class="site-menu__sublink" href="${base}courses/sand-texture/">石英砂肌理畫</a></li>
+            <li><a class="site-menu__sublink" href="${base}courses/custom-photo-oil/">自選主題油畫</a></li>
             <li><a class="site-menu__sublink" href="${base}courses/palette-knife-oil/">刮刀油畫</a></li>
-            <li><a class="site-menu__sublink" href="${base}courses/fluid-art/">流動畫</a></li>
-            <li><a class="site-menu__sublink" href="${base}courses/gold-leaf-abstract/">金箔抽象畫</a></li>
-            <li><a class="site-menu__sublink" href="${base}courses/custom-photo-oil/">自己帶圖創作</a></li>
+            <li><a class="site-menu__sublink" href="${base}courses/sand-texture/">石英砂肌理畫</a></li>
             <li><a class="site-menu__sublink" href="${base}courses/pet-portrait/">寵物油畫</a></li>
-            <li><a class="site-menu__sublink" href="${base}courses/beading/">串珠</a></li>
+            <li><a class="site-menu__sublink" href="${base}courses/gold-leaf-abstract/">金箔抽象畫</a></li>
+            <li><a class="site-menu__sublink" href="${base}courses/fluid-art/">流動畫</a></li>
             <li><a class="site-menu__sublink" href="${base}courses/large-canvas/">大幅畫布訂製</a></li>
             <li><a class="site-menu__sublink" href="${base}courses/custom-material/">特殊材質客製</a></li>
+            <li><a class="site-menu__sublink" href="${base}courses/beading/">串珠</a></li>
           </ul>
         </div>
       </div>
