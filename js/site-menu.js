@@ -52,6 +52,7 @@
             <li><a class="site-menu__sublink" href="${base}courses/sand-texture/">石英砂肌理畫</a></li>
             <li><a class="site-menu__sublink" href="${base}courses/palette-knife-oil/">刮刀油畫</a></li>
             <li><a class="site-menu__sublink" href="${base}courses/fluid-art/">流動畫</a></li>
+            <li><a class="site-menu__sublink" href="${base}courses/gold-leaf-abstract/">金箔抽象畫</a></li>
             <li><a class="site-menu__sublink" href="${base}courses/custom-photo-oil/">自己帶圖創作</a></li>
             <li><a class="site-menu__sublink" href="${base}courses/pet-portrait/">寵物油畫</a></li>
             <li><a class="site-menu__sublink" href="${base}courses/beading/">串珠</a></li>

@@ -1,0 +1,33 @@
+/* 單張調色特寫依原圖比例顯示，沿用章節內文寬度。 */
+.gold-abstract-mixing {
+  margin: 0;
+  margin-top: var(--space-4);
+  margin-bottom: var(--space-4);
+}
+.gold-abstract-mixing img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: auto;
+  object-fit: contain;
+}
+
+/* 成品展示牆與創作圖文使用不同節奏，保持原圖比例。 */
+.gold-student-wall { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-4); align-items: center; margin-top: var(--space-6); }
+.gold-student-wall__photo { margin: 0; min-width: 0; }
+.gold-student-wall__photo--lead { grid-column: 1 / -1; }
+.gold-student-wall img, .gold-process > img { display: block; width: 100%; height: auto; }
+.gold-process { display: grid; gap: var(--space-4); align-items: start; margin-top: var(--space-6); margin-bottom: var(--space-16); }
+.gold-process > div { min-width: 0; }
+@media (min-width: 769px) {
+  .gold-student-wall { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .gold-student-wall__photo--lead { grid-column: span 2; grid-row: span 2; }
+  .gold-process { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); }
+  .gold-process--reverse { grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); }
+  .gold-process--reverse > img { grid-column: 2; grid-row: 1; }
+  .gold-process--reverse > div { grid-column: 1; grid-row: 1; }
+}
+
+/* 每組文字貼齊自己的照片頂端，組內緊密、組間留白。 */
+.gold-process > div > .chapter__statement { margin-top: 0; margin-bottom: var(--space-2); }
+.gold-process > div > .chapter__prose { margin-top: var(--space-2); }

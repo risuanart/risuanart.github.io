@@ -42,6 +42,12 @@
 // oil-knife/08.jpg：畫面實際內容是海岸崖壁＋浪花＋沙灘小花，不是山，
 // 照實標「海邊」而不是套用整批的「山」標籤。
 window.GALLERY_ITEMS = [
+  {"course": "金箔抽象畫", "themes": ["抽象圖案"], "date": "2026-11-07", "src": "../assets/images/gallery/abstract/17887522544807391.jpg", "alt": "學員使用刮刀創作黑白與粉紅色塊抽象畫"},
+  {"course": "金箔抽象畫", "themes": ["抽象圖案"], "date": "2026-11-07", "src": "../assets/images/gallery/abstract/17972946446179999.jpg", "alt": "學員在藍綠與粉紅色背景上描繪金色斑點"},
+  {"course": "金箔抽象畫", "themes": ["抽象圖案"], "date": "2026-11-07", "src": "../assets/images/gallery/abstract/17973733781283534.jpg", "alt": "學員在桌前繪製多彩抽象畫"},
+  {"course": "金箔抽象畫", "themes": ["抽象圖案"], "date": "2026-11-07", "src": "../assets/images/gallery/abstract/17978971655108164.jpg", "alt": "學員在畫架前繪製深淺藍色抽象畫"},
+  {"course": "金箔抽象畫", "themes": ["抽象圖案"], "date": "2026-11-07", "src": "../assets/images/gallery/abstract/18083541364348987.jpg", "alt": "畫架上展示的粉棕色抽象作品"},
+  {"course": "金箔抽象畫", "themes": ["抽象圖案"], "date": "2026-11-07", "src": "../assets/images/gallery/abstract/18273651496118965.jpg", "alt": "刮刀在紫白色抽象畫上堆疊顏料與金色細節"},
   { course: "石英砂肌理畫", themes: ["山"], date: "2026-09-13", src: "../assets/images/guides/material-compare-mountain/sand-texture/01.jpg", alt: "石英砂肌理畫的滑雪場雪山空拍景色，畫面上有滑雪的人群與紅色旗幟", sessions: 1 },
   { course: "石英砂肌理畫", themes: ["山"], date: "2026-09-13", src: "../assets/images/guides/material-compare-mountain/sand-texture/02.jpg", alt: "石英砂肌理畫的海邊夕陽山景，畫面前景有海浪與飛鳥", sessions: 1 },
   { course: "石英砂肌理畫", themes: ["山"], date: "2026-09-13", src: "../assets/images/guides/material-compare-mountain/sand-texture/03.jpg", alt: "石英砂肌理畫的藍紫漸層天空下的雪山倒影", sessions: 1 },
@@ -780,7 +786,7 @@ window.GALLERY_COURSES = [
   "石英砂肌理畫",
   "刮刀油畫",
   "流動畫",
-  "抽象畫",
+  "金箔抽象畫",
   "自己帶圖創作",
   "寵物油畫",
   "鏡子拼貼",
@@ -803,6 +809,7 @@ window.GALLERY_COURSES = [
 // 2026-09-20：全站改乾淨網址，gallery.html 本身也搬進 gallery/index.html
 // （多了一層），這裡的路徑要補上 "../" 才能正確回頭指到 courses/ 底下。
 window.GALLERY_COURSE_LINKS = {
+  "金箔抽象畫": "../courses/gold-leaf-abstract/",
   "石英砂肌理畫": "../courses/sand-texture/",
   "刮刀油畫": "../courses/palette-knife-oil/",
   "流動畫": "../courses/fluid-art/",
