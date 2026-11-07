@@ -30,3 +30,6 @@ h1:has(> .page-title-en) + .chapter__intro { margin-top: var(--space-6); font-si
 
 /* 材料指南頁首介紹以句子分行並置中。 */
 .guides-page-intro { text-align: center; }
+
+/* 一般頁面主標：中文在上、英文在下。 */
+h1 > .page-title-en { order: 1; }
