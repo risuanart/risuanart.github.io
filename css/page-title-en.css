@@ -33,3 +33,10 @@ h1:has(> .page-title-en) + .chapter__intro { margin-top: var(--space-6); font-si
 
 /* 一般頁面主標：中文在上、英文在下。 */
 h1 > .page-title-en { order: 1; }
+
+/* 材料指南手機頁首：導覽下緣至主標由 115px 收為 100px。 */
+@media (max-width: 768px) {
+  .chapter:has(> .guides-page-intro) {
+    margin-top: calc(60px - 15px);
+  }
+}
