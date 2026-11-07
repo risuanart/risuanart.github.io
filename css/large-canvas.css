@@ -1,0 +1,2 @@
+/* 頁首展示學生與畫作，保留完整照片比例。 */
+.large-canvas-hero-gallery .ent-gallery__slide img { object-fit: contain; }
