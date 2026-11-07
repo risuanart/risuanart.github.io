@@ -42,7 +42,7 @@
   button.setAttribute('aria-label', '回到頁面頂端');
   button.innerHTML = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20V4M5 11l7-7 7 7"/></svg>';
   const style = document.createElement('style');
-  style.textContent = '.site-back-top{position:fixed;right:var(--space-6);bottom:calc(var(--space-6) + env(safe-area-inset-bottom,0px));z-index:24;width:36px;height:36px;display:grid;place-items:center;padding:0;border:0;border-radius:0;background:color-mix(in srgb,var(--color-text-secondary) 16%,transparent);backdrop-filter:blur(6px);color:var(--color-text-primary);cursor:pointer}.site-back-top[hidden]{display:none}.site-back-top:focus-visible{outline:2px solid var(--color-brand);outline-offset:3px}body:has(dialog[open],.site-menu.is-open,.cart-sheet.is-open) .site-back-top{display:none}';
+  style.textContent = '.site-back-top{position:fixed;right:var(--space-6);bottom:calc(var(--space-6) + env(safe-area-inset-bottom,0px));z-index:24;width:36px;height:36px;display:grid;place-items:center;padding:0;border:0;border-radius:0;background:color-mix(in srgb,var(--color-surface-light) 16%,transparent);color:var(--color-surface-light);mix-blend-mode:difference;cursor:pointer}.site-back-top[hidden]{display:none}.site-back-top:focus-visible{outline:2px solid var(--color-brand);outline-offset:3px}body:has(dialog[open],.site-menu.is-open,.cart-sheet.is-open) .site-back-top{display:none}';
   document.head.appendChild(style);
   document.body.appendChild(button);
   const top = () => scroller === window ? window.scrollY : scroller.scrollTop;
