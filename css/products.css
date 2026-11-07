@@ -4826,3 +4826,23 @@ button.text-link {
   color: var(--color-text-secondary);
 }
 
+
+/* 收尾聯絡提示共用配置：FAQ、課程與企業頁皆遵守內文容器。 */
+.product-page > :is(.site-contact, .ent-cta) {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: var(--content-max-width);
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: var(--space-16);
+  padding-left: var(--content-pad);
+  padding-right: var(--content-pad);
+  padding-top: var(--space-10);
+  padding-bottom: var(--space-10);
+  border-top: 1px solid color-mix(in srgb, var(--color-text-secondary) 25%, transparent);
+  text-align: center;
+  font-size: var(--font-size-sm);
+  line-height: 1.8;
+  color: var(--color-text-primary);
+}
+.product-page > .ent-cta .ent-cta__text { max-width: none; }
