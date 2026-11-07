@@ -85,6 +85,29 @@
       stoppedByUser = true;
       pause();
     });
+    // 原生觸控捲動也要同步選中項目；等捲動停下，避免平滑切換途中跳選。
+    let scrollTimer = null;
+    function syncActiveFromScroll() {
+      clearTimeout(scrollTimer);
+      const trackRect = track.getBoundingClientRect();
+      const center = trackRect.left + trackRect.width / 2;
+      let nearest = 0;
+      let distance = Infinity;
+      tiles.forEach((tile, i) => {
+        const rect = tile.getBoundingClientRect();
+        const delta = Math.abs(rect.left + rect.width / 2 - center);
+        if (delta < distance) {
+          nearest = i;
+          distance = delta;
+        }
+      });
+      setActive(nearest, false);
+    }
+    track.addEventListener("scroll", () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(syncActiveFromScroll, 150);
+    }, { passive: true });
+    track.addEventListener("scrollend", syncActiveFromScroll);
     root.addEventListener("mouseenter", pause);
     root.addEventListener("mouseleave", resume);
 
