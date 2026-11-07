@@ -4323,6 +4323,7 @@ button.text-link {
 }
 
 .faq-tier2__title {
+  text-align: center;
   margin: 0;
   font-family: var(--font-family-base);
   font-weight: 600;
@@ -4333,6 +4334,8 @@ button.text-link {
 /* 錨點導覽：分類一多，先讓訪客看到「有哪些分類」再決定要點開哪個，
    不用整頁往下滑著找。 */
 .faq-tier2__jump {
+  justify-content: center;
+  text-align: center;
   margin-top: var(--space-4);
   display: flex;
   flex-wrap: wrap;
