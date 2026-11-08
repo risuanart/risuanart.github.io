@@ -616,3 +616,14 @@ ul.booking-payment-note { box-sizing:border-box; padding-left:1.3em; list-style:
 #booking-form > .work__close .work__close-text { flex:0 0 auto; }
 #booking-submit { align-self:flex-end; margin-top:var(--space-4); }
 @media(max-width:767px) { #booking-submit { align-self:center; max-width:100%; } }
+
+@media (max-width:767px) {
+  #booking-form > .confirm-checkbox { justify-content:center; }
+  #booking-form > .work__close .work__close-text { text-align:center; }
+  #booking-form .booking-total { width:100%; max-width:100%; margin-inline:auto; }
+  #booking-form .booking-total__row { justify-content:center; flex-wrap:wrap; gap:0.35em 0.8em; text-align:center; }
+  #booking-form ul.booking-payment-note { text-align:center; padding-left:0; list-style:none; }
+  #booking-form .booking-payment-note li { display:block; padding:0; }
+  #booking-form .booking-payment-note li::before { content:"•"; margin-right:0.5em; }
+  #booking-form .checkout-error { margin-inline:auto; text-align:center; }
+}
