@@ -884,14 +884,53 @@
    的段落（例如課程頁示範手法前後兩步驟、兩種做法的對照）——collage
    是 2x2 四格、mosaic 是一大二小三張，都不適合剛好兩張的情況，補一個
    單排兩欄的變化，不用硬湊成三張或四張填滿格子。 */
+/* 2026-11-08 使用者反映手機寬度看「拿在手上的實際比例」兩張合併照
+   被裁切太多。原因是 .ent-feature__media 本身的 aspect-ratio（手機
+   4:5）是算給「整組」用的，--duo 把同一個框分成兩欄之後，每張圖實際
+   拿到的格子比例會變成 4:5 的一半寬（約 2:5），比圖片原始比例（本身
+   就是 4:5）窄很多，object-fit:cover 因此要再裁掉左右兩側一大截才能
+   填滿那個過窄的格子。這裡覆寫 --duo 自己的 aspect-ratio，手機版用
+   8:5（兩欄合併後換算回單張 4:5）、桌面版用 2:1（換算回單張 1:1，
+   對應 .ent-feature__media 桌面版的 1:1），兩欄各自拿到的比例就會
+   跟圖片原始比例一致，不會多裁一層。 */
 .ent-feature__media--duo {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--space-2);
+  aspect-ratio: 8 / 5;
 }
 
 .ent-feature__media--duo img {
   border-radius: 0;
+}
+
+/* 2026-11-08 寵物油畫課頁「拿在手上的實際比例」：兩張圖直接疊上
+   小尺寸／大尺寸標籤，不用再靠旁邊文字說明「左邊/右邊是哪個尺寸」。
+   .size-compare 只是 .ent-feature__media--duo 的延伸用法，不是另一個
+   獨立元件，figure 取代原本 duo 的直接 img 子層，img 本身的
+   width/height/object-fit 還是吃 .ent-feature__media img 那條既有
+   規則，這裡只需要補 figure 的定位跟標籤樣式。 */
+.size-compare__figure {
+  position: relative;
+  height: 100%;
+  margin: 0;
+}
+
+.size-compare__label {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: var(--space-4) var(--space-2) var(--space-2);
+  background: linear-gradient(
+    to top,
+    color-mix(in srgb, var(--color-surface-dark) 78%, transparent) 0%,
+    transparent 100%
+  );
+  color: var(--color-surface-light);
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  text-align: center;
 }
 
 /* 2026-11-08 使用者反映「也可以帶著真的毛孩一起來」那張四人合照用
@@ -902,6 +941,110 @@
    .ent-feature__media 的預設行為。 */
 .ent-feature__media--wide {
   aspect-ratio: 3 / 2;
+}
+
+/* 2026-11-08 新增：.moments-carousel 是通用的「一堆照片自動輪播＋
+   手機可滑動切換」元件（搭配 js/moments-carousel.js），跟首頁大輪播
+   不同的地方是這裡用淡入淡出、沒有圓點／上一張下一張按鈕，單純給
+   「展示很多張同主題照片」這種情境用。疊圖靠 position:absolute 全部
+   疊在同一個位置，opacity 控制顯示哪一張，is-active 的那張淡入。 */
+.moments-carousel {
+  position: relative;
+  touch-action: pan-y;
+  container-type: inline-size;
+}
+
+.moments-carousel img {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1s var(--ease-standard);
+}
+
+.moments-carousel img.is-active {
+  opacity: 1;
+}
+
+/* 2026-11-08 新增：.moments-carousel--grid-desktop 給「照片數量少、
+   單張輪播在桌機會顯得過大」的情境用（例如「不用只畫寵物」只有 3
+   張）——電腦寬度直接橫向並排全部顯示，不走輪播；手機維持原本單圖
+   輪播＋滑動切換（螢幕窄，並排會太小看不清楚）。JS 的 setInterval／
+   手機滑動邏輯繼續在背景跑，電腦寬度只是被下面的樣式蓋掉視覺效果，
+   不需要另外寫程式碼判斷寬度關掉它。 */
+@media (min-width: 768px) {
+  .ent-features .moments-carousel--grid-desktop {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-4);
+    aspect-ratio: auto;
+  }
+
+  .moments-carousel--grid-desktop img {
+    position: static;
+    opacity: 1;
+    aspect-ratio: 4 / 5;
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-sharp);
+    overflow: hidden;
+    object-fit: cover;
+    transition: none;
+  }
+
+  .moments-carousel--grid-desktop .moments-carousel__nav {
+    display: none;
+  }
+}
+
+/* 2026-11-08 新增：左右鍵只在電腦寬度顯示，手機維持單純滑動切換，
+   避免小螢幕擠進兩顆按鈕又跟手指滑動搶注意力。箭頭尺寸／造型跟
+   courses/custom-photo-oil/「可畫的主題」輪播（.custom-topics__arrow）
+   同一套，不要另外做一顆更大的圓鈕。 */
+.moments-carousel__nav {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .moments-carousel__nav {
+    display: grid;
+    place-items: center;
+    position: absolute;
+    top: 50%;
+    width: clamp(calc(var(--space-10)), 7.5cqi, calc(var(--space-10) + var(--space-2)));
+    aspect-ratio: 1;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: var(--color-surface-light);
+    box-shadow: var(--shadow-raised);
+    cursor: pointer;
+    z-index: 2;
+    color: var(--color-text-primary);
+  }
+
+  .moments-carousel__nav:hover {
+    background: var(--color-surface-neutral);
+  }
+
+  .moments-carousel__nav svg {
+    width: 38%;
+    height: 38%;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .moments-carousel__nav--prev {
+    left: 0;
+    transform: translate(-50%, -50%);
+  }
+
+  .moments-carousel__nav--next {
+    right: 0;
+    transform: translate(50%, -50%);
+  }
 }
 
 @media (min-width: 768px) {
@@ -923,6 +1066,24 @@
 
   .ent-feature__media--wide {
     aspect-ratio: 3 / 2;
+  }
+
+  /* 2026-11-08 新增：本來就是直式 4:5 比例的照片（例如同學全身
+     合照）桌機維持跟手機一樣的 4:5，不收窄成正方形裁掉上下。 */
+  .ent-feature__media--portrait {
+    aspect-ratio: 4 / 5;
+  }
+
+  .ent-feature__media--duo {
+    aspect-ratio: 2 / 1;
+  }
+
+  /* 2026-11-08 新增：size-compare 這組照片本身是直式 4:5 全身合照，
+     不是給 --duo 預設拼接的橫幅照片，桌機維持跟手機一樣的比例（單張
+     4:5），不然會被 --duo 桌機的正方形裁掉下半身。只覆蓋這個組合，
+     其他課程頁用到的 --duo（大幅畫布／流動畫／石英砂）不受影響。 */
+  .ent-feature__media--duo.size-compare {
+    aspect-ratio: 8 / 5;
   }
 
   .ent-feature--reverse {

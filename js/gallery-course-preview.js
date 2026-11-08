@@ -48,11 +48,18 @@
 
     if (!grid) return;
     grid.hidden = false;
+    // 2026-11-08 使用者反映這裡放大看作品時沒有主題／完成堂數資訊，
+    // gallery.html 那邊點放大卻有——跟 js/gallery.js 補 figcaption
+    // 用同一套格式（課程・主題・堂數），這裡本來就是同一堂課底下的
+    // 預覽，不用再加「查看課程」連結（連回自己沒有意義）。
     grid.innerHTML = matched
       .map(
         (item) => `
       <figure class="gallery-grid__item" tabindex="0" role="button" aria-label="放大看：${item.alt || item.course}">
         <img src="${base}${item.src}" alt="${item.alt || ""}" loading="lazy">
+        <figcaption class="gallery-grid__caption">${item.course}${
+          item.themes && item.themes.length ? "・" + item.themes.join("、") : ""
+        }${item.sessions ? "・" + (item.sessions === 1 ? "一堂完成" : item.sessions + "堂完成") : ""}</figcaption>
       </figure>`
       )
       .join("");

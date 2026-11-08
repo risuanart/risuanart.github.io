@@ -71,6 +71,13 @@
     "desc": "除了家裡養的毛孩，其他喜歡的動物、甚至想像中的動物也都可以畫。",
     "detail": "可以是寫實的一根一根筆觸，也可以搭配刮刀做出比較抽象的質感，背景搭配星空也是常見的做法。",
     "images": []
+  },
+  {
+    "key": "vehicles",
+    "label": "車子",
+    "desc": "跑車、機車這類有金屬反光與線條感的題材，光影層次掌握好，會特別有質感。",
+    "detail": "",
+    "images": []
   }
 ];
   // 2026-11-07 使用者要求每個主題改成直接從學員作品資料庫（gallery-data.js）
@@ -90,13 +97,14 @@
     botanical: '植物花卉',
     'night-sky': '星空',
     animals: '其他動物',
+    vehicles: '車子',
   };
   for (const [key, theme] of Object.entries(TOPIC_THEME_MAP)) {
     topics.find(t => t.key === key).images = (window.GALLERY_ITEMS || [])
       .filter(item => item.course === '自選主題油畫' && item.themes.includes(theme))
       .sort((a, b) => (b.date || '').localeCompare(a.date || ''))
       .slice(0, MAX_IMAGES_PER_TOPIC)
-      .map(item => ({src: '../' + item.src, alt: item.alt}));
+      .map(item => ({src: '../' + item.src, alt: item.alt, course: item.course, themes: item.themes, sessions: item.sessions}));
   }
   const nav = root.querySelector('.custom-topics__nav');
   const visual = root.querySelector('.custom-topics__visual');
@@ -169,7 +177,15 @@
       button.append(image); button.addEventListener('click', () => select(i)); strip.append(button);
       const figure = document.createElement('figure'); figure.className = 'gallery-grid__item';
       const source = document.createElement('img'); source.dataset.src = item.src; source.alt = item.alt; source.loading = 'lazy';
-      figure.append(source); sources.append(figure);
+      // 2026-11-08 使用者反映從課程頁的「可畫的主題」放大作品時沒有
+      // 主題／完成堂數資訊，gallery.html 點放大卻有——補上跟
+      // js/gallery.js 同一套 figcaption 格式，lightbox（js/gallery-lightbox.js）
+      // 就會自動讀到並顯示，不用改 lightbox 本身。
+      const caption = document.createElement('figcaption'); caption.className = 'gallery-grid__caption';
+      caption.textContent = (item.course || '') +
+        (item.themes && item.themes.length ? '・' + item.themes.join('、') : '') +
+        (item.sessions ? '・' + (item.sessions === 1 ? '一堂完成' : item.sessions + '堂完成') : '');
+      figure.append(source, caption); sources.append(figure);
     });
     select(0);
   }

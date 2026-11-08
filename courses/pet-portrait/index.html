@@ -227,6 +227,42 @@
       </div>
     </section>
 
+    <!-- 2026-11-08 使用者要求這個區塊移到「上課怎麼進行」上面，當作
+         首圖之後的第一個開場畫面，先帶出完成後的開心感覺，再接著講
+         實際上課流程。 -->
+    <section class="chapter fade-in delay-1">
+      <div class="ent-features">
+        <div class="ent-feature ent-feature--reverse">
+          <!-- 2026-11-08 使用者要求把「學生拿作品」資料夾裡剩下還沒用到
+               的照片，自動輪播呈現在這個區塊——手機可以手指左右滑動
+               切換，跟首頁大輪播（js/home-shop.js）同一套「自動播放＋
+               手動滑動後重新計時」手感，獨立寫成 js/moments-carousel.js
+               這支小型通用元件，用 data-moments-carousel 掛載，之後
+               別的頁面要用同樣的「一堆照片自動輪播」效果可以直接套用，
+               不用重寫一份。 -->
+          <div class="ent-feature__media ent-feature__media--wide moments-carousel" data-moments-carousel data-interval="4000">
+            <img class="is-active" src="../../assets/images/courses/pet-portrait/finished-couple-cats.jpg" alt="三位同學戴口罩手持完成的貓咪肖像，笑著互相比較彼此的作品">
+            <img src="../../assets/images/courses/pet-portrait/moments/01.jpg" alt="戴草帽的同學手持完成的狗狗肖像，背景牆上掛著多幅學員作品">
+            <img src="../../assets/images/courses/pet-portrait/moments/02.jpg" alt="四位同學各自手持完成的貓咪肖像，背景牆上掛著流動畫作品">
+            <img src="../../assets/images/courses/pet-portrait/moments/03.jpg" alt="同學手持完成的狗狗肖像靠近臉部展示，背景是星空主題的作品">
+            <img src="../../assets/images/courses/pet-portrait/moments/04.jpg" alt="同學手持完成的灰色貓咪肖像，表情生動的趴臥姿態">
+            <img src="../../assets/images/courses/pet-portrait/moments/05.jpg" alt="兩位同學戴口罩分別手持完成的貓咪與白色狗狗肖像">
+            <img src="../../assets/images/courses/pet-portrait/moments/06.jpg" alt="三位同學比著勝利手勢，分別手持完成的小狗與貓咪肖像">
+            <img src="../../assets/images/courses/pet-portrait/moments/07.jpg" alt="一對同學戴口罩各自手持完成的柴犬肖像">
+            <img src="../../assets/images/courses/pet-portrait/moments/08.jpg" alt="兩位同學戴口罩分別手持完成的橘貓與圓形貓咪肖像">
+            <img src="../../assets/images/courses/pet-portrait/moments/09.jpg" alt="兩位同學戴口罩揮手，分別手持完成的柴犬與虎斑貓肖像">
+            <img src="../../assets/images/courses/pet-portrait/moments/10.jpg" alt="一對同學戴口罩手持完成的貓咪肖像，背景牆上掛著其他學員作品">
+            <img src="../../assets/images/courses/pet-portrait/moments/11.jpg" alt="同學手持完成的貓咪肖像，背景是聖誕樹與畫室一隅">
+            <img src="../../assets/images/courses/pet-portrait/moments/12.jpg" alt="兩位同學分別手持完成的小尺寸與大尺寸狗狗肖像，直接對比畫布大小差異">
+          </div>
+          <div class="ent-feature__body">
+            <p class="chapter__statement chapter__statement--caption">完成那一刻最有成就感</p>
+            <p class="chapter__prose">從打底稿到堆疊毛髮層次，兩三個小時後拿著完成的作品，很多同學都會有種「這真的是我畫的」的驚喜感。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="chapter fade-in delay-1">
       <div class="chapter__block">
         <p class="chapter__statement">上課怎麼進行</p>
@@ -235,19 +271,6 @@
         <p class="chapter__prose">接著依照毛孩的品種、毛髮跟顏色，用顏料堆疊出不同的層次跟質感。</p>
         <p class="chapter__prose">用的是乾得比較慢的油畫顏料，方便慢慢做出毛髮蓬鬆柔軟的漸層效果。</p>
         <p class="chapter__prose">單隻寵物大約2到3小時可以完成，實際時間會依照片複雜度略有不同，建議留多一點時間給自己。</p>
-      </div>
-      <!-- 2026-11-07 使用者提供的「學生拿作品」系列照片之一，放在「上課
-           怎麼進行」收尾，帶出完成後實際拿著作品的開心感覺。 -->
-      <div class="ent-features">
-        <div class="ent-feature ent-feature--reverse">
-          <div class="ent-feature__media ent-feature__media--wide">
-            <img src="../../assets/images/courses/pet-portrait/finished-couple-cats.jpg" alt="三位同學戴口罩手持完成的貓咪肖像，笑著互相比較彼此的作品">
-          </div>
-          <div class="ent-feature__body">
-            <p class="chapter__statement">完成那一刻最有成就感</p>
-            <p class="chapter__prose">從打底稿到堆疊毛髮層次，兩三個小時後拿著完成的作品，很多同學都會有種「這真的是我畫的」的驚喜感。</p>
-          </div>
-        </div>
       </div>
       <div class="chapter__block">
         <p class="chapter__statement">毛髮畫法</p>
@@ -259,7 +282,9 @@
     <section class="chapter fade-in delay-2">
       <div class="chapter__block">
         <p class="chapter__statement">尺寸與畫布</p>
-        <p class="chapter__prose">畫布分兩種尺寸：小尺寸（23×15cm／20×20cm）適合畫臉加一點點身體，不建議畫全身；大尺寸（33×24cm／30×30cm）可以畫全身，但身體的精緻度會比臉部低一些，身體本來就比臉難畫。</p>
+        <p class="chapter__prose">畫布分兩種尺寸。</p>
+        <p class="chapter__prose">小尺寸（23×15cm／20×20cm）適合畫臉加一點點身體，不建議畫全身。</p>
+        <p class="chapter__prose">大尺寸（33×24cm／30×30cm）可以畫全身，但身體的精緻度會比臉部低一些，身體本來就比臉難畫。</p>
         <p class="chapter__prose">兩種尺寸都可以選擇方形、長方形或圓形的畫布。</p>
         <p class="chapter__prose">背景以單色、雙色為主，最多做一些漸層暈染，沒辦法畫太複雜的背景，可以先想一下喜歡的背景顏色。</p>
       </div>
@@ -269,13 +294,22 @@
            第一次畫畫的同學一樣能完成。 -->
       <div class="ent-features">
         <div class="ent-feature">
-          <div class="ent-feature__media ent-feature__media--duo">
-            <img src="../../assets/images/courses/pet-portrait/size-compare-small.jpg" alt="兩位同學自拍手持完成的小尺寸寵物肖像，畫布大小約一個手掌">
-            <img src="../../assets/images/courses/pet-portrait/size-compare-large.jpg" alt="同學手持完成的大尺寸寵物肖像，畫布從下巴延伸到腰部">
+          <!-- 2026-11-08 使用者要求圖片結合小標，不要單純圖文分開排版。
+               在每張圖片下緣加一個深色漸層＋白字的小標籤（小尺寸／
+               大尺寸），直接對應圖片內容，不用再從旁邊的文字裡對照
+               「左邊／右邊是哪個尺寸」。 -->
+          <div class="ent-feature__media ent-feature__media--duo size-compare">
+            <figure class="size-compare__figure">
+              <img src="../../assets/images/courses/pet-portrait/size-compare-small.jpg" alt="兩位同學自拍手持完成的小尺寸寵物肖像，畫布大小約一個手掌">
+              <figcaption class="size-compare__label">小尺寸</figcaption>
+            </figure>
+            <figure class="size-compare__figure">
+              <img src="../../assets/images/courses/pet-portrait/size-compare-large.jpg" alt="同學手持完成的大尺寸寵物肖像，畫布從下巴延伸到腰部">
+              <figcaption class="size-compare__label">大尺寸</figcaption>
+            </figure>
           </div>
           <div class="ent-feature__body">
-            <p class="chapter__statement">拿在手上的實際比例</p>
-            <p class="chapter__prose">左邊是小尺寸，右邊是大尺寸，兩種大小拿在手上的感覺差很多，可以依照想掛的位置或送禮的用途先想一下想要哪一種。</p>
+            <p class="chapter__prose">兩種大小拿在手上的感覺差很多，可以依照想掛的位置或送禮的用途先想一下想要哪一種。</p>
             <p class="chapter__prose">大家都是第一次畫畫，不管選哪種尺寸，都能在一堂課裡完成。</p>
           </div>
         </div>
@@ -325,7 +359,7 @@
       <div class="chapter__block">
         <!-- 上架前待修清單任務 7：標題原本放在橫滑圖組下面，視覺上容易
              被誤認是下一組圖的標題，改放到圖組上方。 -->
-        <p class="chapter__statement">狗狗</p>
+        <p class="chapter__statement chapter__statement--sub">狗狗</p>
         <div class="material-photo-carousel">
           <div class="material-photo-carousel__track">
             <img src="../../assets/images/gallery/pet-portrait/01.jpg" alt="白色蓬鬆毛狗狗肖像油畫，吐舌微笑，綠色草叢背景，畫面簽名Kobe">
@@ -343,7 +377,7 @@
       </div>
 
       <div class="chapter__block">
-        <p class="chapter__statement">貓咪</p>
+        <p class="chapter__statement chapter__statement--sub">貓咪</p>
         <div class="material-photo-carousel">
           <div class="material-photo-carousel__track">
             <img src="../../assets/images/gallery/pet-portrait/32.jpg" alt="咖啡色虎斑貓肖像油畫，前爪搭在木箱邊緣，黃綠色眼睛，米白色背景">
@@ -366,8 +400,10 @@
 
     <section class="chapter fade-in delay-2">
       <div class="chapter__block">
-        <p class="chapter__statement">想畫兩隻以上</p>
-        <p class="chapter__prose">可以畫多隻寵物的合照，加購價格如下：</p>
+        <div class="chapter__block--center">
+          <p class="chapter__statement">想畫兩隻以上</p>
+          <p class="chapter__prose">可以畫多隻寵物的合照，加購價格如下：</p>
+        </div>
         <!-- 2026-11-08 使用者反映加購價格資訊排在一般內文段落裡不夠
              清楚，改用跟上面首圖同一套 .ent-hero__facts（dt 小字標籤＋
              dd 粗體數字）呈現，價格/時間一眼就能看到，不用從一整句
@@ -416,21 +452,21 @@
         <p class="chapter__prose">狗：大型犬每時段限制1到2隻，小型犬建議包尿布以維持環境整潔，並自備牽繩。</p>
         <p class="chapter__prose">貓：不建議帶來，貓咪容易緊張、亂跳亂躲，也可能因為要兼顧貓咪而影響同學作畫；若堅持要帶，僅能全程放在提籠內，不能放出來活動。</p>
         <p class="chapter__prose">其他寵物（如爬蟲類、烏龜、天竺鼠等）：需自備籠子全程安置，另外請自備寵物飲用水，畫室不提供。</p>
-        <p class="chapter__prose">畫室以人為主要使用空間，非寵物專用場地，地面或地毯可能殘留少量顏料、珠珠等手作材料，無法做到寵物專用場所等級的清潔，若毛孩比較敏感或容易誤食小物，請自行評估是否適合帶來，或使用提籠、外出袋隔離接觸地面。</p>
       </div>
-      <!-- 2026-11-07 使用者提供的「學生拿作品／大寵」資料夾裡剛好有一張
-           同學抱著真實的黑貴賓、旁邊是另外三位同學的完成作品，直接對應
-           「帶毛孩來畫室」這段文字。 -->
+      <!-- 2026-11-08 使用者要求這張圖放到「畫室以人為主要使用空間...」
+           那句提醒之前，不是放在整段文字後面——原本的做法是在最後一句
+           之後。 -->
       <div class="ent-features">
         <div class="ent-feature">
           <div class="ent-feature__media ent-feature__media--wide">
             <img src="../../assets/images/courses/pet-portrait/finished-group-with-dog.jpg" alt="四位同學手持完成的貓咪與貴賓犬肖像合照，其中一人同時抱著真實的黑色貴賓犬">
           </div>
-          <div class="ent-feature__body">
-            <p class="chapter__statement">也可以帶著真的毛孩一起來</p>
-            <p class="chapter__prose">有同學會直接把家裡的狗狗帶來畫室，一邊陪著牠、一邊完成牠的肖像畫。</p>
-          </div>
         </div>
+      </div>
+      <div class="chapter__block">
+        <p class="chapter__prose">畫室以人為主要使用空間，非寵物專用場地，地面或地毯可能殘留少量顏料、珠珠等手作材料，無法做到寵物專用場所等級的清潔，若毛孩比較敏感或容易誤食小物，請自行評估是否適合帶來，或使用提籠、外出袋隔離接觸地面。</p>
+      </div>
+      <div class="ent-features">
         <!-- 2026-11-07 使用者另外補的 3 張「有狗狗可以放在寵物課程介紹」
              系列照片，同樣是帶真狗來畫室的實際情況，跟上面那張一起放
              在這個段落。 -->
@@ -441,8 +477,35 @@
             <img src="../../assets/images/courses/pet-portrait/bring-dog-03.jpg" alt="一對同學手持完成的狗狗肖像，中間抱著真實的黃褐色吉娃娃">
           </div>
           <div class="ent-feature__body">
-            <p class="chapter__statement">狗狗也能當現場模特兒</p>
+            <p class="chapter__statement chapter__statement--caption">狗狗也能當現場模特兒</p>
             <p class="chapter__prose">帶著本尊一起來，畫的時候可以隨時對照真實的毛色跟神情。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="chapter fade-in delay-2">
+      <div class="ent-features">
+        <div class="ent-feature">
+          <div class="ent-feature__media ent-feature__media--mosaic">
+            <img src="../../assets/images/gallery/pet-portrait/45.jpg" alt="白兔戴著花環項圈，漂浮在藍天白雲中，花瓣飄落">
+            <img src="../../assets/images/gallery/pet-portrait/47.jpg" alt="非洲灰鸚鵡特寫，藍色背景">
+            <img src="../../assets/images/gallery/pet-portrait/48.jpg" alt="兩隻粉紅火鶴站在海邊淺灘，藍色海天背景">
+          </div>
+          <div class="ent-feature__body">
+            <p class="chapter__statement chapter__statement--caption">不只貓貓狗狗</p>
+            <p class="chapter__prose">除了貓咪、狗狗，兔子、鳥類這類家裡養的其他寵物也都能畫，一樣是帶著照片來，依照毛髮或羽毛的質感堆疊出層次。</p>
+          </div>
+        </div>
+        <div class="ent-feature ent-feature--reverse">
+          <div class="ent-feature__media ent-feature__media--mosaic">
+            <img src="../../assets/images/gallery/pet-portrait/49.jpg" alt="黑色烏鴉站在紫紅色花朵旁，棕色肌理背景">
+            <img src="../../assets/images/gallery/pet-portrait/52.jpg" alt="老虎幼獸臉部與爪子特寫，白色背景">
+            <img src="../../assets/images/gallery/pet-portrait/53.jpg" alt="黑白色調獅子側臉特寫，深色星空背景">
+          </div>
+          <div class="ent-feature__body">
+            <p class="chapter__statement chapter__statement--caption">也可以畫養不了的動物</p>
+            <p class="chapter__prose">不是只能畫家裡實際養的寵物，烏鴉、老虎、獅子這類沒辦法養在家裡的動物，單純因為喜歡也能畫成一幅作品，當作裝飾畫掛在家裡。</p>
           </div>
         </div>
       </div>
@@ -468,36 +531,28 @@
             <img src="../../assets/images/courses/pet-portrait/finished-couple-large.jpg" alt="一對同學戴口罩手持完成的哈士奇與貓咪大尺寸肖像">
           </div>
           <div class="ent-feature__body">
-            <p class="chapter__statement">不管哪一堂，大家都是這樣笑著完成的</p>
             <p class="chapter__prose">每一堂課結束，看到同學拿著剛完成的作品露出的表情，都是老師最喜歡的部分。</p>
           </div>
         </div>
       </div>
     </section>
 
-
+    <!-- 2026-11-08 使用者指出「油畫筆刷＋寵物」這 3 張照片其實是同學
+         一次帶了兩種不同題材的素材來上課（寵物肖像＋沙畫／星空／海景
+         等其他主題），從輪播裡移出來，另外獨立一個段落說明「同一堂課
+         不用都畫寵物，也可以同時畫別的題材」，放在「替作品留下名字」
+         之前。 -->
     <section class="chapter fade-in delay-2">
+      <div class="chapter__block">
+        <p class="chapter__statement">不用只畫寵物</p>
+        <p class="chapter__prose">同一堂課也可以同時畫別的題材，不用整堂課都只畫寵物，可以跟老師討論怎麼安排時間。</p>
+      </div>
       <div class="ent-features">
         <div class="ent-feature">
-          <div class="ent-feature__media ent-feature__media--mosaic">
-            <img src="../../assets/images/gallery/pet-portrait/45.jpg" alt="白兔戴著花環項圈，漂浮在藍天白雲中，花瓣飄落">
-            <img src="../../assets/images/gallery/pet-portrait/47.jpg" alt="非洲灰鸚鵡特寫，藍色背景">
-            <img src="../../assets/images/gallery/pet-portrait/48.jpg" alt="兩隻粉紅火鶴站在海邊淺灘，藍色海天背景">
-          </div>
-          <div class="ent-feature__body">
-            <p class="chapter__statement">不只貓貓狗狗</p>
-            <p class="chapter__prose">除了貓咪、狗狗，兔子、鳥類這類家裡養的其他寵物也都能畫，一樣是帶著照片來，依照毛髮或羽毛的質感堆疊出層次。</p>
-          </div>
-        </div>
-        <div class="ent-feature ent-feature--reverse">
-          <div class="ent-feature__media ent-feature__media--mosaic">
-            <img src="../../assets/images/gallery/pet-portrait/49.jpg" alt="黑色烏鴉站在紫紅色花朵旁，棕色肌理背景">
-            <img src="../../assets/images/gallery/pet-portrait/52.jpg" alt="老虎幼獸臉部與爪子特寫，白色背景">
-            <img src="../../assets/images/gallery/pet-portrait/53.jpg" alt="黑白色調獅子側臉特寫，深色星空背景">
-          </div>
-          <div class="ent-feature__body">
-            <p class="chapter__statement">也可以畫養不了的動物</p>
-            <p class="chapter__prose">不是只能畫家裡實際養的寵物，烏鴉、老虎、獅子這類沒辦法養在家裡的動物，單純因為喜歡也能畫成一幅作品，當作裝飾畫掛在家裡。</p>
+          <div class="ent-feature__media ent-feature__media--portrait moments-carousel moments-carousel--grid-desktop" data-moments-carousel data-interval="4000">
+            <img class="is-active" src="../../assets/images/courses/pet-portrait/moments/13.jpg" alt="同學手持完成的超人裝扮臘腸狗肖像，旁邊另一位同學手持沙漠棕櫚樹風景作品">
+            <img src="../../assets/images/courses/pet-portrait/moments/14.jpg" alt="同學手持完成的白色牧羊犬肖像，旁邊另一位同學手持小王子星空主題作品">
+            <img src="../../assets/images/courses/pet-portrait/moments/15.jpg" alt="兩位同學分別手持完成的雪納瑞肖像與海邊風景作品">
           </div>
         </div>
       </div>
@@ -599,6 +654,7 @@
   <script src="../../js/account-auth.js"></script>
   <script src="../../js/account-widget.js"></script>
   <script src="../../js/scroll-reveal.js"></script>
+  <script src="../../js/moments-carousel.js"></script>
   <script src="../../js/site-menu.js"></script>
   <script src="../../js/gallery-lightbox.js"></script>
   <script src="/js/promo-bar.js"></script>

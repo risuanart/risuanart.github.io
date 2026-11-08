@@ -31,6 +31,7 @@
   <link rel="stylesheet" href="../../css/enterprise.css">
   <link rel="stylesheet" href="../../css/course-signature.css">
   <link rel="stylesheet" href="../../css/gallery.css">
+  <link rel="stylesheet" href="../../css/custom-photo-topics.css">
   <link rel="stylesheet" href="../../css/site-menu.css">
   <link rel="stylesheet" href="../../css/site-footer.css">
   <link rel="icon" href="/favicon.ico" sizes="any">
@@ -210,6 +211,47 @@
       </div>
     </section>
 
+    <!-- 2026-11-08 使用者要求比照寵物油畫頁「完成那一刻最有成就感」的
+         配置，在價格（上面 hero 的 .ent-hero__facts）下方放學員拿作品
+         的照片輪播，傳達大家完成時開心的感覺。照片來自使用者「學生拿
+         作品／石英砂」資料夾，10 張裡 8 張是直式比例（約 4:5），用
+         --portrait 讓裁切降到最低；輪播／手機滑動／桌機左右鍵都共用
+         js/moments-carousel.js，不用重寫。原本 10 張都塞同一個輪播，
+         但 02 這張是橫式 3:2，硬塞進直式輪播會裁掉太多兩側，改放到
+         輪播下面單獨用 --wide 原比例呈現，順便帶出「同一種材料可以畫
+         不同主題」的訊息；01 雖然也是橫式，但主體（三位同學跟作品）
+         集中在畫面中間，裁成直式不會切到主體，所以留在輪播裡。 -->
+    <section class="chapter fade-in delay-1">
+      <div class="ent-features">
+        <div class="ent-feature ent-feature--reverse">
+          <div class="ent-feature__media ent-feature__media--portrait moments-carousel" data-moments-carousel data-interval="4000">
+            <img class="is-active" src="../../assets/images/courses/sand-texture/moments/03.jpg" alt="兩位同學展示完成的石英砂肌理畫，一張是黑粉花朵圖案，一張是湖畔花海風景">
+            <img src="../../assets/images/courses/sand-texture/moments/01.jpg" alt="三位同學在畫室裡展示完成的石英砂肌理畫，分別是兔子、葉子與白色花朵圖案">
+            <img src="../../assets/images/courses/sand-texture/moments/04.jpg" alt="三位同學展示完成的石英砂肌理畫，分別是窗邊剪影、黃色花朵與夕陽剪影圖案">
+            <img src="../../assets/images/courses/sand-texture/moments/05.jpg" alt="同學們展示完成的石英砂肌理畫，分別是海中花朵與深色花朵圖案">
+            <img src="../../assets/images/courses/sand-texture/moments/06.jpg" alt="兩位同學展示完成的石英砂肌理畫，抽象藍白與粉金配色圖案">
+            <img src="../../assets/images/courses/sand-texture/moments/07.jpg" alt="同學近距離展示完成的石英砂肌理畫，深藍夜空與跳躍鯨魚圖案">
+            <img src="../../assets/images/courses/sand-texture/moments/08.jpg" alt="兩位同學展示完成的石英砂肌理畫，分別是人物肖像與梵谷星夜風格圖案">
+            <img src="../../assets/images/courses/sand-texture/moments/09.jpg" alt="三位同學展示完成的石英砂肌理畫，分別是莫內睡蓮池、鯨鯊海洋與星空小王子圖案">
+            <img src="../../assets/images/courses/sand-texture/moments/10.jpg" alt="同學展示完成的石英砂肌理畫，深色夜空佈滿黃色月球與戴派對帽的小狗剪影">
+          </div>
+          <div class="ent-feature__body">
+            <p class="chapter__statement chapter__statement--caption">完成那一刻最有成就感</p>
+            <p class="chapter__prose">每一堂課結束，看到同學拿著剛完成的作品露出的表情，都是老師最喜歡的部分。</p>
+          </div>
+        </div>
+        <div class="ent-feature">
+          <div class="ent-feature__media ent-feature__media--wide">
+            <img src="../../assets/images/courses/sand-texture/moments/02.jpg" alt="三位同學展示完成的石英砂肌理畫，分別是黑色花朵、夜空沙丘與灰白肌理圖案">
+          </div>
+          <div class="ent-feature__body">
+            <p class="chapter__statement chapter__statement--caption">同樣的材料，可以畫出完全不同的主題</p>
+            <p class="chapter__prose">花朵、夜空、抽象肌理，同學們用的是同一種石英砂混顏料的技法，但畫出來的圖案完全不一樣，想畫什麼可以自己決定。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="chapter fade-in delay-1">
       <div class="chapter__intro">
         <p>透過光線可以看到凹凸的顆粒感，刮刀刮過砂子的聲音也意外地療癒。</p>
@@ -252,9 +294,13 @@
            對應的文案段落——這張（刮刀沾著膏狀顏料、旁邊是試塗的圓形
            肌理畫）剛好直接對應上面「材料組成」描述的膏狀質地，放在
            這個段落收尾最合適。 -->
+      <!-- 2026-11-08 使用者反映這張圖＋文字排版把頁面拉太長——這張
+           原始照片其實是 3:2 橫式（1440×960），卻套用預設的 4:5／1:1
+           方框硬裁成直式，不只多裁了不必要的範圍，box 也比橫式更高，
+           改套 --wide 符合原始比例，裁切變少，高度也跟著變矮。 -->
       <div class="ent-features">
         <div class="ent-feature">
-          <div class="ent-feature__media">
+          <div class="ent-feature__media ent-feature__media--wide">
             <img src="../../assets/images/gallery/sand-texture/81.jpg" alt="三支刮刀沾著粉色與黃色膏狀顏料，旁邊是粉黃紫三色交織的圓形肌理畫">
           </div>
           <div class="ent-feature__body">
@@ -312,14 +358,16 @@
       <!-- 2026-11-07 使用者要求的第 2 張意境側拍：圓形畫布立起側面，
            可以看到塑形工具做出來的立體厚度跟邊緣，對應「成型方式」
            段落講的立體效果。 -->
+      <!-- 2026-11-08 同上一段的理由：這張原始照片也是 3:2 橫式
+           （1440×960），改套 --wide 符合原始比例，不多裁、高度也變矮。 -->
       <div class="ent-features">
         <div class="ent-feature ent-feature--reverse">
-          <div class="ent-feature__media">
+          <div class="ent-feature__media ent-feature__media--wide">
             <img src="../../assets/images/gallery/sand-texture/52.jpg" alt="學員舉起粉色圓形肌理畫布，側面可見刮刀塑形出的立體厚度">
           </div>
           <div class="ent-feature__body">
             <p class="chapter__statement">立起來看得到的立體厚度</p>
-            <p class="chapter__prose">從側面看，才看得出刮刀堆疊出來的實際厚度——這也是石英砂肌理畫跟平面畫法最不一樣的地方。</p>
+            <p class="chapter__prose">從側面看，才看得出刮刀堆疊出來的實際厚度，這也是石英砂肌理畫跟平面畫法最不一樣的地方。</p>
           </div>
         </div>
       </div>
@@ -348,32 +396,41 @@
       </div>
     </section>
 
-    <section class="chapter fade-in delay-2">
+    <!-- 2026-11-08 使用者反映這裡只有放海景範例，但花卉、山景也已經
+         是「學員作品」有在收的分類了，改比照 courses/custom-photo-oil/
+         「可畫的主題」那套主題切換元件（.custom-topics，共用
+         css/custom-photo-topics.css），照片直接從學員作品資料庫
+         （gallery-data.js）抓對應主題、對應這堂課的照片，不用手動列
+         固定 4 張，新增的學員作品也會自動出現在對應主題裡。邏輯寫在
+         js/sand-texture-topics.js，跟 custom-photo-topics.js 同一套
+         寫法，只是主題換成植物花卉／海邊／山景三個。 -->
+    <section class="chapter custom-topics fade-in delay-2" aria-label="適合的圖案">
       <div class="chapter__block">
         <p class="chapter__statement">適合的圖案</p>
         <p class="chapter__prose">純石英砂＋壓克力適合色塊比較單一、乾淨的圖片，細節太多、太複雜的圖案不容易處理；如果想畫的圖片細節比較多，可以參考上面「石英砂底＋油畫」的做法。</p>
-        <p class="chapter__prose">花卉類特別適合純肌理技法，花瓣的形狀剛好合刮刀或擠花袋操作的路徑。</p>
-        <!-- 2026-09-21 新增：海景段落，內容改寫自使用者原本的 IG 貼文（見
-             /Desktop/石英砂－海主題/ig文章.png），不是新編的行銷文案。
-             跟花卉那段一樣的句型節奏（「XX 特別適合...」），維持段落間
-             語氣一致。 -->
-        <p class="chapter__prose">海景也特別適合肌理技法，透過沙子跟顏料比例的調配，可以做出海沙特有的粗糙顆粒感，也能一層層堆疊出浪花拍打瞬間的立體起伏，不管是眼前看到的海，還是想像中的海，都能直接畫出來。</p>
-        <p class="chapter__prose">想自己帶圖來上課的話，可以先私訊傳圖片給我們，會協助評估圖片的難易度跟大概需要的完成時間。</p>
+        <p class="chapter__prose">點選想看的主題，看看同學完成的作品。</p>
       </div>
-      <div class="ent-gallery" data-course-controls="true" data-autoplay="4000">
-        <div class="ent-gallery__viewport">
-          <div class="ent-gallery__slide is-active"><img src="../../assets/images/courses/sand-texture/海主題範例/海景全幅-夕陽.jpg" alt="完成的海景肌理畫，夕陽海面搭配立體浪花"></div>
-          <div class="ent-gallery__slide"><img src="../../assets/images/courses/sand-texture/海主題範例/海浪特寫-黑白.jpg" alt="黑白海浪肌理畫特寫，堆疊出浪花拍打瞬間的立體感"></div>
-          <div class="ent-gallery__slide"><img src="../../assets/images/courses/sand-texture/海主題範例/海浪特寫-暖色.jpg" alt="暖色調海浪肌理畫特寫，沙粒與浪花的顆粒質感"></div>
-          <div class="ent-gallery__slide"><img src="../../assets/images/courses/sand-texture/海主題範例/海景-學員持作品.jpg" alt="學員手持完成的海景肌理畫作品"></div>
+      <nav class="custom-topics__nav" aria-label="作品主題">
+        <button type="button" id="theme-botanical" data-topic="botanical" aria-pressed="true" aria-controls="topic-showcase">植物花卉</button>
+        <button type="button" id="theme-seaside" data-topic="seaside" aria-pressed="false" aria-controls="topic-showcase">海邊</button>
+        <button type="button" id="theme-mountain" data-topic="mountain" aria-pressed="false" aria-controls="topic-showcase">山景</button>
+      </nav>
+      <div class="custom-topics__showcase" id="topic-showcase">
+        <div class="custom-topics__visual">
+          <div class="custom-topics__stage">
+            <button class="custom-topics__zoom" type="button" aria-label="放大作品"><img src="../../assets/images/gallery/sand-texture/35.jpg" alt="石英砂肌理畫學員作品"></button>
+            <button class="custom-topics__arrow custom-topics__prev" type="button" aria-label="上一張作品"><svg viewBox="0 0 25 18" aria-hidden="true"><path d="M24 9H2M2 9l7-7M2 9l7 7"/></svg></button>
+            <button class="custom-topics__arrow custom-topics__next" type="button" aria-label="下一張作品"><svg viewBox="0 0 25 18" aria-hidden="true"><path d="M1 9h22M23 9l-7-7M23 9l-7 7"/></svg></button>
+          </div>
+          <div class="custom-topics__thumbs" aria-label="選擇作品"></div>
         </div>
-        <div class="ent-gallery__dots" role="tablist" aria-label="海景範例輪播切換">
-          <button type="button" class="is-active" data-index="0" role="tab" aria-selected="true" aria-label="第 1 張"></button>
-          <button type="button" data-index="1" role="tab" aria-selected="false" aria-label="第 2 張"></button>
-          <button type="button" data-index="2" role="tab" aria-selected="false" aria-label="第 3 張"></button>
-          <button type="button" data-index="3" role="tab" aria-selected="false" aria-label="第 4 張"></button>
+        <div class="custom-topics__copy" aria-live="polite">
+          <h2></h2><p class="custom-topics__description"></p><p class="custom-topics__detail"></p>
+          <p class="custom-topics__empty" hidden>這個主題的作品照片整理中，歡迎帶喜歡的圖片來討論。</p>
         </div>
       </div>
+      <div class="gallery-grid custom-topics__lightbox-source" hidden></div>
+      <p class="chapter__prose">想自己帶圖來上課的話，可以先私訊傳圖片給我們，會協助評估圖片的難易度跟大概需要的完成時間。</p>
     </section>
 
     <!-- 學員作品：改成跟集中的 gallery.html 共用同一份資料（見
@@ -425,6 +482,23 @@
           <div class="ent-feature__body">
             <p class="chapter__statement">慢慢磨出來的專注感</p>
             <p class="chapter__prose">刮刀的細節需要一點耐心慢慢堆疊，很多同學做到後來反而覺得這個「慢」是放鬆的。</p>
+          </div>
+        </div>
+        <!-- 2026-11-08 使用者要求帶到「同一堂課上課的同學可以選不同
+             材料」，照片來自「學生拿作品／油畫筆刷、石英砂」資料夾，
+             3 張都是兩位同學分別拿著油畫筆刷跟石英砂肌理畫的合照，同時
+             也放進 courses/custom-photo-oil/index.html 同一段落，兩邊都
+             看得到。 -->
+        <div class="ent-feature ent-feature--reverse">
+          <div class="ent-feature__media ent-feature__media--portrait moments-carousel" data-moments-carousel data-interval="4000">
+            <img class="is-active" src="../../assets/images/courses/sand-texture/moments/11.jpg" alt="兩位同學分別手持完成的油畫蠟燭鑰匙靜物與石英砂肌理蛋糕作品">
+            <img src="../../assets/images/courses/sand-texture/moments/12.jpg" alt="兩位同學分別手持完成的石英砂白花肌理畫與油畫滿月海景作品">
+            <img src="../../assets/images/courses/sand-texture/moments/13.jpg" alt="兩位同學分別手持完成的石英砂肌理小王子星空與油畫山景作品">
+          </div>
+          <div class="ent-feature__body">
+            <p class="chapter__statement chapter__statement--caption">同一堂課也能選不同材料</p>
+            <p class="chapter__prose">一起來的同學不用選一樣的材料，石英砂肌理跟油畫筆刷可以分開選，我們會依照想畫的圖片內容推薦比較適合的材料。</p>
+            <p class="chapter__prose">照片中石英砂肌理的作品是粉色蛋糕、白花、小王子星空；油畫筆刷的作品是蠟燭鑰匙、滿月海景、山景。</p>
           </div>
         </div>
       </div>
@@ -510,10 +584,12 @@
   <script src="../../js/account-auth.js"></script>
   <script src="../../js/account-widget.js"></script>
   <script src="../../js/scroll-reveal.js"></script>
+  <script src="../../js/moments-carousel.js"></script>
   <script src="../../js/video-inview.js"></script>
   <script src="../../js/enterprise-gallery.js"></script>
   <script src="../../js/gallery-data.js"></script>
   <script src="../../js/gallery-course-preview.js"></script>
+  <script src="../../js/sand-texture-topics.js"></script>
   <script src="../../js/gallery-lightbox.js"></script>
   <script src="../../js/site-menu.js"></script>
   <script src="/js/promo-bar.js"></script>

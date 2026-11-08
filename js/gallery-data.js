@@ -744,6 +744,14 @@ window.GALLERY_ITEMS = [
   { course: "自選主題油畫", themes: ["海邊"], date: "2026-11-01", src: "../assets/images/gallery/sea-oil/15.jpg", alt: "海景油畫創作過程，畫布上是藍色海浪與遠山", sessions: 1 },
   { course: "自選主題油畫", themes: ["海邊"], date: "2026-11-01", src: "../assets/images/gallery/sea-oil/16.jpg", alt: "深色海岸與遠山的油畫風景", sessions: 1 },
   { course: "自選主題油畫", themes: ["植物花卉"], date: "2026-11-01", src: "../assets/images/gallery/landscape-oil/19.jpg", alt: "油畫的橘子樹景色，兩人坐在樹下的山丘上休息", sessions: 1 },
+  { course: "自選主題油畫", themes: ["植物花卉"], date: "2026-11-08", src: "../assets/images/gallery/landscape-oil/20.jpg", alt: "粉色鬱金香花朵油畫，淺藍背景帶月暈效果，畫布立在畫架上", sessions: 1 },
+  { course: "自選主題油畫", themes: ["植物花卉"], date: "2026-11-08", src: "../assets/images/gallery/landscape-oil/21.jpg", alt: "學員正在繪製灰褐色調玫瑰油畫的過程，手持畫筆描繪花莖細節", sessions: 1 },
+  { course: "自選主題油畫", themes: ["植物花卉"], date: "2026-11-08", src: "../assets/images/gallery/landscape-oil/22.jpg", alt: "深藍背景的白色蝴蝶蘭油畫，花盆上寫著字", sessions: 1 },
+  { course: "自選主題油畫", themes: ["植物花卉"], date: "2026-11-08", src: "../assets/images/gallery/landscape-oil/23.jpg", alt: "粉綠色調的兩朵玫瑰油畫，插在玻璃瓶裡", sessions: 1 },
+  { course: "自選主題油畫", themes: ["植物花卉"], date: "2026-11-08", src: "../assets/images/gallery/landscape-oil/24.jpg", alt: "粉紅與白色鬱金香花束油畫，插在玻璃罐裡，旁邊放著參考圖", sessions: 1 },
+  { course: "自選主題油畫", themes: ["植物花卉"], date: "2026-11-08", src: "../assets/images/gallery/landscape-oil/25.jpg", alt: "學員正在繪製龜背芋葉片油畫的過程，手持畫筆描繪葉脈", sessions: 1 },
+  { course: "自選主題油畫", themes: ["植物花卉"], date: "2026-11-08", src: "../assets/images/gallery/landscape-oil/26.jpg", alt: "學員正在繪製粉橘色鬱金香油畫的過程，畫筆指向花瓣", sessions: 1 },
+  { course: "自選主題油畫", themes: ["植物花卉"], date: "2026-11-08", src: "../assets/images/gallery/landscape-oil/27.jpg", alt: "橘色玫瑰花束油畫，深綠背景，畫面右下角簽名", sessions: 1 },
   { course: "自選主題油畫", themes: ["星空"], date: "2026-11-01", src: "../assets/images/gallery/star-sky/38.jpg", alt: "圓形畫布的月球表面油畫創作過程，學員正在描繪月面細節", sessions: 1 },
   { course: "自選主題油畫", themes: ["星空"], date: "2026-11-01", src: "../assets/images/gallery/star-sky/39.jpg", alt: "藍紫色星空油畫，遠方山巒與湖面倒影交映", sessions: 1 },
   { course: "自選主題油畫", themes: ["星空"], date: "2026-11-01", src: "../assets/images/gallery/star-sky/40.jpg", alt: "月球表面油畫作品，畫布置於畫架上", sessions: 1 },
@@ -780,6 +788,100 @@ window.GALLERY_ITEMS = [
   { course: "自選主題油畫", themes: ["海洋生物"], date: "2026-11-01", src: "../assets/images/gallery/whale/17.jpg", alt: "深色畫布上的鯨魚油畫，星空與光束映照海面", sessions: 1 },
   { course: "自選主題油畫", themes: ["海洋生物"], date: "2026-11-01", src: "../assets/images/gallery/whale/18.jpg", alt: "學員正在描繪鯨魚油畫，畫布上是鯨魚與海面", sessions: 1 },
   { course: "自選主題油畫", themes: ["海洋生物"], date: "2026-11-01", src: "../assets/images/gallery/whale/19.jpg", alt: "圓形畫布的兩隻鯨魚油畫，藍灰色鯨魚悠游於淺色背景", sessions: 1 },
+  // 2026-11-08 新增「動漫／角色」10 件：迪士尼、吉卜力以外的動漫角色
+  // 題材（一拳超人、火影忍者、鋼鍊、我的英雄學院、鬼滅之刃、七龍珠、
+  // 進擊的巨人、電鋸人），對應「可畫的主題」既有的「動漫／角色」標籤，
+  // 不另開新標籤。
+  { course: "自選主題油畫", themes: ["動漫／角色"], date: "2026-11-08", src: "../assets/images/gallery/anime-characters/01.jpg", alt: "一拳超人（埼玉）出拳瞬間的油畫作品", sessions: 1 },
+  { course: "自選主題油畫", themes: ["動漫／角色"], date: "2026-11-08", src: "../assets/images/gallery/anime-characters/02.jpg", alt: "火影忍者鳴人與波風水門相視互頂拳頭的油畫作品", sessions: 1 },
+  { course: "自選主題油畫", themes: ["動漫／角色"], date: "2026-11-08", src: "../assets/images/gallery/anime-characters/03.jpg", alt: "火影忍者宇智波佐助特寫油畫，紅色寫輪眼搭配紫色背景", sessions: 1 },
+  { course: "自選主題油畫", themes: ["動漫／角色"], date: "2026-11-08", src: "../assets/images/gallery/anime-characters/04.jpg", alt: "鋼之鍊金術師羅伊馬斯坦彈指瞬間的油畫作品，橘紅色火焰背景", sessions: 1 },
+  { course: "自選主題油畫", themes: ["動漫／角色"], date: "2026-11-08", src: "../assets/images/gallery/anime-characters/05.jpg", alt: "我的英雄學院綠谷出久拿著錄取通知流淚大笑的油畫作品", sessions: 1 },
+  { course: "自選主題油畫", themes: ["動漫／角色"], date: "2026-11-08", src: "../assets/images/gallery/anime-characters/06.jpg", alt: "鬼滅之刃我妻善逸持刀備戰的油畫作品", sessions: 1 },
+  { course: "自選主題油畫", themes: ["動漫／角色"], date: "2026-11-08", src: "../assets/images/gallery/anime-characters/07.jpg", alt: "七龍珠孫悟空超級賽亞人的油畫作品", sessions: 1 },
+  { course: "自選主題油畫", themes: ["動漫／角色"], date: "2026-11-08", src: "../assets/images/gallery/anime-characters/08.jpg", alt: "進擊的巨人題材的油畫作品，深藍色背景襯著猙獰的巨人臉孔", sessions: 1 },
+  { course: "自選主題油畫", themes: ["動漫／角色"], date: "2026-11-08", src: "../assets/images/gallery/anime-characters/09.jpg", alt: "電鋸人角色側臉叼菸的油畫作品，深色背景", sessions: 1 },
+  { course: "自選主題油畫", themes: ["動漫／角色"], date: "2026-11-08", src: "../assets/images/gallery/anime-characters/10.jpg", alt: "火影忍者宇智波鼬比著手印的油畫作品，紅黑萬花筒寫輪眼背景", sessions: 1 },
+  // 2026-11-08 新增「其他動物」2 件，來自使用者「其他動物2～3堂、加大
+  // 畫布」資料夾，都是加大尺寸、多堂完成的作品。
+  { course: "自選主題油畫", themes: ["其他動物"], date: "2026-11-08", src: "../assets/images/gallery/other-animals-oil/01.jpg", alt: "黑白色調的公鹿頭像油畫特寫，鹿角細節分明", sessions: 2 },
+  { course: "自選主題油畫", themes: ["其他動物"], date: "2026-11-08", src: "../assets/images/gallery/other-animals-oil/02.jpg", alt: "加大尺寸的黑底獅子與幼獅側臉油畫，掛在牆上展示", sessions: 3 },
+  // 2026-11-08 新增「人像」3 件（含真人運動員肖像）、「動漫／角色」
+  // 3 件，以及全新「車子」標籤 4 件（跑車／摩托車，目前沒有對應的
+  // 可畫的主題分頁，先標好標籤，等新增分頁再套用）。來源是使用者
+  // Instagram 貼文匯出資料夾（202508），都是油畫＋筆刷完成。
+  { course: "自選主題油畫", themes: ["人像"], date: "2026-11-08", src: "../assets/images/gallery/portrait-oil/one-session/41.jpg", alt: "絡腮鬍男子肖像油畫，橘色衣著搭配黃色背景", sessions: 1 },
+  { course: "自選主題油畫", themes: ["人像"], date: "2026-11-08", src: "../assets/images/gallery/portrait-oil/one-session/42.jpg", alt: "MLB 球員大谷翔平揮棒瞬間的油畫肖像，身著道奇隊17號球衣", sessions: 1 },
+  { course: "自選主題油畫", themes: ["人像"], date: "2026-11-08", src: "../assets/images/gallery/portrait-oil/one-session/43.jpg", alt: "NBA 球星Kobe Bryant灌籃瞬間的油畫肖像，身著湖人隊8號球衣", sessions: 2 },
+  { course: "自選主題油畫", themes: ["動漫／角色"], date: "2026-11-08", src: "../assets/images/gallery/anime-characters/11.jpg", alt: "蝙蝠俠側臉特寫的油畫作品，深藍色調", sessions: 1 },
+  { course: "自選主題油畫", themes: ["動漫／角色"], date: "2026-11-08", src: "../assets/images/gallery/anime-characters/12.jpg", alt: "灌籃高手10號角色背影運球的油畫作品，搭配日文手寫字「籃球是…喜歡嗎？」", sessions: 1 },
+  { course: "自選主題油畫", themes: ["動漫／角色"], date: "2026-11-08", src: "../assets/images/gallery/anime-characters/13.jpg", alt: "閃電俠奔跑瞬間的油畫作品，深色背景帶動態殘影", sessions: 2 },
+  { course: "自選主題油畫", themes: ["車子"], date: "2026-11-08", src: "../assets/images/gallery/vehicles/01.jpg", alt: "紅色法拉利概念跑車側面油畫，灰藍色天空背景", sessions: 1 },
+  { course: "自選主題油畫", themes: ["車子"], date: "2026-11-08", src: "../assets/images/gallery/vehicles/02.jpg", alt: "經典法拉利250 GT跑車油畫，深綠色背景", sessions: 1 },
+  { course: "自選主題油畫", themes: ["車子"], date: "2026-11-08", src: "../assets/images/gallery/vehicles/03.jpg", alt: "保時捷賽車近距離特寫油畫，夜間賽道燈光虛化背景", sessions: 1 },
+  { course: "自選主題油畫", themes: ["車子"], date: "2026-11-08", src: "../assets/images/gallery/vehicles/04.jpg", alt: "紅色速克達機車油畫，上方以中文書法寫著「好活好」，藍綠色背景", sessions: 1 },
+  // 2026-11-08 新增 6 件（另有 1 張明確標示「這不是完成品」的刮浪過程
+  // 截圖沒有收進來）：3 張筆觸平滑、是油畫＋筆刷技法（自選主題油畫），
+  // 3 張刮刀堆疊出厚塗質感、是刮刀油畫技法，來源同樣是使用者
+  // Instagram 限時動態匯出資料夾（202610）。
+  { course: "自選主題油畫", themes: ["風景"], date: "2026-11-08", src: "../assets/images/gallery/landscape-oil/28.jpg", alt: "學員站在湖邊碼頭上的油畫風景，遠方有山巒與停泊的帆船", sessions: 1 },
+  { course: "自選主題油畫", themes: ["星空", "人像"], date: "2026-11-08", src: "../assets/images/gallery/star-sky/49.jpg", alt: "星空沙灘上比基尼女子背影剪影油畫，雙手高舉", sessions: 1 },
+  { course: "自選主題油畫", themes: ["海邊"], date: "2026-11-08", src: "../assets/images/gallery/sea-oil/36.jpg", alt: "灰藍色調的海浪油畫，浪花拍打灰色沙灘", sessions: 1 },
+  { course: "刮刀油畫", themes: ["風景", "植物花卉"], date: "2026-11-08", src: "../assets/images/gallery/palette-knife-oil/46.jpg", alt: "刮刀油畫的花園小徑景色，紫白色繡球花叢夾道，盡頭有白色小屋", sessions: 1 },
+  { course: "刮刀油畫", themes: ["植物花卉"], date: "2026-11-08", src: "../assets/images/gallery/palette-knife-oil/47.jpg", alt: "刮刀油畫的向日葵特寫，厚塗花瓣點綴水鑽裝飾", sessions: 1 },
+  { course: "刮刀油畫", themes: ["植物花卉"], date: "2026-11-08", src: "../assets/images/gallery/palette-knife-oil/48.jpg", alt: "刮刀油畫的白色雛菊花束，插在兩個馬克杯裡", sessions: 1 },
+  // 2026-11-08 新增 26 件，來源是使用者 Instagram 限時動態匯出資料夾
+  // （202609）。逐張看過內容，排除 2 張跟既有學員作品完全重複的照片
+  // （龍貓、拉拉熊，同一張拍攝角度跟易架都一樣）。
+  { course: "寵物油畫", themes: ["貓咪"], date: "2026-11-08", src: "../assets/images/gallery/pet-portrait/104.jpg", alt: "黑白貓咪站在藍天草地上的油畫肖像，戴著黃色蝴蝶結項圈", sessions: 1 },
+  { course: "刮刀油畫", themes: ["風景", "人像", "植物花卉"], date: "2026-11-08", src: "../assets/images/gallery/palette-knife-oil/49.jpg", alt: "刮刀油畫的女子背影，穿黃色洋裝抱著向日葵奔跑過雛菊花田，背景是起伏山丘", sessions: 1 },
+  { course: "刮刀油畫", themes: ["風景", "人像"], date: "2026-11-08", src: "../assets/images/gallery/palette-knife-oil/50.jpg", alt: "刮刀油畫的女子背影，穿白色洋裝走在蜿蜒山徑上，兩側是綠色山丘", sessions: 1 },
+  { course: "石英砂肌理畫", themes: ["海邊", "山", "植物花卉"], date: "2026-11-08", src: "../assets/images/gallery/sand-texture/82.jpg", alt: "三幅並排展示的石英砂肌理畫，由上至下分別是貝殼沙灘、櫻花富士山與黑白花朵", sessions: 1 },
+  { course: "自選主題油畫", themes: ["植物花卉"], date: "2026-11-08", src: "../assets/images/gallery/landscape-oil/29.jpg", alt: "深藍色背景的白色雛菊油畫特寫", sessions: 1 },
+  { course: "自選主題油畫", themes: ["植物花卉"], date: "2026-11-08", src: "../assets/images/gallery/landscape-oil/30.jpg", alt: "淺藍背景的扁平插畫風格花卉與葉子油畫", sessions: 1 },
+  { course: "刮刀油畫", themes: ["山"], date: "2026-11-08", src: "../assets/images/gallery/palette-knife-oil/51.jpg", alt: "刮刀油畫的藍色山峰倒映在水面上，背景是藍天白雲", sessions: 1 },
+  { course: "刮刀油畫", themes: ["植物花卉"], date: "2026-11-08", src: "../assets/images/gallery/palette-knife-oil/52.jpg", alt: "刮刀油畫的粉白色系玫瑰與野花特寫，點綴藍色小花", sessions: 1 },
+  { course: "石英砂肌理畫", themes: ["人像", "風景"], date: "2026-11-08", src: "../assets/images/gallery/sand-texture/83.jpg", alt: "石英砂肌理畫的沙丘景色，一對情侶背影牽手走在沙地上，女子身穿紅色洋裝", sessions: 1 },
+  { course: "自選主題油畫", themes: ["人像", "植物花卉"], date: "2026-11-08", src: "../assets/images/gallery/landscape-oil/31.jpg", alt: "油畫的草地場景，穿紅色洋裝的女孩躺在草叢中，身旁放著玩偶", sessions: 1 },
+  { course: "石英砂肌理畫", themes: ["山"], date: "2026-11-08", src: "../assets/images/gallery/sand-texture/84.jpg", alt: "石英砂肌理畫的雪山特寫，山腳倒映在水面上", sessions: 1 },
+  { course: "寵物油畫", themes: ["貓咪"], date: "2026-11-08", src: "../assets/images/gallery/pet-portrait/105.jpg", alt: "黑白貓咪肖像油畫，張嘴露出粉色舌頭的瞬間", sessions: 1 },
+  { course: "自選主題油畫", themes: ["節慶／季節"], date: "2026-11-08", src: "../assets/images/gallery/festive/01.jpg", alt: "油畫的聖誕樹特寫，掛著胡桃鉗士兵吊飾與紅色聖誕球", sessions: 2 },
+  { course: "寵物油畫", themes: ["狗狗"], date: "2026-11-08", src: "../assets/images/gallery/pet-portrait/106.jpg", alt: "約克夏混種犬肖像油畫，毛茸茸大耳朵，淺紫色背景，簽名「MeiMei」", sessions: 1 },
+  { course: "刮刀油畫", themes: ["植物花卉"], date: "2026-11-08", src: "../assets/images/gallery/palette-knife-oil/53.jpg", alt: "刮刀油畫的粉色系野花束特寫，紫色與黃色小花點綴其中", sessions: 1 },
+  { course: "自選主題油畫", themes: ["人像"], date: "2026-11-08", src: "../assets/images/gallery/portrait-oil/one-session/44.jpg", alt: "網球選手揮拍瞬間的扁平插畫風格油畫，深綠色背景", sessions: 1 },
+  { course: "自選主題油畫", themes: ["食物"], date: "2026-11-08", src: "../assets/images/gallery/landscape-oil/34.jpg", alt: "油畫的水蜜桃派特寫，奶油上點綴水果丁與水蜜桃切片", sessions: 1 },
+  { course: "自選主題油畫", themes: ["人像"], date: "2026-11-08", src: "../assets/images/gallery/portrait-oil/one-session/45.jpg", alt: "一對情侶在山頂牽手合照的油畫肖像，身穿印有「DTlife49」字樣的黑色上衣", sessions: 1 },
+  { course: "自選主題油畫", themes: ["星空"], date: "2026-11-08", src: "../assets/images/gallery/star-sky/50.jpg", alt: "深藍色螺旋星系油畫特寫", sessions: 1 },
+  { course: "寵物油畫", themes: ["狗狗"], date: "2026-11-08", src: "../assets/images/gallery/pet-portrait/107.jpg", alt: "白色捲毛犬肖像油畫，穿著黃黑條紋上衣，吐舌微笑", sessions: 1 },
+  { course: "寵物油畫", themes: ["貓咪"], date: "2026-11-08", src: "../assets/images/gallery/pet-portrait/108.jpg", alt: "橘色虎斑貓肖像油畫特寫，米白色背景", sessions: 1 },
+  { course: "自選主題油畫", themes: ["風景", "抽象圖案"], date: "2026-11-08", src: "../assets/images/gallery/landscape-oil/33.jpg", alt: "油畫混合少量石英砂堆疊出的立體金色星星，灑落在綠色山坡上，藍天背景", sessions: 1 },
+  { course: "寵物油畫", themes: ["狗狗", "兩隻以上"], date: "2026-11-08", src: "../assets/images/gallery/pet-portrait/109.jpg", alt: "兩隻狗狗肖像油畫，白色捲毛幼犬疊坐在米色成犬頭頂上，淺藍色背景", sessions: 1 },
+  { course: "刮刀油畫", themes: ["植物花卉"], date: "2026-11-08", src: "../assets/images/gallery/palette-knife-oil/56.jpg", alt: "刮刀油畫的灰白色單色花瓶靜物，瓶中插著幾枝白花", sessions: 1 },
+  { course: "自選主題油畫", themes: ["動漫／角色"], date: "2026-11-08", src: "../assets/images/gallery/anime-characters/14.jpg", alt: "原創插畫風格的綠色角色與棕色小狗，手裡拿著愛心信封，黃色背景", sessions: 1 },
+  { course: "自選主題油畫", themes: ["人像"], date: "2026-11-08", src: "../assets/images/gallery/portrait-oil/one-session/46.jpg", alt: "一對情侶的油畫合照，室內暖黃吊燈背景，女生比著YA手勢", sessions: 1 },
+  // 2026-11-08 新增 21 件（folder 202608，另有 1 張純調色杯特寫、沒有
+  // 完成作品入鏡的過程照沒有收進來）。
+  { course: "自選主題油畫", themes: ["海洋生物"], date: "2026-11-08", src: "../assets/images/gallery/sea-oil/37.jpg", alt: "油畫的潛水員特寫，背著氣瓶游過礁岩上方，吐出一串氣泡", sessions: 1 },
+  { course: "自選主題油畫", themes: ["海洋生物"], date: "2026-11-08", src: "../assets/images/gallery/sea-oil/38.jpg", alt: "油畫的自由潛水者背影，踩著蛙鞋向下游，背景由淺藍漸層到深藍", sessions: 1 },
+  { course: "自選主題油畫", themes: ["貓咪", "星空"], date: "2026-11-08", src: "../assets/images/gallery/star-sky/51.jpg", alt: "扁平插畫風格的白貓坐在草地上，紫色夜空背景點綴流星與星星", sessions: 1 },
+  { course: "自選主題油畫", themes: ["人像"], date: "2026-11-08", src: "../assets/images/gallery/portrait-oil/one-session/47.jpg", alt: "古典畫風的天使群像油畫臨摹，多位人物身著飄逸衣袍仰望天空", sessions: 1 },
+  { course: "刮刀油畫", themes: ["山"], date: "2026-11-08", src: "../assets/images/gallery/palette-knife-oil/57.jpg", alt: "刮刀油畫的翠綠山脊特寫，藍天白雲背景", sessions: 1 },
+  { course: "自選主題油畫", themes: ["動漫／角色"], date: "2026-11-08", src: "../assets/images/gallery/anime-characters/15.jpg", alt: "寶可夢火球鼠的油畫作品，趴臥在草地上，背部火焰呈粉橘色，旁邊點綴蘑菇", sessions: 1 },
+  { course: "石英砂肌理畫", themes: ["風景"], date: "2026-11-08", src: "../assets/images/gallery/sand-texture/85.jpg", alt: "石英砂肌理畫的雪梨歌劇院，白色立體屋頂質感，藍色海面背景", sessions: 1 },
+  { course: "自選主題油畫", themes: ["其他動物"], date: "2026-11-08", src: "../assets/images/gallery/other-animals-oil/05.jpg", alt: "狐狸臉部特寫油畫，粉橘色調搭配金箔裝飾", sessions: 1 },
+  { course: "石英砂肌理畫", themes: ["其他動物"], date: "2026-11-08", src: "../assets/images/gallery/sand-texture/86.jpg", alt: "石英砂肌理畫的兔猻（野貓）對著麥克風唱歌的特寫", sessions: 1 },
+  { course: "自選主題油畫", themes: ["其他動物"], date: "2026-11-08", src: "../assets/images/gallery/other-animals-oil/03.jpg", alt: "油畫的紅鶴特寫，粉紅色水面倒影環繞", sessions: 1 },
+  { course: "刮刀油畫", themes: ["植物花卉"], date: "2026-11-08", src: "../assets/images/gallery/palette-knife-oil/58.jpg", alt: "刮刀油畫的白色背景野花草地，粉、白、黃色小花與穀穗錯落其中", sessions: 1 },
+  { course: "自選主題油畫", themes: ["其他動物", "兩隻以上"], date: "2026-11-08", src: "../assets/images/gallery/other-animals-oil/04.jpg", alt: "油畫的兩隻兔子，白色與粉色毛兔依偎在藍綠色雨中草地上", sessions: 1 },
+  { course: "刮刀油畫", themes: ["山", "風景"], date: "2026-11-08", src: "../assets/images/gallery/palette-knife-oil/59.jpg", alt: "刮刀油畫的針葉林山景特寫，深淺綠色堆疊出樹叢質感", sessions: 1 },
+  { course: "寵物油畫", themes: ["狗狗"], date: "2026-11-08", src: "../assets/images/gallery/pet-portrait/110.jpg", alt: "奔跑中的白色梗犬油畫，側面剪影姿態，薄荷綠背景", sessions: 1 },
+  { course: "自選主題油畫", themes: ["海邊"], date: "2026-11-08", src: "../assets/images/gallery/sea-oil/39.jpg", alt: "油畫的海岸礁石景色，粉橘色夕陽天空，海面籠罩著薄霧", sessions: 1 },
+  { course: "寵物油畫", themes: ["狗狗"], date: "2026-11-08", src: "../assets/images/gallery/pet-portrait/111.jpg", alt: "黃金獵犬肖像油畫特寫，淺藍色背景，接近完成階段", sessions: 1 },
+  { course: "石英砂肌理畫", themes: ["狗狗"], date: "2026-11-08", src: "../assets/images/gallery/sand-texture/87.jpg", alt: "兩幅並列的白色毛絨狗狗肌理畫，分別是粉色與藍色背景", sessions: 1 },
+  { course: "石英砂肌理畫", themes: ["海邊"], date: "2026-11-08", src: "../assets/images/gallery/sand-texture/88.jpg", alt: "石英砂肌理畫的海面場景，白色人影沒入藍綠色水中", sessions: 1 },
+  { course: "石英砂肌理畫", themes: ["植物花卉"], date: "2026-11-08", src: "../assets/images/gallery/sand-texture/89.jpg", alt: "石英砂肌理畫的白色梅花枝特寫，黑色背景襯托立體花瓣質感", sessions: 1 },
+  { course: "自選主題油畫", themes: ["風景"], date: "2026-11-08", src: "../assets/images/gallery/landscape-oil/32.jpg", alt: "油畫的鄉間長型建築與道路景色，前景有一棵大樹", sessions: 1 },
+  { course: "寵物油畫", themes: ["狗狗"], date: "2026-11-08", src: "../assets/images/gallery/pet-portrait/112.jpg", alt: "白色馬爾濟斯肖像油畫，身穿粉色草莓圖案外套", sessions: 1 },
 ];
 
 // 課程篩選鈕的選項清單，跟首頁「課程」選單、faq.html 裡提到的課程名稱
@@ -882,4 +984,5 @@ window.GALLERY_THEMES = [
   "項鍊",
   "手鏈",
   "戒指",
+  "車子",
 ];

@@ -2193,6 +2193,13 @@ h1.chapter__title {
   margin-top: var(--space-10);
 }
 
+/* 2026-11-08 新增：區塊開頭的標題＋一句話說明置中，給「想畫兩隻以上」
+   這種前面只有一句引導句、後面接的才是真正內文段落的情況用，不是整個
+   .chapter__block 都置中（後面的內文段落還是靠左排版）。 */
+.chapter__block--center {
+  text-align: center;
+}
+
 .chapter__statement {
   margin: var(--space-4) 0;
   /* 拿掉原本這裡跨字級換算 ch 值的做法（40ch/34ch 那套），理由同
@@ -2209,6 +2216,32 @@ h1.chapter__title {
    用比標題淡一點的次要色，不跟標題本身搶視覺重量。 */
 .chapter__statement-count {
   font-weight: 400;
+  color: var(--color-text-secondary);
+}
+
+/* 2026-11-08 使用者反映「學員作品」底下再分「狗狗」「貓咪」兩個
+   子分類時，三個標題字級一樣大，看起來像三個平行的標題，分不出主從
+   關係。加這個修飾類別給子分類用，字級縮小一階（對應 --font-size-sm，
+   跟全站本文同一階），維持原本的字重，視覺上明顯比上層的
+   .chapter__statement 小一號，一看就知道是底下的子分類，不是跟它
+   平行的另一個大標題。 */
+.chapter__statement--sub {
+  font-size: var(--font-size-sm);
+  margin-top: var(--space-6);
+}
+
+/* 2026-11-08 使用者反映頁面裡有些標題在圖片「上面」（先講一段話，
+   底下再放照片佐證），有些標題在圖片「下面／旁邊」（.ent-feature 裡
+   照片在前、標題+說明在後，手機版會疊成照片在上、標題在下）——兩種
+   排法混在同一頁，光看字級分不出這個標題是在講上面那張照片，還是在
+   開啟下面新的一段內容。這個修飾類別給「搭配單一張／單組照片的標題」
+   用，字級縮小、改用次要色、拿掉原本置頂的留白，視覺上明顯比開啟新
+   段落的 .chapter__statement 輕一號，讀的時候會直覺當成跟它黏在一起
+   的照片說明，不會誤會成下一段的大標題。 */
+.chapter__statement--caption {
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  margin: 0;
   color: var(--color-text-secondary);
 }
 
