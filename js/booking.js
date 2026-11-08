@@ -200,11 +200,13 @@
   }
 
   document.getElementById('booking-extra-pets').addEventListener('input',updateTotal);
+  document.getElementById('booking-extra-small-pets').addEventListener('input',updateTotal);
   function updateTotal() {
     const addon=document.getElementById('booking-extra-pets');
-    const hasPet=attendeeSelections.some(c=>String(c).startsWith('寵物油畫'));
+    const hasPet=attendeeSelections.includes('寵物油畫－大寵');
+    const small=document.getElementById('booking-extra-small-pets');small.disabled=!attendeeSelections.includes('寵物油畫－小寵');if(small.disabled)small.value='0';
     addon.disabled=!hasPet;if(!hasPet)addon.value='0';
-    const sum = Number(addon.value||0)*700+attendeeSelections.reduce((total, course) => total + (COURSE_PRICE[course] || 0), 0);
+    const sum = Number(addon.value||0)*700+Number(small.value||0)*500+attendeeSelections.reduce((total, course) => total + (COURSE_PRICE[course] || 0), 0);
     const deposit = Math.min(DEPOSIT_AMOUNT, sum);
     totalPriceEl.textContent = formatMoney(sum);
     totalDepositEl.textContent = formatMoney(deposit);
@@ -485,6 +487,7 @@
       slotId: slotIdInput.value,
       courses: attendeeSelections.slice(),
       extraPets:Number(document.getElementById('booking-extra-pets').value||0),
+      extraSmallPets:Number(document.getElementById('booking-extra-small-pets').value||0),
       qty,
       name: document.getElementById("booking-name").value.trim(),
       contact: document.getElementById("booking-contact").value.trim(),
