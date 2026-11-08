@@ -213,13 +213,15 @@
   const petConsent=document.getElementById('pet-addon-consent');petConsent.addEventListener('change',updateTotal);
   function petExtraTotals(){return attendeeSelections.reduce((result,c,i)=>{if(c==='寵物油畫－大寵')result.big+=Number(attendeeExtras[i]||0);if(c==='寵物油畫－小寵')result.small+=Number(attendeeExtras[i]||0);return result;},{big:0,small:0});}
   function updateTotal() {
-    const hasPet=attendeeSelections.some(c=>c==='寵物油畫－大寵'||c==='寵物油畫－小寵');
+    const hasPet=attendeeExtras.some((n,i)=>Number(n)>0&&String(attendeeSelections[i]||'').startsWith('寵物油畫'));
     const notice=document.getElementById('pet-addon-notice');notice.hidden=!hasPet;notice.style.display=hasPet?'block':'none';
     const eligible=i=>Number(attendeeExtras[i])>1 && String(attendeeSelections[i]||'').startsWith('寵物油畫');
-    const noticeIndex=activePetAddonIndex!==null&&eligible(activePetAddonIndex)?activePetAddonIndex:attendeeExtras.findIndex((n,i)=>eligible(i));
+    const thirdIndex=attendeeExtras.findIndex((n,i)=>eligible(i));
+    const noticeIndex=activePetAddonIndex!==null&&eligible(activePetAddonIndex)?activePetAddonIndex:thirdIndex>=0?thirdIndex:activePetAddonIndex!==null&&Number(attendeeExtras[activePetAddonIndex])>0?activePetAddonIndex:attendeeExtras.findIndex(n=>Number(n)>0);
     const row=noticeIndex>=0?attendeeCoursesEl.children[noticeIndex]:null;
     if(row)row.append(notice);else attendeeCoursesEl.after(notice);
     const needs=attendeeExtras.some((n,i)=>Number(n)>1 && String(attendeeSelections[i]||'').startsWith('寵物油畫'));
+    notice.querySelectorAll('.pet-third-note').forEach(el=>{el.hidden=!needs;el.style.display=needs?'list-item':'none';});
     const consentLabel=document.getElementById('pet-addon-consent-label');consentLabel.hidden=!needs;consentLabel.style.display=needs?'flex':'none';petConsent.required=needs;consentLabel.classList.toggle('is-required',needs&&!petConsent.checked);petConsent.setAttribute('aria-invalid',String(needs&&!petConsent.checked));
     if(!needs)petConsent.checked=false;
     petConsent.setCustomValidity(needs&&!petConsent.checked?'追加至第3隻前，請閱讀注意事項並勾選確認。':'');
