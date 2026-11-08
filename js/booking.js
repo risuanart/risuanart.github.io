@@ -199,13 +199,19 @@
     updateSubmitState();
   }
 
+  document.querySelectorAll('.pet-addon-consent').forEach(el=>el.addEventListener('change',updateTotal));
   document.getElementById('booking-extra-pets').addEventListener('input',updateTotal);
   document.getElementById('booking-extra-small-pets').addEventListener('input',updateTotal);
   function updateTotal() {
-    const addon=document.getElementById('booking-extra-pets');
-    const hasPet=attendeeSelections.includes('寵物油畫－大寵');
-    const small=document.getElementById('booking-extra-small-pets');small.disabled=!attendeeSelections.includes('寵物油畫－小寵');small.closest('.booking-pet-addon').hidden=small.disabled;small.closest('.booking-pet-addon').style.display=small.disabled?'none':'flex';if(small.disabled)small.value='0';
-    addon.disabled=!hasPet;addon.closest('.booking-pet-addon').hidden=!hasPet;addon.closest('.booking-pet-addon').style.display=hasPet?'flex':'none';if(!hasPet)addon.value='0';
+    const addon=document.getElementById('booking-extra-pets'),small=document.getElementById('booking-extra-small-pets');
+    for(const [input,course] of [[addon,'寵物油畫－大寵'],[small,'寵物油畫－小寵']]) {
+      const area=input.closest('.booking-pet-addon'),consent=area.querySelector('.pet-addon-consent');
+      const count=attendeeSelections.filter(c=>c===course).length;
+      area.hidden=!count;area.style.display=count?'flex':'none';
+      if(!count)consent.checked=false;
+      input.max=String(count*2);input.disabled=!count||!consent.checked;
+      if(input.disabled)input.value='0';
+    }
     const sum = Number(addon.value||0)*700+Number(small.value||0)*500+attendeeSelections.reduce((total, course) => total + (COURSE_PRICE[course] || 0), 0);
     const deposit = Math.min(DEPOSIT_AMOUNT, sum);
     totalPriceEl.textContent = formatMoney(sum);
@@ -487,6 +493,7 @@
       slotId: slotIdInput.value,
       courses: attendeeSelections.slice(),
       extraPets:Number(document.getElementById('booking-extra-pets').value||0),
+      petAddonConsent:Array.from(document.querySelectorAll('.booking-pet-addon')).filter(el=>!el.hidden).every(el=>el.querySelector('.pet-addon-consent').checked),
       extraSmallPets:Number(document.getElementById('booking-extra-small-pets').value||0),
       qty,
       name: document.getElementById("booking-name").value.trim(),
