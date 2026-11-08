@@ -627,3 +627,5 @@ ul.booking-payment-note { box-sizing:border-box; padding-left:1.3em; list-style:
   #booking-form .booking-payment-note li::before { content:"•"; margin-right:0.5em; }
   #booking-form .checkout-error { margin-inline:auto; text-align:center; }
 }
+
+.booking-pet-addon__note { display:block; color:var(--color-text-secondary); font-size:var(--font-size-xs); line-height:1.7; }
