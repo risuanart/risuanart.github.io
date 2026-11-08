@@ -610,3 +610,9 @@
 ul.booking-payment-note { box-sizing:border-box; padding-left:1.3em; list-style:disc outside; text-align:left; }
 .booking-payment-note li { display:list-item; padding-left:0.15em; }
 .booking-payment-note li + li { margin-top:var(--space-2); }
+
+/* 付款操作接在金額與注意事項之後。 */
+#booking-form > .work__close { display:flex; flex-direction:column; align-items:stretch; }
+#booking-form > .work__close .work__close-text { flex:0 0 auto; }
+#booking-submit { align-self:flex-end; margin-top:var(--space-4); }
+@media(max-width:767px) { #booking-submit { align-self:center; max-width:100%; } }
