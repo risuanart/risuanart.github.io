@@ -124,6 +124,7 @@
       btn.setAttribute("aria-pressed", c.label === currentValue ? "true" : "false");
       btn.innerHTML = `<span>${c.label}</span><span class="price-text">${formatMoney(c.price)}</span>`;
       btn.addEventListener("click", () => {
+        if(attendeeSelections[activeAttendeeIndex]!==c.label){attendeeExtras[activeAttendeeIndex]=0;document.getElementById('pet-addon-consent').checked=false;}
         attendeeSelections[activeAttendeeIndex] = c.label;
         closeCoursePickerSheet();
         renderAttendeeCourses();
@@ -160,6 +161,7 @@
   // 記住已經選好的值，人數變動重新產生列表時盡量保留（例如 3 人改成
   // 4 人，前 3 人已選的課程不用重選；4 人改成 2 人，多出來的直接捨棄）。
   let attendeeSelections = [];
+  let attendeeExtras = [];
   // ?course=slug 帶入的預選值（見 COURSE_SLUG_DEFAULT），只套用在人數
   // 還沒被使用者自己改過的第一次渲染。
   let presetCourse = null;
@@ -182,6 +184,12 @@
       </button>
     `;
     row.querySelector(".attendee-course-picker").addEventListener("click", () => openCoursePickerSheet(i));
+    if(existing==='寵物油畫－大寵'||existing==='寵物油畫－小寵') {
+      const label=document.createElement('label');label.className='confirm-field booking-pet-addon';
+      const price=existing==='寵物油畫－大寵'?700:500;
+      label.append(document.createTextNode(`第${i+1}位追加隻數（每隻 $${price}，不增加上課人數）`));
+      const control=document.createElement('span');control.className='confirm-field__control';const input=document.createElement('input');input.type='number';input.min='0';input.max='2';input.step='1';input.value=String(attendeeExtras[i]||0);input.setAttribute('aria-label',`第${i+1}位追加隻數`);input.addEventListener('input',()=>{attendeeExtras[i]=Number(input.value||0);updateTotal();});control.append(input);label.append(control);row.append(label);
+    }
     return row;
   }
 
@@ -194,28 +202,22 @@
       next.push(existing);
       attendeeCoursesEl.appendChild(renderAttendeeCourseRow(i, existing));
     }
-    attendeeSelections = next;
+    attendeeSelections = next;attendeeExtras.length=qty;
     updateTotal();
     updateSubmitState();
   }
 
-  document.querySelectorAll('.pet-addon-consent').forEach(el=>el.addEventListener('change',updateTotal));
-  document.getElementById('booking-extra-pets').addEventListener('input',updateTotal);
-  document.getElementById('booking-extra-small-pets').addEventListener('input',updateTotal);
+  const petConsent=document.getElementById('pet-addon-consent');petConsent.addEventListener('change',updateTotal);
+  function petExtraTotals(){return attendeeSelections.reduce((result,c,i)=>{if(c==='寵物油畫－大寵')result.big+=Number(attendeeExtras[i]||0);if(c==='寵物油畫－小寵')result.small+=Number(attendeeExtras[i]||0);return result;},{big:0,small:0});}
   function updateTotal() {
-    const addon=document.getElementById('booking-extra-pets'),small=document.getElementById('booking-extra-small-pets');
-    for(const [input,course] of [[addon,'寵物油畫－大寵'],[small,'寵物油畫－小寵']]) {
-      const area=input.closest('.booking-pet-addon'),consent=area.querySelector('.pet-addon-consent');
-      const count=attendeeSelections.filter(c=>c===course).length;
-      area.hidden=!count;area.style.display=count?'flex':'none';
-      if(!count)consent.checked=false;
-      input.max=String(count*2);input.disabled=!count;
-      if(input.disabled)input.value='0';
-      const needs=Number(input.value)>count;
-      consent.closest('label').hidden=!needs;consent.closest('label').style.display=needs?'flex':'none';consent.required=needs;
-      consent.setCustomValidity(needs&&!consent.checked?'追加至第3隻前，請閱讀注意事項並勾選確認。':'');
-    }
-    const sum = Number(addon.value||0)*700+Number(small.value||0)*500+attendeeSelections.reduce((total, course) => total + (COURSE_PRICE[course] || 0), 0);
+    const hasPet=attendeeSelections.some(c=>c==='寵物油畫－大寵'||c==='寵物油畫－小寵');
+    const notice=document.getElementById('pet-addon-notice');notice.hidden=!hasPet;notice.style.display=hasPet?'block':'none';
+    const needs=attendeeExtras.some((n,i)=>Number(n)>1 && String(attendeeSelections[i]||'').startsWith('寵物油畫'));
+    const consentLabel=document.getElementById('pet-addon-consent-label');consentLabel.hidden=!needs;consentLabel.style.display=needs?'flex':'none';petConsent.required=needs;
+    if(!needs)petConsent.checked=false;
+    petConsent.setCustomValidity(needs&&!petConsent.checked?'追加至第3隻前，請閱讀注意事項並勾選確認。':'');
+    const totals=petExtraTotals();
+    const sum=totals.big*700+totals.small*500+attendeeSelections.reduce((total,course)=>total+(COURSE_PRICE[course]||0),0);
     const deposit = Math.min(DEPOSIT_AMOUNT, sum);
     totalPriceEl.textContent = formatMoney(sum);
     totalDepositEl.textContent = formatMoney(deposit);
@@ -495,9 +497,10 @@
     const payload = {
       slotId: slotIdInput.value,
       courses: attendeeSelections.slice(),
-      extraPets:Number(document.getElementById('booking-extra-pets').value||0),
-      petAddonConsent:Array.from(document.querySelectorAll('.booking-pet-addon')).filter(el=>!el.hidden).every(el=>{const c=el.querySelector('.pet-addon-consent');return !c.required||c.checked;}),
-      extraSmallPets:Number(document.getElementById('booking-extra-small-pets').value||0),
+      extraPets:petExtraTotals().big,
+      extraSmallPets:petExtraTotals().small,
+      attendeeExtras:attendeeSelections.map((c,i)=>String(c).startsWith('寵物油畫')?Number(attendeeExtras[i]||0):0),
+      petAddonConsent:!petConsent.required||petConsent.checked,
       qty,
       name: document.getElementById("booking-name").value.trim(),
       contact: document.getElementById("booking-contact").value.trim(),
