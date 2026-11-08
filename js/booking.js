@@ -199,8 +199,12 @@
     updateSubmitState();
   }
 
+  document.getElementById('booking-extra-pets').addEventListener('input',updateTotal);
   function updateTotal() {
-    const sum = attendeeSelections.reduce((total, course) => total + (COURSE_PRICE[course] || 0), 0);
+    const addon=document.getElementById('booking-extra-pets');
+    const hasPet=attendeeSelections.some(c=>String(c).startsWith('寵物油畫'));
+    addon.disabled=!hasPet;if(!hasPet)addon.value='0';
+    const sum = Number(addon.value||0)*700+attendeeSelections.reduce((total, course) => total + (COURSE_PRICE[course] || 0), 0);
     const deposit = Math.min(DEPOSIT_AMOUNT, sum);
     totalPriceEl.textContent = formatMoney(sum);
     totalDepositEl.textContent = formatMoney(deposit);
@@ -480,6 +484,7 @@
     const payload = {
       slotId: slotIdInput.value,
       courses: attendeeSelections.slice(),
+      extraPets:Number(document.getElementById('booking-extra-pets').value||0),
       qty,
       name: document.getElementById("booking-name").value.trim(),
       contact: document.getElementById("booking-contact").value.trim(),
