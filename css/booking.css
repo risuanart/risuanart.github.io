@@ -605,3 +605,8 @@
 
 #booking-form > .confirm-checkbox span { min-width:0; white-space:normal; overflow-wrap:break-word; }
 #booking-form > .confirm-checkbox input { flex:0 0 16px; margin-top:0.25em; }
+
+/* 付款注意事項逐點呈現，續行對齊文字。 */
+ul.booking-payment-note { box-sizing:border-box; padding-left:1.3em; list-style:disc outside; text-align:left; }
+.booking-payment-note li { display:list-item; padding-left:0.15em; }
+.booking-payment-note li + li { margin-top:var(--space-2); }
