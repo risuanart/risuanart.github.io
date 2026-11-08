@@ -485,6 +485,12 @@
    補上同一組內距讓勾選框對齊上方表單欄位，不是全站 .confirm-checkbox
    的通用問題（cart.html 的勾選框都包在 .chapter 裡，不受影響）。 */
 #booking-form > .confirm-checkbox {
+  width: 100%;
+  max-width: var(--content-max-width);
+  box-sizing: border-box;
+  margin-left: auto;
+  margin-right: auto;
+  align-items: flex-start;
   margin-top: var(--editorial-gap);
   padding-left: var(--content-pad);
   padding-right: var(--content-pad);
@@ -596,3 +602,6 @@
 #booking-form > .work__close { flex-wrap:wrap; }
 #booking-form > .work__close .work__close-text { flex:1 1 100%; width:100%; min-width:0; max-width:none; }
 .booking-pet-addon input[type="number"] { width:100%; min-width:0; }
+
+#booking-form > .confirm-checkbox span { min-width:0; white-space:normal; overflow-wrap:break-word; }
+#booking-form > .confirm-checkbox input { flex:0 0 16px; margin-top:0.25em; }
