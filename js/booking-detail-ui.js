@@ -19,7 +19,8 @@
   function bookingStatusText(b) {
     if (b.status === "cancelled") return "已取消";
     if (b.cancelRequestedAt) return "取消申請處理中";
-    return BOOKING_STATUS_LABEL[b.status] || b.status;
+    const label = BOOKING_STATUS_LABEL[b.status] || b.status;
+    return Number(b.rescheduleCount || 0) > 0 ? `${label} · 已改期 ${Number(b.rescheduleCount)} 次` : label;
   }
 
   // 已取消、或已經送出取消申請的預約，不用再打改期選項那支 API——
@@ -39,6 +40,7 @@
   }
 
   function renderBookingDetail(container, b, rescheduleData) {
+    const historyHtml = (b.rescheduleHistory || []).filter(h => h.action !== 'hold').map(h => `<p class="account-booking-item__msg">${escapeHtml(h.date)} ${escapeHtml(h.time)} → ${escapeHtml(h.newDate)} ${escapeHtml(h.newTime)}</p>`).join('');
     const policyHtml = `<p class="account-booking-item__policy ${rescheduleData.eligible ? "" : "is-blocked"}">${escapeHtml(rescheduleData.reason)}</p>`;
     const slotsHtml = rescheduleData.eligible
       ? rescheduleData.options.length
@@ -71,7 +73,7 @@
         </div>
       </div>
     `;
-    container.innerHTML = `${policyHtml}${slotsHtml}${cancelHtml}<p class="account-booking-item__msg" hidden></p>`;
+    container.innerHTML = `${historyHtml}${policyHtml}${slotsHtml}${cancelHtml}<p class="account-booking-item__msg" hidden></p>`;
   }
 
   window.BookingDetailUI = { escapeHtml, bookingStatusText, renderBookingDetailStatic, renderBookingDetail };
