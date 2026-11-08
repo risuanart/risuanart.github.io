@@ -14,7 +14,7 @@
     return String(str || "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   }
 
-  const BOOKING_STATUS_LABEL = { confirmed: "已確認", cancelled: "已取消" };
+  const BOOKING_STATUS_LABEL = { confirmed: "已確認", cancelled: "已取消", pending_reschedule: "待安排新日期" };
 
   function bookingStatusText(b) {
     if (b.status === "cancelled") return "已取消";
@@ -26,6 +26,7 @@
   // 結果一定是「不符合資格」，省一次網路往返，直接顯示固定文字。
   // 回傳 true 代表「已經處理完，不用再打 API 查資格」。
   function renderBookingDetailStatic(container, b) {
+    if (b.status === "pending_reschedule") { container.innerHTML = `<p class="account-booking-item__msg">這筆預約已保留資料，原時段座位已釋出，待與畫室確認新日期。</p>`; return true; }
     if (b.status === "cancelled") {
       container.innerHTML = `<p class="account-booking-item__msg">這筆預約已經取消。</p>`;
       return true;
