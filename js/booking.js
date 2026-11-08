@@ -162,6 +162,7 @@
   // 4 人，前 3 人已選的課程不用重選；4 人改成 2 人，多出來的直接捨棄）。
   let attendeeSelections = [];
   let attendeeExtras = [];
+  let activePetAddonIndex = null;
   // ?course=slug 帶入的預選值（見 COURSE_SLUG_DEFAULT），只套用在人數
   // 還沒被使用者自己改過的第一次渲染。
   let presetCourse = null;
@@ -188,13 +189,15 @@
       const label=document.createElement('label');label.className='confirm-field booking-pet-addon';
       const price=existing==='寵物油畫－大寵'?700:500;
       label.append(document.createTextNode(`第${i+1}位追加隻數（每隻 $${price}，不增加上課人數）`));
-      const control=document.createElement('span');control.className='confirm-field__control';const input=document.createElement('input');input.type='number';input.min='0';input.max='2';input.step='1';input.value=String(attendeeExtras[i]||0);input.setAttribute('aria-label',`第${i+1}位追加隻數`);input.addEventListener('input',()=>{attendeeExtras[i]=Number(input.value||0);updateTotal();});control.append(input);label.append(control);row.append(label);
+      const control=document.createElement('span');control.className='confirm-field__control';const input=document.createElement('input');input.type='number';input.min='0';input.max='2';input.step='1';input.value=String(attendeeExtras[i]||0);input.setAttribute('aria-label',`第${i+1}位追加隻數`);input.addEventListener('input',()=>{activePetAddonIndex=i;attendeeExtras[i]=Number(input.value||0);updateTotal();});control.append(input);label.append(control);row.append(label);
     }
     return row;
   }
 
   function renderAttendeeCourses() {
     const qty = currentQty();
+    const sharedNotice=document.getElementById('pet-addon-notice');
+    if(sharedNotice)attendeeCoursesEl.after(sharedNotice);
     attendeeCoursesEl.innerHTML = "";
     const next = [];
     for (let i = 0; i < qty; i++) {
@@ -212,6 +215,10 @@
   function updateTotal() {
     const hasPet=attendeeSelections.some(c=>c==='寵物油畫－大寵'||c==='寵物油畫－小寵');
     const notice=document.getElementById('pet-addon-notice');notice.hidden=!hasPet;notice.style.display=hasPet?'block':'none';
+    const eligible=i=>Number(attendeeExtras[i])>1 && String(attendeeSelections[i]||'').startsWith('寵物油畫');
+    const noticeIndex=activePetAddonIndex!==null&&eligible(activePetAddonIndex)?activePetAddonIndex:attendeeExtras.findIndex((n,i)=>eligible(i));
+    const row=noticeIndex>=0?attendeeCoursesEl.children[noticeIndex]:null;
+    if(row)row.append(notice);else attendeeCoursesEl.after(notice);
     const needs=attendeeExtras.some((n,i)=>Number(n)>1 && String(attendeeSelections[i]||'').startsWith('寵物油畫'));
     const consentLabel=document.getElementById('pet-addon-consent-label');consentLabel.hidden=!needs;consentLabel.style.display=needs?'flex':'none';petConsent.required=needs;consentLabel.classList.toggle('is-required',needs&&!petConsent.checked);petConsent.setAttribute('aria-invalid',String(needs&&!petConsent.checked));
     if(!needs)petConsent.checked=false;
