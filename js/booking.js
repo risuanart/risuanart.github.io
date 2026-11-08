@@ -213,7 +213,7 @@
     const hasPet=attendeeSelections.some(c=>c==='寵物油畫－大寵'||c==='寵物油畫－小寵');
     const notice=document.getElementById('pet-addon-notice');notice.hidden=!hasPet;notice.style.display=hasPet?'block':'none';
     const needs=attendeeExtras.some((n,i)=>Number(n)>1 && String(attendeeSelections[i]||'').startsWith('寵物油畫'));
-    const consentLabel=document.getElementById('pet-addon-consent-label');consentLabel.hidden=!needs;consentLabel.style.display=needs?'flex':'none';petConsent.required=needs;
+    const consentLabel=document.getElementById('pet-addon-consent-label');consentLabel.hidden=!needs;consentLabel.style.display=needs?'flex':'none';petConsent.required=needs;consentLabel.classList.toggle('is-required',needs&&!petConsent.checked);petConsent.setAttribute('aria-invalid',String(needs&&!petConsent.checked));
     if(!needs)petConsent.checked=false;
     petConsent.setCustomValidity(needs&&!petConsent.checked?'追加至第3隻前，請閱讀注意事項並勾選確認。':'');
     const totals=petExtraTotals();

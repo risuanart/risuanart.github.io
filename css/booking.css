@@ -633,3 +633,8 @@ ul.booking-payment-note { box-sizing:border-box; padding-left:1.3em; list-style:
 .booking-pet-addon__note { padding-left:1.3em; list-style:disc outside; margin:var(--space-2) 0; }
 .booking-pet-addon__note li + li { margin-top:0.4em; }
 .booking-pet-addon .confirm-checkbox input { width:16px; height:16px; flex:0 0 16px; }
+
+/* 第三隻未確認時沿用早鳥優惠磚紅色，勾選後復原。 */
+#pet-addon-consent-label.is-required { color:var(--color-warning); }
+#pet-addon-consent-label.is-required input { appearance:none; -webkit-appearance:none; width:18px; height:18px; flex:0 0 18px; border:2px solid var(--color-warning); border-radius:2px; background:color-mix(in srgb,var(--color-warning) 8%,transparent); }
+#pet-addon-consent-label.is-required input:focus-visible { outline:2px solid var(--color-warning); outline-offset:3px; }
