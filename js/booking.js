@@ -209,8 +209,11 @@
       const count=attendeeSelections.filter(c=>c===course).length;
       area.hidden=!count;area.style.display=count?'flex':'none';
       if(!count)consent.checked=false;
-      input.max=String(count*2);input.disabled=!count||!consent.checked;
+      input.max=String(count*2);input.disabled=!count;
       if(input.disabled)input.value='0';
+      const needs=Number(input.value)>count;
+      consent.closest('label').hidden=!needs;consent.closest('label').style.display=needs?'flex':'none';consent.required=needs;
+      consent.setCustomValidity(needs&&!consent.checked?'追加至第3隻前，請閱讀注意事項並勾選確認。':'');
     }
     const sum = Number(addon.value||0)*700+Number(small.value||0)*500+attendeeSelections.reduce((total, course) => total + (COURSE_PRICE[course] || 0), 0);
     const deposit = Math.min(DEPOSIT_AMOUNT, sum);
@@ -493,7 +496,7 @@
       slotId: slotIdInput.value,
       courses: attendeeSelections.slice(),
       extraPets:Number(document.getElementById('booking-extra-pets').value||0),
-      petAddonConsent:Array.from(document.querySelectorAll('.booking-pet-addon')).filter(el=>!el.hidden).every(el=>el.querySelector('.pet-addon-consent').checked),
+      petAddonConsent:Array.from(document.querySelectorAll('.booking-pet-addon')).filter(el=>!el.hidden).every(el=>{const c=el.querySelector('.pet-addon-consent');return !c.required||c.checked;}),
       extraSmallPets:Number(document.getElementById('booking-extra-small-pets').value||0),
       qty,
       name: document.getElementById("booking-name").value.trim(),
