@@ -124,7 +124,7 @@
       btn.setAttribute("aria-pressed", c.label === currentValue ? "true" : "false");
       btn.innerHTML = `<span>${c.label}</span><span class="price-text">${formatMoney(c.price)}</span>`;
       btn.addEventListener("click", () => {
-        if(attendeeSelections[activeAttendeeIndex]!==c.label){attendeeExtras[activeAttendeeIndex]=0;document.getElementById('pet-addon-consent').checked=false;}
+        if(attendeeSelections[activeAttendeeIndex]!==c.label){attendeeExtras[activeAttendeeIndex]=0;}
         attendeeSelections[activeAttendeeIndex] = c.label;
         closeCoursePickerSheet();
         renderAttendeeCourses();
@@ -223,7 +223,7 @@
     const needs=attendeeExtras.some((n,i)=>Number(n)>1 && String(attendeeSelections[i]||'').startsWith('寵物油畫'));
     notice.querySelectorAll('.pet-third-note').forEach(el=>{el.hidden=!needs;el.style.display=needs?'list-item':'none';});
     const consentLabel=document.getElementById('pet-addon-consent-label');consentLabel.hidden=!needs;consentLabel.style.display=needs?'flex':'none';petConsent.required=needs;consentLabel.classList.toggle('is-required',needs&&!petConsent.checked);petConsent.setAttribute('aria-invalid',String(needs&&!petConsent.checked));
-    if(!needs)petConsent.checked=false;
+    // 同一筆預約已閱讀的共用提醒持續有效，不因其他學員改選而取消。
     petConsent.setCustomValidity(needs&&!petConsent.checked?'追加至第3隻前，請閱讀注意事項並勾選確認。':'');
     const totals=petExtraTotals();
     const sum=totals.big*700+totals.small*500+attendeeSelections.reduce((total,course)=>total+(COURSE_PRICE[course]||0),0);
