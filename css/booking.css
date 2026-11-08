@@ -441,8 +441,14 @@
   font-weight: 700;
 }
 .booking-payment-note {
-  max-width: 50ch;
-  margin: var(--space-2) 0 0 auto;
+  width: 100%;
+  max-width: none;
+  min-width: 0;
+  white-space: normal;
+  word-break: normal;
+  overflow-wrap: break-word;
+  text-wrap: wrap;
+  margin: var(--space-2) 0 0;
   color: var(--color-text-secondary);
   font-size: var(--font-size-xs);
   line-height: 1.7;
@@ -584,3 +590,9 @@
   flex: 1 1 auto;
   justify-content: center;
 }
+
+/* 加購依課程顯示，付款說明使用整個內容寬度自然換行。 */
+.booking-pet-addon[hidden] { display:none !important; }
+#booking-form > .work__close { flex-wrap:wrap; }
+#booking-form > .work__close .work__close-text { flex:1 1 100%; width:100%; min-width:0; max-width:none; }
+.booking-pet-addon input[type="number"] { width:100%; min-width:0; }
