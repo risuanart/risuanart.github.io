@@ -188,8 +188,10 @@
     if(existing==='寵物油畫－大寵'||existing==='寵物油畫－小寵') {
       const label=document.createElement('label');label.className='confirm-field booking-pet-addon';
       const price=existing==='寵物油畫－大寵'?700:500;
-      label.append(document.createTextNode(`第${i+1}位寵物總隻數（含原本1隻，每追加1隻 $${price}）`));
-      const control=document.createElement('span');control.className='confirm-field__control';const input=document.createElement('input');input.type='number';input.min='1';input.max='3';input.step='1';input.value=String(Number(attendeeExtras[i]||0)+1);input.setAttribute('aria-label',`第${i+1}位寵物總隻數`);input.addEventListener('input',()=>{activePetAddonIndex=i;attendeeExtras[i]=Number(input.value||1)-1;updateTotal();});control.append(input);label.append(control);row.append(label);
+      label.append(document.createTextNode(`第${i+1}位追加隻數（每隻 $${price}，最多追加2隻）`));
+      const control=document.createElement('span');control.className='confirm-field__control';const input=document.createElement('input');input.type='number';input.min='0';input.max='2';input.step='1';input.value=String(Number(attendeeExtras[i]||0));input.setAttribute('aria-label',`第${i+1}位追加隻數`);input.addEventListener('input',()=>{activePetAddonIndex=i;attendeeExtras[i]=Number(input.value||0);updateAddonPrice();updateTotal();});const addonPrice=document.createElement('span');addonPrice.className='price-text booking-addon-price';addonPrice.setAttribute('aria-live','polite');
+      function updateAddonPrice(){const n=Number(input.value||0);addonPrice.textContent=n>0?`加購 +${formatMoney(n*price)}`:'加購 $0';}
+      updateAddonPrice();control.append(input,addonPrice);label.append(control);row.append(label);
     }
     return row;
   }

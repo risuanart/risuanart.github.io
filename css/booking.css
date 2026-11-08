@@ -645,3 +645,6 @@ ul.booking-payment-note { box-sizing:border-box; padding-left:1.3em; list-style:
   #pet-addon-consent-label .pet-consent-short { display:inline; white-space:nowrap; font-size:var(--font-size-sm); letter-spacing:normal; }
   #pet-addon-consent-label { gap:var(--space-2); }
 }
+
+.booking-addon-price { flex:0 0 auto; white-space:nowrap; color:var(--color-text-secondary); }
+.booking-pet-addon .confirm-field__control input { flex:1 1 auto; width:0; min-width:0; }
