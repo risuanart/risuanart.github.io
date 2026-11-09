@@ -77,9 +77,16 @@
   // 小縮圖，點了就直接換主圖＋更新 .variant-select 的值（給「加入購物
   // 車」讀取），不用整頁跳轉。只有 2 個以上色號的商品才輸出這排（單一
   // 配色的商品只有一個選項，點了也沒有變化，不需要這排 UI）。
-  function swatchesHTML(variants, cart) {
-    if (!variants || variants.length < 2) return "";
-    const chips = variants
+  function swatchesHTML(key, variants, cart) {
+    // 2026-11-09：extraKeys 是「同一張卡片上，除了自己本來的色票，還要
+    // 多顯示哪些其他商品鍵」（見 cart.js CARD_EXTRA_VARIANTS 的說明），
+    // 例如鉑金／香檳銀單色卡片上多一顆「雙色組」縮圖，點了會把整張卡片
+    // 切換成另一個商品鍵（價錢、縮圖、加入購物車目標都跟著換），不是
+    // 單純換色票文字，用 data-swatch-product 跟原本的 data-swatch-scheme
+    // 區分，initSwatchSwitching() 會分開處理這兩種情況。
+    const extraKeys = (cart.CARD_EXTRA_VARIANTS && cart.CARD_EXTRA_VARIANTS[key]) || [];
+    if ((!variants || variants.length < 2) && !extraKeys.length) return "";
+    const schemeChips = (variants || [])
       .map((scheme, i) => {
         const src = cart.schemeImageSrc(scheme);
         const name = cart.SCHEME_NAMES[scheme] || scheme;
@@ -88,7 +95,17 @@
         return `<button type="button" class="shop-card__swatch${activeClass}" data-swatch-scheme="${scheme}" aria-label="${name}"${bg}></button>`;
       })
       .join("");
-    return `<div class="shop-card__swatches" role="group" aria-label="選擇色號">${chips}</div>`;
+    const extraChips = extraKeys
+      .map((extraKey) => {
+        const product = cart.PRODUCTS[extraKey];
+        if (!product) return "";
+        const src = cart.PRODUCT_IMAGES && cart.PRODUCT_IMAGES[extraKey];
+        const name = product.shortName || product.name;
+        const bg = src ? ` style="background-image:url('${src}')"` : "";
+        return `<button type="button" class="shop-card__swatch" data-swatch-product="${extraKey}" aria-label="${name}"${bg}></button>`;
+      })
+      .join("");
+    return `<div class="shop-card__swatches" role="group" aria-label="選擇款式">${schemeChips}${extraChips}</div>`;
   }
 
   function cardHTML(key, product, cart, maxSizeCm) {
@@ -124,7 +141,7 @@
     const variantInput = defaultScheme
       ? `<select class="variant-select" hidden aria-hidden="true">${variants.map((v, i) => `<option value="${v}"${i === 0 ? " selected" : ""}></option>`).join("")}</select>`
       : "";
-    const swatches = swatchesHTML(variants, cart);
+    const swatches = swatchesHTML(key, variants, cart);
     const categoryLabel = CATEGORY_LABELS[product.category];
     const eyebrow = categoryLabel ? `<p class="shop-card__category">${categoryLabel}</p>` : "";
     // 2026-10-18 使用者要求拿掉「新品」標籤，不再標示。早鳥折扣角標
@@ -160,7 +177,7 @@
       ? `<div class="shop-card__thumb-inset"${thumbInsetStyle}>${thumb}${hoverThumb}</div>`
       : `${thumb}${hoverThumb}`;
     return `
-      <div class="shop-card" data-product-card>
+      <div class="shop-card" data-product-card data-base-product="${key}">
         <a class="shop-card__media" href="${url}"${carouselAttr}>${thumbBlock}${badgesWrap}</a>
         <button type="button" class="shop-card__add" data-add-to-cart data-product="${key}" aria-label="加入購物車：${product.name}">${PLUS_ICON}</button>
         ${variantInput}
@@ -320,13 +337,14 @@
   // 上（不是個別卡片各自綁一次），因為卡片是動態建出來的，而且商品總覽
   // 頁／首頁分類區塊可能同時存在、各自重複呼叫 render，掛一次代理就能
   // 涵蓋所有現在跟之後建出來的卡片，不用每次重新渲染後再重新綁定。
-  function initSwatchSwitching() {
+  function initSwatchSwitching(cart) {
     document.addEventListener("click", (e) => {
       const chip = e.target.closest(".shop-card__swatch");
       if (!chip) return;
       const card = chip.closest(".shop-card");
       if (!card) return;
       const scheme = chip.dataset.swatchScheme;
+      const swatchProduct = chip.dataset.swatchProduct;
 
       card.querySelectorAll(".shop-card__swatch").forEach((c) => c.classList.toggle("is-active", c === chip));
 
@@ -341,14 +359,27 @@
       if (mainImg && match) mainImg.src = match[1];
 
       const select = card.querySelector(".variant-select");
-      if (select) select.value = scheme;
+
+      // 2026-11-09：swatchProduct 存在代表點的是「跨商品鍵」縮圖（見
+      // cart.js CARD_EXTRA_VARIANTS），要把整張卡片的加入購物車目標／
+      // 價格都換成那個商品鍵；點回一般色票（scheme）則要換回卡片原本
+      // 的商品鍵（data-base-product，cardHTML() 產生時就固定寫死的
+      // 那一個，不會因為上一次點了別的商品鍵而跟著跑掉）。
+      const addBtn = card.querySelector("[data-add-to-cart]");
+      const priceEl = card.querySelector(".shop-card__price");
+      const baseProduct = card.dataset.baseProduct;
+      const targetKey = swatchProduct || baseProduct;
+      const targetProduct = cart.PRODUCTS[targetKey];
+      if (addBtn && targetKey) addBtn.dataset.product = targetKey;
+      if (priceEl && targetProduct) priceEl.innerHTML = priceText(targetProduct);
+      if (select) select.value = swatchProduct ? "" : scheme;
     });
   }
 
   function init() {
     initShopGrid();
     initCategoryGrids();
-    initSwatchSwitching();
+    if (window.RisuanCart) initSwatchSwitching(window.RisuanCart);
   }
 
   if (document.readyState === "loading") {

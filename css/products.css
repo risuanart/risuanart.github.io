@@ -3227,6 +3227,19 @@ button.text-link {
 /* 一排顯示張數跟著寬度變：手機 2 張、平板 3 張、桌面 4 張——比例换算自
    參考頁面實測的斷點與欄數，間距（20px）乘上 (n-1) 要從卡寬裡扣掉，
    卡片才不會因為 gap 擠出容器外。 */
+/* 單張靜態推薦卡（.chapter__cross-link）：跟 .related-products__track
+   那套「讀 PRODUCTS 動態產生一整排」不同，這是文案段落裡手寫、指定
+   指向某一款特定商品的單張卡（例如金箔碎片頁裡提到「只是想加購色沙
+   本身」時帶過去的那張），用途是段落內的文字推薦，不是跨商品總覽式
+   導流，所以不用整排橫向捲動，也不吃 related-products.js 那套資料
+   產生邏輯，純 HTML／CSS。視覺沿用 .related-card 同一套縮圖＋文字排版
+   （不另外設計一套），只是外層補一個寬度上限，不然脫離 flex 容器後
+   會撐滿整個段落寬度。 */
+.chapter__cross-link {
+  max-width: 160px;
+  margin: var(--space-2) 0 0;
+}
+
 .related-card {
   flex: 0 0 calc(50% - 10px);
   scroll-snap-align: start;

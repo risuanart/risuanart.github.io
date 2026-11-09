@@ -110,6 +110,25 @@
     // bundle）固定是 A+B+C 一次買齊，hasVariant:false，沒有色組選擇。
     "sand-art-24color": { name: "砂畫・24色任選組", price: 450, category: "sand-art", tagline: "24 色單組，A／B／C 任選一組" },
     "sand-art-24color-bundle": { name: "砂畫・24色任選組（72色全組）", shortName: "72色全組", price: 950, category: "sand-art", hasVariant: false, tagline: "A＋B＋C 一次買齊 72 色，比分開買三組更划算" },
+    // 2026-11-09：金屬色沙加購，三種購買方式價錢不同，比照上面 frame-15／
+    // -20、24color／24color-bundle 同樣的理由拆成三個獨立商品鍵：
+    // sand-art-metallic 是鉑金／香檳銀單色（同價錢，用 VARIANT_OPTIONS
+    // 色票選一色），sand-art-metallic-duo 是鉑金＋香檳銀雙色組（兩色一起
+    // 買比分開買單色便宜一點），sand-art-metallic-trio 是金／銀／玫瑰金箔
+    // 三色一組（材質其實是金箔碎片，不是色沙，但使用情境同屬「沙畫加購
+    // 材料」，分類維持 sand-art）。玫瑰金箔沒有單獨開放購買，只存在於
+    // 三色組裡，所以沒有自己的 VARIANT_OPTIONS 選項。
+    "sand-art-metallic": { name: "沙畫加購色沙・金屬色（鉑金／香檳銀）", price: 45, category: "sand-art", tagline: "鉑金、香檳銀單色任選，或選雙色組一起買" },
+    // 2026-11-09：單色／雙色組合併成同一個商品頁（products/sand-art-metallic/
+    // 裡面用款式選擇器切換），總覽購物頁只需要一張卡片進得去就好，不是
+    // 兩張卡片各自連到同一頁造成混淆，所以雙色組這個鍵改回 hidden:true
+    // （跟像框／24色那種「不同尺寸/組合各自都值得單獨一張卡片」的情況
+    // 不同，這裡兩者是同一頁面的選項，不是兩個獨立選購情境）。
+    "sand-art-metallic-duo": { name: "沙畫加購色沙・鉑金＋香檳銀雙色組", shortName: "鉑金＋香檳銀雙色組", price: 80, category: "sand-art", hasVariant: false, tagline: "兩色一起買，比分開買單色更划算", hidden: true },
+    // 名稱不加「沙畫加購」字首：金箔碎片不是砂畫專屬材料，流動畫表面
+    // 一樣可以撒，category 維持 sand-art 純粹是因為購物車頁分組目前只有
+    // 這兩個分類可選，不代表這款限定搭配砂畫。
+    "sand-art-metallic-trio": { name: "金箔碎片・金／銀／玫瑰金箔三色組", shortName: "金箔碎片三色組", price: 85, category: "sand-art", hasVariant: false, tagline: "金、銀、玫瑰金箔，三色一組" },
   };
   const CATEGORY_LABELS = { "fluid-art": "春聯流動畫", "sand-art": "春聯砂畫" };
   // 購物車頁分組顯示的固定順序，不跟著「使用者先加哪一類商品」變動——不然同一個
@@ -136,6 +155,18 @@
       "spring-sprout",
     ],
     "sand-art-24color": ["set-a", "set-b", "set-c"],
+    "sand-art-metallic": ["platinum", "champagne-silver"],
+  };
+
+  // 2026-11-09：商品總覽格狀卡的色號縮圖排（js/products-overview.js
+  // swatchesHTML()）原本只能在「同一個商品鍵換色票」裡面切換，鉑金／
+  // 香檳銀雙色組是價錢不同的另一個商品鍵（sand-art-metallic-duo），沒辦法
+  // 用同一套 scheme 機制表示。這裡額外列一份「這個商品卡片上，除了自己
+  // 本來的色票，還要多顯示哪些其他商品鍵當縮圖」的對照表，點了會把整張
+  // 卡片（縮圖／價格／加入購物車按鈕的目標）切換成那個商品鍵，不是只換
+  // 色票文字，見 products-overview.js 的 initSwatchSwitching()。
+  const CARD_EXTRA_VARIANTS = {
+    "sand-art-metallic": ["sand-art-metallic-duo"],
   };
 
   // 2026-10：羊Diss舞蹈紅／藍兩款原本是同一個商品鍵下的兩個 scheme（購買
@@ -178,6 +209,9 @@
     "set-a": "A｜暖色組",
     "set-b": "B｜藍紫組",
     "set-c": "C｜綠棕組",
+    // 2026-11-09：金屬色沙（sand-art-metallic）鉑金／香檳銀兩色。
+    "platinum": "鉑金",
+    "champagne-silver": "香檳銀",
   };
 
   // 單件商品的單價／整行小計，購物車頁與迷你購物車預覽共用同一套計算，
@@ -268,6 +302,8 @@
     "set-a": BASE_PREFIX + "assets/images/products/sand-art-24color/sand-art-24color-set-a.jpg",
     "set-b": BASE_PREFIX + "assets/images/products/sand-art-24color/sand-art-24color-set-b.jpg",
     "set-c": BASE_PREFIX + "assets/images/products/sand-art-24color/sand-art-24color-set-c.jpg",
+    "platinum": BASE_PREFIX + "assets/images/products/sand-art-metallic/sand-art-metallic-platinum.jpg",
+    "champagne-silver": BASE_PREFIX + "assets/images/products/sand-art-metallic/sand-art-metallic-champagne-silver.jpg",
   };
 
   // 總覽格狀購物頁（products/shop.html）電腦版 hover 換圖用的「第二張圖」：
@@ -305,6 +341,8 @@
     "sand-art-frame-15": BASE_PREFIX + "assets/images/products/sand-art-frame/sand-art-frame-plain-15.jpg",
     "sand-art-frame-20": BASE_PREFIX + "assets/images/products/sand-art-frame/sand-art-frame-plain-20.jpg",
     "sand-art-24color-bundle": BASE_PREFIX + "assets/images/products/sand-art-24color/sand-art-24color-bundle.jpg",
+    "sand-art-metallic-duo": BASE_PREFIX + "assets/images/products/sand-art-metallic-duo/sand-art-metallic-duo-main.jpg",
+    "sand-art-metallic-trio": BASE_PREFIX + "assets/images/products/sand-art-metallic-trio/sand-art-metallic-trio-main.jpg",
   };
 
   // 這 7 款單一配色沙畫的商品頁首圖都做了「配色動態展示」輪播（出貨配色→
@@ -403,6 +441,11 @@
     "sand-art-frame-20": BASE_PREFIX + "products/sand-art-frame/",
     "sand-art-24color": BASE_PREFIX + "products/sand-art-24color/",
     "sand-art-24color-bundle": BASE_PREFIX + "products/sand-art-24color/",
+    // 2026-11-09：單色／雙色組合併成同一個商品頁（比照 sand-art-frame-15／
+    // -20 共用 products/sand-art-frame/ 的先例），兩個商品鍵指向同一個頁面。
+    "sand-art-metallic": BASE_PREFIX + "products/sand-art-metallic/",
+    "sand-art-metallic-duo": BASE_PREFIX + "products/sand-art-metallic/",
+    "sand-art-metallic-trio": BASE_PREFIX + "products/sand-art-metallic-trio/",
   };
 
   const CART_PAGE_URL = BASE_PREFIX + "cart/";
@@ -825,7 +868,6 @@
   // （因為一開始就沒有文字節點），圖示就永久消失了，是個真的會炸掉的 bug。
   function initAddToCart(buyQty) {
     document.querySelectorAll("[data-add-to-cart]").forEach((btn) => {
-      const productKey = btn.dataset.product;
       const label = btn.querySelector(".work__cta-label");
       const svg = btn.querySelector("svg");
       const originalLabel = label ? label.textContent : null;
@@ -835,6 +877,12 @@
       // 收到 undefined 會自己 fallback 成 document，行為跟改之前完全一樣。
       const scope = btn.closest("[data-product-card]") || undefined;
       btn.addEventListener("click", () => {
+        // 2026-11-09：改成每次點擊當下才讀 btn.dataset.product，不是在
+        // initAddToCart() 執行當下（頁面載入時）就讀一次存進閉包——商品
+        // 總覽卡片的「雙色組」縮圖（js/products-overview.js
+        // initSwatchSwitching()）點了之後會動態改這顆按鈕的 data-product，
+        // 要讀到當下最新的值，不能是載入當下就定死的舊值。
+        const productKey = btn.dataset.product;
         // 沒有規格可選的商品（例如自由創作組，固定組合）用固定的 "default" 當
         // 內部 id 用的 scheme key，畫面上不顯示這個字，SCHEME_NAMES 也不會有
         // 對應項目，下面組文字時全部用「有沒有拿到色系名稱」判斷要不要顯示。
@@ -1233,10 +1281,12 @@
     // 那頁沒有另建一份商品資料，直接讀這裡，改價格／規格只要改這一份就好。
     PRODUCTS,
     VARIANT_OPTIONS,
+    CARD_EXTRA_VARIANTS,
     SCHEME_NAMES,
     CATEGORY_ORDER,
     CATEGORY_LABELS,
     PRODUCT_URLS,
+    PRODUCT_IMAGES,
     thumbHTML,
     schemeImageSrc,
     detailImageSrc,
