@@ -336,7 +336,7 @@
 
 /* 指定畫室照片使用既有淡入淡出／觸控輪播，維持橫式完整畫面。 */
 .course-story__media.course-studio-carousel { position: relative; aspect-ratio: 3 / 2; touch-action: pan-y; background: var(--color-surface-neutral); }
-.course-studio-carousel img { position: absolute; inset: 0; object-fit: contain; opacity: 0; transition: opacity var(--duration-slow) var(--ease-standard); }
+.course-studio-carousel img { position: absolute; inset: 0; object-fit: cover; opacity: 0; transition: opacity var(--duration-slow) var(--ease-standard); }
 .course-studio-carousel img.is-active { opacity: 1; }
 .course-studio-carousel .moments-carousel__nav { display: none; }
 @media (min-width: 769px) {
