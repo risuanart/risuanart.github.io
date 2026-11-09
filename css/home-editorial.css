@@ -147,7 +147,7 @@
   color: var(--color-text-primary);
   font-family: var(--font-family-base);
   font-size: var(--font-size-sm);
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.5px;
   line-height: 1.4;
 }
@@ -359,3 +359,25 @@
 .home-page .product-card { text-align: center; }
 .home-page .home-course-section .banner-tile__title,
 .home-page .product-card__title { margin-left: auto; margin-right: auto; }
+
+.home-page .home-course-section .banner-tile__subtitle {
+  margin: var(--space-1) 0 0;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-xs);
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  line-height: 1.4;
+  text-align: center;
+}
+
+/* 中英文為同組標題，說明另留較大間距。 */
+.home-page .home-course-section .banner-tile__title {
+  display: flex;
+  padding-bottom: 0;
+}
+.home-page .home-course-section .banner-tile__subtitle {
+  margin-top: var(--space-1);
+}
+.home-page .home-course-section .banner-tile__subtitle + .banner-tile__desc {
+  margin-top: calc(var(--space-2) + var(--space-1));
+}
