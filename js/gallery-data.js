@@ -750,7 +750,6 @@ window.GALLERY_ITEMS = [
   { course: "自選主題油畫", themes: ["迪士尼／皮克斯"], date: "2026-10-30", src: "../assets/images/gallery/disney/28.jpg", alt: "小美人魚愛麗兒臉部特寫，紅髮搭配藍天白雲背景", sessions: 1 },
   { course: "自選主題油畫", themes: ["迪士尼／皮克斯"], date: "2026-10-30", src: "../assets/images/gallery/disney/29.jpg", alt: "小美人魚愛麗兒坐在礁岩上眺望遠方，深藍海底場景", sessions: 1 },
   { course: "自選主題油畫", themes: ["迪士尼／皮克斯"], date: "2026-10-30", src: "../assets/images/gallery/disney/30.jpg", alt: "戴眼鏡老先生肖像，一旁有貓咪與櫻桃，畫面簽名 Lydia", sessions: 1 },
-  { course: "自選主題油畫", themes: ["迪士尼／皮克斯"], date: "2026-10-30", src: "../assets/images/gallery/disney/31.jpg", alt: "美女與野獸被施魔法的玫瑰，玻璃罩特寫，深藍森林背景", sessions: 1 },
 
   // 2026-10-30 新增「吉卜力」主題作品，共 16 件（6 件第一批＋9 件使用者
   // 後續補的＋1 件再補的霍爾的移動城堡），見上方 GALLERY_THEMES 旁的
