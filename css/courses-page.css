@@ -323,9 +323,9 @@
 
 /* 課程總覽的完成作品紀念照片，保留人物及作品完整比例。 */
 .course-students { margin-block: var(--space-16); }
-.course-students__wall { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-4); align-items: center; }
+.course-students__wall { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-4); align-items: center; }
 .course-students__photo { margin: 0; min-width: 0; }
-.course-students__photo:first-child { grid-column: span 2; grid-row: span 2; }
+
 .course-students__photo img { display: block; width: 100%; height: auto; }
 .course-students__link { margin-top: var(--space-6); text-align: center; }
 @media (max-width: 768px) {
