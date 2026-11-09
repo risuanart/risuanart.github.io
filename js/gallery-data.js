@@ -793,7 +793,7 @@ window.GALLERY_ITEMS = [
   { course: "自選主題油畫", themes: ["人像"], date: "2026-11-01", src: "../assets/images/gallery/portrait-oil/one-session/17.jpg", alt: "學員手持人物肖像油畫", sessions: 1 },
   { course: "自選主題油畫", themes: ["人像"], date: "2026-11-01", src: "../assets/images/gallery/portrait-oil/one-session/18.jpg", alt: "黑白婚禮人物肖像油畫", sessions: 1 },
   { course: "自選主題油畫", themes: ["人像"], date: "2026-11-01", src: "../assets/images/gallery/portrait-oil/one-session/19.jpg", alt: "兩位人物肖像油畫，畫在同一幅畫布上", sessions: 1 },
-  { course: "自選主題油畫", themes: ["人像"], date: "2026-11-01", src: "../assets/images/gallery/portrait-oil/one-session/20.jpg", alt: "人物與校園場景油畫作品", sessions: 1 },
+  { course: "自選主題油畫", themes: ["人像", "建築"], date: "2026-11-01", src: "../assets/images/gallery/portrait-oil/one-session/20.jpg", alt: "人物與校園場景油畫作品", sessions: 1 },
   { course: "自選主題油畫", themes: ["人像"], date: "2026-11-01", src: "../assets/images/gallery/portrait-oil/one-session/21.jpg", alt: "海邊人物合照油畫，畫布放在畫架上", sessions: 1 },
   { course: "自選主題油畫", themes: ["人像"], date: "2026-11-01", src: "../assets/images/gallery/portrait-oil/one-session/22.jpg", alt: "新人站在草地上的婚紗肖像油畫", sessions: 1 },
   { course: "自選主題油畫", themes: ["人像"], date: "2026-11-01", src: "../assets/images/gallery/portrait-oil/one-session/23.jpg", alt: "人物肖像油畫創作過程，畫筆正在描繪人物", sessions: 1 },
