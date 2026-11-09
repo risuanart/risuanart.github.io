@@ -65,7 +65,7 @@
       <a href="${base}enterprise/">團體／企業課程</a>
       <a href="${base}gallery/">學員作品</a>
       <a href="${base}guides/">材料指南</a>
-      <a href="${base}products/shop/">shop</a>
+      <a href="${base}products/shop/">SHOP</a>
       `;
 
   function openMenu() {
