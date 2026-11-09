@@ -648,3 +648,6 @@ ul.booking-payment-note { box-sizing:border-box; padding-left:1.3em; list-style:
 
 .booking-addon-price { flex:0 0 auto; white-space:nowrap; color:var(--color-text-secondary); }
 .booking-pet-addon .confirm-field__control input { flex:1 1 auto; width:0; min-width:0; }
+
+/* 追加標籤屬於下方數量欄，與上方課程選單留出分組間距。 */
+.attendee-course-row > .booking-pet-addon { margin-top:var(--space-4); gap:var(--space-2); }
