@@ -617,15 +617,17 @@ ul.booking-payment-note { box-sizing:border-box; padding-left:1.3em; list-style:
 #booking-submit { align-self:flex-end; margin-top:var(--space-4); }
 @media(max-width:767px) { #booking-submit { align-self:center; max-width:100%; } }
 
+/* 手機整組置中，金額與長文各自使用適合閱讀的對齊。 */
 @media (max-width:767px) {
   #booking-form > .confirm-checkbox { justify-content:center; }
-  #booking-form > .work__close .work__close-text { text-align:center; }
-  #booking-form .booking-total { width:100%; max-width:100%; margin-inline:auto; }
-  #booking-form .booking-total__row { justify-content:center; flex-wrap:wrap; gap:0.35em 0.8em; text-align:center; }
-  #booking-form ul.booking-payment-note { text-align:center; padding-left:0; list-style:none; }
-  #booking-form .booking-payment-note li { display:block; padding:0; }
-  #booking-form .booking-payment-note li::before { content:"•"; margin-right:0.5em; }
-  #booking-form .checkout-error { margin-inline:auto; text-align:center; }
+  #booking-form > .work__close .work__close-text { max-width:420px; margin-inline:auto; text-align:left; }
+  #booking-form .booking-total { width:100%; max-width:none; margin-inline:0; }
+  #booking-form .booking-total__row { display:grid; grid-template-columns:minmax(0,1fr) max-content; gap:var(--space-2); text-align:left; align-items:start; }
+  #booking-form .booking-total__row .price-text { text-align:right; white-space:nowrap; }
+  #booking-form ul.booking-payment-note { text-align:left; padding-left:1.3em; list-style:disc outside; margin-top:var(--space-4); }
+  #booking-form .booking-payment-note li { display:list-item; padding-left:0.15em; }
+  #booking-form .booking-payment-note li::before { content:none; }
+  #booking-form .checkout-error { width:100%; max-width:none; margin:0 0 var(--space-4); text-align:left; overflow-wrap:anywhere; }
 }
 
 .booking-pet-addon__note { display:block; color:var(--color-text-secondary); font-size:var(--font-size-xs); line-height:1.7; }
