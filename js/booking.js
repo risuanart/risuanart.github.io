@@ -1,3 +1,16 @@
+function normalizeInstagram(value) {
+  let text = String(value || '').trim();
+  if (!text) return '';
+  if (/^(https?:\/\/|(?:www\.)?instagram\.com\/)/i.test(text)) {
+    let url; try { url = new URL(/^https?:/i.test(text) ? text : 'https://' + text); } catch { throw new Error('請貼上 Instagram 個人檔案連結'); }
+    const parts = url.pathname.split('/').filter(Boolean);
+    if (!['instagram.com','www.instagram.com'].includes(url.hostname.toLowerCase()) || parts.length !== 1 || ['p','reel','reels','stories','explore','accounts','direct','share'].includes(parts[0].toLowerCase())) throw new Error('請貼上個人檔案連結，不是貼文或 Reels 連結');
+    text = parts[0];
+  }
+  text = text.replace(/^@+/, '').toLowerCase();
+  if (!/^[a-z0-9._]{1,30}$/.test(text)) throw new Error('請輸入有效的 IG 帳號或個人檔案連結');
+  return text;
+}
 /* booking.js —— 官網「線上預約課程」頁面（booking.html）的前端邏輯。
    跟 js/checkout.js 是同一種分工：這支只負責串接 risuan-checkout 後端
    的 api/course-booking.js，UI 互動（人數、月曆、時段面板、每人選課）
@@ -44,10 +57,13 @@
   const platformBtns = Array.from(document.querySelectorAll(".contact-platform__btn"));
   const igInput = document.getElementById("booking-ig");
   let currentPlatform = "IG";
-  const PLATFORM_PLACEHOLDER = { IG: "@your_ig", FB: "您的 Facebook 名稱" };
+  igInput.addEventListener('input',()=>igInput.setCustomValidity(''));
+  igInput.addEventListener('change',()=>{if(currentPlatform!=='IG')return;try{igInput.value=normalizeInstagram(igInput.value);igInput.setCustomValidity('');}catch(error){igInput.setCustomValidity(error.message);igInput.reportValidity();}});
+  const PLATFORM_PLACEHOLDER = { IG: "輸入 IG 帳號，或貼上個人檔案連結", FB: "您的 Facebook 名稱" };
   platformBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
       currentPlatform = btn.dataset.platform;
+      igInput.setCustomValidity('');
       platformBtns.forEach((b) => {
         const active = b === btn;
         b.classList.toggle("is-active", active);
