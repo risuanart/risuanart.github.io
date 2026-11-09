@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="../css/site-menu.css">
   <link rel="stylesheet" href="../css/site-footer.css">
   <link rel="stylesheet" href="../css/hub-blocks.css">
-  <link rel="stylesheet" href="../css/courses-page.css?v=student-works-20261109">
+  <link rel="stylesheet" href="../css/courses-page.css?v=combined-cta">
   <!-- 上架前待修清單任務 8：底部材料指南區塊改用首頁 .home-guide-feature／
        .home-guide-links 排版，這組規則定義在 home-editorial.css?v=guide-flow-20261109，之前
        這頁沒載入過，材料指南區塊原本用的是 .course-guide-card（見
@@ -366,13 +366,6 @@
         </div>
       </div>
 
-      <div class="course-ig-cta">
-        <button class="course-ig-cta__btn" type="button">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg>
-          <span class="course-ig-cta__label">複製訊息，私訊討論圖片</span>
-        </button>
-        <span class="course-ig-cta__hint">會複製一句開場白，直接貼到 Instagram 私訊給我們，附上你的圖就可以開始討論</span>
-      </div>
 
       <section class="course-proof fade-in">
         <div class="course-proof__head">
@@ -410,12 +403,13 @@
       <div class="course-cta-band">
         <div>
           <p class="course-cta-band__title">準備好動手了嗎？</p>
-          <p class="course-cta-band__desc">挑一個喜歡的媒材，或直接跟我們聊聊你想畫的圖</p>
+          <p class="course-cta-band__desc">還在挑圖片，可以先找我們討論；已經決定好，就直接預約課程。</p>
         </div>
-        <a class="course-cta-band__btn" href="../booking/">
-          立即預約課程
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </a>
+        <div class="course-cta-band__actions course-ig-cta">
+          <button class="course-cta-band__btn course-ig-cta__btn" type="button"><span class="course-ig-cta__label">先討論圖片</span></button>
+          <a class="course-cta-band__btn" href="../booking/">立即預約課程</a>
+          <span class="course-ig-cta__hint">點選「先討論圖片」會複製開場訊息並開啟 Instagram，貼上訊息及圖片即可開始討論。</span>
+        </div>
       </div>
     </section>
 

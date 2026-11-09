@@ -349,3 +349,11 @@
 .course-students__controls { display: flex; justify-content: center; gap: var(--space-4); margin-top: var(--space-4); }
 .course-students__controls button { min-width: var(--space-10); min-height: var(--space-10); border: 0; background: transparent; color: var(--color-text-primary); font-size: var(--font-size-lg); cursor: pointer; }
 .course-students__wall::-webkit-scrollbar { display: none; }
+
+/* 課程收尾：討論與預約集中在同一區。 */
+.course-cta-band__actions.course-ig-cta { width:100%; margin-top:var(--space-4); gap:var(--space-4); }
+.course-cta-band .course-ig-cta__btn { background:transparent; color:var(--color-surface-light); border:1px solid currentColor; padding:13px 26px; font-size:13.5px; font-weight:700; }
+.course-cta-band .course-ig-cta__hint { flex-basis:100%; color:var(--color-surface-light); opacity:.7; line-height:1.8; font-size:var(--font-size-xs); }
+@media(max-width:768px) {
+ .course-cta-band__actions .course-cta-band__btn { width:100%; justify-content:center; text-align:center; white-space:normal; }
+}
