@@ -129,6 +129,9 @@
     // 一樣可以撒，category 維持 sand-art 純粹是因為購物車頁分組目前只有
     // 這兩個分類可選，不代表這款限定搭配砂畫。
     "sand-art-metallic-trio": { name: "金箔碎片・金／銀／玫瑰金箔三色組", shortName: "金箔碎片三色組", price: 85, category: "sand-art", hasVariant: false, tagline: "金、銀、玫瑰金箔，三色一組" },
+    // 2026-11-09：材料包附的夾子比較偏向輔助固定，刻細節線條的話官方
+    // 建議客人自備美工刀，這支筆刀是給沒有自備、臨時需要的人加購用。
+    "sand-art-craft-knife": { name: "沙畫加購筆刀", price: 60, category: "sand-art", hasVariant: false, tagline: "刻細節線條用，材料包附的夾子偏向輔助固定" },
   };
   const CATEGORY_LABELS = { "fluid-art": "春聯流動畫", "sand-art": "春聯砂畫" };
   // 購物車頁分組顯示的固定順序，不跟著「使用者先加哪一類商品」變動——不然同一個
@@ -343,6 +346,7 @@
     "sand-art-24color-bundle": BASE_PREFIX + "assets/images/products/sand-art-24color/sand-art-24color-bundle.jpg",
     "sand-art-metallic-duo": BASE_PREFIX + "assets/images/products/sand-art-metallic-duo/sand-art-metallic-duo-main.jpg",
     "sand-art-metallic-trio": BASE_PREFIX + "assets/images/products/sand-art-metallic-trio/sand-art-metallic-trio-main.jpg",
+    "sand-art-craft-knife": BASE_PREFIX + "assets/images/products/sand-art-craft-knife/sand-art-craft-knife-main.jpg",
   };
 
   // 這 7 款單一配色沙畫的商品頁首圖都做了「配色動態展示」輪播（出貨配色→
@@ -446,6 +450,7 @@
     "sand-art-metallic": BASE_PREFIX + "products/sand-art-metallic/",
     "sand-art-metallic-duo": BASE_PREFIX + "products/sand-art-metallic/",
     "sand-art-metallic-trio": BASE_PREFIX + "products/sand-art-metallic-trio/",
+    "sand-art-craft-knife": BASE_PREFIX + "products/sand-art-craft-knife/",
   };
 
   const CART_PAGE_URL = BASE_PREFIX + "cart/";
