@@ -15,14 +15,17 @@
   const trigger = document.querySelector(".product-buy-bar");
   if (!sticky || !trigger || !("IntersectionObserver" in window)) return;
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      const entry = entries[0];
-      const scrolledPast = !entry.isIntersecting && entry.boundingClientRect.bottom < 0;
-      sticky.classList.toggle("is-visible", scrolledPast);
-    },
-    { threshold: 0 }
-  );
-
-  observer.observe(trigger);
+  function update() {
+    sticky.classList.toggle("is-visible", trigger.getBoundingClientRect().bottom < 0);
+  }
+  let scheduled = false;
+  const scrollRoot = trigger.closest('.product-page') || window;
+  scrollRoot.addEventListener('scroll', () => {
+    if (scheduled) return;
+    scheduled = true;
+    requestAnimationFrame(() => { scheduled = false; update(); });
+  }, { passive: true });
+  window.addEventListener('resize', update);
+  new IntersectionObserver(update, { threshold: 0 }).observe(trigger);
+  update();
 })();

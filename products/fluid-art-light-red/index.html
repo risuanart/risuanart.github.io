@@ -261,31 +261,37 @@
     </section>
     -->
 
-    <!-- 購買前請閱讀：內容改抽到 js/product-terms.js 共用資料（全站
-         流動畫＋砂畫都吃同一份，通用政策文字只維護一次，材質專屬文字
-         依 data-product-terms="fluid-art" 帶入）。容器留空、由 script
-         渲染進去。 -->
-    <!-- 2026-10-18 使用者反饋「出貨時間／顏色提醒／材料保存／操作
-         提醒」這組常駐重點從買列底下搬到這裡——手風琴正上方（這頁沒有
-         獨立的「規格資訊」小節，直接接在套組內容後面、手風琴前面），
-         跟手風琴一樣屬於頁面後段的詳細資訊脈絡，不佔買列決策當下的
-         版面。 -->
-    <section class="chapter">
-      <div class="info-highlights fade-in" data-product-info-highlights="fluid-art"></div>
-    </section>
-
-    <details class="accordion fade-in">
-      <summary class="accordion__toggle">購買前請閱讀</summary>
-      <div class="accordion__body" data-product-terms="fluid-art"></div>
-    </details>
-
-    <!-- 收尾：只留出貨提示，不重複放第二組價格／購買按鈕——買的入口留標題
-         買列那組就夠了，這裡單純是敘事結尾的出貨說明。 -->
-    <footer class="work__close">
-      <div class="work__close-text fade-in">
+    <section class="chapter product-tabs fade-in" data-product-tabs>
+      <div class="product-tabs__nav">
+        <button type="button" class="product-tabs__btn is-active" data-tab="spec" aria-current="page">規格</button>
+        <button type="button" class="product-tabs__btn" data-tab="care">出貨與保存須知</button>
+        <button type="button" class="product-tabs__btn" data-tab="terms">購買前請閱讀</button>
+      </div>
+      <div class="product-tabs__panel" data-tab-panel="spec">
+        <p class="chapter__prose">商品：春聯流動畫材料包（經典紅）<br>成品尺寸：15×15cm 春聯一幅</p>
         <p class="work__shipping-note">出貨依訂購順序安排，時程將於下單頁面公告。</p>
       </div>
-    </footer>
+      <div class="product-tabs__panel" data-tab-panel="care" hidden>
+        <div class="info-highlights" data-product-info-highlights="fluid-art"></div>
+      </div>
+      <div class="product-tabs__panel" data-tab-panel="terms" hidden>
+        <div class="accordion__body" data-product-terms="fluid-art"></div>
+      </div>
+    </section>
+
+    <!-- 相關商品 -->
+    <section class="chapter">
+      <h2 class="chapter__title fade-in">相關商品</h2>
+      <div class="related-products fade-in delay-1" data-related-products data-exclude="fluid-art-light-red">
+        <button type="button" class="related-products__nav related-products__nav--prev" aria-label="上一組">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <div class="related-products__track"></div>
+        <button type="button" class="related-products__nav related-products__nav--next" aria-label="下一組">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+        </button>
+      </div>
+    </section>
 
     <footer class="preview-footer">
       <div class="preview-footer__inner">
@@ -317,12 +323,24 @@
       </div>
     </footer>
 
+    <div class="mobile-sticky-buy">
+      <button type="button" class="work__cta work__cta--primary" data-add-to-cart data-product="fluid-art-light-red">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+        <span class="work__cta-label">加入購物車</span>
+      </button>
+      <button type="button" class="work__cta work__cta--buy-now" data-buy-now data-product="fluid-art-light-red">直接購買</button>
+    </div>
+
   </main>
 
   <script src="../../js/product-gallery.js"></script>
   <script src="../../js/cart.js"></script>
   <script src="../../js/product-price-discount.js"></script>
   <script src="../../js/product-terms.js"></script>
+  <script src="../../js/product-tabs.js"></script>
+  <script src="../../js/related-products.js"></script>
+  <script src="../../js/hero-colorway-carousel.js"></script>
+  <script src="../../js/mobile-sticky-buy-reveal.js?v=scroll-root-20261109"></script>
   <script src="../../js/site-header-scroll.js?v=20261107-backtop"></script>
   <script src="../../js/account-auth.js"></script>
   <script src="../../js/account-widget.js"></script>
