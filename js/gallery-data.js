@@ -729,7 +729,7 @@ window.GALLERY_ITEMS = [
   { course: "自選主題油畫", themes: ["迪士尼／皮克斯"], date: "2026-10-30", src: "../assets/images/gallery/disney/07.jpg", alt: "小鹿斑比與兔子桑普、臭鼬花兒在森林空地相遇，蝴蝶停在斑比尾巴上", sessions: 2 },
   { course: "自選主題油畫", themes: ["迪士尼／皮克斯"], date: "2026-10-30", src: "../assets/images/gallery/disney/08.jpg", alt: "粉紫色夕陽海邊，人物背影剪影坐在岩石上", sessions: 2 },
   { course: "自選主題油畫", themes: ["迪士尼／皮克斯"], date: "2026-10-30", src: "../assets/images/gallery/disney/09.jpg", alt: "獅子王木法沙與辛巴依偎，深藍星空背景", sessions: 2 },
-  { course: "自選主題油畫", themes: ["迪士尼／皮克斯"], date: "2026-10-30", src: "../assets/images/gallery/disney/10.jpg", alt: "小美人魚愛麗兒手拿粉紅海星，藍色背景，紅髮隨波飄動", sessions: 3 },
+  { course: "自選主題油畫", themes: ["迪士尼／皮克斯"], date: "2026-10-30", src: "../assets/images/gallery/disney/10.jpg", alt: "小美人魚愛麗兒手拿粉紅海星，藍色背景，紅髮隨波飄動", sessions: 2 },
   { course: "自選主題油畫", themes: ["迪士尼／皮克斯"], date: "2026-10-30", src: "../assets/images/gallery/disney/11.jpg", alt: "擬人化牡蠣角色們圍著樹根聊天，深綠色水底場景，氣泡環繞", sessions: 3 },
   { course: "自選主題油畫", themes: ["迪士尼／皮克斯"], date: "2026-10-30", src: "../assets/images/gallery/disney/12.jpg", alt: "小美人魚愛麗兒與比目魚、賽巴斯汀在海底礁岩，陽光透過水面灑落", sessions: 3 },
   { course: "自選主題油畫", themes: ["迪士尼／皮克斯"], date: "2026-10-30", src: "../assets/images/gallery/disney/13.jpg", alt: "小美人魚愛麗兒與比目魚，深藍背景，紅髮大面積鋪滿畫面", sessions: 2 },
