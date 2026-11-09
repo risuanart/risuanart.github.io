@@ -357,3 +357,5 @@
 @media(max-width:768px) {
  .course-cta-band__actions .course-cta-band__btn { width:100%; justify-content:center; text-align:center; white-space:normal; }
 }
+
+.course-step__booking-link { position:static; display:inline-block; margin-top:var(--space-4); color:var(--color-text-primary); font-size:var(--font-size-sm); line-height:1.5; text-decoration:underline; text-underline-offset:var(--space-1); }
