@@ -1109,7 +1109,7 @@ window.GALLERY_ITEMS = [
   { course: "寵物油畫", themes: ["貓咪"], date: "2026-11-08", src: "../assets/images/gallery/pet-portrait/140.jpg", alt: "灰色貓咪臉部特寫油畫，淺藍色背景，簽名Chichi", sessions: 1 },
   { course: "寵物油畫", themes: ["狗狗"], date: "2026-11-08", src: "../assets/images/gallery/pet-portrait/141.jpg", alt: "淺棕色狗狗側臉肖像油畫，粉色背景", sessions: 1 },
   { course: "石英砂肌理畫", themes: ["抽象圖案"], date: "2026-11-08", src: "../assets/images/gallery/sand-texture/118.jpg", alt: "厚塗抽象紋理肌理畫，粉彩色系交織搭配金箔點綴", sessions: 1 },
-  { course: "自選主題油畫", themes: ["迪士尼／皮克斯", "動漫／角色"], date: "2026-11-08", src: "../assets/images/gallery/disney/34.jpg", alt: "阿拉丁與茉莉公主乘魔毯飛越皇宮陽台油畫", sessions: 3 },
+  { course: "自選主題油畫", themes: ["迪士尼／皮克斯"], date: "2026-11-08", src: "../assets/images/gallery/disney/34.jpg", alt: "阿拉丁與茉莉公主乘魔毯飛越皇宮陽台油畫", sessions: 3 },
   { course: "流動畫", themes: [], date: "2026-11-08", src: "../assets/images/gallery/fluid-art/06.jpg", alt: "灰綠金流動畫方形畫布，大理石紋路搭配金色線條", sessions: 1 },
   { course: "自選主題油畫", themes: ["海邊"], date: "2026-11-08", src: "../assets/images/gallery/sea-oil/45.jpg", alt: "圓形畫布的夕陽海景油畫，粉紫色天空與海浪", sessions: 1 },
   { course: "自選主題油畫", themes: ["海邊"], date: "2026-11-08", src: "../assets/images/gallery/sea-oil/46.jpg", alt: "英國多塞特海岸拱門岩油畫，綠色草地峭壁與海面", sessions: 1 },
