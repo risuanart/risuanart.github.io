@@ -358,4 +358,4 @@
  .course-cta-band__actions .course-cta-band__btn { width:100%; justify-content:center; text-align:center; white-space:normal; }
 }
 
-.course-step__booking-link { position:static; display:inline-block; margin-top:var(--space-4); color:var(--color-text-primary); font-size:var(--font-size-sm); line-height:1.5; text-decoration:underline; text-underline-offset:var(--space-1); }
+.course-step__booking-link { grid-column:2; grid-row:3; justify-self:start; position:static; display:inline-block; white-space:nowrap; margin-top:var(--space-4); color:var(--color-text-primary); font-size:var(--font-size-sm); line-height:1.5; text-decoration:underline; text-underline-offset:var(--space-1); }
