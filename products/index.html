@@ -472,6 +472,7 @@
     .split-row, .split-row.reverse{ flex-direction:column; align-items:stretch; }
   }
 </style>
+<link rel="stylesheet" href="../css/kits-editorial.css?v=editorial-preview">
 </head>
 <body>
 
@@ -566,28 +567,20 @@
   <div class="site-menu-backdrop" id="site-menu-backdrop"></div>
   <nav class="site-menu" id="site-menu" aria-label="全站選單" data-menu-base="../"></nav>
 
-  <section class="content-block content-block--hero fade-in">
-    <div class="hero">
-      <h1 class="fade-in">手作材料包</h1>
-      <div class="tagline fade-in delay-1">Color Your Own New Year</div>
-      <p class="intro fade-in delay-2">
-        一份禮，不只迎新，也留住一段節氣的美好。<br><br>
-        如果你已經對制式的新春禮盒提不起興趣，<br>
-        今年，換一種方式迎接新年。
-      </p>
+  <section class="content-block kit-opening">
+    <div class="kit-opening__copy fade-in">
+      <h1>手作材料包</h1>
+      <p class="kit-eyebrow">COLOR YOUR OWN NEW YEAR</p>
+      <p>一份禮，不只迎新<br>也留住一段節氣的美好</p>
+    </div>
+    <div class="kit-opening__photos">
+      <img class="fade-in" src="../assets/images/products/fluid-art/fluid-art-light-main-red.jpg" alt="紅金色流動畫春聯作品">
+      <img class="fade-in delay-1" src="../assets/images/products/sand-art-fu/sand-art-fu-kit.jpg" alt="春聯砂畫材料包與工具">
     </div>
   </section>
-
-  <section class="overview">
-    <div class="label">
-      專案概述
-    </div>
-    <div class="body">
-      <p class="fade-in">我們把傳統工藝與手作結合，推出在家就能完成的材料包，<br>不論是自己嘗試，或是與家人朋友一起，<br>都能做出一幅屬於這個新年的作品。</p>
-    </div>
-    <div class="extra">
-      <p class="fade-in delay-1">這裡放第二段補充文字，桌面版會排在「專案概述」這排的最右邊，手機版會接在上一段文字下方。</p>
-    </div>
+  <section class="content-block kit-foreword fade-in">
+    <p>今年，換一種方式迎接新年。</p>
+    <p>把顏色與材料準備好，在家慢慢完成一幅作品。<br>可以自己嘗試，也可以邀請家人朋友一起動手。</p>
   </section>
 
   <section class="content-block">
@@ -606,20 +599,22 @@
          舊版 hub 頁或單一商品頁——以後真的要做「技法入口頁」（跟首頁／
          課程 hub 頁同一批規劃），再從頭依照現在的設計規則做一頁新的，
          不是修補這兩個舊頁面。 -->
-    <div class="product-row">
-      <a class="product-card" href="shop/?category=fluid-art">
-        <div class="product-card__media"><img src="../assets/images/products/fluid-art/fluid-art-light-kit-red.jpg" alt="流動畫材料包"></div>
-        <p class="product-card__en">Fluid Art</p>
-        <p class="product-card__title">流動畫材料包</p>
-        <p class="product-card__desc">顏料自然流動交融，呈色隨機多變，每一幅都是獨一無二的作品。</p>
-      </a>
-      <a class="product-card" href="shop/?category=sand-art">
-        <div class="product-card__media"><img src="../assets/images/products/sand-art-fu/sand-art-fu-kit.jpg" alt="砂畫材料包"></div>
-        <p class="product-card__en">Sand Art</p>
-        <p class="product-card__title">砂畫材料包</p>
-        <p class="product-card__desc">分層鋪色、堆疊出圖案，步驟清楚好上手，新手也能做出細緻成品。</p>
-      </a>
-    </div>
+    <article class="kit-story">
+      <a class="kit-story__image fade-in" href="shop/?category=fluid-art"><img src="../assets/images/products/fluid-art/fluid-art-light-main-pink.jpg" alt="粉色流動畫春聯作品" loading="lazy"></a>
+      <div class="kit-story__copy fade-in delay-1">
+        <p class="kit-eyebrow">01 — FLUID ART</p><h2>讓顏色，自然流動</h2>
+        <p>傾倒、轉動畫布，看顏料慢慢交融。<br>不必安排每一道紋路，留下這一次流動的樣子。</p>
+        <a class="kit-story__link" href="shop/?category=fluid-art">探索流動畫材料包</a>
+      </div>
+    </article>
+    <article class="kit-story kit-story--reverse">
+      <a class="kit-story__image fade-in" href="shop/?category=sand-art"><img src="../assets/images/products/sand-art-fu/sand-art-fu-kit.jpg" alt="春聯砂畫材料與色砂" loading="lazy"></a>
+      <div class="kit-story__copy fade-in delay-1">
+        <p class="kit-eyebrow">02 — SAND ART</p><h2>一層層，鋪出喜歡的顏色</h2>
+        <p>從撕開圖案、倒砂到鋪色，慢慢看作品成形。<br>跟著步驟製作，第一次接觸也能安心上手。</p>
+        <a class="kit-story__link" href="shop/?category=sand-art">探索春聯砂畫材料包</a>
+      </div>
+    </article>
   </section>
 
   <section class="content-block">
