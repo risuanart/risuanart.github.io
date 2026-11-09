@@ -656,3 +656,5 @@ ul.booking-payment-note { box-sizing:border-box; padding-left:1.3em; list-style:
 
 #pre-class-notice h2 { scroll-margin-top:calc(var(--ptpl-topbar-height,var(--editorial-header-height)) + var(--space-4)); }
 #booking-notice-link { color:inherit; text-decoration:underline; text-underline-offset:0.2em; }
+
+.pet-consent-error { color:var(--color-warning); font-size:var(--font-size-xs); line-height:1.7; margin:var(--space-2) 0 0; }

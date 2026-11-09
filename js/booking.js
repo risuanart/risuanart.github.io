@@ -218,7 +218,16 @@
     target.setAttribute('tabindex','-1');target.focus({preventScroll:true});
     target.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'start'});
   });
-  const petConsent=document.getElementById('pet-addon-consent');petConsent.addEventListener('change',updateTotal);
+  const petConsent=document.getElementById('pet-addon-consent');petConsent.addEventListener('change',()=>{const message=document.getElementById('pet-consent-error');if(message)message.hidden=true;updateTotal();});
+  function remindPetConsent(){
+    const label=document.getElementById('pet-addon-consent-label');
+    let message=document.getElementById('pet-consent-error');
+    if(!message){message=document.createElement('p');message.id='pet-consent-error';message.className='pet-consent-error';message.setAttribute('role','alert');label.after(message);petConsent.setAttribute('aria-describedby',message.id);}
+    message.textContent='請先確認追加寵物注意事項，再前往付款。';message.hidden=false;
+    petConsent.focus({preventScroll:true});label.scrollIntoView({block:'center',behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});
+  }
+  submitBtn.addEventListener('click',event=>{if(petConsent.required&&!petConsent.checked){event.preventDefault();remindPetConsent();}});
+  petConsent.addEventListener('invalid',event=>{event.preventDefault();remindPetConsent();});
   function petExtraTotals(){return attendeeSelections.reduce((result,c,i)=>{if(c==='寵物油畫－大寵')result.big+=Number(attendeeExtras[i]||0);if(c==='寵物油畫－小寵')result.small+=Number(attendeeExtras[i]||0);return result;},{big:0,small:0});}
   function updateTotal() {
     const hasPet=attendeeExtras.some((n,i)=>Number(n)>0&&String(attendeeSelections[i]||'').startsWith('寵物油畫'));
