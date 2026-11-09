@@ -37,7 +37,7 @@
   };
   for (const [key, theme] of Object.entries(TOPIC_THEME_MAP)) {
     topics.find((t) => t.key === key).images = (window.GALLERY_ITEMS || [])
-      .filter((item) => item.course === '石英砂肌理畫' && item.themes.includes(theme))
+      .filter((item) => (item.course === '石英砂肌理畫' || (item.extraCourses || []).includes('石英砂肌理畫')) && item.themes.includes(theme))
       .sort((a, b) => (b.date || '').localeCompare(a.date || ''))
       .slice(0, MAX_IMAGES_PER_TOPIC)
       .map((item) => ({ src: '../' + item.src, alt: item.alt, course: item.course, themes: item.themes, sessions: item.sessions }));

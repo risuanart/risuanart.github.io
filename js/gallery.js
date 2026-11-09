@@ -89,7 +89,9 @@
     if (course === "all") return all;
     const used = new Set();
     items.forEach((item) => {
-      if (item.course === course) (item.themes || []).forEach((t) => used.add(t));
+      if (item.course === course || (item.extraCourses || []).includes(course)) {
+        (item.themes || []).forEach((t) => used.add(t));
+      }
     });
     return all.filter((t) => used.has(t));
   }
@@ -110,8 +112,17 @@
     });
   }
 
+  // 2026-11-08 使用者要求「大幅畫布訂製」不要另外複製一筆一模一樣的
+  // 圖片資料，改成在原本課程的那筆資料上疊加 extraCourses（例如
+  // ["大幅畫布訂製"]），同一張圖只存一份，但篩選「大幅畫布訂製」課程
+  // 時這筆資料一樣要出現——所以課程比對除了 item.course 本身，也要
+  // 檢查 extraCourses 裡有沒有這個課程。
+  function itemMatchesCourse(item, course) {
+    return item.course === course || (item.extraCourses || []).includes(course);
+  }
+
   function matches(item) {
-    if (activeCourse !== "all" && item.course !== activeCourse) return false;
+    if (activeCourse !== "all" && !itemMatchesCourse(item, activeCourse)) return false;
     if (onlyOneSession && item.sessions !== 1) return false;
     if (activeThemes.size === 0) return true;
 
@@ -174,14 +185,19 @@
 
     grid.innerHTML = visible
       .map((item) => {
-        const courseLink = courseLinks[item.course];
-        const linkAttr = courseLink ? ` data-course-link="${courseLink}" data-course-name="${item.course}"` : "";
+        // 瀏覽特定課程（非「全部」）時，這筆資料可能是靠 extraCourses
+        // 疊加才符合目前課程，不是它自己的主課程——顯示用目前瀏覽的
+        // 課程名稱（displayCourse），而不是 item.course，不然在「大幅
+        // 畫布訂製」底下會顯示成它原本的課程，造成混淆。
+        const displayCourse = activeCourse !== "all" ? activeCourse : item.course;
+        const courseLink = courseLinks[displayCourse];
+        const linkAttr = courseLink ? ` data-course-link="${courseLink}" data-course-name="${displayCourse}"` : "";
         return `
-      <figure class="gallery-grid__item" tabindex="0" role="button" aria-label="放大看：${item.alt || item.course}"${linkAttr}>
+      <figure class="gallery-grid__item" tabindex="0" role="button" aria-label="放大看：${item.alt || displayCourse}"${linkAttr}>
         <img src="${item.src}" alt="${item.alt || ""}" loading="lazy">
-        <figcaption class="gallery-grid__caption">${item.course}${
+        <figcaption class="gallery-grid__caption">${displayCourse}${
           item.themes && item.themes.length ? "・" + item.themes.join("、") : ""
-        }${item.sessions ? "・" + (item.sessions === 1 ? "一堂完成" : item.sessions + "堂完成") : ""}</figcaption>
+        }${item.sessions && displayCourse !== "大幅畫布訂製" ? "・" + (item.sessions === 1 ? "一堂完成" : item.sessions + "堂完成") : ""}</figcaption>
       </figure>`;
       })
       .join("");

@@ -26,8 +26,10 @@
     const emptyState = container.querySelector("[data-gallery-preview-empty]");
     const moreLink = container.querySelector("[data-gallery-preview-more]");
 
+    // 2026-11-08：「大幅畫布訂製」等課程不再另外複製一筆重複圖片資料，
+    // 改成在原本課程那筆疊加 extraCourses，這裡篩選時要一併檢查。
     const matched = items
-      .filter((item) => item.course === course)
+      .filter((item) => item.course === course || (item.extraCourses || []).includes(course))
       .sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0))
       .slice(0, limit);
 
@@ -55,11 +57,11 @@
     grid.innerHTML = matched
       .map(
         (item) => `
-      <figure class="gallery-grid__item" tabindex="0" role="button" aria-label="放大看：${item.alt || item.course}">
+      <figure class="gallery-grid__item" tabindex="0" role="button" aria-label="放大看：${item.alt || course}">
         <img src="${base}${item.src}" alt="${item.alt || ""}" loading="lazy">
-        <figcaption class="gallery-grid__caption">${item.course}${
+        <figcaption class="gallery-grid__caption">${course}${
           item.themes && item.themes.length ? "・" + item.themes.join("、") : ""
-        }${item.sessions ? "・" + (item.sessions === 1 ? "一堂完成" : item.sessions + "堂完成") : ""}</figcaption>
+        }${item.sessions && course !== "大幅畫布訂製" ? "・" + (item.sessions === 1 ? "一堂完成" : item.sessions + "堂完成") : ""}</figcaption>
       </figure>`
       )
       .join("");
