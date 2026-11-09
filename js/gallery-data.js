@@ -968,8 +968,8 @@ window.GALLERY_ITEMS = [
   { course: "自選主題油畫", themes: ["人像"], date: "2026-11-08", src: "../assets/images/gallery/portrait-oil/one-session/46.jpg", alt: "一對情侶的油畫合照，室內暖黃吊燈背景，女生比著YA手勢", sessions: 1 },
   // 2026-11-08 新增 21 件（folder 202608，另有 1 張純調色杯特寫、沒有
   // 完成作品入鏡的過程照沒有收進來）。
-  { course: "自選主題油畫", themes: ["海洋生物"], date: "2026-11-08", src: "../assets/images/gallery/sea-oil/37.jpg", alt: "油畫的潛水員特寫，背著氣瓶游過礁岩上方，吐出一串氣泡", sessions: 1 },
-  { course: "自選主題油畫", themes: ["海洋生物"], date: "2026-11-08", src: "../assets/images/gallery/sea-oil/38.jpg", alt: "油畫的自由潛水者背影，踩著蛙鞋向下游，背景由淺藍漸層到深藍", sessions: 1 },
+  { course: "自選主題油畫", themes: ["人像"], date: "2026-11-08", src: "../assets/images/gallery/sea-oil/37.jpg", alt: "油畫的潛水員特寫，背著氣瓶游過礁岩上方，吐出一串氣泡", sessions: 1 },
+  { course: "自選主題油畫", themes: ["人像"], date: "2026-11-08", src: "../assets/images/gallery/sea-oil/38.jpg", alt: "油畫的自由潛水者背影，踩著蛙鞋向下游，背景由淺藍漸層到深藍", sessions: 1 },
   { course: "自選主題油畫", themes: ["貓咪", "星空"], date: "2026-11-08", src: "../assets/images/gallery/star-sky/51.jpg", alt: "扁平插畫風格的白貓坐在草地上，紫色夜空背景點綴流星與星星", sessions: 1 },
   { course: "自選主題油畫", themes: ["人像"], date: "2026-11-08", src: "../assets/images/gallery/portrait-oil/three-sessions/10.jpg", alt: "古典畫風的天使群像油畫臨摹，多位人物身著飄逸衣袍仰望天空", sessions: 3 },
   { course: "刮刀油畫", themes: ["山"], date: "2026-11-08", src: "../assets/images/gallery/palette-knife-oil/57.jpg", alt: "刮刀油畫的翠綠山脊特寫，藍天白雲背景", sessions: 1 },
