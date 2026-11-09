@@ -37,10 +37,8 @@
   // 總覽這些同層級項目一樣用 .site-menu a 的列樣式，分隔線跟間距自動
   // 跟其他列一致，不用另外調。
   menu.innerHTML = `
-    <a href="${base}">首頁</a>
-    <a href="${base}products/shop/">商品總覽</a>
-    <a href="${base}products/">材料包</a>
-    <div class="site-menu__group">
+      <a href="${base}booking/">線上預約課程</a>
+      <div class="site-menu__group">
       <button type="button" class="site-menu__group-toggle" aria-expanded="false" aria-controls="site-menu-course-panel">
         <span>課程</span>
         <svg class="site-menu__group-chevron" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
@@ -62,17 +60,13 @@
         </div>
       </div>
     </div>
-    <a href="${base}faq/">預約須知</a>
-    <!-- 2026-10-17 使用者要求目錄要有能直達預約入口的連結，讓已經決定好
-         要上哪堂課的同學不用先點進某一堂課程介紹頁才找得到預約表單，
-         放在「課程」（瀏覽課程種類／預約須知）跟「材料指南」之間，順著
-         「先看課程→看預約須知→直接預約」的閱讀動線。index.html 的
-         #site-menu 是獨立一份（見檔案開頭說明），同步加了一樣的連結。 -->
-    <a href="${base}booking/">線上預約課程</a>
-    <a href="${base}guides/">材料指南</a>
-    <a href="${base}gallery/">學員作品</a>
-    <a href="${base}enterprise/">團體／企業課程</a>
-  `;
+      <a href="${base}products/">材料包</a>
+      <a href="${base}faq/">預約須知</a>
+      <a href="${base}enterprise/">團體／企業課程</a>
+      <a href="${base}gallery/">學員作品</a>
+      <a href="${base}guides/">材料指南</a>
+      <a href="${base}products/shop/">shop</a>
+      `;
 
   function openMenu() {
     menu.classList.add("is-open");
