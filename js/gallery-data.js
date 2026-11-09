@@ -1133,7 +1133,7 @@ window.GALLERY_ITEMS = [
   { course: "自選主題油畫", themes: ["風景", "山", "建築"], date: "2026-11-08", src: "../assets/images/gallery/landscape-oil/48.jpg", alt: "富士山與五重塔油畫，粉藍天空背景", sessions: 1 },
   { course: "石英砂肌理畫", themes: ["植物花卉"], date: "2026-11-08", src: "../assets/images/gallery/sand-texture/122.jpg", alt: "紫色系玫瑰浮雕肌理畫，金箔點綴搭配小花", sessions: 1 },
   { course: "自選主題油畫", themes: ["人像"], date: "2026-11-08", src: "../assets/images/gallery/portrait-oil/one-session/66.jpg", alt: "情侶合照肖像油畫，男子以手遮臉逗趣入鏡", sessions: 1 },
-  { course: "自選主題油畫", extraCourses: ["大幅畫布訂製"], themes: ["吉卜力", "建築"], date: "2026-11-08", src: "../assets/images/gallery/ghibli/19.jpg", alt: "神隱少女街景油畫，粉紅洋樓建築與招牌細節", sessions: 2 },
+  { course: "自選主題油畫", extraCourses: ["大幅畫布訂製"], themes: ["吉卜力", "建築"], date: "2026-11-08", src: "../assets/images/gallery/ghibli/19.jpg", alt: "神隱少女街景油畫，粉紅洋樓建築與招牌細節" },
   { course: "寵物油畫", themes: ["貓咪"], date: "2026-11-08", src: "../assets/images/gallery/pet-portrait/144.jpg", alt: "虎斑貓特寫肖像油畫，酒紅色背景", sessions: 1 },
   { course: "刮刀油畫", themes: ["植物花卉"], date: "2026-11-08", src: "../assets/images/gallery/palette-knife-oil/83.jpg", alt: "白色繡球花束浮雕肌理畫，紫色漸層背景", sessions: 1 },
   { course: "自選主題油畫", themes: ["海邊"], date: "2026-11-08", src: "../assets/images/gallery/sea-oil/48.jpg", alt: "女子站在遊艇桅杆旁望海景油畫，背影剪影", sessions: 2 },
