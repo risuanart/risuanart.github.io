@@ -353,3 +353,9 @@
     background: var(--color-interactive);
   }
 }
+
+/* 首頁卡片標題及說明置中試版。 */
+.home-page .home-course-section .banner-tile,
+.home-page .product-card { text-align: center; }
+.home-page .home-course-section .banner-tile__title,
+.home-page .product-card__title { margin-left: auto; margin-right: auto; }
