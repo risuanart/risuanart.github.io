@@ -333,3 +333,15 @@
   .course-students__wall::-webkit-scrollbar { display: none; }
   .course-students__photo { flex: 0 0 86%; scroll-snap-align: start; }
 }
+
+/* 指定畫室照片使用既有淡入淡出／觸控輪播，維持橫式完整畫面。 */
+.course-story__media.course-studio-carousel { position: relative; aspect-ratio: 3 / 2; touch-action: pan-y; background: var(--color-surface-neutral); }
+.course-studio-carousel img { position: absolute; inset: 0; object-fit: contain; opacity: 0; transition: opacity var(--duration-slow) var(--ease-standard); }
+.course-studio-carousel img.is-active { opacity: 1; }
+.course-studio-carousel .moments-carousel__nav { display: none; }
+@media (min-width: 769px) {
+  .course-studio-carousel .moments-carousel__nav { display: grid; place-items: center; position: absolute; top: 50%; transform: translateY(-50%); width: var(--space-10); height: var(--space-10); padding: var(--space-2); border: 0; border-radius: 50%; background: var(--color-surface-light); color: var(--color-text-primary); cursor: pointer; }
+  .course-studio-carousel .moments-carousel__nav--prev { left: var(--space-2); }
+  .course-studio-carousel .moments-carousel__nav--next { right: var(--space-2); }
+  .course-studio-carousel .moments-carousel__nav svg { width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 2; }
+}
