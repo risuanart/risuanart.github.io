@@ -343,21 +343,19 @@
 .ent-hero__scroll-hint-arrow::after {
   content: "";
   position: absolute;
-  left: 50%;
+  left: 0;
   top: 0;
-  width: var(--space-1);
-  height: var(--space-1);
-  border-radius: 50%;
-  background: currentColor;
-  box-shadow: 0 0 var(--space-2) currentColor;
-  transform: translate(-50%, -50%);
-  animation: ent-scroll-light calc(var(--duration-slow) * 4) var(--ease-standard) infinite;
+  width: 1px;
+  height: var(--space-2);
+  background: linear-gradient(to bottom, transparent, currentColor);
+  animation: ent-scroll-light calc(var(--duration-slow) * 5) var(--ease-standard) infinite;
 }
+
 @keyframes ent-scroll-light {
   0% { top: 0; opacity: 0; }
-  15% { opacity: 1; }
-  80% { opacity: 1; }
-  100% { top: 100%; opacity: 0; }
+  15% { opacity: .55; }
+  80% { opacity: .55; }
+  100% { top: calc(100% - var(--space-2)); opacity: 0; }
 }
 @media (prefers-reduced-motion: reduce) {
   .ent-hero__scroll-hint-arrow::after { animation: none; top: 50%; opacity: .85; }
