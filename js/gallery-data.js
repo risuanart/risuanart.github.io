@@ -150,7 +150,6 @@ window.GALLERY_ITEMS = [
   {"course": "寵物油畫", "themes": ["其他動物"], "date": "2025-09-01", "alt": "粉紅鸚鵡", "src": "../assets/images/gallery/ig-202509/18150584761404346.jpg", "sessions": 1},
   {"course": "寵物油畫", "themes": ["貓咪"], "date": "2025-09-01", "alt": "六幅貓咪小畫集合", "src": "../assets/images/gallery/ig-202509/18155150896388125.jpg", "sessions": 1},
   {"course": "自選主題油畫", "themes": ["節慶／季節"], "date": "2025-09-01", "alt": "夜空煙火", "src": "../assets/images/gallery/ig-202509/18324837406237997.jpg", "sessions": 1},
-  {"course": "刮刀油畫", "themes": ["食物"], "date": "2025-09-01", "alt": "蘋果靜物製作中", "src": "../assets/images/gallery/ig-202509/18359973961153887.jpg", "sessions": 1},
   {"course": "自選主題油畫", "themes": ["海邊", "人像"], "date": "2025-09-01", "alt": "藍色海岸與黃傘人物", "src": "../assets/images/gallery/ig-202509/18484898983078541.jpg", "sessions": 1},
   // 日期為照片整理日；完成堂數未提供。
   {"course": "金箔抽象畫", "themes": ["抽象圖案"], "date": "2026-11-07", "src": "../assets/images/gallery/abstract/17887522544807391.jpg", "alt": "學員使用刮刀創作黑白與粉紅色塊抽象畫"},
