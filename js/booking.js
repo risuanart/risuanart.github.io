@@ -212,7 +212,13 @@ function normalizeInstagram(value) {
     return row;
   }
 
+  function renderCompanionEmails(){
+    const host=document.getElementById('booking-companion-emails');if(!host)return;
+    const values=Array.from(host.querySelectorAll('input')).map(e=>e.value);host.replaceChildren();
+    for(let i=1;i<currentQty();i++){const label=document.createElement('label');label.className='confirm-field';const text=document.createElement('span');text.textContent=`第${i+1}位同行者 Email（選填）`;const control=document.createElement('div');control.className='confirm-field__control';const input=document.createElement('input');input.type='email';input.name='companionEmail';input.maxLength=254;input.placeholder='接收預約確認、課前說明與改期通知';input.value=values[i-1]||'';control.append(input);label.append(text,control);host.append(label);}
+  }
   function renderAttendeeCourses() {
+    renderCompanionEmails();
     const qty = currentQty();
     const sharedNotice=document.getElementById('pet-addon-notice');
     if(sharedNotice)attendeeCoursesEl.after(sharedNotice);
@@ -537,6 +543,7 @@ function normalizeInstagram(value) {
     }
 
     const payload = {
+      companionEmails:Array.from(document.querySelectorAll('[name="companionEmail"]')).map(e=>e.value.trim()).filter(Boolean),
       slotId: slotIdInput.value,
       courses: attendeeSelections.slice(),
       extraPets:petExtraTotals().big,
