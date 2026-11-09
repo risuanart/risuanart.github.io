@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="../css/site-menu.css">
   <link rel="stylesheet" href="../css/site-footer.css">
   <link rel="stylesheet" href="../css/hub-blocks.css">
-  <link rel="stylesheet" href="../css/courses-page.css?v=studio-fill-20261109">
+  <link rel="stylesheet" href="../css/courses-page.css?v=student-works-20261109">
   <!-- 上架前待修清單任務 8：底部材料指南區塊改用首頁 .home-guide-feature／
        .home-guide-links 排版，這組規則定義在 home-editorial.css?v=guide-flow-20261109，之前
        這頁沒載入過，材料指南區塊原本用的是 .course-guide-card（見
@@ -212,12 +212,18 @@
 
     <section class="content-container course-students">
       <h2 class="course-features__title">把喜歡的畫，變成自己的作品</h2>
-      <div class="course-students__wall" tabindex="0" role="region" aria-label="學員拿作品照片，手機可左右滑動">
+      <div class="course-students__wall" tabindex="0" role="region" id="course-students-track" aria-label="學員拿作品照片，可左右滑動">
           <figure class="course-students__photo"><img src="../assets/images/courses/sand-texture/moments/03.jpg" alt="兩位同學展示完成的石英砂肌理畫" loading="lazy"></figure>
           <figure class="course-students__photo"><img src="../assets/images/courses/palette-knife-oil/適合的圖案/group-holding-works.jpg" alt="兩位學員展示完成的刮刀油畫作品" loading="lazy"></figure>
           <figure class="course-students__photo"><img src="../assets/images/courses/gold-leaf-abstract/student-06.jpg" alt="學員手持完成的深色抽象畫" loading="lazy"></figure>
           <figure class="course-students__photo"><img src="../assets/images/courses/sand-texture/moments/04.jpg" alt="三位同學展示完成的石英砂肌理畫" loading="lazy"></figure>
+          <figure class="course-students__photo"><img src="../assets/images/courses/student-works/student-01.jpg" alt="學員展示多堂課完成的油畫作品" loading="lazy"></figure>
+          <figure class="course-students__photo"><img src="../assets/images/courses/student-works/student-02.jpg" alt="兩位學員展示迪士尼主題與小寵物油畫" loading="lazy"></figure>
+          <figure class="course-students__photo"><img src="../assets/images/courses/student-works/student-03.jpg" alt="學員展示15公分小畫布系列作品" loading="lazy"></figure>
+          <figure class="course-students__photo"><img src="../assets/images/courses/student-works/student-04.jpg" alt="學員手持10公分迷你方形畫布" loading="lazy"></figure>
+          <figure class="course-students__photo"><img src="../assets/images/courses/student-works/student-05.jpg" alt="學員展示直徑10公分圓形畫布" loading="lazy"></figure>
       </div>
+      <div class="course-students__controls"><button type="button" data-student-direction="-1" aria-label="上一組學員照片">←</button><button type="button" data-student-direction="1" aria-label="下一組學員照片">→</button></div>
       <p class="course-students__link"><a class="text-link" href="../gallery/">看更多學員作品</a></p>
     </section>
 
@@ -474,6 +480,7 @@
   <script src="../js/site-menu.js?v=menu-order-20261109"></script>
   <script src="../js/courses-carousel.js"></script>
   <script src="../js/moments-carousel.js"></script>
+  <script src="../js/course-students.js"></script>
   <script src="/js/promo-bar.js"></script>
   <script src="../js/scroll-reveal.js"></script>
 </body>
