@@ -132,25 +132,25 @@
    覆寫成 4:3（橫式），課程精選用的是手機直拍原圖，被強制裁成橫式會
    切到主體、畫面失重，拿掉這個覆寫，改用 hub-blocks.css 原本的 4:5。 */
 
-/* 2026-11-07 使用者要求「課程精選」卡片文字跟下面「砂畫材料包」等
-   商品分類區塊的卡片（.product-card__title／__desc，見 hub-blocks.css）
-   統一字級／字距，不要自己另外一套數字。 */
-.home-course-section .banner-tile__title {
-  margin-top: 6px;
+/* 首頁卡片標題低於區塊主標，課程與商品卡片沿用同一層級。 */
+.home-page .home-course-section .banner-tile__title,
+.home-page .product-card__title {
+  margin-top: var(--space-2);
   margin-bottom: 0;
   font-family: var(--font-family-base);
-  font-size: 19px;
-  font-weight: 700;
+  font-size: var(--font-size-base);
+  font-weight: 500;
   letter-spacing: 0.5px;
   line-height: 1.4;
 }
 
-.home-course-section .banner-tile__desc {
+.home-page .home-course-section .banner-tile__desc,
+.home-page .product-card__desc {
   margin-top: 8px;
-  font-size: 13px;
+  font-size: var(--font-size-xs);
   line-height: 1.7;
   letter-spacing: 0;
-  color: #666;
+  color: var(--color-text-secondary);
 }
 
 .home-guide-section .home-section-head {
