@@ -719,3 +719,6 @@ gap/margin/padding 其實都沒生效（等於 0 或初始值），包括全站 
 
 ## 2026-11-10：六筆作品移除山主題
 - 依六張截圖從ig-202508/18076814293811743、palette-knife-oil/40、sand-texture/63、star-sky/04與23、palette-knife-oil/59移除山標籤；其餘課程、主題及堂數不變。JS語法與diff檢查通過，未推送。
+
+## 2026-11-10：噴泉街景堂數修正
+- 依截圖將palette-knife-oil/94.jpg改為兩堂完成，課程及主題不變。JS語法與diff檢查通過，未推送。

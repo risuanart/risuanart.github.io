@@ -1248,7 +1248,7 @@ window.GALLERY_ITEMS = [
   { course: "刮刀油畫", themes: ["植物花卉"], date: "2025-10-01", src: "../assets/images/gallery/palette-knife-oil/93.jpg", alt: "厚塗白色花束靜物，深灰背景", sessions: 1 },
   { course: "寵物油畫", themes: ["其他動物"], date: "2025-10-01", src: "../assets/images/gallery/pet-portrait/181.jpg", alt: "寵物小豬肖像特寫油畫，藍色背景", sessions: 1 },
   { course: "自選主題油畫", themes: ["人像", "植物花卉", "山", "學員分享"], date: "2025-10-01", src: "../assets/images/gallery/landscape-oil/63.jpg", alt: "老夫婦賞櫻湖景油畫", sessions: 1 },
-  { course: "刮刀油畫", themes: ["建築", "風景"], date: "2025-10-01", src: "../assets/images/gallery/palette-knife-oil/94.jpg", alt: "厚塗歐洲小鎮廣場噴泉景色", sessions: 1 },
+  { course: "刮刀油畫", themes: ["建築", "風景"], date: "2025-10-01", src: "../assets/images/gallery/palette-knife-oil/94.jpg", alt: "厚塗歐洲小鎮廣場噴泉景色", sessions: 2 },
   { course: "自選主題油畫", themes: ["動漫／角色"], date: "2025-10-01", src: "../assets/images/gallery/anime-characters/26.jpg", alt: "我的英雄學院綠谷出久拿錄取通知哭泣油畫", sessions: 1 },
   { course: "自選主題油畫", themes: ["建築", "山", "電影／動畫場景"], date: "2025-10-01", src: "../assets/images/gallery/landscape-oil/64.jpg", alt: "霍格華茲城堡湖畔景色油畫", sessions: 1 },
   { course: "石英砂肌理畫", themes: ["建築", "迪士尼／皮克斯", "電影／動畫場景"], date: "2025-10-01", src: "../assets/images/gallery/sand-texture/130.jpg", alt: "迪士尼灰姑娘城堡肌理畫，粉色花叢前景", sessions: 1 },
