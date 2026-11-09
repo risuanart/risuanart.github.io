@@ -722,3 +722,6 @@ gap/margin/padding 其實都沒生效（等於 0 或初始值），包括全站 
 
 ## 2026-11-10：噴泉街景堂數修正
 - 依截圖將palette-knife-oil/94.jpg改為兩堂完成，課程及主題不變。JS語法與diff檢查通過，未推送。
+
+## 2026-11-10：四筆作品新增建築主題
+- 依截圖為雪梨歌劇院sand-texture/85、長型建築landscape-oil/32、黃昏城市landscape-oil/11、小屋palette-knife-oil/40新增建築標籤。保留其餘主題與堂數，小屋先前移除山的結果維持。JS語法與diff檢查通過，未推送。
