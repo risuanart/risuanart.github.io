@@ -212,6 +212,12 @@
     updateSubmitState();
   }
 
+  document.getElementById('booking-notice-link').addEventListener('click',event=>{
+    event.preventDefault();event.stopPropagation();
+    const target=document.querySelector('#pre-class-notice h2');
+    target.setAttribute('tabindex','-1');target.focus({preventScroll:true});
+    target.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'start'});
+  });
   const petConsent=document.getElementById('pet-addon-consent');petConsent.addEventListener('change',updateTotal);
   function petExtraTotals(){return attendeeSelections.reduce((result,c,i)=>{if(c==='寵物油畫－大寵')result.big+=Number(attendeeExtras[i]||0);if(c==='寵物油畫－小寵')result.small+=Number(attendeeExtras[i]||0);return result;},{big:0,small:0});}
   function updateTotal() {

@@ -653,3 +653,6 @@ ul.booking-payment-note { box-sizing:border-box; padding-left:1.3em; list-style:
 
 /* 追加標籤屬於下方數量欄，與上方課程選單留出分組間距。 */
 .attendee-course-row > .booking-pet-addon { margin-top:var(--space-4); gap:var(--space-2); }
+
+#pre-class-notice h2 { scroll-margin-top:calc(var(--ptpl-topbar-height,var(--editorial-header-height)) + var(--space-4)); }
+#booking-notice-link { color:inherit; text-decoration:underline; text-underline-offset:0.2em; }
