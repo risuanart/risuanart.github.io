@@ -1148,7 +1148,7 @@ window.GALLERY_ITEMS = [
   { course: "串珠", themes: ["手鏈", "戒指"], date: "2026-11-08", src: "../assets/images/gallery/beading/52.jpg", alt: "綠色與透明珠串手鍊兩條，搭配戒指展示", sessions: 1 },
   { course: "自選主題油畫", themes: ["風景", "建築"], date: "2026-11-08", src: "../assets/images/gallery/landscape-oil/50.jpg", alt: "古代圓形劇場遺跡油畫，階梯座位與遠山藍天，一人獨坐階梯中央", sessions: 2 },
   { course: "自選主題油畫", themes: ["人像"], date: "2026-11-08", src: "../assets/images/gallery/portrait-oil/one-session/67.jpg", alt: "灰階打底情侶肖像油畫兩幅並列，一幅懷抱雙貓一幅深情相擁", sessions: 1 },
-  { course: "流動畫", themes: ["抽象圖案"], date: "2026-11-08", src: "../assets/images/gallery/fluid-art/28.jpg", alt: "學員調色刮板製作流動畫，藍綠與銅橘色顏料交融鋪展於畫布", sessions: 1 },
+  { course: "流動畫", themes: [], date: "2026-11-08", src: "../assets/images/gallery/fluid-art/28.jpg", alt: "學員調色刮板製作流動畫，藍綠與銅橘色顏料交融鋪展於畫布", sessions: 1 },
   { course: "寵物油畫", themes: ["貓咪"], date: "2025-12-05", src: "../assets/images/gallery/pet-portrait/152.jpg", alt: "橘白貓咪肖像油畫兩幅，淺綠與深灰色背景特寫", sessions: 1 },
   { course: "串珠", themes: ["項鍊"], date: "2025-12-05", src: "../assets/images/gallery/beading/53.jpg", alt: "白色珍珠與透明水晶長項鍊，點綴銀色星星墜飾", sessions: 1 },
   { course: "寵物油畫", themes: ["狗狗", "兩隻以上"], date: "2025-12-05", src: "../assets/images/gallery/pet-portrait/153.jpg", alt: "兩隻臘腸狗戴頭巾墨鏡野餐喝紅酒油畫，牆上掛著主人肖像", sessions: 1 },
