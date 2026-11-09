@@ -135,10 +135,18 @@
 /* 首頁卡片標題低於區塊主標，課程與商品卡片沿用同一層級。 */
 .home-page .home-course-section .banner-tile__title,
 .home-page .product-card__title {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  max-width: 100%;
   margin-top: var(--space-2);
   margin-bottom: 0;
+  padding: var(--space-1) var(--space-2);
+  background: var(--color-surface-black);
+  color: var(--color-surface-light);
   font-family: var(--font-family-base);
-  font-size: var(--font-size-base);
+  font-size: var(--font-size-sm);
   font-weight: 500;
   letter-spacing: 0.5px;
   line-height: 1.4;
