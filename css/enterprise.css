@@ -322,47 +322,45 @@
   }
 }
 
-/* 箭頭本體：「C2 圓頭單箭頭」畫法，來源：使用者提供的
-   往下滑_C2圓頭單箭頭_程式碼.md。兩條圓頭線段（::before/::after）
-   拼成 V 形往下的箭頭，純 CSS 畫出來，不用 SVG／圖檔。原始設計稿寫死
-   顏色（假設淺色文字疊在照片上），這裡改用 currentColor 直接繼承
-   .ent-hero__scroll-hint 已經設定好的 --color-surface-light，跟著
-   容器走比寫死更不會之後對比度跑掉。現在是畫面上唯一的視覺元素（沒有
-   文字陪襯），尺寸比原本並排版本大一點更好辨識。緩動用全站既有的
-   --ease-standard。 */
+/* 共用下滑提示：細線與沿線下移的光點。 */
+.ent-hero__scroll-hint::before {
+  content: "SCROLL";
+  display: block;
+  margin-bottom: var(--space-2);
+  font-size: var(--font-size-xs);
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  line-height: 1;
+  opacity: .85;
+}
 .ent-hero__scroll-hint-arrow {
   position: relative;
-  width: 30px;
-  height: 12px;
-  animation: ent-hero-scroll-hint-bob 1.8s var(--ease-standard) infinite;
+  width: 1px;
+  height: var(--space-10);
+  margin-inline: auto;
+  background: color-mix(in srgb, currentColor 35%, transparent);
 }
-
-.ent-hero__scroll-hint-arrow::before,
 .ent-hero__scroll-hint-arrow::after {
   content: "";
   position: absolute;
+  left: 50%;
   top: 0;
-  width: 15px;
-  height: 2.5px;
+  width: var(--space-1);
+  height: var(--space-1);
+  border-radius: 50%;
   background: currentColor;
-  border-radius: 2px;
+  box-shadow: 0 0 var(--space-2) currentColor;
+  transform: translate(-50%, -50%);
+  animation: ent-scroll-light calc(var(--duration-slow) * 4) var(--ease-standard) infinite;
 }
-
-.ent-hero__scroll-hint-arrow::before {
-  left: 0;
-  transform-origin: left center;
-  transform: rotate(38deg);
+@keyframes ent-scroll-light {
+  0% { top: 0; opacity: 0; }
+  15% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
 }
-
-.ent-hero__scroll-hint-arrow::after {
-  right: 0;
-  transform-origin: right center;
-  transform: rotate(-38deg);
-}
-
-@keyframes ent-hero-scroll-hint-bob {
-  0%, 100% { transform: translateY(0); opacity: 0.5; }
-  50% { transform: translateY(4px); opacity: 1; }
+@media (prefers-reduced-motion: reduce) {
+  .ent-hero__scroll-hint-arrow::after { animation: none; top: 50%; opacity: .85; }
 }
 
 .ent-gallery__viewport.is-landscape {
