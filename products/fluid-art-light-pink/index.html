@@ -184,21 +184,26 @@
            讓已經決定要買的人不用滑完整頁故事才找得到入口；想看完故事再決定的人，
            底部收尾那組還在。上面加一條分隔線＋留白，跟純敘事的文字內容明確切開，
            讓人一眼看出「這裡開始是可以動手的區塊」，不是接著往下讀的介紹文字。 -->
-      <div class="work-heading__buy-row fade-in delay-2">
+      <div class="work-heading__buy-row fade-in delay-2" data-product="fluid-art-light-pink">
         <div class="work-heading__buy-text">
           <p class="work-heading__price">$800</p>
         </div>
-        <div class="buy-action">
+      </div>
+
+      <div class="work-heading__qty fade-in delay-2">
           <div class="qty-stepper" data-buy-qty>
             <button type="button" data-qty-minus aria-label="減少數量">−</button>
             <span data-qty-value>1</span>
             <button type="button" data-qty-plus aria-label="增加數量">＋</button>
           </div>
-          <button type="button" class="work__cta work__cta--primary" data-add-to-cart data-product="fluid-art-light-pink">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
-            <span class="work__cta-label">ＢＵＹ</span>
-          </button>
-        </div>
+      </div>
+
+      <div class="product-buy-bar fade-in delay-2">
+        <button type="button" class="work__cta work__cta--primary" data-add-to-cart data-product="fluid-art-light-pink">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+          <span class="work__cta-label">加入購物車</span>
+        </button>
+        <button type="button" class="work__cta work__cta--buy-now" data-buy-now data-product="fluid-art-light-pink">直接購買</button>
       </div>
     </header>
 
