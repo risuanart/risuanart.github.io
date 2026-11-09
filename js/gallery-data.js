@@ -135,7 +135,7 @@ window.GALLERY_ITEMS = [
   {"course": "自選主題油畫", "themes": ["海洋生物"], "date": "2025-09-01", "alt": "水下鯨魚與潛水者", "src": "../assets/images/gallery/ig-202509/18047012801329608.jpg", "sessions": 1},
   {"course": "自選主題油畫", "themes": ["植物花卉"], "date": "2025-09-01", "alt": "水面玫瑰", "src": "../assets/images/gallery/ig-202509/18054073346215186.jpg", "sessions": 1},
   {"course": "自選主題油畫", "themes": ["海邊"], "date": "2025-09-01", "alt": "粉色海灘與浪花", "src": "../assets/images/gallery/ig-202509/18058627484116749.jpg", "sessions": 1},
-  {"course": "自選主題油畫", "themes": ["動漫／角色", "吉卜力"], "date": "2025-09-01", "alt": "抱玉米的動畫角色", "src": "../assets/images/gallery/ig-202509/18063881579197037.jpg", "sessions": 1},
+  {"course": "自選主題油畫", "themes": ["吉卜力"], "date": "2025-09-01", "alt": "抱玉米的動畫角色", "src": "../assets/images/gallery/ig-202509/18063881579197037.jpg", "sessions": 1},
   {"course": "刮刀油畫", "themes": ["植物花卉"], "date": "2025-09-01", "alt": "立體粉色花卉", "src": "../assets/images/gallery/ig-202509/18071420474156789.jpg", "sessions": 1},
   {"course": "自選主題油畫", "themes": ["星空"], "date": "2025-09-01", "alt": "月亮與羽毛", "src": "../assets/images/gallery/ig-202509/18075042203004199.jpg", "sessions": 1},
   {"course": "寵物油畫", "themes": ["貓咪", "兩隻以上"], "date": "2025-09-01", "alt": "四隻貓咪群像", "sessions": 2, "src": "../assets/images/gallery/ig-202509/18075470177512651.jpg"},
