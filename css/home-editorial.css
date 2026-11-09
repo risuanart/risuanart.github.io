@@ -381,3 +381,21 @@
 .home-page .home-course-section .banner-tile__subtitle + .banner-tile__desc {
   margin-top: calc(var(--space-2) + var(--space-1));
 }
+
+/* 指南閱讀入口必須跟隨文字流，避免借用照片疊字定位而遮住其他內容。 */
+.home-guide-feature__copy { min-width: 0; }
+.home-guide-feature .home-entry__link {
+  position: static;
+  display: inline-flex;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+  color: var(--color-text-primary);
+  font-size: var(--font-size-sm);
+  line-height: 1.5;
+}
+@media (max-width: 768px) {
+  .home-guide-feature { grid-template-columns: minmax(0, 1fr); }
+  .home-guide-feature__media { aspect-ratio: 16 / 10; }
+  .home-guide-feature__copy h3 { font-size: var(--font-size-base); }
+  .home-guide-feature__copy > p:not(.home-guide-feature__eyebrow) { font-size: var(--font-size-sm); line-height: 1.8; }
+}
