@@ -359,10 +359,3 @@
 }
 
 .course-step__booking-link { grid-column:2; grid-row:3; justify-self:start; position:static; display:inline-block; white-space:nowrap; margin-top:var(--space-4); color:var(--color-text-primary); font-size:var(--font-size-sm); line-height:1.5; text-decoration:underline; text-underline-offset:var(--space-1); }
-
-/* 課程切換控制移至照片外，避免遮住作品。 */
-.course-carousel { padding-bottom:calc(var(--space-10) + var(--space-4)); }
-.course-carousel .course-carousel__nav { top:auto; bottom:0; transform:none; width:var(--space-8); height:var(--space-8); background:transparent; box-shadow:none; }
-.course-carousel .course-carousel__nav svg { width:14px; height:14px; }
-.course-carousel .course-carousel__nav--prev { left:calc(50% - var(--space-10)); }
-.course-carousel .course-carousel__nav--next { right:calc(50% - var(--space-10)); }
