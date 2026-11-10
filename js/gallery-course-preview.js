@@ -58,7 +58,7 @@
       .map(
         (item) => `
       <figure class="gallery-grid__item" tabindex="0" role="button" aria-label="放大看：${item.alt || course}">
-        <img src="${base}${item.src}" alt="${item.alt || ""}" loading="lazy">
+        <img src="${base}${item.thumb || item.src}" data-full-src="${base}${item.src}" alt="${item.alt || ""}" loading="lazy" decoding="async">
         <figcaption class="gallery-grid__caption">${course}${
           item.themes && item.themes.length ? "・" + item.themes.join("、") : ""
         }${item.sessions && course !== "大幅畫布訂製" ? "・" + (item.sessions === 1 ? "一堂完成" : item.sessions + "堂完成") : ""}</figcaption>

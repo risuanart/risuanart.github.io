@@ -406,3 +406,10 @@
   .preview-gallery-filter-hierarchy-v1 .gallery-results,
   .preview-gallery-filter-hierarchy-v1 .gallery-page__note { padding-left: 16px; padding-right: 16px; }
 }
+
+/* Keep the batch control below the existing gallery without changing its grid. */
+.gallery-load-more {
+  display: block;
+  margin: var(--space-4) auto;
+}
+.gallery-load-more[hidden] { display: none; }

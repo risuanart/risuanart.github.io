@@ -147,8 +147,26 @@
     return true;
   }
 
-  function render() {
+  const batchSize = 48;
+  let shown = batchSize;
+  const more = document.createElement("button");
+  more.type = "button";
+  more.className = "gallery-filters__chip gallery-load-more";
+  more.hidden = true;
+  grid.after(more);
+  more.addEventListener("click", () => {
+    const firstNew = shown;
+    shown += batchSize;
+    render(false);
+    const card = grid.children[firstNew];
+    if (card) card.focus({ preventScroll: true });
+  });
+
+  function render(reset = true) {
+    if (reset) shown = batchSize;
     const visible = items.filter(matches);
+    more.hidden = visible.length <= shown;
+    more.textContent = `載入更多作品（還有 ${Math.max(0, visible.length - shown)} 件）`;
     if (resultsCount) {
       resultsCount.textContent = onlyOneSession
         ? `找到 ${visible.length} 件一堂完成的作品`
@@ -183,7 +201,7 @@
 
     const courseLinks = window.GALLERY_COURSE_LINKS || {};
 
-    grid.innerHTML = visible
+    grid.innerHTML = visible.slice(0, shown)
       .map((item) => {
         // 瀏覽特定課程（非「全部」）時，這筆資料可能是靠 extraCourses
         // 疊加才符合目前課程，不是它自己的主課程——顯示用目前瀏覽的
@@ -194,7 +212,7 @@
         const linkAttr = courseLink ? ` data-course-link="${courseLink}" data-course-name="${displayCourse}"` : "";
         return `
       <figure class="gallery-grid__item" tabindex="0" role="button" aria-label="放大看：${item.alt || displayCourse}"${linkAttr}>
-        <img src="${item.src}" alt="${item.alt || ""}" loading="lazy">
+        <img src="${item.thumb || item.src}" data-full-src="${item.src}" alt="${item.alt || ""}" loading="lazy" decoding="async">
         <figcaption class="gallery-grid__caption">${displayCourse}${
           item.themes && item.themes.length ? "・" + item.themes.join("、") : ""
         }${item.sessions && displayCourse !== "大幅畫布訂製" ? "・" + (item.sessions === 1 ? "一堂完成" : item.sessions + "堂完成") : ""}</figcaption>

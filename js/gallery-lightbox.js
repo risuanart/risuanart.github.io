@@ -66,7 +66,7 @@
     const figure = currentItems[currentIndex];
     const img = figure.querySelector("img");
     const caption = figure.querySelector(".gallery-grid__caption");
-    imgEl.src = img.src;
+    imgEl.src = img.dataset.fullSrc || img.src;
     imgEl.alt = img.alt || "";
     captionEl.textContent = caption ? caption.textContent : "";
     captionEl.hidden = !caption;
