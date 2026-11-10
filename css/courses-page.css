@@ -359,3 +359,8 @@
 }
 
 .course-step__booking-link { grid-column:2; grid-row:3; justify-self:start; position:static; display:inline-block; white-space:nowrap; margin-top:var(--space-4); color:var(--color-text-primary); font-size:var(--font-size-sm); line-height:1.5; text-decoration:underline; text-underline-offset:var(--space-1); }
+
+/* 課程總覽開場照片保留自動輪播與滑動，移除覆蓋照片的箭頭。 */
+.course-studio-carousel .moments-carousel__nav {
+  display: none;
+}
