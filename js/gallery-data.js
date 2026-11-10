@@ -42,6 +42,13 @@
 // oil-knife/08.jpg：畫面實際內容是海岸崖壁＋浪花＋沙灘小花，不是山，
 // 照實標「海邊」而不是套用整批的「山」標籤。
 window.GALLERY_ITEMS = [
+  // 使用者指定六張簽名特寫，沿用課程既有素材；日期為整理日，堂數未指定。
+  {"course": "自選主題油畫", "themes": ["簽名特寫"], "date": "2026-11-10", "src": "../assets/images/courses/signature-details/17859341981863313.jpg", "alt": "四人合照畫布側面簽名"},
+  {"course": "寵物油畫", "themes": ["簽名特寫"], "date": "2026-11-10", "src": "../assets/images/courses/signature-details/17916449606433862.jpg", "alt": "狗狗肖像畫布側面以畫筆簽名"},
+  {"course": "寵物油畫", "themes": ["簽名特寫"], "date": "2026-11-10", "src": "../assets/images/courses/signature-details/17950778618469861.jpg", "alt": "狗狗肖像畫布邊緣簽名"},
+  {"course": "自選主題油畫", "themes": ["簽名特寫"], "date": "2026-11-10", "src": "../assets/images/courses/signature-details/17992882778384572.jpg", "alt": "風景畫布側面簽名"},
+  {"course": "寵物油畫", "themes": ["簽名特寫"], "date": "2026-11-10", "src": "../assets/images/courses/signature-details/18087088045379965.jpg", "alt": "圓形貓咪作品邊緣簽名"},
+  {"course": "石英砂肌理畫", "themes": ["簽名特寫"], "date": "2026-11-10", "src": "../assets/images/courses/signature-details/18392653582023391.jpg", "alt": "肌理畫布側面簽名"},
   // 202506 IG：依使用者匯出選擇新增34筆，排除13筆，42與既有照片重複略過；日期僅知月份。
   {"course": "寵物油畫", "themes": ["貓咪"], "date": "2025-06-01", "src": "../assets/images/gallery/ig-202506/17857256778447501.jpg", "alt": "藍底貓咪PiPi", "sessions": 1},
   {"course": "刮刀油畫", "themes": ["植物花卉", "學員分享"], "date": "2025-06-01", "src": "../assets/images/gallery/ig-202506/17876435760365078.jpg", "alt": "深底花束學員限動", "sessions": 1},
