@@ -1,0 +1,2 @@
+.large-canvas-guide-back { margin-bottom: var(--space-6); }
+.large-canvas-guide-back + .chapter__title { margin-top: 0; }
