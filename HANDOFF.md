@@ -892,3 +892,7 @@ gap/margin/padding 其實都沒生效（等於 0 或初始值），包括全站 
 ## 2026-11-10：金箔入口照依最新指定改特寫
 - 使用者改選畫筆點綴金箔近照，總覽卡片及base.css共用gold-leaf-abstract入口圖改為gallery/ig-202410/17948134034755526.jpg，更新alt與樣式版本。取代前次木牆成品照選擇；課程影片未動。
 - Chrome六種標準寬度橫向溢位0、照片載入與裁切正常、無pageerror，git diff --check通過。僅本機提交，未push。
+
+## 2026-11-10：大幅畫布入口改白色肌理製作照
+- 依最新截圖，總覽07大幅畫布訂製卡片及base.css共用入口設定改用courses/large-canvas/student-0720.webp白色肌理畫貼銀箔特寫，取代context-necklace.jpg並更新alt與CSS版本。課程頁綠葉首圖未動。
+- Chrome六種標準寬度無橫向溢位、照片載入裁切正常、無pageerror，git diff --check通過。僅本機提交，未push。
