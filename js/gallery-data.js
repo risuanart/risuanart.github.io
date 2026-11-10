@@ -42,6 +42,16 @@
 // oil-knife/08.jpg：畫面實際內容是海岸崖壁＋浪花＋沙灘小花，不是山，
 // 照實標「海邊」而不是套用整批的「山」標籤。
 window.GALLERY_ITEMS = [
+  // 202412 IG：依使用者匯出選擇加入9筆，23筆排除、5筆與既有同件作品略過，日期僅知月份。
+  {"course": "自選主題油畫", "themes": ["人像", "建築"], "date": "2024-12-01", "src": "../assets/images/gallery/ig-202412/17859782487239863.jpg", "alt": "白色街屋與人物", "sessions": 1},
+  {"course": "自選主題油畫", "themes": ["人像"], "date": "2024-12-01", "src": "../assets/images/gallery/ig-202412/17867500686200344.jpg", "alt": "公園長椅雙人", "sessions": 2},
+  {"course": "自選主題油畫", "themes": ["人像"], "date": "2024-12-01", "src": "../assets/images/gallery/ig-202412/17907194841073093.jpg", "alt": "婚禮雙人與紅花束", "sessions": 1},
+  {"course": "自選主題油畫", "themes": ["迪士尼／皮克斯"], "date": "2024-12-01", "src": "../assets/images/gallery/ig-202412/17907415065078225.jpg", "alt": "迪士尼反派群像直幅", "extraCourses": ["大幅畫布訂製"]},
+  {"course": "金箔抽象畫", "themes": ["抽象圖案"], "date": "2024-12-01", "src": "../assets/images/gallery/ig-202412/18013506062651921.jpg", "alt": "灰白樹林抽象畫", "sessions": 1, "extraCourses": ["大幅畫布訂製"]},
+  {"course": "寵物油畫", "themes": ["貓咪"], "date": "2024-12-01", "src": "../assets/images/gallery/ig-202412/18042734798190946.jpg", "alt": "虎斑貓與麵包", "sessions": 1},
+  {"course": "石英砂肌理畫", "themes": ["山"], "date": "2024-12-01", "src": "../assets/images/gallery/ig-202412/18047525249106607.jpg", "alt": "富士山與紅葉", "sessions": 1},
+  {"course": "石英砂肌理畫", "themes": ["海邊"], "date": "2024-12-01", "src": "../assets/images/gallery/ig-202412/18208137733288464.jpg", "alt": "藍黑斜向海浪肌理", "sessions": 1},
+  {"course": "自選主題油畫", "themes": ["人像", "節慶／季節"], "date": "2024-12-01", "src": "../assets/images/gallery/ig-202412/18481144363041638.jpg", "alt": "雙人肖像與囍字三幅", "sessions": 3, "extraCourses": ["流動畫"]},
   // 二月兩張依使用者指定分類；堂數沿用未特別指定皆一堂，日期僅知月份。
   {"course": "串珠", "themes": ["項鍊", "學員分享"], "date": "2025-02-01", "src": "../assets/images/gallery/ig-202502/17989932026620607.jpg", "alt": "學員分享黑底串珠項鍊", "sessions": 1},
   {"course": "流動畫", "themes": ["節慶／季節", "學員分享"], "date": "2025-02-01", "src": "../assets/images/gallery/ig-202502/18055686098067191.jpg", "alt": "學員分享春聯流動畫，粉紅春字與紅色福字作品", "sessions": 1},
