@@ -148,3 +148,21 @@ a {
     scroll-behavior: auto !important;
   }
 }
+
+/* 課程入口共用照片：首頁精選、課程總覽、全站課程下拉選單同步。
+   換入口照片只需更新這裡；不套用課程頁主視覺或內文作品照片。
+   img 保留 HTML alt 與既有裁切樣式。 */
+:root {
+  --course-cover-pet-portrait: url("../assets/images/gallery/pet-portrait/22.jpg");
+  --course-cover-fluid-art: url("../assets/images/gallery/fluid-art/17.jpg");
+  --course-cover-large-canvas: url("../assets/images/courses/large-canvas/context-necklace.jpg");
+}
+:is(.site-header__nav-dropdown-photo, .banner-tile, .course-carousel__tile)[href$="pet-portrait/"] img {
+  content: var(--course-cover-pet-portrait);
+}
+:is(.site-header__nav-dropdown-photo, .banner-tile, .course-carousel__tile)[href$="fluid-art/"] img {
+  content: var(--course-cover-fluid-art);
+}
+:is(.site-header__nav-dropdown-photo, .banner-tile, .course-carousel__tile)[href$="large-canvas/"] img {
+  content: var(--course-cover-large-canvas);
+}

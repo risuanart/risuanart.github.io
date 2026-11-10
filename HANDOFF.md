@@ -876,3 +876,7 @@ gap/margin/padding 其實都沒生效（等於 0 或初始值），包括全站 
 ## 2026-11-10：移除課程總覽開場照片箭頭
 - 依使用者截圖，只隱藏繪畫課程開頭畫室照片輪播的左右箭頭，使用courses-page.css限定選擇器；保留自動播放與手機滑動，不影響下方探索課程輪播控制或其他頁面。CSS網址更新版本以避免快取。
 - Chrome六種標準寬度箭頭可見數均0、橫向溢位均0；等待5.3秒確認主動照片有切換，無pageerror，截圖檢視正常，git diff --check通過。僅本機提交、未push。
+
+## 2026-11-10：集中課程入口照片，包含全站下拉選單
+- 使用者指出下拉選單也是共用入口照，要求換圖一起更新並可寫入CSS。css/base.css新增--course-cover-pet-portrait／fluid-art／large-canvas三個共用圖片設定，僅套用site-header__nav-dropdown-photo、banner-tile、course-carousel__tile且連結對應課程的img，利用content替換顯示圖片，保留原alt及裁切。之後這三堂課入口換圖改此處即可同步；HTML src仍作備援，課程頁主視覺與內文不套用。
+- 所有正式頁base.css加版本號，避免舊快取；封存與work不改。首頁、課程總覽、寵物油畫與商品頁四頁六種標準寬度無溢位，下拉選單實測CSS圖片為綠底雙貓、截圖確認正常，寵物頁main圖片無CSS替換，無pageerror。diff檢查通過，未push。
