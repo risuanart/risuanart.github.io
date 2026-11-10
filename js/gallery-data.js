@@ -42,6 +42,15 @@
 // oil-knife/08.jpg：畫面實際內容是海岸崖壁＋浪花＋沙灘小花，不是山，
 // 照實標「海邊」而不是套用整批的「山」標籤。
 window.GALLERY_ITEMS = [
+  // 202501 IG：依使用者匯出選擇加入8筆，3筆排除、1筆既有同件略過，日期僅知月份。
+  {"course": "自選主題油畫", "themes": ["吉卜力", "建築"], "date": "2025-01-01", "src": "../assets/images/gallery/ig-202501/17874740808167416.jpg", "alt": "城堡與草地人物", "sessions": 3, "extraCourses": ["大幅畫布訂製"]},
+  {"course": "流動畫", "themes": ["節慶／季節", "學員分享"], "date": "2025-01-01", "src": "../assets/images/gallery/ig-202501/17925197325001471.jpg", "alt": "春聯福字學員限動", "sessions": 1},
+  {"course": "流動畫", "themes": [], "date": "2025-01-01", "src": "../assets/images/gallery/ig-202501/17925761618901880.jpg", "alt": "藍綠流動畫禮盒", "sessions": 1},
+  {"course": "流動畫", "themes": ["節慶／季節", "學員分享"], "date": "2025-01-01", "src": "../assets/images/gallery/ig-202501/18026934368625118.jpg", "alt": "春福流動畫學員限動", "sessions": 1},
+  {"course": "流動畫", "themes": ["節慶／季節", "學員分享"], "date": "2025-01-01", "src": "../assets/images/gallery/ig-202501/18031442951263822.jpg", "alt": "春字與福字流動畫展示", "sessions": 1},
+  {"course": "自選主題油畫", "themes": ["其他動物"], "date": "2025-01-01", "src": "../assets/images/gallery/ig-202501/18054974090071563.jpg", "alt": "粉彩抽象滑板", "sessions": 2, "extraCourses": ["特殊材質客製"]},
+  {"course": "流動畫", "themes": ["節慶／季節", "學員分享"], "date": "2025-01-01", "src": "../assets/images/gallery/ig-202501/18064533520876066.jpg", "alt": "紅粉春聯學員限動", "sessions": 1},
+  {"course": "流動畫", "themes": ["節慶／季節", "學員分享"], "date": "2025-01-01", "src": "../assets/images/gallery/ig-202501/18484994023040729.jpg", "alt": "木牆上紅色字畫", "sessions": 1},
   // 202412 IG：依使用者匯出選擇加入9筆，23筆排除、5筆與既有同件作品略過，日期僅知月份。
   {"course": "自選主題油畫", "themes": ["人像", "建築"], "date": "2024-12-01", "src": "../assets/images/gallery/ig-202412/17859782487239863.jpg", "alt": "白色街屋與人物", "sessions": 1},
   {"course": "自選主題油畫", "themes": ["人像"], "date": "2024-12-01", "src": "../assets/images/gallery/ig-202412/17867500686200344.jpg", "alt": "公園長椅雙人", "sessions": 2},
