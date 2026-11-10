@@ -42,6 +42,9 @@
 // oil-knife/08.jpg：畫面實際內容是海岸崖壁＋浪花＋沙灘小花，不是山，
 // 照實標「海邊」而不是套用整批的「山」標籤。
 window.GALLERY_ITEMS = [
+  // 202411 IG：依使用者匯出選擇加入2筆，1筆使用者排除，日期僅知月份。
+  {"course": "刮刀油畫", "themes": ["人像", "風景"], "date": "2024-11-01", "src": "../assets/images/gallery/ig-202411/17957606657728393.jpg", "alt": "池塘景色與人物", "sessions": 1},
+  {"course": "流動畫", "themes": [], "date": "2024-11-01", "src": "../assets/images/gallery/ig-202411/18003134786690208.jpg", "alt": "流動畫製作過程", "sessions": 1},
   // 202410 IG：依使用者匯出選擇加入39筆，5筆排除、4筆既有同件略過，日期僅知月份。
   {"course": "自選主題油畫", "themes": ["星空", "建築"], "date": "2024-10-01", "src": "../assets/images/gallery/ig-202410/17846390949307656.jpg", "alt": "星空小屋", "sessions": 1},
   {"course": "串珠", "themes": ["項鍊", "戒指", "學員分享"], "date": "2024-10-01", "src": "../assets/images/gallery/ig-202410/17851857153266056.jpg", "alt": "串珠項鍊與戒指分享", "sessions": 1},
