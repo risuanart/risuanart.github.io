@@ -896,3 +896,9 @@ gap/margin/padding 其實都沒生效（等於 0 或初始值），包括全站 
 ## 2026-11-10：大幅畫布入口改白色肌理製作照
 - 依最新截圖，總覽07大幅畫布訂製卡片及base.css共用入口設定改用courses/large-canvas/student-0720.webp白色肌理畫貼銀箔特寫，取代context-necklace.jpg並更新alt與CSS版本。課程頁綠葉首圖未動。
 - Chrome六種標準寬度無橫向溢位、照片載入裁切正常、無pageerror，git diff --check通過。僅本機提交，未push。
+
+## 2026-11-10：確認圖文清單後升級1035張放大照片
+- 使用者檢視1035張左右比較圖後回覆「ok沒問題」，依確認清單從較大來源替換同張JPEG，最大長邊2560、品質92、不放大來源。1035張完整性及尺寸檢查通過，列表thumb檔全數未改；素材原檔保留。清單包含gallery與29張被作品集引用的guides圖片。
+- 潛水照sea-oil/38由675×1200恢復1328×2360；燈箱仍讀data-full-src，新增v=20261110-high-resolution避免舊快取，十頁腳本版本同步更新。作品集、自選油畫、寵物油畫六種標準寬度無溢位或pageerror，JS語法及diff檢查通過。
+- 素材來源含學員作品照片、照片要放進官網及Downloads/ig下載。其餘照片未找到安全可升級來源，不宣稱全部已改善。完整確認與執行清單存於本次Codex工作區work/resolution-verified.json及resolution-applied.json，不放公開repo。
+- 本次1035張合計605.4MB，素材總量約由830MB增至1.3GB；下次push部署前須處理容量。本次僅本機提交、未push。
