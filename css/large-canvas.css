@@ -13,3 +13,7 @@
 @media (max-width: 767px) {
   .ent-hero.is-flush-top { margin-top: calc(var(--space-4) - 69px); }
 }
+
+/* Each photo keeps a 4:5 frame; the paired container sizes itself around the gap. */
+.ent-feature__media.ent-feature__media--duo { aspect-ratio: auto; }
+.ent-feature__media--duo img { height: auto; aspect-ratio: 4 / 5; }
