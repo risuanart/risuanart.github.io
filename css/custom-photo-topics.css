@@ -70,3 +70,8 @@
 .custom-topics__load-status { position:absolute; inset:0; display:grid; place-items:center; padding:var(--space-4); margin:0; text-align:center; color:var(--color-text-secondary); font-size:var(--font-size-sm); pointer-events:none; }
 .custom-topics__load-status[hidden] { display:none; }
 .custom-topics__zoom:disabled { cursor:progress; }
+
+/* 兩組學員合照保留自動輪播與觸控滑動，不在照片上顯示箭頭。 */
+.custom-photo-students .moments-carousel__nav {
+  display: none;
+}
