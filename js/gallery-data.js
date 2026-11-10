@@ -91,7 +91,7 @@ window.GALLERY_ITEMS = [
   {"course": "刮刀油畫", "themes": ["植物花卉"], "date": "2025-07-01", "src": "../assets/images/gallery/ig-202507/18055170404081569.jpg", "alt": "淺色立體花卉", "sessions": 1},
   {"course": "寵物油畫", "themes": ["貓咪"], "date": "2025-07-01", "src": "../assets/images/gallery/ig-202507/18057478757208415.jpg", "alt": "雙人展示貓咪作品", "sessions": 1},
   {"course": "自選主題油畫", "themes": ["人像"], "date": "2025-07-01", "src": "../assets/images/gallery/ig-202507/18058342694200563.jpg", "alt": "幼童肖像", "sessions": 1},
-  {"course": "自選主題油畫", "themes": ["動漫／角色"], "date": "2025-07-01", "src": "../assets/images/gallery/ig-202507/18058413035058522.jpg", "alt": "彩色塗鴉角色與文字", "sessions": 1},
+  {"course": "自選主題油畫", "themes": ["動漫／角色", "塗鴉"], "date": "2025-07-01", "src": "../assets/images/gallery/ig-202507/18058413035058522.jpg", "alt": "彩色塗鴉角色與文字", "sessions": 1},
   {"course": "自選主題油畫", "themes": ["海邊"], "date": "2025-07-01", "src": "../assets/images/gallery/ig-202507/18059879609360666.jpg", "alt": "淺藍海灘與浪花", "sessions": 1},
   {"course": "自選主題油畫", "themes": ["狗狗"], "date": "2025-07-01", "src": "../assets/images/gallery/ig-202507/18060127331259159.jpg", "alt": "窗邊白貓與垂布", "sessions": 1},
   {"course": "刮刀油畫", "themes": ["植物花卉"], "date": "2025-07-01", "src": "../assets/images/gallery/ig-202507/18062549195520968.jpg", "alt": "白色系立體瓶花", "sessions": 1},
@@ -1454,6 +1454,7 @@ window.GALLERY_COURSE_LINKS = {
 // 作品，借物少女艾莉緹是米林宏昌執導、宮崎駿只掛企劃，「吉卜力」
 // 這個名稱才真的涵蓋得到這些不是宮崎駿本人執導的作品）。
 window.GALLERY_THEMES = [
+  "塗鴉",
   "海洋生物",
   "其他動物",
   "植物花卉",
