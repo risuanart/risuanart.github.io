@@ -66,7 +66,10 @@
     const figure = currentItems[currentIndex];
     const img = figure.querySelector("img");
     const caption = figure.querySelector(".gallery-grid__caption");
-    imgEl.src = img.dataset.fullSrc || img.src;
+    // 高解析照片沿用檔名，版本參數避免放大時讀到瀏覽器舊的低解析快取。
+    const fullSrc = new URL(img.dataset.fullSrc || img.src, document.baseURI);
+    fullSrc.searchParams.set("v", "20261110-high-resolution");
+    imgEl.src = fullSrc.href;
     imgEl.alt = img.alt || "";
     captionEl.textContent = caption ? caption.textContent : "";
     captionEl.hidden = !caption;
