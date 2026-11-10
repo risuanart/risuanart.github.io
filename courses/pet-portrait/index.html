@@ -334,10 +334,10 @@
          見 css/products.css 開頭說明），不再用 js/gallery-course-preview.js
          那個「抓最新4筆」的通用預覽元件——這裡是同一堂課底下依「畫的是
          什麼」分類，不是單純照時間排序，通用元件沒有分類概念。因為改成
-         靜態寫死的輪播，這頁不再需要 js/gallery-data.js／
-         gallery-course-preview.js／gallery-lightbox.js 這三支腳本，一併從
-         頁尾移除；js/gallery-data.js 裡的寵物油畫資料仍然保留，是給
-         gallery.html 總覽頁篩選用（獨立的用途，不影響這裡）。
+         靜態寫死的輪播。2026-11-10 依使用者要求，另於常見問題前新增
+         共用最新四筆作品預覽，重新載入 gallery-data.js 與
+         gallery-course-preview.js；gallery-lightbox.js 同時支援簽名細節
+         與新增的作品預覽。原狗狗／貓咪分類輪播保留。
 
          照片來源：使用者從 Mac 照片 App「狗狗油畫」相簿匯出 10 張真實
          學員作品照片，確認都是完全沒有畫畫經驗的同學一堂課完成的
@@ -578,6 +578,18 @@
       </div>
     </section>
 
+    <section class="chapter fade-in delay-2">
+      <div class="chapter__block">
+        <p class="chapter__statement">學員作品</p>
+        <p class="chapter__prose">每隻毛孩都有不同的表情與個性，看看同學們如何用畫筆留下牠們的模樣。</p>
+      </div>
+      <div data-gallery-course-preview="寵物油畫" data-gallery-preview-base="../../">
+        <div class="gallery-grid" data-gallery-preview-grid hidden></div>
+        <p class="gallery-empty" data-gallery-preview-empty hidden>學員作品陸續整理中，敬請期待。</p>
+        <a class="text-link" data-gallery-preview-more hidden>查看更多這堂課的作品 →</a>
+      </div>
+    </section>
+
     <section class="chapter fade-in delay-3">
       <p class="chapter__statement">常見問題</p>
       <details class="faq-item">
@@ -656,6 +668,8 @@
   <script src="../../js/scroll-reveal.js"></script>
   <script src="../../js/moments-carousel.js"></script>
   <script src="../../js/site-menu.js?v=menu-order-20261109"></script>
+  <script src="../../js/gallery-data.js"></script>
+  <script src="../../js/gallery-course-preview.js?v=20261110-gallery-performance"></script>
   <script src="../../js/gallery-lightbox.js?v=20261110-gallery-performance"></script>
   <script src="/js/promo-bar.js"></script>
 </body>
