@@ -42,6 +42,41 @@
 // oil-knife/08.jpg：畫面實際內容是海岸崖壁＋浪花＋沙灘小花，不是山，
 // 照實標「海邊」而不是套用整批的「山」標籤。
 window.GALLERY_ITEMS = [
+  // 202506 IG：依使用者匯出選擇新增34筆，排除13筆，42與既有照片重複略過；日期僅知月份。
+  {"course": "寵物油畫", "themes": ["貓咪"], "date": "2025-06-01", "src": "../assets/images/gallery/ig-202506/17857256778447501.jpg", "alt": "藍底貓咪PiPi", "sessions": 1},
+  {"course": "刮刀油畫", "themes": ["植物花卉", "學員分享"], "date": "2025-06-01", "src": "../assets/images/gallery/ig-202506/17876435760365078.jpg", "alt": "深底花束學員限動", "sessions": 1},
+  {"course": "串珠", "themes": ["項鍊", "戒指"], "date": "2025-06-01", "src": "../assets/images/gallery/ig-202506/17883254859311969.jpg", "alt": "串珠項鍊與戒指拼貼", "sessions": 1},
+  {"course": "刮刀油畫", "themes": ["植物花卉"], "date": "2025-06-01", "src": "../assets/images/gallery/ig-202506/17886819597182866.jpg", "alt": "學員繪製淺色花卉", "sessions": 1},
+  {"course": "自選主題油畫", "themes": ["人像", "狗狗"], "date": "2025-06-01", "src": "../assets/images/gallery/ig-202506/17901890256085314.jpg", "alt": "橢圓畫布三人與狗", "sessions": 3},
+  {"course": "自選主題油畫", "themes": ["海邊", "風景"], "date": "2025-06-01", "src": "../assets/images/gallery/ig-202506/17918403953997800.jpg", "alt": "海上帆船與夕陽", "sessions": 1},
+  {"course": "石英砂肌理畫", "themes": ["海邊", "狗狗", "學員分享"], "date": "2025-06-01", "src": "../assets/images/gallery/ig-202506/17935818303022838.jpg", "alt": "灰藍肌理製作過程", "sessions": 1},
+  {"course": "刮刀油畫", "themes": ["植物花卉"], "date": "2025-06-01", "src": "../assets/images/gallery/ig-202506/17935920990029002.jpg", "alt": "淺底立體小花枝", "sessions": 1},
+  {"course": "自選主題油畫", "themes": ["簽名特寫"], "date": "2025-06-01", "src": "../assets/images/gallery/ig-202506/17956244705957791.jpg", "alt": "畫布側面簽名", "sessions": 1},
+  {"course": "串珠", "themes": ["項鍊"], "date": "2025-06-01", "src": "../assets/images/gallery/ig-202506/17967566897760617.jpg", "alt": "黑白透明串珠項鍊，限動影片代表截圖", "sessions": 1},
+  {"course": "自選主題油畫", "themes": ["其他動物"], "date": "2025-06-01", "src": "../assets/images/gallery/ig-202506/17967885695913958.jpg", "alt": "學員在大幅畫布繪製其他動物主題", "sessions": 1, "extraCourses": ["大幅畫布訂製"]},
+  {"course": "串珠", "themes": ["吊飾"], "date": "2025-06-01", "src": "../assets/images/gallery/ig-202506/17969682359904246.jpg", "alt": "多款彩色串珠項鍊，限動影片代表截圖", "sessions": 1},
+  {"course": "刮刀油畫", "themes": ["植物花卉"], "date": "2025-06-01", "src": "../assets/images/gallery/ig-202506/18026407205699721.jpg", "alt": "深底立體花束特寫", "sessions": 1},
+  {"course": "刮刀油畫", "themes": ["植物花卉"], "date": "2025-06-01", "src": "../assets/images/gallery/ig-202506/18028082879492106.jpg", "alt": "粉彩立體玫瑰特寫", "sessions": 1},
+  {"course": "串珠", "themes": ["項鍊", "學員分享"], "date": "2025-06-01", "src": "../assets/images/gallery/ig-202506/18046155179216418.jpg", "alt": "學員佩戴串珠項鍊限動，限動影片代表截圖", "sessions": 1},
+  {"course": "刮刀油畫", "themes": ["植物花卉"], "date": "2025-06-01", "src": "../assets/images/gallery/ig-202506/18060811862186447.jpg", "alt": "立體白花枝", "sessions": 1},
+  {"course": "石英砂肌理畫", "themes": ["人像", "抽象圖案", "名畫"], "date": "2025-06-01", "src": "../assets/images/gallery/ig-202506/18061243027949601.jpg", "alt": "戴帽女子肖像", "sessions": 1},
+  {"course": "自選主題油畫", "themes": ["吉卜力"], "date": "2025-06-01", "src": "../assets/images/gallery/ig-202506/18062920445135114.jpg", "alt": "吉卜力主題草地與雲景", "sessions": 1},
+  {"course": "刮刀油畫", "themes": ["植物花卉"], "date": "2025-06-01", "src": "../assets/images/gallery/ig-202506/18067944419078846.jpg", "alt": "黑底花瓶與立體花束", "sessions": 1},
+  {"course": "自選主題油畫", "themes": ["簽名特寫"], "date": "2025-06-01", "src": "../assets/images/gallery/ig-202506/18073519999757372.jpg", "alt": "畫布邊角簽名過程", "sessions": 1},
+  {"course": "刮刀油畫", "themes": ["食物"], "date": "2025-06-01", "src": "../assets/images/gallery/ig-202506/18074426789306106.jpg", "alt": "水面檸檬與游泳圈", "sessions": 1},
+  {"course": "石英砂肌理畫", "themes": ["抽象圖案"], "date": "2025-06-01", "src": "../assets/images/gallery/ig-202506/18078554983804491.jpg", "alt": "白色肌理基底上色過程", "sessions": 1},
+  {"course": "自選主題油畫", "themes": ["食物"], "date": "2025-06-01", "src": "../assets/images/gallery/ig-202506/18080835301655637.jpg", "alt": "持杯人物繪製細節", "sessions": 1},
+  {"course": "串珠", "themes": ["項鍊"], "date": "2025-06-01", "src": "../assets/images/gallery/ig-202506/18081677764774961.jpg", "alt": "串珠飾品設計板", "sessions": 1},
+  {"course": "自選主題油畫", "themes": ["植物花卉"], "date": "2025-06-01", "src": "../assets/images/gallery/ig-202506/18083716393765757.jpg", "alt": "白色雛菊花叢", "sessions": 1},
+  {"course": "串珠", "themes": ["項鍊"], "date": "2025-06-01", "src": "../assets/images/gallery/ig-202506/18086514982662316.jpg", "alt": "黑白串珠項鍊佩戴", "sessions": 1},
+  {"course": "自選主題油畫", "themes": ["植物花卉", "風景"], "date": "2025-06-01", "src": "../assets/images/gallery/ig-202506/18090978526618132.jpg", "alt": "草地孤樹與藍天", "sessions": 1, "extraCourses": ["大幅畫布訂製"]},
+  {"course": "刮刀油畫", "themes": ["植物花卉"], "date": "2025-06-01", "src": "../assets/images/gallery/ig-202506/18102871279549442.jpg", "alt": "灰藍底立體花枝", "sessions": 1},
+  {"course": "刮刀油畫", "themes": ["海洋生物"], "date": "2025-06-01", "src": "../assets/images/gallery/ig-202506/18117545584481800.jpg", "alt": "旋轉魚群與浪花", "sessions": 1},
+  {"course": "串珠", "themes": ["戒指"], "date": "2025-06-01", "src": "../assets/images/gallery/ig-202506/18133825957422865.jpg", "alt": "多款花朵串珠戒指", "sessions": 1},
+  {"course": "刮刀油畫", "themes": ["植物花卉"], "date": "2025-06-01", "src": "../assets/images/gallery/ig-202506/18318343576231777.jpg", "alt": "淺底玫瑰肌理影片，限動影片代表截圖", "sessions": 1},
+  {"course": "串珠", "themes": ["吊飾"], "date": "2025-06-01", "src": "../assets/images/gallery/ig-202506/18347283829087066.jpg", "alt": "白色串珠杯鍊", "sessions": 1},
+  {"course": "串珠", "themes": ["吊飾"], "date": "2025-06-01", "src": "../assets/images/gallery/ig-202506/18356149609152119.jpg", "alt": "黑白串珠項鍊特寫", "sessions": 1},
+  {"course": "串珠", "themes": ["吊飾"], "date": "2025-06-01", "src": "../assets/images/gallery/ig-202506/18515497156038590.jpg", "alt": "串珠包包吊飾與手鏈，限動影片代表截圖", "sessions": 1},
   // 202507 IG：依使用者匯出選擇加入94筆，5筆排除、4筆與既有同件作品略過，日期僅知月份。
   {"course": "刮刀油畫", "themes": ["狗狗", "兩隻以上"], "date": "2025-07-01", "src": "../assets/images/gallery/ig-202507/17844958083512268.jpg", "alt": "水中雙狗", "sessions": 1},
   {"course": "寵物油畫", "themes": ["貓咪"], "date": "2025-07-01", "src": "../assets/images/gallery/ig-202507/17848424787518167.jpg", "alt": "側面仰望虎斑貓", "sessions": 1},
@@ -1454,6 +1489,8 @@ window.GALLERY_COURSE_LINKS = {
 // 作品，借物少女艾莉緹是米林宏昌執導、宮崎駿只掛企劃，「吉卜力」
 // 這個名稱才真的涵蓋得到這些不是宮崎駿本人執導的作品）。
 window.GALLERY_THEMES = [
+  "簽名特寫",
+  "名畫",
   "塗鴉",
   "海洋生物",
   "其他動物",
