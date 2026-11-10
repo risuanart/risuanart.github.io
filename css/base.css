@@ -153,7 +153,7 @@ a {
    換入口照片只需更新這裡；不套用課程頁主視覺或內文作品照片。
    img 保留 HTML alt 與既有裁切樣式。 */
 :root {
-  --course-cover-gold-leaf-abstract: url("../assets/images/gallery/ig-202412/18013506062651921.jpg");
+  --course-cover-gold-leaf-abstract: url("../assets/images/gallery/ig-202410/17948134034755526.jpg");
   --course-cover-pet-portrait: url("../assets/images/gallery/pet-portrait/22.jpg");
   --course-cover-fluid-art: url("../assets/images/gallery/fluid-art/17.jpg");
   --course-cover-large-canvas: url("../assets/images/courses/large-canvas/context-necklace.jpg");
