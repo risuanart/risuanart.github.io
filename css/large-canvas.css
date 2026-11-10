@@ -8,3 +8,8 @@
 .large-canvas-direction h2 { font-size: var(--font-size-base); margin-top: var(--space-4); margin-bottom: var(--space-2); }
 .large-canvas-direction p { font-size: var(--font-size-sm); line-height: var(--body-line-height); margin: 0; }
 @media (min-width: 768px) { .large-canvas-directions { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+
+/* Mobile: retain the header space, cancelling only the shared 69px hero offset. */
+@media (max-width: 767px) {
+  .ent-hero.is-flush-top { margin-top: calc(var(--space-4) - 69px); }
+}
