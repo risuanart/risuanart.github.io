@@ -22,3 +22,5 @@
 @media (max-width: 767px) {
   .large-canvas-hero-gallery .ent-gallery__viewport { aspect-ratio: 4 / 5; }
 }
+
+.large-canvas-hero-gallery .ent-hero__scroll-hint { z-index: 3; }
