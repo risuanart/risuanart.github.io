@@ -42,6 +42,23 @@
 // oil-knife/08.jpg：畫面實際內容是海岸崖壁＋浪花＋沙灘小花，不是山，
 // 照實標「海邊」而不是套用整批的「山」標籤。
 window.GALLERY_ITEMS = [
+  // 202503 IG：依使用者匯出選擇加入16筆，4筆排除、2筆與既有同件作品略過，日期僅知月份。
+  {"course": "自選主題油畫", "themes": ["植物花卉"], "date": "2025-03-01", "src": "../assets/images/gallery/ig-202503/17846877105409221.jpg", "alt": "米底單朵花卉", "sessions": 1},
+  {"course": "寵物油畫", "themes": ["貓咪"], "date": "2025-03-01", "src": "../assets/images/gallery/ig-202503/17858358795333782.jpg", "alt": "灰色幼貓繪製特寫", "sessions": 1},
+  {"course": "石英砂肌理畫", "themes": ["抽象圖案"], "date": "2025-03-01", "src": "../assets/images/gallery/ig-202503/17900215341051369.jpg", "alt": "白色弧線肌理", "sessions": 1},
+  {"course": "寵物油畫", "themes": ["貓咪"], "date": "2025-03-01", "src": "../assets/images/gallery/ig-202503/18043643306110837.jpg", "alt": "橘色虎斑貓繪製特寫", "sessions": 1},
+  {"course": "自選主題油畫", "themes": ["海邊"], "date": "2025-03-01", "src": "../assets/images/gallery/ig-202503/18058481057038041.jpg", "alt": "夕陽海浪", "sessions": 1},
+  {"course": "寵物油畫", "themes": ["狗狗", "學員分享"], "date": "2025-03-01", "src": "../assets/images/gallery/ig-202503/18062462653798311.jpg", "alt": "兩幅狗狗肖像限動", "sessions": 1},
+  {"course": "刮刀油畫", "themes": ["植物花卉"], "date": "2025-03-01", "src": "../assets/images/gallery/ig-202503/18064037842941016.jpg", "alt": "白底粉彩立體花枝", "sessions": 1},
+  {"course": "寵物油畫", "themes": ["節慶／季節", "狗狗"], "date": "2025-03-01", "src": "../assets/images/gallery/ig-202503/18064606270943074.jpg", "alt": "生日帽法鬥", "sessions": 2},
+  {"course": "寵物油畫", "themes": ["狗狗"], "date": "2025-03-01", "src": "../assets/images/gallery/ig-202503/18073715848697162.jpg", "alt": "畢業帽黑狗", "sessions": 1},
+  {"course": "石英砂肌理畫", "themes": ["海邊"], "date": "2025-03-01", "src": "../assets/images/gallery/ig-202503/18073959364750630.jpg", "alt": "黑白巨浪", "sessions": 1},
+  {"course": "流動畫", "themes": [], "date": "2025-03-01", "src": "../assets/images/gallery/ig-202503/18083553865620126.jpg", "alt": "粉棕白大理石流動畫", "sessions": 1},
+  {"course": "刮刀油畫", "themes": ["植物花卉"], "date": "2025-03-01", "src": "../assets/images/gallery/ig-202503/18084950425549670.jpg", "alt": "粉彩立體花田", "sessions": 1},
+  {"course": "寵物油畫", "themes": ["貓咪"], "date": "2025-03-01", "src": "../assets/images/gallery/ig-202503/18087972301595620.jpg", "alt": "灰底三花貓", "sessions": 1},
+  {"course": "自選主題油畫", "themes": ["風景", "山"], "date": "2025-03-01", "src": "../assets/images/gallery/ig-202503/18120101770433937.jpg", "alt": "橘色山巒與花田", "sessions": 1},
+  {"course": "石英砂肌理畫", "themes": ["植物花卉"], "date": "2025-03-01", "src": "../assets/images/gallery/ig-202503/18177896023315954.jpg", "alt": "金棕底白色立體花朵", "sessions": 1},
+  {"course": "石英砂肌理畫", "themes": ["海邊"], "date": "2025-03-01", "src": "../assets/images/gallery/ig-202503/18448179235073656.jpg", "alt": "灰綠色海浪沙灘", "sessions": 1},
   // 202504 IG：依使用者匯出選擇加入28筆，3筆排除、3筆與既有同件作品略過，日期僅知月份。
   {"course": "寵物油畫", "themes": ["貓咪", "兩隻以上"], "date": "2025-04-01", "src": "../assets/images/gallery/ig-202504/17845455408448824.jpg", "alt": "窗邊雙貓背影", "sessions": 1},
   {"course": "自選主題油畫", "themes": ["其他動物"], "date": "2025-04-01", "src": "../assets/images/gallery/ig-202504/17848479933450115.jpg", "alt": "黑白獅子肖像繪製", "sessions": 3, "extraCourses": ["大幅畫布訂製"]},
