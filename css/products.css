@@ -295,7 +295,7 @@
 
   /* 模板 A：.work__title-block 版 ---------- */
   .work__intro:has(.work__title-block) {
-    grid-template-rows: auto auto auto 1fr; /* 圖說／標題區／買列／填充 */
+    grid-template-rows: auto auto auto auto auto 1fr; /* 圖說／標題區／買列／數量列／CTA／填充 */
   }
 
   .work__intro .work-heading__colorway-note {
@@ -318,6 +318,27 @@
   .work__intro:has(.work__title-block) .work-heading__buy-row {
     grid-column: 2;
     grid-row: 3;
+  }
+
+  /* 2026-11-11 使用者反映各商品頁「數量／加入購物車」按鈕位置不一致：
+     這裡（模板 A 共用規則）原本只排了圖說／標題區／買列三列，數量列
+     （.work-heading__qty）跟滿版 CTA（.product-buy-bar）沒有指定
+     grid-row，≥768px 兩欄並排時被瀏覽器的 grid 自動佈局塞進不可預期
+     的位置——有加 .work__intro--orlo-buy 等頁面專屬 class 的商品頁
+     另外補了這兩列（見下方個別規則），但沒加任何頁面專屬 class 的
+     純模板 A 商品頁（例如沙畫加購筆刀）就漏掉了，versions 之間因此
+     長得不一樣。把這兩列直接補進共用規則，之後任何新商品頁只要用
+     模板 A 就自動拿到跟春結 Chun Tied 一致的版面，不用每頁各自宣告，
+     也不影響已經用頁面專屬 class 覆寫過的商品頁（覆寫規則特異度更高，
+     維持原樣）。 */
+  .work__intro:has(.work__title-block) .work-heading__qty {
+    grid-column: 2;
+    grid-row: 4;
+  }
+
+  .work__intro:has(.work__title-block) .product-buy-bar {
+    grid-column: 2;
+    grid-row: 5;
   }
 
   /* 模板 B：沒有 .work__title-block 的舊版（目前只有流動畫經典紅／
@@ -1432,7 +1453,7 @@
    說明，同一個特異度陷阱）。 */
 @media (min-width: 768px) {
   .work__intro.work__intro--extra-color {
-    grid-template-rows: auto auto auto auto auto 1fr;
+    grid-template-rows: auto auto auto auto auto auto auto 1fr;
   }
 
   .work__intro.work__intro--extra-color .work-heading__field-label {
@@ -1448,6 +1469,20 @@
   .work__intro.work__intro--extra-color .work-heading__buy-row {
     grid-column: 2;
     grid-row: 5;
+  }
+
+  /* 2026-11-11：補數量列／滿版 CTA 的 grid-row，理由同上面「模板 A」
+     共用規則那段說明——這頁多了色號欄位，列數比共用規則多，不能沿用
+     那邊新補的 row:4／row:5（會跟這頁自己的欄位疊在一起），這裡接著
+     買列（row:5）往下各自排一列。 */
+  .work__intro.work__intro--extra-color .work-heading__qty {
+    grid-column: 2;
+    grid-row: 6;
+  }
+
+  .work__intro.work__intro--extra-color .product-buy-bar {
+    grid-column: 2;
+    grid-row: 7;
   }
 }
 
@@ -1524,7 +1559,7 @@
    沿用既有兩個。 */
 @media (min-width: 768px) {
   .work__intro.work__intro--frame {
-    grid-template-rows: auto auto auto auto auto 1fr;
+    grid-template-rows: auto auto auto auto auto auto auto 1fr;
   }
 
   .work__intro.work__intro--frame .frame-field--size {
@@ -1540,6 +1575,19 @@
   .work__intro.work__intro--frame .work-heading__buy-row {
     grid-column: 2;
     grid-row: 5;
+  }
+
+  /* 2026-11-11：補數量列／滿版 CTA 的 grid-row，理由同「漸層沙・自選色」
+     那段說明——這頁多了尺寸／預覽款式兩個欄位，接著買列（row:5）往下
+     各自排一列。 */
+  .work__intro.work__intro--frame .work-heading__qty {
+    grid-column: 2;
+    grid-row: 6;
+  }
+
+  .work__intro.work__intro--frame .product-buy-bar {
+    grid-column: 2;
+    grid-row: 7;
   }
 }
 
@@ -1600,7 +1648,7 @@
    既有樣式（卡片式、文字＋價錢兩行），不用另外寫一份一樣的 CSS。 */
 @media (min-width: 768px) {
   .work__intro.work__intro--24color {
-    grid-template-rows: auto auto auto auto auto 1fr;
+    grid-template-rows: auto auto auto auto auto auto auto 1fr;
   }
 
   .work__intro.work__intro--24color .sand24-field--tier {
@@ -1616,6 +1664,19 @@
   .work__intro.work__intro--24color .work-heading__buy-row {
     grid-column: 2;
     grid-row: 5;
+  }
+
+  /* 2026-11-11：補數量列／滿版 CTA 的 grid-row，理由同「漸層沙・自選色」
+     那段說明——這頁多了購買方式／色組兩個欄位，接著買列（row:5）往下
+     各自排一列。 */
+  .work__intro.work__intro--24color .work-heading__qty {
+    grid-column: 2;
+    grid-row: 6;
+  }
+
+  .work__intro.work__intro--24color .product-buy-bar {
+    grid-column: 2;
+    grid-row: 7;
   }
 }
 
