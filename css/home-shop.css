@@ -1087,3 +1087,10 @@
   .preview-hero__companion--sheep { opacity: 0; transition: opacity 1.2s var(--ease-standard); }
   .preview-hero__companion--sheep.is-active { opacity: 1; }
 }
+
+/* 桌機右側照片提供與按鈕一致的入口，手機保留滑動觀看。 */
+.preview-hero__photo-link { display: none; }
+@media (min-width: 1025px) {
+  .preview-hero__photo-link { display: block; position: absolute; inset: 0 0 0 50%; z-index: 2; }
+  .preview-hero__photo-link:focus-visible { outline: var(--space-1) solid var(--color-surface-light); outline-offset: calc(-1 * var(--space-1)); }
+}

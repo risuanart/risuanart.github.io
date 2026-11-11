@@ -52,6 +52,8 @@
     const taglineKey = `tagline${capitalized}`;
     const ctaTextKey = `ctaText${capitalized}`;
     if (sheepLink && sheepLink.dataset[hrefKey]) sheepLink.href = sheepLink.dataset[hrefKey];
+    const photoLink = sheepSlide.querySelector(".preview-hero__photo-link");
+    if (photoLink && sheepLink && sheepLink.dataset[hrefKey]) photoLink.href = sheepLink.dataset[hrefKey];
     if (sheepTagline && sheepTagline.dataset[taglineKey]) sheepTagline.textContent = sheepTagline.dataset[taglineKey];
     if (sheepCtaText && sheepCtaText.dataset[ctaTextKey]) sheepCtaText.textContent = sheepCtaText.dataset[ctaTextKey];
   }
