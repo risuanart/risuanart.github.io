@@ -244,6 +244,7 @@
   // 就好。商品總覽卡片（js/products-overview.js）、商品頁購買列
   // （js/product-price-discount.js）都讀這個常數。
   const PREORDER_NOTE = "預購・2027 年 1 月初陸續出貨";
+  const PREORDER_NOTE_SHORT = "預購・1 月初出貨";
   function todayInTaipei() {
     return new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Taipei" }).format(new Date());
   }
@@ -1285,6 +1286,7 @@
     priceDiscountHTMLPlain,
     EARLY_BIRD_TAGLINE,
     PREORDER_NOTE,
+    PREORDER_NOTE_SHORT,
     getCheckoutPayload() {
       return readCart().map((item) => {
         const product = PRODUCTS[item.productKey];

@@ -160,7 +160,7 @@
     // js/cart.js PREORDER_NOTE 的說明——純文字（使用者選定的方向，
     // 不加色塊／圖示），放在價格下面。
     const preorderNote = product.preorder && cart.PREORDER_NOTE
-      ? `<p class="shop-card__preorder">${cart.PREORDER_NOTE}</p>`
+      ? `<p class="shop-card__preorder">${cart.PREORDER_NOTE_SHORT || cart.PREORDER_NOTE}</p>`
       : "";
     // 早鳥文字行放在標題下方、價格上方，跟商品頁買列同一套文字來源
     // （cart.EARLY_BIRD_TAGLINE），不是另外寫一次「EARLY BIRD · 10% OFF」。
