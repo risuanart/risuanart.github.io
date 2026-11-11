@@ -776,3 +776,6 @@
 
 /* 羊年設計轉化輪播只保留自動播放與觸控滑動。 */
 .ptpl-artwork__carousel .moments-carousel__nav { display: none; }
+
+/* 設計轉化順序與原創理念在圖片下方置中。 */
+.ptpl-artwork__visual > p { text-align: center; }
