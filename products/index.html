@@ -421,10 +421,16 @@
      用途不一樣：這裡每張卡片對應單一商品、有明確的 BUY 動作，不是
      「點圖進某個分類」。auto-fit 讓款式數量增減時自動換行，不用為了
      固定幾欄另外寫手機/桌面兩套斷點。 */
+  /* 2026-11-11 使用者反饋整體要再縮小、兩張圖之間留白也要加大：原本
+     minmax(140px,1fr) 會讓卡片撐滿整欄寬度（桌面版單張卡片將近
+     370px），改成固定上限 150px＋justify-content:center，卡片變小、
+     置中排列；gap 從 --gap-md（30px）加大到 48px，兩張卡片之間的
+     留白更明顯，不會擠在一起。 */
   .koyama-product-grid{
     display:grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: var(--gap-md);
+    grid-template-columns: repeat(auto-fit, minmax(110px, 150px));
+    justify-content:center;
+    gap: 48px;
     margin-top: var(--gap-md);
   }
   .koyama-product-card{
