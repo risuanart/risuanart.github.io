@@ -50,6 +50,13 @@
 <link rel="stylesheet" href="../css/site-footer.css">
 <link rel="stylesheet" href="../css/hub-blocks.css">
 <link rel="stylesheet" href="../css/page-title-en.css?v=20261107-shared-heading">
+<!-- 2026-11-11：使用者參考課程介紹頁（如 courses/sand-texture/）的滿版
+     首圖影片＋koyama.com.tw/newbornbox/ 的開場大圖，要求這頁最上面也要
+     有「一眼驚艷」的視覺，不是只有純文字。直接沿用課程頁已經做好、
+     驗證過的 .ent-hero__media／.ent-hero__photo.is-full-bleed（手機
+     滿版、桌面置中限寬 420px），不自己重新發明一套首圖樣式，見下面
+     <body> 新增的 <section class="ent-hero">。 -->
+<link rel="stylesheet" href="../css/enterprise.css">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
 <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16">
@@ -223,6 +230,18 @@
   .hero{
     padding: var(--gap-lg) var(--pad-h) var(--gap-md);
     text-align:center;
+  }
+  /* 2026-11-11：這頁的 .page-tint 只留了 --ptpl-topbar-height（跑馬燈＋
+     單排頂部列）當 padding-top，沒有像 .product-page（見 products.css
+     該處）額外加 69px 補償這頁頂部列實際多出來的導覽連結那排高度——
+     之前這段差距被 .hero 自己很大的 padding-top 蓋過去，沒人發現；
+     新加的 .ent-hero 首圖影片 margin-top 比較小，差距就會變成影片疊到
+     導覽列。直接幫 .ent-hero 補回這全站既有的 69px 慣用值（跟
+     products.css／home-shop.css／enterprise.css 好幾處同一個數字同一個
+     理由），不去動 .page-tint 本身（其他區塊的留白已經靠 .hero 自己
+     的 padding 蓋過，改 .page-tint 會變成全部內容一起往下多推一截）。 */
+  .ent-hero{
+    margin-top: calc(var(--space-4) + 69px);
   }
   .hero .intro{
     max-width:var(--max-text);
@@ -649,6 +668,18 @@
 
   <div class="site-menu-backdrop" id="site-menu-backdrop"></div>
   <nav class="site-menu" id="site-menu" aria-label="全站選單" data-menu-base="../"></nav>
+
+  <!-- 首圖影片：借用春聯砂畫材料包「春」成品完成那一刻的展示影片，不是
+       隨便挑一支——這頁是材料包總覽（涵蓋全部款式），用任何單一款式的
+       完整商品介紹影片都不合適，但「完成瞬間」這個情緒片段是所有款式
+       共通的，挑視覺最討喜的一款代表整體質感即可。影片本身已經是
+       4:5 直式比例（跟 .ent-hero__photo 預設 aspect-ratio 剛好吻合，
+       不用額外的 .is-landscape／.is-portrait-video 覆寫）。 -->
+  <section class="ent-hero fade-in">
+    <div class="ent-hero__media">
+      <video class="ent-hero__photo is-full-bleed" src="../assets/videos/products/sand-art-chun/gallery-reveal.mp4" poster="../assets/images/products/sand-art-chun/sand-art-chun-gallery-reveal-poster.jpg" preload="auto" autoplay muted loop playsinline aria-label="完成的「春」砂畫材料包成品展示影片"></video>
+    </div>
+  </section>
 
   <section class="content-block content-block--hero fade-in">
     <div class="hero">
