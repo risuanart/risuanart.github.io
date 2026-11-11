@@ -759,3 +759,7 @@
   .ptpl-artwork__image { aspect-ratio: auto; height: auto; object-fit: contain; margin-bottom: 0; }
   .ptpl-artwork__copy > p:last-child { margin-bottom: 0; }
 }
+
+/* 原創設計理念緊接原畫，與右側藝術家背景分開閱讀。 */
+.ptpl-artwork__visual { min-width: 0; }
+.ptpl-artwork__visual > p { margin-top: var(--space-6); }
