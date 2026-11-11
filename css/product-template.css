@@ -773,3 +773,6 @@
 .ptpl-artwork__carousel .moments-carousel__nav--prev { left: 0; }
 .ptpl-artwork__carousel .moments-carousel__nav--next { right: 0; }
 .ptpl-artwork__carousel .moments-carousel__nav svg { width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 1.5; }
+
+/* 羊年設計轉化輪播只保留自動播放與觸控滑動。 */
+.ptpl-artwork__carousel .moments-carousel__nav { display: none; }
