@@ -799,7 +799,7 @@
       const res = await fetch(`${CHECKOUT_API_BASE}/api/start-checkout`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ cartItems }),
+        body: JSON.stringify({ cartItems, couponCode: document.querySelector(".cart-discount__input")?.value.trim() || "" }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "建立訂單失敗，請稍後再試一次");
@@ -817,6 +817,20 @@
     } catch (err) {
       showCheckoutError(`結帳發生問題：${err.message}`);
     }
+  }
+
+  // 套用優惠碼也由後台重新核算，成功後才顯示確認訂單。
+  const couponButton = document.querySelector(".cart-discount__apply");
+  const couponInput = document.querySelector(".cart-discount__input");
+  if (couponButton && couponInput) {
+    couponButton.addEventListener("click", async () => {
+      if (!couponInput.value.trim()) { showCheckoutError("請先輸入 IG 私訊收到的優惠碼"); return; }
+      couponButton.disabled = true;
+      try { await runCheckout(); } finally { couponButton.disabled = false; }
+    });
+    couponInput.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") { event.preventDefault(); couponButton.click(); }
+    });
   }
 
   // 購物車變動時（調整數量／刪除／換規格），如果確認區塊正開著，代表客人

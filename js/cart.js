@@ -527,7 +527,7 @@
 
   function cartTotal() {
     const total = readCart().reduce((sum, i) => sum + itemLineTotalDiscounted(i), 0);
-    return total - (total >= 2000 ? 100 : 0);
+    return total;
   }
 
   function cartTotalOriginal() {
