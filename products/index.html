@@ -9,13 +9,13 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="材料包｜日宣繪畫室">
 <meta property="og:description" content="換一種方式迎接新年。日宣繪畫室手作材料包，把節氣的美好留在自己動手完成的作品裡。">
-<meta property="og:image" content="https://risuanart.com/assets/images/products/sand-art-chun/sand-art-chun-main.jpg">
+<meta property="og:image" content="https://risuanart.com/assets/images/products/sand-art-chun/sand-art-chun-cutout.png">
 <meta property="og:url" content="https://risuanart.com/products/">
 <meta property="og:locale" content="zh_TW">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="材料包｜日宣繪畫室">
 <meta name="twitter:description" content="換一種方式迎接新年。日宣繪畫室手作材料包，把節氣的美好留在自己動手完成的作品裡。">
-<meta name="twitter:image" content="https://risuanart.com/assets/images/products/sand-art-chun/sand-art-chun-main.jpg">
+<meta name="twitter:image" content="https://risuanart.com/assets/images/products/sand-art-chun/sand-art-chun-cutout.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -436,14 +436,14 @@
   }
   .koyama-product-card__media{
     width:100%;
-    aspect-ratio: 4/5;
+    aspect-ratio: 1/1;
     overflow:hidden;
   }
   .koyama-product-card__media img{
     display:block;
     width:100%;
     height:100%;
-    object-fit:cover;
+    object-fit:contain;
     transition: transform var(--duration-normal, .3s) ease;
   }
   .koyama-product-card:hover .koyama-product-card__media img{
@@ -862,33 +862,41 @@
        做成獨立按鈕只是呼應參考站的版面語感，不會因此產生巢狀連結。
        沒有用全站既有的 .product-card（那個是技法分類入口用，不顯示
        BUY／單一商品動作），這裡另外做一組新元件，見下面 <style>
-       .koyama-product-grid。 -->
+       .koyama-product-grid。
+
+       2026-11-11 使用者反映圖片容器拿掉灰底色之後，照片本身棚拍的米色
+       背景還是看得出一塊方框（那是照片檔案自己的內容，不是 CSS 底色，
+       沒辦法單純用 CSS 移除）。改用去背後的 *-cutout.png（本機用
+       scipy 做顏色距離去背＋裁到菱形卡片本身的外接框，只對這五張圖做，
+       不影響其他地方仍在用的 *-main.jpg），卡片容器改成
+       aspect-ratio:1/1 ＋ object-fit:contain（圖片本身已經是裁好的
+       正方形透明 PNG，不需要再裁切/填滿）。 -->
   <section class="chapter fade-in">
     <span class="ed-label">Collection</span>
     <h2 class="chapter__title">經典款式</h2>
     <div class="koyama-product-grid">
       <a class="koyama-product-card" href="sand-art-fu/">
-        <div class="koyama-product-card__media"><img src="../assets/images/products/sand-art-fu/sand-art-fu-main.jpg" alt="福星砂畫材料包成品參考圖" loading="lazy"></div>
+        <div class="koyama-product-card__media"><img src="../assets/images/products/sand-art-fu/sand-art-fu-cutout.png" alt="福星砂畫材料包成品參考圖" loading="lazy"></div>
         <p class="koyama-product-card__name">福</p>
         <span class="koyama-product-card__buy">BUY</span>
       </a>
       <a class="koyama-product-card" href="sand-art-chun/">
-        <div class="koyama-product-card__media"><img src="../assets/images/products/sand-art-chun/sand-art-chun-main.jpg" alt="春結砂畫材料包成品參考圖" loading="lazy"></div>
+        <div class="koyama-product-card__media"><img src="../assets/images/products/sand-art-chun/sand-art-chun-cutout.png" alt="春結砂畫材料包成品參考圖" loading="lazy"></div>
         <p class="koyama-product-card__name">春</p>
         <span class="koyama-product-card__buy">BUY</span>
       </a>
       <a class="koyama-product-card" href="sand-art-cai/">
-        <div class="koyama-product-card__media"><img src="../assets/images/products/sand-art-cai/sand-art-cai-main.jpg" alt="花財砂畫材料包成品參考圖" loading="lazy"></div>
+        <div class="koyama-product-card__media"><img src="../assets/images/products/sand-art-cai/sand-art-cai-cutout.png" alt="花財砂畫材料包成品參考圖" loading="lazy"></div>
         <p class="koyama-product-card__name">財</p>
         <span class="koyama-product-card__buy">BUY</span>
       </a>
       <a class="koyama-product-card" href="sand-art-na-fu/">
-        <div class="koyama-product-card__media"><img src="../assets/images/products/sand-art-na-fu/sand-art-na-fu-main.jpg" alt="格裡納福砂畫材料包成品參考圖" loading="lazy"></div>
+        <div class="koyama-product-card__media"><img src="../assets/images/products/sand-art-na-fu/sand-art-na-fu-cutout.png" alt="格裡納福砂畫材料包成品參考圖" loading="lazy"></div>
         <p class="koyama-product-card__name">納福</p>
         <span class="koyama-product-card__buy">BUY</span>
       </a>
       <a class="koyama-product-card" href="sand-art-ying-chun/">
-        <div class="koyama-product-card__media"><img src="../assets/images/products/sand-art-ying-chun/sand-art-ying-chun-main.jpg" alt="格裡迎春砂畫材料包成品參考圖" loading="lazy"></div>
+        <div class="koyama-product-card__media"><img src="../assets/images/products/sand-art-ying-chun/sand-art-ying-chun-cutout.png" alt="格裡迎春砂畫材料包成品參考圖" loading="lazy"></div>
         <p class="koyama-product-card__name">迎春</p>
         <span class="koyama-product-card__buy">BUY</span>
       </a>
