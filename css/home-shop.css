@@ -1128,3 +1128,10 @@
   .preview-hero__arrow svg { width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 1.5; }
   .preview-hero__arrow:focus-visible { outline: 2px solid currentColor; outline-offset: var(--space-1); }
 }
+
+/* 首頁四組桌機輪播交錯，照片連結跟隨照片位置。 */
+@media (min-width: 1025px) {
+  .preview-hero__slide:nth-child(even) > .preview-hero__photo { left: 50%; }
+  .preview-hero__slide:nth-child(even) > .preview-hero__companion,
+  .preview-hero__slide:nth-child(even) > .preview-hero__photo-link { left: 0; right: 50%; }
+}
