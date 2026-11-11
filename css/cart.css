@@ -2078,7 +2078,7 @@
 .cart-discount__offer {
   display: grid;
   gap: var(--space-2);
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-xs);
   line-height: var(--body-line-height);
 }
 .cart-discount__offer .text-link {
