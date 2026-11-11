@@ -81,13 +81,13 @@
        獨立一份不合併，避免牽動 home.css 那份首頁專屬的參數。--panel-bg
        （.page-tint 用）已經改吃上面新載入的 colors.css，不用在這裡重複
        宣告。 */
-    /* 2026-11-11：使用者反映這頁比參考站（koyama newbornbox）素淨、沒有
-       「帶入感」，翻回當初就寫好、只是先關掉做白底測試版的「背景1」
-       （暈染漸層動畫＋米色蓋層，見下面 .ambient-bg／.ambient-grain／
-       --panel-bg 覆寫），不是重新發明一套背景效果。只影響這頁，
-       colors.css／home.css 的全站預設值不動。 */
-    --ambient-display: block; /* 背景1：暈染動畫＋米色蓋層（已啟用） */
-    --panel-bg: rgba(237, 230, 216, 0.68); /* 背景1用的米色蓋層，疊在 ambient-bg 上面 */
+    /* 2026-11-11：曾經試過打開當初寫好、關閉中的「背景1」（暈染漸層動畫
+       ＋米色蓋層），使用者反饋底色要維持原本官網的白底色系，改回來——
+       不開 --ambient-display，--panel-bg 也不覆寫，直接吃 colors.css
+       的全站預設值（白底），跟其他頁面一致。版面變化（襯線眉標／
+       .split-row 圖文交換／.circle-duo 雙圓形）維持不動，只有底色改回
+       來。 */
+    --ambient-display: none; /* 背景1用：block（目前關閉，維持白底） */
   }
   .p30{ padding-left: var(--pad-h); padding-right: var(--pad-h); }
   .p20{ padding: 20px; }
