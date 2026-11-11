@@ -824,7 +824,7 @@
   const couponInput = document.querySelector(".cart-discount__input");
   if (couponButton && couponInput) {
     couponButton.addEventListener("click", async () => {
-      if (!couponInput.value.trim()) { showCheckoutError("請先輸入 IG 私訊收到的優惠碼"); return; }
+      if (!couponInput.value.trim()) { showCheckoutError("請先輸入優惠碼"); return; }
       couponButton.disabled = true;
       try { await runCheckout(); } finally { couponButton.disabled = false; }
     });
