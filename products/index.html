@@ -680,18 +680,15 @@
   <div class="site-menu-backdrop" id="site-menu-backdrop"></div>
   <nav class="site-menu" id="site-menu" aria-label="全站選單" data-menu-base="../"></nav>
 
-  <!-- 首圖影片：改用使用者指定的「春聯砂畫旋轉卡片」展示影片
-       （assets/videos/home/春聯沙畫-旋轉卡片.mp4，首頁「砂畫材料包」
-       區塊本來就在用，見 index.html 的 .hub-showcase-video 那段）——
-       鏡頭依序帶過好幾款不同砂畫成品輪流旋轉展示，比單一款式的完成
-       瞬間更適合這頁「材料包總覽」的定位，不會讓人誤以為只有「春」
-       這一款。原始影片是 16:9 橫式（1920×1080），套 .is-landscape
-       覆寫 .ent-hero__photo 預設的 4:5 直式比例，避免裁掉太多兩側畫面。
-       沒有另外做 poster 截圖，跟首頁那段用法一致（preload="auto" 這裡
-       改用，因為是首屏立即播放的影片，不是捲到才播的 data-autoplay）。 -->
+  <!-- 首圖影片：借用春聯砂畫材料包「春」成品完成那一刻的展示影片，不是
+       隨便挑一支——這頁是材料包總覽（涵蓋全部款式），用任何單一款式的
+       完整商品介紹影片都不合適，但「完成瞬間」這個情緒片段是所有款式
+       共通的，挑視覺最討喜的一款代表整體質感即可。影片本身已經是
+       4:5 直式比例（跟 .ent-hero__photo 預設 aspect-ratio 剛好吻合，
+       不用額外的 .is-landscape／.is-portrait-video 覆寫）。 -->
   <section class="ent-hero fade-in is-flush-top">
     <div class="ent-hero__media">
-      <video class="ent-hero__photo is-full-bleed is-landscape" src="../assets/videos/home/春聯沙畫-旋轉卡片.mp4" preload="auto" autoplay muted loop playsinline aria-label="好幾款砂畫材料包成品依序旋轉展示"></video>
+      <video class="ent-hero__photo is-full-bleed" src="../assets/videos/products/sand-art-chun/gallery-reveal.mp4" poster="../assets/images/products/sand-art-chun/sand-art-chun-gallery-reveal-poster.jpg" preload="auto" autoplay muted loop playsinline aria-label="完成的「春」砂畫材料包成品展示影片"></video>
       <div class="ent-hero__scroll-hint" aria-hidden="true">
         <div class="ent-hero__scroll-hint-arrow"></div>
       </div>
