@@ -426,9 +426,14 @@
      370px），改成固定上限 150px＋justify-content:center，卡片變小、
      置中排列；gap 從 --gap-md（30px）加大到 48px，兩張卡片之間的
      留白更明顯，不會擠在一起。 */
+  /* 2026-11-11 使用者反饋參考站（koyama）不管桌面或手機都固定兩欄
+     並排，不是寬度夠就自動塞更多欄——auto-fit 在桌面版會變成一排塞
+     4張，跟參考站不一致。改成固定 repeat(2, ...)，永遠兩欄，最後一張
+     （5張是奇數）單獨留在左邊那欄，右邊空著，跟參考站的「ニ０ニ四／
+     龍年」那排最後單張同樣的收尾方式。 */
   .koyama-product-grid{
     display:grid;
-    grid-template-columns: repeat(auto-fit, minmax(110px, 150px));
+    grid-template-columns: repeat(2, minmax(0, 150px));
     justify-content:center;
     gap: 48px;
     margin-top: var(--gap-md);
