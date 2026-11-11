@@ -16,7 +16,11 @@
 
   const mainImg = root.querySelector("[data-frame-mockup-main-img]");
   const priceEl = root.querySelector("[data-frame-mockup-price]");
-  const addBtns = Array.from(root.querySelectorAll("[data-frame-mockup-add-btn]"));
+  // 2026-11-11：加入購物車／直接購買按鈕改成 document 範圍找——手機固定
+  // 購買列（.mobile-sticky-buy）是 <main> 結尾另外一份獨立 HTML，不在
+  // root（這頁的 .work__intro）底下，但一樣要跟著尺寸切換顯示哪一顆。
+  const addBtns = Array.from(document.querySelectorAll("[data-frame-mockup-add-btn]"));
+  const buyBtns = Array.from(document.querySelectorAll("[data-frame-mockup-buy-btn]"));
   const sizeChips = Array.from(root.querySelectorAll(".frame-size-picker__chip"));
   const designPicker = root.querySelector("[data-frame-design-picker]");
   const designChips = designPicker ? Array.from(designPicker.querySelectorAll(".color-picker__chip")) : [];
@@ -58,6 +62,9 @@
       if (priceEl) priceEl.textContent = `$${chip.dataset.price}`;
       addBtns.forEach((btn) => {
         btn.hidden = btn.dataset.frameMockupAddBtn !== currentSize;
+      });
+      buyBtns.forEach((btn) => {
+        btn.hidden = btn.dataset.frameMockupBuyBtn !== currentSize;
       });
       updateAvailableDesigns();
       updateMainImage();

@@ -213,6 +213,8 @@
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
             <span class="work__cta-label">加入購物車</span>
           </button>
+          <button type="button" class="work__cta work__cta--buy-now" data-buy-now data-product="sand-art-24color" data-sand24-buy-btn="single">直接購買</button>
+          <button type="button" class="work__cta work__cta--buy-now" data-buy-now data-product="sand-art-24color-bundle" data-sand24-buy-btn="bundle" hidden>直接購買</button>
         </div>
       </div>
     </header>
@@ -360,10 +362,24 @@
       </div>
     </footer>
 
+    <div class="mobile-sticky-buy">
+      <button type="button" class="work__cta work__cta--primary" data-add-to-cart data-product="sand-art-24color" data-sand24-add-btn="single">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+        <span class="work__cta-label">加入購物車</span>
+      </button>
+      <button type="button" class="work__cta work__cta--primary" data-add-to-cart data-product="sand-art-24color-bundle" data-sand24-add-btn="bundle" hidden>
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+        <span class="work__cta-label">加入購物車</span>
+      </button>
+      <button type="button" class="work__cta work__cta--buy-now" data-buy-now data-product="sand-art-24color" data-sand24-buy-btn="single">直接購買</button>
+      <button type="button" class="work__cta work__cta--buy-now" data-buy-now data-product="sand-art-24color-bundle" data-sand24-buy-btn="bundle" hidden>直接購買</button>
+    </div>
+
   </main>
 
   <script src="../../js/cart.js"></script>
   <script src="../../js/sand-24color-picker.js"></script>
+  <script src="../../js/mobile-sticky-buy-reveal.js"></script>
   <script src="../../js/site-header-scroll.js?v=20261107-backtop"></script>
   <script src="../../js/account-auth.js"></script>
   <script src="../../js/account-widget.js"></script>

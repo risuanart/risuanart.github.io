@@ -953,21 +953,33 @@
   // orderId 後整頁導去 cart/?orderId=xxx——購物車頁本來就支援「網址帶
   // orderId 直接顯示結帳確認畫面」（原本是給綠界電子地圖選店回來用的，
   // 見 js/checkout.js loadAndShowConfirm()），這裡只是提早觸發同一套
-  // 流程，不用另外做一個結帳頁。目前只有 products/sand-art-fu/index.html
-  // 有 [data-buy-now] 這顆按鈕，其他頁面沒有這個 data 屬性，這支函式
-  // 對它們是 no-op。
+  // 流程，不用另外做一個結帳頁。沒有 [data-buy-now] 這顆按鈕的頁面，
+  // 這支函式對它們是 no-op。
   function initBuyNow(buyQty) {
     const CHECKOUT_API_BASE = "https://risuan-checkout.vercel.app";
     document.querySelectorAll("[data-buy-now]").forEach((btn) => {
-      const productKey = btn.dataset.product;
       const originalLabel = btn.textContent;
       btn.addEventListener("click", async () => {
+        // 2026-11-11：跟 initAddToCart() 同一個理由（見該處 2026-11-09
+        // 的說明），每次點擊當下才讀 dataset.product，不是在
+        // initBuyNow() 執行當下就讀一次存進閉包——有選色/選規格的加購頁
+        // （漸層沙、金屬色、像框、24色全組）用多顆各自固定 data-product
+        // 的按鈕＋hidden 切換顯示哪一顆，點擊當下讀到的一定是目前可見
+        // 這顆按鈕自己的商品鍵，不會有這個問題，但這裡還是讀當下值，
+        // 不留之後其他頁面沿用同一支函式時可能踩到舊陷阱的空間。
+        const productKey = btn.dataset.product;
         const product = PRODUCTS[productKey];
         if (!product) return;
         const qty = buyQty ? buyQty.getQty() : 1;
+        // 跟「加入購物車」同一個理由：選色/選規格的加購頁要帶上目前選中
+        // 的色系名稱，不是固定空字串——否則直接購買會漏掉客人選的顏色
+        // 資訊，跟「加入購物車」送出的訂單內容不一致。
+        const scope = btn.closest("[data-product-card]") || undefined;
+        const scheme = activeScheme(scope);
+        const schemeName = scheme ? SCHEME_NAMES[scheme] || "" : "";
         // 跟「加入購物車」同一個理由：把「一起加購」勾選的項目一起帶進
         // 這筆草稿訂單，不是只有主商品，見 getSelectedAddons() 的說明。
-        const cartItems = [{ productKey, name: product.name, schemeName: "", qty }];
+        const cartItems = [{ productKey, name: product.name, schemeName, qty }];
         getSelectedAddons().forEach((addon) => {
           const addonProduct = PRODUCTS[addon.productKey];
           if (!addonProduct) return;

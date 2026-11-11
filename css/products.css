@@ -659,6 +659,7 @@
 .buy-action {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: var(--space-2);
   margin-left: auto;
 }
@@ -668,6 +669,15 @@
    加入購物車按鈕放在這裡切換 hidden，.work__cta--primary 的
    display:inline-flex 一樣會蓋過瀏覽器內建的 [hidden]{display:none}。 */
 .buy-action [hidden] {
+  display: none;
+}
+
+/* 2026-11-11：加購頁補上「直接購買」按鈕後踩到同一個坑的進階版——
+   .work__cta.work__cta--buy-now（兩個 class 疊加）特異度跟上面這條
+   .buy-action [hidden] 打平（都是兩級），檔案後面定義的 buy-now 規則
+   贏，隱藏中的那顆「直接購買」還是會顯示出來。這裡疊加 .work__cta
+   把特異度墊到三級，確保一定贏。 */
+.buy-action .work__cta[hidden] {
   display: none;
 }
 
@@ -918,6 +928,14 @@
    safe-area-inset-bottom 是給有實體 Home Indicator 的 iPhone 用的，
    避免按鈕被系統手勢列擋住或貼得太緊。 */
 .mobile-sticky-buy {
+  display: none;
+}
+
+/* 2026-11-11：金屬色沙／像框／24色這幾頁的固定列裡也放了「依選擇切換
+   顯示哪一顆」的按鈕組（跟頁面內買列同一套 hidden 切換邏輯），一樣會
+   踩到 .work__cta.work__cta--buy-now（兩個 class）蓋過 [hidden] 的
+   特異度坑，這裡疊加 .work__cta 墊高特異度，確保隱藏生效。 */
+.mobile-sticky-buy .work__cta[hidden] {
   display: none;
 }
 
@@ -1543,7 +1561,8 @@
 
 /* 手機滑動換色時，只攔截水平手勢，垂直捲動要維持正常，不能被 JS
    的 touchstart/touchend 判斷卡住。 */
-[data-gradient-sand-main] {
+[data-gradient-sand-main],
+[data-metallic-sand-main] {
   touch-action: pan-y;
 }
 

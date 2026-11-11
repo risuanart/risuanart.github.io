@@ -20,7 +20,13 @@
   const mainImg = root.querySelector("[data-sand24-main-img]");
   const priceEl = root.querySelector("[data-sand24-price]");
   const hintNameEl = root.querySelector("[data-sand24-hint-name]");
-  const addBtns = Array.from(root.querySelectorAll("[data-sand24-add-btn]"));
+  // 2026-11-11：加入購物車／直接購買按鈕改成 document 範圍找，不是只在
+  // root（買列本身）底下找——手機固定購買列（.mobile-sticky-buy）是
+  // <main> 結尾另外一份獨立 HTML，不在 root 裡面，但一樣要跟著購買方式
+  // 切換顯示哪一顆，見下面 tierChips click handler 裡 addBtns／buyBtns
+  // 一起切換的邏輯。
+  const addBtns = Array.from(document.querySelectorAll("[data-sand24-add-btn]"));
+  const buyBtns = Array.from(document.querySelectorAll("[data-sand24-buy-btn]"));
   const tierChips = Array.from(root.querySelectorAll(".sand24-tier-picker__chip"));
   const schemeField = root.querySelector(".sand24-field--scheme");
   const schemePicker = root.querySelector("[data-sand24-scheme-picker]");
@@ -55,6 +61,9 @@
       if (priceEl) priceEl.textContent = `$${Number(chip.dataset.price).toLocaleString()}`;
       addBtns.forEach((btn) => {
         btn.hidden = btn.dataset.sand24AddBtn !== currentTier;
+      });
+      buyBtns.forEach((btn) => {
+        btn.hidden = btn.dataset.sand24BuyBtn !== currentTier;
       });
       if (schemeField) schemeField.hidden = currentTier === "bundle";
       if (hintNameEl) {
