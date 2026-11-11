@@ -523,9 +523,9 @@
   /* ================= 頁面補完（2026-10-24） =================
      這頁原本的 .meta 比較表格／.gallery／.more-projects 都是當年還沒拍
      照片時留下的草稿佔位內容（見 git 歷史），現在用討論過的模擬圖定案
-     版面補完：材料包系列改成技法入口卡（流動畫／砂畫，圖片在上、文字
-     在下，不顯示價格，因為這兩個入口涵蓋該技法底下所有款式，不是單一
-     商品）；新增「加購配件」滿版 banner 讓 12 色漸層沙的選色組圖有地方
+     版面補完（2026-11-11 補充：「材料包系列」技法入口卡（流動畫／砂畫）
+     後來因為流動畫款式太少、點進去多此一舉，整段拿掉了，不是這裡沒寫
+     完）；新增「加購配件」滿版 banner 讓 12 色漸層沙的選色組圖有地方
      曝光；「其他服務」兩張卡片換成真的實體課程／企業活動照片。版面寬度
      套用全站既有的 840px 置中規則（--content-max-width／--content-pad，
      見 products.css .content-container 那組規則），不是自己發明寬度。
@@ -763,39 +763,6 @@
         </div>
         <span class="ed-label">Friends</span>
       </div>
-    </div>
-  </section>
-
-  <section class="content-block">
-    <span class="ed-label">Collection</span>
-    <div class="content-block__head">
-      <p class="content-block__title">材料包系列</p>
-      <p class="content-block__hint">點選圖片瀏覽該技法的所有款式</p>
-    </div>
-    <!-- 2026-11-02 兩格入口連到商品總覽的對應技法分類（?category=），讓點進
-         流動畫時不會混入砂畫商品；商品總覽由 js/products-overview.js 依分類篩選。
-         2026-10-24 使用者發現這兩格原本連到的 fluid-art-intro／sand-art-intro
-         是很久以前做的舊版 hub 頁（沒有真的 header／promo-bar，整頁還有
-         「首圖待補」佔位框），sand-art-intro 甚至連去 sand-art-light／
-         sand-art-collection 這兩個已經下架的舊商品頁，跟現在官網的設計
-         完全不符。這裡改連到真正符合現在設計的商品總覽頁（products/shop/，
-         已經確認會列出全部現役的流動畫／砂畫款式），不是連到任何一個
-         舊版 hub 頁或單一商品頁——以後真的要做「技法入口頁」（跟首頁／
-         課程 hub 頁同一批規劃），再從頭依照現在的設計規則做一頁新的，
-         不是修補這兩個舊頁面。 -->
-    <div class="product-row">
-      <a class="product-card" href="shop/?category=fluid-art">
-        <div class="product-card__media"><img src="../assets/images/products/fluid-art/fluid-art-light-kit-red.jpg" alt="流動畫材料包"></div>
-        <p class="product-card__en">Fluid Art</p>
-        <p class="product-card__title">流動畫材料包</p>
-        <p class="product-card__desc">顏料自然流動交融，呈色隨機多變，每一幅都是獨一無二的作品。</p>
-      </a>
-      <a class="product-card" href="shop/?category=sand-art">
-        <div class="product-card__media"><img src="../assets/images/products/sand-art-fu/sand-art-fu-kit.jpg" alt="砂畫材料包"></div>
-        <p class="product-card__en">Sand Art</p>
-        <p class="product-card__title">砂畫材料包</p>
-        <p class="product-card__desc">分層鋪色、堆疊出圖案，步驟清楚好上手，新手也能做出細緻成品。</p>
-      </a>
     </div>
   </section>
 
