@@ -126,6 +126,13 @@
     });
   });
 
+  hero.querySelectorAll("[data-hero-direction]").forEach((button) => {
+    button.addEventListener("click", () => {
+      goTo(current + Number(button.dataset.heroDirection));
+      scheduleNext();
+    });
+  });
+
   // 滑鼠移到輪播上暫停，離開後繼續（桌機體驗），觸控裝置沒有 hover，
   // 自動播放不受影響。停在羊Diss這格時一併暫停／恢復紅藍切換的計時器，
   // 不然滑鼠移開外層輪播卻繼續倒數會跟主輪播的計時對不起來。

@@ -1094,3 +1094,27 @@
   .preview-hero__photo-link { display: block; position: absolute; inset: 0 0 0 50%; z-index: 2; }
   .preview-hero__photo-link:focus-visible { outline: var(--space-1) solid var(--color-surface-light); outline-offset: calc(-1 * var(--space-1)); }
 }
+
+.preview-hero__arrow { display: none; }
+@media (min-width: 1025px) {
+  .preview-hero__arrow {
+    display: grid;
+    place-items: center;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 5;
+    width: var(--space-10);
+    height: var(--space-10);
+    padding: var(--space-2);
+    border: 1px solid currentColor;
+    border-radius: 50%;
+    color: var(--color-surface-light);
+    background: transparent;
+    cursor: pointer;
+  }
+  .preview-hero__arrow--prev { left: var(--space-6); }
+  .preview-hero__arrow--next { right: var(--space-6); }
+  .preview-hero__arrow svg { width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 1.5; }
+  .preview-hero__arrow:focus-visible { outline: 2px solid currentColor; outline-offset: var(--space-1); }
+}
