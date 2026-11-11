@@ -18,12 +18,7 @@
 <meta name="twitter:image" content="https://risuanart.com/assets/images/products/sand-art-chun/sand-art-chun-main.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- 2026-11-11：補一支襯線字體，只給這頁新加的英文眉標（.ed-label）用，
-     不動全站共用的 --font-family-base（中文內文維持 Open Sans／Noto Sans TC
-     不變）——使用者參考 koyama.com.tw/newbornbox/ 反映我們這頁版面太單調，
-     那頁用襯線大寫英文字當作每個段落的視覺錨點（NAME／FEATURES／
-     PRODUCTS），這裡借同樣的手法，不是整頁換字體。 -->
-<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Cormorant+Garamond:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/colors.css">
 <link rel="stylesheet" href="../css/tokens.css">
 <!-- 2026-10-17 使用者反映這頁（比其他頁都早建立）的左上角目錄、置中
@@ -354,19 +349,20 @@
     .split-row{ padding-left:var(--content-pad); padding-right:var(--content-pad); }
   }
 
-  /* ---------- 襯線英文眉標 ----------
-     每段故事開頭的英文大寫小標（STORY／TOGETHER／PROCESS），用襯線字體
-     跟中文標題拉開份量差距，呼應參考站用 NAME／FEATURES／PRODUCTS 這類
-     英文眉標當作視覺錨點的做法。 */
+  /* ---------- 英文眉標 ----------
+     每段故事開頭的英文大寫小標（STORY／TOGETHER／PROCESS）。2026-11-11
+     使用者反映原本另外補的襯線字體（Cormorant Garamond）跟其他頁面的
+     英文字體不一致、看起來太亂，拿掉字體跟品牌色覆寫，改成跟這頁
+     「材料包系列」卡片本來就在用的 .product-card__en（見
+     css/hub-blocks.css）同一套字體／字級邏輯——沿用全站預設的
+     --font-family-base，不是另外發明一套。 */
   .ed-label{
     display:block;
     margin-bottom: 10px;
-    font-family: "Cormorant Garamond", serif;
-    font-weight:600;
-    font-size:15px;
-    letter-spacing:4px;
+    font-size:12px;
+    letter-spacing:3px;
     text-transform:uppercase;
-    color: var(--color-brand);
+    color: var(--color-text-secondary);
   }
 
   /* ---------- 雙圓形情境照（大家一起過年） ----------
