@@ -416,6 +416,59 @@
     text-align:center;
   }
 
+  /* ---------- koyama 風格 PRODUCTS 卡片（圖片＋剪短名稱＋BUY 按鈕） ----------
+     跟 .product-card（hub-blocks.css，技法分類入口用）刻意分開一組，
+     用途不一樣：這裡每張卡片對應單一商品、有明確的 BUY 動作，不是
+     「點圖進某個分類」。auto-fit 讓款式數量增減時自動換行，不用為了
+     固定幾欄另外寫手機/桌面兩套斷點。 */
+  .koyama-product-grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: var(--gap-md);
+    margin-top: var(--gap-md);
+  }
+  .koyama-product-card{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap: var(--gap-sm);
+    text-align:center;
+  }
+  .koyama-product-card__media{
+    width:100%;
+    aspect-ratio: 4/5;
+    overflow:hidden;
+    background: color-mix(in srgb, var(--color-text-secondary) 8%, transparent);
+  }
+  .koyama-product-card__media img{
+    display:block;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition: transform var(--duration-normal, .3s) ease;
+  }
+  .koyama-product-card:hover .koyama-product-card__media img{
+    transform: scale(1.04);
+  }
+  .koyama-product-card__name{
+    margin:0;
+    font-size:18px;
+    font-weight:700;
+    letter-spacing:0.5px;
+  }
+  .koyama-product-card__buy{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-width:96px;
+    padding: 10px var(--space-4);
+    background: var(--color-button-primary);
+    color: var(--color-surface-light);
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:2px;
+  }
+
   /* ---------- Gallery (stacked full-width images) ---------- */
   .gallery{
     display:flex;
@@ -801,6 +854,45 @@
       <span class="ed-label">Process</span>
       <h2 class="chapter__title">照著步驟，一步步完成</h2>
       <p class="chapter__prose">撕開、倒沙、鋪色，每一步都不難，難的只是願不願意坐下來開始。</p>
+    </div>
+  </section>
+
+  <!-- 2026-11-11 使用者參考 koyama.com.tw/newbornbox/ 的 PRODUCTS 區塊
+       （圖片＋剪短名稱＋獨立 BUY 按鈕），要求加在「照著步驟」段落下面。
+       整張卡片本身也包成連結（不是只有 BUY 兩個字可以點），BUY 視覺上
+       做成獨立按鈕只是呼應參考站的版面語感，不會因此產生巢狀連結。
+       沒有用全站既有的 .product-card（那個是技法分類入口用，不顯示
+       BUY／單一商品動作），這裡另外做一組新元件，見下面 <style>
+       .koyama-product-grid。 -->
+  <section class="chapter fade-in">
+    <span class="ed-label">Collection</span>
+    <h2 class="chapter__title">經典款式</h2>
+    <div class="koyama-product-grid">
+      <a class="koyama-product-card" href="sand-art-fu/">
+        <div class="koyama-product-card__media"><img src="../assets/images/products/sand-art-fu/sand-art-fu-main.jpg" alt="福星砂畫材料包成品參考圖" loading="lazy"></div>
+        <p class="koyama-product-card__name">福</p>
+        <span class="koyama-product-card__buy">BUY</span>
+      </a>
+      <a class="koyama-product-card" href="sand-art-chun/">
+        <div class="koyama-product-card__media"><img src="../assets/images/products/sand-art-chun/sand-art-chun-main.jpg" alt="春結砂畫材料包成品參考圖" loading="lazy"></div>
+        <p class="koyama-product-card__name">春</p>
+        <span class="koyama-product-card__buy">BUY</span>
+      </a>
+      <a class="koyama-product-card" href="sand-art-cai/">
+        <div class="koyama-product-card__media"><img src="../assets/images/products/sand-art-cai/sand-art-cai-main.jpg" alt="花財砂畫材料包成品參考圖" loading="lazy"></div>
+        <p class="koyama-product-card__name">財</p>
+        <span class="koyama-product-card__buy">BUY</span>
+      </a>
+      <a class="koyama-product-card" href="sand-art-na-fu/">
+        <div class="koyama-product-card__media"><img src="../assets/images/products/sand-art-na-fu/sand-art-na-fu-main.jpg" alt="格裡納福砂畫材料包成品參考圖" loading="lazy"></div>
+        <p class="koyama-product-card__name">納福</p>
+        <span class="koyama-product-card__buy">BUY</span>
+      </a>
+      <a class="koyama-product-card" href="sand-art-ying-chun/">
+        <div class="koyama-product-card__media"><img src="../assets/images/products/sand-art-ying-chun/sand-art-ying-chun-main.jpg" alt="格裡迎春砂畫材料包成品參考圖" loading="lazy"></div>
+        <p class="koyama-product-card__name">迎春</p>
+        <span class="koyama-product-card__buy">BUY</span>
+      </a>
     </div>
   </section>
 
