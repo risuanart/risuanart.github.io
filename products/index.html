@@ -18,7 +18,12 @@
 <meta name="twitter:image" content="https://risuanart.com/assets/images/products/sand-art-chun/sand-art-chun-main.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!-- 2026-11-11：補一支襯線字體，只給這頁新加的英文眉標（.ed-label）用，
+     不動全站共用的 --font-family-base（中文內文維持 Open Sans／Noto Sans TC
+     不變）——使用者參考 koyama.com.tw/newbornbox/ 反映我們這頁版面太單調，
+     那頁用襯線大寫英文字當作每個段落的視覺錨點（NAME／FEATURES／
+     PRODUCTS），這裡借同樣的手法，不是整頁換字體。 -->
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Cormorant+Garamond:wght@500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/colors.css">
 <link rel="stylesheet" href="../css/tokens.css">
 <!-- 2026-10-17 使用者反映這頁（比其他頁都早建立）的左上角目錄、置中
@@ -76,7 +81,13 @@
        獨立一份不合併，避免牽動 home.css 那份首頁專屬的參數。--panel-bg
        （.page-tint 用）已經改吃上面新載入的 colors.css，不用在這裡重複
        宣告。 */
-    --ambient-display: none; /* 背景1用：block */
+    /* 2026-11-11：使用者反映這頁比參考站（koyama newbornbox）素淨、沒有
+       「帶入感」，翻回當初就寫好、只是先關掉做白底測試版的「背景1」
+       （暈染漸層動畫＋米色蓋層，見下面 .ambient-bg／.ambient-grain／
+       --panel-bg 覆寫），不是重新發明一套背景效果。只影響這頁，
+       colors.css／home.css 的全站預設值不動。 */
+    --ambient-display: block; /* 背景1：暈染動畫＋米色蓋層（已啟用） */
+    --panel-bg: rgba(237, 230, 216, 0.68); /* 背景1用的米色蓋層，疊在 ambient-bg 上面 */
   }
   .p30{ padding-left: var(--pad-h); padding-right: var(--pad-h); }
   .p20{ padding: 20px; }
@@ -215,10 +226,12 @@
   }
   .hero .tagline{
     margin-top:16px;
-    font-size:12px;
-    letter-spacing:2px;
+    font-family: "Cormorant Garamond", serif;
+    font-weight:600;
+    font-size:16px;
+    letter-spacing:4px;
     text-transform:uppercase;
-    color:#666;
+    color: var(--color-brand);
   }
   .hero .intro{
     max-width:var(--max-text);
@@ -284,26 +297,107 @@
     line-height:1.7;
   }
 
-  /* ---------- Image + text split rows ---------- */
+  /* ---------- Image + text split rows ----------
+     2026-11-11：這組 class 原本是還沒拍照片時的草稿佔位（整個沒有任何
+     HTML 在用，見上面「頁面補完」那段註解），現在拿來放「從傳統工藝，
+     變成在家就能做的事」「照著步驟，一步步完成」這兩段——不是重新發明
+     一套新版面語彙，是把本來就設計好、只是沒派上用場的結構接上真的
+     內容跟照片，順便補上原本沒寫的圖片填滿／襯線眉標樣式。 */
   .split-row{
     display:flex;
-    gap:var(--gap-md);
-    padding: var(--gap-md) var(--pad-h);
+    gap:var(--gap-lg);
+    padding: var(--gap-lg) var(--pad-h);
     align-items:center;
+    max-width:var(--content-max-width);
+    margin:0 auto;
   }
   .split-row.reverse{ flex-direction:row-reverse; }
-  .split-row .col{ flex:1; }
+  .split-row .col{ flex:1; min-width:0; }
   .split-row .img-box{
     aspect-ratio: 4/3;
+    overflow:hidden;
     background:linear-gradient(135deg,#d8d3c8,#a49c8c);
-    display:flex;
-    align-items:center;
-    justify-content:center;
+  }
+  .split-row .img-box img,
+  .split-row .img-box video{
+    display:block;
+    width:100%;
+    height:100%;
+    object-fit:cover;
   }
   .split-row .text-box{
     max-width:500px;
     font-size:16px;
     line-height:1.7;
+  }
+  @media (max-width: 840px){
+    .split-row{ padding-left:var(--content-pad); padding-right:var(--content-pad); }
+  }
+
+  /* ---------- 襯線英文眉標 ----------
+     每段故事開頭的英文大寫小標（STORY／TOGETHER／PROCESS），用襯線字體
+     跟中文標題拉開份量差距，呼應參考站用 NAME／FEATURES／PRODUCTS 這類
+     英文眉標當作視覺錨點的做法。 */
+  .ed-label{
+    display:block;
+    margin-bottom: 10px;
+    font-family: "Cormorant Garamond", serif;
+    font-weight:600;
+    font-size:15px;
+    letter-spacing:4px;
+    text-transform:uppercase;
+    color: var(--color-brand);
+  }
+
+  /* ---------- 雙圓形情境照（大家一起過年） ----------
+     koyama 的做法是兩張圓形裁切的照片並排（HANDPRINT／FOOTPRINT），這裡
+     借同一個視覺手法，但還沒有真的多人手作照片可以放——.placeholder-box
+     本身是方形佔位語彙，直接塞進圓形裁切框會被裁掉邊角文字，所以另外
+     包一層 .circle 負責裁圓＋置中內容，.placeholder-box 本身的虛線框先
+     拿掉（圓形裡再框一層方形虛線框視覺上會很怪），之後有照片時這層
+     .circle 不用拆，直接把 <img> 放進去就會自動裁成圓形。 */
+  .circle-duo{
+    display:flex;
+    justify-content:center;
+    gap: 16px;
+    flex-wrap:wrap;
+    padding: var(--gap-md) var(--pad-h) 0;
+  }
+  .circle-duo__item{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:14px;
+    width: min(220px, 34vw);
+  }
+  /* 2026-11-11：第一版用 42vw／--gap-md（30px）算可用寬度時，漏算
+     .circle-duo 自己的左右 padding 也要從 getBoundingClientRect() 量到的
+     寬度扣掉才是兩個圓形實際可用的空間，手機版（實測 390px）扣掉
+     padding 後只剩約 310px，148px×2＋30px 的間距會超出、被擠到換行變成
+     直式堆疊。改成 34vw／16px 間距，連最窄的 320px 手機都還有餘裕維持
+     並排，不是堆成一直欄。 */
+  .circle-duo__item .circle{
+    width:100%;
+    aspect-ratio:1/1;
+    border-radius:50%;
+    overflow:hidden;
+    background: color-mix(in srgb, var(--color-text-secondary) 8%, transparent);
+  }
+  .circle-duo__item .circle img{
+    display:block;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+  }
+  .circle-duo__item .circle .placeholder-box{
+    width:100%;
+    height:100%;
+    border:none;
+    border-radius:50%;
+  }
+  .circle-duo__item .ed-label{
+    margin:0;
+    text-align:center;
   }
 
   /* ---------- Gallery (stacked full-width images) ---------- */
@@ -587,18 +681,19 @@
        .chapter__banner-photo／.home-entry-row／.placeholder-box 這幾組
        class（分別是商品頁敘事段落、首頁情境入口卡、還沒有照片時的誠實
        佔位框），不新增一套獨立的版面語彙。 -->
-  <section class="chapter fade-in">
-    <h2 class="chapter__title">從傳統工藝，變成在家就能做的事</h2>
-    <div class="chapter__block">
-      <p class="chapter__statement">手作材料包，是怎麼來的</p>
-      <p class="chapter__prose">撕貼紙、倒沙、鋪色，這些原本只在畫室課堂上才會碰到的技法，我們把它拆解成在家也能照著順序完成的步驟。不需要畫畫基礎，材料跟工具都準備好了，剩下的就是坐下來，花一段時間好好完成一幅屬於自己的作品。</p>
-    </div>
-    <div class="chapter__banner-photo fade-in delay-2">
+  <section class="split-row fade-in">
+    <div class="col img-box">
       <img src="../assets/images/products/sand-art-fu/sand-art-fu-gallery-06.jpg" alt="倒沙鋪色的製作過程特寫" loading="lazy">
+    </div>
+    <div class="col text-box">
+      <span class="ed-label">Story</span>
+      <h2 class="chapter__title">從傳統工藝，變成在家就能做的事</h2>
+      <p class="chapter__prose">撕貼紙、倒沙、鋪色，這些原本只在畫室課堂上才會碰到的技法，我們把它拆解成在家也能照著順序完成的步驟。不需要畫畫基礎，材料跟工具都準備好了，剩下的就是坐下來，花一段時間好好完成一幅屬於自己的作品。</p>
     </div>
   </section>
 
   <section class="chapter fade-in">
+    <span class="ed-label">For You, Or For Someone</span>
     <h2 class="chapter__title">留給自己，或是送給在乎的人</h2>
     <div class="home-entry-row">
       <a class="home-entry" href="shop/">
@@ -618,18 +713,31 @@
     </div>
   </section>
 
-  <section class="chapter fade-in">
+  <section class="chapter fade-in" style="text-align:center;">
+    <span class="ed-label">Together</span>
     <h2 class="chapter__title">大家一起過年</h2>
     <p class="chapter__intro">一個人靜靜完成，或是全家人、朋友圍在一起各自動手，都是材料包本來的樣子。</p>
-    <!-- 待補：多人一起手作材料包的情境照（之後補上真實拍攝的照片後，直接
-         把下面整個 .placeholder-box 換成 <img>，.chapter__banner-photo
-         的尺寸規則不用動，見 css/products.css 該處說明）。 -->
-    <div class="chapter__banner-photo fade-in delay-2">
-      <div class="placeholder-box placeholder-box--photo" aria-hidden="true"><svg class="placeholder-box__icon" viewBox="0 0 24 24" width="1.4em" height="1.4em" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1.5"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 16l-5.5-5.5a1 1 0 0 0-1.4 0L6 19"/></svg><span class="placeholder-box__text">多人一起手作材料包的情境照</span></div>
+    <!-- 待補：下面兩個圓形都還沒有真的照片，之後補上真實拍攝的照片後，
+         直接把對應的 .placeholder-box 整個換成 <img>，.circle 的裁圓/
+         尺寸規則不用動，見上面 <style> .circle-duo 那段說明。 -->
+    <div class="circle-duo fade-in delay-2">
+      <div class="circle-duo__item">
+        <div class="circle">
+          <div class="placeholder-box placeholder-box--photo" aria-hidden="true"><svg class="placeholder-box__icon" viewBox="0 0 24 24" width="1.4em" height="1.4em" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1.5"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 16l-5.5-5.5a1 1 0 0 0-1.4 0L6 19"/></svg><span class="placeholder-box__text">全家人一起動手的情境照</span></div>
+        </div>
+        <span class="ed-label">Family</span>
+      </div>
+      <div class="circle-duo__item">
+        <div class="circle">
+          <div class="placeholder-box placeholder-box--photo" aria-hidden="true"><svg class="placeholder-box__icon" viewBox="0 0 24 24" width="1.4em" height="1.4em" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1.5"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 16l-5.5-5.5a1 1 0 0 0-1.4 0L6 19"/></svg><span class="placeholder-box__text">朋友聚會一起動手的情境照</span></div>
+        </div>
+        <span class="ed-label">Friends</span>
+      </div>
     </div>
   </section>
 
   <section class="content-block">
+    <span class="ed-label">Collection</span>
     <div class="content-block__head">
       <p class="content-block__title">材料包系列</p>
       <p class="content-block__hint">點選圖片瀏覽該技法的所有款式</p>
@@ -661,15 +769,19 @@
     </div>
   </section>
 
-  <section class="chapter fade-in">
-    <h2 class="chapter__title">照著步驟，一步步完成</h2>
-    <p class="chapter__intro">撕開、倒沙、鋪色，每一步都不難，難的只是願不願意坐下來開始。</p>
-    <div class="chapter__banner-photo fade-in delay-2">
+  <section class="split-row reverse fade-in">
+    <div class="col img-box">
       <video preload="none" src="../assets/videos/products/sand-art-fu/full-demo.mp4" poster="../assets/images/products/sand-art-fu/sand-art-fu-demo-poster.jpg" data-autoplay muted loop playsinline aria-label="福星 Starry Fu 完整製作過程示範影片，自動循環播放"></video>
+    </div>
+    <div class="col text-box">
+      <span class="ed-label">Process</span>
+      <h2 class="chapter__title">照著步驟，一步步完成</h2>
+      <p class="chapter__prose">撕開、倒沙、鋪色，每一步都不難，難的只是願不願意坐下來開始。</p>
     </div>
   </section>
 
   <section class="content-block">
+    <span class="ed-label">Add-on</span>
     <div class="content-block__head">
       <p class="content-block__title">加購配件</p>
       <p class="content-block__hint">12 組漸層色任選</p>
