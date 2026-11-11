@@ -2069,3 +2069,25 @@
     width: 100%;
   }
 }
+
+/* 購物車活動說明：短標題與補充文字分行，避免連結整段擠在優惠碼上方。 */
+.cart-summary .cart-discount {
+  display: grid;
+  gap: var(--space-6);
+}
+.cart-discount__offer {
+  display: grid;
+  gap: var(--space-2);
+  font-size: var(--font-size-sm);
+  line-height: var(--body-line-height);
+}
+.cart-discount__offer .text-link {
+  justify-self: start;
+  font-size: inherit;
+}
+.cart-discount__offer p {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: inherit;
+  font-weight: 400;
+}
