@@ -41,7 +41,7 @@
   <link rel="stylesheet" href="../../css/home.css">
   <link rel="stylesheet" href="../../css/products.css">
   <link rel="stylesheet" href="../../css/cart.css">
-  <link rel="stylesheet" href="../../css/product-template.css?v=20261111-design-note">
+  <link rel="stylesheet" href="../../css/product-template.css?v=20261111-artwork-carousel">
   <link rel="stylesheet" href="../../css/site-menu.css">
   <link rel="stylesheet" href="../../css/site-footer.css">
   <link rel="icon" href="/favicon.ico" sizes="any">
@@ -328,8 +328,13 @@
     <!-- 作品介紹：跟顏色無關，紅藍兩頁內容相同。 -->
     <section class="ptpl-artwork fade-in delay-2">
       <div class="ptpl-artwork__visual">
-      <img class="ptpl-artwork__image" src="../../assets/images/products/sand-art-artist/sand-art-artist-dance-matisse.jpg" alt="Henri Matisse《Dance II》，五位人物手拉手圍成圓圈舞蹈，藍綠色背景">
-      <p><strong>羊諦斯之舞</strong><br>靈感來自馬諦斯《舞蹈》，我們把跳舞的人換成生肖中的羊，保留圍成一圈的動態，再結合年節的「福」字與小物，讓歡快的舞步帶上新年的祝福。</p>
+      <div class="ptpl-artwork__carousel" data-moments-carousel data-interval="5000" role="region" aria-label="從馬諦斯原畫到羊年草稿與完成作品的設計轉化">
+        <img class="is-active" src="../../assets/images/products/sand-art-artist/sand-art-artist-dance-matisse.jpg" alt="靈感原畫：馬諦斯《舞蹈》">
+        <img src="../../assets/images/products/sand-art-artist/sheep-dance-design-sketch.webp" alt="羊年設計草稿：將原畫人物轉化為舞動的羊群" loading="lazy">
+        <img src="../../assets/images/products/sand-art-artist/sheep-dance-finished-painting.webp" alt="羊年完成作品：以橘紅羊群、寶藍天空與綠地呼應原畫" loading="lazy">
+      </div>
+      <p class="ptpl-artwork__sequence">原畫 → 羊年設計草稿 → 羊年完成作品</p>
+      <p><strong>羊諦斯之舞</strong><br>從馬諦斯《舞蹈》出發，結合羊年意象，我們把跳舞的人換成生肖中的羊，保留圍成一圈的動態，再結合年節的「福」字與小物，讓歡快的舞步帶上新年的祝福。</p>
       </div>
       <div class="ptpl-artwork__copy">
       <h2>馬諦斯《舞蹈》</h2>
@@ -638,6 +643,7 @@
     })();
   </script>
   <script src="../../js/site-menu.js?v=menu-order-20261109"></script>
+  <script src="../../js/moments-carousel.js"></script>
   <script src="/js/promo-bar.js"></script>
 </body>
 </html>
