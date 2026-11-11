@@ -746,3 +746,16 @@
     margin-right: auto;
   }
 }
+
+/* 羊Diss原畫介紹：桌機圖文並排，手機沿用上下閱讀順序。 */
+.ptpl-artwork__copy { min-width: 0; }
+@media (min-width: 1025px) {
+  .ptpl-artwork {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: var(--space-10);
+    align-items: start;
+  }
+  .ptpl-artwork__image { aspect-ratio: auto; height: auto; object-fit: contain; margin-bottom: 0; }
+  .ptpl-artwork__copy > p:last-child { margin-bottom: 0; }
+}
