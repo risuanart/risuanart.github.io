@@ -40,13 +40,16 @@
   const cartCollapseTotal = cartCollapseBar.querySelector(".cart-collapse__total");
   function maxRedeemablePoints(order, method) {
     if (!order) return availablePoints;
-    const fee = method ? SHIPPING_FEES[method] : 0;
-    return Math.max(0, Math.min(availablePoints, Math.floor(order.itemsTotal + fee - 1)));
+    return Math.max(0, Math.min(availablePoints, Math.floor(order.itemsTotal - 1)));
   }
   function appliedPoints(order, method) {
     if (!order || !pointsInput) return 0;
     const requested = Math.max(0, Math.floor(Number(pointsInput.value) || 0));
     return Math.min(requested, maxRedeemablePoints(order, method));
+  }
+  function shippingFee(order, method) {
+    if (!method) return 0;
+    return order.itemsTotal - appliedPoints(order, method) >= 1200 ? 0 : SHIPPING_FEES[method];
   }
   function syncPointsLimit(order, method) {
     if (!pointsInput) return;
@@ -78,13 +81,13 @@
   // 呼叫，不是只有結帳當下算一次就不再更新。還沒選送貨方式時運費當 0，
   // 顯示的就是純商品小計，等選了才會補上運費。
   function updateCollapseBarTotal(order, method) {
-    const fee = method ? SHIPPING_FEES[method] : 0;
+    const fee = shippingFee(order, method);
     const total = formatMoney(order.itemsTotal + fee - appliedPoints(order, method));
     cartCollapseTotal.textContent = total;
     headerOrderTotal.textContent = total;
   }
   function renderConfirmTotals(order, method) {
-    const fee = method ? SHIPPING_FEES[method] : 0;
+    const fee = shippingFee(order, method);
     const redeemed = appliedPoints(order, method);
     document.getElementById("confirm-total-subtotal").textContent = formatMoney(order.originalItemsTotal ?? order.itemsTotal);
     const discountRow = document.getElementById("confirm-total-discount-row");
@@ -202,7 +205,7 @@
 
     // 還沒選送貨方式就還不知道運費，那一行顯示「選擇後計算」而不是硬掛
     // 一個 $0，避免看起來像「這筆免運」。
-    const fee = method ? SHIPPING_FEES[method] : null;
+    const fee = method ? shippingFee(order, method) : null;
     // 「合計」改顯示折扣前的原價，折扣另外列一行「-$XX」，客人才看得出來
     // 自己真的有拿到早鳥優惠，不是悄悄把價格改低（見 api/start-checkout.js
     // earlyBirdDiscount 的說明）。沒有折扣時 originalItemsTotal 就等於

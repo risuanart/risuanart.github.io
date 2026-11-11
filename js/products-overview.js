@@ -29,7 +29,7 @@
     // 2026-10-18：改用「Plain」版本（不含圓角藍底徽章），徽章改成卡片縮圖
     // 角落的 SALE 角標＋標題下方的橘色文字行，見下面 discountBadge／
     // discountTagline。
-    return window.RisuanCart ? window.RisuanCart.priceDiscountHTMLPlain(product.price, 1) : `$${product.price.toLocaleString()}`;
+    return window.RisuanCart ? window.RisuanCart.priceDiscountHTMLPlain(product, 1) : `$${product.price.toLocaleString()}`;
   }
 
   // 這 7 款單一配色沙畫在商品頁首圖已經有「配色動態展示」輪播（出貨配色→

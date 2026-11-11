@@ -36,7 +36,7 @@
     if (!priceEl || !addBtn) return;
     const product = PRODUCTS[addBtn.dataset.product];
     if (!product || !product.price) return;
-    priceEl.innerHTML = priceDiscountHTMLPlain(product.price, 1);
+    priceEl.innerHTML = priceDiscountHTMLPlain(product, 1);
 
     if (earlyBirdActive() && !priceEl.dataset.discountTaglineInjected) {
       const tagline = document.createElement("p");

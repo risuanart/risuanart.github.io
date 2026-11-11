@@ -22,7 +22,7 @@
   // 跟商品頁／商品總覽不一致，使用者要求全站統一。
   function priceText(product) {
     if (!product.price) return "$__";
-    return window.RisuanCart ? window.RisuanCart.priceDiscountHTMLPlain(product.price, 1) : `$${product.price.toLocaleString()}`;
+    return window.RisuanCart ? window.RisuanCart.priceDiscountHTMLPlain(product, 1) : `$${product.price.toLocaleString()}`;
   }
 
   // 跟 js/products-overview.js 的 carouselThumbHTML() 同一套邏輯：有配色

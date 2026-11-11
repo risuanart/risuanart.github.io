@@ -14,7 +14,7 @@
   // 理當跟真正的商品總覽卡片長一樣，不是另外一套樣式。
   function priceText(product) {
     if (!product.price) return "$__";
-    return window.RisuanCart ? window.RisuanCart.priceDiscountHTMLPlain(product.price, 1) : `$${product.price.toLocaleString()}`;
+    return window.RisuanCart ? window.RisuanCart.priceDiscountHTMLPlain(product, 1) : `$${product.price.toLocaleString()}`;
   }
 
   function cardHTML(key, product, cart) {
