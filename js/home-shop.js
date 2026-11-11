@@ -59,6 +59,9 @@
   function playSheepStep(step) {
     sheepStep = step;
     sheepVideos.forEach((v, i) => v.classList.toggle("is-active", i === step));
+    sheepSlide.querySelectorAll(".preview-hero__companion--sheep").forEach((photo) => {
+      photo.classList.toggle("is-active", photo.dataset.scheme === sheepVideos[step].dataset.scheme);
+    });
     sheepVideos.forEach((v, i) => {
       if (i !== step) v.pause();
     });

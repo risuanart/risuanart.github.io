@@ -1070,3 +1070,20 @@
   display: block;
 }
 
+
+/* 首頁首屏例外：品牌影像展示維持滿版；桌機用雙欄避免直式影片放大。 */
+.preview-hero__companion { display: none; }
+@media (min-width: 1025px) {
+  .preview-hero { aspect-ratio: 16 / 9; }
+  .preview-hero__slide > .preview-hero__photo { width: 50%; }
+  .preview-hero__companion {
+    display: block;
+    position: absolute;
+    inset: 0 0 0 50%;
+    width: 50%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .preview-hero__companion--sheep { opacity: 0; transition: opacity 1.2s var(--ease-standard); }
+  .preview-hero__companion--sheep.is-active { opacity: 1; }
+}
