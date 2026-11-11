@@ -470,18 +470,10 @@
     text-transform:uppercase;
     color: var(--color-text-secondary);
   }
-  .koyama-product-card__buy{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    min-width:96px;
-    padding: 10px var(--space-4);
-    background: var(--color-button-primary);
-    color: var(--color-surface-light);
-    font-size:12px;
-    font-weight:700;
-    letter-spacing:2px;
-  }
+  /* 2026-11-11 使用者要求拿掉 BUY 按鈕，改成點圖片／名稱直接進商品頁
+     （整張卡片本來就包在 <a> 裡，拿掉按鈕不影響可點擊範圍）。
+     .koyama-product-card__buy 這個 class 已經沒有 HTML 在用，規則
+     整段留著沒意義，一併刪除。 */
 
   /* ---------- Gallery (stacked full-width images) ---------- */
   .gallery{
@@ -872,12 +864,12 @@
   </section>
 
   <!-- 2026-11-11 使用者參考 koyama.com.tw/newbornbox/ 的 PRODUCTS 區塊
-       （圖片＋剪短名稱＋獨立 BUY 按鈕），要求加在「照著步驟」段落下面。
-       整張卡片本身也包成連結（不是只有 BUY 兩個字可以點），BUY 視覺上
-       做成獨立按鈕只是呼應參考站的版面語感，不會因此產生巢狀連結。
-       沒有用全站既有的 .product-card（那個是技法分類入口用，不顯示
-       BUY／單一商品動作），這裡另外做一組新元件，見下面 <style>
-       .koyama-product-grid。標題下面加一句置中說明（呼應參考站
+       （圖片＋剪短名稱），加在「照著步驟」段落下面。原本比照參考站做了
+       獨立的 BUY 按鈕，使用者後來反饋拿掉，改成點圖片／名稱（整張卡片）
+       直接進商品頁，不需要額外的按鈕。沒有用全站既有的 .product-card
+       （那個是技法分類入口用，不是單一商品動作），這裡另外做一組新
+       元件，見下面 <style> .koyama-product-grid。標題下面加一句置中
+       說明（呼應參考站
        PRODUCTS 標題下的「寶寶出生的那一年最具意義」那句），點出這批
        款式共通的主題：傳統春聯斗方，用新的形式留下來。
 
@@ -900,27 +892,22 @@
       <a class="koyama-product-card" href="sand-art-fu/">
         <div class="koyama-product-card__media"><img src="../assets/images/products/sand-art-fu/sand-art-fu-cutout.webp" alt="福星砂畫材料包成品參考圖" loading="lazy"></div>
         <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">福</span><span class="koyama-product-card__name-en">Fortune</span></p>
-        <span class="koyama-product-card__buy">BUY</span>
       </a>
       <a class="koyama-product-card" href="sand-art-chun/">
         <div class="koyama-product-card__media"><img src="../assets/images/products/sand-art-chun/sand-art-chun-cutout.webp" alt="春結砂畫材料包成品參考圖" loading="lazy"></div>
         <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">春</span><span class="koyama-product-card__name-en">Spring</span></p>
-        <span class="koyama-product-card__buy">BUY</span>
       </a>
       <a class="koyama-product-card" href="sand-art-cai/">
         <div class="koyama-product-card__media"><img src="../assets/images/products/sand-art-cai/sand-art-cai-cutout.webp" alt="花財砂畫材料包成品參考圖" loading="lazy"></div>
         <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">財</span><span class="koyama-product-card__name-en">Wealth</span></p>
-        <span class="koyama-product-card__buy">BUY</span>
       </a>
       <a class="koyama-product-card" href="sand-art-na-fu/">
         <div class="koyama-product-card__media"><img src="../assets/images/products/sand-art-na-fu/sand-art-na-fu-cutout.webp" alt="格裡納福砂畫材料包成品參考圖" loading="lazy"></div>
         <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">納福</span><span class="koyama-product-card__name-en">Blessing</span></p>
-        <span class="koyama-product-card__buy">BUY</span>
       </a>
       <a class="koyama-product-card" href="sand-art-ying-chun/">
         <div class="koyama-product-card__media"><img src="../assets/images/products/sand-art-ying-chun/sand-art-ying-chun-cutout.webp" alt="格裡迎春砂畫材料包成品參考圖" loading="lazy"></div>
         <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">迎春</span><span class="koyama-product-card__name-en">Welcome Spring</span></p>
-        <span class="koyama-product-card__buy">BUY</span>
       </a>
     </div>
   </section>
