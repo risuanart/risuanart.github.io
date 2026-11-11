@@ -951,3 +951,7 @@ gap/margin/padding 其實都沒生效（等於 0 或初始值），包括全站 
 - 使用者指定Desktop/羊年/馬蒂斯舞蹈內「羊年舞蹈-設計草稿.jpg」「羊年舞蹈-完成作品.jpg」，澄清為結合羊年。保留來源，輸出最長邊2000、WebP品質90至sand-art-artist/sheep-dance-design-sketch.webp及sheep-dance-finished-painting.webp。
 - 紅藍款左圖改三張輪播：馬諦斯原畫→羊年草稿→羊年完成作品，沿用moments-carousel自動5秒、左右鍵與觸控滑動；圖片contain完整顯示，下方顯示轉化順序並保留原創理念，明確寫結合羊年意象。桌機左右及手機上下結構不變。
 - 兩頁圖片解碼、手動前進兩張及自動回原畫通過，無pageerror；六種寬度除768px既有11px外均無溢位，diff檢查通過。僅本機提交未push。
+
+## 2026-11-11：原畫輪播箭頭移除白底
+- 依使用者截圖，僅ptpl-artwork__carousel的箭頭背景改transparent、opacity0.5，保留原尺寸與點擊功能，紅藍款CSS版本同步更新。
+- Chrome確認兩頁背景rgba(0,0,0,0)、透明度0.5，下一張可切換至草稿；diff檢查通過，僅提交未push。

@@ -769,7 +769,7 @@
 .ptpl-artwork__carousel img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; opacity: 0; transition: opacity var(--duration-slow) var(--ease-standard); }
 .ptpl-artwork__carousel img.is-active { opacity: 1; }
 .ptpl-artwork__visual > .ptpl-artwork__sequence { margin-top: var(--space-2); font-size: var(--font-size-xs); color: var(--color-text-secondary); }
-.ptpl-artwork__carousel .moments-carousel__nav { position: absolute; top: 50%; transform: translateY(-50%); z-index: 2; width: var(--space-6); height: var(--space-6); padding: var(--space-1); border: 0; background: var(--color-surface-light); color: var(--color-text-primary); cursor: pointer; }
+.ptpl-artwork__carousel .moments-carousel__nav { position: absolute; top: 50%; transform: translateY(-50%); z-index: 2; width: var(--space-6); height: var(--space-6); padding: var(--space-1); border: 0; background: transparent; color: var(--color-text-primary); opacity: 0.5; cursor: pointer; }
 .ptpl-artwork__carousel .moments-carousel__nav--prev { left: 0; }
 .ptpl-artwork__carousel .moments-carousel__nav--next { right: 0; }
 .ptpl-artwork__carousel .moments-carousel__nav svg { width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 1.5; }
