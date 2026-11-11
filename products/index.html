@@ -49,6 +49,7 @@
      說明）。 -->
 <link rel="stylesheet" href="../css/site-footer.css">
 <link rel="stylesheet" href="../css/hub-blocks.css">
+<link rel="stylesheet" href="../css/page-title-en.css?v=20261107-shared-heading">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
 <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16">
@@ -211,27 +212,17 @@
      （舊的是裸 header 元素選擇器，雖然特異度打不過 .site-header，但
      多一份死掉的規則只會讓人搞不清楚現在真正生效的是哪一份）。 */
 
-  /* ---------- Hero ---------- */
+  /* ---------- Hero ----------
+     2026-11-11 使用者反映大標要跟其他頁面（例如 faq/index.html 的
+     「預約須知／BEFORE YOU BOOK」）同一套邏輯，不要這頁自己發明一套
+     「中文置頂＋英文襯線大寫」的標題樣式。改用全站共用的
+     .work-heading／.page-title-en（css/page-title-en.css，見下面
+     <head> 補的 <link>），這頁原本自己刻的 h1／.tagline 樣式整段拿掉，
+     不再需要（取而代之的排版、字級、中英文上下順序都交給那份共用
+     CSS 決定）。 */
   .hero{
     padding: var(--gap-lg) var(--pad-h) var(--gap-md);
     text-align:center;
-  }
-  .hero h1{
-    font-size: clamp(32px, 6vw, 64px);
-    letter-spacing:4px;
-    text-transform:uppercase;
-    opacity:0;
-    transform:translateY(20px);
-    transition: opacity 1s ease, transform 1s ease;
-  }
-  .hero .tagline{
-    margin-top:16px;
-    font-family: "Cormorant Garamond", serif;
-    font-weight:600;
-    font-size:16px;
-    letter-spacing:4px;
-    text-transform:uppercase;
-    color: var(--color-brand);
   }
   .hero .intro{
     max-width:var(--max-text);
@@ -272,7 +263,6 @@
     opacity:1;
     transform:translateY(0);
   }
-  .hero h1.is-visible{ opacity:1; transform:translateY(0); }
   .delay-1{ transition-delay:.15s; }
   .delay-2{ transition-delay:.3s; }
 
@@ -662,8 +652,7 @@
 
   <section class="content-block content-block--hero fade-in">
     <div class="hero">
-      <h1 class="fade-in">手作材料包</h1>
-      <div class="tagline fade-in delay-1">Color Your Own New Year</div>
+      <h1 class="work-heading fade-in"><span class="page-title-en" aria-hidden="true">COLOR YOUR OWN NEW YEAR</span><span class="inner">手作材料包</span></h1>
       <p class="intro fade-in delay-2">
         一份禮，不只迎新，也留住一段節氣的美好。<br><br>
         如果你已經對制式的新春禮盒提不起興趣，<br>
