@@ -578,15 +578,54 @@
     </div>
   </section>
 
-  <section class="overview">
-    <div class="label">
-      專案概述
+  <!-- 2026-11-11 使用者參考 koyama.com.tw/newbornbox/ 的敘事節奏（情感開場→
+       理念/信任→情境代入→材質/手作理性說明→產品系列→行動呼籲），把原本
+       「專案概述」那兩格還沒寫完的佔位文字，換成實際的敘事段落。只改這頁
+       （材料包引導頁），不動個別商品頁——那些頁面本來就各自有自己的
+       「商品介紹」「商品詳細」章節，不需要套用同一套節奏。
+       下面幾個新章節直接沿用全站既有的 .chapter／.chapter__block／
+       .chapter__banner-photo／.home-entry-row／.placeholder-box 這幾組
+       class（分別是商品頁敘事段落、首頁情境入口卡、還沒有照片時的誠實
+       佔位框），不新增一套獨立的版面語彙。 -->
+  <section class="chapter fade-in">
+    <h2 class="chapter__title">從傳統工藝，變成在家就能做的事</h2>
+    <div class="chapter__block">
+      <p class="chapter__statement">手作材料包，是怎麼來的</p>
+      <p class="chapter__prose">撕貼紙、倒沙、鋪色，這些原本只在畫室課堂上才會碰到的技法，我們把它拆解成在家也能照著順序完成的步驟。不需要畫畫基礎，材料跟工具都準備好了，剩下的就是坐下來，花一段時間好好完成一幅屬於自己的作品。</p>
     </div>
-    <div class="body">
-      <p class="fade-in">我們把傳統工藝與手作結合，推出在家就能完成的材料包，<br>不論是自己嘗試，或是與家人朋友一起，<br>都能做出一幅屬於這個新年的作品。</p>
+    <div class="chapter__banner-photo fade-in delay-2">
+      <img src="../assets/images/products/sand-art-fu/sand-art-fu-gallery-06.jpg" alt="倒沙鋪色的製作過程特寫" loading="lazy">
     </div>
-    <div class="extra">
-      <p class="fade-in delay-1">這裡放第二段補充文字，桌面版會排在「專案概述」這排的最右邊，手機版會接在上一段文字下方。</p>
+  </section>
+
+  <section class="chapter fade-in">
+    <h2 class="chapter__title">留給自己，或是送給在乎的人</h2>
+    <div class="home-entry-row">
+      <a class="home-entry" href="shop/">
+        <div class="home-entry__media"><img src="../assets/images/products/sand-art-chun/sand-art-chun-kit.jpg" alt="春聯砂畫材料包平拍俯視圖，含底板、分裝沙、排刷、夾子"></div>
+        <div class="home-entry__copy">
+          <h3 class="home-entry__title">留給自己</h3>
+          <p class="home-entry__desc">花一段時間靜下來，完成一幅新年作品，當作給自己的新年儀式。</p>
+        </div>
+      </a>
+      <a class="home-entry home-entry--reverse" href="shop/">
+        <div class="home-entry__media"><img src="../assets/images/products/sand-art-chun/sand-art-chun-gallery-02.jpg" alt="手持完成的「春」成品，桌面還留著製作過程的痕跡"></div>
+        <div class="home-entry__copy">
+          <h3 class="home-entry__title">送給在乎的人</h3>
+          <p class="home-entry__desc">比起制式的新春禮盒，一份可以親手完成的材料包，更像是用心準備的新年禮物。</p>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section class="chapter fade-in">
+    <h2 class="chapter__title">大家一起過年</h2>
+    <p class="chapter__intro">一個人靜靜完成，或是全家人、朋友圍在一起各自動手，都是材料包本來的樣子。</p>
+    <!-- 待補：多人一起手作材料包的情境照（之後補上真實拍攝的照片後，直接
+         把下面整個 .placeholder-box 換成 <img>，.chapter__banner-photo
+         的尺寸規則不用動，見 css/products.css 該處說明）。 -->
+    <div class="chapter__banner-photo fade-in delay-2">
+      <div class="placeholder-box placeholder-box--photo" aria-hidden="true"><svg class="placeholder-box__icon" viewBox="0 0 24 24" width="1.4em" height="1.4em" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1.5"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 16l-5.5-5.5a1 1 0 0 0-1.4 0L6 19"/></svg><span class="placeholder-box__text">多人一起手作材料包的情境照</span></div>
     </div>
   </section>
 
@@ -619,6 +658,14 @@
         <p class="product-card__title">砂畫材料包</p>
         <p class="product-card__desc">分層鋪色、堆疊出圖案，步驟清楚好上手，新手也能做出細緻成品。</p>
       </a>
+    </div>
+  </section>
+
+  <section class="chapter fade-in">
+    <h2 class="chapter__title">照著步驟，一步步完成</h2>
+    <p class="chapter__intro">撕開、倒沙、鋪色，每一步都不難，難的只是願不願意坐下來開始。</p>
+    <div class="chapter__banner-photo fade-in delay-2">
+      <video preload="none" src="../assets/videos/products/sand-art-fu/full-demo.mp4" poster="../assets/images/products/sand-art-fu/sand-art-fu-demo-poster.jpg" data-autoplay muted loop playsinline aria-label="福星 Starry Fu 完整製作過程示範影片，自動循環播放"></video>
     </div>
   </section>
 
@@ -725,6 +772,7 @@
        的 .product-page 固定容器），site-header-scroll.js 已經有
        `.product-page` 找不到就退回 window 的 fallback，不用額外調整。 -->
   <script src="../js/cart.js"></script>
+  <script src="../js/video-inview.js"></script>
   <script src="../js/site-header-scroll.js?v=20261107-backtop"></script>
   <script src="../js/account-auth.js"></script>
   <script src="../js/account-widget.js"></script>
