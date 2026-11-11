@@ -1108,7 +1108,7 @@
     height: calc(var(--space-6) + var(--space-2));
     padding: var(--space-1);
     opacity: 0;
-    pointer-events: none;
+    pointer-events: auto;
     transition: opacity var(--duration-fast) var(--ease-standard);
     border: 1px solid currentColor;
     border-radius: 50%;
@@ -1116,8 +1116,13 @@
     background: transparent;
     cursor: pointer;
   }
-  .preview-hero:hover .preview-hero__arrow,
-  .preview-hero:has(:focus-visible) .preview-hero__arrow { opacity: 1; pointer-events: auto; }
+  .preview-hero__arrow::before {
+    content: "";
+    position: absolute;
+    inset: calc(-1 * var(--space-6));
+  }
+  .preview-hero__arrow:hover,
+  .preview-hero__arrow:focus-visible { opacity: 1; }
   .preview-hero__arrow--prev { left: var(--space-6); }
   .preview-hero__arrow--next { right: var(--space-6); }
   .preview-hero__arrow svg { width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 1.5; }
