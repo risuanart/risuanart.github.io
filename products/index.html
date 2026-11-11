@@ -449,11 +449,26 @@
   .koyama-product-card:hover .koyama-product-card__media img{
     transform: scale(1.04);
   }
+  /* 名稱改成「字＋英文翻譯」兩層（見上面 <style> 開頭補充說明），中文字
+     大、英文小寫字放大寫＋拉開字距放在下面，像是替這個字做簡短介紹，
+     不是只丟一個單字。 */
   .koyama-product-card__name{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:4px;
     margin:0;
-    font-size:18px;
+  }
+  .koyama-product-card__name-cn{
+    font-size:22px;
     font-weight:700;
     letter-spacing:0.5px;
+  }
+  .koyama-product-card__name-en{
+    font-size:11px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color: var(--color-text-secondary);
   }
   .koyama-product-card__buy{
     display:inline-flex;
@@ -862,42 +877,49 @@
        做成獨立按鈕只是呼應參考站的版面語感，不會因此產生巢狀連結。
        沒有用全站既有的 .product-card（那個是技法分類入口用，不顯示
        BUY／單一商品動作），這裡另外做一組新元件，見下面 <style>
-       .koyama-product-grid。
+       .koyama-product-grid。標題下面加一句置中說明（呼應參考站
+       PRODUCTS 標題下的「寶寶出生的那一年最具意義」那句），點出這批
+       款式共通的主題：傳統春聯斗方，用新的形式留下來。
 
-       2026-11-11 使用者反映圖片容器拿掉灰底色之後，照片本身棚拍的米色
-       背景還是看得出一塊方框（那是照片檔案自己的內容，不是 CSS 底色，
-       沒辦法單純用 CSS 移除）。改用去背後的 *-cutout.png（本機用
-       scipy 做顏色距離去背＋裁到菱形卡片本身的外接框，只對這五張圖做，
-       不影響其他地方仍在用的 *-main.jpg），卡片容器改成
-       aspect-ratio:1/1 ＋ object-fit:contain（圖片本身已經是裁好的
-       正方形透明 PNG，不需要再裁切/填滿）。 -->
-  <section class="chapter fade-in">
+       每張卡片的名稱改成「字＋英文翻譯」（例如 福／Fortune），不是只有
+       單一個字——使用者反饋單字太潦草，像是漏寫，改成字＋英文有在
+       「介紹」這個字的感覺，外國人也看得懂。
+
+       2026-11-11 使用者提供自己已經做好的去背圖（去背邊緣乾淨、沒有
+       撕紙毛邊雜訊，比我本機用 scipy 做的版本品質好很多），改用使用者
+       提供的檔案（來源：桌面／沙畫官網／沙畫搭配自己的顏色／各字資料夾
+       ／{字}-沙畫模擬-01-去背.png），不再用本機去背的版本。原始檔案是
+       1657×1657 的無壓縮 PNG（6.5MB／張，5 張約 32MB，對網頁來說太大），
+       轉存成 900px 寬的 WebP（約 70-110KB／張），品質設 82，透明度不受
+       影響，副檔名從 .png 改 .webp。 -->
+  <section class="chapter fade-in" style="text-align:center;">
     <span class="ed-label">Collection</span>
     <h2 class="chapter__title">經典款式</h2>
+    <p class="chapter__intro">傳統春聯斗方，換一種新的形式留下來。</p>
     <div class="koyama-product-grid">
       <a class="koyama-product-card" href="sand-art-fu/">
-        <div class="koyama-product-card__media"><img src="../assets/images/products/sand-art-fu/sand-art-fu-cutout.png" alt="福星砂畫材料包成品參考圖" loading="lazy"></div>
-        <p class="koyama-product-card__name">福</p>
+        <div class="koyama-product-card__media"><img src="../assets/images/products/sand-art-fu/sand-art-fu-cutout.webp" alt="福星砂畫材料包成品參考圖" loading="lazy"></div>
+        <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">福</span><span class="koyama-product-card__name-en">Fortune</span></p>
         <span class="koyama-product-card__buy">BUY</span>
       </a>
       <a class="koyama-product-card" href="sand-art-chun/">
-        <div class="koyama-product-card__media"><img src="../assets/images/products/sand-art-chun/sand-art-chun-cutout.png" alt="春結砂畫材料包成品參考圖" loading="lazy"></div>
-        <p class="koyama-product-card__name">春</p>
+        <div class="koyama-product-card__media"><img src="../assets/images/products/sand-art-chun/sand-art-chun-cutout.webp" alt="春結砂畫材料包成品參考圖" loading="lazy"></div>
+        <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">春</span><span class="koyama-product-card__name-en">Spring</span></p>
         <span class="koyama-product-card__buy">BUY</span>
       </a>
       <a class="koyama-product-card" href="sand-art-cai/">
-        <div class="koyama-product-card__media"><img src="../assets/images/products/sand-art-cai/sand-art-cai-cutout.png" alt="花財砂畫材料包成品參考圖" loading="lazy"></div>
-        <p class="koyama-product-card__name">財</p>
+        <div class="koyama-product-card__media"><img src="../assets/images/products/sand-art-cai/sand-art-cai-cutout.webp" alt="花財砂畫材料包成品參考圖" loading="lazy"></div>
+        <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">財</span><span class="koyama-product-card__name-en">Wealth</span></p>
         <span class="koyama-product-card__buy">BUY</span>
       </a>
       <a class="koyama-product-card" href="sand-art-na-fu/">
-        <div class="koyama-product-card__media"><img src="../assets/images/products/sand-art-na-fu/sand-art-na-fu-cutout.png" alt="格裡納福砂畫材料包成品參考圖" loading="lazy"></div>
-        <p class="koyama-product-card__name">納福</p>
+        <div class="koyama-product-card__media"><img src="../assets/images/products/sand-art-na-fu/sand-art-na-fu-cutout.webp" alt="格裡納福砂畫材料包成品參考圖" loading="lazy"></div>
+        <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">納福</span><span class="koyama-product-card__name-en">Blessing</span></p>
         <span class="koyama-product-card__buy">BUY</span>
       </a>
       <a class="koyama-product-card" href="sand-art-ying-chun/">
-        <div class="koyama-product-card__media"><img src="../assets/images/products/sand-art-ying-chun/sand-art-ying-chun-cutout.png" alt="格裡迎春砂畫材料包成品參考圖" loading="lazy"></div>
-        <p class="koyama-product-card__name">迎春</p>
+        <div class="koyama-product-card__media"><img src="../assets/images/products/sand-art-ying-chun/sand-art-ying-chun-cutout.webp" alt="格裡迎春砂畫材料包成品參考圖" loading="lazy"></div>
+        <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">迎春</span><span class="koyama-product-card__name-en">Welcome Spring</span></p>
         <span class="koyama-product-card__buy">BUY</span>
       </a>
     </div>
