@@ -1,13 +1,19 @@
 // 購物車頁「您可能對此有興趣」：從 js/cart.js 的真實 PRODUCTS 挑 4 件
 // 目前購物車裡還沒有的商品做推薦，每次重新整理隨機洗牌（不是固定依照
-// PRODUCTS 物件裡的宣告順序），但洗牌後還是照兩條規則篩選，不是純隨機：
-// 1. 流動畫（category:"fluid-art"）最多只讓 1 件入選，避免 4 格裡一次
+// PRODUCTS 物件裡的宣告順序），但洗牌後還是照規則篩選，不是純隨機：
+// 1. 偵測購物車目前的商品屬於哪些技法（category）——如果購物車裡完全
+//    沒有流動畫，強制挑 1 件流動畫進這 4 格；同理，沒有砂畫就強制挑
+//    1 件砂畫進來。讓客人結帳前看得到自己這次「沒選到」的另一種技法，
+//    不是只看到跟購物車內容同類型的東西。購物車兩種技法都有，或是
+//    是空的（兩種都「沒有」，兩種各強制挑 1 件當預設組合）才會套用
+//    這條規則，不是每次都強制。
+// 2. 流動畫（category:"fluid-art"）最多只讓 1 件入選，避免 4 格裡一次
 //    出現兩件流動畫，看起來像同一種材料包的重複推薦。
-// 2. 砂畫（category:"sand-art"）入選的幾件彼此價格要不一樣，避免同時
+// 3. 砂畫（category:"sand-art"）入選的幾件彼此價格要不一樣，避免同時
 //    推薦兩件剛好同價位的砂畫款式（例如都是 $640 的春聯砂畫材料包），
 //    讓這組推薦看起來更有「選擇範圍」而不是同一層級的重複。
-// 如果嚴格套用這兩條規則湊不滿 4 件（候選商品本來就少的情況），
-// 退回補滿剩下的名額，不強行砍成少於 4 件。
+// 如果嚴格套用這些規則湊不滿 4 件（候選商品本來就少的情況），退回
+// 補滿剩下的名額，不強行砍成少於 4 件。
 // 卡片沿用 .shop-card 結構（跟 products-overview.js 同一套），外層
 // grid 直接沿用 .shop-grid（固定兩欄，4 件自然排成 2x2，不用額外
 // 調整欄數）。加入購物車按鈕沿用既有的 data-add-to-cart／
@@ -60,21 +66,26 @@
     return result;
   }
 
-  // 依照上面說明的兩條規則，從洗牌後的候選清單依序挑選，額滿就停。
-  function pickDiverse(shuffledKeys, products, count) {
+  // 依照上面說明的規則，從洗牌後的候選清單依序挑選，額滿就停。
+  // forcedKeys（購物車缺的技法，見 init() 裡怎麼算）優先塞進去，
+  // 之後才輪到洗牌後的候選名單照規則遞補。
+  function pickDiverse(shuffledKeys, products, count, forcedKeys) {
     const picked = [];
     let fluidArtPicked = false;
     const usedSandArtPrices = new Set();
 
-    shuffledKeys.forEach((key) => {
-      if (picked.length >= count) return;
+    function tryAdd(key) {
+      if (picked.length >= count || picked.includes(key)) return;
       const product = products[key];
       if (product.category === "fluid-art" && fluidArtPicked) return;
       if (product.category === "sand-art" && usedSandArtPrices.has(product.price)) return;
       picked.push(key);
       if (product.category === "fluid-art") fluidArtPicked = true;
       if (product.category === "sand-art") usedSandArtPrices.add(product.price);
-    });
+    }
+
+    (forcedKeys || []).forEach(tryAdd);
+    shuffledKeys.forEach(tryAdd);
 
     // 候選商品本來就少、規則湊不滿額度時，退回補滿剩下的名額，
     // 不要為了守規則硬是少顯示幾件。
@@ -97,11 +108,32 @@
     // 只抓一次頁面載入當下的購物車內容排除掉，不是即時連動——加入推薦
     // 商品後這張卡片還是會留著，跟大部分電商「你可能也喜歡」的行為一致，
     // 不會加了就立刻從清單消失、讓人找不到剛剛按過的卡片。
-    const inCart = new Set(cart.readCart().map((item) => item.productKey));
+    const cartItems = cart.readCart();
+    const inCart = new Set(cartItems.map((item) => item.productKey));
+    const cartCategories = new Set(
+      cartItems
+        .map((item) => cart.PRODUCTS[item.productKey] && cart.PRODUCTS[item.productKey].category)
+        .filter(Boolean)
+    );
+
     const pool = Object.keys(cart.PRODUCTS).filter(
       (key) => !cart.PRODUCTS[key].hidden && !inCart.has(key)
     );
-    const candidates = pickDiverse(shuffle(pool), cart.PRODUCTS, RECOMMEND_COUNT);
+    const shuffledPool = shuffle(pool);
+
+    // 購物車缺哪個技法，就從洗牌後的名單裡找一件該技法的商品強制塞入
+    // （見檔案開頭說明）；兩種技法都有的話這裡維持空陣列，交給下面
+    // pickDiverse() 照規則隨機挑。
+    const forced = [];
+    ["fluid-art", "sand-art"].forEach((category) => {
+      if (cartCategories.has(category)) return;
+      const pick = shuffledPool.find(
+        (key) => cart.PRODUCTS[key].category === category && !forced.includes(key)
+      );
+      if (pick) forced.push(pick);
+    });
+
+    const candidates = pickDiverse(shuffledPool, cart.PRODUCTS, RECOMMEND_COUNT, forced);
 
     if (!candidates.length) {
       section.hidden = true;
