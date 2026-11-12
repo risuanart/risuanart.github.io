@@ -4327,16 +4327,27 @@ button.text-link {
 /* 三格版：「搭配自己的顏色」章節原本只有兩張示範圖的版位，2026-10
    使用者補了「原版配色＋兩款重新分配」三張同系列插圖（同一組顏色，
    色塊位置不同），三張並排比兩張更能呈現「同材料、不同效果」這件事，
-   加一個三欄變體，不動原本雙欄版本（其他頁面可能還在用）。 */
+   加一個三欄變體，不動原本雙欄版本（其他頁面可能還在用）。
+   2026-11-12 使用者反映三張圖太小看不清楚，原本的 max-width: 56ch
+   把整組圖限制在遠小於 .chapter 本身的寬度（840px，見 .chapter 規則），
+   拿掉這個上限讓三格直接撐滿章節寬度，桌面版每格明顯變大。 */
 .howto-compare--triple {
   grid-template-columns: repeat(3, 1fr);
-  max-width: 56ch;
 }
 
 .howto-compare__cell {
   aspect-ratio: 1 / 1;
   border-radius: var(--radius-sharp);
   overflow: hidden;
+  /* 2026-11-12 同一次反饋：這三張圖點了沒反應，使用者想點開放大看細節。
+     沿用 js/gallery-lightbox.js（學員作品格子同一套燈箱，見該檔案
+     2026-11-12 的說明），這裡只補點擊游標跟鍵盤焦點樣式。 */
+  cursor: pointer;
+}
+
+.howto-compare__cell:focus-visible {
+  outline: 2px solid var(--color-text-primary);
+  outline-offset: 2px;
 }
 
 .howto-compare__cell img {

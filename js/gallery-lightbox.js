@@ -4,6 +4,10 @@
 // document 層級的事件代理（監聽點擊/鍵盤事件，判斷 e.target 有沒有落在
 // .gallery-grid__item 裡），不用等特定格子存在才綁定，也不受 gallery.html
 // 篩選後重新產生 innerHTML 影響。
+// 2026-11-12：使用者反映沙畫材料包商品頁「搭配自己的顏色」那組
+// .howto-compare__cell 三張示範圖太小、點不開放大，沿用同一套燈箱
+// （不是另外寫一支），把事件代理跟分組邏輯一併認得 .howto-compare__cell／
+// .howto-compare，三張圖之間也能左右切換，跟學員作品格的體驗一致。
 (function () {
   let overlay = null;
   let imgEl = null;
@@ -123,9 +127,9 @@
   }
 
   function findGridItems(fromFigure) {
-    const grid = fromFigure.closest(".gallery-grid");
+    const grid = fromFigure.closest(".gallery-grid, .howto-compare");
     if (!grid) return [fromFigure];
-    return Array.from(grid.querySelectorAll(".gallery-grid__item"));
+    return Array.from(grid.querySelectorAll(".gallery-grid__item, .howto-compare__cell"));
   }
 
   function handleOpenFrom(figure) {
@@ -134,14 +138,14 @@
   }
 
   document.addEventListener("click", (e) => {
-    const figure = e.target.closest(".gallery-grid__item");
+    const figure = e.target.closest(".gallery-grid__item, .howto-compare__cell");
     if (!figure) return;
     handleOpenFrom(figure);
   });
 
   document.addEventListener("keydown", (e) => {
     if (e.key !== "Enter" && e.key !== " ") return;
-    const figure = e.target.closest(".gallery-grid__item");
+    const figure = e.target.closest(".gallery-grid__item, .howto-compare__cell");
     if (!figure) return;
     e.preventDefault();
     handleOpenFrom(figure);
