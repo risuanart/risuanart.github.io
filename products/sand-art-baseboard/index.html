@@ -155,23 +155,20 @@
           <button type="button" class="work__gallery-nav work__gallery-nav--prev" data-baseboard-nav="-1" aria-label="上一款圖案"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
           <button type="button" class="work__gallery-nav work__gallery-nav--next" data-baseboard-nav="1" aria-label="下一款圖案"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
         </div>
+        <!-- 使用者要求把「這個商品只有底板＋貼紙，不含沙子」放在照片
+             正下方、置中，比埋在標題右邊的文字欄更顯眼。蓋在照片上面
+             需要額外加深色遮罩才能維持可讀性，7 款圖案底色深淺不一，
+             遮罩效果每款都不一樣、不穩定，所以是貼著照片下緣、不是疊
+             在照片裡面。 -->
+        <div class="safety-notice safety-notice--purchase-note fade-in delay-1">
+          <p class="safety-notice__title">請注意</p>
+          <p class="safety-notice__list"><strong>這個商品只有底板＋貼紙，不含沙子。</strong></p>
+        </div>
       </div>
 
-      <div class="work__title-block">
+      <div class="work__title-block work__title-block--centered">
         <h1 class="work-heading fade-in"><span class="inner">沙畫底板・單買</span></h1>
         <p class="work-heading__sub fade-in delay-1">加購專屬・7 款設計任選</p>
-        <p class="intro fade-in delay-2">與材料包一致的貼紙底板，如果有加購色沙組，想嘗試不同配色，不用整組材料包重買。</p>
-      </div>
-
-      <!-- 使用者要求明確標示「這個商品只有底板＋貼紙，不含沙子」——
-           放在價格正上方、買之前一定會看到的位置，不是藏在後面章節
-           裡。完整的「建議搭配已有沙子再選購」說明移到下方「什麼時候
-           會用到」內文，這裡只留最關鍵的一句，避免太長。 -->
-      <div class="safety-notice safety-notice--purchase-note fade-in delay-2">
-        <p class="safety-notice__title">請注意</p>
-        <ul class="safety-notice__list">
-          <li><strong>這個商品只有底板＋貼紙，不含沙子。</strong></li>
-        </ul>
       </div>
 
       <p class="work-heading__field-label fade-in delay-2">圖案設計（7 選 1）</p>
@@ -227,18 +224,28 @@
     </header>
 
     <section class="chapter fade-in">
-      <h2 class="chapter__title">什麼時候會用到</h2>
+      <h2 class="chapter__title">適合誰加購？</h2>
       <div class="chapter__intro">
-        <p>材料包做壞了想重來一次、沙或亮粉還有剩但底板已經鋪滿，或是單純想拿同一款圖案換個顏色重新鋪一次──這張底板就是為了這些時刻準備的。圖案跟貼紙都已經印好、貼好，直接開始鋪色就好，不用重買整組材料包。</p>
-        <p>建議手上已經有剩餘的沙子／亮粉（材料包用剩的，或另外加購的漸層沙／金屬色沙／24色任選組）再選購，不然買回去會沒有沙可以鋪。</p>
-        <p>羊Diss舞蹈系列（紅羊／藍羊）的底板因為材料包本身定價較高，單買底板也另外定價，請到<a href="../sand-art-baseboard-artist/">沙畫底板・羊Diss舞蹈單買</a>選購。</p>
+        <p>材料包完成後材料還有剩，或是單純想拿同一款圖案換個顏色重新鋪一次，可以加購此產品。<br>圖案跟貼紙都已經印好、貼好，直接開始鋪色就好，不用重買整組材料包。</p>
+        <p><strong>建議手上已經有剩餘的沙子／亮粉（材料包用剩的，或另外加購的漸層沙／金屬色沙／24色任選組）再選購，不然買回去會沒有沙可以鋪！</strong></p>
+        <p>羊Diss舞蹈系列（紅羊／藍羊）的底板可以到該頁面加購！</p>
+        <a class="related-card chapter__cross-link" href="../sand-art-baseboard-artist/">
+          <div class="related-card__media">
+            <img class="related-card__thumb" src="../../assets/images/products/sand-art-baseboard/sand-art-baseboard-artist-red.jpg" alt="羊Diss舞蹈・紅 底板實拍照" loading="lazy">
+          </div>
+          <div class="related-card__body">
+            <p class="related-card__eyebrow">沙畫底板單買</p>
+            <p class="related-card__name">羊Diss舞蹈・紅／藍</p>
+            <p class="related-card__price price-text">$300</p>
+          </div>
+        </a>
       </div>
     </section>
 
     <section class="chapter fade-in delay-1">
       <h2 class="chapter__title">材料保存</h2>
       <div class="chapter__intro">
-        <p>底板請避免摺疊或重壓，貼紙保持乾燥平整，建議於收到後盡快使用，放置過久貼紙背膠可能影響黏性。</p>
+        <p>底板請避免摺疊，貼紙保持乾燥平整，建議於收到後盡快使用，放置過久貼紙背膠可能影響黏性。</p>
       </div>
     </section>
 

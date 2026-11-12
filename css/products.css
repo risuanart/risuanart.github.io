@@ -2405,16 +2405,42 @@ h1.chapter__title {
    使用、吞嚥風險」的真正兒童安全警示，語意不同，使用者要求拿掉邊框、
    顏色改成跟 .work-heading__discount-tagline（EARLY BIRD 橘紅字）
    同一個 --color-warning。另開修飾 class，不動共用的 .safety-notice
-   本身，其餘 9 頁的安全警示維持原本灰邊框樣式。 */
+   本身，其餘 9 頁的安全警示維持原本灰邊框樣式。
+
+   2026-11-12 第二輪：使用者確認這句話放在照片正下方、置中，比放在
+   標題右邊的文字欄更顯眼。改到 .work__gallery 裡面、緊接主圖之後，
+   文字置中；蓋在照片「上面」（疊字）需要額外的深色遮罩才能維持可讀
+   性，7 款圖案底色深淺不一，遮罩效果不穩定，所以是貼著照片下緣，不
+   是疊在照片裡面。只有一句話，HTML 端也從 <ul><li> 改成單一個 <p>
+   （不需要項目符號），這裡把 .safety-notice__list 的 ul 專屬 padding-
+   left 歸零，不然置中的文字會因為 ul 的項目符號留白而偏右。 */
 .safety-notice--purchase-note {
   border: none;
-  padding: var(--space-4) 0 var(--space-2);
+  padding: var(--space-3) 0 0;
+  text-align: center;
+}
+
+.safety-notice--purchase-note .safety-notice__list {
+  padding-left: 0;
 }
 
 .safety-notice--purchase-note .safety-notice__title,
 .safety-notice--purchase-note .safety-notice__list,
 .safety-notice--purchase-note .safety-notice__list strong {
   color: var(--color-warning);
+}
+
+/* 2026-11-12 使用者要求沙畫底板這兩頁的標題＋副標改置中——原本左欄
+   排版（.work__title-block 本身）是給「商品名搬到相片牆下方」的新版
+   頁面用的靠左排法，這兩頁的「介紹句」已經拆出去、併進下面新的
+   「適合誰加購？」章節，標題區只剩 H1／副標兩行，改用這個獨立修飾
+   class 蓋回置中，不影響其他還在用 .work__title-block 靠左排版的
+   頁面（24色任選組／漸層沙自選色等維持原樣）。沙畫底板・羊Diss舞蹈
+   單買（sand-art-baseboard-artist）同樣拆了介紹句、搬了請注意框，
+   一併加上這個 class 保持兩頁一致。 */
+.work__title-block--centered,
+.work__title-block--centered .work-heading {
+  text-align: center;
 }
 
 /* 內文文字連結（例如尾聲導引至另一版本）：比照 .cta-section__ig／.work__cta 的
