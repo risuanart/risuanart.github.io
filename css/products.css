@@ -1235,16 +1235,27 @@
    才淡入」手法與尺寸，這裡用獨立 class 名稱（而非直接共用
    .related-products__nav）是因為這裡的容器是 .work__gallery-strip-wrap，
    不是 .related-products，選取器命名空間要對得上各自的父層。 */
+/* 2026-11-12 改成懸浮圓形按鈕，不再是貼齊圖片上下滿高的長條背景——
+   滿高長條在滑鼠移到主圖時會變成一條很搶眼的白色色塊，看圖的人會
+   覺得圖片被截斷、視覺被壓縮。改成固定尺寸、垂直置中的圓形按鈕，
+   只佔圖片一小角，不影響整張圖的觀看。.work__gallery--thumbs-left
+   底下的縮圖欄捲動鈕是另一組用途（見下面該規則），那邊會整個蓋掉
+   這裡的 position／width／height／border-radius，但 transform 不會
+   被 position:static 自動歸零，所以那條規則額外補了 transform:none，
+   不然縮圖欄的捲動鈕會莫名其妙往上位移半個按鈕高度。 */
 .work__gallery-nav {
   position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 28px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   border: none;
-  background: color-mix(in srgb, var(--color-surface-light) 85%, transparent);
+  background: color-mix(in srgb, var(--color-surface-light) 90%, transparent);
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.18);
   color: var(--color-text-primary);
   cursor: pointer;
   opacity: 0;
@@ -1257,11 +1268,11 @@
 }
 
 .work__gallery-nav--prev {
-  left: 0;
+  left: 12px;
 }
 
 .work__gallery-nav--next {
-  right: 0;
+  right: 12px;
 }
 
 @media (max-width: 549px) {
@@ -1447,6 +1458,13 @@
      2026-10-22 要求保留箭頭可以點擊捲動，不是單純藏起來改靠滑鼠滾輪。 */
   .work__gallery--thumbs-left .work__gallery-nav {
     position: static;
+    /* 上面主圖用的圓形按鈕規則多了 transform:translateY(-50%) 跟
+       border-radius:50%——position:static 不會自動讓 transform 失效，
+       這裡要明確歸零，不然這顆橫跨整個縮圖欄寬度的捲動鈕會變成被
+       裁切的橢圓，而且往上位移半個按鈕高度。 */
+    transform: none;
+    border-radius: 0;
+    box-shadow: none;
     width: 100%;
     height: 28px;
     flex: 0 0 auto;
