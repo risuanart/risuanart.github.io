@@ -652,6 +652,47 @@
     .split-row, .split-row.reverse{ flex-direction:column; align-items:stretch; }
   }
   .home-entry--static:hover .home-entry__media img { transform: none; }
+
+  /* 畫室設計故事：左上文字、中央作品、右下文字，不作購買入口。 */
+  .studio-story__opening { max-width: 75%; }
+  .studio-story__opening p {
+    margin: 0;
+    font-size: var(--heading-font-size);
+    font-weight: var(--heading-font-weight);
+    line-height: 2;
+  }
+  .studio-story__art {
+    position: relative;
+    aspect-ratio: 1;
+    width: 78%;
+    margin: var(--space-6) auto 0;
+  }
+  .studio-story__art img {
+    position: absolute;
+    top: -12.5%;
+    display: block;
+    width: 100%;
+    height: auto;
+    /* 現有白底作品照暫以遮罩示意；正式去背照到位後可移除此遮罩。 */
+    clip-path: polygon(50% 15.4%, 93.2% 49.9%, 50% 85.2%, 6% 50%);
+    margin: 0;
+  }
+  .studio-story__closing {
+    width: 66%;
+    margin-left: auto;
+    margin-top: var(--space-6);
+  }
+  .studio-story__closing p {
+    margin: 0;
+    font-size: var(--body-font-size);
+    line-height: 2;
+    color: var(--color-text-secondary);
+  }
+  @media (max-width: 600px) {
+    .studio-story__opening { max-width: 100%; }
+    .studio-story__art { width: 100%; }
+    .studio-story__closing { width: 85%; }
+  }
 </style>
 </head>
 <body>
@@ -791,6 +832,19 @@
       <span class="ed-label">Story</span>
       <h2 class="chapter__title">從傳統工藝，變成在家就能做的事</h2>
       <p class="chapter__prose">撕貼紙、倒沙、鋪色，這些原本只在畫室課堂上才會碰到的技法，我們把它拆解成在家也能照著順序完成的步驟。不需要畫畫基礎，材料跟工具都準備好了，剩下的就是坐下來，花一段時間好好完成一幅屬於自己的作品。</p>
+    </div>
+  </section>
+
+  <section id="studio-design-story" class="chapter studio-story fade-in" aria-label="日宣繪畫室的設計與製作">
+    <div class="studio-story__opening">
+      <p>從圖案設計、材料搭配，<br>到分裝與製作，<br>由日宣繪畫室一步步準備。</p>
+    </div>
+    <figure class="studio-story__art">
+      <img src="../assets/images/products/sand-art-artist/sand-art-artist-red-main.jpg" alt="日宣原創羊Diss舞蹈紅款春聯砂畫，羊群圍繞福字起舞" loading="lazy" width="1120" height="1400">
+    </figure>
+    <div class="studio-story__closing">
+      <span class="ed-label">From Our Studio</span>
+      <p>把畫室裡的藝術靈感，<br>做成可以帶回家的創作。<br><br>藝術家系列「羊Diss舞蹈」，<br>致敬馬諦斯《舞蹈》，<br>讓羊群、色彩與新年祝福，<br>成為你親手完成的一幅作品。</p>
     </div>
   </section>
 
