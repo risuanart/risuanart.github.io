@@ -25,7 +25,6 @@
 .course-story {
   padding-top: var(--editorial-gap);
   padding-bottom: 56px;
-  border-bottom: 1px solid color-mix(in srgb, var(--color-text-secondary) 25%, transparent);
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 56px;
