@@ -83,7 +83,7 @@
     "sand-art-na-fu": { name: "春聯砂畫材料包・格裡納福 Checked in Na Fu", shortName: "格裡納福 Checked in Na Fu", price: 640, earlyBirdPrice: 535, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true, preorder: true, sizeCm: 15 },
     "sand-art-ying-chun-lantern": { name: "春聯砂畫材料包・燈上迎春 Lit in Chun", shortName: "燈上迎春 Lit in Chun", price: 510, earlyBirdPrice: 425, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true, preorder: true, sizeCm: 15 },
     "sand-art-na-fu-lantern": { name: "春聯砂畫材料包・燈上納福 Lit in Na Fu", shortName: "燈上納福 Lit in Na Fu", price: 510, earlyBirdPrice: 425, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true, preorder: true, sizeCm: 15 },
-    "fluid-art-canvas-kit": { name: "空白畫布＋字貼＋架高杯", price: 0, category: "fluid-art", hasVariant: false, hidden: true },
+    "fluid-art-canvas-kit": { name: "空白畫布＋字貼＋架高杯", price: 0, category: "fluid-art", hasVariant: false, hidden: true, noEarlyBird: true },
     // 2026-10-22：原本是「額外顏色沙・固定套組」佔位商品（$__，不開放選色），
     // 使用者提供 12 組漸層色沙實拍照後正式上線，改成真的可以自選色的加購品。
     // 沿用同一個商品鍵（沒有改名），避免要去改全部 8 個商品頁「一起加購」
@@ -91,8 +91,8 @@
     // 2026-10-22 補充：原本 hidden:true（比照像框上線前的做法，只在加購
     // 區塊看得到），使用者後來要求跟像框一樣有自己的商品頁、也要能在
     // 商品總覽／相關商品被看到，不是只能從加購區塊進來，拿掉 hidden。
-    "sand-art-extra-color": { name: "漸層沙・自選色", price: 150, category: "sand-art", tagline: "12 組漸層色任選，材料更齊全" },
-    "sand-art-sticker-only": { name: "純貼紙加購・單款", price: 0, category: "sand-art", hasVariant: false, hidden: true },
+    "sand-art-extra-color": { name: "漸層沙・自選色", price: 150, category: "sand-art", tagline: "12 組漸層色任選，材料更齊全", noEarlyBird: true },
+    "sand-art-sticker-only": { name: "純貼紙加購・單款", price: 0, category: "sand-art", hasVariant: false, hidden: true, noEarlyBird: true },
     // 2026-10-22：沙畫加購像框，兩個尺寸是實體上完全不同的兩個木框（不是同一個
     // 商品選尺寸），比照羊Diss舞蹈紅／藍的先例用兩個獨立商品鍵——也是技術上
     // 必須這樣做的原因：目前的購物車架構價格只綁在 productKey 上，沒有「同一個
@@ -100,16 +100,16 @@
     // 用 VARIANT_OPTIONS 的色系/款式選擇器硬套會變成兩個尺寸同一個價錢，不對。
     // hidden:false（這兩個商品可以單獨購買，不是只能加購，所以不排除在商品
     // 總覽／相關商品之外），有自己的頁面 products/sand-art-frame/。
-    "sand-art-frame-15": { name: "沙畫加購像框・15×15cm", shortName: "像框 15×15cm", price: 150, category: "sand-art", hasVariant: false, tagline: "內徑 15×15cm，木質畫框，讓作品直接上牆" },
-    "sand-art-frame-20": { name: "沙畫加購像框・20×20cm", shortName: "像框 20×20cm", price: 199, category: "sand-art", hasVariant: false, tagline: "內徑 20×20cm，木質畫框，讓作品直接上牆" },
+    "sand-art-frame-15": { name: "沙畫加購像框・15×15cm", shortName: "像框 15×15cm", price: 150, category: "sand-art", hasVariant: false, tagline: "內徑 15×15cm，木質畫框，讓作品直接上牆", noEarlyBird: true },
+    "sand-art-frame-20": { name: "沙畫加購像框・20×20cm", shortName: "像框 20×20cm", price: 199, category: "sand-art", hasVariant: false, tagline: "內徑 20×20cm，木質畫框，讓作品直接上牆", noEarlyBird: true },
     // 2026-10-24：72 色沙（A／B／C 三組各 24 色）加購品，單組與全組是兩個
     // 價錢不同的獨立商品鍵（跟上面 sand-art-frame-15／-20 兩個尺寸同一個
     //理由——cart.js 的價格只綁在 productKey 上，沒有「同一商品、不同
     // 購買方式各自不同價錢」的機制）。單組（sand-art-24color）有 A／B／C
     // 三個 scheme 可選（見 VARIANT_OPTIONS），全組（sand-art-24color-
     // bundle）固定是 A+B+C 一次買齊，hasVariant:false，沒有色組選擇。
-    "sand-art-24color": { name: "砂畫・24色任選組", price: 450, category: "sand-art", tagline: "24 色單組，A／B／C 任選一組" },
-    "sand-art-24color-bundle": { name: "砂畫・24色任選組（72色全組）", shortName: "72色全組", price: 950, category: "sand-art", hasVariant: false, tagline: "A＋B＋C 一次買齊 72 色，比分開買三組更划算" },
+    "sand-art-24color": { name: "砂畫・24色任選組", price: 450, category: "sand-art", tagline: "24 色單組，A／B／C 任選一組", noEarlyBird: true },
+    "sand-art-24color-bundle": { name: "砂畫・24色任選組（72色全組）", shortName: "72色全組", price: 950, category: "sand-art", hasVariant: false, tagline: "A＋B＋C 一次買齊 72 色，比分開買三組更划算", noEarlyBird: true },
     // 2026-11-09：金屬色沙加購，三種購買方式價錢不同，比照上面 frame-15／
     // -20、24color／24color-bundle 同樣的理由拆成三個獨立商品鍵：
     // sand-art-metallic 是鉑金／香檳銀單色（同價錢，用 VARIANT_OPTIONS
@@ -118,21 +118,29 @@
     // 三色一組（材質其實是金箔碎片，不是色沙，但使用情境同屬「沙畫加購
     // 材料」，分類維持 sand-art）。玫瑰金箔沒有單獨開放購買，只存在於
     // 三色組裡，所以沒有自己的 VARIANT_OPTIONS 選項。
-    "sand-art-metallic": { name: "沙畫加購色沙・金屬色（鉑金／香檳銀）", price: 45, category: "sand-art", tagline: "鉑金、香檳銀單色任選，或選雙色組一起買" },
+    "sand-art-metallic": { name: "沙畫加購色沙・金屬色（鉑金／香檳銀）", price: 45, category: "sand-art", tagline: "鉑金、香檳銀單色任選，或選雙色組一起買", noEarlyBird: true },
     // 2026-11-09：單色／雙色組合併成同一個商品頁（products/sand-art-metallic/
     // 裡面用款式選擇器切換），總覽購物頁只需要一張卡片進得去就好，不是
     // 兩張卡片各自連到同一頁造成混淆，所以雙色組這個鍵改回 hidden:true
     // （跟像框／24色那種「不同尺寸/組合各自都值得單獨一張卡片」的情況
     // 不同，這裡兩者是同一頁面的選項，不是兩個獨立選購情境）。
-    "sand-art-metallic-duo": { name: "沙畫加購色沙・鉑金＋香檳銀雙色組", shortName: "鉑金＋香檳銀雙色組", price: 80, category: "sand-art", hasVariant: false, tagline: "兩色一起買，比分開買單色更划算", hidden: true },
+    "sand-art-metallic-duo": { name: "沙畫加購色沙・鉑金＋香檳銀雙色組", shortName: "鉑金＋香檳銀雙色組", price: 80, category: "sand-art", hasVariant: false, tagline: "兩色一起買，比分開買單色更划算", hidden: true, noEarlyBird: true },
     // 名稱不加「沙畫加購」字首：金箔碎片不是砂畫專屬材料，流動畫表面
     // 一樣可以撒，category 維持 sand-art 純粹是因為購物車頁分組目前只有
     // 這兩個分類可選，不代表這款限定搭配砂畫。
-    "sand-art-metallic-trio": { name: "金箔碎片・金／銀／玫瑰金箔三色組", shortName: "金箔碎片三色組", price: 85, category: "sand-art", hasVariant: false, tagline: "金、銀、玫瑰金箔，三色一組" },
+    "sand-art-metallic-trio": { name: "金箔碎片・金／銀／玫瑰金箔三色組", shortName: "金箔碎片三色組", price: 85, category: "sand-art", hasVariant: false, tagline: "金、銀、玫瑰金箔，三色一組", noEarlyBird: true },
     // 2026-11-09：材料包附的夾子比較偏向輔助固定，刻細節線條的話官方
     // 建議客人自備美工刀，這支筆刀是給沒有自備、臨時需要的人加購用。
-    "sand-art-craft-knife": { name: "沙畫加購筆刀", price: 60, category: "sand-art", hasVariant: false, tagline: "刻細節線條用，材料包附的夾子偏向輔助固定" },
+    "sand-art-craft-knife": { name: "沙畫加購筆刀", price: 60, category: "sand-art", hasVariant: false, tagline: "刻細節線條用，材料包附的夾子偏向輔助固定", noEarlyBird: true },
   };
+  // noEarlyBird：2026-11-12 使用者確認這些「加購品」不套早鳥折扣（維持
+  // 原價），理由跟後端 risuan-checkout/lib/products.js 同一則註解——這些
+  // 商品本來就是設計給客人拿來湊免運／滿額優惠門檻用的，若本身也打折，
+  // 等於這筆「補差額」被早鳥跟滿額折扣兩頭吃掉利潤。早鳥折扣計算
+  // （earlyBirdPrice()）跟三個卡片渲染檔案（products-overview.js／
+  // related-products.js／cart-cross-sell.js）的 SALE 角標／EARLY BIRD
+  // 文案判斷都要一併排除這個標記，不然價格不打折但卡片還是顯示促銷文案，
+  // 視覺跟實際金額會對不起來。
   const CATEGORY_LABELS = { "fluid-art": "春聯流動畫", "sand-art": "春聯砂畫" };
   // 購物車頁分組顯示的固定順序，不跟著「使用者先加哪一類商品」變動——不然同一個
   // 購物車，加入順序不同就會看到兩種不同的分組排列，體驗不一致。
@@ -251,7 +259,7 @@
   function earlyBirdPrice(value) {
     const product = typeof value === "object" ? value : null;
     const price = product ? product.price : value;
-    if (!price || todayInTaipei() > EARLY_BIRD_CUTOFF) return { discounted: price, amount: 0 };
+    if (!price || (product && product.noEarlyBird) || todayInTaipei() > EARLY_BIRD_CUTOFF) return { discounted: price, amount: 0 };
     const discounted = product && product.earlyBirdPrice != null ? product.earlyBirdPrice : Math.round(price * EARLY_BIRD_RATE);
     return { discounted, amount: price - discounted };
   }
@@ -1143,7 +1151,7 @@
     // discount-badge-corner（縮圖角標）＋ EARLY_BIRD_TAGLINE（價格上方
     // 橘字）＋priceDiscountHTMLPlain（價格本身不帶徽章），三處視覺語言
     // 完全一致，不再各自一套。
-    const discountActive = product.price && earlyBirdActive();
+    const discountActive = product.price && !product.noEarlyBird && earlyBirdActive();
     const cornerBadge = discountActive ? `<span class="discount-badge-corner discount-badge-corner--standalone">SALE</span>` : "";
     const discountTagline = discountActive ? `<p class="cart-item__discount-tagline">${EARLY_BIRD_TAGLINE}</p>` : "";
     li.innerHTML = `

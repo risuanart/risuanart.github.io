@@ -52,7 +52,7 @@
     // 「播一輪就停」早就播完停在主圖了，等於看不到配色動態展示的效果。
     const carouselAttr = colorwayFrames ? " data-hero-carousel data-carousel-loop" : "";
     const eyebrow = CATEGORY_LABELS[product.category] || "";
-    const discountActive = product.price && cart.earlyBirdActive && cart.earlyBirdActive();
+    const discountActive = product.price && !product.noEarlyBird && cart.earlyBirdActive && cart.earlyBirdActive();
     const cornerBadge = discountActive ? `<span class="discount-badge-corner discount-badge-corner--standalone">SALE</span>` : "";
     const discountTagline = discountActive ? `<p class="related-card__discount-tagline">${cart.EARLY_BIRD_TAGLINE}</p>` : "";
     return `

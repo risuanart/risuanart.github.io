@@ -149,7 +149,7 @@
     // corner 同一套樣式）改用 .shop-card__badges 容器單獨包著，貼齊
     // 圖片左上角——雖然現在只剩這一個角標，容器還是保留，之後如果
     // 又有別的角標要加，接上同一套堆疊邏輯就好，不用重新設計版面。
-    const discountActive = product.price && cart.earlyBirdActive && cart.earlyBirdActive();
+    const discountActive = product.price && !product.noEarlyBird && cart.earlyBirdActive && cart.earlyBirdActive();
     const discountBadge = discountActive
       ? `<span class="discount-badge-corner">SALE</span>`
       : "";

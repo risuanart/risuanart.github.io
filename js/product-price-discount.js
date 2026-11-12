@@ -38,7 +38,7 @@
     if (!product || !product.price) return;
     priceEl.innerHTML = priceDiscountHTMLPlain(product, 1);
 
-    if (earlyBirdActive() && !priceEl.dataset.discountTaglineInjected) {
+    if (earlyBirdActive() && !product.noEarlyBird && !priceEl.dataset.discountTaglineInjected) {
       const tagline = document.createElement("p");
       tagline.className = "work-heading__discount-tagline";
       tagline.textContent = EARLY_BIRD_TAGLINE;

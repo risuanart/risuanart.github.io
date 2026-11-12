@@ -38,7 +38,7 @@
     const variantInput = defaultScheme
       ? `<select class="variant-select" hidden aria-hidden="true"><option value="${defaultScheme}" selected></option></select>`
       : "";
-    const discountActive = product.price && cart.earlyBirdActive && cart.earlyBirdActive();
+    const discountActive = product.price && !product.noEarlyBird && cart.earlyBirdActive && cart.earlyBirdActive();
     const cornerBadge = discountActive ? `<span class="discount-badge-corner discount-badge-corner--standalone">SALE</span>` : "";
     const discountTagline = discountActive ? `<p class="shop-card__discount-tagline">${cart.EARLY_BIRD_TAGLINE}</p>` : "";
     return `
