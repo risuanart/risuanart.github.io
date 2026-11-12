@@ -693,6 +693,17 @@
     .studio-story__art { width: 100%; }
     .studio-story__closing { width: 85%; }
   }
+
+  .studio-story__art img { animation: studio-story-colorway 10s linear infinite; }
+  .studio-story__art .studio-story__blue { animation-delay: -5s; }
+  @keyframes studio-story-colorway {
+    0%, 40%, 100% { opacity: 1; }
+    50%, 90% { opacity: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .studio-story__art img { animation: none; }
+    .studio-story__art .studio-story__blue { opacity: 0; }
+  }
 </style>
 </head>
 <body>
@@ -839,8 +850,9 @@
     <div class="studio-story__opening">
       <p>從圖案設計、材料搭配，<br>到分裝與製作，<br>由日宣繪畫室一步步準備。</p>
     </div>
-    <figure class="studio-story__art">
-      <img src="../assets/images/products/sand-art-artist/sand-art-artist-red-main.jpg" alt="日宣原創羊Diss舞蹈紅款春聯砂畫，羊群圍繞福字起舞" loading="lazy" width="1120" height="1400">
+    <figure class="studio-story__art" role="img" aria-label="羊Diss舞蹈紅、藍兩款春聯砂畫，羊群圍繞福字起舞">
+      <img class="studio-story__red" src="../assets/images/products/sand-art-artist/sand-art-artist-red-main.jpg" alt="" aria-hidden="true" loading="lazy" width="1120" height="1400">
+      <img class="studio-story__blue" src="../assets/images/products/sand-art-artist/sand-art-artist-blue-main.jpg" alt="" aria-hidden="true" loading="lazy" width="1120" height="1400">
     </figure>
     <div class="studio-story__closing">
       <span class="ed-label">From Our Studio</span>
