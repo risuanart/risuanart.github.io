@@ -47,9 +47,14 @@
     const requested = Math.max(0, Math.floor(Number(pointsInput.value) || 0));
     return Math.min(requested, maxRedeemablePoints(order, method));
   }
+  // 2026-11-12：免運門檻從 $1,200 調整成 $1,300（跟後端
+  // risuan-checkout/lib/products.js 的 FREE_SHIPPING_THRESHOLD 同步，
+  // 理由見那邊的註解），這裡只是預覽數字，兩邊沒對齊的話客人會看到
+  // 跟實際扣款不一致的金額。
+  const FREE_SHIPPING_THRESHOLD = 1300;
   function shippingFee(order, method) {
     if (!method) return 0;
-    return order.itemsTotal - appliedPoints(order, method) >= 1200 ? 0 : SHIPPING_FEES[method];
+    return order.itemsTotal - appliedPoints(order, method) >= FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_FEES[method];
   }
   function syncPointsLimit(order, method) {
     if (!pointsInput) return;
