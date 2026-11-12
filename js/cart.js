@@ -343,7 +343,11 @@
     "sand-art-cai": BASE_PREFIX + "assets/images/products/sand-art-cai/sand-art-cai-main.jpg",
     "sand-art-ying-chun": BASE_PREFIX + "assets/images/products/sand-art-ying-chun/sand-art-ying-chun-main.jpg",
     "sand-art-na-fu": BASE_PREFIX + "assets/images/products/sand-art-na-fu/sand-art-na-fu-main.jpg",
-    "sand-art-ying-chun-lantern": BASE_PREFIX + "assets/images/products/sand-art-ying-chun-lantern/sand-art-ying-chun-lantern-main.jpg",
+    // 2026-11-12 使用者要求這款的購物車/總覽縮圖改用這次補拍的手持實拍照
+    // （戶外陽光那張，gallery-06），跟其他商品統一用棚拍 -main.jpg 的做法
+    // 不同——是刻意的例外，不是忘記同步。-main.jpg 本身保留不動，商品頁
+    // og:image／結構化資料／「搭配自己的顏色」旁邊的成品參考圖還是用它。
+    "sand-art-ying-chun-lantern": BASE_PREFIX + "assets/images/products/sand-art-ying-chun-lantern/sand-art-ying-chun-lantern-gallery-06.jpg",
     "sand-art-na-fu-lantern": BASE_PREFIX + "assets/images/products/sand-art-na-fu-lantern/sand-art-na-fu-lantern-main.jpg",
     "sand-art-artist-sheep-red": BASE_PREFIX + "assets/images/products/sand-art-artist/sand-art-artist-red-main.jpg",
     "sand-art-artist-sheep-blue": BASE_PREFIX + "assets/images/products/sand-art-artist/sand-art-artist-blue-main.jpg",
