@@ -4329,10 +4329,14 @@ button.text-link {
    色塊位置不同），三張並排比兩張更能呈現「同材料、不同效果」這件事，
    加一個三欄變體，不動原本雙欄版本（其他頁面可能還在用）。
    2026-11-12 使用者反映三張圖太小看不清楚，原本的 max-width: 56ch
-   把整組圖限制在遠小於 .chapter 本身的寬度（840px，見 .chapter 規則），
-   拿掉這個上限讓三格直接撐滿章節寬度，桌面版每格明顯變大。 */
+   把整組圖限制在遠小於 .chapter 本身的寬度（840px，見 .chapter 規則）。
+   第一次修正只刪掉這行，沒想到基礎類別 .howto-compare 自己還有一條
+   max-width: 40ch，兩個 class 疊在同一個 div 上，刪掉覆寫等於讓更小的
+   40ch 生效，圖反而變得更小、擠在左邊——這裡改成明寫 max-width: 100%
+   明確蓋掉基礎類別，三格才會真的撐滿章節寬度。 */
 .howto-compare--triple {
   grid-template-columns: repeat(3, 1fr);
+  max-width: 100%;
 }
 
 .howto-compare__cell {
