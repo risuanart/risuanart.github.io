@@ -651,6 +651,7 @@
        完全不可見。手機版改回 stretch，讓圖片跟文字都撐滿整欄寬度。 */
     .split-row, .split-row.reverse{ flex-direction:column; align-items:stretch; }
   }
+  .home-entry--static:hover .home-entry__media img { transform: none; }
 </style>
 </head>
 <body>
@@ -797,20 +798,20 @@
     <span class="ed-label">For You, Or For Someone</span>
     <h2 class="chapter__title">留給自己，或是送給在乎的人</h2>
     <div class="home-entry-row">
-      <a class="home-entry" href="shop/">
+      <article class="home-entry home-entry--static">
         <div class="home-entry__media"><img src="../assets/images/products/sand-art-chun/sand-art-chun-kit.jpg" alt="春聯砂畫材料包平拍俯視圖，含底板、分裝沙、排刷、夾子"></div>
         <div class="home-entry__copy">
           <h3 class="home-entry__title">留給自己</h3>
           <p class="home-entry__desc">花一段時間靜下來，完成一幅新年作品，當作給自己的新年儀式。</p>
         </div>
-      </a>
-      <a class="home-entry home-entry--reverse" href="shop/">
+      </article>
+      <article class="home-entry home-entry--reverse home-entry--static">
         <div class="home-entry__media"><img src="../assets/images/products/sand-art-chun/sand-art-chun-gallery-02.jpg" alt="手持完成的「春」成品，桌面還留著製作過程的痕跡"></div>
         <div class="home-entry__copy">
           <h3 class="home-entry__title">送給在乎的人</h3>
           <p class="home-entry__desc">比起制式的新春禮盒，一份可以親手完成的材料包，更像是用心準備的新年禮物。</p>
         </div>
-      </a>
+      </article>
     </div>
   </section>
 
