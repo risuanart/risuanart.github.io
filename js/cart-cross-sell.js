@@ -1,10 +1,17 @@
-// 購物車頁「您可能對此有興趣」：從 js/cart.js 的真實 PRODUCTS 挑幾件目前
-// 購物車裡還沒有的商品做推薦，最多 3 件（跟參考規格的 3 欄一致）。
-// 卡片沿用 .shop-card 結構（跟 products-overview.js 同一套），但外層
-// grid 是這支檔案自己的 .cart-cross-sell__grid，欄數／字級跟主要的
-// .shop-grid（相關商品格狀列表）不同，所以沒有直接共用那個 class。
-// 加入購物車按鈕沿用既有的 data-add-to-cart／initAddToCart() 機制，
-// 不是另外寫一套。
+// 購物車頁「您可能對此有興趣」：從 js/cart.js 的真實 PRODUCTS 挑 4 件
+// 目前購物車裡還沒有的商品做推薦，每次重新整理隨機洗牌（不是固定依照
+// PRODUCTS 物件裡的宣告順序），但洗牌後還是照兩條規則篩選，不是純隨機：
+// 1. 流動畫（category:"fluid-art"）最多只讓 1 件入選，避免 4 格裡一次
+//    出現兩件流動畫，看起來像同一種材料包的重複推薦。
+// 2. 砂畫（category:"sand-art"）入選的幾件彼此價格要不一樣，避免同時
+//    推薦兩件剛好同價位的砂畫款式（例如都是 $640 的春聯砂畫材料包），
+//    讓這組推薦看起來更有「選擇範圍」而不是同一層級的重複。
+// 如果嚴格套用這兩條規則湊不滿 4 件（候選商品本來就少的情況），
+// 退回補滿剩下的名額，不強行砍成少於 4 件。
+// 卡片沿用 .shop-card 結構（跟 products-overview.js 同一套），外層
+// grid 直接沿用 .shop-grid（固定兩欄，4 件自然排成 2x2，不用額外
+// 調整欄數）。加入購物車按鈕沿用既有的 data-add-to-cart／
+// initAddToCart() 機制，不是另外寫一套。
 (function () {
   const PLUS_ICON = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>';
 
@@ -41,6 +48,46 @@
       </div>`;
   }
 
+  const RECOMMEND_COUNT = 4;
+
+  // Fisher-Yates 洗牌，每次重新整理順序都不一樣。
+  function shuffle(arr) {
+    const result = arr.slice();
+    for (let i = result.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [result[i], result[j]] = [result[j], result[i]];
+    }
+    return result;
+  }
+
+  // 依照上面說明的兩條規則，從洗牌後的候選清單依序挑選，額滿就停。
+  function pickDiverse(shuffledKeys, products, count) {
+    const picked = [];
+    let fluidArtPicked = false;
+    const usedSandArtPrices = new Set();
+
+    shuffledKeys.forEach((key) => {
+      if (picked.length >= count) return;
+      const product = products[key];
+      if (product.category === "fluid-art" && fluidArtPicked) return;
+      if (product.category === "sand-art" && usedSandArtPrices.has(product.price)) return;
+      picked.push(key);
+      if (product.category === "fluid-art") fluidArtPicked = true;
+      if (product.category === "sand-art") usedSandArtPrices.add(product.price);
+    });
+
+    // 候選商品本來就少、規則湊不滿額度時，退回補滿剩下的名額，
+    // 不要為了守規則硬是少顯示幾件。
+    if (picked.length < count) {
+      shuffledKeys.forEach((key) => {
+        if (picked.length >= count || picked.includes(key)) return;
+        picked.push(key);
+      });
+    }
+
+    return picked;
+  }
+
   function init() {
     const section = document.getElementById("cart-cross-sell");
     const grid = document.getElementById("cart-cross-sell-grid");
@@ -51,9 +98,10 @@
     // 商品後這張卡片還是會留著，跟大部分電商「你可能也喜歡」的行為一致，
     // 不會加了就立刻從清單消失、讓人找不到剛剛按過的卡片。
     const inCart = new Set(cart.readCart().map((item) => item.productKey));
-    const candidates = Object.keys(cart.PRODUCTS)
-      .filter((key) => !cart.PRODUCTS[key].hidden && !inCart.has(key))
-      .slice(0, 3);
+    const pool = Object.keys(cart.PRODUCTS).filter(
+      (key) => !cart.PRODUCTS[key].hidden && !inCart.has(key)
+    );
+    const candidates = pickDiverse(shuffle(pool), cart.PRODUCTS, RECOMMEND_COUNT);
 
     if (!candidates.length) {
       section.hidden = true;
