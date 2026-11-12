@@ -515,6 +515,15 @@
   <script src="../../js/product-price-discount.js"></script>
   <script src="../../js/product-terms.js"></script>
   <script src="../../js/product-tabs.js"></script>
+  <!-- 2026-11-12 補回：這支商品頁自己的首圖雖然已經改用
+       js/hero-thumb-gallery.js 的照片牆，但頁面下方「相關商品」卡片
+       （js/related-products.js 動態產生）裡其他商品的三色配色動圖
+       還是靠這支腳本驅動（見 js/related-products.js
+       carouselFramesHTML() 的說明），上次升級首圖時誤以為這支腳本
+       整支沒用到而拿掉，其實只是靜態 HTML 裡看不到 data-hero-carousel
+       屬性，動態產生的卡片還是需要它，比照 sand-art-fu 同時保留
+       兩支腳本的做法。 -->
+  <script src="../../js/hero-colorway-carousel.js"></script>
   <script src="../../js/hero-thumb-gallery.js"></script>
   <script src="../../js/video-inview.js"></script>
   <script src="../../js/related-products.js"></script>
