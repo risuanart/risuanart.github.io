@@ -143,6 +143,10 @@
     // 剩，可以單獨加購一塊空白畫布再做一幅，不用整組材料包重買。單一
     // 款式（hasVariant:false），跟 sand-art-craft-knife 同一套最簡版型。
     "fluid-art-blank-canvas": { name: "流動畫加購空白畫布", price: 35, category: "fluid-art", hasVariant: false, tagline: "顏料做完一幅還有剩時，加購一塊畫布再做一幅", noEarlyBird: true },
+    // 2026-11-12：流動畫加購字貼，5 款設計任選，可以搭配空白畫布再做
+    // 一幅，也可以單買貼在自己已經完成的作品上。單價 70（成本／耗損／
+    // 包裝／平台費用都算進去後使用者確認的售價），hasVariant:true。
+    "fluid-art-word-sticker": { name: "流動畫加購字貼", price: 70, category: "fluid-art", hasVariant: true, tagline: "5 款設計任選，搭配空白畫布再做一幅，也可以單買貼在作品上", noEarlyBird: true },
   };
   // noEarlyBird：2026-11-12 使用者確認這些「加購品」不套早鳥折扣（維持
   // 原價），理由跟後端 risuan-checkout/lib/products.js 同一則註解——這些
@@ -191,6 +195,15 @@
       "baseboard-fu",
     ],
     "sand-art-baseboard-artist": ["baseboard-artist-red", "baseboard-artist-blue"],
+    // 2026-11-12：流動畫加購字貼，5 款設計用 scheme 表示（前綴
+    // word-sticker- 避免撞名，同一個道理見上面沙畫底板的註解）。
+    "fluid-art-word-sticker": [
+      "word-sticker-huancai-fu",
+      "word-sticker-gold-fu",
+      "word-sticker-black-chun",
+      "word-sticker-black-fu-square",
+      "word-sticker-black-fu-vertical",
+    ],
   };
 
   // 2026-11-09：商品總覽格狀卡的色號縮圖排（js/products-overview.js
@@ -257,6 +270,12 @@
     "baseboard-fu": "福星 Starry Fu",
     "baseboard-artist-red": "羊Diss舞蹈・紅",
     "baseboard-artist-blue": "羊Diss舞蹈・藍",
+    // 2026-11-12：流動畫加購字貼的 5 種設計。
+    "word-sticker-huancai-fu": "幻彩福",
+    "word-sticker-gold-fu": "金色福",
+    "word-sticker-black-chun": "黑色春",
+    "word-sticker-black-fu-square": "黑色福（方）",
+    "word-sticker-black-fu-vertical": "黑色福（直）",
   };
 
   // 單件商品的單價／整行小計，購物車頁與迷你購物車預覽共用同一套計算，
@@ -361,6 +380,12 @@
     "baseboard-fu": BASE_PREFIX + "assets/images/products/sand-art-baseboard/sand-art-baseboard-fu.jpg",
     "baseboard-artist-red": BASE_PREFIX + "assets/images/products/sand-art-baseboard/sand-art-baseboard-artist-red.jpg",
     "baseboard-artist-blue": BASE_PREFIX + "assets/images/products/sand-art-baseboard/sand-art-baseboard-artist-blue.jpg",
+    // 2026-11-12：流動畫加購字貼，5 張實拍照（平鋪棚拍）。
+    "word-sticker-huancai-fu": BASE_PREFIX + "assets/images/products/fluid-art-word-sticker/fluid-art-word-sticker-huancai-fu.jpg",
+    "word-sticker-gold-fu": BASE_PREFIX + "assets/images/products/fluid-art-word-sticker/fluid-art-word-sticker-gold-fu.jpg",
+    "word-sticker-black-chun": BASE_PREFIX + "assets/images/products/fluid-art-word-sticker/fluid-art-word-sticker-black-chun.jpg",
+    "word-sticker-black-fu-square": BASE_PREFIX + "assets/images/products/fluid-art-word-sticker/fluid-art-word-sticker-black-fu-square.jpg",
+    "word-sticker-black-fu-vertical": BASE_PREFIX + "assets/images/products/fluid-art-word-sticker/fluid-art-word-sticker-black-fu-vertical.jpg",
   };
 
   // 總覽格狀購物頁（products/shop.html）電腦版 hover 換圖用的「第二張圖」：
@@ -509,6 +534,7 @@
     "fluid-art-blank-canvas": BASE_PREFIX + "products/fluid-art-blank-canvas/",
     "sand-art-baseboard": BASE_PREFIX + "products/sand-art-baseboard/",
     "sand-art-baseboard-artist": BASE_PREFIX + "products/sand-art-baseboard-artist/",
+    "fluid-art-word-sticker": BASE_PREFIX + "products/fluid-art-word-sticker/",
   };
 
   const CART_PAGE_URL = BASE_PREFIX + "cart/";
