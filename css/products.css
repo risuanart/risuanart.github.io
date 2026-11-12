@@ -4343,15 +4343,6 @@ button.text-link {
   aspect-ratio: 1 / 1;
   border-radius: var(--radius-sharp);
   overflow: hidden;
-  /* 2026-11-12 同一次反饋：這三張圖點了沒反應，使用者想點開放大看細節。
-     沿用 js/gallery-lightbox.js（學員作品格子同一套燈箱，見該檔案
-     2026-11-12 的說明），這裡只補點擊游標跟鍵盤焦點樣式。 */
-  cursor: pointer;
-}
-
-.howto-compare__cell:focus-visible {
-  outline: 2px solid var(--color-text-primary);
-  outline-offset: 2px;
 }
 
 .howto-compare__cell img {
@@ -4359,6 +4350,16 @@ button.text-link {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  /* 2026-11-12 使用者說明「搭配自己的顏色」這三張是 AI 模擬示意圖
+     （不是實拍成品），不希望客人能存下來或放大細看——這裡撤掉點擊
+     放大燈箱（見 js/gallery-lightbox.js 的說明），改用跟 .paint-canvas
+     （css/home.css）同一套 user-select/-webkit-touch-callout 擋掉
+     手機長按喚出「儲存圖片」選單，同一邏輯也配上 HTML 的
+     draggable="false" 跟 oncontextmenu 擋右鍵另存。只是降低順手
+     下載的機率，無法完全防止有心人用瀏覽器工具取得圖片。 */
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
 }
 
 .howto-compare__cell.placeholder-box {
