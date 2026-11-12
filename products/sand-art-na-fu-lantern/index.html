@@ -161,17 +161,42 @@
            原本的配色自動輪播（.work__intro-photo--carousel），不套用
            .work__gallery--thumbs-left——這頁沒有實拍相片牆，是配色
            合成示範圖輪播，兩種元件結構不同，不能直接套用縮圖牆樣式。 -->
-      <div class="work__intro-photo work__intro-photo--carousel fade-in" data-hero-carousel data-carousel-loop>
-        <img src="../../assets/images/products/sand-art-na-fu-lantern/sand-art-na-fu-lantern-combo-1.png" alt="「燈上納福 Lit in Na Fu」配色示範（出貨配色）" loading="lazy" class="is-active" data-carousel-frame>
-        <img src="../../assets/images/products/sand-art-na-fu-lantern/sand-art-na-fu-lantern-combo-2.png" alt="「燈上納福 Lit in Na Fu」配色示範，僅供搭配參考，非出貨配色" loading="lazy" data-carousel-frame>
-        <img src="../../assets/images/products/sand-art-na-fu-lantern/sand-art-na-fu-lantern-combo-3.png" alt="「燈上納福 Lit in Na Fu」配色示範，僅供搭配參考，非出貨配色" loading="lazy" data-carousel-frame>
-        <div class="hero-carousel__dots" aria-hidden="true"><span class="is-active"></span><span></span><span></span></div>
-        <button type="button" class="hero-carousel__toggle" aria-label="暫停配色展示">
-          <svg class="icon-pause" viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14"></rect><rect x="14" y="5" width="4" height="14"></rect></svg>
-          <svg class="icon-play" viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M7 5 L19 12 L7 19 Z"></path></svg>
-        </button>
+      <!-- 2026-11-12：使用者補了實際製作過程／成品實拍照跟影片，改用跟
+           sand-art-ying-chun-lantern（同系列燈籠款，2026-11-12 剛做過
+           同樣的升級）同一套 .work__gallery 真實相片牆，取代原本只有
+           配色示範輪播的 .work__intro-photo--carousel。配色示範圖
+           （combo-1／2／3）合併成第一個縮圖繼續輪播，後面接真實拍的
+           製作過程／成品照片跟影片。 -->
+      <div class="work__gallery work__gallery--thumbs-left fade-in" data-gallery>
+        <div class="work__gallery-main" data-gallery-main>
+          <img src="../../assets/images/products/sand-art-na-fu-lantern/sand-art-na-fu-lantern-combo-1.png" alt="「燈上納福 Lit in Na Fu」配色示範（出貨配色）" loading="eager" class="is-active" data-gallery-frame>
+          <img src="../../assets/images/products/sand-art-na-fu-lantern/sand-art-na-fu-lantern-combo-2.png" alt="「燈上納福 Lit in Na Fu」配色示範，僅供搭配參考，非出貨配色" loading="lazy" data-gallery-frame>
+          <img src="../../assets/images/products/sand-art-na-fu-lantern/sand-art-na-fu-lantern-combo-3.png" alt="「燈上納福 Lit in Na Fu」配色示範，僅供搭配參考，非出貨配色" loading="lazy" data-gallery-frame>
+          <img src="../../assets/images/products/sand-art-na-fu-lantern/sand-art-na-fu-lantern-gallery-03.jpg" alt="用紅色膠水在「納」字貼紙上畫線鋪色前的特寫" loading="lazy" data-gallery-frame>
+          <video preload="none" src="../../assets/videos/products/sand-art-na-fu-lantern/gallery-pour-01.mp4" poster="../../assets/images/products/sand-art-na-fu-lantern/sand-art-na-fu-lantern-gallery-pour-01-poster.jpg" data-autoplay muted loop playsinline aria-label="畫膠水、倒沙鋪色的製作過程展示影片" data-gallery-frame></video>
+          <img src="../../assets/images/products/sand-art-na-fu-lantern/sand-art-na-fu-lantern-gallery-02.jpg" alt="用排刷鋪色、刷除多餘深綠色沙粒的製作過程" loading="lazy" data-gallery-frame>
+          <img src="../../assets/images/products/sand-art-na-fu-lantern/sand-art-na-fu-lantern-gallery-04.jpg" alt="將金色亮粉倒在「納」字貼紙上的特寫" loading="lazy" data-gallery-frame>
+          <video preload="none" src="../../assets/videos/products/sand-art-na-fu-lantern/gallery-reveal-01.mp4" poster="../../assets/images/products/sand-art-na-fu-lantern/sand-art-na-fu-lantern-gallery-reveal-01-poster.jpg" data-autoplay muted loop playsinline aria-label="完成的「燈上納福」成品展示影片一" data-gallery-frame></video>
+          <video preload="none" src="../../assets/videos/products/sand-art-na-fu-lantern/gallery-reveal-02.mp4" poster="../../assets/images/products/sand-art-na-fu-lantern/sand-art-na-fu-lantern-gallery-reveal-02-poster.jpg" data-autoplay muted loop playsinline aria-label="完成的「燈上納福」成品展示影片二，室內光線下的質感" data-gallery-frame></video>
+          <video preload="none" src="../../assets/videos/products/sand-art-na-fu-lantern/gallery-reveal-03.mp4" poster="../../assets/images/products/sand-art-na-fu-lantern/sand-art-na-fu-lantern-gallery-reveal-03-poster.jpg" data-autoplay muted loop playsinline aria-label="完成的「燈上納福」成品展示影片三，戶外陽光下的質感" data-gallery-frame></video>
+          <img src="../../assets/images/products/sand-art-na-fu-lantern/sand-art-na-fu-lantern-gallery-05.jpg" alt="手持完成的「燈上納福」成品，戶外自然光" loading="lazy" data-gallery-frame>
+        </div>
+        <div class="work__gallery-strip-wrap">
+          <button type="button" class="work__gallery-nav work__gallery-nav--prev" data-gallery-nav="-1" aria-label="上一張"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
+          <div class="work__gallery-thumbs" data-gallery-thumbs>
+            <button type="button" class="work__gallery-thumb is-active" data-gallery-thumb data-gallery-thumb-count="3" aria-label="切換到：配色示範輪播（出貨配色＋搭配參考）"><img src="../../assets/images/products/sand-art-na-fu-lantern/sand-art-na-fu-lantern-combo-1.png" alt="" loading="lazy" class="is-active" data-gallery-thumb-frame><img src="../../assets/images/products/sand-art-na-fu-lantern/sand-art-na-fu-lantern-combo-2.png" alt="" loading="lazy" data-gallery-thumb-frame><img src="../../assets/images/products/sand-art-na-fu-lantern/sand-art-na-fu-lantern-combo-3.png" alt="" loading="lazy" data-gallery-thumb-frame></button>
+            <button type="button" class="work__gallery-thumb" data-gallery-thumb aria-label="切換到：畫膠水特寫"><img src="../../assets/images/products/sand-art-na-fu-lantern/sand-art-na-fu-lantern-gallery-03.jpg" alt="" loading="lazy"></button>
+            <button type="button" class="work__gallery-thumb" data-gallery-thumb aria-label="切換到：倒沙鋪色過程影片"><img src="../../assets/images/products/sand-art-na-fu-lantern/sand-art-na-fu-lantern-gallery-pour-01-poster.jpg" alt="" loading="lazy"></button>
+            <button type="button" class="work__gallery-thumb" data-gallery-thumb aria-label="切換到：排刷鋪色過程"><img src="../../assets/images/products/sand-art-na-fu-lantern/sand-art-na-fu-lantern-gallery-02.jpg" alt="" loading="lazy"></button>
+            <button type="button" class="work__gallery-thumb" data-gallery-thumb aria-label="切換到：鋪金色亮粉特寫"><img src="../../assets/images/products/sand-art-na-fu-lantern/sand-art-na-fu-lantern-gallery-04.jpg" alt="" loading="lazy"></button>
+            <button type="button" class="work__gallery-thumb" data-gallery-thumb aria-label="切換到：成品展示影片一"><img src="../../assets/images/products/sand-art-na-fu-lantern/sand-art-na-fu-lantern-gallery-reveal-01-poster.jpg" alt="" loading="lazy"></button>
+            <button type="button" class="work__gallery-thumb" data-gallery-thumb aria-label="切換到：成品展示影片二（室內光）"><img src="../../assets/images/products/sand-art-na-fu-lantern/sand-art-na-fu-lantern-gallery-reveal-02-poster.jpg" alt="" loading="lazy"></button>
+            <button type="button" class="work__gallery-thumb" data-gallery-thumb aria-label="切換到：成品展示影片三（戶外陽光）"><img src="../../assets/images/products/sand-art-na-fu-lantern/sand-art-na-fu-lantern-gallery-reveal-03-poster.jpg" alt="" loading="lazy"></button>
+            <button type="button" class="work__gallery-thumb" data-gallery-thumb aria-label="切換到：成品參考照（戶外光）"><img src="../../assets/images/products/sand-art-na-fu-lantern/sand-art-na-fu-lantern-gallery-05.jpg" alt="" loading="lazy"></button>
+          </div>
+          <button type="button" class="work__gallery-nav work__gallery-nav--next" data-gallery-nav="1" aria-label="下一張"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+        </div>
       </div>
-      <p class="work-heading__colorway-note fade-in delay-1">砂畫底板出貨為圖一配色（固定），其餘為同組沙色重新搭配參考，無法指定砂畫底板配色。</p>
 
       <div class="work__title-block fade-in delay-2">
         <h1 class="work-heading"><span class="inner"><span class="work-heading__cn">燈上納福</span> <span class="work-heading__en">Lit in Na Fu</span></span></h1>
@@ -492,7 +517,7 @@
   <script src="../../js/product-price-discount.js"></script>
   <script src="../../js/product-terms.js"></script>
   <script src="../../js/product-tabs.js"></script>
-  <script src="../../js/hero-colorway-carousel.js"></script>
+  <script src="../../js/hero-thumb-gallery.js"></script>
   <script src="../../js/video-inview.js"></script>
   <script src="../../js/related-products.js"></script>
   <script src="../../js/gallery-lightbox.js"></script>
