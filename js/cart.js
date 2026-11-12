@@ -139,6 +139,10 @@
     // sand-art-baseboard-artist/index.html 的說明）。
     "sand-art-baseboard": { name: "沙畫底板・單買", price: 200, category: "sand-art", hasVariant: true, tagline: "材料包的沙或亮粉用完，或想换個顏色重新鋪一次時，單獨補一張底板＋貼紙", noEarlyBird: true },
     "sand-art-baseboard-artist": { name: "沙畫底板・羊Diss舞蹈單買", shortName: "羊Diss舞蹈底板單買", price: 300, category: "sand-art", hasVariant: true, tagline: "羊Diss舞蹈系列專用底板，材料用完或想換色時單獨補一張", noEarlyBird: true },
+    // 2026-11-12：流動畫加購空白畫布，材料包附的顏料做完一幅後如果還有
+    // 剩，可以單獨加購一塊空白畫布再做一幅，不用整組材料包重買。單一
+    // 款式（hasVariant:false），跟 sand-art-craft-knife 同一套最簡版型。
+    "fluid-art-blank-canvas": { name: "流動畫加購空白畫布", price: 35, category: "fluid-art", hasVariant: false, tagline: "顏料做完一幅還有剩時，加購一塊畫布再做一幅", noEarlyBird: true },
   };
   // noEarlyBird：2026-11-12 使用者確認這些「加購品」不套早鳥折扣（維持
   // 原價），理由跟後端 risuan-checkout/lib/products.js 同一則註解——這些
@@ -397,6 +401,7 @@
     "sand-art-metallic-duo": BASE_PREFIX + "assets/images/products/sand-art-metallic-duo/sand-art-metallic-duo-main.jpg",
     "sand-art-metallic-trio": BASE_PREFIX + "assets/images/products/sand-art-metallic-trio/sand-art-metallic-trio-main.jpg",
     "sand-art-craft-knife": BASE_PREFIX + "assets/images/products/sand-art-craft-knife/sand-art-craft-knife-main.jpg",
+    "fluid-art-blank-canvas": BASE_PREFIX + "assets/images/products/fluid-art-blank-canvas/fluid-art-blank-canvas-main.jpg",
   };
 
   // 這 7 款單一配色沙畫的商品頁首圖都做了「配色動態展示」輪播（出貨配色→
@@ -501,6 +506,7 @@
     "sand-art-metallic-duo": BASE_PREFIX + "products/sand-art-metallic/",
     "sand-art-metallic-trio": BASE_PREFIX + "products/sand-art-metallic-trio/",
     "sand-art-craft-knife": BASE_PREFIX + "products/sand-art-craft-knife/",
+    "fluid-art-blank-canvas": BASE_PREFIX + "products/fluid-art-blank-canvas/",
     "sand-art-baseboard": BASE_PREFIX + "products/sand-art-baseboard/",
     "sand-art-baseboard-artist": BASE_PREFIX + "products/sand-art-baseboard-artist/",
   };
