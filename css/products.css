@@ -1076,6 +1076,19 @@
   color: var(--color-text-primary);
 }
 
+/* .work__title-block 版（模板 A）本身是左欄位左對齊排版，不是上面
+   給置中版面寫的「置中窄欄」效果——但這段 .intro 沒被納入模板 A的
+   grid 覆寫清單裡（它跟 H1／副標一起留在 .work__title-block 內，
+   不是獨立抓出來排 grid-row 的子層），所以沒被排除在這條 base rule
+   之外，margin:auto 還是會讓它在欄位變寬時（平板／桌機）往中間飄，
+   跟左邊的標題、副標、下面的「請注意」對不齊。這裡明確拿掉
+   max-width／改回靠左，不用等到檢查完才發現哪個寬度看起來特別怪。 */
+.work__title-block .intro {
+  max-width: none;
+  margin: var(--space-2) 0 0;
+  text-align: left;
+}
+
 /* 資訊頁標題區與固定導覽列之間留出額外呼吸空間，靠近 Miyuki Journal
    的清爽編排；商品頁有買列，保留原本商品首屏節奏。桌機才增加距離，
    手機沿用既有版面高度，避免窄螢幕頁首被推得過長。 */
@@ -2385,6 +2398,23 @@ h1.chapter__title {
 
 .safety-notice__list li:last-child {
   margin-bottom: 0;
+}
+
+/* 2026-11-12 沙畫底板／羊Diss舞蹈底板單買這兩頁的「請注意」其實是
+   「商品不含沙子」的購買說明，不是其他 9 個材料包頁那種「幼童陪伴
+   使用、吞嚥風險」的真正兒童安全警示，語意不同，使用者要求拿掉邊框、
+   顏色改成跟 .work-heading__discount-tagline（EARLY BIRD 橘紅字）
+   同一個 --color-warning。另開修飾 class，不動共用的 .safety-notice
+   本身，其餘 9 頁的安全警示維持原本灰邊框樣式。 */
+.safety-notice--purchase-note {
+  border: none;
+  padding: var(--space-4) 0 var(--space-2);
+}
+
+.safety-notice--purchase-note .safety-notice__title,
+.safety-notice--purchase-note .safety-notice__list,
+.safety-notice--purchase-note .safety-notice__list strong {
+  color: var(--color-warning);
 }
 
 /* 內文文字連結（例如尾聲導引至另一版本）：比照 .cta-section__ig／.work__cta 的
