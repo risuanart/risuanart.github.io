@@ -661,19 +661,27 @@
     font-weight: var(--heading-font-weight);
     line-height: 2;
   }
+  /* 2026-11-12：.studio-story__art 縮小尺寸後（見下面 max-width），
+     原本靠右對齊、佔頁面 66% 寬的 .studio-story__closing 會跟圖片
+     分離、中間空出一大片——把兩者包進這個共同容器，容器尺寸就是
+     圖片本身的尺寸，文字用絕對定位貼著容器（也就是圖片）的右下角
+     延伸出去，不管圖片縮多小，文字永遠黏在圖片角落，不會分離。 */
+  .studio-story__art-wrap {
+    position: relative;
+    width: 78%;
+    /* 問題出在 78% 是跟著「視窗寬度」算的，螢幕越寬這個正方形就跟著
+       等比例放大，寬螢幕上會撐到非常巨大，遠超過一個螢幕高度（參考
+       koyama.com.tw/newbornbox/ 那種一個畫面就看得完的配置）。維持
+       原本「置中正方形構圖」不變（使用者確認要保留），加固定像素
+       上限，不管螢幕多寬都不會超過這個尺寸。 */
+    max-width: 380px;
+    margin: var(--space-6) auto 0;
+  }
   .studio-story__art {
     position: relative;
     aspect-ratio: 1;
-    width: 78%;
-    /* 2026-11-12 使用者反映這區塊在桌面版遠超過一個螢幕高度，參考
-       koyama.com.tw/newbornbox/ 那種一個畫面就看得完的配置。問題出在
-       78% 是跟著「視窗寬度」算的，螢幕越寬這個正方形就跟著等比例
-       放大，寬螢幕上會撐到非常巨大。維持原本「置中正方形構圖」不變
-       （使用者確認要保留），只是加一個固定像素上限，不管螢幕多寬
-       都不會超過這個尺寸，手機上沿用原本 78%／100% 的相對寬度邏輯
-       不受影響（上限值本來就比手機螢幕寬）。 */
-    max-width: 380px;
-    margin: var(--space-6) auto 0;
+    width: 100%;
+    margin: 0;
   }
   .studio-story__art img {
     position: absolute;
@@ -686,9 +694,12 @@
     margin: 0;
   }
   .studio-story__closing {
-    width: 66%;
-    margin-left: auto;
-    margin-top: var(--space-6);
+    position: absolute;
+    left: 100%;
+    top: 100%;
+    margin: 0 0 0 var(--space-4);
+    width: max-content;
+    max-width: 220px;
   }
   .studio-story__closing p {
     margin: 0;
@@ -698,8 +709,12 @@
   }
   @media (max-width: 600px) {
     .studio-story__opening { max-width: 100%; }
-    .studio-story__art { width: 100%; }
-    .studio-story__closing { width: 85%; }
+    /* 手機版空間不夠讓文字貼在圖片角落延伸出去（容易超出螢幕或擠壓
+       版面），退回原本單純的上下堆疊：圖片滿版、文字接在下面置中
+       寬度 85%，跟縮小尺寸之前手機版的排版一致，這次改動只影響
+       桌面版。 */
+    .studio-story__art-wrap { width: 100%; max-width: none; }
+    .studio-story__closing { position: static; width: 85%; max-width: none; margin: var(--space-6) auto 0; }
   }
 
   .studio-story__art img { animation: studio-story-colorway 10s linear infinite; }
@@ -858,13 +873,23 @@
     <div class="studio-story__opening">
       <p>從圖案設計、材料搭配，<br>到分裝與製作，<br>由日宣繪畫室一步步準備。</p>
     </div>
-    <figure class="studio-story__art" role="img" aria-label="羊Diss舞蹈紅、藍兩款春聯砂畫，羊群圍繞福字起舞">
-      <img class="studio-story__red" src="../assets/images/products/sand-art-artist/sand-art-artist-red-main.jpg" alt="" aria-hidden="true" loading="lazy" width="1120" height="1400">
-      <img class="studio-story__blue" src="../assets/images/products/sand-art-artist/sand-art-artist-blue-main.jpg" alt="" aria-hidden="true" loading="lazy" width="1120" height="1400">
-    </figure>
-    <div class="studio-story__closing">
-      <span class="ed-label">From Our Studio</span>
-      <p>把畫室裡的藝術靈感，<br>做成可以帶回家的創作。<br><br>藝術家系列「羊Diss舞蹈」，<br>致敬馬諦斯《舞蹈》，<br>讓羊群、色彩與新年祝福，<br>成為你親手完成的一幅作品。</p>
+    <!-- 2026-11-12 使用者反映縮小作品圖尺寸後，下面的「From Our
+         Studio」文字段落（.studio-story__closing）變成跟圖片距離很遠、
+         中間一大片空白——原本這段文字是用「靠右對齊、寬度佔頁面 66%」
+         的方式排版，圖片縮小前剛好貼著圖片右側，圖片縮小後兩者失去
+         關聯。改成文字跟圖片包在同一個 .studio-story__art-wrap 容器裡，
+         文字用絕對定位貼齊容器（也就是圖片）的右下角，不管圖片多大
+         都會黏在它旁邊，不會再分離。手機版拿掉絕對定位，退回原本上下
+         堆疊排版（小螢幕空間不夠疊在圖片角落會太擠）。 -->
+    <div class="studio-story__art-wrap">
+      <figure class="studio-story__art" role="img" aria-label="羊Diss舞蹈紅、藍兩款春聯砂畫，羊群圍繞福字起舞">
+        <img class="studio-story__red" src="../assets/images/products/sand-art-artist/sand-art-artist-red-main.jpg" alt="" aria-hidden="true" loading="lazy" width="1120" height="1400">
+        <img class="studio-story__blue" src="../assets/images/products/sand-art-artist/sand-art-artist-blue-main.jpg" alt="" aria-hidden="true" loading="lazy" width="1120" height="1400">
+      </figure>
+      <div class="studio-story__closing">
+        <span class="ed-label">From Our Studio</span>
+        <p>把畫室裡的藝術靈感，<br>做成可以帶回家的創作。<br><br>藝術家系列「羊Diss舞蹈」，<br>致敬馬諦斯《舞蹈》，<br>讓羊群、色彩與新年祝福，<br>成為你親手完成的一幅作品。</p>
+      </div>
     </div>
   </section>
 
