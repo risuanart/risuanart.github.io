@@ -248,8 +248,8 @@
     "platinum": "鉑金",
     "champagne-silver": "香檳銀",
     // 2026-11-12：沙畫底板單買的 9 種設計圖案。
-    "baseboard-chun": "春",
-    "baseboard-cai": "財",
+    "baseboard-chun": "春結 Chun Tied",
+    "baseboard-cai": "花財 Cai in Bloom",
     "baseboard-ying-chun": "格裡迎春 Checked in Chun",
     "baseboard-na-fu": "格裡納福 Checked in Na Fu",
     "baseboard-ying-chun-lantern": "燈上迎春 Lit in Chun",
