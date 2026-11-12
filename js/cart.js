@@ -132,6 +132,13 @@
     // 2026-11-09：材料包附的夾子比較偏向輔助固定，刻細節線條的話官方
     // 建議客人自備美工刀，這支筆刀是給沒有自備、臨時需要的人加購用。
     "sand-art-craft-knife": { name: "沙畫加購筆刀", price: 60, category: "sand-art", hasVariant: false, tagline: "刻細節線條用，材料包附的夾子偏向輔助固定", noEarlyBird: true },
+    // 2026-11-12：沙畫底板單買，給材料包的沙或亮粉用完、或想换個顏色
+    // 重新鋪一次的人，不用整組材料包重買。9 種設計圖案用 scheme 切換
+    // （見 VARIANT_OPTIONS），羊Diss舞蹈系列底板另外拆成獨立商品鍵、
+    // 定價較高，理由跟整組材料包本身的定價差一致（見 products/
+    // sand-art-baseboard-artist/index.html 的說明）。
+    "sand-art-baseboard": { name: "沙畫底板・單買", price: 200, category: "sand-art", hasVariant: true, tagline: "材料包的沙或亮粉用完，或想换個顏色重新鋪一次時，單獨補一張底板＋貼紙", noEarlyBird: true },
+    "sand-art-baseboard-artist": { name: "沙畫底板・羊Diss舞蹈單買", shortName: "羊Diss舞蹈底板單買", price: 300, category: "sand-art", hasVariant: true, tagline: "羊Diss舞蹈系列專用底板，材料用完或想換色時單獨補一張", noEarlyBird: true },
   };
   // noEarlyBird：2026-11-12 使用者確認這些「加購品」不套早鳥折扣（維持
   // 原價），理由跟後端 risuan-checkout/lib/products.js 同一則註解——這些
@@ -167,6 +174,19 @@
     ],
     "sand-art-24color": ["set-a", "set-b", "set-c"],
     "sand-art-metallic": ["platinum", "champagne-silver"],
+    // 2026-11-12：沙畫底板單買，9 種設計圖案用 scheme 表示（前綴
+    // baseboard- 避免跟上面其他商品的色號 key 撞名，例如 "chun"／"fu"／
+    // "cai" 這幾個字已經被別的 scheme 用掉了，見下面 SCHEME_NAMES）。
+    "sand-art-baseboard": [
+      "baseboard-chun",
+      "baseboard-cai",
+      "baseboard-ying-chun",
+      "baseboard-na-fu",
+      "baseboard-ying-chun-lantern",
+      "baseboard-na-fu-lantern",
+      "baseboard-fu",
+    ],
+    "sand-art-baseboard-artist": ["baseboard-artist-red", "baseboard-artist-blue"],
   };
 
   // 2026-11-09：商品總覽格狀卡的色號縮圖排（js/products-overview.js
@@ -223,6 +243,16 @@
     // 2026-11-09：金屬色沙（sand-art-metallic）鉑金／香檳銀兩色。
     "platinum": "鉑金",
     "champagne-silver": "香檳銀",
+    // 2026-11-12：沙畫底板單買的 9 種設計圖案。
+    "baseboard-chun": "春",
+    "baseboard-cai": "財",
+    "baseboard-ying-chun": "格裡迎春 Checked in Chun",
+    "baseboard-na-fu": "格裡納福 Checked in Na Fu",
+    "baseboard-ying-chun-lantern": "燈上迎春 Lit in Chun",
+    "baseboard-na-fu-lantern": "燈上納福 Lit in Na Fu",
+    "baseboard-fu": "福星 Starry Fu",
+    "baseboard-artist-red": "羊Diss舞蹈・紅",
+    "baseboard-artist-blue": "羊Diss舞蹈・藍",
   };
 
   // 單件商品的單價／整行小計，購物車頁與迷你購物車預覽共用同一套計算，
@@ -317,6 +347,16 @@
     "set-c": BASE_PREFIX + "assets/images/products/sand-art-24color/sand-art-24color-set-c.jpg",
     "platinum": BASE_PREFIX + "assets/images/products/sand-art-metallic/sand-art-metallic-platinum.jpg",
     "champagne-silver": BASE_PREFIX + "assets/images/products/sand-art-metallic/sand-art-metallic-champagne-silver.jpg",
+    // 2026-11-12：沙畫底板單買，9 張實拍照（平鋪棚拍，未鋪沙的底板＋貼紙）。
+    "baseboard-chun": BASE_PREFIX + "assets/images/products/sand-art-baseboard/sand-art-baseboard-chun.jpg",
+    "baseboard-cai": BASE_PREFIX + "assets/images/products/sand-art-baseboard/sand-art-baseboard-cai.jpg",
+    "baseboard-ying-chun": BASE_PREFIX + "assets/images/products/sand-art-baseboard/sand-art-baseboard-ying-chun.jpg",
+    "baseboard-na-fu": BASE_PREFIX + "assets/images/products/sand-art-baseboard/sand-art-baseboard-na-fu.jpg",
+    "baseboard-ying-chun-lantern": BASE_PREFIX + "assets/images/products/sand-art-baseboard/sand-art-baseboard-ying-chun-lantern.jpg",
+    "baseboard-na-fu-lantern": BASE_PREFIX + "assets/images/products/sand-art-baseboard/sand-art-baseboard-na-fu-lantern.jpg",
+    "baseboard-fu": BASE_PREFIX + "assets/images/products/sand-art-baseboard/sand-art-baseboard-fu.jpg",
+    "baseboard-artist-red": BASE_PREFIX + "assets/images/products/sand-art-baseboard/sand-art-baseboard-artist-red.jpg",
+    "baseboard-artist-blue": BASE_PREFIX + "assets/images/products/sand-art-baseboard/sand-art-baseboard-artist-blue.jpg",
   };
 
   // 總覽格狀購物頁（products/shop.html）電腦版 hover 換圖用的「第二張圖」：
@@ -461,6 +501,8 @@
     "sand-art-metallic-duo": BASE_PREFIX + "products/sand-art-metallic/",
     "sand-art-metallic-trio": BASE_PREFIX + "products/sand-art-metallic-trio/",
     "sand-art-craft-knife": BASE_PREFIX + "products/sand-art-craft-knife/",
+    "sand-art-baseboard": BASE_PREFIX + "products/sand-art-baseboard/",
+    "sand-art-baseboard-artist": BASE_PREFIX + "products/sand-art-baseboard-artist/",
   };
 
   const CART_PAGE_URL = BASE_PREFIX + "cart/";
