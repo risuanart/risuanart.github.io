@@ -358,7 +358,30 @@
  .course-cta-band__actions .course-cta-band__btn { width:100%; justify-content:center; text-align:center; white-space:normal; }
 }
 
-.course-step__booking-link { grid-column:2; grid-row:3; justify-self:start; position:static; display:inline-block; white-space:nowrap; margin-top:var(--space-4); color:var(--color-text-primary); font-size:var(--font-size-sm); line-height:1.5; text-decoration:underline; text-underline-offset:var(--space-1); }
+/* 2026-11-12 使用者要求改成黑底白字按鈕、拿掉箭頭——跟全站「直接購買」
+   同一套黑底按鈕語彙（見 products.css .work__cta.work__cta--buy-now），
+   這裡直接寫一份，不跨檔案共用 class，維持這份 CSS「這一頁專屬」的既有
+   慣例（見檔案開頭說明）。 */
+.course-step__booking-link {
+  grid-column: 2;
+  grid-row: 3;
+  justify-self: start;
+  position: static;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  margin-top: var(--space-4);
+  padding: var(--space-2) var(--space-5);
+  min-height: 44px;
+  background: var(--color-surface-black);
+  color: var(--color-surface-light);
+  border-radius: var(--radius-sharp);
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  line-height: 1.5;
+  text-decoration: none;
+}
 
 /* 課程總覽開場照片保留自動輪播與滑動，移除覆蓋照片的箭頭。 */
 .course-studio-carousel .moments-carousel__nav {
