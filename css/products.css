@@ -483,6 +483,13 @@
   line-height: 1.25;
   letter-spacing: 0;
   white-space: nowrap;
+  /* .work-heading 的 base rule是給舊版置中版面用的 text-align:center，
+     這裡的版面其實是靠左（跟下面一句話介紹、.work-heading__sub 同一個
+     左邊界），但 base rule 是元素自己直接宣告的值，繼承自
+     .work__title-block 的 text-align:left 贏不過它，導致標題看起來
+     置中、副標卻靠左，兩個對不齊看起來像排版沒做完。這裡明確改回左，
+     跟整個 title-block 的左欄一致。 */
+  text-align: left;
 }
 
 /* 中文商品名／英文譯名字距、字級分開處理：中文部分字距拉寬一些，
