@@ -35,6 +35,12 @@
     const INTERVAL_MS = parseInt(root.dataset.interval, 10) || 4000;
     let current = Math.max(0, images.findIndex((img) => img.classList.contains("is-active")));
     let timer = null;
+    // 2026-11-12 使用者反映一進頁面第一張停太久，容易讓人以為這只是
+    // 一張靜態照片、沒發現這裡其實是輪播——只有「頁面剛載入後的第一次
+    // 切換」要縮短，之後（手動滑動／點箭頭／滑鼠移開後恢復）都還是照
+    // data-interval 設定的節奏，不是整組輪播速度變快。
+    const FIRST_SWITCH_MS = Math.min(1800, INTERVAL_MS);
+    let firstPlay = true;
 
     function goTo(index) {
       current = (index + images.length) % images.length;
@@ -45,13 +51,21 @@
       goTo(current + 1);
     }
 
-    function start() {
+    function scheduleNext(delay) {
       stop();
-      timer = setInterval(next, INTERVAL_MS);
+      timer = setTimeout(() => {
+        next();
+        firstPlay = false;
+        scheduleNext(INTERVAL_MS);
+      }, delay);
+    }
+
+    function start() {
+      scheduleNext(firstPlay ? FIRST_SWITCH_MS : INTERVAL_MS);
     }
 
     function stop() {
-      if (timer) clearInterval(timer);
+      if (timer) clearTimeout(timer);
       timer = null;
     }
 
