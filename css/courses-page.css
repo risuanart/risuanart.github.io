@@ -50,7 +50,7 @@
 }
 
 /* ---------- 賣點特色：快速捕捉 ---------- */
-.course-features { padding-top: 8px; padding-bottom: 52px; border-bottom: 1px solid color-mix(in srgb, var(--color-text-secondary) 25%, transparent); }
+.course-features { padding-top: 8px; padding-bottom: 52px; }
 .course-features__title { font-size: clamp(20px, 2.2vw, 26px); font-weight: 800; margin: 0 0 28px; }
 .course-features__grid {
   display: grid;
