@@ -2,10 +2,21 @@
 
 ## 專案簡介
 日宣繪畫室的官方網站，純靜態前端（HTML/CSS/JS，無框架、無建置工具），
-GitHub Pages 部署，正式網址 risuanart.com。服務對象：散客、企業/團體課程、
-幼兒園。結帳/會員/預約/金流等需要後端的功能，由另一個獨立 repo
-`risuan-checkout`（Vercel Serverless）負責，這個 repo 本身不存放任何
-會員/訂單資料，純粹是展示頁面 + 呼叫後端 API。
+正式網址 risuanart.com。服務對象：散客、企業/團體課程、幼兒園。結帳/
+會員/預約/金流等需要後端的功能，由另一個獨立 repo `risuan-checkout`
+（Vercel Serverless）負責，這個 repo 本身不存放任何會員/訂單資料，純粹
+是展示頁面 + 呼叫後端 API。
+
+⚠️ **2026-11-13 更正，別再誤會**：`risuanart.com` 實際上是 **Cloudflare
+Pages**（專案 `risuanart-github-io`）在服務，不是 GitHub Pages——這個
+repo 的 GitHub Pages 設定（含「切換分支＝切換維護模式」那套機制）現在
+只還連著 `www.risuanart.com`，完全不影響真正在用的 `risuanart.com`
+（無 www）。GitHub repo 本身還是這份內容唯一的程式碼來源，push 到
+`main` 會同時觸發 GitHub Pages 跟 Cloudflare Pages 各自重新建置，但
+**驗證部署有沒有生效、開關維護模式，一律要去 Cloudflare Pages 後台看
+`risuanart-github-io` 這個專案**，不是看 GitHub 的 Pages 設定／API——
+詳見下面「驗收清單」第 4 點跟 `HANDOFF.md` 2026-11-13 條目，這是當場
+真的排查了一輪才抓到的，不要憑舊印象覆蓋這段。
 
 這個 repo 是 **public repo**（GitHub Pages 免費方案的必要條件，升級
 GitHub Pro 可以改成 private，但不影響網站本身的資安，純粹是要不要讓人
@@ -204,9 +215,18 @@ python3 -m http.server 8895
      間距視覺比對，不要只看改動的那一頁順不順眼。
 2. 如果改動涉及共用檔案，額外開 1-2 個沒改過的頁面確認沒有被波及。
 3. 確認後 commit，訊息寫清楚改了什麼、為什麼。
-4. **push 完不要就當作結束，要確認 GitHub Pages 真的部署完成**：
-   `gh api repos/risuanart/risuanart.github.io/pages/builds/latest`，
-   確認回傳的 `commit` 欄位等於剛剛 push 的 commit SHA、`status` 是
-   `built`（不是 `errored`）。2026-10-29 發現的疏漏：之前只確認
-   `git push` 本身成功，沒有再確認 GitHub Pages 有沒有真的重新部署
-   完成，這一步要變成固定習慣，不是事後才想到才查。
+4. **push 完不要就當作結束，要確認網站真的部署完成**：
+   ⚠️ 2026-11-13 更正：`gh api repos/.../pages/builds/latest` 這招**只能
+   驗證 GitHub Pages 自己的建置**，查到 `status: built` 不代表
+   `risuanart.com` 真的更新了——真正在服務 `risuanart.com` 的是
+   Cloudflare Pages（見上面「專案簡介」的更正說明），GitHub Pages 的
+   建置狀態跟它是兩回事，分別建置、互不影響彼此是否成功。
+   正確做法是直接驗證「真正看得到的網站內容」：
+   `curl -s https://risuanart.com/ | grep -o '<title>[^<]*'`（或抓一段
+   剛剛改動裡新增的文字），確認內容真的換成最新版，而不是只查某個
+   部署系統回報的狀態。如果要連 Cloudflare Pages 自己的建置狀態也
+   確認，要登入 Cloudflare 後台看 `risuanart-github-io` 這個 Pages
+   專案的「部署」頁籤（沒有 Cloudflare API token 時這步只能請使用者
+   截圖，或退回只用 curl 驗證實際內容這招）。2026-10-29 發現的疏漏是
+   「完全沒驗證部署」，2026-11-13 這次發現的是「驗證了，但驗證的是
+   錯的系統」，兩次教訓合起來才是完整的檢查方式。

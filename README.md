@@ -5,8 +5,20 @@
 > 更新過。這次全站一致性體檢順便把它改成反映真實現況，不是重寫歷史。design
 > system 那幾節（色彩／token／設計原則）內容仍然有效、仍在遵守，保留不動。
 
-日宣繪畫室的官方網站，純靜態前端，正式上線網址 **risuanart.com**（GitHub Pages
-部署，見 repo 裡的 `CNAME`）。服務對象是散客、企業／團體課程、幼兒園等。
+日宣繪畫室的官方網站，純靜態前端，正式上線網址 **risuanart.com**。
+
+> **2026-11-13 重要更正**：`risuanart.com` 實際上不是由 GitHub Pages
+> 服務，是由 **Cloudflare Pages**（專案名稱 `risuanart-github-io`，一樣連
+> 著這個 GitHub repo，但正式分支／部署設定在 Cloudflare 那邊各自獨立）
+> 服務——這是 2026-11-11 前後因為素材容量逼近 GitHub Pages 上限、要
+> 擴大上傳容量而換過去的。repo 裡的 `CNAME` 檔案跟 GitHub 專案設定裡的
+> Pages 分支切換，現在只影響 `www.risuanart.com`（還留著指到 GitHub
+> Pages），**不影響**真正在用的無 www 版本 `risuanart.com`。確認/切換
+> 部署狀態、開關「網站架設中」維護模式，都要去 **Cloudflare Pages 後台
+> 的 `risuanart-github-io` 專案**操作，不是去 GitHub 的 repo Settings →
+> Pages。詳細經過、怎麼查出來的見 `HANDOFF.md` 2026-11-13 條目。
+
+服務對象是散客、企業／團體課程、幼兒園等。
 
 結帳、會員、預約、金流這些需要後端的功能，是**另一個獨立的 repo**
 `risuan-checkout`（Vercel Serverless + Upstash Redis），這個 repo 本身**不存放

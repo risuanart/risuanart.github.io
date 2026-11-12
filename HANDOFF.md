@@ -1020,3 +1020,9 @@ gap/margin/padding 其實都沒生效（等於 0 或初始值），包括全站 
 - 依使用者要求，中央羊Diss紅藍款每約5秒輪替，淡入淡出約1秒，保持相同圖片尺寸與遮罩；減少動態效果偏好時固定紅款。沿用既有照片，待新去背照再替換。
 - 本次只提交products/index.html與交接；根目錄index.html另有未提交修改，未納入此次提交或覆寫。
 - 驗證通過：紅／藍兩個動畫時點、減少動態時固定紅款、六種標準寬度無溢位與圖文重疊、無JS錯誤、diff檢查通過。
+
+## 2026-11-13：排查「GitHub Pages 切維護模式沒有用」，發現正式網址實際由 Cloudflare Pages 服務
+- 使用者反映之前切到 GitHub Pages 的 `maintenance` 分支、網站應該顯示「架設中」，但 `risuanart.com` 一直還是看得到正式內容。逐步排查（DNS 紀錄 → Workers 路由 → 網頁規則 → Cloudflare Pages 專案列表）後確認：`risuanart.com` 這筆 DNS 是 CNAME 指到 `risuanart-github-io.pages.dev`，也就是一個獨立的 **Cloudflare Pages** 專案（`risuanart-github-io`，連同一個 GitHub repo，但正式分支設定各自獨立，自動部署已啟用，一直在追蹤 `main`），不是 GitHub Pages 在服務。`www.risuanart.com` 才有正確指到 GitHub Pages，但沒人會打 www 版本。
+- 使用者確認：2026-11-11 前後因為 GitHub Pages 素材容量快爆了（見上面 11-11 條目「原容量與 Cloudflare 部署評估仍未處理」），已經正式切換成 Cloudflare Pages 當正式環境，不是要換回 GitHub Pages——這是刻意的决定，不是意外，之後也不用建議改回去。
+- 修法：把 `risuanart-github-io` 這個 Cloudflare Pages 專案的「正式分支」從 `main` 改成 `maintenance`（使用者自己在 Cloudflare 後台操作），但改分支設定本身不會回頭觸發重新建置；額外 push 一個小改動到 `maintenance` 分支（本次改的是 index.html 裡的註解）觸發 Cloudflare Pages 自動建置一次，之後用 `curl https://risuanart.com/` 確認內容真的換成維護頁，確認成功。
+- 已經在 `AGENTS.md`（專案簡介開頭＋驗收清單第4點）、`README.md`、`TROUBLESHOOTING.md` 三份文件補上這個更正，往後「驗證部署」「開關維護模式」都要認 Cloudflare Pages 後台，不是 GitHub repo 的 Pages 設定。GitHub Pages 本身的設定（含 maintenance 分支）目前形同虛設，只還影響沒人在用的 www 子網域，暫時不用特別清掉，但也不要再誤以為它在控制正式網址。

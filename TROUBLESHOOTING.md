@@ -6,6 +6,22 @@
 
 ---
 
+### GitHub Pages 查起來建置成功，但 risuanart.com 看到的還是舊內容／沒變成維護頁
+- **原因**：`risuanart.com`（無 www）的 DNS 實際指到 **Cloudflare
+  Pages**（專案 `risuanart-github-io`，`main` 分支自動部署），不是
+  GitHub Pages——2026-11-11 前後因為 GitHub Pages 素材容量快爆了，
+  切過去擴大容量，但沒有同步更新文件，才會在 2026-11-13 這次「切
+  GitHub Pages 的 maintenance 分支卻沒有效果」上踩了一次。GitHub
+  Pages 的建置狀態跟 Cloudflare Pages 完全是兩個獨立系統，查
+  `gh api .../pages/builds/latest` 顯示成功，只代表 GitHub Pages 那
+  份建置成功，不代表 `risuanart.com` 真的更新。
+- **解法**：驗證/切換都要去 Cloudflare 後台的 `risuanart-github-io`
+  Pages 專案（設定 → 建置與部署 → 正式分支）操作，不是 GitHub repo
+  的 Settings → Pages；驗證內容是否生效用
+  `curl -s https://risuanart.com/`，不要只信 GitHub Pages 的 API
+  回報。詳見 `AGENTS.md`「專案簡介」開頭的更正說明、`HANDOFF.md`
+  2026-11-13 條目。
+
 ### 新建頁面的桌面版主導覽缺少「課程」選單
 - **原因**：桌面導覽 HTML 是各頁各自維護；手機選單雖由 `js/site-menu.js` 共用產生，桌面選單不會自動同步。
 - **解法**：新頁需沿用既有頁面的桌面課程下拉選單；新增頁面後掃描所有 `.site-header__nav`，確認均有 `nav-courses-toggle`。
