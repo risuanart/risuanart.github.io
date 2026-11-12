@@ -372,8 +372,14 @@
   justify-content: center;
   white-space: nowrap;
   margin-top: var(--space-4);
-  padding: var(--space-2) var(--space-5);
-  min-height: 44px;
+  /* 2026-11-12 使用者反饋文字太貼左右邊、上下又太高——原本寫
+     var(--space-5) 其實是不存在的 token（tokens.css 只到 --space-4
+     就跳到 --space-6，沒有 --space-5），等於沒套到任何水平內距，
+     文字才會貼到邊緣；垂直再加上 min-height:44px 撐出比文字需要的
+     高度更高的按鈕。改成實際存在的 --space-6（24px）當水平內距，
+     垂直縮小成 --space-2（8px）且拿掉 min-height，讓按鈕高度貼著
+     文字本身大小，不再硬撐。 */
+  padding: var(--space-2) var(--space-6);
   background: var(--color-surface-black);
   color: var(--color-surface-light);
   border-radius: var(--radius-sharp);
