@@ -4,10 +4,12 @@
 // document 層級的事件代理（監聽點擊/鍵盤事件，判斷 e.target 有沒有落在
 // .gallery-grid__item 裡），不用等特定格子存在才綁定，也不受 gallery.html
 // 篩選後重新產生 innerHTML 影響。
-// 2026-11-12：曾經短暫擴充到也認得沙畫材料包商品頁「搭配自己的顏色」的
-// .howto-compare__cell，但使用者說明那幾張是 AI 模擬示意圖，不希望客人
-// 能放大細看或下載，所以撤回這個擴充，這支檔案維持原本只管
-// .gallery-grid__item（學員作品格狀相簿）的範圍。
+// 2026-11-12：沙畫材料包商品頁「搭配自己的顏色」的 .howto-compare__cell
+// 也用這套燈箱放大（見下面事件代理跟分組邏輯一併認得
+// .howto-compare__cell／.howto-compare）。這幾張是 AI 模擬示意圖，使用者
+// 原本擔心放大看了之後客人會下載，所以放大的這張圖（.gallery-lightbox__img）
+// 也補上跟縮圖同一套 draggable="false"／oncontextmenu 阻擋右鍵另存，不是
+// 只有縮圖擋、放大後反而沒擋。
 (function () {
   let overlay = null;
   let imgEl = null;
@@ -35,7 +37,7 @@
         <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
       </button>
       <figure class="gallery-lightbox__figure">
-        <img class="gallery-lightbox__img" src="" alt="">
+        <img class="gallery-lightbox__img" src="" alt="" draggable="false" oncontextmenu="return false">
         <figcaption class="gallery-lightbox__caption"></figcaption>
         <p class="gallery-lightbox__course-link"><a class="text-link" href="#"></a></p>
       </figure>
@@ -127,9 +129,9 @@
   }
 
   function findGridItems(fromFigure) {
-    const grid = fromFigure.closest(".gallery-grid");
+    const grid = fromFigure.closest(".gallery-grid, .howto-compare");
     if (!grid) return [fromFigure];
-    return Array.from(grid.querySelectorAll(".gallery-grid__item"));
+    return Array.from(grid.querySelectorAll(".gallery-grid__item, .howto-compare__cell"));
   }
 
   function handleOpenFrom(figure) {
@@ -138,14 +140,14 @@
   }
 
   document.addEventListener("click", (e) => {
-    const figure = e.target.closest(".gallery-grid__item");
+    const figure = e.target.closest(".gallery-grid__item, .howto-compare__cell");
     if (!figure) return;
     handleOpenFrom(figure);
   });
 
   document.addEventListener("keydown", (e) => {
     if (e.key !== "Enter" && e.key !== " ") return;
-    const figure = e.target.closest(".gallery-grid__item");
+    const figure = e.target.closest(".gallery-grid__item, .howto-compare__cell");
     if (!figure) return;
     e.preventDefault();
     handleOpenFrom(figure);
