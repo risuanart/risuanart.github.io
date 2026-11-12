@@ -2430,16 +2430,18 @@ h1.chapter__title {
   color: var(--color-warning);
 }
 
-/* 2026-11-12 使用者要求沙畫底板這兩頁的標題＋副標改置中——原本左欄
-   排版（.work__title-block 本身）是給「商品名搬到相片牆下方」的新版
-   頁面用的靠左排法，這兩頁的「介紹句」已經拆出去、併進下面新的
-   「適合誰加購？」章節，標題區只剩 H1／副標兩行，改用這個獨立修飾
-   class 蓋回置中，不影響其他還在用 .work__title-block 靠左排版的
-   頁面（24色任選組／漸層沙自選色等維持原樣）。沙畫底板・羊Diss舞蹈
-   單買（sand-art-baseboard-artist）同樣拆了介紹句、搬了請注意框，
-   一併加上這個 class 保持兩頁一致。 */
-.work__title-block--centered,
-.work__title-block--centered .work-heading {
+/* 2026-11-12 使用者看了流動畫加購字貼頁覺得版面清爽（標題置中、
+   標題跟選款器中間沒有多餘的解釋句），要求「以後所有加購頁都照這頁
+   的排版，寫進 CSS，改一次全部一起改」——這裡統一加一個頁面層級的
+   綁定 class .work__intro--addon，貼在每個加購品頁最外層的
+   <header class="work__intro ..."> 上（跟各頁原本已經有的
+   --extra-color／--frame／--24color 等版型 modifier 並存，互不影響，
+   那些管的是 grid 版面，這裡只管標題置中）。之後任何新加購頁只要在
+   header 補這個 class 就自動套用，不用每頁各自記得加修飾。原本只
+   套在沙畫底板兩頁的 .work__title-block--centered 已經併入這裡、
+   並從那兩頁的 HTML 拿掉，不要留兩條規則同時存在。 */
+.work__intro--addon .work__title-block,
+.work__intro--addon .work__title-block .work-heading {
   text-align: center;
 }
 
