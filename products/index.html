@@ -185,6 +185,20 @@
        數字。 */
     padding-top: var(--ptpl-topbar-height, var(--editorial-header-height));
   }
+  /* 2026-11-12 使用者反映桌面版首圖影片蓋住上方選單：--editorial-header-height
+     （tokens.css，58px）量的是 .product-page 那種單排「← 返回／標題／
+     購物車」頂部列，但這頁（商品總覽母頁）用的是完整文字導覽列，
+     site-menu.css 在 ≥1024px 會把 .site-header 切成兩排 grid（logo 一排、
+     導覽文字一排，見該檔案 @media(min-width:1024px) 那段），實測高度是
+     140px，比 58px 高出一大截——padding-top 只補了 58px 份的空間，導覽列
+     第二排因此被下面的首圖影片蓋住。這裡用瀏覽器實際量出來的 140px
+     補足落差，只在這個斷點生效（≥1024px 以下頂部列還是單排，58px 的
+     計算本來就是對的，不用動）。 */
+  @media (min-width: 1024px) {
+    .page-tint {
+      padding-top: calc(var(--promo-bar-height, 36px) + 140px);
+    }
+  }
   h1,h2,h3{
     font-family: var(--font-family-base);
     font-weight:400;
