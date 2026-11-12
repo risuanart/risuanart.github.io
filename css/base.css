@@ -157,6 +157,13 @@ a {
   --course-cover-pet-portrait: url("../assets/images/gallery/pet-portrait/98.jpg");
   --course-cover-fluid-art: url("../assets/images/gallery/fluid-art/17.jpg");
   --course-cover-large-canvas: url("../assets/images/courses/large-canvas/student-0720.webp");
+  /* 2026-11-12：使用者反饋首頁分類磚要跟課程頁主視覺綁定，但課程頁
+     主視覺其實是影片第一幀截圖（hero-poster.jpg，同時也是 og:image，
+     見 courses/custom-photo-oil/index.html 該處說明），換成分類磚這張
+     會讓訪客進頁面先看到這張、影片一播放又跳切成影片實際內容，所以
+     只綁「沒有影片」的入口圖（首頁精選／導覽下拉／課程總覽卡片），
+     跟 pet-portrait／fluid-art 等既有做法一致，不動 hero-poster.jpg。 */
+  --course-cover-custom-photo-oil: url("../assets/images/gallery/landscape-oil/09.jpg");
 }
 :is(.site-header__nav-dropdown-photo, .banner-tile, .course-carousel__tile)[href$="pet-portrait/"] img {
   content: var(--course-cover-pet-portrait);
@@ -170,4 +177,8 @@ a {
 
 :is(.site-header__nav-dropdown-photo, .banner-tile, .course-carousel__tile)[href$="gold-leaf-abstract/"] img {
   content: var(--course-cover-gold-leaf-abstract);
+}
+
+:is(.site-header__nav-dropdown-photo, .banner-tile, .course-carousel__tile)[href$="custom-photo-oil/"] img {
+  content: var(--course-cover-custom-photo-oil);
 }
