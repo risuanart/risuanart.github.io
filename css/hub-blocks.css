@@ -63,6 +63,25 @@
 .tile{ position:relative; overflow:hidden; display:block; background:#2E2F16; }
 .tile img{ width:100%; height:100%; object-fit:cover; transition:transform .5s ease; }
 .tile:hover img{ transform:scale(1.035); }
+/* 2026-11-14 加購配件區塊裡，款式選項較多的商品（沙畫底板7款圖案／
+   羊Diss舞蹈底板2款／流動畫字貼5款）比照全系列材料包格狀卡同一套
+   輪播（js/hero-colorway-carousel.js），縮圖自動輪流展示每一款設計，
+   不是固定顯示其中一款。跟 .koyama-product-card__media[data-hero-carousel]
+   同樣的疊圖＋淡入淡出邏輯，只是換成 .tile 的命名空間；.tile 本身是
+   object-fit:cover 的實拍照片（不是去背圖），不需要額外的
+   drop-shadow／scale 補償。 */
+.tile[data-hero-carousel] img[data-carousel-frame]{
+  position:absolute;
+  inset:0;
+  opacity:0;
+  transition: opacity 1.1s ease, transform .5s ease;
+}
+.tile[data-hero-carousel] img[data-carousel-frame].is-active{
+  opacity:1;
+}
+.tile[data-hero-carousel]:hover img[data-carousel-frame].is-active{
+  transform: scale(1.035);
+}
 .tile__overlay{ position:absolute; inset:0; display:flex; flex-direction:column; justify-content:flex-end; padding:18px; background:linear-gradient(180deg, rgba(20,20,10,0) 45%, rgba(20,20,10,0.72) 100%); }
 .tile__name{ color:#fff; font-size:15px; font-weight:700; margin-bottom:4px; }
 .tile__price{ color:rgba(255,255,255,0.86); font-size:11px; }
