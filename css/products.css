@@ -311,6 +311,18 @@
     aspect-ratio: 4 / 5;
   }
 
+  /* 2026-11-14 使用者反映砂畫24色任選組（72色全組）的圖被左右裁切。
+     這頁的縮圖不是相片牆那種 4:5 直幅人像照，是色票排列圖（72色全組
+     原始檔案本身就是正方形 1600×1600，分組預覽 set-a／b／c 是較接近
+     正方形的 2000×1600），套用上面全站通用的 4:5 直幅裁切（給真的
+     4:5 直幅照片用的）反而把正方形圖片硬裁成直幅，裁掉兩側內容。
+     這頁的主圖容器改回跟手機版一樣維持 1:1 正方形，不跟著套用 4:5，
+     只影響這頁（.work__intro--24color），不影響其他真的是 4:5 直幅
+     照片的商品頁。 */
+  .work__intro.work__intro--24color .work__gallery-main {
+    aspect-ratio: 1 / 1;
+  }
+
   /* 模板 A：.work__title-block 版 ---------- */
   .work__intro:has(.work__title-block) {
     grid-template-rows: auto auto auto auto auto 1fr; /* 圖說／標題區／買列／數量列／CTA／填充 */
