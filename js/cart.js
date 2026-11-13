@@ -89,8 +89,10 @@
     "sand-art-cai": { name: "春聯砂畫材料包・花財 Cai in Bloom", shortName: "花財 Cai in Bloom", price: 640, earlyBirdPrice: 535, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true, preorder: true, sizeCm: 15 },
     "sand-art-ying-chun": { name: "春聯砂畫材料包・格裡迎春 Checked in Chun", shortName: "格裡迎春 Checked in Chun", price: 640, earlyBirdPrice: 535, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true, preorder: true, sizeCm: 15 },
     "sand-art-na-fu": { name: "春聯砂畫材料包・格裡納福 Checked in Na Fu", shortName: "格裡納福 Checked in Na Fu", price: 640, earlyBirdPrice: 535, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true, preorder: true, sizeCm: 15 },
-    "sand-art-ying-chun-lantern": { name: "春聯砂畫材料包・燈上迎春 Lit in Chun", shortName: "燈上迎春 Lit in Chun", price: 510, earlyBirdPrice: 425, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true, preorder: true, sizeCm: 15 },
-    "sand-art-na-fu-lantern": { name: "春聯砂畫材料包・燈上納福 Lit in Na Fu", shortName: "燈上納福 Lit in Na Fu", price: 510, earlyBirdPrice: 425, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true, preorder: true, sizeCm: 15 },
+    // 2026-11-14 使用者調漲 +$40（510→550），早鳥價維持原本 $85 折扣
+    // 金額跟著平移（425→465），不是折扣比例不變。
+    "sand-art-ying-chun-lantern": { name: "春聯砂畫材料包・燈上迎春 Lit in Chun", shortName: "燈上迎春 Lit in Chun", price: 550, earlyBirdPrice: 465, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true, preorder: true, sizeCm: 15 },
+    "sand-art-na-fu-lantern": { name: "春聯砂畫材料包・燈上納福 Lit in Na Fu", shortName: "燈上納福 Lit in Na Fu", price: 550, earlyBirdPrice: 465, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true, preorder: true, sizeCm: 15 },
     "fluid-art-canvas-kit": { name: "空白畫布＋字貼＋架高杯", price: 0, category: "fluid-art", hasVariant: false, hidden: true, noEarlyBird: true },
     // 2026-10-22：原本是「額外顏色沙・固定套組」佔位商品（$__，不開放選色），
     // 使用者提供 12 組漸層色沙實拍照後正式上線，改成真的可以自選色的加購品。
