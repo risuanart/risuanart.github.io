@@ -826,12 +826,21 @@
     line-height: 2;
     color: var(--color-text-secondary);
   }
-  @media (max-width: 600px) {
+  /* 2026-11-13 使用者反映材料包頁在約 481px～840px 這段寬度（平板直放／
+     小筆電視窗常見寬度）會橫向溢出，量出來最多溢出將近 100px——根因
+     是下面這個斷點原本只到 600px，600px～840px 這段寬度 .studio-story__art-wrap
+     的 78% 寬已經被 max-width:380px 封頂，但可用內容寬度（.chapter 在
+     841px 以下沒有 840px 寬度上限，是跟著視窗等比例縮放）還沒大到能
+     留出足夠空間給 .studio-story__closing 往右延伸的 220px＋16px留白，
+     文字因此被推出可視範圍外、撐寬整個頁面。改成跟 .chapter 本身切換
+     到固定 840px 容器的斷點一致（841px），只有在容器寬度已經固定
+     （desktop ≥841px，content 區域穩定有 800px 可用）才用「文字貼在
+     圖片右下角」的絕對定位排版；841px 以下（包含手機跟這次抓到問題的
+     平板寬度）一律用原本手機版那套「圖片滿版＋文字接在下面置中」的
+     堆疊排版，不會再有兩者之間「圖片已經固定 380px、但容器還沒固定
+     800px」的危險中間地帶。 */
+  @media (max-width: 840px) {
     .studio-story__opening { max-width: 100%; }
-    /* 手機版空間不夠讓文字貼在圖片角落延伸出去（容易超出螢幕或擠壓
-       版面），退回原本單純的上下堆疊：圖片滿版、文字接在下面置中
-       寬度 85%，跟縮小尺寸之前手機版的排版一致，這次改動只影響
-       桌面版。 */
     .studio-story__art-wrap { width: 100%; max-width: none; }
     .studio-story__closing { position: static; width: 85%; max-width: none; margin: var(--space-6) auto 0; }
   }
