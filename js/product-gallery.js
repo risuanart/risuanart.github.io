@@ -99,6 +99,68 @@
 讓年味不再張揚，而是靜靜留在日常中。`,
       storyPlaceholder: false,
     },
+    // 2026-11-13 新增兩款配色（珠光／冰焰紅）。使用者目前只提供了一張
+    // 「棚拍」成品空拍照，沒有內容物全展開、倒顏料過程、字貼特寫這些
+    // 其他實拍素材——跟經典紅／迎春粉剛推出時素材不齊全的情況一樣，這裡
+    // 直接沿用同一套 placeholder 機制（lightPlaceholder／
+    // kitPhotoLightPlaceholder）標出還缺哪些照片，不是留白也不是塞假圖；
+    // 之後補拍齊了，比照上面兩個既有色系的寫法把這些欄位換成真的
+    // file／alt 即可，不用改動版面結構。顏料色名／比例同樣還沒確認
+    // （paintsPlaceholder:true），swatches 色點是直接從使用者提供的
+    // 成品照取樣，不是憑空挑色。
+    "pearl-shimmer": {
+      name: "珠光",
+      dot: "var(--swatch-pearl-shimmer)",
+      ctaText: "var(--color-text-primary)",
+      gallery: [
+        { file: "fluid-art-light-main-pearl.jpg", alt: "珠光成品模擬圖，黑色「福」字菱形畫布", caption: "成品模擬圖" },
+        { caption: "內容物全展開", lightPlaceholder: "待補拍：珠光材料包內容物平鋪（畫布、顏料、字貼、工具）" },
+      ],
+      kitPhotoLightPlaceholder: "待補拍：珠光材料包內容物平鋪照",
+      paints: ["珠光藍", "珠光粉", "珠光金", "珠光米"],
+      paintsPlaceholder: true,
+      swatches: ["var(--swatch-pearl-mist)", "var(--swatch-pearl-blush)", "var(--swatch-pearl-gold)", "var(--swatch-pearl-cream)"],
+      stickers: {
+        light: "霧面黑色字貼，15×15cm 主畫布字貼（黑色「福」，固定款式）",
+      },
+      variationCaption: "同色系、不同比例，光澤濃淡自由掌控",
+      variationLabels: ["多珠光藍", "均衡比例", "多珠光金"],
+      story: `珠光質地的顏料隨著光線角度流轉，在粉、黃、藍之間輕輕交疊，
+像新年清晨第一道天光，不是單一的顏色，而是一層會呼吸的光澤。
+
+我們特意選用霧面的黑，寫下這一年的「福」字，讓閃動的底色安靜下來，
+留出一塊可以專注凝視的焦點，不被珠光的流轉搶走主角。
+
+這是一款適合喜歡低調質感、不追求大紅大紫的配色，初看素雅，細看卻處處是光。`,
+      storyPlaceholder: false,
+    },
+    "frost-red": {
+      name: "冰焰紅",
+      dot: "var(--swatch-frost-red)",
+      ctaText: "var(--color-surface-light)",
+      gallery: [
+        { file: "fluid-art-light-main-frost.jpg", alt: "冰焰紅成品模擬圖，幻彩鐳射「福」字菱形畫布", caption: "成品模擬圖" },
+        { caption: "內容物全展開", lightPlaceholder: "待補拍：冰焰紅材料包內容物平鋪（畫布、顏料、字貼、工具）" },
+      ],
+      kitPhotoLightPlaceholder: "待補拍：冰焰紅材料包內容物平鋪照",
+      paints: ["絳紅", "爐火紅", "霜灰藍"],
+      paintsPlaceholder: true,
+      swatches: ["var(--swatch-frost-ember)", "var(--swatch-frost-red)", "var(--swatch-frost-ice-blue)", "var(--swatch-frost-mauve)"],
+      stickers: {
+        light: "幻彩鐳射字貼，15×15cm 主畫布字貼（鐳射「福」，固定款式）",
+      },
+      variationCaption: "同色系、不同比例，冷暖對比自由掌控",
+      variationLabels: ["多絳紅", "均衡比例", "多霜灰藍"],
+      story: `濃重的絳紅打底，像除夕夜裡爐火燒得最旺的那個瞬間；
+一道霜灰藍悄悄滑過畫面，像窗外忽然落下的初雪，
+提醒著再暖的火光，窗外依然是冬天。
+
+「福」字選用幻彩鐳射材質，隨著觀看角度折射出粉、藍、銀交錯的光，
+在深紅色底上格外醒目，像雪地裡第一道被照亮的反光。
+
+一半是爐火的熱烈，一半是初雪的清冷，這份衝突感，正是冰焰紅最耐人尋味的地方。`,
+      storyPlaceholder: false,
+    },
   };
 
   // 套組清單裡「跟色系無關、只跟版本有關」的固定內容（輕巧版／禮盒版）。

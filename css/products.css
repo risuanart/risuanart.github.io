@@ -31,6 +31,21 @@
   --swatch-pink-platinum: #d4c4a0;
   --swatch-silver: #b8b8b0;
 
+  /* 2026-11-13 新增兩款流動畫配色。色票取樣自使用者提供的「棚拍」
+     成品照（唯一現有實拍素材），不是憑空挑色；確切顏料色名還沒確認
+     （js/product-gallery.js 該兩個 scheme 的 paintsPlaceholder:true），
+     這幾個色號只用來畫色系故事區塊的色點，不代表正式顏料色號。 */
+  --swatch-pearl-shimmer: #c9b998;
+  --swatch-pearl-mist: #aeb8c4;
+  --swatch-pearl-blush: #cda1b2;
+  --swatch-pearl-gold: #e3ce6e;
+  --swatch-pearl-cream: #ecd9a0;
+
+  --swatch-frost-red: #8a1f1f;
+  --swatch-frost-ember: #500809;
+  --swatch-frost-ice-blue: #b2d2e9;
+  --swatch-frost-mauve: #8f6165;
+
   /* 藝術家系列・羊Diss舞蹈，購買面板款式色點：各取該色款最具代表性的
      主色（紅款＝酒紅、藍款＝湖藍），跟 product-template.css「顏色比較」
      區塊的估色是同一批肉眼估色，還不是正式色卡編號，正式色號確定後

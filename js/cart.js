@@ -63,6 +63,14 @@
     // 只套用在有 sizeCm 的商品，流動畫這兩款維持原本滿版鋪滿）。
     "fluid-art-light-red": { name: "春聯流動畫材料包（經典紅）", shortName: "經典紅", price: 800, category: "fluid-art", hasVariant: false, tagline: "單幅 15cm，最快抵達的新年儀式", preorder: true },
     "fluid-art-light-pink": { name: "春聯流動畫材料包（迎春粉）", shortName: "迎春粉", price: 800, category: "fluid-art", hasVariant: false, tagline: "單幅 15cm，最快抵達的新年儀式", preorder: true },
+    // 2026-11-13 新增兩款流動畫配色（珠光／冰焰紅），使用者提供「棚拍」
+    // 成品空拍照各一張，還沒有內容物全展開／製作過程等其他實拍素材——
+    // 跟 sand-art-artist-sheep-red／blue 當初只有成品照時的做法一致，
+    // 先用現有這張照片把商品頁搭起來，其餘照片格子在 js/product-gallery.js
+    // COLOR_SCHEMES 裡用現成的 placeholder 機制（lightPlaceholder／
+    // kitPhotoLightPlaceholder）標注還缺什麼照片，不是留空白或塞假圖。
+    "fluid-art-light-pearl": { name: "春聯流動畫材料包（珠光）", shortName: "珠光", price: 800, category: "fluid-art", hasVariant: false, tagline: "單幅 15cm，最快抵達的新年儀式", preorder: true },
+    "fluid-art-light-frost": { name: "春聯流動畫材料包（冰焰紅）", shortName: "冰焰紅", price: 800, category: "fluid-art", hasVariant: false, tagline: "單幅 15cm，最快抵達的新年儀式", preorder: true },
     // 2026-10-17 使用者要求暫時下架（不是刪除），hidden:true 會讓
     // products-overview.js／related-products.js／cart-cross-sell.js
     // 這三個地方自動把它濾掉（跟加購項目用的是同一個既有機制，見那幾支
@@ -407,6 +415,8 @@
   const PRODUCT_IMAGES = {
     "fluid-art-light-red": BASE_PREFIX + "assets/images/products/fluid-art/fluid-art-light-main-red.jpg",
     "fluid-art-light-pink": BASE_PREFIX + "assets/images/products/fluid-art/fluid-art-light-main-pink.jpg",
+    "fluid-art-light-pearl": BASE_PREFIX + "assets/images/products/fluid-art/fluid-art-light-main-pearl.jpg",
+    "fluid-art-light-frost": BASE_PREFIX + "assets/images/products/fluid-art/fluid-art-light-main-frost.jpg",
     "sand-art-chun": BASE_PREFIX + "assets/images/products/sand-art-chun/sand-art-chun-main.jpg",
     "sand-art-fu": BASE_PREFIX + "assets/images/products/sand-art-fu/sand-art-fu-main.jpg",
     "sand-art-cai": BASE_PREFIX + "assets/images/products/sand-art-cai/sand-art-cai-main.jpg",
@@ -510,6 +520,8 @@
   const PRODUCT_URLS = {
     "fluid-art-light-red": BASE_PREFIX + "products/fluid-art-light-red/",
     "fluid-art-light-pink": BASE_PREFIX + "products/fluid-art-light-pink/",
+    "fluid-art-light-pearl": BASE_PREFIX + "products/fluid-art-light-pearl/",
+    "fluid-art-light-frost": BASE_PREFIX + "products/fluid-art-light-frost/",
     "fluid-art-gift": BASE_PREFIX + "products/fluid-art-gift/",
     "sand-art-artist-sheep-red": BASE_PREFIX + "products/sand-art-artist-sheep-red/",
     "sand-art-artist-sheep-blue": BASE_PREFIX + "products/sand-art-artist-sheep-blue/",
