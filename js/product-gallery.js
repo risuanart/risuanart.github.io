@@ -99,13 +99,14 @@
 讓年味不再張揚，而是靜靜留在日常中。`,
       storyPlaceholder: false,
     },
-    // 2026-11-13 新增兩款配色（珠光／冰焰紅）。使用者目前只提供了一張
-    // 「棚拍」成品空拍照，沒有內容物全展開、倒顏料過程、字貼特寫這些
-    // 其他實拍素材——跟經典紅／迎春粉剛推出時素材不齊全的情況一樣，這裡
-    // 直接沿用同一套 placeholder 機制（lightPlaceholder／
-    // kitPhotoLightPlaceholder）標出還缺哪些照片，不是留白也不是塞假圖；
-    // 之後補拍齊了，比照上面兩個既有色系的寫法把這些欄位換成真的
-    // file／alt 即可，不用改動版面結構。顏料色名／比例同樣還沒確認
+    // 2026-11-13 新增兩款配色（珠光／冰焰紅）。一開始只有「棚拍」成品
+    // 空拍照，內容物全展開那格先用 lightPlaceholder／
+    // kitPhotoLightPlaceholder 標注待補；使用者後來補上了平鋪材料照
+    // （fluid-art-light-kit-pearl.jpg／fluid-art-light-kit-frost.jpg，
+    // 裁切配置比照經典紅／迎春粉既有的 kitPhotoLight 寫法），已經換成
+    // 真的 file／alt，不再是 placeholder。倒顏料過程、字貼特寫這類其他
+    // 實拍素材還沒有，暫時沒有格子可以補（跟經典紅／迎春粉當初逐步
+    // 補拍齊的順序一樣，不急著一次補完）。顏料正式色名／比例仍未確認
     // （paintsPlaceholder:true），swatches 色點是直接從使用者提供的
     // 成品照取樣，不是憑空挑色。
     "pearl-shimmer": {
@@ -114,9 +115,9 @@
       ctaText: "var(--color-text-primary)",
       gallery: [
         { file: "fluid-art-light-main-pearl.jpg", alt: "珠光成品模擬圖，黑色「福」字菱形畫布", caption: "成品模擬圖" },
-        { caption: "內容物全展開", lightPlaceholder: "待補拍：珠光材料包內容物平鋪（畫布、顏料、字貼、工具）" },
+        { file: "fluid-art-light-kit-pearl.jpg", alt: "珠光材料包內容物平鋪，畫布、顏料、字貼與工具", caption: "內容物全展開" },
       ],
-      kitPhotoLightPlaceholder: "待補拍：珠光材料包內容物平鋪照",
+      kitPhotoLight: { file: "fluid-art-light-kit-pearl.jpg", alt: "珠光材料包內容物平鋪，畫布、顏料、字貼與工具" },
       paints: ["珠光藍", "珠光粉", "珠光金", "珠光米"],
       paintsPlaceholder: true,
       swatches: ["var(--swatch-pearl-mist)", "var(--swatch-pearl-blush)", "var(--swatch-pearl-gold)", "var(--swatch-pearl-cream)"],
@@ -140,9 +141,9 @@
       ctaText: "var(--color-surface-light)",
       gallery: [
         { file: "fluid-art-light-main-frost.jpg", alt: "冰焰紅成品模擬圖，幻彩鐳射「福」字菱形畫布", caption: "成品模擬圖" },
-        { caption: "內容物全展開", lightPlaceholder: "待補拍：冰焰紅材料包內容物平鋪（畫布、顏料、字貼、工具）" },
+        { file: "fluid-art-light-kit-frost.jpg", alt: "冰焰紅材料包內容物平鋪，畫布、顏料、字貼與工具", caption: "內容物全展開" },
       ],
-      kitPhotoLightPlaceholder: "待補拍：冰焰紅材料包內容物平鋪照",
+      kitPhotoLight: { file: "fluid-art-light-kit-frost.jpg", alt: "冰焰紅材料包內容物平鋪，畫布、顏料、字貼與工具" },
       paints: ["絳紅", "爐火紅", "霜灰藍"],
       paintsPlaceholder: true,
       swatches: ["var(--swatch-frost-ember)", "var(--swatch-frost-red)", "var(--swatch-frost-ice-blue)", "var(--swatch-frost-mauve)"],
