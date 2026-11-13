@@ -1750,7 +1750,21 @@
    .sand24-field 容器再各自指定 grid-row，不直接沿用 .frame-field--size
    ／--design 那組名稱（語意上是不同東西，沿用名字會讓人誤會這頁也在
    選尺寸／款式）。購買方式卡片外觀直接沿用上面 .frame-size-picker 那組
-   既有樣式（卡片式、文字＋價錢兩行），不用另外寫一份一樣的 CSS。 */
+   既有樣式（卡片式、文字＋價錢兩行），不用另外寫一份一樣的 CSS。
+
+   2026-11-14 使用者反映標題跟「24/72色」選框、選框跟下面「A／B／C」
+   選框彼此太近——這兩個欄位原本各自前面有一個 .work-heading__field-label
+   （「購買方式」「色組（單組任選其一）」），label 本身的
+   margin-top:var(--space-6) 同時兼職當作欄位跟欄位之間的間距；使用者
+   後來要求拿掉這兩行文字（見同頁其他段落的異動），拿掉 label 的同時
+   也把這份間距一起拿掉了，不是故意要讓版面變擠。現在把 margin-top
+   直接搬到 .sand24-field 容器本身，不管手機直向堆疊或桌機 grid 並排
+   都一樣生效（這個 class 本身沒有被 display 覆寫成 grid/flex，單純的
+   margin-top 在兩種版面下都正常作用）。 */
+.sand24-field {
+  margin-top: var(--space-6);
+}
+
 @media (min-width: 768px) {
   .work__intro.work__intro--24color {
     grid-template-rows: auto auto auto auto auto auto auto 1fr;
