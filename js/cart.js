@@ -164,11 +164,11 @@
     // 的差異是這款是「縮小版完整組合」（含字貼跟晾乾繩），不是單純補
     // 一塊同尺寸畫布。
     "fluid-art-mini-canvas": { name: "流動畫加購迷你畫布組", shortName: "迷你畫布組", price: 80, category: "fluid-art", hasVariant: false, tagline: "5×5cm 迷你尺寸，正式倒主畫布前先試手感，也能做成一幅迷你春聯", noEarlyBird: true },
-    // 2026-11-13：無痕上牆藝術黏土，一包 4 入，沙畫／流動畫完成品都適用
+    // 2026-11-13：無痕上牆藝術黏土，一包 4 小塊，沙畫／流動畫完成品都適用
     // （跟 sand-art-metallic-trio 同樣是「跨兩種材質都能用」的加購品，
     // 購物車頁分類目前只有 sand-art／fluid-art 兩種可選，這款歸在使用者
     // 這次對話裡提出的 fluid-art 分類下，不代表限定流動畫專用）。
-    "fluid-art-wall-clay": { name: "加購無痕藝術黏土", shortName: "無痕黏土", price: 30, category: "fluid-art", hasVariant: false, tagline: "一包 4 入，讓作品無痕上牆，沙畫、流動畫作品都適用，建議一幅加購一個", noEarlyBird: true },
+    "fluid-art-wall-clay": { name: "加購無痕藝術黏土", shortName: "無痕黏土", price: 30, category: "fluid-art", hasVariant: false, tagline: "一包 4 小塊，讓作品無痕上牆，沙畫、流動畫作品都適用，建議一幅加購一個", noEarlyBird: true },
   };
   // noEarlyBird：2026-11-12 使用者確認這些「加購品」不套早鳥折扣（維持
   // 原價），理由跟後端 risuan-checkout/lib/products.js 同一則註解——這些
