@@ -1701,7 +1701,8 @@
   color: var(--color-text-secondary);
 }
 
-.work__intro.work__intro--frame .work-heading__notice {
+.work__intro.work__intro--frame .work-heading__notice,
+.work__intro.work__intro--extra-color .work-heading__notice {
   max-width: 34rem;
   margin: var(--space-4) 0 0;
   color: var(--color-warning);

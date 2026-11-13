@@ -155,20 +155,18 @@
           <button type="button" class="work__gallery-nav work__gallery-nav--prev" data-baseboard-nav="-1" aria-label="上一款圖案"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
           <button type="button" class="work__gallery-nav work__gallery-nav--next" data-baseboard-nav="1" aria-label="下一款圖案"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
         </div>
-        <!-- 使用者要求把「這個商品只有底板＋貼紙，不含沙子」放在照片
-             正下方、置中，比埋在標題右邊的文字欄更顯眼。蓋在照片上面
-             需要額外加深色遮罩才能維持可讀性，7 款圖案底色深淺不一，
-             遮罩效果每款都不一樣、不穩定，所以是貼著照片下緣、不是疊
-             在照片裡面。 -->
-        <div class="safety-notice safety-notice--purchase-note fade-in delay-1">
-          <p class="safety-notice__title">請注意</p>
-          <p class="safety-notice__list"><strong>這個商品只有底板＋貼紙，不含沙子。</strong></p>
-        </div>
       </div>
 
       <div class="work__title-block">
         <h1 class="work-heading fade-in"><span class="inner">沙畫底板・單買</span></h1>
         <p class="work-heading__sub fade-in delay-1">加購專屬・7 款設計任選</p>
+        <!-- 2026-11-14 使用者要求改成跟 sand-art-frame（沙畫加購像框）
+             一樣的呈現方式：單行文字接在標題下面，不要加「請注意」
+             標題跟粗體清單樣式，也不用貼在照片下緣——沿用那頁已經
+             寫好、現在擴大套用到 .work__intro--extra-color 的
+             .work-heading__notice 樣式（見 css/products.css），不是
+             另外做一套。 -->
+        <p class="work-heading__notice fade-in delay-2">這個商品只有底板＋貼紙，不含沙子。</p>
       </div>
 
       <p class="work-heading__field-label fade-in delay-2">圖案設計（7 選 1）</p>
