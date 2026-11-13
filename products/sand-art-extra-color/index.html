@@ -152,16 +152,20 @@
          那套（那套跟禮盒版的故事內容綁得很緊，這頁用不到）。 -->
     <header class="work__intro work__intro--extra-color work__intro--addon" data-gradient-sand-picker>
       <!-- 2026-10-25：使用者看過色條卡版本後反饋——主圖＋選色器要能左右
-           滑動／點擊切換 12 張實拍照（手機滑動、桌機點箭頭），不是只能
-           從下面的縮圖點選才會換圖。這裡補上跟 .work__gallery-nav 共用
-           的箭頭按鈕（沿用既有 CSS：手機 <550px 自動隱藏、桌機 hover
-           主圖才淡入，見 css/products.css），互動邏輯（含觸控滑動判斷）
-           見 js/gradient-sand-picker.js。 -->
+           滑動／點擊切換 12 張實拍照，不是只能從下面的縮圖點選才會換圖。
+           手機滑動手勢、桌機直接點縮圖都已經能換圖了，見 js/gradient-
+           sand-picker.js。
+
+           2026-11-14 使用者反映桌機寬度變寬時，hover 主圖才會淡入的
+           左右箭頭（.work__gallery-nav）常常剛好蓋住圖片邊緣的內容，
+           而且色票縮圖本來就能直接點選切換，箭頭等於是多餘的重複功能
+           ——拿掉這兩顆箭頭按鈕（HTML／js/gradient-sand-picker.js 裡
+           對應的 nav 監聽器一併移除），跟沙畫24色任選組、沙畫加購像框
+           這兩頁「不放箭頭、直接點縮圖切換」的做法一致，不同加購頁的
+           切換方式統一。手機滑動手勢維持不變，不受影響。 -->
       <div class="work__gallery fade-in">
         <div class="work__gallery-main" data-gradient-sand-main>
           <img data-gradient-sand-main-img class="is-active" src="../../assets/images/products/sand-art-extra-color/sand-art-extra-color-warm-apricot.jpg" alt="暖杏 漸層沙成品參考圖">
-          <button type="button" class="work__gallery-nav work__gallery-nav--prev" data-gradient-sand-nav="-1" aria-label="上一個色號"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
-          <button type="button" class="work__gallery-nav work__gallery-nav--next" data-gradient-sand-nav="1" aria-label="下一個色號"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
         </div>
       </div>
 

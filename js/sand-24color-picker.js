@@ -73,11 +73,56 @@
     });
   });
 
+  function selectScheme(chip) {
+    schemeChips.forEach((c) => c.setAttribute("aria-pressed", c === chip ? "true" : "false"));
+    if (hintNameEl) hintNameEl.textContent = chip.querySelector(".color-picker__chip-name").textContent;
+    updateMainImage();
+  }
+
   schemeChips.forEach((chip) => {
-    chip.addEventListener("click", () => {
-      schemeChips.forEach((c) => c.setAttribute("aria-pressed", c === chip ? "true" : "false"));
-      if (hintNameEl) hintNameEl.textContent = chip.querySelector(".color-picker__chip-name").textContent;
-      updateMainImage();
-    });
+    chip.addEventListener("click", () => selectScheme(chip));
   });
+
+  // 2026-11-14：使用者反映其他加購選色頁（漸層沙・自選色等）主圖都能
+  // 手機滑動切換，這頁原本只能點下面的 A／B／C 縮圖，不一致——補上跟
+  // 那幾頁同一套觸控滑動判斷邏輯（水平位移要明顯大於垂直位移才當作
+  // 換色手勢）。切到「72色全組」時只有一張組圖可看，沒有可以切換的
+  // 對象，滑動手勢直接略過（schemeChips 在 bundle tier 時本來就不會
+  // 顯示，但仍檢查 currentTier 避免滑動時誤觸發）。這頁沒有加桌機版的
+  // 左右箭頭按鈕——跟沙畫加購像框、沙畫24色任選組一樣，直接點縮圖切換
+  // 已經很清楚，不需要額外的箭頭。
+  const mainWrap = root.querySelector("[data-sand24-main]");
+  if (mainWrap) {
+    let startX = 0;
+    let startY = 0;
+    let tracking = false;
+
+    mainWrap.addEventListener(
+      "touchstart",
+      (e) => {
+        if (e.touches.length !== 1) return;
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+        tracking = true;
+      },
+      { passive: true }
+    );
+
+    mainWrap.addEventListener(
+      "touchend",
+      (e) => {
+        if (!tracking) return;
+        tracking = false;
+        if (currentTier === "bundle" || schemeChips.length < 2) return;
+        const touch = e.changedTouches[0];
+        const dx = touch.clientX - startX;
+        const dy = touch.clientY - startY;
+        if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy)) return;
+        const curIdx = schemeChips.indexOf(currentSchemeChip());
+        const nextIdx = (curIdx + (dx < 0 ? 1 : -1) + schemeChips.length) % schemeChips.length;
+        selectScheme(schemeChips[nextIdx]);
+      },
+      { passive: true }
+    );
+  }
 })();

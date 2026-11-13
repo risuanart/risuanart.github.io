@@ -11,7 +11,11 @@
    主圖，不方便——加上跟漸層沙・自選色（js/gradient-sand-picker.js）
    同一套「主圖左右箭頭＋手機滑動」手勢，index-based 統一處理「換圖＋
    換選中狀態＋換價錢＋換對應按鈕」，點縮圖、點箭頭、滑動手勢都呼叫
-   同一個函式。 */
+   同一個函式。
+
+   2026-11-14：拿掉桌機版的左右箭頭按鈕（跟其他加購選色頁一起統一拿掉，
+   原因見 HTML 裡的說明），select() 不用改，點縮圖／手機滑動手勢維持
+   不變。 */
 (function () {
   const root = document.querySelector("[data-metallic-sand-picker]");
   if (!root) return;
@@ -50,13 +54,6 @@
 
   chips.forEach((chip, i) => {
     chip.addEventListener("click", () => select(i));
-  });
-
-  root.querySelectorAll("[data-metallic-sand-nav]").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const dir = parseInt(btn.getAttribute("data-metallic-sand-nav"), 10);
-      select(index + dir);
-    });
   });
 
   // 觸控滑動（手機）：跟 gradient-sand-picker.js 同一套判斷邏輯，只在

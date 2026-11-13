@@ -71,13 +71,56 @@
     });
   });
 
+  function selectDesign(chip) {
+    if (!chip || chip.hidden) return;
+    designChips.forEach((c) => c.setAttribute("aria-pressed", c === chip ? "true" : "false"));
+    currentDesign = chip.dataset.design;
+    updateMainImage();
+  }
+
   designChips.forEach((chip) => {
-    chip.addEventListener("click", () => {
-      if (chip.hidden) return;
-      designChips.forEach((c) => c.setAttribute("aria-pressed", c === chip ? "true" : "false"));
-      currentDesign = chip.dataset.design;
-      updateMainImage();
-    });
+    chip.addEventListener("click", () => selectDesign(chip));
   });
   updateAvailableDesigns();
+
+  // 2026-11-14：使用者反映其他加購選色頁主圖都能手機滑動切換，這頁
+  // 原本只能點下面的「預覽款式」縮圖，不一致——補上同一套觸控滑動
+  // 判斷邏輯，在目前尺寸底下「看得到」的款式縮圖（chip.hidden 篩選過）
+  // 之間切換，不會滑到被隱藏的尺寸限定款式。這頁沒有加桌機版的左右
+  // 箭頭按鈕，跟沙畫24色任選組一樣，直接點縮圖切換已經很清楚。
+  const mainWrap = root.querySelector("[data-frame-mockup-main]");
+  if (mainWrap) {
+    let startX = 0;
+    let startY = 0;
+    let tracking = false;
+
+    mainWrap.addEventListener(
+      "touchstart",
+      (e) => {
+        if (e.touches.length !== 1) return;
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+        tracking = true;
+      },
+      { passive: true }
+    );
+
+    mainWrap.addEventListener(
+      "touchend",
+      (e) => {
+        if (!tracking) return;
+        tracking = false;
+        const visible = designChips.filter((c) => !c.hidden);
+        if (visible.length < 2) return;
+        const touch = e.changedTouches[0];
+        const dx = touch.clientX - startX;
+        const dy = touch.clientY - startY;
+        if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy)) return;
+        const curIdx = visible.findIndex((c) => c.dataset.design === currentDesign);
+        const nextIdx = (curIdx + (dx < 0 ? 1 : -1) + visible.length) % visible.length;
+        selectDesign(visible[nextIdx]);
+      },
+      { passive: true }
+    );
+  }
 })();

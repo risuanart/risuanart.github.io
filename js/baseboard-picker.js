@@ -38,13 +38,6 @@
     chip.addEventListener("click", () => select(i));
   });
 
-  root.querySelectorAll("[data-baseboard-nav]").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const dir = parseInt(btn.getAttribute("data-baseboard-nav"), 10);
-      select(index + dir);
-    });
-  });
-
   // 觸控滑動（手機）：只在主圖容器內判斷，且水平位移要明顯大於垂直
   // 位移才當作換圖手勢，避免跟頁面正常垂直捲動互相干擾；listener 用
   // passive，不呼叫 preventDefault()，捲動本身不會被卡住。跟

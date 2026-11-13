@@ -11,8 +11,12 @@
 
    2026-10-25：使用者要求主圖能左右切換 12 張色票照——手機滑動、桌機
    點箭頭——不是只能從下面縮圖點選。改成 index-based：select(idx) 統一
-   處理「換圖＋換選中狀態＋換提示文字」，點縮圖、點箭頭、滑動手勢都呼叫
-   同一個函式，不是三套各自獨立的邏輯。 */
+   處理「換圖＋換選中狀態＋換提示文字」，點縮圖、滑動手勢都呼叫同一個
+   函式，不是各自獨立的邏輯。
+
+   2026-11-14：拿掉桌機版的左右箭頭按鈕（原因見 HTML 裡的說明），
+   select() 本身不用改，只是少了一種觸發來源；點縮圖／手機滑動手勢
+   維持不變。 */
 (function () {
   const root = document.querySelector("[data-gradient-sand-picker]");
   if (!root) return;
@@ -48,13 +52,6 @@
 
   chips.forEach((chip, i) => {
     chip.addEventListener("click", () => select(i));
-  });
-
-  root.querySelectorAll("[data-gradient-sand-nav]").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const dir = parseInt(btn.getAttribute("data-gradient-sand-nav"), 10);
-      select(index + dir);
-    });
   });
 
   // 觸控滑動（手機）：只在主圖容器內判斷，且水平位移要明顯大於垂直
