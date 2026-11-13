@@ -1,0 +1,41 @@
+# 2026-11-13 新增：自動更新 IG/Meta 購物目錄（feeds/instagram-shop.csv）。
+#
+# 使用者在 Meta Commerce Manager 設定「排程抓取網址」指到
+# https://risuanart.com/feeds/instagram-shop.csv，Meta 會定期自己來抓這個
+# 固定網址；這支 workflow 負責在商品資料（js/cart.js）或商品頁改動時，
+# 自動重新產生這份資料表並 commit 回 repo，讓那個固定網址上的內容永遠
+# 是最新的——使用者不用在改商品之後額外做任何事。
+#
+# 這不是網站本身的建置流程（paths 只鎖定會影響商品資料表的檔案，不是
+# 每次 push 都跑；網站其他頁面的改動完全不會觸發這支 workflow），網站
+# 本身仍然是純手寫、未經建置的靜態頁面，部署方式（GitHub Pages／
+# Cloudflare Pages）都不受影響。
+name: 更新 IG 購物目錄
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "js/cart.js"
+      - "products/**/index.html"
+      - "scripts/generate-ig-catalog.js"
+
+permissions:
+  contents: write
+
+jobs:
+  update-feed:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 產生商品資料表
+        run: node scripts/generate-ig-catalog.js
+
+      - name: 有變動才 commit（避免內容完全沒變也留一筆空 commit）
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add feeds/instagram-shop.csv
+          git diff --cached --quiet || git commit -m "自動更新 IG 購物目錄"
+          git push
