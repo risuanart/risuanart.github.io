@@ -4785,16 +4785,6 @@ button.text-link {
   color: var(--color-text-secondary);
 }
 
-/* 2026-11-13：使用者反映這塊「購買前請閱讀」在螢幕變寬時文字寬度被
-   鎖死——這裡是刻意跳脫全站 .chapter 840px 上限的例外，不是沿用
-   main-direct-child-width-constraint 那個標準（見專案記憶：該標準用在
-   一般內文區塊，這裡使用者明確要求跟著螢幕寬度一直放大）。 */
-@media (min-width: 841px) {
-  .chapter.product-tabs {
-    max-width: none;
-  }
-}
-
 .accordion {
   margin-top: var(--editorial-gap);
   padding: 0 var(--space-4) 0 var(--space-4);
@@ -4849,13 +4839,13 @@ button.text-link {
 }
 
 /* 2026-11-13：「購買前請閱讀」分頁內容借用 .accordion__body 的字級／
-   行高樣式（見各商品頁 HTML 裡的說明），但繼承到的 max-width: 46ch
-   是獨立手風琴元件原本設計給單欄閱讀寬度用的，跟畫面變寬無關，才是
-   使用者反映「螢幕變寬時文字寬度被鎖死」的真正原因——外層
-   .chapter.product-tabs 容器其實早就有跟著螢幕變寬（見上面
-   .product-tabs__panel 旁的例外），只是這層 46ch 又把文字段落鎖窄。
-   這裡只解除分頁情境下的字元寬度上限，不動 .accordion__body 本身，
-   避免影響其他真正的手風琴（如 FAQ）原本就要的單欄閱讀寬度。 */
+   行高樣式（見各商品頁 HTML 裡的說明），但連帶繼承到的 max-width: 46ch
+   是獨立手風琴元件原本設計給單欄閱讀寬度用的，跟外層 .chapter 840px
+   容器無關，把文字段落鎖得比容器窄很多，才是使用者反映「文字寬度被
+   鎖死」的真正原因。這裡解除分頁情境下的字元寬度上限，讓文字段落貼滿
+   外層 .chapter 既有的 840px 標準寬度（不是跳脫 840px，見上面
+   .chapter 840px 上限說明），不動 .accordion__body 本身，避免影響其他
+   真正的手風琴（如 FAQ）原本就要的單欄閱讀寬度。 */
 .product-tabs__panel .accordion__body {
   max-width: none;
 }
