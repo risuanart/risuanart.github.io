@@ -1029,20 +1029,32 @@
        砂畫，流動畫沒有被平均推送——加上流動畫兩款（經典紅／迎春粉）
        跟砂畫另外 2 款當時還沒收進來的款式（燈上迎春／燈上納福／藝術家
        系列羊Diss舞蹈紅＋藍），讓這個總覽區塊涵蓋全部春節系列材料包，
-       不是只有部分款式。流動畫／羊Diss舞蹈那幾張沒有另外做去背 cutout
-       圖、也沒有三色配色示範圖素材，改直接用商品頁本來就有的
-       「-main.jpg」成品照——實際打開確認過，那幾張本來就是淺色/白色
-       背景＋菱形置中構圖＋淡陰影，跟去背圖放在同一排視覺上差異很小，
-       不需要額外做去背處理。
+       不是只有部分款式。
 
-       使用者接著要求：7 款真的有準備「配色動態展示」素材的砂畫（原本
-       5 款＋新加的燈上迎春／燈上納福），不要維持單張靜態去背圖，要
-       比照首頁／商品總覽格狀卡（products/shop.html）、商品頁首圖同一套
-       輪播（js/hero-colorway-carousel.js＋ PRODUCT_COLORWAY_FRAMES 的
-       combo-1／2／3 去背圖），改成「出貨配色→示範配色二→示範配色三」
-       自動循環播放——這個區塊位置在頁面偏下方，比照 js/related-products.js
-       的做法加上 data-carousel-loop（播完一輪會重頭再播，不會訪客捲到
-       這裡時剛好已經播完定格），不是只播一輪就停。 -->
+       7 款真的有準備「配色動態展示」素材的砂畫（原本 5 款＋新加的
+       燈上迎春／燈上納福），比照首頁／商品總覽格狀卡（products/shop.html）、
+       商品頁首圖同一套輪播（js/hero-colorway-carousel.js＋
+       PRODUCT_COLORWAY_FRAMES 的 combo-1／2／3 去背圖），改成「出貨
+       配色→示範配色二→示範配色三」自動循環播放，不是單張靜態圖——
+       這個區塊位置在頁面偏下方，比照 js/related-products.js 的做法加上
+       data-carousel-loop（播完一輪會重頭再播，不會訪客捲到這裡時剛好
+       已經播完定格），不是只播一輪就停。
+
+       羊Diss舞蹈紅／藍、流動畫經典紅／迎春粉這 4 款沒有配色動態展示
+       素材，但使用者要求這個區塊統一用去背圖，不要留白底＋陰影的
+       「-main.jpg」成品照——本機用 scipy／PIL 寫腳本去背（沒有 rembg
+       這類語意分割模型，用純色距離＋凸包的做法）：先算四個角落的
+       底色，找出跟底色距離夠遠（夠飽和／夠深）的像素，取這些像素的
+       凸包（convex hull）當作整張產品卡片的範圍，範圍內一律視為不透明
+       （不逐像素判斷顏色），範圍外去背透明。這樣即使卡片裡有白色線條
+       或圖案（例如羊Diss舞蹈的白色羊群剪影）剛好跟背景一樣接近白色、
+       又剛好碰到卡片邊緣，也不會被誤判成背景而被挖空——單純用「每個
+       像素跟背景色距離多遠」做全域洪水填充（flood fill）試過，羊群
+       剪影真的在左側頂點碰到卡片邊緣，會沿著那條路徑整塊被誤刪，凸包
+       做法用的是「這個像素在不在卡片的整體範圍內」，不受卡片內部顏色
+       影響，不會有這個問題。產出 900px 寬的 WebP（品質 82），檔名
+       加 -cutout 後綴，跟原本 5 款砂畫手動去背的 cutout.webp 用同一套
+       命名慣例。 -->
   <section class="chapter fade-in" style="text-align:center;">
     <span class="ed-label">Collection</span>
     <h2 class="chapter__title">全系列材料包</h2>
@@ -1105,19 +1117,19 @@
         <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">燈上納福</span><span class="koyama-product-card__name-en">Lantern</span></p>
       </a>
       <a class="koyama-product-card" href="sand-art-artist-sheep-red/">
-        <div class="koyama-product-card__media"><img src="../assets/images/products/sand-art-artist/sand-art-artist-red-main.jpg" alt="藝術家系列羊Diss舞蹈紅款砂畫材料包成品參考圖" loading="lazy"></div>
+        <div class="koyama-product-card__media"><img src="../assets/images/products/sand-art-artist/sand-art-artist-red-cutout.webp" alt="藝術家系列羊Diss舞蹈紅款砂畫材料包成品參考圖" loading="lazy"></div>
         <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">羊舞紅</span><span class="koyama-product-card__name-en">Artist Series</span></p>
       </a>
       <a class="koyama-product-card" href="sand-art-artist-sheep-blue/">
-        <div class="koyama-product-card__media"><img src="../assets/images/products/sand-art-artist/sand-art-artist-blue-main.jpg" alt="藝術家系列羊Diss舞蹈藍款砂畫材料包成品參考圖" loading="lazy"></div>
+        <div class="koyama-product-card__media"><img src="../assets/images/products/sand-art-artist/sand-art-artist-blue-cutout.webp" alt="藝術家系列羊Diss舞蹈藍款砂畫材料包成品參考圖" loading="lazy"></div>
         <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">羊舞藍</span><span class="koyama-product-card__name-en">Artist Series</span></p>
       </a>
       <a class="koyama-product-card" href="fluid-art-light-red/">
-        <div class="koyama-product-card__media"><img src="../assets/images/products/fluid-art/fluid-art-light-main-red.jpg" alt="春聯流動畫材料包經典紅成品參考圖" loading="lazy"></div>
+        <div class="koyama-product-card__media"><img src="../assets/images/products/fluid-art/fluid-art-light-cutout-red.webp" alt="春聯流動畫材料包經典紅成品參考圖" loading="lazy"></div>
         <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">經典紅</span><span class="koyama-product-card__name-en">Fluid Art</span></p>
       </a>
       <a class="koyama-product-card" href="fluid-art-light-pink/">
-        <div class="koyama-product-card__media"><img src="../assets/images/products/fluid-art/fluid-art-light-main-pink.jpg" alt="春聯流動畫材料包迎春粉成品參考圖" loading="lazy"></div>
+        <div class="koyama-product-card__media"><img src="../assets/images/products/fluid-art/fluid-art-light-cutout-pink.webp" alt="春聯流動畫材料包迎春粉成品參考圖" loading="lazy"></div>
         <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">迎春粉</span><span class="koyama-product-card__name-en">Fluid Art</span></p>
       </a>
     </div>
