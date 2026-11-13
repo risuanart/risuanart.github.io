@@ -558,10 +558,35 @@
     position:absolute;
     inset:0;
     opacity:0;
+    /* 2026-11-13 使用者反映「燈上納福」這類配色輪播卡片，跟「經典紅」
+       這類單張去背圖卡片明明容器一樣大（同屬 15cm 款式），但畫面上
+       看起來明顯比較小——實際量圖才發現根因：combo-1/2/3.png（配色
+       輪播用的三色示範圖）去背時四周留了不少透明邊距，菱形本身只佔
+       整張圖寬度約 66%；使用者自己做的去背圖（經典紅／迎春粉／羊舞紅／
+       藍那幾張）裁得很緊，菱形佔圖寬 94～96%。兩種圖都用
+       object-fit:contain 塞進同樣大小的正方形容器，contain 是以「整張
+       圖片（含透明邊距）」去貼合容器，不是以「看得到的菱形範圍」貼合，
+       所以留白多的 combo 圖，菱形看起來自然小一圈，不是容器尺寸本身的
+       問題。這裡直接把輪播圖片等比放大 1.44 倍（0.94 ÷ 0.66 ≈ 1.44，
+       抵銷掉 combo 圖多出來的透明邊距），讓菱形實際佔框比例跟其他卡片
+       看齊——改圖本身（重新裁切 21 張 combo 圖）影響範圍太大（這些圖
+       同時也是商品頁首圖／商店格狀卡在用的素材），用 CSS 補償範圍只
+       限定在這頁的輪播卡片，不動到共用素材。 */
+    transform: scale(1.44);
     transition: opacity 1.1s ease, transform var(--duration-normal, .3s) ease;
   }
   .koyama-product-card__media[data-hero-carousel] img[data-carousel-frame].is-active{
     opacity:1;
+  }
+  /* 上面「全部卡片 hover 放大 1.04 倍」那條規則（.koyama-product-card:hover
+     .koyama-product-card__media img）選擇器特異度比這裡的
+     [data-hero-carousel]／[data-carousel-frame] 屬性選擇器低，hover 時
+     會被這裡的輪播基準 scale(1.44) 整個蓋掉（CSS transform 不會疊加
+     兩條規則，特異度高的那條整個贏），輪播卡片滑鼠移過去不會再放大。
+     補一條特異度更高、兩個效果疊在一起的規則，輪播卡片才會跟其他卡片
+     一樣有 hover 放大回饋。 */
+  .koyama-product-card:hover .koyama-product-card__media[data-hero-carousel] img[data-carousel-frame]{
+    transform: scale(1.44) scale(1.04);
   }
   /* 名稱改成「字＋英文翻譯」兩層（見上面 <style> 開頭補充說明），中文字
      大、英文小寫字放大寫＋拉開字距放在下面，像是替這個字做簡短介紹，
