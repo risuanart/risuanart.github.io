@@ -514,22 +514,31 @@
   }
   /* 名稱改成「字＋英文翻譯」兩層（見上面 <style> 開頭補充說明），中文字
      大、英文小寫字放大寫＋拉開字距放在下面，像是替這個字做簡短介紹，
-     不是只丟一個單字。 */
+     不是只丟一個單字。
+
+     2026-11-13 使用者參考 koyama.com.tw/newbornbox/ 的 PRODUCTS 區塊
+     （圖片下方「二O二六／馬年」那組極小、不加粗的說明文字），反映
+     我們這裡的字級字重太搶眼，看起來沒那麼精緻——原本中文字 22px／
+     700（粗體）比參考站明顯大很多，改成 15px／500（半粗），不是純
+     常規字重 400，是因為這裡的中文字本身還是商品卡片的主要辨識文字
+     （不是純裝飾說明），完全比照參考站的極輕量字重會太弱、跟底下
+     的英文說明字分不出主副層級；降到 500 介於「比參考站粗一點」跟
+     「比原本 700 輕很多」之間，視覺上收斂但還是看得出主次。 */
   .koyama-product-card__name{
     display:flex;
     flex-direction:column;
     align-items:center;
-    gap:4px;
+    gap:6px;
     margin:0;
   }
   .koyama-product-card__name-cn{
-    font-size:22px;
-    font-weight:700;
+    font-size:15px;
+    font-weight:500;
     letter-spacing:0.5px;
   }
   .koyama-product-card__name-en{
-    font-size:11px;
-    letter-spacing:2px;
+    font-size:10px;
+    letter-spacing:1.5px;
     text-transform:uppercase;
     color: var(--color-text-secondary);
   }
@@ -1066,7 +1075,7 @@
           <img src="../assets/images/products/sand-art-fu/sand-art-fu-combo-2.png" alt="" aria-hidden="true" loading="lazy" data-carousel-frame>
           <img src="../assets/images/products/sand-art-fu/sand-art-fu-combo-3.png" alt="" aria-hidden="true" loading="lazy" data-carousel-frame>
         </div>
-        <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">福</span><span class="koyama-product-card__name-en">Fortune</span></p>
+        <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">福星</span><span class="koyama-product-card__name-en">Starry Fu</span></p>
       </a>
       <a class="koyama-product-card" href="sand-art-chun/">
         <div class="koyama-product-card__media" data-hero-carousel data-carousel-loop>
@@ -1074,7 +1083,7 @@
           <img src="../assets/images/products/sand-art-chun/sand-art-chun-combo-2.png" alt="" aria-hidden="true" loading="lazy" data-carousel-frame>
           <img src="../assets/images/products/sand-art-chun/sand-art-chun-combo-3.png" alt="" aria-hidden="true" loading="lazy" data-carousel-frame>
         </div>
-        <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">春</span><span class="koyama-product-card__name-en">Spring</span></p>
+        <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">春結</span><span class="koyama-product-card__name-en">Chun Tied</span></p>
       </a>
       <a class="koyama-product-card" href="sand-art-cai/">
         <div class="koyama-product-card__media" data-hero-carousel data-carousel-loop>
@@ -1082,7 +1091,7 @@
           <img src="../assets/images/products/sand-art-cai/sand-art-cai-combo-2.png" alt="" aria-hidden="true" loading="lazy" data-carousel-frame>
           <img src="../assets/images/products/sand-art-cai/sand-art-cai-combo-3.png" alt="" aria-hidden="true" loading="lazy" data-carousel-frame>
         </div>
-        <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">財</span><span class="koyama-product-card__name-en">Wealth</span></p>
+        <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">花財</span><span class="koyama-product-card__name-en">Cai in Bloom</span></p>
       </a>
       <a class="koyama-product-card" href="sand-art-na-fu/">
         <div class="koyama-product-card__media" data-hero-carousel data-carousel-loop>
@@ -1090,7 +1099,7 @@
           <img src="../assets/images/products/sand-art-na-fu/sand-art-na-fu-combo-2.png" alt="" aria-hidden="true" loading="lazy" data-carousel-frame>
           <img src="../assets/images/products/sand-art-na-fu/sand-art-na-fu-combo-3.png" alt="" aria-hidden="true" loading="lazy" data-carousel-frame>
         </div>
-        <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">納福</span><span class="koyama-product-card__name-en">Blessing</span></p>
+        <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">格裡納福</span><span class="koyama-product-card__name-en">Checked in Na Fu</span></p>
       </a>
       <a class="koyama-product-card" href="sand-art-ying-chun/">
         <div class="koyama-product-card__media" data-hero-carousel data-carousel-loop>
@@ -1098,7 +1107,7 @@
           <img src="../assets/images/products/sand-art-ying-chun/sand-art-ying-chun-combo-2.png" alt="" aria-hidden="true" loading="lazy" data-carousel-frame>
           <img src="../assets/images/products/sand-art-ying-chun/sand-art-ying-chun-combo-3.png" alt="" aria-hidden="true" loading="lazy" data-carousel-frame>
         </div>
-        <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">迎春</span><span class="koyama-product-card__name-en">Welcome Spring</span></p>
+        <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">格裡迎春</span><span class="koyama-product-card__name-en">Checked in Chun</span></p>
       </a>
       <a class="koyama-product-card" href="sand-art-ying-chun-lantern/">
         <div class="koyama-product-card__media" data-hero-carousel data-carousel-loop>
@@ -1106,7 +1115,7 @@
           <img src="../assets/images/products/sand-art-ying-chun-lantern/sand-art-ying-chun-lantern-combo-2.png" alt="" aria-hidden="true" loading="lazy" data-carousel-frame>
           <img src="../assets/images/products/sand-art-ying-chun-lantern/sand-art-ying-chun-lantern-combo-3.png" alt="" aria-hidden="true" loading="lazy" data-carousel-frame>
         </div>
-        <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">燈上迎春</span><span class="koyama-product-card__name-en">Lantern</span></p>
+        <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">燈上迎春</span><span class="koyama-product-card__name-en">Lit in Chun</span></p>
       </a>
       <a class="koyama-product-card" href="sand-art-na-fu-lantern/">
         <div class="koyama-product-card__media" data-hero-carousel data-carousel-loop>
@@ -1114,15 +1123,15 @@
           <img src="../assets/images/products/sand-art-na-fu-lantern/sand-art-na-fu-lantern-combo-2.png" alt="" aria-hidden="true" loading="lazy" data-carousel-frame>
           <img src="../assets/images/products/sand-art-na-fu-lantern/sand-art-na-fu-lantern-combo-3.png" alt="" aria-hidden="true" loading="lazy" data-carousel-frame>
         </div>
-        <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">燈上納福</span><span class="koyama-product-card__name-en">Lantern</span></p>
+        <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">燈上納福</span><span class="koyama-product-card__name-en">Lit in Na Fu</span></p>
       </a>
       <a class="koyama-product-card" href="sand-art-artist-sheep-red/">
         <div class="koyama-product-card__media"><img src="../assets/images/products/sand-art-artist/sand-art-artist-red-cutout.webp" alt="藝術家系列羊Diss舞蹈紅款砂畫材料包成品參考圖" loading="lazy"></div>
-        <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">羊舞紅</span><span class="koyama-product-card__name-en">Artist Series</span></p>
+        <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">羊Diss舞蹈・紅</span><span class="koyama-product-card__name-en">Sheep La Danse</span></p>
       </a>
       <a class="koyama-product-card" href="sand-art-artist-sheep-blue/">
         <div class="koyama-product-card__media"><img src="../assets/images/products/sand-art-artist/sand-art-artist-blue-cutout.webp" alt="藝術家系列羊Diss舞蹈藍款砂畫材料包成品參考圖" loading="lazy"></div>
-        <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">羊舞藍</span><span class="koyama-product-card__name-en">Artist Series</span></p>
+        <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">羊Diss舞蹈・藍</span><span class="koyama-product-card__name-en">Sheep La Danse</span></p>
       </a>
       <a class="koyama-product-card" href="fluid-art-light-red/">
         <div class="koyama-product-card__media"><img src="../assets/images/products/fluid-art/fluid-art-light-cutout-red.webp" alt="春聯流動畫材料包經典紅成品參考圖" loading="lazy"></div>
