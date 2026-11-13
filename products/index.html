@@ -388,6 +388,35 @@
     color: var(--color-text-secondary);
   }
 
+  /* ---------- 加購配件：分類標題＋引言 ----------
+     2026-11-13 使用者反映加購配件原本只有一張 banner（連到漸層沙 12 色
+     任選），看不出材料包其實還有其他 11 款加購／單買品，要求「改成
+     單個產品完全呈現如產品一樣，依照材料、功用分類」。拆成三組（色彩
+     升級／工具與收納／流動畫專屬），每組一個小標題＋一句引言，底下
+     重用 hub-blocks.css 既有但全站都還沒派上用場的 .tile／.tile-row
+     元件（圖滿版＋底部漸層疊字，本來就是「單個產品完整呈現」的卡片
+     樣式，不是分類入口用的 .product-card），不新增一套卡片視覺語言。
+     這裡只負責分類標題/引言這兩個這頁才有的文字樣式，卡片本身的欄數
+     規則（.addon-row／.addon-tile）歸在 hub-blocks.css，供其他頁面
+     之後也能重用同一組「依分類列出多款加購品」版面。 */
+  .addon-intro{
+    margin-top:12px;
+    max-width:var(--max-text);
+    font-size:15px;
+    line-height:1.7;
+  }
+  .addon-category{ margin-top:var(--gap-md); }
+  .addon-category__title{
+    margin:0 0 4px;
+    font-size:14px;
+    font-weight:700;
+  }
+  .addon-category__desc{
+    margin:0 0 14px;
+    font-size:12px;
+    color:#666;
+  }
+
   /* ---------- 雙圓形情境照（大家一起過年） ----------
      koyama 的做法是兩張圓形裁切的照片並排（HANDPRINT／FOOTPRINT），這裡
      借同一個視覺手法，但還沒有真的多人手作照片可以放——.placeholder-box
@@ -1175,16 +1204,113 @@
     <span class="ed-label">Add-on</span>
     <div class="content-block__head">
       <p class="content-block__title">加購配件</p>
-      <p class="content-block__hint">12 組漸層色任選</p>
     </div>
-    <a class="feature-tile" href="sand-art-extra-color/">
-      <img src="../assets/images/products/sand-art-extra-color/sand-art-extra-color-12color-grid.jpg" alt="漸層沙・自選色，12 色拼圖">
-      <div class="feature-tile__overlay">
-        <p class="feature-tile__eyebrow">12 色任選</p>
-        <p class="feature-tile__title">漸層沙・自選色，材料更齊全，一次看懂所有色號</p>
-        <span class="feature-tile__cta">查看全部 12 色 →</span>
+    <p class="addon-intro">每款材料包出廠都已經搭配好安全好上手的配色，照著步驟完成就是一幅成品。如果想要更自由地混出自己的顏色、或是讓作品更完整，這裡有額外的色號、工具與配件可以加購。</p>
+
+    <div class="addon-category">
+      <p class="addon-category__title">色彩升級</p>
+      <p class="addon-category__desc">出貨配色已經是安全好上手的組合，這幾款讓你自由混出更多可能。</p>
+      <div class="tile-row addon-row">
+        <a class="tile addon-tile" href="sand-art-extra-color/">
+          <img src="../assets/images/products/sand-art-extra-color/sand-art-extra-color-12color-grid.jpg" alt="漸層沙．自選色，12 色拼圖">
+          <div class="tile__overlay">
+            <p class="tile__name">漸層沙．自選色</p>
+            <p class="tile__price">$150 · 12 色任選</p>
+          </div>
+        </a>
+        <a class="tile addon-tile" href="sand-art-24color/">
+          <img src="../assets/images/products/sand-art-24color/sand-art-24color-set-a.jpg" alt="砂畫 24 色任選組，A 組色號參考圖">
+          <div class="tile__overlay">
+            <p class="tile__name">24 色任選組</p>
+            <p class="tile__price">$450 · A／B／C 任選一組</p>
+          </div>
+        </a>
+        <a class="tile addon-tile" href="sand-art-24color/">
+          <img src="../assets/images/products/sand-art-24color/sand-art-24color-bundle.jpg" alt="砂畫 24 色任選組 72 色全組參考圖">
+          <div class="tile__overlay">
+            <p class="tile__name">24 色任選組（72 色全組）</p>
+            <p class="tile__price">$950 · A＋B＋C 一次買齊</p>
+          </div>
+        </a>
+        <a class="tile addon-tile" href="sand-art-metallic/">
+          <img src="../assets/images/products/sand-art-metallic/sand-art-metallic-platinum.jpg" alt="沙畫加購金屬色沙，鉑金色參考圖">
+          <div class="tile__overlay">
+            <p class="tile__name">金屬色沙</p>
+            <p class="tile__price">$45 起 · 鉑金／香檳銀</p>
+          </div>
+        </a>
+        <a class="tile addon-tile" href="sand-art-metallic-trio/">
+          <img src="../assets/images/products/sand-art-metallic-trio/sand-art-metallic-trio-main.jpg" alt="金箔碎片三色組參考圖，金／銀／玫瑰金">
+          <div class="tile__overlay">
+            <p class="tile__name">金箔碎片三色組</p>
+            <p class="tile__price">$85 · 金／銀／玫瑰金</p>
+          </div>
+        </a>
       </div>
-    </a>
+    </div>
+
+    <div class="addon-category">
+      <p class="addon-category__title">工具與收納</p>
+      <p class="addon-category__desc">讓作品更好操作、更好展示。</p>
+      <div class="tile-row addon-row">
+        <a class="tile addon-tile" href="sand-art-craft-knife/">
+          <img src="../assets/images/products/sand-art-craft-knife/sand-art-craft-knife-main.jpg" alt="沙畫加購筆刀參考圖">
+          <div class="tile__overlay">
+            <p class="tile__name">加購筆刀</p>
+            <p class="tile__price">$60</p>
+          </div>
+        </a>
+        <a class="tile addon-tile" href="sand-art-frame/">
+          <img src="../assets/images/products/sand-art-frame/sand-art-frame-plain-15.jpg" alt="沙畫加購像框，15×15cm 木質畫框參考圖">
+          <div class="tile__overlay">
+            <p class="tile__name">像框・15×15cm</p>
+            <p class="tile__price">$150</p>
+          </div>
+        </a>
+        <a class="tile addon-tile" href="sand-art-frame/">
+          <img src="../assets/images/products/sand-art-frame/sand-art-frame-plain-20.jpg" alt="沙畫加購像框，20×20cm 木質畫框參考圖">
+          <div class="tile__overlay">
+            <p class="tile__name">像框・20×20cm</p>
+            <p class="tile__price">$199</p>
+          </div>
+        </a>
+        <a class="tile addon-tile" href="sand-art-baseboard/">
+          <img src="../assets/images/products/sand-art-baseboard/sand-art-baseboard-fu.jpg" alt="沙畫底板單買參考圖，福星圖案">
+          <div class="tile__overlay">
+            <p class="tile__name">沙畫底板・單買</p>
+            <p class="tile__price">$200 · 9 款圖案任選</p>
+          </div>
+        </a>
+        <a class="tile addon-tile" href="sand-art-baseboard-artist/">
+          <img src="../assets/images/products/sand-art-baseboard/sand-art-baseboard-artist-red.jpg" alt="羊Diss舞蹈系列底板單買參考圖，紅款">
+          <div class="tile__overlay">
+            <p class="tile__name">底板・羊Diss舞蹈單買</p>
+            <p class="tile__price">$300</p>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="addon-category">
+      <p class="addon-category__title">流動畫專屬</p>
+      <p class="addon-category__desc">顏料用完，或想再多做一幅時的加購。</p>
+      <div class="tile-row addon-row">
+        <a class="tile addon-tile" href="fluid-art-blank-canvas/">
+          <img src="../assets/images/products/fluid-art-blank-canvas/fluid-art-blank-canvas-main.jpg" alt="流動畫加購空白畫布參考圖">
+          <div class="tile__overlay">
+            <p class="tile__name">加購空白畫布</p>
+            <p class="tile__price">$35</p>
+          </div>
+        </a>
+        <a class="tile addon-tile" href="fluid-art-word-sticker/">
+          <img src="../assets/images/products/fluid-art-word-sticker/fluid-art-word-sticker-gold-fu.jpg" alt="流動畫加購字貼參考圖，金色福字款">
+          <div class="tile__overlay">
+            <p class="tile__name">加購字貼</p>
+            <p class="tile__price">$70 · 5 款設計任選</p>
+          </div>
+        </a>
+      </div>
+    </div>
   </section>
 
     <section class="content-block home-entry-section">

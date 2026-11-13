@@ -74,6 +74,20 @@
   .service-tile{ aspect-ratio:4/3; }
 }
 
+/* 2026-11-13 加購配件區塊（products/index.html）新增：一組依分類列出
+   多款加購品的版面，跟 .service-row（固定兩欄、用在「其他服務」兩張
+   卡）不同，這裡每個分類實際商品數量不一（2～5 款），用 auto-fill 讓
+   欄數自動依商品數量跟容器寬度決定，不用像 .service-row 那樣寫死欄數。
+   正方形構圖（跟材料包頁 Collection 格狀卡的菱形去背圖不同調性，這裡
+   刻意用滿版照片＋疊字，呼應這組 .tile 元件本來的設計）。 */
+.addon-row{
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+}
+.addon-tile{ aspect-ratio: 1/1; }
+@media (max-width:768px){
+  .addon-row{ grid-template-columns: repeat(2, 1fr); gap:10px; }
+}
+
 /* ---------- Banner 圖文卡（照抄 koyama.com.tw/store/ 的排版） ----------
    2026-10-24 使用者指定直接照抄 koyama.com.tw/store/「Boooo! It's
    Halloween!」／「Sciuscià edited by koyama」那組 banner 的圖片比例／
