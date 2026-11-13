@@ -460,16 +460,28 @@
      反映的「看起來只賣砂畫」——流動畫兩款因為質感/做法跟砂畫不同，
      英文小標改標「FLUID ART」而不是逐字翻譯，讓人一眼看出這兩張跟
      其他砂畫卡片是不同材質/做法。 */
+  /* 2026-11-13 使用者反映只有羊Diss舞蹈是 20×20cm，其他款式都是
+     15×15cm，要在版面上呈現這個等比例落差——改用 flex-wrap 取代
+     grid-template-columns 固定欄寬：grid 的每欄軌道寬度是整排統一的，
+     沒辦法讓其中一張卡片的格子本身比其他張大；flex 的每個項目可以各自
+     宣告自己的 flex-basis/width，一樣會自動換行置中，但卡片本身的
+     尺寸可以不同。基準 150px／130px（手機）對應 15cm，羊Diss舞蹈
+     20cm 的卡片用「150px × (20/15)」算出的 200px／173px，.koyama-
+     product-card__media 本身是 width:100% + aspect-ratio:1/1（見下面），
+     卡片變寬，裡面的正方形圖片區塊就跟著等比例變大，不用另外用
+     padding 內縮縫圖的方式（那是 shop.html 格狀卡「所有卡片格子大小
+     固定、只縮圖片本身」的做法，這裡卡片格子大小本來就可以不同，
+     更單純）。 */
   .koyama-product-grid{
-    display:grid;
-    grid-template-columns: repeat(auto-fill, minmax(0, 150px));
+    display:flex;
+    flex-wrap:wrap;
+    align-items:flex-start;
     justify-content:center;
     gap: 32px 40px;
     margin-top: var(--gap-md);
   }
   @media (max-width: 480px){
     .koyama-product-grid{
-      grid-template-columns: repeat(auto-fill, minmax(0, 130px));
       gap: 24px;
     }
   }
@@ -479,6 +491,16 @@
     align-items:center;
     gap: var(--gap-sm);
     text-align:center;
+    flex: 0 0 150px;
+    width:150px;
+  }
+  .koyama-product-card--lg{
+    flex-basis:200px;
+    width:200px;
+  }
+  @media (max-width: 480px){
+    .koyama-product-card{ flex-basis:130px; width:130px; }
+    .koyama-product-card--lg{ flex-basis:173px; width:173px; }
   }
   .koyama-product-card__media{
     position:relative;
@@ -1130,11 +1152,11 @@
         </div>
         <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">燈上納福</span><span class="koyama-product-card__name-en">Lit in Na Fu</span></p>
       </a>
-      <a class="koyama-product-card" href="sand-art-artist-sheep-red/">
+      <a class="koyama-product-card koyama-product-card--lg" href="sand-art-artist-sheep-red/">
         <div class="koyama-product-card__media"><img src="../assets/images/products/sand-art-artist/sand-art-artist-red-cutout.webp" alt="藝術家系列羊Diss舞蹈紅款砂畫材料包成品參考圖" loading="lazy"></div>
         <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">羊Diss舞蹈・紅</span><span class="koyama-product-card__name-en">Sheep La Danse</span></p>
       </a>
-      <a class="koyama-product-card" href="sand-art-artist-sheep-blue/">
+      <a class="koyama-product-card koyama-product-card--lg" href="sand-art-artist-sheep-blue/">
         <div class="koyama-product-card__media"><img src="../assets/images/products/sand-art-artist/sand-art-artist-blue-cutout.webp" alt="藝術家系列羊Diss舞蹈藍款砂畫材料包成品參考圖" loading="lazy"></div>
         <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">羊Diss舞蹈・藍</span><span class="koyama-product-card__name-en">Sheep La Danse</span></p>
       </a>
