@@ -395,6 +395,23 @@
     grid-column: 2;
     grid-row: 5;
   }
+
+  /* 2026-11-14 使用者反映沒有款式選擇器的加購品頁（無痕藝術黏土／
+     沙畫加購筆刀／流動畫加購空白畫布／流動畫加購迷你畫布組／金箔碎片
+     三色組——這幾頁跟其他加購品頁的差異是 .work__intro--addon 沒有再
+     疊加 --extra-color／--24color／--frame 這些款式選擇器專屬的
+     modifier class），標題／買列文字區桌機寬度下貼齊頂部，下方留了
+     一大片空白、沒有跟左邊的照片上下置中。原本第 6 列（填充用的 1fr）
+     只墊在文字區「下面」，所以多出來的高度全部變成單側留白。這裡只
+     針對這幾頁，把第 1 列（.work-heading__colorway-note 用的列，這幾
+     頁根本沒有這個元素、原本就是空的）也一起改成 1fr——兩個 1fr 各自
+     拿到一半多出來的高度，文字區因此被夾在正中間，等於整體垂直置中，
+     不用把文字包進另一層 flex 容器重寫結構。只透過比 base rule 更高的
+     選擇器特異度覆寫，不影響其他有款式選擇器的加購頁（它們的第 1 列
+     還是要留給 colorway-note 用，不能跟著變成 1fr）。 */
+  .work__intro--addon:not(.work__intro--extra-color):not(.work__intro--24color):not(.work__intro--frame) {
+    grid-template-rows: 1fr auto auto auto auto 1fr;
+  }
 }
 
 .work-heading {
