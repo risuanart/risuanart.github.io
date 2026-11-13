@@ -2342,6 +2342,14 @@ h1.chapter__title {
   margin-top: var(--space-4);
 }
 
+/* 2026-11-13 新增：影片下方的材質說明文案（例如羊Diss舞蹈示範影片下的
+   「比起基礎款的細砂…」）希望置中呈現、搭配手動 <br> 換行成三行短句，
+   跟一般靠左對齊的敘事段落（.chapter__prose 其他用途）分開，只加
+   modifier class，不改全站共用的 .chapter__prose 本身。 */
+.chapter__prose--centered {
+  text-align: center;
+}
+
 /* 純展示用的主題標籤（自選主題油畫課程頁），視覺借用 gallery.css
    篩選鈕的邊框樣式，但不是按鈕、不能點，所以另外命名一組 class，
    不共用 .gallery-filters__chip（那顆有 cursor:pointer，用在這裡會

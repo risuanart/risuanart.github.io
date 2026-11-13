@@ -749,6 +749,18 @@
 
 /* 羊Diss原畫介紹：桌機圖文並排，手機沿用上下閱讀順序。 */
 .ptpl-artwork__copy { min-width: 0; }
+
+/* 2026-11-13 使用者反映手機寬度下「羊諦斯之舞」那段跟下面「馬諦斯
+   《舞蹈》」區塊之間太近——桌機版兩欄並排靠 grid 的 gap 撐開間距，
+   手機版是單欄上下堆疊、沒有對應的縱向間距，這裡只在手機／平板寬度
+   （<1025px，桌機換成兩欄 grid 後改靠 gap，不要疊加兩份間距）額外補
+   一段 margin-top。 */
+@media (max-width: 1024px) {
+  .ptpl-artwork__copy {
+    margin-top: var(--space-10);
+  }
+}
+
 @media (min-width: 1025px) {
   .ptpl-artwork {
     display: grid;
@@ -769,6 +781,30 @@
 .ptpl-artwork__carousel img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; opacity: 0; transition: opacity var(--duration-slow) var(--ease-standard); }
 .ptpl-artwork__carousel img.is-active { opacity: 1; }
 .ptpl-artwork__visual > .ptpl-artwork__sequence { margin-top: var(--space-2); font-size: var(--font-size-xs); color: var(--color-text-secondary); }
+
+/* 2026-11-13 新增：步驟文字改成可點擊，點哪一步輪播就切到對應那張圖，
+   目前對應的那一步要用顏色變深／加粗標示出來是「選到了」，跟其他步驟
+   的淺灰色區分——互動邏輯見 js/moments-carousel.js 的 stepButtons。 */
+.ptpl-artwork__step {
+  appearance: none;
+  border: none;
+  background: none;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  transition: color var(--duration-fast) var(--ease-standard), font-weight var(--duration-fast) var(--ease-standard);
+}
+
+.ptpl-artwork__step.is-active {
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.ptpl-artwork__arrow {
+  margin: 0 var(--space-1);
+  color: var(--color-text-secondary);
+}
 .ptpl-artwork__carousel .moments-carousel__nav { position: absolute; top: 50%; transform: translateY(-50%); z-index: 2; width: var(--space-6); height: var(--space-6); padding: var(--space-1); border: 0; background: transparent; color: var(--color-text-primary); opacity: 0.5; cursor: pointer; }
 .ptpl-artwork__carousel .moments-carousel__nav--prev { left: 0; }
 .ptpl-artwork__carousel .moments-carousel__nav--next { right: 0; }

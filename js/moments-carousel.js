@@ -32,6 +32,16 @@
     const images = Array.from(root.querySelectorAll("img"));
     if (images.length < 2) return;
 
+    // 2026-11-13 新增：有些輪播（例如羊Diss舞蹈「作品介紹」區塊）旁邊會
+    // 放一行「原畫 → 草稿 → ...」的步驟文字，希望點文字能直接切到對應
+    // 那張圖、目前對應的那一步也要變深色標示出來是「選到了」——這組步驟
+    // 元素不是輪播容器的子元素（兩者是手足關係，各自是
+    // .ptpl-artwork__visual 底下的 div/p），所以用 root 的父層去找帶
+    // data-moments-steps 屬性的段落，不用額外加一個 id 手動對應。找不到
+    // 就當作沒有這個功能，不影響原本單純輪播的頁面。
+    const stepsRoot = root.parentElement ? root.parentElement.querySelector("[data-moments-steps]") : null;
+    const stepButtons = stepsRoot ? Array.from(stepsRoot.querySelectorAll("[data-step]")) : [];
+
     const INTERVAL_MS = parseInt(root.dataset.interval, 10) || 4000;
     let current = Math.max(0, images.findIndex((img) => img.classList.contains("is-active")));
     let timer = null;
@@ -45,6 +55,7 @@
     function goTo(index) {
       current = (index + images.length) % images.length;
       images.forEach((img, i) => img.classList.toggle("is-active", i === current));
+      stepButtons.forEach((btn, i) => btn.classList.toggle("is-active", i === current));
     }
 
     function next() {
@@ -122,6 +133,13 @@
     });
     root.appendChild(prevBtn);
     root.appendChild(nextBtn);
+
+    stepButtons.forEach((btn, i) => {
+      btn.addEventListener("click", () => {
+        goTo(i);
+        start(); // 手動點擊後重新計時，道理跟點箭頭／手機滑動一致
+      });
+    });
 
     start();
   });
