@@ -1215,6 +1215,16 @@
         </div>
         <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">燈上納福</span><span class="koyama-product-card__name-en">Lit in Na Fu</span></p>
       </a>
+    </div>
+
+    <!-- 2026-11-13 使用者反映不同尺寸（15cm／20cm）混在同一排，排版時
+         flex-wrap 換行位置是看容器寬度自動決定、不是看商品分類，兩張
+         20cm 的羊Diss舞蹈很容易被排到跟 15cm 卡片同一排，比例差異反而
+         不容易一眼看出來。改成三個獨立的 .koyama-product-grid 容器各自
+         換行（上面 7 款 15cm 砂畫一組，下面羊Diss舞蹈系列、流動畫系列
+         各自獨立一組），同一組內尺寸才會一致，不同尺寸/類別自然分開
+         成不同排，不用額外寫 JS 或特別指定換行位置。 -->
+    <div class="koyama-product-grid">
       <a class="koyama-product-card koyama-product-card--lg" href="sand-art-artist-sheep-red/">
         <div class="koyama-product-card__media"><img src="../assets/images/products/sand-art-artist/sand-art-artist-red-cutout.webp" alt="藝術家系列羊Diss舞蹈紅款砂畫材料包成品參考圖" loading="lazy"></div>
         <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">羊Diss舞蹈・紅</span><span class="koyama-product-card__name-en">Sheep La Danse</span></p>
@@ -1223,6 +1233,9 @@
         <div class="koyama-product-card__media"><img src="../assets/images/products/sand-art-artist/sand-art-artist-blue-cutout.webp" alt="藝術家系列羊Diss舞蹈藍款砂畫材料包成品參考圖" loading="lazy"></div>
         <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">羊Diss舞蹈・藍</span><span class="koyama-product-card__name-en">Sheep La Danse</span></p>
       </a>
+    </div>
+
+    <div class="koyama-product-grid">
       <a class="koyama-product-card" href="fluid-art-light-red/">
         <div class="koyama-product-card__media"><img src="../assets/images/products/fluid-art/fluid-art-light-cutout-red.webp" alt="春聯流動畫材料包經典紅成品參考圖" loading="lazy"></div>
         <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">經典紅</span><span class="koyama-product-card__name-en">Fluid Art</span></p>
