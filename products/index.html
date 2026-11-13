@@ -536,6 +536,18 @@
     width:100%;
     aspect-ratio: 1/1;
     overflow:hidden;
+    /* 2026-11-13 使用者參考 koyama.com.tw/newbornbox/，產品圖片下方有
+       一點淡淡的陰影，讓卡片有「擺在桌面上」的立體感，不是平貼死板的
+       去背圖。用 filter:drop-shadow() 而不是 box-shadow——這批去背圖
+       都是菱形裁切、背景透明，box-shadow 只會畫出矩形容器的陰影（跟
+       實際菱形輪廓對不起來），drop-shadow 是跟著圖片本身的透明度輪廓
+       走，陰影形狀會貼合菱形邊緣，效果才會跟參考站一樣。filter 要放在
+       容器（.koyama-product-card__media）本身，不是裡面的 <img>——這層
+       容器有 overflow:hidden（限制配色輪播 scale(1.44) 的圖片／hover
+       放大不要溢出到隔壁卡片），但 overflow:hidden 只會裁切「容器裡的
+       內容」，不會裁掉「套用在容器本身的 filter 效果」，所以陰影還是
+       會正常露出到容器範圍外，不用把 overflow 拿掉。 */
+    filter: drop-shadow(0 10px 14px rgba(20,20,10,0.16));
   }
   .koyama-product-card__media img{
     display:block;
