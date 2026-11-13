@@ -481,6 +481,7 @@
     text-align:center;
   }
   .koyama-product-card__media{
+    position:relative;
     width:100%;
     aspect-ratio: 1/1;
     overflow:hidden;
@@ -494,6 +495,22 @@
   }
   .koyama-product-card:hover .koyama-product-card__media img{
     transform: scale(1.04);
+  }
+  /* 2026-11-13 使用者要求「全系列材料包」的砂畫款式比照首頁／商品總覽
+     格狀卡既有的「配色動態展示」輪播（js/hero-colorway-carousel.js，
+     出貨配色→示範配色二→示範配色三，三張都是去背透明圖），不要維持
+     單張靜態去背圖——跟 .shop-card__media[data-hero-carousel] 同一套
+     疊圖＋淡入淡出邏輯，只是換成這頁卡片的命名空間。只有 7 款有準備
+     三色示範圖的砂畫套用（見下面 HTML data-hero-carousel），流動畫／
+     羊Diss舞蹈系列沒有這組素材，維持原本單張圖片不受影響。 */
+  .koyama-product-card__media[data-hero-carousel] img[data-carousel-frame]{
+    position:absolute;
+    inset:0;
+    opacity:0;
+    transition: opacity 1.1s ease, transform var(--duration-normal, .3s) ease;
+  }
+  .koyama-product-card__media[data-hero-carousel] img[data-carousel-frame].is-active{
+    opacity:1;
   }
   /* 名稱改成「字＋英文翻譯」兩層（見上面 <style> 開頭補充說明），中文字
      大、英文小寫字放大寫＋拉開字距放在下面，像是替這個字做簡短介紹，
@@ -987,17 +1004,6 @@
     </div>
   </section>
 
-  <section class="split-row fade-in">
-    <div class="col img-box">
-      <video preload="none" src="../assets/videos/products/sand-art-fu/full-demo.mp4" poster="../assets/images/products/sand-art-fu/sand-art-fu-demo-poster.jpg" data-autoplay muted loop playsinline aria-label="福星 Starry Fu 完整製作過程示範影片，自動循環播放"></video>
-    </div>
-    <div class="col text-box">
-      <span class="ed-label">Process</span>
-      <h2 class="chapter__title">照著步驟，一步步完成</h2>
-      <p class="chapter__prose">撕開、倒沙、鋪色，每一步都不難，難的只是願不願意坐下來開始。</p>
-    </div>
-  </section>
-
   <!-- 2026-11-11 使用者參考 koyama.com.tw/newbornbox/ 的 PRODUCTS 區塊
        （圖片＋剪短名稱），加在「照著步驟」段落下面。原本比照參考站做了
        獨立的 BUY 按鈕，使用者後來反饋拿掉，改成點圖片／名稱（整張卡片）
@@ -1023,43 +1029,79 @@
        砂畫，流動畫沒有被平均推送——加上流動畫兩款（經典紅／迎春粉）
        跟砂畫另外 2 款當時還沒收進來的款式（燈上迎春／燈上納福／藝術家
        系列羊Diss舞蹈紅＋藍），讓這個總覽區塊涵蓋全部春節系列材料包，
-       不是只有部分款式。流動畫／羊Diss舞蹈那幾張沒有另外做跟其他卡片
-       同款的去背 cutout 圖（見上面 2026-11-11 註解，那批 cutout 是
-       使用者自己做的，只做了 5 款砂畫），改直接用商品頁本來就有的
+       不是只有部分款式。流動畫／羊Diss舞蹈那幾張沒有另外做去背 cutout
+       圖、也沒有三色配色示範圖素材，改直接用商品頁本來就有的
        「-main.jpg」成品照——實際打開確認過，那幾張本來就是淺色/白色
-       背景＋菱形置中構圖＋淡陰影，跟 cutout 圖放在同一排視覺上差異
-       很小，不需要額外做去背處理。 -->
+       背景＋菱形置中構圖＋淡陰影，跟去背圖放在同一排視覺上差異很小，
+       不需要額外做去背處理。
+
+       使用者接著要求：7 款真的有準備「配色動態展示」素材的砂畫（原本
+       5 款＋新加的燈上迎春／燈上納福），不要維持單張靜態去背圖，要
+       比照首頁／商品總覽格狀卡（products/shop.html）、商品頁首圖同一套
+       輪播（js/hero-colorway-carousel.js＋ PRODUCT_COLORWAY_FRAMES 的
+       combo-1／2／3 去背圖），改成「出貨配色→示範配色二→示範配色三」
+       自動循環播放——這個區塊位置在頁面偏下方，比照 js/related-products.js
+       的做法加上 data-carousel-loop（播完一輪會重頭再播，不會訪客捲到
+       這裡時剛好已經播完定格），不是只播一輪就停。 -->
   <section class="chapter fade-in" style="text-align:center;">
     <span class="ed-label">Collection</span>
     <h2 class="chapter__title">全系列材料包</h2>
     <p class="chapter__intro">砂畫、流動畫，傳統春聯斗方換一種新的形式留下來，挑一款喜歡的作法開始。</p>
     <div class="koyama-product-grid">
       <a class="koyama-product-card" href="sand-art-fu/">
-        <div class="koyama-product-card__media"><img src="../assets/images/products/sand-art-fu/sand-art-fu-cutout.webp" alt="福星砂畫材料包成品參考圖" loading="lazy"></div>
+        <div class="koyama-product-card__media" data-hero-carousel data-carousel-loop>
+          <img class="is-active" src="../assets/images/products/sand-art-fu/sand-art-fu-combo-1.png" alt="福星砂畫材料包成品參考圖（出貨配色）" loading="lazy" data-carousel-frame>
+          <img src="../assets/images/products/sand-art-fu/sand-art-fu-combo-2.png" alt="" aria-hidden="true" loading="lazy" data-carousel-frame>
+          <img src="../assets/images/products/sand-art-fu/sand-art-fu-combo-3.png" alt="" aria-hidden="true" loading="lazy" data-carousel-frame>
+        </div>
         <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">福</span><span class="koyama-product-card__name-en">Fortune</span></p>
       </a>
       <a class="koyama-product-card" href="sand-art-chun/">
-        <div class="koyama-product-card__media"><img src="../assets/images/products/sand-art-chun/sand-art-chun-cutout.webp" alt="春結砂畫材料包成品參考圖" loading="lazy"></div>
+        <div class="koyama-product-card__media" data-hero-carousel data-carousel-loop>
+          <img class="is-active" src="../assets/images/products/sand-art-chun/sand-art-chun-combo-1.png" alt="春結砂畫材料包成品參考圖（出貨配色）" loading="lazy" data-carousel-frame>
+          <img src="../assets/images/products/sand-art-chun/sand-art-chun-combo-2.png" alt="" aria-hidden="true" loading="lazy" data-carousel-frame>
+          <img src="../assets/images/products/sand-art-chun/sand-art-chun-combo-3.png" alt="" aria-hidden="true" loading="lazy" data-carousel-frame>
+        </div>
         <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">春</span><span class="koyama-product-card__name-en">Spring</span></p>
       </a>
       <a class="koyama-product-card" href="sand-art-cai/">
-        <div class="koyama-product-card__media"><img src="../assets/images/products/sand-art-cai/sand-art-cai-cutout.webp" alt="花財砂畫材料包成品參考圖" loading="lazy"></div>
+        <div class="koyama-product-card__media" data-hero-carousel data-carousel-loop>
+          <img class="is-active" src="../assets/images/products/sand-art-cai/sand-art-cai-combo-1.png" alt="花財砂畫材料包成品參考圖（出貨配色）" loading="lazy" data-carousel-frame>
+          <img src="../assets/images/products/sand-art-cai/sand-art-cai-combo-2.png" alt="" aria-hidden="true" loading="lazy" data-carousel-frame>
+          <img src="../assets/images/products/sand-art-cai/sand-art-cai-combo-3.png" alt="" aria-hidden="true" loading="lazy" data-carousel-frame>
+        </div>
         <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">財</span><span class="koyama-product-card__name-en">Wealth</span></p>
       </a>
       <a class="koyama-product-card" href="sand-art-na-fu/">
-        <div class="koyama-product-card__media"><img src="../assets/images/products/sand-art-na-fu/sand-art-na-fu-cutout.webp" alt="格裡納福砂畫材料包成品參考圖" loading="lazy"></div>
+        <div class="koyama-product-card__media" data-hero-carousel data-carousel-loop>
+          <img class="is-active" src="../assets/images/products/sand-art-na-fu/sand-art-na-fu-combo-1.png" alt="格裡納福砂畫材料包成品參考圖（出貨配色）" loading="lazy" data-carousel-frame>
+          <img src="../assets/images/products/sand-art-na-fu/sand-art-na-fu-combo-2.png" alt="" aria-hidden="true" loading="lazy" data-carousel-frame>
+          <img src="../assets/images/products/sand-art-na-fu/sand-art-na-fu-combo-3.png" alt="" aria-hidden="true" loading="lazy" data-carousel-frame>
+        </div>
         <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">納福</span><span class="koyama-product-card__name-en">Blessing</span></p>
       </a>
       <a class="koyama-product-card" href="sand-art-ying-chun/">
-        <div class="koyama-product-card__media"><img src="../assets/images/products/sand-art-ying-chun/sand-art-ying-chun-cutout.webp" alt="格裡迎春砂畫材料包成品參考圖" loading="lazy"></div>
+        <div class="koyama-product-card__media" data-hero-carousel data-carousel-loop>
+          <img class="is-active" src="../assets/images/products/sand-art-ying-chun/sand-art-ying-chun-combo-1.png" alt="格裡迎春砂畫材料包成品參考圖（出貨配色）" loading="lazy" data-carousel-frame>
+          <img src="../assets/images/products/sand-art-ying-chun/sand-art-ying-chun-combo-2.png" alt="" aria-hidden="true" loading="lazy" data-carousel-frame>
+          <img src="../assets/images/products/sand-art-ying-chun/sand-art-ying-chun-combo-3.png" alt="" aria-hidden="true" loading="lazy" data-carousel-frame>
+        </div>
         <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">迎春</span><span class="koyama-product-card__name-en">Welcome Spring</span></p>
       </a>
       <a class="koyama-product-card" href="sand-art-ying-chun-lantern/">
-        <div class="koyama-product-card__media"><img src="../assets/images/products/sand-art-ying-chun-lantern/sand-art-ying-chun-lantern-main.jpg" alt="燈上迎春砂畫材料包成品參考圖" loading="lazy"></div>
+        <div class="koyama-product-card__media" data-hero-carousel data-carousel-loop>
+          <img class="is-active" src="../assets/images/products/sand-art-ying-chun-lantern/sand-art-ying-chun-lantern-combo-1.png" alt="燈上迎春砂畫材料包成品參考圖（出貨配色）" loading="lazy" data-carousel-frame>
+          <img src="../assets/images/products/sand-art-ying-chun-lantern/sand-art-ying-chun-lantern-combo-2.png" alt="" aria-hidden="true" loading="lazy" data-carousel-frame>
+          <img src="../assets/images/products/sand-art-ying-chun-lantern/sand-art-ying-chun-lantern-combo-3.png" alt="" aria-hidden="true" loading="lazy" data-carousel-frame>
+        </div>
         <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">燈上迎春</span><span class="koyama-product-card__name-en">Lantern</span></p>
       </a>
       <a class="koyama-product-card" href="sand-art-na-fu-lantern/">
-        <div class="koyama-product-card__media"><img src="../assets/images/products/sand-art-na-fu-lantern/sand-art-na-fu-lantern-main.jpg" alt="燈上納福砂畫材料包成品參考圖" loading="lazy"></div>
+        <div class="koyama-product-card__media" data-hero-carousel data-carousel-loop>
+          <img class="is-active" src="../assets/images/products/sand-art-na-fu-lantern/sand-art-na-fu-lantern-combo-1.png" alt="燈上納福砂畫材料包成品參考圖（出貨配色）" loading="lazy" data-carousel-frame>
+          <img src="../assets/images/products/sand-art-na-fu-lantern/sand-art-na-fu-lantern-combo-2.png" alt="" aria-hidden="true" loading="lazy" data-carousel-frame>
+          <img src="../assets/images/products/sand-art-na-fu-lantern/sand-art-na-fu-lantern-combo-3.png" alt="" aria-hidden="true" loading="lazy" data-carousel-frame>
+        </div>
         <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">燈上納福</span><span class="koyama-product-card__name-en">Lantern</span></p>
       </a>
       <a class="koyama-product-card" href="sand-art-artist-sheep-red/">
@@ -1185,6 +1227,7 @@
        的 .product-page 固定容器），site-header-scroll.js 已經有
        `.product-page` 找不到就退回 window 的 fallback，不用額外調整。 -->
   <script src="../js/cart.js"></script>
+  <script src="../js/hero-colorway-carousel.js"></script>
   <script src="../js/video-inview.js"></script>
   <script src="../js/site-header-scroll.js?v=20261107-backtop"></script>
   <script src="../js/account-auth.js"></script>
