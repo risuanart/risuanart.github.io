@@ -3192,10 +3192,26 @@ button.text-link {
    .chapter 的左右 padding，讓這個區塊跟同一欄的其他買列元素共用同一條
    左右邊界，不要疊加兩層邊距。 */
 .addon-section--orlo {
-  text-align: left;
   margin-top: var(--space-2);
   padding-left: 0;
   padding-right: 0;
+}
+
+/* 2026-11-14 使用者反映螢幕寬度接近平板（<768px 還沒切成兩欄買列，
+   單欄置中版面）時，這顆切換按鈕看起來「置左」——根因其實不是
+   text-align（下面這顆按鈕繼承自 .addon-toggle 的 display:flex 是
+   block-level flex 容器，本來就不會理會祖先的 text-align，那隻影響
+   inline-level 內容），是按鈕自己 width:400px／max-width:100% 且沒有
+   margin:auto，單欄版面只要寬度超過 400px（手機橫放、小平板直向都會
+   遇到）就會貼在容器左邊、右側留一大截空白。這裡只在＜768px（兩欄買列
+   還沒生效、按鈕沒有必要跟買列其他元素共用左邊界）補上水平置中的
+   margin；≥768px 維持原本貼齊買列左邊界的樣子不變。另外把 text-align
+   的覆寫範圍也收斂到≥768px，避免跟這裡的語意混淆（雖然對這顆按鈕本身
+   沒有實際效果，但對區塊裡其他未來可能新增的 inline 內容才會有意義）。 */
+@media (min-width: 768px) {
+  .addon-section--orlo {
+    text-align: left;
+  }
 }
 
 .addon-section--orlo .addon-toggle {
@@ -3210,6 +3226,13 @@ button.text-link {
   color: rgb(153, 153, 153);
   line-height: 25px;
   outline: none;
+}
+
+@media (max-width: 767px) {
+  .addon-section--orlo .addon-toggle {
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 .addon-section--orlo .addon-toggle:focus-visible {
