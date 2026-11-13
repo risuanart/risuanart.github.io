@@ -449,17 +449,29 @@
      370px），改成固定上限 150px＋justify-content:center，卡片變小、
      置中排列；gap 從 --gap-md（30px）加大到 48px，兩張卡片之間的
      留白更明顯，不會擠在一起。 */
-  /* 2026-11-11 使用者反饋參考站（koyama）不管桌面或手機都固定兩欄
-     並排，不是寬度夠就自動塞更多欄——auto-fit 在桌面版會變成一排塞
-     4張，跟參考站不一致。改成固定 repeat(2, ...)，永遠兩欄，最後一張
-     （5張是奇數）單獨留在左邊那欄，右邊空著，跟參考站的「ニ０ニ四／
-     龍年」那排最後單張同樣的收尾方式。 */
+  /* 2026-11-13 使用者反映這個區塊在桌面版（容器寬度上限 840px，見
+     .chapter 規則）固定兩欄並排，卡片只佔整個容器左側一小塊、右邊空
+     出一大片留白，看起來很侷促。改成 auto-fill：瀏覽器自己算容器
+     實際寬度能塞下幾欄固定 150px 的卡片（desktop 約 4-5 欄），
+     justify-content:center 讓這排卡片整體置中、多出來的空間變成兩側
+     留白，不是把卡片拉伸變形；手機版欄數變少（通常 2 欄）會自動換行，
+     不用另外寫手機/桌面兩套斷點。同時從「只有 5 款砂畫」擴充成涵蓋
+     砂畫＋流動畫全部春節款式（見下面新增的 6 張卡片），避免使用者
+     反映的「看起來只賣砂畫」——流動畫兩款因為質感/做法跟砂畫不同，
+     英文小標改標「FLUID ART」而不是逐字翻譯，讓人一眼看出這兩張跟
+     其他砂畫卡片是不同材質/做法。 */
   .koyama-product-grid{
     display:grid;
-    grid-template-columns: repeat(2, minmax(0, 150px));
+    grid-template-columns: repeat(auto-fill, minmax(0, 150px));
     justify-content:center;
-    gap: 48px;
+    gap: 32px 40px;
     margin-top: var(--gap-md);
+  }
+  @media (max-width: 480px){
+    .koyama-product-grid{
+      grid-template-columns: repeat(auto-fill, minmax(0, 130px));
+      gap: 24px;
+    }
   }
   .koyama-product-card{
     display:flex;
@@ -1007,10 +1019,20 @@
        1657×1657 的無壓縮 PNG（6.5MB／張，5 張約 32MB，對網頁來說太大），
        轉存成 900px 寬的 WebP（約 70-110KB／張），品質設 82，透明度不受
        影響，副檔名從 .png 改 .webp。 -->
+  <!-- 2026-11-13 使用者反映這個區塊原本只放 5 款砂畫，看起來像是只賣
+       砂畫，流動畫沒有被平均推送——加上流動畫兩款（經典紅／迎春粉）
+       跟砂畫另外 2 款當時還沒收進來的款式（燈上迎春／燈上納福／藝術家
+       系列羊Diss舞蹈紅＋藍），讓這個總覽區塊涵蓋全部春節系列材料包，
+       不是只有部分款式。流動畫／羊Diss舞蹈那幾張沒有另外做跟其他卡片
+       同款的去背 cutout 圖（見上面 2026-11-11 註解，那批 cutout 是
+       使用者自己做的，只做了 5 款砂畫），改直接用商品頁本來就有的
+       「-main.jpg」成品照——實際打開確認過，那幾張本來就是淺色/白色
+       背景＋菱形置中構圖＋淡陰影，跟 cutout 圖放在同一排視覺上差異
+       很小，不需要額外做去背處理。 -->
   <section class="chapter fade-in" style="text-align:center;">
     <span class="ed-label">Collection</span>
-    <h2 class="chapter__title">經典款式</h2>
-    <p class="chapter__intro">傳統春聯斗方，換一種新的形式留下來。</p>
+    <h2 class="chapter__title">全系列材料包</h2>
+    <p class="chapter__intro">砂畫、流動畫，傳統春聯斗方換一種新的形式留下來，挑一款喜歡的作法開始。</p>
     <div class="koyama-product-grid">
       <a class="koyama-product-card" href="sand-art-fu/">
         <div class="koyama-product-card__media"><img src="../assets/images/products/sand-art-fu/sand-art-fu-cutout.webp" alt="福星砂畫材料包成品參考圖" loading="lazy"></div>
@@ -1031,6 +1053,30 @@
       <a class="koyama-product-card" href="sand-art-ying-chun/">
         <div class="koyama-product-card__media"><img src="../assets/images/products/sand-art-ying-chun/sand-art-ying-chun-cutout.webp" alt="格裡迎春砂畫材料包成品參考圖" loading="lazy"></div>
         <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">迎春</span><span class="koyama-product-card__name-en">Welcome Spring</span></p>
+      </a>
+      <a class="koyama-product-card" href="sand-art-ying-chun-lantern/">
+        <div class="koyama-product-card__media"><img src="../assets/images/products/sand-art-ying-chun-lantern/sand-art-ying-chun-lantern-main.jpg" alt="燈上迎春砂畫材料包成品參考圖" loading="lazy"></div>
+        <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">燈上迎春</span><span class="koyama-product-card__name-en">Lantern</span></p>
+      </a>
+      <a class="koyama-product-card" href="sand-art-na-fu-lantern/">
+        <div class="koyama-product-card__media"><img src="../assets/images/products/sand-art-na-fu-lantern/sand-art-na-fu-lantern-main.jpg" alt="燈上納福砂畫材料包成品參考圖" loading="lazy"></div>
+        <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">燈上納福</span><span class="koyama-product-card__name-en">Lantern</span></p>
+      </a>
+      <a class="koyama-product-card" href="sand-art-artist-sheep-red/">
+        <div class="koyama-product-card__media"><img src="../assets/images/products/sand-art-artist/sand-art-artist-red-main.jpg" alt="藝術家系列羊Diss舞蹈紅款砂畫材料包成品參考圖" loading="lazy"></div>
+        <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">羊舞紅</span><span class="koyama-product-card__name-en">Artist Series</span></p>
+      </a>
+      <a class="koyama-product-card" href="sand-art-artist-sheep-blue/">
+        <div class="koyama-product-card__media"><img src="../assets/images/products/sand-art-artist/sand-art-artist-blue-main.jpg" alt="藝術家系列羊Diss舞蹈藍款砂畫材料包成品參考圖" loading="lazy"></div>
+        <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">羊舞藍</span><span class="koyama-product-card__name-en">Artist Series</span></p>
+      </a>
+      <a class="koyama-product-card" href="fluid-art-light-red/">
+        <div class="koyama-product-card__media"><img src="../assets/images/products/fluid-art/fluid-art-light-main-red.jpg" alt="春聯流動畫材料包經典紅成品參考圖" loading="lazy"></div>
+        <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">經典紅</span><span class="koyama-product-card__name-en">Fluid Art</span></p>
+      </a>
+      <a class="koyama-product-card" href="fluid-art-light-pink/">
+        <div class="koyama-product-card__media"><img src="../assets/images/products/fluid-art/fluid-art-light-main-pink.jpg" alt="春聯流動畫材料包迎春粉成品參考圖" loading="lazy"></div>
+        <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">迎春粉</span><span class="koyama-product-card__name-en">Fluid Art</span></p>
       </a>
     </div>
   </section>
