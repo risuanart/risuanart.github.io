@@ -31,10 +31,14 @@
   --swatch-pink-platinum: #d4c4a0;
   --swatch-silver: #b8b8b0;
 
-  /* 2026-11-13 新增兩款流動畫配色。色票取樣自使用者提供的「棚拍」
-     成品照（唯一現有實拍素材），不是憑空挑色；確切顏料色名還沒確認
-     （js/product-gallery.js 該兩個 scheme 的 paintsPlaceholder:true），
-     這幾個色號只用來畫色系故事區塊的色點，不代表正式顏料色號。 */
+  /* 2026-11-13 新增兩款流動畫配色。珠光四色色票取樣自使用者提供的
+     「棚拍」成品照，正式顏料色名使用者還在想取什麼名字（珠光四色
+     本身已確認：珍珠白／珠光藍／珠光粉／珠光黃，paintsPlaceholder
+     還是 true，等命名定案再翻成 false）。冰焰紅使用者已經確認四色
+     顏料跟對應色名：絳紅（跟經典紅同一色，直接沿用 --swatch-jiang-red
+     那組，不用重新取樣定義一個幾乎一樣的顏色）、鉑金（跟經典紅同一
+     色，沿用 --swatch-platinum）、深銀（比迎春粉的銀更深、更金屬，
+     取樣自材料平鋪照自己定義新色票）、冰藍（取樣自材料平鋪照）。 */
   --swatch-pearl-shimmer: #c9b998;
   --swatch-pearl-mist: #aeb8c4;
   --swatch-pearl-blush: #cda1b2;
@@ -42,9 +46,8 @@
   --swatch-pearl-cream: #ecd9a0;
 
   --swatch-frost-red: #8a1f1f;
-  --swatch-frost-ember: #500809;
-  --swatch-frost-ice-blue: #b2d2e9;
-  --swatch-frost-mauve: #8f6165;
+  --swatch-frost-ice-blue: #9cb4d6;
+  --swatch-frost-silver: #55607a;
 
   /* 藝術家系列・羊Diss舞蹈，購買面板款式色點：各取該色款最具代表性的
      主色（紅款＝酒紅、藍款＝湖藍），跟 product-template.css「顏色比較」

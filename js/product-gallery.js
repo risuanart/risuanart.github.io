@@ -144,20 +144,24 @@
         { file: "fluid-art-light-kit-frost.jpg", alt: "冰焰紅材料包內容物平鋪，畫布、顏料、字貼與工具", caption: "內容物全展開" },
       ],
       kitPhotoLight: { file: "fluid-art-light-kit-frost.jpg", alt: "冰焰紅材料包內容物平鋪，畫布、顏料、字貼與工具" },
-      paints: ["絳紅", "爐火紅", "霜灰藍"],
-      paintsPlaceholder: true,
-      swatches: ["var(--swatch-frost-ember)", "var(--swatch-frost-red)", "var(--swatch-frost-ice-blue)", "var(--swatch-frost-mauve)"],
+      // 2026-11-14 使用者確認四色顏料跟經典紅共用兩色（絳紅／鉑金），
+      // 直接沿用同一組顏料色名，不是另外取名重複描述同一個顏色；銀色
+      // 比迎春粉的銀更深、更金屬，另外取名「深銀」區分，不是同一款。
+      paints: ["絳紅", "鉑金", "深銀", "冰藍"],
+      paintsPlaceholder: false,
+      swatches: ["var(--swatch-jiang-red)", "var(--swatch-platinum)", "var(--swatch-frost-silver)", "var(--swatch-frost-ice-blue)"],
       stickers: {
-        light: "幻彩鐳射字貼，15×15cm 主畫布字貼（鐳射「福」，固定款式）",
+        light: "幻彩鐳射字貼，隨光線角度轉出粉、藍、銀交錯的流光色彩，15×15cm 主畫布字貼（鐳射「福」，固定款式）",
       },
       variationCaption: "同色系、不同比例，冷暖對比自由掌控",
-      variationLabels: ["多絳紅", "均衡比例", "多霜灰藍"],
+      variationLabels: ["多絳紅", "均衡比例", "多冰藍"],
       story: `濃重的絳紅打底，像除夕夜裡爐火燒得最旺的那個瞬間；
-一道霜灰藍悄悄滑過畫面，像窗外忽然落下的初雪，
+一道深銀與冰藍悄悄滑過畫面，像窗外忽然落下的初雪，
 提醒著再暖的火光，窗外依然是冬天。
 
-「福」字選用幻彩鐳射材質，隨著觀看角度折射出粉、藍、銀交錯的光，
-在深紅色底上格外醒目，像雪地裡第一道被照亮的反光。
+「福」字選用幻彩鐳射材質，不是固定的單一顏色——隨著觀看角度與光線
+不同，會在粉、藍、銀之間流轉變化，在深紅色底上格外醒目，
+像雪地裡第一道被照亮的反光，每個角度看都不太一樣。
 
 一半是爐火的熱烈，一半是初雪的清冷，這份衝突感，正是冰焰紅最耐人尋味的地方。`,
       storyPlaceholder: false,
