@@ -106,9 +106,9 @@
     // 裁切配置比照經典紅／迎春粉既有的 kitPhotoLight 寫法），已經換成
     // 真的 file／alt，不再是 placeholder。倒顏料過程、字貼特寫這類其他
     // 實拍素材還沒有，暫時沒有格子可以補（跟經典紅／迎春粉當初逐步
-    // 補拍齊的順序一樣，不急著一次補完）。顏料正式色名／比例仍未確認
-    // （paintsPlaceholder:true），swatches 色點是直接從使用者提供的
-    // 成品照取樣，不是憑空挑色。
+    // 補拍齊的順序一樣，不急著一次補完）。兩款的顏料正式色名使用者都
+    // 已經確認（paintsPlaceholder 改為 false），swatches 色點是直接從
+    // 使用者提供的成品照取樣，不是憑空挑色。
     "pearl-shimmer": {
       name: "珠光",
       dot: "var(--swatch-pearl-shimmer)",
@@ -118,14 +118,18 @@
         { file: "fluid-art-light-kit-pearl.jpg", alt: "珠光材料包內容物平鋪，畫布、顏料、字貼與工具", caption: "內容物全展開" },
       ],
       kitPhotoLight: { file: "fluid-art-light-kit-pearl.jpg", alt: "珠光材料包內容物平鋪，畫布、顏料、字貼與工具" },
-      paints: ["珠光藍", "珠光粉", "珠光金", "珠光米"],
-      paintsPlaceholder: true,
+      // 2026-11-14 使用者確認四色顏料正式命名：珠光藍／珠光粉／珠光黃／
+      // 珠光白（維持「珠光＋色」的簡單命名，跟商品名「珠光」直接對應，
+      // 不用再另外想一套獨立的詩意色名），順序比照材料平鋪照實際瓶身
+      // 由左到右（藍／粉／黃／白）。
+      paints: ["珠光藍", "珠光粉", "珠光黃", "珠光白"],
+      paintsPlaceholder: false,
       swatches: ["var(--swatch-pearl-mist)", "var(--swatch-pearl-blush)", "var(--swatch-pearl-gold)", "var(--swatch-pearl-cream)"],
       stickers: {
         light: "霧面黑色字貼，15×15cm 主畫布字貼（黑色「福」，固定款式）",
       },
       variationCaption: "同色系、不同比例，光澤濃淡自由掌控",
-      variationLabels: ["多珠光藍", "均衡比例", "多珠光金"],
+      variationLabels: ["多珠光藍", "均衡比例", "多珠光黃"],
       story: `珠光質地的顏料隨著光線角度流轉，在粉、黃、藍之間輕輕交疊，
 像新年清晨第一道天光，不是單一的顏色，而是一層會呼吸的光澤。
 
