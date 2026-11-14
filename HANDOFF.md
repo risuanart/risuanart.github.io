@@ -1026,3 +1026,8 @@ gap/margin/padding 其實都沒生效（等於 0 或初始值），包括全站 
 - 使用者確認：2026-11-11 前後因為 GitHub Pages 素材容量快爆了（見上面 11-11 條目「原容量與 Cloudflare 部署評估仍未處理」），已經正式切換成 Cloudflare Pages 當正式環境，不是要換回 GitHub Pages——這是刻意的决定，不是意外，之後也不用建議改回去。
 - 修法：把 `risuanart-github-io` 這個 Cloudflare Pages 專案的「正式分支」從 `main` 改成 `maintenance`（使用者自己在 Cloudflare 後台操作），但改分支設定本身不會回頭觸發重新建置；額外 push 一個小改動到 `maintenance` 分支（本次改的是 index.html 裡的註解）觸發 Cloudflare Pages 自動建置一次，之後用 `curl https://risuanart.com/` 確認內容真的換成維護頁，確認成功。
 - 已經在 `AGENTS.md`（專案簡介開頭＋驗收清單第4點）、`README.md`、`TROUBLESHOOTING.md` 三份文件補上這個更正，往後「驗證部署」「開關維護模式」都要認 Cloudflare Pages 後台，不是 GitHub repo 的 Pages 設定。GitHub Pages 本身的設定（含 maintenance 分支）目前形同虛設，只還影響沒人在用的 www 子網域，暫時不用特別清掉，但也不要再誤以為它在控制正式網址。
+
+## 2026-11-14：羊Diss紅藍商品摘要清爽分層
+- 接續使用者確認的方向，中文商品名含紅／藍款為主標，英文另起小字；進階款／藝術家系列同列，耐性度與約3小時完成獨立一列。介紹與優惠保留，移除優惠左槓與日期底線，採既有間距token。
+- 僅紅藍HTML與product-template.css新增限定樣式，保留Claude後續完成的購買排版、目前890／740早鳥價格與12/15截止文案；未修改其他商品。檔名帶「2」的大批未追蹤副本及work截圖原樣保留，不提交。
+- 紅藍與迎春參照頁各跑375／390／768／1024／1440／1920，橫向溢位均0、無pageerror；英文實測14px，中文手機32px、桌機沿用既有主標規則28px。桌機截圖檢視及git diff --check通過。本次提交未push。
