@@ -778,6 +778,16 @@
   flex: none;
 }
 
+/* 數字欄與加減鍵採相同視覺寬度（含自身左右分隔線）。 */
+.buy-action > .qty-stepper span,
+.addon-modal__buy-row > .qty-stepper span,
+.addon-modal__qty-row > .qty-stepper span {
+  box-sizing: border-box;
+  width: calc(var(--space-10) + var(--space-1) - 2px);
+  min-width: calc(var(--space-10) + var(--space-1) - 2px);
+  flex: none;
+}
+
 .qty-stepper button:active {
   background: color-mix(in srgb, var(--color-text-secondary) 15%, transparent);
 }
