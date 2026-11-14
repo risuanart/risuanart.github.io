@@ -276,6 +276,14 @@
     // 帶 ?category=fluid-art／sand-art，讓商品總覽頁直接落在對應分類，
     // 不是連過來才發現沒有真的篩選、看到一樣的全部商品。
     const categoryParam = new URLSearchParams(window.location.search).get("category");
+    const categoryTitle = CATEGORY_LABELS[categoryParam];
+    const title = document.querySelector('[data-shop-title]');
+    if (title && categoryTitle) {
+      title.textContent = categoryTitle;
+      const english = document.querySelector('[data-shop-title-en]');
+      if (english) english.textContent = categoryParam === 'fluid-art' ? 'FLUID ART KITS' : 'SAND ART KITS';
+      document.title = `${categoryTitle}｜日宣繪畫室`;
+    }
     if (categoryParam) {
       visibleKeys = visibleKeys.filter((key) => cart.PRODUCTS[key].category === categoryParam);
     }
