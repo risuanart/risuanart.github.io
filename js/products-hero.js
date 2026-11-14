@@ -40,6 +40,9 @@
     }
     /* 在首頁同版輪播上增加直向空間，容納直式製作畫面。 */
     .kit-hero-frosted-nav .preview-hero { aspect-ratio: 9 / 16; }
+    @media (max-width: 768px) {
+      .kit-hero-frosted-nav .preview-hero { aspect-ratio: 2 / 3; }
+    }
     @media (min-width: 1025px) {
       .kit-hero-frosted-nav .preview-hero { aspect-ratio: 4 / 3; }
       .kit-hero-frosted-nav .preview-hero__companion {
