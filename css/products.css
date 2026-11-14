@@ -770,6 +770,14 @@
   cursor: pointer;
 }
 
+/* 外框44px含上下邊線，按鍵內部42px，寬高一致。 */
+.buy-action > .qty-stepper button,
+.addon-modal__buy-row > .qty-stepper button,
+.addon-modal__qty-row > .qty-stepper button {
+  width: calc(var(--space-10) + var(--space-1) - 2px);
+  flex: none;
+}
+
 .qty-stepper button:active {
   background: color-mix(in srgb, var(--color-text-secondary) 15%, transparent);
 }
