@@ -3257,12 +3257,17 @@ button.text-link {
 }
 
 .addon-section--orlo .addon-toggle::before {
+  /* 2026-11-14 使用者反映符號顏色要跟旁邊的文字一致，不要用黑色
+     搶過文字（這顆按鈕的文字本來就是灰色 rgb(153,153,153)）。 */
   font-size: 15px;
-  color: rgb(0, 0, 0);
+  color: rgb(153, 153, 153);
 }
 
 .addon-section--orlo .addon-list {
-  margin-top: 10px;
+  /* 2026-11-14 使用者反映標題跟下面加購清單之間有一條白色縫隙——
+     兩者都是灰底色塊，中間的 margin-top 讓頁面本身的白底透出來，
+     看起來像斷開的兩塊。拿掉間距，兩塊灰底直接相接。 */
+  margin-top: 0;
 }
 
 /* 2026-10-25 第四輪：第三輪用 grid + aspect-ratio + height:100% 讓
