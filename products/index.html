@@ -398,6 +398,23 @@
   .split-row .img-box--cutout--combo img[data-carousel-frame]{
     transform: scale(1.44);
   }
+  /* 2026-11-14 使用者反映流動畫 4 色去背圖輪播切換時菱形會有一點
+     錯位——量過 4 張圖實際尺寸才發現，fluid-art-light-cutout-{red,
+     pink}.webp 是 900×897、菱形實際內容只佔圖寬約 94.6%，{pearl}.webp
+     是 900×898、菱形佔圖寬約 97.7%，{frost}.webp 是 900×910（四張裡
+     唯一比較高的），菱形佔圖寬同樣約 97.7％但因為畫布本身較高，
+     object-fit:contain 用高度去貼合容器，實際渲染出來的菱形又比
+     pearl 再縮小約 1.1%。四張菱形中心點都落在各自圖片中央（不是
+     偏移問題，單純大小不一致），用跟上面 combo 圖同一招，各自補一個
+     極小的 scale 讓四張菱形渲染大小統一（以 pearl 的比例為基準，
+     其餘三張只往上補，不會反而被裁切）。 */
+  .split-row .img-box--cutout img[data-carousel-frame][src*="cutout-red"],
+  .split-row .img-box--cutout img[data-carousel-frame][src*="cutout-pink"]{
+    transform: scale(1.033);
+  }
+  .split-row .img-box--cutout img[data-carousel-frame][src*="cutout-frost"]{
+    transform: scale(1.011);
+  }
   .split-row .text-box{
     max-width:500px;
     font-size:16px;
@@ -1139,22 +1156,37 @@
 
   <section class="split-row reverse fade-in">
     <!-- 2026-11-14 使用者反映這裡只放福星一款看起來像只有一種砂畫，
-         改成涵蓋全部 7 款有準備配色示範圖的砂畫產品（每款各出貨配色
-         combo-1 一張），而且順序要「隨機、不重複」——js/hero-
-         colorway-carousel.js 本身不處理隨機排序，一律照 DOM 順序從
-         第一張開始播，所以在它初始化之前先用
-         js/sand-art-cutout-shuffle.js 把這 7 張 <img> 在 DOM 裡重新
-         洗牌一次（Fisher–Yates），洗牌後第一張才是真正隨機決定、
-         不會每次重新整理都固定同一張先出現；7 張各代表不同商品，
-         洗牌是排列順序不是抽樣，天生不會重複到同一款。 -->
+         改成涵蓋全部 7 款有準備配色示範圖的砂畫產品，且每款的 3 張
+         配色示範（combo-1 出貨配色／combo-2／combo-3）都放進來，
+         7×3=21 張，而且順序要「隨機、不重複」——js/hero-colorway-
+         carousel.js 本身不處理隨機排序，一律照 DOM 順序從第一張開始
+         播，所以在它初始化之前先用 js/sand-art-cutout-shuffle.js 把
+         這 21 張 <img> 在 DOM 裡重新洗牌一次（Fisher–Yates），洗牌後
+         第一張才是真正隨機決定、不會每次重新整理都固定同一張先出現；
+         洗牌是排列順序不是抽樣放回，21 張各自獨立，天生不會連續播到
+         同一張。 -->
     <div class="col img-box img-box--cutout img-box--cutout--combo" data-hero-carousel data-carousel-loop>
       <img class="is-active" src="../assets/images/products/sand-art-fu/sand-art-fu-combo-1.png" alt="福星砂畫材料包成品參考圖（出貨配色）" loading="lazy" data-carousel-frame>
+      <img src="../assets/images/products/sand-art-fu/sand-art-fu-combo-2.png" alt="福星砂畫材料包成品參考圖（配色示範二）" loading="lazy" data-carousel-frame>
+      <img src="../assets/images/products/sand-art-fu/sand-art-fu-combo-3.png" alt="福星砂畫材料包成品參考圖（配色示範三）" loading="lazy" data-carousel-frame>
       <img src="../assets/images/products/sand-art-chun/sand-art-chun-combo-1.png" alt="春結砂畫材料包成品參考圖（出貨配色）" loading="lazy" data-carousel-frame>
+      <img src="../assets/images/products/sand-art-chun/sand-art-chun-combo-2.png" alt="春結砂畫材料包成品參考圖（配色示範二）" loading="lazy" data-carousel-frame>
+      <img src="../assets/images/products/sand-art-chun/sand-art-chun-combo-3.png" alt="春結砂畫材料包成品參考圖（配色示範三）" loading="lazy" data-carousel-frame>
       <img src="../assets/images/products/sand-art-cai/sand-art-cai-combo-1.png" alt="花財砂畫材料包成品參考圖（出貨配色）" loading="lazy" data-carousel-frame>
+      <img src="../assets/images/products/sand-art-cai/sand-art-cai-combo-2.png" alt="花財砂畫材料包成品參考圖（配色示範二）" loading="lazy" data-carousel-frame>
+      <img src="../assets/images/products/sand-art-cai/sand-art-cai-combo-3.png" alt="花財砂畫材料包成品參考圖（配色示範三）" loading="lazy" data-carousel-frame>
       <img src="../assets/images/products/sand-art-na-fu/sand-art-na-fu-combo-1.png" alt="格裡納福砂畫材料包成品參考圖（出貨配色）" loading="lazy" data-carousel-frame>
+      <img src="../assets/images/products/sand-art-na-fu/sand-art-na-fu-combo-2.png" alt="格裡納福砂畫材料包成品參考圖（配色示範二）" loading="lazy" data-carousel-frame>
+      <img src="../assets/images/products/sand-art-na-fu/sand-art-na-fu-combo-3.png" alt="格裡納福砂畫材料包成品參考圖（配色示範三）" loading="lazy" data-carousel-frame>
       <img src="../assets/images/products/sand-art-ying-chun/sand-art-ying-chun-combo-1.png" alt="格裡迎春砂畫材料包成品參考圖（出貨配色）" loading="lazy" data-carousel-frame>
+      <img src="../assets/images/products/sand-art-ying-chun/sand-art-ying-chun-combo-2.png" alt="格裡迎春砂畫材料包成品參考圖（配色示範二）" loading="lazy" data-carousel-frame>
+      <img src="../assets/images/products/sand-art-ying-chun/sand-art-ying-chun-combo-3.png" alt="格裡迎春砂畫材料包成品參考圖（配色示範三）" loading="lazy" data-carousel-frame>
       <img src="../assets/images/products/sand-art-na-fu-lantern/sand-art-na-fu-lantern-combo-1.png" alt="燈上納福砂畫材料包成品參考圖（出貨配色）" loading="lazy" data-carousel-frame>
+      <img src="../assets/images/products/sand-art-na-fu-lantern/sand-art-na-fu-lantern-combo-2.png" alt="燈上納福砂畫材料包成品參考圖（配色示範二）" loading="lazy" data-carousel-frame>
+      <img src="../assets/images/products/sand-art-na-fu-lantern/sand-art-na-fu-lantern-combo-3.png" alt="燈上納福砂畫材料包成品參考圖（配色示範三）" loading="lazy" data-carousel-frame>
       <img src="../assets/images/products/sand-art-ying-chun-lantern/sand-art-ying-chun-lantern-combo-1.png" alt="燈上迎春砂畫材料包成品參考圖（出貨配色）" loading="lazy" data-carousel-frame>
+      <img src="../assets/images/products/sand-art-ying-chun-lantern/sand-art-ying-chun-lantern-combo-2.png" alt="燈上迎春砂畫材料包成品參考圖（配色示範二）" loading="lazy" data-carousel-frame>
+      <img src="../assets/images/products/sand-art-ying-chun-lantern/sand-art-ying-chun-lantern-combo-3.png" alt="燈上迎春砂畫材料包成品參考圖（配色示範三）" loading="lazy" data-carousel-frame>
     </div>
     <div class="col text-box">
       <span class="ed-label">Sand Art</span>
