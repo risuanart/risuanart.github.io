@@ -3269,7 +3269,11 @@ button.text-link {
   position: relative;
   display: grid;
   grid-template-columns: 16px 1fr;
-  grid-template-areas: "checkbox name" ". body";
+  /* 2026-11-14：checkbox 欄位重複用在兩列（"checkbox" 這個區域名稱
+     在兩列都出現），讓它橫跨整欄高度，才能用 align-self:center 對齊
+     縮圖（縮圖現在跟著標題＋數量選擇器的總高度走，見下面
+     .addon-row__thumb 說明），不是只對齊標題那一行。 */
+  grid-template-areas: "checkbox name" "checkbox body";
   column-gap: 10px;
   /* 2026-11-14 使用者反映標題跟下面數量選擇器距離太遠，從 12px 縮小
      到 4px。 */
@@ -3301,9 +3305,11 @@ button.text-link {
   grid-area: checkbox;
   width: 16px;
   height: 16px;
-  /* 跟標題第一行文字對齊（標題字級 14px／行高 1.4，checkbox 本身
-     16px，往下微調幾 px 讓視覺上落在文字中線附近，不是貼著頂端）。 */
-  margin-top: 3px;
+  /* 2026-11-14 使用者反映 checkbox 應該跟縮圖置中對齊，不是貼齊標題
+     那一行——checkbox 的 grid-area 現在橫跨標題＋數量選擇器兩列（見
+     上面 grid-template-areas 說明），align-self:center 讓它在這個
+     跨兩列的格子裡垂直置中，正好對齊同樣是縱向貼滿整欄高度的縮圖。 */
+  align-self: center;
 }
 
 .addon-section--orlo .addon-row__name {
