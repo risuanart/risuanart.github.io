@@ -3331,6 +3331,19 @@ button.text-link {
   height: 70px;
 }
 
+/* 2026-11-14 新增：這顆縮圖現在可以點擊跳出大圖預覽視窗（見
+   js/addon-preview-modal.js），用 cursor + 輕微透明度變化標示「可以
+   點」，不加邊框／陰影這類會讓縮圖看起來像被框住的裝飾。 */
+.addon-section--orlo .addon-row__thumb[data-addon-preview-trigger] {
+  cursor: zoom-in;
+  transition: opacity var(--duration-fast) var(--ease-standard);
+}
+
+.addon-section--orlo .addon-row__thumb[data-addon-preview-trigger]:hover,
+.addon-section--orlo .addon-row__thumb[data-addon-preview-trigger]:focus-visible {
+  opacity: 0.8;
+}
+
 /* 2026-10-25：加購品項標題補英文小字輔助（使用者從選項裡選定「中文
    為主、英文小字輔助」），英文字級比中文主標題小一號、用次要文字色，
    維持中文主標題的視覺重量，英文只是輔助辨識，不是主角。 */
@@ -5041,8 +5054,13 @@ button.text-link {
   opacity: 0.6;
 }
 
-/* ---------- 加購彈窗（2026-10-22，像框加購專用，9 個砂畫商品頁共用
-   同一套 CSS／JS，見 js/frame-addon-modal.js）----------
+/* ---------- 加購彈窗（2026-10-22，原本是像框加購專用，
+   js/frame-addon-modal.js，後來那支腳本整個移除，這組 CSS 當時留著
+   沒清掉；2026-11-14 重新啟用，改給 js/addon-preview-modal.js 用——
+   「一起加購」清單裡任何一項，點縮圖就能跳出大圖＋可直接加入購物車
+   的預覽視窗，不限定哪個加購品，通用機制。class 名稱沿用，視覺語彙
+   不變，只新增 __variants／__qty／__add 這幾個當時沒有的元素。）
+   ----------
    參考使用者截圖的 davincified.com 加購卡片點下去彈出詳細資訊視窗的
    互動模式，但視覺維持全站克制調性（純色底、直角、沒有圓角卡片／
    繽紛配色）。z-index:100 蓋過全站目前最高的 .mobile-sticky-buy（40）
@@ -5106,6 +5124,11 @@ button.text-link {
 
 .addon-modal__media {
   background: var(--color-surface-light);
+  /* 2026-11-14：舊版原本依賴桌機兩欄 grid 自動撐出高度，手機單欄時
+     media 欄沒有自己的高度，img height:100% 會變成 0——這裡補上跟全站
+     主圖展示框一致的 1:1 比例（見 .work__gallery-main），兩個斷點都有
+     穩定高度。 */
+  aspect-ratio: 1 / 1;
 }
 
 .addon-modal__media img {
@@ -5154,6 +5177,53 @@ button.text-link {
   margin: 0;
   font-weight: 700;
   font-size: var(--font-size-lg);
+}
+
+/* 2026-11-14 新增：有款式可選的加購品（未來如果新增，例如多色的加購
+   小物）才會顯示這塊，目前 3 個加購品都沒有款式，JS 會整段隱藏——
+   沿用 .color-picker__chip 同一套「選中用底線＋深色標示，不做色塊
+   背景」語彙，但文字按鈕不需要縮圖，比色票卡更輕量。 */
+.addon-modal__variants {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+/* 同一個踩過好幾次的坑（見上面 .addon-modal__buy-row [hidden] 的
+   說明）：這裡也是 display:flex 的 class 蓋過瀏覽器內建
+   [hidden]{display:none}，沒款式可選的加購品（目前筆刀／像框／無痕
+   黏土都是）這塊雖然是空的，仍然會以 0 高度的 flex item 身分吃掉
+   父層 gap 的間距，造成價格跟數量列之間多一段用不到的空白。 */
+.addon-modal__variants[hidden] {
+  display: none;
+}
+
+.addon-modal__variant-chip {
+  appearance: none;
+  border: 1px solid color-mix(in srgb, var(--color-text-secondary) 35%, transparent);
+  background: none;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-sharp);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: color var(--duration-fast) var(--ease-standard), border-color var(--duration-fast) var(--ease-standard);
+}
+
+.addon-modal__variant-chip.is-active {
+  color: var(--color-text-primary);
+  border-color: var(--color-text-primary);
+  font-weight: 600;
+}
+
+.addon-modal__qty-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+.addon-modal__add {
   flex: 1;
 }
 

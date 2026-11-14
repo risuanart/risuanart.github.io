@@ -1393,6 +1393,16 @@
   window.RisuanCart = {
     readCart,
     cartTotal,
+    // 2026-11-14 新增：給 js/addon-preview-modal.js（「一起加購」品項
+    // 點縮圖跳出大圖預覽視窗，裡面直接可以加入購物車）用——視窗自己的
+    // 「加入購物車」是一個完全獨立的動作，不經過 getSelectedAddons()／
+    // checkbox 勾選那條路，直接呼叫這幾個底層函式，行為跟各加購品
+    // 自己產品頁的「加入購物車」按鈕一致（飛入動畫／提示音／提示泡泡
+    // 都一樣），不用另外寫一套。
+    addItem,
+    showCartToast,
+    playCartChime,
+    flyToCart,
     earlyBirdPrice,
     earlyBirdActive,
     priceDiscountHTMLPlain,
