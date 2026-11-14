@@ -3258,8 +3258,11 @@ button.text-link {
 
 .addon-section--orlo .addon-toggle::before {
   /* 2026-11-14 使用者反映符號顏色要跟旁邊的文字一致，不要用黑色
-     搶過文字（這顆按鈕的文字本來就是灰色 rgb(153,153,153)）。 */
-  font-size: 15px;
+     搶過文字（這顆按鈕的文字本來就是灰色 rgb(153,153,153)）；後續
+     使用者又反映符號要再加粗一點，字重從繼承自 .addon-toggle::before
+     的 700 再往上加到最粗的 900。 */
+  font-size: 16px;
+  font-weight: 900;
   color: rgb(153, 153, 153);
 }
 
