@@ -6,6 +6,20 @@
   if (!original) return;
   const css = document.createElement('link'); css.rel = 'stylesheet'; css.href = '../css/home-shop.css?v=20261111-alternating-hero';
   document.head.append(css);
+  document.documentElement.classList.add('kit-hero-frosted-nav');
+  const navStyle = document.createElement('style');
+  navStyle.textContent = `
+    /* 與home.css下滑後的導覽霧面效果相同，僅材料包輪播預覽提前啟用。 */
+    .kit-hero-frosted-nav .site-header {
+      background: color-mix(in srgb, var(--color-text-secondary) 20%, transparent);
+      backdrop-filter: blur(30px);
+      -webkit-backdrop-filter: blur(30px);
+    }
+    .kit-hero-frosted-nav .site-header:not(.is-scrolled)::before { display: none; }
+    .kit-hero-frosted-nav .site-header:not(.is-scrolled) :is(.site-header__back, .site-header__title, .site-header__nav, .site-header__menu-toggle, .cart-badge-wrap, .account-badge-wrap, .cart-badge, .account-badge) { color: var(--color-text-primary); }
+    .kit-hero-frosted-nav .site-header:not(.is-scrolled) .site-header__logo img { filter: none; }
+  `;
+  document.head.append(navStyle);
 
   const root = document.createElement('section'); root.className = 'preview-hero fade-in is-visible'; root.dataset.autoplay = '9000'; root.setAttribute('aria-label', '材料包精選輪播');
   root.innerHTML = `<div class="preview-hero__slides">${items.map((item, i) => `
