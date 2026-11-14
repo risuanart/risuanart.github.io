@@ -11,6 +11,29 @@
     .kit-hero-frosted-nav .preview-hero__overlay {
       padding-bottom: calc(var(--space-10) + var(--space-6));
     }
+    .kit-hero-scroll {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-2);
+      margin-top: var(--space-4);
+      padding: var(--space-2) var(--space-4);
+      color: var(--color-surface-light);
+      background: none;
+      border: 0;
+      font-family: inherit;
+      font-size: var(--font-size-xs);
+      letter-spacing: 0.2em;
+      cursor: pointer;
+    }
+    .kit-hero-scroll::after {
+      content: '';
+      display: block;
+      width: 1px;
+      height: var(--space-6);
+      background: currentColor;
+      opacity: 0.7;
+    }
     /* 在首頁同版輪播上增加直向空間，容納直式製作畫面。 */
     .kit-hero-frosted-nav .preview-hero { aspect-ratio: 9 / 16; }
     @media (min-width: 1025px) {
@@ -42,6 +65,7 @@
       <a class="preview-hero__photo-link" href="${item.href}" aria-label="查看${item.name}材料包"></a>
       <div class="preview-hero__overlay">
         <a class="work__cta work__cta--primary" href="${item.href}">查看這款材料包</a>
+        <button class="kit-hero-scroll" type="button" aria-label="往下瀏覽材料包介紹">SCROLL</button>
       </div>
     </div>`).join('')}</div>
 <button class="preview-hero__arrow preview-hero__arrow--prev" type="button" data-hero-direction="-1" aria-label="上一組輪播"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
@@ -55,5 +79,14 @@
     root.style.marginTop = `calc(var(--promo-bar-height) - ${pad}px)`;
   };
   css.addEventListener('load', alignTop); alignTop(); window.addEventListener('resize', alignTop);
+  root.querySelectorAll('.kit-hero-scroll').forEach(button => {
+    button.addEventListener('click', () => {
+      const target = document.querySelector('.content-block--hero');
+      if (!target) return;
+      const header = document.querySelector('.site-header');
+      target.style.scrollMarginTop = `${(header ? header.getBoundingClientRect().bottom : 0) + 24}px`;
+      target.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
+    });
+  });
   const init = document.createElement('script'); init.src = '../js/hero-slideshow.js'; document.body.append(init);
 })();
