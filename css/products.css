@@ -750,12 +750,19 @@
   font-variant-numeric: tabular-nums;
 }
 
-/* 並排購買區數量鍵與44px購買按鈕等高，避免矮小浮在中間。 */
+/* 加購商品沿用一般商品：數量獨立滿寬一排，購買按鈕在下方。 */
+.buy-action {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  width: 100%;
+  margin-left: 0;
+  gap: var(--space-4);
+}
+.buy-action > .qty-stepper { grid-column: 1 / -1; }
 .buy-action > .qty-stepper,
-.addon-modal__buy-row > .qty-stepper,
 .addon-modal__qty-row > .qty-stepper {
-  align-self: stretch;
-  min-height: calc(var(--space-10) + var(--space-1));
+  width: 100%;
+  height: 44px;
 }
 
 .qty-stepper button {
@@ -770,22 +777,16 @@
   cursor: pointer;
 }
 
-/* 外框44px含上下邊線，按鍵內部42px，寬高一致。 */
 .buy-action > .qty-stepper button,
-.addon-modal__buy-row > .qty-stepper button,
 .addon-modal__qty-row > .qty-stepper button {
-  width: calc(var(--space-10) + var(--space-1) - 2px);
+  width: 48px;
   flex: none;
+  font-size: var(--font-size-lg);
 }
-
-/* 數字欄與加減鍵採相同視覺寬度（含自身左右分隔線）。 */
 .buy-action > .qty-stepper span,
-.addon-modal__buy-row > .qty-stepper span,
 .addon-modal__qty-row > .qty-stepper span {
-  box-sizing: border-box;
-  width: calc(var(--space-10) + var(--space-1) - 2px);
-  min-width: calc(var(--space-10) + var(--space-1) - 2px);
-  flex: none;
+  flex: 1;
+  font-size: var(--font-size-lg);
 }
 
 .qty-stepper button:active {
@@ -5305,7 +5306,8 @@ button.text-link {
 
 .addon-modal__qty-row {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: stretch;
   /* 2026-11-14 修正：var(--space-3) 在 tokens.css 沒有定義過（這份
      codebase 已經踩過好幾次的坑），無效的自訂屬性值讓整條 gap
      宣告失效，等於沒有間距，造成數量選擇器跟加入購物車按鈕黏在一起。
@@ -5315,7 +5317,8 @@ button.text-link {
 }
 
 .addon-modal__add {
-  flex: 1;
+  flex: none;
+  width: 100%;
 }
 
 .addon-modal__link {
