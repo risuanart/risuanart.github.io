@@ -35,7 +35,7 @@
       const header = document.querySelector('.work__intro'); if (!header) return;
       const wrap = document.createElement('div'); wrap.className = 'product-navigation-preview content-container';
       wrap.innerHTML = `<nav class="product-breadcrumb" aria-label="商品路徑"><a href="${shopHref('')}">全部商品</a><span aria-hidden="true">›</span><a href="${shopHref('sand-art')}">砂畫材料包</a><span aria-hidden="true">›</span><span aria-current="page">羊Diss・藍</span></nav>`;
-      wrap.append(nav); header.before(wrap);
+      header.before(wrap);
     }
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
