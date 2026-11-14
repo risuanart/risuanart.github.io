@@ -111,7 +111,8 @@
   function cardHTML(key, product, cart, maxSizeCm) {
     const variants = cart.VARIANT_OPTIONS[key];
     const defaultScheme = variants && variants[0];
-    const url = (cart.PRODUCT_URLS && cart.PRODUCT_URLS[key]) || "#";
+    let url = (cart.PRODUCT_URLS && cart.PRODUCT_URLS[key]) || "#";
+    if (window.ShopNavigationPreview && key === 'sand-art-artist-sheep-blue') url += '?preview=shop-navigation';
     const colorwayFrames = cart.PRODUCT_COLORWAY_FRAMES && cart.PRODUCT_COLORWAY_FRAMES[key];
     const thumb = colorwayFrames
       ? carouselThumbHTML(key, product, colorwayFrames, "shop-card__thumb")
@@ -284,7 +285,10 @@
       if (english) english.textContent = categoryParam === 'fluid-art' ? 'FLUID ART KITS' : 'SAND ART KITS';
       document.title = `${categoryTitle}｜日宣繪畫室`;
     }
-    if (categoryParam) {
+    if (window.ShopNavigationPreview) {
+      const nav = window.ShopNavigationPreview;
+      if (nav.selected.key) visibleKeys = visibleKeys.filter(key => nav.categoryFor(key) === nav.selected.key);
+    } else if (categoryParam) {
       visibleKeys = visibleKeys.filter((key) => cart.PRODUCTS[key].category === categoryParam);
     }
     // 比例內縮要用「目前這個格狀頁實際會顯示的商品」裡最大的 sizeCm 當

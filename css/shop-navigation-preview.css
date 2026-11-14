@@ -1,0 +1,27 @@
+/* 僅預覽模式載入；分類列沿用網站文字與底線語彙。 */
+.shop-category-nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  overflow-x: auto;
+  padding-top: var(--space-4);
+  padding-bottom: var(--space-4);
+  margin-top: var(--space-6);
+  border-bottom: 1px solid color-mix(in srgb, var(--color-text-secondary) 25%, transparent);
+}
+.shop-category-nav a {
+  flex: none;
+  padding-top: var(--space-2);
+  padding-bottom: var(--space-2);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+}
+.shop-category-nav a:hover,
+.shop-category-nav a[aria-current] { color: var(--color-text-primary); border-bottom-color: currentColor; }
+.shop-category-nav a[aria-current] { font-weight: 600; }
+.product-navigation-preview { margin-bottom: var(--space-6); }
+.product-breadcrumb { display: flex; flex-wrap: wrap; gap: var(--space-2); font-size: var(--font-size-sm); color: var(--color-text-secondary); }
+.product-breadcrumb a { color: var(--color-text-primary); text-decoration: underline; text-underline-offset: 0.2em; }
+.product-navigation-preview .shop-category-nav { margin-top: var(--space-4); }
