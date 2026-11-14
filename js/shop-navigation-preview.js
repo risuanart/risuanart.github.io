@@ -33,9 +33,10 @@
       nav.querySelector('[aria-current]')?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
     } else {
       const header = document.querySelector('.work__intro'); if (!header) return;
-      const wrap = document.createElement('div'); wrap.className = 'product-navigation-preview content-container';
+      const wrap = document.createElement('div'); wrap.className = 'product-navigation-preview';
       wrap.innerHTML = `<nav class="product-breadcrumb" aria-label="商品路徑"><a href="${shopHref('')}">全部商品</a><span aria-hidden="true">›</span><a href="${shopHref('sand-art')}">砂畫材料包</a><span aria-hidden="true">›</span><span aria-current="page">羊Diss・藍</span></nav>`;
-      header.before(wrap);
+      const buyBar = header.querySelector('.product-buy-bar');
+      if (buyBar) { buyBar.classList.add('product-buy-bar--navigation'); buyBar.append(wrap); }
     }
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
