@@ -9,6 +9,11 @@
   document.documentElement.classList.add('kit-hero-frosted-nav');
   const navStyle = document.createElement('style');
   navStyle.textContent = `
+    /* 在首頁同版輪播上增加直向空間，容納直式製作畫面。 */
+    .kit-hero-frosted-nav .preview-hero { aspect-ratio: 9 / 16; }
+    @media (min-width: 1025px) {
+      .kit-hero-frosted-nav .preview-hero { aspect-ratio: 4 / 3; }
+    }
     /* 與home.css下滑後的導覽霧面效果相同，僅材料包輪播預覽提前啟用。 */
     .kit-hero-frosted-nav .site-header {
       background: color-mix(in srgb, var(--color-text-secondary) 20%, transparent);
