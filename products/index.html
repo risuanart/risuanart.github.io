@@ -1158,13 +1158,15 @@
     <!-- 2026-11-14 使用者反映這裡只放福星一款看起來像只有一種砂畫，
          改成涵蓋全部 7 款有準備配色示範圖的砂畫產品，且每款的 3 張
          配色示範（combo-1 出貨配色／combo-2／combo-3）都放進來，
-         7×3=21 張，而且順序要「隨機、不重複」——js/hero-colorway-
-         carousel.js 本身不處理隨機排序，一律照 DOM 順序從第一張開始
-         播，所以在它初始化之前先用 js/sand-art-cutout-shuffle.js 把
-         這 21 張 <img> 在 DOM 裡重新洗牌一次（Fisher–Yates），洗牌後
-         第一張才是真正隨機決定、不會每次重新整理都固定同一張先出現；
-         洗牌是排列順序不是抽樣放回，21 張各自獨立，天生不會連續播到
-         同一張。 -->
+         7×3=21 張。原本試過另外寫一支 js/sand-art-cutout-shuffle.js
+         在 hero-colorway-carousel.js 初始化前把這 21 張洗牌，但使用者
+         反饋不要隨機排序，只要「21 張依序各播一次、播完整輪從頭
+         開始」就好——這其實正是 hero-colorway-carousel.js 本身不用
+         額外處理就有的行為（照 DOM 順序從第一張播到最後一張，配合
+         data-carousel-loop 播完一輪自動從頭開始，不會中途跳著播或
+         漏掉某幾張），所以把那支洗牌腳本整個移除，這裡維持固定順序
+         （福星→春結→花財→格裡納福→格裡迎春→燈上納福→燈上迎春，
+         每款各出貨配色／配色二／配色三）。 -->
     <div class="col img-box img-box--cutout img-box--cutout--combo" data-hero-carousel data-carousel-loop>
       <img class="is-active" src="../assets/images/products/sand-art-fu/sand-art-fu-combo-1.png" alt="福星砂畫材料包成品參考圖（出貨配色）" loading="lazy" data-carousel-frame>
       <img src="../assets/images/products/sand-art-fu/sand-art-fu-combo-2.png" alt="福星砂畫材料包成品參考圖（配色示範二）" loading="lazy" data-carousel-frame>
@@ -1578,7 +1580,6 @@
        的 .product-page 固定容器），site-header-scroll.js 已經有
        `.product-page` 找不到就退回 window 的 fallback，不用額外調整。 -->
   <script src="../js/cart.js"></script>
-  <script src="../js/sand-art-cutout-shuffle.js"></script>
   <script src="../js/hero-colorway-carousel.js"></script>
   <script src="../js/video-inview.js"></script>
   <script src="../js/site-header-scroll.js?v=20261107-backtop"></script>
