@@ -841,6 +841,12 @@
   font-size: var(--font-size-sm);
   line-height: 25px;
   color: var(--color-text-primary);
+  /* 2026-11-14 使用者反映左側色槓跟文字沒有對齊，中間出現大空格——
+     根因是單欄版面（<768px，兩欄買列還沒生效）繼承祖先 .work__intro
+     的 text-align:center，這個 <p> 本身是滿版的 block 元素（border-left
+     正確貼在最左邊），但裡面的文字被置中，才會跟左邊的色槓拉開一大段
+     距離。這裡明確覆寫成靠左，不依賴外層斷點。 */
+  text-align: left;
 }
 
 .work-heading__urgency-date {
