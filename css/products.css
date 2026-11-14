@@ -5088,7 +5088,11 @@ button.text-link {
 .addon-modal__dialog {
   position: relative;
   background: var(--panel-bg);
-  max-width: 640px;
+  /* 2026-11-14：使用者反映視窗整體偏大，原本 640px 是沿用舊版像框
+     加購彈窗的尺寸（那時候 body 欄裡還有一段說明文字跟雙按鈕買列，
+     需要比較寬），現在 body 欄內容精簡成名稱／價格／數量＋單一顆
+     按鈕，縮小到 480px 更緊湊。 */
+  max-width: 480px;
   width: 100%;
   max-height: 90vh;
   overflow-y: auto;
@@ -5219,7 +5223,11 @@ button.text-link {
 .addon-modal__qty-row {
   display: flex;
   align-items: center;
-  gap: var(--space-3);
+  /* 2026-11-14 修正：var(--space-3) 在 tokens.css 沒有定義過（這份
+     codebase 已經踩過好幾次的坑），無效的自訂屬性值讓整條 gap
+     宣告失效，等於沒有間距，造成數量選擇器跟加入購物車按鈕黏在一起。
+     改用 --space-4。 */
+  gap: var(--space-4);
   margin-top: var(--space-2);
 }
 
