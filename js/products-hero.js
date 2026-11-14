@@ -42,6 +42,7 @@
         background: var(--color-surface-light);
       }
     }
+    @media (min-width: 1025px) {
     /* 與home.css下滑後的導覽霧面效果相同，僅材料包輪播預覽提前啟用。 */
     .kit-hero-frosted-nav .site-header {
       background: color-mix(in srgb, var(--color-text-secondary) 20%, transparent);
@@ -51,6 +52,7 @@
     .kit-hero-frosted-nav .site-header:not(.is-scrolled)::before { display: none; }
     .kit-hero-frosted-nav .site-header:not(.is-scrolled) :is(.site-header__back, .site-header__title, .site-header__nav, .site-header__menu-toggle, .cart-badge-wrap, .account-badge-wrap, .cart-badge, .account-badge) { color: var(--color-text-primary); }
     .kit-hero-frosted-nav .site-header:not(.is-scrolled) .site-header__logo img { filter: none; }
+    }
   `;
   document.head.append(navStyle);
 
