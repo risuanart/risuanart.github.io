@@ -1138,10 +1138,23 @@
   </section>
 
   <section class="split-row reverse fade-in">
+    <!-- 2026-11-14 使用者反映這裡只放福星一款看起來像只有一種砂畫，
+         改成涵蓋全部 7 款有準備配色示範圖的砂畫產品（每款各出貨配色
+         combo-1 一張），而且順序要「隨機、不重複」——js/hero-
+         colorway-carousel.js 本身不處理隨機排序，一律照 DOM 順序從
+         第一張開始播，所以在它初始化之前先用
+         js/sand-art-cutout-shuffle.js 把這 7 張 <img> 在 DOM 裡重新
+         洗牌一次（Fisher–Yates），洗牌後第一張才是真正隨機決定、
+         不會每次重新整理都固定同一張先出現；7 張各代表不同商品，
+         洗牌是排列順序不是抽樣，天生不會重複到同一款。 -->
     <div class="col img-box img-box--cutout img-box--cutout--combo" data-hero-carousel data-carousel-loop>
-      <img class="is-active" src="../assets/images/products/sand-art-fu/sand-art-fu-combo-1.png" alt="福星砂畫材料包成品參考圖（15×15cm，出貨配色）" loading="lazy" data-carousel-frame>
-      <img src="../assets/images/products/sand-art-fu/sand-art-fu-combo-2.png" alt="" aria-hidden="true" loading="lazy" data-carousel-frame>
-      <img src="../assets/images/products/sand-art-fu/sand-art-fu-combo-3.png" alt="" aria-hidden="true" loading="lazy" data-carousel-frame>
+      <img class="is-active" src="../assets/images/products/sand-art-fu/sand-art-fu-combo-1.png" alt="福星砂畫材料包成品參考圖（出貨配色）" loading="lazy" data-carousel-frame>
+      <img src="../assets/images/products/sand-art-chun/sand-art-chun-combo-1.png" alt="春結砂畫材料包成品參考圖（出貨配色）" loading="lazy" data-carousel-frame>
+      <img src="../assets/images/products/sand-art-cai/sand-art-cai-combo-1.png" alt="花財砂畫材料包成品參考圖（出貨配色）" loading="lazy" data-carousel-frame>
+      <img src="../assets/images/products/sand-art-na-fu/sand-art-na-fu-combo-1.png" alt="格裡納福砂畫材料包成品參考圖（出貨配色）" loading="lazy" data-carousel-frame>
+      <img src="../assets/images/products/sand-art-ying-chun/sand-art-ying-chun-combo-1.png" alt="格裡迎春砂畫材料包成品參考圖（出貨配色）" loading="lazy" data-carousel-frame>
+      <img src="../assets/images/products/sand-art-na-fu-lantern/sand-art-na-fu-lantern-combo-1.png" alt="燈上納福砂畫材料包成品參考圖（出貨配色）" loading="lazy" data-carousel-frame>
+      <img src="../assets/images/products/sand-art-ying-chun-lantern/sand-art-ying-chun-lantern-combo-1.png" alt="燈上迎春砂畫材料包成品參考圖（出貨配色）" loading="lazy" data-carousel-frame>
     </div>
     <div class="col text-box">
       <span class="ed-label">Sand Art</span>
@@ -1533,6 +1546,7 @@
        的 .product-page 固定容器），site-header-scroll.js 已經有
        `.product-page` 找不到就退回 window 的 fallback，不用額外調整。 -->
   <script src="../js/cart.js"></script>
+  <script src="../js/sand-art-cutout-shuffle.js"></script>
   <script src="../js/hero-colorway-carousel.js"></script>
   <script src="../js/video-inview.js"></script>
   <script src="../js/site-header-scroll.js?v=20261107-backtop"></script>
