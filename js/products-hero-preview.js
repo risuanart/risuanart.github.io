@@ -39,9 +39,6 @@
       <img class="preview-hero__companion" src="${item.photo}" alt="${item.name}作品照片" loading="lazy">
       <a class="preview-hero__photo-link" href="${item.href}" aria-label="查看${item.name}材料包"></a>
       <div class="preview-hero__overlay">
-        <p class="preview-hero__kicker">手作材料包</p>
-        <h2 class="preview-hero__title">${item.name}</h2>
-        <p class="preview-hero__tagline">${item.tagline}</p>
         <a class="work__cta work__cta--primary" href="${item.href}">查看這款材料包</a>
       </div>
     </div>`).join('')}</div>
