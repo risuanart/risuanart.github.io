@@ -1335,7 +1335,7 @@
 
 .work__gallery-thumb.is-active {
   opacity: 1;
-  border-color: var(--color-text-primary);
+  border-color: transparent;
 }
 
 /* 左右箭頭：跟 .related-products__nav 同一套「平常透明、hover 整組容器
