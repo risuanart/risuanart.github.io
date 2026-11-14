@@ -6,6 +6,21 @@
   if (!original) return;
   const css = document.createElement('link'); css.rel = 'stylesheet'; css.href = '../css/home-shop.css?v=20261111-alternating-hero';
   document.head.append(css);
+  document.documentElement.classList.add('kit-hero-preview-mode');
+  const headerStyle = document.createElement('style');
+  headerStyle.textContent = `
+    .kit-hero-preview-mode .site-header {
+      background: color-mix(in srgb, var(--color-surface-light) 90%, transparent);
+      backdrop-filter: blur(30px);
+      -webkit-backdrop-filter: blur(30px);
+    }
+    .kit-hero-preview-mode .site-header::before { display: none; }
+    .kit-hero-preview-mode .site-header:not(.is-scrolled) :is(.site-header__back, .site-header__title, .site-header__nav, .site-header__menu-toggle, .cart-badge-wrap, .account-badge-wrap, .cart-badge, .account-badge) {
+      color: var(--color-text-primary);
+    }
+    .kit-hero-preview-mode .site-header:not(.is-scrolled) .site-header__logo img { filter: none; }
+  `;
+  document.head.append(headerStyle);
   const root = document.createElement('section'); root.className = 'preview-hero fade-in is-visible'; root.dataset.autoplay = '9000'; root.setAttribute('aria-label', '材料包精選輪播');
   root.innerHTML = `<div class="preview-hero__slides">${items.map((item, i) => `
     <div class="preview-hero__slide ${i ? '' : 'is-active'}" data-index="${i}">
