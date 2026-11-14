@@ -836,6 +836,7 @@
 
 /* 有早鳥說明的商品頁：購買區分隔線移到優惠文字上方。 */
 .work__intro > .work-heading__urgency:has(+ .work-heading__buy-row) {
+  margin-top: var(--space-6);
   border-top: 1px solid color-mix(in srgb, var(--color-text-secondary) 25%, transparent);
 }
 .work-heading__urgency + .work-heading__buy-row {
