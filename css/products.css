@@ -3064,16 +3064,20 @@ button.text-link {
   cursor: pointer;
 }
 
-.addon-toggle::after {
-  content: "展開 ＋";
-  margin-left: auto;
-  font-size: var(--font-size-xs);
-  font-weight: 600;
-  color: var(--color-text-secondary);
+/* 2026-11-14 使用者反映拿掉右側的「展開 ＋／收合 －」文字，改成左側
+   一個粗體符號圖示就好，不用文字重複說明「現在是展開還是收合」這件
+   事——符號本身（＋變－）已經講得夠清楚。用 ::before 放在按鈕文字
+   最前面，符號跟文字之間的間距沿用 .addon-toggle 本身既有的
+   gap: var(--space-2)，不用額外設 margin。 */
+.addon-toggle::before {
+  content: "＋";
+  font-size: var(--font-size-base);
+  font-weight: 700;
+  color: var(--color-text-primary);
 }
 
-.addon-toggle[aria-expanded="true"]::after {
-  content: "收合 －";
+.addon-toggle[aria-expanded="true"]::before {
+  content: "－";
 }
 
 .addon-list {
@@ -3252,10 +3256,9 @@ button.text-link {
   color: rgb(153, 153, 153);
 }
 
-.addon-section--orlo .addon-toggle::after {
-  font-size: 13px;
-  font-weight: 400;
-  color: rgb(153, 153, 153);
+.addon-section--orlo .addon-toggle::before {
+  font-size: 15px;
+  color: rgb(0, 0, 0);
 }
 
 .addon-section--orlo .addon-list {
