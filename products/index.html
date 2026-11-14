@@ -363,6 +363,41 @@
      容器（.img-box--focus-top），不動 .img-box 那條共用規則本身——
      這頁另外兩個 .split-row 區塊的照片維持原本 4:3 不受影響。 */
   .split-row .img-box--focus-top{ aspect-ratio:4/5; }
+  /* 2026-11-14 使用者要求流動畫／砂畫這兩段技法介紹改用去背成品圖的
+     輪播（跟上面「全系列材料包」格狀卡同一套 js/hero-colorway-
+     carousel.js），不是原本的實拍過程照——去背圖背景透明、菱形裁切，
+     跟實拍照片完全不同的呈現方式，不能沿用 .img-box 原本的
+     aspect-ratio:4/3＋漸層底色＋object-fit:cover（cover 會把菱形圖
+     裁切變形），另外開一個 modifier class，不動 .img-box 共用規則
+     本身（上面「從畫室技法...」那段用實拍貓咪照片，還是原本的
+     4:3／cover，不受影響）。方形容器＋object-fit:contain 讓菱形完整
+     顯示，position:relative 讓多張輪播圖可以疊在同一個位置淡入淡出
+     （邏輯跟 .koyama-product-card__media[data-hero-carousel] 一致）。 */
+  .split-row .img-box--cutout{
+    position:relative;
+    aspect-ratio:1/1;
+    background:var(--color-surface-light, #f3f1ea);
+  }
+  .split-row .img-box--cutout img{
+    object-fit:contain;
+  }
+  .split-row .img-box--cutout img[data-carousel-frame]{
+    position:absolute;
+    inset:0;
+    opacity:0;
+    transition: opacity 1.1s ease;
+  }
+  .split-row .img-box--cutout img[data-carousel-frame].is-active{
+    opacity:1;
+  }
+  /* 砂畫那組用的是 combo-1/2/3.png（配色輪播示範圖，四周留了透明邊距，
+     菱形只佔圖寬約 66%），跟上面「全系列材料包」卡片同一個理由，放大
+     1.44 倍抵銷透明邊距，讓菱形視覺比例跟流動畫那組去背圖（裁得很緊，
+     不需要放大）看齊。只加在砂畫這個區塊，流動畫的 cutout 圖維持
+     原比例。 */
+  .split-row .img-box--cutout--combo img[data-carousel-frame]{
+    transform: scale(1.44);
+  }
   .split-row .text-box{
     max-width:500px;
     font-size:16px;
@@ -1089,8 +1124,11 @@
        已經在這頁用過的 .split-row／.split-row.reverse 圖文交換版面，
        跟上面幾段敘事維持同一套視覺語言。 -->
   <section class="split-row fade-in">
-    <div class="col img-box">
-      <img src="../assets/images/products/fluid-art/fluid-art-light-main-red.jpg" alt="春聯流動畫材料包成品參考圖，顏料自然流動交融的紋理" loading="lazy">
+    <div class="col img-box img-box--cutout" data-hero-carousel data-carousel-loop>
+      <img class="is-active" src="../assets/images/products/fluid-art/fluid-art-light-cutout-red.webp" alt="春聯流動畫材料包成品參考圖，顏料自然流動交融的紋理" loading="lazy" data-carousel-frame>
+      <img src="../assets/images/products/fluid-art/fluid-art-light-cutout-pink.webp" alt="" aria-hidden="true" loading="lazy" data-carousel-frame>
+      <img src="../assets/images/products/fluid-art/fluid-art-light-cutout-pearl.webp" alt="" aria-hidden="true" loading="lazy" data-carousel-frame>
+      <img src="../assets/images/products/fluid-art/fluid-art-light-cutout-frost.webp" alt="" aria-hidden="true" loading="lazy" data-carousel-frame>
     </div>
     <div class="col text-box">
       <span class="ed-label">Fluid Art</span>
@@ -1100,8 +1138,10 @@
   </section>
 
   <section class="split-row reverse fade-in">
-    <div class="col img-box">
-      <img src="../assets/images/products/sand-art-fu/sand-art-fu-gallery-07.jpg" alt="用手抹平沙粒的製作過程特寫，需要小心操作的精細區塊" loading="lazy">
+    <div class="col img-box img-box--cutout img-box--cutout--combo" data-hero-carousel data-carousel-loop>
+      <img class="is-active" src="../assets/images/products/sand-art-fu/sand-art-fu-combo-1.png" alt="福星砂畫材料包成品參考圖（15×15cm，出貨配色）" loading="lazy" data-carousel-frame>
+      <img src="../assets/images/products/sand-art-fu/sand-art-fu-combo-2.png" alt="" aria-hidden="true" loading="lazy" data-carousel-frame>
+      <img src="../assets/images/products/sand-art-fu/sand-art-fu-combo-3.png" alt="" aria-hidden="true" loading="lazy" data-carousel-frame>
     </div>
     <div class="col text-box">
       <span class="ed-label">Sand Art</span>
