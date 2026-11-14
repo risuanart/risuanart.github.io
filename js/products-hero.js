@@ -26,14 +26,6 @@
       letter-spacing: 0.2em;
       cursor: pointer;
     }
-    .kit-hero-scroll::after {
-      content: '';
-      display: block;
-      width: 1px;
-      height: var(--space-6);
-      background: currentColor;
-      opacity: 0.7;
-    }
     /* 在首頁同版輪播上增加直向空間，容納直式製作畫面。 */
     .kit-hero-frosted-nav .preview-hero { aspect-ratio: 9 / 16; }
     @media (min-width: 1025px) {
@@ -65,7 +57,7 @@
       <a class="preview-hero__photo-link" href="${item.href}" aria-label="查看${item.name}材料包"></a>
       <div class="preview-hero__overlay">
         <a class="work__cta work__cta--primary" href="${item.href}">查看這款材料包</a>
-        <button class="kit-hero-scroll" type="button" aria-label="往下瀏覽材料包介紹">SCROLL</button>
+        <button class="kit-hero-scroll" type="button" aria-label="往下瀏覽材料包介紹">SCROLL<span class="ent-hero__scroll-hint-arrow" aria-hidden="true"></span></button>
       </div>
     </div>`).join('')}</div>
 <button class="preview-hero__arrow preview-hero__arrow--prev" type="button" data-hero-direction="-1" aria-label="上一組輪播"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
