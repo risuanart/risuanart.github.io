@@ -3307,6 +3307,11 @@ button.text-link {
 .addon-section--orlo .addon-row__name {
   grid-area: name;
   margin: 0;
+  /* 2026-11-14 使用者反映標題起頭應該跟下面數量選擇器對齊，不是跟
+     縮圖左邊對齊——縮圖（70px）＋跟 .addon-row__body 的 gap（14px）
+     之間沒有東西，數量選擇器是縮圖右邊第一個元素，往右推同樣的
+     84px 距離即可對齊。 */
+  margin-left: 84px;
   font-size: 14px;
   font-weight: 400;
   line-height: 1.4;
