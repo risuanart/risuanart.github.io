@@ -8,6 +8,9 @@
   document.documentElement.classList.add('kit-hero-frosted-nav');
   const navStyle = document.createElement('style');
   navStyle.textContent = `
+    .kit-hero-frosted-nav .preview-hero__overlay {
+      padding-bottom: calc(var(--space-10) + var(--space-6));
+    }
     /* 在首頁同版輪播上增加直向空間，容納直式製作畫面。 */
     .kit-hero-frosted-nav .preview-hero { aspect-ratio: 9 / 16; }
     @media (min-width: 1025px) {
