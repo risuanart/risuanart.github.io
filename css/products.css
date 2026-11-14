@@ -750,6 +750,14 @@
   font-variant-numeric: tabular-nums;
 }
 
+/* 並排購買區數量鍵與44px購買按鈕等高，避免矮小浮在中間。 */
+.buy-action > .qty-stepper,
+.addon-modal__buy-row > .qty-stepper,
+.addon-modal__qty-row > .qty-stepper {
+  align-self: stretch;
+  min-height: calc(var(--space-10) + var(--space-1));
+}
+
 .qty-stepper button {
   appearance: none;
   border: none;
