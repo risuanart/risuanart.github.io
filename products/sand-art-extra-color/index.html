@@ -48,6 +48,21 @@
   <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="stylesheet" href="/css/promo-bar.css">
+  <style>
+    @media (min-width: 841px) {
+      .gradient-demo {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        column-gap: var(--space-10);
+        grid-template-rows: 1fr auto auto auto 1fr;
+        align-items: center;
+      }
+      .gradient-demo .demo-video { grid-column: 1; grid-row: 1 / 6; margin-top: 0; }
+      .gradient-demo > .chapter__title { grid-column: 2; grid-row: 2; align-self: end; }
+      .gradient-demo > .chapter__intro { grid-column: 2; grid-row: 3; }
+      .gradient-demo > .chapter__intro:last-child { grid-row: 4; align-self: start; }
+    }
+  </style>
 </head>
 <body>
   <div class="promo-bar" id="promo-bar">
@@ -259,7 +274,7 @@
       </div>
     </section>
 
-    <section class="chapter fade-in" aria-labelledby="gradient-demo-title">
+    <section class="chapter gradient-demo fade-in" aria-labelledby="gradient-demo-title">
       <h2 id="gradient-demo-title" class="chapter__title">漸層效果，做給你看</h2>
       <div class="chapter__intro">
         <p>將不同深淺的色沙分層鋪上，讓同一個區塊慢慢暈出色彩變化。</p>
