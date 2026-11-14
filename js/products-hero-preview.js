@@ -13,6 +13,12 @@
     .kit-hero-frosted-nav .preview-hero { aspect-ratio: 9 / 16; }
     @media (min-width: 1025px) {
       .kit-hero-frosted-nav .preview-hero { aspect-ratio: 4 / 3; }
+      .kit-hero-frosted-nav .preview-hero__companion {
+        object-fit: contain;
+        padding: 5%;
+        box-sizing: border-box;
+        background: var(--color-surface-light);
+      }
     }
     /* 與home.css下滑後的導覽霧面效果相同，僅材料包輪播預覽提前啟用。 */
     .kit-hero-frosted-nav .site-header {
