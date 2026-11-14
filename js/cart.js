@@ -61,16 +61,16 @@
     // 不是像砂畫那種邊緣乾淨的菱形成品圖，按比例內縮會在照片外面多出一圈
     // 不自然的白邊，不是只是把「圖」縮小這麼單純（見下面 sizeScalePadding
     // 只套用在有 sizeCm 的商品，流動畫這兩款維持原本滿版鋪滿）。
-    "fluid-art-light-red": { name: "春聯流動畫材料包（經典紅）", shortName: "經典紅", price: 800, earlyBirdPrice: 664, category: "fluid-art", hasVariant: false, tagline: "單幅 15cm，最快抵達的新年儀式", preorder: true },
-    "fluid-art-light-pink": { name: "春聯流動畫材料包（迎春粉）", shortName: "迎春粉", price: 800, earlyBirdPrice: 664, category: "fluid-art", hasVariant: false, tagline: "單幅 15cm，最快抵達的新年儀式", preorder: true },
+    "fluid-art-light-red": { name: "春聯流動畫材料包（經典紅）", shortName: "經典紅", price: 850, earlyBirdPrice: 706, category: "fluid-art", hasVariant: false, tagline: "單幅 15cm，最快抵達的新年儀式", preorder: true },
+    "fluid-art-light-pink": { name: "春聯流動畫材料包（迎春粉）", shortName: "迎春粉", price: 850, earlyBirdPrice: 706, category: "fluid-art", hasVariant: false, tagline: "單幅 15cm，最快抵達的新年儀式", preorder: true },
     // 2026-11-13 新增兩款流動畫配色（珠光／冰焰紅），使用者提供「棚拍」
     // 成品空拍照各一張，還沒有內容物全展開／製作過程等其他實拍素材——
     // 跟 sand-art-artist-sheep-red／blue 當初只有成品照時的做法一致，
     // 先用現有這張照片把商品頁搭起來，其餘照片格子在 js/product-gallery.js
     // COLOR_SCHEMES 裡用現成的 placeholder 機制（lightPlaceholder／
     // kitPhotoLightPlaceholder）標注還缺什麼照片，不是留空白或塞假圖。
-    "fluid-art-light-pearl": { name: "春聯流動畫材料包（珠光）", shortName: "珠光", price: 800, earlyBirdPrice: 664, category: "fluid-art", hasVariant: false, tagline: "單幅 15cm，最快抵達的新年儀式", preorder: true },
-    "fluid-art-light-frost": { name: "春聯流動畫材料包（冰焰紅）", shortName: "冰焰紅", price: 800, earlyBirdPrice: 664, category: "fluid-art", hasVariant: false, tagline: "單幅 15cm，最快抵達的新年儀式", preorder: true },
+    "fluid-art-light-pearl": { name: "春聯流動畫材料包（珠光）", shortName: "珠光", price: 850, earlyBirdPrice: 706, category: "fluid-art", hasVariant: false, tagline: "單幅 15cm，最快抵達的新年儀式", preorder: true },
+    "fluid-art-light-frost": { name: "春聯流動畫材料包（冰焰紅）", shortName: "冰焰紅", price: 850, earlyBirdPrice: 706, category: "fluid-art", hasVariant: false, tagline: "單幅 15cm，最快抵達的新年儀式", preorder: true },
     // 2026-10-17 使用者要求暫時下架（不是刪除），hidden:true 會讓
     // products-overview.js／related-products.js／cart-cross-sell.js
     // 這三個地方自動把它濾掉（跟加購項目用的是同一個既有機制，見那幾支
@@ -82,8 +82,8 @@
     // products/sand-art-collection/，都還是沒拍照的破圖草稿頁）一起整個
     // 刪除，不是暫時下架了——這裡的商品定義、下面 VARIANT_OPTIONS／
     // PRODUCT_URLS 對應項目都一併移除，不留死鍵值指向已經刪掉的頁面。
-    "sand-art-artist-sheep-red": { name: "藝術家系列・羊Diss舞蹈 Sheep La Danse / 紅", shortName: "羊Diss舞蹈 Sheep La Danse / 紅", price: 890, earlyBirdPrice: 739, category: "sand-art", hasVariant: false, tagline: "致敬馬諦斯《舞蹈》，喜氣酒紅款", preorder: true, sizeCm: 20 },
-    "sand-art-artist-sheep-blue": { name: "藝術家系列・羊Diss舞蹈 Sheep La Danse / 藍", shortName: "羊Diss舞蹈 Sheep La Danse / 藍", price: 890, earlyBirdPrice: 739, category: "sand-art", hasVariant: false, tagline: "致敬馬諦斯《舞蹈》，原畫配色藍款", preorder: true, sizeCm: 20 },
+    "sand-art-artist-sheep-red": { name: "藝術家系列・羊Diss舞蹈 Sheep La Danse / 紅", shortName: "羊Diss舞蹈 Sheep La Danse / 紅", price: 800, earlyBirdPrice: 664, category: "sand-art", hasVariant: false, tagline: "致敬馬諦斯《舞蹈》，喜氣酒紅款", preorder: true, sizeCm: 20 },
+    "sand-art-artist-sheep-blue": { name: "藝術家系列・羊Diss舞蹈 Sheep La Danse / 藍", shortName: "羊Diss舞蹈 Sheep La Danse / 藍", price: 800, earlyBirdPrice: 664, category: "sand-art", hasVariant: false, tagline: "致敬馬諦斯《舞蹈》，原畫配色藍款", preorder: true, sizeCm: 20 },
     "sand-art-chun": { name: "春聯砂畫材料包・春結 Chun Tied", shortName: "春結 Chun Tied", price: 640, earlyBirdPrice: 531, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true, preorder: true, sizeCm: 15 },
     "sand-art-fu": { name: "春聯砂畫材料包・福星 Starry Fu", shortName: "福星 Starry Fu", price: 640, earlyBirdPrice: 531, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true, preorder: true, sizeCm: 15 },
     "sand-art-cai": { name: "春聯砂畫材料包・花財 Cai in Bloom", shortName: "花財 Cai in Bloom", price: 640, earlyBirdPrice: 531, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true, preorder: true, sizeCm: 15 },
