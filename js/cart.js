@@ -61,38 +61,37 @@
     // 不是像砂畫那種邊緣乾淨的菱形成品圖，按比例內縮會在照片外面多出一圈
     // 不自然的白邊，不是只是把「圖」縮小這麼單純（見下面 sizeScalePadding
     // 只套用在有 sizeCm 的商品，流動畫這兩款維持原本滿版鋪滿）。
-    "fluid-art-light-red": { name: "春聯流動畫材料包（經典紅）", shortName: "經典紅", price: 800, category: "fluid-art", hasVariant: false, tagline: "單幅 15cm，最快抵達的新年儀式", preorder: true },
-    "fluid-art-light-pink": { name: "春聯流動畫材料包（迎春粉）", shortName: "迎春粉", price: 800, category: "fluid-art", hasVariant: false, tagline: "單幅 15cm，最快抵達的新年儀式", preorder: true },
+    "fluid-art-light-red": { name: "春聯流動畫材料包（經典紅）", shortName: "經典紅", price: 800, earlyBirdPrice: 664, category: "fluid-art", hasVariant: false, tagline: "單幅 15cm，最快抵達的新年儀式", preorder: true },
+    "fluid-art-light-pink": { name: "春聯流動畫材料包（迎春粉）", shortName: "迎春粉", price: 800, earlyBirdPrice: 664, category: "fluid-art", hasVariant: false, tagline: "單幅 15cm，最快抵達的新年儀式", preorder: true },
     // 2026-11-13 新增兩款流動畫配色（珠光／冰焰紅），使用者提供「棚拍」
     // 成品空拍照各一張，還沒有內容物全展開／製作過程等其他實拍素材——
     // 跟 sand-art-artist-sheep-red／blue 當初只有成品照時的做法一致，
     // 先用現有這張照片把商品頁搭起來，其餘照片格子在 js/product-gallery.js
     // COLOR_SCHEMES 裡用現成的 placeholder 機制（lightPlaceholder／
     // kitPhotoLightPlaceholder）標注還缺什麼照片，不是留空白或塞假圖。
-    "fluid-art-light-pearl": { name: "春聯流動畫材料包（珠光）", shortName: "珠光", price: 800, category: "fluid-art", hasVariant: false, tagline: "單幅 15cm，最快抵達的新年儀式", preorder: true },
-    "fluid-art-light-frost": { name: "春聯流動畫材料包（冰焰紅）", shortName: "冰焰紅", price: 800, category: "fluid-art", hasVariant: false, tagline: "單幅 15cm，最快抵達的新年儀式", preorder: true },
+    "fluid-art-light-pearl": { name: "春聯流動畫材料包（珠光）", shortName: "珠光", price: 800, earlyBirdPrice: 664, category: "fluid-art", hasVariant: false, tagline: "單幅 15cm，最快抵達的新年儀式", preorder: true },
+    "fluid-art-light-frost": { name: "春聯流動畫材料包（冰焰紅）", shortName: "冰焰紅", price: 800, earlyBirdPrice: 664, category: "fluid-art", hasVariant: false, tagline: "單幅 15cm，最快抵達的新年儀式", preorder: true },
     // 2026-10-17 使用者要求暫時下架（不是刪除），hidden:true 會讓
     // products-overview.js／related-products.js／cart-cross-sell.js
     // 這三個地方自動把它濾掉（跟加購項目用的是同一個既有機制，見那幾支
     // 檔案開頭的說明），客人在商品總覽、相關商品、購物車加購推薦都不會
     // 看到。復原時只要把 hidden:true 這行拿掉即可，其他資料原封不動。
-    "fluid-art-gift": { name: "春聯流動畫材料包・禮盒版", shortName: "禮盒版", price: 1100, category: "fluid-art", tagline: "雙幅成品，完整的流動畫體驗", hidden: true },
+    "fluid-art-gift": { name: "春聯流動畫材料包・禮盒版", shortName: "禮盒版", price: 1100, earlyBirdPrice: 913, category: "fluid-art", tagline: "雙幅成品，完整的流動畫體驗", hidden: true },
     // 2026-10-24：sand-art-light／sand-art-collection（輕巧版／自由創作組）
     // 原本是 hidden:true 暫時下架，連同對應頁面（products/sand-art-light/、
     // products/sand-art-collection/，都還是沒拍照的破圖草稿頁）一起整個
     // 刪除，不是暫時下架了——這裡的商品定義、下面 VARIANT_OPTIONS／
     // PRODUCT_URLS 對應項目都一併移除，不留死鍵值指向已經刪掉的頁面。
-    "sand-art-artist-sheep-red": { name: "藝術家系列・羊Diss舞蹈 Sheep La Danse / 紅", shortName: "羊Diss舞蹈 Sheep La Danse / 紅", price: 890, earlyBirdPrice: 740, category: "sand-art", hasVariant: false, tagline: "致敬馬諦斯《舞蹈》，喜氣酒紅款", preorder: true, sizeCm: 20 },
-    "sand-art-artist-sheep-blue": { name: "藝術家系列・羊Diss舞蹈 Sheep La Danse / 藍", shortName: "羊Diss舞蹈 Sheep La Danse / 藍", price: 890, earlyBirdPrice: 740, category: "sand-art", hasVariant: false, tagline: "致敬馬諦斯《舞蹈》，原畫配色藍款", preorder: true, sizeCm: 20 },
-    "sand-art-chun": { name: "春聯砂畫材料包・春結 Chun Tied", shortName: "春結 Chun Tied", price: 640, earlyBirdPrice: 535, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true, preorder: true, sizeCm: 15 },
-    "sand-art-fu": { name: "春聯砂畫材料包・福星 Starry Fu", shortName: "福星 Starry Fu", price: 640, earlyBirdPrice: 535, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true, preorder: true, sizeCm: 15 },
-    "sand-art-cai": { name: "春聯砂畫材料包・花財 Cai in Bloom", shortName: "花財 Cai in Bloom", price: 640, earlyBirdPrice: 535, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true, preorder: true, sizeCm: 15 },
-    "sand-art-ying-chun": { name: "春聯砂畫材料包・格裡迎春 Checked in Chun", shortName: "格裡迎春 Checked in Chun", price: 640, earlyBirdPrice: 535, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true, preorder: true, sizeCm: 15 },
-    "sand-art-na-fu": { name: "春聯砂畫材料包・格裡納福 Checked in Na Fu", shortName: "格裡納福 Checked in Na Fu", price: 640, earlyBirdPrice: 535, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true, preorder: true, sizeCm: 15 },
-    // 2026-11-14 使用者調漲 +$40（510→550），早鳥價維持原本 $85 折扣
-    // 金額跟著平移（425→465），不是折扣比例不變。
-    "sand-art-ying-chun-lantern": { name: "春聯砂畫材料包・燈上迎春 Lit in Chun", shortName: "燈上迎春 Lit in Chun", price: 550, earlyBirdPrice: 465, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true, preorder: true, sizeCm: 15 },
-    "sand-art-na-fu-lantern": { name: "春聯砂畫材料包・燈上納福 Lit in Na Fu", shortName: "燈上納福 Lit in Na Fu", price: 550, earlyBirdPrice: 465, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true, preorder: true, sizeCm: 15 },
+    "sand-art-artist-sheep-red": { name: "藝術家系列・羊Diss舞蹈 Sheep La Danse / 紅", shortName: "羊Diss舞蹈 Sheep La Danse / 紅", price: 890, earlyBirdPrice: 739, category: "sand-art", hasVariant: false, tagline: "致敬馬諦斯《舞蹈》，喜氣酒紅款", preorder: true, sizeCm: 20 },
+    "sand-art-artist-sheep-blue": { name: "藝術家系列・羊Diss舞蹈 Sheep La Danse / 藍", shortName: "羊Diss舞蹈 Sheep La Danse / 藍", price: 890, earlyBirdPrice: 739, category: "sand-art", hasVariant: false, tagline: "致敬馬諦斯《舞蹈》，原畫配色藍款", preorder: true, sizeCm: 20 },
+    "sand-art-chun": { name: "春聯砂畫材料包・春結 Chun Tied", shortName: "春結 Chun Tied", price: 640, earlyBirdPrice: 531, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true, preorder: true, sizeCm: 15 },
+    "sand-art-fu": { name: "春聯砂畫材料包・福星 Starry Fu", shortName: "福星 Starry Fu", price: 640, earlyBirdPrice: 531, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true, preorder: true, sizeCm: 15 },
+    "sand-art-cai": { name: "春聯砂畫材料包・花財 Cai in Bloom", shortName: "花財 Cai in Bloom", price: 640, earlyBirdPrice: 531, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true, preorder: true, sizeCm: 15 },
+    "sand-art-ying-chun": { name: "春聯砂畫材料包・格裡迎春 Checked in Chun", shortName: "格裡迎春 Checked in Chun", price: 640, earlyBirdPrice: 531, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true, preorder: true, sizeCm: 15 },
+    "sand-art-na-fu": { name: "春聯砂畫材料包・格裡納福 Checked in Na Fu", shortName: "格裡納福 Checked in Na Fu", price: 640, earlyBirdPrice: 531, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true, preorder: true, sizeCm: 15 },
+    // 2026-11-14 燈籠原價550；早鳥統一83折，四捨五入至整元457。
+    "sand-art-ying-chun-lantern": { name: "春聯砂畫材料包・燈上迎春 Lit in Chun", shortName: "燈上迎春 Lit in Chun", price: 550, earlyBirdPrice: 457, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true, preorder: true, sizeCm: 15 },
+    "sand-art-na-fu-lantern": { name: "春聯砂畫材料包・燈上納福 Lit in Na Fu", shortName: "燈上納福 Lit in Na Fu", price: 550, earlyBirdPrice: 457, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true, preorder: true, sizeCm: 15 },
     "fluid-art-canvas-kit": { name: "空白畫布＋字貼＋架高杯", price: 0, category: "fluid-art", hasVariant: false, hidden: true, noEarlyBird: true },
     // 2026-10-22：原本是「額外顏色沙・固定套組」佔位商品（$__，不開放選色），
     // 使用者提供 12 組漸層色沙實拍照後正式上線，改成真的可以自選色的加購品。
@@ -312,13 +311,13 @@
   }
 
   // 早鳥優惠：跟 risuan-checkout/lib/products.js earlyBirdDiscount() 同一組
-  // 規則（指定商品固定早鳥價，其餘維持 9 折，2026-12-15 台北時區前），這裡是純「顯示用」的前端版本——
+  // 規則（所有參與商品原價乘0.83，單件四捨五入至整元，2026-12-15 台北時區前），這裡是純「顯示用」的前端版本——
   // 客人加入購物車之前就能看到折扣後的價格，但真正收費永遠是結帳時後端
   // 重新算一次（不相信前端送出的任何金額），所以就算這裡算錯也不影響
   // 實際收費是否正確。兩邊常數要一起改，不然顯示的價格跟實際收費會對
   // 不起來（2026-10-17 使用者要求「官網看到的價格＝刷卡收的價格」）。
   const EARLY_BIRD_CUTOFF = "2026-12-15";
-  const EARLY_BIRD_RATE = 0.9;
+  const EARLY_BIRD_RATE = 0.83;
 
   // 2026-10-17 使用者要求目前所有在賣的商品都要標示預購（1月中後才開始
   // 陸續出貨），用純文字（使用者從幾個排版提案裡選定的方向，不加色塊／
@@ -363,7 +362,7 @@
     return `<s class="price-discount__original">$${originalTotal.toLocaleString()}</s> <span class="price-discount__final">$${discountedTotal.toLocaleString()}</span>`;
   }
 
-  const EARLY_BIRD_TAGLINE = "EARLY BIRD · 預購優惠";
+  const EARLY_BIRD_TAGLINE = "EARLY BIRD · 預購 83 折";
 
   function earlyBirdActive() {
     return todayInTaipei() <= EARLY_BIRD_CUTOFF;
