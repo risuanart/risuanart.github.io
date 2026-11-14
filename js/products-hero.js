@@ -11,18 +11,6 @@
     .kit-hero-frosted-nav .preview-hero__overlay {
       padding-bottom: calc(var(--space-10) + var(--space-6));
     }
-    .kit-hero-product-link {
-      display: inline-block;
-      padding: var(--space-2) var(--space-4);
-      color: var(--color-surface-light);
-      font-family: inherit;
-      font-size: var(--font-size-xs);
-      font-weight: 400;
-      letter-spacing: 0.2em;
-      text-decoration: none;
-    }
-    .kit-hero-product-link:hover,
-    .kit-hero-product-link:focus-visible { text-decoration: underline; text-underline-offset: 0.2em; }
     .kit-hero-scroll {
       display: inline-flex;
       flex-direction: column;
@@ -44,6 +32,7 @@
       .kit-hero-frosted-nav .preview-hero { aspect-ratio: 2 / 3; }
     }
     @media (min-width: 1025px) {
+      .kit-hero-frosted-nav .kit-hero-scroll { display: none; }
       .kit-hero-frosted-nav .preview-hero { aspect-ratio: 4 / 3; }
       .kit-hero-frosted-nav .preview-hero__companion {
         object-fit: contain;
@@ -71,7 +60,6 @@
       <img class="preview-hero__companion" src="${item.photo}" alt="${item.name}作品照片" loading="lazy">
       <a class="preview-hero__photo-link" href="${item.href}" aria-label="查看${item.name}材料包"></a>
       <div class="preview-hero__overlay">
-        <a class="kit-hero-product-link" href="${item.href}">查看這款材料包</a>
         <button class="kit-hero-scroll" type="button" aria-label="往下瀏覽材料包介紹">SCROLL<span class="ent-hero__scroll-hint-arrow" aria-hidden="true"></span></button>
       </div>
     </div>`).join('')}</div>
