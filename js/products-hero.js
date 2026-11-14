@@ -30,6 +30,7 @@
     .kit-hero-frosted-nav .preview-hero { aspect-ratio: 9 / 16; }
     @media (max-width: 768px) {
       .kit-hero-frosted-nav .preview-hero { aspect-ratio: 2 / 3; }
+      .kit-hero-frosted-nav .preview-hero__overlay { padding-bottom: var(--space-10); }
     }
     @media (min-width: 1025px) {
       .kit-hero-frosted-nav .kit-hero-scroll { display: none; }
