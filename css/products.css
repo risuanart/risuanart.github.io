@@ -5241,6 +5241,21 @@ button.text-link {
   color: var(--color-text-secondary);
 }
 
+/* 2026-11-14 新增：像框加購在視窗裡預設直接顯示「放進像框」的合成
+   示意圖，這顆連結讓客人可以切回空框實拍照看清楚像框本身長怎樣，
+   跟商品頁其他地方的純文字底線連結同一套克制調性，不做按鈕外觀——
+   這裡從原本的 <a> 改成 <button>（視窗內容是 JS 動態換圖，不是真的
+   換頁連結），補上 reset。 */
+.addon-modal__link[data-modal-preview-toggle] {
+  appearance: none;
+  border: none;
+  background: none;
+  padding: 0;
+  text-decoration: underline;
+  cursor: pointer;
+  text-align: left;
+}
+
 
 /* 收尾聯絡提示共用配置：FAQ、課程與企業頁皆遵守內文容器。 */
 .product-page > :is(.site-contact, .ent-cta) {

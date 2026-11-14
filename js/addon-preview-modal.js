@@ -43,6 +43,7 @@
       '<div class="addon-modal__body">' +
       '<p class="addon-modal__title" id="addon-modal-title" data-modal-name></p>' +
       '<p class="addon-modal__price" data-modal-price></p>' +
+      '<button type="button" class="addon-modal__link" data-modal-preview-toggle hidden></button>' +
       '<div class="addon-modal__variants" data-modal-variants hidden></div>' +
       '<div class="addon-modal__qty-row">' +
       '<div class="qty-stepper" data-modal-qty>' +
@@ -147,6 +148,36 @@
     modalImg.alt = thumbImg.alt || nameEl.textContent;
     modalName.innerHTML = nameEl.innerHTML;
     modalPrice.textContent = priceEl.textContent;
+
+    // 2026-11-14 新增：像框加購列本來就有「預覽放進像框的效果」這顆
+    // 按鈕（js/addon-frame-preview-toggle.js），縮圖預設放空框照（避免
+    // 客人誤會加購含作品），視窗則相反——使用者反映視窗應該直接秀出
+    // 模擬放進去的效果，更直覺。這裡重用同一組 data-mockup-src／
+    // data-plain-src，不重複存一份圖檔路徑。沒有這顆按鈕的加購列（筆刀／
+    // 無痕黏土）不受影響，toggle 連結維持 hidden。
+    const previewToggleBtn = row.querySelector("[data-addon-preview-toggle]");
+    const modalPreviewToggle = m.querySelector("[data-modal-preview-toggle]");
+    if (previewToggleBtn && previewToggleBtn.dataset.mockupSrc) {
+      const mockupSrc = previewToggleBtn.dataset.mockupSrc;
+      const mockupAlt = previewToggleBtn.dataset.mockupAlt || modalImg.alt;
+      const plainSrc = previewToggleBtn.dataset.plainSrc || thumbImg.src;
+      const plainAlt = previewToggleBtn.dataset.plainAlt || thumbImg.alt;
+      modalImg.src = mockupSrc;
+      modalImg.alt = mockupAlt;
+      let showingMockup = true;
+      modalPreviewToggle.hidden = false;
+      modalPreviewToggle.textContent = "顯示空框照 →";
+      const freshToggle = modalPreviewToggle.cloneNode(true);
+      modalPreviewToggle.replaceWith(freshToggle);
+      freshToggle.addEventListener("click", () => {
+        showingMockup = !showingMockup;
+        modalImg.src = showingMockup ? mockupSrc : plainSrc;
+        modalImg.alt = showingMockup ? mockupAlt : plainAlt;
+        freshToggle.textContent = showingMockup ? "顯示空框照 →" : "預覽放進像框的效果 →";
+      });
+    } else {
+      modalPreviewToggle.hidden = true;
+    }
 
     const select = row.querySelector("[data-addon-scheme], [data-addon-variant]");
     renderVariants(m, row, select, modalImg, modalPrice);
