@@ -3339,24 +3339,25 @@ button.text-link {
   padding-left: 84px;
 }
 
-/* 2026-11-14 改版：使用者反映縮圖總高度應該跟「標題＋數量選擇器」
-   這個文字區塊的總高一致，不要維持固定 70px、讓文字區塊看起來比縮圖
-   還高。縮圖改成絕對定位疊在標題／meta 文字後面，寬度固定 70px（避免
-   2026-10-25 第四輪踩過的「寬度沒被欄位限制住、疊到文字上面」那個
-   坑，這次只有 width 是固定值，不會跑版），高度 100% 貼齊
-   .addon-row（已經是 position:relative 的定位基準）整個內容高度——
-   文字總高多高，縮圖就跟著多高，物件本身用 object-fit:cover（見
-   products.css 共用的 .addon-row__thumb img 規則）裁切撐滿，不會變形。
+/* 2026-11-14 改版後又修正：上一輪把縮圖高度改成貼滿 .addon-row 全部
+   內容高度（跟文字總高一致），結果縮圖變成瘦長形，不再是原本的方形
+   照片，而且上下兩端直接頂到分隔線，相鄰兩列的縮圖看起來像連在一起
+   （沒有留白）。使用者反映要改回原本的方形縮圖——保留絕對定位（仍然
+   疊在標題／meta 文字後面，不佔 grid 版面，checkbox 才能跨兩列置中
+   對齊它），但尺寸改回固定 70×70 方形，用 top:50%+translateY(-50%)
+   垂直置中在整列裡（而不是貼滿整列），縮圖跟上下分隔線之間會留出
+   跟原本一樣的呼吸空間。
    left:42px＝.addon-row 自己的 padding(16px)＋checkbox 欄寬(16px)＋
    column-gap(10px)——絕對定位的 left 是相對「padding box」算，不是
    相對 grid 內容區（grid 內容區本身已經被 padding 往右推過一次），
    這裡少算一次 padding 曾經讓縮圖往左位移、蓋住 checkbox，已修正。 */
 .addon-section--orlo .addon-row__thumb {
   position: absolute;
-  top: 0;
+  top: 50%;
   left: 42px;
   width: 70px;
-  height: 100%;
+  height: 70px;
+  transform: translateY(-50%);
 }
 
 /* 2026-11-14 新增：這顆縮圖現在可以點擊跳出大圖預覽視窗（見
