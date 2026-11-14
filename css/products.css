@@ -3271,7 +3271,9 @@ button.text-link {
   grid-template-columns: 16px 1fr;
   grid-template-areas: "checkbox name" ". body";
   column-gap: 10px;
-  row-gap: 12px;
+  /* 2026-11-14 使用者反映標題跟下面數量選擇器距離太遠，從 12px 縮小
+     到 4px。 */
+  row-gap: 4px;
   align-items: start;
   padding: 16px;
   background: rgba(204, 204, 204, 0.2);
@@ -3319,21 +3321,36 @@ button.text-link {
   text-align: left;
 }
 
-/* 第二列：縮圖＋款式下拉／數量／價格，包成 .addon-row__body 橫向排列。 */
+/* 第二列：款式下拉／數量／價格，橫向排列。縮圖不算在這個 flex 排列
+   裡面（見下面 .addon-row__thumb 說明），這裡改成只留給 meta 內容，
+   左邊預留跟縮圖同寬＋間距的留白，不會疊到縮圖上面。 */
 .addon-section--orlo .addon-row__body {
   grid-area: body;
   display: flex;
   align-items: center;
-  gap: 14px;
+  /* 70px 縮圖寬＋14px 間距，呼應下面 .addon-row__name 的 margin-left:
+     84px，標題與這裡的 meta 內容左邊界對齊。 */
+  padding-left: 84px;
 }
 
-/* 縮圖固定 70px（使用者從模擬提案裡選定的尺寸，不是動態撐高）——
-   固定尺寸保證縮圖的實際渲染寬高一定跟宣告值一致，不會再有跟文字
-   疊在一起的風險。 */
+/* 2026-11-14 改版：使用者反映縮圖總高度應該跟「標題＋數量選擇器」
+   這個文字區塊的總高一致，不要維持固定 70px、讓文字區塊看起來比縮圖
+   還高。縮圖改成絕對定位疊在標題／meta 文字後面，寬度固定 70px（避免
+   2026-10-25 第四輪踩過的「寬度沒被欄位限制住、疊到文字上面」那個
+   坑，這次只有 width 是固定值，不會跑版），高度 100% 貼齊
+   .addon-row（已經是 position:relative 的定位基準）整個內容高度——
+   文字總高多高，縮圖就跟著多高，物件本身用 object-fit:cover（見
+   products.css 共用的 .addon-row__thumb img 規則）裁切撐滿，不會變形。
+   left:42px＝.addon-row 自己的 padding(16px)＋checkbox 欄寬(16px)＋
+   column-gap(10px)——絕對定位的 left 是相對「padding box」算，不是
+   相對 grid 內容區（grid 內容區本身已經被 padding 往右推過一次），
+   這裡少算一次 padding 曾經讓縮圖往左位移、蓋住 checkbox，已修正。 */
 .addon-section--orlo .addon-row__thumb {
-  flex: none;
+  position: absolute;
+  top: 0;
+  left: 42px;
   width: 70px;
-  height: 70px;
+  height: 100%;
 }
 
 /* 2026-11-14 新增：這顆縮圖現在可以點擊跳出大圖預覽視窗（見
