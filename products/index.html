@@ -856,8 +856,12 @@
   }
   .home-entry--static:hover .home-entry__media img { transform: none; }
 
+  @media (max-width: 768px) {
+    .studio-story__opening { text-align: center; }
+  }
+
   /* 畫室設計故事：左上文字、中央作品、右下文字，不作購買入口。 */
-  .studio-story__opening { text-align: center; }
+  .studio-story__opening { max-width: 75%; }
   .studio-story__opening p {
     margin: 0;
     font-size: var(--heading-font-size);
