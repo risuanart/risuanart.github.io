@@ -837,7 +837,12 @@
 /* 有早鳥說明的商品頁：購買區分隔線移到優惠文字上方。 */
 .work__intro > .work-heading__urgency:has(+ .work-heading__buy-row) {
   margin-top: var(--space-6);
+  /* 使用者指定：僅優惠文字再下移100px，分隔線位置維持。 */
+  padding-top: calc(20px + 100px);
   border-top: 1px solid color-mix(in srgb, var(--color-text-secondary) 25%, transparent);
+}
+.work__intro > .work-heading__urgency.sheep-product-summary__offer:has(+ .work-heading__buy-row) {
+  padding-top: 100px;
 }
 .work-heading__urgency + .work-heading__buy-row {
   border-top: 0;
