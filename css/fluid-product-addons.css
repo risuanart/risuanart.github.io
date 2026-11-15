@@ -5,3 +5,9 @@
   .work__intro.work__intro--fluid-addons > .addon-section { grid-column: 2; grid-row: 7; }
   .work__intro.work__intro--fluid-addons > .product-buy-bar { grid-column: 2; grid-row: 8; }
 }
+/* 字貼款式選單依內容收合，不拉滿加購資訊欄。 */
+.work__intro--fluid-addons .addon-row__meta .variant-select {
+  width: auto;
+  max-width: 100%;
+  flex: none;
+}
