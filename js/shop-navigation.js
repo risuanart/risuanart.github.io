@@ -1,7 +1,6 @@
-/* 商品分類與頁內跳轉試作，僅?preview=shop-navigation啟用。 */
+/* 商品分類與購買區路徑；所有商品共用。 */
 (() => {
   const params = new URLSearchParams(location.search);
-  if (params.get('preview') !== 'shop-navigation') return;
   const groups = [
     { key: '', title: '全部商品', en: 'ALL PRODUCTS' },
     { key: 'sand-art', title: '砂畫材料包', en: 'SAND ART KITS' },
@@ -17,9 +16,9 @@
   };
   const categoryFor = key => Object.keys(sets).find(group => sets[group].includes(key)) || (key.startsWith('fluid-art-') ? 'fluid-art' : 'sand-art');
   const selected = groups.find(g => g.key === params.get('category')) || groups[0];
-  const shopHref = category => '../shop/?preview=shop-navigation' + (category ? '&category=' + category : '');
-  window.ShopNavigationPreview = { groups, categoryFor, selected };
-  const css = document.createElement('link'); css.rel = 'stylesheet'; css.href = '../../css/shop-navigation-preview.css'; document.head.append(css);
+  const shopHref = category => '../shop/' + (category ? '?category=' + category : '');
+  window.ShopNavigation = { groups, categoryFor, selected };
+  const css = document.createElement('link'); css.rel = 'stylesheet'; css.href = '../../css/shop-navigation.css?v=20261115'; document.head.append(css);
   function init() {
     const grid = document.getElementById('shop-grid');
     const nav = document.createElement('nav'); nav.className = 'shop-category-nav'; nav.setAttribute('aria-label', '商品分類');
@@ -33,10 +32,21 @@
       nav.querySelector('[aria-current]')?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
     } else {
       const header = document.querySelector('.work__intro'); if (!header) return;
-      const wrap = document.createElement('div'); wrap.className = 'product-navigation-preview';
-      wrap.innerHTML = `<nav class="product-breadcrumb" aria-label="商品路徑"><a href="${shopHref('')}">全部商品</a><span aria-hidden="true">›</span><a href="${shopHref('sand-art')}">砂畫材料包</a><span aria-hidden="true">›</span><span aria-current="page">羊Diss・藍</span></nav>`;
-      const buyBar = header.querySelector('.product-buy-bar');
-      if (buyBar) { buyBar.classList.add('product-buy-bar--navigation'); buyBar.append(wrap); }
+      const buyBar = header.querySelector('.product-buy-bar, .buy-action');
+      const buyButton = buyBar && buyBar.querySelector('[data-add-to-cart]:not([hidden])');
+      const key = buyButton && buyButton.dataset.product;
+      if (!buyBar || !key || !window.RisuanCart?.PRODUCTS[key]) return;
+      const category = groups.find(group => group.key === categoryFor(key));
+      if (!category) return;
+      const wrap = document.createElement('div'); wrap.className = 'product-navigation';
+      const breadcrumb = document.createElement('nav'); breadcrumb.className = 'product-breadcrumb'; breadcrumb.setAttribute('aria-label', '商品路徑');
+      const all = document.createElement('a'); all.href = shopHref(''); all.textContent = '全部商品';
+      const categoryLink = document.createElement('a'); categoryLink.href = shopHref(category.key); categoryLink.textContent = category.title;
+      const name = document.createElement('span'); name.setAttribute('aria-current', 'page');
+      name.textContent = window.RisuanCart.PRODUCTS[key].shortName || header.querySelector('h1')?.textContent.trim() || window.RisuanCart.PRODUCTS[key].name;
+      const separator = () => { const e = document.createElement('span'); e.textContent = '›'; e.setAttribute('aria-hidden', 'true'); return e; };
+      breadcrumb.append(all, separator(), categoryLink, separator(), name); wrap.append(breadcrumb);
+      buyBar.classList.add('product-buy-bar--navigation'); buyBar.append(wrap);
     }
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();

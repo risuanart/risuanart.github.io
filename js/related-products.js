@@ -77,7 +77,6 @@
       : Object.keys(cart.PRODUCTS);
     const html = sourceKeys
       .filter((key) => cart.PRODUCTS[key] && key !== exclude && !cart.PRODUCTS[key].hidden)
-      .filter(key => !window.ShopNavigationPreview || window.ShopNavigationPreview.categoryFor(key) === window.ShopNavigationPreview.categoryFor(exclude))
       .map((key) => cardHTML(key, cart.PRODUCTS[key], cart))
       .join("");
     track.innerHTML = html;
