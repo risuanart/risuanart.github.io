@@ -105,6 +105,8 @@
   function renderVariants(m, row, select, img, priceEl) {
     const wrap = m.querySelector("[data-modal-variants]");
     wrap.innerHTML = "";
+    const showThumbnails = row.querySelector('[data-addon-select]')?.dataset.product === 'fluid-art-word-sticker';
+    wrap.classList.toggle('addon-modal__variants--thumbnails', showThumbnails);
     if (!select) {
       wrap.hidden = true;
       return;
@@ -115,7 +117,14 @@
       const chip = document.createElement("button");
       chip.type = "button";
       chip.className = "addon-modal__variant-chip";
-      chip.textContent = opt.textContent;
+      if (showThumbnails && opt.dataset.thumb) {
+        const thumb = document.createElement('img');
+        thumb.src = opt.dataset.thumb; thumb.alt = ''; thumb.loading = 'lazy';
+        const label = document.createElement('span'); label.textContent = opt.textContent;
+        chip.append(thumb, label);
+      } else {
+        chip.textContent = opt.textContent;
+      }
       chip.setAttribute("aria-pressed", opt.value === select.value ? "true" : "false");
       chip.classList.toggle("is-active", opt.value === select.value);
       chip.addEventListener("click", () => {

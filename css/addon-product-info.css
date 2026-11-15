@@ -6,3 +6,29 @@
 }
 .addon-product-intro { margin-top: var(--space-4); margin-bottom: 0; }
 .addon-modal__description { margin: 0; }
+
+/* 字貼預覽以縮圖辨識顏色與字型，外部清單仍使用短選單。 */
+.addon-modal__variants--thumbnails {
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  padding-bottom: var(--space-2);
+}
+.addon-modal__variants--thumbnails .addon-modal__variant-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  flex: 0 0 calc(var(--space-10) + var(--space-6));
+  padding: 0 0 var(--space-2);
+  border: 0;
+  border-bottom: 2px solid transparent;
+}
+.addon-modal__variants--thumbnails .addon-modal__variant-chip img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: contain;
+}
+.addon-modal__variants--thumbnails .addon-modal__variant-chip.is-active { border-bottom-color: var(--color-text-primary); }
+.addon-modal__body:has(.addon-modal__variants--thumbnails) { min-width: 0; }
+.addon-modal__variants--thumbnails { min-width: 0; max-width: 100%; }
