@@ -1,0 +1,8 @@
+.addon-product-intro,
+.addon-modal__description {
+  font-size: var(--font-size-sm);
+  line-height: 1.8;
+  color: var(--color-text-secondary);
+}
+.addon-product-intro { margin-top: var(--space-4); margin-bottom: 0; }
+.addon-modal__description { margin: 0; }

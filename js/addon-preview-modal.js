@@ -42,6 +42,7 @@
       '<div class="addon-modal__media"><img data-modal-img alt=""></div>' +
       '<div class="addon-modal__body">' +
       '<p class="addon-modal__title" id="addon-modal-title" data-modal-name></p>' +
+      '<p class="addon-modal__description" data-modal-description></p>' +
       '<p class="addon-modal__price" data-modal-price></p>' +
       '<button type="button" class="addon-modal__link" data-modal-preview-toggle hidden></button>' +
       '<div class="addon-modal__variants" data-modal-variants hidden></div>' +
@@ -119,6 +120,11 @@
       chip.classList.toggle("is-active", opt.value === select.value);
       chip.addEventListener("click", () => {
         select.value = opt.value;
+        if (isProductSelect) {
+          const description = m.querySelector('[data-modal-description]');
+          description.textContent = (window.AddonProductInfo || {})[opt.value] || '';
+          description.hidden = !description.textContent;
+        }
         select.dispatchEvent(new Event("change", { bubbles: true }));
         if (opt.dataset.thumb) img.src = opt.dataset.thumb;
         if (opt.dataset.price) priceEl.textContent = `$${Number(opt.dataset.price).toLocaleString()}`;
@@ -148,6 +154,9 @@
     modalImg.alt = thumbImg.alt || nameEl.textContent;
     modalName.innerHTML = nameEl.innerHTML;
     modalPrice.textContent = priceEl.textContent;
+    const description = m.querySelector('[data-modal-description]');
+    description.textContent = (window.AddonProductInfo || {})[checkbox.dataset.product] || '';
+    description.hidden = !description.textContent;
 
     // 2026-11-14 新增：像框加購列本來就有「預覽放進像框的效果」這顆
     // 按鈕（js/addon-frame-preview-toggle.js），縮圖預設放空框照（避免
