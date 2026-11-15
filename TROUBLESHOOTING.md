@@ -113,3 +113,7 @@
 - 症狀：主商品購物車名稱被附上加購字貼的款式。
 - 原因：activeScheme尋找所有variant-select時讀到加購選單。
 - 解法：排除data-addon-scheme與data-addon-variant，加購款式由getSelectedAddons獨立讀取。
+
+### 全系列材料包新增珠光輪播後過大且四角裁切
+- 原因：共用輪播規則含砂畫透明留白專用scale(1.44)，珠光透明留白比例不同。
+- 解法：依alpha實際主體比例量測，珠光獨立倍率1.211／原首圖1.232，hover沿用倍率再乘1.04，砂畫預設保持1.44。
