@@ -158,11 +158,17 @@
          介紹」各自獨立並排在最前面、圖片排在中間的舊排法拿掉，不再保留
          ——內容本身完全沒變，只是搬動位置＋補上 .work__title-block 外殼。 -->
     <header class="work__intro work__intro--fluid-addons">
-      <!-- 成品主圖：比照 sand-art-artist-sheep-red／blue 的做法，單一配色、
-           沒有 combo-2／combo-3 配色示範圖可以借，不套 data-hero-carousel，
-           就是靜態的一張成品參考圖。 -->
-      <div class="work__intro-photo fade-in">
-        <img src="../../assets/images/products/fluid-art/fluid-art-light-main-pink.jpg" alt="春聯流動畫材料包（迎春粉）成品參考圖" width="800" height="800" loading="lazy">
+      <!-- 迎春粉春字九張透明成品，在同一位置切換配色。 -->
+      <div class="work__intro-photo work__intro-photo--carousel fade-in" data-hero-carousel data-carousel-loop>
+        <img class="is-active" src="../../assets/images/products/fluid-art/fluid-art-pink-chun-01.webp" alt="迎春粉春字成品參考" width="1200" height="1200" loading="eager" data-carousel-frame>
+        <img src="../../assets/images/products/fluid-art/fluid-art-pink-chun-02.webp" alt="" aria-hidden="true" width="1200" height="1200" loading="lazy" data-carousel-frame>
+        <img src="../../assets/images/products/fluid-art/fluid-art-pink-chun-03.webp" alt="" aria-hidden="true" width="1200" height="1200" loading="lazy" data-carousel-frame>
+        <img src="../../assets/images/products/fluid-art/fluid-art-pink-chun-04.webp" alt="" aria-hidden="true" width="1200" height="1200" loading="lazy" data-carousel-frame>
+        <img src="../../assets/images/products/fluid-art/fluid-art-pink-chun-05.webp" alt="" aria-hidden="true" width="1200" height="1200" loading="lazy" data-carousel-frame>
+        <img src="../../assets/images/products/fluid-art/fluid-art-pink-chun-06.webp" alt="" aria-hidden="true" width="1200" height="1200" loading="lazy" data-carousel-frame>
+        <img src="../../assets/images/products/fluid-art/fluid-art-pink-chun-07.webp" alt="" aria-hidden="true" width="1200" height="1200" loading="lazy" data-carousel-frame>
+        <img src="../../assets/images/products/fluid-art/fluid-art-pink-chun-08.webp" alt="" aria-hidden="true" width="1200" height="1200" loading="lazy" data-carousel-frame>
+        <img src="../../assets/images/products/fluid-art/fluid-art-pink-chun-09.webp" alt="" aria-hidden="true" width="1200" height="1200" loading="lazy" data-carousel-frame>
       </div>
 
       <div class="work__title-block fade-in delay-1">
@@ -394,7 +400,7 @@
   </main>
 
   <script src="../../js/product-gallery.js"></script>
-  <script src="../../js/cart.js?v=20261115-pearl"></script>
+  <script src="../../js/cart.js?v=20261115-pink"></script>
   <script src="../../js/product-price-discount.js"></script>
   <script src="../../js/product-terms.js"></script>
   <script src="../../js/product-tabs.js"></script>

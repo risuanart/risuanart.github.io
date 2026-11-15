@@ -654,6 +654,9 @@
   }
   /* 珠光去背圖主體佔78%，原首圖修正版本佔76.67%；
      補償到與經典紅同樣的94.44%，不使用砂畫專用1.44倍。 */
+  .koyama-product-card__media[data-pink-colorway]{
+    --colorway-scale: 1.211;
+  }
   .koyama-product-card__media[data-pearl-colorway]{
     --colorway-scale: 1.211;
   }
@@ -1140,7 +1143,15 @@
   <section class="split-row fade-in">
     <div class="col img-box img-box--cutout" data-hero-carousel data-carousel-loop>
       <img class="is-active" src="../assets/images/products/fluid-art/fluid-art-light-cutout-red.webp" alt="春聯流動畫材料包成品參考圖，顏料自然流動交融的紋理" loading="lazy" data-carousel-frame>
-      <img src="../assets/images/products/fluid-art/fluid-art-light-cutout-pink.webp" alt="" aria-hidden="true" loading="lazy" data-carousel-frame>
+              <img src="../assets/images/products/fluid-art/fluid-art-pink-chun-01.webp" alt="迎春粉春字成品參考" width="1200" height="1200" loading="lazy" data-carousel-frame>
+        <img src="../assets/images/products/fluid-art/fluid-art-pink-chun-02.webp" alt="" aria-hidden="true" width="1200" height="1200" loading="lazy" data-carousel-frame>
+        <img src="../assets/images/products/fluid-art/fluid-art-pink-chun-03.webp" alt="" aria-hidden="true" width="1200" height="1200" loading="lazy" data-carousel-frame>
+        <img src="../assets/images/products/fluid-art/fluid-art-pink-chun-04.webp" alt="" aria-hidden="true" width="1200" height="1200" loading="lazy" data-carousel-frame>
+        <img src="../assets/images/products/fluid-art/fluid-art-pink-chun-05.webp" alt="" aria-hidden="true" width="1200" height="1200" loading="lazy" data-carousel-frame>
+        <img src="../assets/images/products/fluid-art/fluid-art-pink-chun-06.webp" alt="" aria-hidden="true" width="1200" height="1200" loading="lazy" data-carousel-frame>
+        <img src="../assets/images/products/fluid-art/fluid-art-pink-chun-07.webp" alt="" aria-hidden="true" width="1200" height="1200" loading="lazy" data-carousel-frame>
+        <img src="../assets/images/products/fluid-art/fluid-art-pink-chun-08.webp" alt="" aria-hidden="true" width="1200" height="1200" loading="lazy" data-carousel-frame>
+        <img src="../assets/images/products/fluid-art/fluid-art-pink-chun-09.webp" alt="" aria-hidden="true" width="1200" height="1200" loading="lazy" data-carousel-frame>
               <img src="../assets/images/products/fluid-art/fluid-art-pearl-fu-00.webp?v=aligned-v2" alt="珠光流動畫成品參考" width="1200" height="1200" loading="lazy" data-carousel-frame>
         <img src="../assets/images/products/fluid-art/fluid-art-pearl-fu-01.webp?v=aligned-v2" alt="" aria-hidden="true" width="1200" height="1200" loading="lazy" data-carousel-frame>
         <img src="../assets/images/products/fluid-art/fluid-art-pearl-fu-02.webp?v=aligned-v2" alt="" aria-hidden="true" width="1200" height="1200" loading="lazy" data-carousel-frame>
@@ -1347,7 +1358,17 @@
         <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">經典紅</span><span class="koyama-product-card__name-en">Fluid Art</span></p>
       </a>
       <a class="koyama-product-card" href="fluid-art-light-pink/">
-        <div class="koyama-product-card__media"><img src="../assets/images/products/fluid-art/fluid-art-light-cutout-pink.webp" alt="春聯流動畫材料包迎春粉成品參考圖" loading="lazy"></div>
+        <div class="koyama-product-card__media" data-hero-carousel data-carousel-loop data-pink-colorway>
+        <img class="is-active" src="../assets/images/products/fluid-art/fluid-art-pink-chun-01.webp" alt="迎春粉春字成品參考" width="1200" height="1200" loading="lazy" data-carousel-frame>
+        <img src="../assets/images/products/fluid-art/fluid-art-pink-chun-02.webp" alt="" aria-hidden="true" width="1200" height="1200" loading="lazy" data-carousel-frame>
+        <img src="../assets/images/products/fluid-art/fluid-art-pink-chun-03.webp" alt="" aria-hidden="true" width="1200" height="1200" loading="lazy" data-carousel-frame>
+        <img src="../assets/images/products/fluid-art/fluid-art-pink-chun-04.webp" alt="" aria-hidden="true" width="1200" height="1200" loading="lazy" data-carousel-frame>
+        <img src="../assets/images/products/fluid-art/fluid-art-pink-chun-05.webp" alt="" aria-hidden="true" width="1200" height="1200" loading="lazy" data-carousel-frame>
+        <img src="../assets/images/products/fluid-art/fluid-art-pink-chun-06.webp" alt="" aria-hidden="true" width="1200" height="1200" loading="lazy" data-carousel-frame>
+        <img src="../assets/images/products/fluid-art/fluid-art-pink-chun-07.webp" alt="" aria-hidden="true" width="1200" height="1200" loading="lazy" data-carousel-frame>
+        <img src="../assets/images/products/fluid-art/fluid-art-pink-chun-08.webp" alt="" aria-hidden="true" width="1200" height="1200" loading="lazy" data-carousel-frame>
+        <img src="../assets/images/products/fluid-art/fluid-art-pink-chun-09.webp" alt="" aria-hidden="true" width="1200" height="1200" loading="lazy" data-carousel-frame>
+        </div>
         <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">迎春粉</span><span class="koyama-product-card__name-en">Fluid Art</span></p>
       </a>
       <a class="koyama-product-card" href="fluid-art-light-pearl/">
@@ -1594,7 +1615,7 @@
        淡出，原本那支沒有）。這頁本身是 document 捲動（不是其他子頁常見
        的 .product-page 固定容器），site-header-scroll.js 已經有
        `.product-page` 找不到就退回 window 的 fallback，不用額外調整。 -->
-  <script src="../js/cart.js?v=20261115-pearl"></script>
+  <script src="../js/cart.js?v=20261115-pink"></script>
   <script src="../js/hero-colorway-carousel.js"></script>
   <script src="../js/video-inview.js"></script>
   <script src="../js/site-header-scroll.js?v=20261107-backtop"></script>
