@@ -34,7 +34,9 @@
     const variants = cart.VARIANT_OPTIONS[key];
     const defaultScheme = variants && variants[0];
     const url = (cart.PRODUCT_URLS && cart.PRODUCT_URLS[key]) || "#";
-    const thumb = cart.thumbHTML({ productKey: key, scheme: defaultScheme || "" }, "shop-card__thumb");
+    const frames = key === "fluid-art-light-pearl" && cart.PRODUCT_COLORWAY_FRAMES[key];
+    const thumb = frames ? frames.map((src, i) => `<img class="shop-card__thumb${i === 0 ? " is-active" : ""}" src="${src}" alt="${i === 0 ? product.name : ""}" loading="lazy" data-carousel-frame>`).join("")
+      : cart.thumbHTML({ productKey: key, scheme: defaultScheme || "" }, "shop-card__thumb");
     const variantInput = defaultScheme
       ? `<select class="variant-select" hidden aria-hidden="true"><option value="${defaultScheme}" selected></option></select>`
       : "";
@@ -43,7 +45,7 @@
     const discountTagline = discountActive ? `<p class="shop-card__discount-tagline">${cart.EARLY_BIRD_TAGLINE}</p>` : "";
     return `
       <div class="shop-card" data-product-card>
-        <a class="shop-card__media" href="${url}">${thumb}${cornerBadge}</a>
+        <a class="shop-card__media" href="${url}"${frames ? " data-hero-carousel data-carousel-loop" : ""}>${thumb}${cornerBadge}</a>
         <button type="button" class="shop-card__add" data-add-to-cart data-product="${key}" aria-label="加入購物車：${product.name}">${PLUS_ICON}</button>
         ${variantInput}
         <a class="shop-card__info" href="${url}">
@@ -141,6 +143,7 @@
     }
 
     grid.innerHTML = candidates.map((key) => cardHTML(key, cart.PRODUCTS[key], cart)).join("");
+    if (window.HeroColorwayCarousel) window.HeroColorwayCarousel.initAll(grid);
     cart.initAddToCart();
   }
 
