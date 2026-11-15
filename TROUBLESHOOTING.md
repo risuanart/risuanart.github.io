@@ -108,3 +108,8 @@
 - 症狀：首頁MORE進入分類清單，但頁標仍為所有材料包。
 - 原因：query只篩選商品，未更新靜態標題。
 - 解法：以既有分類標籤同步SHOP中文／英文與瀏覽器標題。
+
+### 主商品誤讀加購款式
+- 症狀：主商品購物車名稱被附上加購字貼的款式。
+- 原因：activeScheme尋找所有variant-select時讀到加購選單。
+- 解法：排除data-addon-scheme與data-addon-variant，加購款式由getSelectedAddons獨立讀取。

@@ -671,7 +671,7 @@
     const root = scope || document;
     const chip = root.querySelector('.color-picker__chip[aria-pressed="true"], .pattern-card[aria-pressed="true"]');
     if (chip) return chip.dataset.scheme;
-    const select = root.querySelector(".variant-select");
+    const select = root.querySelector(".variant-select:not([data-addon-scheme]):not([data-addon-variant])");
     return select ? select.value : null;
   }
 
