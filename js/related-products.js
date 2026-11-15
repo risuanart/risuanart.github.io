@@ -1,11 +1,4 @@
-/* related-products.js —— 商品頁底部「相關商品」橫向捲動列：跨商品導流用，
-   跟同頁的 .addon-carousel（本商品的加購配件）不是同一回事——那是「你可能
-   還需要」，這裡是「你可能也會喜歡別款材料包」。資料直接讀 window.RisuanCart
-   暴露的 PRODUCTS（跟 js/products-overview.js 同一份來源），不在這裡另外
-   寫死一份商品清單。
-
-   套在 [data-related-products] 容器上，用 data-exclude="商品鍵" 排除目前
-   頁面自己這一款，隱藏的加購項目（PRODUCTS 裡標 hidden:true）一律不列入。 */
+/* 商品頁底部推薦：材料包與搭配配件分列，沿用商品資料與既有橫滑卡片。 */
 
 (function () {
   // 卡片眉標文字，跟 js/products-overview.js 的 CATEGORY_LABELS 同一份對應，
@@ -14,6 +7,9 @@
   const CATEGORY_LABELS = {
     "fluid-art": "流動畫材料包",
     "sand-art": "砂畫材料包",
+    "colors": "色沙與裝飾",
+    "surfaces": "底板與字貼",
+    "tools": "工具與展示",
   };
 
   // 2026-10-23：跟商品總覽卡片（js/products-overview.js）同一套早鳥折扣
@@ -51,7 +47,7 @@
     // 不停、重頭再播——「相關商品」在頁面偏下方，訪客通常滑到這裡時，
     // 「播一輪就停」早就播完停在主圖了，等於看不到配色動態展示的效果。
     const carouselAttr = colorwayFrames ? " data-hero-carousel data-carousel-loop" : "";
-    const eyebrow = CATEGORY_LABELS[product.category] || "";
+    const eyebrow = CATEGORY_LABELS[window.ShopNavigation.categoryFor(key)] || "";
     const discountActive = product.price && !product.noEarlyBird && cart.earlyBirdActive && cart.earlyBirdActive();
     const cornerBadge = discountActive ? `<span class="discount-badge-corner discount-badge-corner--standalone">SALE</span>` : "";
     const discountTagline = discountActive ? `<p class="related-card__discount-tagline">${cart.EARLY_BIRD_TAGLINE}</p>` : "";
@@ -67,18 +63,11 @@
       </a>`;
   }
 
-  function initSection(section, cart) {
+  function initSection(section, cart, keys) {
     const track = section.querySelector(".related-products__track");
     if (!track) return;
 
-    const exclude = section.dataset.exclude;
-    const sourceKeys = section.dataset.relatedKeys
-      ? section.dataset.relatedKeys.split(',').map(key => key.trim())
-      : Object.keys(cart.PRODUCTS);
-    const html = sourceKeys
-      .filter((key) => cart.PRODUCTS[key] && key !== exclude && !cart.PRODUCTS[key].hidden)
-      .map((key) => cardHTML(key, cart.PRODUCTS[key], cart))
-      .join("");
+    const html = keys.map((key) => cardHTML(key, cart.PRODUCTS[key], cart)).join("");
     track.innerHTML = html;
 
     // 卡片是剛剛才動態建出來的，js/hero-colorway-carousel.js 載入時掃不到，
@@ -194,12 +183,44 @@
   function init() {
     if (!window.RisuanCart) return;
     const cart = window.RisuanCart;
-    document
-      .querySelectorAll("[data-related-products]")
-      .forEach((section) => initSection(section, cart));
+    document.querySelectorAll("[data-related-products]").forEach((section) => {
+      const chapter = section.closest(".chapter");
+      if (!chapter) return;
+      const current = cart.PRODUCTS[section.dataset.exclude];
+      // 由商品分類路徑的正式分類區分材料包與配件，
+      // 不以價格或是否參加早鳥判定，避免日後促銷調整改變分組。
+      const isKit = (key) => ["sand-art", "fluid-art"].includes(window.ShopNavigation.categoryFor(key));
+      const explicit = section.dataset.relatedKeys;
+      const keys = (explicit ? explicit.split(",").map(key => key.trim()) : Object.keys(cart.PRODUCTS))
+        .filter(key => cart.PRODUCTS[key] && key !== section.dataset.exclude && !cart.PRODUCTS[key].hidden);
+      const kits = keys.filter(isKit);
+      const compatible = key => {
+        if (explicit || !current?.sizeCm) return true;
+        if (key.startsWith("sand-art-frame-")) return key === `sand-art-frame-${current.sizeCm}`;
+        if (key.startsWith("sand-art-baseboard")) return key === (current.sizeCm === 20 ? "sand-art-baseboard-artist" : "sand-art-baseboard");
+        return true;
+      };
+      const accessories = keys.filter(key => !isKit(key) && compatible(key) && (explicit || !current ||
+        cart.PRODUCTS[key].category === current.category || key === "fluid-art-wall-clay" ||
+        key === "sand-art-metallic-trio"));
+      const groups = [
+        { title: "你可能也喜歡", keys: kits, kind: "kits" },
+        { title: "搭配這款一起做", keys: accessories, kind: "accessories" }
+      ].filter(group => group.keys.length);
+      if (!groups.length) { chapter.hidden = true; return; }
+      groups.forEach((group, index) => {
+        const target = index === 0 ? chapter : chapter.cloneNode(true);
+        target.querySelector(".chapter__title").textContent = group.title;
+        const carousel = target.querySelector("[data-related-products]");
+        carousel.dataset.relatedKind = group.kind;
+        if (index) chapter.after(target);
+        initSection(carousel, cart, group.keys);
+      });
+    });
   }
 
-  if (document.readyState === "loading") {
+  // 頁尾載入時先建好兩區，讓後載入的 scroll-reveal 一併登記淡入。
+  if (!window.RisuanCart && document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", init);
   } else {
     init();
