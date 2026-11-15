@@ -72,8 +72,11 @@
     if (!track) return;
 
     const exclude = section.dataset.exclude;
-    const html = Object.keys(cart.PRODUCTS)
-      .filter((key) => key !== exclude && !cart.PRODUCTS[key].hidden)
+    const sourceKeys = section.dataset.relatedKeys
+      ? section.dataset.relatedKeys.split(',').map(key => key.trim())
+      : Object.keys(cart.PRODUCTS);
+    const html = sourceKeys
+      .filter((key) => cart.PRODUCTS[key] && key !== exclude && !cart.PRODUCTS[key].hidden)
       .filter(key => !window.ShopNavigationPreview || window.ShopNavigationPreview.categoryFor(key) === window.ShopNavigationPreview.categoryFor(exclude))
       .map((key) => cardHTML(key, cart.PRODUCTS[key], cart))
       .join("");
