@@ -1495,3 +1495,4 @@ gap/margin/padding 其實都沒生效（等於 0 或初始值），包括全站 
 ## 2026-11-16：修復桌面加購彈窗裁切
 - 圖片原尺寸撐開grid的1fr欄位，造成右側文字被裁切。專用CSS改minmax(0,1fr)、子欄min-width0，841px以上沿用840px兩欄，窄版單欄。更新必要版本。
 - 三頁六寬度18次開啟驗證無內部溢位，右欄完整落於視窗，桌面各420px，無pageerror；語法與diff通過。已commit未push。
+- 發布完成：隔離release 7563d2e已push origin/main。直接實查https://risuanart.com/cart/回傳新訪客點數說明、付款完成會員入口及20261116-guest-points資源版本，確認Cloudflare實際內容更新。手機付款完成入口inline-flex、無溢位且付款表單隱藏。未進行真實付款；本次預覽使用本機隔離假訂單，未存入正式系統。
