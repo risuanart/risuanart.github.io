@@ -1348,3 +1348,8 @@ gap/margin/padding 其實都沒生效（等於 0 或初始值），包括全站 
 ## 2026-11-16：首頁課程精選電腦改五張單排
 - 使用者不希望五堂課排兩列，並指定手機維持。僅home-editorial.css首頁課程區769px以上改不換行flex，1025px以上五張等寬一次顯示，769至1024px卡片30%可橫滑、露出下一張；768px以下原46%橫滑不變。圖片維持4:5、既有容器寬度與課程順序不變，更新首頁CSS版本。
 - 六種標準寬度五張offsetTop全一致、頁面無溢位；375／390／768px仍46%，1024px可橫滑，1440／1920px列寬與scrollWidth均800、五張全顯示。實際桌面畫面確認，diff通過。更新交接並commit，未push。
+
+## 2026-11-16：使用者授權推送累積調整並確認正式部署
+- 前端已push至c31555b，含七款砂畫624／85折530、課程總覽手機改善、指南計數移除與標題留白、首頁課程單排；後端已push至3eef88c。
+- 正式risuanart.com/js/cart.js七款price624／earlyBirdPrice530及85折文字已確認，正式首頁／課程CSS、作品列pageshow、指南CSS及山景指南計數移除均命中最新內容。
+- GitHub提交3eef88c的Vercel狀態success；Vercel inspect正式risuan-checkout.vercel.app確認部署dpl_CEpvHC6vU3iya3NWnjPeCdGdfe6F為production／Ready且正式alias已指向它，與GitHub狀態deployment ID一致。未建立正式測試訂單、未真實付款或寄信。此交接紀錄另行提交推送。
