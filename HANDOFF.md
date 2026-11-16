@@ -1407,3 +1407,8 @@ gap/margin/padding 其實都沒生效（等於 0 或初始值），包括全站 
 - 七頁各六寬度42次無橫向溢位／pageerror；經典紅7張、冰焰紅6張首圖輪播均自動切至第二張，JS語法及diff通過。正式HTML更新cart與cart-cross-sell快取版本。已commit，未push，待使用者指示。
 
 - 使用者已完成登出後純LINE登入，正式Chrome回到/account/?lineConnected=1，會員區與原基本資料正常顯示，直接登入路徑驗收成功。準備發布頻道時，自動審查要求使用者明確同意不可逆的Developing→Published，目前發布尚未執行，已提出確認問題。Vercel編輯LINE_LOGIN_ENABLED=test時出現「Verify to Reveal Environment Variable」Email驗證，尚未Send Code、未改值；不能跳過驗證。待使用者同意正式發布後，再完成Email驗證、改開關為1並重新部署，最後實查普通會員頁LINE入口。
+
+
+## 2026-11-16：流動畫成品說明移除圓點及編號
+- 依使用者截圖，四款流動畫及共用相同展示的禮盒頁移除「01」與圓點，保留實際成品標題及描述。新增僅五頁載入的fluid-product-gallery.css，取消舊編號預留縮排，標題與說明左對齊，不影響砂畫或其他共用樣式。
+- 五頁各六種標準寬度30次量測：編號／圓點元素0、說明padding-left0、標題與說明起點差0、無橫向溢位與pageerror。JS語法及diff通過，更新腳本版本。已commit，未push。

@@ -246,11 +246,10 @@
       const li = document.createElement("li");
       li.className = "gallery__caption" + (i === 0 ? " is-active" : "");
       li.tabIndex = 0;
-      const num = String(i + 1).padStart(2, "0");
       // 說明句預設複用 alt 描述句；輕巧版顯示佔位圖的格子，改顯示佔位說明文字，
       // 讓收合的清單項目點開後也看得到「這裡缺什麼照片」。
       const desc = showPlaceholder(img) ? img.lightPlaceholder : altFor(img);
-      li.innerHTML = `<div class="gallery__caption-row"><span class="gallery__caption-dot" aria-hidden="true"></span><span class="gallery__caption-num" aria-hidden="true">${num}</span><span>${img.caption}</span></div><p class="gallery__caption-desc">${desc}</p>`;
+      li.innerHTML = `<div class="gallery__caption-row"><span>${img.caption}</span></div><p class="gallery__caption-desc">${desc}</p>`;
       captionsList.appendChild(li);
       return li;
     });

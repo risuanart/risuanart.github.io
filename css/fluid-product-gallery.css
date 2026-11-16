@@ -1,0 +1,4 @@
+/* 流動畫成品說明：移除舊編號後，標題與說明採相同左側起點。 */
+.gallery__captions .gallery__caption-desc {
+  padding-left: 0;
+}
