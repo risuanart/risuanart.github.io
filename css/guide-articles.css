@@ -1,0 +1,3 @@
+/* 材料指南文章的返回入口與標題留白。 */
+.guide-article-back { margin-bottom: var(--space-6); }
+.guide-article-back + .chapter__title { margin-top: 0; }
