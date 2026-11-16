@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="../css/home.css">
   <link rel="stylesheet" href="../css/products.css">
   <link rel="stylesheet" href="../css/cart.css">
+  <link rel="stylesheet" href="../css/guest-entry.css?v=20261116-guest-entry">
   <link rel="stylesheet" href="../css/site-menu.css">
   <link rel="stylesheet" href="../css/site-footer.css">
   <link rel="icon" href="/favicon.ico" sizes="any">
@@ -117,14 +118,24 @@
 
     <p class="account-page__banner" id="account-store-picked-banner" hidden>已更新您的預設超商門市。</p>
 
-    <!-- 未登入：顯示登入提示，GSI 按鈕渲染邏輯沿用全站共用的
-         window.RisuanAccount.mountGoogleButton()（見 js/account-auth.js），
-         跟 header 帳號面板是同一份邏輯，不是這裡另外寫一份。 -->
+    <!-- 訪客入口和會員登入放在一起；登入後由既有 account-page.js 隱藏。 -->
     <section class="chapter fade-in" id="account-guest">
-      <h2 class="chapter__title">請先登入</h2>
-      <p>用 Google 帳號登入後，可以查看訂單進度、課程預約紀錄，並且編輯您的基本資料與收件地址。</p>
-      <p class="account-page__login-note">點擊下方 Google 按鈕後，您會前往 Google 選擇帳戶並完成登入。本站不會要求您輸入 Google 密碼；如需找回帳戶或密碼，請使用 Google 的帳戶復原功能。</p>
+      <h2 class="chapter__title">會員登入</h2>
+      <p>登入後可查看訂單與課程預約紀錄、保存收件資料，並使用會員點數。</p>
       <div class="account-page__google-btn" id="account-page-google-btn"></div>
+      <p class="account-page__login-note">使用 Google 帳號繼續，無須另外設定密碼。新會員完成註冊可獲得 50 點，材料包結帳時可折抵商品金額。</p>
+
+      <div class="guest-entry">
+        <h2 class="chapter__title">不登入，也可以預約和購物</h2>
+        <p>以訪客身分填寫聯絡資料，即可預約課程或購買材料包，不必先加入會員。</p>
+        <div class="guest-entry__actions">
+          <a class="work__cta work__cta--primary" href="../booking/">以訪客預約課程</a>
+          <a class="work__cta work__cta--primary" href="../products/shop/">以訪客選購材料包</a>
+        </div>
+        <p><a class="text-link" href="../cart/">已選好商品？前往購物車結帳</a></p>
+        <p class="guest-entry__note">訪客結帳無法使用會員點數。請填寫可收信的 Email，付款與預約確認通知會寄到這裡。</p>
+        <p class="guest-entry__note">已有課程預約？請從預約確認信開啟免登入管理連結。商品訂單問題可來信 <a class="text-link" href="mailto:risuan.art@gmail.com">聯絡日宣繪畫室</a>。</p>
+      </div>
     </section>
 
     <!-- 參考 koyama.com.tw 的 WooCommerce 會員後台（左側欄切換，不是

@@ -121,3 +121,9 @@
 ### 課程總覽手機作品列從後面開始、課程卡滑到後仍灰淡
 - 原因：作品列未覆寫瀏覽器還原的橫向位置；課程卡非選中opacity0.4，停捲同步與轉場產生顯色延遲。
 - 解法：作品列初始化／pageshow回首張，手動操作後停止載入重置；手機課程卡全部opacity1且取消縮放轉場，桌面維持原效果。
+
+
+### 2026-11-16 未登入仍看到空會員選單
+- 症狀：會員中心account-member已有hidden，仍顯示空的點數與分頁。
+- 原因：既有.account-page__layout的display:flex覆蓋瀏覽器hidden預設樣式。
+- 解法：會員頁引用的guest-entry.css明確指定#account-member[hidden]、#account-guest[hidden]為display:none，未改會員資料權限。

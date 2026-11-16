@@ -1366,3 +1366,11 @@ gap/margin/padding 其實都沒生效（等於 0 或初始值），包括全站 
 - test-local防前端竄改測試由850更新獨立預期918，test-product-pricing四款預期918／780；兩測試及商品同步均通過（既有hidden提示不變）。四頁六寬度24次顯示918／780、無溢位及console error，diff通過。
 - Instagram僅檢查，未改授權／憑證：正式/api/instagram-posts?limit=8回posts空陣列。限定該路由的Vercel日誌明確回報Session has expired，過期時間2026-11-06 21:24:10 PST；因此前端維持貼文待補。需重新Instagram授權並依既有README流程更新Vercel設定才能恢復，尚未執行。未讀取或印出token內容。
 - 前後端本機commit，未push／部署。無真實付款／寄信測試。
+
+
+## 2026-11-16：訪客預約與購物入口
+- 使用者同意優先採Google＋LINE＋訪客方案。確認後端原已允許訪客預約／結帳，本段只補清楚入口：會員頁提供訪客預約、材料包選購及購物車連結，預約與結帳頁補免登入、通知Email與點數需登入的說明。Google登入及金流／會員資料邏輯未修改。
+- 新增僅三頁引用的css/guest-entry.css，沿用chapter 840px、色票與間距token。修正account-member原display:flex蓋過hidden而在未登入時露出空會員選單的問題，僅在本頁限定。
+- 本機三個改動頁＋products/、courses/各六種標準寬度，30次檢查均無橫向溢位。會員章節桌面840px、手機350px（390寬），按鈕高44px、間距16px；會員區hidden實測display:none。預約入口點擊正常，Google核心／付款送出未改、未執行真實登入或交易。本機Google設定請求因正式API跨域限制無法使用，不能當作正式登入已驗收。
+- LINE尚未實作或開通，已向使用者詢問是否有LINE Login頻道；不可宣稱已完成LINE串接。需頻道、Email權限、同一Provider及帳號綁定設計與實測。Email驗證碼、訪客商品訂單自助查詢仍未實作；現階段預約沿用信內免登入管理連結，商品訂單提供聯絡入口。
+- 未追蹤的「 2」副本、work素材均保留且不提交。

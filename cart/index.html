@@ -22,6 +22,7 @@
   <link rel="stylesheet" href="../css/home.css">
   <link rel="stylesheet" href="../css/products.css">
   <link rel="stylesheet" href="../css/cart.css">
+  <link rel="stylesheet" href="../css/guest-entry.css?v=20261116-guest-entry">
   <link rel="stylesheet" href="../css/site-menu.css">
   <link rel="stylesheet" href="../css/site-footer.css">
   <link rel="icon" href="/favicon.ico" sizes="any">
@@ -195,6 +196,7 @@
             </div>
             <button type="button" class="work__cta work__cta--primary" data-checkout-cta disabled>結帳</button>
           </footer>
+          <p class="guest-entry__note">可直接以訪客身分結帳，不必先加入會員。</p>
 
           <div class="cart-discount">
             <div class="cart-discount__offer">
@@ -266,6 +268,7 @@
           <input type="hidden" name="customerToken" id="confirm-customer-token">
 
           <section class="chapter" id="customer-section">
+            <p class="guest-entry__note">不登入也能完成訂購。請填寫可收信的 Email，以接收付款及出貨通知；會員點數折抵需先登入。</p>
             <h2 class="chapter__title"><span class="step-badge step-badge--label">STEP 1</span><span class="step-badge__dot">·</span>聯絡資訊</h2>
             <!-- 姓名分成名字／姓氏左右並排，送出時用 #confirm-customer-name
                  這個隱藏欄位把兩個值合併成後端原本認得的單一 customerName
