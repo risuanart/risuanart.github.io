@@ -36,3 +36,11 @@
 .story-section__variations--four {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
+
+/* 流動畫內容物清單沿用章節寬度，避免40ch造成過早換行。 */
+.kit-list {
+  max-width: none;
+}
+.kit-list li > span:first-child {
+  flex: none;
+}
