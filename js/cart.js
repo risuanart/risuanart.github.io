@@ -465,8 +465,10 @@
   // 當第一格——PRODUCT_IMAGES[key]（main.jpg）不再用在這裡，但其他地方
   // （商品頁相片牆首圖、購物車縮圖）還是讀 PRODUCT_IMAGES，不受影響。
   const PRODUCT_COLORWAY_FRAMES = {
+    "fluid-art-light-red": Array.from({ length: 7 }, (_, i) =>
+      BASE_PREFIX + `assets/images/products/fluid-art/fluid-art-red-fu-${String(i + 1).padStart(2, "0")}.webp?v=clear1`),
     "fluid-art-light-frost": Array.from({ length: 6 }, (_, i) =>
-      BASE_PREFIX + `assets/images/products/fluid-art/fluid-art-frost-fu-${String(i + 1).padStart(2, "0")}.webp`),
+      BASE_PREFIX + `assets/images/products/fluid-art/fluid-art-frost-fu-${String(i + 1).padStart(2, "0")}.webp?v=clear1`),
     "fluid-art-light-pink": Array.from({ length: 9 }, (_, i) =>
       BASE_PREFIX + `assets/images/products/fluid-art/fluid-art-pink-chun-${String(i + 1).padStart(2, "0")}.webp`),
     "fluid-art-light-pearl": Array.from({ length: 7 }, (_, i) =>

@@ -48,7 +48,8 @@
       // 色系故事結尾呼應「自由掌控深淺變化」那句，用三格小圖示意同一組顏料在
       // 不同比例下的成果差異，深／淺兩端取這個色系裡最深跟最淺的顏料。
       variationCaption: "同色系、不同比例，深淺自由掌控",
-      variationLabels: ["多絳紅", "均衡比例", "多鉑金"],
+      variationLabels: ["平均紅金", "過年紅偏多", "絳紅多"],
+      variationImages: ["fluid-art-red-fu-03.webp?v=clear1", "fluid-art-red-fu-06.webp?v=clear1", "fluid-art-light-cutout-red.webp"],
       story: `正統的春聯色配上帶墨色的絳紅，讓傳統更增添一點跳脫。
 
 金，是新春最耀眼的點綴；但我們特別選用了摻入銀色質感的鉑金，
@@ -87,16 +88,12 @@
       // 迎春粉故事文案裡，朱紅是「點綴少量」帶入節慶的角色，櫻粉才是主視覺基底，
       // 深／淺兩端對應這個關係，不是單純取色票數值上最深最淺。
       variationCaption: "同色系、不同比例，濃淡自由掌控",
-      variationLabels: ["多櫻粉", "均衡比例", "多朱紅"],
-      story: `以低飽和度的帶灰嫩粉作為視覺重心，
-加入襯托光澤的鉑金與銀，最後點綴少量朱砂紅帶入節慶，
-在柔和之中保留新年的喜氣，提前迎春。
-
-有別於傳統年節春聯以大面積紅色呈現，
-將時間向後延伸至春天。若家中已有張貼紅色春聯的習慣，
-這份清新而內斂的色彩，更適合作為現代空間中的點綴。
-
-讓年味不再張揚，而是靜靜留在日常中。`,
+      variationLabels: ["金銀柔光", "朱紅流線", "櫻粉主調"],
+      variationImages: ["fluid-art-pink-chun-01.webp", "fluid-art-pink-chun-09.webp", "fluid-art-pink-chun-04.webp"],
+      sentenceBreaks: true,
+      story: `以柔和的櫻粉搭配金銀光澤，少量朱紅就能帶出暖意與流動的線條。
+喜歡鮮明一點，可以增加朱紅；喜歡柔和一點，就讓粉色或金銀多一些。
+依照喜好調整比例，搭配黑色「春」字，都有不同的新年表情。`,
       storyPlaceholder: false,
     },
     // 2026-11-13 新增兩款配色（珠光／冰焰紅）。一開始只有「棚拍」成品
@@ -128,14 +125,14 @@
         light: "霧面黑色字貼，15×15cm 主畫布字貼（黑色「福」，固定款式）",
       },
       variationCaption: "同色系、不同比例，光澤濃淡自由掌控",
-      variationLabels: ["多珠光藍", "均衡比例", "多珠光黃"],
-      story: `珠光質地的顏料隨著光線角度流轉，在粉、黃、藍之間輕輕交疊，
-像新年清晨第一道天光，不是單一的顏色，而是一層會呼吸的光澤。
+      variationLabels: ["偏藍", "偏粉", "偏黃", "偏綠"],
+      variationImages: ["fluid-art-pearl-fu-02.webp?v=aligned-v2", "fluid-art-pearl-fu-04.webp?v=aligned-v2", "fluid-art-pearl-fu-03.webp?v=aligned-v2", "fluid-art-pearl-fu-05.webp?v=aligned-v2"],
+      sentenceBreaks: true,
+      story: `粉、藍、黃各有鮮明個性，每一色都能當主色，搭配霧面黑色「福」字，讓不同底色都襯得出清楚俐落的字樣。
 
-我們特意選用霧面的黑，寫下這一年的「福」字，讓閃動的底色安靜下來，
-留出一塊可以專注凝視的焦點，不被珠光的流轉搶走主角。
+顏料流動時也會自然混色：粉＋黃偏粉橘，粉＋藍偏紫，藍＋黃偏綠。同一組顏料，改變比例就能玩出不同的色彩表情。
 
-這是一款適合喜歡低調質感、不追求大紅大紫的配色，初看素雅，細看卻處處是光。`,
+所有顏色都已調成柔和的珍珠光，混在一起也不會太過強烈。保留各色的流動紋理，或讓顏色自然交融，都容易搭配，第一次嘗試也能放心玩色。`,
       storyPlaceholder: false,
     },
     "frost-red": {
@@ -156,17 +153,16 @@
       stickers: {
         light: "幻彩鐳射字貼，隨光線角度轉出粉、藍、銀交錯的流光色彩，15×15cm 主畫布字貼（鐳射「福」，固定款式）",
       },
-      variationCaption: "同色系、不同比例，冷暖對比自由掌控",
-      variationLabels: ["多絳紅", "均衡比例", "多冰藍"],
-      story: `濃重的絳紅打底，像除夕夜裡爐火燒得最旺的那個瞬間；
-一道深銀與冰藍悄悄滑過畫面，像窗外忽然落下的初雪，
-提醒著再暖的火光，窗外依然是冬天。
+      variationCaption: "以紅色為主，玩出不同的冷暖層次",
+      variationLabels: ["柔和交融", "冰藍流線", "銀色交織"],
+      variationImages: ["fluid-art-frost-fu-01.webp?v=clear1", "fluid-art-frost-fu-04.webp?v=clear1", "fluid-art-frost-silver-original.webp"],
+      sentenceBreaks: true,
+      story: `以絳紅作為主要底色，搭配鉑金、深銀與冰藍，讓熱烈的紅與清冷的光澤自然交織。
 
-「福」字選用幻彩鐳射材質，不是固定的單一顏色——隨著觀看角度與光線
-不同，會在粉、藍、銀之間流轉變化，在深紅色底上格外醒目，
-像雪地裡第一道被照亮的反光，每個角度看都不太一樣。
+幻彩鐳射「福」字會隨光線與觀看角度轉出不同色彩，在紅色佔比較多的底色上，字樣更醒目。
 
-一半是爐火的熱烈，一半是初雪的清冷，這份衝突感，正是冰焰紅最耐人尋味的地方。`,
+建議保留紅色作為主色，再依喜好稍微增加冰藍、深銀或鉑金的比例，變化流線與冷暖層次。
+也可以自由搭配，讓同一組顏料流動出自己的樣子。`,
       storyPlaceholder: false,
     },
   };
@@ -246,11 +242,10 @@
       const li = document.createElement("li");
       li.className = "gallery__caption" + (i === 0 ? " is-active" : "");
       li.tabIndex = 0;
-      const num = String(i + 1).padStart(2, "0");
       // 說明句預設複用 alt 描述句；輕巧版顯示佔位圖的格子，改顯示佔位說明文字，
       // 讓收合的清單項目點開後也看得到「這裡缺什麼照片」。
       const desc = showPlaceholder(img) ? img.lightPlaceholder : altFor(img);
-      li.innerHTML = `<div class="gallery__caption-row"><span class="gallery__caption-dot" aria-hidden="true"></span><span class="gallery__caption-num" aria-hidden="true">${num}</span><span>${img.caption}</span></div><p class="gallery__caption-desc">${desc}</p>`;
+      li.innerHTML = `<div class="gallery__caption-row"><span>${img.caption}</span></div><p class="gallery__caption-desc">${desc}</p>`;
       captionsList.appendChild(li);
       return li;
     });
@@ -351,7 +346,16 @@
       // 讓句號後真的換行分段，不是全部擠成一整塊。
       scheme.story.split(/\n\s*\n/).forEach((para) => {
         const p = document.createElement("p");
-        p.textContent = para.replace(/\n/g, "");
+        const text = para.replace(/\n/g, "");
+        if (scheme.sentenceBreaks) {
+          const sentences = text.match(/[^。]+。?|。/g) || [];
+          sentences.forEach((sentence, index) => {
+            if (index > 0) p.appendChild(document.createElement("br"));
+            p.appendChild(document.createTextNode(sentence));
+          });
+        } else {
+          p.textContent = text;
+        }
         body.appendChild(p);
       });
     }
@@ -363,10 +367,14 @@
     if (variationCaption) variationCaption.textContent = scheme.variationCaption;
     if (variationGrid) {
       variationGrid.innerHTML = "";
-      scheme.variationLabels.forEach((label) => {
+      variationGrid.classList.toggle("story-section__variations--photos", Boolean(scheme.variationImages));
+      variationGrid.classList.toggle("story-section__variations--four", Boolean(scheme.variationImages && scheme.variationImages.length === 4));
+      scheme.variationLabels.forEach((label, i) => {
         const cell = document.createElement("div");
         cell.className = "story-section__variation";
-        cell.innerHTML = `<div class="placeholder-box">${label}</div>`;
+        cell.innerHTML = scheme.variationImages
+          ? `<img src="${IMG_BASE}${scheme.variationImages[i]}" alt="${scheme.name}成品，${label}" width="1200" height="1200" loading="lazy"><p>${label}</p>`
+          : `<div class="placeholder-box">${label}</div>`;
         variationGrid.appendChild(cell);
       });
     }

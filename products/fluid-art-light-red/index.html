@@ -40,6 +40,7 @@
   <link rel="stylesheet" href="../../css/base.css?v=20261110-course-covers">
   <link rel="stylesheet" href="../../css/home.css">
   <link rel="stylesheet" href="../../css/products.css">
+  <link rel="stylesheet" href="../../css/fluid-product-gallery.css?v=20261116-silver-photo">
   <link rel="stylesheet" href="../../css/cart.css">
   <link rel="stylesheet" href="../../css/site-menu.css">
   <link rel="stylesheet" href="../../css/site-footer.css">
@@ -158,11 +159,15 @@
          介紹」各自獨立並排在最前面、圖片排在中間的舊排法拿掉，不再保留
          ——內容本身完全沒變，只是搬動位置＋補上 .work__title-block 外殼。 -->
     <header class="work__intro work__intro--fluid-addons">
-      <!-- 成品主圖：比照 sand-art-artist-sheep-red／blue 的做法，單一配色、
-           沒有 combo-2／combo-3 配色示範圖可以借，不套 data-hero-carousel，
-           就是靜態的一張成品參考圖。 -->
-      <div class="work__intro-photo fade-in">
-        <img src="../../assets/images/products/fluid-art/fluid-art-light-main-red.jpg" alt="春聯流動畫材料包（經典紅）成品參考圖" width="800" height="800" loading="lazy">
+      <!-- 經典紅金福七張實拍清晰去背圖，同位置配色輪播。 -->
+      <div class="work__intro-photo work__intro-photo--carousel fade-in" data-hero-carousel data-carousel-loop>
+        <img class="is-active" src="../../assets/images/products/fluid-art/fluid-art-red-fu-01.webp?v=clear1" alt="經典紅金福成品參考" width="1200" height="1200" loading="eager" data-carousel-frame>
+        <img src="../../assets/images/products/fluid-art/fluid-art-red-fu-02.webp?v=clear1" alt="" width="1200" height="1200" loading="lazy" data-carousel-frame>
+        <img src="../../assets/images/products/fluid-art/fluid-art-red-fu-03.webp?v=clear1" alt="" width="1200" height="1200" loading="lazy" data-carousel-frame>
+        <img src="../../assets/images/products/fluid-art/fluid-art-red-fu-04.webp?v=clear1" alt="" width="1200" height="1200" loading="lazy" data-carousel-frame>
+        <img src="../../assets/images/products/fluid-art/fluid-art-red-fu-05.webp?v=clear1" alt="" width="1200" height="1200" loading="lazy" data-carousel-frame>
+        <img src="../../assets/images/products/fluid-art/fluid-art-red-fu-06.webp?v=clear1" alt="" width="1200" height="1200" loading="lazy" data-carousel-frame>
+        <img src="../../assets/images/products/fluid-art/fluid-art-red-fu-07.webp?v=clear1" alt="" width="1200" height="1200" loading="lazy" data-carousel-frame>
       </div>
 
       <div class="work__title-block fade-in delay-1">
@@ -387,8 +392,8 @@
 
   </main>
 
-  <script src="../../js/product-gallery.js?v=20261115-finished-products"></script>
-  <script src="../../js/cart.js?v=20261116-frost6"></script>
+  <script src="../../js/product-gallery.js?v=20261116-pink-story"></script>
+  <script src="../../js/cart.js?v=20261116-fluid-clear1"></script>
   <script src="../../js/product-price-discount.js?v=20261116-all-kits85"></script>
   <script src="../../js/product-terms.js"></script>
   <script src="../../js/product-tabs.js"></script>
