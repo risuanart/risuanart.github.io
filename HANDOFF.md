@@ -1476,3 +1476,8 @@ gap/margin/padding 其實都沒生效（等於 0 或初始值），包括全站 
 ## 2026-11-16：流動畫獨立推送狀態
 - 使用者同意拆分後，從最新origin/main b879344建立/private/tmp/risuan-fluid-release隔離checkout，只帶入流動畫素材、展示與文案、專用CSS及cart快取，不覆蓋登入程式。c22781e已成功push至main，原本機提交與登入工作保留。
 - 推送後數次curl實查正式站仍回舊product-gallery.js及20261115-finished-products引用，尚未確認Cloudflare部署生效，不能宣稱正式頁面已更新。下一步持續確認Cloudflare Pages部署及公開內容。隔離checkout暫保留供查驗，主checkout與遠端有分歧，後續整合需保留本機登入進度。
+
+
+## 2026-11-16：材料包頁首照片取消白邊
+- 使用者明確要求不要白邊、照片填滿。products-hero.js桌面companion由contain＋5% padding改cover＋0，僅影響材料包頁首，允許照片邊緣適度裁切；手機／窄版及首頁原行為保留。更新該頁腳本版本。
+- 六寬度無溢位／pageerror，1440／1920px實測cover、padding0、照片寬720／960px，填滿半幅。語法與diff通過，已commit，未push。
