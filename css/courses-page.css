@@ -149,7 +149,9 @@
 
 @media (max-width: 768px) {
   .course-showcase__head { grid-template-columns: 1fr; gap: 16px; padding-bottom: 28px; }
-  .course-carousel__tile { width: 72vw; max-width: 300px; }
+  /* 手機每張課程卡都維持完整顏色，避免未選中卡片像停用按鈕。 */
+  .course-carousel__tile,
+  .course-carousel__tile.is-active { width: 72vw; max-width: 300px; opacity: 1; transform: none; transition: none; }
   .course-carousel__track { scroll-snap-type: x mandatory; }
   .course-carousel__tile { scroll-snap-align: center; }
   .course-carousel__nav { width: 38px; height: 38px; }
