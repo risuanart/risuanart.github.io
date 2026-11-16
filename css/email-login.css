@@ -1,0 +1,12 @@
+.email-login {
+  margin-top: var(--space-6);
+  margin-bottom: var(--space-10);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--color-surface-neutral);
+}
+.email-login[hidden], .email-login [hidden] { display: none; }
+.email-login__actions { display:flex; flex-wrap:wrap; align-items:center; gap:var(--space-4); margin-top:var(--space-4); }
+.email-login__status { color:var(--color-text-secondary); font-size:var(--font-size-sm); overflow-wrap:anywhere; }
+.email-login__destination { overflow-wrap:anywhere; }
+.email-login .confirm-field { margin-top:var(--space-4); }
+.email-login button:disabled { opacity:0.5; cursor:not-allowed; }

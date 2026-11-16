@@ -81,6 +81,27 @@
     return data.customer;
   }
 
+  async function emailLoginRequest(action, payload) {
+    const response = await fetch(`${API_BASE}/api/account`, {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ...payload, action }),
+    });
+    const data = await response.json();
+    if (!response.ok) {
+      const error = new Error(data.error || "Email 登入暫時無法使用，請稍後再試。");
+      error.retryAfter = Math.max(0, Number(data.retryAfter) || 0);
+      throw error;
+    }
+    return data;
+  }
+  function requestEmailLoginCode(payload) { return emailLoginRequest("email-code-request", payload); }
+  async function loginWithEmailCode(payload) {
+    const data = await emailLoginRequest("email-code-verify", payload);
+    if (!data.token || !data.customer) throw new Error("登入未完成，請重新取得驗證碼。");
+    writeStored({ token: data.token, customer: data.customer });
+    return data.customer;
+  }
+
   function logout() {
     const token = getToken();
     writeStored(null);
@@ -238,6 +259,8 @@
     getToken,
     loginWithGoogleCredential,
     loginWithLineCode,
+    requestEmailLoginCode,
+    loginWithEmailCode,
     logout,
     syncProfile,
     getGoogleClientId,
