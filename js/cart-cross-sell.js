@@ -34,7 +34,7 @@
     const variants = cart.VARIANT_OPTIONS[key];
     const defaultScheme = variants && variants[0];
     const url = (cart.PRODUCT_URLS && cart.PRODUCT_URLS[key]) || "#";
-    const frames = ["fluid-art-light-pearl", "fluid-art-light-pink"].includes(key) && cart.PRODUCT_COLORWAY_FRAMES[key];
+    const frames = ["fluid-art-light-pearl", "fluid-art-light-pink", "fluid-art-light-frost"].includes(key) && cart.PRODUCT_COLORWAY_FRAMES[key];
     const thumb = frames ? frames.map((src, i) => `<img class="shop-card__thumb${i === 0 ? " is-active" : ""}" src="${src}" alt="${i === 0 ? product.name : ""}" loading="lazy" data-carousel-frame>`).join("")
       : cart.thumbHTML({ productKey: key, scheme: defaultScheme || "" }, "shop-card__thumb");
     const variantInput = defaultScheme

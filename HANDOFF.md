@@ -1376,3 +1376,10 @@ gap/margin/padding 其實都沒生效（等於 0 或初始值），包括全站 
 - 未追蹤的「 2」副本、work素材均保留且不提交。
 
 - 發布：520c83a已push至origin/main；公開https://risuanart.com/account/?v=520c83a經curl及瀏覽器實查，訪客三入口與新樣式已出現、空會員選單不再顯示。原無版本網址曾回快取舊頁。正式截圖在本聊天室outputs/guest-entry-live.jpg，不進repo。未測真實登入、付款或信件。Cloudflare管理後台讀取被自動安全審查拒絕，因此改用公開頁面完成確認。
+
+
+## 2026-11-16：冰焰紅幻彩福字六張透明輪播
+- 使用者提供桌面「流動畫/藍紅流動畫/調色/修圖成品/幻彩福字01細膩多色塊版/透明去背」六張原PNG，保留原始素材、字樣與紋理，僅縮至1200px轉透明WebP，共約556KB。
+- 沿用hero-colorway-carousel，冰焰紅商品首圖同位置切換六張；PRODUCT_COLORWAY_FRAMES同步首頁、SHOP與相關商品，購物車推薦名單加入冰焰紅。材料包介紹輪播及全系列卡片同步，沒有新增相片牆項目。全系列專用倍率1.207，六張主體比例94.45%，與其他流動畫對齊，避免砂畫1.44倍造成裁切。正式HTML更新cart.js快取版本。
+- 六頁（冰焰紅、材料包總覽、SHOP、迎春粉、首頁、購物車）各六寬度共36次無橫向溢位／pageerror；首圖自動切換第二張通過，六寬度全系列實測主體比例94.45%。JS語法與diff檢查通過。已commit，未push，需使用者說推送再發布。
+- 補記Instagram：使用者已自行更新Vercel Production權杖並建立部署；公開instagram-posts端點實查回8則，8則皆有imageUrl及permalink，未讀取／保存權杖。

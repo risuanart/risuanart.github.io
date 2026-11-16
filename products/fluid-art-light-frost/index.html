@@ -158,11 +158,14 @@
          介紹」各自獨立並排在最前面、圖片排在中間的舊排法拿掉，不再保留
          ——內容本身完全沒變，只是搬動位置＋補上 .work__title-block 外殼。 -->
     <header class="work__intro work__intro--fluid-addons">
-      <!-- 成品主圖：比照 sand-art-artist-sheep-red／blue 的做法，單一配色、
-           沒有 combo-2／combo-3 配色示範圖可以借，不套 data-hero-carousel，
-           就是靜態的一張成品參考圖。 -->
-      <div class="work__intro-photo fade-in">
-        <img src="../../assets/images/products/fluid-art/fluid-art-light-main-frost.jpg" alt="春聯流動畫材料包（冰焰紅）成品參考圖" width="800" height="800" loading="lazy">
+      <!-- 六張透明成品沿用共用配色輪播。 -->
+      <div class="work__intro-photo work__intro-photo--carousel fade-in" data-hero-carousel data-carousel-loop>
+        <img class="is-active" src="../../assets/images/products/fluid-art/fluid-art-frost-fu-01.webp" alt="冰焰紅幻彩福字成品參考" width="1200" height="1200" loading="eager" data-carousel-frame>
+        <img src="../../assets/images/products/fluid-art/fluid-art-frost-fu-02.webp" alt="" width="1200" height="1200" loading="lazy" data-carousel-frame>
+        <img src="../../assets/images/products/fluid-art/fluid-art-frost-fu-03.webp" alt="" width="1200" height="1200" loading="lazy" data-carousel-frame>
+        <img src="../../assets/images/products/fluid-art/fluid-art-frost-fu-04.webp" alt="" width="1200" height="1200" loading="lazy" data-carousel-frame>
+        <img src="../../assets/images/products/fluid-art/fluid-art-frost-fu-05.webp" alt="" width="1200" height="1200" loading="lazy" data-carousel-frame>
+        <img src="../../assets/images/products/fluid-art/fluid-art-frost-fu-06.webp" alt="" width="1200" height="1200" loading="lazy" data-carousel-frame>
       </div>
 
       <div class="work__title-block fade-in delay-1">
@@ -388,7 +391,7 @@
   </main>
 
   <script src="../../js/product-gallery.js?v=20261115-finished-products"></script>
-  <script src="../../js/cart.js?v=20261116-fluid780"></script>
+  <script src="../../js/cart.js?v=20261116-frost6"></script>
   <script src="../../js/product-price-discount.js?v=20261116-all-kits85"></script>
   <script src="../../js/product-terms.js"></script>
   <script src="../../js/product-tabs.js"></script>
