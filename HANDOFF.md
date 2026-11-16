@@ -1353,3 +1353,8 @@ gap/margin/padding 其實都沒生效（等於 0 或初始值），包括全站 
 - 前端已push至c31555b，含七款砂畫624／85折530、課程總覽手機改善、指南計數移除與標題留白、首頁課程單排；後端已push至3eef88c。
 - 正式risuanart.com/js/cart.js七款price624／earlyBirdPrice530及85折文字已確認，正式首頁／課程CSS、作品列pageshow、指南CSS及山景指南計數移除均命中最新內容。
 - GitHub提交3eef88c的Vercel狀態success；Vercel inspect正式risuan-checkout.vercel.app確認部署dpl_CEpvHC6vU3iya3NWnjPeCdGdfe6F為production／Ready且正式alias已指向它，與GitHub狀態deployment ID一致。未建立正式測試訂單、未真實付款或寄信。此交接紀錄另行提交推送。
+
+## 2026-11-16：所有材料包早鳥統一85折，加購不參加
+- 使用者更正範圍為所有商品，經確認僅材料包，加購品維持原價。通用早鳥率0.85、標示85折，羊Diss紅藍800→680，流動畫四款850→723；七款砂畫624→530不變。單件四捨五入後乘數量、台北2026/12/15截止均維持。下架禮盒1100→935資料同步但仍hidden，不開放上架。
+- 前後端PRODUCTS固定優惠價、通用率、標示與兩份商品目錄同步，正式HTML更新腳本版本；所有noEarlyBird加購維持原價。
+- test-local、test-product-pricing（補四款流動畫獨立預期723及羊Diss680）、商品同步與diff檢查通過，既有hidden提示保留。羊Diss兩頁、流動畫四頁及一般砂畫1頁各六寬度共42次，價格／85折文字正確、無溢位與console error。無真實付款或寄信。前後端commit，未push或部署。
