@@ -6,6 +6,8 @@
 /* 經典紅的三種顏料比例，以實際成品並列比較。 */
 .story-section__variations--photos {
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  max-width: none;
+  width: 100%;
 }
 .story-section__variations--photos .story-section__variation {
   aspect-ratio: auto;
@@ -20,4 +22,12 @@
   font-size: var(--font-size-xs);
   color: var(--color-text-secondary);
   text-align: center;
+}
+
+/* 原成品去背圖裁得較緊，留白補齊到另外兩張的作品佔比。 */
+.story-section__variations--photos img[src*="fluid-art-light-cutout-red"] {
+  aspect-ratio: 1;
+  object-fit: contain;
+  box-sizing: border-box;
+  padding: 8.65%;
 }

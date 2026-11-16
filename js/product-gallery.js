@@ -49,7 +49,7 @@
       // 不同比例下的成果差異，深／淺兩端取這個色系裡最深跟最淺的顏料。
       variationCaption: "同色系、不同比例，深淺自由掌控",
       variationLabels: ["平均紅金", "過年紅偏多", "絳紅多"],
-      variationImages: ["fluid-art-red-fu-03.webp?v=clear1", "fluid-art-red-fu-06.webp?v=clear1", "fluid-art-light-main-red.jpg"],
+      variationImages: ["fluid-art-red-fu-03.webp?v=clear1", "fluid-art-red-fu-06.webp?v=clear1", "fluid-art-light-cutout-red.webp"],
       story: `正統的春聯色配上帶墨色的絳紅，讓傳統更增添一點跳脫。
 
 金，是新春最耀眼的點綴；但我們特別選用了摻入銀色質感的鉑金，
