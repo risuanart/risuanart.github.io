@@ -1446,3 +1446,8 @@ gap/margin/padding 其實都沒生效（等於 0 或初始值），包括全站 
 - 桌面珠光實測清單與照片均800px，工具列高22.39px／行高22.4px，為單行；五頁六寬度30次無溢位／pageerror，diff通過。更新CSS快取、交接並commit，未push。
 
 - 正式開放完成：使用者已完成Vercel六碼驗證，LINE_LOGIN_ENABLED已由test改為1，保持Production／Config。重新部署dpl_DgzVxosTsrRytGZk4oNsQGrprDvk已Ready（來源74583e1，45秒）；正式risuan-checkout.vercel.app已指向新部署。無lineTest參數的公開會員頁https://risuanart.com/account/，以未登入IAB實查Google按鈕、LINE用途及同意區、LINE登入控制與訪客入口均存在。LINE頻道已Published。正式截圖在本聊天室outputs/line-login-public-live.jpg。官方帳號@698nidbe不連動，Messaging API仍未使用；沒有新付款或對客人寄信。原會員連結及純LINE回訪已由使用者完成真實驗收，新LINE會員建立僅離線測試，尚未另用新帳號做真實註冊驗收。
+
+
+## 2026-11-16：冰焰紅以紅色為主的配色示範
+- 依使用者製作經驗改寫：紅色佔比較多更凸顯幻彩字，其他顏色可依喜好小幅增加，不再建議任一色各自主導。放指定01／04／05透明成品，三欄標示柔和交融、冰藍流線、銀色交織，標題改以紅色為主，玩出不同的冷暖層次；句號換行。
+- 五頁六寬度30次圖片與版面檢查通過，無溢位／pageerror，語法及diff通過。更新腳本版本、交接並commit，未push。
