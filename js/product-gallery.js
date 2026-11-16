@@ -131,6 +131,7 @@
       variationCaption: "同色系、不同比例，光澤濃淡自由掌控",
       variationLabels: ["偏藍", "偏粉", "偏黃", "偏綠"],
       variationImages: ["fluid-art-pearl-fu-02.webp?v=aligned-v2", "fluid-art-pearl-fu-04.webp?v=aligned-v2", "fluid-art-pearl-fu-03.webp?v=aligned-v2", "fluid-art-pearl-fu-05.webp?v=aligned-v2"],
+      sentenceBreaks: true,
       story: `粉、藍、黃各有鮮明個性，每一色都能當主色，搭配霧面黑色「福」字，讓不同底色都襯得出清楚俐落的字樣。
 
 顏料流動時也會自然混色：粉＋黃偏粉橘，粉＋藍偏紫，藍＋黃偏綠。同一組顏料，改變比例就能玩出不同的色彩表情。
@@ -350,7 +351,16 @@
       // 讓句號後真的換行分段，不是全部擠成一整塊。
       scheme.story.split(/\n\s*\n/).forEach((para) => {
         const p = document.createElement("p");
-        p.textContent = para.replace(/\n/g, "");
+        const text = para.replace(/\n/g, "");
+        if (scheme.sentenceBreaks) {
+          const sentences = text.match(/[^。]+。?|。/g) || [];
+          sentences.forEach((sentence, index) => {
+            if (index > 0) p.appendChild(document.createElement("br"));
+            p.appendChild(document.createTextNode(sentence));
+          });
+        } else {
+          p.textContent = text;
+        }
         body.appendChild(p);
       });
     }
