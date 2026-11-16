@@ -159,7 +159,7 @@
       },
       variationCaption: "以紅色為主，玩出不同的冷暖層次",
       variationLabels: ["柔和交融", "冰藍流線", "銀色交織"],
-      variationImages: ["fluid-art-frost-fu-01.webp?v=clear1", "fluid-art-frost-fu-04.webp?v=clear1", "fluid-art-frost-fu-05.webp?v=clear1"],
+      variationImages: ["fluid-art-frost-fu-01.webp?v=clear1", "fluid-art-frost-fu-04.webp?v=clear1", "fluid-art-frost-silver-original.webp"],
       sentenceBreaks: true,
       story: `以絳紅作為主要底色，搭配鉑金、深銀與冰藍，讓熱烈的紅與清冷的光澤自然交織。
 
