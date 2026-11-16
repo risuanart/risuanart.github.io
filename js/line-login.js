@@ -77,7 +77,7 @@
     });
   });
   window.addEventListener(account.CHANGE_EVENT, render);
-  fetch(account.API_BASE + '/api/account?action=config', { cache: 'no-store' })
+  fetch(account.API_BASE + '/api/account?action=config' + (new URLSearchParams(location.search).get('lineTest') === '1' ? '&lineTest=1' : ''), { cache: 'no-store' })
     .then(response => { if (!response.ok) throw new Error(); return response.json(); })
     .then(data => { config = data; render(); })
     .catch(() => {}); // LINE暫時無法使用時，保留既有Google與訪客入口。
