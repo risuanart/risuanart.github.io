@@ -1316,3 +1316,7 @@ gap/margin/padding 其實都沒生效（等於 0 或初始值），包括全站 
 - 五頁各六種標準寬度共30次區塊數0、無橫向溢位或pageerror，diff通過。更新交接並提交，未push。
 
 - 2026-11-15：使用者授權推送，1c30470／a44e93c／05b2aa1已成功push至origin/main，涵蓋所有流動畫成品名稱更正、移除重複內容物與深色教學追蹤區。推送後實查risuanart.com仍為「網站架設中」，未解除維護模式。
+
+## 2026-11-16：使用者授權開放官網供親友測試
+- 使用者明確要求解除維護頁、開放網站。已在Cloudflare Pages專案risuanart-github-io將生產分支maintenance改回main，保留自動部署。此提交用來觸發main正式建置，完成後需實查risuanart.com首頁及商品頁。
+- 既有GitHub Pages設定未調整，www與無www服務來源不同；公開網站供親友測試，不新增登入限制，未執行真實付款或寄信。
