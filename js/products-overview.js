@@ -165,7 +165,7 @@
     // 早鳥文字行放在標題下方、價格上方，跟商品頁買列同一套文字來源
     // （cart.EARLY_BIRD_TAGLINE），不是另外寫一次「EARLY BIRD · 10% OFF」。
     const discountTagline = discountActive
-      ? `<p class="shop-card__discount-tagline">${cart.EARLY_BIRD_TAGLINE}</p>`
+      ? `<p class="shop-card__discount-tagline">${product.earlyBirdTagline || cart.EARLY_BIRD_TAGLINE}</p>`
       : "";
     // 比例內縮：見上面 sizeScalePadding() 說明。padding 加在縮圖外面
     // 再包一層 .shop-card__thumb-inset，不是直接加在 .shop-card__media

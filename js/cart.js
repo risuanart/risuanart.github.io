@@ -84,14 +84,14 @@
     // PRODUCT_URLS 對應項目都一併移除，不留死鍵值指向已經刪掉的頁面。
     "sand-art-artist-sheep-red": { name: "藝術家系列・羊Diss舞蹈 Sheep La Danse / 紅", shortName: "羊Diss舞蹈 Sheep La Danse / 紅", price: 800, earlyBirdPrice: 664, category: "sand-art", hasVariant: false, tagline: "致敬馬諦斯《舞蹈》，喜氣酒紅款", preorder: true, sizeCm: 20 },
     "sand-art-artist-sheep-blue": { name: "藝術家系列・羊Diss舞蹈 Sheep La Danse / 藍", shortName: "羊Diss舞蹈 Sheep La Danse / 藍", price: 800, earlyBirdPrice: 664, category: "sand-art", hasVariant: false, tagline: "致敬馬諦斯《舞蹈》，原畫配色藍款", preorder: true, sizeCm: 20 },
-    "sand-art-chun": { name: "春聯砂畫材料包・春結 Chun Tied", shortName: "春結 Chun Tied", price: 640, earlyBirdPrice: 531, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true, preorder: true, sizeCm: 15 },
-    "sand-art-fu": { name: "春聯砂畫材料包・福星 Starry Fu", shortName: "福星 Starry Fu", price: 640, earlyBirdPrice: 531, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true, preorder: true, sizeCm: 15 },
-    "sand-art-cai": { name: "春聯砂畫材料包・花財 Cai in Bloom", shortName: "花財 Cai in Bloom", price: 640, earlyBirdPrice: 531, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true, preorder: true, sizeCm: 15 },
-    "sand-art-ying-chun": { name: "春聯砂畫材料包・格裡迎春 Checked in Chun", shortName: "格裡迎春 Checked in Chun", price: 640, earlyBirdPrice: 531, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true, preorder: true, sizeCm: 15 },
-    "sand-art-na-fu": { name: "春聯砂畫材料包・格裡納福 Checked in Na Fu", shortName: "格裡納福 Checked in Na Fu", price: 640, earlyBirdPrice: 531, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true, preorder: true, sizeCm: 15 },
-    // 2026-11-14 燈籠原價550；早鳥統一83折，四捨五入至整元457。
-    "sand-art-ying-chun-lantern": { name: "春聯砂畫材料包・燈上迎春 Lit in Chun", shortName: "燈上迎春 Lit in Chun", price: 550, earlyBirdPrice: 457, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true, preorder: true, sizeCm: 15 },
-    "sand-art-na-fu-lantern": { name: "春聯砂畫材料包・燈上納福 Lit in Na Fu", shortName: "燈上納福 Lit in Na Fu", price: 550, earlyBirdPrice: 457, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true, preorder: true, sizeCm: 15 },
+    "sand-art-chun": { earlyBirdTagline: "EARLY BIRD · 預購優惠價", name: "春聯砂畫材料包・春結 Chun Tied", shortName: "春結 Chun Tied", price: 640, earlyBirdPrice: 530, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true, preorder: true, sizeCm: 15 },
+    "sand-art-fu": { earlyBirdTagline: "EARLY BIRD · 預購優惠價", name: "春聯砂畫材料包・福星 Starry Fu", shortName: "福星 Starry Fu", price: 640, earlyBirdPrice: 530, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true, preorder: true, sizeCm: 15 },
+    "sand-art-cai": { earlyBirdTagline: "EARLY BIRD · 預購優惠價", name: "春聯砂畫材料包・花財 Cai in Bloom", shortName: "花財 Cai in Bloom", price: 640, earlyBirdPrice: 530, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true, preorder: true, sizeCm: 15 },
+    "sand-art-ying-chun": { earlyBirdTagline: "EARLY BIRD · 預購優惠價", name: "春聯砂畫材料包・格裡迎春 Checked in Chun", shortName: "格裡迎春 Checked in Chun", price: 640, earlyBirdPrice: 530, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true, preorder: true, sizeCm: 15 },
+    "sand-art-na-fu": { earlyBirdTagline: "EARLY BIRD · 預購優惠價", name: "春聯砂畫材料包・格裡納福 Checked in Na Fu", shortName: "格裡納福 Checked in Na Fu", price: 640, earlyBirdPrice: 530, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true, preorder: true, sizeCm: 15 },
+    // 2026-11-14 燈籠原價550；早鳥固定優惠價530，與其他非羊Diss砂畫一致。
+    "sand-art-ying-chun-lantern": { earlyBirdTagline: "EARLY BIRD · 預購優惠價", name: "春聯砂畫材料包・燈上迎春 Lit in Chun", shortName: "燈上迎春 Lit in Chun", price: 550, earlyBirdPrice: 530, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true, preorder: true, sizeCm: 15 },
+    "sand-art-na-fu-lantern": { earlyBirdTagline: "EARLY BIRD · 預購優惠價", name: "春聯砂畫材料包・燈上納福 Lit in Na Fu", shortName: "燈上納福 Lit in Na Fu", price: 550, earlyBirdPrice: 530, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true, preorder: true, sizeCm: 15 },
     "fluid-art-canvas-kit": { name: "空白畫布＋字貼＋架高杯", price: 0, category: "fluid-art", hasVariant: false, hidden: true, noEarlyBird: true },
     // 2026-10-22：原本是「額外顏色沙・固定套組」佔位商品（$__，不開放選色），
     // 使用者提供 12 組漸層色沙實拍照後正式上線，改成真的可以自選色的加購品。
@@ -1260,7 +1260,7 @@
     // 完全一致，不再各自一套。
     const discountActive = product.price && !product.noEarlyBird && earlyBirdActive();
     const cornerBadge = discountActive ? `<span class="discount-badge-corner discount-badge-corner--standalone">SALE</span>` : "";
-    const discountTagline = discountActive ? `<p class="cart-item__discount-tagline">${EARLY_BIRD_TAGLINE}</p>` : "";
+    const discountTagline = discountActive ? `<p class="cart-item__discount-tagline">${product.earlyBirdTagline || EARLY_BIRD_TAGLINE}</p>` : "";
     li.innerHTML = `
       <a class="cart-item__thumb-link" href="${productUrl}">
         ${thumbHTML(item, "cart-item__thumb")}${cornerBadge}

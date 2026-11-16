@@ -50,7 +50,7 @@
     const eyebrow = CATEGORY_LABELS[window.ShopNavigation.categoryFor(key)] || "";
     const discountActive = product.price && !product.noEarlyBird && cart.earlyBirdActive && cart.earlyBirdActive();
     const cornerBadge = discountActive ? `<span class="discount-badge-corner discount-badge-corner--standalone">SALE</span>` : "";
-    const discountTagline = discountActive ? `<p class="related-card__discount-tagline">${cart.EARLY_BIRD_TAGLINE}</p>` : "";
+    const discountTagline = discountActive ? `<p class="related-card__discount-tagline">${product.earlyBirdTagline || cart.EARLY_BIRD_TAGLINE}</p>` : "";
     return `
       <a class="related-card" href="${url}">
         <div class="related-card__media"${carouselAttr}>${thumb}${cornerBadge}</div>

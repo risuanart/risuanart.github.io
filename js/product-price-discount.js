@@ -41,7 +41,7 @@
     if (earlyBirdActive() && !product.noEarlyBird && !priceEl.dataset.discountTaglineInjected) {
       const tagline = document.createElement("p");
       tagline.className = "work-heading__discount-tagline";
-      tagline.textContent = EARLY_BIRD_TAGLINE;
+      tagline.textContent = product.earlyBirdTagline || EARLY_BIRD_TAGLINE;
       priceEl.insertAdjacentElement("beforebegin", tagline);
       priceEl.dataset.discountTaglineInjected = "1";
 
