@@ -129,14 +129,13 @@
         light: "霧面黑色字貼，15×15cm 主畫布字貼（黑色「福」，固定款式）",
       },
       variationCaption: "同色系、不同比例，光澤濃淡自由掌控",
-      variationLabels: ["多珠光藍", "均衡比例", "多珠光黃"],
-      story: `珠光質地的顏料隨著光線角度流轉，在粉、黃、藍之間輕輕交疊，
-像新年清晨第一道天光，不是單一的顏色，而是一層會呼吸的光澤。
+      variationLabels: ["偏藍", "偏粉", "偏黃", "偏綠"],
+      variationImages: ["fluid-art-pearl-fu-02.webp?v=aligned-v2", "fluid-art-pearl-fu-04.webp?v=aligned-v2", "fluid-art-pearl-fu-03.webp?v=aligned-v2", "fluid-art-pearl-fu-05.webp?v=aligned-v2"],
+      story: `粉、藍、黃各有鮮明個性，每一色都能當主色，搭配霧面黑色「福」字，讓不同底色都襯得出清楚俐落的字樣。
 
-我們特意選用霧面的黑，寫下這一年的「福」字，讓閃動的底色安靜下來，
-留出一塊可以專注凝視的焦點，不被珠光的流轉搶走主角。
+顏料流動時也會自然混色：粉＋黃偏粉橘，粉＋藍偏紫，藍＋黃偏綠。同一組顏料，改變比例就能玩出不同的色彩表情。
 
-這是一款適合喜歡低調質感、不追求大紅大紫的配色，初看素雅，細看卻處處是光。`,
+所有顏色都已調成柔和的珍珠光，混在一起也不會太過強烈。保留各色的流動紋理，或讓顏色自然交融，都容易搭配，第一次嘗試也能放心玩色。`,
       storyPlaceholder: false,
     },
     "frost-red": {
@@ -364,11 +363,12 @@
     if (variationGrid) {
       variationGrid.innerHTML = "";
       variationGrid.classList.toggle("story-section__variations--photos", Boolean(scheme.variationImages));
+      variationGrid.classList.toggle("story-section__variations--four", Boolean(scheme.variationImages && scheme.variationImages.length === 4));
       scheme.variationLabels.forEach((label, i) => {
         const cell = document.createElement("div");
         cell.className = "story-section__variation";
         cell.innerHTML = scheme.variationImages
-          ? `<img src="${IMG_BASE}${scheme.variationImages[i]}" alt="經典紅金福，${label}" width="1200" height="1200" loading="lazy"><p>${label}</p>`
+          ? `<img src="${IMG_BASE}${scheme.variationImages[i]}" alt="${scheme.name}成品，${label}" width="1200" height="1200" loading="lazy"><p>${label}</p>`
           : `<div class="placeholder-box">${label}</div>`;
         variationGrid.appendChild(cell);
       });

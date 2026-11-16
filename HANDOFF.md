@@ -1429,3 +1429,9 @@ gap/margin/padding 其實都沒生效（等於 0 或初始值），包括全站 
 - 六寬度量測grid與文字寬度均一致（335／350／728／800px），三欄差小於0.02px；五頁30次無溢位／pageerror，語法與diff通過。更新快取、交接並commit，未push。
 
 - 使用者已明確要求「正式開放給所有客人」。已用個人LINE切回原頻道管理者（官方帳號商用ID是另一登入身分，未替該身分建立開發者），並成功將2012642901發布為Published，UI已確認。官方帳號@698nidbe Messaging API實查未使用，依使用者方向不連動、不啟用。Vercel的LINE_LOGIN_ENABLED仍test；已按Send Code，驗證碼寄至工作室Gmail，畫面停在六碼Verify Code，待本人完成。驗證後編輯原LINE_LOGIN_ENABLED為1、保持Production／Config，再Save並Redeploy最新Production，實查無lineTest參數的config及會員頁。不要將Published誤當網站入口已開放。
+
+
+## 2026-11-16：珠光四種主色與珍珠光混色特色
+- 珠光比例區依指定放02偏藍、04偏粉、03偏黃、05偏綠，重用已對齊透明WebP，四欄等分全內文。經典紅三欄不變。
+- 珠光故事改寫強調粉藍黃皆可作主色與黑字搭配；粉黃偏粉橘、粉藍偏紫、藍黃偏綠；顏料均已調珍珠光，分色或自然混色都柔和、容易搭配。沒有更動顏料內容物與其他款文案。
+- 五頁六寬度30次驗證珠光四張、經典紅三張、其他配色未改，無溢位／pageerror；語法與diff通過。更新快取、交接並commit，未push。

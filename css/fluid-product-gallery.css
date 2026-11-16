@@ -31,3 +31,8 @@
   box-sizing: border-box;
   padding: 8.65%;
 }
+
+/* 珠光四種主色示範，等分內文寬度。 */
+.story-section__variations--four {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
