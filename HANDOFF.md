@@ -1427,3 +1427,5 @@ gap/margin/padding 其實都沒生效（等於 0 或初始值），包括全站 
 ## 2026-11-16：經典紅比例區去背並展開內文寬度
 - 依使用者要求，絳紅多換成同一作品既有透明去背fluid-art-light-cutout-red.webp，保留原照片與字樣，未重繪。限定照片比例區取消40ch上限，三欄等分全內文；第三圖補透明留白對齊其餘作品佔比。
 - 六寬度量測grid與文字寬度均一致（335／350／728／800px），三欄差小於0.02px；五頁30次無溢位／pageerror，語法與diff通過。更新快取、交接並commit，未push。
+
+- 使用者已明確要求「正式開放給所有客人」。已用個人LINE切回原頻道管理者（官方帳號商用ID是另一登入身分，未替該身分建立開發者），並成功將2012642901發布為Published，UI已確認。官方帳號@698nidbe Messaging API實查未使用，依使用者方向不連動、不啟用。Vercel的LINE_LOGIN_ENABLED仍test；已按Send Code，驗證碼寄至工作室Gmail，畫面停在六碼Verify Code，待本人完成。驗證後編輯原LINE_LOGIN_ENABLED為1、保持Production／Config，再Save並Redeploy最新Production，實查無lineTest參數的config及會員頁。不要將Published誤當網站入口已開放。
