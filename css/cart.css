@@ -2091,3 +2091,17 @@
   font-size: inherit;
   font-weight: 400;
 }
+
+/* 結帳頁限定，訪客點數說明沿用表單色彩與間距。 */
+.guest-points-note {
+  background: var(--color-surface-light);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  line-height: 1.8;
+}
+.guest-points-note p { margin-top: var(--space-2); margin-bottom: 0; }
+.guest-points-note[hidden], #confirm-form[hidden] { display: none; }
+#payment-complete { padding-top: var(--space-6); padding-bottom: var(--space-6); }
+#payment-complete .work__cta { margin-top: var(--space-4); }
+
+.guest-points-note:not(.chapter) { padding: var(--space-4); }
