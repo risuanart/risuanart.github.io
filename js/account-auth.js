@@ -219,8 +219,8 @@
           window.google.accounts.id.renderButton(container, {
             type: "standard",
             theme: "outline",
-            size: "medium",
-            text: "signin_with",
+            size: options.size || "medium",
+            text: options.text || "signin_with",
             locale: "zh-TW",
             width: options.width || 220,
           });

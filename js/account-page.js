@@ -457,7 +457,10 @@
     function showGuest() {
       guestSection.hidden = false;
       memberSection.hidden = true;
-      window.RisuanAccount.mountGoogleButton(googleBtnContainer);
+      window.RisuanAccount.mountGoogleButton(googleBtnContainer, {
+        width: Math.max(200, Math.min(400, Math.floor(googleBtnContainer.getBoundingClientRect().width))),
+        size: "large", text: "continue_with",
+      });
     }
 
     function showMember(customer) {

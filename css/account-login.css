@@ -1,0 +1,55 @@
+.account-login { padding-top:var(--space-6); padding-bottom:var(--space-16); }
+.account-page-intro.work__intro { padding-bottom:var(--space-6); }
+.account-login__grid { display:grid; grid-template-columns:1.15fr 1fr; border:1px solid var(--color-surface-neutral); }
+.account-login__form,.account-login__benefits { padding:var(--space-10); min-width:0; }
+.account-login__benefits { background:var(--color-surface-neutral); }
+.account-login h2 { font-size:var(--font-size-lg); line-height:1.5; color:var(--color-text-primary); margin:0; }
+.account-login__eyebrow { font-size:var(--font-size-xs); letter-spacing:var(--space-1); color:var(--color-brand); margin:0 0 var(--space-4); }
+.account-login__lead { font-size:var(--font-size-sm); color:var(--color-text-secondary); margin-top:var(--space-2); margin-bottom:var(--space-6); }
+.account-login__social { display:grid; gap:var(--space-4); }
+.account-login__button { display:flex; align-items:center; justify-content:space-between; gap:var(--space-4); width:100%; padding:var(--space-4); border:1px solid var(--color-text-primary); background:var(--color-surface-light); color:var(--color-text-primary); font-family:inherit; font-size:var(--font-size-sm); text-decoration:none; cursor:pointer; box-sizing:border-box; }
+.account-login__button:hover { border-color:var(--color-brand); color:var(--color-brand); }
+.account-login__brand { font-weight:700; font-size:var(--font-size-sm); min-width:var(--space-10); }
+.account-login__button--primary { background:var(--color-button-primary); color:var(--color-surface-light); margin-top:var(--space-4); }
+.account-login__button--primary:hover { background:var(--color-surface-dark); color:var(--color-surface-light); }
+.account-login__consent { display:flex; align-items:flex-start; gap:var(--space-2); flex-wrap:wrap; font-size:var(--font-size-xs); color:var(--color-text-secondary); margin-top:var(--space-4); line-height:1.8; }
+.account-login__consent input { margin-top:var(--space-1); accent-color:var(--color-brand); }
+.account-login a { color:inherit; }
+.account-login__divider { display:flex; align-items:center; gap:var(--space-4); margin:var(--space-6) 0; font-size:var(--font-size-xs); color:var(--color-text-secondary); }
+.account-login__divider:before,.account-login__divider:after { content:''; height:1px; background:var(--color-surface-neutral); flex:1; }
+.account-login__small,.account-login details { font-size:var(--font-size-xs); line-height:1.8; color:var(--color-text-secondary); }
+.account-login__small { margin-top:var(--space-4); margin-bottom:0; }
+.account-login details { margin-top:var(--space-4); }
+.account-login summary { cursor:pointer; text-decoration:underline; text-underline-offset:var(--space-1); }
+.account-login__status { font-size:var(--font-size-xs); color:var(--color-brand); }
+.account-login__status:empty { display:none; }
+.account-login__benefits ul { list-style:none; margin:var(--space-10) 0; padding:0; display:grid; gap:var(--space-10); }
+.account-login__benefits li { display:flex; gap:var(--space-4); font-size:var(--font-size-sm); }
+.account-login__number { color:var(--color-brand); font-size:var(--font-size-xs); padding-top:var(--space-1); }
+.account-login__benefits li p { color:var(--color-text-secondary); font-size:var(--font-size-xs); margin:var(--space-2) 0 0; line-height:1.8; }
+.account-login__guest { display:grid; grid-template-columns:1fr 1fr; gap:var(--space-4) var(--space-6); border-top:1px solid var(--color-surface-neutral); padding-top:var(--space-10); margin-top:var(--space-10); }
+.account-login__guest h2 { font-size:var(--font-size-base); }
+.account-login__guest p { font-size:var(--font-size-xs); color:var(--color-text-secondary); }
+.account-login__guest-actions { display:grid; grid-template-columns:1fr 1fr; gap:var(--space-4); align-items:start; }
+.account-login__guest-note { grid-column:1 / -1; margin-top:0; }
+@media(max-width:840px) { .account-login__grid,.account-login__guest { grid-template-columns:1fr; } .account-login__form,.account-login__benefits { padding:var(--space-6); } .account-login__benefits ul { gap:var(--space-6); margin:var(--space-6) 0; } }
+.account-login.chapter { margin-top:var(--space-6); padding-top:0; }
+
+.account-login__logo { width:var(--space-10); height:var(--space-10); object-fit:contain; flex-shrink:0; }
+.account-login__social .account-login__button { padding-top:var(--space-2); padding-bottom:var(--space-2); }
+.account-login__button--line,.account-login__button--line:hover { background:var(--color-line-login); border-color:var(--color-line-login); color:var(--color-surface-light); }
+.account-login__email-icon { flex-shrink:0; }
+/* 依使用者回饋：兩種登入維持白底，品牌色只保留在圖示。 */
+.account-login__logo { width:var(--space-6); height:var(--space-6); }
+.account-login__button--line,.account-login__button--line:hover { background:var(--color-surface-light); border-color:var(--color-text-primary); color:var(--color-text-primary); }
+.account-login__button--line .account-login__logo { background:var(--color-line-login); }
+.account-login__social .account-login__button { padding-top:var(--space-4); padding-bottom:var(--space-4); }
+
+.account-login__line[hidden], .account-login__line [hidden], .account-login__email[hidden], .account-login__email [hidden] { display:none; }
+.account-login__logo--line { background:var(--color-line-login); }
+.account-login__button:disabled { opacity:.5; cursor:not-allowed; }
+.account-login__google { width:100%; min-height:var(--space-10); }
+.account-login__google > div { max-width:100%; }
+.account-login .confirm-field { margin-top:0; }
+.account-login__email .email-login__actions { margin-top:0; }
+.account-login__email .email-login__actions .text-link { margin-top:var(--space-4); }

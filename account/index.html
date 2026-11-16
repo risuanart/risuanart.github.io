@@ -25,6 +25,7 @@
   <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="stylesheet" href="../css/page-title-en.css?v=20261107-shared-heading">
+  <link rel="stylesheet" href="../css/account-login.css?v=20261116-login-layout">
 </head>
 <body>
 
@@ -119,56 +120,50 @@
 
     <p class="account-page__banner" id="account-store-picked-banner" hidden>已更新您的預設超商門市。</p>
 
-    <!-- 訪客入口和會員登入放在一起；登入後由既有 account-page.js 隱藏。 -->
-    <section class="chapter fade-in" id="account-guest">
-      <h2 class="chapter__title">會員登入</h2>
-      <p>登入後可查看訂單與課程預約紀錄、保存收件資料，並使用會員點數。</p>
-      <div class="account-page__google-btn" id="account-page-google-btn"></div>
-      <p class="account-page__login-note">使用 Google 帳號繼續，無須另外設定密碼。新會員完成註冊可獲得 50 點，材料包結帳時可折抵商品金額。</p>
-
-      <div class="line-login" data-line-login="login" hidden>
-        <h3 class="account-page__subheading">使用 LINE 帳號登入</h3>
-        <p class="guest-entry__note">經您同意後，日宣繪畫室會取得 LINE 提供的識別碼、暱稱、大頭貼與 Email，用於辨識會員、管理訂單與課程預約，以及寄送必要通知，不會因此訂閱行銷訊息。</p>
-        <p class="guest-entry__note"><a class="text-link" href="../privacy/" target="_blank" rel="noopener">閱讀隱私權政策</a></p>
-        <div data-line-controls>
-          <label class="line-login__consent"><input type="checkbox">我已閱讀上述說明，同意提供資料給日宣繪畫室。</label>
-          <button type="button" class="text-link line-login__start" data-line-start disabled>使用 LINE 帳號登入</button>
-        </div>
-        <p class="guest-entry__note" data-line-status role="status"></p>
-      </div>
-
-      <section class="email-login" data-email-login hidden aria-labelledby="email-login-heading">
-        <h3 class="account-page__subheading" id="email-login-heading">使用 Email 驗證碼登入</h3>
-        <p class="guest-entry__note">不用設定密碼，使用常用信箱收取登入驗證碼即可。請使用原會員或下單時的信箱，以查看同一信箱的訂單與預約；首次登入會建立會員。</p>
-        <p class="guest-entry__note">此信箱用於會員辨識及必要通知，不會因此訂閱行銷訊息。<a class="text-link" href="../privacy/" target="_blank" rel="noopener">閱讀隱私權政策</a></p>
-        <form data-email-form>
-          <label class="confirm-field"><span>Email</span><span class="confirm-field__control"><input type="email" name="email" required maxlength="254" autocomplete="email" placeholder="you@example.com"></span></label>
-          <div class="email-login__actions"><button type="submit" class="work__cta work__cta--primary">寄送登入驗證碼</button></div>
-        </form>
-        <form data-code-form hidden>
-          <p class="email-login__destination" data-email-destination></p>
-          <label class="confirm-field"><span>6 位數驗證碼</span><span class="confirm-field__control"><input type="text" name="code" required inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6" placeholder="輸入驗證碼"></span></label>
-          <div class="email-login__actions">
-            <button type="submit" class="work__cta work__cta--primary">確認並登入</button>
-            <button type="button" class="text-link" data-email-resend>重寄驗證碼</button>
-            <button type="button" class="text-link" data-email-change>更換信箱</button>
+<section class="chapter account-login" id="account-guest">
+  <div class="account-login__grid">
+    <section class="account-login__form" aria-labelledby="login-heading">
+      <p class="account-login__eyebrow">WELCOME BACK</p>
+      <h2 id="login-heading">登入／加入會員</h2>
+      <p class="account-login__lead">選擇您習慣的方式，開始創作日常。</p>
+      <div class="account-login__social">
+        <div class="account-login__line" data-line-login="login" hidden>
+          <div data-line-controls>
+            <button class="account-login__button" type="button" data-line-start disabled><img class="account-login__logo account-login__logo--line" src="../assets/images/auth/line-login.png" alt="" width="24" height="24">使用 LINE 繼續<span aria-hidden="true">→</span></button>
+            <label class="account-login__consent"><input type="checkbox">我同意 LINE 提供會員辨識所需資料。<a href="#line-data" data-login-details>查看說明</a></label>
           </div>
-        </form>
-        <p class="email-login__status" data-email-status role="status" aria-live="polite"></p>
-      </section>
-
-      <div class="guest-entry">
-        <h2 class="chapter__title">不登入，也可以預約和購物</h2>
-        <p>以訪客身分填寫聯絡資料，即可預約課程或購買材料包，不必先加入會員。</p>
-        <div class="guest-entry__actions">
-          <a class="work__cta work__cta--primary" href="../booking/">以訪客預約課程</a>
-          <a class="work__cta work__cta--primary" href="../products/shop/">以訪客選購材料包</a>
+          <p class="account-login__status" data-line-status role="status"></p>
         </div>
-        <p><a class="text-link" href="../cart/">已選好商品？前往購物車結帳</a></p>
-        <p class="guest-entry__note">訪客結帳無法使用會員點數。請填寫可收信的 Email，付款與預約確認通知會寄到這裡。</p>
-        <p class="guest-entry__note">已有課程預約？請從預約確認信開啟免登入管理連結。商品訂單問題可來信 <a class="text-link" href="mailto:risuan.art@gmail.com">聯絡日宣繪畫室</a>。</p>
+        <div class="account-login__google" id="account-page-google-btn"></div>
       </div>
+      <div class="account-login__divider"><span>或使用 Email</span></div>
+      <section class="account-login__email" data-email-login hidden aria-label="使用 Email 登入"><form data-email-form>
+        <label class="confirm-field"><span>Email</span><span class="confirm-field__control"><input type="email" name="email" maxlength="254" required autocomplete="email" placeholder="輸入您的常用信箱"></span></label>
+        <button class="account-login__button account-login__button--primary" type="submit"><svg class="account-login__email-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 6 9 7 9-7"/></svg>寄送驗證碼<span aria-hidden="true">→</span></button>
+      </form>
+      <form data-code-form hidden>
+        <p class="account-login__small" data-email-destination></p>
+        <label class="confirm-field"><span>6 位數驗證碼</span><span class="confirm-field__control"><input type="text" name="code" required inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6" placeholder="輸入驗證碼"></span></label>
+        <div class="email-login__actions"><button type="submit" class="account-login__button account-login__button--primary">確認並登入<span aria-hidden="true">→</span></button><button type="button" class="text-link" data-email-resend>重寄驗證碼</button><button type="button" class="text-link" data-email-change>更換信箱</button></div>
+      </form>
+      <p class="account-login__status" data-email-status role="status" aria-live="polite"></p>
+      </section>
+      <p class="account-login__small">首次使用會建立會員；之後使用同一信箱收取新驗證碼即可登入，不需設定密碼。</p>
+      <details id="line-data"><summary>資料使用說明與隱私權</summary><p>使用 LINE 登入，經您同意後會取得識別碼、暱稱、大頭貼與 Email，用於會員辨識、訂單與預約管理。Email 用於登入及必要通知，不會因此訂閱行銷訊息。</p><a href="/privacy/" target="_blank" rel="noopener">閱讀完整隱私權政策</a></details>
     </section>
+    <aside class="account-login__benefits" aria-labelledby="benefits-heading">
+      <p class="account-login__eyebrow">A LITTLE MORE FOR YOU</p>
+      <h2 id="benefits-heading">讓每次創作，都有累積</h2>
+      <ul>
+        <li><span class="account-login__number">01</span><div><strong>新會員送 50 點</strong><p>材料包購物可折抵 NT$50</p></div></li>
+        <li><span class="account-login__number">02</span><div><strong>購物累積點數</strong><p>商品訂單每滿 NT$100 回饋 1 點</p></div></li>
+        <li><span class="account-login__number">03</span><div><strong>紀錄，隨時都在</strong><p>查看訂單、課程預約與常用收件資料</p></div></li>
+      </ul>
+      <p class="account-login__small">曾以訪客購物或預約？<br>使用相同 Email 登入，即可查看過往紀錄。</p>
+    </aside>
+  </div>
+  <section class="account-login__guest" aria-labelledby="guest-heading"><div><h2 id="guest-heading">想先逛逛？以訪客繼續</h2><p>不用加入會員，也能預約課程或購物。</p></div><div class="account-login__guest-actions"><a class="account-login__button" href="/booking/">預約課程<span aria-hidden="true">→</span></a><a class="account-login__button" href="/products/shop/">選購材料包<span aria-hidden="true">→</span></a></div><p class="account-login__small account-login__guest-note">日後使用相同 Email 登入，即可查看過往訂單與預約；訪客購物點數也會保留。</p></section>
+</section>
 
     <!-- 參考 koyama.com.tw 的 WooCommerce 會員後台（左側欄切換，不是
          全部攤開在同一頁捲動），但拿掉「變更密碼」——這個網站只有
@@ -338,16 +333,17 @@
 
   </main>
 
-  <script src="../js/account-auth.js?v=20261116-email-login"></script>
+  <script src="../js/account-auth.js?v=20261116-login-layout"></script>
   <script src="../js/line-login.js?v=20261116-line"></script>
   <script src="../js/email-login.js?v=20261116-email-login"></script>
   <script src="../js/tw-postal-codes.js"></script>
   <script src="../js/booking-detail-ui.js"></script>
-  <script src="../js/account-page.js"></script>
+  <script src="../js/account-page.js?v=20261116-login-layout"></script>
   <script src="../js/cart.js?v=20261116-fluid-clear1"></script>
   <script src="../js/site-header-scroll.js?v=20261107-backtop"></script>
   <script src="../js/account-widget.js"></script>
   <script src="../js/site-menu.js?v=menu-order-20261109"></script>
   <script src="../js/scroll-reveal.js"></script>
+  <script src="../js/account-login-layout.js?v=20261116-login-layout"></script>
 </body>
 </html>
