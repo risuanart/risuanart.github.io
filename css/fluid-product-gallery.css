@@ -52,3 +52,8 @@
   box-sizing: border-box;
   padding: 3.1%;
 }
+
+/* 春聯流動畫製作與等待時間分列。 */
+.fluid-making-time { margin-top: var(--space-4); color: var(--color-text-secondary); font-size: var(--font-size-xs); }
+.fluid-making-time__summary { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-4); margin: 0; }
+.fluid-making-time__drying { margin-top: var(--space-1); }

@@ -1502,3 +1502,8 @@ gap/margin/padding 其實都沒生效（等於 0 或初始值），包括全站 
 - 由最新origin/main7563d2e隔離整合，013312b已push。僅含材料包首圖填滿、兩技法作品等大、加購預覽欄寬及必要快取，保留遠端其他功能。
 - Cloudflare Pages check成功，部署6aa4179e-af7c-461f-a2a9-279d11b051a0；正式risuanart.com使用no-cache實查products/含新首圖版本與scale1.217、products-hero.js cover/padding0、addon-product-info.css雙欄minmax新規則，均確認生效。先前帶查詢網址曾回舊快取，不能單看一次請求。
 - 主checkout仍保留本機歷史，隔離發布checkout在/private/tmp/risuan-fluid-release，後續整合避免覆蓋其他功能。
+
+
+## 2026-11-16：四款春聯流動畫加製作與乾燥時間
+- 使用者確認標題區加「耐性度 ★　約30分鐘打底」，下一行小字「靜置約24小時，乾燥後再貼字完成」。套用經典紅、迎春粉、珠光、冰焰紅四款，沿用既有星色與字級間距token，更新專用CSS版本。
+- 五頁六寬度30次回歸無溢位／pageerror，diff通過；已commit未push。
