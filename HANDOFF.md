@@ -1471,3 +1471,8 @@ gap/margin/padding 其實都沒生效（等於 0 或初始值），包括全站 
 ## 2026-11-16：迎春粉三張配色示範與文案
 - 使用者確認建議文案，使用01金銀柔光、09朱紅流線、04櫻粉主調三張既有透明圖，全內文等分。介紹以櫻粉與金銀為基底、少量朱紅帶暖意，可依喜好增加朱紅或粉／金銀，搭黑色春字；句號換行。
 - 五頁六寬度30次圖片數量及版面檢查通過，無溢位／pageerror，語法與diff通過。更新版本、交接並commit，未push。開工時account/index.html、js/account-auth.js、privacy/index.html已有未提交修改，本次未動也未提交。
+
+
+## 2026-11-16：流動畫獨立推送狀態
+- 使用者同意拆分後，從最新origin/main b879344建立/private/tmp/risuan-fluid-release隔離checkout，只帶入流動畫素材、展示與文案、專用CSS及cart快取，不覆蓋登入程式。c22781e已成功push至main，原本機提交與登入工作保留。
+- 推送後數次curl實查正式站仍回舊product-gallery.js及20261115-finished-products引用，尚未確認Cloudflare部署生效，不能宣稱正式頁面已更新。下一步持續確認Cloudflare Pages部署及公開內容。隔離checkout暫保留供查驗，主checkout與遠端有分歧，後續整合需保留本機登入進度。
