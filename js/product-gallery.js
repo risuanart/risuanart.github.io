@@ -114,8 +114,7 @@
       dot: "var(--swatch-pearl-shimmer)",
       ctaText: "var(--color-text-primary)",
       gallery: [
-        { file: "fluid-art-light-main-pearl.jpg", alt: "珠光成品模擬圖，黑色「福」字菱形畫布", caption: "成品模擬圖" },
-        { file: "fluid-art-light-kit-pearl.jpg", alt: "珠光材料包內容物平鋪，畫布、顏料、字貼與工具", caption: "內容物全展開" },
+        { file: "fluid-art-light-main-pearl.jpg", alt: "珠光實際成品，黑色「福」字菱形畫布", caption: "實際成品" },
       ],
       kitPhotoLight: { file: "fluid-art-light-kit-pearl.jpg", alt: "珠光材料包內容物平鋪，畫布、顏料、字貼與工具" },
       // 2026-11-14 使用者確認四色顏料正式命名：珠光藍／珠光粉／珠光黃／
