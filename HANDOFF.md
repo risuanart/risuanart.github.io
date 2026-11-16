@@ -1456,3 +1456,18 @@ gap/margin/padding 其實都沒生效（等於 0 或初始值），包括全站 
 ## 2026-11-16：銀色交織改用指定原照片去背
 - 使用者指定桌面流動畫/藍紅流動畫/調色/俯拍幻彩流動畫-5.jpg，經imagegen去背並由使用者確認「好」，換入比例區第三張銀色交織，保留原照片粉色反光方向；首圖六張輪播不變。新素材fluid-art-frost-silver-original.webp，圖片留白另校準。
 - 五頁六寬度30次無溢位／pageerror，語法與diff通過。更新快取、交接並commit，未push。
+
+
+## 2026-11-16：Email驗證碼登入（本機完成，待收信實測）
+- 使用者同意新增Email驗證碼登入。沿用現有Gmail寄信與會員session，新增api/account.js action=email-code-request／email-code-verify及lib/email-login.js，不增serverless路由或正式依賴，不讀寫.env。暫時預設EMAIL_LOGIN_MODE=test，只有/account/?emailTest=1顯示新入口；原Google、LINE及訪客維持。驗收後預設改on，環境變數可設off停用。
+- 六碼以crypto.randomInt產生，5分鐘有效、單次使用，驗證需同一瀏覽器分頁的隨機browserKey；Redis只存HMAC摘要，驗證碼不回傳API、不放郵件主旨或寄信紀錄、不存瀏覽器storage。錯5次刪除challenge，成功驗證與會員建立／索引／challenge刪除同一Lua原子操作，避免重複使用。
+- Redis限制同信箱60秒重寄、5次／時及10次／日；同IP10次／時30次／日；總量40次／時200次／日保留其他通知寄信容量。驗證同IP30次／10分鐘；寄送失敗刪除challenge，服務錯誤不洩漏SMTP／Redis細節，回應不透露會員存在與否。IP取Vercel覆寫的X-Forwarded-For，不採用body欄位。
+- 已驗證的Email沿用既有小寫email會員key，保留Google、LINE映射、姓名、聯絡、地址、createdAt與訂單／預約／點數。新帳號在驗證通過前不建立。新會員禮沿用帳本，但grantSignupBonusIfNew改Lua原子查帳／加點／記帳，避免三種登入併發重複贈點；記憶體fallback同步測試，舊100點／50點signup紀錄不重送。
+- 會員頁新增寄碼、輸碼、60秒倒數、重寄及更換信箱；驗證後立即清除輸碼欄位，忙碌時停用重複送出。新增只此頁引用的email-login.css／email-login.js；account-auth.js僅增加兩個共用方法（全站64頁引用）。隱私頁及品牌化驗證碼信同步補說明，不會因登入訂閱行銷訊息。
+- 本機test-local及既有LINE前後端測試通過。新scripts/test-email-login.js（後端需fengari，仍僅本聊天室work/line-qa測試依賴）、scripts/test-email-account.js、前端scripts/test-email-login.js均通過，涵蓋真Lua到期／錯碼／單次／併發、全部配額、寄信失敗、舊資料保留、新會員禮不重複、API不提前發token及不信任客傳email/IP。新驗證信樣板以離線資料驗證，未實際寄信。
+- 本機Email輸入／驗證碼兩態及privacy、products、courses共30次標準六寬度檢查，橫向溢位0，16px按鈕間距實測正確；本機替身API驗證寄碼畫面、重寄倒數、錯碼清空與更換信箱，未連正式會員或寄信。Google本機config為空不能當成真實登入驗收；LINE既有功能未重新授權。console無新增error，JS語法及diff通過。待部署隱藏測試入口、本人實際收信登入，再正式開放。
+
+
+## 2026-11-16：迎春粉三張配色示範與文案
+- 使用者確認建議文案，使用01金銀柔光、09朱紅流線、04櫻粉主調三張既有透明圖，全內文等分。介紹以櫻粉與金銀為基底、少量朱紅帶暖意，可依喜好增加朱紅或粉／金銀，搭黑色春字；句號換行。
+- 五頁六寬度30次圖片數量及版面檢查通過，無溢位／pageerror，語法與diff通過。更新版本、交接並commit，未push。開工時account/index.html、js/account-auth.js、privacy/index.html已有未提交修改，本次未動也未提交。
