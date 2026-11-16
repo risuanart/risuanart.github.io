@@ -399,3 +399,24 @@
   .home-guide-feature__copy h3 { font-size: var(--font-size-base); }
   .home-guide-feature__copy > p:not(.home-guide-feature__eyebrow) { font-size: var(--font-size-sm); line-height: 1.8; }
 }
+
+/* 首頁五堂課程維持單排；窄平板保留可閱讀卡片與下一張露出。手機沿用原規則。 */
+@media (min-width: 769px) {
+  .home-course-section .banner-row--quad {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: var(--space-4);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+  .home-course-section .banner-row--quad::-webkit-scrollbar { display: none; }
+  .home-course-section .banner-row--quad .banner-tile {
+    flex: 0 0 calc((100% - 4 * var(--space-4)) / 5);
+    min-width: 0;
+    scroll-snap-align: start;
+  }
+}
+@media (min-width: 769px) and (max-width: 1024px) {
+  .home-course-section .banner-row--quad .banner-tile { flex-basis: 30%; }
+}
