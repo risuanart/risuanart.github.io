@@ -1496,3 +1496,9 @@ gap/margin/padding 其實都沒生效（等於 0 或初始值），包括全站 
 - 圖片原尺寸撐開grid的1fr欄位，造成右側文字被裁切。專用CSS改minmax(0,1fr)、子欄min-width0，841px以上沿用840px兩欄，窄版單欄。更新必要版本。
 - 三頁六寬度18次開啟驗證無內部溢位，右欄完整落於視窗，桌面各420px，無pageerror；語法與diff通過。已commit未push。
 - 發布完成：隔離release 7563d2e已push origin/main。直接實查https://risuanart.com/cart/回傳新訪客點數說明、付款完成會員入口及20261116-guest-points資源版本，確認Cloudflare實際內容更新。手機付款完成入口inline-flex、無溢位且付款表單隱藏。未進行真實付款；本次預覽使用本機隔離假訂單，未存入正式系統。
+
+
+## 2026-11-16：三項視覺修正已推送並驗證
+- 由最新origin/main7563d2e隔離整合，013312b已push。僅含材料包首圖填滿、兩技法作品等大、加購預覽欄寬及必要快取，保留遠端其他功能。
+- Cloudflare Pages check成功，部署6aa4179e-af7c-461f-a2a9-279d11b051a0；正式risuanart.com使用no-cache實查products/含新首圖版本與scale1.217、products-hero.js cover/padding0、addon-product-info.css雙欄minmax新規則，均確認生效。先前帶查詢網址曾回舊快取，不能單看一次請求。
+- 主checkout仍保留本機歷史，隔離發布checkout在/private/tmp/risuan-fluid-release，後續整合避免覆蓋其他功能。
