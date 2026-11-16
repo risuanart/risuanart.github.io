@@ -466,6 +466,7 @@
   if (window.RisuanAccount) {
     window.RisuanAccount.syncProfile().then((customer) => {
       if (!customer) return;
+      document.getElementById("guest-points-hint").hidden = true;
       const contact = customer.lastContact;
       if (contact) {
         fillIfEmpty(customerLastNameInput, contact.lastName);
@@ -726,6 +727,21 @@
     } catch (err) {
       showConfirmError(`讀取訂單失敗：${err.message}`);
       if (wasHidden) confirmView.scrollIntoView({ behavior: "smooth", block: "start" });
+      return;
+    }
+
+    const paymentComplete = document.getElementById("payment-complete");
+    const isPaid = ["paid", "shipment_created"].includes(order.status);
+    paymentComplete.hidden = !isPaid;
+    form.hidden = isPaid;
+    if (isPaid) {
+      currentOrder = order;
+      loadingEl.hidden = true;
+      contentEl.hidden = false;
+      collapseCartEditView();
+      cartCollapseTotal.textContent = formatMoney(order.total);
+      headerOrderTotal.textContent = formatMoney(order.total);
+      paymentComplete.scrollIntoView({ behavior: "smooth", block: "start" });
       return;
     }
 
