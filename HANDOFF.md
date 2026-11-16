@@ -1399,3 +1399,9 @@ gap/margin/padding 其實都沒生效（等於 0 或初始值），包括全站 
 - 設定與部署進度：使用者已確認Email申請送出，實查Applied。已依明確授權把LINE_CHANNEL_SECRET以Vercel Secret類型存入Production；LINE_CHANNEL_ID為公開編號、LINE_LOGIN_ENABLED=test，均已存入Production。未在檔案或交接記錄秘密值。後端74583e1與前端ddcec3f（含遠端自動目錄整合）已push。公開API config正常入口lineClientId為空、lineTest=1回正確編號與callback；正式Chrome已看到新會員頁與原會員基本資料的連結LINE入口。測試頁https://risuanart.com/account/?lineTest=1&v=ddcec3f已停在同意勾選，等待使用者本人完成連結／LINE授權。頻道仍Developing、未完成真實登入，不可宣稱已開放。
 
 - 真實連結已通過：使用者完成LINE授權後導回/account/?lineConnected=1；重新載入測試頁後，原會員基本資料顯示「已連結 LINE，下次可直接使用 LINE 登入同一個會員。」且連結控制項隱藏。已登出準備測試純LINE回訪登入；代勾資料同意遭自動審查拒絕，已交由本人勾選及登入。尚未驗證獨立LINE回訪、未發布頻道、未改公開開關。
+
+
+## 2026-11-16：經典紅與冰焰紅換實拍清晰邊緣版
+- 使用者明確確認兩款均使用最新「實拍清晰邊緣版」。來源為桌面流動畫/經典紅流動畫/調色/修圖成品/經典紅金福實拍清晰邊緣版/透明去背（7張），及藍紅流動畫同層的藍紅幻彩福字實拍清晰邊緣版/透明去背（6張）。僅縮至1200px透明WebP，原PNG保留。
+- 冰焰紅替換原六張並加clear1圖片快取版本；經典紅新增七張同位置輪播，商品首圖、首頁、SHOP、相關推薦、購物車推薦及材料包介紹／全系列同步。兩款全系列主體倍率1.207，六種寬度實測均94.45%完整顯示。未變更相片牆、價格及登入功能。
+- 七頁各六寬度42次無橫向溢位／pageerror；經典紅7張、冰焰紅6張首圖輪播均自動切至第二張，JS語法及diff通過。正式HTML更新cart與cart-cross-sell快取版本。已commit，未push，待使用者指示。
