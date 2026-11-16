@@ -1320,3 +1320,6 @@ gap/margin/padding 其實都沒生效（等於 0 或初始值），包括全站 
 ## 2026-11-16：使用者授權開放官網供親友測試
 - 使用者明確要求解除維護頁、開放網站。已在Cloudflare Pages專案risuanart-github-io將生產分支maintenance改回main，保留自動部署。此提交用來觸發main正式建置，完成後需實查risuanart.com首頁及商品頁。
 - 既有GitHub Pages設定未調整，www與無www服務來源不同；公開網站供親友測試，不新增登入限制，未執行真實付款或寄信。
+
+- 開放完成：Cloudflare生產部署95bd09ee-decd-4e41-9a33-ee3cd96088fc（main／2976163）狀態success。實際Chrome與curl確認risuanart.com已顯示官網；首頁、products/、SHOP、迎春粉、珠光均不是維護頁。公開分享網址https://risuanart.com/。未測真實付款／寄信。開放成功畫面存於本次聊天室outputs/website-open.png，不進repo。
+- 後續main推送將直接更新正式站；若要恢復維護頁，需先取得使用者授權，再將Cloudflare生產分支改maintenance並觸發對應部署。
