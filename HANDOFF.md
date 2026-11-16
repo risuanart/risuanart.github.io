@@ -1444,3 +1444,5 @@ gap/margin/padding 其實都沒生效（等於 0 或初始值），包括全站 
 ## 2026-11-16：流動畫內容物清單寬度
 - 使用者回報架高杯*2過早換行，確認kit-list既有max-width40ch限制。僅流動畫專用CSS取消該上限，沿用章節寬度、固定符號不縮小，其他頁不變。
 - 桌面珠光實測清單與照片均800px，工具列高22.39px／行高22.4px，為單行；五頁六寬度30次無溢位／pageerror，diff通過。更新CSS快取、交接並commit，未push。
+
+- 正式開放完成：使用者已完成Vercel六碼驗證，LINE_LOGIN_ENABLED已由test改為1，保持Production／Config。重新部署dpl_DgzVxosTsrRytGZk4oNsQGrprDvk已Ready（來源74583e1，45秒）；正式risuan-checkout.vercel.app已指向新部署。無lineTest參數的公開會員頁https://risuanart.com/account/，以未登入IAB實查Google按鈕、LINE用途及同意區、LINE登入控制與訪客入口均存在。LINE頻道已Published。正式截圖在本聊天室outputs/line-login-public-live.jpg。官方帳號@698nidbe不連動，Messaging API仍未使用；沒有新付款或對客人寄信。原會員連結及純LINE回訪已由使用者完成真實驗收，新LINE會員建立僅離線測試，尚未另用新帳號做真實註冊驗收。
