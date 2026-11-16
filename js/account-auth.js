@@ -68,6 +68,19 @@
     return data.customer;
   }
 
+  async function loginWithLineCode(payload) {
+    const token = payload.link ? getToken() : null;
+    const res = await fetch(`${API_BASE}/api/account`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", ...(token ? { Authorization: `Bearer ${token}` } : {}) },
+      body: JSON.stringify({ ...payload, action: "line-login" }),
+    });
+    const data = await res.json();
+    if (!res.ok || !data.token || !data.customer) throw new Error(data.error || "LINE 登入失敗，請重新登入。");
+    writeStored({ token: data.token, customer: data.customer });
+    return data.customer;
+  }
+
   function logout() {
     const token = getToken();
     writeStored(null);
@@ -224,6 +237,7 @@
     getCustomer,
     getToken,
     loginWithGoogleCredential,
+    loginWithLineCode,
     logout,
     syncProfile,
     getGoogleClientId,

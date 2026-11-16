@@ -29,3 +29,13 @@
 #account-guest[hidden] {
   display: none;
 }
+
+.line-login { margin-top: var(--space-6); margin-bottom: var(--space-6); }
+.line-login[hidden], .line-login [hidden] { display: none; }
+.line-login__consent { display: flex; align-items: baseline; gap: var(--space-2); font-size: var(--font-size-sm); }
+.line-login__consent input { flex-shrink: 0; }
+.line-login__start { display: inline-block; margin-top: var(--space-4); }
+.line-login__start:disabled { opacity: 0.5; cursor: not-allowed; }
+.line-callback { padding-top: var(--space-16); padding-bottom: var(--space-16); overflow-wrap: anywhere; }
+.line-callback h1 { font-size: var(--font-size-xl); }
+.line-callback h2 { margin-top: var(--space-6); font-size: var(--font-size-lg); }

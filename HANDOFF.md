@@ -1383,3 +1383,13 @@ gap/margin/padding 其實都沒生效（等於 0 或初始值），包括全站 
 - 沿用hero-colorway-carousel，冰焰紅商品首圖同位置切換六張；PRODUCT_COLORWAY_FRAMES同步首頁、SHOP與相關商品，購物車推薦名單加入冰焰紅。材料包介紹輪播及全系列卡片同步，沒有新增相片牆項目。全系列專用倍率1.207，六張主體比例94.45%，與其他流動畫對齊，避免砂畫1.44倍造成裁切。正式HTML更新cart.js快取版本。
 - 六頁（冰焰紅、材料包總覽、SHOP、迎春粉、首頁、購物車）各六寬度共36次無橫向溢位／pageerror；首圖自動切換第二張通過，六寬度全系列實測主體比例94.45%。JS語法與diff檢查通過。已commit，未push，需使用者說推送再發布。
 - 補記Instagram：使用者已自行更新Vercel Production權杖並建立部署；公開instagram-posts端點實查回8則，8則皆有imageUrl及permalink，未讀取／保存權杖。
+
+## 2026-11-16：LINE登入準備完成，尚未開放
+- 使用者已自行完成LINE Developers註冊、Provider「日宣繪畫室」及LINE Login頻道建立。Provider 2005815439、Channel ID 2012642901是公開識別碼；不要記錄Channel secret。頻道仍Developing。回傳網址已設定https://risuanart.com/account/line-callback/。
+- 使用者已明確同意申請Email權限；Apply表單已開啟，但兩項資料使用聲明尚未同意、截圖尚未上傳、Submit尚未送出。自動審查最初拒絕Apply後，已取得使用者明確同意才重開。申請用截圖是本次新實作的本機用途說明與同意區，存於本聊天室outputs/line-email-consent.jpg。Chrome擴充功能上傳要求file URL權限，未擅自開啟；原生檔案選擇遇到使用者接手而中斷，交給使用者上傳及勾選聲明。
+- 後端lib/line-login.js負責code交換、PKCE與nonce、issuer/audience/exp驗證，僅信任LINE verify的身分。api/account.js新增POST action=line-login、config公開設定及profile.lineLinked。前端account-auth只增加loginWithLineCode，不改Google流程；新增頁面限定line-login.js及沒有第三方資源的回傳頁。state、nonce與verifier只留sessionStorage 10分鐘，回傳立即移除code查詢字串，不回傳密鑰或原始服務錯誤。
+- LINE固定sub映射會員email，Redis Lua原子處理line-identity、line-email、customer及customers:index。舊Google會員首次連結須先登入，禁止替換另一個LINE或跨會員綁定；不以姓名合併。已連結者不因LINE變更Email而改會員。沒有Email的新用戶需先用Google或登入原會員後連結。原點數帳本及50點禮沿用既有機制。
+- 會員頁新增資料用途、同意勾選、原會員基本資料的連結入口，隱私頁同步描述。LINE_LOGIN_ENABLED=1，且LINE_CHANNEL_ID、LINE_CHANNEL_SECRET、Redis及會員session secret齊備才顯示入口。LINE環境變數尚未設定，需要使用者明確同意把Channel secret存到日宣Vercel risuan-checkout的環境設定；不寫前端或檔案。
+- 已通過node test-local.js、JS語法及git diff --check。離線測試涵蓋PKCE交換、錯誤nonce／issuer／audience／expiry、取消及過期state、會員狀態變更、固定導回位置。用fengari實際執行Lua，模擬Redis GET/SET/SADD，驗證新會員、舊會員連結、無Email回訪、Email變更、競爭連結；並非正式Upstash驗收。
+- 後端測試用fengari僅安裝在本聊天室work/line-qa，未加入正式依賴：NODE_PATH=/Users/newbarbie/Documents/Codex/2026-11-16/new-chat/work/line-qa/node_modules node scripts/test-line-login.js。前端：node scripts/test-line-login.js。
+- 本機隔離預覽僅替換API網址與公開config，不存真實帳號、不送付款。會員、回傳、privacy、products、courses五頁六寬度30次無溢位；勾選前按鈕disabled、勾選後啟用，console無新增error。申請截圖是待開放功能的本機畫面。真實LINE授權、Vercel設定、正式Redis連結、Google會員回歸及Published皆待完成。
