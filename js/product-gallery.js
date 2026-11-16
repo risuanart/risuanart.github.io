@@ -48,7 +48,8 @@
       // 色系故事結尾呼應「自由掌控深淺變化」那句，用三格小圖示意同一組顏料在
       // 不同比例下的成果差異，深／淺兩端取這個色系裡最深跟最淺的顏料。
       variationCaption: "同色系、不同比例，深淺自由掌控",
-      variationLabels: ["多絳紅", "均衡比例", "多鉑金"],
+      variationLabels: ["平均紅金", "過年紅偏多"],
+      variationImages: ["fluid-art-red-fu-03.webp?v=clear1", "fluid-art-red-fu-06.webp?v=clear1"],
       story: `正統的春聯色配上帶墨色的絳紅，讓傳統更增添一點跳脫。
 
 金，是新春最耀眼的點綴；但我們特別選用了摻入銀色質感的鉑金，
@@ -362,10 +363,13 @@
     if (variationCaption) variationCaption.textContent = scheme.variationCaption;
     if (variationGrid) {
       variationGrid.innerHTML = "";
-      scheme.variationLabels.forEach((label) => {
+      variationGrid.classList.toggle("story-section__variations--photos", Boolean(scheme.variationImages));
+      scheme.variationLabels.forEach((label, i) => {
         const cell = document.createElement("div");
         cell.className = "story-section__variation";
-        cell.innerHTML = `<div class="placeholder-box">${label}</div>`;
+        cell.innerHTML = scheme.variationImages
+          ? `<img src="${IMG_BASE}${scheme.variationImages[i]}" alt="經典紅金福，${label}" width="1200" height="1200" loading="lazy"><p>${label}</p>`
+          : `<div class="placeholder-box">${label}</div>`;
         variationGrid.appendChild(cell);
       });
     }

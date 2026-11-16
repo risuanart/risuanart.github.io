@@ -2,3 +2,22 @@
 .gallery__captions .gallery__caption-desc {
   padding-left: 0;
 }
+
+/* 經典紅的兩種顏料比例，以實際成品並列比較。 */
+.story-section__variations--photos {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.story-section__variations--photos .story-section__variation {
+  aspect-ratio: auto;
+}
+.story-section__variations--photos img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.story-section__variations--photos p {
+  margin-top: var(--space-1);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  text-align: center;
+}
