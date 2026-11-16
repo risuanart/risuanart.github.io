@@ -1358,3 +1358,5 @@ gap/margin/padding 其實都沒生效（等於 0 或初始值），包括全站 
 - 使用者更正範圍為所有商品，經確認僅材料包，加購品維持原價。通用早鳥率0.85、標示85折，羊Diss紅藍800→680，流動畫四款850→723；七款砂畫624→530不變。單件四捨五入後乘數量、台北2026/12/15截止均維持。下架禮盒1100→935資料同步但仍hidden，不開放上架。
 - 前後端PRODUCTS固定優惠價、通用率、標示與兩份商品目錄同步，正式HTML更新腳本版本；所有noEarlyBird加購維持原價。
 - test-local、test-product-pricing（補四款流動畫獨立預期723及羊Diss680）、商品同步與diff檢查通過，既有hidden提示保留。羊Diss兩頁、流動畫四頁及一般砂畫1頁各六寬度共42次，價格／85折文字正確、無溢位與console error。無真實付款或寄信。前後端commit，未push或部署。
+
+- 2026-11-16：使用者授權推送，全部材料包85折已發布：前端12bd3ee、後端65f470b。正式risuanart.com商品資料已實查羊Diss680、流動畫四款723、一般砂畫530且通用標示85折；加購原價維持。後端Vercel production部署dpl_J33TiMVHjxLGtucYKDGjxD9Dqihy狀態Ready，正式risuan-checkout.vercel.app alias已指向它，與65f470b成功狀態一致。無真實付款／寄信測試。
