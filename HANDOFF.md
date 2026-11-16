@@ -1395,3 +1395,5 @@ gap/margin/padding 其實都沒生效（等於 0 或初始值），包括全站 
 - 本機隔離預覽僅替換API網址與公開config，不存真實帳號、不送付款。會員、回傳、privacy、products、courses五頁六寬度30次無溢位；勾選前按鈕disabled、勾選後啟用，console無新增error。申請截圖是待開放功能的本機畫面。真實LINE授權、Vercel設定、正式Redis連結、Google會員回歸及Published皆待完成。
 
 - Email權限已由使用者送出，LINE後台實查Applied；使用者已明確同意把Channel ID及Channel secret存入日宣Vercel risuan-checkout正式環境。新增LINE_LOGIN_ENABLED=test測試模式，普通config不回LINE client ID，只有會員測試網址?lineTest=1才顯示入口；頻道仍Developing，只有LINE允許的管理／測試帳號可用。驗收後才改1並發布頻道。
+
+- 設定與部署進度：使用者已確認Email申請送出，實查Applied。已依明確授權把LINE_CHANNEL_SECRET以Vercel Secret類型存入Production；LINE_CHANNEL_ID為公開編號、LINE_LOGIN_ENABLED=test，均已存入Production。未在檔案或交接記錄秘密值。後端74583e1與前端ddcec3f（含遠端自動目錄整合）已push。公開API config正常入口lineClientId為空、lineTest=1回正確編號與callback；正式Chrome已看到新會員頁與原會員基本資料的連結LINE入口。測試頁https://risuanart.com/account/?lineTest=1&v=ddcec3f已停在同意勾選，等待使用者本人完成連結／LINE授權。頻道仍Developing、未完成真實登入，不可宣稱已開放。
