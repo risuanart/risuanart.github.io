@@ -1360,3 +1360,9 @@ gap/margin/padding 其實都沒生效（等於 0 或初始值），包括全站 
 - test-local、test-product-pricing（補四款流動畫獨立預期723及羊Diss680）、商品同步與diff檢查通過，既有hidden提示保留。羊Diss兩頁、流動畫四頁及一般砂畫1頁各六寬度共42次，價格／85折文字正確、無溢位與console error。無真實付款或寄信。前後端commit，未push或部署。
 
 - 2026-11-16：使用者授權推送，全部材料包85折已發布：前端12bd3ee、後端65f470b。正式risuanart.com商品資料已實查羊Diss680、流動畫四款723、一般砂畫530且通用標示85折；加購原價維持。後端Vercel production部署dpl_J33TiMVHjxLGtucYKDGjxD9Dqihy狀態Ready，正式risuan-checkout.vercel.app alias已指向它，與65f470b成功狀態一致。無真實付款／寄信測試。
+
+## 2026-11-16：流動畫四款折後改780與Instagram待補原因確認
+- 使用者指定四款流動畫折後780，原價依85折回推：780÷0.85約917.647，原價取整數918，單件85折780.3四捨五入780。前後端四款price918／earlyBirdPrice780，七款砂畫530、羊Diss680、加購原價均不變。同步四頁摘要／分享描述／結構化原價／靜態價、兩份目錄與快取版本。
+- test-local防前端竄改測試由850更新獨立預期918，test-product-pricing四款預期918／780；兩測試及商品同步均通過（既有hidden提示不變）。四頁六寬度24次顯示918／780、無溢位及console error，diff通過。
+- Instagram僅檢查，未改授權／憑證：正式/api/instagram-posts?limit=8回posts空陣列。限定該路由的Vercel日誌明確回報Session has expired，過期時間2026-11-06 21:24:10 PST；因此前端維持貼文待補。需重新Instagram授權並依既有README流程更新Vercel設定才能恢復，尚未執行。未讀取或印出token內容。
+- 前後端本機commit，未push／部署。無真實付款／寄信測試。
