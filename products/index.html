@@ -415,6 +415,16 @@
   .split-row .img-box--cutout img[data-carousel-frame][src*="cutout-frost"]{
     transform: scale(1.011);
   }
+  /* 新流動畫圖透明邊距較多，補到砂畫同樣約95%的作品佔比。 */
+  .split-row .img-box--cutout img[data-carousel-frame][src*="fluid-art-red-fu-"],
+  .split-row .img-box--cutout img[data-carousel-frame][src*="fluid-art-pink-chun-"],
+  .split-row .img-box--cutout img[data-carousel-frame][src*="fluid-art-frost-fu-"],
+  .split-row .img-box--cutout img[data-carousel-frame][src*="fluid-art-pearl-fu-"] {
+    transform: scale(1.217);
+  }
+  .split-row .img-box--cutout img[data-carousel-frame][src*="fluid-art-pearl-fu-00"] {
+    transform: scale(1.238);
+  }
   .split-row .text-box{
     max-width:500px;
     font-size:16px;
@@ -1654,6 +1664,6 @@
   <script src="../js/site-menu.js?v=menu-order-20261109"></script>
   <script src="/js/promo-bar.js"></script>
 
-  <script src="../js/products-hero.js?v=20261115-live"></script>
+  <script src="../js/products-hero.js?v=20261116-full-photo"></script>
 </body>
 </html>

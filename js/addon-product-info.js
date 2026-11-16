@@ -18,7 +18,7 @@
     'sand-art-baseboard-artist': '羊Diss系列底板與貼紙，可搭配手邊材料重新配色、再做一幅作品。不含色沙與工具。'
   };
   window.AddonProductInfo = info;
-  const css = document.createElement('link'); css.rel = 'stylesheet'; css.href = '../../css/addon-product-info.css'; document.head.append(css);
+  const css = document.createElement('link'); css.rel = 'stylesheet'; css.href = '../../css/addon-product-info.css?v=20261116-modal-width'; document.head.append(css);
   const key = location.pathname.split('/').filter(Boolean).pop();
   if (!info[key]) return;
   const titleBlock = document.querySelector('.work__intro .work__title-block');

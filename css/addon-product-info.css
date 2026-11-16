@@ -60,3 +60,22 @@
   stroke-linejoin: round;
 }
 .product-more-link:hover { opacity: 0.7; }
+
+/* 加購預覽避免圖片原始尺寸撐開格線，裁掉右欄。 */
+.addon-modal__dialog {
+  grid-template-columns: minmax(0, 1fr);
+}
+.addon-modal__media,
+.addon-modal__body {
+  min-width: 0;
+}
+.addon-modal__title,
+.addon-modal__description {
+  overflow-wrap: anywhere;
+}
+@media (min-width: 841px) {
+  .addon-modal__dialog {
+    max-width: var(--content-max-width);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

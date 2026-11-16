@@ -36,8 +36,8 @@
       .kit-hero-frosted-nav .kit-hero-scroll { display: none; }
       .kit-hero-frosted-nav .preview-hero { aspect-ratio: 4 / 3; }
       .kit-hero-frosted-nav .preview-hero__companion {
-        object-fit: contain;
-        padding: 5%;
+        object-fit: cover;
+        padding: 0;
         box-sizing: border-box;
         background: var(--color-surface-light);
       }

@@ -127,3 +127,8 @@
 - 症狀：會員中心account-member已有hidden，仍顯示空的點數與分頁。
 - 原因：既有.account-page__layout的display:flex覆蓋瀏覽器hidden預設樣式。
 - 解法：會員頁引用的guest-entry.css明確指定#account-member[hidden]、#account-guest[hidden]為display:none，未改會員資料權限。
+
+
+### 桌面加購預覽文字裁切（2026-11-16）
+- 原因：grid的1fr預設最小寬度被圖片撐大。
+- 修正：minmax(0,1fr)、min-width0，桌面840px雙欄，窄版單欄。
