@@ -1374,3 +1374,5 @@ gap/margin/padding 其實都沒生效（等於 0 或初始值），包括全站 
 - 本機三個改動頁＋products/、courses/各六種標準寬度，30次檢查均無橫向溢位。會員章節桌面840px、手機350px（390寬），按鈕高44px、間距16px；會員區hidden實測display:none。預約入口點擊正常，Google核心／付款送出未改、未執行真實登入或交易。本機Google設定請求因正式API跨域限制無法使用，不能當作正式登入已驗收。
 - LINE尚未實作或開通，已向使用者詢問是否有LINE Login頻道；不可宣稱已完成LINE串接。需頻道、Email權限、同一Provider及帳號綁定設計與實測。Email驗證碼、訪客商品訂單自助查詢仍未實作；現階段預約沿用信內免登入管理連結，商品訂單提供聯絡入口。
 - 未追蹤的「 2」副本、work素材均保留且不提交。
+
+- 發布：520c83a已push至origin/main；公開https://risuanart.com/account/?v=520c83a經curl及瀏覽器實查，訪客三入口與新樣式已出現、空會員選單不再顯示。原無版本網址曾回快取舊頁。正式截圖在本聊天室outputs/guest-entry-live.jpg，不進repo。未測真實登入、付款或信件。Cloudflare管理後台讀取被自動安全審查拒絕，因此改用公開頁面完成確認。
