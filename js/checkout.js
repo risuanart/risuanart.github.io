@@ -704,6 +704,9 @@
   // addEventListener，同一顆按鈕會累積掛上一堆重複的監聽器，越用越怪。
   // 用這兩個模組層級的變數＋只掛一次的監聽器取代，各自呼叫時直接讀/寫
   // 最新狀態即可。
+  function readOrderAccess(id) {
+    try { return sessionStorage.getItem('risuan-order-access:' + id) || ''; } catch { return ''; }
+  }
   let currentOrder = null;
   let isHomeConfirmed = false;
   // 目前選中的送貨方式，給訂單明細面板算運費／總金額用（面板可能在客人
@@ -721,7 +724,11 @@
       // 2026-10-20 後端 api/order-status.js 併進 api/account.js（Vercel
       // Hobby 12 支函式上限卡滿，不帶 action 參數時行為跟原本完全一樣，
       // 見該檔案開頭註解）。
-      const res = await fetch(`${CHECKOUT_API_BASE}/api/account?orderId=${encodeURIComponent(orderId)}`);
+      const accessToken = readOrderAccess(orderId);
+      const memberToken = window.RisuanAccount?.getToken();
+      const res = await fetch(`${CHECKOUT_API_BASE}/api/account?orderId=${encodeURIComponent(orderId)}`, {
+        cache: 'no-store', headers: { ...(accessToken ? { 'X-Order-Access': accessToken } : {}), ...(memberToken ? { Authorization: 'Bearer '+memberToken } : {}) },
+      });
       order = await res.json();
       if (!res.ok) throw new Error(order.error || "找不到這筆訂單");
     } catch (err) {
@@ -739,12 +746,17 @@
       loadingEl.hidden = true;
       contentEl.hidden = false;
       collapseCartEditView();
-      cartCollapseTotal.textContent = formatMoney(order.total);
-      headerOrderTotal.textContent = formatMoney(order.total);
+      cartCollapseTotal.textContent = Number.isFinite(order.total) ? formatMoney(order.total) : '已完成付款';
+      headerOrderTotal.textContent = cartCollapseTotal.textContent;
       paymentComplete.scrollIntoView({ behavior: "smooth", block: "start" });
       return;
     }
 
+    if (!Array.isArray(order.items)) {
+      showConfirmError('這筆結帳連線已過期，請返回購物車重新結帳；已付款訂單可使用相同 Email 登入會員查看。');
+      return;
+    }
+    document.getElementById('confirm-order-access').value = readOrderAccess(order.orderId);
     document.getElementById("confirm-order-id").value = order.orderId;
     shippingCvsLink.href = `${CHECKOUT_API_BASE}/api/logistics-map?orderId=${encodeURIComponent(order.orderId)}`;
     form.action = `${CHECKOUT_API_BASE}/api/create-order`;
@@ -787,8 +799,14 @@
   // 點「超商取貨」按鈕：本身是 <a href> 會直接導去綠界電子地圖重新選店，
   // 回來後 loadAndShowConfirm 會依訂單最新的 cvsStore 重新渲染，這裡只要
   // 把本機的「宅配已選」狀態清掉，讓渲染結果改回超商那一側。
-  shippingCvsLink.addEventListener("click", () => {
+  shippingCvsLink.addEventListener("click", (event) => {
+    event.preventDefault();
+    if (!currentOrder) return;
     isHomeConfirmed = false;
+    const mapForm = document.createElement('form'); mapForm.method = 'POST'; mapForm.action = CHECKOUT_API_BASE+'/api/logistics-map';
+    const data = { orderId: currentOrder.orderId, orderAccessToken: readOrderAccess(currentOrder.orderId), customerToken: window.RisuanAccount?.getToken() || '' };
+    Object.entries(data).forEach(([name,value]) => { const input=document.createElement('input');input.type='hidden';input.name=name;input.value=value;mapForm.appendChild(input); });
+    document.body.appendChild(mapForm); mapForm.submit();
   });
 
   function showCheckoutError(message) {
@@ -833,6 +851,10 @@
       // 的 404。跟 api/logistics-map-callback.js 等後端那組「寫死 cart.html
       // 轉址殼」是同一種錯誤，只是這次是前端自己造成的，改用目前真實的
       // pathname（一定是 /cart/）＋查詢字串就不會有這個問題。
+      if (data.orderAccessToken) {
+        try { sessionStorage.setItem('risuan-order-access:'+data.orderId,data.orderAccessToken); }
+        catch { throw new Error('瀏覽器無法保存結帳連線，請允許此網站的儲存空間後重試。'); }
+      }
       history.pushState(null, "", `${window.location.pathname}?orderId=${encodeURIComponent(data.orderId)}`);
       await loadAndShowConfirm(data.orderId);
     } catch (err) {

@@ -1119,6 +1119,10 @@
           const data = await res.json();
           if (!res.ok) throw new Error(data.error || "建立訂單失敗");
           resetSelectedAddons();
+          if (data.orderAccessToken) {
+            try { sessionStorage.setItem('risuan-order-access:'+data.orderId,data.orderAccessToken); }
+            catch { throw new Error('瀏覽器無法保存結帳連線，請允許網站儲存空間後重試。'); }
+          }
           window.location.href = `${BASE_PREFIX}cart/?orderId=${encodeURIComponent(data.orderId)}`;
         } catch (err) {
           alert(`無法直接購買：${err.message}，請改用「加入購物車」`);

@@ -35,9 +35,17 @@
     }
   }
 
+  // Keep contact/address details in current-page memory, not persistent browser storage.
+  let currentCustomer = null;
+  function minimalCustomer(customer) {
+    if(!customer)return null;
+    const {email,name,picture,pointsBalance,pointsReserved,lineLinked}=customer;
+    return {email,name,picture,pointsBalance,pointsReserved,lineLinked};
+  }
   function writeStored(data) {
+    currentCustomer = data ? data.customer : null;
     if (data) {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({ token:data.token, customer:minimalCustomer(data.customer) }));
     } else {
       localStorage.removeItem(STORAGE_KEY);
     }
@@ -51,7 +59,12 @@
 
   function getCustomer() {
     const stored = readStored();
-    return stored ? stored.customer : null;
+    return currentCustomer || (stored ? minimalCustomer(stored.customer) : null);
+  }
+
+  const previous = readStored();
+  if (previous?.customer) {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify({token:previous.token,customer:minimalCustomer(previous.customer)})); } catch {}
   }
 
   // 用 Google Identity Services 回傳的 ID Token（credential）跟後端換成

@@ -18,10 +18,19 @@
   // 前提條件。
   const CHECKOUT_API_BASE = "https://risuan-checkout.vercel.app";
 
+  let bookingAccessToken = "", headerSupport;
+  function supportsScopedHeader() {
+    if(!headerSupport)headerSupport=fetch(CHECKOUT_API_BASE+'/api/account?action=config',{cache:'no-store'}).then(r=>r.json()).then(c=>c.bookingAccessHeader===true).catch(()=>false);
+    return headerSupport;
+  }
   async function tokenApiFetch(pathWithQuery, options = {}) {
-    const res = await fetch(`${CHECKOUT_API_BASE}${pathWithQuery}`, {
+    const useHeader=await supportsScopedHeader();
+    const url=new URL(CHECKOUT_API_BASE+pathWithQuery);
+    if(useHeader)url.searchParams.delete('token');
+    const res = await fetch(url.href, {
       ...options,
       headers: {
+        ...(useHeader && bookingAccessToken ? {"X-Booking-Access":bookingAccessToken} : {}),
         ...(options.body ? { "Content-Type": "application/json" } : {}),
         ...(options.headers || {}),
       },
@@ -37,7 +46,11 @@
 
     const params = new URLSearchParams(location.search);
     const bookingId = params.get("bookingId");
-    const token = params.get("token");
+    let token = params.get("token");
+    const key='risuan-booking-access:'+bookingId;
+    try { if(token)sessionStorage.setItem(key,token);else token=sessionStorage.getItem(key); } catch {}
+    bookingAccessToken=token||'';
+    if(params.has('token'))history.replaceState(null,'',location.pathname+'?bookingId='+encodeURIComponent(bookingId||''));
 
     function renderInvalidLink(message) {
       root.innerHTML = `
