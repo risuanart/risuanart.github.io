@@ -47,6 +47,13 @@
     const pointsListEl = document.getElementById("account-points-list");
     const cvsStoreEl = document.getElementById("account-cvs-store");
     const cvsLinkEl = document.getElementById("account-cvs-link");
+    cvsLinkEl.addEventListener('click', event => {
+      event.preventDefault();
+      const token=window.RisuanAccount.getToken(); if(!token) return;
+      const form=document.createElement('form');form.method='POST';form.action=window.RisuanAccount.API_BASE+'/api/logistics-map';
+      Object.entries({mode:'profile',token}).forEach(([name,value])=>{const input=document.createElement('input');input.type='hidden';input.name=name;input.value=value;form.appendChild(input)});
+      document.body.appendChild(form);form.submit();
+    });
 
     // ---------- 側邊欄分頁切換（參考 koyama.com.tw 會員後台，拿掉
     // 「變更密碼」——這個網站只有 Google 登入）。四個區塊同時只顯示
@@ -147,7 +154,7 @@
         cvsLinkEl.textContent = "選擇門市";
       }
       const token = window.RisuanAccount.getToken();
-      cvsLinkEl.href = `${window.RisuanAccount.API_BASE}/api/logistics-map?mode=profile&token=${encodeURIComponent(token)}`;
+      cvsLinkEl.href = '#';
     }
 
     // 「填完資料→按儲存→結果」這三個狀態要讓客人明顯感覺到有差異，不然

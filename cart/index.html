@@ -21,7 +21,7 @@
   <link rel="stylesheet" href="../css/base.css?v=20261110-course-covers">
   <link rel="stylesheet" href="../css/home.css">
   <link rel="stylesheet" href="../css/products.css">
-  <link rel="stylesheet" href="../css/cart.css?v=20261116-guest-points">
+  <link rel="stylesheet" href="../css/cart.css?v=20261116-order-access">
   <link rel="stylesheet" href="../css/guest-entry.css?v=20261116-guest-entry">
   <link rel="stylesheet" href="../css/site-menu.css">
   <link rel="stylesheet" href="../css/site-footer.css">
@@ -265,6 +265,7 @@
         </section>
         <form id="confirm-form" method="POST" action="">
           <input type="hidden" name="orderId" id="confirm-order-id">
+          <input type="hidden" name="orderAccessToken" id="confirm-order-access">
           <input type="hidden" name="shippingMethod" id="confirm-shipping-method">
           <!-- 登入中的會員 token（js/checkout.js 從 window.RisuanAccount
                讀出來寫進這裡），讓後端 create-order.js 知道這筆訂單是哪個
@@ -631,7 +632,7 @@
   <script src="../js/account-auth.js"></script>
   <script src="../js/cart.js?v=20261116-fluid-clear1"></script>
   <script src="../js/tw-postal-codes.js"></script>
-  <script src="../js/checkout.js?v=20261116-guest-points"></script>
+  <script src="../js/checkout.js?v=20261116-order-access"></script>
   <script src="../js/hero-colorway-carousel.js"></script>
   <script src="../js/cart-cross-sell.js?v=20261116-fluid-clear1"></script>
   <script src="../js/site-header-scroll.js?v=20261107-backtop"></script>

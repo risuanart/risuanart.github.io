@@ -1519,3 +1519,9 @@ gap/margin/padding 其實都沒生效（等於 0 或初始值），包括全站 
 
 ## 2026-11-16：累度與時間正式發布完成
 - 隔離發布4fa3a73已推送main，Cloudflare Pages check成功。正式risuanart.com四類抽查：流動畫累度／30分鐘打底及24小時乾燥、福星30分鐘、春結1小時及半星、羊Diss藍3小時均已生效。原本機其他進度保留。
+
+## 2026-11-16：安全修正前端配套
+- 訪客草稿token只放sessionStorage，API專用標頭／付款與選店POST傳送，直接購買與購物車結帳兩入口都保存；舊未完成草稿需重開，不影響已付款訂單。會員預設門市完整token不放網址。
+- 會員localStorage只留最小登入摘要，常用地址與聯絡資料只在本頁記憶體保留，啟動時清掉舊版多餘欄位；token仍為localStorage、後端縮短7天，尚非HttpOnly／可撤銷session架構。預約管理token移除網址，sessionStorage支援重整；後端能力訊號支援時改用X-Booking-Access，部署期間可相容舊後端。
+- 會員與預約管理頁新增CSP、no-store及no-referrer；只限該兩頁不影響其他行銷頁。以本機隔離API實際操作直接購買→結帳→提交本機診斷端點，回credentialMatches=true/paymentSent=false；未建立正式訂單或付款。本機曾用到舊快取而Failed to fetch，已修測試伺服器no-store與測試資源版本後重驗成功。
+- 發布須以最新origin/main隔離，不推送目前商品頁其他未提交工作。共享cart/account-auth腳本的引用版本要在隔離發布中更新全站，避免舊快取繞過新憑證保存。
