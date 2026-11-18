@@ -1536,3 +1536,7 @@ gap/margin/padding 其實都沒生效（等於 0 或初始值），包括全站 
 - checkout訂單縮圖優先productKey，保留品名／規格及本機資料回退；空購物車＋不同顯示品名的隔離假訂單仍正常顯圖。不改付款、價格或個資流程。
 - 12頁×6寬度72次無橫向溢位／pageerror，左右及垂直手勢、手動後輪播、白卡、影片隱藏暫停／返回播放與步驟淡入通過；JS語法、diff、新封面路徑檢查通過。全站共用資源引用更新版本，多數HTML僅快取參數。測試腳本在/tmp/media-*.cjs、/tmp/check-mobile.cjs，截圖/tmp/color-card-mobile.png。
 - 只提交本次修改與新video-posters資料夾，不含原有未追蹤「 2」副本。仍須使用者實機預覽及另行要求推送；發布沿用/private/tmp/risuan-fluid-release隔離整合，保留其他登入安全工作。
+
+
+## 2026-11-18：手機修正正式發布確認
+- 隔離發布4348cc3已push main，Cloudflare Pages及update-feed皆success。正式risuanart.com no-cache實查hero-thumb-gallery觸控／新節奏／pageshow、video-inview恢復事件、checkout thumbnailItem、春結新版本與封面、gallery白卡及colors橘紅token均為新內容。隔離合併後72次版面與手機互動測試通過；主checkout其他工作保留。
