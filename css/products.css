@@ -492,7 +492,7 @@
 }
 
 .work-heading__effort-stars {
-  color: var(--color-brand);
+  color: var(--color-effort);
   letter-spacing: 1px;
 }
 
@@ -1262,7 +1262,7 @@
   height: 100%;
   object-fit: cover;
   opacity: 0;
-  transition: opacity var(--duration-fast) var(--ease-standard);
+  transition: opacity var(--duration-slow) var(--ease-standard);
 }
 
 .work__gallery-main img.is-active,
@@ -5362,3 +5362,8 @@ button.text-link {
   color: var(--color-text-primary);
 }
 .product-page > .ent-cta .ent-cta__text { max-width: none; }
+
+/* 相片牆主圖手勢只接管左右，保留頁面直向捲動。 */
+[data-gallery-main], [data-hero-carousel], .gallery__frame { touch-action: pan-y; }
+/* 手機加購區立即出現，避免 delay-3 造成滑到此處像停頓。 */
+@media (max-width: 767px) { .addon-section.fade-in { transition-delay: 0s; } }

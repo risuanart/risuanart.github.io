@@ -59,6 +59,24 @@
       "</div>" +
       "</div>" +
       "</div>";
+    let swipeStart = null;
+    const media = el.querySelector('.addon-modal__media');
+    media.addEventListener('touchstart', e => { swipeStart = e.touches.length === 1 ? { x: e.touches[0].clientX, y: e.touches[0].clientY } : null; }, { passive: true });
+    media.addEventListener('touchcancel', () => { swipeStart = null; }, { passive: true });
+    media.addEventListener('touchend', e => {
+      if (!swipeStart || !e.changedTouches.length) return;
+      const dx = e.changedTouches[0].clientX - swipeStart.x, dy = e.changedTouches[0].clientY - swipeStart.y;
+      swipeStart = null;
+      if (Math.abs(dx) < 40 || Math.abs(dx) <= Math.abs(dy)) return;
+      const chips = Array.from(el.querySelectorAll('.addon-modal__variant-chip'));
+      if (chips.length > 1) {
+        const index = chips.findIndex(chip => chip.classList.contains('is-active'));
+        chips[(index + (dx < 0 ? 1 : -1) + chips.length) % chips.length].click();
+      } else {
+        const toggle = el.querySelector('[data-modal-preview-toggle]');
+        if (toggle && !toggle.hidden) toggle.click();
+      }
+    }, { passive: true });
     document.body.appendChild(el);
     return el;
   }

@@ -26,12 +26,12 @@
    products-overview.js 插入卡片後能自己呼叫一次。 */
 
 (function () {
-  const INTERVAL_MS = 2200;
+  const INTERVAL_MS = 1800;
   // 2026-10-25：圖一（combo-1，出貨配色）使用者要求比其餘兩張多停留一點
   // 時間再往下切，讓訪客有足夠時間先看清楚「這是出貨配色」，再接著看
   // 其餘兩張重新搭配參考——只有圖一（index 0）停留比較久，其餘兩張維持
   // 原本的 INTERVAL_MS 節奏。
-  const FIRST_FRAME_MS = 3000;
+  const FIRST_FRAME_MS = 1800;
 
   function initCarousel(root) {
     const frames = Array.prototype.slice.call(
@@ -109,6 +109,23 @@
       "(prefers-reduced-motion: reduce)"
     ).matches;
 
+
+    let swipeStart = null;
+    let suppressClickUntil = 0;
+    root.addEventListener("click", e => { if (Date.now() < suppressClickUntil) { e.preventDefault(); e.stopPropagation(); } }, true);
+    root.addEventListener("touchstart", (e) => {
+      swipeStart = e.touches.length === 1 ? { x: e.touches[0].clientX, y: e.touches[0].clientY } : null;
+    }, { passive: true });
+    root.addEventListener("touchcancel", () => { swipeStart = null; }, { passive: true });
+    root.addEventListener("touchend", (e) => {
+      if (!swipeStart || !e.changedTouches.length) return;
+      const dx = e.changedTouches[0].clientX - swipeStart.x;
+      const dy = e.changedTouches[0].clientY - swipeStart.y;
+      swipeStart = null;
+      if (Math.abs(dx) < 40 || Math.abs(dx) <= Math.abs(dy)) return;
+      suppressClickUntil = Date.now() + 400;
+      pause(); index = (index + (dx < 0 ? 1 : -1) + frames.length) % frames.length; show(index); if (!prefersReducedMotion) { scheduleNext(); root.classList.remove("is-paused"); if (toggle) toggle.setAttribute("aria-label", "暫停配色展示"); }
+    }, { passive: true });
     if (prefersReducedMotion) {
       pause();
     } else {

@@ -5,11 +5,7 @@
    沒有「播完代表看完全部配色」的概念，純粹是讓訪客進頁面就能看到更多
    實拍照，不用自己動手滑），但保留點縮圖／滑動手動切換的互動。
 
-   滑鼠移進整個元件只是「暫停」（手離開會接著播，讓想定格看某張的人不會
-   被跳走）；真的點了縮圖／箭頭／手動滑動縮圖列，才會「永久停止」自動
-   播放——使用者既然自己選了想看哪張，就不該再被自動跳走，這跟
-   hero-colorway-carousel.js 的暫停／播放鍵是兩種節奏（那邊永遠可以按鍵
-   恢復播放，這裡手動介入後不會自動恢復）。
+   手動切換後重新計時繼續輪播；桌面滑鼠停留暫停，手機觸控不永久停止。
 
    套在 [data-gallery] 容器上，裡面要有：
    - [data-gallery-main] 底下一串 [data-gallery-frame]（img，疊在一起用
@@ -44,12 +40,12 @@
    video-inview.js 提供的「離開視野省資源」效果。 */
 
 (function () {
-  var INTERVAL_MS = 2600;
+  var INTERVAL_MS = 4500;
   // 2026-10-25：首圖現在固定是配色示範一（combo-1，出貨配色，見下面
   // setActive(0, false) 的說明），比照 hero-colorway-carousel.js 同一天
   // 的改動，讓圖一停留久一點再往下輪播到配色示範二／三、接著才是真實
   // 相片牆的其餘照片。
-  var FIRST_FRAME_MS = 3000;
+  var FIRST_FRAME_MS = 1800;
 
   function initGallery(root) {
     var frames = Array.prototype.slice.call(
@@ -88,7 +84,7 @@
 
     var index = 0;
     var timer = null;
-    var stoppedByUser = false;
+
     var galleryInView = true;
     var prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
@@ -100,7 +96,7 @@
     function syncVideoPlayback() {
       frames.forEach(function (f, i) {
         if (f.tagName !== "VIDEO") return;
-        if (i === index && galleryInView) {
+        if (i === index && galleryInView && !document.hidden) {
           f.play().catch(function () {});
         } else {
           f.pause();
@@ -164,6 +160,9 @@
       if (scrollThumb) {
         scrollThumbIntoView(activeThumbIdx);
       }
+      // 下一張影片先讀取，切換前保留其 poster，避免空白。
+      var upcoming = frames[(idx + 1) % frames.length];
+      if (upcoming.tagName === "VIDEO" && upcoming.preload === "none") { upcoming.preload = "auto"; upcoming.load(); }
       syncVideoPlayback();
     }
 
@@ -175,30 +174,31 @@
     }
 
     function resumeAutoplay() {
-      if (stoppedByUser || prefersReducedMotion) return;
+      if (prefersReducedMotion || document.hidden) return;
       pauseAutoplay();
-      var duration = index === 0 ? FIRST_FRAME_MS : INTERVAL_MS;
+      var grouped = thumbSubFrames[frameToThumb[index]];
+      var duration = grouped ? FIRST_FRAME_MS : (frames[index].tagName === "VIDEO" ? 8000 : INTERVAL_MS);
       timer = setTimeout(function () {
         setActive((index + 1) % frames.length, true);
         resumeAutoplay();
       }, duration);
     }
 
-    function stopAutoplayForGood() {
-      stoppedByUser = true;
+    function restartAutoplayAfterInteraction() {
       pauseAutoplay();
+      resumeAutoplay();
     }
 
     thumbs.forEach(function (thumb, i) {
       thumb.addEventListener("click", function () {
-        stopAutoplayForGood();
         setActive(thumbStartFrame[i], true);
+        restartAutoplayAfterInteraction();
       });
     });
 
     root.querySelectorAll("[data-gallery-nav]").forEach(function (btn) {
       btn.addEventListener("click", function () {
-        stopAutoplayForGood();
+        restartAutoplayAfterInteraction();
         var dir = parseInt(btn.getAttribute("data-gallery-nav"), 10);
         if (isVertical()) {
           thumbsWrap.scrollBy({ top: dir * 110, behavior: "smooth" });
@@ -208,8 +208,8 @@
       });
     });
 
-    thumbsWrap.addEventListener("pointerdown", stopAutoplayForGood);
-    root.addEventListener("mouseenter", pauseAutoplay);
+    thumbsWrap.addEventListener("pointerdown", restartAutoplayAfterInteraction);
+    root.addEventListener("mouseenter", function () { if (window.matchMedia("(hover: hover)").matches) pauseAutoplay(); });
     root.addEventListener("mouseleave", resumeAutoplay);
 
     // 整個相片牆捲出畫面時暫停目前這支 video（不影響自動輪播的 timer，
@@ -228,6 +228,22 @@
       visibilityObserver.observe(root);
     }
 
+
+    let swipeStart = null;
+    root.querySelector("[data-gallery-main]").addEventListener("touchstart", (e) => {
+      swipeStart = e.touches.length === 1 ? { x: e.touches[0].clientX, y: e.touches[0].clientY } : null;
+    }, { passive: true });
+    root.querySelector("[data-gallery-main]").addEventListener("touchcancel", () => { swipeStart = null; }, { passive: true });
+    root.querySelector("[data-gallery-main]").addEventListener("touchend", (e) => {
+      if (!swipeStart || !e.changedTouches.length) return;
+      const dx = e.changedTouches[0].clientX - swipeStart.x;
+      const dy = e.changedTouches[0].clientY - swipeStart.y;
+      swipeStart = null;
+      if (Math.abs(dx) < 40 || Math.abs(dx) <= Math.abs(dy)) return;
+      setActive((index + (dx < 0 ? 1 : -1) + frames.length) % frames.length, true); resumeAutoplay();
+    }, { passive: true });
+    document.addEventListener("visibilitychange", function () { syncVideoPlayback(); if (document.hidden) pauseAutoplay(); else resumeAutoplay(); });
+    window.addEventListener("pageshow", function () { syncVideoPlayback(); resumeAutoplay(); });
     setActive(0, false);
     resumeAutoplay();
   }

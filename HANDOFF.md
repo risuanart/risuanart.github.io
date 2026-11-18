@@ -1525,3 +1525,14 @@ gap/margin/padding 其實都沒生效（等於 0 或初始值），包括全站 
 - 會員localStorage只留最小登入摘要，常用地址與聯絡資料只在本頁記憶體保留，啟動時清掉舊版多餘欄位；token仍為localStorage、後端縮短7天，尚非HttpOnly／可撤銷session架構。預約管理token移除網址，sessionStorage支援重整；後端能力訊號支援時改用X-Booking-Access，部署期間可相容舊後端。
 - 會員與預約管理頁新增CSP、no-store及no-referrer；只限該兩頁不影響其他行銷頁。以本機隔離API實際操作直接購買→結帳→提交本機診斷端點，回credentialMatches=true/paymentSent=false；未建立正式訂單或付款。本機曾用到舊快取而Failed to fetch，已修測試伺服器no-store與測試資源版本後重驗成功。
 - 發布須以最新origin/main隔離，不推送目前商品頁其他未提交工作。共享cart/account-auth腳本的引用版本要在隔離發布中更新全站，避免舊快取繞過新憑證保存。
+
+
+## 2026-11-18：手機相片／影片互動修正（本機完成，未推送）
+- 使用者手機驗收要求：相片牆及所有左右換圖支援觸控、手動選圖後繼續輪播、實拍放慢並淡入、首圖配色加快、影片避免白畫面與返回頁面恢復；砂畫自選色放大改白底卡、請注意移至規格分頁上方、累度橘紅、訂單圖片補回。
+- hero-thumb-gallery取消手動永久停止，實拍4.5秒／影片8秒、分組三色1.8秒；主圖淡入600ms。hero-colorway 1.8秒並加左右滑、防滑後誤點連結。product-gallery／gallery-lightbox／addon-preview-modal補觸控；動態重建輪播移除舊監聽與影片觀察。既有原生橫滑及其他輪播觸控保留。
+- video-inview擴充一般autoplay影片，接近畫面預載、分頁visibilitychange／pageshow恢復；排除由各自輪播管理的影片。補68張原影片第一幀封面，原影片未重製；步驟容器加入既有fade-in。products-hero動態載入也更新快取。不能保證實機電信網路載入時間。
+- 手機加購區未發現刻意攔截滾動，取消進場delay，Chrome手機觸控實測連續滑動scrollTop1309→2056→3315，無停滯。未在使用者實際iPhone／Android驗收。
+- 九款砂畫請注意完整移至規格／出貨與保存／購買前閱讀分頁上方。自選色燈箱僅howto-compare採840px上限白卡、手機縮至可視寬，關閉鈕在卡內；其他作品燈箱保留既有深底。新增專用color-effort橘紅token，不借用警示色。
+- checkout訂單縮圖優先productKey，保留品名／規格及本機資料回退；空購物車＋不同顯示品名的隔離假訂單仍正常顯圖。不改付款、價格或個資流程。
+- 12頁×6寬度72次無橫向溢位／pageerror，左右及垂直手勢、手動後輪播、白卡、影片隱藏暫停／返回播放與步驟淡入通過；JS語法、diff、新封面路徑檢查通過。全站共用資源引用更新版本，多數HTML僅快取參數。測試腳本在/tmp/media-*.cjs、/tmp/check-mobile.cjs，截圖/tmp/color-card-mobile.png。
+- 只提交本次修改與新video-posters資料夾，不含原有未追蹤「 2」副本。仍須使用者實機預覽及另行要求推送；發布沿用/private/tmp/risuan-fluid-release隔離整合，保留其他登入安全工作。

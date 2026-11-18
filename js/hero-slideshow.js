@@ -29,6 +29,7 @@
   }
   new IntersectionObserver(entries => { heroVisible = entries[0].isIntersecting; syncActiveVideos(); }, { threshold: 0.15 }).observe(hero);
   document.addEventListener('visibilitychange', syncActiveVideos);
+  window.addEventListener('pageshow', syncActiveVideos);
   // 圓點由實際影片產生，避免註解卡片或新增影片後索引錯位。
   const dotsWrap = hero.querySelector(".preview-hero__dots");
   if (dotsWrap) {

@@ -419,3 +419,17 @@
   margin: var(--space-4) auto;
 }
 .gallery-load-more[hidden] { display: none; }
+
+/* 砂畫自選色示意圖使用加購預覽同一白底卡片語彙。 */
+.gallery-lightbox--card { background: color-mix(in srgb, var(--color-surface-black) 45%, transparent); }
+.gallery-lightbox--card .gallery-lightbox__figure {
+  width: var(--content-max-width); max-width: 100%; padding: var(--space-6);
+  background: var(--color-surface-light); max-height: 85dvh; overflow: auto;
+}
+.gallery-lightbox--card .gallery-lightbox__img { max-height: 60dvh; }
+.gallery-lightbox--card .gallery-lightbox__caption { color: var(--color-text-secondary); }
+.gallery-lightbox--card .gallery-lightbox__close { background: var(--color-surface-light); color: var(--color-text-primary); }
+.gallery-lightbox__figure { touch-action: pan-y; }
+
+.gallery-lightbox--card .gallery-lightbox__figure { position: relative; }
+.gallery-lightbox--card .gallery-lightbox__close { position: absolute; top: var(--space-2); right: var(--space-2); }
