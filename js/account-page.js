@@ -482,7 +482,6 @@
     }
 
     async function signOut(all) {
-      if (all && !window.confirm('所有裝置都需要重新登入，確定要登出所有裝置嗎？')) return;
       logoutButton.disabled = true;
       if (logoutAllButton) logoutAllButton.disabled = true;
       try { await window.RisuanAccount.logout({ all }); }
