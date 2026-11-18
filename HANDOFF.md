@@ -1540,3 +1540,8 @@ gap/margin/padding 其實都沒生效（等於 0 或初始值），包括全站 
 
 ## 2026-11-18：手機修正正式發布確認
 - 隔離發布4348cc3已push main，Cloudflare Pages及update-feed皆success。正式risuanart.com no-cache實查hero-thumb-gallery觸控／新節奏／pageshow、video-inview恢復事件、checkout thumbnailItem、春結新版本與封面、gallery白卡及colors橘紅token均為新內容。隔離合併後72次版面與手機互動測試通過；主checkout其他工作保留。
+
+## 2026-11-18：會員撤銷登入前端配套
+- 後端7b6bd38本機完成可撤銷session與logout-all，前端加入能力開關控制的「登出所有裝置」，登出須等伺服器成功，失敗保留狀態供重試；503同步不清掉登入，舊profile回應不得復活已登出token，storage事件同步其他分頁帳號／登出。地址與電話仍僅當頁記憶體，瀏覽器Bearer／localStorage仍待同站HttpOnly架構，未宣稱完整解決XSS。
+- JS隔離測試涵蓋上述失敗／競爭情境，Email與LINE回歸通過。假API本機Email登入成功，基本資料出現兩種登出入口，六寬375/390/768/1024/1440/1920量測溢位0且按鈕未重疊。IAB原生確認對話自動化遇到工具限制，完整確認操作仍待Chrome或正式驗收。
+- 所有受追蹤HTML更新account-auth快取版本，本機大量未追蹤「2」副本與素材未動／未加入提交。Source與遠端32/12提交分歧，另建member-sessions-release從origin/main發布精確安全配套，不能整份push此source main。尚未發布本批。

@@ -115,17 +115,20 @@
     return data.customer;
   }
 
-  function logout() {
+  async function logout(options = {}) {
     const token = getToken();
-    writeStored(null);
-    if (!token) return;
-    // 純粹讓後端知道一下，token 是 stateless 的，不等回應、失敗也不影響
-    // 前端已經登出的狀態。
-    fetch(`${API_BASE}/api/account`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
-      body: JSON.stringify({ action: "logout" }),
-    }).catch(() => {});
+    if (!token) { writeStored(null); return; }
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 15000);
+    try {
+      const response = await fetch(`${API_BASE}/api/account`, {
+        method: "POST", signal: controller.signal,
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+        body: JSON.stringify({ action: options.all ? "logout-all" : "logout" }),
+      });
+      if (!response.ok) throw new Error('未能確認登出成功，請稍後再試。');
+      if (getToken() === token) writeStored(null);
+    } finally { clearTimeout(timeout); }
   }
 
   // 用目前存的 token 跟後端同步一次最新的個人資料（例如上次結帳存的
@@ -138,7 +141,9 @@
       const res = await fetch(`${API_BASE}/api/account?action=me`, {
         headers: { Authorization: `Bearer ${token}` },
       });
+      if (!res.ok) throw new Error('暫時無法確認登入狀態');
       const data = await res.json();
+      if (getToken() !== token) return getCustomer();
       if (!data.customer) {
         writeStored(null);
         return null;
@@ -156,15 +161,15 @@
   // 要最新值（見 api/account.js handleConfig）。拿不到或沒設定的話回傳
   // 空字串，呼叫端據此直接不渲染登入按鈕。
   let configPromise = null;
-  function getGoogleClientId() {
+  function getAuthConfig() {
     if (!configPromise) {
       configPromise = fetch(`${API_BASE}/api/account?action=config`)
-        .then((res) => res.json())
-        .then((data) => data.googleClientId || "")
-        .catch(() => "");
+        .then((res) => { if (!res.ok) throw new Error('Config unavailable'); return res.json(); })
+        .catch(() => ({}));
     }
     return configPromise;
   }
+  function getGoogleClientId() { return getAuthConfig().then(data => data.googleClientId || ''); }
 
   // 帶 Authorization header 呼叫 api/account.js 的共用介面，給會員中心
   // （js/account-page.js）的 orders／bookings／order-detail／
@@ -183,7 +188,10 @@
       },
     });
     const data = await res.json();
-    if (!res.ok) throw new Error(data.error || "請求失敗");
+    if (!res.ok) {
+      if (res.status === 401 && getToken() === token) writeStored(null);
+      throw new Error(data.error || "請求失敗");
+    }
     return data;
   }
 
@@ -264,6 +272,12 @@
     return null;
   }
 
+  window.addEventListener('storage', event => {
+    if (event.key !== STORAGE_KEY && event.key !== null) return;
+    currentCustomer = null;
+    window.dispatchEvent(new CustomEvent(CHANGE_EVENT, { detail: readStored() }));
+  });
+
   window.RisuanAccount = {
     BASE_PREFIX,
     API_BASE,
@@ -277,6 +291,7 @@
     logout,
     syncProfile,
     getGoogleClientId,
+    getAuthConfig,
     apiFetch,
     mountGoogleButton,
     splitHomeAddress,
