@@ -86,5 +86,5 @@
       target.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
     });
   });
-  const init = document.createElement('script'); init.src = '../js/hero-slideshow.js'; document.body.append(init);
+  const init = document.createElement('script'); init.src = '../js/hero-slideshow.js?v=20261117-mobile-media'; document.body.append(init);
 })();

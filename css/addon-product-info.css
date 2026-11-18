@@ -79,3 +79,5 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
+
+.addon-modal__media { touch-action: pan-y; }

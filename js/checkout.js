@@ -165,9 +165,7 @@
   const orderSheetPointsRow = orderSheet.querySelector("[data-sheet-points-row]");
   const orderSheetPoints = orderSheet.querySelector("[data-sheet-points]");
 
-  // 縮圖只有前端的商品資料（cart.js 的 SCHEME_IMAGES）才有，後端回傳的
-  // 品項沒有；用「品名＋規格名」把後端品項對回本機購物車那一筆，拿得到
-  // 就畫縮圖，拿不到就退回沒有縮圖的排版，不會整個壞掉。
+  // 圖片取自前端商品目錄。優先以訂單 productKey 查圖；本機購物車僅協助還原款式。
   function localCartLookup() {
     const map = new Map();
     if (!window.RisuanCart) return map;
@@ -187,12 +185,14 @@
       const li = document.createElement("li");
       li.className = "order-sheet__item";
       const local = lookup.get(`${item.name}|${item.schemeName || ""}`);
-      // 對不回本機那一筆時（理論上不會發生，品名／規格名都是從同一份資料
-      // 送出去的），至少畫一個同尺寸的空方塊，數量圓標才有東西可以貼，
-      // 不會變成孤零零一顆數字浮在旁邊。
+      const catalog = window.RisuanCart;
+      const productKey = item.productKey || (catalog && Object.keys(catalog.PRODUCTS).find(key => catalog.PRODUCTS[key].name === item.name));
+      const scheme = catalog && Object.keys(catalog.SCHEME_NAMES).find(key => catalog.SCHEME_NAMES[key] === item.schemeName);
+      const thumbnailItem = productKey ? { productKey, scheme: (local && local.scheme) || scheme } : local;
+      // 即使換裝置或本機購物車已清除，仍可由訂單商品編號顯示照片。
       const thumb =
-        local && window.RisuanCart
-          ? window.RisuanCart.thumbHTML(local, "order-sheet__thumb")
+        thumbnailItem && window.RisuanCart
+          ? window.RisuanCart.thumbHTML(thumbnailItem, "order-sheet__thumb")
           : `<div class="order-sheet__thumb order-sheet__thumb--empty" aria-hidden="true"></div>`;
       li.innerHTML = `
         <div class="order-sheet__thumb-wrap">

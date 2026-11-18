@@ -188,7 +188,7 @@
     },
   };
 
-  const AUTOPLAY_MS = 4000;
+  const AUTOPLAY_MS = 5000;
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   // 自動輪播疊圖：所有圖片疊在同一個容器（position:absolute; inset:0），靠 opacity 切換，
@@ -220,7 +220,7 @@
         // 靜音自動播放循環短片，取代 GIF 的常見手法；跟照片共用同一套 opacity 切換邏輯。
         el = document.createElement("video");
         el.src = IMG_BASE + img.video;
-        el.autoplay = true;
+        el.preload = "none";
         el.muted = true;
         el.loop = true;
         el.playsInline = true;
@@ -252,11 +252,25 @@
 
     let current = 0;
     let timer = null;
+    let inView = false;
+    function syncGalleryVideos() {
+      images.forEach((el, i) => {
+        if (el.tagName !== "VIDEO") return;
+        if (i === current && inView && !document.hidden) el.play().catch(() => {});
+        else el.pause();
+      });
+    }
+    const videoObserver = new IntersectionObserver(entries => { inView = entries[0].isIntersecting; syncGalleryVideos(); }, { threshold: .1 });
+    videoObserver.observe(frame);
+    document.addEventListener("visibilitychange", syncGalleryVideos);
+    window.addEventListener("pageshow", syncGalleryVideos);
+
 
     function setActive(i) {
       images.forEach((img, idx) => img.classList.toggle("is-active", idx === i));
       captions.forEach((cap, idx) => cap.classList.toggle("is-active", idx === i));
       current = i;
+      syncGalleryVideos();
     }
 
     function next() {
@@ -284,9 +298,29 @@
       });
     });
 
+
+    const swipeController = new AbortController();
+    let swipeStart = null;
+    frame.addEventListener("touchstart", (e) => {
+      swipeStart = e.touches.length === 1 ? { x: e.touches[0].clientX, y: e.touches[0].clientY } : null;
+    }, { passive: true, signal: swipeController.signal });
+    frame.addEventListener("touchcancel", () => { swipeStart = null; }, { passive: true, signal: swipeController.signal });
+    frame.addEventListener("touchend", (e) => {
+      if (!swipeStart || !e.changedTouches.length) return;
+      const dx = e.changedTouches[0].clientX - swipeStart.x;
+      const dy = e.changedTouches[0].clientY - swipeStart.y;
+      swipeStart = null;
+      if (Math.abs(dx) < 40 || Math.abs(dx) <= Math.abs(dy)) return;
+      setActive((current + (dx < 0 ? 1 : -1) + images.length) % images.length); restartTimer();
+    }, { passive: true, signal: swipeController.signal });
     restartTimer();
 
     return function stop() {
+      swipeController.abort();
+      videoObserver.disconnect();
+      document.removeEventListener("visibilitychange", syncGalleryVideos);
+      window.removeEventListener("pageshow", syncGalleryVideos);
+      images.forEach(el => { if (el.tagName === "VIDEO") el.pause(); });
       if (timer) clearInterval(timer);
     };
   }

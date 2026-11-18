@@ -60,6 +60,20 @@
       if (e.target === overlay) close();
     });
 
+
+    let swipeStart = null;
+    overlay.addEventListener("touchstart", (e) => {
+      swipeStart = e.touches.length === 1 ? { x: e.touches[0].clientX, y: e.touches[0].clientY } : null;
+    }, { passive: true });
+    overlay.addEventListener("touchcancel", () => { swipeStart = null; }, { passive: true });
+    overlay.addEventListener("touchend", (e) => {
+      if (!swipeStart || !e.changedTouches.length) return;
+      const dx = e.changedTouches[0].clientX - swipeStart.x;
+      const dy = e.changedTouches[0].clientY - swipeStart.y;
+      swipeStart = null;
+      if (Math.abs(dx) < 40 || Math.abs(dx) <= Math.abs(dy)) return;
+      if (!overlay.hidden) { if (dx < 0) showNext(); else showPrev(); }
+    }, { passive: true });
     document.addEventListener("keydown", (e) => {
       if (overlay.hidden) return;
       if (e.key === "Escape") close();
@@ -104,6 +118,11 @@
     currentItems = items;
     currentIndex = index;
     lastFocused = document.activeElement;
+    const card = !!items[index].closest(".howto-compare");
+    overlay.classList.toggle("gallery-lightbox--card", card);
+    const closeButton = overlay.querySelector(".gallery-lightbox__close");
+    if (card) overlay.querySelector(".gallery-lightbox__figure").appendChild(closeButton);
+    else overlay.prepend(closeButton);
     render();
     overlay.hidden = false;
     overlay.querySelector(".gallery-lightbox__close").focus();
