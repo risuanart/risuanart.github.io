@@ -2792,7 +2792,6 @@ button.text-link {
   padding: 0;
   list-style: none;
   counter-reset: feature-list;
-  max-width: 40ch;
 }
 
 .feature-list li {
