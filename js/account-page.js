@@ -28,6 +28,8 @@
     const memberSection = document.getElementById("account-member");
     const googleBtnContainer = document.getElementById("account-page-google-btn");
     const logoutButton = document.getElementById("account-page-logout");
+    const logoutAllButton = document.getElementById("account-page-logout-all");
+    if (logoutAllButton) window.RisuanAccount.getAuthConfig().then(config => { logoutAllButton.hidden = !config.logoutAll; });
 
     const profileForm = document.getElementById("account-profile-form");
     const lastNameInput = document.getElementById("account-last-name");
@@ -479,7 +481,15 @@
       loadPoints();
     }
 
-    logoutButton.addEventListener("click", () => window.RisuanAccount.logout());
+    async function signOut(all) {
+      logoutButton.disabled = true;
+      if (logoutAllButton) logoutAllButton.disabled = true;
+      try { await window.RisuanAccount.logout({ all }); }
+      catch { window.alert('未能確認登出成功，請檢查網路後重試。'); }
+      finally { logoutButton.disabled = false; if (logoutAllButton) logoutAllButton.disabled = false; }
+    }
+    logoutButton.addEventListener("click", () => signOut(false));
+    if (logoutAllButton) logoutAllButton.addEventListener("click", () => signOut(true));
 
     window.addEventListener(window.RisuanAccount.CHANGE_EVENT, () => {
       const customer = window.RisuanAccount.getCustomer();
