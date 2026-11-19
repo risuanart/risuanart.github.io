@@ -19,23 +19,23 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=ABeeZee&family=Poppins:wght@700&family=Noto+Sans+TC:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../../css/colors.css?v=20261117-mobile-media">
-  <link rel="stylesheet" href="../../css/tokens.css">
-  <link rel="stylesheet" href="../../css/base.css?v=20261110-course-covers">
-  <link rel="stylesheet" href="../../css/home.css">
-  <link rel="stylesheet" href="../../css/products.css?v=20261117-mobile-media">
-  <link rel="stylesheet" href="../../css/cart.css">
-  <link rel="stylesheet" href="../../css/enterprise.css?v=scroll-soft-line">
-  <link rel="stylesheet" href="../../css/course-signature.css">
-  <link rel="stylesheet" href="../../css/custom-photo-topics.css?v=20261110-students-no-arrows">
-  <link rel="stylesheet" href="../../css/gallery.css?v=20261117-mobile-media">
-  <link rel="stylesheet" href="../../css/site-menu.css">
-  <link rel="stylesheet" href="../../css/site-footer.css">
+  <link rel="stylesheet" href="../../css/colors.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/tokens.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/base.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/home.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/products.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/cart.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/enterprise.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/course-signature.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/custom-photo-topics.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/gallery.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/site-menu.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/site-footer.css?v=20261119-public-clean">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
   <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  <link rel="stylesheet" href="/css/promo-bar.css">
+  <link rel="stylesheet" href="/css/promo-bar.css?v=20261119-public-clean">
 </head>
 <body>
   <div class="promo-bar" id="promo-bar">
@@ -54,12 +54,12 @@
     <button type="button" class="site-header__menu-toggle" id="menu-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="site-menu" aria-label="開啟選單">
       <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
     </button>
-    <!-- 2026-09-18 新增：桌面版（≥1024px）文字導覽列，取代漢堡選單抽屜；
-         手機版隱藏，維持現有漢堡選單不變。內容／邏輯跟首頁 index.html
-         那份一致，樣式見 css/site-menu.css .site-header__nav（子頁置中
-         logo 用 .site-header__title，不是首頁專屬的 .site-header__logo，
-         見該檔案開頭說明），下拉開合邏輯見 js/site-menu.js 「課程」下拉
-         那個 IIFE。 -->
+
+
+
+
+
+
     <nav class="site-header__nav" aria-label="主選單">
       <a href="../../booking/">線上預約課程</a>
       <div class="site-header__nav-item">
@@ -137,53 +137,53 @@
 
   <main class="product-page work">
 
-    <!-- 首圖影片（2026-09-16 換成使用者新上傳的版本）：原本是
-         「畫室自己帶圖繪畫課首圖.MP4」，換成使用者後來上傳的
-         「畫室繪畫課宣傳.MP4」，本身已經是 H.264 720×1280，用 ffmpeg
-         -c copy -movflags +faststart 重新封裝（不重新編碼），原始檔
-         加「-原始檔」保留在電腦裡、不進版控（見 .gitignore）；換掉的
-         舊版影片／poster 已從版控移除，還在 git 歷史裡可以找回來。
-         影片內容（用 ffmpeg 抽格 + Read 工具實際看過）：畫室的整體
-         宣傳短片，畫面依序是——畫室環境全景（老師在畫架前調色作畫）、
-         一幅完成的濱海／山徑風景畫特寫、一幅黃昏牧場風景畫（木柵欄＋
-         草地＋遠山，粉紫色天空）、對照手機裡的照片畫一對人與狗在夕陽下
-         散步的畫面（畫布上還看得到鉛筆稿）、一隻黃棕色大耳朵狗的
-         肖像特寫、最後是畫室品牌收尾畫面（葉子＋Ri. Suan 浮水印文字）。
-         比起前一版只拍「畫的過程」，這支多了好幾幅真正完成的風景／
-         寵物作品，更能呈現這堂課主題很廣（風景、人像、寵物都有）的
-         特色，所以換成首圖影片。
-         Poster 用狗狗肖像特寫那格（35s），五官毛髮都畫得很細緻，
-         是全片最像「完成品」的一格。
 
-         內容依據：
-         1. 原本在 IG 上稱作「自己帶圖創作」，2026-11-07 使用者要求改名為
-            「自選主題油畫」（理由：原名容易讓客人誤以為只有這堂課能帶
-            自己的圖，但其實所有課程都能帶圖，這堂課真正的特色是主題
-            完全不限、依照選的圖再評估媒材與難度，適合還不確定要畫
-            什麼的人），是使用者自己在 IG 上長期發文的一個課程分類，
-            使用者在對話中直接說明的真實資訊：媒材是油畫＋筆刷、同學帶
-            自己準備的照片來畫、主題很廣（人像/合照/婚紗、風景、動漫/
-            迪士尼/宮崎駿、海邊、鯨魚、星空月亮、花卉植物等）、同主題
-            也可能有人一堂完成、有人要畫多堂才完成。
-         2. IG 貼文連結本身多數被 Instagram 擋掉抓不到內容（WebFetch
-            試過），但使用者後來把貼文截圖存成本機資料夾
-            （~/Desktop/自己帶圖ig貼文截圖/，29 張），直接用 Read 工具讀
-            截圖裡的文字內容，這頁「油畫＋筆刷」「上課怎麼進行」「可畫的
-            主題」每個主題段落、「適合誰來上」都是從這批截圖的真實貼文
-            文字改寫語氣寫成（口語的部分改成網站語氣，內容本身沒有新增
-            杜撰）。截圖裡另外還讀到一則「自選圖人像 $1350／堂」的真實
-            定價貼文，但因為跟串珠、石英砂肌理畫兩頁一樣，交易條件這階段
-            先不放（下定付款流程還沒定案），所以價格沒有寫進這頁，只在
-            對話裡跟使用者說明這個發現。
-         3. 截圖裡意外讀到一則「除了家裡毛孩，其他動物、不存在的動物也
-            可以畫」的貼文，不在使用者原本列的清單裡，但確實是這堂課
-            真實發過的主題，對應既有的 GALLERY_THEMES「其他動物」標籤，
-            所以也加進「可畫的主題」，沒有另外新增標籤名稱。 -->
 
-    <!-- 2026-10-31：套用寵物油畫頁驗證過的 .ent-hero--split（見
-         css/enterprise.css 說明），桌面版影片跟標題/介紹/價格速覽左右
-         並排，不再留一大塊空白。價格/時間/尺寸取自業主提供的正式課程
-         價目表（自己帶圖畫 3hr／33×24cm／$1600），不是另外編的。 -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <section class="ent-hero fade-in is-flush-top ent-hero--split">
       <div class="ent-hero__media">
         <video class="ent-hero__photo is-portrait-video is-full-bleed" src="../../assets/videos/courses/custom-photo-oil/自己帶圖創作首圖.mp4" poster="../../assets/images/courses/custom-photo-oil/hero-poster.jpg" preload="auto" autoplay muted loop playsinline aria-label="畫室宣傳短片：完成的風景畫、對照手機照片畫人與狗散步的畫面、狗狗肖像特寫"></video>
@@ -203,15 +203,15 @@
       </div>
     </section>
 
-    <!-- 2026-11-08 使用者要求比照寵物油畫／石英砂肌理畫頁「完成那一刻
-         最有成就感」的配置，在價格下方放學員拿作品的照片輪播。照片來自
-         使用者「學生拿作品／油畫筆刷」資料夾。2026-11-08 使用者反映
-         直式照片被硬塞進這裡的橫式（--wide）容器裁切太多，改成直式／
-         橫式分開放：這裡只留 11 張橫式（約 3:2），裁切降到最低；5 張
-         直式（約 4:5）的移到後面「適合誰來上」區塊，改用 --portrait
-         呈現。原資料夾裡另外 2 張直式（人臉位置太靠邊緣）跟「植物」
-         子資料夾 8 張純畫面特寫（沒有同學入鏡，不符合這區塊「同學拿
-         作品」的主題）沒有收進來。 -->
+
+
+
+
+
+
+
+
+
     <section class="chapter fade-in delay-1">
       <div class="ent-features">
         <div class="ent-feature ent-feature--reverse">
@@ -263,7 +263,7 @@
       </div>
     </section>
 
-    <!-- 主題統一切換同一個作品展示，保留既有介紹與精選作品。 -->
+
     <section class="chapter custom-topics fade-in delay-2" aria-label="可畫的主題">
       <div class="chapter__block">
         <p class="chapter__statement">可畫的主題</p>
@@ -299,9 +299,9 @@
       <div class="gallery-grid custom-topics__lightbox-source" hidden></div>
     </section>
 
-    <!-- 2026-11-08 這 5 張是「學生拿作品／油畫筆刷」資料夾裡的直式
-         （約 4:5）照片，跟前面「完成那一刻最有成就感」的橫式（--wide）
-         輪播分開放，改用 --portrait 呈現，裁切降到最低。 -->
+
+
+
     <section class="chapter fade-in delay-2">
       <div class="chapter__block">
         <p class="chapter__statement">適合誰來上</p>
@@ -316,21 +316,21 @@
             <img src="../../assets/images/courses/custom-photo-oil/moments/10.jpg" alt="同學手持完成的黑白枯樹雪景油畫">
             <img src="../../assets/images/courses/custom-photo-oil/moments/11.jpg" alt="兩位同學手持完成的油畫作品，一幅是海底鯨魚尾鰭，一幅是紅底鬱金香花束女孩剪影">
           </div>
-          <!-- 2026-11-08 使用者反映電腦寬度這張照片看起來太大——原因
-               是這個 .ent-feature 只有媒體、沒有 __body，桌機版
-               flex:1 1 0 沒有另一個子元素分寬度，單張圖就撐滿整行。
-               補一段說明文字當作 __body，跟下面那組材料照片一樣各佔
-               一半寬度，不會再爆版。 -->
+
+
+
+
+
           <div class="ent-feature__body">
             <p class="chapter__statement chapter__statement--caption">大家的第一幅作品</p>
             <p class="chapter__prose">不管想畫的主題是什麼，都能在老師的帶領下，一步步在一堂課裡慢慢完成。</p>
           </div>
         </div>
-        <!-- 2026-11-08 使用者要求帶到「同一堂課上課的同學可以選不同
-             材料」，照片來自「學生拿作品／油畫筆刷、石英砂」資料夾，
-             3 張都是兩位同學分別拿著油畫筆刷跟石英砂肌理畫的合照，同時
-             也放進 courses/sand-texture/index.html 同一段落，兩邊都看得
-             到。 -->
+
+
+
+
+
         <div class="ent-feature ent-feature--reverse">
           <div class="ent-feature__media ent-feature__media--portrait moments-carousel custom-photo-students" data-moments-carousel data-interval="4000">
             <img class="is-active" src="../../assets/images/courses/custom-photo-oil/moments/17.jpg" alt="兩位同學分別手持完成的油畫蠟燭鑰匙靜物與石英砂肌理蛋糕作品">
@@ -358,11 +358,11 @@
       </div>
     </section>
 
-    <!-- 2026-11-08 使用者要求新增：迷你畫布可以客製尺寸，也可以一次
-         訂多張做成系列作品，不是只能畫固定的 33×24cm。照片來自使用者
-         「學生拿作品」資料夾：方形 10×10cm（石英砂蝴蝶結）、直徑
-         10cm 圓形（吉卜力角色，油畫筆刷）、15×15cm 系列作品（油畫
-         筆刷，多堂完成）。 -->
+
+
+
+
+
     <section class="chapter fade-in delay-2">
       <div class="chapter__block">
         <p class="chapter__statement">迷你畫布也可以訂製</p>
@@ -419,9 +419,9 @@
       </details>
     </section>
 
-    <!-- CTA 三連：「線上預約」是新的主要動作（2026-09 加，直接刷卡付款
-         排課，不用等私訊回覆），私訊洽詢降級成文字連結但保留——帶圖創作
-         常常需要先討論圖片能不能畫，兩個入口並存，不是取代關係。 -->
+
+
+
     <footer class="ent-cta fade-in">
       <p class="ent-cta__text">可以直接線上刷卡預約，或私訊討論細節，兩種方式都能安排上課！</p>
       <div class="ent-cta__actions">
@@ -466,19 +466,19 @@
 
   </main>
 
-  <script src="../../js/cart.js?v=20261119-early-prices"></script>
-  <script src="../../js/site-header-scroll.js?v=20261107-backtop"></script>
-  <script src="../../js/account-auth.js?v=20261118-sessions"></script>
-  <script src="../../js/account-widget.js"></script>
-  <script src="../../js/scroll-reveal.js"></script>
-  <script src="../../js/moments-carousel.js"></script>
-  <script src="../../js/gallery-data.js?v=20261110-ig202403"></script>
-  <script src="../../js/gallery-course-preview.js?v=20261110-gallery-performance"></script>
-  <script src="../../js/gallery-lightbox.js?v=20261117-mobile-media"></script>
-  <script src="../../js/custom-photo-topics.js?v=20261101-loading"></script>
-  <script src="../../js/enterprise-gallery.js"></script>
-  <script src="../../js/site-menu.js?v=menu-order-20261109"></script>
-  <script src="/js/promo-bar.js"></script>
-  <script src="../../js/video-inview.js?v=20261117-mobile-media"></script>
+  <script src="../../js/cart.js?v=20261119-public-clean"></script>
+  <script src="../../js/site-header-scroll.js?v=20261119-public-clean"></script>
+  <script src="../../js/account-auth.js?v=20261119-public-clean"></script>
+  <script src="../../js/account-widget.js?v=20261119-public-clean"></script>
+  <script src="../../js/scroll-reveal.js?v=20261119-public-clean"></script>
+  <script src="../../js/moments-carousel.js?v=20261119-public-clean"></script>
+  <script src="../../js/gallery-data.js?v=20261119-public-clean"></script>
+  <script src="../../js/gallery-course-preview.js?v=20261119-public-clean"></script>
+  <script src="../../js/gallery-lightbox.js?v=20261119-public-clean"></script>
+  <script src="../../js/custom-photo-topics.js?v=20261119-public-clean"></script>
+  <script src="../../js/enterprise-gallery.js?v=20261119-public-clean"></script>
+  <script src="../../js/site-menu.js?v=20261119-public-clean"></script>
+  <script src="/js/promo-bar.js?v=20261119-public-clean"></script>
+  <script src="../../js/video-inview.js?v=20261119-public-clean"></script>
 </body>
 </html>

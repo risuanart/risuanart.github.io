@@ -35,19 +35,19 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=ABeeZee&family=Poppins:wght@700&family=Noto+Sans+TC:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../../css/colors.css?v=20261117-mobile-media">
-  <link rel="stylesheet" href="../../css/tokens.css">
-  <link rel="stylesheet" href="../../css/base.css?v=20261110-course-covers">
-  <link rel="stylesheet" href="../../css/home.css">
-  <link rel="stylesheet" href="../../css/products.css?v=20261117-mobile-media">
-  <link rel="stylesheet" href="../../css/cart.css">
-  <link rel="stylesheet" href="../../css/site-menu.css">
-  <link rel="stylesheet" href="../../css/site-footer.css">
+  <link rel="stylesheet" href="../../css/colors.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/tokens.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/base.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/home.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/products.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/cart.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/site-menu.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/site-footer.css?v=20261119-public-clean">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
   <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  <link rel="stylesheet" href="/css/promo-bar.css">
+  <link rel="stylesheet" href="/css/promo-bar.css?v=20261119-public-clean">
   <style>
     .gradient-demo a {
       display: inline-block;
@@ -166,26 +166,26 @@
 
   <main class="product-page work">
 
-    <!-- 這是「一起加購」用的附屬商品頁，不是材料包主商品，所以版面比照
-         材料包頁的標題區骨架（.work__intro／.work-heading），但省略整套
-         故事章節（作品成色輪播、色系故事文案、購買前請閱讀分頁等）——
-         這些都是材料包主商品在用的敘事機制，這頁只需要「選色＋買」，
-         硬套會變成內容空泛的分頁。色票選色器是這頁自己的一組簡單邏輯
-         （見 js/gradient-sand-picker.js），不是沿用 js/product-gallery.js
-         那套（那套跟禮盒版的故事內容綁得很緊，這頁用不到）。 -->
-    <header class="work__intro work__intro--extra-color work__intro--addon" data-gradient-sand-picker>
-      <!-- 2026-10-25：使用者看過色條卡版本後反饋——主圖＋選色器要能左右
-           滑動／點擊切換 12 張實拍照，不是只能從下面的縮圖點選才會換圖。
-           手機滑動手勢、桌機直接點縮圖都已經能換圖了，見 js/gradient-
-           sand-picker.js。
 
-           2026-11-14 使用者反映桌機寬度變寬時，hover 主圖才會淡入的
-           左右箭頭（.work__gallery-nav）常常剛好蓋住圖片邊緣的內容，
-           而且色票縮圖本來就能直接點選切換，箭頭等於是多餘的重複功能
-           ——拿掉這兩顆箭頭按鈕（HTML／js/gradient-sand-picker.js 裡
-           對應的 nav 監聽器一併移除），跟沙畫24色任選組、沙畫加購像框
-           這兩頁「不放箭頭、直接點縮圖切換」的做法一致，不同加購頁的
-           切換方式統一。手機滑動手勢維持不變，不受影響。 -->
+
+
+
+
+
+
+    <header class="work__intro work__intro--extra-color work__intro--addon" data-gradient-sand-picker>
+
+
+
+
+
+
+
+
+
+
+
+
       <div class="work__gallery fade-in">
         <div class="work__gallery-main" data-gradient-sand-main>
           <img data-gradient-sand-main-img class="is-active" src="../../assets/images/products/sand-art-extra-color/sand-art-extra-color-warm-apricot.jpg" alt="暖杏 漸層沙成品參考圖">
@@ -198,10 +198,10 @@
       </div>
 
       <p class="work-heading__field-label fade-in delay-2">色號（12 選 1）</p>
-      <!-- 2026-10-25：改回相片縮圖——使用者比較過後覺得實拍沙子的質感
-           比估色色條更好，色條卡的概念改放到下面「12 組色號一覽」那區
-           （縮小、非互動，純粹輔助對照色名），這裡維持原本的選色互動，
-           邏輯見 js/gradient-sand-picker.js。 -->
+
+
+
+
       <div class="gradient-sand-picker fade-in delay-2" role="group" aria-label="選擇色號">
         <button type="button" class="color-picker__chip" data-scheme="warm-apricot" data-colors="淺膚、膚、深膚、麥芽、薑黃" aria-pressed="true">
           <img src="../../assets/images/products/sand-art-extra-color/sand-art-extra-color-warm-apricot.jpg" alt="暖杏：淺膚、膚、深膚、麥芽、薑黃" width="90" height="90" loading="lazy">
@@ -297,21 +297,21 @@
       </div>
     </section>
 
-    <!-- 2026-10-24 新增：12 組色號各自實際包含哪 5 色，原本只寫在縮圖的
-         alt 文字裡（要滑鼠移過去或螢幕閱讀器才讀得到），使用者要求清楚
-         列出來——方便想比較 5 色組跟 24 色任選組差異的人，或材料包用完
-         想知道還缺哪一色的人直接對照，不用一個一個點開色票看。色名跟
-         色票按鈕的 data-colors／alt 是同一份資料，這裡手動列一次純粹是
-         給「不點開選色器也看得到全貌」的瀏覽情境用。 -->
+
+
+
+
+
+
     <section class="chapter fade-in delay-1">
       <h2 class="chapter__title">12 組色號一覽</h2>
       <div class="chapter__intro">
         <p>每組都是協調好的五階漸層，選色時可以對照下面的色名，或跟「砂畫・24色任選組」比較想要哪一種色系。</p>
       </div>
-      <!-- 2026-10-25：原本的色條卡（方向 A）選色器試過後改回相片縮圖，
-           色條的概念移植到這份對照清單——每列名稱前補一小條 5 色色條
-           （.color-reference-list__swatch，純輔助對照用，不是按鈕，不
-           互動），色碼於2026-11-14依使用者提供的廠商72色色卡取樣；百花粉對應百花紅、粉對應粉紅、桃粉對應桃紅。 -->
+
+
+
+
       <dl class="color-reference-list">
         <div><span class="color-reference-list__swatch" aria-hidden="true"><span style="background:#F0DDCE"></span><span style="background:#F4D1B9"></span><span style="background:#F8C7B9"></span><span style="background:#F3D796"></span><span style="background:#F6C27E"></span></span><dt>暖杏</dt><dd>淺膚、膚、深膚、麥芽、薑黃</dd></div>
         <div><span class="color-reference-list__swatch" aria-hidden="true"><span style="background:#DFEB63"></span><span style="background:#CABC4D"></span><span style="background:#8A6D2E"></span><span style="background:#8E6C3A"></span><span style="background:#603D16"></span></span><dt>芥褐</dt><dd>柳黃、芥黃、黃棕、淺棕、棕</dd></div>
@@ -388,19 +388,19 @@
 
   </main>
 
-  <script src="../../js/cart.js?v=20261119-early-prices"></script>
-  <script src="../../js/variant-picker.js"></script>
-  <script src="../../js/gradient-sand-picker.js"></script>
-  <script src="../../js/mobile-sticky-buy-reveal.js"></script>
-  <script src="../../js/site-header-scroll.js?v=20261107-backtop"></script>
-  <script src="../../js/account-auth.js?v=20261118-sessions"></script>
-  <script src="../../js/account-widget.js"></script>
-  <script src="../../js/shop-navigation.js?v=20261115"></script>
-  <script src="../../js/related-products.js?v=20261116-all-kits85"></script>
-  <script src="../../js/scroll-reveal.js"></script>
-  <script src="../../js/video-inview.js?v=20261117-mobile-media"></script>
-  <script src="../../js/site-menu.js?v=menu-order-20261109"></script>
-  <script src="/js/promo-bar.js"></script>
-  <script src="../../js/addon-product-info.js?v=20261117-mobile-media"></script>
+  <script src="../../js/cart.js?v=20261119-public-clean"></script>
+  <script src="../../js/variant-picker.js?v=20261119-public-clean"></script>
+  <script src="../../js/gradient-sand-picker.js?v=20261119-public-clean"></script>
+  <script src="../../js/mobile-sticky-buy-reveal.js?v=20261119-public-clean"></script>
+  <script src="../../js/site-header-scroll.js?v=20261119-public-clean"></script>
+  <script src="../../js/account-auth.js?v=20261119-public-clean"></script>
+  <script src="../../js/account-widget.js?v=20261119-public-clean"></script>
+  <script src="../../js/shop-navigation.js?v=20261119-public-clean"></script>
+  <script src="../../js/related-products.js?v=20261119-public-clean"></script>
+  <script src="../../js/scroll-reveal.js?v=20261119-public-clean"></script>
+  <script src="../../js/video-inview.js?v=20261119-public-clean"></script>
+  <script src="../../js/site-menu.js?v=20261119-public-clean"></script>
+  <script src="/js/promo-bar.js?v=20261119-public-clean"></script>
+  <script src="../../js/addon-product-info.js?v=20261119-public-clean"></script>
 </body>
 </html>

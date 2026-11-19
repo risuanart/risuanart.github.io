@@ -1,7 +1,7 @@
-/* 頁首展示學生與畫作，保留完整照片比例。 */
+
 .large-canvas-hero-gallery .ent-gallery__slide img { object-fit: contain; }
 
-/* Page-only image directions use the existing chapter width and site tokens. */
+
 .large-canvas-note { font-size: var(--font-size-sm); margin-top: var(--space-4); }
 .large-canvas-directions { display: grid; gap: var(--space-6); margin-top: var(--space-6); margin-bottom: var(--space-6); }
 .large-canvas-direction img { display: block; width: 100%; aspect-ratio: 3 / 4; object-fit: contain; background: var(--color-surface-light); }
@@ -9,16 +9,16 @@
 .large-canvas-direction p { font-size: var(--font-size-sm); line-height: var(--body-line-height); margin: 0; }
 @media (min-width: 768px) { .large-canvas-directions { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 
-/* Mobile: retain the header space, cancelling only the shared 69px hero offset. */
+
 @media (max-width: 767px) {
   .ent-hero.is-flush-top { margin-top: calc(var(--space-4) - 69px); }
 }
 
-/* Each photo keeps a 4:5 frame; the paired container sizes itself around the gap. */
+
 .ent-feature__media.ent-feature__media--duo { aspect-ratio: auto; }
 .ent-feature__media--duo img { height: auto; aspect-ratio: 4 / 5; }
 
-/* The static hero photo is 4:5, so a video-shaped frame would add white bands. */
+
 @media (max-width: 767px) {
   .large-canvas-hero-gallery .ent-gallery__viewport { aspect-ratio: 4 / 5; }
 }

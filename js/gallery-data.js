@@ -1,48 +1,48 @@
-// 學員作品集資料——之後新增作品，直接在 GALLERY_ITEMS 加一筆物件就好，
-// gallery.html 會自動重新產生格狀相簿、篩選按鈕跟著算數量，不用改 HTML。
-// 用一般 JS 檔案（不是 .json + fetch()），是因為這個網站常常會直接用
-// 瀏覽器打開本機檔案看（file:// 開啟），file:// 底下 fetch() 讀本機 JSON
-// 會被瀏覽器擋掉（CORS），跟 js/cart.js 的 PRODUCTS 走同一種「資料寫在
-// JS 全域變數裡」的作法，才能兩種開法都正常。
-//
-// 欄位說明：
-// - course：單選，這件作品是上哪堂課做出來的（照實填，不用另外討論）。
-// - themes：複選（陣列），可以跨課程共用同一個主題標籤——例如「海洋生物」
-//   底下可能同時有石英砂版跟油畫版，讓同學能比較同主題、不同材料的差異，
-//   這是這個欄位設計成陣列（不是單一字串）的原因。
-// - date："YYYY-MM-DD"，拍照／完成的日期（不確定的話用上傳日期也可以，
-//   不用太精確）。這個欄位是各課程頁「學員作品」預覽區（見
-//   js/gallery-course-preview.js）拿來排序、抓「這堂課最新幾筆」用的，
-//   沒有這個欄位那筆作品會被排到最後面。
-// - src／alt：真的照片路徑到位前，這個陣列先留空，gallery.html 跟各課程頁
-//   的預覽區都會顯示誠實的「目前還沒有作品」訊息，不會顯示假資料或破圖示。
-// - sessions（選填）：這件作品實際花了幾堂課完成，不確定或沒問過就不填
-//   （gallery.js 只有這個欄位存在時才會在圖片說明多顯示一段「一堂完成」
-//   ／「N堂完成」，沒填不會顯示任何堂數資訊，不會亂猜）。跟課程頁常見的
-//   「一堂課／多堂才畫得完」說法（見 courses/custom-photo-oil.html）是
-//   同一件事，只是放在作品集這邊讓人瀏覽時也能感受到難易度。
-//
-// 範例（之後有真的照片，比照這個格式加進陣列）：
-// {
-//   course: "石英砂肌理畫",
-//   themes: ["植物花卉"],
-//   date: "2026-09-01",
-//   src: "../assets/images/gallery/2026-09-01-sand-texture-flower.jpg",
-//   alt: "石英砂肌理畫，花卉主題",
-//   sessions: 1,
-// }
-// 2026-09-13 新增：「山」系列 29 件（材料指南〈同一座山，三種材料的
-// 呈現〉頁面同一批真實照片，使用者確認這些是真正的學員作品，不是畫室
-// 示範，照實歸進對應課程）。原始相簿共 31 張，這裡排除 2 張刮刀油畫
-// 的「繪製過程」特寫照（IMG_0428／IMG_0435，是同一件作品畫到一半的
-// 過程紀錄，不是獨立完成的作品，放進作品集會重複計算），其餘 29 張
-// 都是各自獨立完成的作品。date 沒有精確的完成日期紀錄，先統一用新增
-// 這筆資料的日期，之後有更準確的日期可以再改。
-// themes 大多標「山」（見下方 GALLERY_THEMES 的說明），例外是
-// oil-knife/08.jpg：畫面實際內容是海岸崖壁＋浪花＋沙灘小花，不是山，
-// 照實標「海邊」而不是套用整批的「山」標籤。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 window.GALLERY_ITEMS = [
-  // 202403 IG：依使用者匯出選擇加入61筆，10筆排除、12筆重複略過，日期僅知月份。
+
   {"course": "自選主題油畫", "themes": ["建築"], "date": "2024-03-01", "src": "../assets/images/gallery/ig-202403/17842972002180414.jpg", "thumb": "../assets/images/gallery/ig-202403/17842972002180414.thumb.webp", "alt": "大阪城繪製特寫", "sessions": 1},
   {"course": "自選主題油畫", "themes": ["海邊", "人像"], "date": "2024-03-01", "src": "../assets/images/gallery/ig-202403/17845251174165933.jpg", "thumb": "../assets/images/gallery/ig-202403/17845251174165933.thumb.webp", "alt": "海岸人物風景", "sessions": 1},
   {"course": "流動畫", "themes": [], "date": "2024-03-01", "src": "../assets/images/gallery/ig-202403/17852993718155035.jpg", "thumb": "../assets/images/gallery/ig-202403/17852993718155035.thumb.webp", "alt": "棕白流動畫製作", "sessions": 1},
@@ -104,7 +104,7 @@ window.GALLERY_ITEMS = [
   {"course": "流動畫", "themes": [], "date": "2024-03-01", "src": "../assets/images/gallery/ig-202403/18301039480145838.jpg", "thumb": "../assets/images/gallery/ig-202403/18301039480145838.thumb.webp", "alt": "流動畫課堂成果集合", "sessions": 1},
   {"course": "石英砂肌理畫", "themes": ["抽象圖案"], "date": "2024-03-01", "src": "../assets/images/gallery/ig-202403/18419403292042374.jpg", "thumb": "../assets/images/gallery/ig-202403/18419403292042374.thumb.webp", "alt": "多色蝴蝶結肌理", "sessions": 1},
   {"course": "流動畫", "themes": [], "date": "2024-03-01", "src": "../assets/images/gallery/ig-202403/18433304284042642.jpg", "thumb": "../assets/images/gallery/ig-202403/18433304284042642.thumb.webp", "alt": "黑白金流動畫", "sessions": 1},
-  // 202404 IG：依使用者匯出選擇加入115筆，19筆排除、17筆重複略過，日期僅知月份。
+
   {"course": "石英砂肌理畫", "themes": ["植物花卉"], "date": "2024-04-01", "src": "../assets/images/gallery/ig-202404/17860118076137098.jpg", "thumb": "../assets/images/gallery/ig-202404/17860118076137098.thumb.webp", "alt": "黑棕花卉肌理", "sessions": 1},
   {"course": "自選主題油畫", "themes": ["風景", "星空"], "date": "2024-04-01", "src": "../assets/images/gallery/ig-202404/17861381529134081.jpg", "thumb": "../assets/images/gallery/ig-202404/17861381529134081.thumb.webp", "alt": "粉藍月夜風景", "sessions": 1},
   {"course": "自選主題油畫", "themes": ["人像"], "date": "2024-04-01", "src": "../assets/images/gallery/ig-202404/17871942666067412.jpg", "thumb": "../assets/images/gallery/ig-202404/17871942666067412.thumb.webp", "alt": "微笑長輩肖像", "sessions": 1},
@@ -220,7 +220,7 @@ window.GALLERY_ITEMS = [
   {"course": "串珠", "themes": ["項鍊"], "date": "2024-04-01", "src": "../assets/images/gallery/ig-202404/18429582064015822.jpg", "thumb": "../assets/images/gallery/ig-202404/18429582064015822.thumb.webp", "alt": "串珠項鍊", "sessions": 1},
   {"course": "寵物油畫", "themes": ["狗狗", "節慶／季節"], "date": "2024-04-01", "src": "../assets/images/gallery/ig-202404/18430529263040649.jpg", "thumb": "../assets/images/gallery/ig-202404/18430529263040649.thumb.webp", "alt": "聖誕帽白色狗狗", "sessions": 1},
   {"course": "串珠", "themes": ["項鍊", "學員分享"], "date": "2024-04-01", "src": "../assets/images/gallery/ig-202404/18431657128009594.jpg", "thumb": "../assets/images/gallery/ig-202404/18431657128009594.thumb.webp", "alt": "串珠項鍊分享", "sessions": 1},
-  // 202405 IG：依使用者匯出選擇加入80筆，12筆排除、24筆既有同件略過，日期僅知月份。
+
   {"course": "石英砂肌理畫", "themes": ["海邊"], "date": "2024-05-01", "src": "../assets/images/gallery/ig-202405/17844050793228750.jpg", "thumb": "../assets/images/gallery/ig-202405/17844050793228750.thumb.webp", "alt": "粉色日落海浪", "sessions": 1},
   {"course": "自選主題油畫", "themes": ["人像"], "date": "2024-05-01", "src": "../assets/images/gallery/ig-202405/17857338279122470.jpg", "thumb": "../assets/images/gallery/ig-202405/17857338279122470.thumb.webp", "alt": "求婚雙人肖像", "sessions": 1},
   {"course": "串珠", "themes": ["項鍊", "學員分享"], "date": "2024-05-01", "src": "../assets/images/gallery/ig-202405/17882506593059530.jpg", "thumb": "../assets/images/gallery/ig-202405/17882506593059530.thumb.webp", "alt": "佩戴項鍊分享", "sessions": 1},
@@ -301,7 +301,7 @@ window.GALLERY_ITEMS = [
   {"course": "刮刀油畫", "themes": ["植物花卉"], "date": "2024-05-01", "src": "../assets/images/gallery/ig-202405/18336069508187617.jpg", "thumb": "../assets/images/gallery/ig-202405/18336069508187617.thumb.webp", "alt": "白金色立體花卉", "sessions": 1},
   {"course": "串珠", "themes": ["項鍊", "戒指"], "date": "2024-05-01", "src": "../assets/images/gallery/ig-202405/18348671488106001.jpg", "thumb": "../assets/images/gallery/ig-202405/18348671488106001.thumb.webp", "alt": "字母項鍊與戒指", "sessions": 1},
   {"course": "流動畫", "themes": [], "date": "2024-05-01", "src": "../assets/images/gallery/ig-202405/18433833157011541.jpg", "thumb": "../assets/images/gallery/ig-202405/18433833157011541.thumb.webp", "alt": "迷你流動畫製作", "sessions": 1},
-  // 202407 IG：依使用者匯出選擇加入45筆，1筆排除、14筆重複略過，日期僅知月份。
+
   {"course": "自選主題油畫", "themes": ["迪士尼／皮克斯"], "date": "2024-07-01", "src": "../assets/images/gallery/ig-202407/17849637456246793.jpg", "thumb": "../assets/images/gallery/ig-202407/17849637456246793.thumb.webp", "alt": "小美人魚", "sessions": 1},
   {"course": "串珠", "themes": ["項鍊", "學員分享"], "date": "2024-07-01", "src": "../assets/images/gallery/ig-202407/17853965856232127.jpg", "thumb": "../assets/images/gallery/ig-202407/17853965856232127.thumb.webp", "alt": "串珠飾品分享", "sessions": 1},
   {"course": "石英砂肌理畫", "themes": ["植物花卉", "學員分享"], "date": "2024-07-01", "src": "../assets/images/gallery/ig-202407/17875577340121367.jpg", "thumb": "../assets/images/gallery/ig-202407/17875577340121367.thumb.webp", "alt": "花卉作品合照分享", "sessions": 1},
@@ -347,7 +347,7 @@ window.GALLERY_ITEMS = [
   {"course": "串珠", "themes": ["項鍊"], "date": "2024-07-01", "src": "../assets/images/gallery/ig-202407/18409195957076353.jpg", "thumb": "../assets/images/gallery/ig-202407/18409195957076353.thumb.webp", "alt": "珍珠項鍊", "sessions": 1},
   {"course": "自選主題油畫", "themes": ["海邊", "植物花卉"], "date": "2024-07-01", "src": "../assets/images/gallery/ig-202407/18449695216030063.jpg", "thumb": "../assets/images/gallery/ig-202407/18449695216030063.thumb.webp", "alt": "海面白花", "sessions": 1},
   {"course": "串珠", "themes": ["項鍊"], "date": "2024-07-01", "src": "../assets/images/gallery/ig-202407/18450950722020022.jpg", "thumb": "../assets/images/gallery/ig-202407/18450950722020022.thumb.webp", "alt": "橘色串珠項鍊", "sessions": 1},
-  // 202406 IG：依使用者匯出選擇加入60筆，6筆排除、10筆重複略過，日期僅知月份。
+
   {"course": "自選主題油畫", "themes": ["海邊", "風景"], "date": "2024-06-01", "src": "../assets/images/gallery/ig-202406/17847024378231945.jpg", "thumb": "../assets/images/gallery/ig-202406/17847024378231945.thumb.webp", "alt": "海岸公路日落", "sessions": 1},
   {"course": "自選主題油畫", "themes": ["動漫／角色"], "date": "2024-06-01", "src": "../assets/images/gallery/ig-202406/17847201561237907.jpg", "thumb": "../assets/images/gallery/ig-202406/17847201561237907.thumb.webp", "alt": "黑白卡通群像", "sessions": 1},
   {"course": "自選主題油畫", "themes": ["海邊"], "date": "2024-06-01", "src": "../assets/images/gallery/ig-202406/17852705211212001.jpg", "thumb": "../assets/images/gallery/ig-202406/17852705211212001.thumb.webp", "alt": "粉色暮光海景", "sessions": 1},
@@ -408,7 +408,7 @@ window.GALLERY_ITEMS = [
   {"course": "自選主題油畫", "themes": ["風景"], "date": "2024-06-01", "src": "../assets/images/gallery/ig-202406/18438625309008765.jpg", "thumb": "../assets/images/gallery/ig-202406/18438625309008765.thumb.webp", "alt": "藍天沙灘", "sessions": 1},
   {"course": "石英砂肌理畫", "themes": ["抽象圖案"], "date": "2024-06-01", "src": "../assets/images/gallery/ig-202406/18438811768012137.jpg", "thumb": "../assets/images/gallery/ig-202406/18438811768012137.thumb.webp", "alt": "白棕抽象肌理", "sessions": 1},
   {"course": "自選主題油畫", "themes": ["海邊"], "date": "2024-06-01", "src": "../assets/images/gallery/ig-202406/18441880783055111.jpg", "thumb": "../assets/images/gallery/ig-202406/18441880783055111.thumb.webp", "alt": "海岸日落", "sessions": 1},
-  // 202409 IG：依使用者匯出選擇加入28筆，4筆排除、7筆重複略過，日期僅知月份。
+
   {"course": "自選主題油畫", "themes": ["海邊", "植物花卉"], "date": "2024-09-01", "src": "../assets/images/gallery/ig-202409/17860722567233646.jpg", "thumb": "../assets/images/gallery/ig-202409/17860722567233646.thumb.webp", "alt": "海邊月色與白花", "sessions": 1},
   {"course": "刮刀油畫", "themes": ["植物花卉"], "date": "2024-09-01", "src": "../assets/images/gallery/ig-202409/17888163483094590.jpg", "thumb": "../assets/images/gallery/ig-202409/17888163483094590.thumb.webp", "alt": "瓶插鬱金香", "sessions": 1},
   {"course": "自選主題油畫", "themes": ["電影／動畫場景"], "date": "2024-09-01", "src": "../assets/images/gallery/ig-202409/17892899016077424.jpg", "thumb": "../assets/images/gallery/ig-202409/17892899016077424.thumb.webp", "alt": "多比肖像製作", "sessions": 3, "extraCourses": ["大幅畫布訂製"]},
@@ -437,7 +437,7 @@ window.GALLERY_ITEMS = [
   {"course": "自選主題油畫", "themes": ["海邊"], "date": "2024-09-01", "src": "../assets/images/gallery/ig-202409/18276632833211653.jpg", "thumb": "../assets/images/gallery/ig-202409/18276632833211653.thumb.webp", "alt": "日光海浪", "sessions": 1},
   {"course": "流動畫", "themes": [], "date": "2024-09-01", "src": "../assets/images/gallery/ig-202409/18279230005209193.jpg", "thumb": "../assets/images/gallery/ig-202409/18279230005209193.thumb.webp", "alt": "迷你流動畫", "sessions": 1},
   {"course": "自選主題油畫", "themes": ["其他動物", "人像"], "date": "2024-09-01", "src": "../assets/images/gallery/ig-202409/18279447520233202.jpg", "thumb": "../assets/images/gallery/ig-202409/18279447520233202.thumb.webp", "alt": "女子與龍"},
-  // 202408 IG：依使用者匯出選擇加入56筆，3筆排除、8筆既有同件略過，日期僅知月份。
+
   {"course": "石英砂肌理畫", "themes": ["學員分享"], "date": "2024-08-01", "src": "../assets/images/gallery/ig-202408/17845871394282764.jpg", "thumb": "../assets/images/gallery/ig-202408/17845871394282764.thumb.webp", "alt": "肌理畫作品分享", "sessions": 1},
   {"course": "刮刀油畫", "themes": ["植物花卉"], "date": "2024-08-01", "src": "../assets/images/gallery/ig-202408/17853601284239609.jpg", "thumb": "../assets/images/gallery/ig-202408/17853601284239609.thumb.webp", "alt": "繽紛花卉", "sessions": 1},
   {"course": "自選主題油畫", "themes": ["塗鴉"], "date": "2024-08-01", "src": "../assets/images/gallery/ig-202408/17854358244203132.jpg", "thumb": "../assets/images/gallery/ig-202408/17854358244203132.thumb.webp", "alt": "氣球狗塗鴉", "sessions": 1},
@@ -494,10 +494,10 @@ window.GALLERY_ITEMS = [
   {"course": "寵物油畫", "themes": ["狗狗"], "date": "2024-08-01", "src": "../assets/images/gallery/ig-202408/18446456029003028.jpg", "thumb": "../assets/images/gallery/ig-202408/18446456029003028.thumb.webp", "alt": "狗狗與福字", "sessions": 1},
   {"course": "石英砂肌理畫", "themes": ["名畫", "海邊"], "date": "2024-08-01", "src": "../assets/images/gallery/ig-202408/18451253068024479.jpg", "thumb": "../assets/images/gallery/ig-202408/18451253068024479.thumb.webp", "alt": "波妞與海浪", "sessions": 1},
   {"course": "自選主題油畫", "themes": ["植物花卉"], "date": "2024-08-01", "src": "../assets/images/gallery/ig-202408/18468192538061745.jpg", "thumb": "../assets/images/gallery/ig-202408/18468192538061745.thumb.webp", "alt": "粉白扶桑花", "sessions": 1},
-  // 202411 IG：依使用者匯出選擇加入2筆，1筆使用者排除，日期僅知月份。
+
   {"course": "刮刀油畫", "themes": ["人像", "風景"], "date": "2024-11-01", "src": "../assets/images/gallery/ig-202411/17957606657728393.jpg", "thumb": "../assets/images/gallery/ig-202411/17957606657728393.thumb.webp", "alt": "池塘景色與人物", "sessions": 1},
   {"course": "流動畫", "themes": [], "date": "2024-11-01", "src": "../assets/images/gallery/ig-202411/18003134786690208.jpg", "thumb": "../assets/images/gallery/ig-202411/18003134786690208.thumb.webp", "alt": "流動畫製作過程", "sessions": 1},
-  // 202410 IG：依使用者匯出選擇加入39筆，5筆排除、4筆既有同件略過，日期僅知月份。
+
   {"course": "自選主題油畫", "themes": ["星空", "建築"], "date": "2024-10-01", "src": "../assets/images/gallery/ig-202410/17846390949307656.jpg", "thumb": "../assets/images/gallery/ig-202410/17846390949307656.thumb.webp", "alt": "星空小屋", "sessions": 1},
   {"course": "串珠", "themes": ["項鍊", "戒指", "學員分享"], "date": "2024-10-01", "src": "../assets/images/gallery/ig-202410/17851857153266056.jpg", "thumb": "../assets/images/gallery/ig-202410/17851857153266056.thumb.webp", "alt": "串珠項鍊與戒指分享", "sessions": 1},
   {"course": "刮刀油畫", "themes": ["植物花卉"], "date": "2024-10-01", "src": "../assets/images/gallery/ig-202410/17852126115320655.jpg", "thumb": "../assets/images/gallery/ig-202410/17852126115320655.thumb.webp", "alt": "粉色背景花園", "sessions": 1},
@@ -537,7 +537,7 @@ window.GALLERY_ITEMS = [
   {"course": "寵物油畫", "themes": ["狗狗"], "date": "2024-10-01", "src": "../assets/images/gallery/ig-202410/18095739775463440.jpg", "thumb": "../assets/images/gallery/ig-202410/18095739775463440.thumb.webp", "alt": "藍底捲毛狗狗", "sessions": 1},
   {"course": "自選主題油畫", "themes": ["星空"], "date": "2024-10-01", "src": "../assets/images/gallery/ig-202410/18103041064444271.jpg", "thumb": "../assets/images/gallery/ig-202410/18103041064444271.thumb.webp", "alt": "縱向銀河", "sessions": 1},
   {"course": "寵物油畫", "themes": ["狗狗"], "date": "2024-10-01", "src": "../assets/images/gallery/ig-202410/18154978072331141.jpg", "thumb": "../assets/images/gallery/ig-202410/18154978072331141.thumb.webp", "alt": "博美狗肖像", "sessions": 1},
-  // 202501 IG：依使用者匯出選擇加入8筆，3筆排除、1筆既有同件略過，日期僅知月份。
+
   {"course": "自選主題油畫", "themes": ["吉卜力", "建築"], "date": "2025-01-01", "src": "../assets/images/gallery/ig-202501/17874740808167416.jpg", "thumb": "../assets/images/gallery/ig-202501/17874740808167416.thumb.webp", "alt": "城堡與草地人物", "sessions": 3, "extraCourses": ["大幅畫布訂製"]},
   {"course": "流動畫", "themes": ["節慶／季節", "學員分享"], "date": "2025-01-01", "src": "../assets/images/gallery/ig-202501/17925197325001471.jpg", "thumb": "../assets/images/gallery/ig-202501/17925197325001471.thumb.webp", "alt": "春聯福字學員限動", "sessions": 1},
   {"course": "流動畫", "themes": [], "date": "2025-01-01", "src": "../assets/images/gallery/ig-202501/17925761618901880.jpg", "thumb": "../assets/images/gallery/ig-202501/17925761618901880.thumb.webp", "alt": "藍綠流動畫禮盒", "sessions": 1},
@@ -546,7 +546,7 @@ window.GALLERY_ITEMS = [
   {"course": "自選主題油畫", "themes": ["其他動物"], "date": "2025-01-01", "src": "../assets/images/gallery/ig-202501/18054974090071563.jpg", "thumb": "../assets/images/gallery/ig-202501/18054974090071563.thumb.webp", "alt": "粉彩抽象滑板", "sessions": 2, "extraCourses": ["特殊材質客製"]},
   {"course": "流動畫", "themes": ["節慶／季節", "學員分享"], "date": "2025-01-01", "src": "../assets/images/gallery/ig-202501/18064533520876066.jpg", "thumb": "../assets/images/gallery/ig-202501/18064533520876066.thumb.webp", "alt": "紅粉春聯學員限動", "sessions": 1},
   {"course": "流動畫", "themes": ["節慶／季節", "學員分享"], "date": "2025-01-01", "src": "../assets/images/gallery/ig-202501/18484994023040729.jpg", "thumb": "../assets/images/gallery/ig-202501/18484994023040729.thumb.webp", "alt": "木牆上紅色字畫", "sessions": 1},
-  // 202412 IG：依使用者匯出選擇加入9筆，23筆排除、5筆與既有同件作品略過，日期僅知月份。
+
   {"course": "自選主題油畫", "themes": ["人像", "建築"], "date": "2024-12-01", "src": "../assets/images/gallery/ig-202412/17859782487239863.jpg", "thumb": "../assets/images/gallery/ig-202412/17859782487239863.thumb.webp", "alt": "白色街屋與人物", "sessions": 1},
   {"course": "自選主題油畫", "themes": ["人像"], "date": "2024-12-01", "src": "../assets/images/gallery/ig-202412/17867500686200344.jpg", "thumb": "../assets/images/gallery/ig-202412/17867500686200344.thumb.webp", "alt": "公園長椅雙人", "sessions": 2},
   {"course": "自選主題油畫", "themes": ["人像"], "date": "2024-12-01", "src": "../assets/images/gallery/ig-202412/17907194841073093.jpg", "thumb": "../assets/images/gallery/ig-202412/17907194841073093.thumb.webp", "alt": "婚禮雙人與紅花束", "sessions": 1},
@@ -556,10 +556,10 @@ window.GALLERY_ITEMS = [
   {"course": "石英砂肌理畫", "themes": ["山"], "date": "2024-12-01", "src": "../assets/images/gallery/ig-202412/18047525249106607.jpg", "thumb": "../assets/images/gallery/ig-202412/18047525249106607.thumb.webp", "alt": "富士山與紅葉", "sessions": 1},
   {"course": "石英砂肌理畫", "themes": ["海邊"], "date": "2024-12-01", "src": "../assets/images/gallery/ig-202412/18208137733288464.jpg", "thumb": "../assets/images/gallery/ig-202412/18208137733288464.thumb.webp", "alt": "藍黑斜向海浪肌理", "sessions": 1},
   {"course": "自選主題油畫", "themes": ["人像", "節慶／季節"], "date": "2024-12-01", "src": "../assets/images/gallery/ig-202412/18481144363041638.jpg", "thumb": "../assets/images/gallery/ig-202412/18481144363041638.thumb.webp", "alt": "雙人肖像與囍字三幅", "sessions": 3, "extraCourses": ["流動畫"]},
-  // 二月兩張依使用者指定分類；堂數沿用未特別指定皆一堂，日期僅知月份。
+
   {"course": "串珠", "themes": ["項鍊", "學員分享"], "date": "2025-02-01", "src": "../assets/images/gallery/ig-202502/17989932026620607.jpg", "thumb": "../assets/images/gallery/ig-202502/17989932026620607.thumb.webp", "alt": "學員分享黑底串珠項鍊", "sessions": 1},
   {"course": "流動畫", "themes": ["節慶／季節", "學員分享"], "date": "2025-02-01", "src": "../assets/images/gallery/ig-202502/18055686098067191.jpg", "thumb": "../assets/images/gallery/ig-202502/18055686098067191.thumb.webp", "alt": "學員分享春聯流動畫，粉紅春字與紅色福字作品", "sessions": 1},
-  // 202503 IG：依使用者匯出選擇加入16筆，4筆排除、2筆與既有同件作品略過，日期僅知月份。
+
   {"course": "自選主題油畫", "themes": ["植物花卉"], "date": "2025-03-01", "src": "../assets/images/gallery/ig-202503/17846877105409221.jpg", "thumb": "../assets/images/gallery/ig-202503/17846877105409221.thumb.webp", "alt": "米底單朵花卉", "sessions": 1},
   {"course": "寵物油畫", "themes": ["貓咪"], "date": "2025-03-01", "src": "../assets/images/gallery/ig-202503/17858358795333782.jpg", "thumb": "../assets/images/gallery/ig-202503/17858358795333782.thumb.webp", "alt": "灰色幼貓繪製特寫", "sessions": 1},
   {"course": "石英砂肌理畫", "themes": ["抽象圖案"], "date": "2025-03-01", "src": "../assets/images/gallery/ig-202503/17900215341051369.jpg", "thumb": "../assets/images/gallery/ig-202503/17900215341051369.thumb.webp", "alt": "白色弧線肌理", "sessions": 1},
@@ -576,7 +576,7 @@ window.GALLERY_ITEMS = [
   {"course": "自選主題油畫", "themes": ["風景", "山"], "date": "2025-03-01", "src": "../assets/images/gallery/ig-202503/18120101770433937.jpg", "thumb": "../assets/images/gallery/ig-202503/18120101770433937.thumb.webp", "alt": "橘色山巒與花田", "sessions": 1},
   {"course": "石英砂肌理畫", "themes": ["植物花卉"], "date": "2025-03-01", "src": "../assets/images/gallery/ig-202503/18177896023315954.jpg", "thumb": "../assets/images/gallery/ig-202503/18177896023315954.thumb.webp", "alt": "金棕底白色立體花朵", "sessions": 1},
   {"course": "石英砂肌理畫", "themes": ["海邊"], "date": "2025-03-01", "src": "../assets/images/gallery/ig-202503/18448179235073656.jpg", "thumb": "../assets/images/gallery/ig-202503/18448179235073656.thumb.webp", "alt": "灰綠色海浪沙灘", "sessions": 1},
-  // 202504 IG：依使用者匯出選擇加入28筆，3筆排除、3筆與既有同件作品略過，日期僅知月份。
+
   {"course": "寵物油畫", "themes": ["貓咪", "兩隻以上"], "date": "2025-04-01", "src": "../assets/images/gallery/ig-202504/17845455408448824.jpg", "thumb": "../assets/images/gallery/ig-202504/17845455408448824.thumb.webp", "alt": "窗邊雙貓背影", "sessions": 1},
   {"course": "自選主題油畫", "themes": ["其他動物"], "date": "2025-04-01", "src": "../assets/images/gallery/ig-202504/17848479933450115.jpg", "thumb": "../assets/images/gallery/ig-202504/17848479933450115.thumb.webp", "alt": "黑白獅子肖像繪製", "sessions": 3, "extraCourses": ["大幅畫布訂製"]},
   {"course": "石英砂肌理畫", "themes": ["抽象圖案"], "date": "2025-04-01", "src": "../assets/images/gallery/ig-202504/17864234229376268.jpg", "thumb": "../assets/images/gallery/ig-202504/17864234229376268.thumb.webp", "alt": "灰綠幾何色塊", "sessions": 1, "extraCourses": ["大幅畫布訂製"]},
@@ -605,7 +605,7 @@ window.GALLERY_ITEMS = [
   {"course": "寵物油畫", "themes": ["狗狗", "兩隻以上"], "date": "2025-04-01", "src": "../assets/images/gallery/ig-202504/18306874849234568.jpg", "thumb": "../assets/images/gallery/ig-202504/18306874849234568.thumb.webp", "alt": "綠椅上的長毛雙狗", "sessions": 1},
   {"course": "串珠", "themes": ["項鍊"], "date": "2025-04-01", "src": "../assets/images/gallery/ig-202504/18357183271176673.jpg", "thumb": "../assets/images/gallery/ig-202504/18357183271176673.thumb.webp", "alt": "串珠項鍊製作特寫", "sessions": 1},
   {"course": "寵物油畫", "themes": ["貓咪"], "date": "2025-04-01", "src": "../assets/images/gallery/ig-202504/18472123720071987.jpg", "thumb": "../assets/images/gallery/ig-202504/18472123720071987.thumb.webp", "alt": "灰貓熟睡倒掛姿態", "sessions": 1},
-  // 202505 IG：依使用者匯出選擇加入35筆，2筆排除、3筆與既有同件作品略過，日期僅知月份。
+
   {"course": "石英砂肌理畫", "themes": ["植物花卉"], "date": "2025-05-01", "src": "../assets/images/gallery/ig-202505/17849627793464425.jpg", "thumb": "../assets/images/gallery/ig-202505/17849627793464425.thumb.webp", "alt": "粉彩花田與海景", "sessions": 1},
   {"course": "寵物油畫", "themes": ["貓咪", "兩隻以上"], "date": "2025-05-01", "src": "../assets/images/gallery/ig-202505/17859646536352056.jpg", "thumb": "../assets/images/gallery/ig-202505/17859646536352056.thumb.webp", "alt": "黑白雙貓相擁", "sessions": 1},
   {"course": "自選主題油畫", "themes": ["人像", "名畫"], "date": "2025-05-01", "src": "../assets/images/gallery/ig-202505/17866759107385614.jpg", "thumb": "../assets/images/gallery/ig-202505/17866759107385614.thumb.webp", "alt": "月亮與古典女子", "sessions": 3},
@@ -641,14 +641,14 @@ window.GALLERY_ITEMS = [
   {"course": "石英砂肌理畫", "themes": ["植物花卉"], "date": "2025-05-01", "src": "../assets/images/gallery/ig-202505/18154765708368807.jpg", "thumb": "../assets/images/gallery/ig-202505/18154765708368807.thumb.webp", "alt": "粉藍色立體花園", "sessions": 1},
   {"course": "自選主題油畫", "themes": ["動漫／角色", "塗鴉"], "date": "2025-05-01", "src": "../assets/images/gallery/ig-202505/18382281760137713.jpg", "thumb": "../assets/images/gallery/ig-202505/18382281760137713.thumb.webp", "alt": "黃色背景原創角色", "sessions": 1},
   {"course": "寵物油畫", "themes": ["狗狗"], "date": "2025-05-01", "src": "../assets/images/gallery/ig-202505/18499849366048242.jpg", "thumb": "../assets/images/gallery/ig-202505/18499849366048242.thumb.webp", "alt": "橘底圓形白狗", "sessions": 1},
-  // 使用者指定六張簽名特寫，沿用課程既有素材；日期為整理日，堂數未指定。
+
   {"course": "自選主題油畫", "themes": ["簽名特寫"], "date": "2026-11-10", "src": "../assets/images/courses/signature-details/17859341981863313.jpg", "thumb": "../assets/images/courses/signature-details/17859341981863313.thumb.webp", "alt": "四人合照畫布側面簽名"},
   {"course": "寵物油畫", "themes": ["簽名特寫"], "date": "2026-11-10", "src": "../assets/images/courses/signature-details/17916449606433862.jpg", "thumb": "../assets/images/courses/signature-details/17916449606433862.thumb.webp", "alt": "狗狗肖像畫布側面以畫筆簽名"},
   {"course": "寵物油畫", "themes": ["簽名特寫"], "date": "2026-11-10", "src": "../assets/images/courses/signature-details/17950778618469861.jpg", "thumb": "../assets/images/courses/signature-details/17950778618469861.thumb.webp", "alt": "狗狗肖像畫布邊緣簽名"},
   {"course": "自選主題油畫", "themes": ["簽名特寫"], "date": "2026-11-10", "src": "../assets/images/courses/signature-details/17992882778384572.jpg", "thumb": "../assets/images/courses/signature-details/17992882778384572.thumb.webp", "alt": "風景畫布側面簽名"},
   {"course": "寵物油畫", "themes": ["簽名特寫"], "date": "2026-11-10", "src": "../assets/images/courses/signature-details/18087088045379965.jpg", "thumb": "../assets/images/courses/signature-details/18087088045379965.thumb.webp", "alt": "圓形貓咪作品邊緣簽名"},
   {"course": "石英砂肌理畫", "themes": ["簽名特寫"], "date": "2026-11-10", "src": "../assets/images/courses/signature-details/18392653582023391.jpg", "thumb": "../assets/images/courses/signature-details/18392653582023391.thumb.webp", "alt": "肌理畫布側面簽名"},
-  // 202506 IG：依使用者匯出選擇新增34筆，排除13筆，42與既有照片重複略過；日期僅知月份。
+
   {"course": "寵物油畫", "themes": ["貓咪"], "date": "2025-06-01", "src": "../assets/images/gallery/ig-202506/17857256778447501.jpg", "thumb": "../assets/images/gallery/ig-202506/17857256778447501.thumb.webp", "alt": "藍底貓咪PiPi", "sessions": 1},
   {"course": "刮刀油畫", "themes": ["植物花卉", "學員分享"], "date": "2025-06-01", "src": "../assets/images/gallery/ig-202506/17876435760365078.jpg", "thumb": "../assets/images/gallery/ig-202506/17876435760365078.thumb.webp", "alt": "深底花束學員限動", "sessions": 1},
   {"course": "串珠", "themes": ["項鍊", "戒指"], "date": "2025-06-01", "src": "../assets/images/gallery/ig-202506/17883254859311969.jpg", "thumb": "../assets/images/gallery/ig-202506/17883254859311969.thumb.webp", "alt": "串珠項鍊與戒指拼貼", "sessions": 1},
@@ -683,7 +683,7 @@ window.GALLERY_ITEMS = [
   {"course": "串珠", "themes": ["吊飾"], "date": "2025-06-01", "src": "../assets/images/gallery/ig-202506/18347283829087066.jpg", "thumb": "../assets/images/gallery/ig-202506/18347283829087066.thumb.webp", "alt": "白色串珠杯鍊", "sessions": 1},
   {"course": "串珠", "themes": ["吊飾"], "date": "2025-06-01", "src": "../assets/images/gallery/ig-202506/18356149609152119.jpg", "thumb": "../assets/images/gallery/ig-202506/18356149609152119.thumb.webp", "alt": "黑白串珠項鍊特寫", "sessions": 1},
   {"course": "串珠", "themes": ["吊飾"], "date": "2025-06-01", "src": "../assets/images/gallery/ig-202506/18515497156038590.jpg", "thumb": "../assets/images/gallery/ig-202506/18515497156038590.thumb.webp", "alt": "串珠包包吊飾與手鏈，限動影片代表截圖", "sessions": 1},
-  // 202507 IG：依使用者匯出選擇加入94筆，5筆排除、4筆與既有同件作品略過，日期僅知月份。
+
   {"course": "刮刀油畫", "themes": ["狗狗", "兩隻以上"], "date": "2025-07-01", "src": "../assets/images/gallery/ig-202507/17844958083512268.jpg", "thumb": "../assets/images/gallery/ig-202507/17844958083512268.thumb.webp", "alt": "水中雙狗", "sessions": 1},
   {"course": "寵物油畫", "themes": ["貓咪"], "date": "2025-07-01", "src": "../assets/images/gallery/ig-202507/17848424787518167.jpg", "thumb": "../assets/images/gallery/ig-202507/17848424787518167.thumb.webp", "alt": "側面仰望虎斑貓", "sessions": 1},
   {"course": "寵物油畫", "themes": ["其他動物", "貓咪"], "date": "2025-07-01", "src": "../assets/images/gallery/ig-202507/17848543932476463.jpg", "thumb": "../assets/images/gallery/ig-202507/17848543932476463.thumb.webp", "alt": "狗貓作品拍攝紀錄", "sessions": 1},
@@ -778,7 +778,7 @@ window.GALLERY_ITEMS = [
   {"course": "寵物油畫", "themes": ["狗狗"], "date": "2025-07-01", "src": "../assets/images/gallery/ig-202507/18419140831101569.jpg", "thumb": "../assets/images/gallery/ig-202507/18419140831101569.thumb.webp", "alt": "粉底白色小狗", "sessions": 1},
   {"course": "寵物油畫", "themes": ["貓咪"], "date": "2025-07-01", "src": "../assets/images/gallery/ig-202507/18516725299002940.jpg", "thumb": "../assets/images/gallery/ig-202507/18516725299002940.thumb.webp", "alt": "貓咪與參考照片", "sessions": 1},
   {"course": "自選主題油畫", "themes": ["人像", "狗狗"], "date": "2025-07-01", "src": "../assets/images/gallery/ig-202507/18518511118022053.jpg", "thumb": "../assets/images/gallery/ig-202507/18518511118022053.thumb.webp", "alt": "兩位長者與狗狗", "sessions": 1},
-  // 202508 IG：使用者確認73筆；未特別標記皆一堂，23/31/32/48兩堂、81三堂。日期僅知月份。
+
   {"course": "串珠", "themes": ["項鍊", "學員分享"], "date": "2025-08-01", "src": "../assets/images/gallery/ig-202508/17851738974479570.jpg", "thumb": "../assets/images/gallery/ig-202508/17851738974479570.thumb.webp", "alt": "佩戴串珠項鍊分享，限動影片代表截圖", "sessions": 1},
   {"course": "寵物油畫", "themes": ["貓咪", "兩隻以上"], "date": "2025-08-01", "src": "../assets/images/gallery/ig-202508/17858826390470709.jpg", "thumb": "../assets/images/gallery/ig-202508/17858826390470709.thumb.webp", "alt": "雙貓靠坐肖像", "sessions": 1},
   {"course": "寵物油畫", "themes": ["貓咪"], "date": "2025-08-01", "src": "../assets/images/gallery/ig-202508/17861340939464278.jpg", "thumb": "../assets/images/gallery/ig-202508/17861340939464278.thumb.webp", "alt": "熟睡虎斑貓", "sessions": 1},
@@ -852,7 +852,7 @@ window.GALLERY_ITEMS = [
   {"course": "自選主題油畫", "themes": ["人像", "植物花卉"], "date": "2025-08-01", "src": "../assets/images/gallery/ig-202508/18398321923184984.jpg", "thumb": "../assets/images/gallery/ig-202508/18398321923184984.thumb.webp", "alt": "黃花田雙人紀念", "sessions": 1},
   {"course": "自選主題油畫", "themes": ["人像"], "date": "2025-08-01", "src": "../assets/images/gallery/ig-202508/18477249523078636.jpg", "thumb": "../assets/images/gallery/ig-202508/18477249523078636.thumb.webp", "alt": "藍外套男子與女子肖像", "sessions": 1},
   {"course": "自選主題油畫", "themes": ["其他動物", "植物花卉", "風景", "迪士尼／皮克斯"], "date": "2025-08-01", "src": "../assets/images/gallery/ig-202508/18482138761074986.jpg", "thumb": "../assets/images/gallery/ig-202508/18482138761074986.thumb.webp", "alt": "森林動物與花卉場景", "sessions": 3},
-  // 202509 IG 故事，使用者逐項確認；07既有作品不重複、23側面照排除。日期僅知月份；堂數僅26確認兩堂。
+
   {"course": "自選主題油畫", "themes": ["人像", "海邊"], "date": "2025-09-01", "alt": "海邊擁抱人物", "src": "../assets/images/gallery/ig-202509/17842245636574148.jpg", "thumb": "../assets/images/gallery/ig-202509/17842245636574148.thumb.webp", "sessions": 1},
   {"course": "自選主題油畫", "themes": ["人像"], "date": "2025-09-01", "alt": "雙人肖像與花束", "src": "../assets/images/gallery/ig-202509/17857196010447090.jpg", "thumb": "../assets/images/gallery/ig-202509/17857196010447090.thumb.webp", "sessions": 1},
   {"course": "寵物油畫", "themes": ["貓咪", "學員分享"], "date": "2025-09-01", "alt": "虎斑貓繪製過程，學員分享影片代表畫面", "src": "../assets/images/gallery/ig-202509/17858847117485189.jpg", "thumb": "../assets/images/gallery/ig-202509/17858847117485189.thumb.webp", "sessions": 1},
@@ -887,7 +887,7 @@ window.GALLERY_ITEMS = [
   {"course": "寵物油畫", "themes": ["貓咪"], "date": "2025-09-01", "alt": "六幅貓咪小畫集合", "src": "../assets/images/gallery/ig-202509/18155150896388125.jpg", "thumb": "../assets/images/gallery/ig-202509/18155150896388125.thumb.webp", "sessions": 1},
   {"course": "自選主題油畫", "themes": ["節慶／季節"], "date": "2025-09-01", "alt": "夜空煙火", "src": "../assets/images/gallery/ig-202509/18324837406237997.jpg", "thumb": "../assets/images/gallery/ig-202509/18324837406237997.thumb.webp", "sessions": 1},
   {"course": "自選主題油畫", "themes": ["海邊", "人像"], "date": "2025-09-01", "alt": "藍色海岸與黃傘人物", "src": "../assets/images/gallery/ig-202509/18484898983078541.jpg", "thumb": "../assets/images/gallery/ig-202509/18484898983078541.thumb.webp", "sessions": 1},
-  // 日期為照片整理日；完成堂數未提供。
+
   {"course": "金箔抽象畫", "themes": ["抽象圖案"], "date": "2026-11-07", "src": "../assets/images/gallery/abstract/17887522544807391.jpg", "thumb": "../assets/images/gallery/abstract/17887522544807391.thumb.webp", "alt": "學員使用刮刀創作黑白與粉紅色塊抽象畫", "sessions": 1},
   {"course": "金箔抽象畫", "themes": ["抽象圖案"], "date": "2026-11-07", "src": "../assets/images/gallery/abstract/17972946446179999.jpg", "thumb": "../assets/images/gallery/abstract/17972946446179999.thumb.webp", "alt": "學員在藍綠與粉紅色背景上描繪金色斑點", "sessions": 1},
   {"course": "金箔抽象畫", "themes": ["抽象圖案"], "date": "2026-11-07", "src": "../assets/images/gallery/abstract/17973733781283534.jpg", "thumb": "../assets/images/gallery/abstract/17973733781283534.thumb.webp", "alt": "學員在桌前繪製多彩抽象畫", "sessions": 1},
@@ -926,11 +926,11 @@ window.GALLERY_ITEMS = [
   { course: "刮刀油畫", themes: ["山"], date: "2026-09-13", src: "../assets/images/guides/material-compare-mountain/oil-knife/07.jpg", "thumb": "../assets/images/guides/material-compare-mountain/oil-knife/07.thumb.webp", alt: "刮刀油畫的黑灰色馬特洪峰，前景是秋天的紅黃樹叢", sessions: 1 },
   { course: "刮刀油畫", themes: ["海邊"], date: "2026-09-13", src: "../assets/images/guides/material-compare-mountain/oil-knife/08.jpg", "thumb": "../assets/images/guides/material-compare-mountain/oil-knife/08.thumb.webp", alt: "刮刀油畫的海岸崖壁，浪花拍打岸邊，前景有紅色小花", sessions: 1 },
 
-  // 2026-09-24 新增：「刮刀油畫」花卉主題 26 件，使用者上傳一批真實學員
-  // 完成作品照片，逐張看過內容後排除明顯是製作過程（畫面裡有手跟刮刀
-  // 在動作）或跟其他張是同一幅作品重複構圖的照片，只保留每幅作品各一張
-  // 最完整的成品照。沒有精確的完成日期紀錄，先統一用新增這筆資料的
-  // 日期，之後有更準確的日期可以再改。
+
+
+
+
+
   { course: "刮刀油畫", themes: ["植物花卉"], date: "2026-09-24", src: "../assets/images/gallery/palette-knife-oil/01.jpg", "thumb": "../assets/images/gallery/palette-knife-oil/01.thumb.webp", alt: "刮刀油畫的蒲公英與野花草地，粉藍黃色系的柔和背景", sessions: 1 },
   { course: "刮刀油畫", themes: ["植物花卉"], date: "2026-09-24", src: "../assets/images/gallery/palette-knife-oil/02.jpg", "thumb": "../assets/images/gallery/palette-knife-oil/02.thumb.webp", alt: "刮刀油畫的粉色虞美人花特寫，白底搭配綠色枝葉", sessions: 1 },
   { course: "刮刀油畫", themes: ["植物花卉"], date: "2026-09-24", src: "../assets/images/gallery/palette-knife-oil/03.jpg", "thumb": "../assets/images/gallery/palette-knife-oil/03.thumb.webp", alt: "刮刀油畫的野花草地，橘、白、藍紫色小花錯落其中", sessions: 1 },
@@ -958,11 +958,11 @@ window.GALLERY_ITEMS = [
   { course: "刮刀油畫", themes: ["植物花卉"], date: "2026-09-24", src: "../assets/images/gallery/palette-knife-oil/25.jpg", "thumb": "../assets/images/gallery/palette-knife-oil/25.thumb.webp", alt: "刮刀油畫的密集野花草地，點綴水鑽裝飾", sessions: 1 },
   { course: "刮刀油畫", themes: ["植物花卉"], date: "2026-09-24", src: "../assets/images/gallery/palette-knife-oil/26.jpg", "thumb": "../assets/images/gallery/palette-knife-oil/26.thumb.webp", alt: "刮刀油畫的灰綠色系玫瑰花特寫", sessions: 1 },
 
-  // 2026-09-30 新增：「刮刀油畫」8 件，使用者上傳一批真實學員完成作品，
-  // 題材比較多元（動漫角色、水果、蛋糕、披薩），逐張看過內容後排除一張
-  // 明顯是製作過程（手＋刮刀入鏡，蛋糕那幅的過程照）跟這批分開放，那張
-  // 改放進課程頁「刮刀油畫是什麼」段落當技法示範用。沒有精確的完成日期
-  // 紀錄，先統一用新增這筆資料的日期，之後有更準確的日期可以再改。
+
+
+
+
+
   { course: "刮刀油畫", themes: ["動漫／角色"], date: "2026-09-30", src: "../assets/images/gallery/palette-knife-oil/28.jpg", "thumb": "../assets/images/gallery/palette-knife-oil/28.thumb.webp", alt: "刮刀油畫的拉拉熊，趴在粉色床鋪上的慵懶姿勢", sessions: 1 },
   { course: "刮刀油畫", themes: ["食物", "風景"], date: "2026-09-30", src: "../assets/images/gallery/palette-knife-oil/29.jpg", "thumb": "../assets/images/gallery/palette-knife-oil/29.thumb.webp", alt: "刮刀油畫的水蜜桃靜物，木籃裝著水蜜桃放在沙灘桌巾上，背景是海景", sessions: 1 },
   { course: "刮刀油畫", themes: ["食物"], date: "2026-09-30", src: "../assets/images/gallery/palette-knife-oil/30.jpg", "thumb": "../assets/images/gallery/palette-knife-oil/30.thumb.webp", alt: "刮刀油畫的杯子蛋糕靜物，白色奶油上放著一顆紅色櫻桃，花紋瓷盤盛裝", sessions: 1 },
@@ -971,9 +971,9 @@ window.GALLERY_ITEMS = [
   { course: "刮刀油畫", themes: ["食物"], date: "2026-09-30", src: "../assets/images/gallery/palette-knife-oil/33.jpg", "thumb": "../assets/images/gallery/palette-knife-oil/33.thumb.webp", alt: "刮刀油畫的水蜜桃與李子特寫，藍色水面背景", sessions: 1 },
   { course: "刮刀油畫", themes: ["風景", "海邊"], date: "2026-09-30", src: "../assets/images/gallery/palette-knife-oil/34.jpg", "thumb": "../assets/images/gallery/palette-knife-oil/34.thumb.webp", alt: "刮刀油畫的海邊放風箏景色，紅色與黃色風箏飛在海浪上方", sessions: 1 },
 
-  // 2026-10-01 新增：「刮刀油畫」10 件風景主題學員作品，使用者上傳時
-  // 確認都是「一堂完成」的真實成品。沒有精確的完成日期紀錄，先統一用
-  // 新增這筆資料的日期，之後有更準確的日期可以再改。
+
+
+
   { course: "刮刀油畫", themes: ["風景", "山"], date: "2026-10-01", src: "../assets/images/gallery/palette-knife-oil/35.jpg", "thumb": "../assets/images/gallery/palette-knife-oil/35.thumb.webp", alt: "刮刀油畫的湖畔小屋秋景，楓紅樹林與遠山倒映在湖面", sessions: 1 },
   { course: "刮刀油畫", themes: ["風景", "海邊"], date: "2026-10-01", src: "../assets/images/gallery/palette-knife-oil/36.jpg", "thumb": "../assets/images/gallery/palette-knife-oil/36.thumb.webp", alt: "刮刀油畫的夕陽海景，一艘帆船航行在波光粼粼的海面上", sessions: 1 },
   { course: "刮刀油畫", themes: ["風景"], date: "2026-10-01", src: "../assets/images/gallery/palette-knife-oil/37.jpg", "thumb": "../assets/images/gallery/palette-knife-oil/37.thumb.webp", alt: "刮刀油畫的雪地狗拉雪橇景色，針葉林環繞", sessions: 1 },
@@ -984,24 +984,24 @@ window.GALLERY_ITEMS = [
   { course: "刮刀油畫", themes: ["風景", "山"], date: "2026-10-01", src: "../assets/images/gallery/palette-knife-oil/42.jpg", "thumb": "../assets/images/gallery/palette-knife-oil/42.thumb.webp", alt: "刮刀油畫的河濱自行車道景色，金黃草地與遠山，有人騎單車經過", sessions: 1 },
   { course: "刮刀油畫", themes: ["節慶／季節", "風景", "建築"], date: "2026-10-01", src: "../assets/images/gallery/palette-knife-oil/43.jpg", "thumb": "../assets/images/gallery/palette-knife-oil/43.thumb.webp", alt: "刮刀油畫的聖誕雪景，窗邊擺著聖誕樹，窗外是飄雪的街道", sessions: 1 },
   { course: "刮刀油畫", themes: ["風景", "植物花卉"], date: "2026-10-01", src: "../assets/images/gallery/palette-knife-oil/44.jpg", "thumb": "../assets/images/gallery/palette-knife-oil/44.thumb.webp", alt: "刮刀油畫的森林野花草地，陽光點點灑落在石頭與花叢間", sessions: 1 },
-  // 2026-10-30 新增：吉卜力主題作品之一，龍貓坐在大樹下，原始檔名
-  // 「使用了刮刀油畫.jpg」，材質實際是刮刀油畫不是油畫＋筆刷，照實
-  // 歸在「刮刀油畫」這堂課，不跟其他吉卜力油畫作品混在一起（同樣的
-  // 處理方式見迪士尼主題裡的小熊維尼／茶壺夫人兩件石英砂作品）。
+
+
+
+
   { course: "刮刀油畫", themes: ["吉卜力"], date: "2026-10-30", src: "../assets/images/gallery/palette-knife-oil/45.jpg", "thumb": "../assets/images/gallery/palette-knife-oil/45.thumb.webp", alt: "龍貓坐在大樹下，刮刀堆疊出樹葉與草地的立體質感", sessions: 1 },
 
-  // 2026-09-17 新增：「寵物油畫」10 件，使用者從 Mac 照片 App 的
-  // 「狗狗油畫」相簿匯出，確認都是完全沒有畫畫經驗的同學一堂課完成的
-  // 真實作品（同一批照片使用者也發了 IG 貼文，見 courses/pet-portrait.html
-  // 「學員作品」段落引言的文案同步更新）。date 用照片本身的拍攝日期
-  // （檔名 EXIF 對應到的檔案時間），不是上傳日期。themes 標「狗狗」
-  // （不是泛用的「其他動物」）——使用者 2026-09-18 明確要求寵物油畫的
-  // 學員作品要分「狗狗」「貓咪」「兩隻以上」三類（貓咪、兩隻以上目前
-  // 還沒有真的照片，先把標籤加進 GALLERY_THEMES，等照片到位直接套用，
-  // 見下方 GALLERY_THEMES 的說明；courses/pet-portrait.html 的「學員
-  // 作品」段落也同步改成三個分類各自一條輪播，不再用這裡的
-  // GALLERY_ITEMS 資料餵那個區塊——這份資料現在只給 gallery.html 總覽頁
-  // 篩選用。
+
+
+
+
+
+
+
+
+
+
+
+
   { course: "寵物油畫", themes: ["狗狗"], date: "2024-07-01", src: "../assets/images/gallery/pet-portrait/01.jpg", "thumb": "../assets/images/gallery/pet-portrait/01.thumb.webp", alt: "白色蓬鬆毛狗狗肖像油畫，吐舌微笑，綠色草叢背景，畫面簽名Kobe", sessions: 1 },
   { course: "寵物油畫", themes: ["狗狗"], date: "2024-07-12", src: "../assets/images/gallery/pet-portrait/02.jpg", "thumb": "../assets/images/gallery/pet-portrait/02.thumb.webp", alt: "哈士奇犬肖像油畫，灰白毛色、尖耳朵，淺藍色背景", sessions: 1 },
   { course: "寵物油畫", themes: ["狗狗"], date: "2024-07-18", src: "../assets/images/gallery/pet-portrait/03.jpg", "thumb": "../assets/images/gallery/pet-portrait/03.thumb.webp", alt: "白色蓬鬆小狗肖像油畫，雙腳搭在藍色椅墊上，背景點綴白色小花", sessions: 1 },
@@ -1009,26 +1009,26 @@ window.GALLERY_ITEMS = [
   { course: "寵物油畫", themes: ["狗狗"], date: "2024-08-25", src: "../assets/images/gallery/pet-portrait/05.jpg", "thumb": "../assets/images/gallery/pet-portrait/05.thumb.webp", alt: "白色吉娃娃肖像油畫，大耳朵豎起，淺藍色背景", sessions: 1 },
   { course: "寵物油畫", themes: ["狗狗"], date: "2024-08-28", src: "../assets/images/gallery/pet-portrait/06.jpg", "thumb": "../assets/images/gallery/pet-portrait/06.thumb.webp", alt: "白色法國鬥牛犬肖像油畫，頭戴花朵頭飾，暖橘色背景", sessions: 1 },
   { course: "寵物油畫", themes: ["狗狗"], date: "2024-09-08", src: "../assets/images/gallery/pet-portrait/07.jpg", "thumb": "../assets/images/gallery/pet-portrait/07.thumb.webp", alt: "黑白毛色狗狗肖像油畫，向前跳躍張嘴的瞬間，藍天與土黃色地面背景", sessions: 1 },
-  // 08.jpg 一張照片裡拍到兩幅畫，但兩幅各自都是「單隻狗」的獨立作品
-  // 並排拍在一起，不是一幅畫裡畫兩隻寵物——2026-09-18 使用者特別確認
-  // 這張不屬於「兩隻以上」分類，themes 標「狗狗」是對的，alt 文字也
-  // 特別寫清楚「各自獨立完成」避免以後被誤會成兩隻以上的合照作品。
+
+
+
+
   { course: "寵物油畫", themes: ["狗狗"], date: "2024-09-22", src: "../assets/images/gallery/pet-portrait/08.jpg", "thumb": "../assets/images/gallery/pet-portrait/08.thumb.webp", alt: "兩幅各自獨立完成的單隻狗狗肖像油畫並排展示，淺棕色毛色，分別戴著紫色與粉色項圈，淺藍色背景", sessions: 1 },
   { course: "寵物油畫", themes: ["狗狗"], date: "2024-10-10", src: "../assets/images/gallery/pet-portrait/09.jpg", "thumb": "../assets/images/gallery/pet-portrait/09.thumb.webp", alt: "黑白毛色小狗肖像油畫，吐舌微笑，藍天與黃色地面背景", sessions: 1 },
   { course: "寵物油畫", themes: ["狗狗"], date: "2024-10-12", src: "../assets/images/gallery/pet-portrait/10.jpg", "thumb": "../assets/images/gallery/pet-portrait/10.thumb.webp", alt: "米白色捲毛狗狗肖像油畫，張嘴微笑，淺藍色背景", sessions: 1 },
 
-  // 2026-09-18 新增：「兩隻以上」21 件，使用者從「兩隻以上油畫照片」
-  // 資料夾提供（根目錄放狗貓合照、兩狗／兩貓各自分裝子資料夾）。同樣逐張
-  // 打開實際看過畫面內容才標的分類跟寫 alt。原始資料夾兩貓子資料夾裡有
-  // 一張 DSCF1788 2.JPG，畫面拍到的是還握著畫筆、手伸進畫面裡補眼睛細節
-  // 的繪製過程照，不是完成品，比照「山」系列排除過程照的先例，這張不放
-  // 進作品集。date 用照片本身的拍攝日期（跟寵物油畫狗狗那批一樣）。
-  // themes 除了「兩隻以上」，同時照畫面實際內容疊加「狗狗」／「貓咪」
-  // （兩者都有的合照兩個都疊上）——使用者 2026-09-18 明確要求：瀏覽
-  // 「貓咪」主題時，有貓的兩隻合照也要一起出現；瀏覽「狗狗」也一樣；
-  // 有貓有狗的合照兩邊都要出現。這三個標籤因此不再是互斥關係，改成
-  // 跟山／海邊那種可以同時成立的一般主題標籤一樣（見 js/gallery.js
-  // 移除 EXCLUSIVE_THEME_GROUP 的說明）。
+
+
+
+
+
+
+
+
+
+
+
+
   { course: "寵物油畫", themes: ["兩隻以上", "狗狗", "貓咪"], date: "2025-08-09", src: "../assets/images/gallery/pet-portrait/11.jpg", "thumb": "../assets/images/gallery/pet-portrait/11.thumb.webp", alt: "橘色虎斑貓與白色吉娃娃合照肖像油畫，貓咪表情驚訝，狗狗吐舌微笑，淺藍色背景", sessions: 1 },
   { course: "寵物油畫", themes: ["兩隻以上", "狗狗", "貓咪"], date: "2025-10-24", src: "../assets/images/gallery/pet-portrait/12.jpg", "thumb": "../assets/images/gallery/pet-portrait/12.thumb.webp", alt: "金黃色狗狗與虎斑貓合照肖像油畫，畫面寫著狗狗名字「甜甜」與貓咪名字「Ari」，白色背景", sessions: 1 },
   { course: "寵物油畫", themes: ["兩隻以上", "狗狗"], date: "2025-04-07", src: "../assets/images/gallery/pet-portrait/13.jpg", "thumb": "../assets/images/gallery/pet-portrait/13.thumb.webp", alt: "兩隻金棕色長毛狗狗依偎在綠色沙發上的肖像油畫，互相靠著頭休息", sessions: 1 },
@@ -1051,9 +1051,9 @@ window.GALLERY_ITEMS = [
   { course: "寵物油畫", themes: ["兩隻以上", "貓咪"], date: "2025-10-11", src: "../assets/images/gallery/pet-portrait/30.jpg", "thumb": "../assets/images/gallery/pet-portrait/30.thumb.webp", alt: "白色蓬鬆貓咪倒臥吐舌與棕色虎斑貓合照的肖像油畫，簽名「Bruna Chen」，藍色背景", sessions: 1 },
   { course: "寵物油畫", themes: ["兩隻以上", "貓咪"], date: "2025-10-22", src: "../assets/images/gallery/pet-portrait/31.jpg", "thumb": "../assets/images/gallery/pet-portrait/31.thumb.webp", alt: "兩隻長毛貓互相伸手依偎的肖像油畫，一隻灰白色一隻棕色虎斑，藍色背景", sessions: 1 },
 
-  // 2026-09-18 新增：「貓咪」（單隻貓）13 件，使用者從「單隻貓咪油畫
-  // 照片」資料夾提供，逐張看過畫面內容才寫 alt——同一套方法論（見上方
-  // 「兩隻以上」的說明）。date 用照片本身的拍攝日期。
+
+
+
   { course: "寵物油畫", themes: ["貓咪"], date: "2026-02-08", src: "../assets/images/gallery/pet-portrait/32.jpg", "thumb": "../assets/images/gallery/pet-portrait/32.thumb.webp", alt: "咖啡色虎斑貓肖像油畫，前爪搭在木箱邊緣，黃綠色眼睛，米白色背景", sessions: 1 },
   { course: "寵物油畫", themes: ["貓咪"], date: "2026-02-10", src: "../assets/images/gallery/pet-portrait/33.jpg", "thumb": "../assets/images/gallery/pet-portrait/33.thumb.webp", alt: "橘白色貓咪肖像油畫，仰頭向上看，米色背景", sessions: 1 },
   { course: "寵物油畫", themes: ["貓咪"], date: "2026-02-10", src: "../assets/images/gallery/pet-portrait/34.jpg", "thumb": "../assets/images/gallery/pet-portrait/34.thumb.webp", alt: "咖啡色虎斑幼貓肖像油畫，張嘴喵叫的瞬間，米色背景", sessions: 1 },
@@ -1067,18 +1067,18 @@ window.GALLERY_ITEMS = [
   { course: "寵物油畫", themes: ["貓咪"], date: "2025-02-22", src: "../assets/images/gallery/pet-portrait/42.jpg", "thumb": "../assets/images/gallery/pet-portrait/42.thumb.webp", alt: "咖啡色虎斑貓肖像油畫特寫，大眼睛直視前方，淺藍色背景", sessions: 1 },
   { course: "寵物油畫", themes: ["貓咪"], date: "2025-02-28", src: "../assets/images/gallery/pet-portrait/43.jpg", "thumb": "../assets/images/gallery/pet-portrait/43.thumb.webp", alt: "橘白色貓咪肖像油畫特寫，米白色背景，簽名「lin.」", sessions: 1 },
   { course: "寵物油畫", themes: ["貓咪"], date: "2025-02-28", src: "../assets/images/gallery/pet-portrait/44.jpg", "thumb": "../assets/images/gallery/pet-portrait/44.thumb.webp", alt: "黑白賓士貓肖像油畫，藍色背景", sessions: 1 },
-  // 2026-10-30 新增「其他動物／兔子／鳥」12 件：使用者確認這幾個分類
-  // 「就算在寵物畫延伸」，不另開新課程，照實歸在「寵物油畫」。畫面
-  // 主體不是狗/貓，既有「狗狗」「貓咪」「兩隻以上」三個主題標籤都不
-  // 適用，改標「其他動物」（兔子/松鼠猴/老虎/獅子/麋鹿）；鳥類沒有
-  // 專屬主題標籤，比照既有慣例併入「其他動物」一起用（只有 4 張，量
-  // 不夠獨立開新標籤）。18229613941258075.jpg（加大畫布框起來掛牆上
-  // 那張黑獅子）雖然畫面主體跟 18027592147877575.jpg 近似，但資料夾
-  // 名稱「2～3堂、加大畫布」明確標示這是放大尺寸的另一幅作品，不是
-  // 同一張的重複拍攝角度，兩張都收錄。
-  // 2026-11-07 使用者要求飛馬/獨角獸這張從「動漫／角色」改標「陸地
-  // 動物」（後改名「其他動物」，見下方 GALLERY_THEMES 旁說明）一起歸類，
-  // 不算動漫角色。
+
+
+
+
+
+
+
+
+
+
+
+
   { course: "寵物油畫", themes: ["其他動物"], date: "2026-10-30", src: "../assets/images/gallery/pet-portrait/45.jpg", "thumb": "../assets/images/gallery/pet-portrait/45.thumb.webp", alt: "白兔戴著花環項圈，漂浮在藍天白雲中，花瓣飄落", sessions: 1 },
   { course: "寵物油畫", themes: ["其他動物"], date: "2026-10-30", src: "../assets/images/gallery/pet-portrait/46.jpg", "thumb": "../assets/images/gallery/pet-portrait/46.thumb.webp", alt: "棕色兔子頭部特寫，深藍色星空背景，圓形畫布", sessions: 1 },
   { course: "寵物油畫", themes: ["其他動物"], date: "2026-10-30", src: "../assets/images/gallery/pet-portrait/47.jpg", "thumb": "../assets/images/gallery/pet-portrait/47.thumb.webp", alt: "非洲灰鸚鵡特寫，藍色背景", sessions: 1 },
@@ -1092,9 +1092,9 @@ window.GALLERY_ITEMS = [
   { course: "寵物油畫", themes: ["其他動物"], date: "2026-10-30", src: "../assets/images/gallery/pet-portrait/55.jpg", "thumb": "../assets/images/gallery/pet-portrait/55.thumb.webp", alt: "公鹿頭部特寫，灰白色調，鹿角分岔", sessions: 1 },
   { course: "寵物油畫", themes: ["其他動物"], date: "2026-10-30", src: "../assets/images/gallery/pet-portrait/56.jpg", "thumb": "../assets/images/gallery/pet-portrait/56.thumb.webp", alt: "黑白色調獅子側臉特寫，加大畫布掛在木質牆面上", sessions: 1 },
 
-  // 2026-11-01 新增：使用者提供「寵物畫」資料夾中的 47 張照片。
-  // 與既有寵物畫照片比對後未發現完全相同檔案；保留原始照片不刪除。
-  // 來源未附作品日期或完成堂數，因此使用整理日期且不填 sessions。
+
+
+
   { course: "寵物油畫", themes: ["狗狗"], date: "2026-11-01", src: "../assets/images/gallery/pet-portrait/57.jpg", "thumb": "../assets/images/gallery/pet-portrait/57.thumb.webp", alt: "狗狗肖像油畫，黃綠色背景", sessions: 1 },
   { course: "寵物油畫", themes: ["狗狗"], date: "2026-11-01", src: "../assets/images/gallery/pet-portrait/58.jpg", "thumb": "../assets/images/gallery/pet-portrait/58.thumb.webp", alt: "小型犬肖像油畫，畫布放在畫架上", sessions: 1 },
   { course: "寵物油畫", themes: [], date: "2026-11-01", src: "../assets/images/gallery/pet-portrait/59.jpg", "thumb": "../assets/images/gallery/pet-portrait/59.thumb.webp", alt: "畫架上展示多幅寵物肖像油畫", sessions: 1 },
@@ -1143,9 +1143,9 @@ window.GALLERY_ITEMS = [
   { course: "寵物油畫", themes: [], date: "2026-11-01", src: "../assets/images/gallery/pet-portrait/102.jpg", "thumb": "../assets/images/gallery/pet-portrait/102.thumb.webp", alt: "畫架上展示多幅狗狗與貓咪肖像油畫", sessions: 1 },
   { course: "寵物油畫", themes: ["狗狗"], date: "2026-11-01", src: "../assets/images/gallery/pet-portrait/103.jpg", "thumb": "../assets/images/gallery/pet-portrait/103.thumb.webp", alt: "黑色狗狗肖像油畫，粉橘色背景", sessions: 1 },
 
-  // 2026-09-21 新增：「石英砂肌理畫」海邊主題 32 件，使用者從相簿匯出
-  // 一批石英砂海景/海浪真實學員作品照片。沒有精確的完成日期紀錄，先統一
-  // 用新增這筆資料的日期，之後有更準確的日期可以再改。
+
+
+
   { course: "石英砂肌理畫", themes: ["海邊"], date: "2026-09-21", src: "../assets/images/gallery/sand-texture/01.jpg", "thumb": "../assets/images/gallery/sand-texture/01.thumb.webp", alt: "黑白海浪肌理畫特寫，深色浪頭夾雜白色浪花", sessions: 1 },
   { course: "石英砂肌理畫", themes: ["海邊"], date: "2026-09-21", src: "../assets/images/gallery/sand-texture/02.jpg", "thumb": "../assets/images/gallery/sand-texture/02.thumb.webp", alt: "海浪與沙灘交界特寫，沙灘上刻著英文字「BARCELONA」", sessions: 1 },
   { course: "石英砂肌理畫", themes: ["海邊"], date: "2026-09-21", src: "../assets/images/gallery/sand-texture/03.jpg", "thumb": "../assets/images/gallery/sand-texture/03.thumb.webp", alt: "藍色海浪肌理畫特寫，浪花翻湧的立體堆疊", sessions: 1 },
@@ -1178,14 +1178,14 @@ window.GALLERY_ITEMS = [
   { course: "石英砂肌理畫", themes: ["海邊"], date: "2026-09-21", src: "../assets/images/gallery/sand-texture/30.jpg", "thumb": "../assets/images/gallery/sand-texture/30.thumb.webp", alt: "學員手持米黃與赭紅色系的沙丘肌理畫作品", sessions: 1 },
   { course: "石英砂肌理畫", themes: ["海邊"], date: "2026-09-21", src: "../assets/images/gallery/sand-texture/31.jpg", "thumb": "../assets/images/gallery/sand-texture/31.thumb.webp", alt: "粉紫漸層肌理畫，白色浪花狀鏤空愛心圖案", sessions: 1 },
   { course: "石英砂肌理畫", themes: ["海邊"], date: "2026-09-21", src: "../assets/images/gallery/sand-texture/32.jpg", "thumb": "../assets/images/gallery/sand-texture/32.thumb.webp", alt: "藍粉夕陽海景肌理畫，前景點綴繽紛花束", sessions: 1 },
-  // 2026-10-30 新增：迪士尼主題作品之一，小熊維尼與驢子屹耳，材質實際
-  // 是石英砂肌理畫（不是油畫），照實歸在這堂課，不跟其他 12 件迪士尼
-  // 油畫作品混在一起（見本檔案下方「迪士尼」主題批次新增的說明）。
+
+
+
   { course: "石英砂肌理畫", themes: ["迪士尼／皮克斯"], date: "2026-10-30", src: "../assets/images/gallery/sand-texture/33.jpg", "thumb": "../assets/images/gallery/sand-texture/33.thumb.webp", alt: "小熊維尼伸手摸驢子屹耳的頭，灰白肌理圓形畫布", sessions: 1 },
   { course: "自選主題油畫", themes: ["迪士尼／皮克斯"], date: "2026-10-30", src: "../assets/images/gallery/sand-texture/34.jpg", "thumb": "../assets/images/gallery/sand-texture/34.thumb.webp", alt: "美女與野獸茶壺夫人與奇普茶杯特寫，白色肌理畫背景", sessions: 1 },
 
-  // 2026-11-01 新增：使用者提供的「石英砂」相簿 47 張學員作品照片。
-  // 收錄完成作品與創作過程照片；完成堂數未確認，因此不填 sessions。
+
+
   { course: "石英砂肌理畫", themes: ["植物花卉"], date: "2026-11-01", src: "../assets/images/gallery/sand-texture/35.jpg", "thumb": "../assets/images/gallery/sand-texture/35.thumb.webp", alt: "黑色畫布上的白色花朵肌理畫，旁邊放著顏料與畫筆", sessions: 1 },
   { course: "石英砂肌理畫", themes: ["海邊"], date: "2026-11-01", src: "../assets/images/gallery/sand-texture/36.jpg", "thumb": "../assets/images/gallery/sand-texture/36.thumb.webp", alt: "藍色海面與白色浪花肌理畫，畫中有帆船", sessions: 1 },
   { course: "石英砂肌理畫", themes: ["人像", "海邊"], date: "2026-11-01", src: "../assets/images/gallery/sand-texture/37.jpg", "thumb": "../assets/images/gallery/sand-texture/37.thumb.webp", alt: "學員手持藍色肌理畫布，畫上是兩人站立滑槳板的俯視構圖", sessions: 1 },
@@ -1231,10 +1231,10 @@ window.GALLERY_ITEMS = [
   { course: "石英砂肌理畫", themes: ["海邊"], date: "2026-11-01", src: "../assets/images/gallery/sand-texture/79.jpg", "thumb": "../assets/images/gallery/sand-texture/79.thumb.webp", alt: "黑白灰色調的海浪與沙岸肌理作品", sessions: 1 },
   { course: "石英砂肌理畫", themes: ["植物花卉"], date: "2026-11-01", src: "../assets/images/gallery/sand-texture/80.jpg", "thumb": "../assets/images/gallery/sand-texture/80.thumb.webp", alt: "深色畫布上的白色與紅色玫瑰肌理畫", sessions: 1 },
 
-  // 2026-10-01 新增：「自選主題油畫」星空油畫學員作品 37 件，技法是壓克力
-  // 打底後用油畫顏料畫星辰、星雲、極光，部分作品完成後會撒星星／亮粉裝飾。
-  // 使用者確認皆為「一堂完成」的真實學員作品。沒有精確完成日期紀錄，先
-  // 統一用新增這筆資料的日期，之後有更準確的日期可以再改。
+
+
+
+
   { course: "自選主題油畫", themes: ["星空"], date: "2026-10-01", src: "../assets/images/gallery/star-sky/01.jpg", "thumb": "../assets/images/gallery/star-sky/01.thumb.webp", alt: "星空油畫的藍色星雲特寫，畫面點綴細小星點", sessions: 1 },
   { course: "自選主題油畫", themes: ["星空"], date: "2026-10-01", src: "../assets/images/gallery/star-sky/02.jpg", "thumb": "../assets/images/gallery/star-sky/02.thumb.webp", alt: "星空油畫的復活節島摩艾石像剪影，頭頂是銀河與極光", sessions: 1 },
   { course: "自選主題油畫", themes: ["星空"], date: "2026-10-01", src: "../assets/images/gallery/star-sky/03.jpg", "thumb": "../assets/images/gallery/star-sky/03.thumb.webp", alt: "星空油畫的綠色極光，針葉林剪影環繞畫面下方", sessions: 1 },
@@ -1273,13 +1273,13 @@ window.GALLERY_ITEMS = [
   { course: "自選主題油畫", themes: ["星空"], date: "2026-10-01", src: "../assets/images/gallery/star-sky/36.jpg", "thumb": "../assets/images/gallery/star-sky/36.thumb.webp", alt: "星空油畫，小屋剪影佇立在星空下的小徑旁", sessions: 1 },
   { course: "自選主題油畫", themes: ["星空"], date: "2026-10-01", src: "../assets/images/gallery/star-sky/37.jpg", "thumb": "../assets/images/gallery/star-sky/37.thumb.webp", alt: "星空油畫，枯樹林剪影佇立在湖畔，天空是流動的極光雲彩", sessions: 1 },
 
-  // 2026-10-05 新增：鯨魚主題學員作品 12 件，使用者確認皆為「一堂完成」
-  // 的真實學員作品。多數是鯨魚悠游於星空／夜空的構圖，同時疊加「星空／
-  // 月亮」標籤；寫實海面特寫（02、04、10）沒有明顯星空元素，只標
-  // 「海洋生物」。09（圓形畫布虎鯨悠游滿月前）材質其實是石英砂，不是
-  // 油畫＋筆刷，使用者看到學員作品頁才發現這張課程歸錯，已改標
-  // 「石英砂肌理畫」，其餘 11 件維持「自選主題油畫」。沒有精確完成
-  // 日期紀錄，先統一用新增這筆資料的日期，之後有更準確的日期可以再改。
+
+
+
+
+
+
+
   { course: "自選主題油畫", themes: ["海洋生物"], date: "2026-10-05", src: "../assets/images/gallery/whale/01.jpg", "thumb": "../assets/images/gallery/whale/01.thumb.webp", alt: "油畫的鯨魚悠游於星雲星空中，一旁點綴行星與星座連線", sessions: 1 },
   { course: "自選主題油畫", themes: ["海洋生物"], date: "2026-10-05", src: "../assets/images/gallery/whale/02.jpg", "thumb": "../assets/images/gallery/whale/02.thumb.webp", alt: "油畫的座頭鯨母子在海面下悠游，光線從水面灑落", sessions: 1 },
   { course: "自選主題油畫", themes: ["海洋生物"], date: "2026-10-05", src: "../assets/images/gallery/whale/03.jpg", "thumb": "../assets/images/gallery/whale/03.thumb.webp", alt: "油畫的鯨魚悠游於紫藍色星雲星空中", sessions: 1 },
@@ -1312,16 +1312,16 @@ window.GALLERY_ITEMS = [
   { course: "自選主題油畫", themes: ["植物花卉"], date: "2026-10-08", src: "../assets/images/gallery/landscape-oil/09.jpg", "thumb": "../assets/images/gallery/landscape-oil/09.thumb.webp", alt: "學員正在繪製黃昏孤樹剪影畫作的過程，橘粉漸層天空搭配單一色系樹枝", sessions: 1 },
   { course: "自選主題油畫", themes: ["植物花卉"], date: "2026-10-08", src: "../assets/images/gallery/landscape-oil/10.jpg", "thumb": "../assets/images/gallery/landscape-oil/10.thumb.webp", alt: "學員繪製棕櫚樹海景底稿的過程，灰階階段旁放著參考照片", sessions: 1 },
 
-  // 2026-10-19 新增：「串珠」課程第一批真實學員作品 50 件，使用者從
-  // raw-uploads/beading/ 底下幾個子資料夾（大珠珠項鍊、小珠珠項鍊、戒指、
-  // 手鏈、大小珠珠合照、大小珠珠混串）整理提供。逐張打開實際看過畫面內容
-  // 才挑選，排除「製作過程中」（畫面裡有手在穿線、拿鑷子、鏡面托盤旁邊
-  // 放著珠珠分格收納盒等工作台場景）或跟其他張是「同一件作品重複構圖」的
-  // 照片，只保留每件作品最完整、最能代表成品的一張。也排除了帶有文字浮水印
-  // 的行銷風格圖（例如標示材質名稱、IG 帳號、吐槽文案的截圖），這些是原始
-  // 社群貼文素材，不是乾淨的作品照。沒有精確的完成日期紀錄，先統一用新增
-  // 這筆資料的日期，之後有更準確的日期可以再改。themes 標記飾品類型
-  // （項鍊／手鏈／戒指），少數同張照片拍到不只一種飾品的疊加標記。
+
+
+
+
+
+
+
+
+
+
   { course: "串珠", themes: ["項鍊"], date: "2026-10-19", src: "../assets/images/gallery/beading/01.jpg", "thumb": "../assets/images/gallery/beading/01.thumb.webp", alt: "大珠項鍊手持展示，珍珠與銀色圓珠點綴，尾端有蝴蝶結造型墜飾", sessions: 1 },
   { course: "串珠", themes: ["項鍊"], date: "2026-10-19", src: "../assets/images/gallery/beading/02.jpg", "thumb": "../assets/images/gallery/beading/02.thumb.webp", alt: "兩條大珠項鍊手持展示，琥珀色、湖水藍與透明大顆珠石交錯", sessions: 1 },
   { course: "串珠", themes: ["項鍊"], date: "2026-10-19", src: "../assets/images/gallery/beading/03.jpg", "thumb": "../assets/images/gallery/beading/03.thumb.webp", alt: "兩條大珠項鍊手持展示，墨綠、琥珀與珍珠大珠交錯排列", sessions: 1 },
@@ -1373,43 +1373,43 @@ window.GALLERY_ITEMS = [
   { course: "串珠", themes: ["戒指"], date: "2026-10-19", src: "../assets/images/gallery/beading/49.jpg", "thumb": "../assets/images/gallery/beading/49.thumb.webp", alt: "戒指戴在手指上展示，銀色圓珠串成，一旁疊戴白色珍珠戒指", sessions: 1 },
   { course: "串珠", themes: ["手鏈"], date: "2026-10-19", src: "../assets/images/gallery/beading/50.jpg", "thumb": "../assets/images/gallery/beading/50.thumb.webp", alt: "兩條手鍊戴在手腕上展示，淺藍鏤空花朵珠與透明大珠交錯", sessions: 1 },
 
-  // 2026-10-29 新增「大幅畫布訂製」首批真實學員作品 4 件：這堂課原本
-  // 作品牆是空的（courses/large-canvas/index.html 之前完全沒有對應
-  // 照片）。使用者整理的素材夾裡這個分類實際只有 3 件不同的大畫布作品，
-  // 每件各選 1～2 張（全幅構圖照 + 肌理特寫照各一張），不是 11 張素材
-  // 全部收錄——其餘是同一件作品的其他角度／特寫重複照，放進作品集會
-  // 重複計算同一件作品。
-  // 2026-10-30 修正：原本每筆都寫 sessions:1，使用者更正大幅畫布不是
-  // 都一堂完成，拿掉這個欄位（不確定/沒問過就不填，跟本檔案開頭的
-  // 欄位說明一致）；03/04 兩張原本 alt 誤寫成「石英砂肌理畫」，但這兩張
-  // 實際來源是「石英砂打底＋油畫」資料夾（石英砂堆疊主體＋筆刷描繪
-  // 細節的複合做法），不是純石英砂肌理，已經改成正確的材料描述。
-  // 2026-10-30 再新增第 4 件真實作品（05.jpg）：珠寶項鍊肖像特寫，是
-  // 油畫＋筆刷做法（跟「自選主題油畫」課程同一種技法）＋加大畫布，
-  // 原本只當課程頁開場的情境照用（assets/images/courses/large-canvas/
-  // context-necklace.jpg），使用者確認這張也該算進正式作品集，所以
-  // 另外存一份進 assets/images/gallery/large-canvas/ 加進這裡。themes
-  // 跟其他植物題材的三件不同，標「人像」（畫面主體是人臉下半部＋
-  // 項鍊，不是植物）。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   { course: "大幅畫布訂製", themes: ["植物花卉"], date: "2026-10-29", src: "../assets/images/gallery/large-canvas/01.jpg", "thumb": "../assets/images/gallery/large-canvas/01.thumb.webp", alt: "大幅畫布石英砂肌理畫，白底搭配深淺綠色熱帶葉片，畫架斜角擺放" },
   { course: "大幅畫布訂製", themes: ["植物花卉"], date: "2026-10-29", src: "../assets/images/gallery/large-canvas/02.jpg", "thumb": "../assets/images/gallery/large-canvas/02.thumb.webp", alt: "大幅油畫天堂鳥花與深綠闊葉，粉白背景，兩人雙手扶著畫布展示全貌" },
   { course: "大幅畫布訂製", themes: ["植物花卉"], date: "2026-10-29", src: "../assets/images/gallery/large-canvas/03.jpg", "thumb": "../assets/images/gallery/large-canvas/03.thumb.webp", alt: "大幅畫布石英砂打底＋油畫，藍綠龜背芋與羽葉搭配金色線條勾勒的葉形輪廓，學員雙手扶著展示" },
   { course: "大幅畫布訂製", themes: ["植物花卉"], date: "2026-10-29", src: "../assets/images/gallery/large-canvas/04.jpg", "thumb": "../assets/images/gallery/large-canvas/04.thumb.webp", alt: "大幅畫布石英砂打底＋油畫局部特寫，藍色羽狀葉片與金色線條勾勒的葉形輪廓" },
   { course: "自選主題油畫", extraCourses: ["大幅畫布訂製"], themes: ["人像"], date: "2026-10-30", src: "../assets/images/gallery/large-canvas/05.jpg", "thumb": "../assets/images/gallery/large-canvas/05.thumb.webp", alt: "大幅油畫珠寶項鍊肖像特寫，掛在木質牆面上，學員伸手調整畫作位置", sessions: 3 },
 
-  // 2026-10-29 新增「流動畫」首批真實學員作品 13 件：courses/fluid-art/
-  // 之前作品牆也是空的。使用者整理的素材夾裡這個分類有兩個來源資料夾，
-  // 「流動畫」本資料夾（30 張，工作室日常上課）挑出 13 張構圖完整的
-  // 成品照；另一個「流動畫家庭日」資料夾（27 張）內容是戶外市集擺攤
-  // 活動照，跟畫室內正式付費課程情境不同，先不放進作品集。themes 留空
-  // 陣列：使用者確認「流動畫」這個 course 欄位本身就是獨立分類，不用
-  // 再疊加主題標籤（曾經試過標「抽象圖案」／「抽象畫」，最後都拿掉，
-  // 見下方 GALLERY_THEMES 旁 2026-10-30 的說明）。
-  // 2026-10-30 使用者更正：作品集不一定要放成品照，倒膠/調色/吹畫這類
-  // 過程照只要有畫作出現也可以放，不用篩得這麼緊。回頭把「流動畫」
-  // 資料夾剩下的照片再看一次，補上 14 張構圖不同的過程/展示照
-  // （14～27.jpg）；另外 2 張跳過沒收錄，是同一張已經用過的灰沙金
-  // 方形畫布（09.jpg）的另一個角度，收錄了只是重複計算同一件作品。
+
+
+
+
+
+
+
+
+
+
+
+
+
   { course: "流動畫", themes: [], date: "2026-10-29", src: "../assets/images/gallery/fluid-art/01.jpg", "thumb": "../assets/images/gallery/fluid-art/01.thumb.webp", alt: "藍白黑流動畫圓形畫布特寫，搭配同色系小方塊畫布", sessions: 1 },
   { course: "流動畫", themes: [], date: "2026-10-29", src: "../assets/images/gallery/fluid-art/02.jpg", "thumb": "../assets/images/gallery/fluid-art/02.thumb.webp", alt: "粉灰白流動畫圓形托盤，大理石紋路由雙手捧著展示", sessions: 1 },
   { course: "流動畫", themes: [], date: "2026-10-29", src: "../assets/images/gallery/fluid-art/03.jpg", "thumb": "../assets/images/gallery/fluid-art/03.thumb.webp", alt: "紫金藍流動畫方形畫布兩幅並排，色彩交融出大理石紋理", sessions: 1 },
@@ -1436,25 +1436,25 @@ window.GALLERY_ITEMS = [
   { course: "流動畫", themes: [], date: "2026-10-30", src: "../assets/images/gallery/fluid-art/25.jpg", "thumb": "../assets/images/gallery/fluid-art/25.thumb.webp", alt: "手指輕觸青綠黃白交錯紋路的圓形畫布邊緣特寫" },
   { course: "流動畫", themes: [], date: "2026-10-30", src: "../assets/images/gallery/fluid-art/26.jpg", "thumb": "../assets/images/gallery/fluid-art/26.thumb.webp", alt: "老師捧著粉藍薄荷綠相間的方形畫布，向鏡頭展示完成的紋路" },
 
-  // 2026-10-30 新增「迪士尼」主題作品，共 32 件：使用者整理素材夾時把
-  // 這批獨立歸成一類，確認「迪士尼可以自己獨立」（不併入「動漫／
-  // 角色」）。第一輪只挑了 13 張「不重複構圖」的作品，使用者更正：
-  // 資料夾裡放的每一張都要收錄，不用自己篩選「重不重複」——同一個
-  // 角色的不同拍攝角度／不同構圖版本，使用者都當成獨立的素材放進去，
-  // 不是失誤。後來使用者又陸續補了 9 張新照片進資料夾，一併收錄，
-  // 最終從 32 張素材全部收錄，不篩選。
-  // 30 件是油畫＋筆刷（course 歸在「自選主題油畫」，比照 landscape-oil／
-  // sea-oil／star-sky／whale 這幾個既有主題資料夾的做法，另開
-  // assets/images/gallery/disney/ 資料夾），小熊維尼＋驢子（33.jpg）
-  // 照片存進既有的 sand-texture/ 資料夾接續編號，不是硬塞進 disney/
-  // 資料夾湊數。茶壺夫人＋奇普（34.jpg）原本也歸在「石英砂肌理畫」，
-  // 2026-11-07 使用者確認實際是油畫筆刷＋刮刀油畫，course 改歸
-  // 「刮刀油畫」；2026-11-10使用者最新確認改為「自選主題油畫」。照片檔案位置不變（還是放在 sand-texture/ 資料夾裡，
-  // 只是 course 欄位不等於資料夾名稱）。sessions 依照
-  // 素材夾的資料夾名稱（單堂／2堂／3堂／4堂）照實填寫。少數幾張角色
-  // 不確定具體是哪一部動畫/哪個角色名稱（例如疑似非迪士尼角色的素材、
-  // 風格化到難以指認是哪位公主的畫面），alt 文字刻意不寫具體片名/
-  // 角色名，避免寫錯造成誤導，只寫畫面實際內容。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   { course: "自選主題油畫", themes: ["迪士尼／皮克斯"], date: "2026-10-30", src: "../assets/images/gallery/disney/01.jpg", "thumb": "../assets/images/gallery/disney/01.thumb.webp", alt: "小美人魚愛麗兒與比目魚，珊瑚粉背景，畫面寫著 Jessie 2022 愛心字樣", sessions: 1 },
   { course: "自選主題油畫", themes: ["迪士尼／皮克斯"], date: "2026-10-30", src: "../assets/images/gallery/disney/02.jpg", "thumb": "../assets/images/gallery/disney/02.thumb.webp", alt: "小美人魚愛麗兒臉部特寫，紅髮搭配金色頭飾，笑容燦爛", sessions: 1 },
   { course: "自選主題油畫", themes: ["迪士尼／皮克斯"], date: "2026-10-30", src: "../assets/images/gallery/disney/03.jpg", "thumb": "../assets/images/gallery/disney/03.thumb.webp", alt: "魔髮奇緣樂佩公主乘船，夜空中飄滿金黃色天燈", sessions: 1 },
@@ -1486,12 +1486,12 @@ window.GALLERY_ITEMS = [
   { course: "自選主題油畫", themes: ["迪士尼／皮克斯"], date: "2026-10-30", src: "../assets/images/gallery/disney/29.jpg", "thumb": "../assets/images/gallery/disney/29.thumb.webp", alt: "小美人魚愛麗兒坐在礁岩上眺望遠方，深藍海底場景", sessions: 1 },
   { course: "自選主題油畫", themes: ["迪士尼／皮克斯"], date: "2026-10-30", src: "../assets/images/gallery/disney/30.jpg", "thumb": "../assets/images/gallery/disney/30.thumb.webp", alt: "戴眼鏡老先生肖像，一旁有貓咪與櫻桃，畫面簽名 Lydia", sessions: 1 },
 
-  // 2026-10-30 新增「吉卜力」主題作品，共 16 件（6 件第一批＋9 件使用者
-  // 後續補的＋1 件再補的霍爾的移動城堡），見上方 GALLERY_THEMES 旁的
-  // 說明。15 件是油畫＋筆刷，
-  // course 歸在「自選主題油畫」，另開 assets/images/gallery/ghibli/
-  // 資料夾（比照 disney/ 的做法）；1 件（龍貓坐在樹下）材質是刮刀
-  // 油畫，歸在「刮刀油畫」那堂課，見 palette-knife-oil/45.jpg 那筆。
+
+
+
+
+
+
   { course: "自選主題油畫", themes: ["吉卜力"], date: "2026-10-30", src: "../assets/images/gallery/ghibli/01.jpg", "thumb": "../assets/images/gallery/ghibli/01.thumb.webp", alt: "霍爾的移動城堡霍爾與蘇菲肖像畫兩幅並排", sessions: 2 },
   { course: "自選主題油畫", themes: ["吉卜力"], date: "2026-10-30", src: "../assets/images/gallery/ghibli/02.jpg", "thumb": "../assets/images/gallery/ghibli/02.thumb.webp", alt: "霍爾的移動城堡火惡魔卡西法特寫，抱著一截木柴", sessions: 1 },
   { course: "自選主題油畫", themes: ["吉卜力"], date: "2026-10-30", src: "../assets/images/gallery/ghibli/03.jpg", "thumb": "../assets/images/gallery/ghibli/03.thumb.webp", alt: "龍貓撐傘站在粉紅花海上，深藍夜空背景，一旁跟著小龍貓", sessions: 1 },
@@ -1508,8 +1508,8 @@ window.GALLERY_ITEMS = [
   { course: "自選主題油畫", themes: ["吉卜力"], date: "2026-10-30", src: "../assets/images/gallery/ghibli/14.jpg", "thumb": "../assets/images/gallery/ghibli/14.thumb.webp", alt: "紅豬波魯克駕駛紅色飛機特寫，另一個拍攝角度", sessions: 1 },
   { course: "自選主題油畫", themes: ["吉卜力"], date: "2026-10-30", src: "../assets/images/gallery/ghibli/15.jpg", "thumb": "../assets/images/gallery/ghibli/15.thumb.webp", alt: "霍爾的移動城堡霍爾與蘇菲站在開滿野花的山坡上，藍天白雲背景", sessions: 1 },
 
-  // 2026-11-01 新增：使用者提供「人油畫筆刷」中的人像單堂、2堂、3堂作品。
-  // 依來源資料夾登錄完成堂數；照片日期未知，採整理日期。資料夾 4 堂先不處理。
+
+
   { course: "自選主題油畫", themes: ["人像"], date: "2026-11-01", src: "../assets/images/gallery/portrait-oil/one-session/01.jpg", "thumb": "../assets/images/gallery/portrait-oil/one-session/01.thumb.webp", alt: "背對觀者的長髮人物肖像，手持藍色畫筆", sessions: 1 },
   { course: "自選主題油畫", themes: ["人像"], date: "2026-11-01", src: "../assets/images/gallery/portrait-oil/one-session/02.jpg", "thumb": "../assets/images/gallery/portrait-oil/one-session/02.thumb.webp", alt: "新人婚禮肖像油畫，兩人相擁", sessions: 1 },
   { course: "自選主題油畫", themes: ["人像"], date: "2026-11-01", src: "../assets/images/gallery/portrait-oil/one-session/03.jpg", "thumb": "../assets/images/gallery/portrait-oil/one-session/03.thumb.webp", alt: "蒙眼人物肖像油畫，手捧紅色花束", sessions: 1 },
@@ -1568,8 +1568,8 @@ window.GALLERY_ITEMS = [
 
   { course: "自選主題油畫", themes: ["人像"], date: "2026-11-01", src: "../assets/images/gallery/portrait-oil/one-session/40.jpg", "thumb": "../assets/images/gallery/portrait-oil/one-session/40.thumb.webp", alt: "人物肖像油畫創作過程，畫布上先以灰階描出人物輪廓", sessions: 1 },
   { course: "自選主題油畫", themes: ["海邊"], date: "2026-11-01", src: "../assets/images/gallery/sea-oil/35.jpg", "thumb": "../assets/images/gallery/sea-oil/35.thumb.webp", alt: "海邊石堆油畫創作過程，學員正在描繪海浪與疊石", sessions: 1 },
-  // 2026-11-01 新增：油畫筆刷學員作品，依作品主題分入海景、星空、
-  // 風景、人像與鯨魚資料夾；來源有標示堂數的鯨魚作品沿用堂數，其餘不推測。
+
+
   { course: "自選主題油畫", themes: ["海邊"], date: "2026-11-01", src: "../assets/images/gallery/sea-oil/10.jpg", "thumb": "../assets/images/gallery/sea-oil/10.thumb.webp", alt: "海邊油畫，藍色海面與岸邊小屋，畫布放在畫架上", sessions: 1 },
   { course: "自選主題油畫", themes: ["風景", "建築"], date: "2026-11-01", src: "../assets/images/gallery/landscape-oil/11.jpg", "thumb": "../assets/images/gallery/landscape-oil/11.thumb.webp", alt: "黃昏城市油畫，遠方高塔與城市剪影映在水面", sessions: 1 },
   { course: "自選主題油畫", themes: ["海邊"], date: "2026-11-01", src: "../assets/images/gallery/sea-oil/11.jpg", "thumb": "../assets/images/gallery/sea-oil/11.thumb.webp", alt: "海灘油畫創作過程，畫布上是沙灘、海面與遠方人物", sessions: 1 },
@@ -1631,10 +1631,10 @@ window.GALLERY_ITEMS = [
   { course: "自選主題油畫", themes: ["海洋生物"], date: "2026-11-01", src: "../assets/images/gallery/whale/17.jpg", "thumb": "../assets/images/gallery/whale/17.thumb.webp", alt: "深色畫布上的鯨魚油畫，星空與光束映照海面", sessions: 1 },
   { course: "自選主題油畫", themes: ["海洋生物"], date: "2026-11-01", src: "../assets/images/gallery/whale/18.jpg", "thumb": "../assets/images/gallery/whale/18.thumb.webp", alt: "學員正在描繪鯨魚油畫，畫布上是鯨魚與海面", sessions: 1 },
   { course: "自選主題油畫", themes: ["海洋生物"], date: "2026-11-01", src: "../assets/images/gallery/whale/19.jpg", "thumb": "../assets/images/gallery/whale/19.thumb.webp", alt: "圓形畫布的兩隻鯨魚油畫，藍灰色鯨魚悠游於淺色背景", sessions: 1 },
-  // 2026-11-08 新增「動漫／角色」10 件：迪士尼、吉卜力以外的動漫角色
-  // 題材（一拳超人、火影忍者、鋼鍊、我的英雄學院、鬼滅之刃、七龍珠、
-  // 進擊的巨人、電鋸人），對應「可畫的主題」既有的「動漫／角色」標籤，
-  // 不另開新標籤。
+
+
+
+
   { course: "自選主題油畫", themes: ["動漫／角色"], date: "2026-11-08", src: "../assets/images/gallery/anime-characters/01.jpg", "thumb": "../assets/images/gallery/anime-characters/01.thumb.webp", alt: "一拳超人（埼玉）出拳瞬間的油畫作品", sessions: 2 },
   { course: "自選主題油畫", themes: ["動漫／角色"], date: "2026-11-08", src: "../assets/images/gallery/anime-characters/02.jpg", "thumb": "../assets/images/gallery/anime-characters/02.thumb.webp", alt: "火影忍者鳴人與波風水門相視互頂拳頭的油畫作品", sessions: 1 },
   { course: "自選主題油畫", themes: ["動漫／角色"], date: "2026-11-08", src: "../assets/images/gallery/anime-characters/03.jpg", "thumb": "../assets/images/gallery/anime-characters/03.thumb.webp", alt: "火影忍者宇智波佐助特寫油畫，紅色寫輪眼搭配紫色背景", sessions: 1 },
@@ -1645,14 +1645,14 @@ window.GALLERY_ITEMS = [
   { course: "自選主題油畫", themes: ["動漫／角色"], date: "2026-11-08", src: "../assets/images/gallery/anime-characters/08.jpg", "thumb": "../assets/images/gallery/anime-characters/08.thumb.webp", alt: "進擊的巨人題材的油畫作品，深藍色背景襯著猙獰的巨人臉孔", sessions: 1 },
   { course: "自選主題油畫", themes: ["動漫／角色"], date: "2026-11-08", src: "../assets/images/gallery/anime-characters/09.jpg", "thumb": "../assets/images/gallery/anime-characters/09.thumb.webp", alt: "電鋸人角色側臉叼菸的油畫作品，深色背景", sessions: 1 },
   { course: "自選主題油畫", themes: ["動漫／角色"], date: "2026-11-08", src: "../assets/images/gallery/anime-characters/10.jpg", "thumb": "../assets/images/gallery/anime-characters/10.thumb.webp", alt: "火影忍者宇智波鼬比著手印的油畫作品，紅黑萬花筒寫輪眼背景", sessions: 1 },
-  // 2026-11-08 新增「其他動物」2 件，來自使用者「其他動物2～3堂、加大
-  // 畫布」資料夾，都是加大尺寸、多堂完成的作品。
+
+
   { course: "自選主題油畫", themes: ["其他動物"], date: "2026-11-08", src: "../assets/images/gallery/other-animals-oil/01.jpg", "thumb": "../assets/images/gallery/other-animals-oil/01.thumb.webp", alt: "黑白色調的公鹿頭像油畫特寫，鹿角細節分明", sessions: 2 },
   { course: "自選主題油畫", themes: ["其他動物"], date: "2026-11-08", src: "../assets/images/gallery/other-animals-oil/02.jpg", "thumb": "../assets/images/gallery/other-animals-oil/02.thumb.webp", alt: "加大尺寸的黑底獅子與幼獅側臉油畫，掛在牆上展示", sessions: 3 },
-  // 2026-11-08 新增「人像」3 件（含真人運動員肖像）、「動漫／角色」
-  // 3 件，以及全新「車子」標籤 4 件（跑車／摩托車，目前沒有對應的
-  // 可畫的主題分頁，先標好標籤，等新增分頁再套用）。來源是使用者
-  // Instagram 貼文匯出資料夾（202508），都是油畫＋筆刷完成。
+
+
+
+
   { course: "自選主題油畫", themes: ["人像"], date: "2026-11-08", src: "../assets/images/gallery/portrait-oil/one-session/41.jpg", "thumb": "../assets/images/gallery/portrait-oil/one-session/41.thumb.webp", alt: "絡腮鬍男子肖像油畫，橘色衣著搭配黃色背景", sessions: 1 },
   { course: "自選主題油畫", themes: ["人像"], date: "2026-11-08", src: "../assets/images/gallery/portrait-oil/one-session/42.jpg", "thumb": "../assets/images/gallery/portrait-oil/one-session/42.thumb.webp", alt: "MLB 球員大谷翔平揮棒瞬間的油畫肖像，身著道奇隊17號球衣", sessions: 1 },
   { course: "自選主題油畫", themes: ["人像"], date: "2026-11-08", src: "../assets/images/gallery/portrait-oil/one-session/43.jpg", "thumb": "../assets/images/gallery/portrait-oil/one-session/43.thumb.webp", alt: "NBA 球星Kobe Bryant灌籃瞬間的油畫肖像，身著湖人隊8號球衣", sessions: 2 },
@@ -1663,19 +1663,19 @@ window.GALLERY_ITEMS = [
   { course: "自選主題油畫", themes: ["車子"], date: "2026-11-08", src: "../assets/images/gallery/vehicles/02.jpg", "thumb": "../assets/images/gallery/vehicles/02.thumb.webp", alt: "經典法拉利250 GT跑車油畫，深綠色背景", sessions: 1 },
   { course: "自選主題油畫", themes: ["車子"], date: "2026-11-08", src: "../assets/images/gallery/vehicles/03.jpg", "thumb": "../assets/images/gallery/vehicles/03.thumb.webp", alt: "保時捷賽車近距離特寫油畫，夜間賽道燈光虛化背景", sessions: 1 },
   { course: "自選主題油畫", themes: ["車子"], date: "2026-11-08", src: "../assets/images/gallery/vehicles/04.jpg", "thumb": "../assets/images/gallery/vehicles/04.thumb.webp", alt: "紅色速克達機車油畫，上方以中文書法寫著「好活好」，藍綠色背景", sessions: 1 },
-  // 2026-11-08 新增 6 件（另有 1 張明確標示「這不是完成品」的刮浪過程
-  // 截圖沒有收進來）：3 張筆觸平滑、是油畫＋筆刷技法（自選主題油畫），
-  // 3 張刮刀堆疊出厚塗質感、是刮刀油畫技法，來源同樣是使用者
-  // Instagram 限時動態匯出資料夾（202610）。
+
+
+
+
   { course: "自選主題油畫", themes: ["風景"], date: "2026-11-08", src: "../assets/images/gallery/landscape-oil/28.jpg", "thumb": "../assets/images/gallery/landscape-oil/28.thumb.webp", alt: "學員站在湖邊碼頭上的油畫風景，遠方有山巒與停泊的帆船", sessions: 1 },
   { course: "自選主題油畫", themes: ["星空", "人像"], date: "2026-11-08", src: "../assets/images/gallery/star-sky/49.jpg", "thumb": "../assets/images/gallery/star-sky/49.thumb.webp", alt: "星空沙灘上比基尼女子背影剪影油畫，雙手高舉", sessions: 1 },
   { course: "自選主題油畫", themes: ["海邊"], date: "2026-11-08", src: "../assets/images/gallery/sea-oil/36.jpg", "thumb": "../assets/images/gallery/sea-oil/36.thumb.webp", alt: "灰藍色調的海浪油畫，浪花拍打灰色沙灘", sessions: 1 },
   { course: "刮刀油畫", themes: ["風景", "植物花卉"], date: "2026-11-08", src: "../assets/images/gallery/palette-knife-oil/46.jpg", "thumb": "../assets/images/gallery/palette-knife-oil/46.thumb.webp", alt: "刮刀油畫的花園小徑景色，紫白色繡球花叢夾道，盡頭有白色小屋", sessions: 1 },
   { course: "刮刀油畫", themes: ["植物花卉"], date: "2026-11-08", src: "../assets/images/gallery/palette-knife-oil/47.jpg", "thumb": "../assets/images/gallery/palette-knife-oil/47.thumb.webp", alt: "刮刀油畫的向日葵特寫，厚塗花瓣點綴水鑽裝飾", sessions: 1 },
   { course: "刮刀油畫", themes: ["植物花卉"], date: "2026-11-08", src: "../assets/images/gallery/palette-knife-oil/48.jpg", "thumb": "../assets/images/gallery/palette-knife-oil/48.thumb.webp", alt: "刮刀油畫的白色雛菊花束，插在兩個馬克杯裡", sessions: 1 },
-  // 2026-11-08 新增 26 件，來源是使用者 Instagram 限時動態匯出資料夾
-  // （202609）。逐張看過內容，排除 2 張跟既有學員作品完全重複的照片
-  // （龍貓、拉拉熊，同一張拍攝角度跟易架都一樣）。
+
+
+
   { course: "寵物油畫", themes: ["貓咪"], date: "2026-11-08", src: "../assets/images/gallery/pet-portrait/104.jpg", "thumb": "../assets/images/gallery/pet-portrait/104.thumb.webp", alt: "黑白貓咪站在藍天草地上的油畫肖像，戴著黃色蝴蝶結項圈", sessions: 1 },
   { course: "刮刀油畫", themes: ["風景", "人像", "植物花卉"], date: "2026-11-08", src: "../assets/images/gallery/palette-knife-oil/49.jpg", "thumb": "../assets/images/gallery/palette-knife-oil/49.thumb.webp", alt: "刮刀油畫的女子背影，穿黃色洋裝抱著向日葵奔跑過雛菊花田，背景是起伏山丘", sessions: 1 },
   { course: "刮刀油畫", themes: ["風景", "人像"], date: "2026-11-08", src: "../assets/images/gallery/palette-knife-oil/50.jpg", "thumb": "../assets/images/gallery/palette-knife-oil/50.thumb.webp", alt: "刮刀油畫的女子背影，穿白色洋裝走在蜿蜒山徑上，兩側是綠色山丘", sessions: 1 },
@@ -1702,8 +1702,8 @@ window.GALLERY_ITEMS = [
   { course: "刮刀油畫", themes: ["植物花卉"], date: "2026-11-08", src: "../assets/images/gallery/palette-knife-oil/56.jpg", "thumb": "../assets/images/gallery/palette-knife-oil/56.thumb.webp", alt: "刮刀油畫的灰白色單色花瓶靜物，瓶中插著幾枝白花", sessions: 1 },
   { course: "自選主題油畫", themes: ["動漫／角色"], date: "2026-11-08", src: "../assets/images/gallery/anime-characters/14.jpg", "thumb": "../assets/images/gallery/anime-characters/14.thumb.webp", alt: "原創插畫風格的綠色角色與棕色小狗，手裡拿著愛心信封，黃色背景", sessions: 1 },
   { course: "自選主題油畫", themes: ["人像"], date: "2026-11-08", src: "../assets/images/gallery/portrait-oil/one-session/46.jpg", "thumb": "../assets/images/gallery/portrait-oil/one-session/46.thumb.webp", alt: "一對情侶的油畫合照，室內暖黃吊燈背景，女生比著YA手勢", sessions: 1 },
-  // 2026-11-08 新增 21 件（folder 202608，另有 1 張純調色杯特寫、沒有
-  // 完成作品入鏡的過程照沒有收進來）。
+
+
   { course: "自選主題油畫", themes: ["人像"], date: "2026-11-08", src: "../assets/images/gallery/sea-oil/37.jpg", "thumb": "../assets/images/gallery/sea-oil/37.thumb.webp", alt: "油畫的潛水員特寫，背著氣瓶游過礁岩上方，吐出一串氣泡", sessions: 1 },
   { course: "自選主題油畫", themes: ["人像"], date: "2026-11-08", src: "../assets/images/gallery/sea-oil/38.jpg", "thumb": "../assets/images/gallery/sea-oil/38.thumb.webp", alt: "油畫的自由潛水者背影，踩著蛙鞋向下游，背景由淺藍漸層到深藍", sessions: 1 },
   { course: "自選主題油畫", themes: ["貓咪", "星空"], date: "2026-11-08", src: "../assets/images/gallery/star-sky/51.jpg", "thumb": "../assets/images/gallery/star-sky/51.thumb.webp", alt: "扁平插畫風格的白貓坐在草地上，紫色夜空背景點綴流星與星星", sessions: 1 },
@@ -1732,8 +1732,8 @@ window.GALLERY_ITEMS = [
   { course: "石英砂肌理畫", themes: ["貓咪"], date: "2026-11-08", src: "../assets/images/gallery/sand-texture/90.jpg", "thumb": "../assets/images/gallery/sand-texture/90.thumb.webp", alt: "四格石英砂肌理畫，分別是愛心、粉色小屋、情侶腿部穿著襪子與灰色貓咪剪影", sessions: 1 },
   { course: "自選主題油畫", themes: ["人像"], date: "2026-11-08", src: "../assets/images/gallery/portrait-oil/one-session/52.jpg", "thumb": "../assets/images/gallery/portrait-oil/one-session/52.thumb.webp", alt: "網球選手肖像油畫，義大利國旗綠白紅配色背景，身著白色球衣戴白帽", sessions: 1 },
   { course: "刮刀油畫", themes: ["風景"], date: "2026-11-08", src: "../assets/images/gallery/palette-knife-oil/61.jpg", "thumb": "../assets/images/gallery/palette-knife-oil/61.thumb.webp", alt: "刮刀油畫的高爾夫球場景色特寫，草地上有揮桿中的小小人影與紅色旗桿", sessions: 1 },
-  // 2026-11-08 新增 25 件（202606 批次），1 張排除（學生自己 IG 限動
-  // 轉發，見前批排除慣例）。
+
+
   { course: "自選主題油畫", themes: ["人像", "抽象圖案"], date: "2026-11-08", src: "../assets/images/gallery/landscape-oil/35.jpg", "thumb": "../assets/images/gallery/landscape-oil/35.thumb.webp", alt: "油畫，雙手捧著發光圓月，深藍色抽象漩渦紋背景", sessions: 3 },
   { course: "刮刀油畫", themes: ["海邊", "植物花卉"], date: "2026-11-08", src: "../assets/images/gallery/palette-knife-oil/62.jpg", "thumb": "../assets/images/gallery/palette-knife-oil/62.thumb.webp", alt: "兩幅並列的刮刀油畫，一幅是白色花朵浪花特寫，一幅是沙灘與海水交界", sessions: 1 },
   { course: "自選主題油畫", themes: ["其他動物"], date: "2026-11-08", src: "../assets/images/gallery/other-animals-oil/06.jpg", "thumb": "../assets/images/gallery/other-animals-oil/06.thumb.webp", alt: "白色孔雀開屏特寫油畫，羽毛帶有金色光澤與亮粉點綴", sessions: 2 },
@@ -2015,8 +2015,8 @@ window.GALLERY_ITEMS = [
   { course: "石英砂肌理畫", themes: ["植物花卉"], date: "2026-05-01", src: "../assets/images/gallery/sand-texture/136.jpg", "thumb": "../assets/images/gallery/sand-texture/136.thumb.webp", alt: "大地色系厚塗花卉特寫，粉橘棕色調，白色背景", sessions: 1 },
 ];
 
-// 課程篩選鈕的選項清單，跟首頁「課程」選單、faq.html 裡提到的課程名稱
-// 一致，不是另外編一套名稱。
+
+
 window.GALLERY_COURSES = [
   "石英砂肌理畫",
   "刮刀油畫",
@@ -2030,19 +2030,19 @@ window.GALLERY_COURSES = [
   "特殊材質客製",
 ];
 
-// 2026-09-13 新增：課程名稱對應到該課程頁面的路徑（相對於網站根目錄），
-// 給 js/gallery.js 產生「查看課程」連結用（見 js/gallery-lightbox.js 的
-// 燈箱下方連結）。只列出已經有獨立頁面的課程——抽象畫、鏡子拼貼
-// 目前沒有自己的頁面，不列在這裡，燈箱看到這幾堂課的作品時就不會顯示
-// 連結，不會連到不存在的頁面。這個連結只在 gallery.html（綜合瀏覽頁）
-// 顯示，各課程頁自己的「學員作品」預覽區（js/gallery-course-preview.js）
-// 不會顯示——使用者已經在那堂課的頁面上了，再跳一次「前往這堂課」是
-// 繞一圈回原地，沒有意義。
-// 2026-09-16 新增「流動畫」：courses/fluid-art.html 上線。
-// 2026-09-16 新增「特殊材質客製」：courses/custom-material.html 上線，
-// 跟「大幅畫布訂製」同樣是客製服務性質，不是固定期別的技法課。
-// 2026-09-20：全站改乾淨網址，gallery.html 本身也搬進 gallery/index.html
-// （多了一層），這裡的路徑要補上 "../" 才能正確回頭指到 courses/ 底下。
+
+
+
+
+
+
+
+
+
+
+
+
+
 window.GALLERY_COURSE_LINKS = {
   "金箔抽象畫": "../courses/gold-leaf-abstract/",
   "石英砂肌理畫": "../courses/sand-texture/",
@@ -2055,45 +2055,45 @@ window.GALLERY_COURSE_LINKS = {
   "特殊材質客製": "../courses/custom-material/",
 };
 
-// 主題標籤的起始清單——先列出來，之後看實際作品內容隨時可以增加，
-// 不用一次想到齊全。
-// 2026-09-13 討論後新增「動漫／角色」「星空」「海邊」三個標籤
-// （「自選主題油畫」課程的 IG 作品分類討論），原本歸在「跟鯨魚有關」
-// 的作品併入既有的「海洋生物」標籤，不另開新標籤。
-// 2026-09-13 再新增「山」標籤：使用者認為「風景」底下分類太雜，山本身
-// 就是熱門主題，值得獨立出來，不用再併在「風景」裡。
-// 2026-09-18 新增「狗狗」「貓咪」「兩隻以上」三個標籤：寵物油畫的學員
-// 作品要分這三類呈現（見 courses/pet-portrait.html「學員作品」段落），
-// 比泛用的「其他動物」更精確。「兩隻以上」21 件、單隻「貓咪」13 件都已
-// 有真實照片（見上方 GALLERY_ITEMS），且「兩隻以上」同時疊加「狗狗」／
-// 「貓咪」標籤——瀏覽「貓咪」時有貓的兩隻合照也要一起出現，瀏覽「狗狗」
-// 也一樣，這三個標籤是可以同時成立的一般主題標籤，不是互斥分類。
-// 2026-09-30 新增「食物」標籤：使用者上傳一批刮刀油畫學員作品裡有水蜜桃、
-// 蛋糕、披薩這類食物靜物題材，之前的分類都不合適（不是植物花卉、也不是
-// 節慶／季節），獨立開一個「食物」標籤。
-// 2026-10-19 新增「項鍊」「手鏈」「戒指」三個標籤：「串珠」課程第一批真實
-// 學員作品上架，之前的標籤都是給繪畫主題用的，沒有適合珠寶飾品的分類。
-// 這三個照實標記作品的飾品類型（不是材質或珠子大小），同一件作品只會有
-// 其中一種（項鍊、手鏈、戒指互斥，不像山／海邊那種可以疊加的主題標籤）。
-// 2026-10-30：「流動畫」的作品原本標成「抽象圖案」主題，後來又短暫
-// 改成新開的「抽象畫」標籤，最後使用者確認：流動畫本身（courses 欄位
-// 已經是「流動畫」）就是獨立的分類依據，不需要再疊加任何主題標籤——
-// 瀏覽作品集時用「流動畫」課程篩選鈕就夠了，不用再多一層主題篩選。
-// 所以「流動畫」底下所有作品的 themes 改回空陣列 []，「抽象圖案」
-// 這個主題標籤維持只留給其他課程裡真的有抽象構圖的作品用。
-// 2026-10-30 新增「迪士尼」標籤：使用者整理素材夾時把迪士尼主題的
-// 學員作品獨立歸成一類，確認這類題材「自己獨立」，不要併進泛用的
-// 「動漫／角色」標籤裡——瀏覽「動漫／角色」時找的是比較廣義的動漫
-// 題材，迪士尼公主/電影角色是更明確、量也夠多的子分類，值得獨立。
-// 2026-10-30 再新增「吉卜力」標籤：使用者當初把「迪士尼、宮崎駿」
-// 一起列為要各自獨立的主題（原話：「迪士尼、宮崎駿可以自己獨立」），
-// 道理跟迪士尼一樣——不併入「動漫／角色」，另開專屬標籤。一開始沿用
-// 素材夾資料夾名稱叫「宮崎駿」，後來使用者自己要求改名「吉卜力」，
-// 這批作品也橫跨霍爾的移動城堡、龍貓、風之谷、神隱少女、借物少女
-// 艾莉緹、崖上的波妞、紅豬這幾部不同片，用工作室名稱「吉卜力」當
-// 標籤比「宮崎駿」更準確涵蓋（風之谷是宮崎駿執導但工作室成立前的
-// 作品，借物少女艾莉緹是米林宏昌執導、宮崎駿只掛企劃，「吉卜力」
-// 這個名稱才真的涵蓋得到這些不是宮崎駿本人執導的作品）。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 window.GALLERY_THEMES = [
   "簽名特寫",
   "名畫",

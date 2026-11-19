@@ -35,21 +35,21 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=ABeeZee&family=Poppins:wght@700&family=Noto+Sans+TC:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../../css/colors.css?v=20261117-mobile-media">
-  <link rel="stylesheet" href="../../css/tokens.css">
-  <link rel="stylesheet" href="../../css/base.css?v=20261110-course-covers">
-  <link rel="stylesheet" href="../../css/home.css">
-  <link rel="stylesheet" href="../../css/products.css?v=20261117-mobile-media">
-  <link rel="stylesheet" href="../../css/product-effort.css?v=20261116">
-  <link rel="stylesheet" href="../../css/gallery.css?v=20261117-mobile-media">
-  <link rel="stylesheet" href="../../css/cart.css">
-  <link rel="stylesheet" href="../../css/site-menu.css">
-  <link rel="stylesheet" href="../../css/site-footer.css">
+  <link rel="stylesheet" href="../../css/colors.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/tokens.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/base.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/home.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/products.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/product-effort.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/gallery.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/cart.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/site-menu.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/site-footer.css?v=20261119-public-clean">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
   <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  <link rel="stylesheet" href="/css/promo-bar.css">
+  <link rel="stylesheet" href="/css/promo-bar.css?v=20261119-public-clean">
 </head>
 <body>
   <div class="promo-bar" id="promo-bar">
@@ -68,12 +68,12 @@
     <button type="button" class="site-header__menu-toggle" id="menu-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="site-menu" aria-label="開啟選單">
       <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
     </button>
-    <!-- 2026-09-18 新增：桌面版（≥1024px）文字導覽列，取代漢堡選單抽屜；
-         手機版隱藏，維持現有漢堡選單不變。內容／邏輯跟首頁 index.html
-         那份一致，樣式見 css/site-menu.css .site-header__nav（子頁置中
-         logo 用 .site-header__title，不是首頁專屬的 .site-header__logo，
-         見該檔案開頭說明），下拉開合邏輯見 js/site-menu.js 「課程」下拉
-         那個 IIFE。 -->
+
+
+
+
+
+
     <nav class="site-header__nav" aria-label="主選單">
       <a href="../../booking/">線上預約課程</a>
       <div class="site-header__nav-item">
@@ -151,20 +151,20 @@
 
   <main class="product-page work">
 
-    <!-- 標題／簡介：跟其他「春聯砂畫材料包」子頁共用同一句開場句。
-         「福」原本是輕巧版 8 款圖案之一（見 js/sand-art-gallery.js 的
-         PATTERNS.fu：素色底＋星星點綴，酒紅底＋金字，15cm，純沙），
-         這頁是給它一個獨立商品頁／連結，做法跟「春」完全一致——單一
-         配色、無雙配色示範，H1 直接放完整商品名稱。 -->
-    <header class="work__intro work__intro--orlo-buy">
-      <!-- 首圖實拍相片牆：跟 sand-art-chun／sand-art-cai／
-           sand-art-artist-sheep-red／blue 同一套 .work__gallery（主圖＋
-           可橫向滑動縮圖列），取代原本的配色自動輪播
-           （.work__intro-photo--carousel，只有出貨配色＋兩張合成配色
-           示範圖，不是真實拍的照片牆）。2026-10-17 使用者補拍了實際
-           製作過程／成品照，要求跟「春」「財」一樣改用真實相片牆。
-           原本配色示範圖（combo-1／2／3）沒有拿掉，繼續留在下面「商品
-           介紹」章節的 howto-compare 對照格裡，只是不再出現在首圖。 -->
+
+
+
+
+
+    <header class="work__intro work__intro--product-buy">
+
+
+
+
+
+
+
+
       <div class="work__gallery work__gallery--thumbs-left fade-in" data-gallery>
         <div class="work__gallery-main" data-gallery-main>
           <img src="../../assets/images/products/sand-art-fu/sand-art-fu-combo-1.png" alt="「福」配色示範（出貨配色）" loading="eager" class="is-active" data-gallery-frame>
@@ -200,12 +200,12 @@
         </div>
       </div>
 
-      <!-- 2026-10：比照紅羊／藍羊改版（見 css/products.css
-           .work__title-block 說明）——商品名搬到相片牆下方、
-           價格正上方，靠左對齊，系列眉標／基礎款標籤合併成一行
-           小字，一句話介紹放最後。這頁沒有耐性度星級——基礎款
-           材料包還沒有實測完成時間，星級只先用在紅／藍羊兩款
-           進階款，避免憑感覺捏造數字。 -->
+
+
+
+
+
+
       <div class="work__title-block fade-in delay-2">
         <h1 class="work-heading"><span class="inner"><span class="work-heading__cn">福星</span> <span class="work-heading__en">Starry Fu</span></span></h1>
         <div class="work__title-block__meta">
@@ -216,28 +216,28 @@
       </div>
 
 
-      <!-- 「福」跟「春」一樣只有一組配色（棗紅底，白色／洋黃／青色／
-           粉紅／冰紫／淺藍六色點綴星星與福字，使用者確認過的定案色，
-           取代 js/sand-art-gallery.js 的 PATTERNS.fu 舊描述「酒紅底＋
-           金字」），不是雙配色示範——沒有選項可選，不需要色票／縮圖卡
-           選擇器，也不需要「目前選擇」提示，買列直接接在開場句後面。
-           價格跟「春」一樣先用 $__ 佔位（使用者確認過兩者價格一致，
-           等正式定價後一起改）。 -->
-      <!-- 2026-10-22 參考 orlo.co 的限時優惠陣列提示，純靜態文字（不是
-           倒數計時器），套用在現有的早鳥 9 折，位置在價格正上方（不是
-           標題上方）——跟 js/product-price-discount.js 自動注入的
-           「EARLY BIRD · 10% OFF」小字是兩回事，那支共用腳本沒有動，
-           這裡是這頁額外加的一段，優惠期過了要手動拿掉，不會自動
-           隱藏。 -->
+
+
+
+
+
+
+
+
+
+
+
+
+
       <blockquote class="work-heading__urgency fade-in delay-3">
         <p><span class="work-heading__urgency-date">12/15 23:59</span> 前下單，材料包享 <strong>早鳥優惠價</strong></p>
       </blockquote>
 
-      <!-- 「加入購物車」／「直接購買」改到頁面下方的滿版 CTA 橫條
-           （見「一起加購」區塊後面的 .product-buy-bar），這裡只留價格
-           跟數量選擇器。data-product 屬性給 js/product-price-
-           discount.js 的 fallback 查找用（按鈕不在這個容器裡了），
-           詳見該檔案說明。 -->
+
+
+
+
+
       <div class="work-heading__buy-row fade-in delay-3" data-product="sand-art-fu">
         <div class="work-heading__buy-text">
           <p class="work-heading__price">$630</p>
@@ -252,37 +252,37 @@
         </div>
       </div>
 
-      <!-- 一起加購（參考 orlo.co「Buy Together and Save More」）：預設
-           收合，點開才看到清單，每列 checkbox＋縮圖＋名稱＋數量＋價格，
-           跟主商品一起用下面的滿版按鈕送出，不是各自獨立的「加入購物
-           車」按鈕。互動邏輯見 js/cart.js initAddonToggle()／
-           getSelectedAddons()。 -->
-      <!-- addon-section--orlo：2026-10-24 使用者用內嵌同源框架在 orlo.co
-           「2027-ikigai-full-set」頁實測「Buy Together and Save More」區塊
-           的真實 computed style，版面結構（checkbox＋縮圖＋右側名稱/數量/
-           價格直欄，手機版改兩列）跟我們原本的單行 flex 完全不同，這裡
-           新增一個頁面限定 modifier class，只在這頁套用新版面／新間距，
-           sand-art-artist-sheep-red／blue 兩頁的 .addon-row--link 維持
-           原樣不受影響（那兩頁沒有這個 class）。 -->
-      <section class="chapter addon-section addon-section--orlo fade-in delay-3">
+
+
+
+
+
+
+
+
+
+
+
+
+      <section class="chapter addon-section addon-section--expandable fade-in delay-3">
         <button type="button" class="addon-toggle" data-addon-toggle aria-expanded="true" aria-controls="addon-list-fu">一起加購，材料更齊全 <span class="addon-toggle__en">Buy Together</span></button>
         <div class="addon-list" id="addon-list-fu" data-addon-list>
-          <!-- 2026-10-24：使用者比對 orlo.co 全部加購項目都是 checkbox 型，
-               要求把原本「跳頁選色」「跳彈窗選尺寸」的兩個連結型項目也
-               改成跟「純貼紙加購・單款」一樣的 checkbox＋縮圖＋數量／
-               價格直欄結構，差別只在多一個款式下拉選單（選色／選尺寸），
-               不用離開這頁或跳彈窗。選單變動時同步縮圖／價格／（像框的話）
-               checkbox 的 data-product，邏輯見 js/addon-variant-select.js；
-               色組會連同 scheme 一起送進購物車，見 js/cart.js
-               getSelectedAddons() 的 data-addon-scheme 讀取。 -->
-          <!-- 2026-10-25 第三輪：使用者反饋 checkbox／縮圖／標題擠在
-               同一列會限制縮圖只能很小張，放大又會撐寬整列。改成縮圖
-               搬到跟「標題＋數量／價格」整個直欄並列（不是跟 checkbox
-               同一列），縮圖高度＝標題＋數量／價格疊起來的總高度（用
-               flex align-self:stretch＋aspect-ratio:1 讓縮圖自動撐滿
-               這個高度，寬度跟著等比例變化，不用手動寫死數字），縮圖
-               可以比之前大張很多，也不會把整列撐寬。見 css/products.css
-               同一處說明。 -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
           <div class="addon-row" data-addon-row>
             <input type="checkbox" class="addon-row__checkbox" data-addon-select data-product="sand-art-craft-knife" aria-label="加購：沙畫加購筆刀">
             <p class="addon-row__name">沙畫加購筆刀 <span class="addon-row__name-en">Craft Knife</span></p>
@@ -300,13 +300,13 @@
               </div>
             </div>
           </div>
-          <!-- 2026-10-25：使用者反饋這頁（福星，15×15cm 商品）的像框
-               加購不需要尺寸選單——客人在這頁加購像框，合理預期就是要
-               裝這幅 15cm 的作品，20cm 像框根本裝不下，列出來是多餘的
-               選項，直接鎖定 15×15cm，資訊量跟著減少（不用選單、不用
-               「／20cm」字樣）。預覽也不用跳頁／開新分頁，改成就地切換
-               縮圖（點一下縮圖直接變成「放進像框」的合成示意圖，再點
-               一下變回空框照），見 js/addon-frame-preview-toggle.js。 -->
+
+
+
+
+
+
+
           <div class="addon-row" data-addon-row>
             <input type="checkbox" class="addon-row__checkbox" data-addon-select data-product="sand-art-frame-15" aria-label="加購：沙畫加購像框">
             <p class="addon-row__name">沙畫加購像框 <span class="addon-row__name-en">Wood Frame</span>（15×15cm）</p>
@@ -345,9 +345,9 @@
         </div>
       </section>
 
-      <!-- 滿版 CTA：「加入購物車」會把主商品＋上面勾選的加購項目一起
-           加進購物車；「直接購買」同理，一起帶進結帳確認頁，見
-           js/cart.js initAddToCart()／initBuyNow()。 -->
+
+
+
       <div class="product-buy-bar fade-in delay-3">
         <button type="button" class="work__cta work__cta--primary" data-add-to-cart data-product="sand-art-fu">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
@@ -357,10 +357,10 @@
       </div>
     </header>
 
-    <!-- 完整示範影片：客人拍的 9:16 直式完整製作過程，理由跟寫法見
-         sand-art-na-fu-lantern/index.html 同一處註解（自動循環、不留
-         播放鍵）。2026-10-18 使用者要求拿掉影片正上方的「完整示範影片」
-         標題文字，影片本身的用途已經很明顯，不需要文字標題重複說明。 -->
+
+
+
+
     <section class="chapter">
       <div class="demo-video-combo fade-in delay-1">
         <div class="demo-video">
@@ -372,16 +372,16 @@
       </div>
     </section>
 
-    <!-- 第三章：商品詳細。跟「春」一樣是基礎款配置，不含集沙盤、教學
-         影片 QR Code（那兩項是進階款才有）。分裝沙 7 色是使用者確認過
-         的定案色（棗紅、白色、洋黃、青色、粉紅、冰紫、淺藍），不是
-         待補佔位。
 
-         2026-10-05 材料平拍圖曾經改成兩張小圖（底板＋分裝沙待補＋全系列
-         通用工具實拍）。2026-10-06 使用者重新拍了「福」專屬的完整材料
-         平拍照，改回單張滿版圖，理由跟改動細節見 sand-art-chun/index.html
-         同一處註解。這張也補齊了第 7 管分裝沙（之前拍的版本少一管），
-         使用者確認這管本來就要換成淺藍色，取代原本的「深膚」。 -->
+
+
+
+
+
+
+
+
+
     <section class="chapter">
       <h2 class="chapter__title fade-in">商品詳細</h2>
       <p class="kit-section__size-hint fade-in delay-1">成品尺寸：15×15cm<br>顏色數：7色</p>
@@ -399,14 +399,14 @@
       </ul>
     </section>
 
-    <!-- 第四章：顏色細節。使用者確認過的定案色（跟「春」一樣不是待補
-         佔位）：棗紅是底色，其餘 6 色是疊在底色上的顯色（星星／福字），
-         補上跟「春」同一套 .color-swatches 色點列。跟「春」重複的色名
-         （粉紅、冰紫、白）直接沿用同一個估色值，不重新估一次。
-         2026-10-06：原本的「深膚」使用者確認要換成「淺藍」（CSS 變數
-         跟著改名為 --swatch-fu-light-blue）。2026-10-07 使用者換了一張
-         乾淨的分裝沙單獨拍攝照（取代舊的大合照裁圖），色票順序跟著這張
-         新照片改成白色、洋黃、冰紫、粉紅、淺藍、青色、棗紅。 -->
+
+
+
+
+
+
+
+
     <section class="chapter">
       <h2 class="chapter__title fade-in">顏色細節</h2>
       <ul class="color-swatches fade-in delay-1">
@@ -423,12 +423,12 @@
       </div>
     </section>
 
-    <!-- 第五章：商品介紹。跟「春」同一種「一句話陳述＋補充說明＋圖片」
-         節奏，順序也照「春」最後確認過的邏輯——先講「這次選用的配色」
-         （具體會收到什麼），再講「搭配自己的顏色」（自由混色的延伸
-         空間）。「搭配自己的顏色」那段原文提到「金箔灑在哪裡」，但
-         「福」材料清單裡沒有碎金箔，比照「春」那次的修正拿掉這幾個字，
-         不是漏改。 -->
+
+
+
+
+
+
     <section class="chapter">
       <h2 class="chapter__title fade-in">商品介紹</h2>
 
@@ -451,16 +451,16 @@
       </div>
     </section>
 
-    <!-- 請注意：安全須知，跟「春」同一種處理方式——一直顯示，不藏進
-         「購買前請閱讀」手風琴裡。內容通用（不含碎金箔／亮粉專屬提醒），
-         跟「春」逐字相同，之後如果全站基礎款頁面數量夠多，可以考慮
-         比照 js/product-terms.js 的做法抽成共用資料。 -->
-    <!-- 2026-09-19：補上 <section class="chapter"> 外層，理由同 gallery.html
-         的補法（見該頁註解）。 -->
 
 
-    <!-- 第六章：怎麼玩。跟其他基礎款材料包一字不差，固定展開、位置在
-         請注意後面（跟「春」統一過的順序一致）。 -->
+
+
+
+
+
+
+
+
     <section class="chapter">
       <h2 class="chapter__title fade-in">怎麼玩</h2>
       <div class="chapter__prose fade-in delay-1">
@@ -495,17 +495,17 @@
       </div>
     </section>
 
-    <!-- 2026-10-22 參考 orlo.co 的 Description／Shipping & Payment
-         分頁切換，把原本各自獨立的「規格資訊」chapter、「出貨時間／
-         顏色提醒／材料保存／操作提醒」常駐區塊、跟「購買前請閱讀」
-         手風琴，三個都包進同一組分頁——三者內容完全不重疊（見
-         js/product-terms.js 開頭說明：highlights 是精簡列點版，跟
-         下單付款/退換貨/版權等較重的條款是分開維護的兩份資料）。
-         「購買前請閱讀」那個面板內部的 .accordion__body class 保留
-         （不是真的手風琴了，純粹沿用它既有的文字排版樣式，見
-         css/products.css .accordion__body，不用重寫一份一樣的字級/
-         行距規則）。頁面限定元件，見 js/product-tabs.js／
-         css/products.css .product-tabs 開頭說明，只有這一頁用到。 -->
+
+
+
+
+
+
+
+
+
+
+
     <section class="chapter">
       <div class="safety-notice fade-in">
         <p class="safety-notice__title">請注意</p>
@@ -538,16 +538,16 @@
     </section>
 
 
-    <!-- 「延伸創作」加購區塊已經搬到上面買列附近的「一起加購」
-         （.addon-section，參考 orlo.co「Buy Together and Save More」，
-         跟滿版 CTA 按鈕一起決策），這裡不再重複一份。 -->
 
-    <!-- 購買前請閱讀：內容改抽到 js/product-terms.js 共用資料，跟「春」
-         一起吃同一份 sand-art 材質內容。容器留空、由 script 渲染進去。 -->
-    <!-- 相關商品：跨商品導流，跟上面「延伸創作」（本商品的加購配件）
-         用途不同。卡片內容由 js/related-products.js 動態讀 cart.js 的
-         PRODUCTS 產生，排除這頁自己（data-exclude）跟隱藏的加購項目，
-         不在這裡手寫商品清單。 -->
+
+
+
+
+
+
+
+
+
     <section class="chapter">
       <h2 class="chapter__title fade-in">相關商品</h2>
       <div class="related-products fade-in delay-1" data-related-products data-exclude="sand-art-fu">
@@ -592,13 +592,13 @@
       </div>
     </footer>
 
-    <!-- 手機版固定在螢幕最下方的購買列，參考 orlo.co：不管捲到頁面
-         哪裡都看得到、按得到「加入購物車／直接購買」，跟上面買列區塊
-         的 .product-buy-bar 是兩份獨立的按鈕（各自綁定同一套
-         data-add-to-cart／data-buy-now 邏輯，見 js/cart.js），不是同一顆
-         按鈕用 CSS 搬過來的，彼此不會互相干擾。只在手機／平板斷點顯示
-         （見 css/products.css 的 .mobile-sticky-buy），桌面版已經能在
-         捲動不多的範圍內看到買列，不需要重複一份固定列。 -->
+
+
+
+
+
+
+
     <div class="mobile-sticky-buy">
       <button type="button" class="work__cta work__cta--primary" data-add-to-cart data-product="sand-art-fu">
         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
@@ -609,26 +609,26 @@
 
   </main>
 
-  <script src="../../js/cart.js?v=20261119-early-prices"></script>
-  <script src="../../js/addon-product-info.js?v=20261117-mobile-media"></script>
-  <script src="../../js/addon-preview-modal.js?v=20261117-mobile-media"></script>
-  <script src="../../js/product-price-discount.js?v=20261116-all-kits85"></script>
-  <script src="../../js/product-terms.js"></script>
-  <script src="../../js/product-tabs.js"></script>
-  <script src="../../js/hero-colorway-carousel.js?v=20261117-mobile-media"></script>
-  <script src="../../js/video-inview.js?v=20261117-mobile-media"></script>
-  <script src="../../js/hero-thumb-gallery.js?v=20261117-mobile-media"></script>
-  <script src="../../js/shop-navigation.js?v=20261115"></script>
-  <script src="../../js/related-products.js?v=20261116-all-kits85"></script>
-  <script src="../../js/gallery-lightbox.js?v=20261117-mobile-media"></script>
-  <script src="../../js/addon-variant-select.js"></script>
-  <script src="../../js/addon-frame-preview-toggle.js"></script>
-  <script src="../../js/mobile-sticky-buy-reveal.js"></script>
-  <script src="../../js/site-header-scroll.js?v=20261107-backtop"></script>
-  <script src="../../js/account-auth.js?v=20261118-sessions"></script>
-  <script src="../../js/account-widget.js"></script>
-  <script src="../../js/scroll-reveal.js"></script>
-  <script src="../../js/site-menu.js?v=menu-order-20261109"></script>
-  <script src="/js/promo-bar.js"></script>
+  <script src="../../js/cart.js?v=20261119-public-clean"></script>
+  <script src="../../js/addon-product-info.js?v=20261119-public-clean"></script>
+  <script src="../../js/addon-preview-modal.js?v=20261119-public-clean"></script>
+  <script src="../../js/product-price-discount.js?v=20261119-public-clean"></script>
+  <script src="../../js/product-terms.js?v=20261119-public-clean"></script>
+  <script src="../../js/product-tabs.js?v=20261119-public-clean"></script>
+  <script src="../../js/hero-colorway-carousel.js?v=20261119-public-clean"></script>
+  <script src="../../js/video-inview.js?v=20261119-public-clean"></script>
+  <script src="../../js/hero-thumb-gallery.js?v=20261119-public-clean"></script>
+  <script src="../../js/shop-navigation.js?v=20261119-public-clean"></script>
+  <script src="../../js/related-products.js?v=20261119-public-clean"></script>
+  <script src="../../js/gallery-lightbox.js?v=20261119-public-clean"></script>
+  <script src="../../js/addon-variant-select.js?v=20261119-public-clean"></script>
+  <script src="../../js/addon-frame-preview-toggle.js?v=20261119-public-clean"></script>
+  <script src="../../js/mobile-sticky-buy-reveal.js?v=20261119-public-clean"></script>
+  <script src="../../js/site-header-scroll.js?v=20261119-public-clean"></script>
+  <script src="../../js/account-auth.js?v=20261119-public-clean"></script>
+  <script src="../../js/account-widget.js?v=20261119-public-clean"></script>
+  <script src="../../js/scroll-reveal.js?v=20261119-public-clean"></script>
+  <script src="../../js/site-menu.js?v=20261119-public-clean"></script>
+  <script src="/js/promo-bar.js?v=20261119-public-clean"></script>
 </body>
 </html>

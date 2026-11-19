@@ -47,7 +47,7 @@
     <button type="button" data-variant="deep-plus" aria-pressed="false">深煙燻棕・加深</button>
     <button type="button" data-variant="olive" aria-pressed="false">深煙燻橄欖</button>
     <button type="button" data-variant="olive-deep" aria-pressed="false">深灰橄欖</button>
-    <button type="button" data-variant="panacea-brown" aria-pressed="false" style="--swatch:#4C3E29"><span class="swatch"></span>棕色參考 #4C3E29</button>
+    <button type="button" data-variant="warm-brown" aria-pressed="false" style="--swatch:#4C3E29"><span class="swatch"></span>棕色參考 #4C3E29</button>
     <button type="button" data-variant="olive-1" aria-pressed="false" style="--swatch:#484737"><span class="swatch"></span>橄欖灰棕 #484737</button>
     <button type="button" data-variant="olive-2" aria-pressed="false" style="--swatch:#424538"><span class="swatch"></span>灰橄欖 #424538</button>
     <button type="button" data-variant="olive-3" aria-pressed="false" style="--swatch:#3D413A"><span class="swatch"></span>霧灰綠 #3D413A</button>
@@ -79,7 +79,7 @@
       'deep-plus': { name: '深煙燻棕・加深', panel: '#39342D', text: '#D8D2C9', wash: 'rgba(32,28,24,.18)', divider: 'rgba(225,218,207,.30)' },
       olive: { name: '深煙燻橄欖', panel: '#3B3D32', text: '#D8D5CC', wash: 'rgba(35,37,31,.18)', divider: 'rgba(225,224,211,.30)' },
       'olive-deep': { name: '深灰橄欖', panel: '#34372F', text: '#D3D2C9', wash: 'rgba(31,34,29,.20)', divider: 'rgba(221,221,210,.28)' },
-      'panacea-brown': { name: '棕色參考（畫面估色）', panel: '#4C3E29', text: '#F0ECE4', wash: 'rgba(35,29,20,.16)', divider: 'rgba(240,236,228,.34)' },
+      'warm-brown': { name: '棕色參考（畫面估色）', panel: '#4C3E29', text: '#F0ECE4', wash: 'rgba(35,29,20,.16)', divider: 'rgba(240,236,228,.34)' },
       'olive-1': { name: '橄欖灰棕', panel: '#484737', text: '#E5E1D7', wash: 'rgba(34,34,27,.15)', divider: 'rgba(232,229,217,.32)' },
       'olive-2': { name: '灰橄欖', panel: '#424538', text: '#E1E0D6', wash: 'rgba(31,34,28,.16)', divider: 'rgba(228,229,217,.30)' },
       'olive-3': { name: '霧灰綠', panel: '#3D413A', text: '#DFE0D8', wash: 'rgba(29,32,29,.16)', divider: 'rgba(225,228,220,.28)' },
@@ -99,6 +99,6 @@
     }
     document.querySelectorAll('[data-variant]').forEach(button => button.addEventListener('click', () => applyVariant(button.dataset.variant)));
     applyVariant(active);
-  </script>
+</script>
 </body>
 </html>

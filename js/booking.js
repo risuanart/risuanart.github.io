@@ -11,31 +11,31 @@ function normalizeInstagram(value) {
   if (!/^[a-z0-9._]{1,30}$/.test(text)) throw new Error('請輸入有效的 IG 帳號或個人檔案連結');
   return text;
 }
-/* booking.js —— 官網「線上預約課程」頁面（booking.html）的前端邏輯。
-   跟 js/checkout.js 是同一種分工：這支只負責串接 risuan-checkout 後端
-   的 api/course-booking.js，UI 互動（人數、月曆、時段面板、每人選課）
-   都是純本機的 state，不用任何框架。
 
-   2026-09-17 使用者確認的流程順序跟算價邏輯：
-   1. 先選人數——才知道要找「剩餘名額夠這麼多人」的時段，所以人數放
-      最前面，月曆／時段清單會依人數篩選（remaining >= qty 才能點）。
-   2. 選時段。
-   3. 每一位參加者各自選一項課程（不是這組人共同做同一批課程）——
-      同一堂課可以被多人重複選（例如 3 人裡 2 人選流動畫、1 人選
-      石英砂），選項數量＝人數，人數改變要重新產生這一段。總價＝每個人
-      各自選的課程單價加總，不是人數×選中課程種類加總。
 
-   兩段式送出，跟 js/checkout.js 的 #confirm-form 同一個理由：
-   1. 送出表單先用 fetch POST action=create（JSON）——這一步只是搶
-      名額、後端重新算金額，還沒有要離開這個網站。
-   2. 成功後才用 #pay-form 這個「真的」<form> 整頁導去綠界付款頁——
-      綠界規定不能用 fetch／iframe 嵌入付款頁，一定要整頁導航，這裡用
-      JS 呼叫 form.submit() 觸發，效果跟使用者自己按下 submit 按鈕一樣。 */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 (function () {
   const API_BASE = "https://risuan-checkout.vercel.app";
 
   const formView = document.getElementById("booking-form-view");
-  if (!formView) return; // 不是預約頁，不用初始化
+  if (!formView) return;
 
   const resultView = document.getElementById("booking-result");
   const form = document.getElementById("booking-form");
@@ -48,12 +48,12 @@ function normalizeInstagram(value) {
   const totalBalanceEl = document.getElementById("booking-total-balance");
   const agreeNoticeCheckbox = document.getElementById("booking-agree-notice");
 
-  // ---------- 聯絡帳號：IG／FB 平台切換 ----------
-  // 單選一個（不是兩個都填），選中的平台存在 currentPlatform，送出表單
-  // 時跟帳號一起打包成 payload.platform／payload.ig（見下面 submit
-  // handler），後端組成 "IG:帳號" 或 "FB:帳號" 存進既有的 ig 欄位
-  // （見 api/course-booking.js handleCreate 的說明，沒有另外新增
-  // 欄位）。IG 是預設、也是畫室比較常用來回覆的平台。
+
+
+
+
+
+
   const platformBtns = Array.from(document.querySelectorAll(".contact-platform__btn"));
   const igInput = document.getElementById("booking-ig");
   let currentPlatform = "IG";
@@ -73,9 +73,9 @@ function normalizeInstagram(value) {
     });
   });
 
-  // ---------- 課前預約須知：分頁籤 ----------
-  // 2026-09-17 使用者參考 tinybot 預約頁截圖，要求改成分頁點選（一次
-  // 只顯示一類內容），不要 5 段全部展開堆疊、捲很長不好讀。
+
+
+
   const noticeTabs = Array.from(document.querySelectorAll(".booking-notice__tab"));
   const noticePanels = Array.from(document.querySelectorAll(".booking-notice__panel"));
   noticeTabs.forEach((tab) => {
@@ -88,9 +88,9 @@ function normalizeInstagram(value) {
   });
   agreeNoticeCheckbox.addEventListener("change", updateSubmitState);
 
-  // 課程清單需要跟後端 risuan-checkout/lib/course-catalog.js 保持一致——
-  // 這裡只負責顯示跟預覽金額，真正收費金額一律由後端重新計算，不信任
-  // 這裡的價格。
+
+
+
   const COURSE_CATALOG = [
     { label: "自選主題油畫", price: 1600 },
     { label: "石英砂肌理畫", price: 1600 },
@@ -104,15 +104,15 @@ function normalizeInstagram(value) {
     { label: "抽象畫", price: 1800 },
   ];
   const COURSE_PRICE = Object.fromEntries(COURSE_CATALOG.map((c) => [c.label, c.price]));
-  // 2026-10-29：線上每位上課者收取預約金，要跟後端
-  // risuan-checkout/lib/course-catalog.js 的 DEPOSIT_AMOUNT 保持一致。
+
+
   const DEPOSIT_AMOUNT = 500;
 
   function formatMoney(n) {
     return `$${n.toLocaleString()}`;
   }
 
-  // ---------- 課程選擇面板（取代原生 <select>，見 renderAttendeeCourseRow） ----------
+
   const coursePickerSheet = document.getElementById("course-picker-sheet");
   const coursePickerList = document.getElementById("course-picker-list");
   let activeAttendeeIndex = null;
@@ -159,10 +159,10 @@ function normalizeInstagram(value) {
     checkoutErrorEl.hidden = true;
   }
 
-  // ---------- 人數 ----------
+
   const qtyInput = document.getElementById("booking-qty");
 
-  // 單一場次的容量上限就是 4 人（畫室實際規則），不是這個表單隨便訂的。
+
   const MAX_QTY = 4;
 
   function currentQty() {
@@ -172,22 +172,22 @@ function normalizeInstagram(value) {
     return n;
   }
 
-  // ---------- 每人一列的課程選擇 ----------
+
   const attendeeCoursesEl = document.getElementById("attendee-courses");
-  // 記住已經選好的值，人數變動重新產生列表時盡量保留（例如 3 人改成
-  // 4 人，前 3 人已選的課程不用重選；4 人改成 2 人，多出來的直接捨棄）。
+
+
   let attendeeSelections = [];
   let attendeeExtras = [];
   let activePetAddonIndex = null;
-  // ?course=slug 帶入的預選值（見 COURSE_SLUG_DEFAULT），只套用在人數
-  // 還沒被使用者自己改過的第一次渲染。
+
+
   let presetCourse = null;
 
-  // 2026-09-17 改用自訂的「按鈕＋彈出清單」取代原生 <select>：原生
-  // <option> 裡的文字沒辦法用 CSS 排版，課程名稱＋價格只能寫死接在一起
-  // （「流動畫－33*24cm・$1,200」），價格看起來就是黏在名字後面，兩邊
-  // 對不齊，使用者反映不整齊。改成一般 <button> 開一個清單面板，清單
-  // 裡每一列用真的 flexbox 排版（名稱靠左、價格靠右），才能真的排整齊。
+
+
+
+
+
   function renderAttendeeCourseRow(i, existing) {
     const row = document.createElement("div");
     row.className = "attendee-course-row";
@@ -262,7 +262,7 @@ function normalizeInstagram(value) {
     const needs=attendeeExtras.some((n,i)=>Number(n)>1 && String(attendeeSelections[i]||'').startsWith('寵物油畫'));
     notice.querySelectorAll('.pet-third-note').forEach(el=>{el.hidden=!needs;el.style.display=needs?'list-item':'none';});
     const consentLabel=document.getElementById('pet-addon-consent-label');consentLabel.hidden=!needs;consentLabel.style.display=needs?'flex':'none';petConsent.required=needs;consentLabel.classList.toggle('is-required',needs&&!petConsent.checked);petConsent.setAttribute('aria-invalid',String(needs&&!petConsent.checked));
-    // 同一筆預約已閱讀的共用提醒持續有效，不因其他學員改選而取消。
+
     petConsent.setCustomValidity(needs&&!petConsent.checked?'追加至第3隻前，請閱讀注意事項並勾選確認。':'');
     const totals=petExtraTotals();
     const sum=totals.big*700+totals.small*500+attendeeSelections.reduce((total,course)=>total+(COURSE_PRICE[course]||0),0);
@@ -277,10 +277,10 @@ function normalizeInstagram(value) {
     onQtyChanged();
   });
 
-  // ---------- 月曆 + 時段面板 ----------
-  // 2026-09-17 改版：時段跟剩餘名額直接列在月曆下面（早上／下午／晚上
-  // 三欄），參考使用者提供的截圖（997studio tinybot 預約頁），不再用
-  // 彈出面板——選日期跟看時段這兩個動作合在同一塊畫面裡，一次看到。
+
+
+
+
   const calendarMonthEl = document.getElementById("calendar-month");
   const calendarGridEl = document.getElementById("calendar-grid");
   const calendarPrevBtn = document.getElementById("calendar-prev");
@@ -291,14 +291,14 @@ function normalizeInstagram(value) {
   const timeslotsInlineEl = document.getElementById("timeslots-inline");
   const timeslotsEmptyHintEl = document.getElementById("timeslots-empty-hint");
 
-  let slotsByDate = new Map(); // date -> [{time, capacity, booked, remaining}]
+  let slotsByDate = new Map();
   let todayStr = "";
   let selectedDate = null;
   let selectedTime = null;
 
-  // 早上／下午／晚上分桶純粹以小時區分，不是硬寫死畫室現在的
-  // 10:00／14:00／16:00 三個時段——後台之後開新的時間，這裡一樣會自動
-  // 分到對的欄位，不用回來改這支檔案。
+
+
+
   function periodOf(time) {
     const hour = Number((time || "").split(":")[0]);
     if (hour < 12) return "morning";
@@ -306,10 +306,10 @@ function normalizeInstagram(value) {
     return "evening";
   }
 
-  // 2026-10-17 使用者要求選定時段摘要顯示整段課程時間（例如「14:00」改
-  // 顯示「14:00 - 17:00」），不是只有開始時間——每個時段本來就是預約
-  // 系統整段保留的 3 小時區塊（見 lib/slots.js COMMON_TIMES 間隔），這裡
-  // 只是把結束時間算出來一起顯示，不影響實際送出的 slotId／time 資料。
+
+
+
+
   const SLOT_DURATION_HOURS = 3;
 
   function formatSlotEndTime(time) {
@@ -328,9 +328,9 @@ function normalizeInstagram(value) {
     }
   }
 
-  // 顯示範圍：今天所在月＋接下來 2 個月，剛好覆蓋後端 action=availability
-  // 回傳的 90 天視窗，不用做到無限往後翻頁那麼通用。
-  let monthCursor = 0; // 0=本月，1=下個月，2=下下個月
+
+
+  let monthCursor = 0;
   const MAX_MONTH_CURSOR = 2;
 
   function pad2(n) {
@@ -352,7 +352,7 @@ function normalizeInstagram(value) {
     calendarPrevBtn.disabled = monthCursor <= 0;
     calendarNextBtn.disabled = monthCursor >= MAX_MONTH_CURSOR;
 
-    // 週一開頭（照參考截圖），JS 原生 getDay() 是週日=0，換算成週一=0。
+
     const firstWeekdaySundayBased = new Date(year, month, 1).getDay();
     const firstWeekday = (firstWeekdaySundayBased + 6) % 7;
     const daysInMonth = new Date(year, month + 1, 0).getDate();
@@ -366,15 +366,15 @@ function normalizeInstagram(value) {
     for (let d = 1; d <= daysInMonth; d++) {
       const ds = dateStr(year, month, d);
       const daySlots = slotsByDate.get(ds) || [];
-      // 名額要夠這次報名的人數才算「這天可以點」，不是只要有 1 個名額
-      // 就顯示——不然選了人數之後點進去卻發現這天沒有一個時段夠坐。
+
+
       const hasAvailability = daySlots.some((s) => s.remaining >= qty);
       const isPast = ds < todayStr;
-      // 「額滿」跟「公休／未開放」在後台是兩種不同狀態（見 risuan-checkout
-      // 後台「批次開時段」的公休／額滿標記），這天確實開過時段、只是全部
-      // 剩 0 位，才算額滿；完全沒有時段資料的日子（公休或還沒排）維持
-      // 原本單純灰階不可點，不特別標示——這裡只標額滿是因為額滿是「刻意
-      // 讓學生看到這天但訂不到」，公休則是單純不開放，不需要特別說明。
+
+
+
+
+
       const isFull = !isPast && daySlots.length > 0 && daySlots.every((s) => s.remaining === 0);
 
       const btn = document.createElement("button");
@@ -431,9 +431,9 @@ function normalizeInstagram(value) {
         btn.className = "booking-timeslot-inline";
         btn.disabled = !enough;
         btn.setAttribute("aria-pressed", ds === selectedDate && s.time === selectedTime ? "true" : "false");
-        // 剩 0 位不管這次要訂幾人都是真的額滿，直接講「額滿」；剩下的
-        // 名額大於 0 但還是不夠這次人數，才需要講「不足 N 人」——這種
-        // 情況還有名額、只是不夠這組人一起坐，跟真的額滿是兩回事。
+
+
+
         const remainingLabel = s.remaining === 0 ? "額滿" : enough ? `剩 ${s.remaining} 位` : `不足${qty}人`;
         btn.innerHTML = `<span class="booking-timeslot-inline__time">${s.time}</span><span class="booking-timeslot-inline__remaining">${remainingLabel}</span>`;
         btn.addEventListener("click", () => {
@@ -450,8 +450,8 @@ function normalizeInstagram(value) {
     });
   }
 
-  // 人數改變時：名額夠不夠會跟著變，盡量保留已選的日期／時段，只有真的
-  // 不夠了才清掉要求重選，不是每次改人數都整個清空重來。
+
+
   function onQtyChanged() {
     renderCalendar();
     if (selectedDate) {
@@ -475,9 +475,9 @@ function normalizeInstagram(value) {
     updateSubmitState();
   }
 
-  // 找可以自動預選的第一個日期（今天以後、有任何時段名額夠），讓頁面
-  // 一打開就有東西可以看，不用先自己點一次月曆才看到時段長什麼樣子
-  // ——同樣是照參考截圖的體驗（截圖裡進頁面就已經選好一天）。
+
+
+
   function autoSelectFirstAvailableDate() {
     const qty = currentQty();
     const candidates = Array.from(slotsByDate.keys())
@@ -517,7 +517,7 @@ function normalizeInstagram(value) {
     }
   }
 
-  // ---------- 送出表單 ----------
+
   function updateSubmitState() {
     const qty = currentQty();
     const allCoursesPicked = attendeeSelections.length === qty && attendeeSelections.every(Boolean);
@@ -581,10 +581,10 @@ function normalizeInstagram(value) {
     }
   });
 
-  // 把每人一筆的課程陣列（可能有重複）整理成「課程名稱 x人數」的顯示
-  // 字串，跟後端 lib/course-catalog.js 的 describeAttendeeCourses() 是
-  // 同一個邏輯的前端版本（純顯示用，各自獨立維護，不影響金額計算——
-  // 金額一律由後端算）。
+
+
+
+
   function describeAttendeeCourses(courses) {
     const counts = new Map();
     (courses || []).forEach((c) => counts.set(c, (counts.get(c) || 0) + 1));
@@ -593,10 +593,10 @@ function normalizeInstagram(value) {
       .join("、");
   }
 
-  // 付款完成後，把預約資訊整理成一段客人可以直接複製貼去 IG／FB 私訊
-  // 的文字——這頁是付款導回來的全新頁面載入，表單裡打過的姓名／帳號
-  // 都不在了，name／ig 改由 handleStatus() 從後端存的那筆預約紀錄
-  // 補回來（見 api/course-booking.js handleStatus 的說明）。
+
+
+
+
   let dmText = "";
   function renderDmCard(data) {
     const dmCard = document.getElementById("booking-dm-card");
@@ -628,8 +628,8 @@ function normalizeInstagram(value) {
           label.textContent = original;
         }, 1800);
       } catch (err) {
-        // 瀏覽器不支援 Clipboard API（少見，通常是非 HTTPS 環境）——
-        // 退而求其次選取文字，使用者自己長按複製。
+
+
         const range = document.createRange();
         range.selectNodeContents(document.getElementById("booking-dm-text"));
         const selection = window.getSelection();
@@ -639,7 +639,7 @@ function normalizeInstagram(value) {
     });
   }
 
-  // ---------- 付款完成後回來這頁：輪詢付款結果 ----------
+
   async function pollBookingStatus(bookingId, attempt) {
     const resultChecking = document.getElementById("result-checking");
     const resultConfirmed = document.getElementById("result-confirmed");
@@ -653,10 +653,10 @@ function normalizeInstagram(value) {
       if (data.status === "confirmed") {
         resultChecking.hidden = true;
         resultConfirmed.hidden = false;
-        // 2026-10-29：線上每人收 $500 預約金，不是課程全額，付款完成頁要
-        // 清楚講出尾款金額跟現場付款方式，不能只顯示「已收款」讓客人
-        // 以為全部付清了（data.balanceDue 由後端 api/course-booking.js
-        // action=status 計算，見那邊的說明）。
+
+
+
+
         const balanceText = data.balanceDue > 0 ? `，尾款 ${formatMoney(data.balanceDue)} 請於上課當天以現金或轉帳支付` : "";
         document.getElementById("result-confirmed-text").textContent = `${data.date} ${data.time} - ${formatSlotEndTime(data.time)}，${describeAttendeeCourses(
           data.courses
@@ -673,7 +673,7 @@ function normalizeInstagram(value) {
         resultPending.hidden = false;
         return;
       }
-      // not_found：付款失敗或逾時，名額已經還給別人。
+
       resultChecking.hidden = true;
       resultFailed.hidden = false;
     } catch (err) {
@@ -682,10 +682,10 @@ function normalizeInstagram(value) {
     }
   }
 
-  // ?course=slug 讓課程頁的「線上預約」按鈕可以帶入預選課程，slug 對照
-  // 表只列有固定報價、開放線上預約的 6 個課程頁；性質相近但有多款式的
-  // 課程（寵物、流動畫、串珠）先預選一個常見款式，客人到這頁還是可以
-  // 自己改選其他款式。只套用在第 1 位參加者，其餘人數要自己選。
+
+
+
+
   const COURSE_SLUG_DEFAULT = {
     "custom-photo-oil": "自選主題油畫",
     "sand-texture": "石英砂肌理畫",

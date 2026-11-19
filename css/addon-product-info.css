@@ -7,7 +7,7 @@
 .addon-product-intro { margin-top: var(--space-4); margin-bottom: 0; }
 .addon-modal__description { margin: 0; }
 
-/* 字貼預覽以縮圖辨識顏色與字型，外部清單仍使用短選單。 */
+
 .addon-modal__variants--thumbnails {
   flex-wrap: nowrap;
   overflow-x: auto;
@@ -33,7 +33,7 @@
 .addon-modal__body:has(.addon-modal__variants--thumbnails) { min-width: 0; }
 .addon-modal__variants--thumbnails { min-width: 0; max-width: 100%; }
 
-/* 商品導流入口：雙小箭頭與獨立留白，不使用一般內文底線。 */
+
 .product-more-link,
 .gradient-demo a.product-more-link {
   display: inline-flex;
@@ -61,7 +61,7 @@
 }
 .product-more-link:hover { opacity: 0.7; }
 
-/* 加購預覽避免圖片原始尺寸撐開格線，裁掉右欄。 */
+
 .addon-modal__dialog {
   grid-template-columns: minmax(0, 1fr);
 }

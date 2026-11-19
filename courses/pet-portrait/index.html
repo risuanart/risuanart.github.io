@@ -9,9 +9,9 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="寵物油畫課程｜日宣繪畫室">
   <meta property="og:description" content="帶家裡毛孩的照片來畫室，用油畫顏料畫出牠的肖像，單隻寵物通常一堂課就能完成。">
-  <!-- 2026-09-14 補上：首圖換成使用者提供的真實繪製過程影片後，用影片
-       截的一幀（hero-poster.jpg）當 og:image，twitter:card 也跟著升級成
-       summary_large_image（其他有真實首圖的課程頁同一套做法）。 -->
+
+
+
   <meta property="og:image" content="https://risuanart.com/assets/images/courses/pet-portrait/hero-poster.jpg">
   <meta property="og:url" content="https://risuanart.com/courses/pet-portrait/">
   <meta property="og:locale" content="zh_TW">
@@ -22,22 +22,22 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=ABeeZee&family=Poppins:wght@700&family=Noto+Sans+TC:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../../css/colors.css?v=20261117-mobile-media">
-  <link rel="stylesheet" href="../../css/tokens.css">
-  <link rel="stylesheet" href="../../css/base.css?v=20261110-course-covers">
-  <link rel="stylesheet" href="../../css/home.css">
-  <link rel="stylesheet" href="../../css/products.css?v=20261117-mobile-media">
-  <link rel="stylesheet" href="../../css/cart.css">
-  <link rel="stylesheet" href="../../css/enterprise.css">
-  <link rel="stylesheet" href="../../css/gallery.css?v=20261117-mobile-media">
-  <link rel="stylesheet" href="../../css/course-signature.css">
-  <link rel="stylesheet" href="../../css/site-menu.css">
-  <link rel="stylesheet" href="../../css/site-footer.css">
+  <link rel="stylesheet" href="../../css/colors.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/tokens.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/base.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/home.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/products.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/cart.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/enterprise.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/gallery.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/course-signature.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/site-menu.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/site-footer.css?v=20261119-public-clean">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
   <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  <link rel="stylesheet" href="/css/promo-bar.css">
+  <link rel="stylesheet" href="/css/promo-bar.css?v=20261119-public-clean">
 </head>
 <body>
   <div class="promo-bar" id="promo-bar">
@@ -56,12 +56,12 @@
     <button type="button" class="site-header__menu-toggle" id="menu-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="site-menu" aria-label="開啟選單">
       <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
     </button>
-    <!-- 2026-09-18 新增：桌面版（≥1024px）文字導覽列，取代漢堡選單抽屜；
-         手機版隱藏，維持現有漢堡選單不變。內容／邏輯跟首頁 index.html
-         那份一致，樣式見 css/site-menu.css .site-header__nav（子頁置中
-         logo 用 .site-header__title，不是首頁專屬的 .site-header__logo，
-         見該檔案開頭說明），下拉開合邏輯見 js/site-menu.js 「課程」下拉
-         那個 IIFE。 -->
+
+
+
+
+
+
     <nav class="site-header__nav" aria-label="主選單">
       <a href="../../booking/">線上預約課程</a>
       <div class="site-header__nav-item">
@@ -139,62 +139,62 @@
 
   <main class="product-page work">
 
-    <!-- 「畫室常態課程」介紹頁第四篇（前三篇：courses/beading.html／
-         courses/sand-texture.html／courses/custom-photo-oil.html），結構
-         同一套（.ent-hero／.chapter／.ent-gallery／.ent-cta），位置規則
-         一樣是 courses/xxx.html。跟企業／團體版的寵物油畫（見
-         ../enterprise-pet-portrait.html，聯合開課／品牌合作性質）是不同
-         頁面，這頁是畫室開放報名的常態課程，客群跟語氣都不一樣。
 
-         內容依據：
-         1. Pinkoi 真實商品頁（https://www.pinkoi.com/product/HPNxvESs）：
-            畫布尺寸（小 20×20cm／22×15cm／20cm 圓，大 30×30cm／
-            33×24cm／30cm 圓）、單隻寵物一堂完成、大畫布 3 小時／小畫布
-            2-2.5 小時、加畫一隻寵物需要加時、材料是棉布＋油畫、地點在
-            行天宮站附近。價格、加購金額、取消退費規則等「交易條件」跟
-            其他課程頁一樣先不放（下定付款流程還沒定案）。
-         2. 使用者截圖存的 IG 貼文（~/Desktop/寵物油畫ig截圖、注意事項/，
-            用 Read 工具直接讀截圖文字，不是 WebFetch）：上課三步驟
-            （構圖／上色／主題刻畫）、用乾得慢的油畫顏料做出毛髮漸層、
-            課程表定 3 小時但通常會畫超過、毛髮依品種/部位有不同畫法
-            （長短／直捲／硬軟）、寵物油畫是畫室最早期的課程之一、
-            幾乎所有同學都是第一次畫畫、老師會在畫壞的時候協助救回作品。
-         3. 同一批截圖裡還有一段畫室內部「注意事項」對話紀錄（不是 IG
-            貼文，是使用者跟合作對象或同學的訊息截圖），內容涵蓋照片
-            準備建議、尺寸與構圖範圍、背景限制、多隻寵物加購規則、攜帶
-            寵物的相關規範。
-         4. 建頁時發現 faq.html 裡「寵物課特殊須知」（#pet 區塊，約
-            faq.html:375-430）已經有更完整、更即時的同一套規則，包含
-            確切加購金額（大張+1隻 $700／+1.5hr、小張+1隻 $500／+1hr）、
-            單隻寵物完成時間（2-3小時，比截圖裡的 2.5-3.5hr 更新）、
-            貓／其他寵物（非狗）的攜帶規範、候選照片建議上限 3 張、
-            畫室清潔／安全的但書等截圖裡沒有的細節。這頁最後是以
-            faq.html 的內容為準（比截圖新、比截圖完整），截圖只用來
-            確認課程流程／技法／品牌語氣等 faq.html 沒寫的部分，沒有
-            兩邊互相矛盾就都保留，有衝突的地方（時長、有沒有涵蓋貓與
-            其他寵物）一律採用 faq.html 的版本。
-         5. 2026-09-14 補上首圖：使用者放了一支真實繪製過程影片
-            （寵物油畫.mov，內容是白底虎斑貓、戴紫色小兜帽、抱著咖啡色
-            玩偶，從調色、畫五官到完成裝框的完整過程），已經是 H.264，
-            用 ffmpeg -c copy 直接重新封裝成 .mp4（不重新編碼，畫質
-            不受影響），取代原本的 .placeholder-box。做法比照
-            courses/sand-texture.html／courses/palette-knife-oil.html
-            首圖（.ent-hero.is-flush-top＋.ent-hero__photo
-            .is-portrait-video.is-full-bleed），另外截一幀當
-            hero-poster.jpg，同時當 <video poster> 跟 og:image／
-            twitter:image。學員作品格維持 gallery-course-preview 誠實
-            佔位，這支影片是繪製過程紀錄，不是可篩選分類的完成品照片，
-            不會另外塞進 js/gallery-data.js。 -->
 
-    <!-- 2026-10-31 使用者回報：桌面版寬螢幕瀏覽時，直式影片（9:16）
-         置中限寬 420px，旁邊空出一大塊沒有利用。改成 .ent-hero--split，
-         桌面版影片跟文字左右並排，文字欄把原本下面 .chapter__intro 的
-         第一段介紹文字搬上來，再加一組價格/時間/尺寸速覽
-         （.ent-hero__facts）。手機版不受影響，CSS 見 css/enterprise.css
-         .ent-hero--split 的說明。價格取自 js/booking.js 的
-         COURSE_CATALOG（寵物油畫－大寵 $1600／小寵 $1400），不是另外
-         編的；時間跟尺寸用頁面下方「上課怎麼進行」「尺寸與畫布」
-         已經寫好的文字改寫，數字一致。 -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <section class="ent-hero fade-in is-flush-top ent-hero--split">
       <div class="ent-hero__media">
         <video class="ent-hero__photo is-portrait-video is-full-bleed" src="../../assets/videos/courses/pet-portrait/寵物油畫.mp4" poster="../../assets/images/courses/pet-portrait/hero-poster.jpg" preload="auto" autoplay muted loop playsinline aria-label="寵物油畫繪製過程：戴紫色小兜帽的貓咪肖像"></video>
@@ -206,15 +206,15 @@
         <p class="ent-hero__title-en">Pet Portrait</p>
         <h1 class="ent-hero__title">寵物油畫</h1>
         <p class="ent-hero__intro">帶著家裡毛孩的照片來畫室，用油畫顏料畫出屬於牠的肖像，是很多同學開始接觸畫畫的第一堂課。</p>
-        <!-- 2026-10-31 使用者更正：原本寫「大寵／小寵」會讓人誤會是依
-             寵物體型大小分類（大隻狗狗／小隻狗狗），實際上分的是畫布
-             尺寸，跟寵物本身大小無關，改成「大尺寸／小尺寸」。價格、
-             時間、尺寸數字依照業主提供的正式課程價目表更新。
-             這堂課「小／大」兩種尺寸各自有不同的價格/時間/尺寸組合，
-             原本拆成「價格」「時間」「尺寸」三列、每列塞兩個尺寸的
-             數字用頓號接起來，讀起來只是一句很長的文字，換行點也
-             不受控制。改成以「小尺寸／大尺寸」為兩個獨立區塊，各自
-             完整列出該尺寸的價格/時間/規格，資訊歸屬更清楚。 -->
+
+
+
+
+
+
+
+
+
         <dl class="ent-hero__facts">
           <div class="ent-hero__facts-item">
             <dt>小尺寸</dt>
@@ -228,19 +228,19 @@
       </div>
     </section>
 
-    <!-- 2026-11-08 使用者要求這個區塊移到「上課怎麼進行」上面，當作
-         首圖之後的第一個開場畫面，先帶出完成後的開心感覺，再接著講
-         實際上課流程。 -->
+
+
+
     <section class="chapter fade-in delay-1">
       <div class="ent-features">
         <div class="ent-feature ent-feature--reverse">
-          <!-- 2026-11-08 使用者要求把「學生拿作品」資料夾裡剩下還沒用到
-               的照片，自動輪播呈現在這個區塊——手機可以手指左右滑動
-               切換，跟首頁大輪播（js/home-shop.js）同一套「自動播放＋
-               手動滑動後重新計時」手感，獨立寫成 js/moments-carousel.js
-               這支小型通用元件，用 data-moments-carousel 掛載，之後
-               別的頁面要用同樣的「一堆照片自動輪播」效果可以直接套用，
-               不用重寫一份。 -->
+
+
+
+
+
+
+
           <div class="ent-feature__media ent-feature__media--wide moments-carousel" data-moments-carousel data-interval="4000">
             <img class="is-active" src="../../assets/images/courses/pet-portrait/finished-couple-cats.jpg" alt="三位同學戴口罩手持完成的貓咪肖像，笑著互相比較彼此的作品">
             <img src="../../assets/images/courses/pet-portrait/moments/01.jpg" alt="戴草帽的同學手持完成的狗狗肖像，背景牆上掛著多幅學員作品">
@@ -289,16 +289,16 @@
         <p class="chapter__prose">兩種尺寸都可以選擇方形、長方形或圓形的畫布。</p>
         <p class="chapter__prose">背景以單色、雙色為主，最多做一些漸層暈染，沒辦法畫太複雜的背景，可以先想一下喜歡的背景顏色。</p>
       </div>
-      <!-- 2026-11-07 使用者提供「學生拿作品／小寵」「學生拿作品／大寵」
-           兩個資料夾，各選一張能清楚看出比例尺的照片，實際對比小尺寸／
-           大尺寸畫布拿在手上的大小差異，呼應上面文字的尺寸說明，也強調
-           第一次畫畫的同學一樣能完成。 -->
+
+
+
+
       <div class="ent-features">
         <div class="ent-feature">
-          <!-- 2026-11-08 使用者要求圖片結合小標，不要單純圖文分開排版。
-               在每張圖片下緣加一個深色漸層＋白字的小標籤（小尺寸／
-               大尺寸），直接對應圖片內容，不用再從旁邊的文字裡對照
-               「左邊／右邊是哪個尺寸」。 -->
+
+
+
+
           <div class="ent-feature__media ent-feature__media--duo size-compare">
             <figure class="size-compare__figure">
               <img src="../../assets/images/courses/pet-portrait/size-compare-small.jpg" alt="兩位同學自拍手持完成的小尺寸寵物肖像，畫布大小約一個手掌">
@@ -325,32 +325,32 @@
       </div>
     </section>
 
-    <!-- 2026-11-08 使用者指出：「學員作品」的狗狗／貓咪（都是單隻）
-         展示應該放在「想畫兩隻以上」之前——先讓大家知道單隻寵物長
-         怎樣，有需要的人才會接著往下看兩隻以上的加購資訊，不是先看
-         兩隻以上這種比較少數人需要的進階資訊。 -->
-    <!-- 學員作品：2026-09-18 使用者要求改成「狗狗／貓咪」分類各自一條
-         橫向滑動輪播，排版直接比照 guides/material-compare-mountain.html
-         「同一座山，三種材料的呈現」那頁的做法（.material-photo-carousel，
-         見 css/products.css 開頭說明），不再用 js/gallery-course-preview.js
-         那個「抓最新4筆」的通用預覽元件——這裡是同一堂課底下依「畫的是
-         什麼」分類，不是單純照時間排序，通用元件沒有分類概念。因為改成
-         靜態寫死的輪播。2026-11-10 依使用者要求，另於常見問題前新增
-         共用最新四筆作品預覽，重新載入 gallery-data.js 與
-         gallery-course-preview.js；gallery-lightbox.js 同時支援簽名細節
-         與新增的作品預覽。原狗狗／貓咪分類輪播保留。
 
-         照片來源：使用者從 Mac 照片 App「狗狗油畫」相簿匯出 10 張真實
-         學員作品照片，確認都是完全沒有畫畫經驗的同學一堂課完成的
-         （同一批照片使用者也發了 IG 貼文，引言文案融入貼文核心訊息：
-         附圖都是無經驗同學第一張油畫、一堂完成沒問題）。
-         「兩隻以上」21 張（2026-09-18 新增，使用者提供的資料夾，根目錄
-         狗貓合照＋兩狗／兩貓子資料夾，逐張看過畫面內容才分類、寫alt）
-         2026-09-18 稍後改放到下面「想畫兩隻以上」那個價格說明段落旁邊
-         （使用者要求範例照片跟加購說明放在一起，比分開放在學員作品區
-         更容易對照），這裡不再重複。
-         「貓咪」（單隻貓）13 張（2026-09-18 新增，使用者提供的資料夾，
-         逐張看過畫面內容才寫 alt）。 -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <section class="chapter fade-in delay-2">
       <div class="chapter__block">
         <p class="chapter__statement">學員作品</p>
@@ -358,8 +358,8 @@
       </div>
 
       <div class="chapter__block">
-        <!-- 上架前待修清單任務 7：標題原本放在橫滑圖組下面，視覺上容易
-             被誤認是下一組圖的標題，改放到圖組上方。 -->
+
+
         <p class="chapter__statement chapter__statement--sub">狗狗</p>
         <div class="material-photo-carousel">
           <div class="material-photo-carousel__track">
@@ -405,10 +405,10 @@
           <p class="chapter__statement">想畫兩隻以上</p>
           <p class="chapter__prose">可以畫多隻寵物的合照，加購價格如下：</p>
         </div>
-        <!-- 2026-11-08 使用者反映加購價格資訊排在一般內文段落裡不夠
-             清楚，改用跟上面首圖同一套 .ent-hero__facts（dt 小字標籤＋
-             dd 粗體數字）呈現，價格/時間一眼就能看到，不用從一整句
-             話裡自己找數字。 -->
+
+
+
+
         <dl class="ent-hero__facts">
           <div class="ent-hero__facts-item">
             <dt>大張加一隻</dt>
@@ -454,9 +454,9 @@
         <p class="chapter__prose">貓：不建議帶來，貓咪容易緊張、亂跳亂躲，也可能因為要兼顧貓咪而影響同學作畫；若堅持要帶，僅能全程放在提籠內，不能放出來活動。</p>
         <p class="chapter__prose">其他寵物（如爬蟲類、烏龜、天竺鼠等）：需自備籠子全程安置，另外請自備寵物飲用水，畫室不提供。</p>
       </div>
-      <!-- 2026-11-08 使用者要求這張圖放到「畫室以人為主要使用空間...」
-           那句提醒之前，不是放在整段文字後面——原本的做法是在最後一句
-           之後。 -->
+
+
+
       <div class="ent-features">
         <div class="ent-feature">
           <div class="ent-feature__media ent-feature__media--wide">
@@ -468,9 +468,9 @@
         <p class="chapter__prose">畫室以人為主要使用空間，非寵物專用場地，地面或地毯可能殘留少量顏料、珠珠等手作材料，無法做到寵物專用場所等級的清潔，若毛孩比較敏感或容易誤食小物，請自行評估是否適合帶來，或使用提籠、外出袋隔離接觸地面。</p>
       </div>
       <div class="ent-features">
-        <!-- 2026-11-07 使用者另外補的 3 張「有狗狗可以放在寵物課程介紹」
-             系列照片，同樣是帶真狗來畫室的實際情況，跟上面那張一起放
-             在這個段落。 -->
+
+
+
         <div class="ent-feature ent-feature--reverse">
           <div class="ent-feature__media ent-feature__media--mosaic">
             <img src="../../assets/images/courses/pet-portrait/bring-dog-01.jpg" alt="兩位同學手持完成的圓形狗狗肖像，其中一人同時抱著真實的黑色貴賓犬">
@@ -520,10 +520,10 @@
         <p class="chapter__prose">只要願意好好把畫完成，就算畫到一半覺得畫壞了，老師也會協助救回來，不用擔心自己不會畫。</p>
         <p class="chapter__prose">自己畫來留念，或是畫給別人當禮物，都是很多同學的選擇。</p>
       </div>
-      <!-- 2026-11-07 使用者要求多放一些「學生拿作品」照片，傳達大家
-           畫完開心的感覺，不只放一張意思意思——這裡用 mosaic 一次放
-           三張不同同學／不同尺寸的完成合照，當作「適合誰來上」的
-           具體佐證。 -->
+
+
+
+
       <div class="ent-features">
         <div class="ent-feature">
           <div class="ent-feature__media ent-feature__media--mosaic">
@@ -538,11 +538,11 @@
       </div>
     </section>
 
-    <!-- 2026-11-08 使用者指出「油畫筆刷＋寵物」這 3 張照片其實是同學
-         一次帶了兩種不同題材的素材來上課（寵物肖像＋沙畫／星空／海景
-         等其他主題），從輪播裡移出來，另外獨立一個段落說明「同一堂課
-         不用都畫寵物，也可以同時畫別的題材」，放在「替作品留下名字」
-         之前。 -->
+
+
+
+
+
     <section class="chapter fade-in delay-2">
       <div class="chapter__block">
         <p class="chapter__statement">一起來，也能各自選擇</p>
@@ -615,9 +615,9 @@
       </details>
     </section>
 
-    <!-- CTA 三連：「線上預約」是新的主要動作（2026-09 加，直接刷卡付款
-         排課，不用等私訊回覆），私訊洽詢降級成文字連結但保留——寵物油畫
-         常常需要先傳照片討論能不能畫，兩個入口並存，不是取代關係。 -->
+
+
+
     <footer class="ent-cta fade-in">
       <p class="ent-cta__text">可以直接線上刷卡預約，或私訊討論細節，兩種方式都能安排上課！</p>
       <div class="ent-cta__actions">
@@ -662,17 +662,17 @@
 
   </main>
 
-  <script src="../../js/cart.js?v=20261119-early-prices"></script>
-  <script src="../../js/site-header-scroll.js?v=20261107-backtop"></script>
-  <script src="../../js/account-auth.js?v=20261118-sessions"></script>
-  <script src="../../js/account-widget.js"></script>
-  <script src="../../js/scroll-reveal.js"></script>
-  <script src="../../js/moments-carousel.js"></script>
-  <script src="../../js/site-menu.js?v=menu-order-20261109"></script>
-  <script src="../../js/gallery-data.js"></script>
-  <script src="../../js/gallery-course-preview.js?v=20261110-gallery-performance"></script>
-  <script src="../../js/gallery-lightbox.js?v=20261117-mobile-media"></script>
-  <script src="/js/promo-bar.js"></script>
-  <script src="../../js/video-inview.js?v=20261117-mobile-media"></script>
+  <script src="../../js/cart.js?v=20261119-public-clean"></script>
+  <script src="../../js/site-header-scroll.js?v=20261119-public-clean"></script>
+  <script src="../../js/account-auth.js?v=20261119-public-clean"></script>
+  <script src="../../js/account-widget.js?v=20261119-public-clean"></script>
+  <script src="../../js/scroll-reveal.js?v=20261119-public-clean"></script>
+  <script src="../../js/moments-carousel.js?v=20261119-public-clean"></script>
+  <script src="../../js/site-menu.js?v=20261119-public-clean"></script>
+  <script src="../../js/gallery-data.js?v=20261119-public-clean"></script>
+  <script src="../../js/gallery-course-preview.js?v=20261119-public-clean"></script>
+  <script src="../../js/gallery-lightbox.js?v=20261119-public-clean"></script>
+  <script src="/js/promo-bar.js?v=20261119-public-clean"></script>
+  <script src="../../js/video-inview.js?v=20261119-public-clean"></script>
 </body>
 </html>

@@ -1,20 +1,20 @@
-/* cart.js —— 購物車：用 localStorage 存，跨頁共用（商品頁／購物車頁），純前端，
-   不依賴任何後端。結帳／金流串接尚未開放，這裡只做「加入購物車、查看、調整數量、
-   移除」，購物車頁的結帳按鈕維持 disabled，等綠界串接做好才會開放。 */
+
+
+
 
 (function () {
   const STORAGE_KEY = "risuan-cart";
 
-  // 絕對路徑（/ 開頭）在本機用 python -m http.server 測試時沒問題，但在某些
-  // 本機預覽工具（例如 VS Code 的預覽/Live Preview）裡，"/" 不一定等於專案
-  // 根目錄，會被那些工具的安全機制擋掉（「File does not reside within a
-  // trusted folder」）。這份 JS 會在很多不同深度的頁面執行（首頁在根目錄、
-  // 舊版商品頁在一層深、2026-09-20 全站改乾淨網址後大部分頁面變兩層深），
-  // 原本用「網址路徑符不符合 /products/」猜層數，全站改版後深度組合變多，
-  // 猜規則的寫法遲早又會漏掉新頁面。改成直接讀「這支 <script> 標籤自己的
-  // src 是怎麼寫的」反推層數——每個頁面的作者本來就得把 src 寫對這份 JS
-  // 才載得進來，這裡直接借用那個已經正確的相對路徑當基準，不用另外維護
-  // 一份判斷邏輯，之後不管網站目錄結構怎麼調整都不用回來改這裡。
+
+
+
+
+
+
+
+
+
+
   const BASE_PREFIX = (function () {
     const script =
       document.currentScript ||
@@ -24,64 +24,64 @@
     return match && match[1] ? match[1] : "";
   })();
 
-  // 商品資料集中在這裡：cart.js 是唯一需要知道「品項＋價格」的地方，
-  // 商品頁本身不需要知道價格邏輯，只需要在按鈕上標明 data-product 是哪一個品項。
-  // category 用來在購物車頁分組顯示（見 renderCartPage）——之後砂畫商品頁做好，
-  // 只要在這裡多加幾筆 category: "sand-art" 的商品，購物車頁會自動多一組分類
-  // 區塊出來，不用重構分組邏輯。
-  // hasVariant: false 表示這個商品沒有色系／圖案可選（自由創作組是固定 5 款組合，
-  // 不開放自選），商品頁不會有 .color-picker__chip 或 .pattern-card，購物車頁
-  // 也不用畫換規格的下拉選單。
-  // TODO：sand-art-light／sand-art-collection 的 price 是還沒定案的佔位數字
-  // （規格書「$__」），價格確定後這裡跟商品頁上的「$__」都要改。
-  // tagline：總覽購物頁手風琴磚（js/products-overview.js）收合狀態顯示的
-  // 一句話標語，跟各商品敘事子頁 <p class="intro"> 的完整文案是各自獨立的
-  // 兩段文字——這裡故意簡短（收合磚只有一行空間），不是那段文案的複製，
-  // 兩處各自維護沒關係，改其中一處不影響另一處。
-  // hidden: true——加購項目本質上是「另一件商品」，用跟主商品完全相同的
-  // data-add-to-cart／initAddToCart() 機制獨立加入購物車（見各商品頁的
-  // .addon-card__cta），但不是訪客會在材料包總覽購物頁單獨瀏覽、選購的品項，
-  // 所以在 products-overview.js 組總覽卡片時要排除掉（見那支檔案 init()
-  // 開頭的 hidden 過濾），只在各自主商品頁的「延伸創作」區塊才看得到。
-  // shortName：購物車頁分組清單、材料包總覽卡片都已經在旁邊放了分類字
-  // （「春聯流動畫」「流動畫材料包」之類），這兩處再用全名會重複念一次
-  // 「春聯流動畫材料包」，所以這兩處改用 shortName 只顯示款式本身。name
-  // 保留完整寫法給搜尋比對、加入購物車的 aria-label、訂單明細面板這些沒有
-  // 分類字陪在旁邊的地方用，不能直接拿掉。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   const PRODUCTS = {
-    // 2026-10：輕巧版紅／粉兩款原本跟禮盒版共用同一個商品鍵＋色系選擇器（VARIANT_OPTIONS
-    // 裡的 scheme），比照羊Diss舞蹈紅／藍的先例拆成兩個完全獨立的商品頁／商品鍵
-    // （hasVariant:false，不再是「同一款選顏色」）。禮盒版維持原本的色系選擇器不動，
-    // classic-red／welcome-pink 這兩個 scheme 鍵值繼續保留給禮盒版用，不能刪。
-    // 2026-10-17 使用者要求拿掉「輕巧版」這個字眼：禮盒版已經暫時下架
-    // （見下面 fluid-art-gift 的 hidden:true），流動畫材料包只剩這兩款，
-    // 沒有另一個版本可以比較，「輕巧版」這個相對詞就不成立了，改回單純
-    // 的「春聯流動畫材料包」。
-    // sizeCm 不加在流動畫商品上——流動畫縮圖是完整實拍照（有背景、沒去背），
-    // 不是像砂畫那種邊緣乾淨的菱形成品圖，按比例內縮會在照片外面多出一圈
-    // 不自然的白邊，不是只是把「圖」縮小這麼單純（見下面 sizeScalePadding
-    // 只套用在有 sizeCm 的商品，流動畫這兩款維持原本滿版鋪滿）。
+
+
+
+
+
+
+
+
+
+
+
+
     "fluid-art-light-red": { name: "春聯流動畫材料包（經典紅）", shortName: "經典紅", price: 930, earlyBirdPrice: 790, category: "fluid-art", hasVariant: false, tagline: "單幅 15cm，最快抵達的新年儀式", preorder: true },
     "fluid-art-light-pink": { name: "春聯流動畫材料包（迎春粉）", shortName: "迎春粉", price: 930, earlyBirdPrice: 790, category: "fluid-art", hasVariant: false, tagline: "單幅 15cm，最快抵達的新年儀式", preorder: true },
-    // 2026-11-13 新增兩款流動畫配色（珠光／冰焰紅），使用者提供「棚拍」
-    // 成品空拍照各一張，還沒有內容物全展開／製作過程等其他實拍素材——
-    // 跟 sand-art-artist-sheep-red／blue 當初只有成品照時的做法一致，
-    // 先用現有這張照片把商品頁搭起來，其餘照片格子在 js/product-gallery.js
-    // COLOR_SCHEMES 裡用現成的 placeholder 機制（lightPlaceholder／
-    // kitPhotoLightPlaceholder）標注還缺什麼照片，不是留空白或塞假圖。
+
+
+
+
+
+
     "fluid-art-light-pearl": { name: "春聯流動畫材料包（珠光）", shortName: "珠光", price: 930, earlyBirdPrice: 790, category: "fluid-art", hasVariant: false, tagline: "單幅 15cm，最快抵達的新年儀式", preorder: true },
     "fluid-art-light-frost": { name: "春聯流動畫材料包（冰焰紅）", shortName: "冰焰紅", price: 930, earlyBirdPrice: 790, category: "fluid-art", hasVariant: false, tagline: "單幅 15cm，最快抵達的新年儀式", preorder: true },
-    // 2026-10-17 使用者要求暫時下架（不是刪除），hidden:true 會讓
-    // products-overview.js／related-products.js／cart-cross-sell.js
-    // 這三個地方自動把它濾掉（跟加購項目用的是同一個既有機制，見那幾支
-    // 檔案開頭的說明），客人在商品總覽、相關商品、購物車加購推薦都不會
-    // 看到。復原時只要把 hidden:true 這行拿掉即可，其他資料原封不動。
+
+
+
+
+
     "fluid-art-gift": { name: "春聯流動畫材料包・禮盒版", shortName: "禮盒版", price: 1100, earlyBirdPrice: 935, category: "fluid-art", tagline: "雙幅成品，完整的流動畫體驗", hidden: true },
-    // 2026-10-24：sand-art-light／sand-art-collection（輕巧版／自由創作組）
-    // 原本是 hidden:true 暫時下架，連同對應頁面（products/sand-art-light/、
-    // products/sand-art-collection/，都還是沒拍照的破圖草稿頁）一起整個
-    // 刪除，不是暫時下架了——這裡的商品定義、下面 VARIANT_OPTIONS／
-    // PRODUCT_URLS 對應項目都一併移除，不留死鍵值指向已經刪掉的頁面。
+
+
+
+
+
     "sand-art-artist-sheep-red": { name: "藝術家系列・羊Diss舞蹈 Sheep La Danse / 紅", shortName: "羊Diss舞蹈 Sheep La Danse / 紅", price: 860, earlyBirdPrice: 730, category: "sand-art", hasVariant: false, tagline: "致敬馬諦斯《舞蹈》，喜氣酒紅款", preorder: true, sizeCm: 20 },
     "sand-art-artist-sheep-blue": { name: "藝術家系列・羊Diss舞蹈 Sheep La Danse / 藍", shortName: "羊Diss舞蹈 Sheep La Danse / 藍", price: 860, earlyBirdPrice: 730, category: "sand-art", hasVariant: false, tagline: "致敬馬諦斯《舞蹈》，原畫配色藍款", preorder: true, sizeCm: 20 },
     "sand-art-chun": { earlyBirdTagline: "EARLY BIRD · 早鳥優惠價", name: "春聯砂畫材料包・春結 Chun Tied", shortName: "春結 Chun Tied", price: 630, earlyBirdPrice: 530, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true, preorder: true, sizeCm: 15 },
@@ -89,102 +89,102 @@
     "sand-art-cai": { earlyBirdTagline: "EARLY BIRD · 早鳥優惠價", name: "春聯砂畫材料包・花財 Cai in Bloom", shortName: "花財 Cai in Bloom", price: 630, earlyBirdPrice: 530, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true, preorder: true, sizeCm: 15 },
     "sand-art-ying-chun": { earlyBirdTagline: "EARLY BIRD · 早鳥優惠價", name: "春聯砂畫材料包・格裡迎春 Checked in Chun", shortName: "格裡迎春 Checked in Chun", price: 630, earlyBirdPrice: 530, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true, preorder: true, sizeCm: 15 },
     "sand-art-na-fu": { earlyBirdTagline: "EARLY BIRD · 早鳥優惠價", name: "春聯砂畫材料包・格裡納福 Checked in Na Fu", shortName: "格裡納福 Checked in Na Fu", price: 630, earlyBirdPrice: 530, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true, preorder: true, sizeCm: 15 },
-    // 2026-11-19 原價與早鳥價分別指定，非羊Diss砂畫630／530。
+
     "sand-art-ying-chun-lantern": { earlyBirdTagline: "EARLY BIRD · 早鳥優惠價", name: "春聯砂畫材料包・燈上迎春 Lit in Chun", shortName: "燈上迎春 Lit in Chun", price: 630, earlyBirdPrice: 530, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true, preorder: true, sizeCm: 15 },
     "sand-art-na-fu-lantern": { earlyBirdTagline: "EARLY BIRD · 早鳥優惠價", name: "春聯砂畫材料包・燈上納福 Lit in Na Fu", shortName: "燈上納福 Lit in Na Fu", price: 630, earlyBirdPrice: 530, category: "sand-art", hasVariant: false, tagline: "（待補）", isNew: true, preorder: true, sizeCm: 15 },
     "fluid-art-canvas-kit": { name: "空白畫布＋字貼＋架高杯", price: 0, category: "fluid-art", hasVariant: false, hidden: true, noEarlyBird: true },
-    // 2026-10-22：原本是「額外顏色沙・固定套組」佔位商品（$__，不開放選色），
-    // 使用者提供 12 組漸層色沙實拍照後正式上線，改成真的可以自選色的加購品。
-    // 沿用同一個商品鍵（沒有改名），避免要去改全部 8 個商品頁「一起加購」
-    // 區塊裡原本寫死的 data-product="sand-art-extra-color" 參照。
-    // 2026-10-22 補充：原本 hidden:true（比照像框上線前的做法，只在加購
-    // 區塊看得到），使用者後來要求跟像框一樣有自己的商品頁、也要能在
-    // 商品總覽／相關商品被看到，不是只能從加購區塊進來，拿掉 hidden。
+
+
+
+
+
+
+
     "sand-art-extra-color": { name: "漸層沙・自選色", price: 150, category: "sand-art", tagline: "12 組漸層色任選，材料更齊全", noEarlyBird: true },
     "sand-art-sticker-only": { name: "純貼紙加購・單款", price: 0, category: "sand-art", hasVariant: false, hidden: true, noEarlyBird: true },
-    // 2026-10-22：沙畫加購像框，兩個尺寸是實體上完全不同的兩個木框（不是同一個
-    // 商品選尺寸），比照羊Diss舞蹈紅／藍的先例用兩個獨立商品鍵——也是技術上
-    // 必須這樣做的原因：目前的購物車架構價格只綁在 productKey 上，沒有「同一個
-    // 商品、不同規格各自不同價錢」的機制，兩個尺寸價錢不一樣（$150／$199），
-    // 用 VARIANT_OPTIONS 的色系/款式選擇器硬套會變成兩個尺寸同一個價錢，不對。
-    // hidden:false（這兩個商品可以單獨購買，不是只能加購，所以不排除在商品
-    // 總覽／相關商品之外），有自己的頁面 products/sand-art-frame/。
+
+
+
+
+
+
+
     "sand-art-frame-15": { name: "沙畫加購像框・15×15cm", shortName: "像框 15×15cm", price: 150, category: "sand-art", hasVariant: false, tagline: "內徑 15×15cm，木質畫框，讓作品直接上牆", noEarlyBird: true },
     "sand-art-frame-20": { name: "沙畫加購像框・20×20cm", shortName: "像框 20×20cm", price: 199, category: "sand-art", hasVariant: false, tagline: "內徑 20×20cm，木質畫框，讓作品直接上牆", noEarlyBird: true },
-    // 2026-10-24：72 色沙（A／B／C 三組各 24 色）加購品，單組與全組是兩個
-    // 價錢不同的獨立商品鍵（跟上面 sand-art-frame-15／-20 兩個尺寸同一個
-    //理由——cart.js 的價格只綁在 productKey 上，沒有「同一商品、不同
-    // 購買方式各自不同價錢」的機制）。單組（sand-art-24color）有 A／B／C
-    // 三個 scheme 可選（見 VARIANT_OPTIONS），全組（sand-art-24color-
-    // bundle）固定是 A+B+C 一次買齊，hasVariant:false，沒有色組選擇。
+
+
+
+
+
+
     "sand-art-24color": { name: "砂畫・24色任選組", price: 400, category: "sand-art", tagline: "24 色單組，A／B／C 任選一組", noEarlyBird: true },
     "sand-art-24color-bundle": { name: "砂畫・24色任選組（72色全組）", shortName: "72色全組", price: 950, category: "sand-art", hasVariant: false, tagline: "A＋B＋C 一次買齊 72 色，比分開買三組更划算", noEarlyBird: true },
-    // 2026-11-09：金屬色沙加購，三種購買方式價錢不同，比照上面 frame-15／
-    // -20、24color／24color-bundle 同樣的理由拆成三個獨立商品鍵：
-    // sand-art-metallic 是鉑金／香檳銀單色（同價錢，用 VARIANT_OPTIONS
-    // 色票選一色），sand-art-metallic-duo 是鉑金＋香檳銀雙色組（兩色一起
-    // 買比分開買單色便宜一點），sand-art-metallic-trio 是金／銀／玫瑰金箔
-    // 三色一組（材質其實是金箔碎片，不是色沙，但使用情境同屬「沙畫加購
-    // 材料」，分類維持 sand-art）。玫瑰金箔沒有單獨開放購買，只存在於
-    // 三色組裡，所以沒有自己的 VARIANT_OPTIONS 選項。
+
+
+
+
+
+
+
+
     "sand-art-metallic": { name: "沙畫加購色沙・金屬色（鉑金／香檳銀）", price: 45, category: "sand-art", tagline: "鉑金、香檳銀單色任選，或選雙色組一起買", noEarlyBird: true },
-    // 2026-11-09：單色／雙色組合併成同一個商品頁（products/sand-art-metallic/
-    // 裡面用款式選擇器切換），總覽購物頁只需要一張卡片進得去就好，不是
-    // 兩張卡片各自連到同一頁造成混淆，所以雙色組這個鍵改回 hidden:true
-    // （跟像框／24色那種「不同尺寸/組合各自都值得單獨一張卡片」的情況
-    // 不同，這裡兩者是同一頁面的選項，不是兩個獨立選購情境）。
+
+
+
+
+
     "sand-art-metallic-duo": { name: "沙畫加購色沙・鉑金＋香檳銀雙色組", shortName: "鉑金＋香檳銀雙色組", price: 80, category: "sand-art", hasVariant: false, tagline: "兩色一起買，比分開買單色更划算", hidden: true, noEarlyBird: true },
-    // 名稱不加「沙畫加購」字首：金箔碎片不是砂畫專屬材料，流動畫表面
-    // 一樣可以撒，category 維持 sand-art 純粹是因為購物車頁分組目前只有
-    // 這兩個分類可選，不代表這款限定搭配砂畫。
+
+
+
     "sand-art-metallic-trio": { name: "金箔碎片・金／銀／玫瑰金箔三色組", shortName: "金箔碎片三色組", price: 85, category: "sand-art", hasVariant: false, tagline: "金、銀、玫瑰金箔，三色一組", noEarlyBird: true },
-    // 2026-11-09：材料包附的夾子比較偏向輔助固定，刻細節線條的話官方
-    // 建議客人自備美工刀，這支筆刀是給沒有自備、臨時需要的人加購用。
+
+
     "sand-art-craft-knife": { name: "沙畫加購筆刀", price: 60, category: "sand-art", hasVariant: false, tagline: "刻細節線條用，材料包附的夾子偏向輔助固定", noEarlyBird: true },
-    // 2026-11-12：沙畫底板單買，給材料包的沙或亮粉用完、或想换個顏色
-    // 重新鋪一次的人，不用整組材料包重買。9 種設計圖案用 scheme 切換
-    // （見 VARIANT_OPTIONS），羊Diss舞蹈系列底板另外拆成獨立商品鍵、
-    // 定價較高，理由跟整組材料包本身的定價差一致（見 products/
-    // sand-art-baseboard-artist/index.html 的說明）。
+
+
+
+
+
     "sand-art-baseboard": { name: "沙畫底板・單買", price: 200, category: "sand-art", hasVariant: true, tagline: "材料包的沙或亮粉用完，或想换個顏色重新鋪一次時，單獨補一張底板＋貼紙", noEarlyBird: true },
     "sand-art-baseboard-artist": { name: "沙畫底板・羊Diss舞蹈單買", shortName: "羊Diss舞蹈底板單買", price: 300, category: "sand-art", hasVariant: true, tagline: "羊Diss舞蹈系列專用底板，材料用完或想換色時單獨補一張", noEarlyBird: true },
-    // 2026-11-12：流動畫加購空白畫布，材料包附的顏料做完一幅後如果還有
-    // 剩，可以單獨加購一塊空白畫布再做一幅，不用整組材料包重買。單一
-    // 款式（hasVariant:false），跟 sand-art-craft-knife 同一套最簡版型。
+
+
+
     "fluid-art-blank-canvas": { name: "流動畫加購空白畫布", price: 35, category: "fluid-art", hasVariant: false, tagline: "顏料做完一幅還有剩時，加購一塊畫布再做一幅", noEarlyBird: true },
-    // 2026-11-12：流動畫加購字貼，5 款設計任選，可以搭配空白畫布再做
-    // 一幅，也可以單買貼在自己已經完成的作品上。單價 70（成本／耗損／
-    // 包裝／平台費用都算進去後使用者確認的售價），hasVariant:true。
+
+
+
     "fluid-art-word-sticker": { name: "流動畫加購字貼", price: 70, category: "fluid-art", hasVariant: true, tagline: "5 款設計任選，搭配空白畫布再做一幅，也可以單買貼在作品上", noEarlyBird: true },
-    // 2026-11-13：流動畫加購迷你畫布組，5×5cm（比主畫布 15×15cm 小一圈），
-    // 內含迷你畫布＋金色字貼＋晾乾繩，不含流動畫顏料（用主材料包剩下的
-    // 顏料倒）。使用情境有兩種：①正式倒主畫布前先用迷你尺寸試手感，
-    // ②顏料還有剩時，做成一幅額外的迷你春聯，跟 fluid-art-blank-canvas
-    // 的差異是這款是「縮小版完整組合」（含字貼跟晾乾繩），不是單純補
-    // 一塊同尺寸畫布。
+
+
+
+
+
+
     "fluid-art-mini-canvas": { name: "流動畫加購迷你畫布組", shortName: "迷你畫布組", price: 80, category: "fluid-art", hasVariant: false, tagline: "5×5cm 迷你尺寸，正式倒主畫布前先試手感，也能做成一幅迷你春聯", noEarlyBird: true },
-    // 2026-11-13：無痕上牆藝術黏土，一包 4 小塊，沙畫／流動畫完成品都適用
-    // （跟 sand-art-metallic-trio 同樣是「跨兩種材質都能用」的加購品，
-    // 購物車頁分類目前只有 sand-art／fluid-art 兩種可選，這款歸在使用者
-    // 這次對話裡提出的 fluid-art 分類下，不代表限定流動畫專用）。
+
+
+
+
     "fluid-art-wall-clay": { name: "加購無痕藝術黏土", shortName: "無痕黏土", price: 30, category: "fluid-art", hasVariant: false, tagline: "一包 4 小塊，讓作品無痕上牆，沙畫、流動畫作品都適用，建議一幅加購一個", noEarlyBird: true },
   };
-  // noEarlyBird：2026-11-12 使用者確認這些「加購品」不套早鳥折扣（維持
-  // 原價），理由跟後端 risuan-checkout/lib/products.js 同一則註解——這些
-  // 商品本來就是設計給客人拿來湊免運／滿額優惠門檻用的，若本身也打折，
-  // 等於這筆「補差額」被早鳥跟滿額折扣兩頭吃掉利潤。早鳥折扣計算
-  // （earlyBirdPrice()）跟三個卡片渲染檔案（products-overview.js／
-  // related-products.js／cart-cross-sell.js）的 SALE 角標／EARLY BIRD
-  // 文案判斷都要一併排除這個標記，不然價格不打折但卡片還是顯示促銷文案，
-  // 視覺跟實際金額會對不起來。
+
+
+
+
+
+
+
+
   const CATEGORY_LABELS = { "fluid-art": "春聯流動畫", "sand-art": "春聯砂畫" };
-  // 購物車頁分組顯示的固定順序，不跟著「使用者先加哪一類商品」變動——不然同一個
-  // 購物車，加入順序不同就會看到兩種不同的分組排列，體驗不一致。
+
+
   const CATEGORY_ORDER = ["fluid-art", "sand-art"];
 
-  // 每個商品實際可選的規格清單，購物車頁換規格的下拉選單只列出「這個商品真的有
-  // 的選項」，不是把全站所有色系／圖案混在同一份清單裡（不然砂畫商品的下拉會
-  // 出現流動畫的「經典紅」，或流動畫商品出現砂畫的圖案，兩邊互不相干）。
+
+
+
   const VARIANT_OPTIONS = {
     "fluid-art-gift": ["classic-red", "welcome-pink"],
     "sand-art-extra-color": [
@@ -203,9 +203,9 @@
     ],
     "sand-art-24color": ["set-a", "set-b", "set-c"],
     "sand-art-metallic": ["platinum", "champagne-silver"],
-    // 2026-11-12：沙畫底板單買，9 種設計圖案用 scheme 表示（前綴
-    // baseboard- 避免跟上面其他商品的色號 key 撞名，例如 "chun"／"fu"／
-    // "cai" 這幾個字已經被別的 scheme 用掉了，見下面 SCHEME_NAMES）。
+
+
+
     "sand-art-baseboard": [
       "baseboard-chun",
       "baseboard-cai",
@@ -216,8 +216,8 @@
       "baseboard-fu",
     ],
     "sand-art-baseboard-artist": ["baseboard-artist-red", "baseboard-artist-blue"],
-    // 2026-11-12：流動畫加購字貼，5 款設計用 scheme 表示（前綴
-    // word-sticker- 避免撞名，同一個道理見上面沙畫底板的註解）。
+
+
     "fluid-art-word-sticker": [
       "word-sticker-huancai-fu",
       "word-sticker-gold-fu",
@@ -227,23 +227,23 @@
     ],
   };
 
-  // 2026-11-09：商品總覽格狀卡的色號縮圖排（js/products-overview.js
-  // swatchesHTML()）原本只能在「同一個商品鍵換色票」裡面切換，鉑金／
-  // 香檳銀雙色組是價錢不同的另一個商品鍵（sand-art-metallic-duo），沒辦法
-  // 用同一套 scheme 機制表示。這裡額外列一份「這個商品卡片上，除了自己
-  // 本來的色票，還要多顯示哪些其他商品鍵當縮圖」的對照表，點了會把整張
-  // 卡片（縮圖／價格／加入購物車按鈕的目標）切換成那個商品鍵，不是只換
-  // 色票文字，見 products-overview.js 的 initSwatchSwitching()。
+
+
+
+
+
+
+
   const CARD_EXTRA_VARIANTS = {
     "sand-art-metallic": ["sand-art-metallic-duo"],
   };
 
-  // 2026-10：羊Diss舞蹈紅／藍兩款原本是同一個商品鍵下的兩個 scheme（購買
-  // 時選款式），使用者確認改成兩個完全獨立的商品頁／商品鍵（sand-art-
-  // artist-sheep-red／-blue，hasVariant:false），不再是「同一款選顏色」。
-  // artist-sheep-red／artist-sheep-blue 這兩個 scheme 鍵值已經不再使用
-  // （原本只有這個商品在用，現在改用商品鍵本身區分顏色），SCHEME_NAMES／
-  // SCHEME_IMAGES 裡原本的對應項目一併移除，不留死鍵值。
+
+
+
+
+
+
   const SCHEME_NAMES = {
     "classic-red": "經典紅",
     "welcome-pink": "迎春粉",
@@ -255,9 +255,9 @@
     "fu": "福",
     "cai": "財",
     "fu-sheep": "福（羊Diss舞蹈 Sheep La Danse）",
-    // 2026-10-22：漸層沙・自選色（sand-art-extra-color）12 組和色名，見
-    // products/sand-art-extra-color/index.html 色票選色器，每組對應的
-    // 實際 5 色內容寫在那個頁面的色票說明文字裡，這裡只放色號本身。
+
+
+
     "warm-apricot": "暖杏",
     "mustard-brown": "芥褐",
     "forest-green": "森綠",
@@ -270,18 +270,18 @@
     "wisteria-purple": "藤紫",
     "rouge-red": "胭脂",
     "spring-sprout": "春芽",
-    // 2026-10-24：72 色沙（sand-art-24color）A／B／C 三組，色號清單見
-    // products/sand-art-24color/index.html 色票選色器的 alt 文字，這裡
-    // 只放色組名稱本身。刻意不比照上面 5 色組那套詩意命名（暖杏／海藍
-    // 之類），使用者要求用「字母＋色系描述」區隔開兩個不同商品，選購
-    // 時能一眼看出色系內容。
+
+
+
+
+
     "set-a": "A｜暖色組",
     "set-b": "B｜藍紫組",
     "set-c": "C｜綠棕組",
-    // 2026-11-09：金屬色沙（sand-art-metallic）鉑金／香檳銀兩色。
+
     "platinum": "鉑金",
     "champagne-silver": "香檳銀",
-    // 2026-11-12：沙畫底板單買的 9 種設計圖案。
+
     "baseboard-chun": "春結 Chun Tied",
     "baseboard-cai": "花財 Cai in Bloom",
     "baseboard-ying-chun": "格裡迎春 Checked in Chun",
@@ -291,7 +291,7 @@
     "baseboard-fu": "福星 Starry Fu",
     "baseboard-artist-red": "羊Diss舞蹈・紅",
     "baseboard-artist-blue": "羊Diss舞蹈・藍",
-    // 2026-11-12：流動畫加購字貼的 5 種設計。
+
     "word-sticker-huancai-fu": "幻彩福",
     "word-sticker-gold-fu": "金色福",
     "word-sticker-black-chun": "黑色春",
@@ -299,8 +299,8 @@
     "word-sticker-black-fu-vertical": "黑色福（直）",
   };
 
-  // 單件商品的單價／整行小計，購物車頁與迷你購物車預覽共用同一套計算，
-  // 避免兩處各自算一次、之後改價格漏改其中一處。
+
+
   function itemUnitPrice(item) {
     const product = PRODUCTS[item.productKey];
     return product ? product.price : 0;
@@ -310,21 +310,21 @@
     return itemUnitPrice(item) * item.qty;
   }
 
-  // 早鳥優惠：跟 risuan-checkout/lib/products.js earlyBirdDiscount() 同一組
-  // 規則（各材料包使用指定早鳥優惠價，其餘相容計價四捨五入至整元，2026-12-15 台北時區前），這裡是純「顯示用」的前端版本——
-  // 客人加入購物車之前就能看到折扣後的價格，但真正收費永遠是結帳時後端
-  // 重新算一次（不相信前端送出的任何金額），所以就算這裡算錯也不影響
-  // 實際收費是否正確。兩邊常數要一起改，不然顯示的價格跟實際收費會對
-  // 不起來（2026-10-17 使用者要求「官網看到的價格＝刷卡收的價格」）。
+
+
+
+
+
+
   const EARLY_BIRD_CUTOFF = "2026-12-15";
   const EARLY_BIRD_RATE = 0.85;
 
-  // 2026-10-17 使用者要求目前所有在賣的商品都要標示預購（1月中後才開始
-  // 陸續出貨），用純文字（使用者從幾個排版提案裡選定的方向，不加色塊／
-  // 圖示）。文字集中放這裡一份，PRODUCTS 裡個別商品只標 preorder:true，
-  // 不是每個商品各自寫一次同樣的句子——之後出貨時間調整，改這裡一處
-  // 就好。商品總覽卡片（js/products-overview.js）、商品頁購買列
-  // （js/product-price-discount.js）都讀這個常數。
+
+
+
+
+
+
   const PREORDER_NOTE = "預購・2027 年 1 月初陸續出貨";
   const PREORDER_NOTE_SHORT = "預購・1 月初出貨";
   function todayInTaipei() {
@@ -337,22 +337,22 @@
     const discounted = product && product.earlyBirdPrice != null ? product.earlyBirdPrice : Math.round(price * EARLY_BIRD_RATE);
     return { discounted, amount: price - discounted };
   }
-  // 每件先取固定早鳥價或四捨五入後的單價，再乘數量；與後端逐項計價一致。
+
   function itemLineTotalDiscounted(item) {
     const unit = itemUnitPrice(item);
     return earlyBirdPrice(PRODUCTS[item.productKey] || unit).discounted * item.qty;
   }
 
-  // 2026-10-18 使用者要求商品頁／商品總覽卡片的早鳥折扣改成仿 koyama／
-  // simpleisstudio 的呈現：圖片角落空心「SALE」標＋標題附近一行橘色文字
-  // 「EARLY BIRD · 10% OFF」，取代原本價格旁邊的圓角藍底徽章。
-  // 2026-10-23：這套呈現方式推廣成全站唯一一套——購物車頁逐項價格／
-  // 小計、相關商品、購物車頁「您可能對此有興趣」原本各自還在用一個
-  // 只有這幾處在用的 priceDiscountHTML()（劃線原價＋折扣後金額＋圓角
-  // 藍底「早鳥9折」徽章），使用者指出這樣視覺不統一，全部改用這支
-  // Plain 版本（不帶徽章，徽章改由呼叫端自己視情況加 discount-badge-
-  // corner／tagline），priceDiscountHTML() 已經沒有任何地方在呼叫，
-  // 直接整支刪掉，不留死函式。
+
+
+
+
+
+
+
+
+
+
   function priceDiscountHTMLPlain(value, qty) {
     const unitPrice = typeof value === "object" ? value.price : value;
     const { discounted, amount } = earlyBirdPrice(value);
@@ -368,9 +368,9 @@
     return todayInTaipei() <= EARLY_BIRD_CUTOFF;
   }
 
-  // 購物車縮圖用「成品模擬圖」（跟套組內容照片不同張）：這張不管輕巧版或禮盒版都
-  // 一樣準確（純粹展示成品長相，不涉及套組內容數量差異），兩版共用同一組縮圖，
-  // 不需要另外分版本。
+
+
+
   const SCHEME_IMAGES = {
     "classic-red": BASE_PREFIX + "assets/images/products/fluid-art/RS_05.7_產品圖片_800x800拷貝.jpg",
     "welcome-pink": BASE_PREFIX + "assets/images/products/fluid-art/RS_05.8_產品圖片_800x800拷貝.jpg",
@@ -391,7 +391,7 @@
     "set-c": BASE_PREFIX + "assets/images/products/sand-art-24color/sand-art-24color-set-c.jpg",
     "platinum": BASE_PREFIX + "assets/images/products/sand-art-metallic/sand-art-metallic-platinum.jpg",
     "champagne-silver": BASE_PREFIX + "assets/images/products/sand-art-metallic/sand-art-metallic-champagne-silver.jpg",
-    // 2026-11-12：沙畫底板單買，9 張實拍照（平鋪棚拍，未鋪沙的底板＋貼紙）。
+
     "baseboard-chun": BASE_PREFIX + "assets/images/products/sand-art-baseboard/sand-art-baseboard-chun.jpg",
     "baseboard-cai": BASE_PREFIX + "assets/images/products/sand-art-baseboard/sand-art-baseboard-cai.jpg",
     "baseboard-ying-chun": BASE_PREFIX + "assets/images/products/sand-art-baseboard/sand-art-baseboard-ying-chun.jpg",
@@ -401,7 +401,7 @@
     "baseboard-fu": BASE_PREFIX + "assets/images/products/sand-art-baseboard/sand-art-baseboard-fu.jpg",
     "baseboard-artist-red": BASE_PREFIX + "assets/images/products/sand-art-baseboard/sand-art-baseboard-artist-red.jpg",
     "baseboard-artist-blue": BASE_PREFIX + "assets/images/products/sand-art-baseboard/sand-art-baseboard-artist-blue.jpg",
-    // 2026-11-12：流動畫加購字貼，5 張實拍照（平鋪棚拍）。
+
     "word-sticker-huancai-fu": BASE_PREFIX + "assets/images/products/fluid-art-word-sticker/fluid-art-word-sticker-huancai-fu.jpg",
     "word-sticker-gold-fu": BASE_PREFIX + "assets/images/products/fluid-art-word-sticker/fluid-art-word-sticker-gold-fu.jpg",
     "word-sticker-black-chun": BASE_PREFIX + "assets/images/products/fluid-art-word-sticker/fluid-art-word-sticker-black-chun.jpg",
@@ -409,10 +409,10 @@
     "word-sticker-black-fu-vertical": BASE_PREFIX + "assets/images/products/fluid-art-word-sticker/fluid-art-word-sticker-black-fu-vertical.jpg",
   };
 
-  // 總覽格狀購物頁（products/shop.html）電腦版 hover 換圖用的「第二張圖」：
-  // 內容物全展開，跟主圖（成品模擬圖）是不同角度／不同用途的真實照片，
-  // 不是隨便複製一張湊數。查不到對應圖的商品（目前砂畫兩款都還沒有實拍
-  // 素材）就不會有 hover 換圖，見 js/products-overview.js 的條件判斷。
+
+
+
+
   const SCHEME_DETAIL_IMAGES = {
     "classic-red": BASE_PREFIX + "assets/images/products/fluid-art/RS_05.1_產品圖片_800x800拷貝.jpg",
     "welcome-pink": BASE_PREFIX + "assets/images/products/fluid-art/RS_05.2_產品圖片_800x800拷貝.jpg",
@@ -422,9 +422,9 @@
     return SCHEME_DETAIL_IMAGES[scheme] || null;
   }
 
-  // 沒有款式可選的商品（hasVariant:false，例如「春」單一配色、自由創作組
-  // 固定組合）沒有「scheme」概念可以查 SCHEME_IMAGES，縮圖改直接用商品鍵
-  // 查這張表，thumbHTML() 在 SCHEME_IMAGES 查無結果時會退回來查這裡。
+
+
+
   const PRODUCT_IMAGES = {
     "fluid-art-light-red": BASE_PREFIX + "assets/images/products/fluid-art/fluid-art-light-main-red.jpg",
     "fluid-art-light-pink": BASE_PREFIX + "assets/images/products/fluid-art/fluid-art-light-main-pink.jpg",
@@ -439,10 +439,10 @@
     "sand-art-na-fu-lantern": BASE_PREFIX + "assets/images/products/sand-art-na-fu-lantern/sand-art-na-fu-lantern-main.jpg",
     "sand-art-artist-sheep-red": BASE_PREFIX + "assets/images/products/sand-art-artist/sand-art-artist-red-main.jpg",
     "sand-art-artist-sheep-blue": BASE_PREFIX + "assets/images/products/sand-art-artist/sand-art-artist-blue-main.jpg",
-    // 2026-10-24：購物車／結帳頁顯示的像框縮圖改用純像框實拍照（不帶
-    // 任何砂畫設計），原本借用 mockup-fu-15/20.jpg（福星放進像框的合成
-    // 示意圖）——使用者反饋這樣容易讓客人誤會像框加購「含砂畫作品」，
-    // 實際加購的是空框本身，設計款式見各商品頁自己的「模擬圖」。
+
+
+
+
     "sand-art-frame-15": BASE_PREFIX + "assets/images/products/sand-art-frame/sand-art-frame-plain-15.jpg",
     "sand-art-frame-20": BASE_PREFIX + "assets/images/products/sand-art-frame/sand-art-frame-plain-20.jpg",
     "sand-art-24color-bundle": BASE_PREFIX + "assets/images/products/sand-art-24color/sand-art-24color-bundle.jpg",
@@ -454,16 +454,16 @@
     "fluid-art-wall-clay": BASE_PREFIX + "assets/images/products/fluid-art-wall-clay/fluid-art-wall-clay-main.jpg",
   };
 
-  // 這 7 款單一配色沙畫的商品頁首圖都做了「配色動態展示」輪播（出貨配色→
-  // 配色示範二→配色示範三→淡回出貨配色後停止，見 js/hero-colorway-carousel.js）。
-  // 商品總覽格狀卡／首頁商品格狀（都共用 js/products-overview.js）也要套同一種
-  // 展示，縮圖來源就是這裡——[0] 是出貨配色（跟上面 PRODUCT_IMAGES 同一張圖），
-  // [1][2] 是另外兩張配色示範圖（combo-1 跟出貨配色是同一張，不重複收錄）。
-  // 2026-10-25：配色輪播第一格原本是 main.jpg（實拍出貨配色），使用者
-  // 反饋想要跟其餘兩格一樣都是 combo 配色示範圖（combo-1／2／3 三張一組，
-  // 同一套沙粒質感＋同樣的菱形占版比例，彼此切換不會跳動），改成 combo-1
-  // 當第一格——PRODUCT_IMAGES[key]（main.jpg）不再用在這裡，但其他地方
-  // （商品頁相片牆首圖、購物車縮圖）還是讀 PRODUCT_IMAGES，不受影響。
+
+
+
+
+
+
+
+
+
+
   const PRODUCT_COLORWAY_FRAMES = {
     "fluid-art-light-red": Array.from({ length: 7 }, (_, i) =>
       BASE_PREFIX + `assets/images/products/fluid-art/fluid-art-red-fu-${String(i + 1).padStart(2, "0")}.webp?v=clear1`),
@@ -510,20 +510,20 @@
     ],
   };
 
-  // 砂畫目前還沒有任何實拍素材，SCHEME_IMAGES 查不到對應圖時，縮圖改畫一個
-  // 文字佔位框（跟商品頁 .placeholder-box 同一套視覺語言），不要留一個空的
-  // src 讓瀏覽器顯示破圖圖示。className 決定實際尺寸／圓角（見 cart.css
-  // .cart-preview__item-thumb／.cart-item__thumb），img 與 placeholder-box
-  // 共用同一個 class 就會是同樣的尺寸，呼叫端不用另外判斷。
-  // 相片圖示：讓還沒有實拍素材的縮圖看起來是「預留給照片的位置」，不是一格
-  // 空白裡飄著兩個字，跟 sand-art-gallery.js 的圖案卡片共用同一個圖示、同一套
-  // placeholder-box--photo 排版邏輯（圖示在上、文字在下）。
+
+
+
+
+
+
+
+
   const PLACEHOLDER_PHOTO_ICON = `<svg class="placeholder-box__icon" viewBox="0 0 24 24" width="1.8em" height="1.8em" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1.5"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 16l-5.5-5.5a1 1 0 0 0-1.4 0L6 19"/></svg>`;
 
-  // 2026-10-24 新增：商品總覽格狀卡片的色號快選縮圖（參考 orlo.co 商品
-  // 卡片下方可以直接點縮圖切換顏色的做法），只需要查「這個 scheme 的
-  // 圖長怎樣」，不需要 thumbHTML() 整段 <img> 標籤或找不到圖時的佔位框，
-  // 所以另外開一個單純回傳圖片網址的查詢函式，不是重複一份 SCHEME_IMAGES。
+
+
+
+
   function schemeImageSrc(scheme) {
     return SCHEME_IMAGES[scheme] || null;
   }
@@ -538,8 +538,8 @@
     return `<div class="${className} placeholder-box placeholder-box--photo" aria-hidden="true">${PLACEHOLDER_PHOTO_ICON}<span class="placeholder-box__text">圖片待補</span></div>`;
   }
 
-  // 縮圖／品名點下去要連去哪個商品頁。2026-09-20：全站改乾淨網址，目標
-  // 從檔案變成資料夾。
+
+
   const PRODUCT_URLS = {
     "fluid-art-light-red": BASE_PREFIX + "products/fluid-art-light-red/",
     "fluid-art-light-pink": BASE_PREFIX + "products/fluid-art-light-pink/",
@@ -560,8 +560,8 @@
     "sand-art-frame-20": BASE_PREFIX + "products/sand-art-frame/",
     "sand-art-24color": BASE_PREFIX + "products/sand-art-24color/",
     "sand-art-24color-bundle": BASE_PREFIX + "products/sand-art-24color/",
-    // 2026-11-09：單色／雙色組合併成同一個商品頁（比照 sand-art-frame-15／
-    // -20 共用 products/sand-art-frame/ 的先例），兩個商品鍵指向同一個頁面。
+
+
     "sand-art-metallic": BASE_PREFIX + "products/sand-art-metallic/",
     "sand-art-metallic-duo": BASE_PREFIX + "products/sand-art-metallic/",
     "sand-art-metallic-trio": BASE_PREFIX + "products/sand-art-metallic-trio/",
@@ -621,9 +621,9 @@
     writeCart(readCart().filter((i) => i.id !== id));
   }
 
-  // 購物車頁直接換色，不用跳回商品頁重選。換色後 id 會變（id 是 productKey__scheme
-  // 組出來的），如果購物車裡剛好已經有「同商品＋新顏色」那一筆，數量併過去，
-  // 不要變成兩筆重複的品項。
+
+
+
   function changeScheme(id, newScheme) {
     const items = readCart();
     const item = items.find((i) => i.id === id);
@@ -654,8 +654,8 @@
     return readCart().reduce((sum, i) => sum + itemLineTotal(i), 0);
   }
 
-  // 全站每一頁都有一個購物車徽章（常駐右上角，圖示＋數字，0 件也照樣顯示，
-  // 不會因為購物車是空的就整個消失），用同一個 class 選取全部一起更新。
+
+
   function updateBadges() {
     const count = cartCount();
     document.querySelectorAll(".cart-badge__count").forEach((el) => {
@@ -666,15 +666,15 @@
     });
   }
 
-  // 讀取「目前選中的規格變體」：流動畫是色系 chip（.color-picker__chip），
-  // 砂畫輕巧版敘事子頁是圖案卡片（.pattern-card），兩種元素共用同一個
-  // data-scheme 屬性名稱，這裡不用分開處理。材料包總覽購物頁改用 <select>
-  // 緊湊呈現（同時有 4 張商品卡，不能像單一商品頁那樣整頁只有一組選擇器），
-  // 找不到 chip 的話退而找 .variant-select 的 value。
-  //
-  // scope 預設是整個頁面（document）——單一商品頁本來就只有一組選擇器，
-  // 全域找剛好符合需求，不用改。總覽頁每張卡片會傳自己的卡片容器當 scope，
-  // 這樣才能分辨「現在讀的是哪一張卡片選的規格」，不會读到別張卡片的值。
+
+
+
+
+
+
+
+
+
   function activeScheme(scope) {
     const root = scope || document;
     const chip = root.querySelector('.color-picker__chip[aria-pressed="true"], .pattern-card[aria-pressed="true"]');
@@ -683,24 +683,24 @@
     return select ? select.value : null;
   }
 
-  // 加入購物車的音效：優先播放真的音檔（硬幣/收銀機那種音效素材），檔案還沒放
-  // 上去或載入失敗時，自動退回合成音效，不會整個沒聲音。
-  //
-  // 音檔放這裡：assets/audio/cart-chime.mp3（相對於網站根目錄，實際路徑字首
-  // 由 BASE_PREFIX 決定）。之後把下載好的音效檔案改名成 cart-chime.mp3 丟進
-  // assets/audio/ 資料夾，重新整理就會自動換成真的音效，不用再改這支程式。
+
+
+
+
+
+
   const CART_SOUND_SRC = BASE_PREFIX + "assets/audio/cart-chime.mp3";
 
-  // new Audio(...) 每次呼叫都建一個新的實例，不重用同一個物件——這樣連續快速
-  // 點好幾次「加入購物車」，音效可以疊在一起播放，不會卡在前一次還沒播完
-  // 就播不出下一次的聲音。
+
+
+
   function playRealCartSound() {
     try {
       const audio = new Audio(CART_SOUND_SRC);
       audio.volume = 0.55;
-      // 音檔還沒放上去時，play() 的 promise 被拒絕跟 <audio> 的 error 事件
-      // 常常兩個都會觸發，用這個旗標確保退回合成音效只播一次，不會疊成
-      // 聽起來像連按了兩下的雙重音效。
+
+
+
       let fellBack = false;
       const fallback = () => {
         if (fellBack) return;
@@ -717,9 +717,9 @@
     }
   }
 
-  // 合成音效備案：兩個三角波音符快速上揚（C6→G6，中間疊一點點），三角波音色
-  // 偏明亮清脆，接近硬幣/收銀機那種「叮！鐺」的感覺，在真的音檔到位之前
-  // （或萬一載入失敗）先頂著用，不需要另外的音檔資源。
+
+
+
   let cartAudioCtx = null;
   function playSynthChime() {
     try {
@@ -730,8 +730,8 @@
 
       const now = cartAudioCtx.currentTime;
       const notes = [
-        { freq: 1046.5, start: 0, dur: 0.1 }, // C6
-        { freq: 1568.0, start: 0.055, dur: 0.18 }, // G6，跟第一個音疊一點點
+        { freq: 1046.5, start: 0, dur: 0.1 },
+        { freq: 1568.0, start: 0.055, dur: 0.18 },
       ];
       notes.forEach(({ freq, start, dur }) => {
         const osc = cartAudioCtx.createOscillator();
@@ -747,7 +747,7 @@
         osc.stop(now + start + dur + 0.02);
       });
     } catch (e) {
-      // 合成音效萬一在少數瀏覽器出錯，不該擋住「加入購物車」這個主要動作。
+
     }
   }
 
@@ -755,25 +755,25 @@
     playRealCartSound();
   }
 
-  // 購物車圖示短暫放大回彈一次，把按鈕跟右上角的購物車視覺連起來，
-  // 讓使用者一眼確認「東西真的加進去了」。用 --ease-overshoot（帶回彈感的
-  // 全站既有 token），不用自己另外調曲線。
+
+
+
   function pulseCartBadge() {
     document.querySelectorAll(".cart-badge").forEach((el) => {
       el.classList.remove("is-pulsing");
-      void el.offsetWidth; // 強制重排，連續加入購物車也能重播一次動畫
+      void el.offsetWidth;
       el.classList.add("is-pulsing");
     });
   }
 
-  // 加入購物車瞬間，複製按鈕上的購物袋圖示，用一段拋物線軌跡飛到右上角的
-  // 購物車圖示，抵達的同時才觸發 pulseCartBadge()（圖示回彈），把「東西被丟進
-  // 購物車」的動作具象化，不只是文字提示跳出來。用 Element.animate()（Web
-  // Animations API）而不是 CSS transition/@keyframes，因為起訖點座標是每次
-  // 點擊當下才量出來的（按鈕位置、購物車圖示位置都可能不同），沒辦法預先寫死
-  // 在 CSS 裡。base.css 全域的 prefers-reduced-motion 規則只涵蓋 CSS
-  // animation/transition，管不到這裡用 JS 產生的動畫，所以這裡自己另外判斷
-  // 一次，開啟「減少動態」時直接跳過飛行動畫，只保留圖示回彈當作有加入的回饋。
+
+
+
+
+
+
+
+
   function flyToCart(sourceIcon) {
     const cartIcon = document.querySelector(".cart-badge-wrap .cart-badge svg");
     const prefersReducedMotion = window.matchMedia(
@@ -791,7 +791,7 @@
       endRect.left + endRect.width / 2 - (startRect.left + startRect.width / 2);
     const deltaY =
       endRect.top + endRect.height / 2 - (startRect.top + startRect.height / 2);
-    // 中途往上拉一段高度，飛行軌跡才有拋物線弧度，不是筆直橫移過去。
+
     const arcLift = -Math.max(60, Math.abs(deltaY) * 0.5);
 
     const clone = sourceIcon.cloneNode(true);
@@ -801,9 +801,9 @@
     clone.style.width = startRect.width + "px";
     clone.style.height = startRect.height + "px";
     clone.style.margin = "0";
-    // 用購物車圖示本身的顏色（深色），不是按鈕上的圖示顏色——按鈕是實色底
-    // （.work__cta--primary 用淺色圖示，襯著深色按鈕底），圖示飛出按鈕、
-    // 落在淺色頁面背景上之後，淺色圖示幾乎看不見，等於整段動畫都是空的。
+
+
+
     clone.style.color = getComputedStyle(cartIcon).color;
     clone.style.zIndex = "60";
     clone.style.pointerEvents = "none";
@@ -832,14 +832,14 @@
     };
   }
 
-  // 加入購物車的提示泡泡：從購物車圖示旁邊滑入，顯示「已加入：商品名 (色系)」，
-  // 停留幾秒後自動滑出消失。用 CSS class 觸發 transition（不是 @keyframes），
-  // 進場／離場是兩種不同的曲線與位移量，寫在 cart.css 的 .cart-toast／
-  // .cart-toast.is-leaving。多筆疊加時新的插在最上面，靠 flex-direction:
-  // column-reverse 處理，不用自己算每一則的座標。
-  const TOAST_ENTER_DELAY_MS = 20; // 讓瀏覽器先畫出「未進場」的初始狀態，class 才會觸發轉場
+
+
+
+
+
+  const TOAST_ENTER_DELAY_MS = 20;
   const TOAST_VISIBLE_MS = 2600;
-  const TOAST_LEAVE_MS = 1000; // 要跟 cart.css 的 leave transition duration 一致
+  const TOAST_LEAVE_MS = 1000;
 
   function showCartToast(message) {
     let container = document.querySelector(".cart-toast-container");
@@ -866,9 +866,9 @@
     }, TOAST_VISIBLE_MS);
   }
 
-  // 「已選色系：X」提示，跟頁面最上面的色系選擇器連動——色系選擇器離加入購物車
-  // 按鈕隔了整個頁面的內容，使用者容易忘記剛剛選的是哪個顏色，這裡在按鈕正上方
-  // 即時顯示一次，不用滑回最上面確認。
+
+
+
   function initColorHint() {
     const hints = document.querySelectorAll(".work__color-hint-name");
     if (!hints.length) return;
@@ -885,10 +885,10 @@
     update();
   }
 
-  // 標題買列／收尾購買列的數量選擇器：同一頁的兩處代表同一件主商品，
-  // 數字互相同步（改其中一個，另一個跟著變），跟 initColorHint() 的雙處
-  // 同步做法一致。只套用在主商品這兩個進入點，延伸創作加購卡
-  // （[data-product-card] 範圍內）沒有這組選擇器，一律維持一次加購 1 件。
+
+
+
+
   function initBuyQty() {
     const steppers = document.querySelectorAll("[data-buy-qty]");
     if (!steppers.length) return null;
@@ -921,13 +921,13 @@
     return { getQty, setQty };
   }
 
-  // 延伸創作加購卡各自獨立的數量選擇器（data-addon-qty，不是主商品買列
-  // 用的 data-buy-qty）——跟 initBuyQty() 的「全頁所有同款選擇器同步成
-  // 一個值」設計刻意相反：每張卡片自己的選擇器只在自己身上生效，卡片
-  // 之間、跟主商品買列，彼此完全獨立，改其中一張卡的數量不會牽動到
-  // 別張卡或主商品。目前只有 products/sand-art-fu/index.html 的加購卡
-  // 有這個 data 屬性，其他頁面的加購卡沒有，這支函式對它們完全是
-  // no-op。
+
+
+
+
+
+
+
   function initAddonQty() {
     const MAX_QTY = 20;
     document.querySelectorAll("[data-addon-qty]").forEach((stepper) => {
@@ -948,22 +948,22 @@
     });
   }
 
-  // 「已加入」暫時提示用的勾勾圖示（跟全站圖示同一套線條風格：
-  // stroke-width 2、圓端），純圖示鈕（沒有 .work__cta-label 文字，例如
-  // 加購卡、總覽格狀商品卡的圓形「+」）點下去換成這個，不是換文字。
+
+
+
   const CHECK_ICON_HTML = '<path d="M5 13l4 4L19 7"/>';
 
-  // 「一起加購」勾選清單（參考 orlo.co「Buy Together and Save More」，
-  // 2026-10-22，目前只有 products/sand-art-fu/index.html 有
-  // [data-addon-select]）：讀取目前勾選的加購項目＋各自的數量，給
-  // initAddToCart()／initBuyNow() 的主商品按鈕一起帶走用。其他頁面
-  // 沒有這個 data 屬性，一律回傳空陣列，對它們完全不影響行為。
-  // 2026-10-24：部分加購項目改成 checkbox＋款式下拉選單（漸層沙選色組、
-  // 像框選尺寸，見 products/sand-art-fu/index.html），像框是換商品鍵
-  // （由 js/addon-variant-select.js 直接改寫 checkbox.dataset.product，
-  // 這裡不用額外處理），漸層沙是同一個商品鍵、不同 scheme——要讀出列
-  // 裡 [data-addon-scheme] 選單目前的值，沒有這個選單的列（例如純貼紙）
-  // 一律回傳 "default"，跟改之前行為一致。
+
+
+
+
+
+
+
+
+
+
+
   function getSelectedAddons() {
     const items = [];
     document.querySelectorAll("[data-addon-select]:checked").forEach((checkbox) => {
@@ -978,53 +978,53 @@
     return items;
   }
 
-  // 加完購物車／送出 Buy Now 之後，把勾選狀態清掉，避免客人下一次按
-  // 「加入購物車」時，不小心又把上次已經加過的加購項目重複加一次。
+
+
   function resetSelectedAddons() {
     document.querySelectorAll("[data-addon-select]:checked").forEach((checkbox) => {
       checkbox.checked = false;
     });
   }
 
-  // 商品頁「加入購物車」按鈕：讀取當下選中的色系 chip（跟 product-gallery.js
-  // 共用同一批 .color-picker__chip，不用另外維護一份選色狀態）。按鈕內有圖示＋
-  // 文字兩個子元素的（.work__cta-label 存在），「已加入」的暫時提示只換文字
-  // 那個 span，圖示不會被蓋掉；純圖示鈕（沒有文字 label）換成上面的勾勾圖示，
-  // 不能沿用「退回整顆按鈕的文字」這條路——那樣會把按鈕原本的 <svg> 整個
-  // 清空換成純文字，「已加入」的提示結束後 textContent 復原成空字串
-  // （因為一開始就沒有文字節點），圖示就永久消失了，是個真的會炸掉的 bug。
+
+
+
+
+
+
+
   function initAddToCart(buyQty) {
     document.querySelectorAll("[data-add-to-cart]").forEach((btn) => {
       const label = btn.querySelector(".work__cta-label");
       const svg = btn.querySelector("svg");
       const originalLabel = label ? label.textContent : null;
       const originalIconHTML = !label && svg ? svg.innerHTML : null;
-      // 總覽購物頁的每張卡片是 [data-product-card]，只在那張卡片範圍內找選中的
-      // 規格；其他頁面沒有這層包裝，closest() 找不到就退回 null，activeScheme()
-      // 收到 undefined 會自己 fallback 成 document，行為跟改之前完全一樣。
+
+
+
       const scope = btn.closest("[data-product-card]") || undefined;
       btn.addEventListener("click", () => {
-        // 2026-11-09：改成每次點擊當下才讀 btn.dataset.product，不是在
-        // initAddToCart() 執行當下（頁面載入時）就讀一次存進閉包——商品
-        // 總覽卡片的「雙色組」縮圖（js/products-overview.js
-        // initSwatchSwitching()）點了之後會動態改這顆按鈕的 data-product，
-        // 要讀到當下最新的值，不能是載入當下就定死的舊值。
+
+
+
+
+
         const productKey = btn.dataset.product;
-        // 沒有規格可選的商品（例如自由創作組，固定組合）用固定的 "default" 當
-        // 內部 id 用的 scheme key，畫面上不顯示這個字，SCHEME_NAMES 也不會有
-        // 對應項目，下面組文字時全部用「有沒有拿到色系名稱」判斷要不要顯示。
+
+
+
         const scheme = activeScheme(scope) || "default";
-        // 主商品的兩個進入點（scope 是 undefined）讀取買列的數量選擇器；
-        // 延伸創作加購卡（scope 有值）大多沒有數量選擇器、固定一次加購
-        // 1 件，但如果這張卡自己有 [data-addon-qty]（見 initAddonQty()，
-        // 目前只有 sand-art-fu 頁面的加購卡有）就讀那個卡片自己的數字，
-        // 不是固定 1。
+
+
+
+
+
         const addonQtyEl = scope && scope.querySelector("[data-addon-qty] [data-qty-value]");
         const qty = !scope && buyQty ? buyQty.getQty() : addonQtyEl ? parseInt(addonQtyEl.textContent, 10) || 1 : 1;
         addItem(productKey, scheme, qty);
-        // 主商品按鈕（scope 是 undefined）順便把「一起加購」勾選的項目
-        // 一起加進購物車，見 getSelectedAddons() 的說明。延伸創作加購卡
-        // 自己按鈕（scope 有值）不會觸發這段，避免遞迴重複加購。
+
+
+
         let addonCount = 0;
         if (!scope) {
           getSelectedAddons().forEach((addon) => {
@@ -1035,8 +1035,8 @@
           resetSelectedAddons();
         }
         playCartChime();
-        // 飛入購物車的動畫要用原本的圖示（複製一份去飛），一定要在下面換成
-        // 勾勾之前呼叫，不然飛出去的會是勾勾而不是原本按下去那顆圖示。
+
+
         flyToCart(svg);
         const product = PRODUCTS[productKey];
         const schemeName = SCHEME_NAMES[scheme] || "";
@@ -1070,37 +1070,37 @@
     });
   }
 
-  // Buy Now：跳過「加入購物車→進購物車頁」這段，直接用當下買列選的
-  // 數量組一筆只有這一件商品的訂單草稿，送 start-checkout 拿到
-  // orderId 後整頁導去 cart/?orderId=xxx——購物車頁本來就支援「網址帶
-  // orderId 直接顯示結帳確認畫面」（原本是給綠界電子地圖選店回來用的，
-  // 見 js/checkout.js loadAndShowConfirm()），這裡只是提早觸發同一套
-  // 流程，不用另外做一個結帳頁。沒有 [data-buy-now] 這顆按鈕的頁面，
-  // 這支函式對它們是 no-op。
+
+
+
+
+
+
+
   function initBuyNow(buyQty) {
     const CHECKOUT_API_BASE = "https://risuan-checkout.vercel.app";
     document.querySelectorAll("[data-buy-now]").forEach((btn) => {
       const originalLabel = btn.textContent;
       btn.addEventListener("click", async () => {
-        // 2026-11-11：跟 initAddToCart() 同一個理由（見該處 2026-11-09
-        // 的說明），每次點擊當下才讀 dataset.product，不是在
-        // initBuyNow() 執行當下就讀一次存進閉包——有選色/選規格的加購頁
-        // （漸層沙、金屬色、像框、24色全組）用多顆各自固定 data-product
-        // 的按鈕＋hidden 切換顯示哪一顆，點擊當下讀到的一定是目前可見
-        // 這顆按鈕自己的商品鍵，不會有這個問題，但這裡還是讀當下值，
-        // 不留之後其他頁面沿用同一支函式時可能踩到舊陷阱的空間。
+
+
+
+
+
+
+
         const productKey = btn.dataset.product;
         const product = PRODUCTS[productKey];
         if (!product) return;
         const qty = buyQty ? buyQty.getQty() : 1;
-        // 跟「加入購物車」同一個理由：選色/選規格的加購頁要帶上目前選中
-        // 的色系名稱，不是固定空字串——否則直接購買會漏掉客人選的顏色
-        // 資訊，跟「加入購物車」送出的訂單內容不一致。
+
+
+
         const scope = btn.closest("[data-product-card]") || undefined;
         const scheme = activeScheme(scope);
         const schemeName = scheme ? SCHEME_NAMES[scheme] || "" : "";
-        // 跟「加入購物車」同一個理由：把「一起加購」勾選的項目一起帶進
-        // 這筆草稿訂單，不是只有主商品，見 getSelectedAddons() 的說明。
+
+
         const cartItems = [{ productKey, name: product.name, schemeName, qty }];
         getSelectedAddons().forEach((addon) => {
           const addonProduct = PRODUCTS[addon.productKey];
@@ -1133,10 +1133,10 @@
     });
   }
 
-  // 「一起加購」預設收合、點擊展開（參考 orlo.co「Buy Together and
-  // Save More」，2026-10-22，目前只有 products/sand-art-fu/index.html
-  // 有 [data-addon-toggle]，其他頁面沒有這個 data 屬性，對它們是
-  // no-op）。
+
+
+
+
   function initAddonToggle() {
     document.querySelectorAll("[data-addon-toggle]").forEach((btn) => {
       const list = document.getElementById(btn.getAttribute("aria-controls"));
@@ -1149,18 +1149,18 @@
     });
   }
 
-  // 點右上角購物車圖示，跳出一般電商常見的「迷你購物車」下拉：先讓使用者看一眼
-  // 裡面有什麼，再自己決定要「查看購物車」（離開這頁去結帳）還是「繼續選購」
-  // （關掉面板留在原頁面），不是點了圖示就直接被導離目前正在看的商品頁。
-  // 全站每一頁都有一組（.cart-badge-wrap 底下的 .cart-badge + .cart-preview），
-  // 用同一套邏輯個別掛上開關行為。
+
+
+
+
+
   function initCartPreview() {
     const wraps = document.querySelectorAll(".cart-badge-wrap");
     if (!wraps.length) return;
 
-    // 每個頁面的 HTML 裡「查看購物車」連結本來就寫好對應這一層的相對路徑，
-    // 這裡用 CART_PAGE_URL 再蓋一次，保險起見避免哪個頁面的 href 手動寫錯
-    // 或之後改版漏改。
+
+
+
     document.querySelectorAll(".cart-preview__view").forEach((el) => {
       el.href = CART_PAGE_URL;
     });
@@ -1251,21 +1251,21 @@
     const li = document.createElement("li");
     li.className = "cart-item";
     const productUrl = PRODUCT_URLS[item.productKey] || "#";
-    // 換規格下拉只列這個商品實際有的選項（見 VARIANT_OPTIONS），沒有規格可選的
-    // 商品（hasVariant: false，例如自由創作組固定組合）完全不畫這個下拉。
+
+
     const variantKeys = product.hasVariant === false ? [] : VARIANT_OPTIONS[item.productKey] || [];
     const schemeSelectHTML = variantKeys.length
       ? `<select class="cart-item__scheme-select" aria-label="更改規格">${variantKeys
           .map((key) => `<option value="${key}"${key === item.scheme ? " selected" : ""}>${SCHEME_NAMES[key] || key}</option>`)
           .join("")}</select>`
       : "";
-    // 2026-10-23 使用者指出早鳥折扣呈現方式（商品頁／商品總覽已經改成
-    // 角標＋橘字 tagline＋無徽章價格）跟購物車頁、相關商品還是兩套不同
-    // 樣式並存，要求全站統一——這裡拿掉原本購物車頁專屬的
-    // .price-discount__badge 圓角藍底徽章，改用跟商品總覽卡片同一套
-    // discount-badge-corner（縮圖角標）＋ EARLY_BIRD_TAGLINE（價格上方
-    // 橘字）＋priceDiscountHTMLPlain（價格本身不帶徽章），三處視覺語言
-    // 完全一致，不再各自一套。
+
+
+
+
+
+
+
     const discountActive = product.price && !product.noEarlyBird && earlyBirdActive();
     const cornerBadge = discountActive ? `<span class="discount-badge-corner discount-badge-corner--standalone">SALE</span>` : "";
     const discountTagline = discountActive ? `<p class="cart-item__discount-tagline">${product.earlyBirdTagline || EARLY_BIRD_TAGLINE}</p>` : "";
@@ -1297,10 +1297,10 @@
     const qtyInput = li.querySelector("[data-qty-input]");
     li.querySelector("[data-qty-decrease]").addEventListener("click", () => setQty(item.id, item.qty - 1));
     li.querySelector("[data-qty-increase]").addEventListener("click", () => setQty(item.id, item.qty + 1));
-    // 直接輸入數字也能改數量，不是只能點 +/-。輸入不是數字或小於等於0時交給
-    // setQty 自己的規則處理（見上面 setQty 定義：qty<=0 直接移除這件商品，
-    // 跟按到「−」減到0是同一套邏輯，不用另外寫一次）；blur 才觸發，不是每打
-    //一個字就送出一次。
+
+
+
+
     qtyInput.addEventListener("change", () => {
       const parsed = parseInt(qtyInput.value, 10);
       setQty(item.id, Number.isNaN(parsed) ? item.qty : parsed);
@@ -1311,9 +1311,9 @@
     return li;
   }
 
-  // 購物車頁：依大分類（春聯流動畫／之後的春聯砂畫……）分組顯示，不是扁平的
-  // 單一清單，避免橫跨分類的多件商品混在一起難以辨識（見規格書第五章）。
-  // 分類順序照 PRODUCTS 裡各商品出現的順序決定，不用另外維護一份順序清單。
+
+
+
   function renderCartPage() {
     const groupsEl = document.querySelector(".cart-groups");
     if (!groupsEl) return;
@@ -1359,9 +1359,9 @@
       if (totalEl) {
         const original = cartTotalOriginal();
         const discounted = cartTotal();
-        // 小計是一行加總文字，不是單一商品卡片，沒有縮圖可以貼角標，也
-        // 沒有特定商品名稱可以接 tagline，統一拿掉徽章、只留劃線原價＋
-        // 折扣後金額（跟 priceDiscountHTMLPlain 同一種呈現），不是漏改。
+
+
+
         totalEl.innerHTML =
           original > discounted
             ? `小計 <s class="price-discount__original">$${original.toLocaleString()}</s> <span class="price-discount__final">$${discounted.toLocaleString()}</span>`
@@ -1371,7 +1371,7 @@
 
     render();
     document.addEventListener("cart:updated", render);
-    // 使用者可能同時開兩個分頁，另一頁改了購物車，這一頁也要跟著重畫。
+
     window.addEventListener("storage", (e) => {
       if (e.key === STORAGE_KEY) render();
     });
@@ -1395,21 +1395,21 @@
     init();
   }
 
-  // 給 js/checkout.js 用的最小公開介面：結帳流程需要把購物車內容送去後端
-  // 重新計價，但商品名稱／色系名稱這些資料只存在這支檔案的 PRODUCTS／
-  // SCHEME_NAMES 裡（cart.js 開頭說過這是唯一該知道商品資料的地方），
-  // 與其讓 checkout.js 自己再存一份，不如在這裡開一個小窗口讓它讀。
-  // 後端（risuan-checkout/lib/products.js）不信任這裡送過去的任何金額，
-  // 一律用自己的價格表重算，這裡只是拿來組出「品項＋數量」的清單。
+
+
+
+
+
+
   window.RisuanCart = {
     readCart,
     cartTotal,
-    // 2026-11-14 新增：給 js/addon-preview-modal.js（「一起加購」品項
-    // 點縮圖跳出大圖預覽視窗，裡面直接可以加入購物車）用——視窗自己的
-    // 「加入購物車」是一個完全獨立的動作，不經過 getSelectedAddons()／
-    // checkbox 勾選那條路，直接呼叫這幾個底層函式，行為跟各加購品
-    // 自己產品頁的「加入購物車」按鈕一致（飛入動畫／提示音／提示泡泡
-    // 都一樣），不用另外寫一套。
+
+
+
+
+
+
     addItem,
     showCartToast,
     playCartChime,
@@ -1431,8 +1431,8 @@
         };
       });
     },
-    // 以下是唯讀商品資料，給材料包總覽購物頁（js/products-overview.js）用——
-    // 那頁沒有另建一份商品資料，直接讀這裡，改價格／規格只要改這一份就好。
+
+
     PRODUCTS,
     VARIANT_OPTIONS,
     CARD_EXTRA_VARIANTS,
@@ -1445,10 +1445,10 @@
     schemeImageSrc,
     detailImageSrc,
     PRODUCT_COLORWAY_FRAMES,
-    // initAddToCart 在這支檔案自己的 init() 時已經跑過一次，但那時候總覽頁的
-    // 商品卡片還沒被 products-overview.js 動態建立出來，掃描不到任何按鈕。
-    // 開放這個函式讓總覽頁卡片建好之後可以重新呼叫一次，掛上「加入購物車」
-    // 的行為——呼叫的還是同一支函式，不是另外寫一套。
+
+
+
+
     initAddToCart,
   };
 })();

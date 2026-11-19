@@ -1,24 +1,24 @@
-/* frame-mockup-picker.js —— 沙畫加購像框（products/sand-art-frame/）專用，
-   只有這一頁會載入。兩組各自獨立的選擇器共用同一張主圖：
-   - 尺寸選擇器（.frame-size-picker__chip）：決定買的是哪個商品（
-     data-product 對應 cart.js PRODUCTS 的 sand-art-frame-15／-20，兩個
-     尺寸價錢不同，是兩個獨立商品鍵，不是同一個商品的規格選項，見
-     cart.js 該處說明），同時也更新主圖要顯示哪個尺寸的合成圖。
-   - 款式選擇器（[data-frame-design-picker] 底下的 .color-picker__chip）：
-     純粹換主圖看預覽，不影響實際購買的是哪個商品——像框本身不分砂畫
-     款式，這組是給客人「想像自己選的那款裝進去長怎樣」用的。
-   主圖檔名規則：mockup-{design}-{size}.jpg（見
-   assets/images/products/sand-art-frame/ 下的生成腳本），兩組狀態都要
-   讀出來才能拼出正確檔名。 */
+
+
+
+
+
+
+
+
+
+
+
+
 (function () {
   const root = document.querySelector("[data-frame-mockup-picker]");
   if (!root) return;
 
   const mainImg = root.querySelector("[data-frame-mockup-main-img]");
   const priceEl = root.querySelector("[data-frame-mockup-price]");
-  // 2026-11-11：加入購物車／直接購買按鈕改成 document 範圍找——手機固定
-  // 購買列（.mobile-sticky-buy）是 <main> 結尾另外一份獨立 HTML，不在
-  // root（這頁的 .work__intro）底下，但一樣要跟著尺寸切換顯示哪一顆。
+
+
+
   const addBtns = Array.from(document.querySelectorAll("[data-frame-mockup-add-btn]"));
   const buyBtns = Array.from(document.querySelectorAll("[data-frame-mockup-buy-btn]"));
   const sizeChips = Array.from(root.querySelectorAll(".frame-size-picker__chip"));
@@ -83,11 +83,11 @@
   });
   updateAvailableDesigns();
 
-  // 2026-11-14：使用者反映其他加購選色頁主圖都能手機滑動切換，這頁
-  // 原本只能點下面的「預覽款式」縮圖，不一致——補上同一套觸控滑動
-  // 判斷邏輯，在目前尺寸底下「看得到」的款式縮圖（chip.hidden 篩選過）
-  // 之間切換，不會滑到被隱藏的尺寸限定款式。這頁沒有加桌機版的左右
-  // 箭頭按鈕，跟沙畫24色任選組一樣，直接點縮圖切換已經很清楚。
+
+
+
+
+
   const mainWrap = root.querySelector("[data-frame-mockup-main]");
   if (mainWrap) {
     let startX = 0;

@@ -1,4 +1,4 @@
-/* Email登入僅載入會員頁；驗證碼與challenge不寫入瀏覽器儲存空間。 */
+
 (function () {
   const root = document.querySelector('[data-email-login]');
   const account = window.RisuanAccount;
@@ -71,7 +71,7 @@
     } catch (error) { showError(error); codeInput.focus(); }
     finally { busy = false; renderControls(); }
   });
-  // 頁籤回到前景時以真實時間更新，不依賴背景分頁的計時頻率。
+
   const interval = setInterval(() => { if (!root.hidden && !codeForm.hidden) renderControls(); }, 1000);
   window.addEventListener('pagehide', () => clearInterval(interval), { once: true });
   const query = new URLSearchParams(location.search).get('emailTest') === '1' ? '&emailTest=1' : '';

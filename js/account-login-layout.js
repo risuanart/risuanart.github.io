@@ -1,4 +1,4 @@
-/* 會員登入分區的資料說明；不改身分驗證流程。 */
+
 (function () {
   document.querySelectorAll('[data-login-details]').forEach(link => link.addEventListener('click', event => {
     event.preventDefault();

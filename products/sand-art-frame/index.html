@@ -35,19 +35,19 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=ABeeZee&family=Poppins:wght@700&family=Noto+Sans+TC:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../../css/colors.css?v=20261117-mobile-media">
-  <link rel="stylesheet" href="../../css/tokens.css">
-  <link rel="stylesheet" href="../../css/base.css?v=20261110-course-covers">
-  <link rel="stylesheet" href="../../css/home.css">
-  <link rel="stylesheet" href="../../css/products.css?v=20261117-mobile-media">
-  <link rel="stylesheet" href="../../css/cart.css">
-  <link rel="stylesheet" href="../../css/site-menu.css">
-  <link rel="stylesheet" href="../../css/site-footer.css">
+  <link rel="stylesheet" href="../../css/colors.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/tokens.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/base.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/home.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/products.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/cart.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/site-menu.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/site-footer.css?v=20261119-public-clean">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
   <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  <link rel="stylesheet" href="/css/promo-bar.css">
+  <link rel="stylesheet" href="/css/promo-bar.css?v=20261119-public-clean">
 </head>
 <body>
   <div class="promo-bar" id="promo-bar">
@@ -143,14 +143,14 @@
 
   <main class="product-page work">
 
-    <!-- 像框本身可以獨立購買（不是只能加購），所以是一個完整的商品頁，但
-         內容比材料包主商品精簡——沒有製作步驟／顏料清單這些材料包才有的
-         章節。重點是「模擬放入像框」預覽：主圖隨下面兩組選擇器（尺寸／
-         砂畫款式）即時換成對應的合成圖，讓客人在買之前就能看到自己想要
-         的那款成品裝框後的樣子。合成圖是用真的像框實拍照去背後跟 9 款
-         砂畫成品圖合成出來的（見 assets/images/products/sand-art-frame/
-         下的生成腳本說明），不是每款都重新裱框拍照。互動邏輯見
-         js/frame-mockup-picker.js（這頁專屬，不是沿用材料包那套）。 -->
+
+
+
+
+
+
+
+
     <header class="work__intro work__intro--frame work__intro--addon" data-frame-mockup-picker>
       <div class="work__gallery fade-in">
         <div class="work__gallery-main" data-frame-mockup-main>
@@ -233,14 +233,14 @@
             <span data-qty-value>1</span>
             <button type="button" data-qty-plus aria-label="增加數量">＋</button>
           </div>
-          <!-- 2026-10-22：cart.js 的 initAddToCart() 在頁面載入當下就把
-               btn.dataset.product 讀進閉包變數，之後再怎麼改按鈕身上的
-               data-product 屬性都不會反映到真正加進購物車的商品——
-               這裡不要去動一顆按鈕的 data-product，改成兩顆按鈕各自
-               固定寫死自己的 data-product，用 hidden 屬性切換顯示
-               哪一顆（見 js/frame-mockup-picker.js），兩顆都在
-               initAddToCart() 第一次掃描時就各自綁定正確的商品鍵，
-               不管之後怎麼切換尺寸都不會讀到錯的。 -->
+
+
+
+
+
+
+
+
           <button type="button" class="work__cta work__cta--primary" data-add-to-cart data-product="sand-art-frame-15" data-frame-mockup-add-btn="15">
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
             <span class="work__cta-label">加入購物車</span>
@@ -328,17 +328,17 @@
 
   </main>
 
-  <script src="../../js/cart.js?v=20261119-early-prices"></script>
-  <script src="../../js/frame-mockup-picker.js?v=20261101-sizes"></script>
-  <script src="../../js/mobile-sticky-buy-reveal.js"></script>
-  <script src="../../js/site-header-scroll.js?v=20261107-backtop"></script>
-  <script src="../../js/account-auth.js?v=20261118-sessions"></script>
-  <script src="../../js/account-widget.js"></script>
-  <script src="../../js/shop-navigation.js?v=20261115"></script>
-  <script src="../../js/related-products.js?v=20261116-all-kits85"></script>
-  <script src="../../js/scroll-reveal.js"></script>
-  <script src="../../js/site-menu.js?v=menu-order-20261109"></script>
-  <script src="/js/promo-bar.js"></script>
-  <script src="../../js/addon-product-info.js?v=20261117-mobile-media"></script>
+  <script src="../../js/cart.js?v=20261119-public-clean"></script>
+  <script src="../../js/frame-mockup-picker.js?v=20261119-public-clean"></script>
+  <script src="../../js/mobile-sticky-buy-reveal.js?v=20261119-public-clean"></script>
+  <script src="../../js/site-header-scroll.js?v=20261119-public-clean"></script>
+  <script src="../../js/account-auth.js?v=20261119-public-clean"></script>
+  <script src="../../js/account-widget.js?v=20261119-public-clean"></script>
+  <script src="../../js/shop-navigation.js?v=20261119-public-clean"></script>
+  <script src="../../js/related-products.js?v=20261119-public-clean"></script>
+  <script src="../../js/scroll-reveal.js?v=20261119-public-clean"></script>
+  <script src="../../js/site-menu.js?v=20261119-public-clean"></script>
+  <script src="/js/promo-bar.js?v=20261119-public-clean"></script>
+  <script src="../../js/addon-product-info.js?v=20261119-public-clean"></script>
 </body>
 </html>

@@ -35,20 +35,20 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=ABeeZee&family=Poppins:wght@700&family=Noto+Sans+TC:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../../css/colors.css?v=20261117-mobile-media">
-  <link rel="stylesheet" href="../../css/tokens.css">
-  <link rel="stylesheet" href="../../css/base.css?v=20261110-course-covers">
-  <link rel="stylesheet" href="../../css/home.css">
-  <link rel="stylesheet" href="../../css/products.css?v=20261117-mobile-media">
-  <link rel="stylesheet" href="../../css/cart.css">
-  <link rel="stylesheet" href="../../css/product-template.css?v=20261114-sheep-summary">
-  <link rel="stylesheet" href="../../css/site-menu.css">
-  <link rel="stylesheet" href="../../css/site-footer.css">
+  <link rel="stylesheet" href="../../css/colors.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/tokens.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/base.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/home.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/products.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/cart.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/product-template.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/site-menu.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/site-footer.css?v=20261119-public-clean">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
   <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  <link rel="stylesheet" href="/css/promo-bar.css">
+  <link rel="stylesheet" href="/css/promo-bar.css?v=20261119-public-clean">
 </head>
 <body>
   <div class="promo-bar" id="promo-bar">
@@ -63,15 +63,15 @@
   <div class="ambient-bg" aria-hidden="true"></div>
   <div class="ambient-grain" aria-hidden="true"></div>
 
-  <!-- 2026-10：原本紅、藍兩款是同一頁（sand-art-artist-sheep/）用款式
-       選單切換，使用者確認改成兩個完全獨立的商品頁（跟其他 7 款單一
-       配色沙畫同一種處理方式），這份是紅款。商品鍵改成
-       sand-art-artist-sheep-red（hasVariant:false），不再是
-       artist-sheep-red 這個 scheme。拿掉原本的促銷橫幅／款式選單／
-       紅藍比對色票等「雙款共用」才需要的機制，換成跟 sand-art-chun.html
-       同一套標準商品頁結構，只保留這款獨有的「作品介紹」（馬諦斯《舞蹈》
-       原畫故事）跟「名畫再製特色」（滑動比對拉桿）兩個區塊，這兩個
-       区塊內容本來就跟顏色無關，紅藍兩頁內容相同。 -->
+
+
+
+
+
+
+
+
+
   <header class="site-header">
     <button type="button" class="site-header__menu-toggle" id="menu-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="site-menu" aria-label="開啟選單">
       <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
@@ -153,19 +153,19 @@
 
   <main class="product-page work">
 
-    <!-- 標題／簡介：跟其他「春聯砂畫材料包」子頁共用同一套 .work__intro／
-         .work-heading 元件，但 .work-heading__series 放「藝術家系列」而
-         不是「春聯砂畫材料包」——這款不是春聯主題，是致敬馬諦斯《舞蹈》
-         的獨立系列。H1 補上「 / 紅」跟藍款區分，兩頁不再是同一個商品的
-         兩個選項。 -->
-    <header class="work__intro work__intro--orlo-buy">
-      <!-- 首圖實拍相片牆：主圖＋可橫向滑動縮圖列，共 12 張（成品、製作
-           過程、材料平拍、情境照）。每張 img 的 alt 文字同時也是縮圖列
-           切換時主圖上方顯示的說明文字（見 js/hero-thumb-gallery.js），
-           不用另外維護一份字串陣列。縮圖跟主圖共用同一張圖檔（跟全站其他
-           縮圖／主圖共用資源的慣例一致，不另外切小尺寸檔案）。
-           2026-10-25：比照福星，同步整組 orlo.co 改版，見
-           products/sand-art-fu/index.html 同一處說明。 -->
+
+
+
+
+
+    <header class="work__intro work__intro--product-buy">
+
+
+
+
+
+
+
       <div class="work__gallery work__gallery--thumbs-left fade-in" data-gallery>
         <div class="work__gallery-main" data-gallery-main>
           <img src="../../assets/images/products/sand-art-artist/sand-art-artist-red-main.jpg" alt="成品參考圖" width="2000" height="2500" loading="eager" class="is-active" data-gallery-frame>
@@ -201,12 +201,12 @@
         </div>
       </div>
 
-      <!-- 商品名＋系列眉標／版本／累度／一句話介紹：全部搬到相片牆
-           下方、價格正上方，靠左對齊。見 css/products.css
-           .work__title-block 說明——商品名最大最顯眼放第一行；系列眉標／
-           進階款／累度合併成緊湊的一行小字放第二行；一句話介紹字級
-           比小字行大一點、行距也更鬆，放最後，三種文字刻意做出層次
-           落差，不是全部長一樣大。 -->
+
+
+
+
+
+
       <div class="work__title-block sheep-product-summary fade-in delay-3">
         <h1 class="work-heading"><span class="inner"><span class="work-heading__cn">羊Diss舞蹈／紅</span><span class="work-heading__en">Sheep La Danse</span></span></h1>
         <div class="sheep-product-summary__details">
@@ -234,11 +234,11 @@
         </div>
       </div>
 
-      <!-- 2026-10-25：比照其他 7 款基礎款，補上「一起加購」三個品項
-         （原本這頁只有像框一項，見 git 歷史）。像框維持 2026-10-24
-         確認過的客製化：羊Diss舞蹈系列只實拍了 20×20cm 這一種尺寸的
-         上框模擬效果，固定單一尺寸，不列 15cm 選項。 -->
-      <section class="chapter addon-section addon-section--orlo fade-in delay-4">
+
+
+
+
+      <section class="chapter addon-section addon-section--expandable fade-in delay-4">
         <button type="button" class="addon-toggle" data-addon-toggle aria-expanded="true" aria-controls="addon-list-artist-sheep-red">一起加購，材料更齊全 <span class="addon-toggle__en">Buy Together</span></button>
         <div class="addon-list" id="addon-list-artist-sheep-red" data-addon-list>
           <div class="addon-row" data-addon-row>
@@ -305,9 +305,9 @@
       </div>
     </header>
 
-    <!-- 完整示範影片：客人拍的 9:16 直式完整製作過程，理由跟寫法見
-         sand-art-na-fu-lantern/index.html 同一處註解（自動循環、不留
-         播放鍵）。 -->
+
+
+
     <section class="chapter">
       <div class="demo-video-combo fade-in delay-1">
         <div class="demo-video">
@@ -320,12 +320,12 @@
       <p class="chapter__prose chapter__prose--centered fade-in delay-2">除了細砂，<br>這一款加入了絨毛砂與碎金箔，<br>操作上多一些層次與變化，適合有耐性、想挑戰更豐富材質效果的同學。</p>
     </section>
 
-    <!-- 作品介紹：原畫圖片＋馬諦斯生平＋《舞蹈》這幅畫本身的介紹，跟顏色
-         無關，紅藍兩頁內容相同。版權提醒（來自文案交付文件）：頁面上如果
-         要放馬諦斯原畫圖片，只能使用 Wikimedia Commons 等已標註公版
-         （Public Domain）來源的圖檔，文案統一用「致敬」「靈感來自」，
-         不用「複製」「重現」——目前這裡沿用的仍是你之前上傳的那張畫作
-         圖檔，來源需要你另外確認是否符合公版規範。 -->
+
+
+
+
+
+
     <section class="ptpl-artwork fade-in delay-2">
       <div class="ptpl-artwork__visual">
       <div class="ptpl-artwork__carousel" data-moments-carousel data-interval="5000" role="region" aria-label="從馬諦斯原畫到羊年草稿與上色的設計轉化">
@@ -353,8 +353,8 @@
     </section>
 
 
-    <!-- 商品詳細：材料平拍俯視圖＋內附材料清單，單一款式，跟其他沙畫
-         產品頁同一套 .kit-section__photo／.kit-list 元件。 -->
+
+
     <section class="chapter">
       <h2 class="chapter__title fade-in">商品詳細</h2>
       <p class="kit-section__size-hint fade-in delay-1">成品尺寸：20×20cm<br>顏色數：8色</p>
@@ -374,10 +374,10 @@
       </ul>
     </section>
 
-    <!-- 顏色細節：單一配色，跟其他單一配色沙畫同一套 .color-swatches
-         靜態色點清單（products.css），不再用原本雙款比對的互動色票。
-         色碼沿用舊頁「顏色比較」區塊已經實測對色過的色碼（見
-         css/products.css --swatch-artist-sheep-red-* 的沿用說明）。 -->
+
+
+
+
     <section class="chapter">
       <h2 class="chapter__title fade-in">顏色細節</h2>
       <ul class="color-swatches fade-in delay-1">
@@ -395,8 +395,8 @@
       </div>
     </section>
 
-    <!-- 商品介紹：一句話陳述＋補充說明，跟其他沙畫產品頁同一套
-         .chapter__statement／.chapter__prose 節奏。 -->
+
+
     <section class="chapter">
       <h2 class="chapter__title fade-in">商品介紹</h2>
 
@@ -411,27 +411,27 @@
       </div>
     </section>
 
-    <!-- 請注意：安全須知，不管訪客有沒有點開「購買前請閱讀」都該看到。
-         這款材料包含碎金箔（細緻顆粒），補上那條專屬提醒——紅款沒有
-         亮粉材料，只提碎金箔，跟藍款的提醒文字不完全一樣。 -->
 
 
-    <!-- 怎麼玩：進階款比基礎款多兩種材質（絨毛砂、碎金箔），拆成三組
-         步驟。「撕」是第一個動作（實際操作順序本來就要先撕開貼紙才能
-         倒材料，2026-10 使用者確認改回撕當第一步，不是先前試過的
-         「碎金箔最吸睛放最前面」那個排法），之後碎金箔、細砂（倒／鋪，
-         做法跟基礎款一樣）、絨毛砂（倒／壓／填，多一道按壓固定＋夾子
-         補實細節的手法，材料要給夠份量才能做出扎實飽滿的質感——這裡
-         沒有「挑鬆」這個動作，絨毛砂越鬆散成品反而越單薄，是用夾子
-         把材料鋪滿壓實）各自成一組，用
-         .chapter__step-group-title 標出「接下來是哪種材質」，直接對應
-         上面「比起基礎款的細砂，這一款加入了絨毛砂與碎金箔」那句文案，
-         讓差異看得到、不只是用講的。編號連續 01-07 不分組重來，避免
-         同一節出現兩個「01」造成混淆。影片素材見
-         assets/videos/products/sand-art-artist-sheep-red/（檔名還是
-         step-01~07 原本的順序，跟畫面上重新排過的編號不一致，是刻意
-         的——影片檔名代表素材本身的拍攝/轉檔順序，不需要跟著畫面顯示
-         順序重新命名）。 -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <section class="chapter">
       <h2 class="chapter__title fade-in">怎麼玩</h2>
       <div class="chapter__prose fade-in delay-1">
@@ -502,9 +502,9 @@
       </div>
     </section>
 
-    <!-- 2026-10-25：規格資訊／出貨與保存須知／購買前請閱讀整併進分頁
-         切換，比照福星頁，見 products/sand-art-fu/index.html 同一處
-         說明。 -->
+
+
+
     <section class="chapter">
       <div class="safety-notice fade-in">
         <p class="safety-notice__title">請注意</p>
@@ -537,10 +537,10 @@
       </div>
     </section>
 
-    <!-- 相關商品：跨商品導流，跟其他沙畫產品頁同一套真實元件。卡片內容
-         由 js/related-products.js 動態讀 cart.js 的 PRODUCTS 產生，排除
-         這頁自己（data-exclude）跟隱藏的加購項目，不在這裡手寫商品
-         清單。 -->
+
+
+
+
     <section class="chapter">
       <h2 class="chapter__title fade-in">相關商品</h2>
       <div class="related-products fade-in delay-1" data-related-products data-exclude="sand-art-artist-sheep-red">
@@ -594,35 +594,35 @@
 
   </main>
 
-  <script src="../../js/cart.js?v=20261119-early-prices"></script>
-  <script src="../../js/addon-product-info.js?v=20261117-mobile-media"></script>
-  <script src="../../js/addon-preview-modal.js?v=20261117-mobile-media"></script>
-  <script src="../../js/product-price-discount.js?v=20261116-all-kits85"></script>
-  <script src="../../js/product-terms.js"></script>
-  <script src="../../js/product-tabs.js"></script>
-  <script src="../../js/hero-colorway-carousel.js?v=20261117-mobile-media"></script>
-  <script src="../../js/video-inview.js?v=20261117-mobile-media"></script>
-  <script src="../../js/hero-thumb-gallery.js?v=20261117-mobile-media"></script>
-  <script src="../../js/shop-navigation.js?v=20261115"></script>
-  <script src="../../js/related-products.js?v=20261116-all-kits85"></script>
-  <script src="../../js/addon-variant-select.js"></script>
-  <script src="../../js/addon-frame-preview-toggle.js"></script>
-  <script src="../../js/mobile-sticky-buy-reveal.js"></script>
-  <script src="../../js/site-header-scroll.js?v=20261107-backtop"></script>
-  <script src="../../js/account-auth.js?v=20261118-sessions"></script>
-  <script src="../../js/account-widget.js"></script>
-  <script src="../../js/scroll-reveal.js"></script>
+  <script src="../../js/cart.js?v=20261119-public-clean"></script>
+  <script src="../../js/addon-product-info.js?v=20261119-public-clean"></script>
+  <script src="../../js/addon-preview-modal.js?v=20261119-public-clean"></script>
+  <script src="../../js/product-price-discount.js?v=20261119-public-clean"></script>
+  <script src="../../js/product-terms.js?v=20261119-public-clean"></script>
+  <script src="../../js/product-tabs.js?v=20261119-public-clean"></script>
+  <script src="../../js/hero-colorway-carousel.js?v=20261119-public-clean"></script>
+  <script src="../../js/video-inview.js?v=20261119-public-clean"></script>
+  <script src="../../js/hero-thumb-gallery.js?v=20261119-public-clean"></script>
+  <script src="../../js/shop-navigation.js?v=20261119-public-clean"></script>
+  <script src="../../js/related-products.js?v=20261119-public-clean"></script>
+  <script src="../../js/addon-variant-select.js?v=20261119-public-clean"></script>
+  <script src="../../js/addon-frame-preview-toggle.js?v=20261119-public-clean"></script>
+  <script src="../../js/mobile-sticky-buy-reveal.js?v=20261119-public-clean"></script>
+  <script src="../../js/site-header-scroll.js?v=20261119-public-clean"></script>
+  <script src="../../js/account-auth.js?v=20261119-public-clean"></script>
+  <script src="../../js/account-widget.js?v=20261119-public-clean"></script>
+  <script src="../../js/scroll-reveal.js?v=20261119-public-clean"></script>
   <script>
-    // 名畫再製特色：滑動比對拉桿。用 pointer events（同時支援滑鼠／觸控）
-    // 算出拖曳位置佔容器寬度的百分比，寫進 --pos 這個 CSS 變數，左側
-    // 「原畫」圖層的 clip-path 靠這個變數決定露出多少（見
-    // css/product-template.css 的 .ptpl-compare__layer--before）。
-    // 方向鍵也做了鍵盤操作支援，不是只能用滑鼠／觸控拖曳。這是這頁
-    // 唯一還需要的頁面專屬邏輯——原本的款式選單／促銷橫幅／紅藍比對
-    // 色票那些「雙款共用頁」才需要的機制，拆成獨立頁後已經不需要，
-    // 「加入購物車」改用跟其他商品頁相同的標準 data-add-to-cart
-    // 標記直接寫在 HTML 裡，靠 js/cart.js 自己的 DOMContentLoaded
-    // 掃描自動掛上，不用再手動呼叫 initAddToCart()。
+
+
+
+
+
+
+
+
+
+
     (function () {
       const compare = document.getElementById("ptpl-compare");
       const compareHandle = document.getElementById("ptpl-compare-handle");
@@ -660,9 +660,9 @@
         compareHandle.setAttribute("aria-valuenow", next);
       });
     })();
-  </script>
-  <script src="../../js/site-menu.js?v=menu-order-20261109"></script>
-  <script src="../../js/moments-carousel.js"></script>
-  <script src="/js/promo-bar.js"></script>
+</script>
+  <script src="../../js/site-menu.js?v=20261119-public-clean"></script>
+  <script src="../../js/moments-carousel.js?v=20261119-public-clean"></script>
+  <script src="/js/promo-bar.js?v=20261119-public-clean"></script>
 </body>
 </html>

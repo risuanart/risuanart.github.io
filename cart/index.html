@@ -16,21 +16,21 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=ABeeZee&family=Poppins:wght@700&family=Noto+Sans+TC:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/colors.css?v=20261117-mobile-media">
-  <link rel="stylesheet" href="../css/tokens.css">
-  <link rel="stylesheet" href="../css/base.css?v=20261110-course-covers">
-  <link rel="stylesheet" href="../css/home.css">
-  <link rel="stylesheet" href="../css/products.css?v=20261117-mobile-media">
-  <link rel="stylesheet" href="../css/cart.css?v=20261116-order-access">
-  <link rel="stylesheet" href="../css/guest-entry.css?v=20261116-guest-entry">
-  <link rel="stylesheet" href="../css/site-menu.css">
-  <link rel="stylesheet" href="../css/site-footer.css">
+  <link rel="stylesheet" href="../css/colors.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../css/tokens.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../css/base.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../css/home.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../css/products.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../css/cart.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../css/guest-entry.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../css/site-menu.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../css/site-footer.css?v=20261119-public-clean">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
   <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  <link rel="stylesheet" href="/css/promo-bar.css">
-  <link rel="stylesheet" href="../css/page-title-en.css?v=20261107-shared-heading">
+  <link rel="stylesheet" href="/css/promo-bar.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../css/page-title-en.css?v=20261119-public-clean">
 </head>
 <body>
   <div class="promo-bar" id="promo-bar">
@@ -49,12 +49,12 @@
     <button type="button" class="site-header__menu-toggle" id="menu-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="site-menu" aria-label="開啟選單">
       <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
     </button>
-    <!-- 2026-09-18 新增：桌面版（≥1024px）文字導覽列，取代漢堡選單抽屜；
-         手機版隱藏，維持現有漢堡選單不變。內容／邏輯跟首頁 index.html
-         那份一致，樣式見 css/site-menu.css .site-header__nav（子頁置中
-         logo 用 .site-header__title，不是首頁專屬的 .site-header__logo，
-         見該檔案開頭說明），下拉開合邏輯見 js/site-menu.js 「課程」下拉
-         那個 IIFE。 -->
+
+
+
+
+
+
     <nav class="site-header__nav" aria-label="主選單">
       <a href="../booking/">線上預約課程</a>
       <div class="site-header__nav-item">
@@ -110,11 +110,11 @@
       <a href="../products/shop/">SHOP</a>
     </nav>
     <a class="site-header__title" href="../" aria-label="回到首頁"><img src="../assets/images/logo-risuan拷貝.png" alt="日宣繪畫室"></a>
-    <!-- 填收件資料往下滑、上面那條「確認訂單詳情」橫條捲出畫面之後，橫條
-         會併進這一列頂部導覽（.site-header.is-order-docked）：標題位置換成
-         這顆可點開訂單明細的按鈕，購物車圖示位置換成金額，讓客人不管滑到
-         哪裡都看得到目前訂單多少錢、也隨時點得開明細。見 js/checkout.js
-         initOrderDock()。 -->
+
+
+
+
+
     <button type="button" class="site-header__order" hidden aria-expanded="false">
       <span>確認訂單詳情</span>
       <svg class="site-header__order-chevron" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
@@ -146,33 +146,33 @@
       <h1 class="work-heading fade-in"><span class="page-title-en" aria-hidden="true">SHOPPING CART</span><span class="inner">您的購物車</span></h1>
     </header>
 
-    <!-- 購物車編輯畫面。按「結帳」之後，這一整塊會被藏起來，改顯示下面那條
-         「確認訂單詳情＋金額」的橫條，以及 #order-confirm-view 那塊（同一頁
-         往下展開，不再跳轉到另一個頁面）。如果網址上已經帶著 orderId
-         （例如從綠界電子地圖選店回來），一開始就直接藏起這塊，見
-         js/checkout.js。
 
-         結帳確認區塊（#order-confirm-view）不套用捲動淡入——那是逐步展開
-         的表單流程，切換步驟當下就該立即顯示，不需要跟敘事類頁面一樣
-         等捲動淡入。 -->
+
+
+
+
+
+
+
+
     <div id="cart-edit-view">
-      <!-- 2026-10-25 桌面版（≥1024px）新增訂單摘要側欄：小計／結帳按鈕＋
-           折扣碼收進同一張卡片，跟左邊商品清單並排（參考使用者提供的
-           panacea-q.com 購物車頁），不再是滿版單欄、按鈕孤零零吊在右下角。
-           手機／平板（<1024px）維持原本單欄直向排列，視覺上跟改版前一樣，
-           只是外層多包了一層 <div class="cart-main">，不影響原本堆疊順序
-           與樣式。
 
-           .cart-main 只包商品清單＋側欄這兩欄，「您可能對此有興趣」刻意
-           留在 .cart-main 外面當普通的同層兄弟——原本把三塊都塞進同一個
-           grid，側欄用 position:sticky 想讓它黏在可視範圍內，結果商品
-           清單比側欄高出一截，grid 那一整列的高度被商品清單撐高，側欄
-           捲動到後面會超出自己的格子範圍、疊到下面「您可能對此有興趣」
-           的區塊上面去（實測會重疊，不是只有理論上的疑慮）。改成兩欄
-           grid 只包清單／側欄這一組（grid 本身的高度=商品清單高度，
-           不會被側欄的 sticky 影響），側欄捲動最多只會黏到這組的
-           底部，再往下就是正常排版的「您可能對此有興趣」，兩者之間
-           不會再疊在一起。 -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       <div class="cart-main">
         <section class="chapter cart-items fade-in delay-1">
           <div class="cart-columns" hidden>
@@ -183,10 +183,10 @@
           <p class="cart-empty" hidden>購物車目前是空的，<a class="text-link" href="../products/shop/">看看材料包</a>。</p>
         </section>
 
-        <!-- 折扣碼刻意排在小計／結帳按鈕「下面」（DOM 順序也對調，不是只用
-             CSS order 讓視覺跟 tab 順序對不起來）——折扣碼是次要的加分
-             動作，金額跟結帳才是這張卡片的主要任務，照參考站的視覺重量
-             順序走。 -->
+
+
+
+
         <aside class="cart-summary fade-in delay-2">
           <footer class="work__close">
             <div class="work__close-text">
@@ -213,30 +213,30 @@
         </aside>
       </div>
 
-      <!-- 您可能對此有興趣：滿版格狀，位置在小計／結帳下面（不是並排），
-           排版比照參考站的購物車頁——直接沿用「相關商品」同一套
-           .shop-grid／.shop-card（見 products.css），2 欄手機／4 欄
-           ≥768px，跟其他商品格狀列表視覺一致，不用另外一套窄欄樣式。 -->
+
+
+
+
       <section class="cart-cross-sell fade-in delay-3" id="cart-cross-sell">
         <h2 class="cart-cross-sell__title">您可能對此有興趣</h2>
         <div class="shop-grid" id="cart-cross-sell-grid" role="list" aria-label="您可能對此有興趣的商品"></div>
       </section>
     </div>
 
-    <!-- 結帳後取代購物車編輯區的橫條：左邊「確認訂單詳情」、右邊金額。
-         點一下從畫面下方滑出訂單明細（.order-sheet），不是就地展開——
-         就地展開會把下面正在填的表單整個推走，關掉之後還要再滑回來，
-         用彈出面板才能關掉就回到原本填到一半的位置。往下滑時這條會併進
-         頂部導覽，見 js/checkout.js initOrderDock()。 -->
+
+
+
+
+
     <button type="button" class="cart-collapse" hidden aria-haspopup="dialog" aria-expanded="false">
       <span class="cart-collapse__label">確認訂單詳情</span>
       <span class="cart-collapse__total"></span>
       <svg class="cart-collapse__chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
     </button>
 
-    <!-- 結帳確認區塊：選送貨方式、填收件資訊，最後送出到綠界付款頁。
-         內容跟欄位配置沿用原本 checkout-confirm.html 的設計，只是現在跟
-         購物車在同一頁，不用另外跳轉一次。 -->
+
+
+
     <div id="order-confirm-view" hidden>
 
       <section class="chapter" id="confirm-loading">
@@ -249,15 +249,15 @@
       </section>
 
       <div id="confirm-content" class="order-confirm-box" hidden>
-        <!-- 這裡原本還有一段收合式的「你選購的商品」清單，但購物車編輯區
-             本身結帳後就收合成「確認訂單詳情」橫條、點開就是同一批商品
-             （而且還多了縮圖跟可直接調整的數量），兩個收合清單並排等於
-             同一件事講兩次，所以移除，只留上面那一條。 -->
-        <!-- 聯絡資訊（下單、收款項通知的聯絡窗口，不依賴送貨方式，一開始
-             就能填）、送貨方式、收件資料（實際收貨的人，禮物代購或公司
-             代收等情境可能是別人，且需要知道送貨方式才能決定要問「取貨」
-             還是「地址」）依序排成三步；<form> 整個往外拉，同時包住這三個
-             <section>，送出按鈕放在最後。 -->
+
+
+
+
+
+
+
+
+
         <section class="chapter guest-points-note" id="payment-complete" hidden aria-labelledby="payment-complete-heading">
           <h2 class="chapter__title" id="payment-complete-heading">付款成功，謝謝您的訂購</h2>
           <p>商品訂單每滿 NT$100 回饋 1 點。點數會記在結帳填寫的 Email，日後使用相同 Email 登入會員，即可查看訂單與累積點數；點數入帳可能需要稍候片刻。</p>
@@ -267,18 +267,18 @@
           <input type="hidden" name="orderId" id="confirm-order-id">
           <input type="hidden" name="orderAccessToken" id="confirm-order-access">
           <input type="hidden" name="shippingMethod" id="confirm-shipping-method">
-          <!-- 登入中的會員 token（js/checkout.js 從 window.RisuanAccount
-               讀出來寫進這裡），讓後端 create-order.js 知道這筆訂單是哪個
-               會員送出的，才能把這次填的資料記回會員資料，給下次結帳自動
-               帶入用；訪客結帳這格留空，後端當成訪客處理。 -->
+
+
+
+
           <input type="hidden" name="customerToken" id="confirm-customer-token">
 
           <section class="chapter" id="customer-section">
             <p class="guest-entry__note">不登入也能完成訂購。請填寫可收信的 Email，以接收付款及出貨通知；會員點數折抵需先登入。</p>
             <h2 class="chapter__title"><span class="step-badge step-badge--label">STEP 1</span><span class="step-badge__dot">·</span>聯絡資訊</h2>
-            <!-- 姓名分成名字／姓氏左右並排，送出時用 #confirm-customer-name
-                 這個隱藏欄位把兩個值合併成後端原本認得的單一 customerName
-                 （見 js/checkout.js syncCustomerName()），不改後端契約。 -->
+
+
+
             <div class="confirm-field-row">
               <label class="confirm-field">
                 <span>姓氏</span>
@@ -319,14 +319,14 @@
             </label>
           </section>
 
-          <!-- 送貨方式：還沒選的話顯示兩個選項；超商取貨會整頁導去綠界電子地圖，
-               選完店綠界會把瀏覽器導回這一頁（帶著 orderId）；宅配到府不用離開
-               這頁，直接在下面顯示地址欄位。兩條路最後都在同一個 <form> 送出
-               到 create-order。
-               送貨方式選擇維持同一組按鈕常駐畫面，不會因為選完就被隱藏、換成
-               一行文字連結——選中的那顆用 aria-pressed 標記「已選」樣式即可，
-               要改選另一種方式，直接點另一顆按鈕（超商取貨會整頁導去綠界
-               電子地圖重新選店；宅配到府純本機切換）。 -->
+
+
+
+
+
+
+
+
           <section class="chapter" id="shipping-section">
             <h2 class="chapter__title"><span class="step-badge step-badge--label">STEP 2</span><span class="step-badge__dot">·</span>送貨方式</h2>
 
@@ -343,9 +343,9 @@
               </button>
             </div>
 
-            <!-- 選定門市卡片：原本只有一行純文字，門市名稱跟地址混在一起不容易
-                 一眼看出「已經選好了」；改成定位圖示＋門市名稱（粗體）＋地址
-                 （次要色）分兩行的卡片，跟頁面其他資訊區塊同一套視覺語言。 -->
+
+
+
             <div class="confirm-store" hidden>
               <svg class="confirm-store__icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.2"/></svg>
               <div class="confirm-store__body">
@@ -354,12 +354,12 @@
               </div>
             </div>
 
-            <!-- 超商取貨限定：選好門市之後，緊接著問「自行取貨」還是
-                 「委託他人代為取貨」——選自行取貨就不用再填收件資料，直接
-                 跳到前往付款；選委託他人才會出現下面的「③收件資料」。
-                 兩顆選項底層都是同一個 #receiver-same-as-customer 的勾選
-                 狀態，只是換一種說法／UI，見 checkout.js
-                 syncPickupModeControls()／updateReceiverSectionVisibility()。 -->
+
+
+
+
+
+
             <div class="confirm-radio-group" id="pickup-mode-picker" hidden>
               <label class="confirm-radio">
                 <input type="radio" name="pickupMode" id="pickup-mode-self" checked>
@@ -372,14 +372,14 @@
             </div>
           </section>
 
-          <!-- 收件資料：超商取貨且選「我會自行取貨」時，這整區完全跳過
-               （customerName／Phone／Email 本來就會鏡射進 receiverName 等
-               欄位一起送出，見 syncReceiverSameAsCustomer()，不用再問一次）。
-               宅配到府維持原本的「與聯絡資訊一樣」勾選——姓名／電話／Email
-               三格改唯讀並即時同步聯絡資訊資料，讓後端仍然收得到值（唯讀
-               欄位會送出，disabled 欄位不會，所以這裡用 readOnly 不是
-               disabled）；取消勾選才能自己填一組不同的收件人資料。地址只在
-               宅配到府才需要。 -->
+
+
+
+
+
+
+
+
           <section class="chapter" id="receiver-section" hidden>
             <h2 class="chapter__title"><span class="step-badge step-badge--label">STEP 3</span><span class="step-badge__dot">·</span>收件資料</h2>
 
@@ -412,15 +412,15 @@
               <span>與聯絡資訊一樣</span>
             </label>
 
-            <!-- 縣市／鄉鎮市區改下拉選單（資料見 js/tw-postal-codes.js），
-                 選了鄉鎮市區直接查表帶出郵遞區號——比讓客人自己輸入地址、
-                 用文字比對猜測要準：光是「中山區」「東區」「西區」這種
-                 名稱，台灣就有好幾個縣市共用，靠打字很難不出錯，選單先
-                 選縣市再選鄉鎮市區就不會有這個問題。詳細地址（路名、
-                 門牌號）維持自由輸入。送出時用 #confirm-receiver-address
-                 這個隱藏欄位把「縣市＋鄉鎮市區＋詳細地址」合併成後端原本
-                 認得的單一 receiverAddress（同一套模式見
-                 syncCustomerName()），不改後端契約。 -->
+
+
+
+
+
+
+
+
+
             <div id="home-address-fields" hidden>
               <div class="confirm-field-row">
                 <label class="confirm-field">
@@ -459,18 +459,18 @@
             </div>
           </section>
 
-          <!-- 收據：2026-10-20 使用者研究過免用統一發票收據的開立方式後
-               決定做成「結帳時勾選＋後端自動產生 PDF 附在付款成功通知信」
-               （見 risuan-checkout/lib/receipt.js），不是繼續手寫空白
-               收據。這裡只收兩個欄位：抬頭（公司或個人名稱，沒填的話
-               後端會退回用收件人姓名）、統一編號（選填，只有要用公司
-               抬頭報帳才需要填，8 碼數字，後端 api/create-order.js 會
-               驗證格式）。沒有另外問「地址」——免用統一發票收據法規上
-               要記載的「地址」是指賣方（工作室）自己的登記地址，不是
-               買方的，賣方資訊在後端用環境變數設定（見 risuan-checkout
-               README「免用統一發票收據設定」），不需要在這裡問客人。
-               欄位預設收合（checkbox 沒勾不顯示），大部分客人不需要
-               收據，不要預設展開占用版面。 -->
+
+
+
+
+
+
+
+
+
+
+
+
           <section class="chapter" id="receipt-section">
             <h2 class="chapter__title"><span class="step-badge step-badge--label">STEP 4</span><span class="step-badge__dot">·</span>收據</h2>
             <label class="confirm-checkbox">
@@ -495,8 +495,8 @@
             </div>
           </section>
 
-          <!-- 點數折抵：只有登入會員且有點數可用才顯示。這裡即時試算折抵與
-               應付金額，送出時仍由後端依最新點數餘額重新確認，不信任前端金額。 -->
+
+
           <section class="chapter" id="points-redeem-section" hidden>
             <h2 class="chapter__title"><span class="step-badge step-badge--label">STEP 5</span><span class="step-badge__dot">·</span>點數折抵</h2>
             <p class="sub" id="points-redeem-hint"></p>
@@ -514,12 +514,12 @@
           </section>
 
           <div class="chapter confirm-pay" hidden>
-            <!-- 2026-10-17 改成跟 .order-sheet__lines（下方滑出的「訂單明細」
-                 面板）同一套逐行拆開的排列，不要再塞成一句「原價…－早鳥優惠
-                 …＝小計…＋運費…＝應付…」的長句子——使用者反映原本那句文字
-                 換行點很怪、看不出哪個數字對應哪個項目。直接沿用同一套
-                 class（.order-sheet__line 等），兩處維持同一套視覺語言，
-                 不用另外發明一組新樣式。 -->
+
+
+
+
+
+
             <dl class="order-sheet__lines confirm-total-lines">
               <div class="order-sheet__line">
                 <dt>小計</dt>
@@ -583,9 +583,9 @@
 
   </main>
 
-  <!-- 訂單明細面板：從畫面下方滑出，蓋在正在填的表單上面，關掉就回到原本
-       填到一半的位置（面板是 position:fixed，開關過程完全不動底下的捲動
-       位置）。放在 <main> 外面，才不會被 .product-page 的 overflow 裁掉。 -->
+
+
+
   <div class="order-sheet" hidden>
     <div class="order-sheet__backdrop" data-order-sheet-close></div>
     <div class="order-sheet__panel" role="dialog" aria-modal="true" aria-labelledby="order-sheet-title">
@@ -625,20 +625,20 @@
     </div>
   </div>
 
-  <!-- account-auth.js 要排在 checkout.js 前面：checkout.js 的會員自動帶入
-       邏輯在自己的 <script> 執行當下（不是等 DOMContentLoaded）就會讀
-       window.RisuanAccount，如果排在後面，checkout.js 執行那一刻這個
-       全域變數還不存在。 -->
-  <script src="../js/account-auth.js?v=20261118-sessions"></script>
-  <script src="../js/cart.js?v=20261119-early-prices"></script>
-  <script src="../js/tw-postal-codes.js"></script>
-  <script src="../js/checkout.js?v=20261117-mobile-media"></script>
-  <script src="../js/hero-colorway-carousel.js?v=20261117-mobile-media"></script>
-  <script src="../js/cart-cross-sell.js?v=20261116-fluid-clear1"></script>
-  <script src="../js/site-header-scroll.js?v=20261107-backtop"></script>
-  <script src="../js/account-widget.js"></script>
-  <script src="../js/scroll-reveal.js"></script>
-  <script src="../js/site-menu.js?v=menu-order-20261109"></script>
-  <script src="/js/promo-bar.js"></script>
+
+
+
+
+  <script src="../js/account-auth.js?v=20261119-public-clean"></script>
+  <script src="../js/cart.js?v=20261119-public-clean"></script>
+  <script src="../js/tw-postal-codes.js?v=20261119-public-clean"></script>
+  <script src="../js/checkout.js?v=20261119-public-clean"></script>
+  <script src="../js/hero-colorway-carousel.js?v=20261119-public-clean"></script>
+  <script src="../js/cart-cross-sell.js?v=20261119-public-clean"></script>
+  <script src="../js/site-header-scroll.js?v=20261119-public-clean"></script>
+  <script src="../js/account-widget.js?v=20261119-public-clean"></script>
+  <script src="../js/scroll-reveal.js?v=20261119-public-clean"></script>
+  <script src="../js/site-menu.js?v=20261119-public-clean"></script>
+  <script src="/js/promo-bar.js?v=20261119-public-clean"></script>
 </body>
 </html>

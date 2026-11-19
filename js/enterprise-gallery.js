@@ -1,21 +1,21 @@
-/* enterprise-gallery.js —— 企業課程案例細節頁的「活動花絮」輪播，邏輯跟
-   首頁 .preview-hero 一樣（自動播放＋圓點手動切換／滑鼠移入暫停，見
-   js/home-shop.js），只是換了一組 class 名稱（.ent-gallery），服務
-   enterprise-porsche.html 這類案例細節頁。用 querySelectorAll 支援一頁
-   放多組輪播，之後新案例頁直接複製整組 .ent-gallery 標記就能用，不用
-   改這支檔案。
-   手機滑動切換：大部分訪客用手機瀏覽，原本只能點下面的小圓點換圖，
-   在手機上很難點準。加上左右滑動偵測（見下方 touchstart/touchmove/
-   touchend），門檻抓 40px、且橫向位移要大於縱向位移才觸發，避免使用者
-   只是想直向捲動頁面卻被誤判成滑動換圖。用 passive listener（沒有呼叫
-   preventDefault），不會擋到原本的頁面捲動。
-   滑動提示（2026-09-25 新增）：使用者反饋手機上只看得到下面的小圓點，
-   不會知道其實可以左右滑動。與其一頁一頁手動加提示 HTML（全站有多個
-   頁面用到 .ent-gallery），改成用 JS 統一在圓點後面插入一個提示元素
-   （文字＋左右箭頭圖示），這樣新增案例頁只要沿用既有的 .ent-gallery
-   標記就會自動帶有提示，不用每頁重複貼一樣的 HTML。提示本身用 CSS 控制
-   只在手機寬度顯示（見 css/enterprise.css .ent-gallery__swipe-hint），
-   桌面版滑鼠使用者用不到滑動手勢，不需要看到這個提示。 */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 (function () {
   const galleries = document.querySelectorAll(".ent-gallery");
 
@@ -88,7 +88,7 @@
     dots.forEach((dot) => {
       dot.addEventListener("click", () => {
         goTo(Number(dot.dataset.index));
-        start(); // 手動切換後重新計時，不會切完馬上又被自動播放蓋過去
+        start();
       });
     });
     if (prevControl) prevControl.addEventListener("click", () => { prev(); start(); });
@@ -128,7 +128,7 @@
           if (touchDeltaX < 0) next();
           else prev();
         }
-        start(); // 滑動後重新計時，跟點圓點的行為一致
+        start();
       });
     }
 
