@@ -1,0 +1,8 @@
+.mini-lettering__video {
+  display: block;
+  width: 100%;
+  max-width: 360px;
+  height: auto;
+  margin: var(--space-6) auto 0;
+  border-radius: var(--radius-sharp);
+}
