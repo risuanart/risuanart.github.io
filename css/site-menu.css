@@ -339,6 +339,8 @@
   grid-auto-flow: column;
   column-gap: var(--space-6);
   margin-bottom: var(--space-4);
+  flex: 1 1 auto;
+  align-content: space-between;
 }
 
 .site-header__nav-dropdown .site-menu__sublist li {
