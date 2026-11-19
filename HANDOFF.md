@@ -1550,3 +1550,9 @@ gap/margin/padding 其實都沒生效（等於 0 或初始值），包括全站 
 ## 2026-11-18：每人500預約金（未推送）
 - 使用者確認訂金應每人500，前端booking.js按attendeeSelections.length計算，保留總價上限；後端depositForAttendees同步修改。1至4人實際選課驗證500/1000/1500/2000，六寬度無溢位／pageerror。FAQ與booking退款說明改退該筆已付預約金，版本20261118-per-person-deposit。
 - 既有已付款／待付款hold原金額不動、不補扣；後端另準備工作室新付款通知與主要聯絡人提醒。未推送、未真實付款或寄信，發布須前後端一起驗證並保留其他會員修改。
+
+
+## 2026-11-19：獨立的預約複製／IG聯絡頁（未推送）
+- 新booking-contact/及booking-contact.js，課前提醒先到此頁，再點「1.複製預約資料」「2.開啟IG私訊」，不再混在管理預約頁。資料含主聯絡人姓名、IG、編號、日期時間、課程、人數、同行者補姓名欄。
+- 多人顯示群組建議與複製同行者連結，使用後端14天只讀booking-contact token，可讀同筆資料但不能改期取消；提醒仍只寄主要聯絡人。token進sessionStorage並從地址列移除，只以X-Booking-Access傳API，分享時才重建只讀URL。剪貼簿失敗改全選提示，不再假稱已複製。
+- 沿用既有840px章節／站內版型，不加入公開選單，noindex/no-referrer。六寬度無溢位／pageerror；假API實測複製換行、主IG、分享、URL移除token與剪貼簿失敗，未請求改期取消、未傳IG訊息。預覽 /Users/newbarbie/Documents/Codex/outputs/booking-copy-flow-mobile.png。尚未推送，需配合後端只讀端點與新提醒信一起部署。
