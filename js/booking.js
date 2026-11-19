@@ -104,7 +104,7 @@ function normalizeInstagram(value) {
     { label: "抽象畫", price: 1800 },
   ];
   const COURSE_PRICE = Object.fromEntries(COURSE_CATALOG.map((c) => [c.label, c.price]));
-  // 2026-10-29：線上只刷這筆固定預約金，要跟後端
+  // 2026-10-29：線上每位上課者收取預約金，要跟後端
   // risuan-checkout/lib/course-catalog.js 的 DEPOSIT_AMOUNT 保持一致。
   const DEPOSIT_AMOUNT = 500;
 
@@ -266,7 +266,7 @@ function normalizeInstagram(value) {
     petConsent.setCustomValidity(needs&&!petConsent.checked?'追加至第3隻前，請閱讀注意事項並勾選確認。':'');
     const totals=petExtraTotals();
     const sum=totals.big*700+totals.small*500+attendeeSelections.reduce((total,course)=>total+(COURSE_PRICE[course]||0),0);
-    const deposit = Math.min(DEPOSIT_AMOUNT, sum);
+    const deposit = Math.min(DEPOSIT_AMOUNT * attendeeSelections.length, sum);
     totalPriceEl.textContent = formatMoney(sum);
     totalDepositEl.textContent = formatMoney(deposit);
     totalBalanceEl.textContent = formatMoney(sum - deposit);
@@ -653,7 +653,7 @@ function normalizeInstagram(value) {
       if (data.status === "confirmed") {
         resultChecking.hidden = true;
         resultConfirmed.hidden = false;
-        // 2026-10-29：線上只收 $500 預約金，不是課程全額，付款完成頁要
+        // 2026-10-29：線上每人收 $500 預約金，不是課程全額，付款完成頁要
         // 清楚講出尾款金額跟現場付款方式，不能只顯示「已收款」讓客人
         // 以為全部付清了（data.balanceDue 由後端 api/course-booking.js
         // action=status 計算，見那邊的說明）。

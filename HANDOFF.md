@@ -1545,3 +1545,8 @@ gap/margin/padding 其實都沒生效（等於 0 或初始值），包括全站 
 - 後端7b6bd38本機完成可撤銷session與logout-all，前端加入能力開關控制的「登出所有裝置」，登出須等伺服器成功，失敗保留狀態供重試；503同步不清掉登入，舊profile回應不得復活已登出token，storage事件同步其他分頁帳號／登出。地址與電話仍僅當頁記憶體，瀏覽器Bearer／localStorage仍待同站HttpOnly架構，未宣稱完整解決XSS。
 - JS隔離測試涵蓋上述失敗／競爭情境，Email與LINE回歸通過。假API本機Email登入成功，基本資料出現兩種登出入口，六寬375/390/768/1024/1440/1920量測溢位0且按鈕未重疊。IAB原生確認對話自動化遇到工具限制，完整確認操作仍待Chrome或正式驗收。
 - 所有受追蹤HTML更新account-auth快取版本，本機大量未追蹤「2」副本與素材未動／未加入提交。Source與遠端32/12提交分歧，另建member-sessions-release從origin/main發布精確安全配套，不能整份push此source main。尚未發布本批。
+
+
+## 2026-11-18：每人500預約金（未推送）
+- 使用者確認訂金應每人500，前端booking.js按attendeeSelections.length計算，保留總價上限；後端depositForAttendees同步修改。1至4人實際選課驗證500/1000/1500/2000，六寬度無溢位／pageerror。FAQ與booking退款說明改退該筆已付預約金，版本20261118-per-person-deposit。
+- 既有已付款／待付款hold原金額不動、不補扣；後端另準備工作室新付款通知與主要聯絡人提醒。未推送、未真實付款或寄信，發布須前後端一起驗證並保留其他會員修改。
