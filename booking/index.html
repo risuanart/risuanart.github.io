@@ -198,7 +198,7 @@
                10%行政費版本，使用者反映不一致要求統一）。 -->
           <ul class="booking-notice__list">
             <li><strong>預約金與尾款：</strong>每人線上預約需支付 NT$500 預約金，全額折抵課程總價；尾款於上課當天以現金或轉帳支付，恕不提供線上刷卡尾款。</li>
-            <li><strong>7 天前（含）取消：</strong>若尚未使用過免費改期，在開課日 7 天前（含）取消，退還 NT$500 預約金，退回原付款方式。</li>
+            <li><strong>7 天前（含）取消：</strong>若尚未使用過免費改期，在開課日 7 天前（含）取消，退還該筆已付預約金（每人 NT$500），退回原付款方式。</li>
             <li><strong>7 天內取消：</strong>若尚未使用過免費改期，在開課日前未滿 7 天取消，預約金不予退還；可選擇使用一次免費改期。</li>
             <li><strong>免費改期：</strong>每筆預約可免費改期一次，不需說明理由。線上自行改期須於原訂上課日 3 天前（含）完成；距上課日未滿 3 天，請於原訂課程開始前私訊畫室，由我們協助評估，非提出即保證可改期。改期後，預約金將保留並轉用於新時段，恕不再提供第二次改期或預約金退款；取消期限也不因改期重新計算。</li>
             <li><strong>課程開始後：</strong>課程開始後取消，或無故未到場，預約金不予退還。</li>
@@ -359,7 +359,7 @@
           <div class="work__close-text">
             <p class="checkout-error" role="alert" hidden></p>
             <!-- 2026-10-29 改成總價/預約金/尾款三行拆分（原本只有單行
-                 「應付 $0」）——使用者統一新規則：線上只刷 $500 預約金，
+                 「應付 $0」）——使用者統一新規則：線上每人刷 $500 預約金，
                  不是課程全額，付款頁要讓客人清楚看到尾款金額跟付款方式，
                  不能讓人以為線上刷的就是全部費用。算法在 js/booking.js
                  updateTotal()，要跟後端 DEPOSIT_AMOUNT 保持一致。 -->
@@ -483,7 +483,7 @@
   <script src="../js/account-widget.js"></script>
   <script src="../js/scroll-reveal.js"></script>
   <script src="../js/site-menu.js?v=menu-order-20261109"></script>
-  <script src="../js/booking.js?v=companion-email-23"></script>
+  <script src="../js/booking.js?v=20261118-per-person-deposit"></script>
   <script src="/js/promo-bar.js"></script>
 </body>
 </html>
