@@ -1563,3 +1563,8 @@ gap/margin/padding 其實都沒生效（等於 0 或初始值），包括全站 
 - Vercel env ls僅核對名稱：Production CRON_SECRET、CUSTOMER_SESSION_SECRET、FRONTEND_BASE_URL、GMAIL_USER、GMAIL_APP_PASSWORD存在，未讀取秘密值；STAFF_NOTIFY_EMAIL未設定，通知沿用GMAIL_USER。vercel.json包含台北09/15課前七日檢查，主要收件人、只讀聯絡token、SMTP不確定結果防重寄已部署。未授權正式cron實測401 JSON，確認不會匿名觸發。
 - 前端以最新origin/main 3a68f0d隔離整合，發布6b060fe成功push，Cloudflare Pages check success。正式risuanart.com no-cache確認booking-contact頁與JS、booking新版本、500乘attendeeSelections.length均生效。保留既有會員與目錄修改，未推整個分歧的主checkout歷史。
 - 發布前隔離版1至4人500/1000/1500/2000，六寬度、複製／分享／剪貼簿失敗皆通過；後端提醒、聯絡只讀、工作室通知、原信件、45項安全與test-local通過。真正SMTP／客戶實收及未來排程執行尚待自然事件紀錄，不能以程式測試當實收證明。既有hold／已付訂金不改、不補扣。
+
+
+## 2026-11-19：指定整十原價與早鳥優惠價
+- 使用者確認流動畫四款930／790、羊Diss紅藍860／730、其餘七款砂畫630／530；標示改早鳥優惠價，不再宣稱統一85折。加購不打折、下架品不開放、12/15台北截止維持。既有訂單金額不改。
+- 同步前後端價表、商品頁摘要／結構化／靜態價格與目錄；只更新cart快取，不推送source其他分歧歷史。待測試與正式部署確認。
