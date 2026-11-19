@@ -1556,3 +1556,10 @@ gap/margin/padding 其實都沒生效（等於 0 或初始值），包括全站 
 - 新booking-contact/及booking-contact.js，課前提醒先到此頁，再點「1.複製預約資料」「2.開啟IG私訊」，不再混在管理預約頁。資料含主聯絡人姓名、IG、編號、日期時間、課程、人數、同行者補姓名欄。
 - 多人顯示群組建議與複製同行者連結，使用後端14天只讀booking-contact token，可讀同筆資料但不能改期取消；提醒仍只寄主要聯絡人。token進sessionStorage並從地址列移除，只以X-Booking-Access傳API，分享時才重建只讀URL。剪貼簿失敗改全選提示，不再假稱已複製。
 - 沿用既有840px章節／站內版型，不加入公開選單，noindex/no-referrer。六寬度無溢位／pageerror；假API實測複製換行、主IG、分享、URL移除token與剪貼簿失敗，未請求改期取消、未傳IG訊息。預覽 /Users/newbarbie/Documents/Codex/outputs/booking-copy-flow-mobile.png。尚未推送，需配合後端只讀端點與新提醒信一起部署。
+
+
+## 2026-11-19：課前提醒／每人訂金／工作室通知正式發布確認
+- 使用者明確要求推送。後端c46fe6d、3765363、dba94e1、54451be已fast-forward push；GitHub Vercel status對54451be success，正式Production部署dpl_BMeRTHhs8Ldbak2bfLsKA7AZUns8（risuan-checkout-aqiw5bdd9）READY。未呼叫帶授權的cron，沒有驗收寄出真實客戶信。
+- Vercel env ls僅核對名稱：Production CRON_SECRET、CUSTOMER_SESSION_SECRET、FRONTEND_BASE_URL、GMAIL_USER、GMAIL_APP_PASSWORD存在，未讀取秘密值；STAFF_NOTIFY_EMAIL未設定，通知沿用GMAIL_USER。vercel.json包含台北09/15課前七日檢查，主要收件人、只讀聯絡token、SMTP不確定結果防重寄已部署。未授權正式cron實測401 JSON，確認不會匿名觸發。
+- 前端以最新origin/main 3a68f0d隔離整合，發布6b060fe成功push，Cloudflare Pages check success。正式risuanart.com no-cache確認booking-contact頁與JS、booking新版本、500乘attendeeSelections.length均生效。保留既有會員與目錄修改，未推整個分歧的主checkout歷史。
+- 發布前隔離版1至4人500/1000/1500/2000，六寬度、複製／分享／剪貼簿失敗皆通過；後端提醒、聯絡只讀、工作室通知、原信件、45項安全與test-local通過。真正SMTP／客戶實收及未來排程執行尚待自然事件紀錄，不能以程式測試當實收證明。既有hold／已付訂金不改、不補扣。
