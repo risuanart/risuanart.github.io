@@ -149,8 +149,23 @@
 
 
 
+  // 2026-11-20 使用者反映桌機版點「課程」只會開合選單、沒辦法直接點
+  // 進繪畫課程總覽頁——滑鼠移過去（mouseenter）本來就會先展開選單，
+  // 所以滑鼠使用者點下「課程」文字時，選單通常已經是展開狀態，直接
+  // 導去 courses/ 總覽頁，符合「點選單標籤本身＝去這個分類的總覽頁」
+  // 的常見慣例；觸控／鍵盤等不會觸發 hover 的使用者，第一次點只會
+  // 展開選單（跟原本行為一致），選單已經展開時再點第二次才會導航，
+  // 不會一碰到就跳頁、看不到選單內容。href 用 data-menu-base（跟
+  // site-menu.js 其他地方組 mobile 選單連結同一個屬性）組出正確的
+  // 相對路徑，不同深度的頁面（首頁／courses/／products/xxx/）都適用。 */
   toggle.addEventListener("click", (event) => {
     event.stopPropagation();
+    if (item.classList.contains("is-open")) {
+      const siteMenu = document.getElementById("site-menu");
+      const menuBase = siteMenu ? siteMenu.getAttribute("data-menu-base") || "" : "";
+      window.location.href = menuBase + "courses/";
+      return;
+    }
     open();
   });
 

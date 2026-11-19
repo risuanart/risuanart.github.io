@@ -131,8 +131,16 @@
 
 
 
+  // 2026-11-20：跟 js/site-menu.js 同一處修正（這裡是首頁專用的重複
+  // 邏輯，首頁沒有載入 site-menu.js），理由同樣說明見該檔案——選單已
+  // 展開時再點一次「課程」直接導去 courses/ 總覽頁。首頁本身就在網站
+  // 根目錄，不需要 data-menu-base 那層相對路徑換算。
   toggle.addEventListener("click", (event) => {
     event.stopPropagation();
+    if (item.classList.contains("is-open")) {
+      window.location.href = "courses/";
+      return;
+    }
     open();
   });
 

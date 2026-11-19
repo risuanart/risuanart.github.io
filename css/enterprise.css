@@ -1088,6 +1088,15 @@
 }
 
 
+/* 2026-11-20 使用者反映頁首「填寫報價表單」按鈕沒有跟標題／介紹段落
+   一起置中——那兩個元素各自有自己的 text-align:center（不是繼承自
+   外層 section），外層 section 本身預設還是靠左，按鈕沒有自己的置中
+   規則，看起來跟上面文字對不齊。直接在這個區段補上 text-align:center，
+   不影響其他沿用 .chapter 的頁面。 */
+.chapter--hero-centered {
+  text-align: center;
+}
+
 .ent-cta {
   margin-top: var(--space-24);
   padding-top: var(--space-10);
