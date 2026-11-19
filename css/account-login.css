@@ -39,7 +39,7 @@
 .account-login__social .account-login__button { padding-top:var(--space-2); padding-bottom:var(--space-2); }
 .account-login__button--line,.account-login__button--line:hover { background:var(--color-line-login); border-color:var(--color-line-login); color:var(--color-surface-light); }
 .account-login__email-icon { flex-shrink:0; }
-/* 依使用者回饋：兩種登入維持白底，品牌色只保留在圖示。 */
+
 .account-login__logo { width:var(--space-6); height:var(--space-6); }
 .account-login__button--line,.account-login__button--line:hover { background:var(--color-surface-light); border-color:var(--color-text-primary); color:var(--color-text-primary); }
 .account-login__button--line .account-login__logo { background:var(--color-line-login); }

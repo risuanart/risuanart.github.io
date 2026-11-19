@@ -35,20 +35,20 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=ABeeZee&family=Poppins:wght@700&family=Noto+Sans+TC:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../../css/colors.css?v=20261117-mobile-media">
-  <link rel="stylesheet" href="../../css/tokens.css">
-  <link rel="stylesheet" href="../../css/base.css?v=20261110-course-covers">
-  <link rel="stylesheet" href="../../css/home.css">
-  <link rel="stylesheet" href="../../css/products.css?v=20261117-mobile-media">
-  <link rel="stylesheet" href="../../css/cart.css">
-  <link rel="stylesheet" href="../../css/product-template.css?v=20261114-sheep-summary">
-  <link rel="stylesheet" href="../../css/site-menu.css">
-  <link rel="stylesheet" href="../../css/site-footer.css">
+  <link rel="stylesheet" href="../../css/colors.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/tokens.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/base.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/home.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/products.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/cart.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/product-template.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/site-menu.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/site-footer.css?v=20261119-public-clean">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
   <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  <link rel="stylesheet" href="/css/promo-bar.css">
+  <link rel="stylesheet" href="/css/promo-bar.css?v=20261119-public-clean">
 </head>
 <body>
   <div class="promo-bar" id="promo-bar">
@@ -63,10 +63,10 @@
   <div class="ambient-bg" aria-hidden="true"></div>
   <div class="ambient-grain" aria-hidden="true"></div>
 
-  <!-- 2026-10：原本紅、藍兩款是同一頁（sand-art-artist-sheep/）用款式
-       選單切換，使用者確認改成兩個完全獨立的商品頁，這份是藍款，跟
-       sand-art-artist-sheep-red/index.html 是對應的一對，結構說明見
-       那份檔案開頭註解。 -->
+
+
+
+
   <header class="site-header">
     <button type="button" class="site-header__menu-toggle" id="menu-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="site-menu" aria-label="開啟選單">
       <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
@@ -148,19 +148,19 @@
 
   <main class="product-page work">
 
-    <header class="work__intro work__intro--orlo-buy">
-      <!-- 2026-10：比照紅羊改版（見 css/products.css .work__title-block
-           說明）——商品名搬到照片下方、價格正上方，靠左對齊，系列眉標／
-           進階款／累度合併成一行小字，一句話介紹放最後。
-           2026-10-25：比照福星，同步整組 orlo.co 改版，見
-           products/sand-art-fu/index.html 同一處說明。 -->
-      <!-- 首圖實拍相片牆：主圖＋可橫向滑動縮圖列，共 13 張（成品、製作
-           過程、材料平拍、細節特寫），跟紅羊同一套元件（見
-           js/hero-thumb-gallery.js／css/products.css .work__gallery
-           說明），進頁面自動循環播放，滑鼠移進去暫停、手動點縮圖／
-           箭頭／滑動縮圖列後永久停止自動播放。藍款比紅款多絨毛砂、
-           碎金箔、亮粉三種材質，縮圖裡刻意涵蓋到亮粉的鋪色／細節
-           特寫，不是只有紅款那組材質的翻版。 -->
+    <header class="work__intro work__intro--product-buy">
+
+
+
+
+
+
+
+
+
+
+
+
       <div class="work__gallery work__gallery--thumbs-left fade-in" data-gallery>
         <div class="work__gallery-main" data-gallery-main>
           <img src="../../assets/images/products/sand-art-artist/sand-art-artist-blue-main.jpg" alt="成品參考圖" width="2000" height="2500" loading="eager" class="is-active" data-gallery-frame>
@@ -223,11 +223,11 @@
         </div>
       </div>
 
-      <!-- 2026-10-25：比照其他 7 款基礎款，補上「一起加購」三個品項
-         （原本這頁只有像框一項，見 git 歷史）。像框維持 2026-10-24
-         確認過的客製化：羊Diss舞蹈系列只實拍了 20×20cm 這一種尺寸的
-         上框模擬效果，固定單一尺寸，不列 15cm 選項。 -->
-      <section class="chapter addon-section addon-section--orlo fade-in delay-2">
+
+
+
+
+      <section class="chapter addon-section addon-section--expandable fade-in delay-2">
         <button type="button" class="addon-toggle" data-addon-toggle aria-expanded="true" aria-controls="addon-list-artist-sheep-blue">一起加購，材料更齊全 <span class="addon-toggle__en">Buy Together</span></button>
         <div class="addon-list" id="addon-list-artist-sheep-blue" data-addon-list>
           <div class="addon-row" data-addon-row>
@@ -294,9 +294,9 @@
       </div>
     </header>
 
-    <!-- 完整示範影片：客人拍的 9:16 直式完整製作過程，理由跟寫法見
-         sand-art-na-fu-lantern/index.html 同一處註解（自動循環、不留
-         播放鍵）。 -->
+
+
+
     <section class="chapter">
       <div class="demo-video-combo fade-in delay-1">
         <div class="demo-video">
@@ -309,7 +309,7 @@
       <p class="chapter__prose chapter__prose--centered fade-in delay-2">除了細砂，<br>這一款加入了絨毛砂、碎金箔與亮粉，<br>操作上多一些層次與變化，適合有耐性、想挑戰更豐富材質效果的同學。</p>
     </section>
 
-    <!-- 作品介紹：跟顏色無關，紅藍兩頁內容相同。 -->
+
     <section class="ptpl-artwork fade-in delay-2">
       <div class="ptpl-artwork__visual">
       <div class="ptpl-artwork__carousel" data-moments-carousel data-interval="5000" role="region" aria-label="從馬諦斯原畫到羊年草稿與上色的設計轉化">
@@ -337,7 +337,7 @@
     </section>
 
 
-    <!-- 商品詳細：材料平拍俯視圖＋內附材料清單，單一款式。 -->
+
     <section class="chapter">
       <h2 class="chapter__title fade-in">商品詳細</h2>
       <p class="kit-section__size-hint fade-in delay-1">成品尺寸：20×20cm<br>顏色數：8色</p>
@@ -358,8 +358,8 @@
       </ul>
     </section>
 
-    <!-- 顏色細節：單一配色，跟其他單一配色沙畫同一套 .color-swatches
-         靜態色點清單。 -->
+
+
     <section class="chapter">
       <h2 class="chapter__title fade-in">顏色細節</h2>
       <ul class="color-swatches fade-in delay-1">
@@ -377,7 +377,7 @@
       </div>
     </section>
 
-    <!-- 商品介紹：一句話陳述＋補充說明。 -->
+
     <section class="chapter">
       <h2 class="chapter__title fade-in">商品介紹</h2>
 
@@ -392,24 +392,24 @@
       </div>
     </section>
 
-    <!-- 請注意：安全須知。藍款有亮粉材料，保留「碎金箔與亮粉」那條提醒。 -->
 
 
-    <!-- 怎麼玩：進階款比基礎款多三種材質（絨毛砂、碎金箔、亮粉），拆成
-         四組步驟。「撕」是第一個動作（實際操作順序本來就要先撕開貼紙
-         才能倒材料，2026-10 使用者確認改回撕當第一步，不是先前試過的
-         「碎金箔／亮粉最吸睛放最前面」那個排法），之後碎金箔、亮粉、
-         細砂（做法跟基礎款一樣，這次只拿到「倒」的片段，沒有「鋪」——
-         使用者之後如果補拍鋪沙的片段，再補進來）、絨毛砂（倒／壓／填，
-         多一道按壓固定＋夾子補實細節的手法，材料要給夠份量才能做出
-         扎實飽滿的質感——這裡沒有「挑鬆」這個動作，絨毛砂越鬆散成品
-         反而越單薄，是用夾子把材料鋪滿壓實）各自成一組。絨毛砂的
-         「填」這個動作使用者提供了兩支片段，分別示範同一個夾子補實
-         手法用在不同用途上的質感差異：鋪，絨毛，（夾子）.mov 是鋪在
-         畫面底部當草叢用（綠色，壓實後呈草地般的茂密質感），鋪，
-         植絨砂（夾子）.mov 是鋪在羊群身體上（橘色，壓實後呈羊毛般的
-         扎實觸感），兩支都用上，分成 07／08 兩步，不是只挑一支。影片
-         素材見 assets/videos/products/sand-art-artist-sheep-blue/。 -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <section class="chapter">
       <h2 class="chapter__title fade-in">怎麼玩</h2>
       <div class="chapter__prose fade-in delay-1">
@@ -489,9 +489,9 @@
       </div>
     </section>
 
-    <!-- 2026-10-25：規格資訊／出貨與保存須知／購買前請閱讀整併進分頁
-         切換，比照福星頁，見 products/sand-art-fu/index.html 同一處
-         說明。 -->
+
+
+
     <section class="chapter">
       <div class="safety-notice fade-in">
         <p class="safety-notice__title">請注意</p>
@@ -524,7 +524,7 @@
       </div>
     </section>
 
-    <!-- 相關商品 -->
+
     <section class="chapter">
       <h2 class="chapter__title fade-in">相關商品</h2>
       <div class="related-products fade-in delay-1" data-related-products data-exclude="sand-art-artist-sheep-blue">
@@ -578,27 +578,27 @@
 
   </main>
 
-  <script src="../../js/cart.js?v=20261119-early-prices"></script>
-  <script src="../../js/addon-product-info.js?v=20261117-mobile-media"></script>
-  <script src="../../js/addon-preview-modal.js?v=20261117-mobile-media"></script>
-  <script src="../../js/product-price-discount.js?v=20261116-all-kits85"></script>
-  <script src="../../js/product-terms.js"></script>
-  <script src="../../js/product-tabs.js"></script>
-  <script src="../../js/hero-colorway-carousel.js?v=20261117-mobile-media"></script>
-  <script src="../../js/video-inview.js?v=20261117-mobile-media"></script>
-  <script src="../../js/hero-thumb-gallery.js?v=20261117-mobile-media"></script>
-  <script src="../../js/shop-navigation.js?v=20261115"></script>
-  <script src="../../js/related-products.js?v=20261116-all-kits85"></script>
-  <script src="../../js/addon-variant-select.js"></script>
-  <script src="../../js/addon-frame-preview-toggle.js"></script>
-  <script src="../../js/mobile-sticky-buy-reveal.js"></script>
-  <script src="../../js/site-header-scroll.js?v=20261107-backtop"></script>
-  <script src="../../js/account-auth.js?v=20261118-sessions"></script>
-  <script src="../../js/account-widget.js"></script>
-  <script src="../../js/scroll-reveal.js"></script>
+  <script src="../../js/cart.js?v=20261119-public-clean"></script>
+  <script src="../../js/addon-product-info.js?v=20261119-public-clean"></script>
+  <script src="../../js/addon-preview-modal.js?v=20261119-public-clean"></script>
+  <script src="../../js/product-price-discount.js?v=20261119-public-clean"></script>
+  <script src="../../js/product-terms.js?v=20261119-public-clean"></script>
+  <script src="../../js/product-tabs.js?v=20261119-public-clean"></script>
+  <script src="../../js/hero-colorway-carousel.js?v=20261119-public-clean"></script>
+  <script src="../../js/video-inview.js?v=20261119-public-clean"></script>
+  <script src="../../js/hero-thumb-gallery.js?v=20261119-public-clean"></script>
+  <script src="../../js/shop-navigation.js?v=20261119-public-clean"></script>
+  <script src="../../js/related-products.js?v=20261119-public-clean"></script>
+  <script src="../../js/addon-variant-select.js?v=20261119-public-clean"></script>
+  <script src="../../js/addon-frame-preview-toggle.js?v=20261119-public-clean"></script>
+  <script src="../../js/mobile-sticky-buy-reveal.js?v=20261119-public-clean"></script>
+  <script src="../../js/site-header-scroll.js?v=20261119-public-clean"></script>
+  <script src="../../js/account-auth.js?v=20261119-public-clean"></script>
+  <script src="../../js/account-widget.js?v=20261119-public-clean"></script>
+  <script src="../../js/scroll-reveal.js?v=20261119-public-clean"></script>
   <script>
-    // 名畫再製特色：滑動比對拉桿，邏輯跟 sand-art-artist-sheep-red/index.html
-    // 完全相同（跟顏色無關的共用功能）。
+
+
     (function () {
       const compare = document.getElementById("ptpl-compare");
       const compareHandle = document.getElementById("ptpl-compare-handle");
@@ -636,9 +636,9 @@
         compareHandle.setAttribute("aria-valuenow", next);
       });
     })();
-  </script>
-  <script src="../../js/site-menu.js?v=menu-order-20261109"></script>
-  <script src="../../js/moments-carousel.js"></script>
-  <script src="/js/promo-bar.js"></script>
+</script>
+  <script src="../../js/site-menu.js?v=20261119-public-clean"></script>
+  <script src="../../js/moments-carousel.js?v=20261119-public-clean"></script>
+  <script src="/js/promo-bar.js?v=20261119-public-clean"></script>
 </body>
 </html>

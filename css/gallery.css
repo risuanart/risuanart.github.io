@@ -1,4 +1,4 @@
-/* gallery.css —— 學員作品集頁（gallery.html）專屬樣式。 */
+
 
 .gallery-filters {
   margin-top: var(--space-4);
@@ -43,11 +43,11 @@
   row-gap: var(--space-1);
 }
 
-/* 2026-11-07 使用者要求課程／媒材改成下拉選單——課程是單選，跟按鈕
-   比起來，選項變多（現在十幾堂課）時下拉選單不會佔用額外的畫面高度。
-   先試過細底線版本，後改成黑底白字小標籤，跟首頁「ＭＯＲＥ」按鈕
-   （.hub-more-link，見 css/hub-blocks.css）同一套視覺語言、直角無
-   圓角。箭頭換成白色，不然黑底上看不到原本的深灰色箭頭。 */
+
+
+
+
+
 .gallery-course-select {
   appearance: none;
   -webkit-appearance: none;
@@ -56,8 +56,8 @@
   border: none;
   border-radius: 0;
   background-color: var(--color-surface-black);
-  /* 2026-11-07：SVG data URI 裡的顏色是寫死的字串，不能吃 CSS 變數，
-     --color-surface-light 改色時要手動同步這裡，不會自動跟著變。 */
+
+
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23ffffff' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right var(--space-2) center;
@@ -91,11 +91,11 @@
   color: var(--color-text-secondary);
 }
 
-/* 2026-11-07 使用者參考 sensationsprint.com.tw/works 的標籤排版，改成
-   純文字＋「｜」分隔號，拿掉原本黑底填色的按鈕外觀——課程／主題選項
-   一多（主題現在將近 20 個），黑色色塊按鈕一字排開很佔畫面，純文字
-   換行同樣能多選多排，但每排只佔文字高度，整體矮很多。選取狀態改用
-   粗體＋深色文字取代黑底白字。 */
+
+
+
+
+
 .gallery-filters__chip {
   appearance: none;
   border: none;
@@ -118,10 +118,10 @@
   font-weight: 700;
 }
 
-/* 「｜」分隔號放在每個按鈕前面（每組第一個除外），純裝飾、不佔點擊
-   範圍。2026-11-07 使用者要求分隔線要明顯一點、跟感官印刷的參考網站
-   一樣，顏色改用跟未選取文字同一個 --color-text-secondary（原本用
-   --color-surface-neutral 太淺，幾乎看不出來）。 */
+
+
+
+
 .gallery-filters__chip:not(:first-child)::before {
   content: "｜";
   display: inline-block;
@@ -156,14 +156,14 @@
   gap: var(--space-2);
 }
 
-/* 修正 bug：瀏覽器內建樣式表的 [hidden] { display: none } 選擇器特異度
-   跟上面 .gallery-grid { display: grid } 打平（都是 0,1,0），瀏覽器自己
-   的樣式表雖然通常最先套用，但當開發者樣式表（這份 CSS）晚載入、特異度
-   又打平時，後載入的這條 display: grid 會贏，導致 js/gallery.js／
-   js/gallery-course-preview.js 設定 grid.hidden = true 時畫面上完全沒有
-   視覺效果——格子還是用 display: grid 繼續顯示，篩選到沒有符合的作品時
-   舊的照片還是會留在畫面上。這裡明寫一條特異度打平但排在後面的規則，
-   確保 hidden 屬性真的會生效。 */
+
+
+
+
+
+
+
+
 .gallery-grid[hidden] {
   display: none;
 }
@@ -224,11 +224,11 @@
   }
 }
 
-/* ---------- 作品放大燈箱（js/gallery-lightbox.js）----------
-   點格狀相簿裡任何一張圖都會跳出來，深色滿版背景＋置中大圖，跟站內其他
-   彈窗（購物車、預約資訊）不同語彙——那些是白底面板，這裡刻意用近黑
-   背景，理由是燈箱的目的是讓照片本身最顯眼，白底面板反而會搶走注意力。
-   只有這個燈箱用這種深色滿版風格，不是全站彈窗語彙的替代方案。 */
+
+
+
+
+
 .gallery-lightbox {
   position: fixed;
   inset: 0;
@@ -259,9 +259,9 @@
   max-width: 100%;
   max-height: 78vh;
   object-fit: contain;
-  /* 2026-11-12：沙畫商品頁「搭配自己的顏色」AI 模擬圖放大燈箱後，
-     防右鍵另存的 user-select/-webkit-touch-callout 也要跟著放大圖走，
-     不是只擋縮圖，不然放大後反而變成唯一沒防護的版本。 */
+
+
+
   -webkit-user-select: none;
   user-select: none;
   -webkit-touch-callout: none;
@@ -273,13 +273,13 @@
   text-align: center;
 }
 
-/* 「查看課程」連結：只有 gallery.html 綜合瀏覽頁點開的燈箱才會出現
-   （見 js/gallery.js／js/gallery-lightbox.js 的說明）。使用者反饋：原本
-   沿用 .text-link（跟圖說一樣淺色、字級也一樣）看起來太像圖說的延伸，
-   分不清楚哪裡開始是可以點的連結；也不喜歡底線的做法。這裡改用
-   --color-interactive（全站語意上本來就是「連結／可點擊元素」專用色）
-   取代淺色文字，拿掉底線，字重加粗，跟圖說之間也拉開更多間距，靠顏色、
-   字重、位置三個線索疊加造成區別，不靠底線。 */
+
+
+
+
+
+
+
 .gallery-lightbox__course-link {
   margin: var(--space-4) 0 0;
   font-size: var(--font-size-sm);
@@ -327,7 +327,7 @@
 }
 
 
-/* Local preview: MIYUKI-inspired filter hierarchy, scoped to one preview URL. */
+
 .preview-gallery-filter-hierarchy-v1 .gallery-filters {
   width: min(100%, 920px);
   margin: var(--space-6) auto 0;
@@ -413,14 +413,14 @@
   .preview-gallery-filter-hierarchy-v1 .gallery-page__note { padding-left: 16px; padding-right: 16px; }
 }
 
-/* Keep the batch control below the existing gallery without changing its grid. */
+
 .gallery-load-more {
   display: block;
   margin: var(--space-4) auto;
 }
 .gallery-load-more[hidden] { display: none; }
 
-/* 砂畫自選色示意圖使用加購預覽同一白底卡片語彙。 */
+
 .gallery-lightbox--card { background: color-mix(in srgb, var(--color-surface-black) 45%, transparent); }
 .gallery-lightbox--card .gallery-lightbox__figure {
   width: var(--content-max-width); max-width: 100%; padding: var(--space-6);

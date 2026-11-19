@@ -1,8 +1,8 @@
-// sand-texture-topics.js —— 石英砂肌理畫課程頁「適合的圖案」主題切換，
-// 跟 js/custom-photo-topics.js 同一套 .custom-topics 元件（CSS 共用
-// css/custom-photo-topics.css，不是另外做一份），只是這頁的主題換成
-// 植物花卉／海邊／山景，照片一樣直接從學員作品資料庫（gallery-data.js）
-// 抓對應主題、對應課程（石英砂肌理畫）的照片，不手動列清單。
+
+
+
+
+
 (function () {
   const root = document.querySelector('.custom-topics');
   if (!root) return;
@@ -67,7 +67,7 @@
     loadStatus.hidden = false;
     loadStatus.textContent = '正在載入' + active.label + '作品…';
     nextImage.onload = async () => {
-      try { await nextImage.decode(); } catch (_) { /* Loaded images can still be displayed. */ }
+      try { await nextImage.decode(); } catch (_) {                                             }
       if (hero !== nextImage) return;
       nextImage.style.visibility = 'visible';
       stage.setAttribute('aria-busy', 'false');
@@ -110,8 +110,8 @@
       button.append(image); button.addEventListener('click', () => select(i)); strip.append(button);
       const figure = document.createElement('figure'); figure.className = 'gallery-grid__item';
       const source = document.createElement('img'); source.dataset.src = item.src; source.alt = item.alt; source.loading = 'lazy';
-      // 2026-11-08 比照 js/custom-photo-topics.js 同樣的修正：補上
-      // figcaption，放大看作品時才會顯示主題／完成堂數資訊。
+
+
       const caption = document.createElement('figcaption'); caption.className = 'gallery-grid__caption';
       caption.textContent = (item.course || '') +
         (item.themes && item.themes.length ? '・' + item.themes.join('、') : '') +

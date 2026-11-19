@@ -19,21 +19,21 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=ABeeZee&family=Poppins:wght@700&family=Noto+Sans+TC:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../../css/colors.css?v=20261117-mobile-media">
-  <link rel="stylesheet" href="../../css/tokens.css">
-  <link rel="stylesheet" href="../../css/base.css?v=20261110-course-covers">
-  <link rel="stylesheet" href="../../css/home.css">
-  <link rel="stylesheet" href="../../css/products.css?v=20261117-mobile-media">
-  <link rel="stylesheet" href="../../css/cart.css">
-  <link rel="stylesheet" href="../../css/enterprise.css">
-  <link rel="stylesheet" href="../../css/gallery.css?v=20261117-mobile-media">
-  <link rel="stylesheet" href="../../css/site-menu.css">
-  <link rel="stylesheet" href="../../css/site-footer.css">
+  <link rel="stylesheet" href="../../css/colors.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/tokens.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/base.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/home.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/products.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/cart.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/enterprise.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/gallery.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/site-menu.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/site-footer.css?v=20261119-public-clean">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
   <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  <link rel="stylesheet" href="/css/promo-bar.css">
+  <link rel="stylesheet" href="/css/promo-bar.css?v=20261119-public-clean">
 </head>
 <body>
   <div class="promo-bar" id="promo-bar">
@@ -52,12 +52,12 @@
     <button type="button" class="site-header__menu-toggle" id="menu-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="site-menu" aria-label="開啟選單">
       <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
     </button>
-    <!-- 2026-09-18 新增：桌面版（≥1024px）文字導覽列，取代漢堡選單抽屜；
-         手機版隱藏，維持現有漢堡選單不變。內容／邏輯跟首頁 index.html
-         那份一致，樣式見 css/site-menu.css .site-header__nav（子頁置中
-         logo 用 .site-header__title，不是首頁專屬的 .site-header__logo，
-         見該檔案開頭說明），下拉開合邏輯見 js/site-menu.js 「課程」下拉
-         那個 IIFE。 -->
+
+
+
+
+
+
     <nav class="site-header__nav" aria-label="主選單">
       <a href="../../booking/">線上預約課程</a>
       <div class="site-header__nav-item">
@@ -135,62 +135,62 @@
 
   <main class="product-page work">
 
-    <!-- 「流動畫」課程介紹頁，結構沿用其他畫室常態課程頁（beading.html／
-         sand-texture.html／palette-knife-oil.html）同一套元件
-         （.ent-hero／.chapter／.ent-cta），語氣是開放報名的體驗課程，
-         不是企業包班服務。
 
-         資料來源：使用者提供 Pinkoi 上架的同一堂課連結
-         （https://hk.pinkoi.com/product/68viLNaF，用 WebFetch 讀取），
-         「課程內容」相關資訊（媒材、上課流程、適合對象、時長、地點、
-         穿著建議）已確認為真實資料直接使用；價格（依尺寸分級）、開課
-         3天前取消退費規則等「交易條件」，比照石英砂肌理畫／刮刀油畫／
-         串珠三堂課同樣的處理方式（下定付款流程還沒定案），這階段先不
-         寫進頁面。乾燥天數同時對照 faq.html 既有「流動畫：3天」的站內
-         既有資料（faq.html:453）——跟 Pinkoi 頁面寫的「約2-3天」相符，
-         這裡採用 faq.html 的說法，維持全站同一個數字。「壓克力顏料
-         沾到衣服不易清洗」這點也對照 faq.html 既有的通用說明
-         （faq.html:377），不是新增的說法。
 
-         首頁上方選單「流動畫」原本連到材料包頁面
-         （products/fluid-art-intro.html，「春聯流動畫材料包」是可以
-         帶回家自己動手做的年節主題商品，跟這堂在畫室現場上課、自由
-         配色的體驗課程是兩回事），這頁做好後改連過來，做法跟當初
-         「石英砂肌理畫」有了自己的課程頁後把連結從材料包頁面改過來
-         一樣（見 index.html 該處註解）。
 
-         首圖影片（2026-09-16 補上）：使用者上傳的「流動畫宣傳影片.MP4」，
-         已經是 H.264、720×406，是橫式（約16:9）畫面，不是全站其他課程
-         頁常見的手機直式9:16，所以套用跟 enterprise-pet-portrait.html
-         首圖照片同一個 .is-landscape 修飾類別（見 css/enterprise.css），
-         不是 is-flush-top／is-full-bleed 那套滿版直式的做法——橫式素材
-         套滿版直式的比例公式會失真，直接沿用既有的橫式 recipe 最單純。
-         影片內容：畫室帶著品牌「Ri suan」浮水印的宣傳片，畫面依序是
-         好幾位同學圍著桌子調色、用筆刷／刮刀在畫布上推開顏料倒出紋路、
-         用噴槍消泡一塊圓形畫布、最後是一塊完成的圓形流動畫（墨綠、粉、
-         黑交融的大理石紋路）。Poster 用最後那格完成的圓形畫布（18.5s），
-         是全片最像「成品」的一格。因為是橫式構圖，畫面高度本來就不會
-         佔滿整個手機螢幕，不會有「看起來像整頁只有這支影片」的問題，
-         不需要另外加往下滑提示（跟其他直式滿版首圖影片的處理不同）。
 
-         2026-10-30 使用者更正兩件事，這次一起補上：
-         1. 真實上課流程：原本「上課怎麼進行」只有籠統帶過調色跟倒膠，
-            漏了「5×5cm 迷你畫布試色」這個環節——學員選色後先在迷你
-            畫布試做，確認喜歡的配色跟技法才放大畫到正式畫布，不喜歡
-            可以換色重試，迷你畫布也能帶走。這解釋了部分素材照片裡
-            出現在單個紙杯上那種超小尺寸畫布的由來。
-         2. 情境照分散穿插：第二批流動畫照片裡一些有人物、倒顏料特寫
-            的照片，原本只有進作品集的格狀清單，使用者認為這樣「配置
-            很單薄」，應該分散安排進課程介紹本身，讓同學讀文字的同時
-            就能感受畫面。拆成兩組用 .material-photo-carousel 插入：
-            一組是「新手友善、享受顏料流動」的情境照（人物為主），配在
-            「上課怎麼進行」；一組是倒顏料/調色的質地特寫，配在
-            「媒材與技法」解釋壓克力稀釋劑調整流動性那段。context-
-            presenting.jpg（17988747139878442.jpg）沒有進作品集（跟已
-            收錄的 fluid-art/09.jpg 是同一件作品的另一個角度，避免
-            重複計算），但單純當情境照用在這裡沒有這個限制，所以另存
-            一份在 assets/images/courses/fluid-art/ 底下，不跟作品集
-            共用同一份檔案命名空間。 -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <section class="ent-hero fade-in">
       <video class="ent-hero__photo is-landscape" src="../../assets/videos/courses/fluid-art/流動畫宣傳影片.MP4" poster="../../assets/images/courses/fluid-art/hero-poster.jpg" preload="auto" autoplay muted loop playsinline aria-label="流動畫宣傳影片：學員調色與倒膠，完成大理石紋路的圓形畫布"></video>
@@ -201,21 +201,21 @@
       </div>
     </section>
 
-    <!-- 2026-10-30 重新設計：使用者點出這頁所有圖片都塞進同一種
-         .material-photo-carousel（橫向滑動列），四段內容看起來長得
-         一模一樣，單調。研究後發現 enterprise.css 已經有專門給「照片
-         跟文字具體對應」用的 .ent-feature（桌面版圖文左右並排，
-         --reverse 交錯方向，--collage／--mosaic 兩種多圖拼貼），只是
-         從來沒套用在任何課程頁上。這次改成：開場鉤子、媒材質地說明、
-         傾斜流動說明、迷你畫布說明都改用 .ent-feature（四段輪流用
-         mosaic／collage／duo 三種不同的圖片排列＋ default／reverse
-         交錯方向，視覺上才會真的有節奏變化，不是複製四次同一格式）；
-         「上課情境」「作品細節」這兩段本來就是「同性質照片一次看好
-         幾張」的情境，保留 .material-photo-carousel 橫滑，跟上面的
-         .ent-feature 區塊形成對比，不是整頁同一種容器。
-         .ent-feature__media--duo 是這次新增的變化（見 enterprise.css），
-         專門給剛好兩張照片對應同一段文字的情況，collage／mosaic 都是
-         三張或四張，硬塞兩張會留空格。 -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <section class="chapter fade-in delay-1">
       <div class="ent-features">
@@ -295,11 +295,11 @@
       </div>
     </section>
 
-    <!-- 2026-10-30 使用者更正：這組近拍照片其實是作品紋路的細節呈現，
-         不是學員作品本身，標成「學員作品」容易誤導；而且緊接在作品集
-         連結前面太擠，拆成獨立一個 section，跟下面「學員作品」正式的
-         gallery-course-preview 格狀清單之間空出完整一個 section 的間距
-         （.chapter 之間本來就有既定的垂直留白），不會再貼在一起。 -->
+
+
+
+
+
     <section class="chapter fade-in delay-2">
       <div class="chapter__block">
         <p class="chapter__statement">作品細節呈現</p>
@@ -315,8 +315,8 @@
       </div>
     </section>
 
-    <!-- 學員作品：用跟其他課程頁一樣的 gallery-course-preview 元件抓
-         「流動畫」分類底下的作品，資料到位就會自動出現。 -->
+
+
     <section class="chapter fade-in delay-2">
       <div class="chapter__block">
         <p class="chapter__statement">學員作品</p>
@@ -360,12 +360,12 @@
       </details>
     </section>
 
-    <!-- CTA 三連：「線上預約」是新的主要動作（2026-09 加，直接刷卡付款
-         排課，不用等私訊回覆），私訊洽詢降級成文字連結但保留——流動畫的
-         尺寸／配色還是有人想先討論再決定，兩個入口並存，不是取代關係。
-         課程頁的 query slug（?course=fluid-art）對照 js/booking.js 的
-         COURSE_SLUG_DEFAULT，帶到預約頁會預選「流動畫－33*24cm」這個
-         款式，客人到那邊還是能改選其他尺寸。 -->
+
+
+
+
+
+
     <footer class="ent-cta fade-in">
       <p class="ent-cta__text">可以直接線上刷卡預約，或私訊討論細節，兩種方式都能安排上課！</p>
       <div class="ent-cta__actions">
@@ -410,16 +410,16 @@
 
   </main>
 
-  <script src="../../js/cart.js?v=20261119-early-prices"></script>
-  <script src="../../js/site-header-scroll.js?v=20261107-backtop"></script>
-  <script src="../../js/account-auth.js?v=20261118-sessions"></script>
-  <script src="../../js/account-widget.js"></script>
-  <script src="../../js/scroll-reveal.js"></script>
-  <script src="../../js/video-inview.js?v=20261117-mobile-media"></script>
-  <script src="../../js/gallery-data.js?v=20261110-ig202403"></script>
-  <script src="../../js/gallery-course-preview.js?v=20261110-gallery-performance"></script>
-  <script src="../../js/gallery-lightbox.js?v=20261117-mobile-media"></script>
-  <script src="../../js/site-menu.js?v=menu-order-20261109"></script>
-  <script src="/js/promo-bar.js"></script>
+  <script src="../../js/cart.js?v=20261119-public-clean"></script>
+  <script src="../../js/site-header-scroll.js?v=20261119-public-clean"></script>
+  <script src="../../js/account-auth.js?v=20261119-public-clean"></script>
+  <script src="../../js/account-widget.js?v=20261119-public-clean"></script>
+  <script src="../../js/scroll-reveal.js?v=20261119-public-clean"></script>
+  <script src="../../js/video-inview.js?v=20261119-public-clean"></script>
+  <script src="../../js/gallery-data.js?v=20261119-public-clean"></script>
+  <script src="../../js/gallery-course-preview.js?v=20261119-public-clean"></script>
+  <script src="../../js/gallery-lightbox.js?v=20261119-public-clean"></script>
+  <script src="../../js/site-menu.js?v=20261119-public-clean"></script>
+  <script src="/js/promo-bar.js?v=20261119-public-clean"></script>
 </body>
 </html>

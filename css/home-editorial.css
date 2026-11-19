@@ -1,13 +1,13 @@
-/* 首頁影片下方主要服務入口、課程精選與材料指南專用。 */
+
 .home-entry-section,
 .home-course-section,
 .home-guide-section {
   padding-top: var(--space-10);
 }
 
-/* 上架前待修清單任務 2：課程精選區塊上下留白改用 --space-16（原本跟
-   其他兩個區塊共用 --space-10／40px），這裡用更高特異度的選擇器單獨
-   覆寫，不影響上面兩個區塊既有的間距。 */
+
+
+
 .home-course-section.home-course-section {
   padding-top: var(--space-16);
 }
@@ -22,8 +22,8 @@
   align-items: center;
 }
 
-/* 首頁兩個主要服務入口改成橫幅：讓照片提供情境，文字直接疊在照片上，
-   比分離的圖文卡更像快速入口。圖片仍使用既有真實素材。 */
+
+
 .home-entry {
   position: relative;
   display: block;
@@ -128,11 +128,11 @@
   white-space: nowrap;
 }
 
-/* 上架前待修清單任務 2：這裡原本把 hub-blocks.css 預設的 4:5（直式）
-   覆寫成 4:3（橫式），課程精選用的是手機直拍原圖，被強制裁成橫式會
-   切到主體、畫面失重，拿掉這個覆寫，改用 hub-blocks.css 原本的 4:5。 */
 
-/* 首頁卡片標題低於區塊主標，課程與商品卡片沿用同一層級。 */
+
+
+
+
 .home-page .home-course-section .banner-tile__title,
 .home-page .product-card__title {
   display: inline-flex;
@@ -287,14 +287,14 @@
   }
 }
 
-/* ---------- 課程精選橫滑：進場動畫／按壓縮放／捲動進度列
-   上架前待修清單任務 2 ---------- */
 
-/* 卡片進場：section 本身沿用 js/scroll-reveal.js 既有的 .fade-in／
-   .is-visible 機制（不用另外寫 IntersectionObserver），但視覺效果從
-   「整個區塊一起淡入」改成「四張卡片各自依序淡入＋上移 8px」，所以
-   這裡讓 section 自己的 .fade-in 效果歸零（opacity:1／transform:none），
-   改成套用在子層的 .banner-tile 上，用 nth-child 做 80ms 階梯延遲。 */
+
+
+
+
+
+
+
 .home-course-section.fade-in {
   opacity: 1;
   transform: none;
@@ -317,7 +317,7 @@
 .home-course-section.is-visible .banner-tile:nth-child(3) { transition-delay: 160ms; }
 .home-course-section.is-visible .banner-tile:nth-child(4) { transition-delay: 240ms; }
 
-/* 按下卡片：圖片微縮放 1.02，放開時用同一條 transition 回到原本大小。 */
+
 .home-course-section .banner-tile__media img {
   transition: transform var(--duration-slow) var(--ease-standard);
 }
@@ -326,11 +326,11 @@
   transform: scale(1.02);
 }
 
-/* 捲動進度列：1px 髮絲線 + 一段隨捲動位置移動的加粗線，只在手機橫滑
-   模式下有意義（桌機版 .banner-row--quad 是固定格狀、沒有橫向可滑），
-   預設隱藏，跟 .banner-row--quad 本身改橫滑的中斷點（768px）一致。
-   寬度／位移量由 js/hscroll-progress.js 依實際可滑動比例計算，不是
-   寫死的百分比。 */
+
+
+
+
+
 .hscroll-progress {
   display: none;
 }
@@ -354,7 +354,7 @@
   }
 }
 
-/* 首頁卡片標題及說明置中試版。 */
+
 .home-page .home-course-section .banner-tile,
 .home-page .product-card { text-align: center; }
 .home-page .home-course-section .banner-tile__title,
@@ -370,7 +370,7 @@
   text-align: center;
 }
 
-/* 中英文為同組標題，說明另留較大間距。 */
+
 .home-page .home-course-section .banner-tile__title {
   display: flex;
   padding-bottom: 0;
@@ -382,7 +382,7 @@
   margin-top: calc(var(--space-2) + var(--space-1));
 }
 
-/* 指南閱讀入口必須跟隨文字流，避免借用照片疊字定位而遮住其他內容。 */
+
 .home-guide-feature__copy { min-width: 0; }
 .home-guide-feature .home-entry__link {
   position: static;
@@ -400,7 +400,7 @@
   .home-guide-feature__copy > p:not(.home-guide-feature__eyebrow) { font-size: var(--font-size-sm); line-height: 1.8; }
 }
 
-/* 首頁五堂課程維持單排；窄平板保留可閱讀卡片與下一張露出。手機沿用原規則。 */
+
 @media (min-width: 769px) {
   .home-course-section .banner-row--quad {
     display: flex;

@@ -19,44 +19,44 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../css/colors.css?v=20261117-mobile-media">
-<link rel="stylesheet" href="../css/tokens.css">
-<!-- 2026-10-17 使用者反映這頁（比其他頁都早建立）的左上角目錄、置中
-     logo、右上角購物車、頂部跑馬燈列都跟全站其他頁不一樣——因為這頁
-     從頭到尾沒載入 home.css／products.css／cart.css／site-menu.css／
-     promo-bar.css 這組全站共用的頂部列系統，<header> 也是當時自己手刻
-     的（logo 靠左＋純文字「材料包」標題＋純文字「購物車」連結），不是
-     共用的 .site-header／漢堡選單／cart-badge。這裡補上跟其他子頁
-     （例如 faq/index.html）完全一樣的那組 <link>，讓 .site-header／
-     .cart-badge／.site-menu／.promo-bar 這些 class 有樣式可以吃。這頁
-     下面原本自己的 <style>（.hero／.split-row／.meta 表格／.gallery
-     這些頁面獨有的排版）載入順序在後面，同特異度的規則還是這份自己
-     的版本贏，不會被蓋掉——只有新載入的這幾個 class（原本完全沒有
-     定義過）才會生效，不影響這頁原本的版面。 -->
-<link rel="stylesheet" href="../css/base.css?v=20261110-course-covers">
-<link rel="stylesheet" href="../css/home.css">
-<link rel="stylesheet" href="../css/home-editorial.css?v=guide-flow-20261109">
-<link rel="stylesheet" href="../css/products.css?v=20261117-mobile-media">
-<link rel="stylesheet" href="../css/cart.css">
-<link rel="stylesheet" href="../css/site-menu.css">
-<!-- 2026-10-24 補完頁面內容時一併補上全站共用黑色頁尾（原本這頁用自己
-     手刻的淺色 <footer>，跟其他頁都不一樣，見下方 <footer class="preview-footer">
-     說明）。 -->
-<link rel="stylesheet" href="../css/site-footer.css">
-<link rel="stylesheet" href="../css/hub-blocks.css">
-<link rel="stylesheet" href="../css/page-title-en.css?v=20261107-shared-heading">
-<!-- 2026-11-11：使用者參考課程介紹頁（如 courses/sand-texture/）的滿版
-     首圖影片＋koyama.com.tw/newbornbox/ 的開場大圖，要求這頁最上面也要
-     有「一眼驚艷」的視覺，不是只有純文字。直接沿用課程頁已經做好、
-     驗證過的 .ent-hero__media／.ent-hero__photo.is-full-bleed（手機
-     滿版、桌面置中限寬 420px），不自己重新發明一套首圖樣式，見下面
-     <body> 新增的 <section class="ent-hero">。 -->
-<link rel="stylesheet" href="../css/enterprise.css">
+<link rel="stylesheet" href="../css/colors.css?v=20261119-public-clean">
+<link rel="stylesheet" href="../css/tokens.css?v=20261119-public-clean">
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="../css/base.css?v=20261119-public-clean">
+<link rel="stylesheet" href="../css/home.css?v=20261119-public-clean">
+<link rel="stylesheet" href="../css/home-editorial.css?v=20261119-public-clean">
+<link rel="stylesheet" href="../css/products.css?v=20261119-public-clean">
+<link rel="stylesheet" href="../css/cart.css?v=20261119-public-clean">
+<link rel="stylesheet" href="../css/site-menu.css?v=20261119-public-clean">
+
+
+
+<link rel="stylesheet" href="../css/site-footer.css?v=20261119-public-clean">
+<link rel="stylesheet" href="../css/hub-blocks.css?v=20261119-public-clean">
+<link rel="stylesheet" href="../css/page-title-en.css?v=20261119-public-clean">
+
+
+
+
+
+
+<link rel="stylesheet" href="../css/enterprise.css?v=20261119-public-clean">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
 <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="stylesheet" href="/css/promo-bar.css">
+<link rel="stylesheet" href="/css/promo-bar.css?v=20261119-public-clean">
 <style>
   :root{
     --bg: #f5f5ed;
@@ -65,32 +65,32 @@
     --pill-bg: rgba(193,193,189,0.35);
     --gap-sm: 20px;
     --gap-md: 30px;
-    /* --gap-lg／--gap-double／--pad-h：這頁是最早定案這組編輯式版面節奏的
-       頁面，數值後來被搬到 tokens.css 變成全站共用的 --editorial-gap／
-       --editorial-gap-double／--pad-h（含 768px 響應式切換）。這裡改成
-       直接指到那組共用 token，不再自己重複定義一份數值：改 tokens.css，
-       這頁的版面節奏會跟著一起變，不用兩邊分別維護。--pad-h 名稱兩邊
-       本來就相同，直接吃 tokens.css 那份、這裡不用再宣告一次。 */
+
+
+
+
+
+
     --gap-lg: var(--editorial-gap);
     --gap-double: var(--editorial-gap-double);
     --max-text: 800px;
 
-    /* 背景版本開關（背景1／背景2）：block＝背景1（下面 .ambient-bg／
-       .ambient-grain 的暈染動畫，原本設計）／none＝背景2（純白底，目前
-       啟用，測試用）。這個開關 home.css 也有一份幾乎一樣的，2026-10-17
-       這頁已經補載 home.css（給新加的 .site-header 用，見上面 <head>
-       說明），但這裡的 .ambient-bg／.ambient-grain 是這頁原本就有、獨立
-       於 home.css 那份的規則（class 名稱一樣，靠後面載入順序贏），維持
-       獨立一份不合併，避免牽動 home.css 那份首頁專屬的參數。--panel-bg
-       （.page-tint 用）已經改吃上面新載入的 colors.css，不用在這裡重複
-       宣告。 */
-    /* 2026-11-11：曾經試過打開當初寫好、關閉中的「背景1」（暈染漸層動畫
-       ＋米色蓋層），使用者反饋底色要維持原本官網的白底色系，改回來——
-       不開 --ambient-display，--panel-bg 也不覆寫，直接吃 colors.css
-       的全站預設值（白底），跟其他頁面一致。版面變化（襯線眉標／
-       .split-row 圖文交換／.circle-duo 雙圓形）維持不動，只有底色改回
-       來。 */
-    --ambient-display: none; /* 背景1用：block（目前關閉，維持白底） */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    --ambient-display: none;
   }
   .p30{ padding-left: var(--pad-h); padding-right: var(--pad-h); }
   .p20{ padding: 20px; }
@@ -104,15 +104,15 @@
     font-size:14px;
     line-height:1.5;
     letter-spacing: var(--letter-spacing-base);
-    /* 2026-10-17 補上這行：剛載入的 home.css 把 body 設成 overflow:hidden
-       （html,body{height:100%}＋body{overflow:hidden}），那組規則是給
-       全站其他頁面的 .product-page 固定容器架構用的（.product-page 自己
-       position:fixed + overflow-y:auto 負責捲動，所以 body 本身故意不給
-       捲動）。這頁從來就不是那套架構，一直是最單純的「整頁本身捲動」，
-       套用 home.css 的 body{overflow:hidden} 之後，超出一個螢幕高度的
-       內容完全沒辦法捲上去看，使用者反映「後面就都沒有了，無法往下
-       滑」——這裡用跟 home.css 同特異度的規則（這段 <style> 載入順序
-       在後面，同特異度後者贏）蓋回正常的可捲動狀態，不用整頁改架構。 */
+
+
+
+
+
+
+
+
+
     height: auto;
     overflow: visible;
   }
@@ -120,10 +120,10 @@
     height: auto;
   }
 
-  /* ---------- 首頁同款動畫底色 ----------
-     斜角漸層＋緩慢位移動畫＋blur，色票現在直接吃上面新載入的 colors.css
-     （之前這頁沒載入那份檔案，色票是改寫成字面色碼的權宜做法，現在補回
-     真正的變數引用）。 */
+
+
+
+
   .ambient-bg{
     position: fixed;
     inset: -60px;
@@ -165,35 +165,35 @@
   @media (prefers-reduced-motion: reduce){
     .ambient-bg{ animation: none; }
   }
-  /* 半透明米色蓋在 ambient-bg／ambient-grain 上面，讓底下的暈染色隱約透出來。
-     故意不是直接寫在 body 上：body 的背景會被瀏覽器「提升」去畫最底層的
-     畫布，反而蓋在 .ambient-bg（z-index:-2）下面、完全被蓋住看不到，
-     實測結果整頁會變成沒有稀釋過的原始飽和漸層色，比首頁實際看到的濃豔
-     很多。改成一個包住全部內容的一般 wrapper div（不是額外疊一層蓋在
-     內容上面的 fixed 浮層，那樣反而會蓋住底下的文字），背景色直接當
-     wrapper 自己的底色，子元素本來就會正常疊在自己 parent 的背景之上，
-     不會有 body 那個「被提升去畫布」的特例問題。 */
+
+
+
+
+
+
+
+
   .page-tint{
     background: var(--panel-bg);
-    /* 2026-10-17 新換成的 .site-header 是 position:fixed（原本這頁是
-       position:sticky，會自然把內容往下推，不用額外留白），fixed 元素
-       整個脫離文件流、不會自動幫下面的內容讓出空間，不補 padding-top
-       的話標題「手作材料包」會被頂部列／跑馬燈列蓋住一截。用全站共用的
-       --ptpl-topbar-height（頂部列＋跑馬燈列的高度，見 css/promo-bar.css）
-       把這段高度補回來，跟其他子頁 .product-page 的 padding-top 用同一個
-       變數來源，之後跑馬燈列高度調整這裡會自動跟著變，不用回來改寫死的
-       數字。 */
+
+
+
+
+
+
+
+
     padding-top: var(--ptpl-topbar-height, var(--editorial-header-height));
   }
-  /* 2026-11-12 使用者反映桌面版首圖影片蓋住上方選單：--editorial-header-height
-     （tokens.css，58px）量的是 .product-page 那種單排「← 返回／標題／
-     購物車」頂部列，但這頁（商品總覽母頁）用的是完整文字導覽列，
-     site-menu.css 在 ≥1024px 會把 .site-header 切成兩排 grid（logo 一排、
-     導覽文字一排，見該檔案 @media(min-width:1024px) 那段），實測高度是
-     140px，比 58px 高出一大截——padding-top 只補了 58px 份的空間，導覽列
-     第二排因此被下面的首圖影片蓋住。這裡用瀏覽器實際量出來的 140px
-     補足落差，只在這個斷點生效（≥1024px 以下頂部列還是單排，58px 的
-     計算本來就是對的，不用動）。 */
+
+
+
+
+
+
+
+
+
   @media (min-width: 1024px) {
     .page-tint {
       padding-top: calc(var(--promo-bar-height, 36px) + 140px);
@@ -204,11 +204,11 @@
     font-weight:400;
     margin:0;
   }
-  /* 跟 base.css 同一組內文段落統一規格（見該處註解）：14px／字重400／
-     行高25.2px。這頁目前每個 <p> 都自己有 class（.intro、.overview
-     .body p、.overview .extra p 等），class 特異度比這裡的裸 p{} 高，
-     不受影響；這裡補上是為了跟其他頁面維持同一套標準，以後這頁如果
-     加裸 <p>，也會自動套用這個規格。 */
+
+
+
+
+
   p{
     font-size: var(--body-font-size);
     font-weight: var(--body-font-weight);
@@ -220,41 +220,41 @@
   .center{text-align:center;}
   .wrap{max-width:1400px; margin:0 auto; padding:0 30px;}
 
-  /* 2026-10-17：這頁原本在這裡自己刻了一整組 sticky header 樣式
-     （.back／.title／.enquire），服務的是手動寫死的舊版頭部（logo 靠左
-     ＋純文字「材料包」標題＋純文字「購物車」連結）。現在 <header> 已經
-     換成全站共用的 .site-header（見 <body> 開頭，樣式來自新載入的
-     home.css／site-menu.css），這組舊規則整段拿掉，不留著跟新樣式打架
-     （舊的是裸 header 元素選擇器，雖然特異度打不過 .site-header，但
-     多一份死掉的規則只會讓人搞不清楚現在真正生效的是哪一份）。 */
 
-  /* ---------- Hero ----------
-     2026-11-11 使用者反映大標要跟其他頁面（例如 faq/index.html 的
-     「預約須知／BEFORE YOU BOOK」）同一套邏輯，不要這頁自己發明一套
-     「中文置頂＋英文襯線大寫」的標題樣式。改用全站共用的
-     .work-heading／.page-title-en（css/page-title-en.css，見下面
-     <head> 補的 <link>），這頁原本自己刻的 h1／.tagline 樣式整段拿掉，
-     不再需要（取而代之的排版、字級、中英文上下順序都交給那份共用
-     CSS 決定）。 */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   .hero{
     padding: var(--gap-lg) var(--pad-h) var(--gap-md);
     text-align:center;
   }
-  /* 2026-11-11：使用者反映首圖影片要真的「貼合最上面」＋有 SCROLL 提示
-     （跟課程頁 .ent-hero.is-flush-top 的效果一樣：手機版影片貼齊螢幕
-     最頂端，透明的 .site-header／跑馬燈浮貼在影片上面，不是推開一段
-     留白再開始放影片）。
-     enterprise.css 原本 .ent-hero.is-flush-top 的負 margin 公式是
-     calc(-1 * (var(--editorial-header-height) + 69px))，那是算給
-     .product-page 用的（.product-page 的 padding-top 是
-     --ptpl-topbar-height + 69px，見 products.css 該處），這頁的容器是
-     自己的 .page-tint，padding-top 只有 --ptpl-topbar-height（沒有另外
-     + 69px，這頁沒有 .product-page 那層導覽連結列的高度差要補），直接
-     套用課程頁那組公式會往上拉過頭，變成影片上緣被跑馬燈列蓋掉一截。
-     這裡改成精準對應這頁實際 padding-top 的負值：
-     calc(-1 * var(--ptpl-topbar-height, var(--editorial-header-height)))，
-     桌面版（≥768px）維持原本 enterprise.css 的重設（改回小段正留白，
-     不貼齊），不用另外覆寫。 */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   .ent-hero.is-flush-top{
     margin-top: calc(-1 * var(--ptpl-topbar-height, var(--editorial-header-height)));
   }
@@ -281,8 +281,8 @@
     align-items:center;
     justify-content:center;
   }
-  /* 拍照代辦事項：直接寫在圖片佔位框裡，記錄之後要補拍哪張照片，
-     不是設計稿的正式文案——之後照片補上去就整段刪掉。 */
+
+
   .photo-note{
     max-width:80%;
     padding:12px;
@@ -292,7 +292,7 @@
     color:rgba(17,17,16,0.55);
   }
 
-  /* ---------- Fade-in on scroll ---------- */
+
   .fade-in{
     opacity:0;
     transform:translateY(30px);
@@ -305,7 +305,7 @@
   .delay-1{ transition-delay:.15s; }
   .delay-2{ transition-delay:.3s; }
 
-  /* ---------- Section: overview (label + text grid) ---------- */
+
   .overview{
     display:grid;
     grid-template-columns: 220px 1fr 1fr;
@@ -326,12 +326,12 @@
     line-height:1.7;
   }
 
-  /* ---------- Image + text split rows ----------
-     2026-11-11：這組 class 原本是還沒拍照片時的草稿佔位（整個沒有任何
-     HTML 在用，見上面「頁面補完」那段註解），現在拿來放「從傳統工藝，
-     變成在家就能做的事」「照著步驟，一步步完成」這兩段——不是重新發明
-     一套新版面語彙，是把本來就設計好、只是沒派上用場的結構接上真的
-     內容跟照片，順便補上原本沒寫的圖片填滿／襯線眉標樣式。 */
+
+
+
+
+
+
   .split-row{
     display:flex;
     gap:var(--gap-lg);
@@ -354,25 +354,25 @@
     height:100%;
     object-fit:cover;
   }
-  /* 2026-11-13 使用者反映貓咪被裁掉：這張直式照片（約 4:5）要塞進
-     4:3 橫式框，置中裁切垂直方向要扣掉快四成高度，貓咪頭部跟下面的
-     春聯字卡沒辦法同時留在框內——只調整裁切基準點治標不治本，往上挪
-     救到貓咪、下面的字卡就被裁掉，往下挪救字卡、貓咪頭又不見，框本身
-     塞不下兩個重點。改成直接把容器比例換成接近照片原始比例，裁切
-     幅度降到很小，貓咪跟字卡才能同時完整在框內。只調整這張照片用的
-     容器（.img-box--focus-top），不動 .img-box 那條共用規則本身——
-     這頁另外兩個 .split-row 區塊的照片維持原本 4:3 不受影響。 */
+
+
+
+
+
+
+
+
   .split-row .img-box--focus-top{ aspect-ratio:4/5; }
-  /* 2026-11-14 使用者要求流動畫／砂畫這兩段技法介紹改用去背成品圖的
-     輪播（跟上面「全系列材料包」格狀卡同一套 js/hero-colorway-
-     carousel.js），不是原本的實拍過程照——去背圖背景透明、菱形裁切，
-     跟實拍照片完全不同的呈現方式，不能沿用 .img-box 原本的
-     aspect-ratio:4/3＋漸層底色＋object-fit:cover（cover 會把菱形圖
-     裁切變形），另外開一個 modifier class，不動 .img-box 共用規則
-     本身（上面「從畫室技法...」那段用實拍貓咪照片，還是原本的
-     4:3／cover，不受影響）。方形容器＋object-fit:contain 讓菱形完整
-     顯示，position:relative 讓多張輪播圖可以疊在同一個位置淡入淡出
-     （邏輯跟 .koyama-product-card__media[data-hero-carousel] 一致）。 */
+
+
+
+
+
+
+
+
+
+
   .split-row .img-box--cutout{
     position:relative;
     aspect-ratio:1/1;
@@ -390,24 +390,24 @@
   .split-row .img-box--cutout img[data-carousel-frame].is-active{
     opacity:1;
   }
-  /* 砂畫那組用的是 combo-1/2/3.png（配色輪播示範圖，四周留了透明邊距，
-     菱形只佔圖寬約 66%），跟上面「全系列材料包」卡片同一個理由，放大
-     1.44 倍抵銷透明邊距，讓菱形視覺比例跟流動畫那組去背圖（裁得很緊，
-     不需要放大）看齊。只加在砂畫這個區塊，流動畫的 cutout 圖維持
-     原比例。 */
+
+
+
+
+
   .split-row .img-box--cutout--combo img[data-carousel-frame]{
     transform: scale(var(--colorway-scale, 1.44));
   }
-  /* 2026-11-14 使用者反映流動畫 4 色去背圖輪播切換時菱形會有一點
-     錯位——量過 4 張圖實際尺寸才發現，fluid-art-light-cutout-{red,
-     pink}.webp 是 900×897、菱形實際內容只佔圖寬約 94.6%，{pearl}.webp
-     是 900×898、菱形佔圖寬約 97.7%，{frost}.webp 是 900×910（四張裡
-     唯一比較高的），菱形佔圖寬同樣約 97.7％但因為畫布本身較高，
-     object-fit:contain 用高度去貼合容器，實際渲染出來的菱形又比
-     pearl 再縮小約 1.1%。四張菱形中心點都落在各自圖片中央（不是
-     偏移問題，單純大小不一致），用跟上面 combo 圖同一招，各自補一個
-     極小的 scale 讓四張菱形渲染大小統一（以 pearl 的比例為基準，
-     其餘三張只往上補，不會反而被裁切）。 */
+
+
+
+
+
+
+
+
+
+
   .split-row .img-box--cutout img[data-carousel-frame][src*="cutout-red"],
   .split-row .img-box--cutout img[data-carousel-frame][src*="cutout-pink"]{
     transform: scale(1.033);
@@ -415,7 +415,7 @@
   .split-row .img-box--cutout img[data-carousel-frame][src*="cutout-frost"]{
     transform: scale(1.011);
   }
-  /* 新流動畫圖透明邊距較多，補到砂畫同樣約95%的作品佔比。 */
+
   .split-row .img-box--cutout img[data-carousel-frame][src*="fluid-art-red-fu-"],
   .split-row .img-box--cutout img[data-carousel-frame][src*="fluid-art-pink-chun-"],
   .split-row .img-box--cutout img[data-carousel-frame][src*="fluid-art-frost-fu-"],
@@ -434,13 +434,13 @@
     .split-row{ padding-left:var(--content-pad); padding-right:var(--content-pad); }
   }
 
-  /* ---------- 英文眉標 ----------
-     每段故事開頭的英文大寫小標（STORY／TOGETHER／PROCESS）。2026-11-11
-     使用者反映原本另外補的襯線字體（Cormorant Garamond）跟其他頁面的
-     英文字體不一致、看起來太亂，拿掉字體跟品牌色覆寫，改成跟這頁
-     「材料包系列」卡片本來就在用的 .product-card__en（見
-     css/hub-blocks.css）同一套字體／字級邏輯——沿用全站預設的
-     --font-family-base，不是另外發明一套。 */
+
+
+
+
+
+
+
   .ed-label{
     display:block;
     margin-bottom: 10px;
@@ -450,17 +450,17 @@
     color: var(--color-text-secondary);
   }
 
-  /* ---------- 加購配件：分類標題＋引言 ----------
-     2026-11-13 使用者反映加購配件原本只有一張 banner（連到漸層沙 12 色
-     任選），看不出材料包其實還有其他 11 款加購／單買品，要求「改成
-     單個產品完全呈現如產品一樣，依照材料、功用分類」。拆成三組（色彩
-     升級／工具與收納／流動畫專屬），每組一個小標題＋一句引言，底下
-     重用 hub-blocks.css 既有但全站都還沒派上用場的 .tile／.tile-row
-     元件（圖滿版＋底部漸層疊字，本來就是「單個產品完整呈現」的卡片
-     樣式，不是分類入口用的 .product-card），不新增一套卡片視覺語言。
-     這裡只負責分類標題/引言這兩個這頁才有的文字樣式，卡片本身的欄數
-     規則（.addon-row／.addon-tile）歸在 hub-blocks.css，供其他頁面
-     之後也能重用同一組「依分類列出多款加購品」版面。 */
+
+
+
+
+
+
+
+
+
+
+
   .addon-intro{
     margin-top:12px;
     max-width:var(--max-text);
@@ -479,13 +479,13 @@
     color:#666;
   }
 
-  /* ---------- 雙圓形情境照（大家一起過年） ----------
-     koyama 的做法是兩張圓形裁切的照片並排（HANDPRINT／FOOTPRINT），這裡
-     借同一個視覺手法，但還沒有真的多人手作照片可以放——.placeholder-box
-     本身是方形佔位語彙，直接塞進圓形裁切框會被裁掉邊角文字，所以另外
-     包一層 .circle 負責裁圓＋置中內容，.placeholder-box 本身的虛線框先
-     拿掉（圓形裡再框一層方形虛線框視覺上會很怪），之後有照片時這層
-     .circle 不用拆，直接把 <img> 放進去就會自動裁成圓形。 */
+
+
+
+
+
+
+
   .circle-duo{
     display:flex;
     justify-content:center;
@@ -500,12 +500,12 @@
     gap:14px;
     width: min(220px, 34vw);
   }
-  /* 2026-11-11：第一版用 42vw／--gap-md（30px）算可用寬度時，漏算
-     .circle-duo 自己的左右 padding 也要從 getBoundingClientRect() 量到的
-     寬度扣掉才是兩個圓形實際可用的空間，手機版（實測 390px）扣掉
-     padding 後只剩約 310px，148px×2＋30px 的間距會超出、被擠到換行變成
-     直式堆疊。改成 34vw／16px 間距，連最窄的 320px 手機都還有餘裕維持
-     並排，不是堆成一直欄。 */
+
+
+
+
+
+
   .circle-duo__item .circle{
     width:100%;
     aspect-ratio:1/1;
@@ -530,40 +530,40 @@
     text-align:center;
   }
 
-  /* ---------- koyama 風格 PRODUCTS 卡片（圖片＋剪短名稱＋BUY 按鈕） ----------
-     跟 .product-card（hub-blocks.css，技法分類入口用）刻意分開一組，
-     用途不一樣：這裡每張卡片對應單一商品、有明確的 BUY 動作，不是
-     「點圖進某個分類」。auto-fit 讓款式數量增減時自動換行，不用為了
-     固定幾欄另外寫手機/桌面兩套斷點。 */
-  /* 2026-11-11 使用者反饋整體要再縮小、兩張圖之間留白也要加大：原本
-     minmax(140px,1fr) 會讓卡片撐滿整欄寬度（桌面版單張卡片將近
-     370px），改成固定上限 150px＋justify-content:center，卡片變小、
-     置中排列；gap 從 --gap-md（30px）加大到 48px，兩張卡片之間的
-     留白更明顯，不會擠在一起。 */
-  /* 2026-11-13 使用者反映這個區塊在桌面版（容器寬度上限 840px，見
-     .chapter 規則）固定兩欄並排，卡片只佔整個容器左側一小塊、右邊空
-     出一大片留白，看起來很侷促。改成 auto-fill：瀏覽器自己算容器
-     實際寬度能塞下幾欄固定 150px 的卡片（desktop 約 4-5 欄），
-     justify-content:center 讓這排卡片整體置中、多出來的空間變成兩側
-     留白，不是把卡片拉伸變形；手機版欄數變少（通常 2 欄）會自動換行，
-     不用另外寫手機/桌面兩套斷點。同時從「只有 5 款砂畫」擴充成涵蓋
-     砂畫＋流動畫全部春節款式（見下面新增的 6 張卡片），避免使用者
-     反映的「看起來只賣砂畫」——流動畫兩款因為質感/做法跟砂畫不同，
-     英文小標改標「FLUID ART」而不是逐字翻譯，讓人一眼看出這兩張跟
-     其他砂畫卡片是不同材質/做法。 */
-  /* 2026-11-13 使用者反映只有羊Diss舞蹈是 20×20cm，其他款式都是
-     15×15cm，要在版面上呈現這個等比例落差——改用 flex-wrap 取代
-     grid-template-columns 固定欄寬：grid 的每欄軌道寬度是整排統一的，
-     沒辦法讓其中一張卡片的格子本身比其他張大；flex 的每個項目可以各自
-     宣告自己的 flex-basis/width，一樣會自動換行置中，但卡片本身的
-     尺寸可以不同。基準 150px／130px（手機）對應 15cm，羊Diss舞蹈
-     20cm 的卡片用「150px × (20/15)」算出的 200px／173px，.koyama-
-     product-card__media 本身是 width:100% + aspect-ratio:1/1（見下面），
-     卡片變寬，裡面的正方形圖片區塊就跟著等比例變大，不用另外用
-     padding 內縮縫圖的方式（那是 shop.html 格狀卡「所有卡片格子大小
-     固定、只縮圖片本身」的做法，這裡卡片格子大小本來就可以不同，
-     更單純）。 */
-  .koyama-product-grid{
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  .shop-product-grid{
     display:flex;
     flex-wrap:wrap;
     align-items:flex-start;
@@ -572,11 +572,11 @@
     margin-top: var(--gap-md);
   }
   @media (max-width: 480px){
-    .koyama-product-grid{
+    .shop-product-grid{
       gap: 24px;
     }
   }
-  .koyama-product-card{
+  .shop-product-card{
     display:flex;
     flex-direction:column;
     align-items:center;
@@ -585,134 +585,134 @@
     flex: 0 0 150px;
     width:150px;
   }
-  .koyama-product-card--lg{
+  .shop-product-card--lg{
     flex-basis:200px;
     width:200px;
   }
   @media (max-width: 480px){
-    .koyama-product-card{ flex-basis:130px; width:130px; }
-    .koyama-product-card--lg{ flex-basis:173px; width:173px; }
+    .shop-product-card{ flex-basis:130px; width:130px; }
+    .shop-product-card--lg{ flex-basis:173px; width:173px; }
   }
-  .koyama-product-card__media{
+  .shop-product-card__media{
     position:relative;
     width:100%;
     aspect-ratio: 1/1;
     overflow:hidden;
-    /* 2026-11-13 使用者參考 koyama.com.tw/newbornbox/，產品圖片下方有
-       一點淡淡的陰影，讓卡片有「擺在桌面上」的立體感，不是平貼死板的
-       去背圖。用 filter:drop-shadow() 而不是 box-shadow——這批去背圖
-       都是菱形裁切、背景透明，box-shadow 只會畫出矩形容器的陰影（跟
-       實際菱形輪廓對不起來），drop-shadow 是跟著圖片本身的透明度輪廓
-       走，陰影形狀會貼合菱形邊緣，效果才會跟參考站一樣。filter 要放在
-       容器（.koyama-product-card__media）本身，不是裡面的 <img>——這層
-       容器有 overflow:hidden（限制配色輪播 scale(1.44) 的圖片／hover
-       放大不要溢出到隔壁卡片），但 overflow:hidden 只會裁切「容器裡的
-       內容」，不會裁掉「套用在容器本身的 filter 效果」，所以陰影還是
-       會正常露出到容器範圍外，不用把 overflow 拿掉。 */
+
+
+
+
+
+
+
+
+
+
+
     filter: drop-shadow(0 10px 14px rgba(20,20,10,0.16));
   }
-  .koyama-product-card__media img{
+  .shop-product-card__media img{
     display:block;
     width:100%;
     height:100%;
     object-fit:contain;
     transition: transform var(--duration-normal, .3s) ease;
   }
-  .koyama-product-card:hover .koyama-product-card__media img{
+  .shop-product-card:hover .shop-product-card__media img{
     transform: scale(1.04);
   }
-  /* 2026-11-13 使用者要求「全系列材料包」的砂畫款式比照首頁／商品總覽
-     格狀卡既有的「配色動態展示」輪播（js/hero-colorway-carousel.js，
-     出貨配色→示範配色二→示範配色三，三張都是去背透明圖），不要維持
-     單張靜態去背圖——跟 .shop-card__media[data-hero-carousel] 同一套
-     疊圖＋淡入淡出邏輯，只是換成這頁卡片的命名空間。只有 7 款有準備
-     三色示範圖的砂畫套用（見下面 HTML data-hero-carousel），流動畫／
-     羊Diss舞蹈系列沒有這組素材，維持原本單張圖片不受影響。 */
-  .koyama-product-card__media[data-hero-carousel] img[data-carousel-frame]{
+
+
+
+
+
+
+
+  .shop-product-card__media[data-hero-carousel] img[data-carousel-frame]{
     position:absolute;
     inset:0;
     opacity:0;
-    /* 2026-11-13 使用者反映「燈上納福」這類配色輪播卡片，跟「經典紅」
-       這類單張去背圖卡片明明容器一樣大（同屬 15cm 款式），但畫面上
-       看起來明顯比較小——實際量圖才發現根因：combo-1/2/3.png（配色
-       輪播用的三色示範圖）去背時四周留了不少透明邊距，菱形本身只佔
-       整張圖寬度約 66%；使用者自己做的去背圖（經典紅／迎春粉／羊舞紅／
-       藍那幾張）裁得很緊，菱形佔圖寬 94～96%。兩種圖都用
-       object-fit:contain 塞進同樣大小的正方形容器，contain 是以「整張
-       圖片（含透明邊距）」去貼合容器，不是以「看得到的菱形範圍」貼合，
-       所以留白多的 combo 圖，菱形看起來自然小一圈，不是容器尺寸本身的
-       問題。這裡直接把輪播圖片等比放大 1.44 倍（0.94 ÷ 0.66 ≈ 1.44，
-       抵銷掉 combo 圖多出來的透明邊距），讓菱形實際佔框比例跟其他卡片
-       看齊——改圖本身（重新裁切 21 張 combo 圖）影響範圍太大（這些圖
-       同時也是商品頁首圖／商店格狀卡在用的素材），用 CSS 補償範圍只
-       限定在這頁的輪播卡片，不動到共用素材。 */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     transform: scale(var(--colorway-scale, 1.44));
     transition: opacity 1.1s ease, transform var(--duration-normal, .3s) ease;
   }
-  .koyama-product-card__media[data-hero-carousel] img[data-carousel-frame].is-active{
+  .shop-product-card__media[data-hero-carousel] img[data-carousel-frame].is-active{
     opacity:1;
   }
-  /* 上面「全部卡片 hover 放大 1.04 倍」那條規則（.koyama-product-card:hover
-     .koyama-product-card__media img）選擇器特異度比這裡的
-     [data-hero-carousel]／[data-carousel-frame] 屬性選擇器低，hover 時
-     會被這裡的輪播基準 scale(1.44) 整個蓋掉（CSS transform 不會疊加
-     兩條規則，特異度高的那條整個贏），輪播卡片滑鼠移過去不會再放大。
-     補一條特異度更高、兩個效果疊在一起的規則，輪播卡片才會跟其他卡片
-     一樣有 hover 放大回饋。 */
-  .koyama-product-card:hover .koyama-product-card__media[data-hero-carousel] img[data-carousel-frame]{
+
+
+
+
+
+
+
+  .shop-product-card:hover .shop-product-card__media[data-hero-carousel] img[data-carousel-frame]{
     transform: scale(var(--colorway-scale, 1.44)) scale(1.04);
   }
-  /* 珠光去背圖主體佔78%，原首圖修正版本佔76.67%；
-     補償到與經典紅同樣的94.44%，不使用砂畫專用1.44倍。 */
-  .koyama-product-card__media[data-pink-colorway]{
+
+
+  .shop-product-card__media[data-pink-colorway]{
     --colorway-scale: 1.211;
   }
-  .koyama-product-card__media[data-red-colorway],
-  .koyama-product-card__media[data-frost-colorway]{
+  .shop-product-card__media[data-red-colorway],
+  .shop-product-card__media[data-frost-colorway]{
     --colorway-scale: 1.207;
   }
-  .koyama-product-card__media[data-pearl-colorway]{
+  .shop-product-card__media[data-pearl-colorway]{
     --colorway-scale: 1.211;
   }
-  .koyama-product-card__media[data-pearl-colorway] img:first-child{
+  .shop-product-card__media[data-pearl-colorway] img:first-child{
     --colorway-scale: 1.232;
   }
-  /* 名稱改成「字＋英文翻譯」兩層（見上面 <style> 開頭補充說明），中文字
-     大、英文小寫字放大寫＋拉開字距放在下面，像是替這個字做簡短介紹，
-     不是只丟一個單字。
 
-     2026-11-13 使用者參考 koyama.com.tw/newbornbox/ 的 PRODUCTS 區塊
-     （圖片下方「二O二六／馬年」那組極小、不加粗的說明文字），反映
-     我們這裡的字級字重太搶眼，看起來沒那麼精緻——原本中文字 22px／
-     700（粗體）比參考站明顯大很多，改成 15px／500（半粗），不是純
-     常規字重 400，是因為這裡的中文字本身還是商品卡片的主要辨識文字
-     （不是純裝飾說明），完全比照參考站的極輕量字重會太弱、跟底下
-     的英文說明字分不出主副層級；降到 500 介於「比參考站粗一點」跟
-     「比原本 700 輕很多」之間，視覺上收斂但還是看得出主次。 */
-  .koyama-product-card__name{
+
+
+
+
+
+
+
+
+
+
+
+  .shop-product-card__name{
     display:flex;
     flex-direction:column;
     align-items:center;
     gap:6px;
     margin:0;
   }
-  .koyama-product-card__name-cn{
+  .shop-product-card__name-cn{
     font-size:15px;
     font-weight:500;
     letter-spacing:0.5px;
   }
-  .koyama-product-card__name-en{
+  .shop-product-card__name-en{
     font-size:10px;
     letter-spacing:1.5px;
     text-transform:uppercase;
     color: var(--color-text-secondary);
   }
-  /* 2026-11-11 使用者要求拿掉 BUY 按鈕，改成點圖片／名稱直接進商品頁
-     （整張卡片本來就包在 <a> 裡，拿掉按鈕不影響可點擊範圍）。
-     .koyama-product-card__buy 這個 class 已經沒有 HTML 在用，規則
-     整段留著沒意義，一併刪除。 */
 
-  /* ---------- Gallery (stacked full-width images) ---------- */
+
+
+
+
+
   .gallery{
     display:flex;
     flex-direction:column;
@@ -739,13 +739,13 @@
     color: var(--ink);
   }
 
-  /* ---------- Meta info (Scope / Team / Share) ---------- */
+
   .meta{
     padding: var(--gap-lg) var(--pad-h);
     border-top:1px solid var(--line);
   }
-  /* 比較表格：直接用真的 <table>，寬度不夠時整個表格自己橫向捲動
-     （overflow-x:auto），不會把整個頁面撐出橫向捲軸。 */
+
+
   .meta-table-wrap{
     overflow-x:auto;
   }
@@ -776,7 +776,7 @@
   .meta td.tier{ color:#666; font-size:12px; white-space:nowrap; }
   .meta td.price{ font-variant-numeric: tabular-nums; white-space:nowrap; }
 
-  /* ---------- More projects ---------- */
+
   .more-projects{
     padding: var(--gap-lg) var(--pad-h);
     border-top:1px solid var(--line);
@@ -802,8 +802,8 @@
     margin-bottom:var(--gap-md);
     overflow:hidden;
   }
-  /* 深色底的卡片，拍照代辦文字改用淺色、不用跟 hero-image 那類淺色底一樣的
-     深色字，不然會完全看不見。 */
+
+
   .project-card .photo-note{
     color:rgba(245,245,237,0.7);
   }
@@ -816,18 +816,18 @@
   }
   .project-card:hover span{ transform:scale(1.05); }
 
-  /* ================= 頁面補完（2026-10-24） =================
-     這頁原本的 .meta 比較表格／.gallery／.more-projects 都是當年還沒拍
-     照片時留下的草稿佔位內容（見 git 歷史），現在用討論過的模擬圖定案
-     版面補完（2026-11-11 補充：「材料包系列」技法入口卡（流動畫／砂畫）
-     後來因為流動畫款式太少、點進去多此一舉，整段拿掉了，不是這裡沒寫
-     完）；新增「加購配件」滿版 banner 讓 12 色漸層沙的選色組圖有地方
-     曝光；「其他服務」兩張卡片換成真的實體課程／企業活動照片。版面寬度
-     套用全站既有的 840px 置中規則（--content-max-width／--content-pad，
-     見 products.css .content-container 那組規則），不是自己發明寬度。
-     .content-block／.product-row／.feature-tile／.tile 這組共用區塊元件
-     已經抽到 ../css/hub-blocks.css（課程 hub 頁、首頁拼貼區塊都會共用
-     同一份），這裡只留這頁自己專屬的 .overview 寬度覆寫跟 Hero 樣式。 */
+
+
+
+
+
+
+
+
+
+
+
+
   .content-block--hero .hero{
     padding:0;
     text-align:center;
@@ -843,7 +843,7 @@
     }
   }
 
-  /* ---------- Footer ---------- */
+
   footer{
     padding: var(--gap-lg) var(--pad-h) calc(var(--gap-lg) + 80px);
     border-top:1px solid var(--line);
@@ -868,15 +868,15 @@
     color:#666;
   }
 
-  /* ---------- Responsive ---------- */
+
   @media (max-width: 768px){
     .overview{ grid-template-columns: 1fr; }
-    /* 原本的 align-items:center 是給桌面版左右並排時，圖片跟文字垂直置中用的；
-       手機版變成上下堆疊（column）後，center 會讓子元素縮成內容寬度，圖片
-       (.img-box 只有 aspect-ratio、沒有內容撐開寬度) 因此整個垮成 0 寬 0 高、
-       完全不可見。手機版改回 stretch，讓圖片跟文字都撐滿整欄寬度。 */
+
+
+
+
     .split-row, .split-row.reverse{ flex-direction:column; align-items:stretch; }
-    /* 製作場景介紹：手機輪播寬高各縮為原本一半，保留完整作品。 */
+
     .split-row .img-box--cutout { width:50%; flex:none; align-self:center; }
   }
   .home-entry--static:hover .home-entry__media img { transform: none; }
@@ -885,7 +885,7 @@
     .studio-story__opening { text-align: center; }
   }
 
-  /* 畫室設計故事：左上文字、中央作品、右下文字，不作購買入口。 */
+
   .studio-story__opening { max-width: 75%; }
   .studio-story__opening p {
     margin: 0;
@@ -893,19 +893,19 @@
     font-weight: var(--heading-font-weight);
     line-height: 2;
   }
-  /* 2026-11-12：.studio-story__art 縮小尺寸後（見下面 max-width），
-     原本靠右對齊、佔頁面 66% 寬的 .studio-story__closing 會跟圖片
-     分離、中間空出一大片——把兩者包進這個共同容器，容器尺寸就是
-     圖片本身的尺寸，文字用絕對定位貼著容器（也就是圖片）的右下角
-     延伸出去，不管圖片縮多小，文字永遠黏在圖片角落，不會分離。 */
+
+
+
+
+
   .studio-story__art-wrap {
     position: relative;
     width: 78%;
-    /* 問題出在 78% 是跟著「視窗寬度」算的，螢幕越寬這個正方形就跟著
-       等比例放大，寬螢幕上會撐到非常巨大，遠超過一個螢幕高度（參考
-       koyama.com.tw/newbornbox/ 那種一個畫面就看得完的配置）。維持
-       原本「置中正方形構圖」不變（使用者確認要保留），加固定像素
-       上限，不管螢幕多寬都不會超過這個尺寸。 */
+
+
+
+
+
     max-width: 380px;
     margin: var(--space-6) auto 0;
   }
@@ -921,18 +921,18 @@
     display: block;
     width: 100%;
     height: auto;
-    /* 現有白底作品照暫以遮罩示意；正式去背照到位後可移除此遮罩。 */
+
     clip-path: polygon(50% 15.4%, 93.2% 49.9%, 50% 85.2%, 6% 50%);
     margin: 0;
   }
   .studio-story__closing {
-    /* 2026-11-12 使用者反映這段文字被下一個區塊的內容擋住、希望位置
-       高一點：原本 top:100% 是從圖片底邊「往下」延伸整段文字的高度，
-       但 .studio-story__art-wrap 的高度不會跟著這個絕對定位的子元素
-       撐開（絕對定位元素不計入父層高度），所以文字會一路往下蓋到
-       下一個區塊的內容上面。改成 bottom:0，文字改成從圖片底邊「往上」
-       長，整段文字都還在圖片的高度範圍內（頂多超出圖片上緣，不會
-       再往下蓋到下一個區塊），視覺上也更接近「貼著圖片右下角」。 */
+
+
+
+
+
+
+
     position: absolute;
     left: 100%;
     bottom: 0;
@@ -946,19 +946,19 @@
     line-height: 2;
     color: var(--color-text-secondary);
   }
-  /* 2026-11-13 使用者反映材料包頁在約 481px～840px 這段寬度（平板直放／
-     小筆電視窗常見寬度）會橫向溢出，量出來最多溢出將近 100px——根因
-     是下面這個斷點原本只到 600px，600px～840px 這段寬度 .studio-story__art-wrap
-     的 78% 寬已經被 max-width:380px 封頂，但可用內容寬度（.chapter 在
-     841px 以下沒有 840px 寬度上限，是跟著視窗等比例縮放）還沒大到能
-     留出足夠空間給 .studio-story__closing 往右延伸的 220px＋16px留白，
-     文字因此被推出可視範圍外、撐寬整個頁面。改成跟 .chapter 本身切換
-     到固定 840px 容器的斷點一致（841px），只有在容器寬度已經固定
-     （desktop ≥841px，content 區域穩定有 800px 可用）才用「文字貼在
-     圖片右下角」的絕對定位排版；841px 以下（包含手機跟這次抓到問題的
-     平板寬度）一律用原本手機版那套「圖片滿版＋文字接在下面置中」的
-     堆疊排版，不會再有兩者之間「圖片已經固定 380px、但容器還沒固定
-     800px」的危險中間地帶。 */
+
+
+
+
+
+
+
+
+
+
+
+
+
   @media (max-width: 840px) {
     .studio-story__opening { max-width: 100%; }
     .studio-story__art-wrap { width: 100%; max-width: none; }
@@ -1071,12 +1071,12 @@
   <div class="site-menu-backdrop" id="site-menu-backdrop"></div>
   <nav class="site-menu" id="site-menu" aria-label="全站選單" data-menu-base="../"></nav>
 
-  <!-- 首圖影片：借用春聯砂畫材料包「春」成品完成那一刻的展示影片，不是
-       隨便挑一支——這頁是材料包總覽（涵蓋全部款式），用任何單一款式的
-       完整商品介紹影片都不合適，但「完成瞬間」這個情緒片段是所有款式
-       共通的，挑視覺最討喜的一款代表整體質感即可。影片本身已經是
-       4:5 直式比例（跟 .ent-hero__photo 預設 aspect-ratio 剛好吻合，
-       不用額外的 .is-landscape／.is-portrait-video 覆寫）。 -->
+
+
+
+
+
+
   <section class="ent-hero fade-in is-flush-top">
     <div class="ent-hero__media">
       <video class="ent-hero__photo is-full-bleed" src="../assets/videos/products/sand-art-chun/gallery-reveal.mp4" poster="../assets/images/products/sand-art-chun/sand-art-chun-gallery-reveal-poster.jpg" preload="auto" autoplay muted loop playsinline aria-label="完成的「春」砂畫材料包成品展示影片"></video>
@@ -1099,15 +1099,15 @@
     </div>
   </section>
 
-  <!-- 2026-11-11 使用者參考 koyama.com.tw/newbornbox/ 的敘事節奏（情感開場→
-       理念/信任→情境代入→材質/手作理性說明→產品系列→行動呼籲），把原本
-       「專案概述」那兩格還沒寫完的佔位文字，換成實際的敘事段落。只改這頁
-       （材料包引導頁），不動個別商品頁——那些頁面本來就各自有自己的
-       「商品介紹」「商品詳細」章節，不需要套用同一套節奏。
-       下面幾個新章節直接沿用全站既有的 .chapter／.chapter__block／
-       .chapter__banner-photo／.home-entry-row／.placeholder-box 這幾組
-       class（分別是商品頁敘事段落、首頁情境入口卡、還沒有照片時的誠實
-       佔位框），不新增一套獨立的版面語彙。 -->
+
+
+
+
+
+
+
+
+
   <section class="split-row fade-in">
     <div class="col img-box img-box--focus-top">
       <img src="../assets/images/products/sand-art-fu/sand-art-fu-gallery-06.jpg" alt="在家手作砂畫材料包，畫室的貓也在一旁陪伴" loading="lazy">
@@ -1122,14 +1122,14 @@
     <div class="studio-story__opening">
       <p>從圖案設計、材料搭配，<br>由日宣繪畫室一步步準備。</p>
     </div>
-    <!-- 2026-11-12 使用者反映縮小作品圖尺寸後，下面的「From Our
-         Studio」文字段落（.studio-story__closing）變成跟圖片距離很遠、
-         中間一大片空白——原本這段文字是用「靠右對齊、寬度佔頁面 66%」
-         的方式排版，圖片縮小前剛好貼著圖片右側，圖片縮小後兩者失去
-         關聯。改成文字跟圖片包在同一個 .studio-story__art-wrap 容器裡，
-         文字用絕對定位貼齊容器（也就是圖片）的右下角，不管圖片多大
-         都會黏在它旁邊，不會再分離。手機版拿掉絕對定位，退回原本上下
-         堆疊排版（小螢幕空間不夠疊在圖片角落會太擠）。 -->
+
+
+
+
+
+
+
+
     <div class="studio-story__art-wrap">
       <figure class="studio-story__art" role="img" aria-label="羊Diss舞蹈紅、藍兩款春聯砂畫，羊群圍繞福字起舞">
         <img class="studio-story__red" src="../assets/images/products/sand-art-artist/sand-art-artist-red-main.jpg" alt="" aria-hidden="true" loading="lazy" width="1120" height="1400">
@@ -1149,11 +1149,11 @@
 
   </section>
 
-  <!-- 2026-11-11 使用者要求把拿掉的「材料包系列」入口卡換成兩段技法
-       介紹（流動畫／砂畫各自的操作特性跟適合情境），不是單純的分類
-       導流入口，是讓訪客看懂兩種材料差在哪裡、自己適合哪一種。沿用
-       已經在這頁用過的 .split-row／.split-row.reverse 圖文交換版面，
-       跟上面幾段敘事維持同一套視覺語言。 -->
+
+
+
+
+
   <section class="split-row fade-in">
     <div class="col img-box img-box--cutout" data-hero-carousel data-carousel-loop>
               <img class="is-active" src="../assets/images/products/fluid-art/fluid-art-red-fu-01.webp?v=clear1" alt="經典紅金福成品參考" width="1200" height="1200" loading="eager" data-carousel-frame>
@@ -1196,18 +1196,18 @@
   </section>
 
   <section class="split-row reverse fade-in">
-    <!-- 2026-11-14 使用者反映這裡只放福星一款看起來像只有一種砂畫，
-         改成涵蓋全部 7 款有準備配色示範圖的砂畫產品，且每款的 3 張
-         配色示範（combo-1 出貨配色／combo-2／combo-3）都放進來，
-         7×3=21 張。原本試過另外寫一支 js/sand-art-cutout-shuffle.js
-         在 hero-colorway-carousel.js 初始化前把這 21 張洗牌，但使用者
-         反饋不要隨機排序，只要「21 張依序各播一次、播完整輪從頭
-         開始」就好——這其實正是 hero-colorway-carousel.js 本身不用
-         額外處理就有的行為（照 DOM 順序從第一張播到最後一張，配合
-         data-carousel-loop 播完一輪自動從頭開始，不會中途跳著播或
-         漏掉某幾張），所以把那支洗牌腳本整個移除，這裡維持固定順序
-         （福星→春結→花財→格裡納福→格裡迎春→燈上納福→燈上迎春，
-         每款各出貨配色／配色二／配色三）。 -->
+
+
+
+
+
+
+
+
+
+
+
+
     <div class="col img-box img-box--cutout img-box--cutout--combo" data-hero-carousel data-carousel-loop>
       <img class="is-active" src="../assets/images/products/sand-art-fu/sand-art-fu-combo-1.png" alt="福星砂畫材料包成品參考圖（出貨配色）" loading="lazy" data-carousel-frame>
       <img src="../assets/images/products/sand-art-fu/sand-art-fu-combo-2.png" alt="福星砂畫材料包成品參考圖（配色示範二）" loading="lazy" data-carousel-frame>
@@ -1240,146 +1240,146 @@
     </div>
   </section>
 
-  <!-- 2026-11-11 使用者參考 koyama.com.tw/newbornbox/ 的 PRODUCTS 區塊
-       （圖片＋剪短名稱），加在「照著步驟」段落下面。原本比照參考站做了
-       獨立的 BUY 按鈕，使用者後來反饋拿掉，改成點圖片／名稱（整張卡片）
-       直接進商品頁，不需要額外的按鈕。沒有用全站既有的 .product-card
-       （那個是技法分類入口用，不是單一商品動作），這裡另外做一組新
-       元件，見下面 <style> .koyama-product-grid。標題下面加一句置中
-       說明（呼應參考站
-       PRODUCTS 標題下的「寶寶出生的那一年最具意義」那句），點出這批
-       款式共通的主題：傳統春聯斗方，用新的形式留下來。
 
-       每張卡片的名稱改成「字＋英文翻譯」（例如 福／Fortune），不是只有
-       單一個字——使用者反饋單字太潦草，像是漏寫，改成字＋英文有在
-       「介紹」這個字的感覺，外國人也看得懂。
 
-       2026-11-11 使用者提供自己已經做好的去背圖（去背邊緣乾淨、沒有
-       撕紙毛邊雜訊，比我本機用 scipy 做的版本品質好很多），改用使用者
-       提供的檔案（來源：桌面／沙畫官網／沙畫搭配自己的顏色／各字資料夾
-       ／{字}-沙畫模擬-01-去背.png），不再用本機去背的版本。原始檔案是
-       1657×1657 的無壓縮 PNG（6.5MB／張，5 張約 32MB，對網頁來說太大），
-       轉存成 900px 寬的 WebP（約 70-110KB／張），品質設 82，透明度不受
-       影響，副檔名從 .png 改 .webp。 -->
-  <!-- 2026-11-13 使用者反映這個區塊原本只放 5 款砂畫，看起來像是只賣
-       砂畫，流動畫沒有被平均推送——加上流動畫兩款（經典紅／迎春粉）
-       跟砂畫另外 2 款當時還沒收進來的款式（燈上迎春／燈上納福／藝術家
-       系列羊Diss舞蹈紅＋藍），讓這個總覽區塊涵蓋全部春節系列材料包，
-       不是只有部分款式。
 
-       7 款真的有準備「配色動態展示」素材的砂畫（原本 5 款＋新加的
-       燈上迎春／燈上納福），比照首頁／商品總覽格狀卡（products/shop.html）、
-       商品頁首圖同一套輪播（js/hero-colorway-carousel.js＋
-       PRODUCT_COLORWAY_FRAMES 的 combo-1／2／3 去背圖），改成「出貨
-       配色→示範配色二→示範配色三」自動循環播放，不是單張靜態圖——
-       這個區塊位置在頁面偏下方，比照 js/related-products.js 的做法加上
-       data-carousel-loop（播完一輪會重頭再播，不會訪客捲到這裡時剛好
-       已經播完定格），不是只播一輪就停。
 
-       羊Diss舞蹈紅／藍、流動畫經典紅／迎春粉這 4 款沒有配色動態展示
-       素材，但使用者要求這個區塊統一用去背圖，不要留白底＋陰影的
-       「-main.jpg」成品照。羊Diss舞蹈紅／藍本機用 scipy／PIL 寫腳本去背
-       （沒有 rembg 這類語意分割模型，用純色距離＋凸包的做法）：先算
-       四個角落的底色，找出跟底色距離夠遠（夠飽和／夠深）的像素，取
-       這些像素的凸包（convex hull）當作整張產品卡片的範圍，範圍內
-       一律視為不透明（不逐像素判斷顏色），範圍外去背透明。這樣即使
-       卡片裡有白色線條或圖案（例如羊Diss舞蹈的白色羊群剪影）剛好跟
-       背景一樣接近白色、又剛好碰到卡片邊緣，也不會被誤判成背景而被
-       挖空——單純用「每個像素跟背景色距離多遠」做全域洪水填充
-       （flood fill）試過，羊群剪影真的在左側頂點碰到卡片邊緣，會
-       沿著那條路徑整塊被誤刪，凸包做法用的是「這個像素在不在卡片的
-       整體範圍內」，不受卡片內部顏色影響，不會有這個問題。
 
-       流動畫經典紅／迎春粉後來使用者直接提供品質更好的去背圖（真的
-       透明 PNG，邊緣乾淨，沒有本機凸包做法那種略微生硬的邊界），改用
-       使用者提供的檔案，不再用本機去背的版本——跟上面 2026-11-11 那次
-       5 款砂畫用使用者自己做的去背圖取代本機 scipy 版本是同樣的情況。
-       都統一轉存成 900px 寬的 WebP（品質 82），檔名加 -cutout 後綴，
-       跟其他款式的 cutout.webp 用同一套命名慣例。 -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   <section class="chapter fade-in" style="text-align:center;">
     <span class="ed-label">Collection</span>
     <h2 class="chapter__title">全系列材料包</h2>
     <p class="chapter__intro">砂畫、流動畫，傳統春聯斗方換一種新的形式留下來，挑一款喜歡的作法開始。</p>
-    <div class="koyama-product-grid">
-      <a class="koyama-product-card" href="sand-art-fu/">
-        <div class="koyama-product-card__media" data-hero-carousel data-carousel-loop>
+    <div class="shop-product-grid">
+      <a class="shop-product-card" href="sand-art-fu/">
+        <div class="shop-product-card__media" data-hero-carousel data-carousel-loop>
           <img class="is-active" src="../assets/images/products/sand-art-fu/sand-art-fu-combo-1.png" alt="福星砂畫材料包成品參考圖（出貨配色）" loading="lazy" data-carousel-frame>
           <img src="../assets/images/products/sand-art-fu/sand-art-fu-combo-2.png" alt="" aria-hidden="true" loading="lazy" data-carousel-frame>
           <img src="../assets/images/products/sand-art-fu/sand-art-fu-combo-3.png" alt="" aria-hidden="true" loading="lazy" data-carousel-frame>
         </div>
-        <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">福星</span><span class="koyama-product-card__name-en">Starry Fu</span></p>
+        <p class="shop-product-card__name"><span class="shop-product-card__name-cn">福星</span><span class="shop-product-card__name-en">Starry Fu</span></p>
       </a>
-      <a class="koyama-product-card" href="sand-art-chun/">
-        <div class="koyama-product-card__media" data-hero-carousel data-carousel-loop>
+      <a class="shop-product-card" href="sand-art-chun/">
+        <div class="shop-product-card__media" data-hero-carousel data-carousel-loop>
           <img class="is-active" src="../assets/images/products/sand-art-chun/sand-art-chun-combo-1.png" alt="春結砂畫材料包成品參考圖（出貨配色）" loading="lazy" data-carousel-frame>
           <img src="../assets/images/products/sand-art-chun/sand-art-chun-combo-2.png" alt="" aria-hidden="true" loading="lazy" data-carousel-frame>
           <img src="../assets/images/products/sand-art-chun/sand-art-chun-combo-3.png" alt="" aria-hidden="true" loading="lazy" data-carousel-frame>
         </div>
-        <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">春結</span><span class="koyama-product-card__name-en">Chun Tied</span></p>
+        <p class="shop-product-card__name"><span class="shop-product-card__name-cn">春結</span><span class="shop-product-card__name-en">Chun Tied</span></p>
       </a>
-      <a class="koyama-product-card" href="sand-art-cai/">
-        <div class="koyama-product-card__media" data-hero-carousel data-carousel-loop>
+      <a class="shop-product-card" href="sand-art-cai/">
+        <div class="shop-product-card__media" data-hero-carousel data-carousel-loop>
           <img class="is-active" src="../assets/images/products/sand-art-cai/sand-art-cai-combo-1.png" alt="花財砂畫材料包成品參考圖（出貨配色）" loading="lazy" data-carousel-frame>
           <img src="../assets/images/products/sand-art-cai/sand-art-cai-combo-2.png" alt="" aria-hidden="true" loading="lazy" data-carousel-frame>
           <img src="../assets/images/products/sand-art-cai/sand-art-cai-combo-3.png" alt="" aria-hidden="true" loading="lazy" data-carousel-frame>
         </div>
-        <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">花財</span><span class="koyama-product-card__name-en">Cai in Bloom</span></p>
+        <p class="shop-product-card__name"><span class="shop-product-card__name-cn">花財</span><span class="shop-product-card__name-en">Cai in Bloom</span></p>
       </a>
-      <a class="koyama-product-card" href="sand-art-na-fu/">
-        <div class="koyama-product-card__media" data-hero-carousel data-carousel-loop>
+      <a class="shop-product-card" href="sand-art-na-fu/">
+        <div class="shop-product-card__media" data-hero-carousel data-carousel-loop>
           <img class="is-active" src="../assets/images/products/sand-art-na-fu/sand-art-na-fu-combo-1.png" alt="格裡納福砂畫材料包成品參考圖（出貨配色）" loading="lazy" data-carousel-frame>
           <img src="../assets/images/products/sand-art-na-fu/sand-art-na-fu-combo-2.png" alt="" aria-hidden="true" loading="lazy" data-carousel-frame>
           <img src="../assets/images/products/sand-art-na-fu/sand-art-na-fu-combo-3.png" alt="" aria-hidden="true" loading="lazy" data-carousel-frame>
         </div>
-        <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">格裡納福</span><span class="koyama-product-card__name-en">Checked in Na Fu</span></p>
+        <p class="shop-product-card__name"><span class="shop-product-card__name-cn">格裡納福</span><span class="shop-product-card__name-en">Checked in Na Fu</span></p>
       </a>
-      <a class="koyama-product-card" href="sand-art-ying-chun/">
-        <div class="koyama-product-card__media" data-hero-carousel data-carousel-loop>
+      <a class="shop-product-card" href="sand-art-ying-chun/">
+        <div class="shop-product-card__media" data-hero-carousel data-carousel-loop>
           <img class="is-active" src="../assets/images/products/sand-art-ying-chun/sand-art-ying-chun-combo-1.png" alt="格裡迎春砂畫材料包成品參考圖（出貨配色）" loading="lazy" data-carousel-frame>
           <img src="../assets/images/products/sand-art-ying-chun/sand-art-ying-chun-combo-2.png" alt="" aria-hidden="true" loading="lazy" data-carousel-frame>
           <img src="../assets/images/products/sand-art-ying-chun/sand-art-ying-chun-combo-3.png" alt="" aria-hidden="true" loading="lazy" data-carousel-frame>
         </div>
-        <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">格裡迎春</span><span class="koyama-product-card__name-en">Checked in Chun</span></p>
+        <p class="shop-product-card__name"><span class="shop-product-card__name-cn">格裡迎春</span><span class="shop-product-card__name-en">Checked in Chun</span></p>
       </a>
-      <a class="koyama-product-card" href="sand-art-ying-chun-lantern/">
-        <div class="koyama-product-card__media" data-hero-carousel data-carousel-loop>
+      <a class="shop-product-card" href="sand-art-ying-chun-lantern/">
+        <div class="shop-product-card__media" data-hero-carousel data-carousel-loop>
           <img class="is-active" src="../assets/images/products/sand-art-ying-chun-lantern/sand-art-ying-chun-lantern-combo-1.png" alt="燈上迎春砂畫材料包成品參考圖（出貨配色）" loading="lazy" data-carousel-frame>
           <img src="../assets/images/products/sand-art-ying-chun-lantern/sand-art-ying-chun-lantern-combo-2.png" alt="" aria-hidden="true" loading="lazy" data-carousel-frame>
           <img src="../assets/images/products/sand-art-ying-chun-lantern/sand-art-ying-chun-lantern-combo-3.png" alt="" aria-hidden="true" loading="lazy" data-carousel-frame>
         </div>
-        <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">燈上迎春</span><span class="koyama-product-card__name-en">Lit in Chun</span></p>
+        <p class="shop-product-card__name"><span class="shop-product-card__name-cn">燈上迎春</span><span class="shop-product-card__name-en">Lit in Chun</span></p>
       </a>
-      <a class="koyama-product-card" href="sand-art-na-fu-lantern/">
-        <div class="koyama-product-card__media" data-hero-carousel data-carousel-loop>
+      <a class="shop-product-card" href="sand-art-na-fu-lantern/">
+        <div class="shop-product-card__media" data-hero-carousel data-carousel-loop>
           <img class="is-active" src="../assets/images/products/sand-art-na-fu-lantern/sand-art-na-fu-lantern-combo-1.png" alt="燈上納福砂畫材料包成品參考圖（出貨配色）" loading="lazy" data-carousel-frame>
           <img src="../assets/images/products/sand-art-na-fu-lantern/sand-art-na-fu-lantern-combo-2.png" alt="" aria-hidden="true" loading="lazy" data-carousel-frame>
           <img src="../assets/images/products/sand-art-na-fu-lantern/sand-art-na-fu-lantern-combo-3.png" alt="" aria-hidden="true" loading="lazy" data-carousel-frame>
         </div>
-        <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">燈上納福</span><span class="koyama-product-card__name-en">Lit in Na Fu</span></p>
+        <p class="shop-product-card__name"><span class="shop-product-card__name-cn">燈上納福</span><span class="shop-product-card__name-en">Lit in Na Fu</span></p>
       </a>
     </div>
 
-    <!-- 2026-11-13 使用者反映不同尺寸（15cm／20cm）混在同一排，排版時
-         flex-wrap 換行位置是看容器寬度自動決定、不是看商品分類，兩張
-         20cm 的羊Diss舞蹈很容易被排到跟 15cm 卡片同一排，比例差異反而
-         不容易一眼看出來。改成三個獨立的 .koyama-product-grid 容器各自
-         換行（上面 7 款 15cm 砂畫一組，下面羊Diss舞蹈系列、流動畫系列
-         各自獨立一組），同一組內尺寸才會一致，不同尺寸/類別自然分開
-         成不同排，不用額外寫 JS 或特別指定換行位置。 -->
-    <div class="koyama-product-grid">
-      <a class="koyama-product-card koyama-product-card--lg" href="sand-art-artist-sheep-red/">
-        <div class="koyama-product-card__media"><img src="../assets/images/products/sand-art-artist/sand-art-artist-red-cutout.webp" alt="藝術家系列羊Diss舞蹈紅款砂畫材料包成品參考圖" loading="lazy"></div>
-        <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">羊Diss舞蹈・紅</span><span class="koyama-product-card__name-en">Sheep La Danse</span></p>
+
+
+
+
+
+
+
+    <div class="shop-product-grid">
+      <a class="shop-product-card shop-product-card--lg" href="sand-art-artist-sheep-red/">
+        <div class="shop-product-card__media"><img src="../assets/images/products/sand-art-artist/sand-art-artist-red-cutout.webp" alt="藝術家系列羊Diss舞蹈紅款砂畫材料包成品參考圖" loading="lazy"></div>
+        <p class="shop-product-card__name"><span class="shop-product-card__name-cn">羊Diss舞蹈・紅</span><span class="shop-product-card__name-en">Sheep La Danse</span></p>
       </a>
-      <a class="koyama-product-card koyama-product-card--lg" href="sand-art-artist-sheep-blue/">
-        <div class="koyama-product-card__media"><img src="../assets/images/products/sand-art-artist/sand-art-artist-blue-cutout.webp" alt="藝術家系列羊Diss舞蹈藍款砂畫材料包成品參考圖" loading="lazy"></div>
-        <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">羊Diss舞蹈・藍</span><span class="koyama-product-card__name-en">Sheep La Danse</span></p>
+      <a class="shop-product-card shop-product-card--lg" href="sand-art-artist-sheep-blue/">
+        <div class="shop-product-card__media"><img src="../assets/images/products/sand-art-artist/sand-art-artist-blue-cutout.webp" alt="藝術家系列羊Diss舞蹈藍款砂畫材料包成品參考圖" loading="lazy"></div>
+        <p class="shop-product-card__name"><span class="shop-product-card__name-cn">羊Diss舞蹈・藍</span><span class="shop-product-card__name-en">Sheep La Danse</span></p>
       </a>
     </div>
 
-    <div class="koyama-product-grid">
-      <a class="koyama-product-card" href="fluid-art-light-red/">
-        <div class="koyama-product-card__media" data-hero-carousel data-carousel-loop data-red-colorway>
+    <div class="shop-product-grid">
+      <a class="shop-product-card" href="fluid-art-light-red/">
+        <div class="shop-product-card__media" data-hero-carousel data-carousel-loop data-red-colorway>
         <img class="is-active" src="../assets/images/products/fluid-art/fluid-art-red-fu-01.webp?v=clear1" alt="經典紅金福成品參考" width="1200" height="1200" loading="eager" data-carousel-frame>
         <img src="../assets/images/products/fluid-art/fluid-art-red-fu-02.webp?v=clear1" alt="" width="1200" height="1200" loading="lazy" data-carousel-frame>
         <img src="../assets/images/products/fluid-art/fluid-art-red-fu-03.webp?v=clear1" alt="" width="1200" height="1200" loading="lazy" data-carousel-frame>
@@ -1388,10 +1388,10 @@
         <img src="../assets/images/products/fluid-art/fluid-art-red-fu-06.webp?v=clear1" alt="" width="1200" height="1200" loading="lazy" data-carousel-frame>
         <img src="../assets/images/products/fluid-art/fluid-art-red-fu-07.webp?v=clear1" alt="" width="1200" height="1200" loading="lazy" data-carousel-frame>
         </div>
-        <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">經典紅</span><span class="koyama-product-card__name-en">Fluid Art</span></p>
+        <p class="shop-product-card__name"><span class="shop-product-card__name-cn">經典紅</span><span class="shop-product-card__name-en">Fluid Art</span></p>
       </a>
-      <a class="koyama-product-card" href="fluid-art-light-pink/">
-        <div class="koyama-product-card__media" data-hero-carousel data-carousel-loop data-pink-colorway>
+      <a class="shop-product-card" href="fluid-art-light-pink/">
+        <div class="shop-product-card__media" data-hero-carousel data-carousel-loop data-pink-colorway>
         <img class="is-active" src="../assets/images/products/fluid-art/fluid-art-pink-chun-01.webp" alt="迎春粉春字成品參考" width="1200" height="1200" loading="lazy" data-carousel-frame>
         <img src="../assets/images/products/fluid-art/fluid-art-pink-chun-02.webp" alt="" aria-hidden="true" width="1200" height="1200" loading="lazy" data-carousel-frame>
         <img src="../assets/images/products/fluid-art/fluid-art-pink-chun-03.webp" alt="" aria-hidden="true" width="1200" height="1200" loading="lazy" data-carousel-frame>
@@ -1402,10 +1402,10 @@
         <img src="../assets/images/products/fluid-art/fluid-art-pink-chun-08.webp" alt="" aria-hidden="true" width="1200" height="1200" loading="lazy" data-carousel-frame>
         <img src="../assets/images/products/fluid-art/fluid-art-pink-chun-09.webp" alt="" aria-hidden="true" width="1200" height="1200" loading="lazy" data-carousel-frame>
         </div>
-        <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">迎春粉</span><span class="koyama-product-card__name-en">Fluid Art</span></p>
+        <p class="shop-product-card__name"><span class="shop-product-card__name-cn">迎春粉</span><span class="shop-product-card__name-en">Fluid Art</span></p>
       </a>
-      <a class="koyama-product-card" href="fluid-art-light-pearl/">
-        <div class="koyama-product-card__media" data-hero-carousel data-carousel-loop data-pearl-colorway>
+      <a class="shop-product-card" href="fluid-art-light-pearl/">
+        <div class="shop-product-card__media" data-hero-carousel data-carousel-loop data-pearl-colorway>
         <img class="is-active" src="../assets/images/products/fluid-art/fluid-art-pearl-fu-00.webp?v=aligned-v2" alt="珠光流動畫成品參考" width="1200" height="1200" loading="eager" data-carousel-frame>
         <img src="../assets/images/products/fluid-art/fluid-art-pearl-fu-01.webp?v=aligned-v2" alt="" aria-hidden="true" width="1200" height="1200" loading="lazy" data-carousel-frame>
         <img src="../assets/images/products/fluid-art/fluid-art-pearl-fu-02.webp?v=aligned-v2" alt="" aria-hidden="true" width="1200" height="1200" loading="lazy" data-carousel-frame>
@@ -1414,10 +1414,10 @@
         <img src="../assets/images/products/fluid-art/fluid-art-pearl-fu-05.webp?v=aligned-v2" alt="" aria-hidden="true" width="1200" height="1200" loading="lazy" data-carousel-frame>
         <img src="../assets/images/products/fluid-art/fluid-art-pearl-fu-06.webp?v=aligned-v2" alt="" aria-hidden="true" width="1200" height="1200" loading="lazy" data-carousel-frame>
         </div>
-        <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">珠光</span><span class="koyama-product-card__name-en">Fluid Art</span></p>
+        <p class="shop-product-card__name"><span class="shop-product-card__name-cn">珠光</span><span class="shop-product-card__name-en">Fluid Art</span></p>
       </a>
-      <a class="koyama-product-card" href="fluid-art-light-frost/">
-        <div class="koyama-product-card__media" data-hero-carousel data-carousel-loop data-frost-colorway>
+      <a class="shop-product-card" href="fluid-art-light-frost/">
+        <div class="shop-product-card__media" data-hero-carousel data-carousel-loop data-frost-colorway>
         <img class="is-active" src="../assets/images/products/fluid-art/fluid-art-frost-fu-01.webp?v=clear1" alt="冰焰紅幻彩福字成品參考" width="1200" height="1200" loading="eager" data-carousel-frame>
         <img src="../assets/images/products/fluid-art/fluid-art-frost-fu-02.webp?v=clear1" alt="" width="1200" height="1200" loading="lazy" data-carousel-frame>
         <img src="../assets/images/products/fluid-art/fluid-art-frost-fu-03.webp?v=clear1" alt="" width="1200" height="1200" loading="lazy" data-carousel-frame>
@@ -1425,7 +1425,7 @@
         <img src="../assets/images/products/fluid-art/fluid-art-frost-fu-05.webp?v=clear1" alt="" width="1200" height="1200" loading="lazy" data-carousel-frame>
         <img src="../assets/images/products/fluid-art/fluid-art-frost-fu-06.webp?v=clear1" alt="" width="1200" height="1200" loading="lazy" data-carousel-frame>
         </div>
-        <p class="koyama-product-card__name"><span class="koyama-product-card__name-cn">冰焰紅</span><span class="koyama-product-card__name-en">Fluid Art</span></p>
+        <p class="shop-product-card__name"><span class="shop-product-card__name-cn">冰焰紅</span><span class="shop-product-card__name-en">Fluid Art</span></p>
       </a>
     </div>
   </section>
@@ -1617,16 +1617,16 @@
     </div>
   </footer>
 
-  </div><!-- /.page-tint -->
+  </div>
 
   <script>
-    // 捲動淡入動畫。threshold:0：跟 js/scroll-reveal.js 同一個修正（見
-    // 該處註解）——原本 threshold:0.15 要求元素自己高度的 15% 先進畫面
-    // 才觸發，高區塊會讓使用者捲很深一段都還是空白，容易被誤會成網站
-    // 壞了。（這裡沒有疊加 rootMargin——這頁是標準 document 捲動，不是
-    // 子頁那種 .product-page 固定定位捲動容器，理論上 rootMargin 在這裡
-    // 可以生效，但為了跟 scroll-reveal.js 行為一致、同一套修正邏輯
-    // 兩邊一樣，就不另外加。）
+
+
+
+
+
+
+
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -1637,33 +1637,33 @@
 
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-    // Hero 標題進場（頁面載入立即觸發一次）
+
     window.addEventListener('load', () => {
       document.querySelectorAll('.hero .fade-in').forEach(el => {
         setTimeout(()=> el.classList.add('is-visible'), 100);
       });
     });
 
-  </script>
+</script>
 
-  <!-- 2026-10-17 跟著上面補的 .site-header／.cart-badge／.site-menu／
-       .promo-bar 一起加：這幾支共用腳本處理頂部列毛玻璃轉場、購物車
-       數量／預覽、漢堡選單開合、跑馬燈輪播，全站其他頁都是這組，這頁
-       原本沒載入所以這些功能全部不會動（購物車圖示一直顯示死的 0，
-       漢堡鈕點了沒反應）。原本自己寫的 updateHeaderGlass() 拿掉，
-       js/site-header-scroll.js 做的是同一件事（且同時處理 promo-bar
-       淡出，原本那支沒有）。這頁本身是 document 捲動（不是其他子頁常見
-       的 .product-page 固定容器），site-header-scroll.js 已經有
-       `.product-page` 找不到就退回 window 的 fallback，不用額外調整。 -->
-  <script src="../js/cart.js?v=20261119-early-prices"></script>
-  <script src="../js/hero-colorway-carousel.js?v=20261117-mobile-media"></script>
-  <script src="../js/video-inview.js?v=20261117-mobile-media"></script>
-  <script src="../js/site-header-scroll.js?v=20261107-backtop"></script>
-  <script src="../js/account-auth.js?v=20261118-sessions"></script>
-  <script src="../js/account-widget.js"></script>
-  <script src="../js/site-menu.js?v=menu-order-20261109"></script>
-  <script src="/js/promo-bar.js"></script>
 
-  <script src="../js/products-hero.js?v=20261117-mobile-media"></script>
+
+
+
+
+
+
+
+
+  <script src="../js/cart.js?v=20261119-public-clean"></script>
+  <script src="../js/hero-colorway-carousel.js?v=20261119-public-clean"></script>
+  <script src="../js/video-inview.js?v=20261119-public-clean"></script>
+  <script src="../js/site-header-scroll.js?v=20261119-public-clean"></script>
+  <script src="../js/account-auth.js?v=20261119-public-clean"></script>
+  <script src="../js/account-widget.js?v=20261119-public-clean"></script>
+  <script src="../js/site-menu.js?v=20261119-public-clean"></script>
+  <script src="/js/promo-bar.js?v=20261119-public-clean"></script>
+
+  <script src="../js/products-hero.js?v=20261119-public-clean"></script>
 </body>
 </html>

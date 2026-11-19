@@ -1,27 +1,27 @@
-/* courses-page.css —— courses/index.html 專用樣式，2026-10-29 第二次改版
-   取代原本的「展覽索引」排版（.course-index，見 git 歷史／hub-blocks.css
-   拿掉的那段）。這次參考使用者提供的 miyuki-beads.co.jp「Types of Seed
-   Beads」頁面：大圖橫向輪播＋兩側箭頭，前後討論出完整的一頁：敘事開場
-   →賣點特色→課程輪播→怎麼上課／怎麼預約→學員作品／FAQ→材料指南。
 
-   這份是這一頁專屬的 class（不碰 .content-block／.product-row／
-   .course-index 這些其他頁面或已經刪掉的舊版在用的東西）。
 
-   2026-10-29 修正：敘事開場／賣點特色／怎麼上課／材料指南這幾個
-   main 直接子層區塊，原本自己發明了一個 .page-wide（max-width:1100px）
-   當寬度容器，結果跟其他頁面（products/、courses/{slug}/ 等）實際
-   採用的全站標準寬度（.content-container，840px，見 products.css
-   「全站共用內文容器」那段註解）不一樣，桌面版寬度看起來比其他頁面
-   寬很多——使用者截圖比對 products/ 才發現。products.css 那段註解
-   講得很清楚：「以後任何新頁面」的 main 直接子層都該直接套用
-   .content-container，不要自己發明寬度數字。已經把這幾個區塊的 HTML
-   class 從 page-wide 換成 content-container，這裡不再需要自己維護
-   一份寬度規則。1100px 這個數字本身不是不能用（.shop-grid／cart.css
-   兩欄／site-footer.css 頁尾是刻意比內文寬的「格狀」區塊，仍在用），
-   但這頁的敘事文字／賣點卡／步驟／FAQ 本質是「內文」，不是格狀列表，
-   套錯了基準。 */
 
-/* ---------- 敘事式開場：品牌故事，慢慢把人帶進課程 ---------- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .course-story {
   padding-top: var(--editorial-gap);
   padding-bottom: 56px;
@@ -49,7 +49,7 @@
   .course-story__media { order: -1; aspect-ratio: 4/3; }
 }
 
-/* ---------- 賣點特色：快速捕捉 ---------- */
+
 .course-features { padding-top: 8px; padding-bottom: 52px; }
 .course-features__title { font-size: clamp(20px, 2.2vw, 26px); font-weight: 800; margin: 0 0 28px; }
 .course-features__grid {
@@ -64,10 +64,10 @@
 .course-feature__title { font-size: 14px; font-weight: 700; margin: 0; }
 .course-feature__desc { font-size: 12px; line-height: 1.75; color: var(--color-text-secondary); margin: 0; }
 @media (max-width: 768px) {
-  /* 手機版佔的高度太長（使用者截圖回報滑動距離過長）：原本桌面版的
-     「格狀盒子」排法（icon 在上、標題/說明在下，每格自己 24px 內距）
-     在 1 欄寬度下會把 6 格直接疊成一長串，改成橫列式（icon 在左、文字
-     在右，用細分隔線取代格狀背景），單列高度大幅縮短。 */
+
+
+
+
   .course-features__grid {
     grid-template-columns: 1fr;
     gap: 0;
@@ -75,10 +75,10 @@
     border: none;
     border-top: 1px solid color-mix(in srgb, var(--color-text-secondary) 25%, transparent);
   }
-  /* .course-feature 的 icon／標題／說明是三個獨立的 flex 子層（不是包在
-     一個文字容器裡），直接用 flex-direction:row 會讓標題欄位自己被擠成
-     一欄、跟說明搶寬度（標題被迫斷成三行）。改用 grid 讓 icon 直接
-     橫跨標題＋說明兩列，不用改 HTML 結構。 */
+
+
+
+
   .course-feature {
     display: grid;
     grid-template-columns: auto 1fr;
@@ -93,10 +93,10 @@
   .course-feature__desc { grid-column: 2; grid-row: 2; }
 }
 
-/* ---------- 課程展示：自動輪播的大圖橫列 ----------
-   自動輪播＋hover 暫停＋手動介入後永久停止，跟商品頁配色輪播
-   （js/hero-colorway-carousel.js）同一套互動邏輯，不是另外發明一套
-   新規則，見 js/courses-carousel.js。 */
+
+
+
+
 .course-showcase {
   background: var(--color-surface-neutral);
   margin: 0 calc(50% - 50vw);
@@ -149,7 +149,7 @@
 
 @media (max-width: 768px) {
   .course-showcase__head { grid-template-columns: 1fr; gap: 16px; padding-bottom: 28px; }
-  /* 手機每張課程卡都維持完整顏色，避免未選中卡片像停用按鈕。 */
+
   .course-carousel__tile,
   .course-carousel__tile.is-active { width: 72vw; max-width: 300px; opacity: 1; transform: none; transition: none; }
   .course-carousel__track { scroll-snap-type: x mandatory; }
@@ -157,7 +157,7 @@
   .course-carousel__nav { width: 38px; height: 38px; }
 }
 
-/* ---------- 怎麼上課：步驟 ---------- */
+
 .course-steps { padding-top: 64px; }
 .course-steps__title { font-size: clamp(20px, 2.2vw, 26px); font-weight: 800; margin: 0 0 32px; }
 .course-steps__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
@@ -165,12 +165,12 @@
 .course-step__title { font-size: 15.5px; font-weight: 700; margin: 0 0 8px; }
 .course-step__desc { font-size: 13px; line-height: 1.8; color: var(--color-text-secondary); margin: 0; }
 @media (max-width: 768px) {
-  /* 使用者反映手機版「怎麼上課」只是數字＋標題＋說明往下疊，看不出
-     「這是一串有順序的步驟」。改成直向時間軸：編號放進圓圈，圓圈之間
-     用一條直線連起來，標題/說明放在圓圈右邊——每個步驟 wrapper（原本
-     num/title/desc 三個獨立子層）改用 grid 排版，道理跟上面
-     .course-feature 手機版那次修正一樣：num 橫跨 title/desc 兩列，
-     不用改 HTML 結構。 */
+
+
+
+
+
+
   .course-steps__grid { grid-template-columns: 1fr; gap: 0; }
   .course-steps__grid > div {
     display: grid;
@@ -202,7 +202,7 @@
   .course-step__desc { grid-column: 2; grid-row: 2; }
 }
 
-/* ---------- 補充說明框（圖片評估／大型客製）---------- */
+
 .course-note {
   margin-top: 28px; padding: 24px 26px;
   border: 1px solid color-mix(in srgb, var(--color-text-secondary) 25%, transparent);
@@ -214,14 +214,14 @@
 .course-note__desc { font-size: 12.5px; line-height: 1.8; color: var(--color-text-secondary); margin: 0; }
 .course-note__desc + .course-note__desc { margin-top: 10px; }
 @media (max-width: 768px) {
-  /* 使用者反映手機版這兩個補充說明框「讀起來很沈重，像是把資料丟給
-     你」——原本是一大段沒有分段的長文字，塞在跟桌面版一樣重的完整
-     邊框＋底色方盒裡，icon 還疊到文字上面又多佔一截高度。這裡改成
-     左側色條取代整圈邊框（視覺上輕一點，不是一個「公文方盒」），
-     icon 跟文字維持左右並排（不要疊成上下），內距縮小；文字內容本身
-     也在 HTML 拆成多個 <p>（見 courses/index.html），每段之間用上面
-     .course-note__desc + .course-note__desc 的間距自然產生段落節奏，
-     不用整段一次讀完。 */
+
+
+
+
+
+
+
+
   .course-note {
     gap: 12px;
     padding: 16px 16px 16px 14px;
@@ -231,7 +231,7 @@
   .course-note__desc { font-size: 12px; line-height: 1.75; }
 }
 
-/* ---------- IG 私訊 CTA ---------- */
+
 .course-ig-cta { margin-top: 28px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
 .course-ig-cta__btn {
   display: inline-flex; align-items: center; gap: 8px;
@@ -243,7 +243,7 @@
 .course-ig-cta__hint { font-size: 11.5px; color: var(--color-text-secondary); }
 .course-ig-cta__copied { color: var(--color-brand); font-weight: 700; }
 
-/* ---------- 學員作品：信任感佐證 ---------- */
+
 .course-proof { margin-top: 56px; }
 .course-proof__head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; }
 .course-proof__title { font-size: 15px; font-weight: 800; margin: 0; }
@@ -255,7 +255,7 @@
   .course-proof__grid { grid-template-columns: repeat(2, 1fr); }
 }
 
-/* ---------- FAQ ---------- */
+
 .course-faq { margin-top: 56px; }
 .course-faq__title { font-size: clamp(20px, 2.2vw, 26px); font-weight: 800; margin: 0 0 20px; }
 .course-faq-item { border-top: 1px solid color-mix(in srgb, var(--color-text-secondary) 25%, transparent); }
@@ -272,7 +272,7 @@
 .course-faq-item[open] summary::after { content: "\2212"; }
 .course-faq-item__body { padding: 0 0 20px; font-size: 13px; line-height: 1.85; color: var(--color-text-secondary); max-width: 68ch; }
 
-/* ---------- 預約 CTA 橫幅 ---------- */
+
 .course-cta-band {
   margin-top: 52px; padding: 40px 32px;
   background: var(--color-text-primary); color: #fff;
@@ -286,13 +286,13 @@
   text-decoration: none; font-size: 13.5px; font-weight: 700;
 }
 
-/* ---------- 材料指南：底部延伸閱讀 ----------
-   上架前待修清單任務 8：原本的 .course-guides__grid（三張大圖直排卡片）
-   換成跟首頁同一套「主打卡片＋精簡列表」排版，.course-guide-card 系列
-   class 不再使用（改用 home-editorial.css 的 .home-guide-feature）。
-   列表部分（.course-guide-links）是這份清單獨有的規格：一行一列、
-   列高至少 44px、列與列用 1px 髮絲線分隔——跟首頁的 .home-guide-links
-   （兩欄並排，只有一條頂線）不是同一回事，所以沒有直接沿用那組。 */
+
+
+
+
+
+
+
 .course-guide-links {
   display: flex;
   flex-direction: column;
@@ -305,9 +305,9 @@
   justify-content: space-between;
   gap: var(--space-2);
   min-height: 44px;
-  /* 2026-10-31 修正：原本寫 var(--space-3)，tokens.css 沒有定義過這個
-     變數，這裡的上下內距等於沒生效（min-height:44px 還是會撐出最小
-     點擊範圍，只是文字沒有額外呼吸空間）。改用 --space-2。 */
+
+
+
   padding: var(--space-2) 0;
   border-bottom: 1px solid var(--color-surface-neutral);
   color: var(--color-text-primary);
@@ -322,7 +322,7 @@
   color: var(--color-interactive);
 }
 
-/* 課程總覽的完成作品紀念照片，保留人物及作品完整比例。 */
+
 .course-students { margin-block: var(--space-16); }
 .course-students__wall { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; gap: var(--space-4); align-items: center; }
 .course-students__photo { margin: 0; min-width: 0; flex: 0 0 calc((100% - 2 * var(--space-4)) / 3); scroll-snap-align: start; }
@@ -335,7 +335,7 @@
   .course-students__photo { flex: 0 0 86%; scroll-snap-align: start; }
 }
 
-/* 指定畫室照片使用既有淡入淡出／觸控輪播，維持橫式完整畫面。 */
+
 .course-story__media.course-studio-carousel { position: relative; aspect-ratio: 3 / 2; touch-action: pan-y; background: var(--color-surface-neutral); }
 .course-studio-carousel img { position: absolute; inset: 0; object-fit: cover; opacity: 0; transition: opacity var(--duration-slow) var(--ease-standard); }
 .course-studio-carousel img.is-active { opacity: 1; }
@@ -351,7 +351,7 @@
 .course-students__controls button { min-width: var(--space-10); min-height: var(--space-10); border: 0; background: transparent; color: var(--color-text-primary); font-size: var(--font-size-lg); cursor: pointer; }
 .course-students__wall::-webkit-scrollbar { display: none; }
 
-/* 課程收尾：討論與預約集中在同一區。 */
+
 .course-cta-band__actions.course-ig-cta { width:100%; margin-top:var(--space-4); gap:var(--space-4); }
 .course-cta-band .course-ig-cta__btn { background:transparent; color:var(--color-surface-light); border:1px solid currentColor; padding:13px 26px; font-size:13.5px; font-weight:700; }
 .course-cta-band .course-ig-cta__hint { flex-basis:100%; color:var(--color-surface-light); opacity:.7; line-height:1.8; font-size:var(--font-size-xs); }
@@ -359,10 +359,10 @@
  .course-cta-band__actions .course-cta-band__btn { width:100%; justify-content:center; text-align:center; white-space:normal; }
 }
 
-/* 2026-11-12 使用者要求改成黑底白字按鈕、拿掉箭頭——跟全站「直接購買」
-   同一套黑底按鈕語彙（見 products.css .work__cta.work__cta--buy-now），
-   這裡直接寫一份，不跨檔案共用 class，維持這份 CSS「這一頁專屬」的既有
-   慣例（見檔案開頭說明）。 */
+
+
+
+
 .course-step__booking-link {
   grid-column: 2;
   grid-row: 3;
@@ -373,13 +373,13 @@
   justify-content: center;
   white-space: nowrap;
   margin-top: var(--space-4);
-  /* 2026-11-12 使用者反饋文字太貼左右邊、上下又太高——原本寫
-     var(--space-5) 其實是不存在的 token（tokens.css 只到 --space-4
-     就跳到 --space-6，沒有 --space-5），等於沒套到任何水平內距，
-     文字才會貼到邊緣；垂直再加上 min-height:44px 撐出比文字需要的
-     高度更高的按鈕。改成實際存在的 --space-6（24px）當水平內距，
-     垂直縮小成 --space-2（8px）且拿掉 min-height，讓按鈕高度貼著
-     文字本身大小，不再硬撐。 */
+
+
+
+
+
+
+
   padding: var(--space-2) var(--space-6);
   background: var(--color-surface-black);
   color: var(--color-surface-light);
@@ -390,7 +390,7 @@
   text-decoration: none;
 }
 
-/* 課程總覽開場照片保留自動輪播與滑動，移除覆蓋照片的箭頭。 */
+
 .course-studio-carousel .moments-carousel__nav {
   display: none;
 }

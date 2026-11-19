@@ -35,21 +35,21 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=ABeeZee&family=Poppins:wght@700&family=Noto+Sans+TC:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../../css/colors.css?v=20261117-mobile-media">
-  <link rel="stylesheet" href="../../css/tokens.css">
-  <link rel="stylesheet" href="../../css/base.css?v=20261110-course-covers">
-  <link rel="stylesheet" href="../../css/home.css">
-  <link rel="stylesheet" href="../../css/products.css?v=20261117-mobile-media">
-  <link rel="stylesheet" href="../../css/product-effort.css?v=20261116">
-  <link rel="stylesheet" href="../../css/gallery.css?v=20261117-mobile-media">
-  <link rel="stylesheet" href="../../css/cart.css">
-  <link rel="stylesheet" href="../../css/site-menu.css">
-  <link rel="stylesheet" href="../../css/site-footer.css">
+  <link rel="stylesheet" href="../../css/colors.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/tokens.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/base.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/home.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/products.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/product-effort.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/gallery.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/cart.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/site-menu.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/site-footer.css?v=20261119-public-clean">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
   <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  <link rel="stylesheet" href="/css/promo-bar.css">
+  <link rel="stylesheet" href="/css/promo-bar.css?v=20261119-public-clean">
 </head>
 <body>
   <div class="promo-bar" id="promo-bar">
@@ -145,29 +145,29 @@
 
   <main class="product-page work">
 
-    <!-- 「格裡迎春 Checked in Chun」是 2026-10-06 新增的第四款基礎款春聯砂畫，跟
-         「春」「福」「財」同一層級（不含集沙盤、教學影片 QR Code），
-         底板圖案是粉色花磚格紋邊框＋黑色「迎春」字樣＋四組茶花點綴。
-         配色文字（底色／字色／格紋／花朵）是使用者提供的定稿文案，
-         直接採用，沒有另外改寫。 -->
-    <header class="work__intro work__intro--orlo-buy">
-      <!-- 2026-10-25：比照福星，同步整組 orlo.co 改版，見
-           products/sand-art-fu/index.html 同一處說明。 -->
-      <!-- 首圖實拍相片牆：跟 sand-art-chun／sand-art-cai／sand-art-fu／
-           sand-art-artist-sheep-red／blue 同一套 .work__gallery（主圖＋
-           可橫向滑動縮圖列），取代原本的配色自動輪播。2026-10-18 使用者
-           反映這款實拍照片拍得比較少，想試試在相片牆裡混一支影片（不是
-           另外開「完整示範影片」小節，是直接當成相片牆裡的一「張」），
-           看看效果適不適合——[data-gallery-frame] 本來就是用 opacity
-           疊圖切換，不限定只能是 <img>，css/products.css 補上
-           .work__gallery-main video 的對應樣式就能直接混用，縮圖列那顆
-           小縮圖用影片擷取的畫面當封面圖，跟其他縮圖視覺上沒有差異，
-           點下去才會發現是影片。自動輪播（hero-thumb-gallery.js）每
-           2.6 秒換一張，影片本身是 autoplay+muted+loop，輪到它之前／
-           之後都在背景持續播放，不會從頭開始，使用者點縮圖手動停在
-           這張時可以看到完整內容。如果效果不好、使用者反映不適合，
-           把這個 data-gallery-frame／縮圖拿掉、檔案留著即可，不影響
-           其他張照片。 -->
+
+
+
+
+
+    <header class="work__intro work__intro--product-buy">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       <div class="work__gallery work__gallery--thumbs-left fade-in" data-gallery>
         <div class="work__gallery-main" data-gallery-main>
           <img src="../../assets/images/products/sand-art-ying-chun/sand-art-ying-chun-combo-1.png" alt="「格裡迎春」配色示範（出貨配色）" loading="eager" class="is-active" data-gallery-frame>
@@ -203,12 +203,12 @@
         </div>
       </div>
 
-      <!-- 2026-10：比照紅羊／藍羊改版（見 css/products.css
-           .work__title-block 說明）——商品名搬到相片牆下方、
-           價格正上方，靠左對齊，系列眉標／基礎款標籤合併成一行
-           小字，一句話介紹放最後。這頁沒有耐性度星級——基礎款
-           材料包還沒有實測完成時間，星級只先用在紅／藍羊兩款
-           進階款，避免憑感覺捏造數字。 -->
+
+
+
+
+
+
       <div class="work__title-block fade-in delay-2">
         <h1 class="work-heading"><span class="inner"><span class="work-heading__cn">格裡迎春</span> <span class="work-heading__en">Checked in Chun</span></span></h1>
         <div class="work__title-block__meta">
@@ -237,7 +237,7 @@
         </div>
       </div>
 
-      <section class="chapter addon-section addon-section--orlo fade-in delay-3">
+      <section class="chapter addon-section addon-section--expandable fade-in delay-3">
         <button type="button" class="addon-toggle" data-addon-toggle aria-expanded="true" aria-controls="addon-list-ying-chun">一起加購，材料更齊全 <span class="addon-toggle__en">Buy Together</span></button>
         <div class="addon-list" id="addon-list-ying-chun" data-addon-list>
           <div class="addon-row" data-addon-row>
@@ -304,9 +304,9 @@
       </div>
     </header>
 
-    <!-- 完整示範影片：客人拍的 9:16 直式完整製作過程，理由跟寫法見
-         sand-art-fu/index.html 同一處註解（自動循環、不留播放鍵，影片
-         正上方不放「完整示範影片」標題文字）。 -->
+
+
+
     <section class="chapter">
       <div class="demo-video-combo fade-in delay-1">
         <div class="demo-video">
@@ -318,11 +318,11 @@
       </div>
     </section>
 
-    <!-- 第三章：商品詳細。跟「春」「福」「財」一樣是基礎款配置。分裝沙
-         7 色是使用者提供的定稿文案（粉紅、黑色、冰藍、淺膚、珊瑚紅、
-         墨綠、白色），不是待補佔位。材料平拍圖直接用使用者重新拍攝的
-         完整照片（含底板、分裝沙、排刷、夾子、一次性防污桌布），跟
-         「春」「福」「財」同一批照片一起拍的。 -->
+
+
+
+
+
     <section class="chapter">
       <h2 class="chapter__title fade-in">商品詳細</h2>
       <p class="kit-section__size-hint fade-in delay-1">成品尺寸：15×15cm<br>顏色數：7色</p>
@@ -340,11 +340,11 @@
       </ul>
     </section>
 
-    <!-- 第四章：顏色細節。一開始誤把「沙子基礎工具組-上架照片」資料夾裡
-         「春」的色沙照片當成這款的材料照，顏色對不起來；使用者後來指出
-         正確的實拍照其實是同資料夾的「迎春格子沙子顏色拷貝.jpg」，7 管
-         由左至右剛好是白色→淺膚→粉紅→珊瑚紅→冰藍→墨綠→黑色，跟色名
-         完全對得上，色碼跟色沙材料細節展示圖都已經換成這張真實對色。 -->
+
+
+
+
+
     <section class="chapter">
       <h2 class="chapter__title fade-in">顏色細節</h2>
       <ul class="color-swatches fade-in delay-1">
@@ -361,7 +361,7 @@
       </div>
     </section>
 
-    <!-- 第五章：商品介紹。配色文案直接採用使用者提供的定稿文字。 -->
+
     <section class="chapter">
       <h2 class="chapter__title fade-in">商品介紹</h2>
 
@@ -419,9 +419,9 @@
       </div>
     </section>
 
-    <!-- 2026-10-25：規格資訊／出貨與保存須知／購買前請閱讀整併進分頁
-         切換，延伸創作（加購）搬到上面買列附近的「一起加購」，比照
-         福星頁，見 products/sand-art-fu/index.html 同一處說明。 -->
+
+
+
     <section class="chapter">
       <div class="safety-notice fade-in">
         <p class="safety-notice__title">請注意</p>
@@ -453,10 +453,10 @@
       </div>
     </section>
 
-    <!-- 相關商品：跨商品導流，跟上面「延伸創作」（本商品的加購配件）
-         用途不同。卡片內容由 js/related-products.js 動態讀 cart.js 的
-         PRODUCTS 產生，排除這頁自己（data-exclude）跟隱藏的加購項目，
-         不在這裡手寫商品清單。 -->
+
+
+
+
     <section class="chapter">
       <h2 class="chapter__title fade-in">相關商品</h2>
       <div class="related-products fade-in delay-1" data-related-products data-exclude="sand-art-ying-chun">
@@ -511,26 +511,26 @@
 
   </main>
 
-  <script src="../../js/cart.js?v=20261119-early-prices"></script>
-  <script src="../../js/addon-product-info.js?v=20261117-mobile-media"></script>
-  <script src="../../js/addon-preview-modal.js?v=20261117-mobile-media"></script>
-  <script src="../../js/product-price-discount.js?v=20261116-all-kits85"></script>
-  <script src="../../js/product-terms.js"></script>
-  <script src="../../js/product-tabs.js"></script>
-  <script src="../../js/hero-colorway-carousel.js?v=20261117-mobile-media"></script>
-  <script src="../../js/video-inview.js?v=20261117-mobile-media"></script>
-  <script src="../../js/hero-thumb-gallery.js?v=20261117-mobile-media"></script>
-  <script src="../../js/shop-navigation.js?v=20261115"></script>
-  <script src="../../js/related-products.js?v=20261116-all-kits85"></script>
-  <script src="../../js/gallery-lightbox.js?v=20261117-mobile-media"></script>
-  <script src="../../js/addon-variant-select.js"></script>
-  <script src="../../js/addon-frame-preview-toggle.js"></script>
-  <script src="../../js/mobile-sticky-buy-reveal.js"></script>
-  <script src="../../js/site-header-scroll.js?v=20261107-backtop"></script>
-  <script src="../../js/account-auth.js?v=20261118-sessions"></script>
-  <script src="../../js/account-widget.js"></script>
-  <script src="../../js/scroll-reveal.js"></script>
-  <script src="../../js/site-menu.js?v=menu-order-20261109"></script>
-  <script src="/js/promo-bar.js"></script>
+  <script src="../../js/cart.js?v=20261119-public-clean"></script>
+  <script src="../../js/addon-product-info.js?v=20261119-public-clean"></script>
+  <script src="../../js/addon-preview-modal.js?v=20261119-public-clean"></script>
+  <script src="../../js/product-price-discount.js?v=20261119-public-clean"></script>
+  <script src="../../js/product-terms.js?v=20261119-public-clean"></script>
+  <script src="../../js/product-tabs.js?v=20261119-public-clean"></script>
+  <script src="../../js/hero-colorway-carousel.js?v=20261119-public-clean"></script>
+  <script src="../../js/video-inview.js?v=20261119-public-clean"></script>
+  <script src="../../js/hero-thumb-gallery.js?v=20261119-public-clean"></script>
+  <script src="../../js/shop-navigation.js?v=20261119-public-clean"></script>
+  <script src="../../js/related-products.js?v=20261119-public-clean"></script>
+  <script src="../../js/gallery-lightbox.js?v=20261119-public-clean"></script>
+  <script src="../../js/addon-variant-select.js?v=20261119-public-clean"></script>
+  <script src="../../js/addon-frame-preview-toggle.js?v=20261119-public-clean"></script>
+  <script src="../../js/mobile-sticky-buy-reveal.js?v=20261119-public-clean"></script>
+  <script src="../../js/site-header-scroll.js?v=20261119-public-clean"></script>
+  <script src="../../js/account-auth.js?v=20261119-public-clean"></script>
+  <script src="../../js/account-widget.js?v=20261119-public-clean"></script>
+  <script src="../../js/scroll-reveal.js?v=20261119-public-clean"></script>
+  <script src="../../js/site-menu.js?v=20261119-public-clean"></script>
+  <script src="/js/promo-bar.js?v=20261119-public-clean"></script>
 </body>
 </html>

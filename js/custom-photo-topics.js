@@ -80,11 +80,11 @@
     "images": []
   }
 ];
-  // 2026-11-07 使用者要求每個主題改成直接從學員作品資料庫（gallery-data.js）
-  // 抓對應主題的照片，不要再手動列清單（之前手動列的清單數量不一、
-  // 也沒跟著新增的學員作品同步更新）。每個主題上限 12 張，照拍攝日期
-  // 新到舊排序，展示最新完成的作品；只抓真的歸在這堂課底下的作品，
-  // 不會混到寵物油畫等其他課程的同主題標籤。
+
+
+
+
+
   const MAX_IMAGES_PER_TOPIC = 12;
   const TOPIC_THEME_MAP = {
     portrait: '人像',
@@ -121,8 +121,8 @@
   function select(index) {
     if (!active.images.length) return;
     current = (index + active.images.length) % active.images.length;
-    // A separate element per request prevents a late image from a previous
-    // selection from showing under the newly selected topic's title.
+
+
     const item = active.images[current];
     const nextImage = new Image();
     nextImage.alt = item.alt;
@@ -133,7 +133,7 @@
     loadStatus.hidden = false;
     loadStatus.textContent = '正在載入' + active.label + '作品…';
     nextImage.onload = async () => {
-      try { await nextImage.decode(); } catch (_) { /* Loaded images can still be displayed. */ }
+      try { await nextImage.decode(); } catch (_) {                                             }
       if (hero !== nextImage) return;
       nextImage.style.visibility = 'visible';
       stage.setAttribute('aria-busy', 'false');
@@ -156,7 +156,7 @@
     active = topics.find(t => t.key === key) || topics[0];
     current = 0;
     suppressClick = false;
-    // Invalidate pending load callbacks even when the next topic has no images.
+
     const placeholder = new Image();
     placeholder.alt = '';
     hero.replaceWith(placeholder);
@@ -177,10 +177,10 @@
       button.append(image); button.addEventListener('click', () => select(i)); strip.append(button);
       const figure = document.createElement('figure'); figure.className = 'gallery-grid__item';
       const source = document.createElement('img'); source.dataset.src = item.src; source.alt = item.alt; source.loading = 'lazy';
-      // 2026-11-08 使用者反映從課程頁的「可畫的主題」放大作品時沒有
-      // 主題／完成堂數資訊，gallery.html 點放大卻有——補上跟
-      // js/gallery.js 同一套 figcaption 格式，lightbox（js/gallery-lightbox.js）
-      // 就會自動讀到並顯示，不用改 lightbox 本身。
+
+
+
+
       const caption = document.createElement('figcaption'); caption.className = 'gallery-grid__caption';
       caption.textContent = (item.course || '') +
         (item.themes && item.themes.length ? '・' + item.themes.join('、') : '') +
@@ -194,7 +194,7 @@
   root.querySelector('.custom-topics__next').addEventListener('click', () => select(current + 1));
   zoom.addEventListener('click', () => {
     if (suppressClick || zoom.disabled) return;
-    // Hidden lightbox entries need URLs only when opening the lightbox.
+
     sources.querySelectorAll('img').forEach(image => { image.src = image.dataset.src; });
     sources.children[current]?.click();
   });

@@ -1,4 +1,4 @@
-/* 一般頁面沿用首頁英文小標／中文主標層級，不影響既有課程頁首。 */
+
 h1 > .page-title-en {
   display: block;
   margin-bottom: var(--space-4);
@@ -11,7 +11,7 @@ h1 > .page-title-en {
   text-align: center;
 }
 
-/* 一般頁面標題層級：英文與中文視為同一組，主標高於區塊與卡片。 */
+
 h1:has(> .page-title-en) {
   display: flex;
   flex-direction: column;
@@ -28,20 +28,20 @@ body:has(.page-title-en) .ent-entry__eyebrow { font-size: var(--font-size-xs); }
 body:has(.page-title-en) .chapter__statement { font-size: var(--font-size-lg); }
 h1:has(> .page-title-en) + .chapter__intro { margin-top: var(--space-6); font-size: var(--font-size-sm); line-height: 1.8; }
 
-/* 材料指南頁首介紹以句子分行並置中。 */
+
 .guides-page-intro { text-align: center; }
 
-/* 一般頁面主標：中文在上、英文在下。 */
+
 h1 > .page-title-en { order: 1; }
 
-/* 一般頁面手機頁首，沿用材料指南確認的 80px 上方距離。 */
+
 @media (max-width: 768px) {
   .product-page > :is(.chapter, .work__intro):has(> h1 > .page-title-en) {
     margin-top: calc(60px - 35px);
   }
 }
 
-/* 一般頁首介紹沿用材料指南的置中與主次層級。 */
+
 h1:has(> .page-title-en) + :is(.intro, .chapter__intro) {
   text-align: center;
   margin-top: var(--space-6);

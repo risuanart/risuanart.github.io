@@ -1,15 +1,15 @@
-// 學員作品格狀相簿（.gallery-grid__item）點擊放大燈箱：不管圖片是
-// js/gallery.js（gallery.html 篩選格）還是 js/gallery-course-preview.js
-// （各課程頁「學員作品」預覽區）動態產生的，這支都能用，因為是用
-// document 層級的事件代理（監聽點擊/鍵盤事件，判斷 e.target 有沒有落在
-// .gallery-grid__item 裡），不用等特定格子存在才綁定，也不受 gallery.html
-// 篩選後重新產生 innerHTML 影響。
-// 2026-11-12：沙畫材料包商品頁「搭配自己的顏色」的 .howto-compare__cell
-// 也用這套燈箱放大（見下面事件代理跟分組邏輯一併認得
-// .howto-compare__cell／.howto-compare）。這幾張是 AI 模擬示意圖，使用者
-// 原本擔心放大看了之後客人會下載，所以放大的這張圖（.gallery-lightbox__img）
-// 也補上跟縮圖同一套 draggable="false"／oncontextmenu 阻擋右鍵另存，不是
-// 只有縮圖擋、放大後反而沒擋。
+
+
+
+
+
+
+
+
+
+
+
+
 (function () {
   let overlay = null;
   let imgEl = null;
@@ -55,7 +55,7 @@
     prevBtn.addEventListener("click", showPrev);
     nextBtn.addEventListener("click", showNext);
 
-    // 點背景（不是點圖片本身）也可以關閉，跟大部分燈箱的操作習慣一致。
+
     overlay.addEventListener("click", (e) => {
       if (e.target === overlay) close();
     });
@@ -86,7 +86,7 @@
     const figure = currentItems[currentIndex];
     const img = figure.querySelector("img");
     const caption = figure.querySelector(".gallery-grid__caption");
-    // 高解析照片沿用檔名，版本參數避免放大時讀到瀏覽器舊的低解析快取。
+
     const fullSrc = new URL(img.dataset.fullSrc || img.src, document.baseURI);
     fullSrc.searchParams.set("v", "20261110-high-resolution");
     imgEl.src = fullSrc.href;
@@ -94,10 +94,10 @@
     captionEl.textContent = caption ? caption.textContent : "";
     captionEl.hidden = !caption;
 
-    // 「查看課程」連結：只有 js/gallery.js 產生格子時才會補
-    // data-course-link（見該檔案），課程頁自己的「學員作品」預覽區
-    // （js/gallery-course-preview.js）不會補，所以這裡讀不到屬性時
-    // 直接把整段連結藏起來，不會顯示壞掉的連結。
+
+
+
+
     const courseLink = figure.getAttribute("data-course-link");
     const courseName = figure.getAttribute("data-course-name");
     if (courseLink) {

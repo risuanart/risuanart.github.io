@@ -1,4 +1,4 @@
-// 只預載接近畫面的影片；回到分頁／返回此頁時重新同步播放。
+
 (function () {
   const videos = Array.from(document.querySelectorAll('video[data-autoplay], video[autoplay]')).filter(video => !video.matches('[data-gallery-frame], [data-carousel-frame]') && !video.closest('.preview-hero, .gallery__frame'));
   const visible = new Set();

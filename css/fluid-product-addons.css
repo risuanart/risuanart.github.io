@@ -1,11 +1,11 @@
-/* 四款流動畫購買區：價格、數量、加購、購買按鈕依序排列。 */
+
 @media (min-width: 768px) {
   .work__intro.work__intro--fluid-addons { grid-template-rows: repeat(8, auto) 1fr; }
   .work__intro.work__intro--fluid-addons > .work-heading__qty { grid-column: 2; grid-row: 6; }
   .work__intro.work__intro--fluid-addons > .addon-section { grid-column: 2; grid-row: 7; }
   .work__intro.work__intro--fluid-addons > .product-buy-bar { grid-column: 2; grid-row: 8; }
 }
-/* 字貼款式選單依內容收合，不拉滿加購資訊欄。 */
+
 .work__intro--fluid-addons .addon-row__meta .variant-select {
   width: auto;
   max-width: 100%;

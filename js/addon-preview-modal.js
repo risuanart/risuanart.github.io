@@ -1,26 +1,26 @@
-/* addon-preview-modal.js —— 「一起加購」清單（.addon-section--orlo，
-   見 css/products.css 同一處說明）裡任何一項，點縮圖就跳出大圖＋可
-   直接加入購物車的預覽視窗，不限定哪個加購品、不需要每頁另外接線，
-   通用機制：頁面上只要有 [data-addon-row] 結構（checkbox 型加購列），
-   這支腳本就會自動幫它的縮圖掛上預覽視窗。
 
-   2026-11-14 新增。視窗本身的「加入購物車」是完全獨立的動作，不經過
-   js/cart.js 的 getSelectedAddons()／checkbox 勾選那條路——直接呼叫
-   window.RisuanCart.addItem()，等同於客人自己去那個加購品的產品頁按
-   下加入購物車，行為（飛入動畫／提示音／提示泡泡）完全一致，不用另外
-   寫一套。這代表視窗加購跟勾選 checkbox 走主商品「加入購物車」按鈕是
-   兩條互不影響的路徑，各自代表一次「加 1 份」的意圖，都勾選/都按過
-   一次會各自算一次，不是衝突或重複扣款的 bug。
 
-   款式支援（目前 3 個加購品：筆刀／像框／無痕黏土都沒有款式，這段對
-   它們是 no-op）：如果加購列裡有 [data-addon-scheme]（固定商品鍵，只
-   換縮圖，例如以前的漸層沙選色）或 [data-addon-variant]（換商品鍵，
-   例如像框選尺寸）下拉選單，視窗會把選單的 <option> 轉成可點的款式
-   按鈕，點了同步換視窗裡的大圖／價格／（如果是 data-addon-variant）
-   要加購的商品鍵，同時把原本頁面上那顆下拉選單也設成同一個值並觸發
-   change 事件——這樣視窗關掉之後，頁面上這一列的縮圖／勾選狀態跟視窗
-   裡选的是同一顆，不會讓客人在視窗裡选了 A 色、關掉後頁面上卻還是
-   顯示 B 色這種不同步的狀況。 */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 (function () {
   const rows = Array.from(document.querySelectorAll("[data-addon-row]"));
   if (!rows.length) return;
@@ -117,9 +117,9 @@
     if (lastFocusedTrigger) lastFocusedTrigger.focus();
   }
 
-  // 把 <select> 的 <option> 轉成視窗裡可點的款式按鈕；row 上原本的
-  // 下拉選單同步更新＋觸發 change，讓 js/addon-variant-select.js
-  // 既有的縮圖/價格同步邏輯也一起跑，不用在這裡重複寫一次。
+
+
+
   function renderVariants(m, row, select, img, priceEl) {
     const wrap = m.querySelector("[data-modal-variants]");
     wrap.innerHTML = "";
@@ -185,12 +185,12 @@
     description.textContent = (window.AddonProductInfo || {})[checkbox.dataset.product] || '';
     description.hidden = !description.textContent;
 
-    // 2026-11-14 新增：像框加購列本來就有「預覽放進像框的效果」這顆
-    // 按鈕（js/addon-frame-preview-toggle.js），縮圖預設放空框照（避免
-    // 客人誤會加購含作品），視窗則相反——使用者反映視窗應該直接秀出
-    // 模擬放進去的效果，更直覺。這裡重用同一組 data-mockup-src／
-    // data-plain-src，不重複存一份圖檔路徑。沒有這顆按鈕的加購列（筆刀／
-    // 無痕黏土）不受影響，toggle 連結維持 hidden。
+
+
+
+
+
+
     const previewToggleBtn = row.querySelector("[data-addon-preview-toggle]");
     const modalPreviewToggle = m.querySelector("[data-modal-preview-toggle]");
     if (previewToggleBtn && previewToggleBtn.dataset.mockupSrc) {
@@ -224,9 +224,9 @@
     const addLabel = addBtn.querySelector(".work__cta-label");
     const addSvg = addBtn.querySelector("svg");
     const originalLabel = addLabel.textContent;
-    // 用 cloneNode 重新綁定，避免同一顆按鈕累積上一次開視窗留下的
-    // click listener（每次開視窗都呼叫 openModal，如果直接在既有
-    // 按鈕上 addEventListener，不清掉舊的就會疊加，點一次加購 N 次）。
+
+
+
     const freshAddBtn = addBtn.cloneNode(true);
     addBtn.replaceWith(freshAddBtn);
     freshAddBtn.addEventListener("click", () => {

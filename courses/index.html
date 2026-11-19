@@ -19,27 +19,27 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/colors.css?v=20261117-mobile-media">
-  <link rel="stylesheet" href="../css/tokens.css">
-  <link rel="stylesheet" href="../css/base.css?v=20261110-large-cover-detail">
-  <link rel="stylesheet" href="../css/home.css">
-  <link rel="stylesheet" href="../css/products.css?v=20261117-mobile-media">
-  <link rel="stylesheet" href="../css/cart.css">
-  <link rel="stylesheet" href="../css/site-menu.css">
-  <link rel="stylesheet" href="../css/site-footer.css">
-  <link rel="stylesheet" href="../css/hub-blocks.css">
-  <link rel="stylesheet" href="../css/courses-page.css?v=20261116-mobile-cards">
-  <!-- 上架前待修清單任務 8：底部材料指南區塊改用首頁 .home-guide-feature／
-       .home-guide-links 排版，這組規則定義在 home-editorial.css?v=guide-flow-20261109，之前
-       這頁沒載入過，材料指南區塊原本用的是 .course-guide-card（見
-       courses-page.css?v=20261116-mobile-cards），現在改用首頁那套樣式後才需要補這個連結。 -->
-  <link rel="stylesheet" href="../css/home-editorial.css?v=guide-flow-20261109">
+  <link rel="stylesheet" href="../css/colors.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../css/tokens.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../css/base.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../css/home.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../css/products.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../css/cart.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../css/site-menu.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../css/site-footer.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../css/hub-blocks.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../css/courses-page.css?v=20261119-public-clean">
+
+
+
+
+  <link rel="stylesheet" href="../css/home-editorial.css?v=20261119-public-clean">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
   <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  <link rel="stylesheet" href="/css/promo-bar.css">
-  <link rel="stylesheet" href="../css/page-title-en.css?v=20261107-shared-heading">
+  <link rel="stylesheet" href="/css/promo-bar.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../css/page-title-en.css?v=20261119-public-clean">
 </head>
 <body>
   <div class="promo-bar" id="promo-bar">
@@ -135,23 +135,23 @@
 
   <main class="product-page work">
 
-    <!-- 課程 hub 頁：首頁模塊的入口頁，統整介紹全部課程，再從這裡點進去
-         才是各自現有的課程頁（courses/{slug}/）。套用跟材料包母頁同一套
-         .content-block／.product-row 共用元件（見 ../css/hub-blocks.css），
-         不是另外做一套新樣式——材料包母頁、這頁、之後首頁拼貼區塊要維持
-         同一種視覺語言。.work__intro 不帶買列，單純標題＋一段介紹文字，
-         跟 faq/index.html 的用法一致。 -->
+
+
+
+
+
+
     <header class="work__intro fade-in">
       <h1 class="work-heading"><span class="page-title-en" aria-hidden="true">COURSES</span><span class="inner">繪畫課程</span></h1>
       <p class="intro">從肌理砂畫到油畫，不論有沒有基礎，老師都會依你的程度調整教法。<br>選好喜歡的媒材、圖片，現場就能完成一幅專屬作品。</p>
     </header>
 
-    <!-- 2026-10-29 第二次改版：取代原本的「展覽索引」排版（純靜態格狀
-         列表），參考使用者提供的 miyuki-beads.co.jp「Types of Seed
-         Beads」頁面做成自動輪播展示，並補上完整的敘事開場、賣點特色、
-         怎麼上課／怎麼預約、學員作品、FAQ、CTA。樣式見
-         css/courses-page.css?v=20261116-mobile-cards（這一頁專屬，不影響其他頁面），互動腳本見
-         js/courses-carousel.js。 -->
+
+
+
+
+
+
 
     <div class="content-container course-story fade-in">
       <div class="course-story__text">
@@ -409,16 +409,16 @@
       </div>
     </section>
 
-    <!-- 上架前待修清單任務 8：底部材料指南區塊從三張並排的大圖直排卡片
-         （原本一行是主題式命名、一行是文章式命名，風格不一致），改成
-         跟首頁同一套「一張主打卡片＋精簡列表」排版。主打卡片指定放
-         「同一座山，三種材料的呈現」（業主指定），其餘兩篇放進下面的
-         列表，列表項目統一用短標題（完整標題只在文章頁本身出現）。
-         .home-guide-feature 直接沿用首頁那套樣式（home-editorial.css?v=guide-flow-20261109），
-         但首頁的 .home-guide-links 是「兩欄並排」排版，不符合這裡要的
-         「一行一列、列高 44px、列間 1px 髮絲線分隔」規格，所以列表部分
-         另外用 .course-guide-links（定義在 courses-page.css?v=20261116-mobile-cards），不是
-         直接沿用 .home-guide-links。 -->
+
+
+
+
+
+
+
+
+
+
     <section class="content-container home-guide-section fade-in">
       <div class="home-section-head">
         <div>
@@ -473,15 +473,15 @@
 
   </main>
 
-  <script src="../js/cart.js?v=20261119-early-prices"></script>
-  <script src="../js/site-header-scroll.js?v=20261107-backtop"></script>
-  <script src="../js/account-auth.js?v=20261118-sessions"></script>
-  <script src="../js/account-widget.js"></script>
-  <script src="../js/site-menu.js?v=menu-order-20261109"></script>
-  <script src="../js/courses-carousel.js"></script>
-  <script src="../js/moments-carousel.js"></script>
-  <script src="../js/course-students.js?v=20261116-start"></script>
-  <script src="/js/promo-bar.js"></script>
-  <script src="../js/scroll-reveal.js"></script>
+  <script src="../js/cart.js?v=20261119-public-clean"></script>
+  <script src="../js/site-header-scroll.js?v=20261119-public-clean"></script>
+  <script src="../js/account-auth.js?v=20261119-public-clean"></script>
+  <script src="../js/account-widget.js?v=20261119-public-clean"></script>
+  <script src="../js/site-menu.js?v=20261119-public-clean"></script>
+  <script src="../js/courses-carousel.js?v=20261119-public-clean"></script>
+  <script src="../js/moments-carousel.js?v=20261119-public-clean"></script>
+  <script src="../js/course-students.js?v=20261119-public-clean"></script>
+  <script src="/js/promo-bar.js?v=20261119-public-clean"></script>
+  <script src="../js/scroll-reveal.js?v=20261119-public-clean"></script>
 </body>
 </html>

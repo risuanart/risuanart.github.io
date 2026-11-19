@@ -1,4 +1,4 @@
-// 專用的只讀聯絡頁，不呼叫任何改期、取消或會員API。
+
 (() => {
   const API = 'https://risuan-checkout.vercel.app';
   const root = document.getElementById('booking-contact-root');

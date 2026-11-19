@@ -1,38 +1,38 @@
-/* js/product-terms.js —— 材料包購買資訊，全站（流動畫＋砂畫）共用同一份
-   資料來源，不是各材質分開各自維護。
 
-   2026-10-18：參考 fisherm.co 商品頁做法，使用者反饋出貨時間、顏色落差、
-   材料保存、操作提醒這幾項太重要，不該摺在「購買前請閱讀」手風琴裡才
-   看得到。拆成兩塊輸出：
-   - renderHighlightsHTML()：常駐展開的重點區塊（出貨時間／顏色提醒／
-     材料保存／操作提醒），放在買列下方，不需要點開。
-   - renderTermsHTML()：手風琴裡的完整條款，份量較重、較少影響購買
-     決策的部分（下單與付款、退換貨政策、版權聲明等）留在這裡，不重複
-     放已經常駐顯示的出貨／材料保存／操作提醒。
 
-   比對過流動畫（輕巧版／禮盒版）跟砂畫（春／羊Diss舞蹈 Sheep La Danse）原本各自貼死的
-   條款內容，發現約一半是逐字相同的通用政策文字，跟材質完全無關；另一半
-   才是真的因材質不同而需要分開寫。這裡把兩層拆開：UNIVERSAL 放通用
-   文字，MATERIALS 依材質分別放專屬文字——通用政策要改，只要改 UNIVERSAL
-   一次，流動畫／砂畫所有頁面一起更新；材質專屬文字則各自維護在
-   MATERIALS 底下對應的鍵值。
 
-   套用方式：
-   - 常駐重點區塊：<div class="info-highlights" data-product-info-
-     highlights="sand-art"></div>（或 "fluid-art"），放在
-     .work-heading__buy-row 下方、</header> 之前。
-   - 手風琴條款：<div class="accordion__body" data-product-terms=
-     "sand-art"></div>（或 "fluid-art"），外層 <details class="accordion">
-     ＋<summary>，摺疊互動跟樣式沿用既有 .accordion 元件。
-   這支 script 只負責把內容填進容器，不碰版面。
 
-   目前引用頁面：
-   - sand-art：sand-art-chun、sand-art-cai、sand-art-fu、sand-art-na-fu、
-     sand-art-na-fu-lantern、sand-art-ying-chun、sand-art-ying-chun-lantern、
-     sand-art-artist-sheep-red、sand-art-artist-sheep-blue
-   - fluid-art：fluid-art-light-red、fluid-art-light-pink、fluid-art-gift
-   sand-art-light.html／sand-art-collection.html 暫時維持各自貼上的舊版
-   純 HTML，還沒接上這份共用資料（已下架，不補）。 */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 (function () {
   const UNIVERSAL = {
     intro: "感謝你選擇 Ri Suan Studio 的材料包與手作商品。為了確保每位創作者都有順暢的購買體驗，請花些時間閱讀以下內容。當你在本網站完成訂購，即代表你已閱讀並同意此內容。",
@@ -64,9 +64,9 @@
     },
   };
 
-  /* 常駐重點區塊的短列點版本——跟上面 MATERIALS／UNIVERSAL 的完整句子
-     分開維護，因為這裡要的是精簡、一眼看完的列點，不是手風琴裡的完整
-     句子。改這裡不會影響手風琴內容，反之亦然。 */
+
+
+
   const HIGHLIGHTS_UNIVERSAL = {
     shipping: [
       "商品依訂購順序安排出貨，出貨時程將於下單頁面另行公告",

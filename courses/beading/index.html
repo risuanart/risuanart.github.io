@@ -9,8 +9,8 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="手作串珠項鍊課程｜日宣繪畫室">
   <meta property="og:description" content="日本玻璃珠、捷克玻璃珠、水晶、珍珠等多種珠款自由混搭，串出獨一無二的項鍊。">
-  <!-- 還沒有真實課程／學員作品照片，og:image 先不放（沒有素材硬塞一張
-       不相關的圖，比沒有這個標籤更誤導），等真的照片到位再補上。 -->
+
+
   <meta property="og:url" content="https://risuanart.com/courses/beading/">
   <meta property="og:locale" content="zh_TW">
   <meta name="twitter:card" content="summary">
@@ -19,21 +19,21 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=ABeeZee&family=Poppins:wght@700&family=Noto+Sans+TC:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../../css/colors.css?v=20261117-mobile-media">
-  <link rel="stylesheet" href="../../css/tokens.css">
-  <link rel="stylesheet" href="../../css/base.css?v=20261110-course-covers">
-  <link rel="stylesheet" href="../../css/home.css">
-  <link rel="stylesheet" href="../../css/products.css?v=20261117-mobile-media">
-  <link rel="stylesheet" href="../../css/cart.css">
-  <link rel="stylesheet" href="../../css/enterprise.css">
-  <link rel="stylesheet" href="../../css/gallery.css?v=20261117-mobile-media">
-  <link rel="stylesheet" href="../../css/site-menu.css">
-  <link rel="stylesheet" href="../../css/site-footer.css">
+  <link rel="stylesheet" href="../../css/colors.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/tokens.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/base.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/home.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/products.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/cart.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/enterprise.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/gallery.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/site-menu.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/site-footer.css?v=20261119-public-clean">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
   <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  <link rel="stylesheet" href="/css/promo-bar.css">
+  <link rel="stylesheet" href="/css/promo-bar.css?v=20261119-public-clean">
 </head>
 <body>
   <div class="promo-bar" id="promo-bar">
@@ -52,12 +52,12 @@
     <button type="button" class="site-header__menu-toggle" id="menu-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="site-menu" aria-label="開啟選單">
       <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
     </button>
-    <!-- 2026-09-18 新增：桌面版（≥1024px）文字導覽列，取代漢堡選單抽屜；
-         手機版隱藏，維持現有漢堡選單不變。內容／邏輯跟首頁 index.html
-         那份一致，樣式見 css/site-menu.css .site-header__nav（子頁置中
-         logo 用 .site-header__title，不是首頁專屬的 .site-header__logo，
-         見該檔案開頭說明），下拉開合邏輯見 js/site-menu.js 「課程」下拉
-         那個 IIFE。 -->
+
+
+
+
+
+
     <nav class="site-header__nav" aria-label="主選單">
       <a href="../../booking/">線上預約課程</a>
       <div class="site-header__nav-item">
@@ -135,35 +135,35 @@
 
   <main class="product-page work">
 
-    <!-- 這是「畫室常態課程」介紹頁的第一篇，之後每堂課（石英砂肌理畫、
-         刮刀油畫、流動畫、抽象畫、自選主題油畫、鏡子拼貼……）都會照這個
-         位置規則（courses/xxx.html）跟版面結構各建一頁，結構沿用企業
-         案例頁（enterprise-candle.html）同一套元件（.ent-hero／.chapter／
-         .ent-gallery／.ent-cta），但文案語氣不同——這不是企業包班課程，
-         是畫室開放報名的常態課程，自由度更高（珠款選擇多、成品因人而異），
-         不是「依活動人數／預算客製」的服務介紹語氣。
 
-         資料來源：使用者自己在 Pinkoi 上架的同一堂課（
-         https://www.pinkoi.com/product/b3TTNZ3z），材料／適合對象等
-         「課程內容」資訊已確認為真實資料直接使用；價格、上課時長、
-         取消退費規則等「交易條件」使用者明確表示這階段先不放（下定
-         付款流程還沒決定怎麼做，之後才會定案），沒有寫進這頁。
 
-         使用者已上傳 4 支真實影片（assets/videos/courses/beading/，
-         原始都是手機直式 9:16，用 ffprobe 確認過 720×1280，不是我裁切
-         或猜的比例）：宣傳片當首圖影片、大珠款／小珠款示範片放進「珠款
-         選擇」段落、學員作品影片放進學員作品輪播（其餘 3 格還沒有其他
-         真實素材，維持 .placeholder-box 誠實佔位，之後有照片/影片直接
-         替換）。還沒有靜態照片，首圖／學員作品格用影片而不是照片。 -->
 
-    <!-- 2026-10-31：套用寵物油畫頁驗證過的 .ent-hero--split。價格/時間
-         取自業主提供的正式課程價目表（項鍊 3hr／$1280）。業主提供的
-         價目表這堂課其實還有「飲料提袋」（同價格/時間）跟「手鍊」
-         （2hr／$850）兩個選項，但這頁從標題到內文從頭到尾都只講項鍊，
-         沒有提過飲料提袋或手鍊，所以這裡沒有一起列進速覽，只放這頁
-         本來就有在講的項鍊——如果要把另外兩個做法也納入這頁，是要
-         另外擴充頁面內容的決定，不是這次補價格資訊的範圍。串珠沒有
-         固定的「尺寸」數字可以列，速覽只放價格／時間兩項。 -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <section class="ent-hero fade-in is-flush-top ent-hero--split">
       <div class="ent-hero__media">
         <video poster="../../assets/images/products/video-posters/preview-400eb515db.jpg" class="ent-hero__photo is-portrait-video is-full-bleed" src="../../assets/videos/courses/beading/串珠課程宣傳影片.MP4" preload="auto" autoplay muted loop playsinline aria-label="串珠課程宣傳影片"></video>
@@ -193,11 +193,11 @@
         <p class="chapter__statement">珠款選擇</p>
         <p class="chapter__prose">課程準備了日本玻璃珠、捷克玻璃珠、水晶、珍珠、金屬管珠等多種材質，還可以選擇小珠款或大珠款，混搭出不同的風格與層次。</p>
       </div>
-      <!-- 大珠款／小珠款示範片並排比較，兩支都是使用者提供的真實影片，
-           不是同一支剪兩半。網格語言沿用 products.css 既有的兩格比較
-           排版（.sticker-compare／.howto-compare 同一套 recipe，這裡另開
-           .bead-compare 是延續那邊「不同比較內容另開一組類別名稱」的
-           慣例，見 css/enterprise.css）。 -->
+
+
+
+
+
       <div class="bead-compare">
         <div class="bead-compare__cell">
           <div class="chapter__banner-video is-portrait-video">
@@ -212,13 +212,13 @@
           <p class="bead-compare__label">小珠款</p>
         </div>
       </div>
-      <!-- 材料特寫：使用者提供的珠珠收納盒實拍照，不是學員完成品，是
-           材料本身的照片，放在「珠款選擇」段落呼應上面文字（日本玻璃珠、
-           捷克玻璃珠、水晶、珍珠、金屬管珠等）。張數不多（5 張）但用
-           橫向滑動呈現，沿用 .material-photo-carousel——這個 class 本來
-           就是給「材料指南比較頁」放同一種材料的多張真實照片用的（見
-           css/products.css 該處註解），語意完全對得上，不用另外做新的
-           排版。 -->
+
+
+
+
+
+
+
       <div class="material-photo-carousel">
         <div class="material-photo-carousel__track">
           <img src="../../assets/images/courses/beading/material-01.jpg" alt="珠珠收納盒特寫，白色、透明與深色珠子分格收納" loading="lazy">
@@ -230,13 +230,13 @@
       </div>
     </section>
 
-    <!-- 上課情境：使用者提供的候拍照（學員製作過程中被拍下的真實瞬間，
-         不是擺拍示範），用來傳達「動手做」的臨場感，跟上面「珠款選擇」
-         的示範影片、下面「學員作品」的完成品照片是三種不同性質的素材
-         （材料／過程／成果）。版面沿用上面已經在用的 .bead-compare 兩格
-         並排＋ .chapter__banner-video.is-portrait-video 直式媒材框，
-         這裡放的是 img 不是 video，見 css/enterprise.css
-         .chapter__banner-video img 規則。 -->
+
+
+
+
+
+
+
     <section class="chapter fade-in delay-2">
       <div class="chapter__block">
         <p class="chapter__statement">上課情境</p>
@@ -256,12 +256,12 @@
       </div>
     </section>
 
-    <!-- 學員作品：影片跟照片分開放。影片獨立播放到底（沿用
-         .chapter__banner-video，跟上面「珠款選擇」的大小珠比較影片同一
-         套樣式）；下面照片改成跟集中的 gallery.html 共用同一份資料
-         （見 js/gallery-course-preview.js／js/gallery-data.js），抓
-         「串珠」這個課程底下最新的 4 筆，不是自己另外寫死幾張佔位圖，
-         資料到位就會自動出現。 -->
+
+
+
+
+
+
     <section class="chapter fade-in delay-2">
       <div class="chapter__block">
         <p class="chapter__statement">學員作品</p>
@@ -284,10 +284,10 @@
       </div>
     </section>
 
-    <!-- 常見 QA：目前只放跟「課程內容」有關、使用者確認過的真實資訊
-         （來源同上方 Pinkoi 頁面），不涉及價格／時長／取消退費——那些
-         等下定付款流程定案後再補。手風琴樣式沿用 faq.html 同一套
-         .faq-item／<details>，不是另外做一套。 -->
+
+
+
+
     <section class="chapter fade-in delay-3">
       <p class="chapter__statement">常見問題</p>
       <details class="faq-item">
@@ -308,9 +308,9 @@
       </details>
     </section>
 
-    <!-- CTA 三連：「線上預約」是新的主要動作（2026-09 加，直接刷卡付款
-         排課，不用等私訊回覆），私訊洽詢降級成文字連結但保留，兩個入口
-         並存，不是取代關係。 -->
+
+
+
     <footer class="ent-cta fade-in">
       <p class="ent-cta__text">可以直接線上刷卡預約，或私訊討論細節，兩種方式都能安排上課！</p>
       <div class="ent-cta__actions">
@@ -355,16 +355,16 @@
 
   </main>
 
-  <script src="../../js/cart.js?v=20261119-early-prices"></script>
-  <script src="../../js/site-header-scroll.js?v=20261107-backtop"></script>
-  <script src="../../js/account-auth.js?v=20261118-sessions"></script>
-  <script src="../../js/account-widget.js"></script>
-  <script src="../../js/scroll-reveal.js"></script>
-  <script src="../../js/video-inview.js?v=20261117-mobile-media"></script>
-  <script src="../../js/gallery-data.js?v=20261110-ig202403"></script>
-  <script src="../../js/gallery-course-preview.js?v=20261110-gallery-performance"></script>
-  <script src="../../js/gallery-lightbox.js?v=20261117-mobile-media"></script>
-  <script src="../../js/site-menu.js?v=menu-order-20261109"></script>
-  <script src="/js/promo-bar.js"></script>
+  <script src="../../js/cart.js?v=20261119-public-clean"></script>
+  <script src="../../js/site-header-scroll.js?v=20261119-public-clean"></script>
+  <script src="../../js/account-auth.js?v=20261119-public-clean"></script>
+  <script src="../../js/account-widget.js?v=20261119-public-clean"></script>
+  <script src="../../js/scroll-reveal.js?v=20261119-public-clean"></script>
+  <script src="../../js/video-inview.js?v=20261119-public-clean"></script>
+  <script src="../../js/gallery-data.js?v=20261119-public-clean"></script>
+  <script src="../../js/gallery-course-preview.js?v=20261119-public-clean"></script>
+  <script src="../../js/gallery-lightbox.js?v=20261119-public-clean"></script>
+  <script src="../../js/site-menu.js?v=20261119-public-clean"></script>
+  <script src="/js/promo-bar.js?v=20261119-public-clean"></script>
 </body>
 </html>

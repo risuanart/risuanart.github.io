@@ -1,13 +1,13 @@
-/* courses-carousel.js —— courses/index.html 課程展示輪播（.course-carousel）。
-   自動輪播＋hover 暫停＋手動介入（點箭頭／點 dots／拖曳捲動）後永久停止，
-   跟 js/hero-colorway-carousel.js 同一套互動邏輯（setTimeout 遞迴＋
-   prefers-reduced-motion 尊重），不是另外發明一套新規則，只是這裡是
-   「可以手動控制、停了就不會自己恢復」的版本，跟那支「暫停鍵可以恢復
-   播放」的節奏不同——道理同 js/hero-thumb-gallery.js 開頭的說明：使用者
-   自己選了要看哪張，就不該再被自動跳走。
 
-   同一支檔案也處理「複製訊息，私訊討論圖片」那顆按鈕（.course-ig-cta__btn）
-   ——邏輯很單純，不值得為它另外切一支檔案。 */
+
+
+
+
+
+
+
+
+
 
 (function () {
   const FIRST_FRAME_MS = 4000;
@@ -85,7 +85,7 @@
       stoppedByUser = true;
       pause();
     });
-    // 原生觸控捲動也要同步選中項目；等捲動停下，避免平滑切換途中跳選。
+
     let scrollTimer = null;
     function syncActiveFromScroll() {
       clearTimeout(scrollTimer);

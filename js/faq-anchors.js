@@ -1,4 +1,4 @@
-/* 預約主題跳轉：為固定導覽預留實際高度，停在主題標題。 */
+
 (function () {
   const nav = document.querySelector(".faq-tier2__jump");
   if (!nav) return;

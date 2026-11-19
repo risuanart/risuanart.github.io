@@ -19,21 +19,21 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=ABeeZee&family=Poppins:wght@700&family=Noto+Sans+TC:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../../css/colors.css?v=20261117-mobile-media">
-  <link rel="stylesheet" href="../../css/tokens.css">
-  <link rel="stylesheet" href="../../css/base.css?v=20261110-course-covers">
-  <link rel="stylesheet" href="../../css/home.css">
-  <link rel="stylesheet" href="../../css/products.css?v=20261117-mobile-media">
-  <link rel="stylesheet" href="../../css/cart.css">
-  <link rel="stylesheet" href="../../css/enterprise.css">
-  <link rel="stylesheet" href="../../css/site-menu.css">
-  <link rel="stylesheet" href="../../css/site-footer.css">
+  <link rel="stylesheet" href="../../css/colors.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/tokens.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/base.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/home.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/products.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/cart.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/enterprise.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/site-menu.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/site-footer.css?v=20261119-public-clean">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
   <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  <link rel="stylesheet" href="/css/promo-bar.css">
-  <link rel="stylesheet" href="../../css/guide-articles.css?v=20261116">
+  <link rel="stylesheet" href="/css/promo-bar.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/guide-articles.css?v=20261119-public-clean">
 </head>
 <body>
   <div class="promo-bar" id="promo-bar">
@@ -128,60 +128,60 @@
 
   <main class="product-page work">
 
-    <!-- 材料指南新一篇，不是「同題材三種材料」比較型文章（跟
-         material-compare-mountain／material-compare-large-canvas 那兩篇
-         結構不同），是「怎麼挑一張迪士尼/皮克斯參考圖」的難易度判斷
-         文章。內容依據使用者提供的真實 IG 貼文截圖（#迪士尼 #一堂完成
-         #皮克斯 #油畫，用 Read 工具直接讀截圖畫面文字，不是轉述記憶），
-         原文把迪士尼/皮克斯作品分成兩種畫風：
-         - 2D 手繪平面風格：白雪公主、仙履奇緣、睡美人、小美人魚、美女
-           與野獸、阿拉丁、公主與青蛙
-         - 3D 立體風格：魔髮奇緣（原文寫「魔法奇緣」，查證後應為
-           Tangled《魔髮奇緣》，原文手滑打成「法」，這裡照正確片名
-           寫）、冰雪奇緣、勇敢傳說、海洋奇緣，以及皮克斯／夢工廠／
-           索尼多數作品
-         簡易評估法（原文）：色塊是單色+線條（平面）還是多色+線條不
-         清晰（立體）；一張臉需要很多種膚色堆疊 = 偏立體 = 一堂課較難
-         做出高精緻度成品。新手不建議挑需要多堂完成的圖，避免落差感
-         影響成品。原文也明確寫「評估是大概劃分，同一角色的再製圖/
-         衍生圖會有各種風格形式，具體以傳圖片給畫室評估為主」——這篇
-         文章保留這個但書，不是斬釘截鐵的規則。
 
-         配圖用學員真實作品（js/gallery-data.js「迪士尼」主題，2026-10-30
-         新增），2D 區塊挑小美人魚／阿拉丁／美女與野獸的例子，3D 區塊挑
-         魔髮奇緣／怪獸電力公司的例子——這些都是文中有明確提到片名、
-         角色辨識度高的作品；角色不確定具體是哪部片的素材（例如疑似
-         非迪士尼角色的雪怪場景、風格化到難辨認的側臉剪影）不放進這篇
-         文章當範例，避免掛錯片名誤導讀者，但仍然留在作品集裡。
 
-         SEO 考量：使用者明確要求這篇文章要能提到動畫片名、角色名，
-         增加搜尋引擎涵蓋的關鍵字範圍，所以內文、alt、meta description
-         都刻意具體寫出片名與角色名，不是用「迪士尼公主」這種籠統說法
-         帶過。
 
-         2026-10-30 大幅擴充：使用者指出原本版本太像「極度簡短的濃縮
-         文章」，範例作品太少，整頁顯得廉價，要求放夠多作品、而且
-         「盡量不要裁切到圖片」——.ent-feature__media／.material-photo-
-         carousel 這些既有元件都是固定比例＋object-fit:cover 會裁切，
-         改用新增的 .uncropped-gallery（CSS columns 瀑布流，見
-         css/products.css 說明）維持每張照片的原始比例完整呈現。
 
-         同時新增「單堂／2堂／3堂／4堂，完成度差在哪裡」整段——使用者
-         原話：「我有分類在資料夾，這就是為什麼我分類給你的原因」，
-         點出使用者把迪士尼素材依堂數分裝進不同資料夾，本來就是為了
-         將來做這種堂數對照說明用的，不是單純整理方便而已，這段直接
-         用 js/gallery-data.js 裡每張圖真實的 sessions 數值分組（不是
-         另外猜的），讓同學具體看到堂數跟細緻度的關係。
 
-         2D／3D 區塊的電影分類比照原文（白雪公主/仙履奇緣/睡美人/
-         小美人魚/美女與野獸/阿拉丁/公主與青蛙=2D；魔髮奇緣/冰雪奇緣/
-         勇敢傳說/海洋奇緣及皮克斯多數作品=3D），這次也把小熊維尼、
-         小鹿斑比、唐老鴨這幾部經典手繪動畫（1940~60年代作品，技法上
-         也是手繪平面）併入 2D 區塊舉例——這幾部原文沒提到，但畫風
-         判斷邏輯一致，补充同類型例子不算超出原文評估方式。獅子王
-         （1994 手繪版）這次也歸回 2D 區塊——上一版誤放進 3D 範例，
-         獅子王 1994 年版本是傳統手繪動畫，不是立體電腦動畫，是個
-         分類錯誤，這次順便修正。 -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <section class="chapter fade-in">
       <p class="guide-article-back"><a class="text-link" href="../">← 材料指南</a></p>
@@ -291,10 +291,10 @@
 
     <section class="chapter fade-in delay-2">
       <div class="chapter__block">
-        <!-- 2026-10-30 使用者更正：原本小美人魚海底場景那 3 張（10/11/12）
-             標成 4 堂完成，使用者要求改成 3 堂（js/gallery-data.js 的
-             sessions 欄位同步修正），原本獨立的「4 堂完成」小節併入
-             「3 堂完成」，標題跟著拿掉「4堂」。 -->
+
+
+
+
         <p class="chapter__statement">單堂／2堂／3堂，完成度差在哪裡</p>
         <p class="chapter__prose">同樣的評估邏輯，實際放進真實作品比較會更清楚。以下照堂數分組，都是真實學員作品，不是示意圖。</p>
       </div>
@@ -427,13 +427,13 @@
 
   </main>
 
-  <script src="../../js/cart.js?v=20261119-early-prices"></script>
-  <script src="../../js/site-header-scroll.js?v=20261107-backtop"></script>
-  <script src="../../js/account-auth.js?v=20261118-sessions"></script>
-  <script src="../../js/account-widget.js"></script>
-  <script src="../../js/scroll-reveal.js"></script>
-  <script src="../../js/hero-thumb-gallery.js?v=20261117-mobile-media"></script>
-  <script src="../../js/site-menu.js?v=menu-order-20261109"></script>
-  <script src="/js/promo-bar.js"></script>
+  <script src="../../js/cart.js?v=20261119-public-clean"></script>
+  <script src="../../js/site-header-scroll.js?v=20261119-public-clean"></script>
+  <script src="../../js/account-auth.js?v=20261119-public-clean"></script>
+  <script src="../../js/account-widget.js?v=20261119-public-clean"></script>
+  <script src="../../js/scroll-reveal.js?v=20261119-public-clean"></script>
+  <script src="../../js/hero-thumb-gallery.js?v=20261119-public-clean"></script>
+  <script src="../../js/site-menu.js?v=20261119-public-clean"></script>
+  <script src="/js/promo-bar.js?v=20261119-public-clean"></script>
 </body>
 </html>

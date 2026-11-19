@@ -1,4 +1,4 @@
-/* Small signature-detail feature used only on course pages that offer it. */
+
 .course-signature {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 0.82fr);

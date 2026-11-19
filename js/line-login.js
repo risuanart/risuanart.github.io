@@ -1,4 +1,4 @@
-/* 只在會員與LINE回傳頁載入。使用PKCE；state與nonce綁定同一分頁的登入請求。 */
+
 (function () {
   const SESSION_KEY = 'risuan-line-oauth';
   const TTL = 10 * 60 * 1000;
@@ -27,7 +27,7 @@
   async function finish() {
     const status = document.getElementById('line-callback-status');
     const params = new URLSearchParams(location.search);
-    // 立即移除code，避免重新整理重送或經由後續連結外洩。
+
     history.replaceState(null, '', location.pathname);
     try {
       const request = JSON.parse(sessionStorage.getItem(SESSION_KEY) || 'null');
@@ -80,5 +80,5 @@
   fetch(account.API_BASE + '/api/account?action=config' + (new URLSearchParams(location.search).get('lineTest') === '1' ? '&lineTest=1' : ''), { cache: 'no-store' })
     .then(response => { if (!response.ok) throw new Error(); return response.json(); })
     .then(data => { config = data; render(); })
-    .catch(() => {}); // LINE暫時無法使用時，保留既有Google與訪客入口。
+    .catch(() => {});
 })();

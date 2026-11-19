@@ -1,7 +1,7 @@
 (() => {
   const track = document.getElementById('course-students-track');
   if (!track) return;
-  // 重新進頁與往返快取都從第一張開始；使用者操作後不再因圖片載入拉回。
+
   let interacted = false;
   const stopReset = () => { interacted = true; };
   ['pointerdown', 'touchstart', 'wheel', 'keydown'].forEach(event => {

@@ -19,21 +19,21 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=ABeeZee&family=Poppins:wght@700&family=Noto+Sans+TC:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../../css/colors.css?v=20261117-mobile-media">
-  <link rel="stylesheet" href="../../css/tokens.css">
-  <link rel="stylesheet" href="../../css/base.css?v=20261110-course-covers">
-  <link rel="stylesheet" href="../../css/home.css">
-  <link rel="stylesheet" href="../../css/products.css?v=20261117-mobile-media">
-  <link rel="stylesheet" href="../../css/cart.css">
-  <link rel="stylesheet" href="../../css/enterprise.css">
-  <link rel="stylesheet" href="../../css/gallery.css?v=20261117-mobile-media">
-  <link rel="stylesheet" href="../../css/site-menu.css">
-  <link rel="stylesheet" href="../../css/site-footer.css">
+  <link rel="stylesheet" href="../../css/colors.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/tokens.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/base.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/home.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/products.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/cart.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/enterprise.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/gallery.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/site-menu.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../../css/site-footer.css?v=20261119-public-clean">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
   <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  <link rel="stylesheet" href="/css/promo-bar.css">
+  <link rel="stylesheet" href="/css/promo-bar.css?v=20261119-public-clean">
 </head>
 <body>
   <div class="promo-bar" id="promo-bar">
@@ -52,12 +52,12 @@
     <button type="button" class="site-header__menu-toggle" id="menu-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="site-menu" aria-label="開啟選單">
       <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
     </button>
-    <!-- 2026-09-18 新增：桌面版（≥1024px）文字導覽列，取代漢堡選單抽屜；
-         手機版隱藏，維持現有漢堡選單不變。內容／邏輯跟首頁 index.html
-         那份一致，樣式見 css/site-menu.css .site-header__nav（子頁置中
-         logo 用 .site-header__title，不是首頁專屬的 .site-header__logo，
-         見該檔案開頭說明），下拉開合邏輯見 js/site-menu.js 「課程」下拉
-         那個 IIFE。 -->
+
+
+
+
+
+
     <nav class="site-header__nav" aria-label="主選單">
       <a href="../../booking/">線上預約課程</a>
       <div class="site-header__nav-item">
@@ -135,56 +135,56 @@
 
   <main class="product-page work">
 
-    <!-- 「特殊材質客製」課程頁：跟「大幅畫布訂製」（courses/large-canvas.html）
-         同一種性質——不是固定期別的技法課，是依照學生想法／參考圖，由畫室
-         評估合適材質與做法的客製服務，所以沿用同一套處理方式：eyebrow
-         用「客製服務」而不是「畫室常態課程」，課程選單裡排在「大幅畫布
-         訂製」旁邊、跟前面的固定技法課稍微拉開距離，但還是留在同一個
-         「課程」清單裡（使用者 2026-09-16 討論後拍板：「還是放進課程清單
-         裡，但比照大幅畫布訂製的做法」）。
 
-         資料來源：使用者在桌面建立「客製化其他材質課程」資料夾，內含
-         3 支真實影片＋3 張 IG 貼文截圖，用 Read 工具讀過截圖文字、用
-         ffmpeg 抽格 + Read 工具看過影片內容，逐一比對確認影片跟貼文
-         描述的是同一件作品：
-         1. 「雕塑＋環氧樹脂的客製教學.MP4」對應 IG 貼文（instagram.com/p/DKmg2xyTTFs/）：
-            原文「喜歡海洋的學生想做的，先使用雕塑土捏出鯨魚的樣子，刷上
-            壓克力後以樹脂封層，最後再吹出海浪及泡泡。分了好幾次才完成
-            ...為客製課程目前沒有開課，有特別材料、內容之課程都可以私訊
-            我們討論！」——這句直接證實這類客製案目前沒有固定開課，是
-            對話評估決定的，跟使用者的說明完全吻合。
-         2. 「異材質畫布結合.MP4」對應 IG 貼文（instagram.com/p/C5gNJH6PF0n/）：
-            原文「同學說~要送朋友禮物，朋友選了平常畫的照片裡面的調色盤？
-            ...影片內容是抽象畫主題是花...抽象畫在畫的過程中會依照選圖去
-            挑選材料跟用具，但是因為比較無法完全控制，會有顏色跟筆觸的
-            些微落差，最後有再加金箔增加細緻度...有什麼特別想法都可以私訊
-            討論，可以的話老師都會協助完成或找材料」——用學生自己的舊
-            調色盤當畫布，不是標準方形畫布。
-         3. 「小畫布的立體設計.MP4」對應 IG 貼文（instagram.com/p/C4QTy46P9e2/）：
-            原文「因應最近熱愛蝴蝶結的同學設計，可以替換任何顏色形狀有
-            針織毛衣的感覺，10*10cm小小畫布超可愛...適合速食耐性的同學」
-            ——這則用的是既有的石英砂肌理畫媒材，客製的是圖案跟尺寸（
-            小尺寸蝴蝶結），不是全新材質，放在這裡當作「客製不只限於全新
-            材質，既有媒材客製圖案／尺寸也算」的例子。
-         三支影片原始檔都已經是 H.264 720×1280，沒有需要轉檔，直接複製
-         使用。首圖用鯨魚樹脂影片（三支裡視覺效果最完整、最能代表「特殊
-         材質」這個主題），poster 截圖取影片最後鯨魚尾巴特寫那格（32s），
-         成品光澤感很清楚。
 
-         價格：三個範例的 IG 貼文都沒有提到費用（客製案本來就是逐案評估，
-         比大幅畫布訂製更難有一個固定區間），這頁「怎麼進行」段落直接
-         寫「詳洽」，不是遺漏。
 
-         學員作品：目前沒有這堂課專屬的完成品照片（三支影片是製作過程，
-         不是分類好的成品照，比照 pet-portrait.html 對「過程影片」的處理
-         方式，不直接塞進 js/gallery-data.js 的 GALLERY_ITEMS），學員作品
-         區塊維持 gallery-course-preview 的誠實 empty state，之後有真的
-         成品照片再讓它自動出現。 -->
 
-    <!-- 2026-10-31：套用寵物油畫頁驗證過的 .ent-hero--split，解決桌面版
-         留白問題。這堂是客製服務，業主提供的正式價目表沒有固定金額
-         （材質、做法都因人而異），速覽只放價格一項、寫「依設計報價」，
-         不列時間／尺寸，避免暗示有固定數字。 -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <section class="ent-hero fade-in is-flush-top ent-hero--split">
       <div class="ent-hero__media">
         <video class="ent-hero__photo is-portrait-video is-full-bleed" src="../../assets/videos/courses/custom-material/雕塑＋環氧樹脂的客製教學.MP4" poster="../../assets/images/courses/custom-material/hero-poster.jpg" preload="auto" autoplay muted loop playsinline aria-label="鯨魚造型客製作品：雕塑土捏形，刷上壓克力後以環氧樹脂封層，吹出海浪與泡泡紋理"></video>
@@ -245,10 +245,10 @@
       </div>
     </section>
 
-    <!-- 學員作品：目前沒有這堂課的真實成品照片，用跟其他課程頁一樣的
-         gallery-course-preview 元件抓「特殊材質客製」分類底下的作品，
-         資料到位就會自動出現，現在會顯示 data-gallery-preview-empty
-         那句提示。 -->
+
+
+
+
     <section class="chapter fade-in delay-3">
       <div class="chapter__block">
         <p class="chapter__statement">學員作品</p>
@@ -331,16 +331,16 @@
 
   </main>
 
-  <script src="../../js/cart.js?v=20261119-early-prices"></script>
-  <script src="../../js/site-header-scroll.js?v=20261107-backtop"></script>
-  <script src="../../js/account-auth.js?v=20261118-sessions"></script>
-  <script src="../../js/account-widget.js"></script>
-  <script src="../../js/scroll-reveal.js"></script>
-  <script src="../../js/video-inview.js?v=20261117-mobile-media"></script>
-  <script src="../../js/gallery-data.js?v=20261110-ig202403"></script>
-  <script src="../../js/gallery-course-preview.js?v=20261110-gallery-performance"></script>
-  <script src="../../js/gallery-lightbox.js?v=20261117-mobile-media"></script>
-  <script src="../../js/site-menu.js?v=menu-order-20261109"></script>
-  <script src="/js/promo-bar.js"></script>
+  <script src="../../js/cart.js?v=20261119-public-clean"></script>
+  <script src="../../js/site-header-scroll.js?v=20261119-public-clean"></script>
+  <script src="../../js/account-auth.js?v=20261119-public-clean"></script>
+  <script src="../../js/account-widget.js?v=20261119-public-clean"></script>
+  <script src="../../js/scroll-reveal.js?v=20261119-public-clean"></script>
+  <script src="../../js/video-inview.js?v=20261119-public-clean"></script>
+  <script src="../../js/gallery-data.js?v=20261119-public-clean"></script>
+  <script src="../../js/gallery-course-preview.js?v=20261119-public-clean"></script>
+  <script src="../../js/gallery-lightbox.js?v=20261119-public-clean"></script>
+  <script src="../../js/site-menu.js?v=20261119-public-clean"></script>
+  <script src="/js/promo-bar.js?v=20261119-public-clean"></script>
 </body>
 </html>

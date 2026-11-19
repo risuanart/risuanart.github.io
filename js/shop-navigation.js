@@ -1,4 +1,4 @@
-/* 商品分類與購買區路徑；所有商品共用。 */
+
 (() => {
   const params = new URLSearchParams(location.search);
   const groups = [

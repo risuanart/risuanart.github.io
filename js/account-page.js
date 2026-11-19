@@ -1,8 +1,8 @@
-/* account-page.js —— account/index.html 專屬的頁面控制器，只在這一頁
-   載入。登入狀態讀寫、Google 登入按鈕渲染、地址拆解邏輯都是
-   window.RisuanAccount（js/account-auth.js）提供的全站共用介面，這支
-   檔案只負責「把這頁需要的四個區塊（基本資料／收件地址／訂單／課程
-   預約）串起來」，不重複寫那幾支共用邏輯。 */
+
+
+
+
+
 
 (function () {
   function escapeHtml(str) {
@@ -57,11 +57,11 @@
       document.body.appendChild(form);form.submit();
     });
 
-    // ---------- 側邊欄分頁切換（參考 koyama.com.tw 會員後台，拿掉
-    // 「變更密碼」——這個網站只有 Google 登入）。四個區塊同時只顯示
-    // 一個，純粹是畫面顯示切換，各區塊的資料仍然在登入當下就一次全部
-    // 載入（見 showMember()），不是切到哪個分頁才現載，資料量不大，
-    // 不值得為此多一層「哪個分頁載入過了」的狀態管理。 ----------
+
+
+
+
+
     const navItems = document.querySelectorAll(".account-page__nav-item");
     navItems.forEach((btn) => {
       btn.addEventListener("click", () => {
@@ -76,10 +76,10 @@
       });
     });
 
-    // ---------- 縣市／鄉鎮市區下拉選單（跟 js/checkout.js 結帳頁同一套
-    // window.TW_POSTAL_CODES 資料來源，選單填充邏輯各自獨立一份——這塊
-    // UI 互動本身很短，比起抽成共用函式、還要處理兩邊各自不同的 DOM id，
-    // 維持各自一份更單純）。 ----------
+
+
+
+
     if (window.TW_POSTAL_CODES) {
       Object.keys(window.TW_POSTAL_CODES).forEach((county) => {
         const opt = document.createElement("option");
@@ -130,7 +130,7 @@
       addressDetailInput.value = parsed.detail;
     }
 
-    // ---------- 基本資料表單 ----------
+
     function fillProfileForm(customer) {
       emailInput.value = customer.email;
       const contact = customer.lastContact;
@@ -143,10 +143,10 @@
       renderCvsStore(customer.lastCvsStore);
     }
 
-    // 門市一定要透過綠界官方電子地圖選，這裡只是顯示目前設定的門市＋
-    // 一個整頁導去選店的連結（跟結帳頁選店是同一套流程，見
-    // risuan-checkout api/logistics-map.js 的 mode=profile 模式），不是
-    // 表單欄位、不能用文字輸入。
+
+
+
+
     function renderCvsStore(cvsStore) {
       if (cvsStore && cvsStore.CVSStoreName) {
         cvsStoreEl.textContent = `${cvsStore.CVSStoreName}（${cvsStore.CVSAddress || ""}）`;
@@ -159,18 +159,18 @@
       cvsLinkEl.href = '#';
     }
 
-    // 「填完資料→按儲存→結果」這三個狀態要讓客人明顯感覺到有差異，不然
-    // 使用者反映「儲存前後畫面長得幾乎一樣，會怕自己是不是誤按／沒存到」
-    // ——不是只加一行小字，按鈕本身的文字也要跟著變，兩個地方一起給
-    // 回饋（按鈕是手指剛剛按下去、視線還停留的地方；下面的提示文字是
-    // 給已經移開視線、回頭確認結果用的，兩者互補，不是重複）。
+
+
+
+
+
     const saveBtn = profileForm.querySelector(".account-page__save-btn");
     const saveBtnDefaultText = saveBtn.textContent;
     let resetBtnTimer = null;
 
-    // 使用者在「已儲存」還顯示著的時候又手動改了欄位，代表那個提示
-    // 已經是舊的了（現在畫面上的內容跟剛剛存進去的不是同一份），要
-    // 馬上藏起來，不然會誤以為「這次新改的也已經存了」。
+
+
+
     function clearStaleSaveHint() {
       if (!profileHint.hidden && profileHint.classList.contains("is-ok")) {
         profileHint.hidden = true;
@@ -207,10 +207,10 @@
         profileHint.className = "account-page__save-hint is-ok";
         profileHint.hidden = false;
         saveBtn.textContent = "已儲存";
-        // 按鈕文字停留一下讓人看到「已儲存」這個瞬間狀態，再變回原本的
-        // 「儲存變更」——跟上面 .account-page__save-hint 的提示文字不同：
-        // 按鈕這裡是要抓住「剛剛按下去」那個當下的注意力，提示文字是
-        // 給之後回頭看的，兩個各司其職，故意都做、不是留一個就好。
+
+
+
+
         resetBtnTimer = setTimeout(() => {
           saveBtn.textContent = saveBtnDefaultText;
         }, 1600);
@@ -224,12 +224,12 @@
       }
     });
 
-    // ---------- 我的訂單 ----------
+
     async function loadOrders() {
       try {
         const data = await window.RisuanAccount.apiFetch("/api/account?action=orders");
-        // 後端只回傳已取得付款憑據或有付款結果的正式訂單；這個前端過濾
-        // 是為了兼容部署期間可能仍存在的舊版草稿索引。
+
+
         const visibleOrders = data.orders.filter((order) => !["draft", "payment_attempt"].includes(order.status));
         if (visibleOrders.length === 0) {
           orderListEl.innerHTML = `<li class="account-page__empty">目前沒有訂單紀錄</li>`;
@@ -298,12 +298,12 @@
       detail.hidden = false;
     });
 
-    // ---------- 課程預約紀錄（含自助改期／申請取消，2026-10-29 新增）----------
-    // 第一階段做了這個已登入會員中心入口；第二階段（信件免登入連結，
-    // booking-manage/ 頁面）畫面長得一模一樣，渲染邏輯已經抽成共用的
-    // js/booking-detail-ui.js（window.BookingDetailUI），這支檔案跟
-    // js/booking-manage.js 都載入同一份，不要再各自維護一份重複的
-    // HTML 模板。
+
+
+
+
+
+
     const { bookingStatusText, renderBookingDetailStatic, renderBookingDetail } = window.BookingDetailUI;
 
     async function loadBookings() {
@@ -326,9 +326,9 @@
           </li>`
           )
           .join("");
-        // 摘要資料（status／cancelRequestedAt／rescheduleCount）直接存
-        // 在對應的 <li> 元素上，點開展開明細時不用為了這幾個欄位再打
-        // 一次 API，見下面點擊事件處理裡的 renderBookingDetailStatic()。
+
+
+
         bookingListEl.querySelectorAll(".account-booking-item").forEach((li, i) => {
           li.__bookingSummary = data.bookings[i];
         });
@@ -353,9 +353,9 @@
         }
         detail.hidden = false;
         if (detail.dataset.loaded) return;
-        // 列表摘要資料（status／cancelRequestedAt）已經在 loadBookings()
-        // 當下拿到了，先存在 li 的 dataset 上，不用為了這點資訊再多打
-        // 一次 API——見 loadBookings() 裡 render 之後緊接著的賦值。
+
+
+
         const bookingId = li.dataset.bookingId;
         const summary = li.__bookingSummary;
         if (renderBookingDetailStatic(detail, summary)) {
@@ -386,9 +386,9 @@
             method: "POST",
             body: JSON.stringify({ action: "booking-reschedule", bookingId: li.dataset.bookingId, newSlotId: picked.value }),
           });
-          // 改期成功，這張卡片的狀態整個變了（日期／時段／是否還能再
-          // 改），與其自己手動拼湊新畫面，重新整個列表最單純、最不會
-          // 漏掉哪個欄位沒同步更新。
+
+
+
           await loadBookings();
         } catch (err) {
           msgEl.textContent = err.message;
@@ -429,7 +429,7 @@
       }
     });
 
-    // ---------- 我的點數 ----------
+
     const POINTS_TYPE_LABEL = { signup: "新會員禮", earn: "購物回饋", redeem: "結帳折抵" };
     async function loadPoints() {
       try {
@@ -462,7 +462,7 @@
       }
     }
 
-    // ---------- 登入狀態切換 ----------
+
     function showGuest() {
       guestSection.hidden = false;
       memberSection.hidden = true;
@@ -502,10 +502,10 @@
     else showGuest();
     window.RisuanAccount.syncProfile();
 
-    // 選完預設門市後，risuan-checkout api/logistics-map-callback.js 會
-    // 導回這頁、帶 ?storePicked=1，顯示一下成功提示，然後把這段查詢
-    // 字串從網址列拿掉（history.replaceState），重新整理這頁不會一直
-    // 顯示同一個提示。
+
+
+
+
     if (new URLSearchParams(location.search).get("storePicked") === "1") {
       document.getElementById("account-store-picked-banner").hidden = false;
       history.replaceState(null, "", location.pathname);
