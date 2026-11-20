@@ -1428,7 +1428,8 @@
 
 
 @media (min-width: 841px) {
-  .work__intro.work__intro--product-buy {
+  .work__intro.work__intro--product-buy,
+  .work__intro.work__intro--fluid-addons {
     max-width: 988px;
   }
 }
