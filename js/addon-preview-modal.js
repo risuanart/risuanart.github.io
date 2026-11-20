@@ -217,6 +217,27 @@
 
     const select = row.querySelector("[data-addon-scheme], [data-addon-variant]");
     renderVariants(m, row, select, modalImg, modalPrice);
+    modalImg.style.objectFit = '';
+    if (checkbox.dataset.product === 'fluid-art-mini-canvas') {
+      const wrap = m.querySelector('[data-modal-variants]');
+      wrap.hidden = false;
+      wrap.classList.add('addon-modal__variants--thumbnails');
+      const base = new URL('../../assets/images/products/fluid-art-mini-canvas/', document.currentScript?.src || location.href);
+      ['fluid-art-mini-canvas-main.jpg', 'lettering-detail-01.webp', 'lettering-detail-02.webp', 'lettering-detail-03.webp'].forEach((file, i) => {
+        const button = document.createElement('button');
+        button.type = 'button'; button.className = 'addon-modal__variant-chip';
+        button.setAttribute('aria-label', i === 0 ? '套組內容照片' : '字貼質感照片' + i);
+        const image = document.createElement('img'); image.src = new URL(file, base).href; image.alt = '';
+        button.append(image);
+        button.addEventListener('click', () => {
+          modalImg.src = image.src; modalImg.alt = button.getAttribute('aria-label');
+          wrap.querySelectorAll('button').forEach(item => { item.classList.toggle('is-active', item === button); item.setAttribute('aria-pressed', String(item === button)); });
+        });
+        wrap.append(button);
+        if (i === 1) button.click();
+      });
+    }
+
 
     m._resetQty();
 
@@ -259,6 +280,10 @@
     const nameEl = row.querySelector(".addon-row__name");
     if (!thumb || !thumb.querySelector("img") || !nameEl) return;
 
+    if (row.querySelector('[data-addon-select]')?.dataset.product === 'fluid-art-mini-canvas') {
+      thumb.querySelector('img').src = '../../assets/images/products/fluid-art-mini-canvas/lettering-detail-01.webp';
+      thumb.querySelector('img').alt = '迷你畫布組金色字貼陽光下的閃光質感';
+    }
     thumb.setAttribute("data-addon-preview-trigger", "");
     thumb.setAttribute("role", "button");
     thumb.setAttribute("tabindex", "0");
