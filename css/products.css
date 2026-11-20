@@ -2383,7 +2383,16 @@ h1.chapter__title {
 }
 
 .step-icon-hourglass__grain {
+  fill: var(--swatch-gold);
   animation: step-icon-hourglass-fall 1.8s ease-in infinite;
+}
+
+.step-icon-hourglass__grain--2 {
+  animation-delay: 0.3s;
+}
+
+.step-icon-hourglass__grain--3 {
+  animation-delay: 0.6s;
 }
 
 @keyframes step-icon-hourglass-fall {
