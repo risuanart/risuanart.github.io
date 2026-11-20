@@ -6,7 +6,7 @@
 .account-login h2 { font-size:var(--font-size-lg); line-height:1.5; color:var(--color-text-primary); margin:0; }
 .account-login__eyebrow { font-size:var(--font-size-xs); letter-spacing:var(--space-1); color:var(--color-brand); margin:0 0 var(--space-4); }
 .account-login__lead { font-size:var(--font-size-sm); color:var(--color-text-secondary); margin-top:var(--space-2); margin-bottom:var(--space-6); }
-.account-login__social { display:grid; gap:var(--space-4); }
+.account-login__social { display:grid; gap:var(--space-4); max-width:400px; }
 .account-login__button { display:flex; align-items:center; justify-content:space-between; gap:var(--space-4); width:100%; padding:var(--space-4); border:1px solid var(--color-text-primary); background:var(--color-surface-light); color:var(--color-text-primary); font-family:inherit; font-size:var(--font-size-sm); text-decoration:none; cursor:pointer; box-sizing:border-box; }
 .account-login__button:hover { border-color:var(--color-brand); color:var(--color-brand); }
 .account-login__brand { font-weight:700; font-size:var(--font-size-sm); min-width:var(--space-10); }
@@ -43,7 +43,8 @@
 .account-login__logo { width:var(--space-6); height:var(--space-6); }
 .account-login__button--line,.account-login__button--line:hover { background:var(--color-surface-light); border-color:var(--color-text-primary); color:var(--color-text-primary); }
 .account-login__button--line .account-login__logo { background:var(--color-line-login); }
-.account-login__social .account-login__button { padding-top:var(--space-4); padding-bottom:var(--space-4); }
+/* Match the Google Identity Services large button height. */
+.account-login__line .account-login__button { height:40px; padding-block:0; }
 
 .account-login__line[hidden], .account-login__line [hidden], .account-login__email[hidden], .account-login__email [hidden] { display:none; }
 .account-login__logo--line { background:var(--color-line-login); }
