@@ -48,7 +48,7 @@
   <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="stylesheet" href="/css/promo-bar.css?v=20261119-public-clean">
-  <link rel="stylesheet" href="../../css/mini-canvas.css?v=20261119-lettering">
+  <link rel="stylesheet" href="../../css/mini-canvas.css?v=20261119-mini-gallery">
 </head>
 <body>
   <div class="promo-bar" id="promo-bar">
@@ -145,9 +145,26 @@
   <main class="product-page work">
 
 
-    <header class="work__intro work__intro--addon">
-      <div class="work__intro-photo fade-in">
-        <img src="../../assets/images/products/fluid-art-mini-canvas/fluid-art-mini-canvas-main.jpg" alt="流動畫加購迷你畫布組參考圖，5×5cm 迷你畫布、金色字貼與晾乾繩" width="800" height="800" loading="lazy">
+    <header class="work__intro work__intro--product-buy">
+      <div class="work__gallery work__gallery--thumbs-left mini-canvas-gallery fade-in" data-gallery>
+        <div class="work__gallery-main" data-gallery-main>
+          <img src="../../assets/images/products/fluid-art-mini-canvas/fluid-art-mini-canvas-main.jpg" alt="迷你畫布組內容" loading="eager" class="is-active" data-gallery-frame>
+          <img src="../../assets/images/products/fluid-art-mini-canvas/lettering-detail-01.webp" alt="金色字貼近拍" loading="lazy" data-gallery-frame>
+          <img src="../../assets/images/products/fluid-art-mini-canvas/lettering-detail-02.webp" alt="貼上字貼的質感" loading="lazy" data-gallery-frame>
+          <img src="../../assets/images/products/fluid-art-mini-canvas/lettering-detail-03.webp" alt="陽光下的閃光細節" loading="lazy" data-gallery-frame>
+          <video src="../../assets/videos/products/fluid-art-mini-canvas/lettering-sunlight.mp4" poster="../../assets/images/products/fluid-art-mini-canvas/lettering-sunlight-poster.jpg" preload="none" muted loop playsinline data-gallery-frame aria-label="陽光下字貼閃光展示影片"></video>
+        </div>
+        <div class="work__gallery-strip-wrap">
+          <button type="button" class="work__gallery-nav work__gallery-nav--prev" data-gallery-nav="-1" aria-label="上一張">‹</button>
+          <div class="work__gallery-thumbs" data-gallery-thumbs>
+            <button type="button" class="work__gallery-thumb is-active" data-gallery-thumb aria-label="切換到：迷你畫布組內容"><img src="../../assets/images/products/fluid-art-mini-canvas/fluid-art-mini-canvas-main.jpg" alt="" loading="lazy"></button>
+            <button type="button" class="work__gallery-thumb" data-gallery-thumb aria-label="切換到：金色字貼近拍"><img src="../../assets/images/products/fluid-art-mini-canvas/lettering-detail-01.webp" alt="" loading="lazy"></button>
+            <button type="button" class="work__gallery-thumb" data-gallery-thumb aria-label="切換到：貼上字貼的質感"><img src="../../assets/images/products/fluid-art-mini-canvas/lettering-detail-02.webp" alt="" loading="lazy"></button>
+            <button type="button" class="work__gallery-thumb" data-gallery-thumb aria-label="切換到：陽光下的閃光細節"><img src="../../assets/images/products/fluid-art-mini-canvas/lettering-detail-03.webp" alt="" loading="lazy"></button>
+            <button type="button" class="work__gallery-thumb" data-gallery-thumb aria-label="切換到：字貼閃光影片"><img src="../../assets/images/products/fluid-art-mini-canvas/lettering-sunlight-poster.jpg" alt="" loading="lazy"></button>
+          </div>
+          <button type="button" class="work__gallery-nav work__gallery-nav--next" data-gallery-nav="1" aria-label="下一張">›</button>
+        </div>
       </div>
 
       <div class="work__title-block fade-in delay-1">
@@ -176,21 +193,6 @@
         <button type="button" class="work__cta work__cta--buy-now" data-buy-now data-product="fluid-art-mini-canvas">直接購買</button>
       </div>
     </header>
-
-    <section class="chapter mini-lettering">
-      <h2 class="chapter__title fade-in">陽光下，閃閃發光</h2>
-      <div class="chapter__intro fade-in delay-1">
-        <p>迷你畫布組的金色字貼，由日宣親自挑選材料、切割製作。細緻的閃光質感，在陽光下隨著角度閃閃發光，為小小的流動畫添上一筆亮眼的春意。</p>
-      </div>
-      <video class="mini-lettering__video fade-in delay-1" preload="none" src="../../assets/videos/products/fluid-art-mini-canvas/lettering-sunlight.mp4" poster="../../assets/images/products/fluid-art-mini-canvas/lettering-sunlight-poster.jpg" data-autoplay muted loop playsinline aria-label="迷你畫布金色字貼在陽光下隨角度閃耀的質感展示"></video>
-      <div class="material-photo-carousel fade-in delay-2">
-        <div class="material-photo-carousel__track" aria-label="金色字貼細節照片，可左右滑動">
-          <img src="../../assets/images/products/fluid-art-mini-canvas/lettering-detail-01.webp" alt="陽光下手持切割完成的金色春字貼，呈現細緻閃光紋理" width="1120" height="1400" loading="lazy">
-          <img src="../../assets/images/products/fluid-art-mini-canvas/lettering-detail-02.webp" alt="將金色春字貼搭配迷你流動畫，近看字貼質感" width="1120" height="1400" loading="lazy">
-          <img src="../../assets/images/products/fluid-art-mini-canvas/lettering-detail-03.webp" alt="另一角度欣賞金色春字貼在日光下的閃耀細節" width="1120" height="1400" loading="lazy">
-        </div>
-      </div>
-    </section>
 
     <section class="chapter fade-in">
       <h2 class="chapter__title">適合誰加購？</h2>
@@ -279,9 +281,9 @@
   <script src="../../js/shop-navigation.js?v=20261119-public-clean"></script>
   <script src="../../js/related-products.js?v=20261119-public-clean"></script>
   <script src="../../js/scroll-reveal.js?v=20261119-public-clean"></script>
-  <script src="../../js/video-inview.js?v=20261119-public-clean"></script>
+  <script src="../../js/hero-thumb-gallery.js?v=20261119-public-clean"></script>
   <script src="../../js/site-menu.js?v=20261119-public-clean"></script>
   <script src="/js/promo-bar.js?v=20261119-public-clean"></script>
-  <script src="../../js/addon-product-info.js?v=20261119-public-clean"></script>
+  <script src="../../js/addon-product-info.js?v=20261119-mini-gallery"></script>
 </body>
 </html>
