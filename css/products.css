@@ -2382,6 +2382,25 @@ h1.chapter__title {
   opacity: 0.7;
 }
 
+.step-icon-hourglass__grain {
+  animation: step-icon-hourglass-fall 1.8s ease-in infinite;
+}
+
+@keyframes step-icon-hourglass-fall {
+  0% { transform: translateY(0); opacity: 0; }
+  12% { opacity: 1; }
+  75% { opacity: 1; }
+  100% { transform: translateY(7px); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .step-icon-hourglass__grain {
+    animation: none;
+    opacity: 1;
+    transform: translateY(3.5px);
+  }
+}
+
 .chapter__step-photo--icon p {
   margin: 0;
   font-size: var(--font-size-xs);
