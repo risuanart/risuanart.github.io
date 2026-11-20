@@ -136,14 +136,14 @@
       storyPlaceholder: false,
     },
     "frost-red": {
-      name: "冰焰紅",
+      name: "極光紅",
       dot: "var(--swatch-frost-red)",
       ctaText: "var(--color-surface-light)",
       gallery: [
-        { file: "fluid-art-light-main-frost.jpg", alt: "冰焰紅實際成品，幻彩鐳射「福」字菱形畫布", caption: "實際成品" },
-        { file: "fluid-art-light-kit-frost.jpg", alt: "冰焰紅材料包內容物平鋪，畫布、顏料、字貼與工具", caption: "內容物全展開" },
+        { file: "fluid-art-light-main-frost.jpg", alt: "極光紅實際成品，幻彩鐳射「福」字菱形畫布", caption: "實際成品" },
+        { file: "fluid-art-light-kit-frost.jpg", alt: "極光紅材料包內容物平鋪，畫布、顏料、字貼與工具", caption: "內容物全展開" },
       ],
-      kitPhotoLight: { file: "fluid-art-light-kit-frost.jpg", alt: "冰焰紅材料包內容物平鋪，畫布、顏料、字貼與工具" },
+      kitPhotoLight: { file: "fluid-art-light-kit-frost.jpg", alt: "極光紅材料包內容物平鋪，畫布、顏料、字貼與工具" },
 
 
 
