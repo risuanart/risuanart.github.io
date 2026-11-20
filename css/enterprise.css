@@ -1247,7 +1247,9 @@
 
 
 #quote-form .confirm-radio input,
-#quote-form .confirm-checkbox input {
+#quote-form .confirm-checkbox input,
+#material-quote-form .confirm-radio input,
+#material-quote-form .confirm-checkbox input {
   flex: none;
   width: 20px;
   height: 20px;
