@@ -1,8 +1,3 @@
-.mini-lettering__video {
-  display: block;
-  width: 100%;
-  max-width: 360px;
-  height: auto;
-  margin: var(--space-6) auto 0;
-  border-radius: var(--radius-sharp);
-}
+.mini-canvas-gallery .work__gallery-main { aspect-ratio: 4 / 5; }
+.mini-canvas-gallery .work__gallery-main img,
+.mini-canvas-gallery .work__gallery-main video { object-fit: contain; }
