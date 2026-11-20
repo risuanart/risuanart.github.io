@@ -29,6 +29,8 @@
       gallery: [
         { file: "RS+_04.1_產品主圖_800x800拷貝.jpg", alt: "春聯流動畫材料包，包裝盒與福字菱形成品合照", caption: "包裝與成品", lightPlaceholder: "建議拍攝：輕巧版包裝與福字菱形成品合照", notInLight: true },
         { file: "RS_05.7_產品圖片_800x800拷貝.jpg", alt: "實際成品，四款福字菱形排列", caption: "實際成品", lightFile: "fluid-art-light-main-red.jpg", lightAlt: "經典紅實際成品，金色「福」字菱形畫布" },
+        { file: "fluid-art-red-fu-finished-held.jpg", alt: "經典紅成品特寫，雙手捧著完成的金色「福」字菱形畫布", caption: "成品特寫" },
+        { file: "fluid-art-red-fu-gold-detail.jpg", alt: "金色「福」字近拍，可見顏料紋理與燙金質感", caption: "福字特寫" },
         { file: "RS_05.1_產品圖片_800x800拷貝.jpg", alt: "經典紅內容物全展開", caption: "內容物全展開", lightFile: "fluid-art-light-kit-red.jpg" },
         { file: "RS_05.3_產品圖片_800x800拷貝.jpg", alt: "材料完整，開盒即用", caption: "開盒即用", lightPlaceholder: "建議拍攝：輕巧版包裝開盒即用", notInLight: true },
         { file: "RS_05.5_產品圖片_800x800拷貝.jpg", alt: "倒顏料操作，獨一無二的變化性", caption: "倒顏料", notInLight: true },
