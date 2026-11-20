@@ -69,7 +69,7 @@
 
 
 
-    "fluid-art-light-pearl": { name: "春聯流動畫材料包（珠光）", shortName: "珠光", price: 930, earlyBirdPrice: 790, category: "fluid-art", hasVariant: false, tagline: "單幅 15cm，最快抵達的新年儀式", preorder: true },
+    "fluid-art-light-pearl": { name: "春聯流動畫材料包（珍珠光）", shortName: "珍珠光", price: 930, earlyBirdPrice: 790, category: "fluid-art", hasVariant: false, tagline: "單幅 15cm，最快抵達的新年儀式", preorder: true },
     "fluid-art-light-frost": { name: "春聯流動畫材料包（極光紅）", shortName: "極光紅", price: 930, earlyBirdPrice: 790, category: "fluid-art", hasVariant: false, tagline: "單幅 15cm，最快抵達的新年儀式", preorder: true },
 
 

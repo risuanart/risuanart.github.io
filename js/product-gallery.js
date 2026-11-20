@@ -107,13 +107,13 @@
 
 
     "pearl-shimmer": {
-      name: "珠光",
+      name: "珍珠光",
       dot: "var(--swatch-pearl-shimmer)",
       ctaText: "var(--color-text-primary)",
       gallery: [
-        { file: "fluid-art-light-main-pearl.jpg", alt: "珠光實際成品，黑色「福」字菱形畫布", caption: "實際成品" },
+        { file: "fluid-art-light-main-pearl.jpg", alt: "珍珠光實際成品，黑色「福」字菱形畫布", caption: "實際成品" },
       ],
-      kitPhotoLight: { file: "fluid-art-light-kit-pearl.jpg", alt: "珠光材料包內容物平鋪，畫布、顏料、字貼與工具" },
+      kitPhotoLight: { file: "fluid-art-light-kit-pearl.jpg", alt: "珍珠光材料包內容物平鋪，畫布、顏料、字貼與工具" },
 
 
 
