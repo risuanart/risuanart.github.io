@@ -1568,6 +1568,15 @@
     </div>
   </section>
 
+    <section class="content-block">
+      <span class="ed-label">Wholesale</span>
+      <div class="content-block__head">
+        <p class="content-block__title">大量採購／企業訂製</p>
+      </div>
+      <p class="addon-intro">無論是企業贈品、幼稚園或學校活動、家庭日，還是公司團體活動，都歡迎洽詢材料包大量採購的報價；我們也提供客製化服務，可以依照您的需求調整圖案或配色。填寫以下表單，我們會盡快回信提供報價。</p>
+      <button type="button" class="work__cta work__cta--primary" data-material-quote-open>填寫報價表單</button>
+    </section>
+
     <section class="content-block home-entry-section">
       <div class="home-entry-row">
         <a class="home-entry" href="../courses/">
@@ -1617,6 +1626,125 @@
     </div>
   </footer>
 
+  <div class="quote-sheet" id="material-quote-sheet" hidden>
+    <div class="quote-sheet__backdrop" data-material-quote-close></div>
+    <div class="quote-sheet__panel" role="dialog" aria-modal="true" aria-labelledby="material-quote-sheet-title">
+      <div class="quote-sheet__head">
+        <h2 class="quote-sheet__title" id="material-quote-sheet-title">材料包大量採購報價</h2>
+        <button type="button" class="quote-sheet__close" data-material-quote-close aria-label="關閉報價表單">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </div>
+      <p class="chapter__intro">填寫以下資訊，我們會盡快回信給您，提供初步報價與建議。</p>
+
+      <form id="material-quote-form">
+        <label class="confirm-field">
+          <span>公司／單位名稱（選填）</span>
+          <div class="confirm-field__control">
+            <input type="text" id="material-quote-company" maxlength="60" placeholder="貴公司、幼稚園或單位名稱">
+          </div>
+        </label>
+
+        <div class="confirm-field-row">
+          <label class="confirm-field">
+            <span>聯絡人姓名</span>
+            <div class="confirm-field__control">
+              <input type="text" id="material-quote-contact-name" required maxlength="30" placeholder="您的稱呼">
+            </div>
+          </label>
+          <label class="confirm-field">
+            <span>Email</span>
+            <div class="confirm-field__control">
+              <input type="email" id="material-quote-email" required placeholder="you@example.com">
+            </div>
+          </label>
+        </div>
+
+        <div class="confirm-field">
+          <span>用途情境</span>
+          <div class="confirm-radio-group">
+            <label class="confirm-radio">
+              <input type="radio" name="materialQuoteUseCase" value="corporate" required>
+              <span>企業贈品</span>
+            </label>
+            <label class="confirm-radio">
+              <input type="radio" name="materialQuoteUseCase" value="kindergarten">
+              <span>幼稚園／學校活動</span>
+            </label>
+            <label class="confirm-radio">
+              <input type="radio" name="materialQuoteUseCase" value="family-day">
+              <span>企業家庭日</span>
+            </label>
+            <label class="confirm-radio">
+              <input type="radio" name="materialQuoteUseCase" value="team-event">
+              <span>公司團體活動</span>
+            </label>
+            <label class="confirm-radio">
+              <input type="radio" name="materialQuoteUseCase" value="collab">
+              <span>合作開發／客製訂製</span>
+            </label>
+            <label class="confirm-radio">
+              <input type="radio" name="materialQuoteUseCase" value="other">
+              <span>其他</span>
+            </label>
+          </div>
+        </div>
+
+        <label class="confirm-field">
+          <span>預計採購數量</span>
+          <div class="confirm-field__control">
+            <input type="number" id="material-quote-quantity" min="1" step="1" required placeholder="例如 50">
+          </div>
+        </label>
+
+        <div class="confirm-field">
+          <span>款式偏好</span>
+          <div class="confirm-radio-group">
+            <label class="confirm-radio">
+              <input type="radio" name="materialQuoteStyle" value="single" required>
+              <span>單一款式</span>
+            </label>
+            <label class="confirm-radio">
+              <input type="radio" name="materialQuoteStyle" value="mixed">
+              <span>混搭多款</span>
+            </label>
+            <label class="confirm-radio">
+              <input type="radio" name="materialQuoteStyle" value="custom">
+              <span>需要客製構圖設計</span>
+            </label>
+            <label class="confirm-radio">
+              <input type="radio" name="materialQuoteStyle" value="undecided">
+              <span>尚未決定</span>
+            </label>
+          </div>
+        </div>
+
+        <label class="confirm-field">
+          <span>想採購的商品／款式（選填）</span>
+          <div class="confirm-field__control">
+            <input type="text" id="material-quote-product-note" maxlength="100" placeholder="例如：砂畫材料包 福星／花財，或先留空由我們建議">
+          </div>
+        </label>
+
+        <label class="confirm-field">
+          <span>其他需求（選填）</span>
+          <div class="confirm-field__control">
+            <textarea id="material-quote-other-notes" rows="3" maxlength="500" placeholder="還有什麼想讓我們知道的嗎？例如到貨時程、包裝需求等"></textarea>
+          </div>
+        </label>
+
+        <p class="checkout-error" id="material-quote-error" role="alert" hidden></p>
+
+        <button type="submit" class="work__cta work__cta--primary" id="material-quote-submit">送出報價需求</button>
+      </form>
+
+      <div id="material-quote-success" hidden>
+        <p class="chapter__statement">已收到您的需求</p>
+        <p class="chapter__prose">我們會盡快回信給您，提供初步報價與建議，請留意信箱（包含垃圾郵件夾）。</p>
+      </div>
+    </div>
+  </div>
+
   </div>
 
   <script>
@@ -1665,5 +1793,6 @@
   <script src="/js/promo-bar.js?v=20261119-public-clean"></script>
 
   <script src="../js/products-hero.js?v=20261119-public-clean"></script>
+  <script src="../js/material-quote.js?v=20261119-public-clean"></script>
 </body>
 </html>
