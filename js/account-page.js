@@ -469,6 +469,7 @@
       window.RisuanAccount.mountGoogleButton(googleBtnContainer, {
         width: Math.max(200, Math.min(400, Math.floor(googleBtnContainer.getBoundingClientRect().width))),
         size: "large", text: "continue_with",
+        onLogin: customer => window.dispatchEvent(new CustomEvent("risuan:login-success", { detail: customer })),
       });
     }
 

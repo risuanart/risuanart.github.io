@@ -41,7 +41,7 @@
       if (request.link && account.getCustomer()?.email !== request.email) throw new Error('原會員登入狀態已變更，請回會員中心重新連結 LINE。');
       await account.loginWithLineCode({ code: params.get('code'), codeVerifier: request.verifier, nonce: request.nonce, link: request.link === true });
       status.textContent = request.link ? 'LINE 已連結，正在回到會員中心…' : '登入成功，正在回到會員中心…';
-      location.replace(new URL('../?lineConnected=1', location.href));
+      location.replace(new URL(request.link ? '../?lineLinked=1' : '../?lineConnected=1', location.href));
     } catch (error) {
       status.textContent = error.message || '登入未完成，請重新登入。';
       document.getElementById('line-callback-back').hidden = false;
@@ -66,19 +66,49 @@
   blocks.forEach(block => {
     const button = block.querySelector('[data-line-start]');
     const checkbox = block.querySelector('input[type=checkbox]');
+    const consentLabel = block.querySelector('label');
     const status = block.querySelector('[data-line-status]');
-    checkbox.addEventListener('change', () => { button.disabled = !checkbox.checked; });
+    checkbox.addEventListener('change', () => { if (checkbox.checked) status.textContent = ''; });
     button.addEventListener('click', async () => {
-      if (!checkbox.checked || !config?.lineClientId) return;
+      if (!checkbox.checked) {
+        status.textContent = '請先勾選上方的同意項目。';
+        consentLabel.classList.add('is-attention');
+        checkbox.focus();
+        consentLabel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        setTimeout(() => consentLabel.classList.remove('is-attention'), 1600);
+        return;
+      }
+      if (!config?.lineClientId) {
+        status.textContent = 'LINE 登入暫時無法使用，請改用 Email 登入。';
+        return;
+      }
       button.disabled = true;
       status.textContent = '正在前往 LINE…';
       try { await start(config, block.dataset.lineLogin === 'link'); }
-      catch { status.textContent = '無法開始 LINE 登入，請確認瀏覽器允許儲存登入狀態後再試。'; button.disabled = !checkbox.checked; }
+      catch { status.textContent = '無法開始 LINE 登入，請確認瀏覽器允許儲存登入狀態後再試。'; button.disabled = false; }
     });
   });
   window.addEventListener(account.CHANGE_EVENT, render);
-  fetch(account.API_BASE + '/api/account?action=config' + (new URLSearchParams(location.search).get('lineTest') === '1' ? '&lineTest=1' : ''), { cache: 'no-store' })
-    .then(response => { if (!response.ok) throw new Error(); return response.json(); })
-    .then(data => { config = data; render(); })
-    .catch(() => {});
+  function loadConfig() {
+    window.dispatchEvent(new CustomEvent('risuan:line-config-loading'));
+    fetch(account.API_BASE + '/api/account?action=config' + (new URLSearchParams(location.search).get('lineTest') === '1' ? '&lineTest=1' : ''), { cache: 'no-store' })
+      .then(response => { if (!response.ok) throw new Error(); return response.json(); })
+      .then(data => { config = data; render(); window.dispatchEvent(new CustomEvent('risuan:line-config-ready', { detail: data })); })
+      .catch(() => {
+        blocks.forEach(block => {
+          block.hidden = false;
+          const status = block.querySelector('[data-line-status]');
+          status.textContent = '';
+          status.append('LINE 登入暫時無法使用，請改用 Email 登入。');
+          const retry = document.createElement('button');
+          retry.type = 'button';
+          retry.className = 'text-link';
+          retry.textContent = '重試';
+          retry.addEventListener('click', loadConfig);
+          status.append(' ', retry);
+        });
+        window.dispatchEvent(new CustomEvent('risuan:line-config-ready', { detail: null }));
+      });
+  }
+  loadConfig();
 })();

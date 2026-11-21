@@ -11,27 +11,41 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=ABeeZee&family=Poppins:wght@700&family=Noto+Sans+TC:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/colors.css?v=20261119-public-clean">
-  <link rel="stylesheet" href="../css/tokens.css?v=20261119-public-clean">
-  <link rel="stylesheet" href="../css/base.css?v=20261119-public-clean">
-  <link rel="stylesheet" href="../css/home.css?v=20261119-public-clean">
-  <link rel="stylesheet" href="../css/products.css?v=20261119-public-clean">
-  <link rel="stylesheet" href="../css/cart.css?v=20261119-public-clean">
-  <link rel="stylesheet" href="../css/guest-entry.css?v=20261119-public-clean">
-  <link rel="stylesheet" href="../css/email-login.css?v=20261119-public-clean">
-  <link rel="stylesheet" href="../css/site-menu.css?v=20261119-public-clean">
-  <link rel="stylesheet" href="../css/site-footer.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../css/colors.css?v=20261120-fix">
+  <link rel="stylesheet" href="../css/tokens.css?v=20261120-fix">
+  <link rel="stylesheet" href="../css/base.css?v=20261120-fix">
+  <link rel="stylesheet" href="../css/home.css?v=20261120-fix">
+  <link rel="stylesheet" href="../css/products.css?v=20261120-fix">
+  <link rel="stylesheet" href="../css/cart.css?v=20261120-fix">
+  <link rel="stylesheet" href="../css/guest-entry.css?v=20261120-fix">
+  <link rel="stylesheet" href="../css/email-login.css?v=20261120-fix">
+  <link rel="stylesheet" href="../css/site-menu.css?v=20261120-fix">
+  <link rel="stylesheet" href="../css/site-footer.css?v=20261120-fix">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
   <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  <link rel="stylesheet" href="../css/page-title-en.css?v=20261119-public-clean">
-  <link rel="stylesheet" href="../css/account-login.css?v=20261119-public-clean">
+  <link rel="stylesheet" href="../css/page-title-en.css?v=20261120-fix">
+  <link rel="stylesheet" href="../css/account-login.css?v=20261120-fix">
 </head>
 <body>
 
   <div class="ambient-bg" aria-hidden="true"></div>
   <div class="ambient-grain" aria-hidden="true"></div>
+
+  <div class="account-toast" id="account-login-toast" role="status" aria-live="polite" hidden></div>
+  <div class="account-welcome-card" id="account-welcome-card" hidden>
+    <button type="button" class="account-welcome-card__close" id="account-welcome-card-close" aria-label="關閉">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M5 5l14 14M19 5 5 19"/></svg>
+    </button>
+    <p class="account-welcome-card__eyebrow">WELCOME</p>
+    <h2 class="account-welcome-card__title">歡迎加入日宣繪畫室</h2>
+    <p class="account-welcome-card__lead">新會員已自動獲得 50 點，材料包購物可折抵 NT$50。</p>
+    <div class="account-welcome-card__actions">
+      <a class="account-login__button" href="../courses/">瀏覽課程<span aria-hidden="true">→</span></a>
+      <a class="account-login__button" href="../products/shop/">逛材料包<span aria-hidden="true">→</span></a>
+    </div>
+  </div>
 
   <header class="site-header">
     <button type="button" class="site-header__menu-toggle" id="menu-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="site-menu" aria-label="開啟選單">
@@ -127,15 +141,21 @@
       <p class="account-login__eyebrow">WELCOME BACK</p>
       <h2 id="login-heading">登入／加入會員</h2>
       <p class="account-login__lead">選擇您習慣的方式，開始創作日常。</p>
-      <div class="account-login__social">
+      <p class="account-login__browser-warning" id="account-login-browser-warning" role="status" hidden></p>
+      <p class="account-login__loading" id="account-login-social-loading" role="status" aria-live="polite">載入登入選項…</p>
+      <div class="account-login__social" id="account-login-social">
+        <div class="account-login__google-group">
+          <div class="account-login__google" id="account-page-google-btn"></div>
+          <p class="account-login__hint">在這裡可能需要輸入帳號密碼。</p>
+        </div>
         <div class="account-login__line" data-line-login="login" hidden>
           <div data-line-controls>
-            <button class="account-login__button" type="button" data-line-start disabled><img class="account-login__logo account-login__logo--line" src="../assets/images/auth/line-login.png" alt="" width="24" height="24">使用 LINE 繼續<span aria-hidden="true">→</span></button>
             <label class="account-login__consent"><input type="checkbox">我同意 LINE 提供會員辨識所需資料。<a href="#line-data" data-login-details>查看說明</a></label>
+            <button class="account-login__button" type="button" data-line-start><img class="account-login__logo account-login__logo--line" src="../assets/images/auth/line-login.png" alt="" width="24" height="24">使用 LINE 繼續<span aria-hidden="true">→</span></button>
+            <p class="account-login__hint">若跳到 LINE 帳密頁，可點頁面下方「使用 LINE 應用程式登入」。在這裡可能需要輸入帳號密碼。</p>
           </div>
           <p class="account-login__status" data-line-status role="status"></p>
         </div>
-        <div class="account-login__google" id="account-page-google-btn"></div>
       </div>
       <div class="account-login__divider"><span>或使用 Email</span></div>
       <section class="account-login__email" data-email-login hidden aria-label="使用 Email 登入"><form data-email-form>
@@ -205,7 +225,7 @@
         <p class="guest-entry__note"><a class="text-link" href="../privacy/" target="_blank" rel="noopener">閱讀隱私權政策</a></p>
         <div data-line-controls>
           <label class="line-login__consent"><input type="checkbox">我已閱讀上述說明，同意提供資料給日宣繪畫室。</label>
-          <button type="button" class="text-link line-login__start" data-line-start disabled>連結 LINE 帳號</button>
+          <button type="button" class="text-link line-login__start" data-line-start>連結 LINE 帳號</button>
         </div>
         <p class="guest-entry__note" data-line-status role="status"></p>
       </div>
@@ -336,17 +356,17 @@
 
   </main>
 
-  <script src="../js/account-auth.js?v=20261119-public-clean"></script>
-  <script src="../js/line-login.js?v=20261119-public-clean"></script>
-  <script src="../js/email-login.js?v=20261119-public-clean"></script>
-  <script src="../js/tw-postal-codes.js?v=20261119-public-clean"></script>
-  <script src="../js/booking-detail-ui.js?v=20261119-public-clean"></script>
-  <script src="../js/account-page.js?v=20261119-public-clean"></script>
-  <script src="../js/cart.js?v=20261119-public-clean"></script>
-  <script src="../js/site-header-scroll.js?v=20261119-public-clean"></script>
-  <script src="../js/account-widget.js?v=20261119-public-clean"></script>
-  <script src="../js/site-menu.js?v=20261119-public-clean"></script>
-  <script src="../js/scroll-reveal.js?v=20261119-public-clean"></script>
-  <script src="../js/account-login-layout.js?v=20261119-public-clean"></script>
+  <script src="../js/account-auth.js?v=20261120-fix"></script>
+  <script src="../js/line-login.js?v=20261120-fix"></script>
+  <script src="../js/email-login.js?v=20261120-fix"></script>
+  <script src="../js/tw-postal-codes.js?v=20261120-fix"></script>
+  <script src="../js/booking-detail-ui.js?v=20261120-fix"></script>
+  <script src="../js/account-page.js?v=20261120-fix"></script>
+  <script src="../js/cart.js?v=20261120-fix"></script>
+  <script src="../js/site-header-scroll.js?v=20261120-fix"></script>
+  <script src="../js/account-widget.js?v=20261120-fix"></script>
+  <script src="../js/site-menu.js?v=20261120-fix"></script>
+  <script src="../js/scroll-reveal.js?v=20261120-fix"></script>
+  <script src="../js/account-login-layout.js?v=20261120-fix"></script>
 </body>
 </html>

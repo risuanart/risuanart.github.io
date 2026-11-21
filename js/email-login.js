@@ -13,10 +13,29 @@
   const change = root.querySelector('[data-email-change]');
   const send = emailForm.querySelector('button');
   const verify = codeForm.querySelector('button[type=submit]');
-  let browserKey = null, challenge = null, busy = false, cooldownUntil = 0;
+  const SESSION_KEY = 'risuan-email-login-state';
+  let busy = false, cooldownUntil = 0;
   function randomKey() {
     return btoa(String.fromCharCode(...crypto.getRandomValues(new Uint8Array(32)))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
   }
+  function saveState() {
+    try {
+      if (browserKey && challenge) sessionStorage.setItem(SESSION_KEY, JSON.stringify({ browserKey, challenge, cooldownUntil }));
+      else sessionStorage.removeItem(SESSION_KEY);
+    } catch {}
+  }
+  let browserKey = null, challenge = null;
+  (function restoreState() {
+    try {
+      const saved = JSON.parse(sessionStorage.getItem(SESSION_KEY) || 'null');
+      if (!saved?.browserKey || !saved?.challenge) return;
+      browserKey = saved.browserKey; challenge = saved.challenge; cooldownUntil = saved.cooldownUntil || 0;
+      destination.textContent = `驗證碼已寄至 ${challenge.email}`;
+      emailInput.value = challenge.email;
+      emailForm.hidden = true; codeForm.hidden = false;
+      status.textContent = '請在 5 分鐘內輸入信中的 6 位數驗證碼；若未收到，可先查看垃圾郵件。';
+    } catch {}
+  })();
   function renderControls() {
     const seconds = Math.max(0, Math.ceil((cooldownUntil - Date.now()) / 1000));
     resend.disabled = busy || seconds > 0;
@@ -28,7 +47,7 @@
     codeInput.readOnly = busy;
   }
   function showError(error) {
-    if (error.retryAfter > 0) cooldownUntil = Date.now() + error.retryAfter * 1000;
+    if (error.retryAfter > 0) { cooldownUntil = Date.now() + error.retryAfter * 1000; saveState(); }
     status.textContent = error.message || '暫時無法完成登入，請稍後再試。';
   }
   async function requestCode() {
@@ -40,6 +59,7 @@
       challenge = { id: data.challengeId, email: data.email };
       emailInput.value = data.email;
       cooldownUntil = Date.now() + data.retryAfter * 1000;
+      saveState();
       destination.textContent = `驗證碼已寄至 ${data.email}`;
       emailForm.hidden = true; codeForm.hidden = false;
       codeInput.value = '';
@@ -53,6 +73,7 @@
   change.addEventListener('click', () => {
     if (busy) return;
     challenge = null; browserKey = null; codeInput.value = '';
+    saveState();
     codeForm.hidden = true; emailForm.hidden = false;
     status.textContent = ''; emailInput.focus();
   });
@@ -63,11 +84,13 @@
     const code = codeInput.value.trim();
     codeInput.value = '';
     try {
-      await account.loginWithEmailCode({ challengeId: challenge.id, code, browserKey });
+      const customer = await account.loginWithEmailCode({ challengeId: challenge.id, code, browserKey });
       challenge = null; browserKey = null;
+      saveState();
       emailForm.reset(); codeForm.reset();
       emailForm.hidden = false; codeForm.hidden = true;
       status.textContent = '登入成功。';
+      window.dispatchEvent(new CustomEvent('risuan:login-success', { detail: customer }));
     } catch (error) { showError(error); codeInput.focus(); }
     finally { busy = false; renderControls(); }
   });
