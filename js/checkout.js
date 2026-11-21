@@ -52,6 +52,13 @@
 
 
   const FREE_SHIPPING_THRESHOLD = 1300;
+  function renderFreeShipping(hint, netItemsTotal) {
+    const remaining = FREE_SHIPPING_THRESHOLD - netItemsTotal;
+    hint.textContent = remaining > 0
+      ? `折抵後滿 ${formatMoney(FREE_SHIPPING_THRESHOLD)} 免運，目前還差 ${formatMoney(remaining)}。`
+      : `已達 ${formatMoney(FREE_SHIPPING_THRESHOLD)} 免運門檻。`;
+  }
+
   function shippingFee(order, method) {
     if (!method) return 0;
     return order.itemsTotal - appliedPoints(order, method) >= FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_FEES[method];
@@ -105,6 +112,7 @@
   function renderConfirmTotals(order, method) {
     const fee = shippingFee(order, method);
     const redeemed = appliedPoints(order, method);
+    renderFreeShipping(document.getElementById("confirm-free-shipping"), order.itemsTotal - redeemed);
     document.getElementById("confirm-total-subtotal").textContent = formatMoney(order.originalItemsTotal ?? order.itemsTotal);
     renderDiscountRows(
       order,
@@ -226,6 +234,7 @@
     renderDiscountRows(order, orderSheetDiscountRow, orderSheetCouponRow);
     orderSheetShipping.textContent = fee === null ? "選擇送貨方式後計算" : formatMoney(fee);
     const redeemed = appliedPoints(order, method);
+    renderFreeShipping(orderSheet.querySelector("[data-sheet-free-shipping]"), order.itemsTotal - redeemed);
     updatePointsDiscountRow(order, method, orderSheetPointsRow, orderSheetPoints);
     orderSheetGrand.textContent = formatMoney(order.itemsTotal + (fee || 0) - redeemed);
   }
@@ -891,9 +900,11 @@
   function initCartEditView() {
     if (!checkoutBtn || !window.RisuanCart) return;
 
+    const freeShippingHint = document.getElementById("cart-free-shipping");
     function updateButtonState() {
       const hasItems = window.RisuanCart.readCart().length > 0;
       checkoutBtn.disabled = !hasItems;
+      if (hasItems) renderFreeShipping(freeShippingHint, window.RisuanCart.cartTotal());
     }
 
     checkoutBtn.addEventListener("click", async () => {
