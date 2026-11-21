@@ -41,6 +41,32 @@
     const zipcodeInput = document.getElementById("account-zipcode");
     const addressDetailInput = document.getElementById("account-address-detail");
     const profileHint = document.getElementById("account-profile-hint");
+    const profileView = document.getElementById("account-profile-view");
+    const profileEditBtn = document.getElementById("account-profile-edit-btn");
+    const profileCancelBtn = document.getElementById("account-profile-cancel-btn");
+    const profileViewName = document.getElementById("account-profile-view-name");
+    const profileViewEmail = document.getElementById("account-profile-view-email");
+    const profileViewPhone = document.getElementById("account-profile-view-phone");
+    const profileViewAddress = document.getElementById("account-profile-view-address");
+    let lastCustomerData = null;
+
+    function showProfileView() {
+      profileView.hidden = false;
+      profileForm.hidden = true;
+    }
+
+    function showProfileEdit() {
+      profileView.hidden = true;
+      profileForm.hidden = false;
+      lastNameInput.focus();
+    }
+
+    profileEditBtn.addEventListener("click", showProfileEdit);
+    profileCancelBtn.addEventListener("click", () => {
+      if (lastCustomerData) fillProfileForm(lastCustomerData);
+      profileHint.hidden = true;
+      showProfileView();
+    });
 
     const orderListEl = document.getElementById("account-order-list");
     const bookingListEl = document.getElementById("account-booking-list");
@@ -132,15 +158,31 @@
 
 
     function fillProfileForm(customer) {
+      lastCustomerData = customer;
       emailInput.value = customer.email;
       const contact = customer.lastContact;
       if (contact) {
         lastNameInput.value = contact.lastName || "";
         firstNameInput.value = contact.firstName || "";
         phoneInput.value = contact.phone || "";
+      } else {
+        lastNameInput.value = "";
+        firstNameInput.value = "";
+        phoneInput.value = "";
       }
       fillAddress(customer.lastHomeAddress);
       renderCvsStore(customer.lastCvsStore);
+      renderProfileView(customer);
+    }
+
+    function renderProfileView(customer) {
+      const contact = customer.lastContact;
+      const name = contact && (contact.lastName || contact.firstName) ? `${contact.lastName || ""}${contact.firstName || ""}` : "尚未填寫";
+      profileViewName.textContent = name;
+      profileViewEmail.textContent = customer.email;
+      profileViewPhone.textContent = (contact && contact.phone) || "尚未填寫";
+      const home = customer.lastHomeAddress;
+      profileViewAddress.textContent = home && home.receiverAddress ? `${home.receiverZipCode || ""} ${home.receiverAddress}`.trim() : "尚未填寫";
     }
 
 
@@ -213,6 +255,8 @@
 
         resetBtnTimer = setTimeout(() => {
           saveBtn.textContent = saveBtnDefaultText;
+          profileHint.hidden = true;
+          showProfileView();
         }, 1600);
       } catch (err) {
         profileHint.textContent = err.message;

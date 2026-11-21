@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="../css/base.css?v=20261121-fix">
   <link rel="stylesheet" href="../css/home.css?v=20261121-fix">
   <link rel="stylesheet" href="../css/products.css?v=20261121-fix2">
-  <link rel="stylesheet" href="../css/cart.css?v=20261121-fix">
+  <link rel="stylesheet" href="../css/cart.css?v=20261121-fix3">
   <link rel="stylesheet" href="../css/guest-entry.css?v=20261121-fix4">
   <link rel="stylesheet" href="../css/email-login.css?v=20261121-fix">
   <link rel="stylesheet" href="../css/site-menu.css?v=20261121-fix">
@@ -228,7 +228,15 @@
         <p class="guest-entry__note" data-line-status role="status"></p>
       </div>
 
-          <form id="account-profile-form">
+          <div class="account-profile-view" id="account-profile-view">
+            <div class="account-profile-view__row"><span class="account-profile-view__label">姓名</span><span class="account-profile-view__value" id="account-profile-view-name">-</span></div>
+            <div class="account-profile-view__row"><span class="account-profile-view__label">Email</span><span class="account-profile-view__value" id="account-profile-view-email">-</span></div>
+            <div class="account-profile-view__row"><span class="account-profile-view__label">手機</span><span class="account-profile-view__value" id="account-profile-view-phone">尚未填寫</span></div>
+            <div class="account-profile-view__row"><span class="account-profile-view__label">預設收件地址</span><span class="account-profile-view__value" id="account-profile-view-address">尚未填寫</span></div>
+            <button type="button" class="text-link account-profile-view__edit" id="account-profile-edit-btn">編輯基本資料</button>
+          </div>
+
+          <form id="account-profile-form" hidden>
             <div class="confirm-field-row">
               <label class="confirm-field">
                 <span>姓氏</span>
@@ -291,7 +299,10 @@
             </label>
 
             <p class="account-page__save-hint" id="account-profile-hint" hidden></p>
-            <button type="submit" class="work__cta work__cta--primary account-page__save-btn">儲存變更</button>
+            <div class="account-profile-form__actions">
+              <button type="submit" class="work__cta work__cta--primary account-page__save-btn">儲存變更</button>
+              <button type="button" class="text-link" id="account-profile-cancel-btn">取消</button>
+            </div>
           </form>
 
 
@@ -359,7 +370,7 @@
   <script src="../js/email-login.js?v=20261121-fix"></script>
   <script src="../js/tw-postal-codes.js?v=20261121-fix"></script>
   <script src="../js/booking-detail-ui.js?v=20261121-fix"></script>
-  <script src="../js/account-page.js?v=20261121-fix"></script>
+  <script src="../js/account-page.js?v=20261121-fix2"></script>
   <script src="../js/cart.js?v=20261121-fix2"></script>
   <script src="../js/site-header-scroll.js?v=20261121-fix"></script>
   <script src="../js/account-widget.js?v=20261121-fix"></script>
