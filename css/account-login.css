@@ -71,8 +71,6 @@
 .line-login__consent.is-attention { outline:2px solid var(--color-warning); outline-offset:var(--space-1); transition:outline-color .3s var(--ease-standard); }
 @media (prefers-reduced-motion: reduce) { .account-login__consent.is-attention, .line-login__consent.is-attention { transition:none; } }
 
-.account-login__consent input,.line-login__consent input { min-width:var(--space-6); min-height:var(--space-6); }
-
 .account-toast { position:fixed; left:50%; bottom:calc(var(--space-6) + env(safe-area-inset-bottom, 0px)); transform:translateX(-50%); background:var(--color-surface-dark); color:var(--color-surface-light); font-size:var(--font-size-sm); padding:var(--space-3) var(--space-6); border-radius:0; z-index:60; max-width:calc(100vw - var(--space-8)); text-align:center; opacity:1; transition:opacity .25s var(--ease-standard); }
 .account-toast[hidden] { display:none; }
 @media (prefers-reduced-motion: reduce) { .account-toast { transition:none; } }
