@@ -54,3 +54,35 @@
 .account-login .confirm-field { margin-top:0; }
 .account-login__email .email-login__actions { margin-top:0; }
 .account-login__email .email-login__actions .text-link { margin-top:var(--space-4); }
+
+.account-login__hint { font-size:var(--font-size-xs); color:var(--color-text-secondary); margin:var(--space-2) 0 0; line-height:1.7; }
+.account-login__google-group { display:grid; gap:var(--space-2); }
+.account-login__browser-warning { font-size:var(--font-size-xs); color:var(--color-warning); background:color-mix(in srgb, var(--color-warning) 10%, transparent); border:1px solid color-mix(in srgb, var(--color-warning) 35%, transparent); padding:var(--space-2) var(--space-4); margin:0 0 var(--space-4); line-height:1.8; }
+.account-login__browser-warning .text-link { color:inherit; }
+.account-login__loading { display:flex; align-items:center; gap:var(--space-2); font-size:var(--font-size-xs); color:var(--color-text-secondary); margin:0 0 var(--space-4); }
+.account-login__loading[hidden] { display:none; }
+.account-login__loading-logo { width:20px; height:16px; object-fit:contain; animation:account-login-breathe 1.2s var(--ease-standard) infinite; }
+@keyframes account-login-breathe { 0%,100% { opacity:.95; transform:scale(.95); } 50% { opacity:1; transform:scale(1); } }
+@media (prefers-reduced-motion: reduce) { .account-login__loading-logo { animation:none; } }
+.account-login__google--disabled { display:flex; align-items:center; justify-content:center; min-height:var(--space-10); border:1px solid var(--color-surface-neutral); color:var(--color-text-secondary); font-size:var(--font-size-xs); text-align:center; padding:var(--space-2); box-sizing:border-box; }
+
+.account-login__consent.is-attention { outline:2px solid var(--color-warning); outline-offset:var(--space-1); transition:outline-color .3s var(--ease-standard); }
+.line-login__consent.is-attention { outline:2px solid var(--color-warning); outline-offset:var(--space-1); transition:outline-color .3s var(--ease-standard); }
+@media (prefers-reduced-motion: reduce) { .account-login__consent.is-attention, .line-login__consent.is-attention { transition:none; } }
+
+.account-login__consent input,.line-login__consent input { min-width:var(--space-6); min-height:var(--space-6); }
+
+.account-toast { position:fixed; left:50%; bottom:calc(var(--space-6) + env(safe-area-inset-bottom, 0px)); transform:translateX(-50%); background:var(--color-surface-dark); color:var(--color-surface-light); font-size:var(--font-size-sm); padding:var(--space-3) var(--space-6); border-radius:0; z-index:60; max-width:calc(100vw - var(--space-8)); text-align:center; opacity:1; transition:opacity .25s var(--ease-standard); }
+.account-toast[hidden] { display:none; }
+@media (prefers-reduced-motion: reduce) { .account-toast { transition:none; } }
+
+.account-welcome-card { position:fixed; right:var(--space-6); bottom:calc(var(--space-6) + env(safe-area-inset-bottom, 0px)); width:min(320px, calc(100vw - var(--space-8))); background:var(--color-surface-light); border:1px solid var(--color-surface-neutral); padding:var(--space-6); z-index:60; box-shadow:0 var(--space-2) var(--space-6) rgba(0,0,0,.12); }
+.account-welcome-card[hidden] { display:none; }
+.account-welcome-card__close { position:absolute; top:var(--space-2); right:var(--space-2); width:var(--space-8); height:var(--space-8); display:flex; align-items:center; justify-content:center; background:none; border:none; color:var(--color-text-secondary); cursor:pointer; }
+.account-welcome-card__close:hover { color:var(--color-text-primary); }
+.account-welcome-card__eyebrow { font-size:var(--font-size-xs); letter-spacing:var(--space-1); color:var(--color-brand); margin:0 0 var(--space-2); }
+.account-welcome-card__title { font-size:var(--font-size-base); margin:0 0 var(--space-2); }
+.account-welcome-card__lead { font-size:var(--font-size-xs); color:var(--color-text-secondary); margin:0 0 var(--space-4); line-height:1.8; }
+.account-welcome-card__actions { display:grid; gap:var(--space-2); }
+.account-welcome-card__actions .account-login__button { padding:var(--space-2) var(--space-4); }
+@media (max-width:480px) { .account-welcome-card { left:var(--space-4); right:var(--space-4); width:auto; } }
