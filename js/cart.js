@@ -109,8 +109,8 @@
 
 
 
-    "sand-art-frame-15": { name: "沙畫加購像框・15×15cm", shortName: "像框 15×15cm", price: 150, category: "sand-art", hasVariant: false, tagline: "內徑 15×15cm，木質畫框，讓作品直接上牆", noEarlyBird: true },
-    "sand-art-frame-20": { name: "沙畫加購像框・20×20cm", shortName: "像框 20×20cm", price: 199, category: "sand-art", hasVariant: false, tagline: "內徑 20×20cm，木質畫框，讓作品直接上牆", noEarlyBird: true },
+    "sand-art-frame-15": { name: "沙畫加購相框・15×15cm", shortName: "相框 15×15cm", price: 150, category: "sand-art", hasVariant: false, tagline: "內徑 15×15cm，木質畫框，讓作品直接上牆", noEarlyBird: true },
+    "sand-art-frame-20": { name: "沙畫加購相框・20×20cm", shortName: "相框 20×20cm", price: 199, category: "sand-art", hasVariant: false, tagline: "內徑 20×20cm，木質畫框，讓作品直接上牆", noEarlyBird: true },
 
 
 

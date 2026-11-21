@@ -52,7 +52,7 @@
       return;
     }
     mainImg.src = `../../assets/images/products/sand-art-frame/mockup-${currentDesign}-${currentSize}.jpg`;
-    mainImg.alt = `${name} 裝進 ${currentSize}×${currentSize}cm 像框的模擬效果`;
+    mainImg.alt = `${name} 裝進 ${currentSize}×${currentSize}cm 相框的模擬效果`;
   }
 
   sizeChips.forEach((chip) => {

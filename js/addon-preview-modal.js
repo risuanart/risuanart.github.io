@@ -209,7 +209,7 @@
         showingMockup = !showingMockup;
         modalImg.src = showingMockup ? mockupSrc : plainSrc;
         modalImg.alt = showingMockup ? mockupAlt : plainAlt;
-        freshToggle.textContent = showingMockup ? "顯示空框照 →" : "預覽放進像框的效果 →";
+        freshToggle.textContent = showingMockup ? "顯示空框照 →" : "預覽放進相框的效果 →";
       });
     } else {
       modalPreviewToggle.hidden = true;
