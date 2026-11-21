@@ -93,25 +93,29 @@
   }
   if (welcomeCardClose) welcomeCardClose.addEventListener('click', () => { welcomeCard.hidden = true; });
 
-  function announceLogin(customer) {
-    const label = customer?.name || (customer?.email ? customer.email.split('@')[0] : '');
-    showToast(label ? `登入成功，歡迎回來，${label}` : '登入成功');
-    // 新會員判斷依賴後端登入回應補上 isNewUser 欄位；目前後端未提供，暫時一律顯示統一的登入成功提示。
+  function announceLogin(customer, isNewUser) {
+    if (isNewUser && welcomeCard) {
+      welcomeCard.hidden = false;
+    } else {
+      const label = customer?.name || (customer?.email ? customer.email.split('@')[0] : '');
+      showToast(label ? `登入成功，歡迎回來，${label}` : '登入成功');
+    }
     const returnTo = sessionStorage.getItem('risuan-login-return-to');
     if (returnTo) {
       sessionStorage.removeItem('risuan-login-return-to');
       try { location.assign(returnTo); } catch {}
     }
   }
-  window.addEventListener('risuan:login-success', event => announceLogin(event.detail));
+  window.addEventListener('risuan:login-success', event => announceLogin(event.detail?.customer, event.detail?.isNewUser));
 
   const params = new URLSearchParams(location.search);
   if (params.get('lineConnected') === '1') {
+    const isNewUser = params.get('isNewUser') === '1';
     history.replaceState(null, '', location.pathname);
     const customer = window.RisuanAccount?.getCustomer();
-    if (customer) announceLogin(customer);
+    if (customer) announceLogin(customer, isNewUser);
     else window.addEventListener(window.RisuanAccount.CHANGE_EVENT, function once(event) {
-      if (event.detail?.customer) { window.removeEventListener(window.RisuanAccount.CHANGE_EVENT, once); announceLogin(event.detail.customer); }
+      if (event.detail?.customer) { window.removeEventListener(window.RisuanAccount.CHANGE_EVENT, once); announceLogin(event.detail.customer, isNewUser); }
     });
   } else if (params.get('lineLinked') === '1') {
     history.replaceState(null, '', location.pathname);

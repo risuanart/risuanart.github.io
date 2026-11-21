@@ -84,13 +84,13 @@
     const code = codeInput.value.trim();
     codeInput.value = '';
     try {
-      const customer = await account.loginWithEmailCode({ challengeId: challenge.id, code, browserKey });
+      const { customer, isNewUser } = await account.loginWithEmailCode({ challengeId: challenge.id, code, browserKey });
       challenge = null; browserKey = null;
       saveState();
       emailForm.reset(); codeForm.reset();
       emailForm.hidden = false; codeForm.hidden = true;
       status.textContent = '登入成功。';
-      window.dispatchEvent(new CustomEvent('risuan:login-success', { detail: customer }));
+      window.dispatchEvent(new CustomEvent('risuan:login-success', { detail: { customer, isNewUser } }));
     } catch (error) { showError(error); codeInput.focus(); }
     finally { busy = false; renderControls(); }
   });

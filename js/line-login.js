@@ -39,9 +39,11 @@
       if (params.has('error')) throw new Error('您尚未完成 LINE 授權，可以回會員中心重新登入，或使用訪客入口。');
       if (!params.get('code')) throw new Error('沒有收到 LINE 登入資料，請重新登入。');
       if (request.link && account.getCustomer()?.email !== request.email) throw new Error('原會員登入狀態已變更，請回會員中心重新連結 LINE。');
-      await account.loginWithLineCode({ code: params.get('code'), codeVerifier: request.verifier, nonce: request.nonce, link: request.link === true });
+      const { isNewUser } = await account.loginWithLineCode({ code: params.get('code'), codeVerifier: request.verifier, nonce: request.nonce, link: request.link === true });
       status.textContent = request.link ? 'LINE 已連結，正在回到會員中心…' : '登入成功，正在回到會員中心…';
-      location.replace(new URL(request.link ? '../?lineLinked=1' : '../?lineConnected=1', location.href));
+      const redirectUrl = new URL(request.link ? '../?lineLinked=1' : '../?lineConnected=1', location.href);
+      if (!request.link && isNewUser) redirectUrl.searchParams.set('isNewUser', '1');
+      location.replace(redirectUrl);
     } catch (error) {
       status.textContent = error.message || '登入未完成，請重新登入。';
       document.getElementById('line-callback-back').hidden = false;

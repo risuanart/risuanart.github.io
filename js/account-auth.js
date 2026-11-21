@@ -77,8 +77,8 @@
     });
     const data = await res.json();
     if (!res.ok) throw new Error(data.error || "登入失敗");
-    writeStored({ token: data.token, customer: data.customer });
-    return data.customer;
+    writeStored({ token: data.token, customer: data.customer, isNewUser: data.isNewUser });
+    return { customer: data.customer, isNewUser: Boolean(data.isNewUser) };
   }
 
   async function loginWithLineCode(payload) {
@@ -90,8 +90,8 @@
     });
     const data = await res.json();
     if (!res.ok || !data.token || !data.customer) throw new Error(data.error || "LINE 登入失敗，請重新登入。");
-    writeStored({ token: data.token, customer: data.customer });
-    return data.customer;
+    writeStored({ token: data.token, customer: data.customer, isNewUser: data.isNewUser });
+    return { customer: data.customer, isNewUser: Boolean(data.isNewUser) };
   }
 
   async function emailLoginRequest(action, payload) {
@@ -111,8 +111,8 @@
   async function loginWithEmailCode(payload) {
     const data = await emailLoginRequest("email-code-verify", payload);
     if (!data.token || !data.customer) throw new Error("登入未完成，請重新取得驗證碼。");
-    writeStored({ token: data.token, customer: data.customer });
-    return data.customer;
+    writeStored({ token: data.token, customer: data.customer, isNewUser: data.isNewUser });
+    return { customer: data.customer, isNewUser: Boolean(data.isNewUser) };
   }
 
   async function logout(options = {}) {
@@ -229,8 +229,8 @@
             callback: (response) => {
               container.textContent = "登入中…";
               loginWithGoogleCredential(response.credential)
-                .then((customer) => {
-                  if (options.onLogin) options.onLogin(customer);
+                .then(({ customer, isNewUser }) => {
+                  if (options.onLogin) options.onLogin(customer, isNewUser);
                 })
                 .catch((err) => {
                   container.textContent = `登入失敗：${err.message}`;
