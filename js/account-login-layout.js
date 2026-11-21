@@ -1,12 +1,5 @@
 
 (function () {
-  document.querySelectorAll('[data-login-details]').forEach(link => link.addEventListener('click', event => {
-    event.preventDefault();
-    const details = document.getElementById('line-data');
-    details.open = true;
-    details.querySelector('summary').focus();
-    details.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  }));
   const google = document.getElementById('account-page-google-btn');
   if (google && window.ResizeObserver) {
     let width = Math.floor(google.getBoundingClientRect().width), timer;

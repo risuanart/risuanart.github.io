@@ -67,19 +67,8 @@
   }
   blocks.forEach(block => {
     const button = block.querySelector('[data-line-start]');
-    const checkbox = block.querySelector('input[type=checkbox]');
-    const consentLabel = block.querySelector('label');
     const status = block.querySelector('[data-line-status]');
-    checkbox.addEventListener('change', () => { if (checkbox.checked) status.textContent = ''; });
     button.addEventListener('click', async () => {
-      if (!checkbox.checked) {
-        status.textContent = '請先勾選上方的同意項目。';
-        consentLabel.classList.add('is-attention');
-        checkbox.focus();
-        consentLabel.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        setTimeout(() => consentLabel.classList.remove('is-attention'), 1600);
-        return;
-      }
       if (!config?.lineClientId) {
         status.textContent = 'LINE 登入暫時無法使用，請改用 Email 登入。';
         return;
