@@ -880,6 +880,14 @@
   animation: order-sheet-rise var(--duration-normal) var(--ease-standard);
 }
 
+@media (min-width: 841px) {
+  .order-sheet__panel {
+    box-sizing: border-box;
+    max-width: var(--content-max-width);
+    margin-inline: auto;
+  }
+}
+
 @keyframes order-sheet-fade {
   from { opacity: 0; }
 }
