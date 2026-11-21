@@ -877,8 +877,6 @@
 
 .work-heading__urgency p {
   margin: 0;
-  padding: 0 8px;
-  border-left: 3px solid var(--color-text-primary);
   font-size: var(--font-size-sm);
   line-height: 25px;
   color: var(--color-text-primary);
