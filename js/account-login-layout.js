@@ -65,7 +65,10 @@
   if (loadingEl) {
     let settled = false;
     const slowTimer = setTimeout(() => {
-      if (!settled) loadingEl.textContent = '載入較慢，可重新整理，或改用 Email 登入。';
+      if (!settled) {
+        const textEl = loadingEl.querySelector('[data-loading-text]');
+        if (textEl) textEl.textContent = '載入較慢，可重新整理，或改用 Email 登入。';
+      }
     }, 8000);
     function settle() {
       settled = true;
