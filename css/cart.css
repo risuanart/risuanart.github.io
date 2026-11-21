@@ -1104,6 +1104,7 @@
 
 
 
+.work__shipping-note.cart-promotion-note,
 .order-sheet__line--promotion dt,
 .order-sheet__line--promotion dd {
   color: var(--color-warning);

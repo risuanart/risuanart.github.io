@@ -21,7 +21,7 @@
   <link rel="stylesheet" href="../css/base.css?v=20261121-fix">
   <link rel="stylesheet" href="../css/home.css?v=20261121-fix">
   <link rel="stylesheet" href="../css/products.css?v=20261121-fix">
-  <link rel="stylesheet" href="../css/cart.css?v=20261121-order-sheet-width">
+  <link rel="stylesheet" href="../css/cart.css?v=20261121-promotion-notes">
   <link rel="stylesheet" href="../css/guest-entry.css?v=20261121-fix">
   <link rel="stylesheet" href="../css/site-menu.css?v=20261121-fix">
   <link rel="stylesheet" href="../css/site-footer.css?v=20261121-fix">
@@ -190,7 +190,7 @@
           <footer class="work__close">
             <div class="work__close-text">
               <p class="work__shipping-note">運費和折扣將在結帳時計算。</p>
-              <p class="work__shipping-note" id="cart-free-shipping" aria-live="polite"></p>
+              <p class="work__shipping-note cart-promotion-note" id="cart-free-shipping" aria-live="polite"></p>
               <p class="checkout-error" role="alert" hidden></p>
               <p class="work__price price-text">小計 $0</p>
             </div>
@@ -206,7 +206,7 @@
               <input type="text" class="cart-discount__input" placeholder="輸入優惠碼" aria-label="優惠碼" maxlength="64">
               <button type="button" class="cart-discount__apply">套用</button>
             </div>
-            <p class="work__shipping-note" id="cart-coupon-result" role="status" hidden></p>
+            <p class="work__shipping-note cart-promotion-note" id="cart-coupon-result" role="status" hidden></p>
           </div>
         </aside>
       </div>
@@ -540,7 +540,7 @@
                 <dd id="confirm-total-points"></dd>
               </div>
             </dl>
-            <p class="work__shipping-note" id="confirm-free-shipping" aria-live="polite"></p>
+            <p class="work__shipping-note cart-promotion-note" id="confirm-free-shipping" aria-live="polite"></p>
             <div class="order-sheet__grand confirm-total-grand">
               <span>應付金額</span>
               <span id="confirm-total-grand"></span>
@@ -626,7 +626,7 @@
           <dd data-sheet-points></dd>
         </div>
       </dl>
-      <p class="work__shipping-note" data-sheet-free-shipping aria-live="polite"></p>
+      <p class="work__shipping-note cart-promotion-note" data-sheet-free-shipping aria-live="polite"></p>
       <div class="order-sheet__grand">
         <span>總金額</span>
         <span data-sheet-grand></span>
