@@ -880,6 +880,14 @@
   animation: order-sheet-rise var(--duration-normal) var(--ease-standard);
 }
 
+@media (min-width: 841px) {
+  .order-sheet__panel {
+    box-sizing: border-box;
+    max-width: var(--content-max-width);
+    margin-inline: auto;
+  }
+}
+
 @keyframes order-sheet-fade {
   from { opacity: 0; }
 }
@@ -1095,6 +1103,12 @@
 
 
 
+
+.work__shipping-note.cart-promotion-note,
+.order-sheet__line--promotion dt,
+.order-sheet__line--promotion dd {
+  color: var(--color-warning);
+}
 
 .order-sheet__line--discount[hidden] {
   display: none;

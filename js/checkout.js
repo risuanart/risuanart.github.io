@@ -52,6 +52,13 @@
 
 
   const FREE_SHIPPING_THRESHOLD = 1300;
+  function renderFreeShipping(hint, netItemsTotal) {
+    const remaining = FREE_SHIPPING_THRESHOLD - netItemsTotal;
+    hint.textContent = remaining > 0
+      ? `折抵後滿 ${formatMoney(FREE_SHIPPING_THRESHOLD)} 免運，目前還差 ${formatMoney(remaining)}。`
+      : `已達 ${formatMoney(FREE_SHIPPING_THRESHOLD)} 免運門檻。`;
+  }
+
   function shippingFee(order, method) {
     if (!method) return 0;
     return order.itemsTotal - appliedPoints(order, method) >= FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_FEES[method];
@@ -91,18 +98,27 @@
     cartCollapseTotal.textContent = total;
     headerOrderTotal.textContent = total;
   }
+  function renderDiscountRows(order, earlyBirdRow, couponRow) {
+    const totalDiscount = order.discountAmount || 0;
+    const coupon = Math.max(0, Math.min(order.thresholdDiscount || 0, totalDiscount));
+    const earlyBird = totalDiscount - coupon;
+    earlyBirdRow.hidden = earlyBird === 0;
+    earlyBirdRow.querySelector("dt").textContent = coupon ? "早鳥預購優惠" : order.discountLabel;
+    earlyBirdRow.querySelector("dd").textContent = earlyBird ? `-${formatMoney(earlyBird)}` : "";
+    couponRow.hidden = coupon === 0;
+    couponRow.querySelector("dd").textContent = coupon ? `-${formatMoney(coupon)}` : "";
+  }
+
   function renderConfirmTotals(order, method) {
     const fee = shippingFee(order, method);
     const redeemed = appliedPoints(order, method);
+    renderFreeShipping(document.getElementById("confirm-free-shipping"), order.itemsTotal - redeemed);
     document.getElementById("confirm-total-subtotal").textContent = formatMoney(order.originalItemsTotal ?? order.itemsTotal);
-    const discountRow = document.getElementById("confirm-total-discount-row");
-    if (order.discountAmount > 0) {
-      discountRow.hidden = false;
-      document.getElementById("confirm-total-discount-label").textContent = order.discountLabel;
-      document.getElementById("confirm-total-discount").textContent = `-${formatMoney(order.discountAmount)}`;
-    } else {
-      discountRow.hidden = true;
-    }
+    renderDiscountRows(
+      order,
+      document.getElementById("confirm-total-discount-row"),
+      document.getElementById("confirm-total-coupon-row")
+    );
     document.getElementById("confirm-total-shipping").textContent = method ? formatMoney(fee) : "選擇送貨方式後計算";
     updatePointsDiscountRow(
       order,
@@ -160,8 +176,7 @@
   const orderSheetShipping = orderSheet.querySelector("[data-sheet-shipping]");
   const orderSheetGrand = orderSheet.querySelector("[data-sheet-grand]");
   const orderSheetDiscountRow = orderSheet.querySelector("[data-sheet-discount-row]");
-  const orderSheetDiscountLabel = orderSheet.querySelector("[data-sheet-discount-label]");
-  const orderSheetDiscount = orderSheet.querySelector("[data-sheet-discount]");
+  const orderSheetCouponRow = orderSheet.querySelector("[data-sheet-coupon-row]");
   const orderSheetPointsRow = orderSheet.querySelector("[data-sheet-points-row]");
   const orderSheetPoints = orderSheet.querySelector("[data-sheet-points]");
 
@@ -216,15 +231,10 @@
 
 
     orderSheetSubtotal.textContent = formatMoney(order.originalItemsTotal ?? order.itemsTotal);
-    if (order.discountAmount > 0) {
-      orderSheetDiscountRow.hidden = false;
-      orderSheetDiscountLabel.textContent = order.discountLabel;
-      orderSheetDiscount.textContent = `-${formatMoney(order.discountAmount)}`;
-    } else {
-      orderSheetDiscountRow.hidden = true;
-    }
+    renderDiscountRows(order, orderSheetDiscountRow, orderSheetCouponRow);
     orderSheetShipping.textContent = fee === null ? "選擇送貨方式後計算" : formatMoney(fee);
     const redeemed = appliedPoints(order, method);
+    renderFreeShipping(orderSheet.querySelector("[data-sheet-free-shipping]"), order.itemsTotal - redeemed);
     updatePointsDiscountRow(order, method, orderSheetPointsRow, orderSheetPoints);
     orderSheetGrand.textContent = formatMoney(order.itemsTotal + (fee || 0) - redeemed);
   }
@@ -835,21 +845,7 @@
     hideCheckoutError();
 
     try {
-      const res = await fetch(`${CHECKOUT_API_BASE}/api/start-checkout`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ cartItems, couponCode: document.querySelector(".cart-discount__input")?.value.trim() || "" }),
-      });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "建立訂單失敗，請稍後再試一次");
-
-
-
-
-
-
-
-
+      const data = await requestCheckout(cartItems, couponInput?.value.trim() || "");
 
       if (data.orderAccessToken) {
         try { sessionStorage.setItem('risuan-order-access:'+data.orderId,data.orderAccessToken); }
@@ -863,22 +859,72 @@
   }
 
 
+  async function requestCheckout(cartItems, couponCode, quoteOnly = false) {
+    const res = await fetch(`${CHECKOUT_API_BASE}/api/start-checkout`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ cartItems, couponCode, quoteOnly }),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || "請稍後再試一次");
+    return data;
+  }
+
   const couponButton = document.querySelector(".cart-discount__apply");
   const couponInput = document.querySelector(".cart-discount__input");
+  const couponResult = document.getElementById("cart-coupon-result");
+  const freeShippingHint = document.getElementById("cart-free-shipping");
+  let couponQuote = null;
+
+  function renderCartOffer() {
+    couponResult.hidden = !couponQuote;
+    couponResult.textContent = couponQuote
+      ? `優惠碼已套用，折抵 ${formatMoney(couponQuote.thresholdDiscount)}，折後小計 ${formatMoney(couponQuote.itemsTotal)}。`
+      : "";
+    renderFreeShipping(freeShippingHint, couponQuote?.itemsTotal ?? window.RisuanCart.cartTotal());
+  }
+
+  function clearCouponQuote() {
+    couponQuote = null;
+    renderCartOffer();
+  }
+
   if (couponButton && couponInput) {
+    couponInput.addEventListener("input", clearCouponQuote);
     couponButton.addEventListener("click", async () => {
-      if (!couponInput.value.trim()) { showCheckoutError("請先輸入優惠碼"); return; }
+      const couponCode = couponInput.value.trim();
+      if (!couponCode) {
+        couponResult.hidden = false;
+        couponResult.textContent = "請先輸入優惠碼。";
+        return;
+      }
+      const cartItems = window.RisuanCart.getCheckoutPayload();
+      const cartSnapshot = JSON.stringify(cartItems);
+      const stillCurrent = () => couponInput.value.trim() === couponCode &&
+        JSON.stringify(window.RisuanCart.getCheckoutPayload()) === cartSnapshot;
+      hideCheckoutError();
       couponButton.disabled = true;
-      try { await runCheckout(); } finally { couponButton.disabled = false; }
+      try {
+        const quote = await requestCheckout(cartItems, couponCode, true);
+        if (!stillCurrent()) return;
+        if (!(quote.thresholdDiscount > 0) || !Number.isFinite(quote.itemsTotal)) {
+          throw new Error("暫時無法驗證優惠碼，請稍後再試。");
+        }
+        couponQuote = quote;
+        renderCartOffer();
+      } catch (err) {
+        if (!stillCurrent()) return;
+        clearCouponQuote();
+        couponResult.hidden = false;
+        couponResult.textContent = err.message;
+      } finally {
+        couponButton.disabled = false;
+      }
     });
     couponInput.addEventListener("keydown", (event) => {
       if (event.key === "Enter") { event.preventDefault(); couponButton.click(); }
     });
   }
-
-
-
-
 
   let resyncTimer = null;
   function scheduleResync() {
@@ -893,6 +939,7 @@
     function updateButtonState() {
       const hasItems = window.RisuanCart.readCart().length > 0;
       checkoutBtn.disabled = !hasItems;
+      if (hasItems) renderCartOffer();
     }
 
     checkoutBtn.addEventListener("click", async () => {
@@ -905,10 +952,15 @@
 
     updateButtonState();
     document.addEventListener("cart:updated", () => {
+      couponQuote = null;
       updateButtonState();
       scheduleResync();
     });
-    window.addEventListener("storage", updateButtonState);
+    window.addEventListener("storage", () => {
+      if (!couponQuote) return updateButtonState();
+      clearCouponQuote();
+      updateButtonState();
+    });
   }
 
   if (backToCartBtn) {
