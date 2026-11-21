@@ -1096,6 +1096,11 @@
 
 
 
+.order-sheet__line--promotion dt,
+.order-sheet__line--promotion dd {
+  color: var(--color-warning);
+}
+
 .order-sheet__line--discount[hidden] {
   display: none;
 }
