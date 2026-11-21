@@ -91,18 +91,26 @@
     cartCollapseTotal.textContent = total;
     headerOrderTotal.textContent = total;
   }
+  function renderDiscountRows(order, earlyBirdRow, couponRow) {
+    const totalDiscount = order.discountAmount || 0;
+    const coupon = Math.max(0, Math.min(order.thresholdDiscount || 0, totalDiscount));
+    const earlyBird = totalDiscount - coupon;
+    earlyBirdRow.hidden = earlyBird === 0;
+    earlyBirdRow.querySelector("dt").textContent = coupon ? "早鳥預購優惠" : order.discountLabel;
+    earlyBirdRow.querySelector("dd").textContent = earlyBird ? `-${formatMoney(earlyBird)}` : "";
+    couponRow.hidden = coupon === 0;
+    couponRow.querySelector("dd").textContent = coupon ? `-${formatMoney(coupon)}` : "";
+  }
+
   function renderConfirmTotals(order, method) {
     const fee = shippingFee(order, method);
     const redeemed = appliedPoints(order, method);
     document.getElementById("confirm-total-subtotal").textContent = formatMoney(order.originalItemsTotal ?? order.itemsTotal);
-    const discountRow = document.getElementById("confirm-total-discount-row");
-    if (order.discountAmount > 0) {
-      discountRow.hidden = false;
-      document.getElementById("confirm-total-discount-label").textContent = order.discountLabel;
-      document.getElementById("confirm-total-discount").textContent = `-${formatMoney(order.discountAmount)}`;
-    } else {
-      discountRow.hidden = true;
-    }
+    renderDiscountRows(
+      order,
+      document.getElementById("confirm-total-discount-row"),
+      document.getElementById("confirm-total-coupon-row")
+    );
     document.getElementById("confirm-total-shipping").textContent = method ? formatMoney(fee) : "選擇送貨方式後計算";
     updatePointsDiscountRow(
       order,
@@ -160,8 +168,7 @@
   const orderSheetShipping = orderSheet.querySelector("[data-sheet-shipping]");
   const orderSheetGrand = orderSheet.querySelector("[data-sheet-grand]");
   const orderSheetDiscountRow = orderSheet.querySelector("[data-sheet-discount-row]");
-  const orderSheetDiscountLabel = orderSheet.querySelector("[data-sheet-discount-label]");
-  const orderSheetDiscount = orderSheet.querySelector("[data-sheet-discount]");
+  const orderSheetCouponRow = orderSheet.querySelector("[data-sheet-coupon-row]");
   const orderSheetPointsRow = orderSheet.querySelector("[data-sheet-points-row]");
   const orderSheetPoints = orderSheet.querySelector("[data-sheet-points]");
 
@@ -216,13 +223,7 @@
 
 
     orderSheetSubtotal.textContent = formatMoney(order.originalItemsTotal ?? order.itemsTotal);
-    if (order.discountAmount > 0) {
-      orderSheetDiscountRow.hidden = false;
-      orderSheetDiscountLabel.textContent = order.discountLabel;
-      orderSheetDiscount.textContent = `-${formatMoney(order.discountAmount)}`;
-    } else {
-      orderSheetDiscountRow.hidden = true;
-    }
+    renderDiscountRows(order, orderSheetDiscountRow, orderSheetCouponRow);
     orderSheetShipping.textContent = fee === null ? "選擇送貨方式後計算" : formatMoney(fee);
     const redeemed = appliedPoints(order, method);
     updatePointsDiscountRow(order, method, orderSheetPointsRow, orderSheetPoints);

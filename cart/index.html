@@ -529,6 +529,10 @@
                 <dt id="confirm-total-discount-label"></dt>
                 <dd id="confirm-total-discount"></dd>
               </div>
+              <div class="order-sheet__line order-sheet__line--discount" id="confirm-total-coupon-row" hidden>
+                <dt>優惠碼折抵</dt>
+                <dd id="confirm-total-coupon"></dd>
+              </div>
               <div class="order-sheet__line">
                 <dt id="confirm-total-shipping-label">運費</dt>
                 <dd id="confirm-total-shipping"></dd>
@@ -610,6 +614,10 @@
           <dt data-sheet-discount-label></dt>
           <dd data-sheet-discount></dd>
         </div>
+        <div class="order-sheet__line order-sheet__line--discount" data-sheet-coupon-row hidden>
+          <dt>優惠碼折抵</dt>
+          <dd data-sheet-coupon></dd>
+        </div>
         <div class="order-sheet__line">
           <dt>運費</dt>
           <dd data-sheet-shipping></dd>
@@ -633,7 +641,7 @@
   <script src="../js/account-auth.js?v=20261121-fix"></script>
   <script src="../js/cart.js?v=20261121-fix"></script>
   <script src="../js/tw-postal-codes.js?v=20261121-fix"></script>
-  <script src="../js/checkout.js?v=20261121-fix"></script>
+  <script src="../js/checkout.js?v=20261121-split-discounts"></script>
   <script src="../js/hero-colorway-carousel.js?v=20261121-fix"></script>
   <script src="../js/cart-cross-sell.js?v=20261121-fix"></script>
   <script src="../js/site-header-scroll.js?v=20261121-fix"></script>
