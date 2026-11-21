@@ -36,7 +36,7 @@
   if (warning) {
     if (isLine) {
       warning.hidden = false;
-      warning.textContent = '在 LINE 內開啟時，Google 登入無法使用，建議改用 Email 登入。';
+      warning.textContent = '在 LINE 內開啟時，Google 登入可能無法跳轉成功，建議改用 Email 登入；想用 Google 也可以直接試試看。';
       const copyBtn = document.createElement('button');
       copyBtn.type = 'button';
       copyBtn.className = 'text-link';

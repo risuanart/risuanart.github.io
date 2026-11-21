@@ -216,18 +216,15 @@
     return gsiLoadPromise;
   }
 
-  // LINE 內建瀏覽器會擋 Google 登入的跳轉頁（已實機測試確認），這裡用
-  // UA 直接擋在渲染之前，不要讓使用者點了按鈕才卡住；這個判斷也是
-  // account-login-layout.js 判斷要不要顯示警示文字的同一個依據，故意
-  // 共用同一個旗標，避免兩邊各自判斷一次卻可能給出不一致的結果。
+  // LINE 內建瀏覽器大部分時候會擋 Google 登入的跳轉頁，但不是每次、每個
+  // LINE版本都一定失敗，仍有使用者實際上手動輸入帳密後可以成功登入，
+  // 所以這裡不整個擋掉按鈕（擋掉=直接杜絕嘗試的可能），只在
+  // account-login-layout.js 顯示提醒文字，按鈕本身照常渲染讓使用者
+  // 自己決定要不要試。這個旗標也給account-login-layout.js共用，兩邊
+  // 判斷同一個條件、顯示一致的文案。
   const isLineInAppBrowser = /\bLine\//i.test(navigator.userAgent || "");
 
   function mountGoogleButton(container, options = {}) {
-    if (isLineInAppBrowser) {
-      container.textContent = "請用 Safari 或 Chrome 開啟才能使用 Google 登入";
-      container.classList.add("account-login__google--disabled");
-      return;
-    }
     getGoogleClientId().then((clientId) => {
       if (!clientId) {
         container.textContent = "會員登入功能尚未設定完成";
