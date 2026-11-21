@@ -22,8 +22,14 @@
   }
 
   // 內建瀏覽器偵測與對應提示（任務 8b）
+  // isLine 這個旗標跟 account-auth.js 的 mountGoogleButton 共用同一個
+  // isLineInAppBrowser（同一個 UA 判斷式只在一個地方寫），Google 按鈕
+  // 本身要不要停用交給 mountGoogleButton 自己擋，這裡不直接動
+  // google 容器的內容，避免跟 account-page.js 呼叫 mountGoogleButton
+  // 的時機前後搶著改同一個 DOM 節點，曾經因為這樣讓已停用的按鈕又被
+  // 蓋回正常可點的 Google 按鈕（連帶造成版面被撐寬）。
   const ua = navigator.userAgent || '';
-  const isLine = /\bLine\//i.test(ua);
+  const isLine = window.RisuanAccount?.isLineInAppBrowser ?? /\bLine\//i.test(ua);
   const isInstagram = /Instagram/i.test(ua);
   const isOtherInApp = !isLine && !isInstagram && (/FBAN|FBAV/i.test(ua));
   const warning = document.getElementById('account-login-browser-warning');
@@ -48,11 +54,6 @@
       openBtn.href = openUrl.toString();
       openBtn.textContent = '用瀏覽器開啟';
       warning.append(' ', copyBtn, ' ', openBtn);
-      if (google) {
-        google.innerHTML = '';
-        google.textContent = '請用 Safari 或 Chrome 開啟才能使用 Google 登入';
-        google.classList.add('account-login__google--disabled');
-      }
     } else if (isOtherInApp) {
       warning.hidden = false;
       warning.textContent = '若無法登入，請改用 Email 登入。';
