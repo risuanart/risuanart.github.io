@@ -75,25 +75,32 @@
 
     async function loadAndRender() {
       root.innerHTML = `<p class="account-page__empty">載入中…</p>`;
+      let data;
       try {
-        const [data, contactInfo] = await Promise.all([
-          tokenApiFetch(
-            `/api/account?action=booking-reschedule-options&bookingId=${encodeURIComponent(bookingId)}&token=${encodeURIComponent(token)}`
-          ),
-          tokenApiFetch(
-            `/api/account?action=booking-contact-info&bookingId=${encodeURIComponent(bookingId)}&token=${encodeURIComponent(token)}`
-          ),
-        ]);
+        data = await tokenApiFetch(
+          `/api/account?action=booking-reschedule-options&bookingId=${encodeURIComponent(bookingId)}&token=${encodeURIComponent(token)}`
+        );
+      } catch (err) {
+        renderInvalidLink(err.message);
+        return;
+      }
 
+      const summary = { bookingId, date: data.currentDate, time: data.currentTime };
+      renderBookingDetail(root, summary, data);
+      root.dataset.bookingId = bookingId;
 
+      // 聯絡卡片是獨立請求：booking-contact-info 失敗不應該影響改期／取消，退回純 Instagram 連結。
+      let contactInfo = null;
+      try {
+        contactInfo = await tokenApiFetch(
+          `/api/account?action=booking-contact-info&bookingId=${encodeURIComponent(bookingId)}&token=${encodeURIComponent(token)}`
+        );
+      } catch {}
 
-
-
-
-
-
-        const summary = { bookingId, date: data.currentDate, time: data.currentTime };
-        renderBookingDetail(root, summary, data);
+      const contactCard = document.createElement("aside");
+      contactCard.className = "booking-contact-card";
+      contactCard.id = "contact";
+      if (contactInfo) {
         const contactText = [
           "您好，我想詢問我的課程預約：",
           `預約編號：${contactInfo.bookingId}`,
@@ -103,9 +110,6 @@
           `人數：${contactInfo.qty}`,
           "想詢問的問題：",
         ].join("\n");
-        const contactCard = document.createElement("aside");
-        contactCard.className = "booking-contact-card";
-        contactCard.id = "contact";
         contactCard.innerHTML = `
           <p class="booking-contact-card__eyebrow">CONTACT US</p>
           <h2 class="booking-contact-card__title">要詢問預約嗎？</h2>
@@ -117,11 +121,17 @@
           </div>
           <p class="booking-contact-card__status" aria-live="polite" hidden></p>
         `;
-        root.prepend(contactCard);
-        root.dataset.bookingId = bookingId;
-      } catch (err) {
-        renderInvalidLink(err.message);
+      } else {
+        contactCard.innerHTML = `
+          <p class="booking-contact-card__eyebrow">CONTACT US</p>
+          <h2 class="booking-contact-card__title">要詢問預約嗎？</h2>
+          <p class="booking-contact-card__text">請透過 Instagram 私訊我們，並告知您的預約編號：${escapeHtml(bookingId)}。</p>
+          <div class="booking-contact-card__actions">
+            <a class="work__cta booking-contact-card__instagram" href="https://www.instagram.com/ri.suan_art/" target="_blank" rel="noopener">開啟 Instagram</a>
+          </div>
+        `;
       }
+      root.prepend(contactCard);
     }
 
     root.addEventListener("click", async (e) => {
