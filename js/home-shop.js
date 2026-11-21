@@ -17,7 +17,8 @@
 
 
 (function () {
-  const grid = document.querySelector(".preview-follow__grid");
+  const grid = document.getElementById("preview-follow-grid");
+  const section = grid ? grid.closest(".preview-follow") : null;
   if (!grid) return;
 
   const API_BASE = "https://risuan-checkout.vercel.app";
@@ -26,11 +27,15 @@
     return `https://images.weserv.nl/?url=${encodeURIComponent(originalUrl.replace(/^https?:\/\//, ""))}&w=600&q=75&output=webp`;
   }
 
+  function collapseToFollowButton() {
+    if (section) section.classList.add("preview-follow--collapsed");
+  }
+
   fetch(`${API_BASE}/api/instagram-posts?limit=8`)
     .then((res) => (res.ok ? res.json() : Promise.reject(new Error(`HTTP ${res.status}`))))
     .then((data) => {
       const posts = Array.isArray(data.posts) ? data.posts : [];
-      if (!posts.length) return;
+      if (!posts.length) { collapseToFollowButton(); return; }
 
       const items = Array.from(grid.querySelectorAll(".preview-follow__item"));
       posts.slice(0, items.length).forEach((post, i) => {
@@ -45,12 +50,13 @@
         img.src = resizedThumbUrl(post.imageUrl);
         img.alt = "";
         img.loading = "lazy";
+        img.addEventListener("error", () => { img.src = post.imageUrl; }, { once: true });
         link.appendChild(img);
         placeholder.replaceWith(link);
       });
     })
     .catch(() => {
-
+      collapseToFollowButton();
     });
 })();
 
