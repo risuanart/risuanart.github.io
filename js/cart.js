@@ -592,6 +592,10 @@
     document.dispatchEvent(new CustomEvent("cart:updated"));
   }
 
+  function clearCart() {
+    writeCart([]);
+  }
+
   function addItem(productKey, scheme, qty) {
     qty = qty || 1;
     if (!PRODUCTS[productKey]) return;
@@ -1403,6 +1407,7 @@
 
   window.RisuanCart = {
     readCart,
+    clearCart,
     cartTotal,
 
 

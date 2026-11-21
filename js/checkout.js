@@ -755,6 +755,9 @@
       currentOrder = order;
       loadingEl.hidden = true;
       contentEl.hidden = false;
+      // 付款已經成功，購物車裡這些商品已經是這筆訂單的一部分，不清掉的話
+      // 使用者回到商店會看到購物車還留著剛買過的商品，容易誤會或重複下單。
+      window.RisuanCart?.clearCart();
       collapseCartEditView();
       cartCollapseTotal.textContent = Number.isFinite(order.total) ? formatMoney(order.total) : '已完成付款';
       headerOrderTotal.textContent = cartCollapseTotal.textContent;
