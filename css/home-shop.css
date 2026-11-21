@@ -1012,21 +1012,19 @@
 }
 
 .preview-follow__title {
+  align-self: center;
   margin: 0;
   font-size: 15px;
   letter-spacing: normal;
   font-weight: 700;
   color: var(--color-text-secondary);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
 }
 
-.preview-follow__cta {
-  align-self: center;
-  display: inline-block;
-  margin-top: var(--space-2);
-  font-size: var(--font-size-sm);
-  font-weight: 700;
+.preview-follow__title:hover {
   color: var(--color-text-primary);
-  border-bottom: 1px solid var(--color-text-primary);
+  border-bottom-color: var(--color-text-primary);
 }
 
 .preview-follow--collapsed .preview-follow__grid {
