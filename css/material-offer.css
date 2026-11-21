@@ -1,5 +1,6 @@
 .material-offer {
   box-sizing: border-box;
+  margin: auto;
   width: min(25rem, calc(100% - var(--space-6) * 2));
   padding: var(--space-10) var(--space-6) var(--space-6);
   border: 1px solid var(--color-surface-neutral);
