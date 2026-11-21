@@ -68,7 +68,16 @@
     if (sheepLink && sheepLink.dataset[hrefKey]) sheepLink.href = sheepLink.dataset[hrefKey];
     const photoLink = sheepSlide.querySelector(".preview-hero__photo-link");
     if (photoLink && sheepLink && sheepLink.dataset[hrefKey]) photoLink.href = sheepLink.dataset[hrefKey];
-    if (sheepTagline && sheepTagline.dataset[taglineKey]) sheepTagline.textContent = sheepTagline.dataset[taglineKey];
+    if (sheepTagline && sheepTagline.dataset[taglineKey]) {
+      let phrases;
+      try { phrases = JSON.parse(sheepTagline.dataset[taglineKey]); } catch { phrases = [sheepTagline.dataset[taglineKey]]; }
+      sheepTagline.replaceChildren(...phrases.map(phrase => {
+        const span = document.createElement("span");
+        span.className = "nowrap-phrase";
+        span.textContent = phrase;
+        return span;
+      }));
+    }
     if (sheepCtaText && sheepCtaText.dataset[ctaTextKey]) sheepCtaText.textContent = sheepCtaText.dataset[ctaTextKey];
   }
 

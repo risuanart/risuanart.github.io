@@ -137,6 +137,21 @@ a {
   text-underline-offset: 3px;
 }
 
+/* 手動斷句：每個短語維持一整行內不被拆開，換行只會發生在短語之間 */
+.nowrap-phrase {
+  display: inline-block;
+}
+
+.br-mobile {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .br-mobile {
+    display: block;
+  }
+}
+
 
 
 @media (prefers-reduced-motion: reduce) {
