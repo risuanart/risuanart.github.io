@@ -24,7 +24,7 @@
       <button class="material-offer__close" type="submit" aria-label="關閉優惠資訊" autofocus>×</button>
     </form>
     <h2 id="material-offer-title">${earlyBird ? "春聯材料包早鳥至 12/15" : "材料包購物優惠"}</h2>
-    <p>商品折抵後滿 <strong>NT$1,300</strong> 免運。</p>
+    <p>商品折抵後，超商滿 <strong>NT$1,300</strong>、宅配滿 <strong>NT$3,000</strong> 免運。</p>
     <a class="material-offer__link" href="/account/">登入／加入會員</a>
   `;
   document.body.append(dialog);

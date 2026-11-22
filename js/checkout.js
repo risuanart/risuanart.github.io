@@ -51,17 +51,22 @@
 
 
 
-  const FREE_SHIPPING_THRESHOLD = 1300;
-  function renderFreeShipping(hint, netItemsTotal) {
-    const remaining = FREE_SHIPPING_THRESHOLD - netItemsTotal;
+  const FREE_SHIPPING_THRESHOLDS = { cvs: 1300, home: 3000 };
+  function renderFreeShipping(hint, netItemsTotal, method) {
+    if (!method) {
+      hint.textContent = `商品折抵後，超商滿 ${formatMoney(FREE_SHIPPING_THRESHOLDS.cvs)}、宅配滿 ${formatMoney(FREE_SHIPPING_THRESHOLDS.home)} 免運。`;
+      return;
+    }
+    const threshold = FREE_SHIPPING_THRESHOLDS[method];
+    const remaining = threshold - netItemsTotal;
     hint.textContent = remaining > 0
-      ? `折抵後滿 ${formatMoney(FREE_SHIPPING_THRESHOLD)} 免運，目前還差 ${formatMoney(remaining)}。`
-      : `已達 ${formatMoney(FREE_SHIPPING_THRESHOLD)} 免運門檻。`;
+      ? `折抵後滿 ${formatMoney(threshold)} 免運，目前還差 ${formatMoney(remaining)}。`
+      : `已達 ${formatMoney(threshold)} 免運門檻。`;
   }
 
   function shippingFee(order, method) {
     if (!method) return 0;
-    return order.itemsTotal - appliedPoints(order, method) >= FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_FEES[method];
+    return order.itemsTotal - appliedPoints(order, method) >= FREE_SHIPPING_THRESHOLDS[method] ? 0 : SHIPPING_FEES[method];
   }
   function syncPointsLimit(order, method) {
     if (!pointsInput) return;
@@ -112,7 +117,7 @@
   function renderConfirmTotals(order, method) {
     const fee = shippingFee(order, method);
     const redeemed = appliedPoints(order, method);
-    renderFreeShipping(document.getElementById("confirm-free-shipping"), order.itemsTotal - redeemed);
+    renderFreeShipping(document.getElementById("confirm-free-shipping"), order.itemsTotal - redeemed, method);
     document.getElementById("confirm-total-subtotal").textContent = formatMoney(order.originalItemsTotal ?? order.itemsTotal);
     renderDiscountRows(
       order,
@@ -234,7 +239,7 @@
     renderDiscountRows(order, orderSheetDiscountRow, orderSheetCouponRow);
     orderSheetShipping.textContent = fee === null ? "選擇送貨方式後計算" : formatMoney(fee);
     const redeemed = appliedPoints(order, method);
-    renderFreeShipping(orderSheet.querySelector("[data-sheet-free-shipping]"), order.itemsTotal - redeemed);
+    renderFreeShipping(orderSheet.querySelector("[data-sheet-free-shipping]"), order.itemsTotal - redeemed, method);
     updatePointsDiscountRow(order, method, orderSheetPointsRow, orderSheetPoints);
     orderSheetGrand.textContent = formatMoney(order.itemsTotal + (fee || 0) - redeemed);
   }
