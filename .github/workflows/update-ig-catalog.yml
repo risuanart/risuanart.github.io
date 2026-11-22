@@ -22,6 +22,13 @@ on:
       - "js/cart.js"
       - "products/**/index.html"
       - "scripts/generate-ig-catalog.js"
+      - "scripts/update-product-jsonld.js"
+  # 2026-11-22：商品頁結構化資料（scripts/update-product-jsonld.js）的價格會依「今天」
+  # 判斷早鳥價還是原價，早鳥到期（js/cart.js 的 EARLY_BIRD_CUTOFF）那天不會有人 push，
+  # 所以每天固定重跑一次（台北時間每天 00:05），到期後隔天凌晨自動變回原價。
+  schedule:
+    - cron: "5 16 * * *"
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -32,13 +39,20 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # 商品資料表會把「現在時間」寫進早鳥開始時間，每天排程都重產會每天多一筆無意義的
+      # commit；排程只需要更新結構化資料（價格隨日期變），所以排程時跳過這一步。
       - name: 產生商品資料表
+        if: github.event_name != 'schedule'
         run: node scripts/generate-ig-catalog.js
+
+      - name: 同步商品頁結構化資料（價格、預購狀態）
+        run: node scripts/update-product-jsonld.js
 
       - name: 有變動才 commit（避免內容完全沒變也留一筆空 commit）
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add feeds/instagram-shop.csv feeds/google-shopping.csv
+          git add -u products
           git diff --cached --quiet || git commit -m "自動更新購物平台商品目錄"
           git push

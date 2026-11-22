@@ -248,4 +248,6 @@ function main() {
   console.log(`已產生 ${googleCount} 筆商品到 feeds/google-shopping.csv（Google／Pinterest 共用）`);
 }
 
-main();
+if (require.main === module) main();
+
+module.exports = { collectItems, extractConst, extractStringConst, CART_JS_PATH, REPO_ROOT, SITE_ORIGIN };
