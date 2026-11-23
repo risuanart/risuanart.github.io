@@ -28,6 +28,7 @@
 .content-block__head{ display:flex; align-items:baseline; justify-content:space-between; gap:8px; flex-wrap:wrap; margin-bottom:20px; }
 .content-block__title{ font-size:12px; text-transform:uppercase; letter-spacing:1px; }
 .content-block__hint{ font-size:11px; color:#666; }
+.content-block__hint--rule{ color:var(--color-warning); font-weight:600; }
 
 
 
