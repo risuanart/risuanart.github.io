@@ -26,6 +26,7 @@
   <link rel="stylesheet" href="../css/products.css?v=20261121-fix2">
   <link rel="stylesheet" href="../css/cart.css?v=20261121-fix3">
   <link rel="stylesheet" href="../css/enterprise.css?v=20261121-fix">
+  <link rel="stylesheet" href="../css/hub-blocks.css?v=20261123-fix">
   <link rel="stylesheet" href="../css/site-menu.css?v=20261121-fix">
   <link rel="stylesheet" href="../css/site-footer.css?v=20261121-fix">
   <link rel="icon" href="/favicon.ico" sizes="any">
@@ -664,8 +665,9 @@
         <label class="confirm-field">
           <span>預計採購數量</span>
           <div class="confirm-field__control">
-            <input type="number" id="material-quote-quantity" min="1" step="1" required placeholder="例如 50">
+            <input type="number" id="material-quote-quantity" min="20" step="1" required placeholder="例如 50">
           </div>
+          <p class="content-block__hint">企業訂單最低 20 份起訂，才能提供優惠價。</p>
         </label>
 
         <div class="confirm-field">
@@ -688,6 +690,7 @@
               <span>尚未決定</span>
             </label>
           </div>
+          <p class="content-block__hint">選「混搭多款」的話，每款至少需 10 份（總數仍須滿 20 份）。</p>
         </div>
 
         <label class="confirm-field">
@@ -723,7 +726,7 @@
   <script src="../js/scroll-reveal.js?v=20261121-fix"></script>
   <script src="../js/site-menu.js?v=20261121-fix"></script>
   <script src="../js/enterprise-quote.js?v=20261121-fix"></script>
-  <script src="../js/material-quote.js?v=20261121-fix"></script>
+  <script src="../js/material-quote.js?v=20261123-moq-fix"></script>
   <script src="/js/promo-bar.js?v=20261121-fix"></script>
 </body>
 </html>

@@ -59,6 +59,15 @@
       otherNotes: document.getElementById("material-quote-other-notes").value.trim(),
     };
 
+    // 2026-11-23使用者確認：企業訂單最低20份起訂，不接受未滿20份的
+    // 詢問；後端（api/course-booking.js handleMaterialQuote）也有同樣
+    // 檢查，這裡只是讓客人在送出前就看到清楚的錯誤訊息，不用等後端
+    // 回應才知道數量不夠。
+    if (!Number.isInteger(payload.quantity) || payload.quantity < 20) {
+      showError("企業訂單最低 20 份起訂，請調整採購數量。");
+      return;
+    }
+
     submitBtn.disabled = true;
     submitBtn.textContent = "送出中…";
 
