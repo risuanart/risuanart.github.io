@@ -281,3 +281,59 @@
 .hub-placeholder svg{ width:1.8em; height:1.8em; }
 .hub-placeholder span{ font-size:11px; line-height:1.6; }
 
+/* 企業大量採購報價表單：點擊選取款式與份數（2026-11-24新增），見
+   js/material-quote.js。卡片本身是<label>包<input type=checkbox>，不用
+   額外寫click事件就能依賴原生checkbox的checked狀態；選中時用邊框顏色
+   +背景色標示，不是另外疊一層遮罩。 */
+.material-quote-style-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(104px, 1fr));
+  gap:10px;
+  margin:10px 0;
+}
+.material-quote-style-option{
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:4px;
+  padding:8px 6px 10px;
+  border:1.5px solid #dcdfd9;
+  border-radius:8px;
+  cursor:pointer;
+  text-align:center;
+  background:#fff;
+  transition:border-color .15s ease, background-color .15s ease;
+}
+.material-quote-style-option:has(.material-quote-style-check:checked){
+  border-color:var(--color-brand, #686F12);
+  background:color-mix(in srgb, var(--color-brand, #686F12) 8%, transparent);
+}
+.material-quote-style-option .material-quote-style-check{
+  position:absolute;
+  top:6px;
+  right:6px;
+  width:16px;
+  height:16px;
+  margin:0;
+}
+.material-quote-style-option img{
+  width:100%;
+  aspect-ratio:1/1;
+  object-fit:cover;
+  border-radius:6px;
+}
+.material-quote-style-option__name{ font-size:11.5px; line-height:1.4; font-weight:600; }
+.material-quote-style-option__price{ font-size:11px; color:#767676; }
+.material-quote-style-qty{
+  width:100%;
+  margin-top:2px;
+  padding:4px 6px;
+  border:1px solid #c3c8bf;
+  border-radius:4px;
+  font-size:13px;
+  text-align:center;
+}
+.material-quote-style-summary{ font-size:12.5px; line-height:1.8; color:#1A1815; margin:6px 0 0; }
+.material-quote-style-summary.is-error{ color:var(--color-warning, #B8541C); font-weight:600; }
+
