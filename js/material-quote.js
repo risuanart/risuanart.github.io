@@ -55,7 +55,9 @@
   const styleGrid = document.getElementById("material-quote-style-grid");
   const styleOptions = styleGrid ? Array.prototype.slice.call(styleGrid.querySelectorAll(".material-quote-style-option")) : [];
   const summaryEl = document.getElementById("material-quote-style-summary");
-  const productNoteField = document.getElementById("material-quote-product-note-field");
+  // 2026-11-24使用者確認拿掉「想採購的商品／款式」這個自由輸入框，
+  // 現在只剩一個隱藏欄位給「指定款式」模式送出時組字串用；「需要客製
+  // 構圖設計」改用下面的「其他需求」欄位描述，不再需要這個可見輸入框。
   const productNoteInput = document.getElementById("material-quote-product-note");
 
   function isPickMode() {
@@ -110,9 +112,7 @@
   }
 
   function applyStyleModeVisibility() {
-    const pick = isPickMode();
-    if (pickerField) pickerField.hidden = !pick;
-    if (productNoteField) productNoteField.hidden = pick;
+    if (pickerField) pickerField.hidden = !isPickMode();
     renderSummary();
   }
 
