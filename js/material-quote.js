@@ -66,15 +66,22 @@
 
   // 回傳目前勾選的款式明細，每筆 { key, name, price, qty }；qty 是
   // Number(輸入值) 或 NaN（還沒填/填了非數字）。
+  // 2026-11-24修正：Number("")是0不是NaN，原本空白輸入框會被當成
+  // 「填了0份」而不是「還沒填」，彙總顯示會出現誤導的「x0」，驗證也會
+  // 把「還沒填」跟「真的填0」混在一起判斷。這裡先把空字串／純空白轉成
+  // NaN，才交給Number()轉換。
   function selectedStyles() {
     return styleOptions
       .filter((opt) => opt.querySelector(".material-quote-style-check").checked)
-      .map((opt) => ({
-        key: opt.dataset.key,
-        name: opt.dataset.name,
-        price: Number(opt.dataset.price),
-        qty: Number(opt.querySelector(".material-quote-style-qty").value),
-      }));
+      .map((opt) => {
+        const raw = opt.querySelector(".material-quote-style-qty").value.trim();
+        return {
+          key: opt.dataset.key,
+          name: opt.dataset.name,
+          price: Number(opt.dataset.price),
+          qty: raw === "" ? NaN : Number(raw),
+        };
+      });
   }
 
   // 回傳null代表「目前不需要擋（不是pick模式，或根本還沒選任何款式）」；
@@ -125,7 +132,13 @@
     const sum = picked.reduce((s, p) => s + (Number.isInteger(p.qty) ? p.qty : 0), 0);
     const detail = picked.map((p) => `${p.name.split("・").pop() || p.name} x${Number.isInteger(p.qty) ? p.qty : "?"}`).join("、");
     const err = validatePickerAndGetError();
-    summaryEl.textContent = err ? `${detail}（已分配 ${sum} 份）— ${err}` : `${detail}（共 ${sum} 份，符合條件）`;
+    // 2026-11-24使用者反映明細跟錯誤訊息擠在同一行、用「—」接起來很
+    // 難讀。改成分兩行：第一行是選取明細，第二行（如果有錯誤）才是
+    // 錯誤說明；CSS用white-space:pre-line讓\n真的換行，textContent
+    // 本身不會解讀\n但pre-line會。
+    summaryEl.textContent = err
+      ? `${detail}（已分配 ${sum} 份）\n${err}`
+      : `${detail}（共 ${sum} 份，符合條件）`;
     summaryEl.classList.toggle("is-error", Boolean(err));
   }
 
