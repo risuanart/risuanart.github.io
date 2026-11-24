@@ -90,10 +90,28 @@
     return null;
   }
 
+  // 2026-11-24修正：原本只在送出時「事後」驗證份數對不對，使用者
+  // 反映畫面上完全看不出有擋，可以一次勾超過上限的款數（例如20份卻
+  // 勾了4款）。改成「事前」就擋：還沒勾的格子一旦達到上限就直接鎖
+  // 起來點不動（disabled+變灰），已經勾的格子不鎖（可以取消重選）。
+  function enforceStyleCap() {
+    const total = Number(quantityInput.value);
+    const maxStyles = Number.isInteger(total) && total >= 10 ? Math.floor(total / 10) : 0;
+    const checkedCount = styleOptions.filter((opt) => opt.querySelector(".material-quote-style-check").checked).length;
+    const atCap = maxStyles > 0 && checkedCount >= maxStyles;
+    styleOptions.forEach((opt) => {
+      const checkbox = opt.querySelector(".material-quote-style-check");
+      const lockThisOne = !checkbox.checked && (atCap || maxStyles === 0);
+      checkbox.disabled = lockThisOne;
+      opt.classList.toggle("is-disabled", lockThisOne);
+    });
+    return maxStyles;
+  }
+
   function renderSummary() {
     if (!summaryEl) return;
     const total = Number(quantityInput.value);
-    const maxStyles = Number.isInteger(total) && total >= 10 ? Math.floor(total / 10) : 0;
+    const maxStyles = enforceStyleCap();
     limitHint.textContent = Number.isInteger(total) && total > 0
       ? `總共 ${total} 份，最多可以選 ${maxStyles} 款（每款至少 10 份）。`
       : "請先填寫上方「預計採購數量」。";

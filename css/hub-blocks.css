@@ -309,6 +309,12 @@
   border-color:var(--color-brand, #686F12);
   background:color-mix(in srgb, var(--color-brand, #686F12) 8%, transparent);
 }
+/* 達到上限後，還沒勾選的格子鎖住變灰（2026-11-24新增），讓使用者
+   一眼看出「不能再選了」，不是只靠送出後才跳錯誤訊息。 */
+.material-quote-style-option.is-disabled{
+  cursor:not-allowed;
+  opacity:.45;
+}
 .material-quote-style-option .material-quote-style-check{
   position:absolute;
   top:6px;
