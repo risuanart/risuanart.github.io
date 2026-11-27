@@ -590,10 +590,48 @@
     localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
     updateBadges();
     document.dispatchEvent(new CustomEvent("cart:updated"));
+    scheduleCartSync();
   }
 
   function clearCart() {
     writeCart([]);
+  }
+
+  // 2026-11-26新增：購物車只存在localStorage，後端完全不知道登入會員
+  // 購物車裡有什麼，沒辦法在客人離開後主動提醒「購物車還有商品」——
+  // 這裡在每次購物車變動（writeCart()是所有增刪改的共用出口）時，
+  // 如果客人是登入會員，debounce一下（2秒內連續操作只送最後一次）把
+  // 目前購物車同步到後端（見risuan-checkout的api/account.js
+  // action=sync-cart／lib/member-cart.js），讓後端的提醒信cron（見
+  // lib/cart-reminders.js）能找到「有同步購物車、但一段時間沒動作」的
+  // 會員主動寄信。訪客（沒登入）沒有email可以寄信，不同步。失敗了
+  // （網路問題、API暫時掛掉）就算了，不影響客人結帳本身，不重試、
+  // 不提示錯誤。
+  const CART_SYNC_API_BASE = "https://risuan-checkout.vercel.app";
+  let cartSyncTimer = null;
+  function scheduleCartSync() {
+    if (!window.RisuanAccount || typeof window.RisuanAccount.getToken !== "function") return;
+    const token = window.RisuanAccount.getToken();
+    if (!token) return;
+    clearTimeout(cartSyncTimer);
+    cartSyncTimer = setTimeout(() => {
+      const latestToken = window.RisuanAccount.getToken();
+      if (!latestToken) return;
+      const items = readCart().map((item) => {
+        const product = PRODUCTS[item.productKey];
+        return {
+          productKey: item.productKey,
+          name: product ? product.name : item.productKey,
+          schemeName: SCHEME_NAMES[item.scheme] || "",
+          qty: item.qty,
+        };
+      });
+      fetch(`${CART_SYNC_API_BASE}/api/account`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Authorization: "Bearer " + latestToken },
+        body: JSON.stringify({ action: "sync-cart", items }),
+      }).catch(() => {});
+    }, 2000);
   }
 
   function addItem(productKey, scheme, qty) {
