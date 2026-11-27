@@ -34,7 +34,7 @@
   }
 
   const requested = parseProducts(window.location.search);
-  let added = 0;
+  const importable = [];
   let firstVariantUrl = null;
 
   requested.forEach(({ key, qty }) => {
@@ -45,12 +45,19 @@
       if (!firstVariantUrl) firstVariantUrl = cart.PRODUCT_URLS && cart.PRODUCT_URLS[key];
       return;
     }
-    cart.addItem(key, "default", qty);
-    added += 1;
+    importable.push({ key, qty });
   });
 
-  if (added > 0) {
-    go("../cart/");
+  if (importable.length > 0) {
+    const importAndContinue = () => {
+      cart.importMetaItems(importable);
+      go("../cart/");
+    };
+    if (navigator.locks) {
+      navigator.locks.request("risuan-meta-cart-import", importAndContinue);
+    } else {
+      importAndContinue();
+    }
   } else if (firstVariantUrl) {
     if (msg) msg.textContent = "這個商品需要選擇款式，正在帶你前往商品頁⋯⋯";
     go(firstVariantUrl);

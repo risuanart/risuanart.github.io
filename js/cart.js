@@ -634,16 +634,38 @@
     }, 2000);
   }
 
-  function addItem(productKey, scheme, qty) {
-    qty = qty || 1;
-    if (!PRODUCTS[productKey]) return;
-    const items = readCart();
+  function mergeItem(items, productKey, scheme, qty) {
     const id = [productKey, scheme].join("__");
-    const existing = items.find((i) => i.id === id);
+    const existing = items.find((item) => item.id === id);
     if (existing) {
       existing.qty += qty;
-    } else {
-      items.push({ id, productKey, scheme, qty });
+      return existing;
+    }
+    const item = { id, productKey, scheme, qty };
+    items.push(item);
+    return item;
+  }
+
+  function addItem(productKey, scheme, qty) {
+    if (!PRODUCTS[productKey]) return;
+    const items = readCart();
+    mergeItem(items, productKey, scheme, qty || 1);
+    writeCart(items);
+  }
+
+  function importMetaItems(requested) {
+    const quantities = new Map();
+    for (const { key, qty } of requested) {
+      quantities.set(key, (quantities.get(key) || 0) + qty);
+    }
+    const entries = [...quantities].sort(([left], [right]) => left.localeCompare(right));
+    const importKey = JSON.stringify(entries);
+    const items = readCart();
+    if (items.some((item) => item.metaImports?.includes(importKey))) return;
+
+    for (const [key, qty] of entries) {
+      const item = mergeItem(items, key, "default", qty);
+      item.metaImports = [...(item.metaImports || []), importKey];
     }
     writeCart(items);
   }
@@ -1454,6 +1476,7 @@
 
 
     addItem,
+    importMetaItems,
     showCartToast,
     playCartChime,
     flyToCart,
